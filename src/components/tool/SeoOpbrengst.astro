@@ -1,0 +1,220 @@
+---
+// "Wat levert een plek hoger op?" Zoekvolume, huidige positie en doelpositie, conversie en klantwaarde.
+// Uitkomst: extra bezoekers, aanvragen, klanten en omzet per maand, naast de vanaf-prijs van SEO (€ 495) of,
+// als het doel een plek in het kaartje is, lokale SEO (€ 295).
+// Klikkans per positie: First Page Sage, "Google Click-Through Rates (CTRs) by Ranking Position in 2026",
+// laatst bijgewerkt 22 september 2026, opgehaald met curl op 18 oktober 2026. Amerikaanse zoekresultaten.
+// De studie geeft drie kolommen: met AI-antwoord, zonder AI-antwoord en gemengd. De bezoeker kiest welke past.
+// Idee van de vragen komt uit beeld/SeoRekenhulp.astro; dit is een eigen component.
+interface Props {
+  id?: string;
+  plaats?: string; // voor de uitleg en de vervolgknop (?plaats=)
+  volume?: number;
+  van?: string; // k1-k3 (kaartje), o1-o10 (gewone resultaten), p2 (pagina 2 of lager)
+  naar?: string;
+  conversie?: number; // procent bezoekers dat een aanvraag doet
+  klant?: number; // procent aanvragen dat klant wordt
+  waarde?: number; // omzet per klant in euro
+}
+const { id = 'seo-opbrengst', plaats, volume = 400, van = 'o10', naar = 'o1', conversie = 5, klant = 33, waarde = 1000 } = Astro.props;
+const posities: [string, string][] = [
+  ['k1', 'Kaartje, plek 1'], ['k2', 'Kaartje, plek 2'], ['k3', 'Kaartje, plek 3'],
+  ...Array.from({ length: 10 }, (_, i): [string, string] => [`o${i + 1}`, `Plek ${i + 1}`]),
+  ['p2', 'Pagina 2 of lager'],
+];
+---
+<div class="tool card" id={id} data-seo-opbrengst data-plaats={plaats}>
+  <p class="kicker">Rekenhulp · SEO</p>
+  <p class="titel">Wat levert een plek hoger op{plaats ? ` in ${plaats}` : ''}?</p>
+  <p class="intro muted">Vul in hoe vaak er op je dienst wordt gezocht, waar je nu staat en waar je wilt staan. Je ziet wat dat per maand scheelt.</p>
+
+  <form class="velden" novalidate>
+    <div class="veld breed">
+      <label for={`${id}-vol`}>Zoekopdrachten per maand{plaats ? ` (in en rond ${plaats})` : ''}</label>
+      <input id={`${id}-vol`} name="v" inputmode="numeric" autocomplete="off" value={volume} />
+    </div>
+    <div class="veld">
+      <label for={`${id}-van`}>Waar sta je nu?</label>
+      <select id={`${id}-van`} name="van">{posities.map(([w, t]) => <option value={w} selected={w === van}>{t}</option>)}</select>
+    </div>
+    <div class="veld">
+      <label for={`${id}-naar`}>Waar wil je staan?</label>
+      <select id={`${id}-naar`} name="naar">{posities.filter(([w]) => w !== 'p2').map(([w, t]) => <option value={w} selected={w === naar}>{t}</option>)}</select>
+    </div>
+    <fieldset class="breed keuzes">
+      <legend>Staat er een AI-overzicht boven de zoekresultaten?</legend>
+      <label><input type="radio" name="ai" value="ja" /> Ja</label>
+      <label><input type="radio" name="ai" value="nee" /> Nee</label>
+      <label><input type="radio" name="ai" value="mix" checked /> Weet ik niet</label>
+    </fieldset>
+    <div class="veld">
+      <label for={`${id}-conv`}>Bezoekers die een aanvraag doen</label>
+      <span class="invoer"><input id={`${id}-conv`} name="c" inputmode="decimal" autocomplete="off" value={conversie} /><span class="na" aria-hidden="true">%</span></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-klant`}>Aanvragen die klant worden</label>
+      <span class="invoer"><input id={`${id}-klant`} name="k" inputmode="decimal" autocomplete="off" value={klant} /><span class="na" aria-hidden="true">%</span></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-waarde`}>Omzet per klant</label>
+      <span class="invoer"><span class="voor" aria-hidden="true">€</span><input id={`${id}-waarde`} name="w" inputmode="decimal" autocomplete="off" value={waarde} /></span>
+    </div>
+  </form>
+
+  <div class="uitkomst" aria-live="polite" data-uit>
+    <p class="leeg">Zo reken je het zelf: zoekopdrachten × het verschil in klikkans tussen je oude en je nieuwe plek geeft de extra bezoekers. Vermenigvuldig met je percentage aanvragen, het aandeel dat klant wordt en de omzet per klant. Zet JavaScript aan om het hier uit te laten rekenen.</p>
+  </div>
+
+  <div class="acties">
+    <a class="btn" href={plaats ? `/gratis-website-analyse/?plaats=${encodeURIComponent(plaats)}` : '/gratis-website-analyse/'} data-cta>Vraag de gratis scan aan</a>
+    <button class="btn btn-ghost deel" type="button" data-deel hidden>Kopieer link naar deze uitkomst</button>
+  </div>
+  <p class="bron klein muted">Klikkans per plek: First Page Sage, <a href="https://firstpagesage.com/reports/google-click-through-rates-ctrs-by-ranking-position/" rel="noopener">Google Click-Through Rates by Ranking Position in 2026</a>, september 2026. Gemeten op Amerikaanse zoekresultaten, met en zonder AI-antwoord. Pagina 2 rekenen we als nul. Zoekvolume, percentages en omzet zijn voorbeeldwaarden.</p>
+</div>
+
+<script>
+  // CTR in procenten per positie (First Page Sage, 2026). Kaartje: gemiddelde van de studie, los van een AI-antwoord.
+  const CTR = {
+    ja: [3.6, 1.4, 0.8, 0.5, 0.3, 0.3, 0.2, 0.2, 0.1, 0.1],
+    nee: [22.6, 10.2, 5.8, 3.7, 2.5, 1.8, 1.3, 0.9, 0.7, 0.5],
+    mix: [7.1, 3.0, 1.7, 1.1, 0.7, 0.6, 0.4, 0.3, 0.2, 0.2],
+  } as const;
+  const KAART = [14.8, 12.6, 11.9];
+  type Ai = keyof typeof CTR;
+  const kans = (pos: string, ai: Ai) => pos[0] === 'k' ? KAART[+pos.slice(1) - 1] : pos[0] === 'o' ? CTR[ai][+pos.slice(1) - 1] : 0;
+  const naam = (pos: string) => pos[0] === 'k' ? `plek ${pos.slice(1)} in het kaartje` : pos[0] === 'o' ? `plek ${pos.slice(1)}` : 'pagina 2';
+  const eur = (n: number) => '€ ' + Math.round(n).toLocaleString('nl-NL');
+  const een = (n: number) => n.toLocaleString('nl-NL', { maximumFractionDigits: n < 10 ? 1 : 0 });
+  const pct = (n: number) => n.toLocaleString('nl-NL', { maximumFractionDigits: 1 }) + '%';
+  const getal = (s: string) => {
+    let t = s.trim().replace(/[€%\s]/g, '');
+    if (t.includes(',')) t = t.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, '');
+    const n = parseFloat(t);
+    return Number.isFinite(n) ? n : NaN;
+  };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/seo-opbrengst/${stap}`, r: '' })); } catch {} };
+
+  document.querySelectorAll<HTMLElement>('[data-seo-opbrengst]').forEach((el) => {
+    const form = el.querySelector('form')!;
+    const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement & HTMLSelectElement;
+    const uit = el.querySelector<HTMLElement>('[data-uit]')!;
+    const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    const namen = ['v', 'van', 'naar', 'c', 'k', 'w'];
+    const aiVan = () => (form.querySelector<HTMLInputElement>('input[name="ai"]:checked')?.value ?? 'mix') as Ai;
+    let geteld = false;
+
+    const q = new URLSearchParams(location.search);
+    namen.forEach((n) => {
+      const v = q.get(`s_${n}`);
+      if (v == null) return;
+      const f = veld(n);
+      if (f instanceof HTMLSelectElement) { if ([...f.options].some((o) => o.value === v)) f.value = v; }
+      else f.value = v.slice(0, 12);
+    });
+    const ai = q.get('s_ai');
+    if (ai && ai in CTR) form.querySelector<HTMLInputElement>(`input[name="ai"][value="${ai}"]`)!.checked = true;
+
+    const reken = () => {
+      const vol = getal(veld('v').value), conv = getal(veld('c').value) / 100, kl = getal(veld('k').value) / 100, w = getal(veld('w').value);
+      const van = veld('van').value, naar = veld('naar').value, a = aiVan();
+      if (![vol, conv, kl, w].every((x) => x > 0) || conv > 1 || kl > 1) {
+        uit.innerHTML = '<p class="leeg">Vul bij elk veld een getal groter dan nul in. Percentages zijn hooguit 100.</p>';
+        return;
+      }
+      const kVan = kans(van, a), kNaar = kans(naar, a);
+      const lokaal = naar[0] === 'k';
+      const prijs = lokaal ? 295 : 495;
+      const dienst = lokaal ? 'lokale SEO' : 'SEO';
+      const url = lokaal ? '/lokale-seo/' : '/zoekmachine-optimalisatie/';
+      if (kNaar <= kVan) {
+        uit.innerHTML = `<p class="leeg">Op ${naam(naar)} klikt volgens de studie niet meer dan op ${naam(van)} (${pct(kVan)} tegen ${pct(kNaar)}). Kies een plek die hoger staat.</p>`;
+        return;
+      }
+      const extraBez = vol * (kNaar - kVan) / 100;
+      const extraAanv = extraBez * conv;
+      const extraKlant = extraAanv * kl;
+      const omzet = extraKlant * w;
+      const keer = omzet / prijs;
+      const soort = keer >= 3 ? 'ruim' : keer >= 1 ? 'krap' : 'niet';
+      const oordeel = {
+        ruim: `Ruim ${Math.floor(keer)} keer zoveel omzet als ${dienst} kost`,
+        krap: `Meer omzet dan ${dienst} kost, maar niet veel meer`,
+        niet: `Minder omzet dan ${dienst} kost`,
+      }[soort];
+      const uitleg = {
+        ruim: `Van ${naam(van)} naar ${naam(naar)} levert in dit voorbeeld zo'n ${eur(omzet)} extra omzet per maand op. ${dienst[0].toUpperCase() + dienst.slice(1)} kost bij ons vanaf ${eur(prijs)} per maand.`,
+        krap: `De extra omzet is ${eur(omzet)} per maand, tegen vanaf ${eur(prijs)} voor ${dienst}. Omzet is geen winst, dus reken na wat je overhoudt. Vaak helpt het om meer zoekwoorden mee te nemen.`,
+        niet: `Op deze zoekopdracht levert een betere plek ongeveer ${eur(omzet)} per maand op. Dat is minder dan ${dienst} vanaf ${eur(prijs)}. Kijk of er meer zoekwoorden bij horen, of kies een ander kanaal. Dat zeggen we je ook eerlijk.`,
+      }[soort];
+      uit.innerHTML = `
+        <p class="oordeel ${soort}"><span class="stip" aria-hidden="true"></span>${oordeel}</p>
+        <p class="uitleg">${uitleg}</p>
+        <dl class="getallen-rij">
+          <div><dt>Extra bezoekers per maand</dt><dd>${een(extraBez)}</dd></div>
+          <div><dt>Extra aanvragen per maand</dt><dd>${een(extraAanv)}</dd></div>
+          <div><dt>Extra klanten per maand</dt><dd>${een(extraKlant)}</dd></div>
+          <div><dt>Extra omzet per maand</dt><dd>${eur(omzet)}</dd></div>
+        </dl>
+        <p class="klein muted">Klikkans op ${naam(van)}: ${pct(kVan)}. Op ${naam(naar)}: ${pct(kNaar)}.${location.pathname === url ? '' : ` Wat <a href="${url}">${dienst}</a> inhoudt, lees je op de dienstpagina.`}</p>`;
+      const p = new URLSearchParams(location.search);
+      namen.forEach((nm) => p.set(`s_${nm}`, veld(nm).value.trim()));
+      p.set('s_ai', a);
+      history.replaceState(null, '', `${location.pathname}?${p}${location.hash}`);
+      if (!geteld) { geteld = true; tel('uitkomst'); }
+    };
+
+    let wacht: number | undefined;
+    form.addEventListener('input', () => { clearTimeout(wacht); wacht = window.setTimeout(reken, 250); });
+    form.addEventListener('change', reken);
+    form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
+    deel.hidden = false;
+    deel.addEventListener('click', async () => {
+      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; }
+      catch { window.prompt('Kopieer deze link', link); }
+      setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);
+    });
+    reken();
+  });
+</script>
+
+<style>
+  .tool { margin: 28px 0; padding: clamp(20px, 4vw, 32px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); max-width: 100%; }
+  .titel { font-weight: 900; font-size: var(--step-1); line-height: 1.2; margin: 4px 0 8px; }
+  .intro { margin: 0 0 18px; max-width: 60ch; }
+  .velden { display: grid; gap: 14px 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); margin-bottom: 18px; }
+  .velden .breed { grid-column: 1 / -1; }
+  .veld label { font-size: 0.95rem; }
+  .veld select, .veld input { min-height: 48px; }
+  .invoer { position: relative; display: flex; align-items: center; }
+  .invoer input { width: 100%; }
+  .invoer .voor, .invoer .na { position: absolute; color: var(--muted); font-weight: 700; pointer-events: none; }
+  .invoer .voor { left: 14px; }
+  .invoer .voor + input { padding-left: 32px; }
+  .invoer .na { right: 14px; }
+  .invoer input:has(+ .na) { padding-right: 34px; }
+  .keuzes { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+  .keuzes legend { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; padding: 0; width: 100%; }
+  .keuzes label { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-weight: 600; font-size: 0.95rem; cursor: pointer; }
+  .keuzes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .keuzes label:has(input:checked) { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .keuzes label:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 2px; }
+  .uitkomst { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .uitkomst :global(p) { margin: 0 0 10px; }
+  .uitkomst :global(p:last-child) { margin-bottom: 0; }
+  .uitkomst :global(.leeg) { color: var(--muted); }
+  .uitkomst :global(.oordeel) { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.25rem; line-height: 1.25; }
+  .uitkomst :global(.stip) { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--muted); }
+  .uitkomst :global(.ruim .stip) { background: var(--ok); }
+  .uitkomst :global(.krap .stip) { background: #f2b200; }
+  .uitkomst :global(.niet .stip) { background: var(--orange); }
+  .uitkomst :global(.getallen-rij) { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); margin: 14px 0; }
+  .uitkomst :global(.getallen-rij div) { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .uitkomst :global(dt) { font-size: 0.85rem; color: var(--muted); line-height: 1.3; }
+  .uitkomst :global(dd) { margin: 4px 0 0; font-size: 1.45rem; font-weight: 900; color: var(--navy); letter-spacing: -0.02em; }
+  .acties { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  .acties .btn { min-height: 48px; text-align: center; }
+  .deel { font-size: 1rem; }
+  .bron { margin: 0; }
+</style>

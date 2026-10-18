@@ -1,0 +1,128 @@
+---
+// Prijzen-samensteller voor bovenaan /prijzen/. De bezoeker kiest wat hij wil bereiken; de tool stelt de diensten voor
+// die daarbij horen, met maandbedrag en eenmalige kosten (vanaf-prijzen uit STRUCTUUR.md) en waarom.
+// "Vraag deze prijs vast aan" gaat naar /contact/?vraag=... (het contactformulier vult die vraag in).
+// Bewust weinig vaste tekst: de prijzenpagina zit dicht bij haar woordmaximum. De uitleg per dienst staat in het script.
+interface Props { id?: string; doelen?: string[] }
+const { id = 'prijzen-samensteller', doelen = [] } = Astro.props;
+const keuzes = [
+  { w: 'regio', t: 'Meer telefoontjes uit de regio' },
+  { w: 'landelijk', t: 'Landelijk hoger in Google' },
+  { w: 'ai', t: 'Genoemd worden door AI' },
+  { w: 'website', t: 'Een nieuwe website' },
+  { w: 'adverteren', t: 'Adverteren in Google' },
+];
+---
+<div class="tool card" id={id} data-samensteller>
+  <p class="kicker">Stel je prijs samen</p>
+  <form class="velden" novalidate>
+    <fieldset class="keuzes">
+      <legend class="titel">Wat wil je bereiken?</legend>
+      {keuzes.map((k) => <label><input type="checkbox" name="d" value={k.w} checked={doelen.includes(k.w)} /> {k.t}</label>)}
+    </fieldset>
+  </form>
+  <div class="uitkomst" aria-live="polite" data-uit>
+    <p class="leeg">Kies een of meer doelen, dan zie je welke diensten passen en wat ze kosten. Werkt dat niet, kijk dan in de lijst hieronder.</p>
+  </div>
+  <div class="acties">
+    <a class="btn" href="/contact/" data-cta>Vraag deze prijs vast aan</a>
+    <button class="btn btn-ghost deel" type="button" data-deel hidden>Kopieer link</button>
+  </div>
+</div>
+
+<script>
+  // Vanaf-prijzen uit STRUCTUUR.md, exclusief btw
+  const DIENSTEN = {
+    regio: { naam: 'Lokale SEO', url: '/lokale-seo/', maand: 295, eenmalig: 0, waarom: 'Voor klanten uit je eigen regio: het kaartje in Google, je bedrijfsprofiel en reviews. Met stijggarantie.' },
+    landelijk: { naam: 'SEO', url: '/zoekmachine-optimalisatie/', maand: 495, eenmalig: 0, waarom: 'Hoger in heel Nederland op de zoekwoorden van je diensten: techniek, teksten en links. Met stijggarantie.' },
+    ai: { naam: 'GEO', url: '/generative-engine-optimization/', maand: 495, eenmalig: 0, waarom: 'Zodat ChatGPT, Gemini, Copilot en Google AI je noemen als iemand naar jouw dienst vraagt.' },
+    website: { naam: 'Website met AI', url: '/website-laten-maken/', maand: 0, eenmalig: 250, waarom: 'De snelle route, vaak binnen twee weken klaar. Wil je een eigen ontwerp, dan is maatwerk in WordPress er vanaf € 2.000.' },
+    adverteren: { naam: 'Google Ads', url: '/online-adverteren/google-ads-bureau/', maand: 0, eenmalig: 0, waarom: 'Direct bovenaan voor de zoekwoorden die je kiest. Het beheer hangt af van je advertentiebudget, dat je apart aan Google betaalt.' },
+  } as const;
+  type K = keyof typeof DIENSTEN;
+  const eur = (n: number) => '€ ' + n.toLocaleString('nl-NL');
+
+  document.querySelectorAll<HTMLElement>('[data-samensteller]').forEach((el) => {
+    const form = el.querySelector('form')!;
+    const uit = el.querySelector<HTMLElement>('[data-uit]')!;
+    const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
+    const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    const vakjes = [...form.querySelectorAll<HTMLInputElement>('input[name="d"]')];
+    let geteld = false;
+
+    const q = (new URLSearchParams(location.search).get('p_d') ?? '').split(',').filter((x) => x in DIENSTEN);
+    if (q.length) vakjes.forEach((v) => (v.checked = q.includes(v.value)));
+
+    const reken = () => {
+      const gekozen = vakjes.filter((v) => v.checked).map((v) => v.value as K);
+      const p = new URLSearchParams(location.search);
+      if (gekozen.length) p.set('p_d', gekozen.join(',')); else p.delete('p_d');
+      const qs = p.toString();
+      history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
+      if (!gekozen.length) {
+        uit.innerHTML = '<p class="leeg">Kies een of meer doelen, dan zie je welke diensten passen en wat ze kosten.</p>';
+        cta.href = '/contact/';
+        return;
+      }
+      const lijst = gekozen.map((k) => DIENSTEN[k]);
+      const maand = lijst.reduce((s, d) => s + d.maand, 0);
+      const eenmalig = lijst.reduce((s, d) => s + d.eenmalig, 0);
+      const ads = gekozen.includes('adverteren');
+      const maanddiensten = lijst.filter((d) => d.maand > 0).length;
+      const prijsVan = (d: (typeof lijst)[number]) => d.maand ? `vanaf ${eur(d.maand)} per maand` : d.eenmalig ? `vanaf ${eur(d.eenmalig)} eenmalig` : 'naar budget';
+      uit.innerHTML = `
+        <ul class="voorstel">${lijst.map((d) => `<li><span class="kop"><a href="${d.url}">${d.naam}</a><b>${prijsVan(d)}</b></span><span class="waarom">${d.waarom}</span></li>`).join('')}</ul>
+        <dl class="getallen-rij">
+          <div><dt>Per maand</dt><dd>${maand ? `vanaf ${eur(maand)}` : ads ? 'naar budget' : eur(0)}</dd>${maand && ads ? '<span class="plus">plus Google Ads naar budget</span>' : ''}</div>
+          <div><dt>Eenmalig</dt><dd>${eenmalig ? `vanaf ${eur(eenmalig)}` : eur(0)}</dd></div>
+        </dl>
+        ${maanddiensten >= 2 ? `<p class="klein">Meer dan één maanddienst? Vraag ook naar <a href="/online-marketing-uitbesteden/">online marketing uitbesteden</a>, vanaf € 595 per maand. Dan werken we elke maand aan wat op dat moment het meeste oplevert.</p>` : ''}
+        <p class="klein muted">Vanaf-prijzen, exclusief btw, maandelijks opzegbaar. Na een kort gesprek hoor je de vaste prijs.</p>`;
+      const vraag = `Graag een vaste prijs voor: ${lijst.map((d) => `${d.naam} (${prijsVan(d).replace(' ', ' ')})`).join(', ')}.`;
+      cta.href = `/contact/?${new URLSearchParams({ vraag })}`;
+      if (!geteld) { geteld = true; try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: '/_tool/prijzen-samensteller/uitkomst', r: '' })); } catch {} }
+    };
+
+    form.addEventListener('change', reken);
+    form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
+    deel.hidden = false;
+    deel.addEventListener('click', async () => {
+      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; }
+      catch { window.prompt('Kopieer deze link', link); }
+      setTimeout(() => (deel.textContent = 'Kopieer link'), 2000);
+    });
+    if (vakjes.some((v) => v.checked)) reken();
+    else uit.innerHTML = '<p class="leeg">Kies een of meer doelen, dan zie je welke diensten passen en wat ze kosten.</p>';
+  });
+</script>
+
+<style>
+  .tool { margin: 0 0 40px; padding: clamp(20px, 4vw, 32px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); max-width: 100%; }
+  .titel { display: block; font-weight: 900; font-size: var(--step-1); line-height: 1.2; margin: 4px 0 14px; padding: 0; width: 100%; }
+  .velden { margin-bottom: 18px; }
+  .keuzes { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+  .keuzes label { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1.5px solid var(--line); border-radius: 22px; background: #fff; font-weight: 600; font-size: 0.98rem; line-height: 1.3; cursor: pointer; }
+  .keuzes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .keuzes label:has(input:checked) { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .keuzes label:has(input:checked)::before { content: ''; flex: none; width: 12px; height: 7px; margin: -3px 10px 0 0; border-left: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(-45deg); }
+  .keuzes label:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 2px; }
+  .uitkomst { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .uitkomst :global(p) { margin: 0 0 10px; }
+  .uitkomst :global(p:last-child) { margin-bottom: 0; }
+  .uitkomst :global(.leeg) { color: var(--muted); }
+  .uitkomst :global(.voorstel) { list-style: none; padding: 0; margin: 0 0 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  .uitkomst :global(.voorstel li) { display: grid; gap: 2px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .uitkomst :global(.voorstel li:last-child) { border-bottom: 0; }
+  .uitkomst :global(.voorstel .kop) { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; font-weight: 800; }
+  .uitkomst :global(.voorstel .kop b) { color: var(--navy); }
+  .uitkomst :global(.voorstel .waarom) { color: var(--muted); font-size: 0.95rem; }
+  .uitkomst :global(.getallen-rij) { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); margin: 0 0 12px; }
+  .uitkomst :global(.getallen-rij div) { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .uitkomst :global(dt) { font-size: 0.85rem; color: var(--muted); }
+  .uitkomst :global(dd) { margin: 4px 0 0; font-size: 1.45rem; font-weight: 900; color: var(--navy); letter-spacing: -0.02em; }
+  .uitkomst :global(.plus) { display: block; font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+  .acties { display: flex; flex-wrap: wrap; gap: 12px; }
+  .acties .btn { min-height: 48px; text-align: center; }
+  .deel { font-size: 1rem; }
+</style>

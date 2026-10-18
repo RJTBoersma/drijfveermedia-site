@@ -1,0 +1,175 @@
+---
+// "Zelf doen of uitbesteden?" Uurtarief, uren per maand en eventueel omzet die je misloopt, naast onze vanaf-prijzen:
+// lokale SEO € 295, SEO € 495 of alles uitbesteden € 595 per maand (STRUCTUUR.md). Consult € 85 per uur als tussenweg.
+import { site } from '../../data/site';
+interface Props {
+  id?: string;
+  dienst?: 'lokaal' | 'seo' | 'alles';
+  tarief?: number;
+  uren?: number;
+  gemist?: number;
+}
+const { id = 'zelf-of-uitbesteden', dienst = 'seo', tarief = 75, uren = 8, gemist = 0 } = Astro.props;
+const diensten = [
+  { w: 'lokaal', t: 'Lokale SEO (€ 295)' },
+  { w: 'seo', t: 'SEO (€ 495)' },
+  { w: 'alles', t: 'Alle online marketing (€ 595)' },
+];
+---
+<div class="tool card" id={id} data-zelf-of-uit>
+  <p class="kicker">Rekenhulp · Tijd en geld</p>
+  <p class="titel">Zelf doen of uitbesteden?</p>
+  <p class="intro muted">Zelf doen lijkt gratis, maar je betaalt met je eigen uren. Reken uit wat dat per maand kost.</p>
+
+  <form class="velden" novalidate>
+    <fieldset class="breed keuzes">
+      <legend>Wat zou je uit handen geven?</legend>
+      {diensten.map((d) => <label><input type="radio" name="d" value={d.w} checked={d.w === dienst} /> {d.t}</label>)}
+    </fieldset>
+    <div class="veld">
+      <label for={`${id}-tarief`}>Wat is een uur van jou waard?</label>
+      <span class="invoer"><span class="voor" aria-hidden="true">€</span><input id={`${id}-tarief`} name="t" inputmode="decimal" autocomplete="off" value={tarief} /></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-uren`}>Uren per maand die je eraan kwijt bent</label>
+      <input id={`${id}-uren`} name="u" inputmode="decimal" autocomplete="off" value={uren} />
+    </div>
+    <div class="veld">
+      <label for={`${id}-gemist`}>Omzet die je misloopt per maand (mag 0)</label>
+      <span class="invoer"><span class="voor" aria-hidden="true">€</span><input id={`${id}-gemist`} name="g" inputmode="decimal" autocomplete="off" value={gemist} /></span>
+    </div>
+  </form>
+
+  <div class="uitkomst" aria-live="polite" data-uit>
+    <p class="leeg">Zo reken je het zelf: je uurtarief × de uren per maand, plus de omzet die je misloopt. Leg dat naast lokale SEO vanaf € 295, SEO vanaf € 495 of alles uitbesteden vanaf € 595 per maand. Zet JavaScript aan om het hier uit te laten rekenen.</p>
+  </div>
+
+  <div class="acties">
+    <a class="btn" href="/contact/" data-cta>Laat {site.contactpersoon} je terugbellen</a>
+    <button class="btn btn-ghost deel" type="button" data-deel hidden>Kopieer link naar deze uitkomst</button>
+  </div>
+  <p class="bron klein muted">Onze vanaf-prijzen per maand, exclusief btw, maandelijks opzegbaar. Uurtarief en uren zijn voorbeeldwaarden: vul je eigen cijfers in.</p>
+</div>
+
+<script>
+  const DIENST = {
+    lokaal: { naam: 'lokale SEO', prijs: 295 },
+    seo: { naam: 'SEO', prijs: 495 },
+    alles: { naam: 'alles uitbesteden', prijs: 595 },
+  } as const;
+  type D = keyof typeof DIENST;
+  const eur = (n: number) => '€ ' + Math.round(n).toLocaleString('nl-NL');
+  const uur = (n: number) => n.toLocaleString('nl-NL', { maximumFractionDigits: 1 });
+  const getal = (s: string) => {
+    let t = s.trim().replace(/[€%\s]/g, '');
+    if (t === '') return 0;
+    if (t.includes(',')) t = t.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, '');
+    const n = parseFloat(t);
+    return Number.isFinite(n) ? n : NaN;
+  };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/zelf-of-uitbesteden/${stap}`, r: '' })); } catch {} };
+
+  document.querySelectorAll<HTMLElement>('[data-zelf-of-uit]').forEach((el) => {
+    const form = el.querySelector('form')!;
+    const uit = el.querySelector<HTMLElement>('[data-uit]')!;
+    const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
+    const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    const tekst = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const gekozen = () => (form.querySelector<HTMLInputElement>('input[name="d"]:checked')?.value ?? 'seo') as D;
+    let geteld = false;
+
+    const q = new URLSearchParams(location.search);
+    const d = q.get('z_d');
+    if (d && d in DIENST) form.querySelector<HTMLInputElement>(`input[name="d"][value="${d}"]`)!.checked = true;
+    ['t', 'u', 'g'].forEach((n) => { const v = q.get(`z_${n}`); if (v != null) tekst(n).value = v.slice(0, 12); });
+
+    const reken = () => {
+      const tarief = getal(tekst('t').value), uren = getal(tekst('u').value), gemist = getal(tekst('g').value);
+      if (!(tarief > 0) || !(uren >= 0) || !(gemist >= 0)) {
+        uit.innerHTML = '<p class="leeg">Vul een uurtarief groter dan nul in, en voor uren en omzet een getal (0 mag).</p>';
+        return;
+      }
+      const dienst = DIENST[gekozen()];
+      const zelf = tarief * uren + gemist;
+      const verschil = zelf - dienst.prijs;
+      const omslag = Math.max(0, (dienst.prijs - gemist) / tarief);
+      const soort = verschil > 50 ? 'ruim' : verschil >= -50 ? 'krap' : 'niet';
+      const oordeel = {
+        ruim: `Uitbesteden scheelt je ${eur(verschil)} per maand`,
+        krap: 'Zelf doen en uitbesteden kosten ongeveer hetzelfde',
+        niet: `Zelf doen is ${eur(-verschil)} per maand goedkoper`,
+      }[soort];
+      const uitleg = {
+        ruim: `Zelf doen kost je ${eur(zelf)} per maand aan uren${gemist ? ' en gemiste omzet' : ''}. ${dienst.naam[0].toUpperCase() + dienst.naam.slice(1)} kost vanaf ${eur(dienst.prijs)}. Dat is ${eur(verschil * 12)} per jaar, en de uren die je overhoudt, besteed je aan klanten.`,
+        krap: `Zelf doen kost je ${eur(zelf)} per maand, ${dienst.naam} vanaf ${eur(dienst.prijs)}. Dan beslist vooral de vraag of je het werk leuk vindt en of je het volhoudt.`,
+        niet: `Zelf doen kost je ${eur(zelf)} per maand, ${dienst.naam} vanaf ${eur(dienst.prijs)}. Heb je de tijd en vind je het leuk, begin dan zelf. Een consult van € 85 per uur kan je op weg helpen.`,
+      }[soort];
+      uit.innerHTML = `
+        <p class="oordeel ${soort}"><span class="stip" aria-hidden="true"></span>${oordeel}</p>
+        <p class="uitleg">${uitleg}</p>
+        <dl class="getallen-rij">
+          <div><dt>Zelf doen per maand</dt><dd>${eur(zelf)}</dd></div>
+          <div><dt>Uitbesteden per maand</dt><dd>vanaf ${eur(dienst.prijs)}</dd></div>
+          <div><dt>Omslagpunt</dt><dd>${uur(omslag)} uur</dd></div>
+        </dl>
+        <p class="klein muted">Besteed je meer dan ${uur(omslag)} uur per maand, dan is uitbesteden goedkoper. Wat je niet ziet in deze som: hoe lang je erover doet om het vak te leren.</p>`;
+      cta.href = `/contact/?${new URLSearchParams({ vraag: `Ik twijfel tussen zelf doen en ${dienst.naam} (vanaf € ${dienst.prijs} per maand). Ik ben er nu zo'n ${uur(uren)} uur per maand mee bezig.` })}`;
+      const p = new URLSearchParams(location.search);
+      p.set('z_d', gekozen());
+      ['t', 'u', 'g'].forEach((n) => p.set(`z_${n}`, tekst(n).value.trim()));
+      history.replaceState(null, '', `${location.pathname}?${p}${location.hash}`);
+      if (!geteld) { geteld = true; tel('uitkomst'); }
+    };
+
+    let wacht: number | undefined;
+    form.addEventListener('input', () => { clearTimeout(wacht); wacht = window.setTimeout(reken, 250); });
+    form.addEventListener('change', reken);
+    form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
+    deel.hidden = false;
+    deel.addEventListener('click', async () => {
+      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; }
+      catch { window.prompt('Kopieer deze link', link); }
+      setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);
+    });
+    reken();
+  });
+</script>
+
+<style>
+  .tool { margin: 28px 0; padding: clamp(20px, 4vw, 32px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); max-width: 100%; }
+  .titel { font-weight: 900; font-size: var(--step-1); line-height: 1.2; margin: 4px 0 8px; }
+  .intro { margin: 0 0 18px; max-width: 60ch; }
+  .velden { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); margin-bottom: 18px; }
+  .velden .breed { grid-column: 1 / -1; }
+  .veld label { font-size: 0.95rem; }
+  .veld input { min-height: 48px; }
+  .invoer { position: relative; display: flex; align-items: center; }
+  .invoer input { width: 100%; }
+  .invoer .voor { position: absolute; left: 14px; color: var(--muted); font-weight: 700; pointer-events: none; }
+  .invoer .voor + input { padding-left: 32px; }
+  .keuzes { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+  .keuzes legend { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; padding: 0; width: 100%; }
+  .keuzes label { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1.5px solid var(--line); border-radius: 22px; background: #fff; font-weight: 600; font-size: 0.95rem; line-height: 1.3; cursor: pointer; }
+  .keuzes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .keuzes label:has(input:checked) { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .keuzes label:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 2px; }
+  .uitkomst { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .uitkomst :global(p) { margin: 0 0 10px; }
+  .uitkomst :global(p:last-child) { margin-bottom: 0; }
+  .uitkomst :global(.leeg) { color: var(--muted); }
+  .uitkomst :global(.oordeel) { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.25rem; line-height: 1.25; }
+  .uitkomst :global(.stip) { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--muted); }
+  .uitkomst :global(.ruim .stip) { background: var(--ok); }
+  .uitkomst :global(.krap .stip) { background: #f2b200; }
+  .uitkomst :global(.niet .stip) { background: var(--navy); }
+  .uitkomst :global(.getallen-rij) { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); margin: 14px 0; }
+  .uitkomst :global(.getallen-rij div) { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .uitkomst :global(dt) { font-size: 0.85rem; color: var(--muted); line-height: 1.3; }
+  .uitkomst :global(dd) { margin: 4px 0 0; font-size: 1.45rem; font-weight: 900; color: var(--navy); letter-spacing: -0.02em; }
+  .acties { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  .acties .btn { min-height: 48px; text-align: center; }
+  .deel { font-size: 1rem; }
+  .bron { margin: 0; }
+</style>

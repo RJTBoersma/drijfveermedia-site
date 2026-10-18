@@ -1,0 +1,214 @@
+---
+// "Wat mag een klik kosten?" De bezoeker kiest een branche (gemiddelde klikprijs uit SE Ranking, dezelfde cijfers als de
+// klikprijzentabellen op /online-adverteren/google-ads-bureau/ en /online-adverteren/google-ads-campagne-opzetten/),
+// vult marge per klus en twee conversiestappen in, en ziet direct: de hoogste klikprijs die nog loont, wat een aanvraag
+// en een klus aan klikken kost, en welk maandbudget nodig is voor het aantal klussen dat hij wil.
+// Alles rekent in de browser. De invoer staat in de URL (k_...), zodat iemand een uitkomst kan doorsturen.
+interface Props {
+  id?: string;
+  branche?: string; // een zoekwoord uit de lijst hieronder
+  marge?: number; // euro per klus
+  conversie?: number; // procent bezoekers dat een aanvraag doet
+  klus?: number; // procent aanvragen dat een klus wordt
+  klussen?: number; // gewenst aantal klussen per maand
+}
+const { id = 'klikrekenhulp', branche = 'dakdekker', marge = 1500, conversie = 5, klus = 33, klussen = 4 } = Astro.props;
+
+// Gemiddelde klikprijzen in Nederland, SE Ranking, opgevraagd 18 oktober 2026 (zie de tabellen op de Google Ads-pagina's).
+const klikprijzen: [string, number][] = [
+  ['hypotheekadviseur', 8.15],
+  ['dakdekker', 4.81],
+  ['boekhouder', 3.8],
+  ['badkamer renovatie', 3.41],
+  ['verhuisbedrijf', 3.35],
+  ['elektricien', 3.29],
+  ['kozijnen', 2.57],
+  ['loodgieter', 2.25],
+  ['schilder', 1.73],
+  ['rijschool', 1.42],
+  ['hovenier', 0.88],
+  ['glazenwasser', 0.56],
+];
+const start = klikprijzen.find(([k]) => k === branche) ?? klikprijzen[1];
+const euro = (n: number) => n.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+---
+<div class="tool card" id={id} data-klik>
+  <p class="kicker">Rekenhulp · Google Ads</p>
+  <p class="titel">Wat mag een klik kosten?</p>
+  <p class="intro muted">Kies je branche en vul je eigen cijfers in. Je ziet direct of adverteren in Google voor jou loont.</p>
+
+  <form class="velden" novalidate>
+    <div class="veld breed">
+      <label for={`${id}-branche`}>Je branche</label>
+      <select id={`${id}-branche`} name="b">
+        {klikprijzen.map(([k, p]) => <option value={k} selected={k === start[0]}>{k} (€ {euro(p)})</option>)}
+        <option value="eigen">Anders, ik vul zelf een klikprijs in</option>
+      </select>
+    </div>
+    <div class="veld">
+      <label for={`${id}-cpc`}>Klikprijs</label>
+      <span class="invoer"><span class="voor" aria-hidden="true">€</span><input id={`${id}-cpc`} name="cpc" inputmode="decimal" autocomplete="off" value={euro(start[1])} /></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-marge`}>Marge per klus</label>
+      <span class="invoer"><span class="voor" aria-hidden="true">€</span><input id={`${id}-marge`} name="m" inputmode="decimal" autocomplete="off" value={marge} /></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-conv`}>Bezoekers die een aanvraag doen</label>
+      <span class="invoer"><input id={`${id}-conv`} name="c" inputmode="decimal" autocomplete="off" value={conversie} /><span class="na" aria-hidden="true">%</span></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-klus`}>Aanvragen die een klus worden</label>
+      <span class="invoer"><input id={`${id}-klus`} name="a" inputmode="decimal" autocomplete="off" value={klus} /><span class="na" aria-hidden="true">%</span></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-aantal`}>Extra klussen per maand</label>
+      <input id={`${id}-aantal`} name="n" inputmode="numeric" autocomplete="off" value={klussen} />
+    </div>
+  </form>
+
+  <div class="uitkomst" aria-live="polite" data-uit>
+    <p class="leeg">Zo reken je het zelf: marge per klus × aandeel bezoekers dat een aanvraag doet × aandeel aanvragen dat een klus wordt. Dat is de hoogste klikprijs die nog loont. Zet JavaScript aan om het hier uit te laten rekenen.</p>
+  </div>
+
+  <div class="acties">
+    <a class="btn" href="/gratis-website-analyse/" data-cta>Laat je Google Ads-account gratis checken</a>
+    <button class="btn btn-ghost deel" type="button" data-deel hidden>Kopieer link naar deze uitkomst</button>
+  </div>
+  <p class="bron klein muted">Klikprijzen: SE Ranking, zoekwoorddatabase Nederland, opgevraagd 18 oktober 2026. Een landelijk gemiddelde; in jouw regio kan het anders zijn. Marge en percentages zijn voorbeeldwaarden. Beheerkosten zitten niet in de som.</p>
+</div>
+
+<script>
+  const eur = (n: number, d = 2) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const heel = (n: number) => n.toLocaleString('nl-NL', { maximumFractionDigits: 0 });
+  // Leest "4,81", "4.81", "1.500" en "1500" goed
+  const getal = (s: string) => {
+    let t = s.trim().replace(/[€%\s]/g, '');
+    if (t.includes(',')) t = t.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, '');
+    const n = parseFloat(t);
+    return Number.isFinite(n) ? n : NaN;
+  };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/klikprijs/${stap}`, r: '' })); } catch {} };
+
+  document.querySelectorAll<HTMLElement>('[data-klik]').forEach((el) => {
+    const form = el.querySelector('form')!;
+    const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement & HTMLSelectElement;
+    const uit = el.querySelector<HTMLElement>('[data-uit]')!;
+    const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
+    const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    const prijzen = new Map([...veld('b').options].filter((o) => o.value !== 'eigen').map((o) => [o.value, getal(o.text.match(/€\s?([\d,]+)/)?.[1] ?? '')]));
+    const namen = ['b', 'cpc', 'm', 'c', 'a', 'n'];
+    let geteld = false;
+
+    // Gedeelde uitkomst: invoer uit de URL overnemen (k_b, k_cpc, ...)
+    const q = new URLSearchParams(location.search);
+    namen.forEach((n) => {
+      const v = q.get(`k_${n}`);
+      if (v == null) return;
+      if (n === 'b') { if ([...veld('b').options].some((o) => o.value === v)) veld('b').value = v; }
+      else veld(n).value = v.slice(0, 12);
+    });
+
+    const reken = () => {
+      const cpc = getal(veld('cpc').value), marge = getal(veld('m').value);
+      const conv = getal(veld('c').value) / 100, klus = getal(veld('a').value) / 100, n = Math.max(1, Math.round(getal(veld('n').value) || 1));
+      if (![cpc, marge, conv, klus].every((x) => x > 0) || conv > 1 || klus > 1) {
+        uit.innerHTML = '<p class="leeg">Vul bij elk veld een getal groter dan nul in. Percentages zijn hooguit 100.</p>';
+        return;
+      }
+      const max = marge * conv * klus; // hoogste klikprijs waarbij je quitte speelt
+      const perAanvraag = cpc / conv;
+      const perKlus = perAanvraag / klus;
+      const klikken = n / (conv * klus);
+      const budget = klikken * cpc;
+      const rendement = marge / perKlus; // marge per euro aan klikken
+      const soort = cpc <= max * 0.5 ? 'ruim' : cpc <= max ? 'krap' : 'niet';
+      const oordeel = { ruim: 'Dit loont ruim', krap: 'Dit loont, maar het is krap', niet: 'Dit loont (nog) niet' }[soort];
+      const uitleg = {
+        ruim: `Een klik mag je tot ${eur(max)} kosten. Je betaalt ${eur(cpc)}. Een klus kost je ${eur(perKlus, 0)} aan klikken en levert ${eur(marge, 0)} marge op.`,
+        krap: `Een klik mag je tot ${eur(max)} kosten en je betaalt ${eur(cpc)}. Je verdient eraan, maar een iets slechtere maand en je speelt quitte. Een betere landingspagina geeft de meeste ruimte.`,
+        niet: `Een klik mag je hooguit ${eur(max)} kosten, maar je betaalt ${eur(cpc)}. Elke klus kost ${eur(perKlus, 0)} aan klikken, meer dan de ${eur(marge, 0)} die hij oplevert. Kijk eerst naar je landingspagina, je werkgebied of een goedkoper zoekwoord.`,
+      }[soort];
+      uit.innerHTML = `
+        <p class="oordeel ${soort}"><span class="stip" aria-hidden="true"></span>${oordeel}</p>
+        <p class="uitleg">${uitleg}</p>
+        <dl class="getallen-rij">
+          <div><dt>Hoogste klikprijs die loont</dt><dd>${eur(max)}</dd></div>
+          <div><dt>Kosten per aanvraag</dt><dd>${eur(perAanvraag, 0)}</dd></div>
+          <div><dt>Kosten per klus</dt><dd>${eur(perKlus, 0)}</dd></div>
+          <div><dt>Budget voor ${heel(n)} ${n === 1 ? 'klus' : 'klussen'} per maand</dt><dd>${eur(budget, 0)}</dd></div>
+        </dl>
+        <p class="klein muted">Dat zijn ongeveer ${heel(klikken)} klikken per maand, een dagbudget van ${eur(budget / 30.4, 0)}. Elke euro aan klikken levert ${eur(rendement)} marge op.</p>`;
+      const b = veld('b').value;
+      cta.href = b === 'eigen' ? '/gratis-website-analyse/' : `/gratis-website-analyse/?vak=${encodeURIComponent(b)}`;
+      // Invoer in de URL, zodat de uitkomst te delen is. Andere parameters blijven staan.
+      const p = new URLSearchParams(location.search);
+      namen.forEach((nm) => p.set(`k_${nm}`, veld(nm).value.trim()));
+      history.replaceState(null, '', `${location.pathname}?${p}${location.hash}`);
+      if (!geteld) { geteld = true; tel('uitkomst'); }
+    };
+
+    let wacht: number | undefined;
+    form.addEventListener('input', (e) => {
+      const t = e.target as HTMLElement;
+      if (t === veld('cpc') && veld('b').value !== 'eigen') {
+        // Eigen klikprijs ingevuld die niet bij de branche past: dan is het een eigen prijs
+        const p = prijzen.get(veld('b').value);
+        if (p !== undefined && Math.abs(getal(veld('cpc').value) - p) > 0.001) veld('b').value = 'eigen';
+      }
+      clearTimeout(wacht); wacht = window.setTimeout(reken, 250);
+    });
+    form.addEventListener('change', (e) => {
+      if (e.target === veld('b')) {
+        const p = prijzen.get(veld('b').value);
+        if (p !== undefined) veld('cpc').value = p.toLocaleString('nl-NL', { minimumFractionDigits: 2 });
+        else veld('cpc').focus();
+      }
+      reken();
+    });
+    form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
+    deel.hidden = false;
+    deel.addEventListener('click', async () => {
+      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; }
+      catch { window.prompt('Kopieer deze link', link); }
+      setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);
+    });
+    reken();
+  });
+</script>
+
+<style>
+  .tool { margin: 28px 0; padding: clamp(20px, 4vw, 32px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); max-width: 100%; }
+  .titel { font-weight: 900; font-size: var(--step-1); line-height: 1.2; margin: 4px 0 8px; }
+  .intro { margin: 0 0 18px; max-width: 60ch; }
+  .velden { display: grid; gap: 14px 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); margin-bottom: 18px; }
+  .velden .breed { grid-column: 1 / -1; }
+  .veld label { font-size: 0.95rem; }
+  .veld select, .veld input { min-height: 48px; }
+  .invoer { position: relative; display: flex; align-items: center; }
+  .invoer input { width: 100%; }
+  .invoer .voor, .invoer .na { position: absolute; color: var(--muted); font-weight: 700; pointer-events: none; }
+  .invoer .voor { left: 14px; }
+  .invoer .voor + input { padding-left: 32px; }
+  .invoer .na { right: 14px; }
+  .invoer input:has(+ .na) { padding-right: 34px; }
+  .uitkomst { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .uitkomst :global(p) { margin: 0 0 10px; }
+  .uitkomst :global(p:last-child) { margin-bottom: 0; }
+  .uitkomst :global(.leeg) { color: var(--muted); }
+  .uitkomst :global(.oordeel) { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.25rem; line-height: 1.25; }
+  .uitkomst :global(.stip) { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--muted); }
+  .uitkomst :global(.ruim .stip) { background: var(--ok); }
+  .uitkomst :global(.krap .stip) { background: #f2b200; }
+  .uitkomst :global(.niet .stip) { background: var(--orange); }
+  .uitkomst :global(.getallen-rij) { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); margin: 14px 0; }
+  .uitkomst :global(.getallen-rij div) { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .uitkomst :global(dt) { font-size: 0.85rem; color: var(--muted); line-height: 1.3; }
+  .uitkomst :global(dd) { margin: 4px 0 0; font-size: 1.45rem; font-weight: 900; color: var(--navy); letter-spacing: -0.02em; }
+  .acties { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  .acties .btn { min-height: 48px; text-align: center; }
+  .deel { font-size: 1rem; }
+  .bron { margin: 0; }
+</style>
