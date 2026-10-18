@@ -21,7 +21,7 @@ const hoofdstukken = [
   { id: 'onzichtbaar', titel: 'Waarom je het zelf niet ziet' },
   { id: 'soorten', titel: 'Wat een hacker wil' },
   { id: 'stappenplan', titel: 'Stappenplan in 12 stappen' },
-  { id: 'inloggen', titel: 'Niet meer kunnen inloggen' },
+  { id: 'inloggen', titel: 'Kun je niet meer inloggen?' },
   { id: 'google', titel: 'Google, bezoekers en mail' },
   { id: 'datalek', titel: 'Datalek en de AVG' },
   { id: 'oorzaak', titel: 'Hoe hackers binnenkomen' },
@@ -91,12 +91,12 @@ const schema = [{
           <li><b>Bel of mail je hostingpartij.</b> Zij zien wat er op de server gebeurt, hebben vaak een recente back-up en weten of andere sites op dezelfde server ook geraakt zijn.</li>
           <li><b>Verander je wachtwoorden.</b> Van je hostingaccount, je mail, (S)FTP, de database en de WordPress admin. Doe dat vanaf een apparaat waarvan je zeker weet dat het schoon is.</li>
           <li><b>Zet de site tijdelijk uit.</b> Vraag je hostingpartij om hem offline te halen of in onderhoudsmodus te zetten. Dat adviseert ook het NCSC. Zo besmet je site geen bezoekers terwijl je opruimt.</li>
-          <li><b>Raak de rest nog niet aan.</b> Niet zomaar plugins verwijderen of de database leegmaken. Eerst een kopie, dan uitzoeken, dan opruimen.</li>
+          <li><b>Raak de rest nog niet aan.</b> Verwijder dus geen plugins en maak de database niet leeg. Eerst een kopie, dan uitzoeken, dan opruimen.</li>
         </ol>
         <div class="kader">
           <p class="kader-titel">Wat je juist niet moet doen</p>
           <ul>
-            <li><b>WordPress opnieuw installeren met de knop in het dashboard.</b> Die knop overschrijft alleen bestaande bestanden. Bestanden die de hacker heeft toegevoegd, blijven gewoon staan. Dat waarschuwt WordPress.org zelf.</li>
+            <li><b>WordPress opnieuw installeren met de knop in het dashboard.</b> Die knop overschrijft alleen bestaande bestanden. Bestanden die de hacker heeft toegevoegd, blijven staan. Dat waarschuwt WordPress.org zelf.</li>
             <li><b>Blind een back-up terugzetten.</b> Weet je niet wanneer de hack begon, dan zet je misschien een besmette versie terug.</li>
             <li><b>Een beveiligingsplugin installeren en denken dat je klaar bent.</b> Een scan vindt veel, maar niet alles.</li>
             <li><b>Inloggen vanaf een computer die je niet vertrouwt.</b> Dan geef je je nieuwe wachtwoord meteen weer weg.</li>
@@ -150,7 +150,7 @@ const schema = [{
         </div>
 
         <h2 id="onzichtbaar">Waarom je een hack vaak zelf niet ziet</h2>
-        <p>Je opent je site, alles ziet er normaal uit, en toch is je site gehackt. Dat is geen toeval. Patchstack en Monarx onderzochten de malware die in 2025 het vaakst op WordPress-sites zat. De grootste families, zoals de Japanse SEO-spam en Parrot TDS, laten iedere bezoeker iets anders zien. Google krijgt pagina's vol spam. Een bezoeker op zijn telefoon wordt doorgestuurd naar een phishingsite. En de eigenaar en de scanner zien een schone pagina.</p>
+        <p>Je opent je site, alles ziet er normaal uit, en toch is je site gehackt. Dat is precies wat de hacker wil. Patchstack en Monarx onderzochten de malware die in 2025 het vaakst op WordPress-sites zat. De grootste families, zoals de Japanse SEO-spam en Parrot TDS, laten iedere bezoeker iets anders zien. Google krijgt pagina's vol spam. Een bezoeker op zijn telefoon wordt doorgestuurd naar een phishingsite. En de eigenaar en de scanner zien een schone pagina.</p>
         <p>Volgens hetzelfde rapport herkent Parrot TDS nu ook de crawlers van AI-diensten als ChatGPT en Gemini, en geeft die een schone versie. Een andere familie, Lock360, draait in het geheugen van de server. Ruim je een besmet bestand op, dan schrijft de malware het binnen een paar tellen opnieuw. En het onderzoek zag nog iets: in november en december lag het aantal kwaadaardige uploads bijna drie keer zo hoog. Juist als iedereen vrij is.</p>
         <h3>Zo kijk je zoals Google kijkt</h3>
         <ol>
@@ -185,7 +185,7 @@ const schema = [{
         <p>Vaak gaan meerdere soorten samen. Google waarschuwt daar ook voor: een site kan met verschillende typen malware tegelijk besmet zijn. Ruim je alleen de spampagina's op, dan kan de achterdeur waarmee ze gemaakt werden er nog steeds zitten.</p>
 
         <h2 id="stappenplan">Stappenplan: zo maak je een gehackte website schoon</h2>
-        <p>Is je WordPress gehackt, dan is dit de volgorde die we zelf aanhouden. Heb je geen ervaring met (S)FTP of een database, laat het dan aan een vakman over. Een halve schoonmaak is erger dan geen schoonmaak, want je denkt dat je klaar bent. Google zegt het ook eerlijk: om malware op te ruimen moet je de code van je site kunnen lezen en begrijpen.</p>
+        <p>Is je WordPress gehackt, dan is dit de volgorde die we zelf aanhouden. Heb je geen ervaring met (S)FTP of een database, laat het dan aan een vakman over. Een halve schoonmaak is erger dan geen schoonmaak, want je denkt dat je klaar bent. Google zegt het ook: om malware op te ruimen moet je de code van je site kunnen lezen en begrijpen.</p>
 
         <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>1. Maak een kopie van alles, ook van de besmette site</h3></div>
         <p>Klinkt vreemd, maar WordPress.org raadt het zelf aan. Met die kopie zie je later wat er is veranderd en hoe de hacker binnenkwam. En als er bij het opruimen iets misgaat, heb je nog iets om op terug te vallen. Kopieer alle bestanden en een export van de database. Bewaar ze apart, niet op dezelfde server.</p>
@@ -368,7 +368,7 @@ const schema = [{
             </tbody>
           </table>
         </div>
-        <p>Bij ons werkt het zo. Je belt, we bellen binnen 15 minuten terug. We kijken samen hoe erg het is en wat het waarschijnlijk kost. Daarna maken we de site schoon, zoeken we uit hoe de hacker binnenkwam en dichten we dat gat. Ook als iemand anders je site heeft gebouwd. Is de site niet meer te redden, dan zeggen we dat ook. Soms is opnieuw bouwen de goedkoopste route. Kijk dan eens bij <a href="/website-laten-maken/">een nieuwe website laten maken</a>.</p>
+        <p>Bij ons werkt het zo. Je belt, en op werkdagen bellen we binnen 15 minuten terug. We kijken samen hoe erg het is en wat het waarschijnlijk kost. Daarna maken we de site schoon, zoeken we uit hoe de hacker binnenkwam en dichten we dat gat. Ook als iemand anders je site heeft gebouwd. Is de site niet meer te redden, dan zeggen we dat ook. Soms is opnieuw bouwen de goedkoopste route. Kijk dan eens bij <a href="/website-laten-maken/">een nieuwe website laten maken</a>.</p>
 
         <h2 id="fouten">Zes fouten waardoor een hack terugkomt</h2>
         <ol>
@@ -397,7 +397,7 @@ const schema = [{
     </div>
   </section>
 
-  <Bewijs titel="Waarom je ons kunt bellen" intro="Snel schakelen bij een hack, en daarna zorgen dat het niet opnieuw gebeurt." case={false} />
+  <Bewijs titel="Waarom je ons kunt bellen" intro="Snel schakelen bij een hack, en daarna de lekken dichten waardoor hij binnenkwam." case={false} />
 
   <Faq
     vragen={[

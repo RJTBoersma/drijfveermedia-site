@@ -3,6 +3,8 @@
 // Zo kan een zoekmachine of AI-assistent het antwoord in één keer overnemen.
 import paginas from '../../../scripts/paginas.json';
 import { site } from '../../data/site';
+interface Props { waar?: string }
+const { waar: eigenWaar } = Astro.props;
 const pad = Astro.url.pathname;
 const p = (paginas as any[]).find((x) => x.url === pad);
 const slug = pad.replace(/\//g, '');
@@ -21,16 +23,16 @@ const km = (a: [number, number], b: [number, number]) => {
   return Math.round((12742 * Math.asin(Math.sqrt(h))) / 5) * 5;
 };
 const afstand = ligging[plaatsSlug] ? km([site.geo.lat, site.geo.lng], ligging[plaatsSlug]) : null;
-const wat = { seo: `SEO (zoekmachine optimalisatie) voor ondernemers in ${plaats}`, webdesign: `websites laten maken voor ondernemers in ${plaats}`, 'online-marketing': `online marketing voor ondernemers in ${plaats}: SEO, Google Ads, je website en de opvolging van aanvragen` }[dienst];
+const wat = { seo: `SEO (zoekmachineoptimalisatie) voor ondernemers in ${plaats}`, webdesign: `websites laten maken voor ondernemers in ${plaats}`, 'online-marketing': `online marketing voor ondernemers in ${plaats}: SEO, Google Ads, je website en de opvolging van aanvragen` }[dienst];
 const prijs = {
-  seo: 'SEO vanaf € 495 per maand, lokale SEO vanaf € 295 per maand. Maandelijks opzegbaar, met stijggarantie.',
+  seo: 'SEO vanaf € 495 per maand, lokale SEO vanaf € 295 per maand. Per maand opzegbaar, met stijggarantie.',
   webdesign: 'Een website met AI vanaf € 250, maatwerk in WordPress vanaf € 2.000. Je krijgt vooraf een vaste prijs.',
-  'online-marketing': 'Alles in één hand vanaf € 595 per maand, losse diensten vanaf € 295 per maand. Maandelijks opzegbaar.',
+  'online-marketing': 'Alles in één hand vanaf € 595 per maand, losse diensten vanaf € 295 per maand. Per maand opzegbaar.',
 }[dienst];
-const waar = plaatsSlug === 'assen'
+const waar = eigenWaar ?? (plaatsSlug === 'assen'
   ? `Ons kantoor staat in Assen zelf, aan de ${site.straat}. Je kunt gewoon langskomen.`
   : afstand ? `Vanuit ons kantoor aan de ${site.straat} in Assen, ongeveer ${afstand} km hemelsbreed van ${plaats}. Langskomen kan, en wij komen ook naar jou toe.`
-  : `Vanuit ons kantoor aan de ${site.straat} in Assen, midden in het Noorden.`;
+  : `Vanuit ons kantoor aan de ${site.straat} in Assen, midden in het Noorden.`);
 ---
 {p && (
   <dm-extra><div class="kader kader-oranje in-het-kort plaatsfeiten">

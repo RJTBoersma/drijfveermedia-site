@@ -17,10 +17,19 @@ const euroBijElkaar = {
         const html = readFileSync(p, 'utf8');
         const k = html.indexOf('<body');
         if (k < 0) return;
+        let n = 0;
         const lijf = html.slice(k).split(/(<script[\s\S]*?<\/script>)/).map((deel, i) => (i % 2 ? deel : deel
           .replace(/€ (?=[0-9])/g, '€&#160;')
-          // Tabellen die horizontaal scrollen: bereikbaar met het toetsenbord en voorgelezen als gebied
-          .replace(/<div class="tabel-scroll"(?![^>]*tabindex)/g, '<div class="tabel-scroll" tabindex="0" role="region" aria-label="Tabel"'))).join('');
+          // Tabellen die horizontaal scrollen: bereikbaar met het toetsenbord en voorgelezen als gebied, elk met een eigen naam
+          .replace(/<div class="tabel-scroll"(?![^>]*tabindex)/g, () => `<div class="tabel-scroll" tabindex="0" role="region" aria-label="Tabel ${++n}"`)
+          // Codeblokken die kunnen scrollen: ook bereikbaar met het toetsenbord
+          .replace(/<pre(?![^>]*tabindex)(?=[\s>])/g, '<pre tabindex="0"')
+          // Tabellen met drie of meer kolommen: de eerste cel van elke rij is de rijkop (WCAG 1.3.1)
+          .replace(/<table\b[\s\S]*?<\/table>/g, (t) => {
+            const kop = t.match(/<thead[\s\S]*?<\/thead>/)?.[0];
+            if (!kop || (kop.match(/<th\b/g) ?? []).length < 3) return t;
+            return t.replace(/<tbody[\s\S]*?<\/tbody>/, (body) => body.replace(/(<tr\b[^>]*>\s*)<td\b([^>]*)>([\s\S]*?)<\/td>/g, '$1<th scope="row"$2>$3</th>'));
+          }))).join('');
         const nieuw = html.slice(0, k) + lijf;
         if (nieuw !== html) writeFileSync(p, nieuw);
       });
