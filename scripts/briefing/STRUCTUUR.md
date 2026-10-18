@@ -276,7 +276,7 @@ Korte pagina's met een definitie van één zin bovenaan.
 | Keyword cannibalization | /kennisbank/wat-is/keyword-cannibalization/ |
 | Mixed content | /kennisbank/wat-is/mixed-content/ |
 | Link juice | /kennisbank/wat-is/link-juice/ |
-| Anchortekst | /kennisbank/wat-is/anchortekst/ |
+| Ankertekst | /kennisbank/wat-is/ankertekst/ |
 | Crawlbudget | /kennisbank/wat-is/crawlbudget/ |
 | Interne links | /kennisbank/wat-is/interne-links/ |
 | Entiteiten | /kennisbank/wat-is/entiteiten/ |

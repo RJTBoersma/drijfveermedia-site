@@ -24,7 +24,7 @@ vast = {
  '/blog/het-belang-van-alt-tekst-voor-seo/': '/kennisbank/wat-is/alt-tekst/',
  '/blog/het-belang-van-een-sterke-404-pagina/': '/kennisbank/wat-is/404-pagina/',
  '/blog/het-gevaar-van-keyword-cannibalization-en-hoe-je-het-kan-oplossen/': '/kennisbank/wat-is/keyword-cannibalization/',
- '/blog/hoe-geef-anchortekst-vorm/': '/kennisbank/wat-is/anchortekst/',
+ '/blog/hoe-geef-anchortekst-vorm/': '/kennisbank/wat-is/ankertekst/',
  '/blog/hoe-krijg-je-positie-0-in-google/': '/kennisbank/wat-is/featured-snippet/',
  '/blog/hoe-slecht-is-duplicate-content-voor-seo/': '/kennisbank/wat-is/duplicate-content/',
  '/blog/voorkom-mixed-content-en-beloon-veilige-site/': '/kennisbank/wat-is/mixed-content/',
