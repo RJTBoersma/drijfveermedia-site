@@ -105,8 +105,8 @@ vast = {
  '/website-toevoegen-aan-google/': '/kennisbank/gidsen/google-search-console/',
  '/over-ons/team/': '/over-ons/', '/privacy/': '/privacyverklaring/',
  '/ervaringsberoepen/': '/proeflab/',
- '/DM-algemenevoorwaarden.pdf': '/algemene-voorwaarden/',
- '/wp-content/uploads/Algemene-Voorwaarden-2.pdf': '/algemene-voorwaarden/',
+ '/DM-algemenevoorwaarden.pdf': '/algemene-voorwaarden-2025-03.pdf',
+ '/wp-content/uploads/Algemene-Voorwaarden-2.pdf': '/algemene-voorwaarden-2025-03.pdf',
  '/blog/5-stappen-om-google-analytics-avg-vriendelijk-in-te-stellen/': '/kennisbank/gidsen/google-analytics-4/',
  '/blog/7-manieren-succesvol-gebruiken-e-mailnieuwsbrief-online-marketingcampagne/': '/kennisbank/gidsen/nieuwsbrief-maken/',
  '/blog/vijf-stappen-om-je-mobiele-website-te-optimaliseren/': '/kennisbank/gidsen/website-sneller-maken/',
@@ -123,7 +123,7 @@ for u in oud:
         if u in nieuw: continue  # bestaat nog op dezelfde plek
         mis.append(u); continue
     if doel == u: continue
-    if doel not in nieuw and doel != '/': mis.append(f'{u} -> {doel} (doel bestaat niet)'); continue
+    if doel not in nieuw and doel != '/' and not __import__('os').path.exists('public' + doel): mis.append(f'{u} -> {doel} (doel bestaat niet)'); continue
     patroon = re.escape(u.strip('/'))
     regels.append(f'RewriteRule ^{patroon}/?$ https://www.drijfveermedia.nl{doel} [R=301,L,NC]')
 regels += [f"RewriteRule ^{re.escape(u.strip('/'))}/?$ - [G,L]" for u in weg]

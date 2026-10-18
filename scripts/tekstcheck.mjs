@@ -45,7 +45,7 @@ const STIJL = [
   [/\bGoogle reviews?\b/g, 0, 'schrijf "Google-reviews"'],
   [/\b(SEO|Google Ads|Linkbuilding|GEO) (specialist|bureau|specialisten|bureaus)\b/g, 0, 'met koppelteken: "SEO-bureau", "Google Ads-specialist"'],
   [/\b(branding|social media|marketing) bureau\b/gi, 0, 'aan elkaar: "brandingbureau", "socialemediabureau", "marketingbureau"'],
-  [/\bcontent marketing\b/gi, 0, 'schrijf "contentmarketing"'],
+  [/\bcontent marketing\b(?! institute)/gi, 0, 'schrijf "contentmarketing"'],
   [/Apple Business Connect/g, 0, 'de naam is nu "Apple Business"'],
   [/community van freelance/gi, 0, 'schrijf "een vaste groep freelancers die we al jaren kennen"'],
   [/(dertig|veertig) pagina'?s/gi, 0, 'geen "rapport van dertig/veertig pagina\'s": zeg wat je wel krijgt (één A4)'],
