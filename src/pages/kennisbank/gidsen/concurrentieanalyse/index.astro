@@ -1,0 +1,444 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--concurrentieanalyse.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/concurrentieanalyse/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is een concurrentieanalyse?' },
+  { id: 'wanneer', titel: 'Wanneer maak je er een?' },
+  { id: 'soorten', titel: 'Soorten concurrenten' },
+  { id: 'stappen', titel: 'In zeven stappen' },
+  { id: 'bronnen', titel: 'Waar je informatie vindt' },
+  { id: 'online', titel: 'Online vergelijken' },
+  { id: 'reviews', titel: 'Reviews van concurrenten lezen' },
+  { id: 'matrix', titel: 'Concurrentiematrix om in te vullen' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een schilder in Assen' },
+  { id: 'positionering', titel: 'Van analyse naar positionering' },
+  { id: 'modellen', titel: 'SWOT, Porter en de 4 P\'s' },
+  { id: 'mag', titel: 'Wat mag wel en niet?' },
+  { id: 'fouten', titel: 'Zes fouten' },
+  { id: 'herhalen', titel: 'Hoe vaak herhalen?' },
+  { id: 'hulp', titel: 'Zelf doen of laten doen?' },
+];
+
+// De matrix: criterium, standaardweging (0 tot 5), korte uitleg.
+const criteria = [
+  ['Prijs', 3, 'Vanaf-prijzen, uurtarief, kortingen, wat er wel en niet in zit'],
+  ['Aanbod en specialisatie', 2, 'Breed of juist gespecialiseerd, extra diensten'],
+  ['Kwaliteit van het werk', 3, 'Wat klanten erover zeggen, foto\'s, keurmerken'],
+  ['Service en bereikbaarheid', 2, 'Reactietijd, openingstijden, terugbellen'],
+  ['Garantie en zekerheid', 1, 'Garantie, vaste prijs, voorwaarden in gewone taal'],
+  ['Website', 2, 'Duidelijk, snel, prijzen zichtbaar, makkelijk aanvragen'],
+  ['Vindbaarheid', 3, 'Plek in Google en op Google Maps op je belangrijkste zoekwoorden'],
+  ['Reviews', 2, 'Aantal, gemiddelde score, reageert de eigenaar'],
+] as const;
+const kolommen = ['Jij', 'Concurrent A', 'Concurrent B', 'Concurrent C'];
+const csvCel = (c: string | number) => `"${String(c).replace(/"/g, '""')}"`;
+const matrixCsv = '﻿' + [
+  ['Criterium', 'Weging (0-5)', ...kolommen, 'Toelichting'],
+  ...criteria.map(([n, w, t]) => [n, w, 3, 3, 3, 3, t]),
+].map((r) => r.map(csvCel).join(';')).join('\r\n');
+const matrixDownload = 'data:text/csv;charset=utf-8,' + encodeURIComponent(matrixCsv);
+
+const schema = [{
+  '@type': 'Article',
+  headline: 'Concurrentieanalyse maken: zo vind je je voorsprong',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Concurrentieanalyse',
+  citation: [
+    'https://www.kvk.nl/cijfers-en-trends/marktscan/',
+    'https://www.kvk.nl/producten-bestellen/jaarrekeningen/',
+    'https://support.google.com/adspolicy/answer/9703665?hl=nl',
+    'https://www.facebook.com/business/help/2405092116183307',
+    'https://wetten.overheid.nl/jci1.3:c:BWBR0005289&boek=6&titeldeel=3&afdeling=4&artikel=194a',
+  ],
+}, {
+  '@type': 'HowTo',
+  name: 'Een concurrentieanalyse maken',
+  step: [
+    'Bepaal wat je wilt weten', 'Kies drie tot vijf concurrenten', 'Kies je criteria en hun gewicht', 'Verzamel de informatie',
+    'Vul de concurrentiematrix in', 'Benoem sterke punten, zwakke punten en gaten', 'Kies je positionering en maak er acties van',
+  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, url: `${site.url}${url}#stappen` })),
+}];
+---
+<Base
+  title="Concurrentieanalyse maken in 7 stappen, met matrix"
+  description="Een concurrentieanalyse maken als mkb'er: zeven stappen, gratis bronnen, een concurrentiematrix om in te vullen en een uitgewerkt voorbeeld uit Assen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Concurrentieanalyse', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Strategie" titel="Concurrentieanalyse maken: zo vind je je voorsprong" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Met een concurrentieanalyse zie je waarom klanten voor een ander kiezen, en waar jij kunt winnen. Je hebt er geen dure tools voor nodig. Wel een vaste aanpak, een paar gratis bronnen en een matrix om alles naast elkaar te zetten. Die staan hieronder.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een concurrentieanalyse vergelijkt jouw bedrijf met drie tot vijf concurrenten op dezelfde punten, zoals prijzen, service, reviews en vindbaarheid.</li>
+            <li>Kijk niet alleen naar wie hetzelfde verkoopt. Ook wie bovenaan staat in Google op jouw zoekwoorden, is je concurrent.</li>
+            <li>Bijna alles wat je nodig hebt is openbaar en gratis: websites, reviews, de KVK, en de advertentiebibliotheken van Google en Meta.</li>
+            <li>De analyse is pas af als je weet waarin je je gaat onderscheiden, en wat je daar morgen voor doet.</li>
+            <li>Op deze pagina staat een concurrentiematrix die je online invult en downloadt.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is een concurrentieanalyse?</h2>
+        <p>Een concurrentieanalyse is een onderzoek naar de bedrijven waar jouw klanten ook uit kunnen kiezen. Je zet hun sterke en zwakke punten naast die van jezelf. Zo zie je waar je achterloopt, waar je voorloopt en welke behoefte in de markt nog niemand goed invult.</p>
+        <p>Je komt ook de woorden concurrentenanalyse en concurrentie analyse tegen. In de praktijk bedoelen mensen hetzelfde. Wie het precies wil nemen, maakt dit onderscheid:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Begrip</th><th>Kijkt naar</th><th>Vraag</th></tr></thead>
+            <tbody>
+              <tr><td><b>Concurrentenanalyse</b></td><td>Individuele concurrenten</td><td>Wat doen bedrijf A, B en C beter of slechter dan ik?</td></tr>
+              <tr><td><b>Concurrentieanalyse</b></td><td>De krachten in je hele markt</td><td>Hoe zwaar is de concurrentie, en waar komt die vandaan?</td></tr>
+              <tr><td><b>Marktonderzoek</b></td><td>Klanten, vraag en trends</td><td>Is er genoeg vraag, en verandert die?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor een mkb'er is de eerste het nuttigst om mee te beginnen. Deze gids doet ze allebei: eerst je directe concurrenten, daarna een korte blik op de markt.</p>
+
+        <h2 id="wanneer">Wanneer maak je er een?</h2>
+        <p>Niet alleen bij de start van je bedrijf. Juist op deze momenten levert een analyse het meest op:</p>
+        <ul>
+          <li>Je aanvragen dalen, en je weet niet waarom.</li>
+          <li>Je wilt je prijzen verhogen en vraagt je af hoe je ervoor staat.</li>
+          <li>Je begint met een nieuwe dienst of in een nieuwe regio.</li>
+          <li>Je laat een nieuwe website maken, of start met SEO of Google Ads.</li>
+          <li>Je verliest een paar offertes op rij aan dezelfde partij.</li>
+          <li>Je schrijft een ondernemingsplan of vraagt financiering aan.</li>
+        </ul>
+        <p>Daarnaast loont een korte jaarlijkse ronde. Markten veranderen sneller dan je denkt. Een nieuwe speler, een platform dat ineens bovenaan staat, een concurrent die met prijzen gaat stunten.</p>
+
+        <h2 id="soorten">Directe concurrenten, indirecte concurrenten en zoekconcurrenten</h2>
+        <p>De meeste ondernemers noemen meteen een paar namen uit de buurt. Dat is een goed begin, maar het is maar een deel van het plaatje.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort</th><th>Wie</th><th>Voorbeeld bij een schilder</th></tr></thead>
+            <tbody>
+              <tr><td><b>Directe concurrenten</b></td><td>Verkopen hetzelfde aan dezelfde klanten in jouw gebied</td><td>Andere schildersbedrijven in de regio</td></tr>
+              <tr><td><b>Indirecte concurrenten</b></td><td>Lossen hetzelfde probleem anders op</td><td>Een bedrijf dat kunststof kozijnen plaatst, zodat schilderen niet meer nodig is</td></tr>
+              <tr><td><b>Zoekconcurrenten</b></td><td>Staan bovenaan in Google op jouw zoekwoorden</td><td>Klusplatforms, vergelijkingssites, een landelijke keten</td></tr>
+              <tr><td><b>Zelf doen of niets doen</b></td><td>De klant die het zelf oppakt of uitstelt</td><td>De bouwmarkt, een filmpje met uitleg, nog een jaar wachten</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die derde groep wordt vaak vergeten. Toch is dat online je echte concurrentie. Een klusplatform verkoopt niet hetzelfde als jij, maar pakt wel de klik. Wat je daartegen kunt doen, lees je in de gids <a href="/kennisbank/gidsen/werkspot-alternatieven/">alternatieven voor klusplatforms</a>.</p>
+
+        <h2 id="stappen">Een concurrentieanalyse maken in zeven stappen</h2>
+        <p>Reken op een dag voor de eerste keer. Daarna kost een update een paar uur.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>1. Bepaal wat je wilt weten</h3></div>
+        <p>Begin met een vraag, anders verzamel je alleen maar feitjes. Bijvoorbeeld: "Waarom verliezen we offertes aan bedrijf B?" of "Kunnen we 10% duurder worden?" of "Waarom staan we niet in het kaartje van Google?" Die vraag bepaalt welke concurrenten en welke punten je onderzoekt.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>2. Kies drie tot vijf concurrenten</h3></div>
+        <p>Meer is niet beter. Met vijf kun je diep gaan, met twintig blijf je aan de oppervlakte. Zo vind je ze:</p>
+        <ul>
+          <li><b>Vraag het je klanten.</b> "Bij wie heb je nog meer een offerte gevraagd?" is de eerlijkste bron die er is.</li>
+          <li><b>Zoek in Google.</b> Typ je vijf belangrijkste zoekwoorden in, zoals "schilder Assen". Noteer wie in het kaartje en in de eerste resultaten staat. Doe het in een privévenster, dan ziet Google niet wat je eerder zocht.</li>
+          <li><b>Kijk op Google Maps.</b> Zoek je dienst in je werkgebied en zoom uit tot je hele regio in beeld is.</li>
+          <li><b>Gebruik de KVK Marktscan.</b> Die is gratis en laat zien hoeveel bedrijven in jouw branche actief zijn in een gebied, en hoe dat zich ontwikkelt. Je krijgt er ook cijfers over de bevolking bij.</li>
+        </ul>
+        <p>Kies een mix: de partij die je het vaakst tegenkomt in offertes, de partij die bovenaan Google staat en één partij die je bewondert. Van die laatste leer je het meest.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>3. Kies je criteria en hun gewicht</h3></div>
+        <p>Bepaal vooraf op welke punten je iedereen beoordeelt. Dan vergelijk je appels met appels. Denk aan prijzen, aanbod, kwaliteit, service, garantie, website, vindbaarheid en reviews. Geef elk punt een gewicht: hoe belangrijk is het voor jouw klant? Bij een loodgieter bij lekkage weegt snelheid zwaar. Bij een interieurontwerper telt de kwaliteit van eerder werk meer dan de prijs.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>4. Verzamel de informatie</h3></div>
+        <p>Werk per concurrent dezelfde lijst af. Noteer wat je ziet, niet wat je denkt. "Geen prijzen op de site" is een feit. "Ze zijn vast duur" is een gok. Welke bronnen je kunt gebruiken, staat in de tabel <a href="#bronnen">hieronder</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>5. Vul de concurrentiematrix in</h3></div>
+        <p>Geef iedereen per criterium een score van 1 tot 5, jezelf ook. Wees streng voor jezelf, en vraag een klant of collega om mee te kijken. De meeste ondernemers geven zichzelf op service een 5, terwijl hun reviews iets anders zeggen. De <a href="#matrix">concurrentiematrix</a> verderop rekent de gewogen score voor je uit.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>6. Benoem sterke punten, zwakke punten en gaten</h3></div>
+        <p>Kijk naar de matrix en schrijf drie lijstjes. Waar ben jij duidelijk beter? Waar loop je achter? En waar scoort iedereen laag? Dat laatste is het interessantst. Als geen enkele concurrent prijzen op zijn site zet, of niemand binnen een dag terugbelt, ligt daar je kans. Wil je het in een SWOT-analyse zetten, lees dan de <a href="/kennisbank/gidsen/marketingplan-maken/">gids over een marketingplan</a>. Daar staat hoe je die in een kwartier maakt.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>7. Kies je positionering en maak er acties van</h3></div>
+        <p>Een analyse zonder actie is een hobby. Kies één tot drie punten waarin je je gaat onderscheiden. Maak er concrete acties van, met een datum en een naam. "Beter worden in service" is geen actie. "Elke aanvraag binnen vier werkuren terugbellen, vanaf 1 november, Petra houdt het bij" wel. Meer over het kiezen staat bij <a href="#positionering">positionering</a>.</p>
+
+        <h2 id="bronnen">Waar je informatie vindt over je concurrenten</h2>
+        <p>Je hoeft niet te spioneren. Bijna alles is openbaar. Deze bronnen gebruiken we zelf ook.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bron</th><th>Wat je er ziet</th><th>Kosten</th></tr></thead>
+            <tbody>
+              <tr><td>Hun website</td><td>Aanbod, prijzen, werkwijze, garantie, hoe ze zich presenteren</td><td>Gratis</td></tr>
+              <tr><td>Google Bedrijfsprofiel en Maps</td><td>Reviews, foto's, openingstijden, reacties van de eigenaar</td><td>Gratis</td></tr>
+              <tr><td>KVK Handelsregister</td><td>Rechtsvorm, vestigingen, oprichtingsdatum en wie er tekenbevoegd is. Het register is openbaar.</td><td>Uittreksel te bestellen bij de KVK</td></tr>
+              <tr><td>KVK jaarrekeningen</td><td>Balans en winst- en verliesrekening. Bv's en nv's moeten die vrijwel altijd deponeren, eenmanszaken en vof's meestal niet.</td><td>Te bestellen bij de KVK</td></tr>
+              <tr><td>Centrum voor advertentietransparantie van Google</td><td>Welke advertenties een bedrijf toont op Google Zoeken en YouTube</td><td>Gratis</td></tr>
+              <tr><td>Advertentiebibliotheek van Meta</td><td>Alle actieve advertenties op Facebook en Instagram</td><td>Gratis</td></tr>
+              <tr><td>Wayback Machine (web.archive.org)</td><td>Oude versies van hun website, zodat je ziet wat ze veranderd hebben</td><td>Gratis</td></tr>
+              <tr><td>SEO-tools zoals SE Ranking, <a href="/kennisbank/wat-is/semrush/">Semrush</a> of <a href="/kennisbank/wat-is/ahrefs/">Ahrefs</a></td><td>Zoekwoorden waarop ze gevonden worden, schatting van verkeer, backlinks</td><td>Meestal een betaald abonnement</td></tr>
+              <tr><td>Hun vacatures</td><td>Waar ze in investeren en welke diensten ze uitbreiden</td><td>Gratis</td></tr>
+              <tr><td>Je eigen klanten</td><td>Waarom ze voor jou kozen, en wie ze nog meer overwogen</td><td>Gratis</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een tip voor de advertentiebibliotheken: kijk niet alleen óf een concurrent adverteert, maar ook wat hij belooft. Advertenties die al maanden draaien, werken meestal. Anders was hij er allang mee gestopt.</p>
+
+        <h2 id="online">Online concurrentieanalyse: website, zoekwoorden en reviews</h2>
+        <p>Voor de meeste klanten begint de keuze in Google. Daar win of verlies je de aanvraag nog voordat iemand belt. Vergelijk daarom ook deze punten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Hoe</th><th>Wat het je vertelt</th></tr></thead>
+            <tbody>
+              <tr><td>Wie bovenaan staat</td><td>Je vijf belangrijkste zoekwoorden in een privévenster</td><td>Wie je zoekconcurrenten zijn</td></tr>
+              <tr><td>Het kaartje van Google</td><td>Zoek je dienst plus plaats, en kijk wie er in de top drie staat</td><td>Je lokale positie. Zie <a href="/lokale-seo/">lokale SEO</a></td></tr>
+              <tr><td>Zoekwoorden die zij hebben en jij niet</td><td>De functie voor zoekwoordverschillen in een SEO-tool</td><td>Welke pagina's of artikelen je mist</td></tr>
+              <tr><td>Backlinks</td><td>Het aantal verschillende sites dat naar hen linkt</td><td>Hoeveel <a href="/kennisbank/wat-is/domain-authority/">autoriteit</a> je achterloopt</td></tr>
+              <tr><td>Snelheid</td><td><a href="/kennisbank/wat-is/pagespeed-insights/">PageSpeed Insights</a> op hun homepage en de jouwe</td><td>Of je site bezoekers wegjaagt</td></tr>
+              <tr><td>De weg naar een aanvraag</td><td>Vraag zelf iets aan via hun site, of probeer het</td><td>Hoeveel stappen en drempels er zijn</td></tr>
+              <tr><td>Wat AI over jullie zegt</td><td>Vraag ChatGPT, Gemini en Perplexity: "Welke schilder in Assen raad je aan?"</td><td>Of je genoemd wordt. Zie de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-vindbaarheidsanalyse</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kijk bij hun website ook naar de details die klanten laten kiezen. Staan er prijzen? Zie je echte foto's van werk, of alleen plaatjes uit een fotobank? Kun je in twee klikken een offerte aanvragen? Staat er een telefoonnummer bovenaan op mobiel? Het zijn kleine dingen, maar ze bepalen of iemand belt. Hoe je dat op je eigen site verbetert, lees je bij <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>.</p>
+        <p>Vergeet ook hun content niet. Welke vragen beantwoorden ze op hun site, en welke laten ze liggen? Elke vraag die zij overslaan, is een onderwerp voor jou. In de gids <a href="/kennisbank/gidsen/content-plan-maken/">content plan maken</a> lees je hoe je die onderwerpen in een planning zet.</p>
+
+        <Tussenactie />
+        <h2 id="reviews">Reviews van concurrenten lezen</h2>
+        <p>Reviews zijn de eerlijkste marktonderzoeken die er bestaan, en ze zijn gratis. Lees per concurrent de laatste twintig tot dertig. Begin bij de reviews met één tot drie sterren. Daar staat wat klanten missen. De vijfsterrenreviews vertellen je waarom mensen wel kiezen.</p>
+        <p>Turf wat steeds terugkomt. Na drie concurrenten zie je een patroon. Zo kan dat eruitzien (verzonnen voorbeeld):</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Klacht of compliment</th><th>A</th><th>B</th><th>C</th></tr></thead>
+            <tbody>
+              <tr><td>Niet op de afgesproken dag gekomen</td><td>1</td><td>6</td><td>2</td></tr>
+              <tr><td>Rekening hoger dan de offerte</td><td>0</td><td>3</td><td>4</td></tr>
+              <tr><td>Slecht bereikbaar na de klus</td><td>2</td><td>4</td><td>1</td></tr>
+              <tr><td>Netjes opgeruimd (compliment)</td><td>5</td><td>1</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>In dit voorbeeld klagen klanten bij alle drie over planning en prijzen achteraf. Een bedrijf dat een vaste dag en een vaste prijs belooft, en dat waarmaakt, heeft een sterk verhaal. Kijk ook of de eigenaar reageert op reviews, en hoe. Een vriendelijke reactie op een slechte review overtuigt vaak meer dan tien goede reviews. Hoe je dat zelf aanpakt, lees je in de gids over <a href="/kennisbank/gidsen/google-reviews/">Google reviews</a>.</p>
+
+        <h2 id="matrix">De concurrentiematrix: sjabloon om in te vullen</h2>
+        <p>Vul de matrix hieronder direct in. Pas de namen, de weging (0 tot 5) en de scores (1 tot 5) aan. De gewogen score onderaan rekent mee. Download hem daarna als bestand voor Excel of Google Sheets. Zonder JavaScript kun je het lege sjabloon downloaden en daar invullen.</p>
+        <p class="klein muted">Score 1 betekent duidelijk slechter dan de rest, 3 gemiddeld, 5 de beste in je markt. Weging 0 betekent dat het punt voor jouw klant niet meetelt.</p>
+        <div class="kader matrix-kader" data-matrix>
+          <div class="tabel-scroll">
+            <table class="matrix">
+              <thead>
+                <tr>
+                  <th>Criterium</th>
+                  <th>Weging</th>
+                  {kolommen.map((k, i) => <th><input type="text" value={k} aria-label={`Naam kolom ${i + 1}`} data-naam={i} /></th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {criteria.map(([n, w, t]) => (
+                  <tr>
+                    <th scope="row">{n}<span class="uitleg">{t}</span></th>
+                    <td><input type="number" min="0" max="5" step="1" value={w} aria-label={`Weging ${n}`} data-w /></td>
+                    {kolommen.map((k, i) => <td><input type="number" min="1" max="5" step="1" value="3" aria-label={`${n}, score ${k}`} data-s={i} /></td>)}
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row">Gewogen score</th>
+                  <td></td>
+                  {kolommen.map((_, i) => <td><output data-tot={i}>3,0</output></td>)}
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <a class="btn" href={matrixDownload} download="concurrentiematrix.csv" data-download>Download de matrix</a>
+        </div>
+        <p>De gewogen score is een hulpmiddel, geen eindoordeel. Het gaat erom waar de verschillen zitten. Een concurrent met een hogere totaalscore kan op precies het punt dat jouw klant het belangrijkst vindt, zwak zijn.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: een schilder in Assen</h2>
+        <p>Zo ziet een ingevulde matrix eruit. Het bedrijf is verzonnen: Schildersbedrijf Noorderveld uit Assen, met zes schilders. De eigenaar ziet zijn aanvragen dalen en wil weten waarom. Hij vergelijkt zich met drie concurrenten die hij vaak tegenkomt.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: Schildersbedrijf Noorderveld</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th>Criterium</th><th>Weging</th><th>Noorderveld</th><th>A</th><th>B</th><th>C</th></tr></thead>
+              <tbody>
+                <tr><td>Prijs</td><td>3</td><td>3</td><td>3</td><td>5</td><td>2</td></tr>
+                <tr><td>Aanbod en specialisatie</td><td>2</td><td>3</td><td>4</td><td>2</td><td>3</td></tr>
+                <tr><td>Kwaliteit van het werk</td><td>3</td><td>5</td><td>4</td><td>2</td><td>4</td></tr>
+                <tr><td>Service en bereikbaarheid</td><td>2</td><td>3</td><td>3</td><td>2</td><td>4</td></tr>
+                <tr><td>Garantie en zekerheid</td><td>1</td><td>2</td><td>3</td><td>1</td><td>4</td></tr>
+                <tr><td>Website</td><td>2</td><td>2</td><td>4</td><td>3</td><td>3</td></tr>
+                <tr><td>Vindbaarheid</td><td>3</td><td>1</td><td>4</td><td>5</td><td>2</td></tr>
+                <tr><td>Reviews</td><td>2</td><td>4</td><td>4</td><td>2</td><td>3</td></tr>
+                <tr><td><b>Gewogen score</b></td><td>&nbsp;</td><td><b>2,9</b></td><td><b>3,7</b></td><td><b>3,1</b></td><td><b>3,0</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p>Wat zegt dit? Noorderveld levert het beste werk, dat zeggen de reviews ook. Maar bijna niemand vindt hem. Op "schilder Assen" staat hij niet in het kaartje en niet op de eerste pagina. Concurrent B staat overal bovenaan en is de goedkoopste, maar heeft reviews over gemiste afspraken. Concurrent A heeft de beste website en wint daardoor veel aanvragen.</p>
+        <ul>
+          <li><b>Sterke punten:</b> kwaliteit van het werk, goede reviews.</li>
+          <li><b>Zwakke punten:</b> vindbaarheid en een website zonder prijzen en zonder foto's van eigen werk.</li>
+          <li><b>Gat in de markt:</b> niemand belooft een vaste startdatum en een vaste prijs, terwijl dat de grootste klacht is in de reviews.</li>
+        </ul>
+        <p>De acties voor het komende kwartaal: het Google Bedrijfsprofiel volledig inrichten met foto's van projecten. Een pagina per dienst met vanaf-prijzen en echte foto's. Klanten na elke klus om een review vragen. En op de site beloven wat de reviews al laten zien: "Vaste prijs, vaste startdatum, en we ruimen op." Over drie maanden kijkt hij opnieuw naar dezelfde matrix.</p>
+
+        <h2 id="positionering">Van analyse naar positionering en USP</h2>
+        <p>Positionering is de plek die je in het hoofd van je klant wilt innemen. Het antwoord op de vraag: waarom jij en niet de buren? Je concurrentieanalyse laat zien welke plekken al bezet zijn en welke nog vrij zijn.</p>
+        <p>Een handige oefening: teken twee assen op een vel papier. Horizontaal van goedkoop naar duur, verticaal van breed aanbod naar specialist. Zet jezelf en je concurrenten erop. Zitten ze allemaal in hetzelfde vak? Dan is het lege vak misschien jouw plek. Zit je zelf midden tussen de anderen in, dan ben je voor de klant onzichtbaar.</p>
+        <p>Niet de goedkoopste zijn is geen probleem, zolang je ergens anders in uitblinkt. Deze routes zien we het vaakst werken:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Zo onderscheid je je</th><th>Voorwaarde</th></tr></thead>
+            <tbody>
+              <tr><td>Specialist</td><td>Je doet één ding beter dan wie ook, zoals monumentale panden</td><td>Genoeg vraag naar dat ene ding</td></tr>
+              <tr><td>Snelheid</td><td>Binnen een dag langs, binnen een week klaar</td><td>Je planning moet het aankunnen</td></tr>
+              <tr><td>Zekerheid</td><td>Vaste prijs, vaste datum, garantie in gewone taal</td><td>Je moet het altijd waarmaken</td></tr>
+              <tr><td>Openheid</td><td>Prijzen gewoon op je site</td><td>Je moet je prijzen durven uitleggen</td></tr>
+              <tr><td>Dichtbij</td><td>Echt lokaal, bekend in de buurt, snel ter plaatse</td><td>Een duidelijk werkgebied</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Vat je keuze samen in één zin. Dat is je USP, je unieke verkoopargument. Hoe je die scherp krijgt, lees je bij het begrip <a href="/kennisbank/wat-is/usp/">USP</a>. Toets hem aan je matrix: kan een concurrent precies hetzelfde zeggen? Dan is het geen USP.</p>
+
+        <h2 id="modellen">SWOT, Porter en de 4 P's in gewone taal</h2>
+        <p>In boeken en scripties kom je modellen tegen. Je hebt ze niet nodig om een goede analyse te maken, maar ze helpen om niets te vergeten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Model</th><th>Wat het doet</th><th>Handig als</th></tr></thead>
+            <tbody>
+              <tr><td><b>SWOT</b></td><td>Zet je sterktes en zwaktes (binnen je bedrijf) naast kansen en bedreigingen (daarbuiten)</td><td>Je je conclusies wilt samenvatten op één vel</td></tr>
+              <tr><td><b>Vijfkrachtenmodel van Porter</b></td><td>Kijkt naar vijf krachten in je markt: onderlinge concurrentie, nieuwe toetreders, de macht van afnemers, de macht van leveranciers en vervangende producten</td><td>Je wilt weten hoe zwaar je markt is, bijvoorbeeld voor een ondernemingsplan</td></tr>
+              <tr><td><b>4 P's</b></td><td>Vergelijkt product, prijs, plaats en promotie</td><td>Je snel een concurrent wilt beschrijven</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het vijfkrachtenmodel van Michael Porter klinkt zwaar, maar het is in gewone taal goed te gebruiken. Hoeveel bedrijven doen wat jij doet? Kan een nieuwe partij makkelijk beginnen, zoals een platform? Kunnen klanten je makkelijk tegen anderen uitspelen? Ben je afhankelijk van één leverancier? En kan de klant het probleem ook op een heel andere manier oplossen? Hoe meer vragen je met ja beantwoordt, hoe harder je moet werken aan je onderscheid.</p>
+
+        <Tussenactie />
+        <h2 id="mag">Wat mag wel en wat niet?</h2>
+        <p>Concurrenten onderzoeken is normaal en mag. Er zijn wel grenzen.</p>
+        <ul>
+          <li><b>Openbare informatie verzamelen mag.</b> Hun website, reviews, advertenties en gegevens uit het Handelsregister zijn er om bekeken te worden.</li>
+          <li><b>Een offerte opvragen kan, met mate.</b> Het is gangbaar om te kijken hoe een ander met een aanvraag omgaat. Bedenk wel dat het de ander tijd kost. Eén keer om te leren is iets anders dan het structureel doen.</li>
+          <li><b>Teksten en foto's niet overnemen.</b> Die zijn beschermd. Laat je inspireren door de opbouw, maar schrijf alles zelf.</li>
+          <li><b>Geen nepreviews.</b> Niet bij jezelf, en zeker niet negatieve bij een ander.</li>
+          <li><b>Vergelijkende reclame mag, onder voorwaarden.</b> Volgens het Burgerlijk Wetboek (artikel 6:194a) moet een vergelijking onder meer niet misleidend zijn, producten vergelijken die in dezelfde behoefte voorzien, objectief controleerbare kenmerken zoals de prijs vergelijken, en de concurrent niet kleineren. Twijfel je, laat het dan door een jurist bekijken.</li>
+        </ul>
+
+        <h2 id="fouten">Zes fouten die we vaak zien</h2>
+        <ol>
+          <li><b>Alleen naar de buren kijken.</b> Online zijn je echte concurrenten vaak platforms en landelijke spelers.</li>
+          <li><b>Te veel concurrenten.</b> Twintig bedrijven oppervlakkig vergelijken levert minder op dan vier grondig.</li>
+          <li><b>Jezelf te mild beoordelen.</b> Laat een klant of collega je scores controleren.</li>
+          <li><b>Kopiëren wat de grootste doet.</b> Dan word je een slechtere versie van hem. Zoek wat hij laat liggen.</li>
+          <li><b>Alleen naar prijs kijken.</b> Klanten kiezen zelden alleen op prijs. Ze kiezen op vertrouwen, snelheid en gemak.</li>
+          <li><b>Analyseren zonder actie.</b> Een matrix in een la verandert niets. Eindig altijd met drie acties.</li>
+        </ol>
+
+        <h2 id="herhalen">Hoe vaak herhaal je een concurrentieanalyse?</h2>
+        <p>Een volledige analyse doe je eens per jaar, en bij grote beslissingen zoals een nieuwe dienst of een prijsverhoging. Daartussen volstaat een korte check van een halfuur per kwartaal:</p>
+        <ul class="vink">
+          <li>Wie staat er nu bovenaan op je vijf belangrijkste zoekwoorden?</li>
+          <li>Zijn er nieuwe reviews bij je concurrenten, en wat zeggen die?</li>
+          <li>Draaien er nieuwe advertenties in de bibliotheken van Google en Meta?</li>
+          <li>Is er een nieuwe speler in je regio of in Google verschenen?</li>
+          <li>Kloppen je scores in de matrix nog?</li>
+        </ul>
+        <p>Bewaar elke versie van je matrix met de datum. Na een paar jaar zie je precies hoe je markt verschuift, en hoe jij erin bent gegroeid.</p>
+
+        <h2 id="hulp">Zelf doen of laten doen?</h2>
+        <p>Met deze gids maak je een prima concurrentieanalyse zelf. Niemand kent je markt beter dan jij. Het online deel is wel lastiger in te schatten zonder tools en ervaring. Eerlijk is eerlijk: een concurrentieanalyse als los rapport verkopen we niet. Wel kijken we standaard naar je concurrenten als we met je aan de slag gaan.</p>
+        <p>Begin gratis. Bij de <a href="/gratis-website-analyse/">gratis website-analyse</a> bekijkt {site.contactpersoon} je site en die van je drie grootste concurrenten. We halen je linkprofiel op met SE Ranking en zetten het naast dat van hen, en we vergelijken je reviews en je Google Bedrijfsprofiel. Daarna bellen we je met wat het eerst aandacht nodig heeft. Wil je daarna verder? Met <a href="/zoekmachine-optimalisatie/">SEO</a> vanaf € 495 per maand of <a href="/lokale-seo/">lokale SEO</a> vanaf € 295 per maand werken we aan de punten waar je achterloopt. Maandelijks opzegbaar. Wil je alleen even sparren over je eigen analyse, boek dan een <a href="/consult/">consult</a> van € 85 per uur.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={18} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij meekijken?" intro="Wat je van ons mag verwachten als we je helpen je concurrenten voorbij te gaan." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat staat er in een concurrentieanalyse?', a: 'Een overzicht van drie tot vijf concurrenten, beoordeeld op dezelfde punten als jezelf: prijzen, aanbod, kwaliteit, service, garantie, website, vindbaarheid en reviews. Daarna je sterke en zwakke punten, de gaten in de markt en de acties die je gaat nemen.' },
+      { v: 'Wat is een concurrentiematrix?', a: 'Een tabel waarin je jezelf en je concurrenten per criterium een score geeft, bijvoorbeeld van 1 tot 5. Met een weging per criterium zie je in één oogopslag waar je voor- en achterloopt. Op deze pagina staat er een die je kunt invullen en downloaden.' },
+      { v: 'Wat is het verschil tussen directe en indirecte concurrenten?', a: 'Directe concurrenten verkopen hetzelfde aan dezelfde klanten. Indirecte concurrenten lossen hetzelfde probleem op een andere manier op. Bij een schilder is een ander schildersbedrijf direct, en een bedrijf dat kunststof kozijnen plaatst indirect.' },
+      { v: 'Hoeveel concurrenten neem je mee?', a: 'Drie tot vijf. Kies de partij die je het vaakst tegenkomt in offertes, de partij die bovenaan Google staat, en één bedrijf dat je bewondert.' },
+      { v: 'Hoe zie ik op welke zoekwoorden mijn concurrent gevonden wordt?', a: 'Met een SEO-tool zoals SE Ranking, Semrush of Ahrefs. Die schatten op welke zoekwoorden een site in Google staat. Zonder tool zoek je je eigen belangrijkste zoekwoorden in een privévenster en noteer je wie er bovenaan staat.' },
+      { v: 'Kan ik zien welke advertenties mijn concurrent draait?', a: 'Ja. In het Centrum voor advertentietransparantie van Google zie je advertenties op Google Zoeken en YouTube. De advertentiebibliotheek van Meta toont alle actieve advertenties op Facebook en Instagram.' },
+      { v: 'Is een concurrentieanalyse hetzelfde als een SWOT-analyse?', a: 'Nee. De concurrentieanalyse levert input voor je SWOT, vooral voor de kansen en bedreigingen. De SWOT vat daarna samen wat je intern en extern weet. Hoe je die maakt, lees je in de gids <a href="/kennisbank/gidsen/marketingplan-maken/">marketingplan maken</a>.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gratis', titel: 'Gratis website-analyse', href: '/gratis-website-analyse/', tekst: 'Je site naast die van je drie grootste concurrenten.' },
+      { label: 'Gids', titel: 'Marketingplan maken', href: '/kennisbank/gidsen/marketingplan-maken/', tekst: 'Met een SWOT-analyse in een kwartier.' },
+      { label: 'Gids', titel: 'Zoekwoordonderzoek', href: '/kennisbank/gidsen/zoekwoordonderzoek/', tekst: 'Waar je klanten echt op zoeken.' },
+      { label: 'Dienst', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Boven je concurrenten in het kaartje, vanaf € 295 per maand.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd hoe je er tegenover je concurrenten voor staat?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} zet je site naast die van je drie grootste concurrenten en belt je met de punten waar je het snelst terrein wint.`} />
+</Base>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-matrix]').forEach((blok) => {
+    const rijen = [...blok.querySelectorAll<HTMLTableRowElement>('tbody tr')];
+    const totalen = [...blok.querySelectorAll<HTMLOutputElement>('[data-tot]')];
+    const namen = [...blok.querySelectorAll<HTMLInputElement>('[data-naam]')];
+    const knop = blok.querySelector<HTMLAnchorElement>('[data-download]');
+    const getal = (el: HTMLInputElement | null, min: number) => Math.min(5, Math.max(min, Number(el?.value) || 0));
+    const cel = (c: string | number) => `"${String(c).replace(/"/g, '""')}"`;
+    const reken = () => {
+      const som = totalen.map(() => 0);
+      let gewicht = 0;
+      const regels = [['Criterium', 'Weging', ...namen.map((n) => n.value)]];
+      rijen.forEach((r) => {
+        const w = getal(r.querySelector('[data-w]'), 0);
+        gewicht += w;
+        const scores = totalen.map((_, i) => getal(r.querySelector(`[data-s="${i}"]`), 1));
+        scores.forEach((s, i) => { som[i] += s * w; });
+        regels.push([r.querySelector('th')?.firstChild?.textContent?.trim() ?? '', String(w), ...scores.map(String)]);
+      });
+      const uit = som.map((s) => (gewicht ? s / gewicht : 0));
+      const hoogste = Math.max(...uit);
+      totalen.forEach((t, i) => {
+        t.textContent = uit[i].toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+        t.classList.toggle('beste', gewicht > 0 && uit[i] === hoogste);
+      });
+      regels.push(['Gewogen score', '', ...uit.map((u) => u.toFixed(1).replace('.', ','))]);
+      if (knop) knop.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent('﻿' + regels.map((r) => r.map(cel).join(';')).join('\r\n'));
+    };
+    blok.addEventListener('input', reken);
+    reken();
+  });
+</script>
+<style>
+  .matrix { font-size: 0.95rem; min-width: 600px; }
+  .matrix th[scope='row'] { text-transform: none; letter-spacing: 0; font-size: 0.98rem; color: var(--ink); min-width: 170px; }
+  .matrix .uitleg { display: block; font-weight: 400; font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .matrix input { font: inherit; width: 100%; min-width: 52px; padding: 6px 8px; border: 1.5px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); }
+  .matrix input[type='text'] { min-width: 92px; font-weight: 800; font-size: 0.85rem; }
+  .matrix input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgb(7 70 99 / 0.15); }
+  .matrix td, .matrix th { padding-right: 8px; vertical-align: middle; }
+  .matrix tfoot th, .matrix tfoot td { border-bottom: 0; padding-top: 14px; font-weight: 800; }
+  .matrix output { font-weight: 900; font-size: 1.15rem; }
+  .matrix output.beste { color: var(--orange-tekst); }
+  .matrix-kader .btn { margin-top: 12px; }
+</style>

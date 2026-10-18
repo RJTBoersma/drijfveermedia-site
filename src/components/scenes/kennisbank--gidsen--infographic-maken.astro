@@ -1,0 +1,99 @@
+---
+// Scène voor /kennisbank/gidsen/infographic-maken/: een staande infographic met titel, groot cijfer, staafdiagram, een rij pictogrammen en drie stappen, en rechts twee websites die hem overnemen.
+// Als hij leeft: twee pictogrammen kleuren oranje, de lijnen naar de twee websites tekenen zich steeds opnieuw en een label "Bron: jouw site" verschijnt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const staven = [
+  { x: 84, h: 34 },
+  { x: 112, h: 52 },
+  { x: 140, h: 70, oranje: true },
+];
+const poppetjes = [80, 104, 128, 152, 176];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een staande infographic met een groot cijfer, een staafdiagram, pictogrammen en drie stappen. Twee websites nemen hem over en linken terug als bron.'}>
+  <!-- de infographic -->
+  <rect x="58" y="16" width="160" height="238" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M70 16h136a12 12 0 0 1 12 12v24H58V28a12 12 0 0 1 12-12z" fill="#074663" />
+  <rect x="72" y="28" width="98" height="8" rx="4" fill="#fff" />
+  <rect x="72" y="40" width="64" height="5" rx="2.5" fill="#fff" opacity="0.6" />
+
+  <text x="72" y="84" font-size="26" font-weight="900" style="fill:#ff6600">68%</text>
+  <rect x="140" y="66" width="62" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="140" y="76" width="46" height="5" rx="2.5" fill="#d9e1ea" />
+
+  <!-- staafdiagram -->
+  <path d="M74 166h132" stroke="#d9e1ea" stroke-width="2" />
+  {staven.map((s) => <rect x={s.x} y={166 - s.h} width="20" height={s.h} rx="3" fill={s.oranje ? '#ff6600' : '#074663'} />)}
+  <rect x="172" y="120" width="30" height="5" rx="2.5" fill="#e8eef4" />
+  <rect x="172" y="130" width="22" height="5" rx="2.5" fill="#e8eef4" />
+
+  <!-- pictogrammen -->
+  {poppetjes.map((x, i) => (
+    <g fill={i < 3 ? '#074663' : '#d9e1ea'}>
+      <circle cx={x} cy="184" r="5" />
+      <path d={`M${x - 7} 202c0-7 3-10 7-10s7 3 7 10z`} />
+    </g>
+  ))}
+
+  <!-- drie stappen -->
+  <path d="M84 228h104" stroke="#d9e1ea" stroke-width="2" />
+  {[84, 136, 188].map((x, i) => (
+    <g>
+      <circle cx={x} cy="228" r="10" fill={i === 2 ? '#1f8a5b' : '#fff'} stroke={i === 2 ? '#1f8a5b' : '#074663'} stroke-width="2" />
+      <text x={x - 3} y="232" font-size="10" font-weight="900" style={i === 2 ? 'fill:#fff' : undefined}>{i + 1}</text>
+    </g>
+  ))}
+
+  <!-- twee websites die hem overnemen -->
+  <g>
+    <rect x="300" y="30" width="148" height="88" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <path d="M310 30h128a10 10 0 0 1 10 10v6H300v-6a10 10 0 0 1 10-10z" fill="#e8eef4" />
+    <rect x="312" y="56" width="34" height="50" rx="4" fill="#e8eef4" />
+    <rect x="312" y="56" width="34" height="9" rx="4" fill="#074663" />
+    <rect x="354" y="58" width="80" height="6" rx="3" fill="#d9e1ea" />
+    <rect x="354" y="70" width="64" height="6" rx="3" fill="#d9e1ea" />
+    <rect x="354" y="88" width="56" height="10" rx="5" fill="#ffe3cf" />
+  </g>
+  <g>
+    <rect x="300" y="150" width="148" height="88" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <path d="M310 150h128a10 10 0 0 1 10 10v6H300v-6a10 10 0 0 1 10-10z" fill="#e8eef4" />
+    <rect x="354" y="176" width="34" height="50" rx="4" fill="#e8eef4" />
+    <rect x="354" y="176" width="34" height="9" rx="4" fill="#074663" />
+    <rect x="312" y="178" width="34" height="6" rx="3" fill="#d9e1ea" />
+    <rect x="312" y="190" width="30" height="6" rx="3" fill="#d9e1ea" />
+    <rect x="396" y="208" width="40" height="10" rx="5" fill="#ffe3cf" />
+  </g>
+
+  {!mini && (
+    <g>
+      <path class="link link-1" d="M222 70C258 66 272 74 300 74" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 5" />
+      <path class="link link-2" d="M222 200C258 204 272 196 300 196" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 5" />
+      {[152, 176].map((x, i) => (
+        <g class={`pop pop-${i + 1}`} fill="#ff6600">
+          <circle cx={x} cy="184" r="5" />
+          <path d={`M${x - 7} 202c0-7 3-10 7-10s7 3 7 10z`} />
+        </g>
+      ))}
+      <g class="bron">
+        <rect x="318" y="122" width="112" height="22" rx="11" fill="#1f8a5b" />
+        <path d="M330 133l3 3 6-6.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="345" y="137" font-size="10" font-weight="800" style="fill:#fff">Bron: jouw site</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .link { opacity: 0; }
+  .in-beeld .link { animation: kennisbank-gidsen-infographic-maken-link 6s ease-in-out 1.4s infinite; }
+  .in-beeld .link-2 { animation-delay: 1.9s; }
+  :global(.teken-js) .pop { opacity: 0; }
+  .in-beeld .pop { animation: kennisbank-gidsen-infographic-maken-pop 6s ease-in-out 1.4s infinite; }
+  .in-beeld .pop-2 { animation-delay: 1.8s; }
+  .bron { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .bron { opacity: 0; }
+  .in-beeld .bron { animation: kennisbank-gidsen-infographic-maken-bron 6s ease-in-out 1.4s infinite; }
+  @keyframes kennisbank-gidsen-infographic-maken-link { 0% { opacity: 0; stroke-dashoffset: 36; } 15% { opacity: 1; } 70% { opacity: 1; stroke-dashoffset: 0; } 100% { opacity: 0; stroke-dashoffset: 0; } }
+  @keyframes kennisbank-gidsen-infographic-maken-bron { 0%, 30% { opacity: 0; transform: scale(0.7); } 40%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-gidsen-infographic-maken-pop { 0%, 20% { opacity: 0; } 30%, 85% { opacity: 1; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .pop, .in-beeld .link, .in-beeld .bron { animation: none; } }
+</style>

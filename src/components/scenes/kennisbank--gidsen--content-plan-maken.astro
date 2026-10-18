@@ -1,0 +1,95 @@
+---
+// Scène voor /kennisbank/gidsen/content-plan-maken/: links een contentplan op één A4 (doel, thema's, kanalen), rechts een maandkalender met geplande stukken.
+// Als hij leeft: een onderwerpkaartje schuift van het plan naar een vrij vak in de kalender, waarna een vinkje "Gepland" verschijnt; de kalender vult zich rustig steeds opnieuw.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const dagen = ['ma', 'di', 'wo', 'do', 'vr'];
+// kolom, rij, kleur (n = navy, o = oranje, c = chip)
+const vol = [
+  [0, 0, 'n'], [2, 0, 'c'], [4, 0, 'n'],
+  [1, 1, 'o'], [3, 1, 'c'],
+  [0, 2, 'c'], [2, 2, 'n'],
+  [1, 3, 'c'], [4, 3, 'o'],
+];
+const kx = (k: number) => 240 + k * 40;
+const ry = (r: number) => 98 + r * 32;
+const kleur: Record<string, string> = { n: '#074663', o: '#ff6600', c: '#d9e1ea' };
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een contentplan op één A4 met doel, thema\'s en kanalen, en een maandkalender waarin een nieuw onderwerp in een vrij vak schuift en als gepland wordt afgevinkt.'}>
+  <!-- A4 met het plan -->
+  <path d="M34 26h140l24 24v196H34z" fill="#fff" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <path d="M174 26v24h24" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <text x="50" y="62" font-size="14" font-weight="900">Contentplan</text>
+  <rect x="50" y="70" width="38" height="4" rx="2" fill="#ff6600" />
+
+  <text x="50" y="96" font-size="10" font-weight="800" class="zacht">Doel</text>
+  <rect x="50" y="102" width="96" height="16" rx="8" fill="#ffe3cf" />
+  <text x="58" y="113.5" font-size="9.5" font-weight="800">9 aanvragen p/m</text>
+
+  <text x="50" y="140" font-size="10" font-weight="800" class="zacht">Thema's</text>
+  <rect x="50" y="146" width="40" height="14" rx="7" fill="#074663" />
+  <text x="56" y="156" font-size="8.5" font-weight="800" style="fill:#fff">Kosten</text>
+  <rect x="94" y="146" width="40" height="14" rx="7" fill="#e8eef4" />
+  <text x="100" y="156" font-size="8.5" font-weight="800">Kiezen</text>
+  <rect x="138" y="146" width="44" height="14" rx="7" fill="#e8eef4" />
+  <text x="144" y="156" font-size="8.5" font-weight="800">Proces</text>
+
+  <text x="50" y="182" font-size="10" font-weight="800" class="zacht">Kanalen</text>
+  <rect x="50" y="188" width="120" height="6" rx="3" fill="#e8eef4" />
+  <rect x="50" y="200" width="90" height="6" rx="3" fill="#e8eef4" />
+  <rect x="50" y="218" width="54" height="16" rx="8" fill="#fff" stroke="#074663" stroke-width="1.5" />
+  <text x="58" y="229.5" font-size="9" font-weight="800">Nieuw</text>
+
+  <!-- kalender -->
+  <rect x="222" y="34" width="228" height="208" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M236 34h200a14 14 0 0 1 14 14v12H222V48a14 14 0 0 1 14-14z" fill="#e8eef4" />
+  <text x="238" y="53" font-size="12" font-weight="900">Oktober</text>
+  <rect x="404" y="44" width="34" height="12" rx="6" fill="#d9e1ea" />
+  {dagen.map((d, i) => <text x={kx(i) + 9} y="82" font-size="9.5" font-weight="800" class="zacht">{d}</text>)}
+  {[0, 1, 2, 3].map((r) => dagen.map((_, k) => <rect x={kx(k)} y={ry(r)} width="32" height="24" rx="5" fill="none" stroke="#eef2f6" stroke-width="1.5" />))}
+  {vol.map(([k, r, c]) => (
+    <g>
+      <rect x={kx(k as number)} y={ry(r as number)} width="32" height="24" rx="5" fill={kleur[c as string]} />
+      <rect x={kx(k as number) + 5} y={ry(r as number) + 8} width="18" height="3" rx="1.5" fill="#fff" opacity={c === 'c' ? 0.9 : 0.7} />
+      <rect x={kx(k as number) + 5} y={ry(r as number) + 14} width="12" height="3" rx="1.5" fill="#fff" opacity="0.7" />
+    </g>
+  ))}
+  <!-- het vrije vak waar het nieuwe stuk landt -->
+  <rect x={kx(3)} y={ry(2)} width="32" height="24" rx="5" fill="none" stroke="#ff6600" stroke-width="1.5" stroke-dasharray="3 3" />
+
+  {!mini && (
+    <g>
+      <g class="kaartje">
+        <rect x="50" y="218" width="54" height="16" rx="8" fill="#ff6600" />
+        <text x="58" y="229.5" font-size="9" font-weight="800" style="fill:#fff">Nieuw</text>
+      </g>
+      <g class="gepland">
+        <rect x="342" y="221" width="96" height="18" rx="9" fill="#1f8a5b" />
+        <path d="M352 230l3 3 6-6.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="366" y="234" font-size="10" font-weight="800" style="fill:#fff">Gepland</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .kaartje { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .kaartje { opacity: 0; }
+  .in-beeld .kaartje { animation: kennisbank-gidsen-content-plan-maken-schuif 6s ease-in-out 0.8s infinite; }
+  :global(.teken-js) .gepland { opacity: 0; }
+  .gepland { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .gepland { animation: kennisbank-gidsen-content-plan-maken-vink 6s ease-in-out 0.8s infinite; }
+  @keyframes kennisbank-gidsen-content-plan-maken-schuif {
+    0% { opacity: 0; transform: translate(0, 0); }
+    8% { opacity: 1; transform: translate(0, 0); }
+    45% { opacity: 1; transform: translate(299px, -52px) scale(0.6); }
+    80% { opacity: 1; transform: translate(299px, -52px) scale(0.6); }
+    100% { opacity: 0; transform: translate(299px, -52px) scale(0.6); }
+  }
+  @keyframes kennisbank-gidsen-content-plan-maken-vink {
+    0%, 45% { opacity: 0; transform: scale(0.6); }
+    52% { opacity: 1; transform: scale(1.05); }
+    56%, 80% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .kaartje, .in-beeld .gepland { animation: none; } }
+</style>

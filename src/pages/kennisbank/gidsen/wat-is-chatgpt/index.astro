@@ -1,0 +1,371 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wat-is-chatgpt.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/wat-is-chatgpt/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is ChatGPT?' },
+  { id: 'hoe-werkt', titel: 'Hoe werkt het?' },
+  { id: 'begrippen', titel: 'De begrippen op een rij' },
+  { id: 'kan', titel: 'Wat kun je ermee?' },
+  { id: 'beginnen', titel: 'Aan de slag in vijf stappen' },
+  { id: 'prompt', titel: 'Een goede vraag stellen' },
+  { id: 'abonnementen', titel: 'Gratis of betaald?' },
+  { id: 'veilig', titel: 'Is het veilig?' },
+  { id: 'hallucinaties', titel: 'Hallucinaties' },
+  { id: 'vergelijken', titel: 'Naast Claude, Gemini en Copilot' },
+  { id: 'zoeken', titel: 'Vervangt het Google?' },
+  { id: 'ondernemer', titel: 'Wat het betekent voor je bedrijf' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat is ChatGPT? Uitleg voor beginners en ondernemers',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI-assistent', author: { '@type': 'Organization', name: 'OpenAI' } },
+  citation: [
+    'https://learn.chatgpt.com/docs/pricing',
+    'https://learn.chatgpt.com/docs/web',
+    'https://learn.chatgpt.com/docs/web-search',
+    'https://learn.chatgpt.com/docs/personalize',
+    'https://learn.chatgpt.com/docs/projects',
+    'https://www.cbs.nl/nl-nl/nieuws/2024/36/bijna-kwart-nederlanders-gebruikt-kunstmatige-intelligentie-zoals-chatgpt',
+    'https://www.autoriteitpersoonsgegevens.nl/documenten/handreiking-generatieve-ai-en-de-avg',
+    'https://nl.wikipedia.org/wiki/ChatGPT',
+  ],
+}];
+---
+<Base
+  title="Wat is ChatGPT? Uitleg, kosten en tips voor 2026"
+  description="Wat is ChatGPT en hoe werkt het? Uitleg in gewone taal: wat het kan, gratis of betaald, privacy, hallucinaties en hoe je een goede vraag stelt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat is ChatGPT?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · AI" titel="Wat is ChatGPT? Uitleg in gewone taal, met kosten en tips" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Wat is ChatGPT precies, hoe werkt het en wat kost het? Hier lees je het zonder vakjargon. Met de abonnementen op een rij, een hulp om een goede vraag te stellen en eerlijk advies over privacy en fouten.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand 18 oktober 2026)</p>
+          <ul>
+            <li>ChatGPT is een chatbot van het Amerikaanse bedrijf OpenAI. Je typt een vraag in gewone taal en krijgt binnen seconden een antwoord.</li>
+            <li>Achter de chatbot zit een taalmodel: software die op enorme hoeveelheden tekst is getraind en voorspelt welke woorden logisch volgen.</li>
+            <li>Er is een gratis versie. Betaalde abonnementen beginnen bij $ 8 per maand (Go) en $ 20 per maand (Plus).</li>
+            <li>Het antwoord klinkt altijd zeker, maar klopt niet altijd. Controleer feiten, cijfers en regels zelf.</li>
+            <li>Zet geen persoonsgegevens van klanten of vertrouwelijke stukken in een persoonlijk account.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is ChatGPT?</h2>
+        <p>Het is een AI-assistent die je via een chatvenster gebruikt. Je stelt een vraag of geeft een opdracht, en het antwoordt in natuurlijke taal. Het schrijft teksten, vat lange stukken samen, vertaalt, rekent, zoekt op internet en maakt afbeeldingen. Je gebruikt het in de browser, in de app op je telefoon of in de desktop-app.</p>
+        <p>De maker is OpenAI, een AI-bedrijf uit San Francisco. De chatbot kwam uit op 30 november 2022 en groeide daarna sneller dan bijna elke andere internetdienst. Twee maanden na de lancering had het al 100 miljoen gebruikers per maand, en in februari 2026 ging het volgens Wikipedia om 900 miljoen mensen per week.</p>
+        <p>De naam verklapt hoe het werkt. Chat staat voor het gesprek. GPT staat voor Generative Pre-trained Transformer: een model dat zelf tekst maakt (generative), vooraf is getraind op heel veel tekst (pre-trained) en een bepaalde bouw heeft die goed met taal overweg kan (transformer).</p>
+        <p>Ook in Nederland is het gewoon geworden. Volgens het CBS gebruikte in 2024 al 23,4 procent van de Nederlanders van 12 jaar en ouder een programma met kunstmatige intelligentie om teksten, video's of afbeeldingen te maken. Bij 18- tot 25-jarigen was dat 48,7 procent, bij 75-plussers 1,3 procent. Nieuwere cijfers van het CBS hebben we niet gevonden.</p>
+
+        <h3>Van 2022 tot nu: de belangrijkste momenten</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat er gebeurde</th></tr></thead>
+            <tbody>
+              <tr><td>30 november 2022</td><td>Lancering als gratis onderzoeksversie, op het model GPT-3.5</td></tr>
+              <tr><td>Begin 2023</td><td>100 miljoen gebruikers per maand, twee maanden na de start</td></tr>
+              <tr><td>2023</td><td>Eerste betaalde abonnementen, naast de gratis versie</td></tr>
+              <tr><td>Maart tot april 2023</td><td>Tijdelijk verbod in Italië om privacyredenen</td></tr>
+              <tr><td>Oktober 2023</td><td>Afbeeldingen maken wordt onderdeel van de chatbot</td></tr>
+              <tr><td>April 2024</td><td>Gebruik zonder account mogelijk via de website</td></tr>
+              <tr><td>7 augustus 2025</td><td>GPT-5, dat ook taken kan uitvoeren</td></tr>
+              <tr><td>Oktober 2025</td><td>Atlas, een eigen webbrowser met de assistent erin</td></tr>
+              <tr><td>Januari 2026</td><td>OpenAI kondigt een test aan met advertenties in de gratis versie, eerst in de Verenigde Staten</td></tr>
+              <tr><td>Augustus 2026</td><td>De advertenties komen ook naar Europa</td></tr>
+              <tr><td>September 2026</td><td>Het model GPT-6 Astra verschijnt</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="hoe-werkt">Hoe werkt het?</h2>
+        <p>De chatbot zoekt een antwoord niet op in een database. Het maakt het antwoord woord voor woord. Dat gaat in drie stappen.</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>1. Lezen, heel veel lezen</h3></div>
+        <p>Het taalmodel is getraind op een gigantische hoeveelheid tekst: websites, boeken, handleidingen en ook Wikipedia. Met machine learning leert het patronen herkennen. Welke woorden horen bij elkaar? Hoe is een zin opgebouwd? Hoe ziet een sollicitatiebrief eruit, en hoe een recept?</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>2. Bijgeschaafd door mensen</h3></div>
+        <p>Een model dat alleen tekst heeft gelezen, is nog geen behulpzame assistent. Daarom is het daarna verder getraind met voorbeeldgesprekken en met beoordelingen van mensen. Die gaven aan welk antwoord beter was. In vaktaal heet dat reinforcement learning from human feedback. Zo leerde het model vragen beantwoorden, weigeren wat schadelijk is en een gesprek voeren.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Voorspellen wat er volgt</h3></div>
+        <p>Typ je een vraag, dan knipt het model je tekst in kleine stukjes: tokens. Daarna voorspelt het steeds welk stukje er het meest logisch volgt, tot het antwoord af is. Daarom komt een antwoord ook letter voor letter op je scherm. En daarom kan het overtuigend klinken terwijl het niet klopt: het model kiest wat waarschijnlijk is, niet wat waar is.</p>
+        <h3>Wat het níet is</h3>
+        <ul>
+          <li><b>Geen encyclopedie.</b> Het slaat geen feiten op zoals een database. Het maakt elke keer een nieuw antwoord.</li>
+          <li><b>Geen mens.</b> Het klinkt soms als een collega, maar het begrijpt je situatie niet zoals een mens dat doet.</li>
+          <li><b>Geen garantie.</b> Hoe stelliger het antwoord, hoe makkelijker je vergeet dat het fout kan zijn.</li>
+          <li><b>Geen vervanger van advies.</b> Voor juridische, medische of fiscale beslissingen blijf je een vakman nodig hebben.</li>
+        </ul>
+        <p>Een taalmodel weet alleen wat er in zijn trainingsteksten stond, tot een bepaalde datum. Voor nieuws en actuele prijzen zoekt de chatbot op internet. Je ziet dan bronnen in het antwoord staan. Meer over de techniek erachter lees je bij <a href="/kennisbank/wat-is/llm/">wat is een LLM</a>.</p>
+
+        <h2 id="begrippen">De begrippen die je tegenkomt</h2>
+        <p>Rond AI-chatbots hoor je veel termen die door elkaar lopen. Dit zijn de belangrijkste, in gewone taal:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Begrip</th><th>Wat het betekent</th></tr></thead>
+            <tbody>
+              <tr><td><b>Kunstmatige intelligentie (AI)</b></td><td>Software die taken doet waar je vroeger een mens voor nodig had, zoals taal begrijpen of een plaatje herkennen</td></tr>
+              <tr><td><b>Machine learning</b></td><td>De manier waarop AI leert: uit voorbeelden in plaats van uit vaste regels die een programmeur schrijft</td></tr>
+              <tr><td><b>Generatieve AI</b></td><td>AI die zelf iets nieuws maakt, zoals een tekst, afbeelding of stuk code</td></tr>
+              <tr><td><b>Taalmodel (LLM)</b></td><td>Het AI-model achter de chatbot, getraind op tekst. Deze chatbot draait op modellen van OpenAI uit de GPT-familie</td></tr>
+              <tr><td><b>Chatbot</b></td><td>Een programma waarmee je via tekstberichten een gesprek voert</td></tr>
+              <tr><td><b>Prompt</b></td><td>De vraag of opdracht die je intypt</td></tr>
+              <tr><td><b>Token</b></td><td>Een klein stukje tekst, vaak een deel van een woord. Je vraag en het antwoord bestaan allebei uit tokens</td></tr>
+              <tr><td><b>Hallucinatie</b></td><td>Een antwoord dat overtuigend klinkt, maar verzonnen of fout is</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kan">Wat kun je ermee?</h2>
+        <p>Wat begon als een chatvenster, is in vier jaar uitgegroeid tot een assistent die ook werk uitvoert. Dit zijn de onderdelen die je nu tegenkomt, zoals OpenAI ze in zijn eigen handleiding beschrijft:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Wat je ermee doet</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td><b>Chat</b></td><td>Een vraag stellen, een idee uitwerken, iets laten uitleggen</td><td>"Leg uit wat het verschil is tussen een eenmanszaak en een bv."</td></tr>
+              <tr><td><b>Work</b></td><td>Een grotere taak in stappen laten uitvoeren, met een document, presentatie of spreadsheet als resultaat</td><td>"Zet deze drie offertes naast elkaar in een overzicht."</td></tr>
+              <tr><td><b>Zoeken op internet</b></td><td>Actuele informatie, met bronnen in het antwoord</td><td>"Wat zijn de openingstijden van het gemeentehuis in Assen?"</td></tr>
+              <tr><td><b>Bestanden en foto's</b></td><td>Een pdf, spreadsheet of schermafbeelding meesturen</td><td>"Wat staat er in dit contract over opzeggen?"</td></tr>
+              <tr><td><b>Afbeeldingen maken</b></td><td>Een plaatje laten maken of bewerken</td><td>Een schets voor een uitnodiging</td></tr>
+              <tr><td><b>Projecten</b></td><td>Gesprekken, bestanden en instructies over één onderwerp bij elkaar houden</td><td>Een project "Nieuwe website" met je teksten erin</td></tr>
+              <tr><td><b>Geheugen en instructies</b></td><td>Laten onthouden hoe je antwoorden wilt, zodat je dat niet steeds hoeft te herhalen</td><td>"Schrijf altijd in de je-vorm, zonder Engelse woorden."</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De desktop-app is er voor macOS, Windows en Linux. Programmeurs gebruiken daarnaast Codex, het programmeerhulpmiddel van OpenAI dat zijn gebruik deelt met de chatbot. Concurrent Anthropic heeft daarvoor <a href="/kennisbank/gidsen/claude-code/">Claude Code</a>.</p>
+
+        <h2 id="beginnen">Aan de slag in vijf stappen</h2>
+        <ol>
+          <li><b>Ga naar chatgpt.com</b> of download de app in de App Store of Google Play. Check of de maker OpenAI is.</li>
+          <li><b>Maak een account aan</b> met je e-mailadres. Je krijgt een code per mail om in te loggen.</li>
+          <li><b>Kies Chat of Work.</b> Chat is voor een vraag of gesprek. Work is voor een taak met een resultaat, zoals een document.</li>
+          <li><b>Typ je vraag</b> in het vak onderin en druk op Enter. Nederlands werkt prima, je krijgt ook Nederlands terug.</li>
+          <li><b>Vraag door.</b> Is het antwoord te lang, te stijf of mist er iets? Zeg het gewoon: "korter", "minder formeel", "met een voorbeeld uit de bouw".</li>
+        </ol>
+        <p>Kijk daarna meteen bij <b>Instellingen</b>, <b>Personalisatie</b>. Daar stel je de toon in en geef je vaste instructies mee. Bij de gegevensinstellingen kies je of je gesprekken gebruikt mogen worden om de modellen van OpenAI te verbeteren.</p>
+
+        <Tussenactie />
+        <h2 id="prompt">Zo stel je een goede vraag</h2>
+        <p>Een prompt van één regel geeft een antwoord van dertien in een dozijn. Geef de chatbot wat je een nieuwe collega ook zou geven: wie je bent, wat je wilt, voor wie het is en hoe het eruit moet zien.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zwakke prompt</th><th>Sterke prompt</th></tr></thead>
+            <tbody>
+              <tr><td>"Schrijf een tekst over zonnepanelen."</td><td>"Ik ben installateur in Emmen. Schrijf 150 woorden voor mijn homepage, voor huiseigenaren van 40 tot 65 jaar die twijfelen. Nuchter, je-vorm, eindig met een uitnodiging om te bellen."</td></tr>
+              <tr><td>"Vat dit samen."</td><td>"Vat dit rapport samen in vijf punten voor mijn compagnon. Zet de besluiten bovenaan en de open vragen onderaan."</td></tr>
+              <tr><td>"Wat moet ik doen met een boze klant?"</td><td>"Hier is de mail van een klant. Schrijf een kort, eerlijk antwoord zonder smoesjes en stel twee oplossingen voor."</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="kader promptbouwer" id="promptbouwer">
+          <p class="kader-titel">Promptbouwer: vul in en kopieer</p>
+          <div class="pb-velden">
+            <label>Wie ben je?<input id="pb-wie" type="text" value="Ik heb een kapsalon in Assen met drie medewerkers." /></label>
+            <label>Wat moet er gebeuren?<input id="pb-wat" type="text" value="Schrijf een bericht voor Instagram over onze nieuwe openingstijden op zaterdag." /></label>
+            <label>Voor wie is het?<input id="pb-voor" type="text" value="Vaste klanten tussen de 25 en 60 jaar." /></label>
+            <label>Hoe moet het eruitzien?<input id="pb-vorm" type="text" value="Maximaal 60 woorden, vriendelijk, geen uitroeptekens, met één vraag aan het eind." /></label>
+          </div>
+          <p class="klein muted">Jouw prompt:</p>
+          <pre class="pb-uit" id="pb-uit">Ik heb een kapsalon in Assen met drie medewerkers. Schrijf een bericht voor Instagram over onze nieuwe openingstijden op zaterdag. Het is bedoeld voor: vaste klanten tussen de 25 en 60 jaar. Vorm: maximaal 60 woorden, vriendelijk, geen uitroeptekens, met één vraag aan het eind. Stel me eerst vragen als je iets mist.</pre>
+          <button class="btn" type="button" id="pb-kopieer" hidden>Kopieer prompt</button>
+        </div>
+        <p>Werk je er dagelijks mee in je bedrijf? In de gids <a href="/kennisbank/gidsen/chatgpt-voor-bedrijven/">ChatGPT voor bedrijven</a> staan tien toepassingen, vijf prompts om over te nemen en afspraken voor je team.</p>
+
+        <h2 id="abonnementen">Gratis versie of betaalde versie: welke past?</h2>
+        <p>Je kunt de chatbot gratis gebruiken. Wie er vaker mee werkt, loopt tegen limieten aan en kiest een betaalde versie. Dit zijn de abonnementen zoals OpenAI ze in zijn documentatie noemt (prijspeil oktober 2026, per maand, in dollars):</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Abonnement</th><th>Prijs</th><th>Past bij</th></tr></thead>
+            <tbody>
+              <tr><td>Free</td><td>$&nbsp;0</td><td>Proberen en af en toe een vraag</td></tr>
+              <tr><td>Go</td><td>$&nbsp;8</td><td>Iets vaker gebruik, voor weinig geld</td></tr>
+              <tr><td>Plus</td><td>$&nbsp;20</td><td>Eén persoon die het dagelijks gebruikt</td></tr>
+              <tr><td>Pro</td><td>$&nbsp;100, $&nbsp;200 of $&nbsp;500</td><td>Zware gebruikers en programmeurs</td></tr>
+              <tr><td>Business</td><td>$&nbsp;20 per gebruiker bij jaarbetaling, $&nbsp;25 per maand los, vanaf 2 gebruikers</td><td>Teams en mkb-bedrijven</td></tr>
+              <tr><td>Enterprise</td><td>Op aanvraag</td><td>Grote organisaties</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat je in euro's betaalt, zie je bij het afrekenen. Het grootste verschil voor een ondernemer zit niet in de slimheid, maar in de gegevens. Bij Business traint OpenAI volgens eigen zeggen standaard niet op je bedrijfsgegevens, en krijg je beheer over de accounts van je team. Bij de persoonlijke abonnementen regel je dat zelf in de instellingen.</p>
+        <p>Let ook op advertenties. OpenAI test sinds begin 2026 advertenties in de gratis versie en breidde die in augustus 2026 uit naar Europa. Wat dat voor adverteerders betekent, lees je op onze pagina over <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in AI-antwoorden</a>.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een boekhouder in Hoogeveen besteedt elke week drie uur aan mails, samenvattingen en eerste versies van brieven. Met ChatGPT Plus wint hij daar een uur per week op terug. Dat is ruim 45 uur per jaar, voor zo'n $ 240 aan abonnement. Bij een uurtarief van € 75 levert dat in tijd ruim € 3.000 op. De gratis versie had hij ook kunnen proberen. Maar die liep bij hem halverwege de dag tegen de limiet aan.</p>
+        </div>
+
+        <h2 id="veilig">Is ChatGPT veilig?</h2>
+        <p>Voor gewoon gebruik wel, als je weet wat je erin zet. Alles wat je typt of uploadt, gaat naar de servers van OpenAI. Bij persoonlijke accounts kunnen je gesprekken worden gebruikt om nieuwe modellen te trainen, tenzij je dat uitzet. Dat is het belangrijkste privacypunt.</p>
+        <p>Toezichthouders kijken mee. In maart 2023 werd de dienst een maand verboden in Italië, omdat de privacytoezichthouder vond dat het de wet overtrad en minderjarigen te weinig beschermde. Na aanpassingen ging de dienst weer open. In Nederland bracht de Autoriteit Persoonsgegevens in juli 2026 een handreiking uit over generatieve AI en de AVG, voor organisaties die zulke tools inzetten.</p>
+        <p>Zo gebruik je het veilig:</p>
+        <ul class="vink">
+          <li>Zet geen namen, adressen, burgerservicenummers, medische gegevens of wachtwoorden in een persoonlijk account.</li>
+          <li>Haal klantgegevens uit een mail voordat je hem laat herschrijven. "Meneer X uit Y" werkt net zo goed.</li>
+          <li>Kies bewust of je gesprekken voor training gebruikt mogen worden.</li>
+          <li>Deel een gesprek niet openbaar als er iets vertrouwelijks in staat.</li>
+          <li>Download de app alleen van OpenAI zelf, via de officiële appwinkels.</li>
+          <li>Werk je met een team? Neem een zakelijk account en maak afspraken op papier.</li>
+        </ul>
+        <p>Er is ook een andere kant. Oplichters gebruiken AI om phishingmails te schrijven zonder taalfouten. Een foutloze mail is dus geen bewijs meer dat hij echt is. Kijk naar de afzender en de link, niet naar de spelling.</p>
+
+        <h2 id="hallucinaties">Hallucinaties: als het antwoord niet klopt</h2>
+        <p>OpenAI erkent het zelf: de chatbot schrijft soms antwoorden die plausibel klinken, maar fout of onzinnig zijn. Dat heet hallucineren. Het komt voor bij alle taalmodellen, omdat ze voorspellen wat waarschijnlijk klinkt. Ze weten niet wat waar is.</p>
+        <p>Hallucinaties duiken vooral op bij:</p>
+        <ul>
+          <li><b>Precieze cijfers en datums.</b> Een omzetcijfer, een wetsartikel, de oprichtingsdatum van een bedrijf.</li>
+          <li><b>Bronnen.</b> Een titel van een onderzoek of een link die niet bestaat. Rechters in het buitenland kregen al stukken met verzonnen jurisprudentie.</li>
+          <li><b>Kleine onderwerpen.</b> Over je eigen dorp of je nichebranche staat weinig in de trainingsdata. Dan vult het model aan.</li>
+          <li><b>Lange gesprekken.</b> Na een tijd raakt het eerdere afspraken kwijt.</li>
+        </ul>
+        <div class="kader">
+          <p class="kader-titel">Zo controleer je een antwoord in drie minuten</p>
+          <ol>
+            <li>Vraag: "Op welke bronnen baseer je dit?" en open die bronnen zelf.</li>
+            <li>Zoek elk cijfer en elke regel na bij de bron zelf: de overheid, de KvK, de Belastingdienst, de maker van een product.</li>
+            <li>Stel dezelfde vraag anders, of in een nieuw gesprek. Krijg je een ander antwoord, dan is het geen feit.</li>
+          </ol>
+        </div>
+        <p>Zie het als een snelle, slimme stagiair. Je krijgt in seconden een eerste versie. Maar je leest alles na voordat het de deur uitgaat.</p>
+
+        <Tussenactie />
+        <h2 id="vergelijken">ChatGPT naast Claude, Gemini en Copilot</h2>
+        <p>Het is de bekendste, maar niet de enige. Voor de meeste dagelijkse taken doen de grote assistenten weinig voor elkaar onder. Het verschil zit vooral in waar ze op aansluiten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Assistent</th><th>Maker</th><th>Handig als je</th></tr></thead>
+            <tbody>
+              <tr><td>ChatGPT</td><td>OpenAI</td><td>Een brede alleskunner wilt, met de grootste gebruikersgroep</td></tr>
+              <tr><td><a href="/kennisbank/gidsen/claude/">Claude</a></td><td>Anthropic</td><td>Veel schrijft of met lange documenten werkt</td></tr>
+              <tr><td><a href="/kennisbank/gidsen/google-gemini/">Gemini</a></td><td>Google</td><td>Gmail en Google Drive gebruikt</td></tr>
+              <tr><td><a href="/kennisbank/gidsen/microsoft-copilot/">Copilot</a></td><td>Microsoft</td><td>In Word, Outlook en Teams werkt</td></tr>
+              <tr><td><a href="/kennisbank/gidsen/perplexity/">Perplexity</a></td><td>Perplexity AI</td><td>Vooral antwoorden met bronnen zoekt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Ons advies: geef dezelfde opdracht aan twee assistenten. Kies het antwoord dat je het minst hoeft te herschrijven. Wij gebruiken ze zelf naast elkaar.</p>
+
+        <h2 id="zoeken">Vervangt het zoeken in Google?</h2>
+        <p>Voor een deel wel. Wie vroeger "beste hovenier Assen" googelde, vraagt het nu soms aan een AI-assistent. Die zoekt op internet en geeft een antwoord met een paar namen en bronnen. Google doet hetzelfde met AI Overviews bovenaan de zoekresultaten. Toch blijft Google voor veel zoekopdrachten de eerste stop, zeker als iemand snel een telefoonnummer, adres of webshop zoekt.</p>
+        <p>Voor ondernemers verandert vooral dit: je wilt niet alleen gevonden worden in Google, maar ook genoemd worden in het antwoord van een AI-assistent. Dat vraagt om duidelijke feiten op je site en vermeldingen op andere sites. Hoe dat werkt, lees je bij <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar in ChatGPT</a>.</p>
+
+        <h2 id="ondernemer">Wat betekent het voor jouw bedrijf?</h2>
+        <p>Voor een mkb'er speelt het op drie manieren:</p>
+        <div class="stap-kop"><Tekening naam="koffie" maat={48} /><h3>Je gebruikt het zelf</h3></div>
+        <p>Voor mails, teksten, samenvattingen en onderzoek. De winst zit in kleine taken die elke week terugkomen. Begin met één taak en bouw het rustig uit.</p>
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>Je klanten vragen het om advies</h3></div>
+        <p>"Welke installateur in Drenthe is goed in warmtepompen?" Of jij dan genoemd wordt, hangt af van wat er online over je staat. Dat heet <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+        <div class="stap-kop"><Tekening naam="megafoon" maat={48} /><h3>Je kunt er adverteren</h3></div>
+        <p>Sinds 2026 kun je advertenties tonen in de gratis versie. Het is nieuw en nog volop in beweging. Er vroeg bij zijn kan lonen, maar meet goed wat het oplevert.</p>
+        <div class="kader">
+          <p class="kader-titel">Zo kan het eruitzien (verzonnen voorbeeld)</p>
+          <p>Een bakkerij in Emmen laat de chatbot elke maandag een eerste versie maken van de weekaanbieding voor Facebook en de nieuwsbrief. De eigenaar past de prijzen aan en zet er een eigen foto bij. Dat kost tien minuten in plaats van een uur. Tegelijk stelt ze elke maand dezelfde vraag: "Waar haal ik goed brood in Emmen?" Zo ziet ze of haar bakkerij genoemd wordt, en welke concurrent wel.</p>
+        </div>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Het antwoord ongelezen gebruiken.</b> Een tekst vol feiten die niet kloppen, kost je meer dan hij oplevert.</li>
+          <li><b>Een vraag van één regel stellen.</b> Geef context, een doel en een vorm. Zie de promptbouwer hierboven.</li>
+          <li><b>Klantgegevens in een gratis account zetten.</b> Voor de AVG ben jij verantwoordelijk voor wat je met die gegevens doet.</li>
+          <li><b>Denken dat het alles weet van vandaag.</b> Vraag om een zoekopdracht op internet als het om actuele zaken gaat.</li>
+          <li><b>Alle teksten op je website erdoor laten schrijven.</b> Dan klinkt je site als die van iedereen. Google kijkt naar kwaliteit en naar wat alleen jij kunt vertellen.</li>
+          <li><b>Te snel opgeven.</b> Het eerste antwoord is een begin. Twee of drie keer bijsturen levert vaak iets bruikbaars op.</li>
+        </ul>
+        <p>Wij werken dagelijks met ChatGPT, naast Claude, Gemini, Copilot en Perplexity. Voor eerste versies, onderzoek en het saaie rekenwerk. Nadenken, controleren en afmaken blijft mensenwerk. Hoe we dat precies doen, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>. Wil je dat je team het goed en veilig leert gebruiken, kijk dan bij onze <a href="/trainingen/">trainingen en workshops</a>.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">OpenAI: de officiële handleiding (pagina's over prijzen, gebruik op het web, zoeken op internet, personaliseren en projecten). CBS: nieuwsbericht over het gebruik van kunstmatige intelligentie, 2024. Autoriteit Persoonsgegevens: "Handreiking generatieve AI en de AVG", juli 2026. Wikipedia (Nederlands en Engels) voor de geschiedenis, gebruikerscijfers en het verbod in Italië. Allemaal geraadpleegd op 18 oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={17} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij meedenken?" intro="We gebruiken AI elke dag in ons eigen werk. Dit mag je van ons verwachten als je met ons samenwerkt." />
+
+  <Faq
+    vragen={[
+      { v: 'Is ChatGPT gratis?', a: 'Ja, er is een gratis versie. Wie meer wil, kiest een betaalde versie: Go voor $ 8, Plus voor $ 20 of Pro vanaf $ 100 per maand. Voor teams is er Business, vanaf $ 20 per gebruiker per maand bij jaarbetaling (prijspeil oktober 2026).' },
+      { v: 'Wie heeft ChatGPT gemaakt?', a: 'OpenAI, een Amerikaans AI-bedrijf uit San Francisco. De chatbot kwam uit op 30 november 2022.' },
+      { v: 'Spreekt ChatGPT Nederlands?', a: 'Ja. Je stelt je vraag in het Nederlands en krijgt Nederlands terug. Laat een tekst voor klanten wel nalezen door iemand die de taal en je vak kent.' },
+      { v: 'Waar staat GPT voor?', a: 'Generative Pre-trained Transformer. Een model dat zelf tekst maakt, vooraf is getraind op veel tekst en een bouw heeft die goed met taal overweg kan.' },
+      { v: 'Kan het ook op internet zoeken?', a: 'Ja. Voor actuele vragen zoekt het op internet en zet het bronnen in het antwoord. Open die bronnen zelf voordat je iets overneemt.' },
+      { v: 'Is wat ik intyp privé?', a: 'Niet helemaal. Je gesprekken staan bij OpenAI en kunnen bij persoonlijke accounts gebruikt worden voor training, tenzij je dat uitzet. Zet er geen persoonsgegevens of vertrouwelijke stukken in.' },
+      { v: 'Hoe weet ik of een antwoord klopt?', a: 'Dat weet je pas als je het nagaat. Vraag om bronnen, zoek cijfers en regels na bij de officiële bron en stel de vraag nog eens anders.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over AI-assistenten"
+    links={[
+      { label: 'Gids', titel: 'ChatGPT voor bedrijven', href: '/kennisbank/gidsen/chatgpt-voor-bedrijven/', tekst: 'Tien toepassingen en afspraken voor je team.' },
+      { label: 'Dienst', titel: 'Vindbaar in ChatGPT', href: '/generative-engine-optimization/vindbaar-in-chatgpt/', tekst: 'Zorgen dat AI-assistenten jouw bedrijf noemen.' },
+      { label: 'Begrip', titel: 'Wat is een LLM?', href: '/kennisbank/wat-is/llm/', tekst: 'Het taalmodel achter elke AI-chatbot.', teken: 'ai' },
+      { label: 'Gids', titel: 'Wat is Claude?', href: '/kennisbank/gidsen/claude/', tekst: 'De assistent van Anthropic.' },
+    ]}
+  />
+
+  <Actie titel="Weet ChatGPT wie jij bent?" tekst={`${site.contactpersoon} vraagt de grote AI-assistenten naar jouw bedrijf en belt je met de uitkomst. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>
+<style>
+  .promptbouwer .pb-velden { display: grid; gap: 12px; margin-bottom: 14px; }
+  .promptbouwer label { display: grid; gap: 4px; font-weight: 700; font-size: 0.98rem; }
+  .promptbouwer input { font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid var(--lijn, #d9e1ea); border-radius: 8px; background: #fff; color: inherit; width: 100%; box-sizing: border-box; }
+  .promptbouwer .pb-uit { white-space: pre-wrap; word-break: break-word; background: #fff; border: 1px solid var(--lijn, #d9e1ea); border-radius: 8px; padding: 12px 14px; font-size: 0.95rem; margin: 0 0 14px; }
+</style>
+<script>
+  const veld = (id: string) => document.getElementById(id) as HTMLInputElement | null;
+  const uit = document.getElementById('pb-uit');
+  const knop = document.getElementById('pb-kopieer') as HTMLButtonElement | null;
+  const schoon = (s: string) => s.trim().replace(/[.\s]+$/, '');
+  const maak = () => {
+    if (!uit) return;
+    const wie = schoon(veld('pb-wie')?.value ?? '');
+    const wat = schoon(veld('pb-wat')?.value ?? '');
+    const voor = schoon(veld('pb-voor')?.value ?? '');
+    const vorm = schoon(veld('pb-vorm')?.value ?? '');
+    const delen = [];
+    if (wie) delen.push(wie + '.');
+    if (wat) delen.push(wat + '.');
+    if (voor) delen.push('Het is bedoeld voor: ' + voor.charAt(0).toLowerCase() + voor.slice(1) + '.');
+    if (vorm) delen.push('Vorm: ' + vorm.charAt(0).toLowerCase() + vorm.slice(1) + '.');
+    delen.push('Stel me eerst vragen als je iets mist.');
+    uit.textContent = delen.join(' ');
+  };
+  ['pb-wie', 'pb-wat', 'pb-voor', 'pb-vorm'].forEach((id) => veld(id)?.addEventListener('input', maak));
+  if (knop && navigator.clipboard) {
+    knop.hidden = false;
+    knop.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(uit?.textContent ?? '');
+        knop.textContent = 'Gekopieerd';
+        setTimeout(() => { knop.textContent = 'Kopieer prompt'; }, 2000);
+      } catch { /* kopiëren niet toegestaan: tekst blijft zichtbaar om zelf te selecteren */ }
+    });
+  }
+</script>

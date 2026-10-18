@@ -1,0 +1,295 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--claude-code.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/claude-code/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is Claude Code?' },
+  { id: 'hoe-werkt', titel: 'Hoe het werkt' },
+  { id: 'waar', titel: 'Terminal, IDE, app of web' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'installeren', titel: 'Installeren in vijf stappen' },
+  { id: 'eerste-sessie', titel: 'Je eerste sessie' },
+  { id: 'claude-md', titel: 'CLAUDE.md' },
+  { id: 'veiligheid', titel: 'Toestemming en veiligheid' },
+  { id: 'mcp', titel: 'Koppelen met MCP' },
+  { id: 'git', titel: 'Git en pull requests' },
+  { id: 'voor-wie', titel: 'Voor wie is het?' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const eersteSessie = [
+  'Leg uit wat dit project doet en hoe de mappen zijn opgebouwd.',
+  'Het contactformulier verstuurt niets. Zoek uit waarom en stel een oplossing voor, maar pas nog niets aan.',
+  'Schrijf tests voor de functie die de offerteprijs berekent en voer ze uit.',
+  'Maak een nieuwe branch, voer de oplossing door en schrijf een duidelijke commit.',
+];
+const voorbeeldMd = `# Project: website Hoveniersbedrijf De Es (voorbeeld)
+
+## Opbouw
+- Astro-site, pagina's in src/pages, teksten in het Nederlands
+- Afbeeldingen altijd als WebP in public/img
+
+## Commando's
+- npm run dev   (lokaal bekijken)
+- npm run build (moet zonder fouten slagen voor elke commit)
+
+## Afspraken
+- Schrijf in de je-vorm, korte zinnen
+- Pas nooit de prijzen aan zonder het te vragen
+- Commit per onderwerp, met een omschrijving in het Nederlands`;
+const schema = [{
+  '@type': 'Article',
+  headline: 'Claude Code: wat het is, wat het kost en hoe je begint',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: { '@type': 'SoftwareApplication', name: 'Claude Code', applicationCategory: 'DeveloperApplication', operatingSystem: 'macOS, Windows, Linux', author: { '@type': 'Organization', name: 'Anthropic' } },
+  citation: [
+    'https://code.claude.com/docs/en/overview',
+    'https://code.claude.com/docs/en/setup',
+    'https://code.claude.com/docs/en/quickstart',
+    'https://code.claude.com/docs/en/costs',
+    'https://code.claude.com/docs/en/security',
+    'https://code.claude.com/docs/en/permissions',
+    'https://code.claude.com/docs/en/memory',
+    'https://code.claude.com/docs/en/mcp',
+    'https://code.claude.com/docs/en/github-actions',
+    'https://claude.com/product/claude-code',
+    'https://claude.com/pricing',
+    'https://www.anthropic.com/news/claude-3-7-sonnet',
+    'https://www.anthropic.com/news/claude-4',
+    'https://www.anthropic.com/news/model-context-protocol',
+  ],
+}];
+---
+<Base
+  title="Claude Code: wat is het en wat kost het in 2026?"
+  description="Wat is Claude Code? De programmeeragent van Anthropic uitgelegd: hoe het werkt, wat het kost, installeren in vijf stappen en veilig werken met toestemmingen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Claude Code', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · AI" titel="Claude Code: wat het is, wat het kost en hoe je begint" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Claude Code is een AI-agent die zelf code leest, schrijft, test en vastlegt. Hier lees je hoe het werkt, wat het kost, hoe je het installeert en hoe je voorkomt dat het iets doet wat je niet wilt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand 18 oktober 2026)</p>
+          <ul>
+            <li>Het programmeerhulpmiddel van Anthropic, de maker van Claude. Het werkt in je terminal, je editor, een desktop app en de browser.</li>
+            <li>Het leest je hele codebase, voert opdrachten in meerdere stappen uit en vraagt toestemming voordat het iets wijzigt.</li>
+            <li>Inbegrepen bij een betaald abonnement: Pro vanaf $ 17 per maand bij jaarbetaling, $ 20 per maand los, excl. btw. Niet in de gratis versie.</li>
+            <li>Installeren kost één commando. Je hebt macOS 13, Windows 10 (versie 1809) of Ubuntu 20.04 of nieuwer nodig, en 4 GB werkgeheugen.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is Claude Code?</h2>
+        <p>Claude Code is een AI-agent voor programmeren, gemaakt door het Amerikaanse AI-bedrijf Anthropic. Je beschrijft in gewone taal wat je wilt, bijvoorbeeld "voeg een knop toe die het formulier opslaat". De agent zoekt zelf uit welke bestanden erbij horen, past ze aan, voert tests uit en meldt wat hij heeft gedaan.</p>
+        <p>Het verschil met een chatbot is groot. In een chatvenster plak je een stukje code, krijg je een suggestie terug en plak je die zelf weer terug. Een agent werkt direct in je project. Hij opent bestanden, draait commando's en kijkt of het resultaat werkt. Jij bent de opdrachtgever en de controleur.</p>
+        <p>Anthropic bracht het hulpmiddel op 24 februari 2025 uit als beperkte proefversie, als programma voor de command line. Op 22 mei 2025 werd het voor iedereen beschikbaar, samen met de Claude 4-modellen. Sindsdien is het uitgegroeid tot een familie van apps die allemaal dezelfde motor gebruiken. Wil je eerst weten wat Claude zelf is, lees dan de gids <a href="/kennisbank/gidsen/claude/">wat is Claude</a>.</p>
+
+        <h2 id="hoe-werkt">Hoe werkt het?</h2>
+        <p>Een opdracht doorloopt steeds dezelfde vier stappen. Dat herhaalt zich tot de klus klaar is, of tot de agent jouw beslissing nodig heeft.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Rondkijken</h3></div>
+        <p>Het leest de mappen en bestanden in je project. Je hoeft niet zelf aan te wijzen welke bestanden ertoe doen: het zoekt zelf door de codebase en volgt verwijzingen tussen bestanden.</p>
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>2. Een plan maken</h3></div>
+        <p>Bij een grotere klus maakt het eerst een plan en stelt het vragen als iets onduidelijk is. In de planmodus blijft het daarbij: het leest, maar het verandert niets.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Uitvoeren</h3></div>
+        <p>Het past bestanden aan en voert commando's uit, zoals het installeren van een pakket of het starten van de tests. Afhankelijk van je instellingen vraagt het eerst toestemming.</p>
+        <div class="stap-kop"><Tekening naam="kolf" maat={48} /><h3>4. Controleren</h3></div>
+        <p>Het draait de tests of de build en leest de foutmeldingen. Gaat er iets mis, dan zoekt het de oorzaak en probeert het opnieuw. Daarna krijg je een overzicht van wat er veranderd is.</p>
+        <p>Achter de agent zitten de taalmodellen van Anthropic, zoals Opus 5.5 en Sonnet 5.5. Zwaardere modellen denken beter na over lastige problemen, lichtere zijn sneller en goedkoper.</p>
+
+        <h2 id="waar">Waar gebruik je Claude Code?</h2>
+        <p>Begonnen als programma in de terminal, draait het nu op zes plekken. Volgens Anthropic delen ze dezelfde motor, dus je instellingen en koppelingen werken overal.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Plek</th><th>Wat het is</th><th>Handig als je</th></tr></thead>
+            <tbody>
+              <tr><td><b>Terminal</b></td><td>Het volledige programma voor de command line</td><td>Al in een terminal werkt, of taken wilt automatiseren</td></tr>
+              <tr><td><b>VS Code en Cursor</b></td><td>Een extensie met wijzigingen naast elkaar in beeld en je geschiedenis</td><td>Liever in je editor blijft</td></tr>
+              <tr><td><b>JetBrains</b></td><td>Een plugin voor IntelliJ IDEA, PyCharm, WebStorm en andere IDE's</td><td>Met een JetBrains-IDE werkt (de terminalversie moet er ook op staan)</td></tr>
+              <tr><td><b>Desktop app</b></td><td>Het tabblad Code in de Claude-app voor macOS en Windows</td><td>Geen terminal wilt, of meerdere sessies naast elkaar wilt volgen</td></tr>
+              <tr><td><b>Web en mobiel</b></td><td>Via claude.ai/code, ook in de Claude-app voor iOS en Android</td><td>Lange taken in de cloud wilt laten lopen, zonder installatie</td></tr>
+              <tr><td><b>Slack en GitHub</b></td><td>Een taak starten met @Claude in een chat, een issue of een pull request</td><td>Met een team werkt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor de desktop app heb je een betaald abonnement nodig. Op Ubuntu en Debian is de app nog in bèta.</p>
+
+        <h2 id="kosten">Wat kost Claude Code?</h2>
+        <p>Er zijn twee manieren om te betalen: met een abonnement, of per gebruik via een account op het Claude-ontwikkelaarsplatform (de Console). Dit zijn de bedragen van Anthropic zelf (prijspeil oktober 2026, in dollars, exclusief btw):</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Abonnement</th><th>Prijs per maand</th><th>Wat je krijgt</th></tr></thead>
+            <tbody>
+              <tr><td>Free</td><td>$&nbsp;0</td><td>Geen toegang tot de programmeeragent</td></tr>
+              <tr><td>Pro</td><td>$&nbsp;17 bij jaarbetaling ($&nbsp;200 vooraf), $&nbsp;20 maandelijks</td><td>Volgens Anthropic geschikt voor korte sessies in kleine projecten</td></tr>
+              <tr><td>Max 5x</td><td>$&nbsp;100</td><td>Vijf keer zoveel gebruik als Pro, voor dagelijks werk in grotere projecten</td></tr>
+              <tr><td>Max 20x</td><td>$&nbsp;200</td><td>Twintig keer zoveel gebruik als Pro</td></tr>
+              <tr><td>Team</td><td>$&nbsp;20 per plek bij jaarbetaling ($&nbsp;25 los), premium plek $&nbsp;100 ($&nbsp;125 los)</td><td>Voor teams van 2 tot 150 mensen, met centraal beheer</td></tr>
+              <tr><td>Enterprise</td><td>$&nbsp;20 per plek plus verbruik tegen API-tarieven, minimaal 20 plekken</td><td>Voor grote organisaties</td></tr>
+              <tr><td>Console (per gebruik)</td><td>Per token, bijvoorbeeld Sonnet 5.5: $&nbsp;2 per miljoen tokens invoer, $&nbsp;10 uitvoer</td><td>Voor automatisering en wie liever per gebruik betaalt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Elk abonnement heeft gebruikslimieten die per vijf uur opnieuw ingaan, met daarbovenop een weeklimiet. Je gebruik in de chat en in de programmeeragent komt uit dezelfde pot. Wie per token betaalt, ziet de kosten van een sessie met het commando /usage.</p>
+        <p>Wat kost het in de praktijk? Anthropic noemt voor grote bedrijven een gemiddelde van ongeveer $ 13 per ontwikkelaar per actieve dag, en $ 150 tot $ 250 per maand. Bij 90 procent van de gebruikers blijft het onder de $ 30 per dag. Voor een ondernemer die af en toe iets bouwt, is Pro meestal genoeg om mee te beginnen.</p>
+
+        <Tussenactie />
+        <h2 id="installeren">Claude Code installeren in vijf stappen</h2>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>1. Controleer je computer</h3></div>
+        <p>Je hebt macOS 13 of nieuwer nodig, Windows 10 versie 1809 of nieuwer, of Ubuntu 20.04 of nieuwer. Verder minimaal 4 GB werkgeheugen en een internetverbinding. Op Windows raadt Anthropic Git for Windows aan, zodat de agent Bash kan gebruiken.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Voer het installatiecommando uit</h3></div>
+        <p>Open een terminal en plak het commando voor jouw systeem. Op een Mac, Linux of WSL:</p>
+        <pre><code>curl -fsSL https://claude.ai/install.sh | bash</code></pre>
+        <p>Op Windows in PowerShell:</p>
+        <pre><code>irm https://claude.ai/install.ps1 | iex</code></pre>
+        <p>Liever een pakketbeheerder? Het kan ook met Homebrew (<code>brew install --cask claude-code</code>) of WinGet (<code>winget install Anthropic.ClaudeCode</code>). Let op: die twee werken zichzelf niet automatisch bij, de gewone installatie wel.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>3. Controleer de installatie</h3></div>
+        <p>Open een nieuw terminalvenster en typ <code>claude --version</code>. Zie je een versienummer, dan is het gelukt. Krijg je de melding dat claude niet gevonden wordt, dan staat de installatiemap nog niet in je PATH.</p>
+        <div class="stap-kop"><Tekening naam="huis" maat={48} /><h3>4. Ga naar je project</h3></div>
+        <p>Ga met <code>cd</code> naar de map van je project en start het programma met <code>claude</code>. Begin bij voorkeur in een project dat in Git staat, zodat je elke wijziging terug kunt draaien.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>5. Log in</h3></div>
+        <p>Bij de eerste keer vraagt het programma om in te loggen met je Claude-abonnement of je Console-account. Daarna kun je je eerste opdracht geven.</p>
+
+        <h2 id="eerste-sessie">Je eerste sessie: wat vraag je?</h2>
+        <p>Begin klein, en laat eerst lezen voordat je laat schrijven. Deze vier opdrachten werken goed als opbouw:</p>
+        <ol>{eersteSessie.map((o) => <li>"{o}"</li>)}</ol>
+        <p>Een paar commando's die je vaak gebruikt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Commando</th><th>Wat het doet</th></tr></thead>
+            <tbody>
+              <tr><td><code>/init</code></td><td>Maakt een eerste CLAUDE.md met uitleg over je project</td></tr>
+              <tr><td><code>/usage</code></td><td>Laat zien hoeveel je hebt verbruikt en wat er van je limiet over is</td></tr>
+              <tr><td><code>/clear</code></td><td>Begint een nieuw gesprek, zonder de oude context</td></tr>
+              <tr><td><code>/permissions</code></td><td>Laat zien en regelt wat de agent zonder vragen mag</td></tr>
+              <tr><td><code>/install-github-app</code></td><td>Koppelt de agent aan je GitHub-repository</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Zo kan het eruitzien (verzonnen voorbeeld)</p>
+          <p>Een installatiebedrijf in Hoogeveen heeft een eenvoudige website met een rekenhulp voor de prijs van een warmtepomp. De rekenhulp rondt verkeerd af. De eigenaar opent het project, start de agent en vraagt: "De prijs klopt niet bij een woning van 140 m². Zoek uit waarom." Na een paar minuten wijst de agent de fout aan in één regel en stelt een oplossing voor. De eigenaar laat eerst een test schrijven, keurt de wijziging goed en bekijkt het resultaat zelf op zijn telefoon voordat het online gaat.</p>
+        </div>
+
+        <h2 id="claude-md">CLAUDE.md: je vaste afspraken</h2>
+        <p>Elke sessie begint blanco. Om niet steeds hetzelfde uit te leggen, zet je de vaste afspraken in een bestand met de naam CLAUDE.md in de hoofdmap van je project. Het programma leest dat bestand aan het begin van elke sessie. Anthropic geeft een handige vuistregel: zet erin wat je anders opnieuw zou moeten uitleggen. Maakt de agent twee keer dezelfde fout, dan hoort de oplossing in dit bestand.</p>
+        <pre><code>{voorbeeldMd}</code></pre>
+        <p>Houd het kort en feitelijk: commando's, afspraken en de opbouw van het project. Naast CLAUDE.md houdt de agent ook een eigen geheugen bij met dingen die hij van je correcties leert. Maar wat altijd moet gelden, zet je zelf in het bestand.</p>
+
+        <h2 id="veiligheid">Toestemming en veiligheid</h2>
+        <p>Een agent die bestanden aanpast en commando's uitvoert, kan ook dingen stukmaken. Daarom werkt het programma met toestemmingsmodi. Je kiest zelf hoeveel vrijheid je geeft:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Modus</th><th>Wat er gebeurt</th><th>Gebruik je als</th></tr></thead>
+            <tbody>
+              <tr><td><b>Manual</b> (default)</td><td>Vraagt toestemming bij het eerste gebruik van elk gereedschap</td><td>Je net begint, of in een belangrijk project werkt</td></tr>
+              <tr><td><b>Plan</b></td><td>Leest en verkent alleen, past geen bronbestanden aan</td><td>Je eerst een plan wilt zien</td></tr>
+              <tr><td><b>Accept edits</b></td><td>Keurt bestandswijzigingen en eenvoudige mapcommando's in je projectmap zelf goed</td><td>Je de wijzigingen achteraf in Git controleert</td></tr>
+              <tr><td><b>Auto</b></td><td>Werkt zonder vaste vragen; een apart model controleert riskante acties vooraf</td><td>Je langere taken wilt laten lopen</td></tr>
+              <tr><td><b>Bypass permissions</b></td><td>Slaat bijna alle vragen over</td><td>Alleen in een afgeschermde omgeving, zoals een container</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Sinds augustus 2026 start de agent bij Pro, Max en Team standaard in de automatische modus. Je organisatie kan die modus uitzetten. Anthropic zegt er duidelijk bij: jij bent verantwoordelijk voor het nakijken van voorgestelde code en commando's.</p>
+        <ul class="vink">
+          <li>Werk altijd in een project met Git, zodat je kunt terugdraaien.</li>
+          <li>Zet wachtwoorden en API-sleutels niet in je code, en verbied het lezen van bestanden als .env met een regel in je instellingen.</li>
+          <li>Wees voorzichtig met webpagina's en documenten van anderen. Daarin kunnen verborgen instructies staan die de agent proberen te sturen (prompt injection).</li>
+          <li>Laat niets live gaan dat je niet zelf hebt bekeken en getest.</li>
+        </ul>
+
+        <h2 id="mcp">Koppelen met MCP</h2>
+        <p>MCP staat voor Model Context Protocol. Anthropic maakte deze open standaard in november 2024 openbaar. Het is een vaste manier om een AI-hulpmiddel te verbinden met andere systemen, zoals Google Drive, Jira, Slack, Notion of een eigen database. Zo'n koppeling heet een MCP-server.</p>
+        <p>Een koppeling toevoegen gaat met één commando, bijvoorbeeld voor Notion:</p>
+        <pre><code>claude mcp add --transport http notion https://mcp.notion.com/mcp</code></pre>
+        <p>Daarna kan de agent bijvoorbeeld een ontwerpdocument lezen of een ticket bijwerken. Twee kanttekeningen. Elke koppeling krijgt toegang tot gegevens, dus voeg alleen servers toe die je vertrouwt. En elke koppeling zet wat extra tekst in de context van het model, zoals de namen van de gereedschappen. Zet koppelingen uit die je niet gebruikt.</p>
+
+        <Tussenactie />
+        <h2 id="git">Git, commits en pull requests</h2>
+        <p>De agent werkt direct met Git. Hij zet wijzigingen klaar, schrijft commitberichten, maakt branches aan en opent pull requests. Vraag gewoon: "Commit mijn wijzigingen met een duidelijke omschrijving."</p>
+        <p>Met een team kun je nog een stap verder gaan. Met <code>/install-github-app</code> koppel je de agent aan GitHub. Daarna noem je @claude in een issue of in een pull request, en analyseert hij de code, voert hij wijzigingen door of geeft hij een review. Voor GitLab bestaat een vergelijkbare koppeling. Een collega blijft wel de laatste controle doen voordat iets wordt samengevoegd.</p>
+
+        <h2 id="voor-wie">Voor wie is Claude Code?</h2>
+        <p>Het is gemaakt voor programmeurs. Toch gebruiken steeds meer mensen zonder programmeerkennis het om een kleine tool of website te bouwen. Dat heet <a href="/kennisbank/gidsen/vibe-coding/">vibe coding</a>. Dat kan, maar wees eerlijk over wat je zelf kunt controleren.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wel geschikt</th><th>Liever niet zonder hulp</th></tr></thead>
+            <tbody>
+              <tr><td>Een rekenhulp of formulier voor je eigen website</td><td>Een webshop met betalingen</td></tr>
+              <tr><td>Een script dat een lijst opschoont of omzet</td><td>Iets dat klantgegevens opslaat</td></tr>
+              <tr><td>Een klikbaar ontwerp om aan je webbouwer te laten zien</td><td>De kern van je bedrijfssoftware</td></tr>
+              <tr><td>Uitleg vragen over code die je hebt laten maken</td><td>Beveiliging en inlogsystemen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het is niet het enige programmeerhulpmiddel. OpenAI heeft Codex, dat bij de abonnementen van ChatGPT zit. Wat bij jou past, hangt vooral af van welk abonnement je al hebt. Wil je weten hoe ChatGPT zelf werkt, lees dan <a href="/kennisbank/gidsen/wat-is-chatgpt/">wat is ChatGPT</a>.</p>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Starten zonder Git.</b> Dan kun je een mislukte wijziging niet netjes terugdraaien.</li>
+          <li><b>Een te grote eerste opdracht.</b> "Bouw mijn hele website" levert iets op dat je niet overziet. Werk in kleine stappen.</li>
+          <li><b>Alles goedkeuren zonder te lezen.</b> De toestemmingsvraag is je belangrijkste veiligheidsklep.</li>
+          <li><b>Geen CLAUDE.md.</b> Dan leg je elke sessie opnieuw uit hoe je project in elkaar zit.</li>
+          <li><b>Eén eindeloos gesprek.</b> Begin met /clear een nieuw gesprek voor een nieuwe taak. Dat scheelt verbruik en verwarring.</li>
+          <li><b>Te veel koppelingen tegelijk aan.</b> Elke MCP-server geeft toegang tot gegevens en voegt context toe.</li>
+        </ul>
+        <p>Wij gebruiken Claude dagelijks, onder meer voor eerste versies van teksten en code. Hoe we met AI werken en wat we er niet aan overlaten, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>. Wil je zelf geen code schrijven, maar wel snel een nette website? Dan is een <a href="/website-laten-maken/website-met-ai/">website met AI laten maken</a> een optie, vanaf € 250. AI bouwt de eerste versie, wij maken hem met de hand af. En wil je team leren werken met AI-hulpmiddelen, kijk dan bij onze <a href="/trainingen/">trainingen</a>.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Anthropic: documentatie op code.claude.com (Overview, Advanced setup, Quickstart, Manage costs, Security, Permissions, Memory, MCP, GitHub Actions, Desktop), de productpagina en prijspagina op claude.com, en de aankondigingen op anthropic.com (24 februari 2025, 22 mei 2025 en over het Model Context Protocol, 25 november 2024). Allemaal geraadpleegd op 18 oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={15} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het bouwen?" intro="Geen zin om zelf met een terminal aan de slag te gaan? Dit mag je van ons verwachten." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Claude Code gratis?', a: 'Nee. Je hebt een betaald abonnement nodig, vanaf Pro voor $ 17 per maand bij jaarbetaling of $ 20 per maand los, of je betaalt per gebruik via de Console (prijspeil oktober 2026, excl. btw).' },
+      { v: 'Moet ik kunnen programmeren?', a: 'Het helpt wel. Je beschrijft wat je wilt in gewone taal, maar je moet het resultaat kunnen beoordelen. Begin met kleine dingen en laat de agent uitleggen wat hij doet.' },
+      { v: 'Werkt het op Windows?', a: 'Ja, op Windows 10 versie 1809 of nieuwer en op Windows Server 2019 of nieuwer. Installeer bij voorkeur ook Git for Windows.' },
+      { v: 'Wat is het verschil met de chat van Claude?', a: 'In de chat krijg je antwoorden en voorbeelden. De programmeeragent werkt direct in je project: hij leest en wijzigt bestanden, voert commando\'s uit en test het resultaat.' },
+      { v: 'Is het veilig om een AI in mijn code te laten werken?', a: 'Als je de toestemmingen goed instelt en in Git werkt, kun je alles controleren en terugdraaien. Begin in de handmatige modus en keur niets goed wat je niet begrijpt.' },
+      { v: 'Wat is MCP?', a: 'Model Context Protocol: een open standaard van Anthropic om AI-hulpmiddelen te koppelen aan andere systemen, zoals Google Drive, Jira of Slack.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over bouwen met AI"
+    links={[
+      { label: 'Gids', titel: 'Vibe coding', href: '/kennisbank/gidsen/vibe-coding/', tekst: 'Kun je zo zelf een website maken?' },
+      { label: 'Gids', titel: 'Wat is Claude?', href: '/kennisbank/gidsen/claude/', tekst: 'De assistent van Anthropic uitgelegd.' },
+      { label: 'Dienst', titel: 'Website met AI', href: '/website-laten-maken/website-met-ai/', tekst: 'Snel en betaalbaar, met de hand afgemaakt.' },
+      { label: 'Gids', titel: 'Zelf een website maken', href: '/kennisbank/gidsen/zelf-website-maken/', tekst: 'Alle routes op een rij.' },
+    ]}
+  />
+
+  <Actie titel="Liever een website zonder terminal?" tekst={`Bel ${site.contactpersoon} of vraag de gratis scan aan. We bellen je binnen 15 minuten terug en vragen eerst wat je wilt bereiken.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>

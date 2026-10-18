@@ -1,0 +1,323 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--infographic-maken.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/infographic-maken/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is een infographic?' },
+  { id: 'wanneer', titel: 'Wanneer het werkt' },
+  { id: 'soorten', titel: 'Zeven soorten' },
+  { id: 'stappen', titel: 'In negen stappen' },
+  { id: 'tools', titel: 'Welke tool kies je?' },
+  { id: 'seo', titel: 'Bezoekers en links' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een dakdekker' },
+  { id: 'fouten', titel: 'Acht fouten' },
+  { id: 'checklist', titel: 'Checklist om af te vinken' },
+  { id: 'hulp', titel: 'Zelf maken of laten maken?' },
+];
+const checklist = [
+  'De boodschap past in één zin, en die zin staat bovenaan.',
+  'Elk getal heeft een bron, en de bron staat onderaan met jaartal.',
+  'Er zijn hooguit twee lettertypes en drie of vier kleuren gebruikt.',
+  'Tekst haalt een contrast van minstens 4,5 staat tot 1 met de achtergrond.',
+  'Betekenis zit niet alleen in kleur: er staan ook labels of vormen bij.',
+  'De infographic is leesbaar op een telefoon, zonder in te zoomen.',
+  'Iemand die het onderwerp niet kent, snapt de kern binnen tien seconden.',
+  'Spelling, getallen en eenheden zijn door een tweede persoon gecontroleerd.',
+  'Je logo en je webadres staan erop, klein en onderaan.',
+  'De bestandsnaam beschrijft wat erop staat.',
+  'Op de pagina staat een alt-tekst en de kern als gewone tekst.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Checklist infographic maken\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  checklist.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Infographic maken: van losse cijfers naar één helder beeld',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Infographic',
+  citation: [
+    'https://developers.google.com/search/docs/appearance/google-images',
+    'https://developers.google.com/search/docs/essentials/spam-policies',
+    'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html',
+    'https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html',
+    'https://www.cbs.nl/nl-nl/over-ons/website/copyright',
+    'https://help.pinterest.com/en/business/article/pinterest-product-specs',
+    'https://www.linkedin.com/help/linkedin/answer/a564109',
+    'https://www.datawrapper.de/pricing',
+  ],
+}, {
+  '@type': 'HowTo',
+  name: 'Een infographic maken',
+  step: [
+    'Bepaal doel en doelgroep', 'Kies één boodschap', 'Verzamel data en bronnen', 'Kies de juiste grafiek', 'Schets de indeling op papier',
+    'Kies kleuren, lettertype en pictogrammen', 'Bouw het ontwerp in een tool', 'Laat het controleren', 'Publiceer en deel',
+  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, url: `${site.url}${url}#stappen` })),
+}];
+---
+<Base
+  title="Infographic maken: zo doe je het zelf in 9 stappen"
+  description="Zelf een infographic maken die mensen lezen en delen: negen stappen, de juiste grafiek per soort data, tools als Canva, en hoe je er links mee verdient."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Infographic maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Content" titel="Infographic maken: van losse cijfers naar één helder beeld" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een goede infographic maken begint niet in Canva, maar bij één boodschap en een handvol betrouwbare cijfers. In deze gids lees je hoe je die vindt, welke grafiek erbij past en hoe je zorgt dat je plaat ook bezoekers en links oplevert.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een infographic laat data, een proces of een vergelijking in één overzichtelijk beeld zien.</li>
+            <li>Begin met één zin die de boodschap vangt. Alles wat die zin niet steunt, gaat eruit.</li>
+            <li>Gebruik hooguit twee lettertypes en drie of vier kleuren, en zet onder elk getal de bron.</li>
+            <li>Zet de kern ook als gewone tekst op je pagina. Google haalt de betekenis van een afbeelding vooral uit de tekst eromheen.</li>
+            <li>Onderaan staat een checklist van elf punten om te downloaden en af te vinken.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is een infographic?</h2>
+        <p>Een infographic is een afbeelding die informatie uitlegt met een combinatie van tekst, cijfers, grafieken, pictogrammen en illustraties. Het woord komt van het Engelse information graphic. Het doel is dat de lezer in één oogopslag snapt wat anders een pagina tekst zou kosten.</p>
+        <p>Een losse grafiek is nog geen infographic. Een staafdiagram laat cijfers zien. Een infographic vertelt een verhaal: er is een begin, een kern en een conclusie. Denk aan een plattegrond van een station, een stappenplan op een folder of de uitleg van een verkiezingsuitslag in de krant. Allemaal visualisatie met een duidelijk doel.</p>
+
+        <h2 id="wanneer">Wanneer werkt een infographic, en wanneer niet?</h2>
+        <p>Een infographic kost meer tijd dan een artikel. Maak er dus alleen een als het beeld echt iets toevoegt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Werkt goed</th><th>Werkt slecht</th></tr></thead>
+            <tbody>
+              <tr><td>Een proces van vijf tot acht stappen</td><td>Een onderwerp met veel uitzonderingen en voorwaarden</td></tr>
+              <tr><td>Cijfers die samen een conclusie geven</td><td>Eén los getal, daar volstaat een zin</td></tr>
+              <tr><td>Twee of drie opties naast elkaar</td><td>Een vergelijking met twintig kenmerken, dan is een tabel beter</td></tr>
+              <tr><td>Iets wat mensen willen bewaren of doorsturen</td><td>Nieuws dat over een week niet meer klopt</td></tr>
+              <tr><td>Uitleg op een beurs, in een offerte of op de bouwplaats</td><td>Juridische of medische tekst die precies moet zijn</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="soorten">Zeven soorten infographics</h2>
+        <p>De vorm volgt uit wat je wilt laten zien. Kies eerst het soort, dan pas de stijl.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort</th><th>Laat zien</th><th>Voorbeeld voor een mkb'er</th></tr></thead>
+            <tbody>
+              <tr><td><b>Proces</b></td><td>Stappen in een vaste volgorde</td><td>Van offerte tot oplevering in zes stappen</td></tr>
+              <tr><td><b>Tijdlijn</b></td><td>Wat wanneer gebeurt</td><td>Het jaar van een hovenier per seizoen</td></tr>
+              <tr><td><b>Vergelijking</b></td><td>Twee of drie opties naast elkaar</td><td>Huren of kopen van een warmtepomp</td></tr>
+              <tr><td><b>Statistiek</b></td><td>Cijfers die samen iets zeggen</td><td>Wat klanten in jouw regio het vaakst vragen</td></tr>
+              <tr><td><b>Checklist</b></td><td>Wat iemand moet doen of controleren</td><td>Tien punten voor je verhuisdag</td></tr>
+              <tr><td><b>Kaart</b></td><td>Waar iets is of gebeurt</td><td>Je werkgebied met reistijden</td></tr>
+              <tr><td><b>Hiërarchie</b></td><td>Hoe iets is opgebouwd</td><td>Welke onderdelen een dak heeft</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="stappen">Een infographic maken in negen stappen</h2>
+        <p>Deze volgorde werkt bij een middag werk en bij een week werk. De eerste vier stappen gaan over inhoud. Pas bij stap zes begint het ontwerp.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Bepaal doel en doelgroep</h3></div>
+        <p>Wat moet de lezer na het kijken weten of doen? En wie is die lezer? Een plaat voor vakgenoten mag vaktermen bevatten. Een plaat voor particulieren niet. Schrijf het doel op in één regel, zoals: "Huiseigenaren in Drenthe snappen in tien seconden hoe een dakrenovatie verloopt." Bekijk zo nodig de gids over je <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>2. Kies één boodschap</h3></div>
+        <p>Een infographic met vijf boodschappen heeft er geen. Vat het verhaal samen in één zin. Die zin wordt meestal je titel. Alles wat die zin niet ondersteunt, laat je weg, hoe interessant ook. Twijfel je wat er moet blijven? Vraag je bij elk blok af: mist de lezer iets als dit er niet staat?</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>3. Verzamel data en bronnen</h3></div>
+        <p>Goede cijfers maken je plaat betrouwbaar en deelbaar. Er zijn drie soorten bronnen.</p>
+        <ul>
+          <li><b>Je eigen data.</b> Aantallen uit je administratie, vragen uit je mailbox, een korte enquête onder klanten. Dit is het waardevolst, want niemand anders heeft het.</li>
+          <li><b>Openbare bronnen.</b> Het CBS publiceert zijn cijfers onder de licentie Creative Commons Naamsvermelding (CC BY 4.0). Je mag ze hergebruiken, als je het CBS als bron noemt. Je mag niet de indruk wekken dat het CBS jouw conclusie onderschrijft, en foto's van het CBS vallen er niet onder.</li>
+          <li><b>Onderzoek van anderen.</b> Branchevereniging, kennisinstituut, universiteit. Lees de voorwaarden, en verwijs naar de oorspronkelijke bron, niet naar een blog dat het overnam.</li>
+        </ul>
+        <p>Noteer bij elk getal de bron en het jaartal. Die komen klein onderaan de infographic. Een getal zonder bron is een mening.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>4. Kies de juiste grafiek</h3></div>
+        <p>De vraag is niet welke grafiek mooi is, maar wat je wilt laten zien. Deze tabel helpt bij het kiezen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Je wilt laten zien</th><th>Gebruik</th><th>Vermijd</th></tr></thead>
+            <tbody>
+              <tr><td>Een ontwikkeling in de tijd</td><td>Lijngrafiek</td><td>Taartdiagram</td></tr>
+              <tr><td>Hoeveelheden vergelijken</td><td>Staafdiagram, liefst liggend en gesorteerd</td><td>3D-staven</td></tr>
+              <tr><td>Delen van een geheel</td><td>Taartdiagram met hooguit vier stukken, of een gestapelde balk</td><td>Taart met tien stukken</td></tr>
+              <tr><td>Eén getal laten opvallen</td><td>Groot cijfer met een pictogram</td><td>Een hele grafiek voor één waarde</td></tr>
+              <tr><td>Aantallen tastbaar maken</td><td>Rij pictogrammen, één poppetje per tien klanten</td><td>Pictogrammen van verschillende grootte</td></tr>
+              <tr><td>Een verband tussen twee getallen</td><td>Spreidingsdiagram</td><td>Twee lijnen met elk een eigen as</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Laat de as van een staafdiagram altijd bij nul beginnen. Een as die bij 80 begint, maakt van een klein verschil een groot verschil. Lezers voelen zich dan bedrogen, en terecht.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>5. Schets de indeling op papier</h3></div>
+        <p>Pak pen en papier voordat je een tool opent. Een schets kost vijf minuten en voorkomt uren schuiven. Deel je vlak in drie delen: bovenaan de titel met je kernzin, in het midden de blokken met de inhoud, onderaan de conclusie, bronnen en je naam. Mensen lezen van boven naar beneden en van links naar rechts. Zet het belangrijkste dus linksboven.</p>
+        <p>Denk ook aan het formaat. Een lange, smalle plaat werkt op je website en Pinterest. Voor LinkedIn en een presentatie knip je hem liever op in losse vierkante delen.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>6. Kies kleuren, lettertype en pictogrammen</h3></div>
+        <p>Begin bij je huisstijl. Een infographic in je eigen kleuren herken je later terug, ook als iemand anders hem deelt. Houd het rustig:</p>
+        <ul>
+          <li><b>Kleuren.</b> Eén hoofdkleur, één accentkleur voor wat moet opvallen, en grijs voor de rest. Meer over de werking van kleur lees je in de gids <a href="/kennisbank/gidsen/kleuren-in-marketing/">kleuren in marketing</a>.</li>
+          <li><b>Contrast.</b> De richtlijnen voor toegankelijkheid van het W3C (WCAG) vragen voor gewone tekst een contrast van minstens 4,5 staat tot 1 met de achtergrond. Voor grote tekst en voor onderdelen van een grafiek is dat 3 staat tot 1. Een gratis contrastchecker rekent het voor je uit.</li>
+          <li><b>Niet alleen kleur.</b> Volgens dezelfde richtlijnen mag kleur nooit de enige manier zijn om iets duidelijk te maken. Zet dus labels bij de lijnen, of gebruik ook verschillende vormen.</li>
+          <li><b>Lettertype.</b> Hooguit twee: één voor koppen, één voor de rest. Kies een lettertype dat ook klein goed leesbaar blijft. Sierletters bewaar je voor je logo.</li>
+          <li><b>Pictogrammen.</b> Kies één set met dezelfde lijndikte en stijl. Een mengelmoes van iconen ziet er direct rommelig uit.</li>
+        </ul>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>7. Bouw het ontwerp in een tool</h3></div>
+        <p>Nu pas open je een programma. Welke tool past, lees je <a href="#tools">hieronder</a>. Werk met een raster, zodat blokken netjes uitlijnen. Laat ruimte tussen de onderdelen. Witruimte is geen verspilling, het maakt de plaat overzichtelijk. Maak eerst een versie in grijstinten en voeg pas daarna kleur toe. Dan zie je of de indeling klopt zonder dat kleur je afleidt.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>8. Laat het controleren</h3></div>
+        <p>Laat iemand die het onderwerp niet kent tien seconden kijken. Vraag daarna wat de boodschap was. Komt die niet terug, dan is de plaat te druk. Laat een tweede persoon alle getallen naast de bronnen leggen. Een rekenfout in een infographic gaat rond, met jouw logo erop. Bekijk het ontwerp ook op je telefoon: kun je alles lezen zonder te zoomen?</p>
+
+        <div class="stap-kop"><Tekening naam="social" maat={48} /><h3>9. Publiceer en deel</h3></div>
+        <p>Een infographic die alleen op je computer staat, levert niets op. Zet hem op een eigen pagina op je site, met uitleg erbij. Deel hem daarna in de vorm die elk kanaal het beste past.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Waar</th><th>Formaat</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Je website</td><td>WebP of PNG, plus de kern als tekst</td><td>Een beschrijvende bestandsnaam en een alt-tekst</td></tr>
+              <tr><td>Pinterest</td><td>Staand, 2:3, bijvoorbeeld 1000 bij 1500 pixels</td><td>Langer dan 2:3 kan volgens Pinterest worden afgesneden</td></tr>
+              <tr><td>LinkedIn</td><td>Een pdf met losse delen als bladzijden</td><td>LinkedIn accepteert pdf's tot 100 MB en 300 pagina's</td></tr>
+              <tr><td>Nieuwsbrief</td><td>Eén blok als afbeelding, met link naar de hele plaat</td><td>Een lange plaat is in een mail niet te lezen</td></tr>
+              <tr><td>Print, beurs of offerte</td><td>Pdf in hoge resolutie</td><td>Vraag de drukker welk kleurprofiel hij wil</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Waarom WebP vaak de beste keuze is voor je site, lees je bij <a href="/kennisbank/wat-is/webp/">WebP</a>. Bestaat de plaat vooral uit vlakken en lijnen, dan kan SVG nog lichter en scherper zijn.</p>
+
+        <Tussenactie />
+        <h2 id="tools">Infographic maken met een tool: welke kies je?</h2>
+        <p>Je hebt geen dure software nodig. Welke tool past, hangt af van wat je maakt en hoe vaak.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Sterk in</th><th>Minder sterk</th></tr></thead>
+            <tbody>
+              <tr><td><b>Canva</b></td><td>Snel een plaat maken met kant-en-klare sjablonen en pictogrammen. Er is een gratis versie.</td><td>Iedereen gebruikt dezelfde sjablonen, dus pas ze flink aan</td></tr>
+              <tr><td><b>Datawrapper</b></td><td>Nette grafieken, kaarten en tabellen. De gratis versie downloadt als PNG.</td><td>Geen hele infographic, alleen de grafieken. SVG en pdf en het weghalen van de vermelding "Created with Datawrapper" zitten in Pro, $ 21 per gebruiker per maand excl. btw (prijspeil oktober 2026)</td></tr>
+              <tr><td><b>Excel of Google Sheets</b></td><td>Grafieken direct uit je eigen cijfers</td><td>Standaardopmaak ziet er snel saai uit</td></tr>
+              <tr><td><b>PowerPoint of Keynote</b></td><td>Iedereen heeft het, en een dia is al een raster</td><td>Minder geschikt voor lange platen</td></tr>
+              <tr><td><b>Figma of Illustrator</b></td><td>Alles precies zoals jij het wilt, scherp als SVG</td><td>Kost tijd om te leren</td></tr>
+              <tr><td><b>AI-beeldgenerator</b></td><td>Een losse illustratie of sfeerbeeld</td><td>Verzint vaak tekst en cijfers, en spelt woorden fout. Controleer alles</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Onze tip voor wie het af en toe doet: maak de grafieken in Datawrapper of Sheets, en zet het geheel in elkaar in Canva. Dan kloppen de cijfers en ziet het er toch verzorgd uit.</p>
+
+        <h2 id="seo">Zo haal je bezoekers en links uit je infographic</h2>
+        <p>Een infographic is ook een middel om gevonden te worden. Maar alleen als je het goed aanpakt.</p>
+        <h3>Zorg dat Google snapt wat erop staat</h3>
+        <p>Volgens Google haalt het de betekenis van een afbeelding uit de inhoud van de pagina, zoals bijschriften en titels. De alt-tekst noemt Google het belangrijkste kenmerk om een afbeelding te beschrijven. Dit doe je dus:</p>
+        <ul class="vink">
+          <li>Zet de infographic op een eigen pagina met een titel die het onderwerp noemt.</li>
+          <li>Schrijf de kern eronder uit als gewone tekst: de stappen, de cijfers, de bronnen.</li>
+          <li>Geef het bestand een korte, beschrijvende naam, zoals <code>dakrenovatie-stappen.webp</code> in plaats van <code>IMG00023.png</code>.</li>
+          <li>Schrijf een <a href="/kennisbank/wat-is/alt-tekst/">alt-tekst</a> die zegt wat erop staat, zonder rijtjes zoekwoorden.</li>
+          <li>Gebruik een gewoon afbeeldingselement, geen achtergrondafbeelding in CSS. Die indexeert Google niet.</li>
+        </ul>
+        <h3>Linkbuilding met een infographic</h3>
+        <p>Een goede infographic wordt overgenomen door anderen: een vakblad, een gemeente, een branchesite, een blogger. Als zij naar jou linken als bron, levert dat autoriteit op in Google. Dat is <a href="/linkbuilding/">linkbuilding</a> die je verdient, in plaats van koopt.</p>
+        <p>Veel sites bieden onder de plaat een insluitcode aan met een link erin. Pas daar op. Google noemt in zijn spambeleid links met veel zoekwoorden in widgets die over veel sites verspreid worden. Een insluitcode met een link als "goedkope dakdekker Meppel" zit daar dicht tegenaan. Gebruik in de link je bedrijfsnaam of de titel van de plaat. Wat een goede link is, lees je in de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</p>
+        <p>Wachten tot iemand hem vindt, werkt zelden. Stuur hem naar vijf tot tien sites waarvoor hij echt nuttig is, met een persoonlijk berichtje. Liever één relevante site uit je vak of regio dan vijftig willekeurige.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: een infographic voor een dakdekker</h2>
+        <p>Zo kan een eerste opzet eruitzien. Het bedrijf is verzonnen: Dakwerken Meppel. De klant weet vaak niet wat er gebeurt tussen het eerste telefoontje en het nieuwe dak. Daar gaat de plaat over.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: "Zo krijg je een nieuw dak, in zes stappen"</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th>Blok</th><th>Tekst</th><th>Beeld</th></tr></thead>
+              <tbody>
+                <tr><td>Titel</td><td>Zo krijg je een nieuw dak, in zes stappen</td><td>Getekend huis met steiger</td></tr>
+                <tr><td>1</td><td>Je belt of mailt, wij komen binnen een week kijken</td><td>Pictogram telefoon</td></tr>
+                <tr><td>2</td><td>Je krijgt een offerte met foto's van jouw dak</td><td>Pictogram document</td></tr>
+                <tr><td>3</td><td>We plannen samen een week, met reserve voor regen</td><td>Pictogram kalender</td></tr>
+                <tr><td>4</td><td>Steiger staat, oud dak eraf, nieuw dak erop</td><td>Pictogram steiger</td></tr>
+                <tr><td>5</td><td>Samen nalopen, foto's van het eindresultaat</td><td>Pictogram vinkje</td></tr>
+                <tr><td>6</td><td>Na een jaar komen we gratis controleren</td><td>Pictogram vergrootglas</td></tr>
+                <tr><td>Onderaan</td><td>Logo, telefoonnummer en webadres</td><td>Huisstijlbalk</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p>Let op wat er niet op staat: prijzen, materiaalsoorten, subsidies. Dat zijn allemaal goede onderwerpen, maar elk is een eigen plaat. Deze heeft één boodschap: het is overzichtelijk en je weet waar je aan toe bent. Hij werkt op de site, als bijlage bij de offerte en als poster in de bus.</p>
+
+        <Tussenactie />
+        <h2 id="fouten">Acht fouten die we vaak zien</h2>
+        <ol>
+          <li><b>Te veel tekst.</b> Heb je meer dan ongeveer zeventig woorden per blok, dan is het een artikel met plaatjes.</li>
+          <li><b>Geen bronnen.</b> Zonder bron neemt een serieuze site je plaat niet over.</li>
+          <li><b>Te veel kleuren.</b> Als alles opvalt, valt niets meer op.</li>
+          <li><b>Een misleidende as.</b> Begin staafdiagrammen bij nul.</li>
+          <li><b>Onleesbaar op mobiel.</b> Kleine letters in een brede plaat kan niemand lezen op een telefoon.</li>
+          <li><b>Alleen een plaatje op de pagina.</b> Zonder tekst eromheen weet Google niet waar het over gaat.</li>
+          <li><b>Andermans werk gebruiken.</b> Een foto of pictogram van internet is niet vrij omdat je hem kunt downloaden. Gebruik sets met een duidelijke licentie.</li>
+          <li><b>Maken en vergeten.</b> Kloppen de cijfers niet meer, werk de plaat dan bij en zet het nieuwe jaartal erop.</li>
+        </ol>
+
+        <h2 id="checklist">Checklist voordat je publiceert</h2>
+        <p>Loop deze elf punten langs voordat je de plaat de wereld in stuurt. Je kunt de lijst downloaden en afvinken.</p>
+        <div class="kader check-lijst">
+          <ol>{checklist.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="checklist-infographic.txt">Download de checklist</a>
+        </div>
+
+        <h2 id="hulp">Zelf maken of laten maken?</h2>
+        <p>Een eenvoudige infographic maak je met deze gids zelf, in een middag. Gaat het om een plaat die jaren mee moet, of die je ook op een beurs of in drukwerk gebruikt? Dan loont een ontwerper. Eerlijk is eerlijk: een infographic ontwerpen doen wij niet als losse dienst.</p>
+        <p>Wat we wel doen, is alles eromheen. Een <a href="/branding/huisstijl-laten-maken/">huisstijl laten maken</a>, vanaf € 995, zodat je platen herkenbaar zijn. Het verhaal en de pagina eromheen schrijven, via <a href="/tekstschrijver/contentmarketing/">contentmarketing</a> vanaf € 495 per maand. En zorgen dat de pagina gevonden wordt en links krijgt, met <a href="/linkbuilding/">linkbuilding</a> vanaf € 395 per maand. Alles maandelijks opzegbaar. Hoort de infographic bij een groter plan, lees dan ook hoe je een <a href="/kennisbank/gidsen/content-plan-maken/">content plan</a> maakt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={13} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij helpen?" intro="Wat je van ons mag verwachten als we je content laten werken in Google." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe maak je zelf een infographic?', a: 'Bepaal je doel en doelgroep, vat de boodschap samen in één zin, verzamel cijfers met bronnen, kies de juiste grafiek, schets de indeling op papier en bouw het ontwerp daarna in een tool zoals Canva. Laat het controleren voordat je het deelt.' },
+      { v: 'Kan ik gratis een infographic maken?', a: 'Ja. Canva heeft een gratis versie met sjablonen, en de gratis versie van Datawrapper maakt grafieken die je als PNG downloadt. Ook Google Sheets en PowerPoint werken prima.' },
+      { v: 'Hoe groot moet een infographic zijn?', a: 'Dat hangt af van het kanaal. Voor je website werkt een breedte van ongeveer 1000 tot 1200 pixels. Pinterest raadt een staande plaat van 2:3 aan, zoals 1000 bij 1500 pixels. Voor LinkedIn knip je hem op in losse delen in een pdf.' },
+      { v: 'Mag ik cijfers van het CBS gebruiken?', a: 'Ja. Het CBS publiceert onder de licentie CC BY 4.0. Je mag de cijfers hergebruiken als je het CBS als bron vermeldt. Foto\'s en het logo van het CBS vallen daar niet onder.' },
+      { v: 'Helpt een infographic voor SEO?', a: 'Alleen als je hem goed inzet. Zet hem op een eigen pagina met de kern als tekst, een beschrijvende bestandsnaam en een alt-tekst. Wordt hij door relevante sites overgenomen met een link naar jou, dan helpt dat ook bij <a href="/linkbuilding/">linkbuilding</a>.' },
+      { v: 'Wat is het verschil tussen een infographic en datavisualisatie?', a: 'Datavisualisatie is het in beeld brengen van data, bijvoorbeeld in een grafiek. Een infographic gebruikt dat, maar vertelt er een verhaal omheen met tekst, pictogrammen en een duidelijke conclusie.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Content plan maken', href: '/kennisbank/gidsen/content-plan-maken/', tekst: 'Waar je infographic past in je planning.' },
+      { label: 'Gids', titel: 'Kleuren in marketing', href: '/kennisbank/gidsen/kleuren-in-marketing/', tekst: 'Welke kleur wat doet, en wat het onderzoek zegt.' },
+      { label: 'Gids', titel: 'Backlinks', href: '/kennisbank/gidsen/backlinks/', tekst: 'Wat een goede link is, en hoe je hem krijgt.' },
+      { label: 'Dienst', titel: 'Huisstijl laten maken', href: '/branding/huisstijl-laten-maken/', tekst: 'Kleuren en letters die overal kloppen, vanaf € 995.' },
+    ]}
+  />
+
+  <Actie titel="Wil je dat je content ook gevonden wordt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt hoe je site en je content in Google scoren, en belt je met de eerste dingen die je kunt verbeteren.`} />
+</Base>
+<style>
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+</style>

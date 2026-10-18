@@ -1,0 +1,319 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-trends.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/google-trends/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is Google Trends?' },
+  { id: 'grafiek', titel: 'De grafiek lezen: 0 tot 100' },
+  { id: 'starten', titel: 'Je eerste zoekopdracht' },
+  { id: 'term-onderwerp', titel: 'Zoekterm of onderwerp?' },
+  { id: 'vergelijken', titel: 'Vergelijken' },
+  { id: 'regio', titel: 'Interesse per regio' },
+  { id: 'gerelateerd', titel: 'Gerelateerde zoekopdrachten' },
+  { id: 'trending', titel: 'Nu trending' },
+  { id: 'nieuw', titel: 'Nieuwere functies' },
+  { id: 'seizoen', titel: 'Plannen op het seizoen' },
+  { id: 'seo', titel: 'Trends en zoekwoordonderzoek' },
+  { id: 'toepassingen', titel: 'Zes toepassingen' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const maanden = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google Trends gebruiken: zo zie je waar Nederland naar zoekt',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google Trends',
+  citation: [
+    'https://support.google.com/trends/answer/4365533?hl=nl',
+    'https://support.google.com/trends/answer/6248105?hl=nl',
+    'https://support.google.com/trends/answer/4359550?hl=nl',
+    'https://support.google.com/trends/answer/17309543?hl=nl',
+    'https://support.google.com/trends/answer/4355212?hl=nl',
+    'https://support.google.com/trends/answer/4355000?hl=nl',
+    'https://support.google.com/trends/answer/3076011?hl=nl',
+    'https://support.google.com/trends/answer/17261722?hl=nl',
+    'https://support.google.com/trends/answer/16763742?hl=nl',
+    'https://support.google.com/trends/answer/4359582?hl=nl',
+    'https://support.google.com/trends/answer/4365538?hl=nl',
+    'https://support.google.com/trends/answer/9009229?hl=nl',
+    'https://developers.google.com/search/blog/2025/07/trends-api',
+  ],
+}];
+---
+<Base
+  title="Google Trends gebruiken: complete uitleg voor 2026"
+  description="Wat is Google Trends en hoe gebruik je het? Zo lees je de grafiek van 0 tot 100, vergelijk je zoekwoorden en plan je content op de piek van het seizoen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google Trends', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Google Trends: zo zie je waar Nederland naar zoekt, en wanneer" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Google Trends laat gratis zien hoe de zoekinteresse in een onderwerp door het jaar heen stijgt en daalt. Hier lees je hoe je de grafiek leest, zoekwoorden vergelijkt en je content op tijd klaar hebt voor de piek.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Google Trends is een gratis tool van Google die de zoekinteresse in een zoekterm of onderwerp laat zien, per regio en per periode.</li>
+            <li>De grafiek toont geen aantallen, maar een score van 0 tot 100. Die 100 is het moment met de meeste interesse in de gekozen periode en regio.</li>
+            <li>Je ziet gegevens vanaf 2004, voor Google Zoeken, Afbeeldingen, Nieuws, Google Shopping en YouTube.</li>
+            <li>Het sterkste gebruik voor een mkb'er: zien wanneer je klanten zoeken, en je pagina's of advertenties daar op tijd op afstemmen.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is Google Trends?</h2>
+        <p>Google Trends is een gratis website van Google op trends.google.com. Je typt een zoekterm in, en je ziet hoe vaak daar in verhouding naar gezocht wordt, door de tijd heen en per regio. Je hoeft niet in te loggen. De dienst bestaat sinds mei 2006 en laat gegevens zien vanaf 2004.</p>
+        <p>De cijfers komen uit een steekproef van echte zoekopdrachten. Volgens Google is die steekproef grotendeels ongefilterd, geanonimiseerd en gegroepeerd per onderwerp. Omdat Google miljarden zoekopdrachten per dag verwerkt, is een steekproef genoeg om een betrouwbaar beeld te geven. En het gaat snel: binnen enkele minuten na een gebeurtenis zie je de gevolgen in de grafiek.</p>
+        <p>Op de homepage vind je drie hoofdonderdelen:</p>
+        <ul>
+          <li><b>Verkennen</b> (in de nieuwe versie <b>Ontdekken</b>): de pagina waar je zoektermen opzoekt en vergelijkt.</li>
+          <li><b>Nu trending</b>: de zoekopdrachten die op dit moment sterk stijgen.</li>
+          <li><b>Year in Search</b>: wat er in een heel jaar het meest gezocht werd.</li>
+        </ul>
+
+        <h2 id="grafiek">De grafiek lezen: wat betekent 0 tot 100?</h2>
+        <p>Dit is het punt waar de meeste mensen de mist ingaan. Google Trends laat geen zoekvolume zien. Google rekent elk punt in de grafiek om in twee stappen:</p>
+        <ol>
+          <li>Het aantal zoekopdrachten naar jouw term wordt gedeeld door het totale aantal zoekopdrachten in die regio en die periode. Zo telt de populariteit, niet de grootte van de regio.</li>
+          <li>Die verhouding wordt omgerekend naar een schaal van 0 tot 100. Het hoogste punt in jouw grafiek wordt 100.</li>
+        </ol>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Score</th><th>Wat het betekent</th></tr></thead>
+            <tbody>
+              <tr><td>100</td><td>Het moment met de meeste interesse in de gekozen periode en regio</td></tr>
+              <tr><td>50</td><td>Half zo veel interesse als op het hoogste punt</td></tr>
+              <tr><td>0</td><td>Te weinig gegevens voor deze term. Niet per se: niemand zoekt ernaar</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>In juli wordt er 4.000 keer gezocht op "airco laten plaatsen", in januari 1.000 keer. Juli is het hoogste punt, dus juli krijgt 100 en januari 25. Kies je een andere periode waarin een nog hetere zomer zit, dan schuift alles op. Juli krijgt dan misschien 70. Een score zegt dus alleen iets binnen de grafiek die je op dat moment bekijkt.</p>
+        </div>
+        <p>Twee dingen om te onthouden. Google voegt kleine willekeurige schommelingen toe om de privacy te beschermen. Bij termen waar weinig op gezocht wordt, zie je daardoor soms een losse piek die niets betekent. En Trends is geen peiling. Google zegt het zelf: een piek betekent dat veel mensen ergens naar zochten, om welke reden dan ook. Niet dat iets populair is.</p>
+
+        <h2 id="starten">Je eerste zoekopdracht in zes stappen</h2>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Open Trends en typ een term</h3></div>
+        <p>Ga naar trends.google.com en typ een zoekterm in het zoekvak, bijvoorbeeld "warmtepomp". Kies in het menu dat openklapt een zoekterm of een onderwerp. Het verschil lees je hieronder.</p>
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>2. Kies je regio</h3></div>
+        <p>Meestal staat je eigen land al ingesteld. Werk je alleen in Nederland, laat dan Nederland staan. Wil je één provincie bekijken, dan kies je die in het filter.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>3. Kies de tijdsperiode</h3></div>
+        <p>Van het afgelopen uur tot de afgelopen vijf jaar, of alles vanaf 2004. Voor seizoenspatronen kies je vijf jaar. Dan zie je of een piek elk jaar terugkomt of eenmalig was.</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>4. Kies een categorie</h3></div>
+        <p>Heeft je woord meerdere betekenissen? Kies dan een categorie. Google gebruikt het voorbeeld "jaguar": het dier of het automerk.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>5. Kies waar er gezocht werd</h3></div>
+        <p>Standaard kijk je naar Google Zoeken. Je kunt ook kiezen voor Afbeeldingen zoeken, Google Nieuws, Google Shopping of YouTube. Verkoop je producten, kijk dan ook naar Shopping. Maak je video's, kijk naar YouTube.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>6. Lees de resultaten</h3></div>
+        <p>Bovenaan staat de grafiek met de interesse door de tijd heen. Daaronder zie je de interesse per regio, en de tabellen met gerelateerde onderwerpen en gerelateerde zoekopdrachten.</p>
+
+        <h2 id="term-onderwerp">Zoekterm of onderwerp?</h2>
+        <p>Als je typt, laat Trends twee soorten suggesties zien. Kies bewust, want ze meten iets anders.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zoekterm</th><th>Onderwerp</th></tr></thead>
+            <tbody>
+              <tr><td>Wat het meet</td><td>Precies de woorden die je typt, in die taal</td><td>Een groep zoekopdrachten over hetzelfde ding, in alle talen en spellingen</td></tr>
+              <tr><td>Herken je aan</td><td>Het label Zoekterm</td><td>Een omschrijving onder de naam, zoals Bedrijf of Plaats</td></tr>
+              <tr><td>Voorbeeld</td><td>"zonnepanelen" telt niet mee als iemand "zonnecellen" typt</td><td>Het onderwerp Zonnepaneel telt varianten en vertalingen mee</td></tr>
+              <tr><td>Kies je als</td><td>Je wilt weten welke woorden je klanten gebruiken</td><td>Je de totale interesse in iets wilt zien</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor je teksten is de zoekterm het nuttigst. Je wilt weten of mensen "dakkapel" of "dakopbouw" typen, want dat woord hoort in je titel.</p>
+
+        <h2 id="vergelijken">Zoekwoorden vergelijken</h2>
+        <p>Trends wordt pas echt bruikbaar als je vergelijkt. In het vak Vergelijken voeg je een tweede term toe. In de nieuwe versie vergelijk je tot 8 groepen tegelijk, met elk tot 50 termen. In de klassieke versie zijn dat er 5 met elk 25 termen. Je kunt ook regio's of perioden naast elkaar zetten.</p>
+        <p>Met tekens in je zoekopdracht stuur je wat er meetelt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Je typt</th><th>Wat er meetelt</th></tr></thead>
+            <tbody>
+              <tr><td>tuin onderhoud</td><td>Zoekopdrachten met beide woorden, in elke volgorde</td></tr>
+              <tr><td>"tuin onderhoud"</td><td>Alleen die woorden in die volgorde, eventueel met woorden ervoor of erna</td></tr>
+              <tr><td>hovenier + tuinman</td><td>Zoekopdrachten met het ene of het andere woord</td></tr>
+              <tr><td>tuin -meubels</td><td>Zoekopdrachten met tuin, maar zonder meubels</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let op: Trends telt spelfouten, synoniemen en meervouden niet vanzelf mee. Wil je "kozijn" en "kozijnen" samen zien, typ dan kozijn + kozijnen. En vergelijk altijd over dezelfde periode en in dezelfde regio, anders geeft Trends geen bruikbare grafiek.</p>
+
+        <Tussenactie />
+        <h2 id="regio">Interesse per regio</h2>
+        <p>Onder de grafiek staat een kaart. Hoe donkerder een gebied, hoe groter het aandeel zoekopdrachten naar je term daar. Ernaast staat een lijst met regio's, gesorteerd op interesse. In Nederland zie je zo de verschillen tussen provincies, dus ook tussen Drenthe, Friesland en Groningen.</p>
+        <p>Onthoud dat ook dit een verhouding is. Een hoge score in Drenthe betekent niet dat er in Drenthe meer gezocht wordt dan in Noord-Holland. Het betekent dat de term in Drenthe een groter deel van alle zoekopdrachten uitmaakt. Een lichte regio is ook niet per se een regio zonder interesse. De term kan er gewoon minder opvallen dan elders.</p>
+        <div class="kader">
+          <p class="kader-titel">Zo kan het eruitzien (verzonnen voorbeeld)</p>
+          <p>Een leverancier van houtkachels uit Assen kijkt naar "houtkachel kopen" in de afgelopen vijf jaar, per provincie. Drenthe en Friesland kleuren donkerder dan de Randstad. Hij besluit zijn advertentiebudget in het najaar vooral in het Noorden in te zetten, en schrijft een pagina over vergunningen en rookoverlast, omdat die vraag bij de gerelateerde zoekopdrachten opvalt.</p>
+        </div>
+
+        <h2 id="gerelateerd">Gerelateerde zoekopdrachten en onderwerpen</h2>
+        <p>Onderaan de pagina staan twee tabellen: gerelateerde onderwerpen en gerelateerde zoekopdrachten. Voor contentideeën is dit het waardevolste deel van Google Trends. Je kunt elke tabel op twee manieren bekijken:</p>
+        <ul>
+          <li><b>Meest gezocht:</b> wat mensen het vaakst zochten in dezelfde zoeksessie als jouw term. Dit zijn de vaste vragen.</li>
+          <li><b>Toenemend:</b> wat in de gekozen periode het hardst groeide, met een groeipercentage erbij. Staat er <b>Snelle stijger</b>, dan groeide de term meer dan 5000 procent.</li>
+        </ul>
+        <p>De toenemende zoekopdrachten zijn goud voor een blog of een nieuwe dienstpagina. Je ziet een vraag opkomen voordat je concurrenten erover schrijven. Krijg je hier niets te zien? Deze tabellen werken alleen voor periodes die minstens een week in het verleden beginnen.</p>
+
+        <h2 id="trending">Wat is er nu trending?</h2>
+        <p>Op de pagina Nu trending zie je wat er op dit moment veel meer gezocht wordt dan normaal, in meer dan 100 landen en regio's. De gegevens worden volgens Google gemiddeld elke tien minuten ververst. Je kiest trends van de afgelopen 4 uur, 24 uur, 48 uur of 7 dagen.</p>
+        <p>Per trend zie je het zoekvolume in een bandbreedte, hoe hard het groeide, wanneer het begon en of de trend nog actief is of al voorbij. Klik je op een trend, dan zie je uit welke zoekopdrachten hij bestaat en welke nieuwsberichten erbij horen. Je kunt de lijst exporteren als csv, kopiëren of volgen via een RSS-feed.</p>
+        <p>Voor de meeste mkb'ers is dit vooral handig om in te haken op het nieuws. Past een trend niet bij je bedrijf, laat hem dan liggen. Wanneer inhaken wel werkt, lees je in de <a href="/kennisbank/gidsen/inhaakkalender/">inhaakkalender</a>.</p>
+
+        <h2 id="nieuw">Nieuwere functies: snel vergelijken, AI en een API</h2>
+        <h3>Snelle vergelijkingen</h3>
+        <p>Boven de grafiek staan nu knoppen om de huidige periode direct te vergelijken met de periode ervoor of met dezelfde periode vorig jaar. Je ziet meteen een percentage en een lijn met het verleden. Zo zie je in één klik of een piek normaal is voor het seizoen of echt opvalt.</p>
+        <h3>Zoektermen voorstellen met Gemini</h3>
+        <p>Op de vernieuwde pagina Ontdekken zit een zijpaneel met de AI van Google. Je typt een interessegebied, bijvoorbeeld "hondenrassen", en Trends stelt tot 8 zoektermen voor en zet ze meteen in één grafiek. Google noemt de functie zelf experimenteel en waarschuwt dat de suggesties fouten kunnen bevatten. Zet er geen gevoelige gegevens in: menselijke beoordelaars kunnen de gesprekken lezen.</p>
+        <h3>Een API voor wie veel data wil</h3>
+        <p>In juli 2025 kondigde Google een API voor Trends aan, eerst voor een kleine groep testers. Die geeft gegevens over vijf jaar die op een vaste schaal staan, zodat je meer termen en losse opvragingen kunt samenvoegen. Voor de gewone ondernemer is de website ruim voldoende.</p>
+
+        <Tussenactie />
+        <h2 id="seizoen">Plannen op het seizoen: zo ben je op tijd</h2>
+        <p>Hier zit de echte winst. Bijna elke branche heeft een seizoen. Hoveniers in het voorjaar, schoorsteenvegers in het najaar, fietsenmakers rond de zomer. Met Trends zie je precies wanneer de interesse begint te stijgen. Kies vijf jaar als periode en kijk of de piek elk jaar in dezelfde maand valt.</p>
+        <p>Een nieuwe of herschreven pagina staat zelden binnen een week bovenaan in Google. Reken op een paar maanden. Advertenties werken direct, maar hebben een paar weken nodig om te leren. Onze vuistregel staat in de planner hieronder.</p>
+        <div class="kader planner" id="seizoensplanner">
+          <p class="kader-titel">Seizoensplanner: in welke maand piekt jouw zoekterm?</p>
+          <label class="planner-keuze">Piekmaand volgens Google Trends
+            <select id="sp-maand">
+              {maanden.map((m, i) => <option value={i} selected={i === 4}>{m}</option>)}
+            </select>
+          </label>
+          <ul class="planner-uit" id="sp-uit">
+            <li><b>januari:</b> kijk welke vragen er vorig jaar opkwamen bij de gerelateerde zoekopdrachten.</li>
+            <li><b>februari:</b> schrijf of vernieuw je pagina en zet hem online.</li>
+            <li><b>maart:</b> controleer in Search Console of de pagina gevonden wordt, en vul hem aan.</li>
+            <li><b>april:</b> zet je advertenties en social posts klaar.</li>
+            <li><b>mei:</b> de piek. Kijk dagelijks naar je aanvragen.</li>
+            <li><b>juni:</b> schrijf op wat werkte, voor volgend jaar.</li>
+          </ul>
+          <p class="klein muted">Vuistregel van Drijfveer Media: pagina drie maanden voor de piek online, advertenties een maand ervoor klaar.</p>
+        </div>
+        <p>Zo maak je van een grafiek een planning. Leg je seizoenspieken naast elkaar in een jaarplan, dan weet je elk kwartaal waar je aan moet werken. Hoe je dat uitwerkt, lees je in de gids over <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a>.</p>
+
+        <h2 id="seo">Google Trends en zoekwoordonderzoek</h2>
+        <p>Trends vertelt je wanneer en waar, maar niet hoeveel. Voor zoekwoordonderzoek combineer je het daarom met een tool die wel aantallen geeft. Google zegt het zelf: de zoekgegevens in Google Ads gaan over maandelijkse en gemiddelde zoekvolumes, Trends over verhoudingen en snelle veranderingen. Citeer ze ook nooit samen als één bron.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vraag</th><th>Tool</th></tr></thead>
+            <tbody>
+              <tr><td>Wanneer zoeken mensen hiernaar?</td><td>Google Trends</td></tr>
+              <tr><td>Welk woord gebruiken ze het vaakst?</td><td>Google Trends (vergelijken)</td></tr>
+              <tr><td>Hoe vaak per maand wordt er gezocht?</td><td>Zoekwoordplanner van Google Ads, of een tool als SE Ranking</td></tr>
+              <tr><td>Op welke zoekwoorden sta ik al?</td><td><a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a></td></tr>
+              <tr><td>Welke vragen komen op?</td><td>Google Trends (toenemende zoekopdrachten)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Hoe je een volledige lijst zoekwoorden opbouwt en aan pagina's koppelt, lees je in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a>.</p>
+
+        <h2 id="toepassingen">Zes toepassingen voor je bedrijf</h2>
+        <div class="stap-kop"><Tekening naam="pen" maat={44} /><h3>1. Het juiste woord kiezen</h3></div>
+        <p>Vergelijk de woorden die jij gebruikt met de woorden van je klanten. Zeg jij "zonwering" en zoeken zij "screens"? Dan weet je wat er in je titel hoort.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={44} /><h3>2. Content op tijd klaar hebben</h3></div>
+        <p>Zie je elk jaar een piek in mei, dan staat je pagina in februari online. Dat is het verschil tussen meedoen en te laat zijn.</p>
+        <div class="stap-kop"><Tekening naam="megafoon" maat={44} /><h3>3. Advertentiebudget verdelen</h3></div>
+        <p>Geef meer uit als de interesse stijgt, minder als hij inzakt. Ook per regio: waarom adverteren waar weinig vraag is?</p>
+        <div class="stap-kop"><Tekening naam="lamp" maat={44} /><h3>4. Een idee toetsen</h3></div>
+        <p>Overweeg je een nieuwe dienst? Kijk of de interesse stijgt, gelijk blijft of daalt. Een dalende lijn over vijf jaar is een waarschuwing.</p>
+        <div class="stap-kop"><Tekening naam="social" maat={44} /><h3>5. Onderwerpen voor blog en YouTube</h3></div>
+        <p>Gebruik de toenemende zoekopdrachten als lijst met onderwerpen. Zet de zoekmachine op YouTube om te zien waar mensen video's over zoeken.</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={44} /><h3>6. Producten in Google Shopping</h3></div>
+        <p>Verkoop je producten, zet de zoekmachine dan op Google Shopping. Dan zie je wanneer mensen echt aan kopen denken. Meer over adverteren met producten lees je bij <a href="/online-adverteren/google-shopping/">Google Shopping</a>.</p>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>De score lezen als aantal zoekopdrachten.</b> 100 is het hoogste punt in jouw grafiek, geen aantal.</li>
+          <li><b>Een te korte periode kiezen.</b> In één jaar zie je geen patroon. Kijk naar vijf jaar.</li>
+          <li><b>Te kleine termen opzoeken.</b> "Stukadoor Westerbork" levert waarschijnlijk 0 op. Kijk naar de bredere term en zoom dan in.</li>
+          <li><b>Varianten vergeten.</b> Enkelvoud, meervoud en spelfouten tellen apart. Gebruik het plusteken.</li>
+          <li><b>Een losse piek serieus nemen.</b> Bij weinig gegevens is het vaak ruis. Kijk of hij terugkomt.</li>
+          <li><b>Zoekterm en onderwerp door elkaar halen.</b> Kies bij vergelijken voor alle termen hetzelfde type.</li>
+          <li><b>Een screenshot delen zonder bron.</b> Google vraagt om de vermelding "Gegevensbron: Google Trends".</li>
+        </ul>
+        <p>Grafieken exporteer je met de knop Downloaden rechtsboven als csv-bestand. Je kunt een grafiek ook insluiten op je eigen website. Daarvoor kopieer je de html-code die Trends geeft.</p>
+        <p>Wil je dat iemand met je meekijkt? Bij een <a href="/consult/">consult</a> van een uur, voor € 85, zoeken we samen de seizoenspieken in jouw branche uit. Of laat ons het werk doen: in ons <a href="/zoekmachine-optimalisatie/">SEO-traject</a>, vanaf € 495 per maand, en bij <a href="/tekstschrijver/contentmarketing/">contentmarketing</a> plannen we je pagina's op de momenten dat je klanten zoeken.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Google: het Helpcentrum van Google Trends (Veelgestelde vragen over Google Trends-gegevens, Aan de slag, Trends-zoektermen vergelijken, Zoektermen en onderwerpen vergelijken, De resultaten verkennen per regio, Gerelateerde zoekopdrachten vinden, Nu trending, Snelle vergelijkingen, Gemini in Trends, Zoektips, Exporteren en citeren, Problemen oplossen) en de Search Central Blog over de Trends API (24 juli 2025). Wikipedia voor het startjaar. Geraadpleegd op 18 oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={14} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je seizoen plannen?" intro="We zoeken uit wanneer je klanten zoeken en zorgen dat je dan gevonden wordt. Dit mag je van ons verwachten." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Google Trends gratis?', a: 'Ja. Je kunt het gebruiken zonder account en zonder te betalen.' },
+      { v: 'Laat Google Trends het aantal zoekopdrachten zien?', a: 'Nee. Je ziet een score van 0 tot 100 die de verhouding toont. Voor aantallen gebruik je de Zoekwoordplanner van Google Ads of een SEO-tool.' },
+      { v: 'Waarom staat mijn zoekterm op 0?', a: 'Er wordt te weinig op gezocht voor Trends om iets te tonen. Kies een bredere term, een langere periode of een groter gebied.' },
+      { v: 'Hoe ver kan ik terugkijken?', a: 'Tot en met 2004. Voor seizoenspatronen is vijf jaar meestal de handigste periode.' },
+      { v: 'Kan ik Google Trends per provincie bekijken?', a: 'Ja. Onder de grafiek staat de interesse per subregio. In Nederland zijn dat de provincies.' },
+      { v: 'Wat is het verschil tussen een zoekterm en een onderwerp?', a: 'Een zoekterm meet precies de woorden die je typt. Een onderwerp telt alle varianten, spellingen en vertalingen van hetzelfde ding mee.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder met zoekwoorden en planning"
+    links={[
+      { label: 'Gids', titel: 'Zoekwoordonderzoek doen', href: '/kennisbank/gidsen/zoekwoordonderzoek/', tekst: 'Zoekwoorden vinden in zes stappen.' },
+      { label: 'Gids', titel: 'Inhaakkalender', href: '/kennisbank/gidsen/inhaakkalender/', tekst: 'Alle inhaakmomenten per maand.' },
+      { label: 'Gids', titel: 'Google Search Console', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Zien op welke zoekwoorden je al staat.' },
+      { label: 'Dienst', titel: 'Contentmarketing', href: '/tekstschrijver/contentmarketing/', tekst: 'Elke maand artikelen die klanten trekken.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wanneer jouw klanten zoeken?" tekst={`${site.contactpersoon} kijkt hoe je site er in Google voor staat en belt je met wat het eerst aandacht nodig heeft. Gratis, en je zit nergens aan vast.`} />
+</Base>
+<style>
+  .planner-keuze { display: grid; gap: 6px; font-weight: 700; max-width: 320px; margin-bottom: 14px; }
+  .planner-keuze select { font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid var(--lijn, #d9e1ea); border-radius: 8px; background: #fff; color: inherit; }
+  .planner-uit { margin: 0 0 10px; padding-left: 20px; }
+  .planner-uit li { margin-bottom: 6px; }
+</style>
+<script>
+  const maanden = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+  const stappen = [
+    [-4, 'kijk welke vragen er vorig jaar opkwamen bij de gerelateerde zoekopdrachten.'],
+    [-3, 'schrijf of vernieuw je pagina en zet hem online.'],
+    [-2, 'controleer in Search Console of de pagina gevonden wordt, en vul hem aan.'],
+    [-1, 'zet je advertenties en social posts klaar.'],
+    [0, 'de piek. Kijk dagelijks naar je aanvragen.'],
+    [1, 'schrijf op wat werkte, voor volgend jaar.'],
+  ] as const;
+  const keuze = document.getElementById('sp-maand') as HTMLSelectElement | null;
+  const uit = document.getElementById('sp-uit');
+  const toon = () => {
+    if (!keuze || !uit) return;
+    const piek = Number(keuze.value);
+    uit.innerHTML = stappen.map(([d, t]) => `<li><b>${maanden[(piek + d + 12) % 12]}:</b> ${t}</li>`).join('');
+  };
+  keuze?.addEventListener('change', toon);
+</script>

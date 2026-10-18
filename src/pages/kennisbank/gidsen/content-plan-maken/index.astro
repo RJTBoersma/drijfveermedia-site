@@ -1,0 +1,405 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--content-plan-maken.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/content-plan-maken/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is een content plan?' },
+  { id: 'verschil', titel: 'Strategie, plan en kalender' },
+  { id: 'waarom', titel: 'Waarom plannen stranden' },
+  { id: 'stappen', titel: 'In acht stappen' },
+  { id: 'rekenhulp', titel: 'Hoeveel artikelen heb je nodig?' },
+  { id: 'sjabloon', titel: 'Sjabloon op één pagina' },
+  { id: 'kalender', titel: 'Contentkalender om over te nemen' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een kwartaal' },
+  { id: 'hergebruik', titel: 'Eén onderwerp, vijf keer' },
+  { id: 'ai', titel: 'AI in je contentplan' },
+  { id: 'tijd', titel: 'Hoeveel tijd het kost' },
+  { id: 'fouten', titel: 'Zeven fouten' },
+  { id: 'hulp', titel: 'Zelf doen of uitbesteden?' },
+];
+
+// Het plan op één pagina: vraag en wat je invult.
+const plan = [
+  ['Doel', 'Wat moet content over zes maanden opleveren, in één getal? Bijvoorbeeld: 6 extra aanvragen per maand via de site.'],
+  ['Voor wie', 'Eén hoofdpersona in twee zinnen: wie is het, wat wil hij, waar loopt hij op vast?'],
+  ['Thema\'s', 'Drie tot vijf thema\'s waar je klant over zoekt en waar jij verstand van hebt.'],
+  ['Hoofdpagina per thema', 'De pagina op je site waar elk thema naartoe leidt, meestal een dienstpagina.'],
+  ['Vragen en zoekwoorden', 'De tien vragen die je het vaakst hoort, en de zoekwoorden die erbij horen.'],
+  ['Formats', 'Welke vormen je gebruikt: blog, stappenplan, prijsuitleg, FAQ, case, nieuwsbrief, post.'],
+  ['Kanalen', 'Waar je publiceert en deelt. Begin met je website plus één of twee andere kanalen.'],
+  ['Ritme', 'Hoe vaak, en op welke dag. Liever twee keer per maand volhouden dan elke week beginnen.'],
+  ['Wie doet wat', 'Wie schrijft, wie controleert, wie plaatst, wie deelt. Met namen.'],
+  ['Meten', 'Welke cijfers je elke maand bekijkt, en wanneer je stopt met een onderwerp.'],
+];
+const kalender = [
+  ['Week 41', 'Wat kost een kunststof kozijn?', 'Kosten', 'Vergelijken', 'Prijsuitleg', 'Website, nieuwsbrief', 'kunststof kozijnen prijs', 'Marieke', 'Gepland'],
+  ['Week 43', 'Hout of kunststof: wat past bij jouw huis?', 'Kiezen', 'Oriënteren', 'Vergelijkingstabel', 'Website, LinkedIn', 'houten of kunststof kozijnen', 'Marieke', 'Idee'],
+  ['Week 45', 'Zo verloopt het plaatsen, dag voor dag', 'Proces', 'Kiezen', 'Stappenplan', 'Website, Facebook', 'kozijnen laten plaatsen', 'Henk', 'Idee'],
+  ['Week 47', 'Vijf vragen die klanten ons stellen', 'Kiezen', 'Vergelijken', 'FAQ', 'Website, nieuwsbrief', 'kozijnen vervangen', 'Marieke', 'Idee'],
+];
+const kop = ['Week', 'Onderwerp', 'Thema', 'Fase', 'Format', 'Kanaal', 'Zoekwoord', 'Wie', 'Status'];
+const csv = (rijen: string[][]) => '﻿' + rijen.map((r) => r.map((c) => `"${c.replace(/"/g, '""')}"`).join(';')).join('\r\n');
+const kalenderDownload = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv([kop, ...kalender, ['Week ..', '', '', '', '', '', '', '', '']]));
+const planDownload = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv([['Onderdeel', 'Vraag', 'Jouw antwoord'], ...plan.map(([a, b]) => [a, b, ''])]));
+
+const schema = [{
+  '@type': 'Article',
+  headline: 'Content plan maken: in 8 stappen naar een plan dat je volhoudt',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Content plan',
+  citation: [
+    'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+    'https://developers.google.com/search/blog/2023/02/google-search-and-ai-content',
+    'https://developers.google.com/search/docs/essentials/spam-policies',
+  ],
+}, {
+  '@type': 'HowTo',
+  name: 'Een content plan maken',
+  totalTime: 'PT4H',
+  step: [
+    'Begin bij je doel en reken terug', 'Kies voor wie je schrijft', 'Verzamel de vragen van je klanten', 'Kies drie tot vijf thema\'s',
+    'Leg onderwerpen op de customer journey', 'Kies formats en kanalen', 'Vul je contentkalender', 'Meet en stuur bij',
+  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, url: `${site.url}${url}#stappen` })),
+}];
+---
+<Base
+  title="Content plan maken: 8 stappen en een gratis sjabloon"
+  description="Een content plan maken dat je ook in drukke weken volhoudt: acht stappen, een rekenhulp, een sjabloon en een contentkalender om te downloaden."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Content plan maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Content" titel="Content plan maken: in 8 stappen naar een plan dat je volhoudt" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een content plan zegt wat je publiceert, voor wie, waarom en wanneer. Zonder plan schrijf je over wat toevallig opkomt. Met plan schrijf je over wat klanten oplevert. Hier vind je de stappen, een sjabloon en een kalender om over te nemen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een content plan begint bij een doel in één getal, niet bij een lijst met leuke onderwerpen.</li>
+            <li>Kies drie tot vijf thema's en koppel elk thema aan een pagina op je site die geld oplevert.</li>
+            <li>Haal onderwerpen uit de vragen die klanten je al stellen. Die zijn beter dan elke brainstorm.</li>
+            <li>Plan wat je volhoudt. Twee goede artikelen per maand winnen het van een wekelijks blog dat na zes weken stilvalt.</li>
+            <li>Op deze pagina staan een rekenhulp, een sjabloon en een contentkalender die je kunt downloaden.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is een content plan?</h2>
+        <p>Een content plan is een kort document waarin staat welke content je maakt, voor wie, met welk doel, via welke kanalen en wanneer. Content is alles wat je publiceert: artikelen op je site, een nieuwsbrief, posts op LinkedIn, een stappenplan, een prijsuitleg, een video. Het plan zorgt dat al die losse stukken één kant op wijzen.</p>
+        <p>Je mag het ook contentplan noemen, of contentmarketingplan. Het is hetzelfde. Wat het niet is: een dik rapport voor in de la. Een goed plan past op één pagina, met daaronder een kalender die je elke maand aanvult. Wil je eerst weten wat <a href="/kennisbank/wat-is/contentmarketing/">contentmarketing</a> is, lees dan dat begrip. Deze gids gaat over het plannen en volhouden.</p>
+
+        <h2 id="verschil">Content strategie, contentplan en contentkalender</h2>
+        <p>Die drie woorden lopen vaak door elkaar. Het verschil zit in de tijd die ze bestrijken en de vraag die ze beantwoorden.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Beantwoordt</th><th>Hoe vaak bijwerken</th></tr></thead>
+            <tbody>
+              <tr><td><b>Content strategie</b></td><td>Waarom maken we content, voor wie, en waarin willen we beter zijn dan anderen?</td><td>Eens per jaar</td></tr>
+              <tr><td><b>Contentplan</b></td><td>Welke thema's, formats, kanalen en doelen kiezen we, en wie doet wat?</td><td>Elk kwartaal</td></tr>
+              <tr><td><b>Contentkalender</b></td><td>Welk stuk komt op welke dag op welk kanaal, en wat is de status?</td><td>Elke maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor een klein bedrijf mogen strategie en plan samen op dat ene A4. Het belangrijkste is dat je de keuzes opschrijft. Plan je vooral berichten voor Facebook, Instagram en LinkedIn? Dan helpt de gids <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a> je met de week- en maandritmes. Hoort content bij een groter verhaal over al je marketing, kijk dan bij <a href="/kennisbank/gidsen/marketingplan-maken/">een marketingplan maken</a>.</p>
+
+        <h2 id="waarom">Waarom de meeste plannen stranden</h2>
+        <p>Bijna elke ondernemer is weleens begonnen met bloggen. Twee artikelen in januari, één in februari, daarna niets meer. Dat komt zelden door luiheid. Het komt door drie dingen die in het begin ontbreken.</p>
+        <ul>
+          <li><b>Geen doel.</b> Wie niet weet wat content moet opleveren, ziet ook niet dat het werkt. Dan wint het werk van vandaag het altijd.</li>
+          <li><b>Geen voorraad onderwerpen.</b> Elke keer opnieuw bedenken waar je over schrijft, kost meer tijd dan het schrijven zelf.</li>
+          <li><b>Te veel tegelijk.</b> Een blog, een nieuwsbrief, drie social kanalen en een video per week. Na een maand houdt niemand dat vol.</li>
+        </ul>
+        <p>Een content plan lost alle drie op. Je weet waarom je het doet, je hebt een lijst onderwerpen voor maanden, en je hebt bewust gekozen wat je niet doet.</p>
+
+        <h2 id="stappen">Een content plan maken in acht stappen</h2>
+        <p>Trek er een middag voor uit. Met de vragen hieronder heb je aan het eind een plan voor een kwartaal.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Begin bij je doel en reken terug</h3></div>
+        <p>Schrijf op wat content moet opleveren, in één getal. "Meer naamsbekendheid" is geen doel, want je kunt het niet meten. "Over zes maanden zes extra aanvragen per maand via de site" wel. Kies er één of hooguit twee. Leads en klantbinding vragen elk een andere aanpak.</p>
+        <p>Reken daarna terug. Hoeveel aanvragen heb je nodig voor die klanten? Hoeveel bezoekers voor die aanvragen? En hoeveel artikelen voor die bezoekers? Verderop staat een <a href="#rekenhulp">rekenhulp</a> die dat voor je doet. Het antwoord is vaak ontnuchterend, en dat is goed. Dan weet je meteen of je doel past bij de tijd die je hebt.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>2. Kies voor wie je schrijft</h3></div>
+        <p>Een artikel voor iedereen raakt niemand. Beschrijf je ideale klant in een paar zinnen: wie is het, wat wil hij bereiken, waar twijfelt hij over? Dat noemen marketeers een persona. Heb je nog geen persona, volg dan de gids <a href="/kennisbank/gidsen/persona-maken/">persona maken</a>. Die kost een ochtend en je hebt er jaren plezier van.</p>
+        <p>Heb je twee heel verschillende klantgroepen, zoals particulieren en bedrijven? Maak dan per groep een persona. Schrijf per artikel wel voor één van de twee. Een stuk dat beide wil bedienen, wordt voor allebei vaag. Meer over het afbakenen van je <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a> lees je bij dat begrip.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>3. Verzamel de vragen van je klanten</h3></div>
+        <p>De beste onderwerpen liggen al op je bureau. Klanten stellen je elke week dezelfde vragen. Schrijf ze twee weken lang op, met de woorden die de klant gebruikt. Vul de lijst aan uit vijf bronnen:</p>
+        <ul>
+          <li><b>Je mailbox en offertes.</b> Waar twijfelen mensen over voordat ze tekenen?</li>
+          <li><b>Je collega's.</b> Wie de telefoon opneemt of bij klanten thuis komt, hoort de echte vragen.</li>
+          <li><b>Google Search Console.</b> Bij Prestaties zie je zoekopdrachten waarop je al verschijnt maar weinig klikken krijgt. Hoe dat werkt, staat in de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</li>
+          <li><b>Google zelf.</b> Typ je dienst in en kijk naar de vragen onder "Mensen vragen ook" en de suggesties onderaan.</li>
+          <li><b>Zoekwoordonderzoek.</b> Daarmee zie je hoe vaak er op iets gezocht wordt. De werkwijze staat in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a>. Wil je weten of een onderwerp groeit of seizoen heeft, kijk dan in <a href="/kennisbank/gidsen/google-trends/">Google Trends</a>.</li>
+        </ul>
+        <p>Na twee weken heb je makkelijk dertig vragen. Dat zijn dertig onderwerpen waarvan je zeker weet dat iemand het antwoord wil.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>4. Kies drie tot vijf thema's</h3></div>
+        <p>Groepeer de vragen. Je ziet vanzelf clusters ontstaan, zoals kosten, kiezen, onderhoud of het proces. Dat zijn je thema's. Hang elk thema op aan een hoofdpagina op je site, meestal de pagina van een dienst. Alle artikelen binnen een thema linken naar die hoofdpagina en naar elkaar.</p>
+        <p>Zo bouw je wat SEO'ers een topic cluster noemen. Google ziet dat je een onderwerp van alle kanten behandelt, en de bezoeker vindt altijd de weg naar de pagina waar hij iets kan aanvragen. Waarom die links tussen pagina's zo veel uitmaken, lees je bij <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</p>
+        <p>Meer dan vijf thema's is voor een klein bedrijf te veel. Dan wordt elk thema dun. Twijfel je? Kies het thema dat het dichtst bij je beste dienst ligt en begin daar.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>5. Leg je onderwerpen op de customer journey</h3></div>
+        <p>Niet iedereen die zoekt, wil meteen kopen. De ene lezer weet nog niet wat hij nodig heeft, de ander vergelijkt al drie offertes. Die route heet de customer journey of klantreis. Zet bij elk onderwerp in welke fase het past.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Fase</th><th>Wat de lezer wil</th><th>Content die past</th></tr></thead>
+            <tbody>
+              <tr><td><b>Oriënteren</b></td><td>Snappen wat er speelt en wat de mogelijkheden zijn</td><td>Uitleg, blog, begrippen, checklist</td></tr>
+              <tr><td><b>Vergelijken</b></td><td>Opties en aanbieders tegen elkaar afwegen</td><td>Prijsuitleg, vergelijkingstabel, cases, reviews</td></tr>
+              <tr><td><b>Kiezen</b></td><td>Zekerheid voordat hij tekent</td><td>Werkwijze, garantie, FAQ, offertevoorbeeld</td></tr>
+              <tr><td><b>Klant</b></td><td>Goed gebruik en onderhoud</td><td>Handleiding, nieuwsbrief, onderhoudstips</td></tr>
+              <tr><td><b>Ambassadeur</b></td><td>Iets om te delen of door te sturen</td><td>Reviewverzoek, verhaal van een klant</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De meeste bedrijven schrijven alleen voor de eerste fase, omdat dat makkelijk is. Maar de artikelen die aanvragen opleveren, zitten bij vergelijken en kiezen. Zorg dat elke fase onderwerpen heeft. Uitgebreider staat het in de gids over de <a href="/kennisbank/gidsen/customer-journey/">customer journey</a>, of in het model <a href="/kennisbank/gidsen/see-think-do-care/">See-Think-Do-Care</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>6. Kies formats en kanalen</h3></div>
+        <p>Een format is de vorm van je content. Niet elk onderwerp wordt een blog. Een vraag over kosten werkt beter als prijsuitleg met een tabel. Een vraag over het proces werkt beter als stappenplan. Kies per onderwerp de vorm die de lezer het snelst verder helpt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Format</th><th>Goed voor</th><th>Moeite</th></tr></thead>
+            <tbody>
+              <tr><td>Blog of uitleg</td><td>Vragen in de oriëntatiefase, gevonden worden in Google</td><td>Gemiddeld</td></tr>
+              <tr><td>Stappenplan</td><td>Hoe gaat het in zijn werk, wat moet ik zelf doen</td><td>Laag</td></tr>
+              <tr><td>Prijsuitleg met rekenvoorbeeld</td><td>Vergelijken, de meest gezochte vraag in bijna elke branche</td><td>Gemiddeld</td></tr>
+              <tr><td>Vergelijkingstabel</td><td>Kiezen tussen twee of drie opties</td><td>Gemiddeld</td></tr>
+              <tr><td>Case of klantverhaal</td><td>Bewijs dat je het kunt</td><td>Hoog</td></tr>
+              <tr><td>FAQ</td><td>Twijfels wegnemen vlak voor de aanvraag</td><td>Laag</td></tr>
+              <tr><td>Nieuwsbrief</td><td>Bestaande klanten en twijfelaars warm houden</td><td>Gemiddeld</td></tr>
+              <tr><td>Post op LinkedIn of Facebook</td><td>Bereik en herhaling van wat al op je site staat</td><td>Laag</td></tr>
+              <tr><td><a href="/kennisbank/gidsen/infographic-maken/">Infographic</a></td><td>Cijfers en processen in één beeld, delen en links</td><td>Hoog</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij kanalen geldt: minder is meer. Je website is de basis, want die is van jou. Kies daarnaast één of twee kanalen waar je klanten echt zitten. Een loodgieter heeft meer aan een buurtgroep op Facebook dan aan TikTok. Een adviesbureau meer aan LinkedIn. Voor de <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief</a> geldt hetzelfde: alleen als je hem kunt volhouden.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>7. Vul je contentkalender</h3></div>
+        <p>Nu wordt het concreet. Zet de onderwerpen in een kalender: welke week, welk format, welk kanaal, welk zoekwoord en wie het maakt. Kies een ritme dat je volhoudt, ook in de drukste maand van het jaar. Voor de meeste kleine bedrijven is dat één of twee artikelen per maand, plus het delen ervan.</p>
+        <p>Plan een kwartaal vooruit en laat ruimte vrij. Er komt altijd iets langs wat je niet zag aankomen, zoals een nieuwe regel, een vraag die ineens vaak komt of een seizoen dat vroeg begint. Voor vaste momenten in het jaar helpt de <a href="/kennisbank/gidsen/inhaakkalender/">inhaakkalender</a>. Een lege kalender om over te nemen staat <a href="#kalender">verderop</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>8. Meet en stuur bij</h3></div>
+        <p>Zet elke maand een halfuur in je agenda. Kijk dan naar de cijfers die bij je doel horen, en verder nergens naar. Meten zonder beslissing is tijdverspilling. Stel jezelf na elke ronde één vraag: waar doe ik meer van, en waar stop ik mee?</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Doel</th><th>Wat je meet</th><th>Waar</th></tr></thead>
+            <tbody>
+              <tr><td>Gevonden worden</td><td>Vertoningen, klikken en positie per artikel</td><td>Google Search Console</td></tr>
+              <tr><td>Aanvragen</td><td>Aanvragen en telefoontjes na het lezen van een artikel</td><td><a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a> of je eigen administratie</td></tr>
+              <tr><td>Klanten binden</td><td>Openingen, klikken en reacties op je nieuwsbrief</td><td>Je mailprogramma</td></tr>
+              <tr><td>Bereik op social</td><td>Reacties en klikken naar je site, niet alleen likes</td><td>De statistieken van het kanaal</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Geef een artikel tijd. In Google duurt het vaak een paar maanden voordat een nieuw stuk zijn plek vindt. Beoordeel een onderwerp dus na drie tot zes maanden, niet na drie weken. Op social media zie je juist binnen een paar dagen of iets aanslaat.</p>
+
+        <h2 id="rekenhulp">Hoeveel artikelen heb je nodig?</h2>
+        <p>Met deze rekenhulp reken je je doel terug naar een aantal artikelen. De startwaarden zijn verzonnen. Vervang ze door je eigen cijfers uit Google Analytics en je administratie. Weet je een getal niet, laat de startwaarde dan staan als eerste schatting.</p>
+        <div class="kader rekenhulp" data-rekenhulp>
+          <p class="kader-titel">Rekenhulp: van doel naar aantal artikelen</p>
+          <div class="velden">
+            <label class="veld"><span>Extra klanten per maand die je wilt</span><input type="number" min="1" step="1" value="4" data-k="klanten" /></label>
+            <label class="veld"><span>Van aanvraag naar klant (%)</span><input type="number" min="1" max="100" step="1" value="25" data-k="sluit" /></label>
+            <label class="veld"><span>Van bezoeker naar aanvraag (%)</span><input type="number" min="0.1" max="100" step="0.1" value="2" data-k="conv" /></label>
+            <label class="veld"><span>Bezoekers per artikel per maand</span><input type="number" min="1" step="1" value="40" data-k="bezoek" /></label>
+          </div>
+          <p class="uitkomst" aria-live="polite">Je hebt <b data-u="aanvragen">16</b> aanvragen per maand nodig, dus <b data-u="bezoekers">800</b> bezoekers. Dat zijn ongeveer <b data-u="artikelen">20</b> artikelen die elk maand na maand bezoekers trekken.</p>
+        </div>
+        <p>In het voorbeeld heb je twintig goed vindbare artikelen nodig. Schrijf je er twee per maand, dan ben je tien maanden bezig. Dat klopt met de praktijk: content is een investering die na een jaar het meest oplevert. Is het aantal veel te hoog voor jouw tijd? Dan heb je drie knoppen. Kies onderwerpen met meer zoekvolume, verbeter je <a href="/kennisbank/gidsen/conversie-verhogen/">conversie</a> zodat meer bezoekers aanvragen, of combineer content met adverteren.</p>
+
+        <Tussenactie />
+        <h2 id="sjabloon">Het content plan op één pagina: sjabloon</h2>
+        <p>Neem dit sjabloon over in een document of download het als bestand voor Excel en Google Sheets. Beantwoord elke vraag in een paar zinnen. Schrijf het zo dat een nieuwe collega het snapt.</p>
+        <div class="kader">
+          <p class="kader-titel">Sjabloon contentplan</p>
+          <div class="tabel-scroll">
+            <table class="sjabloon">
+              <thead><tr><th>Onderdeel</th><th>Wat je invult</th></tr></thead>
+              <tbody>{plan.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}</tbody>
+            </table>
+          </div>
+          <a class="btn" href={planDownload} download="contentplan-sjabloon.csv">Download het sjabloon</a>
+        </div>
+        <p>Klaar? Hang het op of zet het bovenaan je gedeelde map. Een plan dat je elke maand ziet, gebruik je ook.</p>
+
+        <h2 id="kalender">Een contentkalender om over te nemen</h2>
+        <p>Dit is de kalender die bij het sjabloon hoort. Elke rij is één stuk content. De kolom Status loopt van idee naar gepland, geschreven, gecontroleerd en geplaatst. De rijen hieronder zijn ingevuld voor het verzonnen kozijnenbedrijf uit het voorbeeld verderop, zodat je ziet hoe het werkt.</p>
+        <div class="tabel-scroll">
+          <table class="kalender">
+            <thead><tr>{kop.map((k) => <th>{k}</th>)}</tr></thead>
+            <tbody>{kalender.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+        <p><a class="btn" href={kalenderDownload} download="contentkalender.csv">Download de contentkalender</a></p>
+        <p class="klein muted">Het bestand opent in Excel, Numbers en Google Sheets. In Google Sheets kies je Bestand, Importeren, Uploaden.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: een kwartaal voor een kozijnenbedrijf</h2>
+        <p>Zo ziet een ingevuld plan eruit. Het bedrijf is verzonnen: Kozijnen Hoogeveen, met vier man personeel. De eigenaar wil meer aanvragen voor kunststof kozijnen bij particulieren.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: Kozijnen Hoogeveen</p>
+          <ul>
+            <li><b>Doel:</b> van 5 naar 9 offerteaanvragen per maand via de site, binnen zes maanden.</li>
+            <li><b>Voor wie:</b> huiseigenaren van 45 tot 70 in Zuidwest-Drenthe met een woning uit de jaren zeventig of tachtig. Ze willen minder tocht en minder onderhoud, en zijn bang voor een rommelige verbouwing.</li>
+            <li><b>Thema's:</b> kosten, kiezen (hout, kunststof, aluminium), het plaatsen zelf, onderhoud.</li>
+            <li><b>Hoofdpagina's:</b> de dienstpagina kunststof kozijnen en de pagina over plaatsen.</li>
+            <li><b>Formats:</b> prijsuitleg, vergelijkingstabel, stappenplan, FAQ en foto's van eigen werk.</li>
+            <li><b>Kanalen:</b> de website, een maandelijkse nieuwsbrief aan oud-klanten en een Facebookpagina voor de regio.</li>
+            <li><b>Ritme:</b> twee artikelen per maand op de site, elk artikel twee keer gedeeld.</li>
+            <li><b>Wie:</b> Marieke van kantoor schrijft de eerste versie, Henk controleert de vakinhoud, Marieke plaatst.</li>
+            <li><b>Meten:</b> elke eerste maandag Search Console en het aantal aanvragen. Na drie maanden kiezen ze welk thema meer aandacht krijgt.</li>
+          </ul>
+        </div>
+        <p>Let op wat er niet in staat. Geen TikTok, geen wekelijkse vlog, geen nieuwsbrief aan mensen die nog nooit klant waren. Niet omdat dat nooit werkt, maar omdat vier man het niet volhoudt naast het werk. Die keuze is net zo belangrijk als wat er wel in staat.</p>
+
+        <h2 id="hergebruik">Hergebruik: één onderwerp, vijf keer gebruikt</h2>
+        <p>Het zwaarste werk is het uitzoeken: het onderwerp, de feiten, de voorbeelden. Als dat er eenmaal ligt, haal je er veel meer uit dan één artikel. Hergebruik is geen luiheid. Niet iedereen leest alles, en mensen moeten iets vaker zien voordat het blijft hangen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Van het artikel</th><th>Maak je</th><th>Tijd</th></tr></thead>
+            <tbody>
+              <tr><td>De kern in drie zinnen</td><td>Een post op LinkedIn of Facebook met link</td><td>15 minuten</td></tr>
+              <tr><td>De tabel of het stappenplan</td><td>Een afbeelding of carrousel voor social</td><td>30 minuten</td></tr>
+              <tr><td>De vijf vragen eruit</td><td>Een FAQ op de dienstpagina</td><td>20 minuten</td></tr>
+              <tr><td>Het hele artikel, ingekort</td><td>Het hoofdstuk van je nieuwsbrief</td><td>20 minuten</td></tr>
+              <tr><td>De cijfers</td><td>Een <a href="/kennisbank/gidsen/infographic-maken/">infographic</a> die anderen willen delen</td><td>Een middag</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Plan hergebruik meteen mee in je contentkalender. Zet bij elk artikel in welke vormen het terugkomt en wanneer.</p>
+        <h3>Oude content bijwerken telt ook</h3>
+        <p>Een artikel van twee jaar oud met verouderde prijzen kost je vertrouwen. Zet daarom elk kwartaal twee of drie bestaande stukken in je kalender om bij te werken: nieuwe cijfers, een extra vraag, een betere tabel. Pas alleen de datum aan als je echt iets veranderd hebt. Google noemt het oppoetsen van data zonder echte wijziging juist als een signaal van content die voor zoekmachines gemaakt is.</p>
+
+        <Tussenactie />
+        <h2 id="ai">AI in je contentplan: wat werkt wel en wat niet</h2>
+        <p>AI kan je veel tijd schelen. Wij gebruiken het zelf ook, onder meer Claude en ChatGPT. Maar het hangt ervan af waarvoor. Google zegt het helder: het beloont goede content, ongeacht hoe die gemaakt is. Tegelijk valt het massaal maken van pagina's met AI, zonder iets toe te voegen voor de lezer, onder het spambeleid.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wel handig</th><th>Niet doen</th></tr></thead>
+            <tbody>
+              <tr><td>Je lijst met klantvragen laten groeperen in thema's</td><td>Honderd artikelen laten schrijven en ongelezen plaatsen</td></tr>
+              <tr><td>Een eerste opzet of koppenstructuur laten maken</td><td>Feiten, prijzen of regels overnemen zonder ze te controleren</td></tr>
+              <tr><td>Een artikel laten omzetten naar een post of nieuwsbrief</td><td>Je eigen ervaring en voorbeelden weglaten</td></tr>
+              <tr><td>Vragen laten bedenken die een lezer nog zou kunnen hebben</td><td>Teksten van concurrenten laten herschrijven</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het verschil zit in wat jij toevoegt: je vakkennis, je voorbeelden uit de praktijk, je prijzen, je mening. Dat kan AI niet verzinnen. Hoe wij er zelf mee omgaan, staat op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
+
+        <h2 id="tijd">Hoeveel tijd kost het?</h2>
+        <p>Een grove inschatting voor een klein bedrijf dat twee artikelen per maand maakt en die deelt. Wie snel schrijft, zit eronder. Wie veel moet uitzoeken, erboven.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Taak</th><th>Eenmalig</th><th>Per maand</th></tr></thead>
+            <tbody>
+              <tr><td>Content plan maken (stap 1 tot en met 6)</td><td>3 tot 4 uur</td><td>&nbsp;</td></tr>
+              <tr><td>Kalender vullen en bijwerken</td><td>&nbsp;</td><td>1 uur</td></tr>
+              <tr><td>Twee artikelen schrijven en laten nalezen</td><td>&nbsp;</td><td>6 tot 10 uur</td></tr>
+              <tr><td>Plaatsen, afbeeldingen, interne links</td><td>&nbsp;</td><td>1 tot 2 uur</td></tr>
+              <tr><td>Delen en hergebruiken</td><td>&nbsp;</td><td>1 tot 2 uur</td></tr>
+              <tr><td>Meten en bijsturen</td><td>&nbsp;</td><td>Een halfuur</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Samen is dat één tot twee dagen per maand. Reken het uit tegen je uurtarief. Dan weet je wat content je kost, en wat het moet opleveren.</p>
+
+        <h2 id="fouten">Zeven fouten die we vaak zien</h2>
+        <ol>
+          <li><b>Schrijven over jezelf.</b> Nieuws over een nieuwe bus of een jubileum leest bijna niemand. Schrijf over de vraag van de klant.</li>
+          <li><b>Alleen oriënterende onderwerpen.</b> Veel bezoekers, geen aanvragen. Zorg ook voor prijzen, vergelijkingen en je werkwijze.</li>
+          <li><b>Geen link naar een dienst.</b> Een artikel zonder volgende stap is een doodlopende weg. Link elk stuk naar de pagina waar de lezer iets kan doen.</li>
+          <li><b>Een ritme dat je niet volhoudt.</b> Een gat van drie maanden valt meer op dan een rustig ritme van twee keer per maand.</li>
+          <li><b>Te veel kanalen.</b> Overal een beetje is nergens goed. Begin met je site en één ander kanaal.</li>
+          <li><b>Nooit stoppen.</b> Een thema dat na zes maanden niets oplevert, kost elke maand opnieuw tijd. Schrappen is ook een keuze.</li>
+          <li><b>Schrijven voor een woordenaantal.</b> Google zegt zelf geen voorkeur te hebben voor een bepaald aantal woorden. Schrijf tot de vraag beantwoord is.</li>
+        </ol>
+
+        <h2 id="hulp">Zelf doen of uitbesteden?</h2>
+        <p>Het plan zelf kun je prima zelf maken met deze gids. Niemand kent je klanten beter dan jij. Het volhouden is voor de meeste ondernemers het lastige deel. Daar kunnen we helpen.</p>
+        <p>Eerlijk is eerlijk: een content plan als los document verkopen we niet. Een plan zonder uitvoering levert niets op. Bij <a href="/tekstschrijver/contentmarketing/">contentmarketing</a> maken we het plan wel samen met je, en voeren we het daarna uit. We kiezen de onderwerpen op wat je klanten zoeken, schrijven met jouw kennis, plaatsen de artikelen en laten elke maand zien wat ze opleveren. Dat begint bij € 495 per maand, exclusief btw, en is maandelijks opzegbaar. Losse teksten kan ook, via onze <a href="/tekstschrijver/">tekstschrijvers</a>, vanaf € 75 per pagina.</p>
+        <p>Heb je zelf een plan gemaakt en wil je dat iemand er kritisch naar kijkt? Boek dan een <a href="/consult/">consult</a> van € 85 per uur. In een uur hoor je wat sterk is, wat ontbreekt en waar je beter mee kunt stoppen.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={18} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het volhouden?" intro="Wat je van ons mag verwachten als we je content plan uitvoeren." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat zet je in een content plan?', a: 'Je doel in één getal, voor wie je schrijft, drie tot vijf thema\'s, de formats en kanalen die je gebruikt, wie wat doet en welke cijfers je elke maand bekijkt. Daaronder hangt een contentkalender met de onderwerpen per week.' },
+      { v: 'Hoe ver plan je vooruit?', a: 'Een kwartaal is voor de meeste kleine bedrijven ideaal. Ver genoeg om rust te hebben, kort genoeg om bij te sturen. Laat in elke maand ruimte voor iets wat je niet zag aankomen.' },
+      { v: 'Hoe vaak moet ik een blog publiceren?', a: 'Zo vaak als je volhoudt met goede kwaliteit. Voor een klein bedrijf is één of twee keer per maand een prima start. Een vast ritme werkt beter dan veel publiceren en dan stoppen.' },
+      { v: 'Is er een gratis sjabloon voor een contentplan?', a: 'Ja, op deze pagina staan een sjabloon op één pagina en een contentkalender. Je downloadt ze als bestand dat opent in Excel, Numbers en Google Sheets.' },
+      { v: 'Wat is het verschil tussen een contentplan en een contentkalender?', a: 'Het plan legt de keuzes vast: doel, doelgroep, thema\'s, kanalen. De kalender is de uitvoering: welk stuk op welke dag op welk kanaal staat. Het plan werk je elk kwartaal bij, de kalender elke maand.' },
+      { v: 'Kan ik een content plan maken met ChatGPT?', a: 'AI helpt bij het groeperen van vragen en het bedenken van koppen. De keuzes en de vakkennis moeten van jou komen. Controleer elk feit en voeg je eigen voorbeelden toe, anders lijkt je content op die van iedereen.' },
+      { v: 'Wanneer zie ik resultaat van een content plan?', a: 'Op social media binnen dagen. In Google duurt het meestal een paar maanden voordat nieuwe artikelen bezoekers trekken. Beoordeel een thema daarom na drie tot zes maanden.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Contentmarketing', href: '/tekstschrijver/contentmarketing/', tekst: 'Wij voeren je plan uit, vanaf € 495 per maand.' },
+      { label: 'Gids', titel: 'Social media planning', href: '/kennisbank/gidsen/social-media-planning/', tekst: 'Je posts een maand vooruit, in een uur.' },
+      { label: 'Gids', titel: 'Een bedrijfsblog beginnen', href: '/kennisbank/gidsen/bedrijfsblog-beginnen/', tekst: 'Van eerste artikel tot vaste lezers.' },
+      { label: 'Gids', titel: 'Concurrentieanalyse maken', href: '/kennisbank/gidsen/concurrentieanalyse/', tekst: 'Zien wat anderen publiceren, en wat ze laten liggen.' },
+    ]}
+  />
+
+  <Actie titel="Waar zoeken jouw klanten op?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt welke vragen jouw klanten in Google stellen en belt je met de onderwerpen waar je het eerst mee begint.`} />
+</Base>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rekenhulp]').forEach((blok) => {
+    const veld = (k: string) => blok.querySelector<HTMLInputElement>(`[data-k="${k}"]`);
+    const uit = (k: string) => blok.querySelector<HTMLElement>(`[data-u="${k}"]`);
+    const getal = (n: number) => Math.ceil(n).toLocaleString('nl-NL');
+    const reken = () => {
+      const klanten = Number(veld('klanten')?.value) || 0;
+      const sluit = (Number(veld('sluit')?.value) || 0) / 100;
+      const conv = (Number(veld('conv')?.value) || 0) / 100;
+      const bezoek = Number(veld('bezoek')?.value) || 0;
+      if (!klanten || !sluit || !conv || !bezoek) return;
+      const aanvragen = klanten / sluit;
+      const bezoekers = aanvragen / conv;
+      const a = uit('aanvragen'), b = uit('bezoekers'), c = uit('artikelen');
+      if (a) a.textContent = getal(aanvragen);
+      if (b) b.textContent = getal(bezoekers);
+      if (c) c.textContent = getal(bezoekers / bezoek);
+    };
+    blok.addEventListener('input', reken);
+  });
+</script>
+<style>
+  .rekenhulp .velden { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; margin: 12px 0 16px; }
+  .rekenhulp .veld { display: grid; gap: 6px; font-size: 0.95rem; font-weight: 700; }
+  .rekenhulp .uitkomst { font-size: 1.1rem; margin: 0; }
+  .rekenhulp .uitkomst b { color: var(--orange-tekst); }
+  .sjabloon th[scope='row'] { text-transform: none; letter-spacing: 0; font-size: 1rem; color: var(--ink); width: 34%; }
+  .kalender { font-size: 0.92rem; }
+  .kalender td { white-space: nowrap; }
+  .kader .btn { margin-top: 8px; }
+  @media (max-width: 560px) { .rekenhulp .velden { grid-template-columns: minmax(0, 1fr); } }
+</style>

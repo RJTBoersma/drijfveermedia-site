@@ -5,6 +5,8 @@ import Tekening from '../../components/teken/Tekening.astro';
 import { perOnderwerp } from '../../data/tekeningen';
 import Plaatje from '../../components/teken/Plaatje.astro';
 import { overgang, tekeningVoor } from '../../data/miniaturen';
+import Actie from '../../components/pagina/Actie.astro';
+import { diensten } from '../../data/diensten';
 
 // Gidsen gegroepeerd naar de drie pijlers. Volgorde binnen een groep: zoals in de structuur.
 const groepen: { titel: string; pijler: string; onderwerpen: string[] }[] = [
@@ -14,6 +16,22 @@ const groepen: { titel: string; pijler: string; onderwerpen: string[] }[] = [
   { titel: 'Plannen en aanpak', pijler: 'Advies', onderwerpen: ['Online marketing uitbesteden', 'Consult'] },
 ];
 const gidsen = paginas.filter((p: any) => p.type === 'gids' && p.url.startsWith('/kennisbank/gidsen/'));
+const blogs = paginas.filter((p: any) => p.type === 'blog');
+// Gratis rekenhulpen en tools op de site
+const tools = [
+  { naam: 'AI-test: noemt ChatGPT jou?', url: '/generative-engine-optimization/#ai-test', teken: 'ai' },
+  { naam: 'SEO-rekenhulp: wat kost SEO?', url: '/kennisbank/gidsen/wat-kost-seo/', teken: 'reken' },
+  { naam: 'Wat levert een plek hoger op?', url: '/zoekmachine-optimalisatie/', teken: 'vergrootglas' },
+  { naam: 'Wat mag een klik kosten?', url: '/online-adverteren/google-ads-bureau/', teken: 'megafoon' },
+  { naam: 'Wat kost jouw website?', url: '/website-laten-maken/', teken: 'scherm' },
+  { naam: 'Sta jij in het kaartje?', url: '/lokale-seo/', teken: 'pin' },
+  { naam: 'Reviewlink en QR-kaartje', url: '/lokale-seo/reviews/', teken: 'ster' },
+  { naam: 'Google-voorbeeld van je pagina', url: '/kennisbank/gidsen/meta-description/', teken: 'pen' },
+  { naam: 'Offertechecker', url: '/kennisbank/gidsen/offerte-beoordelen/', teken: 'doel' },
+  { naam: 'Concurrentiematrix', url: '/kennisbank/gidsen/concurrentieanalyse/', teken: 'grafiek' },
+  { naam: 'UTM-linkbouwer', url: '/kennisbank/gidsen/utm-codes/', teken: 'grafiek' },
+  { naam: 'Zelf doen of uitbesteden?', url: '/kennisbank/gidsen/hoger-in-google/', teken: 'munten' },
+];
 const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, b: any) => a.naam.localeCompare(b.naam, 'nl'));
 ---
 <Base
@@ -39,6 +57,11 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
     <p class="muted klein" id="kb-telling" aria-live="polite"></p>
   </section>
 
+  <section class="wrap tools" aria-labelledby="tools-kop">
+    <h2 id="tools-kop">Gratis rekenhulpen en tools</h2>
+    <ul class="chips">{tools.map((t) => <li><a class="chip" href={t.url}>{t.naam}</a></li>)}</ul>
+  </section>
+
   <section class="wrap sectie kb">
     {groepen.map((g) => {
       const lijst = gidsen.filter((x: any) => g.onderwerpen.includes(x.onderwerp));
@@ -62,8 +85,19 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
         {begrippen.map((b: any) => <li data-item data-zoek={b.naam.toLowerCase()}><a class="chip" href={b.url}>{b.naam}</a></li>)}
       </ul>
     </div>
+    <div class="groep" data-groep>
+      <h2>Lijsten en achtergrond</h2>
+      <ul class="chips">{blogs.map((b: any) => <li data-item data-zoek={b.naam.toLowerCase()}><a class="chip" href={b.url}>{b.naam}</a></li>)}</ul>
+    </div>
+
+    <div class="groep" data-groep data-alleen-zoeken hidden>
+      <h2>Diensten</h2>
+      <ul class="chips">{diensten.map((d) => <li data-item data-zoek={`${d.naam} ${d.kort}`.toLowerCase()}><a class="chip" href={d.url}>{d.naam}</a></li>)}</ul>
+    </div>
     <p class="leeg muted" hidden>Niets gevonden. Probeer een ander woord, of <a href="/contact/">stel je vraag aan ons</a>.</p>
   </section>
+
+  <Actie titel="Liever dat wij het voor je doen?" tekst="Lezen is één ding, tijd hebben om het te doen iets anders. Thorgall belt je binnen 15 minuten terug op werkdagen en zegt eerlijk wat je zelf kunt doen en waar wij helpen." />
 </Base>
 
 <script>
@@ -76,14 +110,19 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
     const q = veld.value.trim().toLowerCase();
     let n = 0;
     items.forEach((i) => { const ja = !q || (i.dataset.zoek ?? '').includes(q); i.hidden = !ja; if (ja) n++; });
-    groepen.forEach((g) => { g.hidden = ![...g.querySelectorAll<HTMLElement>('[data-item]')].some((i) => !i.hidden); });
-    if (telling) telling.textContent = q ? `${n} resultaten voor "${veld.value.trim()}"` : '';
+    groepen.forEach((g) => { g.hidden = (g.hasAttribute('data-alleen-zoeken') && !q) || ![...g.querySelectorAll<HTMLElement>('[data-item]')].some((i) => !i.hidden); });
+    if (telling) telling.textContent = q ? `${n} ${n === 1 ? 'resultaat' : 'resultaten'} voor "${veld.value.trim()}"` : '';
     if (leeg) leeg.hidden = n > 0;
   });
 </script>
 
 <style>
   .kb-kop { padding-block: 24px 8px; }
+  .tools { padding-block: 16px 0; }
+  .tools h2 { font-size: var(--step-1); margin-bottom: 12px; }
+  .tools .chips, .groep .chips:not(.begrippen) { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .tools .chip { text-decoration: none; padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center; background: var(--panel); border: 1px solid var(--line); font-weight: 700; }
+  .tools .chip:hover { background: var(--navy); color: #fff; }
   .kb-kop > :not(.kb-beeld) { max-width: 760px; }
   .kb-kop { margin-inline: auto; position: relative; }
   .tx { display: grid; gap: 4px; }
@@ -103,7 +142,7 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
   .zoek input { flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 1.1rem; padding: 10px 0; color: var(--ink); background: transparent; }
   .groep { margin-bottom: 48px; }
   .groep h2 { margin-bottom: 18px; }
-  .pijl { color: var(--orange); }
+  .pijl { color: var(--orange-tekst); }
   .gidsen { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
   .gidsen .kl { display: grid; align-content: start; gap: 8px; height: 100%; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; }
   .gidsen .kl:hover { border-color: var(--navy); transform: translateY(-2px); }

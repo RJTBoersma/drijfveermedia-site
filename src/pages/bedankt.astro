@@ -1,16 +1,55 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
+// vCard zodat ons nummer herkend wordt als we terugbellen
+const vcard = ['BEGIN:VCARD', 'VERSION:3.0', `FN:${site.contactpersoon} van Eeden (${site.naam})`, `ORG:${site.naam}`, `TEL;TYPE=WORK,VOICE:${site.telefoonLink.replace('tel:', '')}`, `EMAIL:${site.email}`, `ADR;TYPE=WORK:;;${site.straat};${site.plaats};;${site.postcode.replace(' ', '')};Nederland`, `URL:${site.url}/`, 'END:VCARD'].join('\r\n');
+const vcardHref = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
 ---
 <Base title="Bedankt | Drijfveer Media" description="Je aanvraag is binnen." noindex>
   <section class="wrap bedankt">
-    <h1>Binnen. We bellen je zo terug.</h1>
-    <p class="lead" id="wanneer">Op {site.kantoortijden} bellen we je binnen 15 minuten terug. Daarbuiten de volgende werkdag vóór 8.15 uur.</p>
-    <p>Hou je telefoon bij de hand. We bellen met {site.telefoon}, dus neem gerust op als je een 088-nummer ziet.</p>
-    <p>Terwijl je wacht: kijk wat we voor <a href="/cases/">andere ondernemers</a> deden. Of lees <a href="/werkwijze/">hoe we werken</a>.</p>
+    <img class="gezicht" src="/img/team/thorgall.webp" width="160" height="160" alt={`${site.contactpersoon} van Drijfveer Media`} />
+    <div>
+      <p class="kicker">Aanvraag ontvangen</p>
+      <h1 id="kop">Binnen. {site.contactpersoon} belt je zo terug.</h1>
+      <p class="lead" id="wanneer">Op {site.kantoortijden} bellen we je binnen 15 minuten terug. Daarbuiten de volgende werkdag vóór 8.15 uur.</p>
+      <p>We bellen met <b>{site.telefoon}</b>. Zet het nummer in je telefoon, dan weet je meteen wie er belt.</p>
+      <p><a class="btn" href={vcardHref} download="drijfveer-media.vcf">Zet ons nummer in je telefoon</a></p>
+
+      <h2>Wat {site.contactpersoon} je gaat vragen</h2>
+      <ol class="vragen">
+        <li>Wat moet je website opleveren: telefoontjes, aanvragen, verkopen?</li>
+        <li>Wie zijn je belangrijkste concurrenten, en wie staat er nu boven je?</li>
+        <li>Wat heb je al geprobeerd, en wat werkte wel of niet?</li>
+      </ol>
+      <p class="muted">Je hoeft niets voor te bereiden. Weet je het antwoord nog niet, dan zoeken we het samen uit.</p>
+
+      <h2>Terwijl je wacht</h2>
+      <p>Kijk wat we voor <a href="/cases/">andere ondernemers</a> deden, lees <a href="/werkwijze/">hoe we werken</a> of bekijk <a href="/prijzen/">onze prijzen</a>.</p>
+    </div>
   </section>
 </Base>
+<script>
+  // Kop en verwachting afstemmen op het moment: binnen of buiten kantoortijd (Nederlandse tijd).
+  try {
+    const d = new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'long', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+    const dag = d.find((x) => x.type === 'weekday')?.value ?? '';
+    const uur = Number(d.find((x) => x.type === 'hour')?.value ?? 12);
+    const werkdag = !['zaterdag', 'zondag'].includes(dag);
+    const kop = document.getElementById('kop');
+    const wanneer = document.getElementById('wanneer');
+    if (kop && wanneer && !(werkdag && uur >= 8 && uur < 17)) {
+      const volgende = werkdag && uur < 8 ? 'vanochtend' : (dag === 'vrijdag' || dag === 'zaterdag' || dag === 'zondag') ? 'maandag' : 'morgen';
+      kop.textContent = `Binnen. Thorgall belt je ${volgende} vóór 8.15 uur.`;
+      wanneer.textContent = 'We zijn nu niet op kantoor. Je aanvraag staat bovenaan de lijst voor de volgende werkdag.';
+    }
+  } catch (e) {}
+</script>
 <style>
-  .bedankt { padding-block: 64px; max-width: 720px; display: grid; gap: 16px; }
+  .bedankt { padding-block: 56px; display: grid; grid-template-columns: auto minmax(0, 720px); gap: 32px; align-items: start; }
+  .gezicht { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; object-position: top; background: #e8eef4; }
+  .bedankt h1 { margin: 6px 0 14px; }
+  .bedankt h2 { font-size: var(--step-1); margin-top: 32px; }
   .lead { font-size: var(--step-1); }
+  .vragen { padding-left: 1.2em; display: grid; gap: 8px; }
+  @media (max-width: 700px) { .bedankt { grid-template-columns: minmax(0, 1fr); } .gezicht { width: 112px; height: 112px; } }
 </style>
