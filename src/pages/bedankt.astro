@@ -10,39 +10,67 @@ const vcardHref = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
     <img class="gezicht" src="/img/team/thorgall.webp" width="160" height="160" alt={`${site.contactpersoon} van Drijfveer Media`} />
     <div>
       <p class="kicker">Aanvraag ontvangen</p>
-      <h1 id="kop">Binnen. {site.contactpersoon} belt je zo terug.</h1>
-      <p class="lead" id="wanneer">Op {site.kantoortijden} bellen we je binnen 15 minuten terug. Daarbuiten de volgende werkdag vóór 8.15 uur.</p>
-      <p>We bellen met <b>{site.telefoon}</b>. Zet het nummer in je telefoon, dan weet je meteen wie er belt.</p>
+      <h1 id="kop">Ontvangen. {site.contactpersoon} belt je zo terug.</h1>
+      <p class="lead" id="wanneer">Op {site.kantoortijden} bellen we je binnen 15 minuten terug. Daarbuiten de volgende werkdag vóór 8.15 uur. Is {site.contactpersoon} er een keer niet, dan belt een collega.</p>
+      <p id="nummer">We bellen met <b>{site.telefoon}</b>. Zet het nummer in je telefoon, dan weet je meteen wie er belt.</p>
       <p><a class="btn" href={vcardHref} download="drijfveer-media.vcf">Zet ons nummer in je telefoon</a></p>
 
+      <h2 id="vervolg-kop">Wat er nu gebeurt</h2>
+      <p id="vervolg">{site.contactpersoon} vraagt eerst wat je wilt bereiken. Daarna kijkt hij naar je site en je concurrenten, en hoor je waar de grootste kans zit.</p>
+
       <h2>Wat {site.contactpersoon} je gaat vragen</h2>
-      <ol class="vragen">
+      <ol class="vragen" id="vragen">
         <li>Wat moet je website opleveren: telefoontjes, aanvragen, verkopen?</li>
         <li>Wie zijn je belangrijkste concurrenten, en wie staat er nu boven je?</li>
         <li>Wat heb je al geprobeerd, en wat werkte wel of niet?</li>
       </ol>
       <p class="muted">Je hoeft niets voor te bereiden. Weet je het antwoord nog niet, dan zoeken we het samen uit.</p>
 
-      <h2>Terwijl je wacht</h2>
-      <p>Kijk wat we voor <a href="/cases/">andere ondernemers</a> deden, lees <a href="/werkwijze/">hoe we werken</a> of bekijk <a href="/prijzen/">onze prijzen</a>.</p>
+      <div class="card wacht">
+        <h2>Terwijl je wacht: noemt ChatGPT jou al?</h2>
+        <p>Met de gratis AI-test zie je in vijf minuten of ChatGPT en Gemini jouw bedrijf noemen als iemand naar jouw vak vraagt. Handig om bij de hand te hebben als {site.contactpersoon} belt.</p>
+        <p><a href="/generative-engine-optimization/#ai-test">Doe de AI-test</a> · <a href="/cases/">Bekijk de cases</a> · <a href="/prijzen/">Onze prijzen</a></p>
+      </div>
     </div>
   </section>
 </Base>
 <script>
-  // Kop en verwachting afstemmen op het moment: binnen of buiten kantoortijd (Nederlandse tijd).
-  try {
-    const d = new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'long', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
-    const dag = d.find((x) => x.type === 'weekday')?.value ?? '';
-    const uur = Number(d.find((x) => x.type === 'hour')?.value ?? 12);
-    const werkdag = !['zaterdag', 'zondag'].includes(dag);
-    const kop = document.getElementById('kop');
-    const wanneer = document.getElementById('wanneer');
-    if (kop && wanneer && !(werkdag && uur >= 8 && uur < 17)) {
-      const volgende = werkdag && uur < 8 ? 'vanochtend' : (dag === 'vrijdag' || dag === 'zaterdag' || dag === 'zondag') ? 'maandag' : 'morgen';
-      kop.textContent = `Binnen. Thorgall belt je ${volgende} vóór 8.15 uur.`;
-      wanneer.textContent = 'We zijn nu niet op kantoor. Je aanvraag staat bovenaan de lijst voor de volgende werkdag.';
-    }
-  } catch (e) {}
+  // Kop, verwachting en vervolg afstemmen op het moment (werkdagen en feestdagen) en het soort aanvraag (?s=).
+  import { bereikbaarheid } from '../data/kantoortijd';
+  const q = new URLSearchParams(location.search);
+  const zet = (id: string, tekst: string) => { const el = document.getElementById(id); if (el) el.textContent = tekst; };
+  const b = bereikbaarheid();
+  const alleenMail = q.get('m') === '1';
+  const moment = (q.get('b') || '').slice(0, 60);
+  if (alleenMail) {
+    zet('kop', 'Ontvangen. Je hoort het per e-mail.');
+    zet('wanneer', 'Je koos ervoor om alleen gemaild te worden. We mailen je zodra we je vraag hebben bekeken.');
+    document.getElementById('nummer')?.setAttribute('hidden', '');
+  } else if (moment && moment !== 'Mail me liever') {
+    zet('kop', `Ontvangen. Thorgall belt je ${moment.charAt(0).toLowerCase() + moment.slice(1)}.`);
+    zet('wanneer', 'Dat is het moment dat je koos. Past het toch niet, bel dan zelf even: 088 11 55 666.');
+  } else if (!b.open) {
+    zet('kop', `Ontvangen. Thorgall belt je ${b.wanneer} vóór 8.15 uur.`);
+    zet('wanneer', `We zijn nu niet op kantoor. Je aanvraag staat bovenaan de lijst voor ${b.datum}.`);
+  } else {
+    zet('kop', 'Ontvangen. Thorgall belt je binnen 15 minuten.');
+  }
+  const soorten: Record<string, { kop: string; tekst: string; vragen?: string[] }> = {
+    scan: { kop: 'Wat er na het gesprek gebeurt', tekst: 'Na het gesprek bekijkt Thorgall je site, je plek op de kaart, wat AI over je zegt en je drie grootste concurrenten. Daarna hoor je de drie verbeterpunten die het meeste opleveren, en wie ze kan oppakken: jij, je webbouwer of wij.' },
+    kaart: { kop: 'Wat er na het gesprek gebeurt', tekst: 'Thorgall zoekt op jouw vak in jouw plaats en kijkt wie er in het kaartje van Google staat, en waarom. Daarna hoor je wat jou daar het snelst brengt.', vragen: ['Op welke diensten wil je gevonden worden?', 'In welke plaatsen werk je?', 'Heb je al een Google Bedrijfsprofiel, en wie beheert het?'] },
+    ads: { kop: 'Wat er na het gesprek gebeurt', tekst: 'We lopen je campagnes na: zoektermen, biedingen, advertenties en de meting. Daarna hoor je waar budget weglekt en wat je als eerste aanpakt. Je account blijft van jou.', vragen: ['Wat geef je per maand uit aan Google Ads?', 'Wat levert een nieuwe klant je ongeveer op?', 'Kun je ons leestoegang geven tot je account? Thorgall legt uit hoe.'] },
+    website: { kop: 'Wat er na het gesprek gebeurt', tekst: 'Thorgall vraagt wat je site moet opleveren en wat je al hebt. Daarna hoor je een vaste prijs, en welke route het beste bij je past: snel met AI of maatwerk in WordPress.', vragen: ['Wat moet je nieuwe site opleveren?', 'Welke sites vind je mooi, en waarom?', 'Heb je al teksten en foto’s, of schrijven wij ze?'] },
+    ai: { kop: 'Wat er na het gesprek gebeurt', tekst: 'We stellen ChatGPT, Gemini en Google AI de vragen die jouw klanten stellen. Daarna hoor je of je genoemd wordt, wie wel, en welke bronnen AI daarvoor gebruikt.' },
+    consult: { kop: 'Wat er nu gebeurt', tekst: 'Thorgall belt je om een moment voor het consult te prikken: aan de telefoon, online of bij ons aan de Lauwers in Assen.' },
+    training: { kop: 'Wat er nu gebeurt', tekst: 'Thorgall belt je om te horen wie er meedoen, wat jullie al weten en wat je na de training wilt kunnen. Daarna hoor je een voorstel en een prijs.' },
+    second: { kop: 'Wat er nu gebeurt', tekst: 'Thorgall vraagt wat je bureau nu doet en wat het oplevert. Daarna kijken we mee en hoor je wat we ervan vinden.' },
+  };
+  const soort = soorten[q.get('s') || ''];
+  if (soort) {
+    zet('vervolg-kop', soort.kop);
+    zet('vervolg', soort.tekst);
+    if (soort.vragen) { const ol = document.getElementById('vragen'); if (ol) { ol.innerHTML = ''; soort.vragen.forEach((v) => { const li = document.createElement('li'); li.textContent = v; ol.appendChild(li); }); } }
+  }
 </script>
 <style>
   .bedankt { padding-block: 56px; display: grid; grid-template-columns: 160px minmax(0, 720px); justify-content: start; gap: 40px; align-items: start; }
@@ -51,5 +79,7 @@ const vcardHref = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
   .bedankt h2 { font-size: var(--step-1); margin-top: 32px; }
   .lead { font-size: var(--step-1); }
   .vragen { padding-left: 1.2em; display: grid; gap: 8px; }
+  .wacht { margin-top: 36px; padding: 22px 24px; }
+  .wacht h2 { margin-top: 0; }
   @media (max-width: 700px) { .bedankt { grid-template-columns: minmax(0, 1fr); } .gezicht { width: 112px; height: 112px; } }
 </style>

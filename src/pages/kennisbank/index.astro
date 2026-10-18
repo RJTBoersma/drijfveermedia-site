@@ -36,7 +36,7 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
 ---
 <Base
   title="Kennisbank: online marketing uitgelegd | Drijfveer Media"
-  description="Gidsen en begrippen over SEO, GEO, websites, Google Ads en leadgeneratie. Geschreven door de mensen van Drijfveer Media, in gewone taal en zonder jargon."
+  description="Gidsen en begrippen over SEO, GEO, websites, Google Ads en leadgeneratie. Geschreven door de mensen van Drijfveer Media, zonder vakjargon en met voorbeelden."
   kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }]}
 >
   <section class="wrap kb-kop">
@@ -47,7 +47,7 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
       <Tekening naam="klik" maat={74} class="z3" vertraging={1100} />
     </div>
     <p class="kicker">Kennisbank</p>
-    <h1>Online marketing, uitgelegd in gewone taal</h1>
+    <h1>Online marketing, uitgelegd zonder vakjargon</h1>
     <p class="lead">{gidsen.length} gidsen en {begrippen.length} begrippen over gevonden, genoemd en gekozen worden. Geschreven door de mensen die het elke dag doen.</p>
     <label class="zoek" for="kb-zoek">
       <span class="sr-only">Zoek in de kennisbank</span>
@@ -94,10 +94,13 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
       <h2>Diensten</h2>
       <ul class="chips">{diensten.map((d) => <li data-item data-zoek={`${d.naam} ${d.kort}`.toLowerCase()}><a class="chip" href={d.url}>{d.naam}</a></li>)}</ul>
     </div>
-    <p class="leeg muted" hidden>Niets gevonden. Probeer een ander woord, of <a href="/contact/">stel je vraag aan ons</a>.</p>
+    <div class="leeg" hidden>
+      <p>Nog geen artikel over <b data-leeg-woord></b>. Probeer een korter woord, zoals <i>reviews</i>, <i>Ads</i> of <i>ChatGPT</i>. Of stel je vraag aan Thorgall: hij belt je op werkdagen binnen 15 minuten terug.</p>
+      <p>Veel gelezen: <a href="/kennisbank/gidsen/wat-kost-seo/">Wat kost SEO?</a> · <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> · <a href="/kennisbank/wat-is/geo/">Wat is GEO?</a></p>
+    </div>
   </section>
 
-  <Actie titel="Liever dat wij het voor je doen?" tekst="Lezen is één ding, tijd hebben om het te doen iets anders. Thorgall belt je binnen 15 minuten terug op werkdagen en zegt eerlijk wat je zelf kunt doen en waar wij helpen." />
+  <Actie titel="Zelf geen tijd voor?" tekst="Lezen is één ding, tijd hebben om het te doen iets anders. Thorgall belt je op werkdagen binnen 15 minuten terug en zegt wat je zelf kunt doen en waar wij helpen." />
 </Base>
 
 <script>
@@ -106,14 +109,19 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
   const groepen = [...document.querySelectorAll<HTMLElement>('[data-groep]')];
   const telling = document.getElementById('kb-telling');
   const leeg = document.querySelector<HTMLElement>('.leeg');
-  veld?.addEventListener('input', () => {
+  const zoek = () => {
+    if (!veld) return;
     const q = veld.value.trim().toLowerCase();
     let n = 0;
     items.forEach((i) => { const ja = !q || (i.dataset.zoek ?? '').includes(q); i.hidden = !ja; if (ja) n++; });
     groepen.forEach((g) => { g.hidden = (g.hasAttribute('data-alleen-zoeken') && !q) || ![...g.querySelectorAll<HTMLElement>('[data-item]')].some((i) => !i.hidden); });
-    if (telling) telling.textContent = q ? `${n} ${n === 1 ? 'resultaat' : 'resultaten'} voor "${veld.value.trim()}"` : '';
-    if (leeg) leeg.hidden = n > 0;
-  });
+    if (telling) telling.textContent = q && n ? `${n} ${n === 1 ? 'resultaat' : 'resultaten'} voor "${veld.value.trim()}"` : '';
+    if (leeg) { leeg.hidden = n > 0; const w = leeg.querySelector('[data-leeg-woord]'); if (w) w.textContent = `"${veld.value.trim()}"`; }
+  };
+  veld?.addEventListener('input', zoek);
+  // Zoeken vanuit de link, bijvoorbeeld vanaf de 404-pagina: /kennisbank/?q=reviews
+  const vooraf = new URLSearchParams(location.search).get('q');
+  if (veld && vooraf) { veld.value = vooraf.slice(0, 60); zoek(); }
 </script>
 
 <style>

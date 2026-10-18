@@ -12,10 +12,17 @@ for rij in open('scripts/briefing/STRUCTUUR.md'):
 gidsen = [x for x in p if x['type'] == 'gids']
 begrippen = [x for x in p if x['type'] == 'begrip']
 regio = [x for x in p if x['type'] in ('plaats', 'provincie')]
-L = lambda x: f"- [{x['naam']}](https://www.drijfveermedia.nl{x['url']})"
+# Diensten die niet in de prijstabel van STRUCTUUR.md staan, toch noemen
+bekend = {re.search(r'\((https://[^)]+)\)', d).group(1).replace('https://www.drijfveermedia.nl', '') for d in diensten}
+from_ts = re.findall(r"\{ naam: '([^']+)', url: '([^']+)'.*?kort: '([^']+)', prijs: '([^']+)'", open('src/data/diensten.ts').read())
+for n, u, k, pr in from_ts:
+    if u not in bekend and u in naam:
+        diensten.append(f"- [{n}](https://www.drijfveermedia.nl{u}): {k}. {pr[0].upper() + pr[1:]}.")
+cases = [x for x in p if x['type'] == 'case']
+L = lambda x: f"- [{x['naam']}](https://www.drijfveermedia.nl{x['url']})" + (f": {x['omschrijving']}" if x.get('omschrijving') else '')
 tekst = f"""# Drijfveer Media
 
-> Online marketingbureau in Assen (Drenthe), opgericht in 2011. Drijfveer Media zorgt dat ondernemers gevonden worden in Google (SEO), genoemd worden door AI-assistenten zoals ChatGPT, Gemini en Copilot (GEO) en gekozen worden met een website die aanvragen oplevert. Werkt voor het mkb in heel Nederland, met de nadruk op Noord-Nederland. Prijzen staan open op de site, alle maandabonnementen zijn maandelijks opzegbaar.
+> Online marketingbureau in Assen (Drenthe), opgericht in 2011. Drijfveer Media zorgt dat ondernemers gevonden worden in Google (SEO), genoemd worden door AI-assistenten zoals ChatGPT, Gemini en Copilot (GEO) en gekozen worden met een website die aanvragen oplevert. Werkt voor het mkb in heel Nederland, met de nadruk op Noord-Nederland. Prijzen staan open op de site (vanaf-prijzen, exclusief btw, voor ondernemers). Maandelijkse diensten zijn per maand opzegbaar, met één maand opzegtermijn.
 
 ## Bedrijfsgegevens
 - Naam: {b['naam']}
@@ -32,6 +39,19 @@ tekst = f"""# Drijfveer Media
 
 ## Diensten en prijzen
 {chr(10).join(diensten)}
+
+## Bewijs
+- [Cases](https://www.drijfveermedia.nl/cases/): Willemfikstt.nl kreeg 87% meer bezoekers uit Google en 60% meer aanvragen via de site; Conflictbemiddeling.nl 47% meer bezoekers uit Google na een nieuwe site, SEO en Google Ads; Dakraamconcurrent.nl 32% meer bezoekers uit Google na een nieuwe site en linkbuilding.
+{chr(10).join(L(x) for x in cases)}
+- [Logboek](https://www.drijfveermedia.nl/logboek/): elke maand de cijfers van onze eigen site.
+
+## Over ons
+- [Over ons](https://www.drijfveermedia.nl/over-ons/)
+- [Robert Boersma, eigenaar](https://www.drijfveermedia.nl/over-ons/robert-boersma/)
+- [Garantie](https://www.drijfveermedia.nl/garantie/): bij maandelijkse diensten een meetbaar doel met datum; halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Bij SEO en linkbuilding een stijggarantie.
+- [Werkwijze](https://www.drijfveermedia.nl/werkwijze/)
+- [Proeflab](https://www.drijfveermedia.nl/proeflab/): sinds 2011 meer dan 100 eigen websites waarop we technieken eerst testen.
+- [Zo werken we met AI](https://www.drijfveermedia.nl/zo-werken-we-met-ai/)
 
 ## Werkgebied
 {chr(10).join(L(x) for x in regio)}

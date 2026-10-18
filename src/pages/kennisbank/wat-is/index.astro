@@ -1,4 +1,5 @@
 ---
+import { site } from '../../../data/site';
 import Base from '../../../layouts/Base.astro';
 import paginas from '../../../../scripts/paginas.json';
 import Plaatje from '../../../components/teken/Plaatje.astro';
@@ -40,7 +41,7 @@ const kort: Record<string, string> = {
   '/kennisbank/wat-is/funnel/': 'De route van eerste kennismaking tot betalende klant, als trechter.',
   '/kennisbank/wat-is/marketing-automation/': 'Software die mails en opvolging vanzelf regelt na een trigger.',
   '/kennisbank/wat-is/ux/': 'Hoe makkelijk en prettig je website werkt voor een bezoeker.',
-  '/kennisbank/wat-is/llm/': 'Het taalmodel achter ChatGPT, Gemini en Claude, in gewone taal.',
+  '/kennisbank/wat-is/llm/': 'Het taalmodel achter ChatGPT, Gemini en Claude.',
   '/kennisbank/wat-is/sea/': 'Adverteren in zoekmachines zoals Google, je betaalt per klik.',
   '/kennisbank/wat-is/cpc/': 'Wat je betaalt als iemand op je advertentie klikt.',
   '/kennisbank/wat-is/ctr/': 'Hoeveel procent van wie je ziet, ook echt klikt.',
@@ -90,11 +91,18 @@ for (const b of begrippen) {
 }
 const alfabet = ['0-9', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
 const anker = (l: string) => `letter-${l.toLowerCase()}`;
+const schema = [{ '@type': 'CollectionPage', name: 'Begrippen van A tot Z' }, {
+  '@type': 'DefinedTermSet',
+  '@id': `${site.url}/kennisbank/wat-is/#begrippen`,
+  name: 'Begrippen van Drijfveer Media',
+  hasDefinedTerm: begrippen.map((b: any) => ({ '@id': `${site.url}${b.url}#begrip` })),
+}];
 ---
 <Base
   title="Begrippen van A tot Z: marketing uitgelegd | Drijfveer Media"
-  description={`${begrippen.length} begrippen uit SEO, GEO, websites en online marketing, elk uitgelegd in één zin en daarna in gewone taal. Van 404-pagina tot zoekintentie.`}
+  description={`${begrippen.length} begrippen uit SEO, GEO, websites en online marketing, elk uitgelegd in één zin en daarna zonder vakjargon. Van 404-pagina tot zoekintentie.`}
   kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url }]}
+  schema={schema}
 >
   <section class="wrap kop">
     <div>

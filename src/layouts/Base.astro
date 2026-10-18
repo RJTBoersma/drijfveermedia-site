@@ -140,12 +140,19 @@ const loop = (n: any, top = false): any => {
       n.image ??= ogImageUrl;
       n.author ??= { '@id': persoonId('robert') };
       if (Astro.url.pathname.startsWith('/cases/')) { n.datePublished ??= '2026-10-17'; n.dateModified ??= '2026-10-18'; }
-      n.mainEntityOfPage ??= { '@id': webpageId };
+      n.mainEntityOfPage = { '@id': webpageId };
+      if (typeof n.about === 'string') n.about = { '@type': 'Thing', name: n.about };
       n.publisher ??= { '@id': orgId };
       n.inLanguage ??= taal;
       if (!webpage.mainEntity) webpage.mainEntity = { '@id': n['@id'] };
     }
     if (typen(n).includes('Service')) { n.description ??= description; n.provider ??= { '@id': orgId }; }
+    // dateModified hoort niet bij Service en DefinedTerm: verplaats naar de WebPage
+    if (typen(n).some((x) => ['Service', 'DefinedTerm'].includes(x)) && n.dateModified) { webpage.dateModified ??= n.dateModified; delete n.dateModified; }
+    if (typen(n).includes('Service') && n.availableLanguage) { n.availableChannel ??= { '@type': 'ServiceChannel', availableLanguage: n.availableLanguage }; delete n.availableLanguage; }
+    // Alle begrippen horen bij één set, gedefinieerd op /kennisbank/wat-is/
+    if (typen(n).includes('DefinedTerm')) n.inDefinedTermSet = { '@id': `${site.url}/kennisbank/wat-is/#begrippen` };
+    if (typen(n).includes('FAQPage')) { n['@id'] ??= `${canonical}#faq`; n.isPartOf ??= { '@id': webpageId }; }
     if (typen(n).includes('DefinedTerm') && !webpage.mainEntity) webpage.mainEntity = { '@id': n['@id'] };
     if (typen(n).includes('Service') && !webpage.about) webpage.about = { '@id': n['@id'] };
   }
@@ -200,33 +207,28 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
       // Tekeningen pas verbergen als we ze ook weer kunnen laten verschijnen.
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('teken-js');
     </script>
-    <script is:inline>
-      // De titel van het tabblad verandert als je wegklikt. Een kleine knipoog.
-      (function () {
-        var t = document.title;
-        document.addEventListener('visibilitychange', function () {
-          document.title = document.hidden ? 'Pssst. Kom je nog terug?' : t;
-        });
-      })();
-    </script>
   </head>
   <body>
-    <a class="sr-only" href="#inhoud">Direct naar de inhoud</a>
-    <Header />
-    <Breadcrumbs items={kruimels} />
+    <a class="skiplink" href="#inhoud">{lang === 'en' ? 'Skip to content' : lang === 'de' ? 'Zum Inhalt springen' : 'Direct naar de inhoud'}</a>
+    <div lang={lang !== 'nl' ? 'nl' : undefined} style="display:contents">
+      <Header />
+      <Breadcrumbs items={kruimels} />
+    </div>
     <main id="inhoud">
       <slot />
       {bronnen.length > 0 && (
-        <dm-extra><section class="wrap sectie bronnen" aria-labelledby="bronnen-kop">
+        <dm-extra><section class="wrap sectie bronnen" aria-labelledby="bronnen-kop" lang={lang !== 'nl' ? 'nl' : undefined}>
           <h2 id="bronnen-kop" class="bronnen-kop">Bronnen</h2>
           <ol>
-            {bronnen.map((u) => { const b = bronNaam(u); return <li><a href={u} rel="noopener" target="_blank">{b.host}</a>{b.stuk && <span>: {b.stuk}</span>}</li>; })}
+            {bronnen.map((u) => { const b = bronNaam(u); return <li><a href={u} rel="noopener" target="_blank">{b.host}</a>{b.stuk && <span lang={/\.nl$/.test(b.host) ? undefined : 'en'}>: {b.stuk}</span>}</li>; })}
           </ol>
         </section></dm-extra>
       )}
     </main>
-    <Footer />
-    <MobileBar />
+    <div lang={lang !== 'nl' ? 'nl' : undefined} style="display:contents">
+      <Footer />
+      <MobileBar />
+    </div>
     <script is:inline>
       // Laat elke tekening zichzelf tekenen zodra hij voor een kwart in beeld is.
       (function () {
@@ -271,3 +273,8 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     </script>
   </body>
 </html>
+<style is:global>
+  /* Skiplink: onzichtbaar tot hij focus krijgt (WCAG 2.4.7) */
+  .skiplink { position: absolute; left: -9999px; top: 12px; }
+  .skiplink:focus, .skiplink:focus-visible { left: 16px; z-index: 1000; background: var(--navy); color: #fff; padding: 12px 18px; border-radius: 10px; font-weight: 800; text-decoration: none; outline: 3px solid #fff; box-shadow: 0 0 0 6px var(--navy); }
+</style>

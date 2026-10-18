@@ -25,7 +25,7 @@ const hoofdstukken = [
   { id: 'redirects', titel: 'Doorverwijzen in één sprong' },
   { id: 'snelheid', titel: 'Wordt je site trager?' },
   { id: 'voorbeeld', titel: 'Voorbeeld uit Meppel' },
-  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
   { id: 'controleren', titel: 'Je eigen site controleren' },
 ];
 const hsts = `Strict-Transport-Security: max-age=31536000; includeSubDomains`;
@@ -125,7 +125,7 @@ const schema = [
       <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="niet">Wat de beveiligde verbinding niet doet</h2></div>
       <p>Het is een slot op de verbinding. Over wat er aan beide uiteinden gebeurt, zegt het niets.</p>
       <ul>
-        <li><strong>Het maakt een site niet betrouwbaar.</strong> Oplichters krijgen net zo makkelijk een gratis certificaat. Veel phishingsites draaien er gewoon op. Kijk dus altijd naar de domeinnaam zelf. Waarom het slotje daarom uit Chrome verdween, lees je bij <a href="/kennisbank/wat-is/ssl-certificaat/">het SSL-certificaat</a>.</li>
+        <li><strong>Het maakt een site niet betrouwbaar.</strong> Oplichters krijgen net zo makkelijk een gratis certificaat. Veel phishingsites draaien er ook op. Kijk dus altijd naar de domeinnaam zelf. Waarom het slotje daarom uit Chrome verdween, lees je bij <a href="/kennisbank/wat-is/ssl-certificaat/">het SSL-certificaat</a>.</li>
         <li><strong>Het beveiligt je website niet.</strong> Een verouderde plugin of een zwak wachtwoord blijft een open deur. Hackers komen via je beheeromgeving binnen, niet via de verbinding.</li>
         <li><strong>Het verbergt niet alles.</strong> Je internetprovider of de beheerder van een netwerk ziet nog welke domeinnaam je bezoekt, wanneer, en hoeveel data er heen en weer gaat. Welke pagina je opent en wat je invult, blijft wel verborgen.</li>
         <li><strong>Het beschermt niets op de server zelf.</strong> Komt een formulier binnen in een mailbox zonder tweestapsverificatie? Dan ligt het daar alsnog voor het oprapen.</li>
@@ -228,7 +228,7 @@ const schema = [
       </ol>
       <p>Het resultaat: geen melding meer in Chrome, ook niet straks als de nieuwe standaardinstelling aanstaat. En de praktijk voldoet beter aan de AVG. Gezondheidsgegevens zijn bijzondere persoonsgegevens, waarvoor zwaardere eisen gelden dan voor een naam en een telefoonnummer.</p>
 
-      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <h2 id="fouten">Veelgemaakte fouten</h2>
       <ul>
         <li><strong>Half werk.</strong> Alleen de homepage of alleen www is beveiligd. Of de webshop wel, maar het offerteformulier op een subdomein niet.</li>
         <li><strong>Alles naar de homepage.</strong> Wie een oude link naar /tarieven/ volgt, hoort op de https-versie van /tarieven/ uit te komen. Niet op de homepage, waar hij opnieuw moet zoeken.</li>
@@ -236,7 +236,7 @@ const schema = [
         <li><strong>Oude adressen in de sitemap.</strong> De sitemap en de canonical-tags wijzen nog naar http, zodat Google tegenstrijdige signalen krijgt.</li>
         <li><strong>HSTS meteen op een jaar.</strong> Terwijl de webmail op een subdomein nog geen certificaat heeft.</li>
         <li><strong>Formulieren die naar een http-adres versturen.</strong> De pagina is veilig, de inzending niet.</li>
-        <li><strong>Denken dat het slot genoeg is.</strong> Updates, sterke wachtwoorden en back-ups blijven gewoon nodig.</li>
+        <li><strong>Denken dat het slot genoeg is.</strong> Updates, sterke wachtwoorden en back-ups blijven nodig.</li>
       </ul>
 
       <h2 id="controleren">Zo controleer je je eigen site in vijf minuten</h2>
@@ -258,9 +258,9 @@ const schema = [
 
   <Faq
     vragen={[
-      { v: 'Wat is https in gewone taal?', a: 'De beveiligde versie van http, de taal waarmee je browser pagina\'s opvraagt. Alles wat je browser en de server uitwisselen, wordt versleuteld. Niemand onderweg kan meelezen of iets veranderen.' },
+      { v: 'Wat is https, kort gezegd?', a: 'De beveiligde versie van http, de taal waarmee je browser pagina\'s opvraagt. Alles wat je browser en de server uitwisselen, wordt versleuteld. Niemand onderweg kan meelezen of iets veranderen.' },
       { v: 'Is een beveiligde verbinding verplicht?', a: 'Voor overheden wel: sinds 1 juli 2023 zijn https en HSTS voor hun websites wettelijk verplicht. Voor bedrijven staat het niet letterlijk in de wet. Maar verwerk je persoonsgegevens via een formulier, dan vraagt de AVG passende beveiliging. Zonder versleuteling is dat lastig te verdedigen.' },
-      { v: 'Kost het geld?', a: 'Meestal niet. Bijna elke hostingpartij levert een gratis certificaat van Let\'s Encrypt dat zichzelf verlengt. Een betaald certificaat versleutelt niet sterker. Het verschil zit in de controle van je bedrijfsgegevens.' },
+      { v: 'Kost https geld?', a: 'Meestal niet. Bijna elke hostingpartij levert een gratis certificaat van Let\'s Encrypt dat zichzelf verlengt. Een betaald certificaat versleutelt niet sterker. Het verschil zit in de controle van je bedrijfsgegevens.' },
       { v: 'Wat is het verschil tussen SSL en TLS?', a: 'TLS is de opvolger van SSL. SSL wordt al jaren niet meer gebruikt, maar de naam is blijven hangen. Een SSL-certificaat is dus in werkelijkheid een TLS-certificaat.' },
       { v: 'Verlies ik posities als ik overstap?', a: 'Een korte schommeling is normaal. Stuur je elke oude pagina met een 301 door naar dezelfde pagina op https, dan neemt Google de signalen mee. Volgens Google duurt het bij een kleine site meestal een paar weken tot de meeste pagina\'s zijn verhuisd.' },
       { v: 'Waarom zegt Chrome "Niet beveiligd" terwijl ik een certificaat heb?', a: 'Vaak laadt de pagina nog onderdelen via http (mixed content), verstuurt een formulier naar een http-adres of is het certificaat verlopen. Klik op het icoon links van het adres voor de details.' },

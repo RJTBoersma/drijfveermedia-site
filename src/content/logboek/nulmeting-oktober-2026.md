@@ -1,6 +1,6 @@
 ---
 titel: "Nulmeting oktober 2026: zo staat onze eigen site ervoor"
-beschrijving: "Het eerlijke startpunt van drijfveermedia.nl: 245 bezoekers per maand uit Google, 2.830 zoekwoorden en nul aanvragen. Dit gaan we eraan doen."
+beschrijving: "Het startpunt van drijfveermedia.nl, zonder mooier te maken: 245 bezoekers per maand uit Google, 2.830 zoekwoorden en nul aanvragen. Dit gaan we eraan doen."
 maand: "2026-10"
 datum: 2026-10-17
 verkeer: 245

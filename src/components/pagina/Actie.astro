@@ -5,9 +5,11 @@ import { knopVoor } from '../../data/actie';
 interface Props { titel?: string; tekst?: string; knop?: { tekst: string; href: string } }
 const {
   titel = 'Benieuwd waar jouw grootste kans zit?',
-  tekst = `${site.contactpersoon} belt je binnen 15 minuten terug en vraagt eerst wat jij wilt bereiken. Pas daarna praten we over geld.`,
+  tekst: eigenTekst = `${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en vraagt eerst wat jij wilt bereiken. Pas daarna praten we over geld.`,
   knop: eigenKnop,
 } = Astro.props;
+// De belofte van 15 minuten geldt op werkdagen: staat dat er niet bij, dan zetten we het erbij.
+const tekst = /binnen 15 minuten/.test(eigenTekst) && !/werkdag|8\.00/.test(eigenTekst) ? eigenTekst.replace('binnen 15 minuten', 'op werkdagen binnen 15 minuten') : eigenTekst;
 const knop = knopVoor(Astro.url.pathname, eigenKnop);
 ---
 <section class="wrap sectie" data-aida="action">

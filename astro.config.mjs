@@ -35,7 +35,7 @@ const zoekDatums = (d, pad = '') => readdirSync(d).forEach((f) => {
   const p = join(d, f);
   if (statSync(p).isDirectory()) return zoekDatums(p, `${pad}${f}/`);
   if (f !== 'index.astro') return;
-  const m = readFileSync(p, 'utf8').match(/(?:datum\s*=\s*|dateModified:\s*)'(20\d\d-\d\d-\d\d)'/);
+  const m = readFileSync(p, 'utf8').match(/(?:datum\s*=\s*|dateModified:\s*)["'](20\d\d-\d\d-\d\d)["']/);
   if (m) lastmod[`https://www.drijfveermedia.nl/${pad}`] = m[1];
 });
 zoekDatums(fileURLToPath(new URL('./src/pages/', import.meta.url)));

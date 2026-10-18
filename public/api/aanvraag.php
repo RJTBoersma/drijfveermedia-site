@@ -39,9 +39,10 @@ function bewaar(string $bestand, array $gegevens): void {
 // Soort aanvraag naar een korte sleutel voor de bedankpagina
 function soort_sleutel(string $soort): string {
     $s = mb_strtolower($soort);
-    foreach (['kaart' => 'kaart', 'ads' => 'ads', 'website' => 'website', 'ai' => 'ai', 'scan' => 'scan', 'consult' => 'consult', 'training' => 'training', 'second' => 'second'] as $zoek => $sleutel) {
+    foreach (['kaart' => 'kaart', 'training' => 'training', 'consult' => 'consult', 'second' => 'second', 'ads' => 'ads', 'website' => 'website', 'scan' => 'scan', 'interim' => 'contact'] as $zoek => $sleutel) {
         if (str_contains($s, $zoek)) return $sleutel;
     }
+    if (preg_match('/\bai\b/u', $s)) return 'ai';
     return 'contact';
 }
 
@@ -131,5 +132,10 @@ if (!$verstuurd) {
     exit;
 }
 
-header('Location: /bedankt/?s=' . soort_sleutel($gegevens['Soort aanvraag']), true, 303);
+// Naar de bedankpagina, met het soort aanvraag, of de bezoeker alleen gemaild wil worden, en het gekozen belmoment
+$terug = '/bedankt/?s=' . soort_sleutel($gegevens['Soort aanvraag']);
+if (veld('contactwijze', 20) === 'mail') { $terug .= '&m=1'; }
+$moment = veld('moment', 60);
+if ($moment !== '' && !str_starts_with($moment, 'Nu') && $moment !== 'Zo snel mogelijk') { $terug .= '&b=' . rawurlencode($moment); }
+header('Location: ' . $terug, true, 303);
 exit;

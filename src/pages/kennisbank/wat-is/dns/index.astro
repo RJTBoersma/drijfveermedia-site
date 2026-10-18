@@ -21,7 +21,7 @@ const hoofdstukken = [
   { id: 'ttl', titel: 'TTL, cache en propagatie' },
   { id: 'mail', titel: 'Je e-mail hangt er ook aan' },
   { id: 'voorbeeld', titel: 'Voorbeeld: een site verhuizen' },
-  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
   { id: 'veilig', titel: 'Veiligheid en storingen' },
   { id: 'ondernemer', titel: 'Wat moet je ermee?' },
 ];
@@ -58,7 +58,7 @@ const schema = [
 ---
 <Base
   title="Wat is DNS? Uitleg, records en voorbeeld | Drijfveer Media"
-  description="Wat is DNS? Het adresboek van internet koppelt je domeinnaam aan je website en e-mail. Zo werken nameservers, records, TTL en propagatie, in gewone taal."
+  description="Wat is DNS? Het adresboek van internet koppelt je domeinnaam aan je website en e-mail. Zo werken nameservers, records, TTL en propagatie, met voorbeelden."
   kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'DNS', url }]}
   schema={schema}
   ogType="article"
@@ -132,7 +132,7 @@ const schema = [
           </tbody>
         </table>
       </div>
-      <p>Een subdomein is een naam vóór je domein, zoals www.jouwbedrijf.nl, offerte.jouwbedrijf.nl of mail.jouwbedrijf.nl. Je maakt het aan met een eigen A-record of een CNAME. Zo kan een afsprakenmodule van een externe leverancier gewoon onder jouw naam draaien, terwijl de rest van je site blijft waar hij staat.</p>
+      <p>Een subdomein is een naam vóór je domein, zoals www.jouwbedrijf.nl, offerte.jouwbedrijf.nl of mail.jouwbedrijf.nl. Je maakt het aan met een eigen A-record of een CNAME. Zo kan een afsprakenmodule van een externe leverancier onder jouw naam draaien, terwijl de rest van je site blijft waar hij staat.</p>
       <p>Twee dingen om te onthouden. Een CNAME mag niet naast andere records op dezelfde naam staan, en daarom zet je hem niet op het kale domein zelf. En bij MX geldt: het laagste prioriteitsgetal krijgt de mail eerst. Een tweede MX met een hoger getal is de reserve.</p>
 
       <Tussenactie />
@@ -166,18 +166,17 @@ const schema = [
         <li><strong>Dinsdag:</strong> de nieuwe site staat klaar bij partij B en is getest op een tijdelijk adres.</li>
         <li><strong>Woensdag 7.30 uur:</strong> het A-record krijgt het nieuwe IP-adres. De CNAME voor www wijst al naar het hoofddomein en blijft staan.</li>
         <li><strong>Woensdag 7.45 uur:</strong> op zijn telefoon en in een privévenster ziet hij de nieuwe site. Het certificaat voor <a href="/kennisbank/wat-is/https/">https</a> wordt bij partij B aangemaakt.</li>
-        <li><strong>De MX- en TXT-records</strong> raakt niemand aan. De mail blijft dus gewoon werken.</li>
+        <li><strong>De MX- en TXT-records</strong> raakt niemand aan. De mail blijft dus werken.</li>
         <li><strong>Een week later:</strong> de TTL gaat terug naar 3600 en de oude hosting wordt opgezegd.</li>
       </ol>
       <p>Hadden ze in plaats daarvan de nameservers naar partij B verhuisd, dan was het anders gelopen. Nieuwe nameservers beginnen vaak met een lege of standaardset records. Het MX-record naar Microsoft was dan verdwenen, en de hele ochtend was er geen mail binnengekomen. Juist die fout zien we het vaakst.</p>
 
-      <Tussenactie />
-      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <h2 id="fouten">Veelgemaakte fouten</h2>
       <ul>
         <li><strong>Het domein staat op naam van de webbouwer.</strong> Gaat die failliet of stopt hij, dan ben je je adres kwijt. Een domeinnaam hoort op jouw naam te staan, in een account waar jij bij kunt.</li>
         <li><strong>Niemand weet meer waar de nameservers staan.</strong> Je past records aan bij partij A, terwijl partij B de baas is.</li>
         <li><strong>Nameservers wisselen zonder de records mee te nemen.</strong> Met als klassiek gevolg: geen mail meer.</li>
-        <li><strong>De TTL pas verlagen als het al te laat is.</strong> De oude, lange TTL loopt dan gewoon door.</li>
+        <li><strong>De TTL pas verlagen als het al te laat is.</strong> De oude, lange TTL loopt dan nog door.</li>
         <li><strong>Twee SPF-records.</strong> Er mag er maar één zijn. Een nieuwe dienst voeg je toe aan het bestaande record.</li>
         <li><strong>Vergeten te verlengen.</strong> Een verlopen domein gaat uit de lucht, en een ander kan het daarna registreren.</li>
         <li><strong>Geen tweestapsverificatie op het account van je registrar.</strong> Wie daar binnenkomt, kan je hele domein omleiden.</li>

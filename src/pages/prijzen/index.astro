@@ -26,6 +26,13 @@ const schema = [{
     itemOffered: { '@type': 'Service', name: d.naam, url: `${site.url}${d.url}` },
     priceCurrency: 'EUR',
     price: d.prijsWaarde,
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: d.prijsWaarde,
+      priceCurrency: 'EUR',
+      valueAddedTaxIncluded: false,
+      ...(d.prijsEenheid === 'maand' ? { unitCode: 'MON', unitText: 'per maand' } : d.prijsEenheid === 'uur' ? { unitCode: 'HUR', unitText: 'per uur' } : d.prijsEenheid === 'pagina' ? { unitText: 'per pagina' } : { unitText: 'eenmalig' }),
+    },
   })),
 }];
 ---
@@ -35,8 +42,8 @@ const schema = [{
   kruimels={[{ naam: 'Prijzen', url: '/prijzen/' }]}
   schema={schema}
 >
-  <Hero kicker="Prijzen" titel="Wat het kost, gewoon op een rij">
-    <p>Veel bureaus zetten hun prijzen niet online. Wij wel. Het zijn vanaf-prijzen, exclusief btw. Wat je precies betaalt, hoor je na een kort gesprek, en dat bedrag staat vast. Zo hoort het.</p>
+  <Hero kicker="Prijzen" titel="Prijzen: wat online marketing bij ons kost, per dienst">
+    <p>Veel bureaus zetten hun prijzen niet online. Wij wel. Het zijn vanaf-prijzen, exclusief btw. Wat je precies betaalt, hoor je na een kort gesprek, en dat bedrag staat vast. Onze diensten zijn voor ondernemers en organisaties.</p>
     <Prijslabel slot="beeld" />
   </Hero>
 
@@ -50,7 +57,7 @@ const schema = [{
         <div class="stap-kop"><Tekening naam={perOnderwerp[g.pijler]} maat={52} /><h2><span class="oranje-punt">{g.pijler}.</span> {g.titel}</h2></div>
         <ul class="lijst">
           {diensten.filter((d) => d.pijler === g.pijler).map((d) => (
-            <li class:list={{ sub: !!d.ouder }}>
+            <li class:list={{ sub: !!d.ouder && diensten.find((x) => x.url === d.ouder)?.pijler === g.pijler }}>
               <a href={d.url}><b>{d.naam}</b><span class="muted">{d.kort}</span></a>
               <span class="prijs">{d.prijs}</span>
             </li>
@@ -63,15 +70,15 @@ const schema = [{
       <h2>Wat kost een website laten maken?</h2>
       <p>Een website die we met AI bouwen en met de hand afmaken, begint bij € 250. Een maatwerk website in WordPress begint bij € 2.000. Waar je tussen die twee uitkomt, hangt af van drie dingen: hoeveel pagina's je nodig hebt, of wij de teksten schrijven en of er bijzondere functies in moeten, zoals een boekingssysteem of een koppeling met je software. Meer weten? Lees de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website laten maken</a>.</p>
 
-      <h2>Waarom we goedkoper zijn dan de meeste bureaus</h2>
-      <p>Een gemiddeld mkb-bureau rekent voor SEO al snel € 1.000 tot € 3.500 per maand (zie <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO?</a>). Wij beginnen bij € 495. Dat komt niet doordat we minder doen. We gebruiken AI voor het rekenwerk en de eerste versies. We testen alles eerst op onze eigen sites, dus we verspillen geen tijd aan wat niet werkt. En we hebben een klein team zonder dure kantoorvilla. Het verschil merk je in je portemonnee. Dat scheelt flink.</p>
+      <h2>Waarom we aan de onderkant van de markt zitten</h2>
+      <p>SEO kost bij de meeste bureaus € 500 tot € 3.500 per maand (zie <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO?</a>). Bij ons begint het bij € 495. Dat komt niet doordat we minder doen. AI doet bij ons het rekenwerk en de eerste versies, en een mens controleert alles. Nieuwe technieken testen we eerst op onze eigen sites, dus je betaalt geen leergeld. En we zijn met z'n vieren, in een bedrijfsverzamelpand in Assen: geen accountmanagers en geen dure kantoorvilla.</p>
 
       <h2>Wat er altijd bij zit</h2>
       <ul class="vink">
         <li>Een vast aanspreekpunt dat je binnen 15 minuten terugbelt, op werkdagen tussen 8.00 en 17.00 uur.</li>
-        <li>Een maandelijks overzicht in gewone taal: wat we deden en wat het opleverde.</li>
-        <li>Afspraken die maandelijks opzegbaar zijn, tenzij we samen iets anders afspreken.</li>
-        <li>Een doel waar je ons op mag afrekenen, met <a href="/garantie/">onze garantie</a> erbij.</li>
+        <li>Elke maand één A4: wat we deden, wat het opleverde en wat we nu doen.</li>
+        <li>Maandelijkse diensten zeg je per maand op, met één maand opzegtermijn, per e-mail.</li>
+        <li>Bij maandelijkse diensten een doel waar je ons op mag afrekenen, met <a href="/garantie/">onze garantie</a> erbij. Bij eenmalig werk een vaste prijs vooraf.</li>
       </ul>
       <p>Twijfel je welke dienst je nodig hebt? Begin met een <a href="/gratis-website-analyse/">gratis scan</a> of een <a href="/consult/">consult</a> van € 85 per uur.</p>
     </div>
@@ -81,14 +88,14 @@ const schema = [{
 
   <Faq
     vragen={[
-      { v: 'Zijn de prijzen inclusief btw?', a: 'Nee. Alle prijzen op deze pagina zijn exclusief btw. Zo vergelijk je ze makkelijk met offertes van andere bureaus.' },
+      { v: 'Zijn de prijzen inclusief btw?', a: 'Nee. Alle prijzen op deze pagina zijn exclusief btw. Onze diensten zijn bedoeld voor ondernemers en organisaties, niet voor particulieren.' },
       { v: 'Wat betekent vanaf?', a: 'Dat is de prijs voor de kleinste vorm van de dienst. Heb je meer nodig, bijvoorbeeld omdat je landelijk wilt scoren of veel concurrentie hebt, dan wordt het meer. Je hoort dat altijd vooraf.' },
-      { v: 'Zit ik vast aan een contract?', a: 'Nee. Maandelijkse diensten zijn maandelijks opzegbaar, tenzij we samen iets anders afspreken.' },
+      { v: 'Zit ik vast aan een contract?', a: 'Nee. Maandelijkse diensten zeg je per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat.' },
       { v: 'Wat kost Google Ads bij jullie?', a: 'Het beheer begint bij € 249 per maand, exclusief btw en maandelijks opzegbaar. Je advertentiebudget betaal je rechtstreeks aan Google. Bij een groot budget of veel campagnes is er meer werk; wat het voor jou wordt, hoor je vooraf.' },
     ]}
   />
 
-  <Actie titel="Wil je weten wat het voor jou kost?" tekst={`${site.contactpersoon} belt je binnen 15 minuten terug. Na één gesprek weet je wat je nodig hebt en wat het kost.`} />
+  <Actie titel="Wil je weten wat het voor jou kost?" tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug. Na één gesprek weet je wat je nodig hebt en wat het kost.`} />
 </Base>
 <style>
   .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }

@@ -8,11 +8,13 @@ import Plaatje from '../components/teken/Plaatje.astro';
 import TeamOpKantoor from '../components/beeld/TeamOpKantoor.astro';
 import { perOnderwerp } from '../data/tekeningen';
 import InDeRegio from '../components/pagina/InDeRegio.astro';
+import { termijnen } from '../data/termijnen';
+import { nietKort } from '../data/niet';
 
 const kolommen = [
-  { titel: 'Gevonden', zin: 'Bovenaan in Google, ook in je eigen regio.', items: perPijler('Gevonden').filter((d) => d.pillar) },
-  { titel: 'Genoemd', zin: 'Genoemd door ChatGPT en Google AI.', items: perPijler('Genoemd') },
-  { titel: 'Gekozen', zin: 'Een site en teksten die bezoekers laten bellen.', items: perPijler('Gekozen').filter((d) => d.pillar) },
+  { titel: 'Gevonden', zin: 'Klanten vinden je in Google: in de zoekresultaten, op de kaart en in de advertenties.', items: perPijler('Gevonden').filter((d) => d.pillar) },
+  { titel: 'Genoemd', zin: 'ChatGPT en Google AI noemen je, en klanten doen het in hun reviews.', items: perPijler('Genoemd').filter((d) => d.pillar || ['Vindbaar in ChatGPT', 'Reviews en reputatie'].includes(d.naam)) },
+  { titel: 'Gekozen', zin: 'Je website en teksten maken van een bezoeker een aanvraag.', items: perPijler('Gekozen').filter((d) => d.pillar) },
 ];
 const advies = perPijler('Advies');
 
@@ -20,15 +22,16 @@ const vragen = [
   { v: 'Wat doet een online marketingbureau eigenlijk?', a: 'Het zorgt dat de juiste mensen je vinden en voor jou kiezen. Bij ons betekent dat SEO, Google Ads-campagnes, social media, teksten, branding, e-mailmarketing en een website die aanvragen oplevert. Eerst bepalen we samen je doelgroep en je strategie. Daarna kijken we elke maand naar de data. Wat werkt houden we, de rest gaat eruit. Je hebt één vast aanspreekpunt, met een team van specialisten erachter.' },
   { v: 'Wat is het verschil met een reclamebureau?', a: 'Een reclamebureau bedenkt vooral campagnes en beelden, vaak ook voor drukwerk, radio of televisie. Een online marketingbureau werkt aan wat er online gebeurt: gevonden worden in Google, genoemd worden door AI, een website die bezoekers laat bellen, en meten wat dat oplevert. Wij doen alleen online, en we sturen op aanvragen in plaats van op mooie plaatjes.' },
   { v: 'Wat kost online marketing bij jullie?', a: 'Dat hangt af van wat je nodig hebt. SEO begint bij € 495 per maand, linkbuilding bij € 395 en een website die we met AI bouwen bij € 250. Een uur sparren kost € 85. Op de pagina <a href="/prijzen/">prijzen</a> staat alles op een rij, zonder kleine lettertjes.' },
-  { v: 'Hoe snel zie ik resultaat?', a: 'Met Google Ads kan het binnen een week. Een goed ingericht Bedrijfsprofiel merk je vaak binnen een paar weken. SEO kost meer geduld: reken op een paar maanden voordat je echt stijgt. Dat zeggen we liever eerlijk vooraf dan achteraf.' },
+  { v: 'Hoe snel levert online marketing iets op?', a: `Met Google Ads het snelst. ${termijnen.ads} ${termijnen.lokaal} Bij SEO geldt: ${termijnen.seo.charAt(0).toLowerCase() + termijnen.seo.slice(1)}` },
   { v: 'Wat heb ik nodig om te beginnen?', a: 'Alleen het adres van je website en een telefoonnummer waarop we je kunnen bellen. Toegang tot je site, Google Search Console of je Bedrijfsprofiel regelen we later samen, als je besluit verder te gaan. Heb je nog geen website, dan kijken we eerst naar je concurrenten en je profiel in Google.' },
   { v: 'Moet ik zelf ook iets doen?', a: 'Een beetje. Wij doen het werk, maar jij kent je vak en je klanten. We vragen je om foto\'s, om feedback op teksten en om aanvragen snel op te volgen. Dat is ook de voorwaarde van onze <a href="/garantie/">garantie</a>: halen we het doel niet en ligt het aan ons, dan werken we een maand gratis door, als jij hebt gedaan wat nodig was.' },
   { v: 'Werken jullie alleen in het Noorden?', a: 'Nee. We zitten in Assen en kennen het Noorden goed, maar we werken voor ondernemers in heel Nederland en hebben ook klanten in het buitenland. Bijna alles kan op afstand. Wil je liever aan tafel zitten, dan komen we langs of kom jij naar ons. Kijk ook bij ons <a href="/werkgebied/">werkgebied</a>.' },
-  { v: 'Zit ik ergens aan vast?', a: 'Nee. Onze afspraken zijn maandelijks opzegbaar, tenzij we samen iets anders afspreken. We willen dat je blijft omdat het werkt.' },
-  { v: 'Doen jullie ook advertenties op Facebook en Instagram?', a: 'Nee. Social advertising, influencers, video en webshops doen we niet. We beheren wel je social media kanalen, zonder advertenties, en we adverteren in Google, waar mensen actief zoeken. Vraag je iets wat we niet goed kunnen, dan zeggen we dat meteen.' },
+  { v: 'Zit ik ergens aan vast?', a: `Nee. ${termijnen.opzeggen}` },
+  { v: 'Doen jullie ook advertenties op Facebook en Instagram?', a: `Nee. ${nietKort} We beheren wel je social media kanalen, zonder advertenties, en we adverteren in Google, waar mensen actief zoeken. Vraag je iets wat we niet goed kunnen, dan zeggen we dat meteen.` },
+  { v: 'Ik heb al een bureau. Kunnen jullie meekijken?', a: 'Ja. Met de <a href="/consult/#offerte-check">offertecheck</a> zie je zelf in een paar minuten of de offerte of het maandoverzicht van je bureau klopt. Wil je dat we meekijken, dan kan dat in een <a href="/consult/">consult</a> van € 85 per uur.' },
   { v: 'Gebruiken jullie AI?', a: 'Ja, elke dag. Voor onderzoek, eerste versies en het rekenwerk. Een mens beslist, controleert en past aan. Dat maakt ons sneller en scherper, en dat zie je terug in de prijs. Hoe dat precies gaat, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.' },
-  { v: 'Waarom heet het bedrijf Drijfveer Media?', a: 'Omdat talent zonder inzet niets oplevert, en kennis die je niet deelt ook niet. Alles begint bij de juiste drijfveren. Daarom delen we in onze <a href="/kennisbank/">kennisbank</a> ook gewoon hoe we werken, zodat je veel zelf kunt doen.' },
-  { v: 'Kan ik bij jullie langskomen?', a: 'Graag. We zitten aan de Lauwers 9 in Assen, in een bedrijfsverzamelpand vol ondernemers. Bel even van tevoren, dan staat de koffie klaar.' },
+  { v: 'Waarom heet het bedrijf Drijfveer Media?', a: 'Talent zonder inzet levert niets op. Kennis die je niet deelt ook niet. Alles begint bij de juiste drijfveer. Daarom delen we in onze <a href="/kennisbank/">kennisbank</a> hoe we werken, zodat je veel zelf kunt doen.' },
+  { v: 'Kan ik bij jullie langskomen?', a: 'Graag. We zitten aan de Lauwers 9 in Assen, in een bedrijfsverzamelpand vol ondernemers. Bel even van tevoren, dan weten we dat je komt.' },
 ];
 const schema = [{
   '@type': 'FAQPage',
@@ -44,8 +47,9 @@ const schema = [{
   <section class="wrap hero" data-aida="attention">
     <div class="hero-tekst">
       <p class="claim" aria-hidden="true"><span>Gevonden.</span><span>Genoemd.</span><span>Gekozen<b>.</b></span></p>
-      <h1>Online marketingbureau in Assen, voor ondernemers in heel Nederland</h1>
-      <p class="lead">We zorgen dat je bovenaan staat in Google, dat ChatGPT je noemt en dat je website bezoekers laat bellen. Vlijmscherp geprijsd en maandelijks opzegbaar.</p>
+      <h1>Online marketingbureau voor het mkb: meer klanten, met het doel op papier</h1>
+      <p class="lead">We zorgen dat klanten je vinden in Google, dat ChatGPT je noemt en dat je site ze laat bellen. Bij de start leggen we een meetbaar doel vast. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p>
+      <p class="usp">SEO vanaf € 495 per maand (excl. btw) · alle prijzen online · elke techniek eerst getest op meer dan 100 eigen sites</p>
     </div>
     <form class="card vraag" id="ask" action="/gratis-website-analyse/" method="get">
       <p class="zin">
@@ -60,11 +64,11 @@ const schema = [{
   <section class="wrap strook" aria-labelledby="cases-kop">
     <h2 id="cases-kop" class="sr-only">Wat het opleverde</h2>
     <div class="cases">
-      <div class="card case kaart-link"><span class="getal">+47%</span><span class="wat"><a href="/cases/conflictbemiddeling/">meer bezoekers</a></span><span class="wie">Conflictbemiddeling.nl</span></div>
-      <div class="card case kaart-link"><span class="getal">#1</span><span class="wat"><a href="/cases/willemfikstt/">posities en 87% groei</a></span><span class="wie">Willemfikstt.nl</span></div>
-      <div class="card case kaart-link"><span class="getal">+32%</span><span class="wat"><a href="/cases/dakraamconcurrent/">meer bezoekers uit Google</a></span><span class="wie">Dakraamconcurrent.nl</span></div>
+      <div class="card case kaart-link"><span class="getal">+47%</span><span class="wat"><a href="/cases/conflictbemiddeling/">bezoekers uit Google</a></span><span class="wie">Conflictbemiddeling.nl</span></div>
+      <div class="card case kaart-link"><span class="getal">Nr. 1</span><span class="wat"><a href="/cases/willemfikstt/">op "klusjesman Amsterdam"</a></span><span class="wie">Willemfikstt.nl</span></div>
+      <div class="card case kaart-link"><span class="getal">+32%</span><span class="wat"><a href="/cases/dakraamconcurrent/">bezoekers uit Google</a></span><span class="wie">Dakraamconcurrent.nl</span></div>
     </div>
-    <p class="vertrouwd">Vertrouwd door <b>Kärcher</b>, <b>bol.com</b>, <b>Nyenrode</b>, <b>Conflictbemiddeling Nederland</b> en <b>Glaspunt</b>. Sinds 2011. <a href="/cases/">Bekijk de cases</a></p>
+    <p class="vertrouwd">We werkten onder meer voor <b>Kärcher</b>, <b>bol.com</b>, <b>Nyenrode</b>, <b>Conflictbemiddeling Nederland</b> en <b>Glaspunt</b>. Sinds 2011. <a href="/cases/">Bekijk de cases</a></p>
   </section>
   <p class="wrap cue" aria-hidden="true">↓ <span id="cue">Scroll en kijk hoe een loodgieter in Emmen aan klanten komt</span></p>
 
@@ -79,20 +83,20 @@ const schema = [{
       <article class="hoofdstuk">
         <span class="kicker">1 · Gevonden</span>
         <h2>Iemand in <span data-plaats>Emmen</span> zoekt een <span data-vak>loodgieter</span>.</h2>
-        <p>Sta jij dan bovenaan, of je concurrent? Op de eerste plek klikt ongeveer 1 op de 5 zoekers. Op plek 5 bijna niemand.</p>
-        <p class="diensten-links"><a href="/zoekmachine-optimalisatie/">SEO</a> · <a href="/lokale-seo/">Lokale SEO</a> · <a href="/linkbuilding/">Linkbuilding</a></p>
+        <p>Sta jij dan bovenaan, of je concurrent? Op de eerste plek klikt ongeveer 1 op de 5 zoekers (First Page Sage, 2026). Op plek 5 bijna niemand.</p>
+        <p class="diensten-links"><a href="/zoekmachine-optimalisatie/">SEO</a> · <a href="/lokale-seo/">Lokale SEO</a> · <a href="/linkbuilding/">Linkbuilding</a> · <a href="/online-adverteren/">Adverteren in Google</a></p>
       </article>
       <article class="hoofdstuk">
         <span class="kicker">2 · Genoemd</span>
         <h2>Steeds vaker vraagt die klant het aan AI.</h2>
         <p>ChatGPT en Google AI noemen een paar namen. Wij zorgen dat de jouwe erbij staat, met een link naar je site.</p>
-        <p class="diensten-links"><a href="/generative-engine-optimization/">Genoemd worden door AI (GEO)</a> · <a href="/generative-engine-optimization/#ai-test">Doe de AI-test (2 minuten)</a></p>
+        <p class="diensten-links"><a href="/generative-engine-optimization/">Genoemd worden door AI (GEO)</a> · <a href="/generative-engine-optimization/#ai-test">Doe de AI-test (5 minuten)</a> · <a href="/lokale-seo/reviews/">Reviews</a></p>
       </article>
       <article class="hoofdstuk">
         <span class="kicker">3 · Gekozen</span>
         <h2>Dan moet je site het werk doen.</h2>
-        <p>Duidelijk, snel en overtuigend, zodat die bezoeker jou belt. Niet je concurrent.</p>
-        <p class="diensten-links"><a href="/website-laten-maken/">Website</a> · <a href="/tekstschrijver/">Teksten</a> · <a href="/online-adverteren/">Adverteren</a> · <a href="/leadgeneratie/">Leadgeneratie</a></p>
+        <p>Een site die in drie seconden laat zien wat je doet en waar je werkt, met je nummer bovenaan. Dan belt die bezoeker jou, en niet de volgende in het rijtje.</p>
+        <p class="diensten-links"><a href="/website-laten-maken/">Website</a> · <a href="/tekstschrijver/">Teksten</a> · <a href="/branding/">Branding</a> · <a href="/leadgeneratie/">Leadgeneratie</a></p>
         <p><a class="btn" href="/gratis-website-analyse/">Waar sta jij? Laat je site gratis nakijken</a></p>
       </article>
     </div>
@@ -103,13 +107,13 @@ const schema = [{
     <h2 id="bewijs-kop">Hoe weet je dat wij waarmaken wat we zeggen?</h2>
     <p class="muted intro">Een goede vraag. Dit is ons antwoord, in vijf delen.</p>
     <div class="bewijs">
-      <div class="card"><Tekening naam="schild" /><h3>Garantie</h3><p>We spreken samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p><a href="/garantie/">Zo werkt de garantie</a></div>
-      <div class="card"><Tekening naam="kalender" vertraging={120} /><h3>Maandelijks opzegbaar</h3><p>Je blijft omdat het werkt, niet omdat je vastzit aan een contract.</p></div>
-      <div class="card"><Tekening naam="kolf" vertraging={240} /><h3>Ons proeflab</h3><p>We hebben al 15 jaar meer dan 100 eigen websites. Elke techniek testen we daar eerst, zodat jouw site geen risico loopt.</p><a href="/proeflab/">Over het proeflab</a></div>
-      <div class="card"><Tekening naam="team" vertraging={360} /><h3>Klanten blijven jaren</h3><p>Bijna niemand vertrekt. Dat zegt meer dan een gelikte pitch.</p><a href="/cases/">Bekijk de cases</a></div>
-      <div class="card"><Tekening naam="telefoon" vertraging={480} /><h3>Binnen 15 minuten</h3><p>Op werkdagen tussen 8.00 en 17.00 uur bellen we je binnen 15 minuten terug. Uit interesse, niet om te verkopen.</p></div>
+      <div class="card"><Tekening naam="schild" /><h3>Een doel op papier</h3><p>Bij maandelijkse diensten leggen we bij de start een meetbaar doel vast, met een datum. Halen we het niet en ligt het aan ons, dan werk je de maand erna zonder factuur met ons door.</p><a href="/garantie/">Zo werkt de garantie</a></div>
+      <div class="card"><Tekening naam="kalender" vertraging={120} /><h3>Per maand opzegbaar</h3><p>Eén maand opzegtermijn, per e-mail. Je blijft alleen zolang het iets oplevert.</p></div>
+      <div class="card"><Tekening naam="kolf" vertraging={240} /><h3>Eerst getest op eigen sites</h3><p>Sinds 2011 bouwden we een proeflab op van meer dan 100 eigen websites. Een nieuwe techniek proberen we daar eerst, zodat jouw site geen proefkonijn is.</p><a href="/proeflab/">Over het proeflab</a></div>
+      <div class="card"><Tekening naam="team" vertraging={360} /><h3>Klanten blijven jaren</h3><p>Bijna niemand vertrekt. Wie wil weten wat we voor anderen deden, leest het in de cases.</p><a href="/cases/">Bekijk de cases</a></div>
+      <div class="card"><Tekening naam="telefoon" vertraging={480} /><h3>Binnen 15 minuten teruggebeld</h3><p>Op werkdagen tussen 8.00 en 17.00 uur. Thorgall vraagt eerst wat je wilt bereiken. Over geld praat je pas als jij dat wilt.</p></div>
     </div>
-    <p class="case-uitleg">Achter die cijfers zit geen trucje. Bij Dakraam Concurrent, officieel VELUX-installatiepartner, kwam eerst een nieuwe website, daarna linkbuilding en daarna SEO. Bij Conflictbemiddeling Nederland combineerden we een nieuwe website met SEO, linkbuilding en Google Ads-campagnes. Steeds dezelfde volgorde: eerst de basis op orde, dan bouwen aan groei.</p>
+    <p class="case-uitleg">Achter die cijfers zit een vaste volgorde. Bij Dakraam Concurrent, een VELUX-installatiepartner, kwam eerst een nieuwe website, daarna linkbuilding en daarna SEO. Bij Conflictbemiddeling Nederland combineerden we een nieuwe website met SEO, linkbuilding en Google Ads-campagnes. Eerst de basis op orde, dan bouwen aan groei.</p>
   </section>
 
   <section class="wrap blok" aria-labelledby="diensten-kop">
@@ -134,7 +138,7 @@ const schema = [{
   <section class="wrap blok" aria-labelledby="kiezen-kop">
     <div class="tekst breed">
       <h2 id="kiezen-kop">Waar begin je? Kies op je doel</h2>
-      <p>Je hoeft niet alles tegelijk. De meeste klanten beginnen met één of twee diensten en breiden pas uit als dat werkt. Deze tabel helpt je kiezen. Het eerste effect is een richtlijn, geen belofte: dat hangt af van je markt en je concurrenten.</p>
+      <p>Je hoeft niet alles tegelijk. Begin met één of twee diensten en breid pas uit als dat werkt. Deze tabel helpt je kiezen. Het eerste effect is een richtlijn, geen belofte: dat hangt af van je markt en je concurrenten.</p>
       <div class="tabel-scroll">
         <table>
           <thead><tr><th>Je wilt</th><th>Begin met</th><th>Vanaf</th><th>Eerste effect</th></tr></thead>
@@ -142,13 +146,14 @@ const schema = [{
             <tr><td>Meer telefoontjes uit je eigen regio</td><td><a href="/lokale-seo/">Lokale SEO</a> en je Google Bedrijfsprofiel</td><td>€ 295 p/m</td><td>Vaak binnen een paar weken</td></tr>
             <tr><td>Hoger in Google op je vak, ook landelijk</td><td><a href="/zoekmachine-optimalisatie/">SEO</a>, daarna <a href="/linkbuilding/">linkbuilding</a></td><td>€ 495 p/m</td><td>Na een paar maanden</td></tr>
             <tr><td>Genoemd worden door ChatGPT en Google AI</td><td><a href="/generative-engine-optimization/">GEO</a>, op een goede SEO-basis</td><td>€ 495 p/m</td><td>Na een paar maanden</td></tr>
-            <tr><td>Deze maand nog aanvragen</td><td><a href="/online-adverteren/google-ads-bureau/">Google Ads</a></td><td>€ 249 p/m + budget</td><td>Binnen een week</td></tr>
+            <tr><td>Deze maand nog aanvragen</td><td><a href="/online-adverteren/google-ads-bureau/">Google Ads</a></td><td>€ 249 p/m + budget</td><td>Live binnen een werkdag, aanvragen vaak in de eerste weken</td></tr>
             <tr><td>Meer aanvragen uit dezelfde bezoekers</td><td><a href="/leadgeneratie/conversie-optimalisatie/">Conversie-optimalisatie</a></td><td>€ 395</td><td>Binnen een paar weken</td></tr>
             <tr><td>Een site waar je weer trots op bent</td><td><a href="/website-laten-maken/">Website laten maken</a></td><td>€ 250</td><td>Direct na de lancering</td></tr>
             <tr><td>Je hele marketing kwijt</td><td><a href="/online-marketing-uitbesteden/">Online marketing uitbesteden</a></td><td>€ 595 p/m</td><td>We beginnen bij de snelste winst</td></tr>
           </tbody>
         </table>
       </div>
+      <p class="muted klein">Vanaf-prijzen, exclusief btw. Onze diensten zijn voor ondernemers en organisaties.</p>
       <p>Twijfel je? Daar is de <a href="/gratis-website-analyse/">gratis scan</a> voor. We kijken naar je site, je concurrenten en wat AI over je zegt. Daarna hoor je welke stap bij jou het meeste oplevert, ook als dat iets is wat je zelf kunt doen.</p>
     </div>
   </section>
@@ -157,23 +162,37 @@ const schema = [{
   <section class="wrap blok twee" aria-label="Voor wie en wie we zijn">
     <div>
       <h2>Voor wie we werken</h2>
-      <p>Voor ondernemers in het mkb. Denk aan de installateur met drie busjes, het advocatenkantoor met twaalf mensen of de webshop die wil groeien zonder eigen marketingafdeling. Veel klanten komen uit <a href="/regio/drenthe/">Drenthe</a>, <a href="/regio/friesland/">Friesland</a> en <a href="/regio/groningen/">Groningen</a>, maar net zo goed uit de rest van het land. Zit je in de buurt? Lees dan wat we doen voor <a href="/online-marketing-assen/">online marketing in Assen</a>.</p>
-      <p>Wat onze klanten gemeen hebben: ze willen weten wat het oplevert. Daarom spreken we vooraf een doel af en laten we elke maand zien of we het halen. In gewone taal, zonder rapport van veertig pagina's.</p>
+      <p>Voor ondernemers in het mkb. Denk aan de installateur met drie busjes, het advocatenkantoor met twaalf mensen of de fysiotherapeut met twee praktijken, zonder eigen marketingafdeling. We werken veel voor ondernemers uit <a href="/regio/drenthe/">Drenthe</a>, <a href="/regio/friesland/">Friesland</a> en <a href="/regio/groningen/">Groningen</a>, maar net zo goed uit de rest van het land. Zit je in de buurt? Lees dan wat we doen voor <a href="/online-marketing-assen/">online marketing in Assen</a>.</p>
+      <p>Wat onze klanten gemeen hebben: ze willen weten wat het oplevert. Daarom spreken we vooraf een doel af en laten we elke maand zien of we het halen, op één A4: wat we deden, wat het opleverde en wat we nu doen.</p>
       <p>Je hebt geen groot budget nodig. Met een paar honderd euro per maand kun je bij ons serieus aan de slag, en meestal beginnen we met één kanaal. Wat een online marketingbureau je kan opleveren, hangt minder af van de omvang van je bedrijf dan van de vraag of je klanten online zoeken. Dat doen ze bijna altijd.</p>
     </div>
     <div>
       <h2>Wie we zijn</h2>
       <p>In 2011 gingen Robert Boersma en Evelien Heerema twee weken op vakantie naar België. Na twee dagen hadden ze het wel gezien. Op dag drie stonden ze weer thuis en schreven ze Drijfveer Media in.</p>
       <p>Inmiddels zijn we met z'n vieren, met een vaste groep freelancers om ons heen. Thorgall van Eeden is online marketeer en je eerste aanspreekpunt. Robert is eigenaar en online marketeer, Evelien is medeoprichter en Johan Zwartenberg bouwt de links. Voor specialistisch werk schakelen we freelancers in die bovenop de nieuwste ontwikkelingen zitten.</p>
-      <p>Je vindt ons aan de Lauwers in Assen. De koffie staat klaar, dus kom gerust langs. <a href="/over-ons/">Meer over ons</a></p>
+      <p>Je vindt ons aan de Lauwers 9 in Assen. Kom gerust langs. <a href="/over-ons/">Meer over ons</a></p>
     </div>
+  </section>
+
+  <section class="wrap blok" aria-labelledby="kort-kop">
+    <h2 id="kort-kop">Drijfveer Media in het kort</h2>
+    <dl class="feiten">
+      <div><dt>Wat</dt><dd>Online marketingbureau: SEO, lokale SEO, GEO (genoemd worden door AI), Google Ads, websites en teksten.</dd></div>
+      <div><dt>Waar</dt><dd>{site.straat}, {site.postcode} {site.plaats}. Voor ondernemers in heel Nederland, veel in Drenthe, Friesland en Groningen.</dd></div>
+      <div><dt>Sinds</dt><dd>2011, opgericht door Robert Boersma en Evelien Heerema.</dd></div>
+      <div><dt>Wie</dt><dd>Vier mensen: Robert Boersma, Thorgall van Eeden, Evelien Heerema en Johan Zwartenberg, met een vaste groep freelancers.</dd></div>
+      <div><dt>Prijzen</dt><dd>SEO vanaf € 495, lokale SEO vanaf € 295 en Google Ads-beheer vanaf € 249 per maand. Een website vanaf € 250. Exclusief btw.</dd></div>
+      <div><dt>Afspraken</dt><dd>Per maand opzegbaar. Bij maandelijkse diensten een doel op papier, met <a href="/garantie/">garantie</a>.</dd></div>
+      <div><dt>Bereikbaar</dt><dd><a href={site.telefoonLink}>{site.telefoon}</a>, op werkdagen van 8.00 tot 17.00 uur. We bellen binnen 15 minuten terug.</dd></div>
+      <div><dt>KvK</dt><dd>{site.kvk}</dd></div>
+    </dl>
   </section>
 
   <section class="wrap team-beeld" aria-label="Het team op kantoor">
     <TeamOpKantoor />
     <figure class="pand">
-      <img src="/img/kantoor-assen.webp" srcset="/img/kantoor-assen-klein.webp 660w, /img/kantoor-assen.webp 1100w" sizes="(max-width: 860px) 100vw, 40vw" width="1100" height="1040" alt="Ons kantoorpand aan de Lauwers in Assen, gezien vanaf het plein voor de ingang" loading="lazy" decoding="async" />
-      <figcaption>Hier zitten we: Lauwers 9 in Assen. Bel even van tevoren, dan staat de koffie klaar.</figcaption>
+      <img src="/img/kantoor-assen.webp" srcset="/img/kantoor-assen-klein.webp 660w, /img/kantoor-assen.webp 1100w" sizes="(max-width: 860px) 100vw, 40vw" width="1100" height="1040" alt="Het bedrijfsverzamelpand aan de Lauwers in Assen waar ons kantoor zit, gezien vanaf het plein voor de ingang" loading="lazy" decoding="async" />
+      <figcaption>Hier zitten we: Lauwers 9 in Assen, in een bedrijfsverzamelpand. Bel even van tevoren, dan weten we dat je komt.</figcaption>
     </figure>
   </section>
 
@@ -181,26 +200,26 @@ const schema = [{
 
   <section class="wrap blok" aria-labelledby="verwacht-kop">
     <h2 id="verwacht-kop">Wat je van een online marketingbureau mag verwachten</h2>
-    <p class="muted intro breed-intro">Veel bureaus zijn beter in zichzelf verkopen dan in klanten laten groeien. Een gelikte pitch zegt weinig over wat er na de handtekening gebeurt. Daarom zetten we hier zwart op wit wat je van ons krijgt, en wat niet.</p>
+    <p class="muted intro breed-intro">Wat er na de handtekening gebeurt, zie je pas als je klant bent. Daarom zetten we hier zwart op wit wat je van ons krijgt, en wat niet.</p>
     <div class="raster raster-2 verwacht">
       <div class="card">
         <h3>Wat je bij ons krijgt</h3>
         <ul class="vink">
           <li>Eén vast aanspreekpunt. {site.contactpersoon} neemt de telefoon op en kent je dossier.</li>
           <li>Een doel op papier, met een termijn, waar je ons op mag afrekenen.</li>
-          <li>Elke maand één overzicht in gewone taal: wat werkte, wat niet, en wat we nu doen.</li>
+          <li>Elke maand één A4: wat werkte, wat niet, en wat we nu doen.</li>
           <li>Het advies om te stoppen met iets wat geld kost en niets oplevert.</li>
           <li>Technieken die we eerst op onze eigen sites hebben getest.</li>
         </ul>
       </div>
       <div class="card">
         <h3>Wat je bij ons niet krijgt</h3>
-        <ul class="vink">
+        <ul class="kruis">
           <li>Een contract van een jaar. Je zegt per maand op.</li>
-          <li>Een rapport van veertig pagina's vol grafieken.</li>
+          <li>Een dik rapport vol grafieken zonder conclusie.</li>
           <li>Vakjargon dat verbergt dat er weinig is gebeurd.</li>
           <li>Trucs die Google of AI-assistenten niet toestaan.</li>
-          <li>Diensten die we niet goed kunnen. Webshops, social advertising en video doen we niet.</li>
+          <li>Diensten die we niet goed kunnen, zoals webshops bouwen, advertenties op social media en video.</li>
         </ul>
       </div>
     </div>
@@ -217,7 +236,7 @@ const schema = [{
   <section class="wrap blok" aria-labelledby="werkwijze-kop">
     <h2 id="werkwijze-kop">Zo werken we</h2>
     <ol class="stappenlijst">
-      <li><strong>Binnen 15 minuten bellen we je terug.</strong> Uit interesse, niet om te verkopen. Op werkdagen tussen 8.00 en 17.00 uur.</li>
+      <li><strong>Binnen 15 minuten bellen we je terug</strong>, op werkdagen tussen 8.00 en 17.00 uur. Thorgall vraagt eerst wat je wilt bereiken.</li>
       <li><strong>We vragen door</strong> tot we weten wat je echt wilt. Meer aanvragen, andere klanten, minder afhankelijk van één platform? Dat antwoord bepaalt de strategie, niet ons lijstje met diensten.</li>
       <li><strong>We zoeken uit waar je grootste kansen liggen</strong> en bespreken die: aan de telefoon, bij ons in Assen of bij jou. We kijken naar je website, je concurrenten in Google en wat AI over je zegt.</li>
       <li><strong>Je hoort wat het kost en wat je ervoor krijgt</strong>, met doelen waar je ons op mag afrekenen. Een lage investering om mee te beginnen, en concrete targets met een termijn.</li>
@@ -228,7 +247,7 @@ const schema = [{
 
   <section class="wrap blok" aria-labelledby="kennis-kop">
     <h2 id="kennis-kop">Uit de kennisbank</h2>
-    <p class="muted intro breed-intro">Kennis die je niet deelt, levert niets op. In onze kennisbank staat gewoon hoe we werken: gidsen, begrippen en rekenhulpen. Gratis te lezen, ook als je nooit klant wordt. Deze content wordt het meest gelezen.</p>
+    <p class="muted intro breed-intro">Kennis die je niet deelt, levert niets op. Daarom staat in onze kennisbank hoe we werken: gidsen, begrippen en rekenhulpen. Gratis te lezen, ook als je nooit klant wordt. Drie om mee te beginnen:</p>
     <div class="raster kennis">
       <div class="card kaart-link"><div aria-hidden="true"><Plaatje href="/kennisbank/gidsen/wat-kost-seo/" /></div><span class="kicker">Gids</span><h3><a href="/kennisbank/gidsen/wat-kost-seo/">Wat kost SEO?</a></h3><p>Tarieven op een rij, met een rekenhulp.</p></div>
       <div class="card kaart-link"><div aria-hidden="true"><Plaatje href="/generative-engine-optimization/" /></div><span class="kicker">Genoemd</span><h3><a href="/generative-engine-optimization/">Genoemd worden door AI</a></h3><p>Zo raadt ChatGPT jouw bedrijf aan.</p></div>
@@ -254,7 +273,7 @@ const schema = [{
       <img class="gezicht" src="/img/team/thorgall-klein.webp" width="88" height="88" alt="Thorgall van Drijfveer Media" loading="lazy" decoding="async" />
       <div>
         <h2>Benieuwd waar jouw grootste kans zit?</h2>
-        <p class="muted">{site.contactpersoon} belt je binnen 15 minuten terug en vraagt eerst wat jij wilt bereiken. Pas daarna praten we over geld.</p>
+        <p class="muted">{site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en vraagt eerst wat jij wilt bereiken.</p>
       </div>
       <div class="contact-acties">
         <a class="btn" href="/gratis-website-analyse/">Laat je site gratis nakijken</a>
@@ -329,6 +348,12 @@ const schema = [{
   .case-uitleg { margin-top: 20px; max-width: 66ch; }
   .strook .getal { font-size: 2.2rem; }
   .vertrouwd { margin-top: 20px; color: var(--muted); }
+  .feiten { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; margin: 16px 0 0; }
+  .feiten div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .feiten dt { font-weight: 800; color: var(--navy); }
+  .feiten dd { margin: 0; }
+  @media (max-width: 760px) { .feiten { grid-template-columns: minmax(0, 1fr); } .feiten div { grid-template-columns: 96px minmax(0, 1fr); } }
+  .usp { margin: 14px 0 0; font-weight: 700; color: var(--navy); font-size: 0.98rem; }
   .vertrouwd b { color: var(--ink); }
   .meer-vragen { margin-top: 20px; font-weight: 700; }
 
