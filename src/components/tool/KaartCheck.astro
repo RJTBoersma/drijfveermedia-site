@@ -45,7 +45,7 @@ const groepen = [
   </form>
 
   <form class="kc-lijst" data-lijst>
-    <fieldset class="kc-plek">
+    <fieldset class="kc-plek keuze-pil">
       <legend>Waar sta je in Google Maps?</legend>
       <label><input type="radio" name="plek" value="top" /> In de bovenste drie</label>
       <label><input type="radio" name="plek" value="lager" /> Wel op de kaart, maar lager</label>
@@ -72,11 +72,11 @@ const groepen = [
         <a class="btn" data-cta href="/gratis-website-analyse/#scan">Check gratis je plek op de kaart</a>
         <button class="btn btn-ghost" type="button" data-deel>Deel je uitslag</button>
       </div>
-      <p class="klein muted kc-status" data-status></p>
+      <p class="klein muted kc-status" data-status role="status"></p>
       <p class="klein muted">{site.contactpersoon} zoekt op jouw vak in jouw plaats en belt je terug met wat hij ziet: wie er in het kaartje staat en waarom.</p>
     </div>
   </div>
-  <noscript><p class="klein">Zonder JavaScript rekent de check niet. Zoek zelf in Google Maps op je vak en plaats en loop de punten hierboven na. Liever dat wij kijken? Vraag de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.</p></noscript>
+  <noscript><p class="klein">Zonder JavaScript rekent de check niet. Zoek zelf in Google Maps op je vak en plaats en loop de punten hierboven na. Wil je dat wij meekijken? Vraag de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.</p></noscript>
   <p class="klein muted kc-bron">Bron: Google Bedrijfsprofiel Help, <a href="https://support.google.com/business/answer/7091?hl=nl" rel="noopener">tips voor je positie in lokale zoekresultaten</a> (gelezen op 18 oktober 2026). Hoe zwaar elk punt telt, is onze eigen inschatting.</p>
 </div>
 
@@ -148,7 +148,7 @@ const groepen = [
       el.querySelector('[data-oordeel]')!.textContent = oordeel;
       el.querySelector('[data-uitleg]')!.textContent = uitleg;
       el.querySelector('[data-punten]')!.innerHTML = items.map((t) => `<li>${esc(t)}</li>`).join('');
-      const q = new URLSearchParams(); if (vak) q.set('vak', vak); if (plaats) q.set('plaats', plaats);
+      const q = new URLSearchParams(); q.set('doel', 'kaart'); if (vak) q.set('vak', vak); if (plaats) q.set('plaats', plaats); q.set('context', `Kaartcheck: score ${score} van 100 (${oordeel})`);
       el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/gratis-website-analyse/${q.toString() ? `?${q}` : ''}#scan`;
       uitslag.hidden = false; status.textContent = '';
       try { history.replaceState(null, '', deelLink().replace(location.origin, '')); } catch {}
@@ -178,7 +178,7 @@ const groepen = [
 
 <style>
   .kc { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
-  .kc-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .kc-titel { font-size: var(--step-2); font-weight: 750; margin: 6px 0 10px; }
   .kc-intro { margin-bottom: 18px; }
   .kc-zoek { display: grid; gap: 12px; margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px dashed var(--line); }
   .kc-zoek .btn { justify-self: start; }
@@ -187,15 +187,12 @@ const groepen = [
   .kc-lijst .btn { justify-self: start; }
   fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
   legend { font-weight: 800; padding: 0; margin-bottom: 6px; }
-  .kc-plek { display: flex; flex-wrap: wrap; gap: 8px; }
-  .kc-plek legend { width: 100%; }
-  .kc-plek label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
-  .kc-plek label:has(input:checked) { border-color: var(--navy); background: var(--chip); }
-  .kc-plek input { accent-color: var(--navy); width: 18px; height: 18px; margin: 0; }
+  /* Plek in Maps: de gedeelde .keuze-pil uit pagina.css; de legend houdt de stijl van de andere groepen */
+  .kc-plek > legend { font-weight: 800; font-size: 1rem; margin-bottom: 6px; }
   .kc-groep { display: grid; gap: 4px; }
   .kc-punt { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; min-height: 44px; padding: 10px 12px; border-radius: 10px; background: var(--bg); cursor: pointer; font-size: 0.98rem; line-height: 1.45; }
   .kc-punt:has(input:checked) { background: #eaf5ef; }
-  .kc-punt input { accent-color: var(--ok); width: 20px; height: 20px; margin: 1px 0 0; }
+  .kc-punt input { accent-color: var(--navy); width: 20px; height: 20px; margin: 1px 0 0; }
   .kc-punt:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 2px; }
   .kc-uitslag { margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--line); }
   .kc-score-rij { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; align-items: center; margin-bottom: 16px; }
@@ -203,7 +200,7 @@ const groepen = [
   .kc-uitleg { margin: 0; }
   .kc-meter { --score: 0; width: 120px; aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; text-align: center;
     background: radial-gradient(closest-side, var(--panel) 78%, transparent 79% 100%), conic-gradient(var(--orange) calc(var(--score) * 1%), var(--chip) 0); }
-  .kc-meter span { font-size: 2.2rem; font-weight: 900; line-height: 1; color: var(--ink); }
+  .kc-meter span { font-size: 2.2rem; font-weight: 800; line-height: 1; color: var(--ink); }
   .kc-meter small { color: var(--muted); font-size: 0.85rem; }
   .kc-punten-kop { font-weight: 800; font-size: 1.1rem; margin: 6px 0 8px; }
   .kc-punten { padding-left: 1.3em; margin: 0 0 16px; display: grid; gap: 8px; }

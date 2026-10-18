@@ -13,12 +13,13 @@
   --chip: #e8eef4;
   --tint: #fff4ec;
   --orange: #ff6600;
-  --orange-tekst: #d24e00; /* oranje voor tekst en cijfers op licht: haalt 3:1 voor grote tekst */
+  --orange-tekst: #b84400; /* oranje voor tekst en cijfers op licht: 5,4:1 op wit, 5,1:1 op --bg (AA voor gewone tekst) */
+  --veldrand: #7f8e9d; /* rand van invoervelden: 3,4:1 op wit, 3,1:1 op --bg (WCAG 1.4.11) */
   --on-orange: #10283f;
-  --ok: #1f8a5b;
+  --ok: #1a7a50; /* 5,3:1 met wit */
 
   --font: 'Albert Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; /* één monospace op elk systeem */
 
   --step--1: clamp(0.88rem, 0.85rem + 0.1vw, 0.94rem);
   --step-0: clamp(1.06rem, 1.02rem + 0.2vw, 1.15rem);
@@ -28,15 +29,38 @@
   --step-4: clamp(2.6rem, 1.6rem + 4.6vw, 5rem);
 
   --radius: 14px;
+  /* Diepte: kaarten krijgen een zachte schaduw in plaats van een rand. Randen alleen voor velden en tabellen. */
+  --schaduw: 0 1px 2px rgb(16 40 63 / 0.05), 0 8px 24px -12px rgb(16 40 63 / 0.16);
+  --schaduw-hover: 0 2px 4px rgb(16 40 63 / 0.06), 0 16px 32px -14px rgb(16 40 63 / 0.24);
+  /* Eén schaal voor witruimte */
+  --ruimte-s: 24px;
+  --ruimte-m: 48px;
+  --ruimte-l: clamp(64px, 7.5vw, 104px);
+  --tekstkolom: 64ch;
   --wrap: 1160px;
   --gutter: max(16px, env(safe-area-inset-left, 0px));
+}
+
+/* IBM Plex Mono 500, alleen latin (15 kB), SIL Open Font License: zie fonts/IBM-Plex-Mono-OFL.txt */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 *,
 *::before,
 *::after { box-sizing: border-box; }
 
+/* Verborgen is verborgen, ook als een component zelf een display-regel heeft (knoppen, uitkomsten van tools) */
+[hidden] { display: none !important; }
+
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 90px; }
+/* Een gefocust element valt nooit achter de vaste balk onderaan (WCAG 2.4.11) */
+@media (max-width: 900px) { html { scroll-padding-bottom: 96px; } }
 
 body {
   margin: 0;
@@ -55,11 +79,15 @@ a:hover { text-decoration-thickness: 2px; }
 
 :focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; border-radius: 6px; }
 
-h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
-h1 { font-size: var(--step-3); font-weight: 900; }
-h2 { font-size: var(--step-2); font-weight: 900; }
-h3 { font-size: var(--step-1); font-weight: 800; }
+/* Gewicht 900 is voor de slogan "Gevonden. Genoemd. Gekozen." en het woordmerk. Koppen: 800, 750, 700. */
+h1, h2, h3 { line-height: 1.1; text-wrap: balance; hyphens: manual; margin: 0; }
+h1 { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.03em; }
+h2 { font-size: var(--step-2); font-weight: 750; letter-spacing: -0.02em; }
+h3 { font-size: var(--step-1); font-weight: 700; letter-spacing: -0.01em; }
+h2 + p, h2 + .sectie-intro { margin-top: 12px; }
 p { margin: 0 0 1em; }
+table, .tel, a[href^="tel:"], dd, .getal, .prijs { font-variant-numeric: tabular-nums; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--navy); }
 
 .wrap {
   max-width: var(--wrap);
@@ -67,12 +95,13 @@ p { margin: 0 0 1em; }
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-.prose { max-width: 66ch; }
+.prose { max-width: var(--tekstkolom); }
 .muted { color: var(--muted); }
 .kicker {
   font-family: var(--mono);
+  font-weight: 500;
   font-size: 0.8rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -91,26 +120,55 @@ p { margin: 0 0 1em; }
   border: 0;
   border-radius: 10px;
   padding: 0.85em 1.25em;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: filter 0.15s ease;
+  transition: filter 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
 .btn:hover { filter: brightness(1.06); }
+/* Tweede knop: zichtbare rand (ruim 3:1 tegen wit en lichtgrijs), donker bij hover */
 .btn-ghost {
   background: transparent;
   color: var(--ink);
-  border: 2px solid var(--line);
+  border: 1.5px solid color-mix(in srgb, var(--ink) 45%, transparent);
 }
+.btn-ghost:hover { filter: none; border-color: var(--ink); background: rgb(16 40 63 / 0.04); }
+/* Derde niveau: een actie die eruitziet als een link (deel, opnieuw, terug) */
+.btn-tekst {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 2px;
+  background: none; border: 0; font: inherit; font-weight: 700; font-size: 1rem;
+  color: var(--navy); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.btn-tekst:hover { text-decoration-thickness: 2px; }
 
 .card {
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   border-radius: var(--radius);
+  box-shadow: var(--schaduw);
 }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* Skiplink: verborgen tot hij focus krijgt (WCAG 2.4.7). Werkt voor class="skiplink" en voor de huidige a.sr-only. */
+.skiplink { position: absolute; left: -9999px; top: 12px; }
+.skiplink:focus, .skiplink:focus-visible,
+a.sr-only:focus, a.sr-only:focus-visible {
+  position: fixed; left: 16px; top: 12px; z-index: 100;
+  width: auto; height: auto; margin: 0; clip: auto; overflow: visible; white-space: nowrap;
+  background: var(--navy); color: #fff; font-weight: 800; padding: 12px 18px; border-radius: 10px; text-decoration: none;
+  outline: 3px solid var(--ink); outline-offset: 2px; box-shadow: 0 0 0 2px #fff;
+}
+
+/* Reflow bij 400% zoom: lange samengestelde woorden mogen afbreken op een smal scherm (WCAG 1.4.10) */
+@media (max-width: 480px) {
+  h1, h2, h3, .kader-titel { overflow-wrap: anywhere; hyphens: auto; }
+}
+/* Lage schermen (zoom 400%, telefoon liggend): niets vast in beeld, anders blijft er geen ruimte over voor de inhoud */
+@media (max-height: 500px) {
+  .mbar { display: none !important; }
 }
 
 /* Vloeiende overgang tussen pagina's in browsers die het kennen */
@@ -121,8 +179,26 @@ p { margin: 0 0 1em; }
   @view-transition { navigation: none; }
 }
 
-/* Getekende teamportretten hebben een doorzichtige achtergrond */
-img[src^="/img/team/"] { background: #e8eef4; object-position: top; }
+/* Teamportretten: één uitsnede, één tint en één kader voor iedereen.
+   - Tint: navy-duotoon via het SVG-filter #duotoon (staat in Header.astro), zodat de grijze getekende portretten
+     bij de navy lijntekeningen passen. Zonder filter blijft het gewoon grijs.
+   - Uitsnede: object-view-box zet bij alle vier de ogen op ca. 40% van de hoogte en het gezicht op ca. 40% van de
+     breedte (Chrome en Edge; andere browsers tonen het origineel). Definitief: de bestanden zelf zo bijsnijden,
+     of echte foto's op één dag met hetzelfde licht en kader. */
+img[src^="/img/team/"] {
+  background: #dfe8f1;
+  object-fit: cover;
+  object-position: 50% 20%;
+  filter: url(#duotoon);
+}
+img[src^="/img/team/robert"] { object-view-box: inset(-6.7% 4.3% 17% 6%); }
+img[src^="/img/team/evelien"] { object-view-box: inset(-8.7% 0% 21.2% 12.7%); }
+img[src^="/img/team/thorgall"] { object-view-box: inset(2% 2% 4.3% 4.3%); }
+img[src^="/img/team/johan"] { object-view-box: inset(-2.5% 2% 6.7% 2.2%); }
+@media print { img[src^="/img/team/"] { filter: grayscale(1); } }
+
+/* Vaste ruimte onder de laatste sectie, voor de footer */
+main { padding-bottom: var(--ruimte-l); }
 
 /* Blokken die rond de tekst staan (vervolgstap, bronnen, regiolinks); tellen niet mee in de tekstcontrole */
 dm-extra { display: contents; }

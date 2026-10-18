@@ -11,6 +11,17 @@ const kolommen = [
 ];
 const pad = Astro.url.pathname;
 ---
+<svg class="filters" width="0" height="0" aria-hidden="true" focusable="false">
+  <!-- Navy-duotoon voor de teamportretten (global.css): donker = ink, licht = bijna wit met een zweem navy -->
+  <filter id="duotoon" color-interpolation-filters="sRGB">
+    <feColorMatrix type="saturate" values="0" />
+    <feComponentTransfer>
+      <feFuncR type="table" tableValues="0.063 0.94" />
+      <feFuncG type="table" tableValues="0.157 0.955" />
+      <feFuncB type="table" tableValues="0.247 0.975" />
+    </feComponentTransfer>
+  </filter>
+</svg>
 <header class="site-header">
   <div class="wrap bar">
     <Logo />
@@ -86,28 +97,36 @@ const pad = Astro.url.pathname;
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') mega.forEach((d) => { if (d.open) { d.open = false; d.querySelector('summary')?.focus(); } });
   });
+  // Menu dicht zodra de focus het verlaat, anders valt de volgende tabstop onder het paneel (WCAG 2.4.11)
+  mega.forEach((d) => d.addEventListener('focusout', (e) => {
+    const naar = (e as FocusEvent).relatedTarget as Node | null;
+    if (d.open && naar && !d.contains(naar)) d.open = false;
+  }));
+  // Gedeelde verbeteringen voor elke pagina: gestapelde tabellen op mobiel, lussen die binnen 5 s stoppen
+  import '../scripts/ui.js';
 </script>
 
 <style>
+  .filters { position: absolute; width: 0; height: 0; overflow: hidden; }
   .site-header { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding-top: env(safe-area-inset-top, 0px); }
-  .bar { display: flex; align-items: center; gap: 24px; min-height: 72px; }
-  .hoofdmenu { margin-left: auto; }
-  .hoofdmenu > ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; align-items: center; }
+  .bar { display: flex; align-items: center; gap: 20px; min-height: 72px; }
+  .hoofdmenu { margin-left: auto; min-width: 0; }
+  .hoofdmenu > ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; align-items: center; }
   .hoofdmenu a, .hoofdmenu summary { white-space: nowrap; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 1rem; cursor: pointer; }
   .hoofdmenu a[aria-current='page'] { text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 3px; text-underline-offset: 8px; }
   .hoofdmenu summary { list-style: none; display: inline-flex; align-items: center; gap: 6px; }
   .hoofdmenu summary::-webkit-details-marker { display: none; }
   .hoofdmenu summary::after { content: ''; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); }
-  .mega-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--panel); border-bottom: 1px solid var(--line); box-shadow: 0 24px 40px -30px rgb(16 40 63 / 0.4); }
+  .mega-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--panel); border-bottom: 1px solid var(--line); box-shadow: 0 24px 40px -30px rgb(16 40 63 / 0.4); max-height: calc(100vh - 80px); overflow-y: auto; }
   .mega-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; padding-block: 28px; }
-  .mega-kop { font-weight: 900; font-size: 1.2rem; margin: 0 0 10px; }
+  .mega-kop { font-weight: 750; font-size: 1.2rem; margin: 0 0 10px; }
   .mega-kop span { font-weight: 500; color: var(--muted); font-size: 1rem; }
   .mega-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
   .mega-grid a { display: grid; gap: 2px; padding: 8px 10px; margin-left: -10px; border-radius: 8px; text-decoration: none; white-space: normal; line-height: 1.35; }
   .mega-grid a:hover { background: var(--chip); }
   .mega-grid a strong { color: var(--ink); font-weight: 700; }
   .mega-grid a span { color: var(--muted); font-size: 0.92rem; font-weight: 400; }
-  .acties { display: flex; align-items: center; gap: 16px; }
+  .acties { display: flex; align-items: center; gap: 12px; flex: none; }
   .btn-sm { font-size: 1rem; padding: 0.6em 1em; white-space: nowrap; }
   .mobiel { display: none; margin-left: auto; }
   .mobiel > summary { list-style: none; width: 44px; height: 44px; display: grid; place-content: center; gap: 5px; cursor: pointer; border-radius: 10px; }
@@ -130,13 +149,20 @@ const pad = Astro.url.pathname;
   .mobiel[open] > summary span:nth-child(2) { opacity: 0; }
   .mobiel[open] > summary span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .mobiel > summary span { transition: transform 0.2s, opacity 0.2s; }
-  .bel-icoon { display: none; width: 44px; height: 44px; place-content: center; border-radius: 10px; color: var(--navy); border: 1.5px solid var(--line); margin-left: auto; }
+  .bel-icoon { display: none; width: 44px; height: 44px; place-content: center; border-radius: 10px; color: var(--navy); border: 1.5px solid var(--veldrand); margin-left: auto; }
   @media (prefers-reduced-motion: reduce) { .mobiel > summary span { transition: none; } }
-  .los { border-top: 1px solid var(--line); padding-top: 14px !important; }
-  @media (max-width: 1280px) { .acties :global(.reach .lbl), .acties :global(.reach .sep) { display: none; } }
-  @media (max-width: 1060px) { .acties :global(.reach) { display: none; } }
-  @media (max-width: 1180px) { .hoofdmenu .extra { display: none; } }
-  @media (max-width: 900px) {
+  /* Losse links in twee kolommen, zodat het hele menu op één scherm past */
+  .los { border-top: 1px solid var(--line); padding-top: 8px !important; grid-template-columns: 1fr 1fr; column-gap: 16px; }
+  .los a { padding-block: 9px; min-height: 44px; display: flex; align-items: center; }
+  /* Breekpunten in em, zodat ze ook meeschalen bij "alleen tekst zoomen".
+     De zin "Morgen vanaf 8.00 uur bereikbaar" past niet naast het volle menu binnen het raster van 1160 px;
+     het nummer blijft staan, de zin staat in het mobiele menu. Zo eindigt "Gratis scan" op de rechterlijn van .wrap. */
+  .acties :global(.reach .lbl), .acties :global(.reach .sep) { display: none; }
+  @media (max-width: 66.25em) { .acties :global(.reach) { display: none; } }
+  @media (max-width: 73.75em) { .hoofdmenu .extra { display: none; } }
+  /* Lage schermen (zoom 400%): kop niet vast, anders blijft er geen ruimte over (WCAG 1.4.10) */
+  @media (max-height: 500px) { .site-header { position: static; } .mobiel-panel { max-height: none; } }
+  @media (max-width: 56.25em) {
     .hoofdmenu, .acties { display: none; }
     .mobiel { display: block; margin-left: 4px; }
     .bel-icoon { display: grid; }

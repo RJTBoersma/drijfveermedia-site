@@ -234,10 +234,13 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
       (function () {
         if (!document.documentElement.classList.contains('teken-js')) return;
         var els = document.querySelectorAll('[data-teken],[data-leeft]');
-        var io = new IntersectionObserver(function (items) {
-          items.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-beeld'); io.unobserve(e.target); } });
-        }, { threshold: 0.25 });
-        els.forEach(function (el) { io.observe(el); });
+        var cb = function (items, obs) {
+          items.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-beeld'); obs.unobserve(e.target); } });
+        };
+        // Kleine iconen pas als ze echt in beeld zijn, zodat je ze ziet tekenen
+        var io = new IntersectionObserver(cb, { threshold: 0.25 });
+        var ioKlein = new IntersectionObserver(cb, { threshold: 0.6 });
+        els.forEach(function (el) { (el.classList.contains('tekening') ? ioKlein : io).observe(el); });
         // Bij afdrukken staat alles er meteen.
         addEventListener('beforeprint', function () { els.forEach(function (el) { el.classList.add('in-beeld'); }); });
       })();

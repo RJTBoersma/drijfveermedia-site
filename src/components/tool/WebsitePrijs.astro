@@ -8,6 +8,8 @@
 // De grens van tien pagina's voor de AI-route is een vuistregel ("een compacte site"); de precieze grens volgt uit het gesprek.
 interface Props {
   id?: string;
+  intro?: string; // eigen inleiding per pagina
+  noot?: string; // eigen kanttekening onder de tool
   plaats?: string; // gaat mee naar het contactformulier (?plaats=)
   paginas?: number;
   ontwerp?: boolean; // eigen ontwerp rond je merk
@@ -16,13 +18,15 @@ interface Props {
   profiel?: boolean;
   onderhoud?: boolean;
   marge?: number; // wat één klus oplevert
+  kop?: 'h2' | 'h3'; // kopniveau van de tooltitel
 }
-const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = true, logo = false, profiel = false, onderhoud = false, marge = 600 } = Astro.props;
+const { id = 'website-prijs', plaats, intro, noot, paginas = 5, ontwerp = false, teksten = true, logo = false, profiel = false, onderhoud = false, marge = 600, kop = 'h3' } = Astro.props;
+const Kop = kop;
 ---
 <div class="tool card" id={id} data-website-prijs data-plaats={plaats}>
   <p class="kicker">Rekenhulp · Website</p>
-  <p class="titel">Wat kost jouw website, en wanneer verdien je hem terug?</p>
-  <p class="intro muted">Vul in wat je nodig hebt. Je ziet welke route past, de vanaf-prijs en na hoeveel klussen de site betaald is.</p>
+  <Kop class="titel">Wat kost jouw website, en wanneer verdien je hem terug?</Kop>
+  <p class="intro muted">{intro ?? 'Vul in wat je nodig hebt. Je ziet welke route past, de vanaf-prijs en na hoeveel klussen de site betaald is.'}</p>
 
   <form class="velden" novalidate>
     <div class="veld">
@@ -30,32 +34,33 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
       <input id={`${id}-pag`} name="p" inputmode="numeric" autocomplete="off" value={paginas} />
     </div>
     <div class="veld">
-      <label for={`${id}-marge`}>Wat houd je over aan één klus?</label>
+      <label for={`${id}-marge`}>Wat houd je over aan één klus?<span class="sr-only"> (in euro)</span></label>
       <span class="invoer"><span class="voor" aria-hidden="true">€</span><input id={`${id}-marge`} name="m" inputmode="decimal" autocomplete="off" value={marge} /></span>
     </div>
-    <fieldset class="breed keuzes">
+    <fieldset class="breed keuzes keuze-pil">
       <legend>Ontwerp</legend>
       <label><input type="radio" name="o" value="0" checked={!ontwerp} /> Een strakke, beproefde opzet</label>
       <label><input type="radio" name="o" value="1" checked={ontwerp} /> Een eigen ontwerp rond mijn merk</label>
     </fieldset>
-    <fieldset class="breed keuzes">
+    <fieldset class="breed keuzes keuze-pil">
       <legend>Teksten</legend>
       <label><input type="radio" name="t" value="0" checked={!teksten} /> Lever ik zelf aan</label>
       <label><input type="radio" name="t" value="1" checked={teksten} /> Schrijven jullie (€ 75 per pagina)</label>
     </fieldset>
-    <fieldset class="breed keuzes">
+    <fieldset class="breed keuzes keuze-pil">
       <legend>Logo</legend>
       <label><input type="radio" name="l" value="0" checked={!logo} /> Heb ik al</label>
       <label><input type="radio" name="l" value="1" checked={logo} /> Heb ik nog niet (€ 495)</label>
     </fieldset>
-    <fieldset class="breed keuzes">
+    <fieldset class="breed keuzes keuze-pil">
       <legend>Extra</legend>
       <label><input type="checkbox" name="g" value="1" checked={profiel} /> Google Bedrijfsprofiel, Bing en Apple inrichten (€ 249)</label>
       <label><input type="checkbox" name="u" value="1" checked={onderhoud} /> Onderhoud: updates, back-ups en beveiliging (€ 39 per maand)</label>
     </fieldset>
   </form>
 
-  <div class="uitkomst" aria-live="polite" data-uit>
+  <p class="sr-only" aria-live="polite" data-meld></p>
+  <div class="uitkomst" data-uit>
     <p class="leeg">Zo reken je het zelf: een website met AI begint bij € 250, maatwerk in WordPress bij € 2.000. Tel er € 75 per pagina bij als wij de teksten schrijven en € 495 voor een logo. Deel het totaal door wat je aan één klus overhoudt, dan weet je na hoeveel klussen de site terugverdiend is.</p>
   </div>
 
@@ -63,7 +68,7 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
     <a class="btn" href={plaats ? `/contact/?plaats=${encodeURIComponent(plaats)}` : '/contact/'} data-cta>Vraag een vaste prijs aan</a>
     <button class="btn btn-ghost deel" type="button" data-deel hidden>Kopieer link naar deze uitkomst</button>
   </div>
-  <p class="bron klein muted">Onze vanaf-prijzen, exclusief btw. Een afsprakenplanner of koppeling met je software rekenen we hier niet mee; die prijs hoor je in het gesprek. Hosting regel je zelf, meestal een paar euro per maand.</p>
+  <p class="bron klein muted">Onze vanaf-prijzen, exclusief btw. {noot ?? 'Een afsprakenplanner of koppeling met je software rekenen we hier niet mee; die prijs hoor je in het gesprek. Hosting regel je zelf, meestal een paar euro per maand.'}</p>
 </div>
 
 <script>
@@ -84,6 +89,15 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
     const uit = el.querySelector<HTMLElement>('[data-uit]')!;
     const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
     const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    const meld = el.querySelector<HTMLElement>('[data-meld]')!;
+    let gebruikt = false;
+    const zeg = (t: string) => { if (gebruikt) meld.textContent = t; };
+    const foutId = `${el.id}-fout`;
+    const markeer = (namen: string[], fout: string[]) => namen.forEach((nm) => {
+      const v = form.elements.namedItem(nm) as HTMLInputElement;
+      if (fout.includes(nm)) { v.setAttribute('aria-invalid', 'true'); v.setAttribute('aria-describedby', foutId); }
+      else { v.removeAttribute('aria-invalid'); v.removeAttribute('aria-describedby'); }
+    });
     const plaats = el.dataset.plaats;
     const tekst = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
     const keuze = (n: string) => form.querySelector<HTMLInputElement>(`input[name="${n}"]:checked`)?.value === '1';
@@ -98,8 +112,13 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
     const reken = () => {
       const pag = Math.round(getal(tekst('p').value));
       const marge = getal(tekst('m').value);
-      if (!(pag >= 1 && pag <= 200) || !(marge > 0)) {
-        uit.innerHTML = '<p class="leeg">Vul een aantal pagina\'s (1 tot 200) en een bedrag per klus in.</p>';
+      const fouten: [string, string][] = [];
+      if (!(pag >= 1 && pag <= 200)) fouten.push(['p', "Hoeveel pagina's: vul een aantal tussen 1 en 200 in."]);
+      if (!(marge > 0)) fouten.push(['m', 'Wat houd je over aan één klus: vul een bedrag groter dan nul in.']);
+      markeer(['p', 'm'], fouten.map(([f]) => f));
+      if (fouten.length) {
+        uit.innerHTML = `<p class="leeg fout" id="${foutId}">${fouten.map(([, t]) => t).join(' ')}</p>`;
+        zeg(fouten.map(([, t]) => t).join(' '));
         return;
       }
       const o = keuze('o'), t = keuze('t'), l = keuze('l'), g = keuze('g'), u = keuze('u');
@@ -121,6 +140,7 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
         ? (o ? 'Je wilt een eigen ontwerp rond je merk. Dat is maatwerk.' : `Met ${pag} pagina's past maatwerk meestal beter dan de compacte route met AI.`)
         : 'Een compacte site met een beproefde opzet: de snelle route met AI past. Vaak staat hij er binnen twee weken.';
       const naam = maatwerk ? 'Maatwerk in WordPress' : 'Website met AI';
+      zeg(`${naam}: vanaf ${eur(totaal)}. Terugverdiend na ${klussen} ${klussen === 1 ? 'klus' : 'klussen'}.`);
       uit.innerHTML = `
         <p class="oordeel ruim"><span class="stip" aria-hidden="true"></span>${naam}: vanaf ${eur(totaal)}${u ? ` plus ${eur(PRIJS.onderhoud)} per maand` : ''}</p>
         <p class="uitleg">${waarom}</p>
@@ -143,13 +163,13 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
     };
 
     let wacht: number | undefined;
-    form.addEventListener('input', () => { clearTimeout(wacht); wacht = window.setTimeout(reken, 250); });
-    form.addEventListener('change', reken);
+    form.addEventListener('input', () => { gebruikt = true; clearTimeout(wacht); wacht = window.setTimeout(reken, 250); });
+    form.addEventListener('change', () => { gebruikt = true; reken(); });
     form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
     deel.hidden = false;
     deel.addEventListener('click', async () => {
       const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
-      try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; }
+      try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; meld.textContent = 'De link naar deze uitkomst staat op je klembord.'; }
       catch { window.prompt('Kopieer deze link', link); }
       setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);
     });
@@ -159,9 +179,9 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
 
 <style>
   .tool { margin: 28px 0; padding: clamp(20px, 4vw, 32px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); max-width: 100%; }
-  .titel { font-weight: 900; font-size: var(--step-1); line-height: 1.2; margin: 4px 0 8px; }
+  .titel { font-weight: 750; font-size: var(--step-1); line-height: 1.2; margin: 4px 0 8px; }
   .intro { margin: 0 0 18px; max-width: 60ch; }
-  .velden { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); margin-bottom: 18px; }
+  .velden { display: grid; align-items: end; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); margin-bottom: 18px; }
   .velden .breed { grid-column: 1 / -1; }
   .veld label { font-size: 0.95rem; }
   .veld input { min-height: 48px; }
@@ -169,18 +189,13 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
   .invoer input { width: 100%; }
   .invoer .voor { position: absolute; left: 14px; color: var(--muted); font-weight: 700; pointer-events: none; }
   .invoer .voor + input { padding-left: 32px; }
-  .keuzes { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
-  .keuzes legend { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; padding: 0; width: 100%; }
-  .keuzes label { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border: 1.5px solid var(--line); border-radius: 22px; background: #fff; font-weight: 600; font-size: 0.95rem; line-height: 1.3; cursor: pointer; max-width: 100%; }
-  .keuzes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-  .keuzes label:has(input:checked) { background: var(--navy); border-color: var(--navy); color: #fff; }
-  .keuzes label:has(input[type="checkbox"]:checked)::before { content: ''; flex: none; width: 12px; height: 7px; margin: -3px 10px 0 0; border-left: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(-45deg); }
-  .keuzes label:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 2px; }
+  /* Keuzes: de gedeelde .keuze-pil uit pagina.css */
+  .uitkomst :global(.leeg.fout) { color: #b3261e; font-weight: 600; }
   .uitkomst { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
   .uitkomst :global(p) { margin: 0 0 10px; }
   .uitkomst :global(p:last-child) { margin-bottom: 0; }
   .uitkomst :global(.leeg) { color: var(--muted); }
-  .uitkomst :global(.oordeel) { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.25rem; line-height: 1.25; }
+  .uitkomst :global(.oordeel) { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; line-height: 1.25; }
   .uitkomst :global(.stip) { flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--ok); }
   .uitkomst :global(.posten) { list-style: none; padding: 0; margin: 12px 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
   .uitkomst :global(.posten li) { display: flex; justify-content: space-between; gap: 12px; padding: 9px 14px; margin: 0; border-bottom: 1px solid var(--line); font-size: 0.98rem; }
@@ -191,7 +206,7 @@ const { id = 'website-prijs', plaats, paginas = 5, ontwerp = false, teksten = tr
   .uitkomst :global(.getallen-rij) { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); margin: 14px 0; }
   .uitkomst :global(.getallen-rij div) { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
   .uitkomst :global(dt) { font-size: 0.85rem; color: var(--muted); line-height: 1.3; }
-  .uitkomst :global(dd) { margin: 4px 0 0; font-size: 1.45rem; font-weight: 900; color: var(--navy); letter-spacing: -0.02em; }
+  .uitkomst :global(dd) { margin: 4px 0 0; font-size: 1.45rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
   .acties { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
   .acties .btn { min-height: 48px; text-align: center; }
   .deel { font-size: 1rem; }

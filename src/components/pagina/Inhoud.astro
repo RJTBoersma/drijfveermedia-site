@@ -11,7 +11,7 @@ const dienstHier = stap.dienst && Astro.url.pathname.startsWith(stap.dienst.url)
 ---
 <nav class="inhoud card" aria-label="Op deze pagina" data-inhoud-nav>
   <details open data-inhoud-details>
-    <summary class="kop">Op deze pagina{leestijd && <span class="muted"> · {leestijd} min. lezen</span>}<span class="aantal muted"> ({items.length} onderdelen)</span></summary>
+    <summary class="kop">Op deze pagina{leestijd && <span class="leestijd muted">{leestijd} min. lezen</span>}<span class="aantal muted"> ({items.length} onderdelen)</span></summary>
     <ol>{items.map((i) => <li><a href={`#${i.id}`} data-inhoud={i.id}>{i.titel}</a></li>)}</ol>
   </details>
 </nav>
@@ -28,7 +28,7 @@ const dienstHier = stap.dienst && Astro.url.pathname.startsWith(stap.dienst.url)
   const doelen = links.map((a) => document.getElementById(a.dataset.inhoud!)).filter(Boolean) as HTMLElement[];
   if ('IntersectionObserver' in window && doelen.length) {
     const io = new IntersectionObserver((e) => {
-      e.forEach((x) => { if (x.isIntersecting) links.forEach((a) => a.classList.toggle('hier', a.dataset.inhoud === x.target.id)); });
+      e.forEach((x) => { if (x.isIntersecting) links.forEach((a) => { a.classList.toggle('hier', a.dataset.inhoud === x.target.id); a.toggleAttribute('aria-current', a.dataset.inhoud === x.target.id); }); });
     }, { rootMargin: '-20% 0px -70% 0px' });
     doelen.forEach((d) => io.observe(d));
   }
@@ -45,6 +45,7 @@ const dienstHier = stap.dienst && Astro.url.pathname.startsWith(stap.dienst.url)
   }
 </script>
 <style>
+  .leestijd { display: block; font-weight: 500; font-size: 0.9rem; }
   .inhoud { padding: 20px 22px; }
   .kop { font-weight: 800; margin: 0 0 10px; list-style: none; cursor: default; }
   .kop::-webkit-details-marker { display: none; }
@@ -62,10 +63,10 @@ const dienstHier = stap.dienst && Astro.url.pathname.startsWith(stap.dienst.url)
   .inhoud-boven ol { padding-bottom: 12px; }
   .inhoud-boven ol a { padding-block: 9px; }
   .mini-actie { padding: 18px 20px; display: grid; gap: 10px; justify-items: start; }
-  .mini-actie img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: top; background: #e8eef4; }
+  .mini-actie img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .mini-actie p { margin: 0; font-size: 0.95rem; color: var(--muted); line-height: 1.45; }
   .mini-actie p b { color: var(--ink); display: block; margin-bottom: 2px; }
-  .mini-actie .btn { white-space: normal; text-align: left; line-height: 1.25; }
+  .mini-actie .btn { white-space: normal; text-align: center; line-height: 1.25; }
   .mini-actie .tel { font-size: 0.92rem; color: var(--ink); font-weight: 700; text-decoration: none; padding-block: 6px; }
   @media (max-width: 960px) { .mini-actie { display: none; } }
 </style>

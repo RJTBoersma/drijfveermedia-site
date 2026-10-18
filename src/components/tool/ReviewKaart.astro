@@ -13,7 +13,7 @@ const Kop = kop;
   <Kop class="rk-titel">Maak je reviewkaartje met QR-code</Kop>
   <p class="muted rk-intro">Plak je reviewlink en vul je bedrijfsnaam in. Je krijgt een QR-code en een kaartje om te printen, voor op de balie of bij de factuur. Alles gebeurt in je eigen browser.</p>
   {uitleg ? (
-    <details class="rk-hulp">
+    <details class="rk-hulp uitklap">
       <summary>Waar vind ik mijn reviewlink?</summary>
       <ol>
         <li>Open je Google Bedrijfsprofiel op een computer. Volgens Google kan dit niet op een telefoon.</li>
@@ -31,7 +31,7 @@ const Kop = kop;
       <div class="veld"><label for={`${id}-naam`}>Je bedrijfsnaam</label><input id={`${id}-naam`} name="naam" placeholder="Bijvoorbeeld: Kapsalon Knip" autocomplete="organization" maxlength="50" /></div>
       <div class="veld"><label for={`${id}-tekst`}>Tekst op het kaartje</label><input id={`${id}-tekst`} name="tekst" value={tekst} maxlength="70" /></div>
     </div>
-    <fieldset class="rk-formaat">
+    <fieldset class="rk-formaat keuze-pil">
       <legend>Formaat</legend>
       <label><input type="radio" name="formaat" value="a6" checked /> A6 voor de balie (10,5 × 14,8 cm)</label>
       <label><input type="radio" name="formaat" value="visite" /> Visitekaartje (8,5 × 5,5 cm)</label>
@@ -190,26 +190,22 @@ const Kop = kop;
 
 <style>
   .rk { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
-  .rk-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .rk-titel { font-size: var(--step-2); font-weight: 750; margin: 6px 0 10px; }
   .rk-intro { margin-bottom: 14px; }
   .rk-hulp { margin: 0 0 18px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 0 16px; }
-  .rk-hulp summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+  .rk-hulp summary { font-weight: 700; }
   .rk-hulp ol { margin: 0 0 14px; padding-left: 1.3em; }
   .rk-hulp li { margin-bottom: 4px; }
   .rk-form { display: grid; gap: 16px; }
   .rk-form .btn { justify-self: start; }
-  .rk-formaat { border: 0; padding: 0; margin: 0; min-width: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .rk-formaat legend { font-weight: 700; font-size: 0.98rem; padding: 0; margin-bottom: 6px; width: 100%; }
-  .rk-formaat label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
-  .rk-formaat label:has(input:checked) { border-color: var(--navy); background: var(--chip); }
-  .rk-formaat input { accent-color: var(--navy); width: 18px; height: 18px; margin: 0; }
+  /* Formaat: de gedeelde .keuze-pil uit pagina.css */
   .rk-melding { margin: 16px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--tint); border: 1px solid #ffd6b8; }
   .rk-melding.rk-fout { background: #fdecec; border-color: #f3b6b6; }
   .rk-uitkomst { margin-top: 22px; padding-top: 22px; border-top: 1px dashed var(--line); display: grid; gap: 12px; justify-items: start; }
   .rk-uitkomst p { margin: 0; }
   .rk-voorbeeld { width: 100%; display: grid; place-items: center; padding: 20px; background: var(--chip); border-radius: 12px; }
   .rk-knoppen { display: flex; flex-wrap: wrap; gap: 8px; }
-  .rk-knop { font: inherit; font-size: 0.95rem; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 16px; min-height: 44px; cursor: pointer; }
+  .rk-knop { font: inherit; font-size: 0.95rem; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid color-mix(in srgb, var(--ink) 45%, transparent); border-radius: 999px; padding: 8px 16px; min-height: 44px; cursor: pointer; }
   .rk-knop:hover { border-color: var(--navy); }
   .rk-status { min-height: 1.4em; }
   .rk-bron { margin: 18px 0 0; }
@@ -220,7 +216,7 @@ const Kop = kop;
   .rk-a6 { width: min(100%, 290px); aspect-ratio: 105 / 148; }
   .rk-visite { width: min(100%, 340px); aspect-ratio: 85 / 55; }
   .rk-binnen { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2.6cqi; padding: 8cqi 8cqi 7cqi; border-top: 3cqi solid #ff6600; }
-  .rk-naam { font-size: 7.6cqi; font-weight: 900; line-height: 1.1; overflow-wrap: anywhere; }
+  .rk-naam { font-size: 7.6cqi; font-weight: 800; line-height: 1.1; overflow-wrap: anywhere; }
   .rk-tekst { font-size: 5.6cqi; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
   .rk-sterren { font-size: 6cqi; letter-spacing: 1cqi; color: #ff6600; line-height: 1; }
   .rk-qr { width: 60cqi; }

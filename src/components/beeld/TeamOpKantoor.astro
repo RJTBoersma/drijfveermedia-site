@@ -1,11 +1,27 @@
 ---
-// Het team aan het werk op kantoor: de getekende portretten (zwart-wit) achter één lange tafel.
+// Het team aan het werk op kantoor: vier ronde portretten (navy-duotoon) achter één lange tafel met laptops.
+// Ronde uitsneden in plaats van afgesneden bustes, zodat de portretten en de lijntekening naast elkaar kunnen bestaan.
+// Per persoon een uitsnede (in px van het bronbeeld van 600 × 600): ogen op 40% van de hoogte, gezicht 40% breed.
 import { team } from '../../data/site';
 interface Props { klein?: boolean }
 const { klein = false } = Astro.props;
 const volgorde = ['thorgall', 'robert', 'evelien', 'johan'];
 const mensen = volgorde.map((s) => team.find((p) => p.slug === s)!).filter(Boolean);
 const xs = [55, 270, 485, 700];
+const uitsnede: Record<string, { l: number; t: number; c: number }> = {
+  robert: { l: 36, t: -40, c: 538 },
+  evelien: { l: 76, t: -52, c: 525 },
+  thorgall: { l: 26, t: 12, c: 562 },
+  johan: { l: 13, t: -15, c: 575 },
+};
+const D = 176; // diameter van een portret
+const CY = 252; // middelpunt van de cirkels
+const beeld = (slug: string, i: number) => {
+  const u = uitsnede[slug] ?? { l: 0, t: 0, c: 600 };
+  const k = D / u.c;
+  const cx = xs[i] + 115;
+  return { cx, x: cx - D / 2 - u.l * k, y: CY - D / 2 - u.t * k, w: 600 * k };
+};
 ---
 <figure class:list={['team-kantoor', { klein }]}>
   <svg viewBox="0 0 960 500" role="img" aria-label={`Het team van Drijfveer Media aan tafel op kantoor in Assen: ${mensen.map((p) => p.naam.split(' ')[0]).join(', ')}`}>
@@ -21,10 +37,20 @@ const xs = [55, 270, 485, 700];
     <circle cx="864" cy="70" r="5" class="tk-punt" />
     <text x="88" y="76" class="tk-tekst">Gevonden.</text>
     <text x="88" y="100" class="tk-tekst">Genoemd.</text>
-    <text x="88" y="124" class="tk-tekst tk-oranje">Gekozen.</text>
-    {mensen.map((p, i) => (
-      <image href={`/img/team/${p.slug}.webp`} x={xs[i]} y="140" width="230" height="230" preserveAspectRatio="xMidYMax meet" />
-    ))}
+    <text x="88" y="124" class="tk-tekst">Gekozen<tspan class="tk-oranje">.</tspan></text>
+    <defs>
+      {mensen.map((p, i) => <clipPath id={`tk-rond-${p.slug}`}><circle cx={xs[i] + 115} cy={CY} r={D / 2} /></clipPath>)}
+    </defs>
+    {mensen.map((p, i) => {
+      const b = beeld(p.slug, i);
+      return (
+        <g>
+          <circle cx={b.cx} cy={CY} r={D / 2} class="tk-rond" />
+          <image href={`/img/team/${p.slug}.webp`} x={b.x} y={b.y} width={b.w} height={b.w} clip-path={`url(#tk-rond-${p.slug})`} filter="url(#duotoon)" />
+          <circle cx={b.cx} cy={CY} r={D / 2} class="tk-l" />
+        </g>
+      );
+    })}
     <rect x="40" y="370" width="880" height="18" rx="4" class="tk-l tk-wit" />
     <path class="tk-l" d="M72 388 V480 M888 388 V480" />
     {xs.map((x) => (
@@ -51,5 +77,6 @@ const xs = [55, 270, 485, 700];
   .tk-wit { fill: #fff; }
   .tk-tekst { font: 800 19px var(--font, 'Albert Sans', sans-serif); fill: var(--ink); }
   .tk-oranje { fill: var(--orange); }
+  .tk-rond { fill: #dfe8f1; }
   .tk-naam { font: 700 15px var(--font, 'Albert Sans', sans-serif); fill: var(--ink); }
 </style>

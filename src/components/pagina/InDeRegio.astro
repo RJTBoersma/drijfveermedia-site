@@ -13,15 +13,14 @@ const lijst = kies.sort((a, b) => (a.type === 'provincie' ? -1 : 0) - (b.type ==
   <dm-extra><section class="wrap sectie regio-links" aria-labelledby={`regio-${soort}`}>
     <h2 id={`regio-${soort}`}>{titel}</h2>
     <p class="muted">{intro}</p>
-    <ul>
-      {lijst.map((p) => <li><a class="chip" href={p.url}>{p.naam}</a></li>)}
-      <li><a class="chip alle" href="/werkgebied/">Hele werkgebied</a></li>
+    <ul class="chips chips-scroll">
+      {lijst.map((p) => <li><a class="chip-link" href={p.url}>{p.naam}</a></li>)}
+      <li><a class="chip-link alle" href="/werkgebied/">Hele werkgebied</a></li>
     </ul>
   </section></dm-extra>
 )}
 <style>
-  .regio-links ul { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
-  .regio-links .chip { text-decoration: none; padding: 10px 16px; font-size: 0.95rem; min-height: 44px; display: inline-flex; align-items: center; border: 1px solid var(--line); background: var(--panel); }
-  .regio-links .chip:hover { border-color: var(--navy); background: var(--navy); color: #fff; }
+  .regio-links ul { margin-top: 16px; }
+  .regio-links .chip-link { min-height: 44px; padding-inline: 16px; }
   .regio-links .alle { font-weight: 800; }
 </style>

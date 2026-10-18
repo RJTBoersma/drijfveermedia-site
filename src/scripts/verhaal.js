@@ -1,8 +1,19 @@
 // Scrollverhaal op de homepage: Gevonden, Genoemd, Gekozen.
 // Eén tijdlijn van 0 tot 1, gestuurd door de scrollpositie. Zonder JavaScript staat er een stilstaand beeld.
+// Het verhaal wordt pas opgebouwd als het (bijna) in beeld komt, en dan in een rustig moment van de browser,
+// zodat het tekenwerk het laden van de pagina niet ophoudt. Typt iemand eerder in het zinformulier, dan start het meteen.
 export function startVerhaal(){
 const stage=document.getElementById("stage");
 if(!stage) return;
+let gestart=false;
+const start=()=>{if(gestart)return;gestart=true;io&&io.disconnect();bouwVerhaal(stage)};
+const straks=()=>("requestIdleCallback" in window?requestIdleCallback(start,{timeout:1200}):setTimeout(start,200));
+const io="IntersectionObserver" in window?new IntersectionObserver(e=>{if(e.some(x=>x.isIntersecting))straks()},{rootMargin:"0px 0px 200px 0px"}):null;
+if(io)io.observe(document.getElementById("verhaal")||stage);else straks();
+["vak","plaats"].forEach(id=>document.getElementById(id)?.addEventListener("input",start,{once:true}));
+}
+
+function bouwVerhaal(stage){
 stage.innerHTML="";
 const NS="http://www.w3.org/2000/svg";
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
@@ -13,7 +24,7 @@ const el=(tag,attrs={},parent)=>{const n=document.createElementNS(NS,tag);for(co
 const txt=(parent,attrs,s)=>{const t=el("text",Object.assign({"font-family":"Albert Sans Variable, Albert Sans, sans-serif"},attrs),parent);t.textContent=s;return t};
 
 /* kleuren van de tekening (vast, de tekening heeft een eigen vlak) */
-const C={navy:"#074663",blue:"#4f7aa3",grey:"#dbe3eb",grey2:"#a9b8c8",white:"#ffffff",orange:"#ff6600",tint:"#fff4ec",green:"#1f8a5b",red:"#c9443c",bg:"#e3ebf3",soft:"#eef2f7"};
+const C={navy:"#074663",blue:"#4f7aa3",grey:"#dbe3eb",grey2:"#a9b8c8",white:"#ffffff",orange:"#ff6600",tint:"#fff4ec",green:"#1a7a50",red:"#c9443c",bg:"#e3ebf3",soft:"#eef2f7"};
 
 const svg=el("svg",{viewBox:"0 0 600 480",role:"img","aria-label":"Een zoekresultaat klimt naar plek 1, wordt genoemd in een AI-antwoord en eindigt in een telefoontje van een nieuwe klant"});
 stage.appendChild(svg);
@@ -101,12 +112,12 @@ el("path",{d:"M331 372 q2 12 18 18 l4 -4 l-5 -5 l-3 3 q-6 -3 -9 -9 l3 -3 l-5 -5z
 const doneV=el("g",{opacity:0},phone);
 el("circle",{cx:300,cy:168,r:40,fill:C.green},doneV);
 el("path",{d:"M281 168 l13 13 l25 -27",fill:"none",stroke:C.white,"stroke-width":7,"stroke-linecap":"round","stroke-linejoin":"round"},doneV);
-txt(doneV,{x:300,y:246,"text-anchor":"middle",fill:C.navy,"font-size":21,"font-weight":900},"Nieuwe klant");
+txt(doneV,{x:300,y:246,"text-anchor":"middle",fill:C.navy,"font-size":21,"font-weight":800},"Nieuwe klant");
 const doneSub=txt(doneV,{x:300,y:272,"text-anchor":"middle",fill:"#6b7d90","font-size":13},"");
 el("rect",{x:226,y:300,width:148,height:58,rx:12,fill:C.white,stroke:"#dbe3eb"},doneV);
 txt(doneV,{x:300,y:324,"text-anchor":"middle",fill:"#6b7d90","font-size":12.5},"Afspraak");
 txt(doneV,{x:300,y:345,"text-anchor":"middle",fill:C.navy,"font-size":15,"font-weight":800},"dinsdag 10.00 uur");
-txt(doneV,{x:300,y:410,"text-anchor":"middle",fill:C.navy,"font-size":12.5,"font-weight":800},"Gevonden. Genoemd. Gekozen.");
+txt(doneV,{x:300,y:398,"text-anchor":"middle",fill:C.navy,"font-size":12.5,"font-weight":800},"Gevonden. Genoemd. Gekozen.");
 
 /* --- tekst uit het invoerveld --- */
 const vakIn=document.getElementById("vak"),plaatsIn=document.getElementById("plaats");
@@ -155,9 +166,9 @@ function render(p){
   const n=Math.round(fullQ.length*seg(p,.45,.52));
   q2.textContent=fullQ.slice(0,n)+(n>0&&n<fullQ.length?"|":"");
   qBubble.setAttribute("opacity",seg(p,.44,.46));
-  // antwoord
-  aLines.forEach((r,i)=>r.setAttribute("width",(+r.dataset.w)*ease(seg(p,.52+i*.02,.56+i*.02))));
-  ans.setAttribute("opacity",seg(p,.51,.53));
+  // antwoord: groeit al mee terwijl de vraag getypt wordt, zodat het vlak nooit leeg oogt
+  aLines.forEach((r,i)=>r.setAttribute("width",(+r.dataset.w)*ease(seg(p,.47+i*.02,.53+i*.02))));
+  ans.setAttribute("opacity",seg(p,.46,.48));
   const pk=seg(p,.58,.61);
   pick.setAttribute("opacity",pk);
   pickT.textContent=fullPick;
@@ -189,23 +200,29 @@ function render(p){
   const in3=ease(seg(p,.75,.82));
   L3.setAttribute("opacity",in3);
   L3.setAttribute("transform",`translate(${60*(1-in3)} 0)`);
-  const accepted=seg(p,.92,.95);
-  const ringing=p>.80&&p<.92&&!reduced();
+  // eerst verdwijnt het inkomende gesprek helemaal, daarna komt "Nieuwe klant" (nooit twee teksten tegelijk)
+  const uit=seg(p,.90,.925),inn=ease(seg(p,.925,.95));
+  const ringing=p>.80&&p<.90&&!reduced();
   phone.classList.toggle("ringing",ringing);
-  doneV.setAttribute("opacity",accepted);
-  ringV.setAttribute("opacity",1-accepted);
+  if(ringing&&!belStart){belStart=performance.now();if(!wt)wt=requestAnimationFrame(waveLoop)}
+  if(!ringing)belStart=0;
+  ringV.setAttribute("opacity",1-uit);
+  doneV.setAttribute("opacity",inn);
+  doneV.setAttribute("transform",`translate(0 ${8*(1-inn)})`);
   // stappen
   const step=p<.36?1:p<.74?2:3;
   ["s1","s2","s3"].forEach((id,i)=>document.getElementById(id).classList.toggle("on",i<step));
 }
 
-/* belgolven, los van scrollen */
-let wt=0;
+/* belgolven, los van scrollen. Ze lopen alleen terwijl de telefoon overgaat, en hooguit 4 seconden (WCAG 2.2.2) */
+let wt=0,belStart=0;
+const golven=[...svg.querySelectorAll(".wave")];
 function waveLoop(now){
-  if(!reduced()&&lastP>.80&&lastP<.92){
-    document.querySelectorAll(".wave").forEach(w=>{const ph=((now/1000)+(+w.dataset.i)*.33)%1;w.setAttribute("r",24+22*ph);w.setAttribute("opacity",.6*(1-ph))});
-  }else document.querySelectorAll(".wave").forEach(w=>w.setAttribute("opacity",0));
-  wt=requestAnimationFrame(waveLoop);
+  const bezig=!reduced()&&belStart&&lastP>.80&&lastP<.90&&now-belStart<4000;
+  if(bezig){
+    golven.forEach(w=>{const ph=((now/1000)+(+w.dataset.i)*.33)%1;w.setAttribute("r",24+22*ph);w.setAttribute("opacity",.6*(1-ph))});
+    wt=requestAnimationFrame(waveLoop);
+  }else{golven.forEach(w=>w.setAttribute("opacity",0));wt=0}
 }
 
 const mql=window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -229,5 +246,5 @@ window.addEventListener("scroll",onScroll,{passive:true});
 window.addEventListener("resize",onScroll);
 
 vakIn.addEventListener("input",words);plaatsIn.addEventListener("input",words);
-words();onScroll();requestAnimationFrame(waveLoop);
+words();onScroll();
 }

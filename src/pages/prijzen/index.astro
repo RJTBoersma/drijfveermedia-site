@@ -15,7 +15,7 @@ const groepen: { pijler: Pijler; titel: string }[] = [
   { pijler: 'Gevonden', titel: 'Klanten vinden je in Google' },
   { pijler: 'Genoemd', titel: 'AI en klanten noemen je' },
   { pijler: 'Gekozen', titel: 'Je site maakt er een aanvraag van' },
-  { pijler: 'Advies', titel: 'Uitbesteden en advies' },
+  { pijler: 'Advies', titel: 'Alles in één hand, of eerst sparren' },
 ];
 const schema = [{
   '@type': 'OfferCatalog',
@@ -49,12 +49,12 @@ const schema = [{
 
   <section class="wrap sectie prijzen" data-aida="interest">
     <PrijzenSamensteller />
-    <div class="tabs" role="list">
-      {groepen.map((g) => <a role="listitem" href={`#${g.pijler.toLowerCase()}`} class="chip">{g.pijler}</a>)}
-    </div>
+    <ul class="chips tabs" aria-label="Spring naar">
+      {groepen.map((g) => <li><a href={`#${g.pijler.toLowerCase()}`} class="chip-link">{g.pijler === 'Advies' ? 'Uitbesteden' : g.pijler}</a></li>)}
+    </ul>
     {groepen.map((g) => (
       <div class="groep" id={g.pijler.toLowerCase()}>
-        <div class="stap-kop"><Tekening naam={perOnderwerp[g.pijler]} maat={52} /><h2><span class="oranje-punt">{g.pijler}.</span> {g.titel}</h2></div>
+        <div class="stap-kop"><Tekening naam={perOnderwerp[g.pijler]} maat={52} /><h2>{g.pijler === 'Advies' ? 'Uitbesteden' : g.pijler}<span class="merk-punt">.</span> {g.titel}</h2></div>
         <ul class="lijst">
           {diensten.filter((d) => d.pijler === g.pijler).map((d) => (
             <li class:list={{ sub: !!d.ouder && diensten.find((x) => x.url === d.ouder)?.pijler === g.pijler }}>

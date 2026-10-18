@@ -24,8 +24,8 @@ for (let i = 0; i < n; i++) {
 }
 pad2 += 'Z';
 ---
-<figure class="regiokaart card" aria-label={label}>
-  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} data-teken>
+<figure class="regiokaart card">
+  <svg viewBox={`0 0 ${W} ${H}`} role={plaatsen.some((p) => p.href) ? 'group' : 'img'} aria-label={label} data-teken>
     <path d={pad2} class="land" />
     {thuis && plaatsen.filter((p) => !p.thuis).map((p, i) => (
       <path class="route" pathLength="1" style={`--i:${i}`} d={`M${x(thuis.lng).toFixed(1)} ${y(thuis.lat).toFixed(1)} Q${((x(thuis.lng) + x(p.lng)) / 2 + 18).toFixed(1)} ${((y(thuis.lat) + y(p.lat)) / 2 - 18).toFixed(1)} ${x(p.lng).toFixed(1)} ${y(p.lat).toFixed(1)}`} />
@@ -54,7 +54,7 @@ pad2 += 'Z';
       </g>
     ))}
   </svg>
-  <figcaption class="klein muted">{label}. Oranje: hier zit ons kantoor.</figcaption>
+  <figcaption class="klein muted">{label}. De grote oranje stip is ons kantoor in Assen.</figcaption>
 </figure>
 <style>
   .regiokaart { margin: 0; padding: 16px; box-shadow: 0 24px 60px -30px rgb(7 70 99 / 0.35); }

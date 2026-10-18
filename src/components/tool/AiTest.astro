@@ -11,7 +11,7 @@ const { id = 'ai-test' } = Astro.props;
 <section class="wrap sectie" id={id}>
   <div class="ai-test card" data-ai-test>
     <div class="kop">
-      <p class="kicker">Gratis test · twee minuten</p>
+      <p class="kicker">Gratis test · vijf minuten</p>
       <h2>Noemt AI jou? Test het zelf</h2>
       <p class="muted">Vul in wat je doet en waar. Je krijgt vijf vragen zoals je klanten ze stellen. Eén klik opent de vraag in een AI-assistent. Jij kijkt of je genoemd wordt. Wat je invult, blijft in je eigen browser.</p>
     </div>
@@ -26,20 +26,23 @@ const { id = 'ai-test' } = Astro.props;
       <button class="btn" type="submit">Maak mijn vijf vragen</button>
     </form>
 
+    <p class="sr-only" aria-live="polite" data-meld></p>
     <div class="stap stap-2" data-stap="2" hidden>
+      <h3 class="sr-only" tabindex="-1" data-stap2-kop>Je vijf vragen</h3>
       <ol class="vragen" data-vragen></ol>
+      <p class="klein melding" data-ontbreekt hidden></p>
       <p class="klein muted tip">Tip: open de assistent in een privévenster, dan telt je eigen zoekgeschiedenis niet mee. Gemini en Claude? Kopieer de vraag en plak hem daar.</p>
       <div class="acties">
         <button class="btn" type="button" data-uitslag>Bekijk mijn score</button>
-        <button class="btn btn-ghost" type="button" data-opnieuw>Andere gegevens</button>
+        <button class="btn-tekst" type="button" data-opnieuw>Andere gegevens</button>
       </div>
     </div>
 
-    <div class="stap stap-3" data-stap="3" hidden aria-live="polite">
+    <div class="stap stap-3" data-stap="3" hidden>
       <div class="uitslag">
         <div class="meter" data-meter style="--score:0"><span data-score>0</span><small>van 100</small></div>
         <div>
-          <h3 data-oordeel></h3>
+          <h3 data-oordeel tabindex="-1"></h3>
           <p data-uitleg></p>
         </div>
       </div>
@@ -48,15 +51,17 @@ const { id = 'ai-test' } = Astro.props;
       <ol class="punten" data-punten data-eigen></ol>
       <div class="acties">
         <a class="btn" data-cta href="/generative-engine-optimization/ai-vindbaarheidsanalyse/#aanvragen">Laat Thorgall het gratis nakijken</a>
-        <button class="btn btn-ghost" type="button" data-deel data-eigen>Deel je uitslag</button>
-        <button class="btn btn-ghost" type="button" data-concurrent data-eigen>Test ook een concurrent</button>
-        <button class="btn btn-ghost" type="button" data-terug data-eigen>Terug naar de vragen</button>
         <button class="btn btn-ghost" type="button" data-zelf hidden>Doe de test zelf</button>
       </div>
-      <p class="klein muted deel-status" data-deel-status></p>
+      <p class="tekstacties" data-eigen>
+        <button class="btn-tekst" type="button" data-deel>Deel je uitslag</button><span aria-hidden="true">·</span>
+        <button class="btn-tekst" type="button" data-concurrent>Test ook een concurrent</button><span aria-hidden="true">·</span>
+        <button class="btn-tekst" type="button" data-terug>Terug naar de vragen</button>
+      </p>
+      <p class="klein muted deel-status" data-deel-status role="status"></p>
       <p class="klein muted">De gratis analyse gaat verder dan deze test: we stellen de vragen meerdere keren, in vijf assistenten, en kijken welke websites AI als bron gebruikt.</p>
     </div>
-    <noscript><p class="klein">Deze test werkt met JavaScript. Liever dat wij het doen? Vraag de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a> aan.</p></noscript>
+    <noscript><p class="klein">Deze test werkt met JavaScript. Wil je dat wij kijken? Vraag de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a> aan.</p></noscript>
   </div>
 </section>
 
@@ -99,6 +104,10 @@ const { id = 'ai-test' } = Astro.props;
   document.querySelectorAll<HTMLElement>('[data-ai-test]').forEach((el) => {
     const stappen = [...el.querySelectorAll<HTMLElement>('[data-stap]')];
     const toon = (n: number) => { stappen.forEach((s) => (s.hidden = s.dataset.stap !== String(n))); };
+    // Na elke stap gaat de focus naar het begin van die stap, en een schermlezer hoort wat er gebeurde (WCAG 2.4.3, 4.1.3)
+    const meld = el.querySelector<HTMLElement>('[data-meld]')!;
+    const zeg = (t: string) => { meld.textContent = ''; setTimeout(() => (meld.textContent = t), 60); };
+    const ontbreekt = el.querySelector<HTMLElement>('[data-ontbreekt]')!;
     const form = el.querySelector<HTMLFormElement>('.stap-1')!;
     const lijst = el.querySelector<HTMLOListElement>('[data-vragen]')!;
     let staat: { vak: string; plaats: string; naam: string; antwoorden: Antwoord[] } = { vak: '', plaats: '', naam: '', antwoorden: [] };
@@ -125,7 +134,7 @@ const { id = 'ai-test' } = Astro.props;
       const g = el.querySelector<HTMLElement>('[data-gedeeld]')!;
       g.hidden = !gedeeld;
       g.textContent = gedeeld ? `Dit is een gedeelde uitslag voor een ${staat.vak} in ${staat.plaats}. Doe de test zelf met je eigen bedrijfsnaam, dan zie je ook waar jouw winst zit.` : '';
-      el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/generative-engine-optimization/ai-vindbaarheidsanalyse/?vak=${encodeURIComponent(staat.vak)}&plaats=${encodeURIComponent(staat.plaats)}#aanvragen`;
+      el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/generative-engine-optimization/ai-vindbaarheidsanalyse/?vak=${encodeURIComponent(staat.vak)}&plaats=${encodeURIComponent(staat.plaats)}&context=${encodeURIComponent(`AI-test: score ${score} van 100 (${oordeelVoor(score)})`)}#aanvragen`;
       deelStatus.textContent = '';
       laatsteScore = gedeeld ? -1 : score;
       if (!gedeeld) { try { history.replaceState(null, '', deelLink(score).replace(location.origin, '')); } catch {} }
@@ -138,7 +147,7 @@ const { id = 'ai-test' } = Astro.props;
         <li class="vraag" data-i="${i}">
           <p class="q">${esc(v.q)}</p>
           <div class="open">${assistenten.map((a) => `<a href="${a.url(v.q)}" target="_blank" rel="noopener">${a.naam}</a>`).join('')}<button type="button" class="kopieer" data-q="${esc(v.q)}">Kopieer</button></div>
-          <fieldset class="keuze"><legend>Werd ${esc(staat.naam)} genoemd?</legend>
+          <fieldset class="keuze keuze-pil"><legend>Werd ${esc(staat.naam)} genoemd?</legend>
             ${[['eerst', 'Ja, als eerste'], ['genoemd', 'Ja, maar niet als eerste'], ['nee', 'Nee']].map(([w, t]) => `<label><input type="radio" name="v${i}" value="${w}" ${staat.antwoorden[i] === w ? 'checked' : ''}> ${t}</label>`).join('')}
           </fieldset>
         </li>`).join('');
@@ -150,8 +159,10 @@ const { id = 'ai-test' } = Astro.props;
       const nieuw = { vak: String(f.get('vak')).trim().toLowerCase(), plaats: String(f.get('plaats')).trim(), naam: String(f.get('naam')).trim() };
       const zelfde = nieuw.vak === staat.vak && nieuw.plaats === staat.plaats && nieuw.naam === staat.naam;
       staat = { ...nieuw, antwoorden: zelfde ? staat.antwoorden : [] };
-      bewaar(staat); bouwVragen(); toon(2); tel('vragen'); tip.hidden = true; wisHash();
+      bewaar(staat); bouwVragen(); toon(2); tel('vragen'); tip.hidden = true; wisHash(); ontbreekt.hidden = true;
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.querySelector<HTMLElement>('[data-stap2-kop]')!.focus({ preventScroll: true });
+      zeg('Je vijf vragen staan klaar. Open elke vraag in een AI-assistent en kies of je genoemd werd.');
     });
 
     lijst.addEventListener('change', (e) => {
@@ -162,18 +173,26 @@ const { id = 'ai-test' } = Astro.props;
     lijst.addEventListener('click', async (e) => {
       const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.kopieer');
       if (!b) return;
-      try { await navigator.clipboard.writeText(b.dataset.q || ''); b.textContent = 'Gekopieerd'; setTimeout(() => (b.textContent = 'Kopieer'), 1600); } catch { b.textContent = 'Selecteer en kopieer'; }
+      try { await navigator.clipboard.writeText(b.dataset.q || ''); b.textContent = 'Gekopieerd'; zeg('De vraag staat op je klembord.'); setTimeout(() => (b.textContent = 'Kopieer'), 1600); } catch { b.textContent = 'Selecteer en kopieer'; }
     });
 
     el.querySelector('[data-uitslag]')!.addEventListener('click', () => {
       const vragen = vragenVoor(staat.vak, staat.plaats, staat.naam);
       const ingevuld = staat.antwoorden.filter(Boolean).length;
       if (ingevuld < vragen.length) {
-        const eerste = lijst.querySelector<HTMLElement>(`.vraag:nth-child(${vragen.findIndex((_, i) => !staat.antwoorden[i]) + 1})`);
+        // Niet alleen een kleur: een zin die zegt welke vraag nog open staat, en de focus op die vraag (WCAG 3.3.1, 1.4.1)
+        const open = vragen.map((_, i) => i).filter((i) => !staat.antwoorden[i]);
+        const eerste = lijst.querySelector<HTMLElement>(`.vraag:nth-child(${open[0] + 1})`);
+        const tekst = open.length === 1 ? `Vraag ${open[0] + 1} heeft nog geen antwoord.` : `De vragen ${open.slice(0, -1).map((i) => i + 1).join(', ')} en ${open[open.length - 1] + 1} hebben nog geen antwoord.`;
+        ontbreekt.textContent = `${tekst} Kies bij elke vraag of je genoemd werd.`;
+        ontbreekt.hidden = false;
+        zeg(tekst);
         eerste?.classList.add('let-op'); eerste?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        eerste?.querySelector<HTMLInputElement>('input')?.focus({ preventScroll: true });
         setTimeout(() => eerste?.classList.remove('let-op'), 1800);
         return;
       }
+      ontbreekt.hidden = true;
       const waarde = { eerst: 2, genoemd: 1, nee: 0, '': 0 };
       const score = Math.round((staat.antwoorden.reduce((s, a) => s + waarde[a], 0) / (vragen.length * 2)) * 100);
       // Verbeterpunten: eerst de soorten vragen waar je niet genoemd werd, dan de vragen waar je niet bovenaan stond
@@ -183,9 +202,11 @@ const { id = 'ai-test' } = Astro.props;
       if (!lijstPunten.length) lijstPunten.push(punten.goed);
       toonUitslag(score, false, lijstPunten);
       tel('score'); el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.querySelector<HTMLElement>('[data-oordeel]')!.focus({ preventScroll: true });
+      zeg(`Je score is ${score} van 100: ${oordeelVoor(score)}.`);
     });
-    el.querySelector('[data-opnieuw]')!.addEventListener('click', () => toon(1));
-    el.querySelector('[data-terug]')!.addEventListener('click', () => toon(2));
+    el.querySelector('[data-opnieuw]')!.addEventListener('click', () => { toon(1); veld('vak').focus(); });
+    el.querySelector('[data-terug]')!.addEventListener('click', () => { toon(2); el.querySelector<HTMLElement>('[data-stap2-kop]')!.focus(); });
     el.querySelector('[data-deel]')!.addEventListener('click', async () => {
       if (laatsteScore < 0) return;
       const link = deelLink(laatsteScore);
@@ -230,6 +251,7 @@ const { id = 'ai-test' } = Astro.props;
 
 <style>
   .ai-test { padding: clamp(22px, 4vw, 40px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .ai-test.card { border-color: var(--navy); }
   .kop { max-width: 62ch; margin-bottom: 22px; }
   .kop h2 { margin: 6px 0 10px; }
   .stap-1 .btn { margin-top: 6px; }
@@ -237,15 +259,16 @@ const { id = 'ai-test' } = Astro.props;
   .vragen :global(.vraag) { counter-increment: v; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: box-shadow 0.2s; }
   .vragen :global(.vraag.let-op) { box-shadow: 0 0 0 3px var(--orange); }
   .vragen :global(.q) { font-weight: 800; margin: 0 0 10px; }
-  .vragen :global(.q)::before { content: counter(v) '. '; color: var(--orange); }
+  .vragen :global(.q)::before { content: counter(v) '. '; color: var(--orange-tekst); }
   .vragen :global(.open) { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-  .vragen :global(.open a), .vragen :global(.kopieer) { font: inherit; font-size: 0.92rem; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--line); border-radius: 999px; padding: 5px 12px; text-decoration: none; cursor: pointer; }
+  .vragen :global(.open a), .vragen :global(.kopieer) { font: inherit; font-size: 0.92rem; font-weight: 700; color: var(--navy); background: #fff; border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent); border-radius: 999px; padding: 5px 12px; text-decoration: none; cursor: pointer; }
   .vragen :global(.open a:hover), .vragen :global(.kopieer:hover) { border-color: var(--navy); }
   .vragen :global(.open a)::after { content: ' ↗'; font-weight: 400; }
-  .vragen :global(.keuze) { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.95rem; }
-  .vragen :global(.keuze legend) { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; padding: 0; }
-  .vragen :global(.keuze label) { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
-  .vragen :global(.keuze input) { accent-color: var(--navy); width: 18px; height: 18px; }
+  .vragen :global(.keuze > legend) { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  .tekstacties { display: flex; flex-wrap: wrap; align-items: center; gap: 0 10px; margin: 0 0 6px; color: var(--muted); }
+  .melding { margin: 0 0 12px; padding: 10px 14px; border-radius: 10px; background: var(--tint); border: 1px solid #ffd6b8; color: var(--ink); font-weight: 600; }
+  [data-oordeel]:focus, [data-stap2-kop]:focus { outline: none; }
+  [data-oordeel]:focus-visible { outline: 3px solid var(--navy); outline-offset: 4px; }
   .tip { margin: 0 0 16px; }
   .acties { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 14px; }
   .uitslag { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; margin-bottom: 18px; }
@@ -253,7 +276,7 @@ const { id = 'ai-test' } = Astro.props;
   .uitslag p { margin: 0; color: var(--muted); }
   .meter { --score: 0; width: 132px; aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; text-align: center;
     background: radial-gradient(closest-side, var(--panel) 78%, transparent 79% 100%), conic-gradient(var(--orange) calc(var(--score) * 1%), var(--chip) 0); }
-  .meter span { font-size: 2.4rem; font-weight: 900; line-height: 1; color: var(--ink); }
+  .meter span { font-size: 2.4rem; font-weight: 800; line-height: 1; color: var(--ink); }
   .meter small { color: var(--muted); font-size: 0.85rem; }
   .punten-kop { font-size: 1.15rem; margin: 6px 0 8px; }
   .gedeeld { background: var(--tint); border: 1px solid #ffd6b8; border-radius: 10px; padding: 12px 14px; margin: 0 0 14px; }

@@ -3,6 +3,8 @@
 import { tekeningen } from '../../data/tekeningen';
 interface Props { naam: string; maat?: number; label?: string; class?: string; vertraging?: number }
 const { naam, maat = 56, label, class: klasse, vertraging = 0 } = Astro.props;
+// Kaarten in een rij tekenen kort na elkaar: de opgegeven vertraging wordt gehalveerd (120/240/360 ms wordt 60/120/180 ms),
+// zodat ook het laatste icoon binnen ongeveer 0,8 s af is.
 const inhoud = tekeningen[naam] ?? tekeningen.lamp;
 ---
 <svg
@@ -11,7 +13,7 @@ const inhoud = tekeningen[naam] ?? tekeningen.lamp;
   width={maat}
   height={maat}
   data-teken
-  style={vertraging ? `--start:${vertraging}ms` : undefined}
+  style={vertraging ? `--start:${Math.round(vertraging / 2)}ms` : undefined}
   role={label ? 'img' : undefined}
   aria-label={label}
   aria-hidden={label ? undefined : 'true'}

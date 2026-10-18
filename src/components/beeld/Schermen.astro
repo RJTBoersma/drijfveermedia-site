@@ -4,6 +4,7 @@ interface Props { bedrijf: string; kop: string; label?: string }
 const { bedrijf, kop, label = 'Voorbeeld: dezelfde website op laptop en telefoon' } = Astro.props;
 ---
 <figure class="schermen" aria-label={label}>
+  <div class="toestellen">
   <div class="laptop">
     <div class="scherm">
       <div class="site">
@@ -24,10 +25,13 @@ const { bedrijf, kop, label = 'Voorbeeld: dezelfde website op laptop en telefoon
       <div class="blokjes"><i></i><i></i></div>
     </div>
   </div>
+  </div>
   <figcaption class="klein muted">{label}</figcaption>
 </figure>
 <style>
-  .schermen { margin: 0; position: relative; padding-bottom: 64px; }
+  .schermen { margin: 0; }
+  /* Alles blijft binnen de figuur: geen horizontale scroll op een tablet (de onderrand van de laptop stak 4% uit) */
+  .toestellen { position: relative; padding: 0 4% 44px; }
   .laptop .scherm { background: #10283f; border-radius: 14px 14px 0 0; padding: 10px; position: relative; }
   .cursor { position: absolute; width: 22px; height: 22px; left: 70%; top: 85%; animation: cursor 6s ease-in-out 0.8s infinite; }
   @keyframes cursor { 0% { left: 75%; top: 88%; } 35%, 60% { left: 15%; top: 50%; } 100% { left: 75%; top: 88%; } }
@@ -37,7 +41,7 @@ const { bedrijf, kop, label = 'Voorbeeld: dezelfde website op laptop en telefoon
   .melding b { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ok); color: #fff; margin-right: 6px; font-size: 0.75rem; }
   @keyframes melding { 0%, 42% { opacity: 0; transform: translateY(10px) scale(0.95); } 48%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
   @media (prefers-reduced-motion: reduce) { .cursor, .klikring, .melding { animation: none; } .klikring { display: none; } }
-  .voet { height: 14px; background: #c9d3dd; border-radius: 0 0 14px 14px; margin: 0 -4%; }
+  .voet { height: 14px; background: #c9d3dd; border-radius: 0 0 14px 14px; margin: 0 -4.4%; }
   .site { background: #fff; border-radius: 6px; overflow: hidden; }
   .nav { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 0.8rem; }
   .nav b { margin-right: auto; color: var(--navy); }
@@ -45,15 +49,15 @@ const { bedrijf, kop, label = 'Voorbeeld: dezelfde website op laptop en telefoon
   .knopje { background: var(--orange); color: var(--on-orange); font-weight: 800; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; }
   .knopje.groot { display: inline-block; margin-top: 8px; font-size: 0.78rem; padding: 6px 10px; }
   .held { padding: 18px 14px; background: linear-gradient(135deg, #eef3f7, #fff); }
-  .h { margin: 0 0 8px; font-weight: 900; font-size: 1.05rem; line-height: 1.15; color: var(--ink); max-width: 16ch; }
+  .h { margin: 0 0 8px; font-weight: 750; font-size: 1.05rem; line-height: 1.15; color: var(--ink); max-width: 16ch; }
   .l { height: 6px; border-radius: 3px; background: var(--line); margin: 0 0 6px; width: 80%; }
   .l.kort { width: 55%; }
   .blokjes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 14px 16px; }
   .blokjes i { height: 42px; border-radius: 6px; background: var(--chip); }
-  .telefoon { position: absolute; right: -2%; bottom: 20px; width: 34%; background: #10283f; border-radius: 22px; padding: 8px; box-shadow: 0 20px 50px -20px rgb(7 70 99 / 0.6); animation: zweef 5s ease-in-out infinite; }
+  .telefoon { position: absolute; right: 0; bottom: 8px; width: 34%; background: #10283f; border-radius: 22px; padding: 8px; box-shadow: 0 20px 50px -20px rgb(7 70 99 / 0.6); animation: zweef 5s ease-in-out infinite; }
   .telefoon .site { border-radius: 15px; }
   .telefoon .h { font-size: 0.85rem; }
   .telefoon .blokjes { grid-template-columns: 1fr 1fr; }
   @keyframes zweef { 50% { transform: translateY(-8px); } }
-  figcaption { position: absolute; left: 0; bottom: 0; max-width: 58%; }
+  figcaption { margin-top: 12px; max-width: 60ch; }
 </style>

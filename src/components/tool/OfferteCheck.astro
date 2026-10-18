@@ -35,7 +35,7 @@ const vragen = [
         <li class="oc-vraag" data-i={i}>
           <fieldset>
             <legend>{v}</legend>
-            <div class="oc-keuze">
+            <div class="oc-keuze keuze-pil">
               <label><input type="radio" name={`v${i}`} value="j" /> Ja</label>
               <label><input type="radio" name={`v${i}`} value="n" /> Nee</label>
             </div>
@@ -59,7 +59,7 @@ const vragen = [
         <a class="btn" href="/contact/?vraag=second%20opinion%20offerte">Stuur je offerte, {site.contactpersoon} belt je met een second opinion</a>
         <button class="btn btn-ghost" type="button" data-deel>Deel je uitslag</button>
       </div>
-      <p class="klein muted oc-status" data-status></p>
+      <p class="klein muted oc-status" data-status role="status"></p>
       <p class="klein muted">Laat je nummer achter en mail de offerte naar <a href={`mailto:${site.email}?subject=Second%20opinion%20offerte`}>{site.email}</a>.{!opConsult && <> Samen grondig doorlopen kan in een <a href="/consult/">consult</a> van € 85 per uur.</>}</p>
     </div>
   </div>
@@ -146,7 +146,7 @@ const vragen = [
 
 <style>
   .oc { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
-  .oc-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .oc-titel { font-size: var(--step-2); font-weight: 750; margin: 6px 0 10px; }
   .oc-intro { margin-bottom: 16px; }
   .oc-form { display: grid; gap: 14px; }
   .oc-form .btn { justify-self: start; }
@@ -157,17 +157,15 @@ const vragen = [
   .oc-vraag fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; align-items: center; }
   .oc-vraag legend { float: left; padding: 0; font-weight: 600; font-size: 0.98rem; line-height: 1.4; }
   .oc-vraag legend::before { content: counter(oc) '. '; color: var(--orange); font-weight: 800; }
-  .oc-keuze { display: flex; gap: 6px; }
-  .oc-keuze label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; min-width: 64px; padding: 4px 12px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
-  .oc-keuze label:has(input:checked) { border-color: var(--navy); background: var(--chip); }
-  .oc-keuze input { accent-color: var(--navy); width: 18px; height: 18px; margin: 0; }
+  .oc-keuze { flex-wrap: nowrap; gap: 6px; }
+  .oc-keuze > label { min-width: 64px; justify-content: center; }
   .oc-uitslag { margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--line); }
   .oc-score-rij { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; align-items: center; margin-bottom: 16px; }
   .oc-oordeel { font-size: var(--step-1); font-weight: 800; line-height: 1.2; margin: 0 0 6px; }
   .oc-uitleg { margin: 0; }
   .oc-meter { --score: 0; width: 120px; aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; text-align: center;
     background: radial-gradient(closest-side, var(--panel) 78%, transparent 79% 100%), conic-gradient(var(--orange) calc(var(--score) * 1%), var(--chip) 0); }
-  .oc-meter span { font-size: 2.2rem; font-weight: 900; line-height: 1; color: var(--ink); }
+  .oc-meter span { font-size: 2.2rem; font-weight: 800; line-height: 1; color: var(--ink); }
   .oc-meter small { color: var(--muted); font-size: 0.85rem; }
   .oc-vlaggen-kop { font-weight: 800; font-size: 1.1rem; margin: 6px 0 8px; }
   .oc-vlaggen { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 8px; }

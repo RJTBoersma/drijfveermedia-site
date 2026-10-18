@@ -22,7 +22,8 @@ const naarScan = Astro.url.pathname.startsWith('/gratis-website-analyse');
   .mbar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; gap: 10px; background: var(--panel); border-top: 1px solid var(--line);
     padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
     transform: translateY(110%); transition: transform 0.25s ease; }
-  .mbar.show { transform: none; }
+  .mbar { visibility: hidden; transition: transform 0.25s ease, visibility 0s linear 0.25s; }
+  .mbar.show { transform: none; visibility: visible; transition: transform 0.25s ease, visibility 0s; }
   .mbar .btn { flex: 1; font-size: 1rem; padding: 0.75em; min-height: 48px; }
   @media (max-width: 900px) { .mbar { display: flex; } }
   @media (prefers-reduced-motion: reduce) { .mbar { transition: none; } }
