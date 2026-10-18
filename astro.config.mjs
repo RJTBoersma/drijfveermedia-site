@@ -21,7 +21,7 @@ const euroBijElkaar = {
         const lijf = html.slice(k).split(/(<script[\s\S]*?<\/script>)/).map((deel, i) => (i % 2 ? deel : deel
           .replace(/€ (?=[0-9])/g, '€&#160;')
           // Tabellen die horizontaal scrollen: bereikbaar met het toetsenbord en voorgelezen als gebied, elk met een eigen naam
-          .replace(/<div class="tabel-scroll"(?![^>]*tabindex)/g, () => `<div class="tabel-scroll" tabindex="0" role="region" aria-label="Tabel ${++n}"`)
+          .replace(/<div class="(tabel-scroll[^"]*)"(?![^>]*tabindex)/g, (_, k) => `<div class="${k}" tabindex="0" role="region" aria-label="Tabel ${++n}"`)
           // Codeblokken die kunnen scrollen: ook bereikbaar met het toetsenbord
           .replace(/<pre(?![^>]*tabindex)(?=[\s>])/g, '<pre tabindex="0"')
           // Tabellen met drie of meer kolommen: de eerste cel van elke rij is de rijkop (WCAG 1.3.1)
