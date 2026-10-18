@@ -7,12 +7,15 @@ import Tekening from '../teken/Tekening.astro';
 import Veer from '../teken/Veer.astro';
 import Plaatje from '../teken/Plaatje.astro';
 import { diensten } from '../../data/diensten';
+import { stapVoor } from '../../data/actie';
 type CaseNaam = 'willemfikstt' | 'conflictbemiddeling' | 'dakraamconcurrent';
 interface Props { titel?: string; intro?: string; case?: boolean | CaseNaam; eenmalig?: boolean; kort?: boolean }
 const pad = Astro.url.pathname;
 const groot = ['/', '/prijzen/', '/garantie/'].includes(pad) || diensten.some((d) => d.pillar && d.url === pad);
 const dienst = diensten.find((d) => d.url === pad);
-const eenmaligAuto = pad.startsWith('/webdesign-') || (!!dienst && ['eenmalig', 'pagina', 'uur'].includes(dienst.prijsEenheid ?? ''));
+const stapDienst = diensten.find((d) => d.url === stapVoor(pad).dienst?.url);
+const isEenmalig = (d?: typeof dienst) => !!d && ['eenmalig', 'pagina', 'uur'].includes(d.prijsEenheid ?? '');
+const eenmaligAuto = pad.startsWith('/webdesign-') || isEenmalig(dienst) || (pad.startsWith('/kennisbank/') && isEenmalig(stapDienst));
 const {
   titel = groot ? 'Hoe weet je dat wij waarmaken wat we zeggen?' : 'Wat je bij ons zeker weet',
   intro,
@@ -33,6 +36,7 @@ const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? case
   <h2>{titel}</h2>
   {intro && <p class="sectie-intro">{intro}</p>}
   {kort ? (
+    eenmalig ? <p class="bewijs-kort">Laat je het ons doen, dan hoor je na één gesprek een vaste prijs, die in de offerte staat voordat we beginnen. Wat we bij jou doen, hebben we eerst op onze eigen sites getest (<a href="/proeflab/">het proeflab</a>), en op werkdagen bellen we je binnen 15 minuten terug.</p> :
     <p class="bewijs-kort">Bij maandelijkse diensten leggen we vooraf een doel vast. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door (<a href="/garantie/">zo werkt de garantie</a>). Je zegt per maand op, en wat we bij jou doen, hebben we eerst op onze eigen sites getest (<a href="/proeflab/">het proeflab</a>).</p>
   ) : (
     <div class:list={['raster', 'bewijs', { drie: eenmalig }]}>
