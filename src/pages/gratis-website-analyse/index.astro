@@ -36,12 +36,33 @@ const hoofdstukken = [
   description="Vraag een gratis SEO-scan aan. We bekijken je zoekwoorden, techniek, content, backlinks en AI-vindbaarheid en bellen je binnen 15 minuten terug."
   kruimels={[{ naam: 'Gratis scan', url: '/gratis-website-analyse/' }]}
 >
-  <Hero kicker="Gratis" titel="Gratis SEO-scan: zo staat je website ervoor" knop={{ tekst: 'Vraag de scan aan', href: '#scan' }}>
-    <p>Vul je gegevens in en we kijken naar je site, je concurrenten en wat AI over je zegt. Op werkdagen bellen we je binnen 15 minuten terug.</p>
+  <Hero kicker="Gratis" titel="Gratis SEO-scan: de 3 kansen die jou de meeste klanten opleveren" knop={{ tekst: 'Naar het formulier', href: '#scan' }} knopAlleenMobiel>
+    <p>Thorgall kijkt naar je website, je drie grootste concurrenten, je plek op de kaart en wat ChatGPT over je zegt. Daarna hoor je de drie verbeterpunten die het meeste opleveren, ook als je nooit klant wordt. Op werkdagen bellen we je binnen 15 minuten terug.</p>
     <div slot="beeld" id="scan">
-      <Aanvraagformulier soort="Gratis scan" knop="Vraag de gratis scan aan" vak website bericht={false} />
+      <Aanvraagformulier soort="Gratis scan" knop="Vraag de gratis scan aan" vak website bericht={false} mailKeuze />
     </div>
   </Hero>
+  <script>
+    // De scanpagina past zich aan de knop aan waarmee de bezoeker kwam: ?doel=kaart|ads|website, plus vak en plaats.
+    const q = new URLSearchParams(location.search);
+    const vak = (q.get('vak') || '').slice(0, 40).trim();
+    const plaats = (q.get('plaats') || '').slice(0, 40).trim();
+    const doelen: Record<string, { titel: string; lead: string; knop: string; soort: string }> = {
+      kaart: { titel: `Gratis kaart-check: sta jij in het kaartje als iemand${plaats ? ` in ${plaats}` : ''} zoekt?`, lead: 'Thorgall zoekt op jouw vak in jouw plaats en kijkt wie er in het kaartje van Google staat, en waarom. Daarna belt hij je met de drie dingen die jou daar het snelst brengen.', knop: 'Check mijn plek op de kaart', soort: 'Kaart-check' },
+      ads: { titel: 'Gratis Google Ads-check: waar lekt je budget weg?', lead: 'We lopen je campagnes na: zoektermen, biedingen, advertenties en de meting. Daarna hoor je waar geld weglekt en wat je als eerste aanpakt. Je account blijft van jou.', knop: 'Laat mijn account checken', soort: 'Ads-check' },
+      website: { titel: 'Vraag een vaste prijs voor je nieuwe website', lead: 'Vertel wat je site moet opleveren. Thorgall belt je terug en noemt een vaste prijs, ook als de goedkoopste route het beste bij je past.', knop: 'Vraag mijn vaste prijs aan', soort: 'Website-prijs' },
+    };
+    const d = doelen[q.get('doel') || ''];
+    const zet = (sel: string, tekst: string) => { const el = document.querySelector(sel); if (el) el.textContent = tekst; };
+    if (d) {
+      zet('[data-hero-titel]', d.titel);
+      const lead = document.querySelector('[data-hero-lead] p'); if (lead) lead.textContent = d.lead;
+      const knop = document.querySelector<HTMLButtonElement>('#scan button[type=submit]'); if (knop) knop.textContent = d.knop;
+      const soort = document.querySelector<HTMLInputElement>('#scan [data-soort]'); if (soort) soort.value = d.soort;
+      document.title = d.titel + ' | Drijfveer Media';
+    }
+    if (vak || plaats) zet('[data-hero-kicker]', `Gratis · voor ${vak ? `een ${vak}` : 'jouw bedrijf'}${plaats ? ` in ${plaats}` : ''}`);
+  </script>
 
   <section class="wrap sectie" data-aida="interest">
     <div class="scan-kop">
@@ -61,7 +82,7 @@ const hoofdstukken = [
       <h2>Zo werkt het</h2>
     </div>
     <ol class="stappen-rij">
-      <li><strong>Je vult het formulier in</strong><p>Wat je doet, waar je zit en je website. Meer hebben we niet nodig.</p></li>
+      <li><strong>Je vult het formulier in</strong><p>Je website, je naam en je nummer. Meer hebben we niet nodig.</p></li>
       <li><strong>We bellen je terug</strong><p>Binnen 15 minuten op werkdagen. We vragen wat je wilt bereiken.</p></li>
       <li><strong>We kijken je site na</strong><p>Thorgall bekijkt je site en die van je drie grootste concurrenten.</p></li>
       <li><strong>Je hoort de uitkomst</strong><p>De drie verbeterpunten die het meeste opleveren, in gewone taal.</p></li>
@@ -165,10 +186,10 @@ const hoofdstukken = [
         <p>Voor een webshop met duizenden producten is de scan minder geschikt. Webshops bouwen en optimaliseren doen we niet, en dat zeggen we je dan ook. Heb je nog geen website? Dan kijken we naar je Bedrijfsprofiel en je concurrenten, en hoor je wat een nieuwe site minimaal moet hebben.</p>
 
         <h2 id="gegevens">Wat er met je gegevens gebeurt</h2>
-        <p>Je vult je naam, je telefoonnummer, je vak, je plaats en je website in. Onze site maakt daar een e-mail van naar {site.email}. Het komt niet in een database op de website terecht en er komen geen tracking-cookies aan te pas. We gebruiken je gegevens om de scan te doen en je te bellen. Je komt niet op een mailinglijst. Alles staat in onze <a href="/privacyverklaring/">privacyverklaring</a>.</p>
+        <p>Je vult je website, je naam en je telefoonnummer in, en als je wilt je vak en je plaats. Onze site maakt daar een e-mail van naar {site.email} en bewaart een reservekopie, die na 3 maanden wordt verwijderd. Er komen geen tracking-cookies aan te pas. We gebruiken je gegevens om de scan te doen en je te bellen. Je komt niet op een mailinglijst. Alles staat in onze <a href="/privacyverklaring/">privacyverklaring</a>.</p>
       </article>
       <aside class="zijkolom">
-        <Inhoud items={hoofdstukken} leestijd={11} />
+        <Inhoud items={hoofdstukken} leestijd={11} actie={false} />
         <div class="card zij-actie">
           <p class="kader-titel">Liever meteen beginnen?</p>
           <p class="muted">Vul het formulier in, of bel {site.contactpersoon}: <a href={site.telefoonLink}>{site.telefoon}</a>.</p>

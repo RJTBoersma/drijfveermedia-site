@@ -11,18 +11,19 @@ interface Props {
   bel?: boolean;
   smal?: boolean; // zonder beeld
   eenmalig?: boolean; // eenmalige prijs in plaats van per maand
+  knopAlleenMobiel?: boolean; // knop verbergen op brede schermen (als het formulier ernaast staat)
 }
-const { kicker, titel, prijs, knop: eigenKnop, bel = true, smal = false, eenmalig = false } = Astro.props;
+const { kicker, titel, prijs, knop: eigenKnop, bel = true, smal = false, eenmalig = false, knopAlleenMobiel = false } = Astro.props;
 const knop = knopVoor(Astro.url.pathname, eigenKnop);
 const heeftBeeld = Astro.slots.has('beeld') && !smal;
 ---
 <section class:list={['wrap', 'hero', { 'met-beeld': heeftBeeld }]} data-aida="attention">
   <div class="hero-tekst">
-    <p class="kicker">{kicker}</p>
-    <h1>{titel}</h1>
-    <div class="lead"><slot /></div>
+    <p class="kicker" data-hero-kicker>{kicker}</p>
+    <h1 data-hero-titel>{titel}</h1>
+    <div class="lead" data-hero-lead><slot /></div>
     <div class="hero-acties">
-      <a class="btn" href={knop.href}>{knop.tekst}</a>
+      <a class:list={['btn', { 'alleen-mobiel': knopAlleenMobiel }]} href={knop.href}>{knop.tekst}</a>
       {bel && <span class="bel">of bel {site.contactpersoon}: <a href={site.telefoonLink}>{site.telefoon}</a></span>}
     </div>
     {prijs && (
@@ -36,6 +37,7 @@ const heeftBeeld = Astro.slots.has('beeld') && !smal;
   {heeftBeeld && <div class="hero-beeld stippen" style={`view-transition-name:${overgang(Astro.url.pathname)}`}><slot name="beeld" /></div>}
 </section>
 <style>
+  @media (min-width: 901px) { .alleen-mobiel { display: none; } }
   .hero { padding-block: 28px clamp(8px, 2vw, 24px); display: grid; gap: 40px; }
   .hero.met-beeld { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: center; }
   .hero h1 { margin: 10px 0 18px; max-width: 18ch; }

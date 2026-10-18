@@ -61,6 +61,7 @@ const basis = [
     email: site.email,
     foundingDate: String(site.opgericht),
     identifier: { '@type': 'PropertyValue', propertyID: 'KvK', value: site.kvk },
+    ...(site.btwId ? { vatID: site.btwId } : {}),
     address: {
       '@type': 'PostalAddress',
       streetAddress: site.straat,
@@ -245,9 +246,26 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     <script is:inline>
       // Bezoekersteller zonder cookies en zonder persoonsgegevens (zie /privacyverklaring/ en /api/teller-lib.php)
       (function () {
+        // Campagne van de eerste pagina in deze tab onthouden (sessionStorage, geen cookie), zodat een aanvraag weet waar hij vandaan kwam.
+        try {
+          var u = new URLSearchParams(location.search);
+          var c = ['utm_source', 'utm_medium', 'utm_campaign'].map(function (k) { return u.get(k); }).filter(Boolean).join(' / ') || (u.has('gclid') ? 'google ads' : '');
+          if (c && !sessionStorage.getItem('dm-campagne')) sessionStorage.setItem('dm-campagne', c.slice(0, 120));
+        } catch (e) {}
         try {
           if (location.hostname !== 'www.drijfveermedia.nl' || navigator.doNotTrack === '1' || navigator.globalPrivacyControl) return;
-          navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: location.pathname, r: document.referrer }));
+          var ref = document.referrer, binnen = !ref;
+          try { binnen = binnen || new URL(ref).host !== location.host; } catch (e) {}
+          var q = new URLSearchParams(location.search);
+          var utm = ['utm_source', 'utm_medium', 'utm_campaign'].map(function (k) { return q.get(k); }).filter(Boolean).join(' / ').slice(0, 60);
+          navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: location.pathname, r: ref, e: binnen ? 1 : 0, u: utm, g: q.has('gclid') ? 1 : 0 }));
+          // Klikken op bellen, mailen, de vCard en de route tellen (alleen het aantal per pagina)
+          document.addEventListener('click', function (ev) {
+            var a = ev.target.closest && ev.target.closest('a[href^="tel:"],a[href^="mailto:"],a[download],a[href*="maps/dir"]');
+            if (!a) return;
+            var soort = a.protocol === 'tel:' ? 'bellen' : a.protocol === 'mailto:' ? 'mail' : a.hasAttribute('download') ? 'vcard' : 'route';
+            navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: '/_klik/' + soort + location.pathname, r: '' }));
+          });
         } catch (e) {}
       })();
     </script>

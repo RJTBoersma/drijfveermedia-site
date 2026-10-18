@@ -18,5 +18,9 @@ $bron = strtolower((string)parse_url((string)($in['r'] ?? ''), PHP_URL_HOST));
 $bron = preg_replace('/^www\./', '', $bron);
 if ($bron === 'drijfveermedia.nl' || !preg_match('/^[a-z0-9.-]{3,80}$/', $bron)) $bron = '';
 
-tel_bezoek($pad, $bron);
+$binnen = !empty($in['e']);
+$utm = substr(preg_replace('/[^a-z0-9 \/._-]/i', '', (string)($in['u'] ?? '')), 0, 60);
+if (!empty($in['g']) && $utm === '') $utm = 'google ads';
+
+tel_bezoek($pad, $bron, $binnen, $utm);
 http_response_code(204);

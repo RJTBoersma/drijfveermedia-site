@@ -26,6 +26,31 @@ const verboden = [
 // Eigennamen tellen niet mee bij de controle op Engelse hoofdletters in koppen.
 const eigenNamen = new Set(['Google', 'Bing', 'Apple', 'Business', 'Connect', 'Places', 'Maps', 'Kaarten', 'ChatGPT', 'Gemini', 'Copilot', 'Perplexity', 'Microsoft', 'Overviews', 'Drijfveer', 'Media', 'Search', 'Console', 'Analytics', 'Shopping', 'WordPress', 'Instagram', 'LinkedIn', 'Facebook', 'Bedrijfsprofiel', 'Drenthe', 'Friesland', 'Groningen', 'Assen', 'Emmen', 'Zwolle', 'Willemfikstt', 'Thorgall', 'Claude', 'Anthropic', 'OpenAI', 'Perplexity', 'Leeuwarden', 'Heerenveen', 'Drachten', 'Sneek', 'Joure', 'Meppel', 'Hoogeveen', 'Veendam', 'Stadskanaal', 'Tag', 'Manager', 'Looker', 'Studio', 'Ads', 'Grants', 'Stories', 'Copilot', 'Overview', 'Mode']);
 const opsommers = ['bovendien', 'daarnaast', 'verder', 'tevens', 'echter'];
+// Huisstijl (panel copy, 18-10-2026): stopwoorden die door herhaling hun kracht verliezen, AI-patronen en één schrijfwijze per begrip.
+const STIJL = [
+  // [patroon, maximum per pagina, uitleg, url's waar het wel mag]
+  [/\beerlijk(e|er|heid)?\b/gi, 1, '"eerlijk" hooguit één keer per pagina'],
+  [/eerlijk is eerlijk/gi, 0, '"Eerlijk is eerlijk" schrappen, begin met het feit'],
+  [/\bgewoon\b/gi, 1, '"gewoon" hooguit één keer per pagina, en alleen als "normaal"'],
+  [/in gewone taal/gi, 0, '"in gewone taal": zeg wat de klant concreet krijgt'],
+  [/(^|[.?!]\s+|\n\s*)niet\s/gi, 1, 'hooguit één zin die met "Niet" begint'],
+  [/\b(niet|geen)\b[^.?!\n]{0,90}?,?\s+maar\b/gi, 2, 'hooguit twee keer "niet/geen X, maar Y"'],
+  [/\bdat is geen\b/gi, 0, '"Dat is geen …" (AI-patroon)'],
+  [/\bzegt (alles|niets|weinig|genoeg)\b/gi, 0, '"zegt alles/niets/weinig/genoeg" (AI-patroon)'],
+  [/goud waard/gi, 0, '"goud waard" (cliché)'],
+  [/uit interesse, niet om te verkopen/gi, 0, '"Uit interesse, niet om te verkopen" wekt het wantrouwen dat het wil wegnemen'],
+  [/gelikte pitch/gi, 0, '"gelikte pitch" staat alleen op over ons', ['/over-ons/']],
+  [/koffie staat (al )?klaar/gi, 0, '"de koffie staat klaar" alleen op contact', ['/contact/']],
+  [/zoekmachine optimalisatie/gi, 0, 'schrijf "zoekmachineoptimalisatie"'],
+  [/\bGoogle reviews?\b/g, 0, 'schrijf "Google-reviews"'],
+  [/\b(SEO|Google Ads|Linkbuilding|GEO) (specialist|bureau|specialisten|bureaus)\b/g, 0, 'met koppelteken: "SEO-bureau", "Google Ads-specialist"'],
+  [/\b(branding|social media|marketing) bureau\b/gi, 0, 'aan elkaar: "brandingbureau", "socialemediabureau", "marketingbureau"'],
+  [/\bcontent marketing\b/gi, 0, 'schrijf "contentmarketing"'],
+  [/Apple Business Connect/g, 0, 'de naam is nu "Apple Business"'],
+  [/community van freelance/gi, 0, 'schrijf "een vaste groep freelancers die we al jaren kennen"'],
+  [/(dertig|veertig) pagina'?s/gi, 0, 'geen "rapport van dertig/veertig pagina\'s": zeg wat je wel krijgt (één A4)'],
+  [/fouten die we vaak zien/gi, 0, 'schrijf "Veelgemaakte fouten"'],
+];
 
 function bestanden(dir) {
   return readdirSync(dir).flatMap((f) => {
@@ -153,6 +178,15 @@ for (const f of bestanden('dist')) {
   for (const o of opsommers) {
     const n = (laag.match(new RegExp(`\\b${o}\\b`, 'g')) ?? []).length;
     if (n > 2) meldingen.push(`te vaak "${o}" (${n}x)`);
+  }
+  for (const [re, max, uitleg, mag] of STIJL) {
+    if (mag?.includes(url)) continue;
+    const n = (tekst.match(re) ?? []).length;
+    if (n > max) meldingen.push(`stijl: ${uitleg} (${n}x)`);
+  }
+  if (/binnen 15 minuten/i.test(tekst) && !/werkdag|kantoortijd|8\.00 en 17\.00/i.test(tekst)) meldingen.push('stijl: "binnen 15 minuten" zonder "op werkdagen" op de pagina');
+  for (const k of [...ruw.matchAll(/<h[1-3][^>]*>([\s\S]*?)<\/h[1-3]>/g)].map((m) => m[1]).concat(ruw.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '')) {
+    if (/eerlijk|gewoon/i.test(k)) meldingen.push(`stijl: "eerlijk" of "gewoon" in een kop of meta description: "${k.replace(/<[^>]+>/g, '').trim()}"`);
   }
   const streep = (tekst.match(/\s[—–]\s|—/g) ?? []).length;
   if (streep) meldingen.push(`gedachtestreepjes: ${streep}`);

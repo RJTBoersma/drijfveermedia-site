@@ -1,32 +1,66 @@
 ---
 // Het antwoord op "Hoe weet ik dat jullie waarmaken wat jullie zeggen?" (AIDA: desire).
+// Twee varianten: maandelijkse diensten (garantie en opzegbaar) en eenmalig werk (vaste prijs vooraf).
+// In de kennisbank één korte alinea: wie leest wat een sitemap is, zoekt nog geen garantie.
+// De case-strook wisselt per onderwerp, zodat niet op elke pagina hetzelfde cijfer staat.
 import Tekening from '../teken/Tekening.astro';
 import Veer from '../teken/Veer.astro';
 import Plaatje from '../teken/Plaatje.astro';
-interface Props { titel?: string; intro?: string; case?: boolean }
-const { titel = 'Hoe weet je dat wij waarmaken wat we zeggen?', intro, case: metCase = true } = Astro.props;
+import { diensten } from '../../data/diensten';
+type CaseNaam = 'willemfikstt' | 'conflictbemiddeling' | 'dakraamconcurrent';
+interface Props { titel?: string; intro?: string; case?: boolean | CaseNaam; eenmalig?: boolean; kort?: boolean }
+const pad = Astro.url.pathname;
+const groot = ['/', '/prijzen/', '/garantie/'].includes(pad) || diensten.some((d) => d.pillar && d.url === pad);
+const dienst = diensten.find((d) => d.url === pad);
+const eenmaligAuto = pad.startsWith('/webdesign-') || (!!dienst && ['eenmalig', 'pagina', 'uur'].includes(dienst.prijsEenheid ?? ''));
+const {
+  titel = groot ? 'Hoe weet je dat wij waarmaken wat we zeggen?' : 'Wat je bij ons zeker weet',
+  intro,
+  case: caseKeuze = true,
+  eenmalig = eenmaligAuto,
+  kort = pad.startsWith('/kennisbank/'),
+} = Astro.props;
+const cases: Record<CaseNaam, { href: string; naam: string; getal: string; tekst: string; onderwerp: string }> = {
+  willemfikstt: { href: '/cases/willemfikstt/', naam: 'Willemfikstt.nl', getal: '+87%', tekst: 'kreeg 87% meer bezoekers uit Google', onderwerp: 'raket' },
+  conflictbemiddeling: { href: '/cases/conflictbemiddeling/', naam: 'Conflictbemiddeling.nl', getal: '+47%', tekst: 'kreeg 47% meer bezoekers uit Google, na een nieuwe site, SEO en Google Ads', onderwerp: 'raket' },
+  dakraamconcurrent: { href: '/cases/dakraamconcurrent/', naam: 'Dakraamconcurrent.nl', getal: '+32%', tekst: 'kreeg 32% meer bezoekers uit Google, na een nieuwe site en linkbuilding', onderwerp: 'raket' },
+};
+const caseAuto: CaseNaam = /^\/(website-laten-maken|webdesign-|online-adverteren|branding)/.test(pad) ? 'conflictbemiddeling' : /^\/linkbuilding/.test(pad) ? 'dakraamconcurrent' : 'willemfikstt';
+const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? caseAuto : caseKeuze];
 ---
 <section class="wrap sectie" data-aida="desire">
   <Veer />
   <h2>{titel}</h2>
   {intro && <p class="sectie-intro">{intro}</p>}
-  <div class="raster bewijs">
-    <div class="card"><Tekening naam="schild" /><h3>Garantie</h3><p>We spreken samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p><a class="meer" href="/garantie/">Zo werkt de garantie</a></div>
-    <div class="card"><Tekening naam="kalender" vertraging={150} /><h3>Maandelijks opzegbaar</h3><p>Je blijft omdat het werkt. Niet omdat je vastzit aan een contract van een jaar.</p></div>
-    <div class="card"><Tekening naam="kolf" vertraging={300} /><h3>Eerst getest in ons proeflab</h3><p>We hebben al 15 jaar meer dan 100 eigen websites. Daar testen we elke techniek voordat jouw site ermee te maken krijgt.</p><a class="meer" href="/proeflab/">Over het proeflab</a></div>
-    <div class="card"><Tekening naam="telefoon" vertraging={450} /><h3>Binnen 15 minuten gebeld</h3><p>Op werkdagen tussen 8.00 en 17.00 uur bellen we je binnen een kwartier terug. Uit interesse, niet om te verkopen.</p></div>
-  </div>
-  {metCase && (
+  {kort ? (
+    <p class="bewijs-kort">Bij maandelijkse diensten leggen we vooraf een doel vast. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door (<a href="/garantie/">zo werkt de garantie</a>). Je zegt per maand op, en wat we bij jou doen, hebben we eerst op onze eigen sites getest (<a href="/proeflab/">het proeflab</a>).</p>
+  ) : (
+    <div class:list={['raster', 'bewijs', { drie: eenmalig }]}>
+      {eenmalig ? (
+        <div class="card"><Tekening naam="kalender" /><h3>Vaste prijs vooraf</h3><p>Na één gesprek weet je wat het kost. Dat bedrag staat in de offerte, voordat we beginnen.</p><a class="meer" href="/prijzen/">Alle prijzen</a></div>
+      ) : (
+        <>
+          <div class="card"><Tekening naam="schild" /><h3>Een doel op papier</h3><p>We leggen bij de start een meetbaar doel vast, met een datum. Halen we het niet en ligt het aan ons, dan werk je de maand erna zonder factuur met ons door.</p><a class="meer" href="/garantie/">Zo werkt de garantie</a></div>
+          <div class="card"><Tekening naam="kalender" vertraging={150} /><h3>Per maand opzegbaar</h3><p>Eén maand opzegtermijn, per e-mail. Je blijft alleen zolang het iets oplevert.</p></div>
+        </>
+      )}
+      <div class="card"><Tekening naam="kolf" vertraging={300} /><h3>Eerst getest op eigen sites</h3><p>Sinds 2011 bouwden we een proeflab op van meer dan 100 eigen websites. Een nieuwe techniek proberen we daar eerst, zodat jouw site geen proefkonijn is.</p><a class="meer" href="/proeflab/">Over het proeflab</a></div>
+      <div class="card"><Tekening naam="telefoon" vertraging={450} /><h3>Binnen 15 minuten teruggebeld</h3><p>Op werkdagen tussen 8.00 en 17.00 uur. Thorgall vraagt eerst wat je wilt bereiken. Over geld praat je pas als jij dat wilt.</p></div>
+    </div>
+  )}
+  {gekozenCase && !kort && (
     <div class="card case-strook kaart-link">
-      <div class="mini" aria-hidden="true"><Plaatje href="/cases/willemfikstt/" onderwerp="raket" /></div>
-      <span class="getal">+87%</span>
-      <span class="wat"><a href="/cases/willemfikstt/"><b>Willemfikstt.nl</b> kreeg 87% meer bezoekers uit Google</a> en 60% meer aanvragen via de site.</span>
+      <div class="mini" aria-hidden="true"><Plaatje href={gekozenCase.href} onderwerp={gekozenCase.onderwerp} /></div>
+      <span class="getal">{gekozenCase.getal}</span>
+      <span class="wat"><a href={gekozenCase.href}><b>{gekozenCase.naam}</b> {gekozenCase.tekst}</a>{gekozenCase.naam === 'Willemfikstt.nl' && ', en 60% meer aanvragen via de site'}.</span>
       <span class="meer" aria-hidden="true">Lees de case</span>
     </div>
   )}
 </section>
 <style>
   .bewijs :global(.tekening) { margin-bottom: 4px; }
+  @media (min-width: 900px) { .bewijs.drie { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .bewijs-kort { max-width: 68ch; }
   .case-strook { margin-top: 16px; padding: 20px 24px; display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 8px 24px; align-items: center; }
   .case-strook .mini { width: 150px; }
   .case-strook .mini :global(.plaatje) { margin: 0; }

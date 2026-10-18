@@ -7,26 +7,16 @@ const { compact = false } = Astro.props;
   <span class="txt"><span class="lbl" data-reach-label>Bel {site.contactpersoon}</span><span class="sep"> · </span><a href={site.telefoonLink} class="tel">{site.telefoon}</a></span>
 </span>
 <script>
-  // Kantoortijden: werkdagen 8.00 tot 17.00 uur, Nederlandse tijd.
+  import { bereikbaarheid } from '../data/kantoortijd';
+  // Werkdagen 8.00 tot 17.00 uur, Nederlandse tijd, dicht op feestdagen.
   function status() {
-    const nu = new Date();
-    const delen = new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(nu);
-    const dag = delen.find((p) => p.type === 'weekday')?.value ?? '';
-    const uur = Number(delen.find((p) => p.type === 'hour')?.value ?? 0);
-    const min = Number(delen.find((p) => p.type === 'minute')?.value ?? 0);
-    const werkdag = !['za', 'zo'].includes(dag.replace('.', ''));
-    const tijd = uur * 60 + min;
-    const open = werkdag && tijd >= 480 && tijd < 1020;
+    const b = bereikbaarheid();
     document.querySelectorAll<HTMLElement>('[data-reach]').forEach((el) => {
-      el.classList.toggle('open', open);
+      el.classList.toggle('open', b.open);
       const label = el.querySelector('[data-reach-label]');
       if (!label) return;
-      if (open) label.textContent = 'Thorgall is nu bereikbaar';
-      else {
-        const vrijdagAvond = dag.startsWith('vr') && tijd >= 1020;
-        const weekend = !werkdag;
-        label.textContent = vrijdagAvond || weekend ? 'Maandag vanaf 8.00 uur bereikbaar' : 'Morgen vanaf 8.00 uur bereikbaar';
-      }
+      const dag = b.wanneer.charAt(0).toUpperCase() + b.wanneer.slice(1);
+      label.textContent = b.open ? 'Thorgall is nu bereikbaar' : `${dag} vanaf 8.00 uur bereikbaar`;
     });
   }
   status();

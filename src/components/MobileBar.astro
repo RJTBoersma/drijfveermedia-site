@@ -13,15 +13,10 @@ const naarScan = Astro.url.pathname.startsWith('/gratis-website-analyse');
   const toon = () => bar?.classList.toggle('show', window.scrollY > 150);
   window.addEventListener('scroll', toon, { passive: true });
   toon();
-  // Buiten kantoortijd (werkdagen 8.00 tot 17.00 uur, Nederlandse tijd) heeft bellen geen zin: laat dan je nummer achter.
-  try {
-    const d = new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'short', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
-    const dag = d.find((x) => x.type === 'weekday')?.value ?? '';
-    const uur = Number(d.find((x) => x.type === 'hour')?.value ?? 12);
-    const open = !['za', 'zo'].includes(dag.replace('.', '')) && uur >= 8 && uur < 17;
-    const bel = document.querySelector<HTMLAnchorElement>('[data-bel]');
-    if (!open && bel) { bel.textContent = 'Bel me terug'; bel.href = '/contact/#terugbellen'; }
-  } catch (e) {}
+  // Buiten kantoortijd (en op feestdagen) heeft bellen geen zin: laat dan je nummer achter.
+  import { bereikbaarheid } from '../data/kantoortijd';
+  const bel = document.querySelector<HTMLAnchorElement>('[data-bel]');
+  if (!bereikbaarheid().open && bel) { bel.textContent = 'Bel me terug'; bel.href = '/contact/#terugbellen'; }
 </script>
 <style>
   .mbar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; gap: 10px; background: var(--panel); border-top: 1px solid var(--line);

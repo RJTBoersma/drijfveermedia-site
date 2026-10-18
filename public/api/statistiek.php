@@ -19,6 +19,8 @@ $e = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES);
 $top = function (array $a, int $n = 25) { arsort($a); return array_slice($a, 0, $n, true); };
 $bezoeken = array_sum(array_column($data['dagen'] ?? [], 'bezoeken'));
 $aanvragen = array_sum(array_column($data['dagen'] ?? [], 'aanvragen'));
+$binnen = array_sum(array_column($data['dagen'] ?? [], 'binnenkomsten'));
+$bellen = array_sum(array_filter($data['klikken'] ?? [], fn($k) => str_starts_with((string)$k, 'bellen'), ARRAY_FILTER_USE_KEY));
 $maanden = array_map(fn($f) => basename($f, '.json'), glob(TELLER_MAP . '/*.json') ?: []);
 rsort($maanden);
 ?><!doctype html>
@@ -28,13 +30,21 @@ rsort($maanden);
 <body><main>
 <h1>Statistiek <?= $e($maand) ?></h1>
 <p>Zonder cookies en zonder persoonsgegevens. Andere maand: <?php foreach ($maanden as $m): ?><a href="?sleutel=<?= $e($sleutel) ?>&amp;maand=<?= $e($m) ?>"><?= $e($m) ?></a> <?php endforeach; ?></p>
-<div class="k"><div><b><?= $bezoeken ?></b>paginabezoeken</div><div><b><?= $aanvragen ?></b>aanvragen</div><div><b><?= $bezoeken ? round($aanvragen / $bezoeken * 100, 2) : 0 ?>%</b>aanvragen per bezoek</div></div>
-<h2>Per dag</h2><table><tr><th>Dag</th><th>Bezoeken</th><th>Aanvragen</th></tr>
-<?php $dagen = $data['dagen'] ?? []; krsort($dagen); foreach ($dagen as $d => $v): ?><tr><td><?= $e($d) ?></td><td><?= (int)($v['bezoeken'] ?? 0) ?></td><td><?= (int)($v['aanvragen'] ?? 0) ?></td></tr><?php endforeach; ?></table>
+<div class="k"><div><b><?= $bezoeken ?></b>paginabezoeken</div><div><b><?= $binnen ?></b>bezoeken (binnenkomsten)</div><div><b><?= $aanvragen ?></b>aanvragen</div><div><b><?= $bellen ?></b>klikken op bellen</div><div><b><?= $binnen ? round($aanvragen / $binnen * 100, 2) : 0 ?>%</b>aanvragen per bezoek</div></div>
+<h2>Per dag</h2><table><tr><th>Dag</th><th>Paginabezoeken</th><th>Binnenkomsten</th><th>Aanvragen</th></tr>
+<?php $dagen = $data['dagen'] ?? []; krsort($dagen); foreach ($dagen as $d => $v): ?><tr><td><?= $e($d) ?></td><td><?= (int)($v['bezoeken'] ?? 0) ?></td><td><?= (int)($v['binnenkomsten'] ?? 0) ?></td><td><?= (int)($v['aanvragen'] ?? 0) ?></td></tr><?php endforeach; ?></table>
 <h2>Pagina's</h2><table><tr><th>Pagina</th><th>Bezoeken</th></tr>
 <?php foreach ($top($data['paginas'] ?? []) as $p => $n): ?><tr><td><a href="<?= $e($p) ?>"><?= $e($p) ?></a></td><td><?= (int)$n ?></td></tr><?php endforeach; ?></table>
 <h2>Kwamen van</h2><table><tr><th>Website</th><th>Bezoeken</th></tr>
 <?php foreach ($top($data['bronnen'] ?? []) as $p => $n): ?><tr><td><?= $e($p) ?></td><td><?= (int)$n ?></td></tr><?php endforeach; ?></table>
 <h2>Aanvragen vanaf</h2><table><tr><th>Pagina</th><th>Aanvragen</th></tr>
 <?php foreach ($top($data['aanvraagpaginas'] ?? []) as $p => $n): ?><tr><td><?= $e($p) ?></td><td><?= (int)$n ?></td></tr><?php endforeach; ?></table>
+<h2>Aanvragen per soort</h2><table><tr><th>Soort</th><th>Aanvragen</th></tr>
+<?php foreach ($top($data['aanvraagsoorten'] ?? []) as $p => $n): ?><tr><td><?= $e($p) ?></td><td><?= (int)$n ?></td></tr><?php endforeach; ?></table>
+<h2>Klikken op bellen, mail, vCard en route</h2><table><tr><th>Klik en pagina</th><th>Aantal</th></tr>
+<?php foreach ($top($data['klikken'] ?? [], 40) as $p => $n): ?><tr><td><?= $e($p) ?></td><td><?= (int)$n ?></td></tr><?php endforeach; ?></table>
+<h2>Binnenkomsten per pagina</h2><table><tr><th>Pagina</th><th>Binnenkomsten</th></tr>
+<?php foreach ($top($data['binnenkomsten'] ?? []) as $p => $n): ?><tr><td><?= $e($p) ?></td><td><?= (int)$n ?></td></tr><?php endforeach; ?></table>
+<h2>Campagnes (utm)</h2><table><tr><th>Campagne</th><th>Bezoeken</th><th>Aanvragen</th></tr>
+<?php foreach ($top($data['campagnes'] ?? []) as $p => $n): ?><tr><td><?= $e($p) ?></td><td><?= (int)$n ?></td><td><?= (int)($data['aanvraagcampagnes'][$p] ?? 0) ?></td></tr><?php endforeach; ?></table>
 </main></body></html>

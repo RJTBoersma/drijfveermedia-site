@@ -5,8 +5,14 @@ interface Props { titel?: string; tekst?: string; knop?: { tekst: string; href: 
 const pad = Astro.url.pathname;
 const stap = stapVoor(pad);
 const opDienst = stap.dienst && pad.startsWith(stap.dienst.url);
+// Per pagina telt hij mee: de eerste tussenactie krijgt de vraag die bij het onderwerp past, de volgende een andere.
+const g = globalThis as unknown as { __dmTussen?: Map<string, number> };
+g.__dmTussen ??= new Map();
+const nr = g.__dmTussen.get(pad) ?? 0;
+g.__dmTussen.set(pad, nr + 1);
+const reserve = ['Weet je al genoeg?', 'Zelf geen tijd voor?', 'Wil je weten wat dit bij jou oplevert?'];
 const {
-  titel = opDienst ? 'Weet je al genoeg?' : 'Geen tijd om dit zelf te doen?',
+  titel = opDienst ? reserve[nr % reserve.length] : nr === 0 ? stap.vraag ?? 'Zelf geen tijd voor?' : reserve[(nr - 1) % reserve.length],
   tekst = opDienst || !stap.dienst ? stap.zin : `${stap.dienst.naam}: ${stap.dienst.prijs}. ${stap.zin}`,
   knop = { tekst: stap.knop, href: stap.href },
 } = Astro.props;

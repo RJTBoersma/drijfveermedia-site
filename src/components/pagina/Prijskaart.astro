@@ -1,14 +1,18 @@
 ---
 // Prijs van een dienst, met wat erbij zit.
-interface Props { naam: string; prijs: string; eenheid?: string; punten: string[]; noot?: string; eenmalig?: boolean }
-const { naam, prijs, eenheid, punten, noot, eenmalig = false } = Astro.props;
+// De knop volgt de vervolgstap van de pagina (actie.ts). Opzegbaar en garantie alleen bij een maandbedrag.
+import { knopVoor } from '../../data/actie';
+interface Props { naam: string; prijs: string; eenheid?: string; punten: string[]; noot?: string; eenmalig?: boolean; knop?: { tekst: string; href: string } }
+const { naam, prijs, eenheid, punten, noot, eenmalig = false, knop: eigenKnop } = Astro.props;
+const knop = knopVoor(Astro.url.pathname, eigenKnop);
+const perMaand = !eenmalig && /maand|p\/m/.test(`${eenheid ?? ''} ${prijs}`);
 ---
 <div class="card prijskaart">
   <p class="kicker">{naam}</p>
   <p class="bedrag"><span>vanaf</span> {prijs}{eenheid && <small> {eenheid}</small>}</p>
-  <p class="muted klein">{eenmalig ? 'Eenmalig, exclusief btw.' : 'Exclusief btw. Maandelijks opzegbaar.'}</p>
+  <p class="muted klein">{eenmalig ? 'Eenmalig, exclusief btw.' : perMaand ? 'Exclusief btw. Per maand opzegbaar, met een doel op papier.' : 'Exclusief btw.'}</p>
   <ul class="vink">{punten.map((p) => <li>{p}</li>)}</ul>
-  <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+  <a class="btn" href={knop.href}>{knop.tekst}</a>
   {noot && <p class="muted klein noot">{noot}</p>}
 </div>
 <style>

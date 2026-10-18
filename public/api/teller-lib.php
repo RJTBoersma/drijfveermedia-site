@@ -30,18 +30,23 @@ function teller_ophogen(callable $wijzig): void {
 function teller_plus(?array &$a, string $k, int $n = 1): void { $a[$k] = ($a[$k] ?? 0) + $n; }
 
 // Een paginabezoek. $pad is het pad op onze site, $bron de domeinnaam van de verwijzer (of '').
-function tel_bezoek(string $pad, string $bron): void {
-    teller_ophogen(function (array &$d, string $dag) use ($pad, $bron) {
+function tel_bezoek(string $pad, string $bron, bool $binnen = false, string $utm = ''): void {
+    teller_ophogen(function (array &$d, string $dag) use ($pad, $bron, $binnen, $utm) {
+        if (str_starts_with($pad, '/_klik/')) { teller_plus($d['klikken'], substr($pad, 7)); return; }
         teller_plus($d['dagen'][$dag], 'bezoeken');
         teller_plus($d['paginas'], $pad);
         if ($bron !== '') teller_plus($d['bronnen'], $bron);
+        if ($binnen) { teller_plus($d['dagen'][$dag], 'binnenkomsten'); teller_plus($d['binnenkomsten'], $pad); }
+        if ($utm !== '') teller_plus($d['campagnes'], $utm);
     });
 }
 
 // Een aanvraag via het formulier.
-function tel_aanvraag(string $pad): void {
-    teller_ophogen(function (array &$d, string $dag) use ($pad) {
+function tel_aanvraag(string $pad, string $soort = '', string $campagne = ''): void {
+    teller_ophogen(function (array &$d, string $dag) use ($pad, $soort, $campagne) {
         teller_plus($d['dagen'][$dag], 'aanvragen');
         teller_plus($d['aanvraagpaginas'], $pad ?: '(onbekend)');
+        if ($soort !== '') teller_plus($d['aanvraagsoorten'], $soort);
+        if ($campagne !== '') teller_plus($d['aanvraagcampagnes'], $campagne);
     });
 }

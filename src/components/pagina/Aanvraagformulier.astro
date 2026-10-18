@@ -1,25 +1,54 @@
 ---
-// Formulier dat naar /api/aanvraag.php post (PHP-mail op Vimexx). Met honeypot en tijdcontrole tegen spam.
-interface Props { soort: string; knop?: string; vak?: boolean; website?: boolean; bericht?: boolean; bron?: string; moment?: boolean; vakVerplicht?: boolean }
-const { soort, knop = 'Verstuur', vak = false, website = false, bericht = true, bron, moment = false } = Astro.props;
+// Formulier dat naar /api/aanvraag.php post (PHP-mail op Vimexx). Met lokveld en tijdcontrole tegen spam.
+// Neemt uit de link over: ?vak= ?plaats= ?vraag= ?context= (uitkomst van een tool) en ?soort= (witte lijst).
+interface Props { soort: string; knop?: string; vak?: boolean; website?: boolean; bericht?: boolean; bron?: string; moment?: boolean; mailKeuze?: boolean }
+const { soort, knop = 'Verstuur', vak = false, website = false, bericht = true, moment = true, mailKeuze = false } = Astro.props;
 const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
 ---
-<form class="formulier card aanvraag" method="post" action="/api/aanvraag.php" data-aanvraag>
-  <input type="hidden" name="soort" value={soort} />
+<form class="formulier card aanvraag" method="post" action="/api/aanvraag.php" data-aanvraag novalidate>
+  <input type="hidden" name="soort" value={soort} data-soort />
   <input type="hidden" name="pagina" value={Astro.url.pathname} />
+  <input type="hidden" name="van" value="" data-van />
+  <input type="hidden" name="campagne" value="" data-campagne />
+  <input type="hidden" name="context" value="" data-context />
   <input type="hidden" name="t" value="" data-t />
-  {bron && <input type="hidden" name="bron" value={bron} />}
   <div class="honing" aria-hidden="true"><label for={`${id}-extra`}>Laat dit veld leeg</label><input id={`${id}-extra`} name="hp_veld_x" type="text" tabindex="-1" autocomplete="new-password" /></div>
-  {website && <div class="veld"><label for={`${id}-website`}>Je website</label><input id={`${id}-website`} name="website" type="text" inputmode="url" autocomplete="url" placeholder="jouwbedrijf.nl" required /></div>}
+  {website && (
+    <div class="veld">
+      <label for={`${id}-website`}>Je website</label>
+      <input id={`${id}-website`} name="website" type="text" inputmode="url" autocomplete="url" placeholder="jouwbedrijf.nl" required aria-describedby={`${id}-website-fout`} data-website />
+      <label class="vinkje"><input type="checkbox" name="geen_website" value="ja" data-geen-website /> Ik heb nog geen website</label>
+      <p class="fout-tekst" id={`${id}-website-fout`} hidden>Vul je website in, of vink aan dat je er nog geen hebt.</p>
+    </div>
+  )}
   <div class="veld-rij">
-    <div class="veld"><label for={`${id}-naam`}>Je naam</label><input id={`${id}-naam`} name="naam" autocomplete="name" required /></div>
-    <div class="veld"><label for={`${id}-tel`}>Telefoonnummer</label><input id={`${id}-tel`} name="telefoon" type="tel" autocomplete="tel" required /></div>
+    <div class="veld">
+      <label for={`${id}-naam`}>Je naam</label>
+      <input id={`${id}-naam`} name="naam" autocomplete="name" required aria-describedby={`${id}-naam-fout`} />
+      <p class="fout-tekst" id={`${id}-naam-fout`} hidden>Vul je naam in, dan weten we wie we bellen.</p>
+    </div>
+    <div class="veld">
+      <label for={`${id}-tel`}>Je telefoonnummer <span class="muted" data-tel-optioneel hidden>(niet verplicht)</span></label>
+      <input id={`${id}-tel`} name="telefoon" type="tel" autocomplete="tel" inputmode="tel" required pattern="^\s*(\+|00)?[0-9][0-9\s\-()]{8,16}\s*$" aria-describedby={`${id}-tel-fout`} data-tel />
+      <p class="fout-tekst" id={`${id}-tel-fout`} hidden>Controleer je nummer, bijvoorbeeld 06 12 34 56 78 of 0592 123 456. We bellen je hierop terug.</p>
+    </div>
   </div>
-  <div class="veld"><label for={`${id}-mail`}>E-mailadres <span class="muted">(mag leeg)</span></label><input id={`${id}-mail`} name="email" type="email" autocomplete="email" /></div>
-  {bericht && <div class="veld"><label for={`${id}-bericht`}>Je vraag <span class="muted">(mag leeg)</span></label><textarea id={`${id}-bericht`} name="bericht" data-vul="vraag"></textarea></div>}
+  {mailKeuze && (
+    <fieldset class="keuze">
+      <legend>Hoe wil je de uitkomst?</legend>
+      <label><input type="radio" name="contactwijze" value="bellen" checked data-wijze /> Bel me</label>
+      <label><input type="radio" name="contactwijze" value="mail" data-wijze /> Mail me alleen</label>
+    </fieldset>
+  )}
+  <div class="veld">
+    <label for={`${id}-mail`}>Je e-mailadres <span class="muted" data-mail-optioneel>(niet verplicht)</span></label>
+    <input id={`${id}-mail`} name="email" type="email" autocomplete="email" aria-describedby={`${id}-mail-fout`} data-mail />
+    <p class="fout-tekst" id={`${id}-mail-fout`} hidden>Vul een geldig e-mailadres in, dan mailen we je de uitkomst.</p>
+  </div>
+  {bericht && <div class="veld"><label for={`${id}-bericht`}>Je vraag <span class="muted">(niet verplicht)</span></label><textarea id={`${id}-bericht`} name="bericht" data-vul="vraag"></textarea></div>}
   {vak && (
     <details class="meer-velden" data-meer>
-      <summary>Vertel er iets meer bij <span class="muted">(mag leeg)</span></summary>
+      <summary>Vertel er iets meer bij <span class="muted">(niet verplicht)</span></summary>
       <div class="veld-rij">
         <div class="veld"><label for={`${id}-vak`}>Wat doe je?</label><input id={`${id}-vak`} name="vak" placeholder="Bijvoorbeeld: loodgieter" data-vul="vak" /></div>
         <div class="veld"><label for={`${id}-plaats`}>Waar zit je?</label><input id={`${id}-plaats`} name="plaats" placeholder="Bijvoorbeeld: Emmen" autocomplete="address-level2" data-vul="plaats" /></div>
@@ -27,23 +56,82 @@ const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
     </details>
   )}
   {moment && (
-    <div class="veld"><label for={`${id}-moment`}>Wanneer schikt het?</label>
-      <select id={`${id}-moment`} name="moment">
+    <div class="veld" data-moment-veld>
+      <label for={`${id}-moment`}>Wanneer schikt het?</label>
+      <select id={`${id}-moment`} name="moment" data-moment>
         <option>Zo snel mogelijk</option>
-        <option>Vandaag na 12.00 uur</option>
-        <option>Morgenochtend</option>
-        <option>Morgenmiddag</option>
       </select>
     </div>
   )}
+  <div class="veld">
+    <label for={`${id}-bron`}>Hoe ken je ons? <span class="muted">(niet verplicht)</span></label>
+    <select id={`${id}-bron`} name="bron">
+      <option value="">Kies als je wilt</option>
+      <option>Google</option>
+      <option>Google Maps</option>
+      <option>ChatGPT of een andere AI</option>
+      <option>Via iemand die ons kent</option>
+      <option>LinkedIn</option>
+      <option>Anders</option>
+    </select>
+  </div>
   <button class="btn" type="submit">{knop}</button>
-  <p class="muted klein">We gebruiken je gegevens alleen om je terug te bellen. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p>
+  <p class="muted klein">Kost je een halve minuut en je zit nergens aan vast. We gebruiken je gegevens om je terug te bellen en je vraag te beantwoorden, en zetten je niet op een mailinglijst. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p>
 </form>
 <script>
-  document.querySelectorAll<HTMLInputElement>('[data-t]').forEach((i) => (i.value = String(Date.now())));
-  // Vak, plaats en vraag overnemen uit de link (?vak=...&plaats=...&vraag=...), bijvoorbeeld vanuit een rekenhulp
+  import { bereikbaarheid } from '../../data/kantoortijd';
+  const start = performance.now();
   const q = new URLSearchParams(location.search);
-  document.querySelectorAll<HTMLInputElement>('[data-vul]').forEach((i) => { const v = q.get(i.dataset.vul!); if (v) { i.value = v.slice(0, i.tagName === 'TEXTAREA' ? 400 : 80); const d = i.closest('details'); if (d) d.open = true; } });
+  const soorten = ['Consult', 'Training', 'Second opinion', 'Website-prijs', 'Ads-check', 'Kaart-check', 'Interim-marketeer', 'Uitslag tool'];
+
+  document.querySelectorAll<HTMLFormElement>('form[data-aanvraag]').forEach((f) => {
+    // Vak, plaats en vraag uit de link overnemen, bijvoorbeeld vanuit een rekenhulp
+    f.querySelectorAll<HTMLInputElement>('[data-vul]').forEach((i) => { const v = q.get(i.dataset.vul!); if (v) { i.value = v.slice(0, i.tagName === 'TEXTAREA' ? 400 : 80); const d = i.closest('details'); if (d) d.open = true; } });
+    const ctx = q.get('context'); if (ctx) (f.querySelector('[data-context]') as HTMLInputElement).value = ctx.slice(0, 400);
+    const s = q.get('soort'); if (s && soorten.includes(s)) (f.querySelector('[data-soort]') as HTMLInputElement).value = s;
+    // Van welke pagina kwam de bezoeker, en via welke campagne (zonder cookies: alleen voor deze tab)
+    try { const r = document.referrer && new URL(document.referrer); if (r && r.host === location.host) (f.querySelector('[data-van]') as HTMLInputElement).value = r.pathname; } catch {}
+    try { (f.querySelector('[data-campagne]') as HTMLInputElement).value = (sessionStorage.getItem('dm-campagne') || '').slice(0, 120); } catch {}
+
+    // Belmomenten die kloppen met vandaag
+    const sel = f.querySelector<HTMLSelectElement>('[data-moment]');
+    if (sel) {
+      const b = bereikbaarheid();
+      const opties = [b.open ? 'Nu, binnen 15 minuten' : `${b.datum} vóór 9.00 uur`, `${b.datum} tussen 12.00 en 13.00 uur`, `${b.datum} tussen 16.00 en 17.00 uur`, 'Mail me liever'];
+      sel.innerHTML = '';
+      opties.forEach((o) => sel.add(new Option(o, o)));
+    }
+
+    // "Ik heb nog geen website" en "Mail me alleen"
+    const web = f.querySelector<HTMLInputElement>('[data-website]');
+    const geen = f.querySelector<HTMLInputElement>('[data-geen-website]');
+    geen?.addEventListener('change', () => { if (!web) return; web.required = !geen.checked; web.disabled = geen.checked; if (geen.checked) web.value = ''; });
+    const tel = f.querySelector<HTMLInputElement>('[data-tel]')!;
+    const mail = f.querySelector<HTMLInputElement>('[data-mail]')!;
+    const zetWijze = () => {
+      const alleenMail = f.querySelector<HTMLInputElement>('[data-wijze][value="mail"]')?.checked;
+      tel.required = !alleenMail; mail.required = !!alleenMail;
+      f.querySelector('[data-tel-optioneel]')!.toggleAttribute('hidden', !alleenMail);
+      f.querySelector('[data-mail-optioneel]')!.toggleAttribute('hidden', !!alleenMail);
+    };
+    f.querySelectorAll('[data-wijze]').forEach((r) => r.addEventListener('change', zetWijze));
+
+    // Eigen, Nederlandse foutmeldingen onder het veld
+    const controleer = (i: HTMLInputElement) => {
+      const fout = document.getElementById(i.getAttribute('aria-describedby') || '');
+      const goed = i.disabled || i.checkValidity();
+      i.setAttribute('aria-invalid', String(!goed));
+      if (fout) fout.hidden = goed;
+      return goed;
+    };
+    f.querySelectorAll<HTMLInputElement>('input[aria-describedby]').forEach((i) => i.addEventListener('blur', () => { if (i.value) controleer(i); }));
+    f.addEventListener('submit', (e) => {
+      const velden = [...f.querySelectorAll<HTMLInputElement>('input[aria-describedby]')];
+      const fout = velden.filter((i) => !controleer(i));
+      if (fout.length) { e.preventDefault(); fout[0].focus(); return; }
+      (f.querySelector('[data-t]') as HTMLInputElement).value = String(Math.round(performance.now() - start));
+    });
+  });
 </script>
 <style>
   .aanvraag { padding: 26px; }
@@ -51,4 +139,11 @@ const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
   .aanvraag p { margin: 0; }
   .meer-velden summary { cursor: pointer; font-weight: 700; padding: 8px 0; min-height: 44px; display: flex; align-items: center; gap: 6px; }
   .meer-velden[open] summary { margin-bottom: 8px; }
+  .vinkje { display: flex; align-items: center; gap: 8px; font-weight: 500; margin-top: 8px; min-height: 32px; }
+  .vinkje input, .keuze input { width: 20px; height: 20px; accent-color: var(--navy); }
+  .keuze { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .keuze legend { font-weight: 700; margin-bottom: 6px; padding: 0; }
+  .keuze label { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+  .fout-tekst { color: #a3261a; font-weight: 600; font-size: 0.95rem; margin-top: 6px !important; }
+  [aria-invalid='true'] { border-color: #a3261a !important; }
 </style>

@@ -17,15 +17,16 @@ const artikelen = [
   { id: 'beveiliging', titel: '8. Beveiliging' },
   { id: 'rechten', titel: '9. Jouw rechten' },
   { id: 'klachten', titel: '10. Klachten' },
-  { id: 'leeftijd', titel: '11. Leeftijd' },
-  { id: 'wijzigingen', titel: '12. Wijzigingen' },
+  { id: 'solliciteren', titel: '11. Solliciteren' },
+  { id: 'leeftijd', titel: '12. Leeftijd' },
+  { id: 'wijzigingen', titel: '13. Wijzigingen' },
 ];
 const schema = [{
   '@type': 'WebPage',
   name: 'Privacyverklaring van Drijfveer Media',
   url: `${site.url}${url}`,
   inLanguage: 'nl-NL',
-  dateModified: '2026-10-17',
+  dateModified: '2026-10-18',
   publisher: { '@id': `${site.url}/#organisatie` },
 }];
 ---
@@ -52,15 +53,15 @@ const schema = [{
           <ul class="vink">
             <li>We gebruiken je gegevens om contact met je op te nemen en je een passend voorstel te doen.</li>
             <li>Deze site plaatst geen tracking-cookies. Daarom zie je ook geen cookiemelding.</li>
-            <li>We meten bezoek op een privacyvriendelijke manier, zonder cookies en zonder persoonsgegevens.</li>
-            <li>Je aanvraag komt per e-mail bij ons binnen, niet in een database op de website.</li>
+            <li>We tellen bezoek met een eigen teller, zonder cookies en zonder IP-adressen. We bewaren alleen totalen.</li>
+            <li>Je aanvraag komt per e-mail bij ons binnen. De website bewaart een reservekopie, die we na 3 maanden verwijderen.</li>
             <li>Je mag altijd vragen wat we van je hebben, en het laten aanpassen of verwijderen.</li>
           </ul>
         </div>
 
         <h2 id="wie">1. Wie verantwoordelijk is</h2>
         <ol class="leden">
-          <li>Drijfveer Media, {site.straat}, {site.postcode} {site.plaats}, is verantwoordelijk voor de verwerking van je persoonsgegevens zoals in deze verklaring staat. KvK-nummer {site.kvk}.</li>
+          <li>Drijfveer Media{site.rechtsvorm && ` (${site.rechtsvorm})`}, {site.straat}, {site.postcode} {site.plaats}, is verantwoordelijk voor de verwerking van je persoonsgegevens zoals in deze verklaring staat. KvK-nummer {site.kvk}{site.btwId && `, btw-id ${site.btwId}`}.</li>
           <li>We verwerken je gegevens volgens de Algemene verordening gegevensbescherming (AVG).</li>
           <li>Als je ons je gegevens toevertrouwt, vertrouw je erop dat we er goed mee omgaan. Andersom vertrouwen wij erop dat je ze naar waarheid invult.</li>
           <li>Vragen over deze verklaring? Bel <a href={site.telefoonLink}>{site.telefoon}</a> of mail <a href={`mailto:${site.email}`}>{site.email}</a>.</li>
@@ -69,7 +70,7 @@ const schema = [{
         <h2 id="gegevens">2. Welke gegevens we verwerken</h2>
         <ol class="leden">
           <li>Via het aanvraagformulier: je naam, je telefoonnummer, je e-mailadres, je website, je vak en je plaats, en je vraag als je die stelt. Welke velden verplicht zijn, zie je bij het formulier zelf.</li>
-          <li>Met je aanvraag gaan automatisch mee: het soort aanvraag, de pagina waarop je het formulier invulde en het tijdstip.</li>
+          <li>Met je aanvraag gaan automatisch mee: het soort aanvraag, de pagina waarop je het formulier invulde, de pagina op onze site die je daarvoor bekeek, het tijdstip en, als je via een advertentie of nieuwsbrief kwam, de naam van die campagne. Gebruikte je een rekenhulp of test op onze site, dan gaat de uitkomst mee als je via die tool het formulier opent. Vul je in hoe je ons kent, dan weten we dat ook.</li>
           <li>Bel of mail je ons, dan hebben we de gegevens die je ons daarbij zelf geeft. Bijvoorbeeld je naam, je nummer en je e-mailadres.</li>
           <li>Word je klant, dan gebruiken we ook de gegevens die nodig zijn om de opdracht uit te voeren en te factureren.</li>
         </ol>
@@ -77,34 +78,49 @@ const schema = [{
         <h2 id="doel">3. Waarvoor en op welke grondslag</h2>
         <ol class="leden">
           <li>We gebruiken je gegevens om je terug te bellen, je vraag te beantwoorden en je een passend voorstel of een offerte te sturen. Op werkdagen tussen 8.00 en 17.00 uur bellen we binnen 15 minuten terug.</li>
-          <li>We doen dat op grond van artikel 6, lid 1, onder b van de AVG: je vraagt ons zelf om contact, met het oog op een mogelijke overeenkomst. Daarnaast hebben we een gerechtvaardigd belang om je vraag te beantwoorden.</li>
+          <li>Vraag je zelf om contact als (toekomstige) klant, dan verwerken we je gegevens om op je verzoek een overeenkomst voor te bereiden (artikel 6, lid 1, onder b AVG). Vraag je contact aan namens een bedrijf, dan doen we dat op grond van ons gerechtvaardigd belang: je vraag beantwoorden en je een voorstel doen (artikel 6, lid 1, onder f AVG). Je telefoonnummer of e-mailadres is nodig om je te bereiken. Zonder kunnen we je aanvraag niet behandelen.</li>
           <li>We sturen je geen nieuwsbrieven, enquêtes of andere aanbiedingen, tenzij je daar zelf mee hebt ingestemd.</li>
+          <li>We nemen geen besluiten over je die alleen door een computer worden genomen.</li>
         </ol>
 
         <h2 id="formulier">4. Zo werkt ons formulier</h2>
         <ol class="leden">
-          <li>Verstuur je het formulier, dan maakt onze website er een e-mail van. Die gaat naar {site.email}. Je gegevens komen niet in een database op de website terecht.</li>
-          <li>De website draait bij onze hostingpartij Vimexx. Op hun servers wordt je aanvraag als e-mail verstuurd.</li>
-          <li>Tegen spam gebruikt het formulier een verborgen veld en een tijdcontrole. Daar zijn geen cookies voor nodig.</li>
+          <li>Verstuur je het formulier, dan maakt onze website er een e-mail van naar {site.email}. Zodat er nooit een aanvraag kwijtraakt, bewaart de website ook een kopie in een afgeschermd bestand op de server van onze hostingpartij Vimexx. Die kopie wordt na 3 maanden automatisch verwijderd.</li>
+          <li>Tegen spam gebruikt het formulier een verborgen veld en een tijdcontrole. Daar zijn geen cookies voor nodig. Inzendingen die het spamfilter tegenhoudt, bewaren we 30 dagen, zodat we kunnen nakijken of er een echte aanvraag tussen zat.</li>
         </ol>
 
         <h2 id="cookies">5. Cookies en statistieken</h2>
         <ol class="leden">
           <li>Deze website plaatst geen tracking-cookies en geen advertentiecookies. Er zitten geen knoppen van sociale media in die meekijken, en we laden geen kaarten of video's van andere partijen. De lettertypen staan op onze eigen server. Daarom hoef je ook niets weg te klikken.</li>
-          <li>Om te zien hoe de site gebruikt wordt, gebruiken we privacyvriendelijke statistieken. Die werken zonder cookies en verzamelen geen persoonsgegevens. We zien hoeveel mensen een pagina bekijken, maar niet wie dat zijn.</li>
-          <li>Klik je op een link naar een andere site, zoals de routebeschrijving in Google Maps? Dan gelden daar de regels van die site.</li>
+          <li>We tellen bezoek met een eigen teller op onze server. Bij elke paginaweergave stuurt je browser het adres van de pagina, de naam van de website waar je vandaan kwam (alleen de domeinnaam) en, als je via een advertentie of nieuwsbrief kwam, de naam van die campagne. Ook tellen we klikken op ons telefoonnummer, ons e-mailadres en de routebeschrijving. We bewaren alleen totalen per dag. Geen IP-adressen, geen cookies, niets waarmee we je herkennen. Staat "niet volgen" (Do Not Track of Global Privacy Control) aan in je browser, dan tellen we je niet.</li>
+          <li>Een paar hulpmiddelen onthouden je invoer in je eigen browser (localStorage), zoals de checklist voor on-page SEO en de AI-test. Kwam je via een campagne, dan onthoudt je browser de naam daarvan tot je het tabblad sluit (sessionStorage), zodat die met een aanvraag kan meegaan. Die gegevens blijven op je eigen apparaat. Wij zien ze alleen als je zelf het formulier verstuurt. Je wist ze via de instellingen van je browser.</li>
+          <li>Zoals elke website houdt onze hostingpartij technische logbestanden bij, met onder meer je IP-adres, voor beveiliging en het oplossen van storingen. Vimexx bewaart die volgens haar eigen beleid.</li>
+          <li>Klik je op een link naar een andere site, zoals de routebeschrijving in Google Maps of een vraag die de AI-test voor je klaarzet in ChatGPT, Perplexity, Copilot of Google, dan gaat wat in die link staat naar die partij. Daar gelden hun regels.</li>
         </ol>
 
         <h2 id="delen">6. Met wie we gegevens delen</h2>
         <ol class="leden">
-          <li>We delen je gegevens alleen met partijen die we nodig hebben om je te helpen, zoals onze hostingpartij. Of als de wet ons daartoe verplicht.</li>
+          <li>We delen je gegevens alleen met partijen die we nodig hebben om je te helpen, of als de wet ons daartoe verplicht. Die partijen mogen je gegevens alleen voor ons gebruiken:
+            <ul>
+              <li>Vimexx (Nederland): hosting van de website en het formulier.</li>
+              <li>Microsoft (Microsoft 365): onze e-mail. Aanvragen komen daar als e-mail binnen.</li>
+              <li>Dienstverleners voor onze telefonie en onze boekhouding, voor zover dat nodig is voor gesprekken, offertes en facturen.</li>
+            </ul>
+          </li>
+          <li>Microsoft is een Amerikaans bedrijf. Komen gegevens buiten de Europese Economische Ruimte, dan gebeurt dat op basis van het EU-VS Data Privacy Framework of de standaardcontractbepalingen van de Europese Commissie.</li>
           <li>Voor ons werk voor klanten gebruiken we AI-tools. Hoe we daarmee omgaan en wat je daarin kunt kiezen, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</li>
         </ol>
 
         <h2 id="bewaren">7. Hoe lang we gegevens bewaren</h2>
         <ol class="leden">
-          <li>We verzamelen je gegevens één keer, bewaren ze zo kort mogelijk en verwijderen ze daarna.</li>
-          <li>Word je klant, dan bewaren we wat nodig is zolang we voor je werken. En daarna zolang de wet ons verplicht om onze administratie te bewaren.</li>
+          <li>We bewaren je gegevens niet langer dan nodig:
+            <ul>
+              <li>Je aanvraag, als je geen klant wordt: 12 maanden na het laatste contact, zodat we je vraag kunnen terugvinden als je later terugkomt. De reservekopie op de website: 3 maanden.</li>
+              <li>Inzendingen die het spamfilter tegenhoudt: 30 dagen.</li>
+              <li>Klantgegevens, offertes, facturen en administratie: 7 jaar, omdat de wet ons dat verplicht.</li>
+              <li>Sollicitaties: zie artikel 11.</li>
+            </ul>
+          </li>
         </ol>
 
         <h2 id="beveiliging">8. Beveiliging</h2>
@@ -114,9 +130,9 @@ const schema = [{
 
         <h2 id="rechten">9. Jouw rechten</h2>
         <ol class="leden">
-          <li>Je mag je gegevens inzien, laten aanpassen als ze niet kloppen en laten verwijderen. Inzien kan zolang we ze nog niet hebben gewist.</li>
-          <li>Je kunt je ook beroepen op de andere rechten die de AVG je geeft.</li>
-          <li>Stuur je verzoek naar <a href={`mailto:${site.email}`}>{site.email}</a>. We kunnen je vragen je legitimatiebewijs te laten zien. Zo weten we zeker dat het om jouw gegevens gaat.</li>
+          <li>Je mag je gegevens inzien, laten aanpassen als ze niet kloppen en laten verwijderen. Je kunt ook vragen de verwerking te beperken, of je gegevens in een gangbaar bestand te krijgen. Inzien kan zolang we ze nog niet hebben gewist.</li>
+          <li><strong>Recht van bezwaar.</strong> Verwerken we je gegevens op grond van ons gerechtvaardigd belang, dan kun je daar altijd bezwaar tegen maken. Dan stoppen we, tenzij er dwingende redenen zijn om door te gaan. Tegen gebruik voor marketing kun je altijd bezwaar maken. Dan stoppen we daar direct mee.</li>
+          <li>Stuur je verzoek naar <a href={`mailto:${site.email}`}>{site.email}</a>. We kunnen je vragen je legitimatiebewijs te laten zien. Zo weten we zeker dat het om jouw gegevens gaat. We reageren binnen een maand.</li>
         </ol>
 
         <h2 id="klachten">10. Klachten</h2>
@@ -125,22 +141,28 @@ const schema = [{
           <li>Je kunt ook een klacht indienen bij de nationale toezichthouder, de Autoriteit Persoonsgegevens.</li>
         </ol>
 
-        <h2 id="leeftijd">11. Leeftijd</h2>
+        <h2 id="solliciteren">11. Solliciteren</h2>
+        <ol class="leden">
+          <li>Stuur je ons je cv of een sollicitatie, dan gebruiken we die alleen om je sollicitatie te beoordelen.</li>
+          <li>We bewaren je gegevens tot 4 weken na afloop van de procedure. Wil je dat we ze langer bewaren voor een volgende plek, dan vragen we je toestemming en bewaren we ze hooguit een jaar.</li>
+        </ol>
+
+        <h2 id="leeftijd">12. Leeftijd</h2>
         <ol class="leden">
           <li>We kunnen niet zien hoe oud iemand is die ons gegevens stuurt. We gaan ervan uit dat je 16 jaar of ouder bent, of toestemming hebt van een ouder of voogd.</li>
         </ol>
 
-        <h2 id="wijzigingen">12. Wijzigingen</h2>
+        <h2 id="wijzigingen">13. Wijzigingen</h2>
         <ol class="leden">
-          <li>We kunnen deze privacyverklaring aanpassen, bijvoorbeeld als de website verandert. Dat doen we zonder je daarover apart te berichten. Kijk er dus af en toe naar.</li>
+          <li>We kunnen deze privacyverklaring aanpassen, bijvoorbeeld als de website verandert. Bezoekers berichten we daar niet apart over, dus kijk er af en toe naar. Klanten mailen we bij een grote wijziging.</li>
           <li>Lees ook onze <a href="/algemene-voorwaarden/">algemene voorwaarden</a> en onze <a href="/disclaimer/">disclaimer</a>.</li>
         </ol>
 
-        <p class="bijgewerkt">Laatst bijgewerkt: 17 oktober 2026</p>
+        <p class="bijgewerkt">Laatst bijgewerkt: 18 oktober 2026</p>
       </article>
 
       <aside class="zijkolom">
-        <Inhoud items={artikelen} />
+        <Inhoud items={artikelen} actie={false} />
         <div class="card vraag">
           <p class="kader-titel">Vraag over je gegevens?</p>
           <p class="muted">Mail naar <a href={`mailto:${site.email}`}>{site.email}</a> of bel <a href={site.telefoonLink}>{site.telefoon}</a>. We helpen je graag.</p>

@@ -1,10 +1,11 @@
 ---
-// Footer: compact, vijf korte kolommen. De complete lijst staat op /sitemap/.
+// Footer: compact, korte kolommen per pijler (Gevonden, Genoemd, Gekozen), regio en over ons. De complete lijst staat op /sitemap/.
 import { site } from '../data/site';
 const jaar = new Date().getFullYear();
 const kolommen = [
-  { kop: 'Gevonden en genoemd', links: [['SEO', '/zoekmachine-optimalisatie/'], ['Lokale SEO', '/lokale-seo/'], ['Linkbuilding', '/linkbuilding/'], ['GEO', '/generative-engine-optimization/'], ['Gratis AI-test', '/generative-engine-optimization/#ai-test']] },
-  { kop: 'Gekozen', links: [['Website laten maken', '/website-laten-maken/'], ['Tekstschrijver', '/tekstschrijver/'], ['Branding', '/branding/'], ['Online adverteren', '/online-adverteren/'], ['Leadgeneratie', '/leadgeneratie/']] },
+  { kop: 'Gevonden', links: [['SEO', '/zoekmachine-optimalisatie/'], ['Lokale SEO', '/lokale-seo/'], ['Linkbuilding', '/linkbuilding/'], ['Online adverteren', '/online-adverteren/'], ['Google Ads', '/online-adverteren/google-ads-bureau/']] },
+  { kop: 'Genoemd', links: [['GEO', '/generative-engine-optimization/'], ['Gratis AI-test', '/generative-engine-optimization/#ai-test'], ['Reviews', '/lokale-seo/reviews/'], ['Social media beheer', '/social-media-beheer/']] },
+  { kop: 'Gekozen', links: [['Website laten maken', '/website-laten-maken/'], ['Tekstschrijver', '/tekstschrijver/'], ['Branding', '/branding/'], ['Leadgeneratie', '/leadgeneratie/']] },
   { kop: 'In de regio', links: [['Online marketing Assen', '/online-marketing-assen/'], ['Webdesign Assen', '/webdesign-assen/'], ['SEO Groningen', '/seo-groningen/'], ['SEO Leeuwarden', '/seo-leeuwarden/'], ['SEO Zwolle', '/seo-zwolle/'], ['Alle plaatsen', '/werkgebied/']] },
   { kop: 'Over ons', links: [['Wie we zijn', '/over-ons/'], ['Werkwijze', '/werkwijze/'], ['Garantie', '/garantie/'], ['Ons proeflab', '/proeflab/'], ['Veelgestelde vragen', '/veelgestelde-vragen/'], ['Contact', '/contact/']] },
   { kop: 'Verder', links: [['Prijzen', '/prijzen/'], ['Cases', '/cases/'], ['Kennisbank', '/kennisbank/'], ['Logboek', '/logboek/'], ['Werken bij', '/werken-bij/']] },
@@ -31,7 +32,7 @@ const kolommen = [
     ))}
   </div>
   <div class="wrap onder">
-    <span>© {jaar} {site.naam} · KvK {site.kvk}</span>
+    <span>© {jaar} {site.naam}{site.rechtsvorm && ` (${site.rechtsvorm})`} · KvK {site.kvk}{site.btwId && ` · btw-id ${site.btwId}`}</span>
     <span class="juridisch"><a href="/algemene-voorwaarden/">Voorwaarden</a><a href="/privacyverklaring/">Privacy</a><a href="/disclaimer/">Disclaimer</a><a href="/sitemap/">Sitemap</a><a href="/en/" lang="en" hreflang="en">In English</a></span>
     <span class="muted">Gemaakt in Assen, tussen de hunebedden en het TT-circuit.</span>
   </div>
@@ -40,7 +41,7 @@ const kolommen = [
   .site-footer { margin-top: 96px; background: var(--navy); color: #dfe7f0; padding-block: 56px calc(96px + env(safe-area-inset-bottom, 0px)); }
   .site-footer a { color: #fff; text-decoration: none; }
   .site-footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .grid { display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 32px 24px; }
+  .grid { display: grid; grid-template-columns: 1.4fr repeat(6, 1fr); gap: 32px 22px; }
   .woordmerk { font-size: 1.5rem; font-weight: 900; color: #fff; margin: 0; letter-spacing: -0.02em; }
   .woordmerk span { color: var(--orange); }
   .slogan { margin: 2px 0 18px; color: #a9bacb; font-weight: 600; }
@@ -52,7 +53,7 @@ const kolommen = [
   .muted { color: #a9bacb; }
   .onder { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; justify-content: space-between; border-top: 1px solid rgb(255 255 255 / 0.15); margin-top: 44px; padding-top: 22px; font-size: 0.9rem; }
   .juridisch { display: flex; flex-wrap: wrap; gap: 6px 18px; }
-  @media (max-width: 1160px) { .grid { grid-template-columns: repeat(5, 1fr); } .merk { grid-column: 1 / -1; } }
+  @media (max-width: 1240px) { .grid { grid-template-columns: repeat(6, 1fr); } .merk { grid-column: 1 / -1; } }
   @media (max-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } ul { gap: 0; } ul a, address a { display: inline-block; padding-block: 11px; } }
 </style>
