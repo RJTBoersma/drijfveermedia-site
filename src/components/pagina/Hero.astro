@@ -29,8 +29,8 @@ const heeftBeeld = Astro.slots.has('beeld') && !smal;
     {prijs && (
       <ul class="hero-feiten">
         <li><b>{prijs}</b> excl. btw</li>
-        <li>{eenmalig ? 'Eenmalig, geen abonnement' : 'Maandelijks opzegbaar'}</li>
-        {!eenmalig && <li><a href="/garantie/">Met garantie</a></li>}
+        {/uur/.test(prijs) ? <li>Uurtarief, geen abonnement</li> : <li>{eenmalig ? 'Eenmalig, geen abonnement' : 'Per maand opzegbaar'}</li>}
+        {!eenmalig && /maand|p\/m/.test(prijs) && <li><a href="/garantie/">Met garantie</a></li>}
       </ul>
     )}
   </div>

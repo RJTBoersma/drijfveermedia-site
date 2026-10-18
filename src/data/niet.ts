@@ -7,6 +7,7 @@ export const nietLijst = [
   'hosting (we helpen je kiezen en zetten je site erop)',
   'apps, chatbots en AI-automatisering',
   'een losse marketingstrategie of marketingplan op papier',
+  'digitale PR, employer branding en LinkedIn-profielen',
 ];
 export const nietKort = 'Webshops bouwen, advertenties op social media, video en hosting doen we niet. Google Shopping voor een bestaande webshop wel.';
 export const nietWebshop = 'Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.';
