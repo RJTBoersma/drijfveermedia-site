@@ -87,11 +87,11 @@ Ordening volgens Gevonden, Genoemd en Gekozen. Elke pillar heeft een eigen pagin
 | Branding (pillar) | /branding/ | Logo en huisstijl | € 495 |
 | Logo laten maken | /branding/logo-laten-maken/ | Werkwijze, voorbeelden, rechten | € 495 |
 | Huisstijl laten maken | /branding/huisstijl-laten-maken/ | Kleuren, letters, toepassingen | € 995 |
-| Online adverteren (pillar) | /online-adverteren/ | Adverteren waar je klant zoekt | Afhankelijk van advertentiebudget |
+| Online adverteren (pillar) | /online-adverteren/ | Adverteren waar je klant zoekt | € 249 p/m (beheer, excl. advertentiebudget) |
 | Google Ads | /online-adverteren/google-ads-bureau/ | Campagnes opzetten en beheren | € 249 p/m (beheer, excl. advertentiebudget) |
 | Google Ads-campagne opzetten (gids + dienst) | /online-adverteren/google-ads-campagne-opzetten/ | Het complete stappenplan, de 10-puntencheck als download, en onderaan: of laat hem door ons opzetten | € 249 p/m (beheer, excl. advertentiebudget) |
-| Adverteren in ChatGPT | /online-adverteren/adverteren-in-chatgpt/ | De nieuwe advertentieplek, er vroeg bij zijn | Afhankelijk van advertentiebudget |
-| Google Shopping | /online-adverteren/google-shopping/ | Producten in Google laten zien | Afhankelijk van advertentiebudget |
+| Adverteren in ChatGPT | /online-adverteren/adverteren-in-chatgpt/ | De nieuwe advertentieplek, er vroeg bij zijn | € 249 p/m (beheer, excl. advertentiebudget) |
+| Google Shopping | /online-adverteren/google-shopping/ | Producten in Google laten zien | € 249 p/m (beheer, excl. advertentiebudget) |
 | Social media beheer (pillar) | /social-media-beheer/ | Je kanalen actief en consistent, zonder er zelf naar om te kijken | € 395 p/m |
 | Leadgeneratie (pillar) | /leadgeneratie/ | Van bezoeker naar aanvraag, met doelen waar je ons op afrekent | € 495 p/m |
 | Conversie-optimalisatie | /leadgeneratie/conversie-optimalisatie/ | Meer aanvragen uit dezelfde bezoekers | € 395 |

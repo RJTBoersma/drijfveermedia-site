@@ -1,5 +1,5 @@
 ---
-// Wie schreef dit, en wanneer. Belangrijk voor E-E-A-T.
+// Wie schreef dit. Belangrijk voor E-E-A-T. (De datum staat alleen in het schema, niet zichtbaar.)
 import { persoon } from '../../data/site';
 interface Props { slug: string; datum: string; nagekeken?: string } // datum als JJJJ-MM-DD
 const { slug, datum, nagekeken } = Astro.props;
@@ -11,7 +11,6 @@ const leesbaar = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('nl
   <img src={`/img/team/${p.slug}-klein.webp`} width="56" height="56" alt={p.naam} loading="lazy" decoding="async" />
   <div>
     <p class="naam"><a href={profiel} rel="author">{p.naam}</a> <span class="muted">· {p.rol}</span></p>
-    <p class="muted klein">Bijgewerkt op <time datetime={datum}>{leesbaar(datum)}</time>{nagekeken && <> · nagekeken door {persoon(nagekeken).naam}</>}</p>
   </div>
 </div>
 <style>
