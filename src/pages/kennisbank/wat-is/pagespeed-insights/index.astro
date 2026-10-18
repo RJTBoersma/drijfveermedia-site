@@ -1,0 +1,355 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--pagespeed-insights.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/pagespeed-insights/';
+const datum = '2026-10-18';
+const definitie = 'PageSpeed Insights is een gratis tool van Google die meet hoe snel een webpagina laadt en reageert, met cijfers van echte bezoekers en een testrit in een nagebootste omgeving.';
+const hoofdstukken = [
+  { id: 'gebruiken', titel: 'Zo gebruik je de tool' },
+  { id: 'twee', titel: 'Velddata en labdata' },
+  { id: 'beoordeling', titel: 'De Core Web Vitals-beoordeling' },
+  { id: 'meetwaarden', titel: 'Alle meetwaarden en grenzen' },
+  { id: 'meter', titel: 'Beoordeel je eigen cijfers' },
+  { id: 'score', titel: 'Hoe de score ontstaat' },
+  { id: 'mobiel', titel: 'Waarom mobiel lager scoort' },
+  { id: 'schommelt', titel: 'Waarom de score schommelt' },
+  { id: 'inzichten', titel: 'De inzichten lezen' },
+  { id: 'rood', titel: 'Rood? Hier zit het meestal' },
+  { id: 'niet', titel: 'Wat PSI niet laat zien' },
+  { id: 'google', titel: 'Telt het mee in Google?' },
+  { id: 'welke', titel: 'Welke tool wanneer?' },
+  { id: 'voorbeeld', titel: 'Voorbeeld uit Emmen' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'PageSpeed Insights',
+    alternateName: ['PSI', 'Google PageSpeed', 'Google PageSpeed Insights'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'PageSpeed Insights: wat de score echt zegt',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://developers.google.com/speed/docs/insights/v5/about',
+      'https://developer.chrome.com/docs/lighthouse/performance/performance-scoring',
+      'https://developer.chrome.com/docs/crux/methodology',
+      'https://developer.chrome.com/blog/lighthouse-13-0',
+      'https://github.com/GoogleChrome/lighthouse/blob/main/docs/throttling.md',
+      'https://github.com/GoogleChrome/lighthouse/blob/main/docs/variability.md',
+      'https://web.dev/articles/vitals',
+      'https://web.dev/blog/inp-cwv-launch',
+      'https://developers.google.com/search/docs/appearance/page-experience',
+    ],
+  },
+];
+---
+<Base
+  title="PageSpeed Insights: zo lees je je score | Drijfveer Media"
+  description="PageSpeed Insights uitgelegd: het verschil tussen velddata en labdata, wat LCP, INP en CLS betekenen, hoe de score ontstaat en waarom mobiel lager scoort."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'PageSpeed Insights', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Snelheid</p>
+        <h1>PageSpeed Insights: wat de score echt zegt</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je webbouwer stuurt een screenshot met een groene 96. Iemand anders laat dezelfde site zien met een rode 41. Wie heeft er gelijk? Waarschijnlijk allebei. Google PageSpeed Insights geeft twee heel verschillende soorten cijfers, en wie die door elkaar haalt, trekt de verkeerde conclusie.</p>
+      <p>Hier lees je hoe de tool werkt, wat elk getal betekent en waarom je score op mobiel zo veel lager is. Met een hulpje om je eigen cijfers te beoordelen. Wil je daarna je site echt sneller maken? De stappen staan in de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={12} />
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2 id="gebruiken">Zo gebruik je PageSpeed Insights</h2></div>
+      <ol>
+        <li>Ga naar pagespeed.web.dev.</li>
+        <li>Plak het adres van de pagina die je wilt testen en klik op Analyseren.</li>
+        <li>Wacht een halve minuut. Google laadt je pagina in een eigen datacenter, in Noord-Amerika, Europa of Azië.</li>
+        <li>Kies bovenaan Mobiel of Desktop. Je krijgt voor allebei een apart rapport.</li>
+        <li>Lees eerst het bovenste blok: hoe echte bezoekers je pagina ervaren. Met Deze URL en Oorsprong wissel je tussen deze ene pagina en je hele site.</li>
+        <li>Scrol daarna naar de prestatiescore. Daaronder staan de inzichten en de diagnose.</li>
+      </ol>
+      <p>De tool is gratis en je hoeft niet in te loggen. Elke openbare pagina kun je testen, ook die van een concurrent. Voor ontwikkelaars is er een API die dezelfde gegevens als JSON teruggeeft. Handig als je veel pagina's automatisch wilt meten. Kortweg heet de tool ook wel PSI. Dat doen wij hieronder ook.</p>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2 id="twee">Velddata en labdata: twee soorten cijfers</h2></div>
+      <p>Dit is het belangrijkste om te snappen. Het rapport bestaat uit twee delen die los van elkaar staan.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Velddata (bovenaan)</th><th>Labdata (daaronder)</th></tr></thead>
+          <tbody>
+            <tr><td><b>Bron</b></td><td>Chrome User Experience Report (CrUX): echte bezoekers</td><td>Lighthouse: één testrit</td></tr>
+            <tr><td><b>Periode</b></td><td>De afgelopen 28 dagen, elke dag bijgewerkt</td><td>Dit moment</td></tr>
+            <tr><td><b>Apparaat</b></td><td>Wat je bezoekers echt gebruiken</td><td>Een nagebootste middenklasse telefoon, of een desktop</td></tr>
+            <tr><td><b>Meetwaarden</b></td><td>LCP, INP, CLS, FCP, TTFB</td><td>FCP, LCP, TBT, CLS, Speed Index</td></tr>
+            <tr><td><b>Oordeel</b></td><td>Core Web Vitals-beoordeling: geslaagd of niet</td><td>Score van 0 tot 100</td></tr>
+            <tr><td><b>Telt voor Google</b></td><td>Ja, de Core Web Vitals</td><td>Nee, het is een hulpmiddel</td></tr>
+            <tr><td><b>Handig voor</b></td><td>Weten hoe het echt gaat</td><td>Oorzaken vinden en een wijziging meteen testen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Google zegt het zelf zo: labdata is handig om problemen op te sporen, omdat het in een vaste omgeving wordt gemeten. Maar het vangt niet alle knelpunten uit de praktijk. Velddata laat de echte ervaring zien, met minder meetwaarden.</p>
+      <p>Spreken ze elkaar tegen? Dat kan. Een labtest is één rit met één apparaat en één netwerk. Velddata zijn duizenden bezoeken op allerlei telefoons en verbindingen. Stuur bij twijfel op de velddata.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="beoordeling">De Core Web Vitals-beoordeling</h2></div>
+      <p>Bovenaan staat het oordeel: geslaagd of niet geslaagd. Dat hangt af van drie meetwaarden, de Core Web Vitals: LCP, INP en CLS. Een pagina slaagt als het 75e percentiel van alle drie goed is. Minstens drie op de vier bezoeken moeten dus binnen de grens blijven. Google kiest dat percentiel bewust, zodat ook bezoekers met een trage telefoon of slecht bereik meetellen.</p>
+      <p>Zijn er te weinig gegevens over INP, bijvoorbeeld omdat bezoekers weinig klikken? Dan slaagt de pagina als LCP en CLS goed zijn. Ontbreekt LCP of CLS, dan is er geen oordeel.</p>
+      <p>Onder het oordeel staat per meetwaarde een gekleurde balk: groen voor goed, oranje voor verbetering nodig, rood voor slecht. Staat er bij LCP 11 procent in het oranje deel? Dan duurde het bij 11 procent van de bezoeken tussen 2,5 en 4 seconden.</p>
+      <h3>Waarom staat er geen beoordeling?</h3>
+      <p>Velddata komen alleen van bezoekers die aan voorwaarden voldoen. Volgens de documentatie van Chrome tellen alleen mensen mee die Chrome gebruiken op een computer of een Android-telefoon, met het delen van gebruiksstatistieken aan en hun geschiedenis gesynchroniseerd. Chrome op de iPhone telt niet mee. Edge ook niet. Heb je veel bezoekers met een iPhone, dan zie je hun ervaring dus niet terug.</p>
+      <p>De pagina moet verder openbaar en indexeerbaar zijn, en genoeg bezoekers hebben. Hoeveel precies, maakt Google niet bekend. Heeft één pagina te weinig bezoeken, dan valt PSI terug op de hele site, de oorsprong. Is ook die te klein, dan zie je alleen de labtest. Bij kleine sites komt dat vaak voor. Lees een rode labscore dan niet als het oordeel van je bezoekers.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="meetwaarden">Alle meetwaarden en grenzen op een rij</h2></div>
+      <p>De grenzen hieronder gebruikt PSI zelf, in lijn met Google en web.dev. Bij de velddata gaat het steeds om het 75e percentiel.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Meetwaarde</th><th>Wat het meet</th><th>Goed</th><th>Slecht</th><th>Waar</th></tr></thead>
+          <tbody>
+            <tr><td><b>LCP</b> Largest Contentful Paint</td><td>Wanneer het grootste blok in beeld staat</td><td>tot 2,5 s</td><td>boven 4 s</td><td>Veld en lab</td></tr>
+            <tr><td><b>INP</b> Interaction to Next Paint</td><td>Hoe snel de pagina reageert op een klik of tik</td><td>tot 200 ms</td><td>boven 500 ms</td><td>Alleen veld</td></tr>
+            <tr><td><b>CLS</b> Cumulative Layout Shift</td><td>Hoeveel de pagina verspringt</td><td>tot 0,1</td><td>boven 0,25</td><td>Veld en lab</td></tr>
+            <tr><td><b>FCP</b> First Contentful Paint</td><td>Wanneer het eerste stukje inhoud verschijnt</td><td>tot 1,8 s</td><td>boven 3 s</td><td>Veld en lab</td></tr>
+            <tr><td><b>TTFB</b> Time to First Byte</td><td>Hoe snel de server de eerste data stuurt</td><td>tot 0,8 s</td><td>boven 1,8 s</td><td>Veld, experimenteel</td></tr>
+            <tr><td><b>TBT</b> Total Blocking Time</td><td>Hoe lang JavaScript de pagina blokkeert tijdens het laden</td><td colspan="2">Telt 30% in de score</td><td>Alleen lab</td></tr>
+            <tr><td><b>Speed Index</b></td><td>Hoe snel de pagina zichtbaar vol raakt</td><td colspan="2">Telt 10% in de score</td><td>Alleen lab</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>INP verving op 12 maart 2024 de oude meetwaarde FID. In het lab is INP niet te meten, want daar klikt niemand. Volgens web.dev is TBT daar de beste vervanger: wie TBT in het lab verbetert, verbetert vaak ook INP in het veld.</p>
+
+      <h2 id="meter">Beoordeel je eigen cijfers</h2>
+      <p>Neem de waarden over uit het bovenste blok van je rapport, bij Mobiel. Je ziet meteen welke goed is en waar je moet beginnen. Je hoeft niet alles in te vullen. Er wordt niets opgeslagen of verstuurd.</p>
+      <form class="card meter" id="psi-meter" onsubmit="return false">
+        <div class="velden">
+          <label>LCP in seconden<input type="text" name="lcp" inputmode="decimal" autocomplete="off" placeholder="bijv. 3,1" /></label>
+          <label>INP in milliseconden<input type="text" name="inp" inputmode="decimal" autocomplete="off" placeholder="bijv. 180" /></label>
+          <label>CLS<input type="text" name="cls" inputmode="decimal" autocomplete="off" placeholder="bijv. 0,05" /></label>
+          <label>FCP in seconden<input type="text" name="fcp" inputmode="decimal" autocomplete="off" placeholder="bijv. 1,9" /></label>
+          <label>TTFB in seconden<input type="text" name="ttfb" inputmode="decimal" autocomplete="off" placeholder="bijv. 0,6" /></label>
+        </div>
+        <ul class="uitslag" aria-live="polite">
+          <li class="leeg">Vul een of meer waarden in. Zonder JavaScript gebruik je de tabel hierboven.</li>
+        </ul>
+      </form>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="score">Hoe de score van 0 tot 100 ontstaat</h2></div>
+      <p>De prestatiescore komt alleen uit de labtest. Lighthouse meet vijf waarden, zet elke waarde om in een deelscore en neemt daar een gewogen gemiddelde van:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Meetwaarde</th><th>Gewicht in de score</th></tr></thead>
+          <tbody>
+            <tr><td>Total Blocking Time (TBT)</td><td>30%</td></tr>
+            <tr><td>Largest Contentful Paint (LCP)</td><td>25%</td></tr>
+            <tr><td>Cumulative Layout Shift (CLS)</td><td>25%</td></tr>
+            <tr><td>First Contentful Paint (FCP)</td><td>10%</td></tr>
+            <tr><td>Speed Index</td><td>10%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Twee dingen vallen op. JavaScript (via TBT) en de grote afbeelding bovenaan (via LCP) bepalen samen meer dan de helft. En de adviezen onder de score tellen zelf niet mee, alleen de meetwaarden. Een advies opvolgen helpt dus alleen als het een meetwaarde verbetert.</p>
+      <p>De omrekening is gebaseerd op echte sites uit het HTTP Archive. Ben je voor een meetwaarde sneller dan 92 procent van die sites, dan krijg je daarvoor een 90. De kleuren: 90 tot 100 is groen, 50 tot 89 oranje, 0 tot 49 rood. De schaal loopt niet gelijk op. Volgens de makers van Lighthouse kost de stap van 99 naar 100 net zoveel verbetering als die van 90 naar 94. Een 100 wordt dan ook niet verwacht.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="telefoon" maat={52} /><h2 id="mobiel">Waarom je score op mobiel lager is</h2></div>
+      <p>Bijna iedereen schrikt van zijn mobiele score. Dat komt door de testomstandigheden. Op mobiel bootst Lighthouse een middenklasse telefoon na op een trage 4G-verbinding: 150 milliseconden vertraging en 1,6 megabit per seconde download. Daarbij wordt de processor vier keer zo traag gemaakt. Volgens de makers hoort die verbinding bij het langzaamste kwart van de 4G-verbindingen.</p>
+      <p>Op desktop krijgt de test een snelle, bekabelde verbinding en een processor op volle kracht. Bovendien gebruikt Lighthouse sinds versie 6 aparte scoregrenzen voor desktop. Een 60 op mobiel en een 95 op desktop is dus geen tegenstrijdigheid. Kijk vooral naar mobiel: Google leest je site als smartphone.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="schommelt">Waarom de score elke keer anders is</h2></div>
+      <p>Test je twee keer achter elkaar, dan krijg je vaak een ander getal. Dat ligt meestal niet aan de tool. De makers van Lighthouse noemen als oorzaken onder meer advertenties en A/B-tests die per keer verschillen, de route die het internetverkeer neemt en de belasting van de testmachine. Ook je server antwoordt op het ene moment sneller dan op het andere.</p>
+      <ul class="vink">
+        <li>Test minstens drie keer, liefst vijf, en neem het middelste getal. Volgens de makers is de mediaan van vijf metingen twee keer zo stabiel als één meting.</li>
+        <li>Test na een wijziging dezelfde pagina's op dezelfde manier.</li>
+        <li>Vergelijk mobiel met mobiel, nooit je mobiele score met de desktopscore van een ander.</li>
+        <li>Noteer de datum. Google past Lighthouse regelmatig aan, en een nieuwe versie kan een ander getal geven.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="inzichten">De inzichten en de diagnose lezen</h2></div>
+      <p>Onder de score staan de adviezen. Sinds Lighthouse 13, dat in oktober 2025 uitkwam, heten de meeste daarvan inzichten. Een aantal losse adviezen is daarbij samengevoegd. Dit zijn de inzichten die we bij mkb-sites het vaakst zien. We noemen de Engelse namen; in de Nederlandse weergave kan de vertaling iets afwijken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Inzicht</th><th>Wat het betekent</th><th>Wat je doet</th></tr></thead>
+          <tbody>
+            <tr><td>Improve image delivery</td><td>Afbeeldingen zijn groter of zwaarder dan nodig</td><td>Verkleinen tot de maat op het scherm, omzetten naar <a href="/kennisbank/wat-is/webp/">WebP</a> of AVIF</td></tr>
+            <tr><td>LCP request discovery</td><td>De browser vindt de grootste afbeelding te laat</td><td>Geen lazy loading op de bovenste afbeelding, eventueel fetchpriority="high"</td></tr>
+            <tr><td>LCP breakdown</td><td>Welke fase van de LCP de meeste tijd kost</td><td>Begin bij de langste fase</td></tr>
+            <tr><td>Render blocking requests</td><td>CSS of scripts houden de eerste weergave tegen</td><td>Scripts uitstellen met defer, ongebruikte plugins weg</td></tr>
+            <tr><td>Document request latency</td><td>De HTML zelf komt traag binnen</td><td>Paginacache aanzetten, compressie, betere <a href="/kennisbank/wat-is/hosting/">hosting</a></td></tr>
+            <tr><td>Use efficient cache lifetimes</td><td>Bestanden worden bij elk bezoek opnieuw opgehaald</td><td>Langere cachetijden via je server of cacheplugin</td></tr>
+            <tr><td>Layout shift culprits</td><td>Deze elementen laten de pagina verspringen</td><td>Vaste afmetingen op afbeeldingen, ruimte reserveren voor banners</td></tr>
+            <tr><td>Third parties</td><td>Scripts van anderen kosten tijd</td><td>Chatwidgets, trackers en ingesloten video's kritisch bekijken</td></tr>
+            <tr><td>Font display</td><td>Tekst blijft onzichtbaar tot het lettertype er is</td><td>font-display: swap, minder lettertypen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Naast prestaties geeft PSI nog drie scores: toegankelijkheid, praktische tips en SEO. De SEO-score controleert alleen basiszaken, zoals een title, een meta description en of de pagina geïndexeerd mag worden. Een 100 daar zegt niets over je posities.</p>
+
+      <h2 id="rood">Rood of oranje? Hier zit het bij mkb-sites meestal</h2>
+      <p>Het rapport noemt de symptomen. Dit zijn de oorzaken die we er bij kleine bedrijfssites het vaakst achter vinden, per meetwaarde:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Meetwaarde</th><th>Meestal de boosdoener</th><th>Eerste stap</th></tr></thead>
+          <tbody>
+            <tr><td><b>LCP</b></td><td>Een grote foto of slider bovenaan, lazy loading op die foto, een trage server</td><td>Foto verkleinen en omzetten, lazy loading eraf, paginacache aan</td></tr>
+            <tr><td><b>INP</b></td><td>Chatwidgets, trackers, het script van de cookiemelding, een zware pagebuilder</td><td>Scripts schrappen die niets opleveren, de rest uitstellen</td></tr>
+            <tr><td><b>CLS</b></td><td>Afbeeldingen zonder afmetingen, lettertypen die laat laden, banners die later inschuiven</td><td>Breedte en hoogte opgeven, vaste ruimte reserveren</td></tr>
+            <tr><td><b>FCP</b></td><td>Veel CSS en scripts die vooraf moeten laden, externe lettertypen</td><td>Ongebruikte plugins weg, lettertypen zelf hosten</td></tr>
+            <tr><td><b>TTFB</b></td><td>Overvolle gedeelde hosting, geen paginacache, een verouderde PHP-versie</td><td>Cache aanzetten, PHP bijwerken, hosting vergelijken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Begin bij de meetwaarde die het verst in het rood staat. Vaak is dat LCP, en zit de oplossing in één of twee afbeeldingen. Het complete stappenplan staat in de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+
+      <h2 id="niet">Wat PSI niet laat zien</h2>
+      <p>Het is een sterke tool, maar hij heeft blinde vlekken. Houd daar rekening mee voordat je conclusies trekt.</p>
+      <ul>
+        <li><strong>Pagina's die niet openbaar zijn.</strong> Een testomgeving, een pagina achter een inlog of een winkelmandje kun je niet testen. Gebruik daarvoor Lighthouse in je eigen Chrome.</li>
+        <li><strong>Wat er na het laden gebeurt, in het lab.</strong> De labtest klikt nergens op. Een traag menu of een formulier dat hapert bij het versturen, blijft daar buiten beeld. Alleen INP uit de velddata vangt dat.</li>
+        <li><strong>De herhaalbezoeker.</strong> Lighthouse komt elke keer binnen als nieuwe bezoeker, zonder opgeslagen bestanden of cookies. Je cookiemelding staat dus altijd in beeld. Een vaste klant die je site vaker opent, heeft het vaak sneller.</li>
+        <li><strong>Je eigen regio.</strong> De velddata zijn een mix van alle bezoekers, van alle locaties. Search Console zegt het zelf: veel verkeer uit een land met trage verbindingen drukt het gemiddelde.</li>
+        <li><strong>Of het iets oplevert.</strong> PSI meet snelheid, geen aanvragen. Een pagina van 70 die helder vertelt wat je doet en hoe je te bereiken bent, verslaat een lege pagina van 100.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="ster" maat={52} /><h2 id="google">Telt PageSpeed Insights mee in Google?</h2></div>
+      <p>De tool zelf niet. Google rankt je niet op het getal in de cirkel. Wel gebruiken de systemen van Google de Core Web Vitals van echte bezoekers. Google zegt er direct bij dat een perfecte score jagen voor SEO waarschijnlijk niet de beste besteding van je tijd is. En dat Google altijd de meest relevante inhoud wil tonen, ook als de pagina-ervaring tegenvalt. Snelheid helpt vooral als er veel goede antwoorden zijn om uit te kiezen.</p>
+      <p>Voor je hele site kijk je in Search Console bij het rapport Core Web Vitals. Dat groepeert vergelijkbare pagina's en laat per groep zien of LCP, INP en CLS goed zijn, apart voor mobiel en desktop. Het gebruikt dezelfde velddata, maar alleen van geïndexeerde pagina's. Hoe je dat instelt, lees je in de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+
+      <Tussenactie />
+      <h2 id="welke">PSI, Lighthouse of Search Console: welke wanneer?</h2>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Tool</th><th>Laat zien</th><th>Gebruik het als</th></tr></thead>
+          <tbody>
+            <tr><td>PageSpeed Insights</td><td>Velddata en een labtest voor één adres</td><td>Je snel één pagina wilt beoordelen</td></tr>
+            <tr><td>Lighthouse in Chrome (F12, tabblad Lighthouse)</td><td>Alleen een labtest, op je eigen computer</td><td>Je een pagina test die nog niet openbaar is, zoals een testomgeving</td></tr>
+            <tr><td>Search Console, rapport Core Web Vitals</td><td>Velddata voor groepen pagina's</td><td>Je de hele site wilt volgen</td></tr>
+            <tr><td>De API van PSI</td><td>Dezelfde gegevens, als JSON</td><td>Je veel pagina's automatisch wilt meten</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="koffie" maat={52} /><h2 id="voorbeeld">Voorbeeld: een bakkerij in Emmen meet haar site</h2></div>
+      <p>Een bakkerij in Emmen test haar homepage. Mobiel: 38, rood. Desktop: 81. Bovenaan staat dat de Core Web Vitals-beoordeling niet geslaagd is, met een LCP van 4,6 seconden. INP en CLS zijn groen. <span class="muted">(Verzonnen voorbeeld, met realistische getallen.)</span></p>
+      <p>De inzichten wijzen naar één ding. De grote foto van de vitrine bovenaan is 3,8 MB en krijgt lazy loading, waardoor de browser hem pas laat ophaalt. De webbouwer verkleint de foto naar 1600 pixels breed, zet hem om naar WebP (240 kB) en haalt de lazy loading van die ene foto af. Drie nieuwe labtests geven als mediaan 74 op mobiel, met een LCP van 2,3 seconden.</p>
+      <p>De velddata veranderen niet meteen. Die kijken 28 dagen terug en schuiven dag voor dag op. Pas na ongeveer een maand staat de beoordeling op geslaagd. Wie de dag na de wijziging kijkt en niets ziet veranderen, hoeft dus niet te schrikken.</p>
+
+      <h2 id="fouten">Veelgemaakte fouten met de score</h2>
+      <ul>
+        <li><strong>Sturen op de 100.</strong> Je bezoekers merken het verschil tussen 85 en 100 niet. Wel of je pagina binnen een paar seconden staat.</li>
+        <li><strong>Alleen de homepage testen.</strong> Dienstpagina's en blogs met veel foto's zijn vaak zwaarder.</li>
+        <li><strong>Eén meting als bewijs gebruiken</strong>, voor of na een wijziging.</li>
+        <li><strong>Een plugin die de score belooft op te krikken</strong>, zonder daarna te kijken of formulieren en menu's nog werken.</li>
+        <li><strong>Kleine adviezen eerst.</strong> Een paar milliseconden winst bij een lettertype, terwijl de foto van 3 MB bovenaan blijft staan.</li>
+        <li><strong>Desktop en mobiel door elkaar halen</strong> in een vergelijking met een concurrent.</li>
+      </ul>
+
+      <h2 id="ondernemer">Wat moet je ermee?</h2>
+      <ul class="vink">
+        <li>Test op mobiel je homepage, je belangrijkste dienstpagina en een pagina met veel afbeeldingen.</li>
+        <li>Kijk eerst of er velddata zijn. Zo ja: stuur op LCP, INP en CLS.</li>
+        <li>Geen velddata? Gebruik de labtest dan om oorzaken te vinden, niet als rapportcijfer.</li>
+        <li>Pak eerst de inzichten aan die de meeste tijd schelen. Meestal zijn dat afbeeldingen en scripts.</li>
+        <li>Kijk eens per maand naar de Core Web Vitals in Search Console.</li>
+      </ul>
+      <p>Wil je dat iemand het voor je uitzoekt? In een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> (vanaf € 395) meten we de laadsnelheid van je belangrijkste pagina's en maken we van het rapport een lijst met wat het meeste oplevert. Met <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a> (vanaf € 39 per maand) houden we je site daarna ook snel.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Waarom snelheid meetelt voor je bezoekers, lees je bij <a href="/kennisbank/wat-is/ux/">wat is UX</a>. Hoe trage pagina's je crawlbudget raken, staat bij <a href="/kennisbank/wat-is/googlebot/">Googlebot</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een goede score in PageSpeed Insights?', a: 'Een score van 90 of hoger is groen. Maar de score is een labtest. Belangrijker is of je pagina slaagt voor de Core Web Vitals-beoordeling bovenaan, op basis van echte bezoekers.' },
+      { v: 'Waarom verschilt mijn score per test?', a: 'Netwerk, server, advertenties en de testmachine verschillen per keer. Test drie tot vijf keer en neem het middelste getal.' },
+      { v: 'Waarom zie ik geen gegevens van echte bezoekers?', a: 'Je pagina of site heeft te weinig bezoeken in Chrome om mee te tellen, of de pagina is niet indexeerbaar. Bezoekers met Chrome op een iPhone tellen niet mee. Dan zie je alleen de labtest.' },
+      { v: 'Is PageSpeed Insights gratis?', a: 'Ja. Je hoeft niet in te loggen en je kunt elke openbare pagina testen. Voor automatisch meten is er een gratis API.' },
+      { v: 'Wat is het verschil met Lighthouse?', a: 'Lighthouse is de testmotor achter de labscore. PSI voegt daar de velddata van echte bezoekers aan toe. Lighthouse kun je ook zelf in Chrome draaien, bijvoorbeeld op een pagina die nog niet openbaar is.' },
+      { v: 'Hoe snel zie ik het effect van een verbetering?', a: 'In de labtest meteen. De velddata kijken 28 dagen terug, dus het volledige effect zie je pas na ongeveer een maand.' },
+      { v: 'Welke pagina\'s moet ik testen?', a: 'Niet alleen je homepage. Test ook je belangrijkste dienstpagina\'s en een pagina met veel foto\'s, zoals je portfolio of een blog. Voor de hele site gebruik je het rapport Core Web Vitals in Search Console.' },
+      { v: 'Heeft mijn hosting invloed op de score?', a: 'Ja, vooral via de TTFB: hoe snel de server de eerste data stuurt. Volgens web.dev is 0,8 seconden of minder een goede richtlijn. Een trage server remt alle andere meetwaarden af.' },
+    ]}
+  />
+
+  <Actie titel="Hoe snel is jouw site echt?" tekst={`We lezen je rapport van PageSpeed Insights gratis voor je uit. ${site.contactpersoon} belt je met de drie punten die het meeste schelen.`} />
+</Base>
+<script>
+  const vorm = document.getElementById('psi-meter') as HTMLFormElement | null;
+  if (vorm) {
+    const lijst = vorm.querySelector('.uitslag') as HTMLUListElement;
+    const grenzen: Record<string, { naam: string; goed: number; slecht: number; eenheid: string; tip: string }> = {
+      lcp: { naam: 'LCP', goed: 2.5, slecht: 4, eenheid: ' s', tip: 'Begin bij de grootste afbeelding bovenaan en de reactietijd van je server.' },
+      inp: { naam: 'INP', goed: 200, slecht: 500, eenheid: ' ms', tip: 'Kijk naar zware scripts: chatwidgets, trackers, sliders en pagebuilders.' },
+      cls: { naam: 'CLS', goed: 0.1, slecht: 0.25, eenheid: '', tip: 'Geef afbeeldingen vaste afmetingen en reserveer ruimte voor banners.' },
+      fcp: { naam: 'FCP', goed: 1.8, slecht: 3, eenheid: ' s', tip: 'Kijk naar CSS en scripts die de eerste weergave tegenhouden.' },
+      ttfb: { naam: 'TTFB', goed: 0.8, slecht: 1.8, eenheid: ' s', tip: 'Zet paginacache aan en vraag je hostingpartij naar de serversnelheid.' },
+    };
+    const toon = () => {
+      const regels: string[] = [];
+      for (const [veld, g] of Object.entries(grenzen)) {
+        const invoer = vorm.elements.namedItem(veld) as HTMLInputElement;
+        const ruw = invoer.value.replace(',', '.');
+        if (ruw === '') continue;
+        const w = Number(ruw);
+        if (Number.isNaN(w)) continue;
+        const oordeel = w <= g.goed ? 'goed' : w <= g.slecht ? 'matig' : 'slecht';
+        const label = oordeel === 'goed' ? 'goed' : oordeel === 'matig' ? 'verbetering nodig' : 'slecht';
+        const waarde = String(w).replace('.', ',');
+        regels.push(`<li class="${oordeel}"><b>${g.naam} ${waarde}${g.eenheid}: ${label}.</b>${oordeel === 'goed' ? '' : ' ' + g.tip}</li>`);
+      }
+      lijst.innerHTML = regels.length ? regels.join('') : '<li class="leeg">Vul een of meer waarden in.</li>';
+    };
+    vorm.addEventListener('input', toon);
+    toon();
+  }
+</script>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .meter { padding: 20px 22px; margin: 8px 0 32px; }
+  .velden { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px 16px; }
+  .velden label { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 0.92rem; }
+  .velden input { font: inherit; font-weight: 400; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; min-width: 0; width: 100%; }
+  .uitslag { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 8px; }
+  .uitslag :global(li) { padding: 10px 14px; border-radius: 10px; border-left: 5px solid var(--line); background: var(--panel, #f5f8fb); }
+  .uitslag :global(li.goed) { border-left-color: #1f8a5b; }
+  .uitslag :global(li.matig) { border-left-color: #ff6600; }
+  .uitslag :global(li.slecht) { border-left-color: #c0392b; }
+  .uitslag :global(li.leeg) { color: var(--muted); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

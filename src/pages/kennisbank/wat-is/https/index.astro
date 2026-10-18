@@ -1,0 +1,282 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--https.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/https/';
+const datum = '2026-10-18';
+const definitie = 'HTTPS is de beveiligde versie van http: browser en server versleutelen alles wat ze uitwisselen met TLS, zodat niemand onderweg kan meelezen of iets kan veranderen.';
+const hoofdstukken = [
+  { id: 'verschil', titel: 'Http en https naast elkaar' },
+  { id: 'bescherming', titel: 'Drie dingen die de s regelt' },
+  { id: 'niet', titel: 'Wat het niet doet' },
+  { id: 'werking', titel: 'Zo ontstaat de verbinding' },
+  { id: 'google', titel: 'Wat het doet in Google' },
+  { id: 'browsers', titel: 'Browsers waarschuwen harder' },
+  { id: 'hsts', titel: 'HSTS' },
+  { id: 'overstap', titel: 'De overstap in tien stappen' },
+  { id: 'redirects', titel: 'Doorverwijzen in één sprong' },
+  { id: 'snelheid', titel: 'Wordt je site trager?' },
+  { id: 'voorbeeld', titel: 'Voorbeeld uit Meppel' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'controleren', titel: 'Je eigen site controleren' },
+];
+const hsts = `Strict-Transport-Security: max-age=31536000; includeSubDomains`;
+const htaccess = `RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^jouwbedrijf\\.nl [NC]
+RewriteRule ^ https://www.jouwbedrijf.nl%{REQUEST_URI} [L,R=301]`;
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'HTTPS',
+    alternateName: ['Hypertext Transfer Protocol Secure', 'Beveiligde websiteverbinding'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat is HTTPS?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.rfc-editor.org/rfc/rfc2818',
+      'https://developers.google.com/search/blog/2014/08/https-as-ranking-signal',
+      'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
+      'https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes',
+      'https://security.googleblog.com/2018/02/a-secure-web-is-here-to-stay.html',
+      'https://security.googleblog.com/2025/10/https-by-default.html',
+      'https://hstspreload.org/',
+      'https://www.forumstandaardisatie.nl/open-standaarden/https-en-hsts',
+      'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is HTTPS? Uitleg, HSTS en de overstap | Drijfveer Media"
+  description="Wat is HTTPS? De s maakt je verbinding versleuteld. Wat het wel en niet beschermt, wat Google en Chrome ermee doen en hoe je in tien stappen overstapt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'HTTPS', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is HTTPS? De beveiligde verbinding uitgelegd</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Kijk naar de adresbalk van je browser. Voor bijna elk webadres staat https, met een s aan het eind. Die ene letter is het verschil tussen een ansichtkaart en een dichtgeplakte envelop. Maar wat is https precies? Wat beschermt het wel, wat niet, en wat merk je ervan in Google?</p>
+      <p>Er verandert dit najaar ook iets. Chrome gaat bezoekers standaard waarschuwen voor openbare sites zonder beveiligde verbinding. Draait er bij jou nog iets op http, zoals een oud subdomein of een afsprakenmodule? Dan is dit het moment. Onderaan vind je een stappenplan voor de overstap en de fouten die we het vaakst tegenkomen.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={12} />
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="verschil">Http en https naast elkaar</h2></div>
+      <p>Http staat voor Hypertext Transfer Protocol. Het is de taal waarin je browser een pagina opvraagt en de server hem terugstuurt. In die taal zit geen enkele beveiliging. Alles gaat als leesbare tekst over de lijn.</p>
+      <p>De beveiligde variant is precies dezelfde taal, alleen in een afgesloten koker. De s staat voor secure. Netscape bedacht het in 1994 voor zijn browser, toen de eerste webwinkels betalingen wilden ontvangen. In mei 2000 volgde de officiële standaard: RFC 2818, met de veelzeggende titel "HTTP over TLS".</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kenmerk</th><th>http</th><th>https</th></tr></thead>
+          <tbody>
+            <tr><td>Standaardpoort op de server</td><td>80</td><td>443</td></tr>
+            <tr><td>Versleuteling</td><td>Geen</td><td>Alles, met TLS</td></tr>
+            <tr><td>Wat een meekijker op het netwerk ziet</td><td>De hele pagina, formulieren en wachtwoorden</td><td>Alleen de domeinnaam en hoeveel data er gaat</td></tr>
+            <tr><td>Kan iemand onderweg iets veranderen?</td><td>Ja, ongemerkt</td><td>Nee, de browser merkt het</td></tr>
+            <tr><td>Certificaat nodig</td><td>Nee</td><td>Ja, vaak gratis</td></tr>
+            <tr><td>Melding in Chrome</td><td>"Niet beveiligd"</td><td>Geen waarschuwing</td></tr>
+            <tr><td>HTTP/2 en HTTP/3 in de browser</td><td>Nee</td><td>Ja</td></tr>
+            <tr><td>Voorkeur van Google bij twee gelijke pagina's</td><td>Nee</td><td>Ja</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="bescherming">Drie dingen die de s voor je regelt</h2></div>
+      <p>Versleuteling is het bekendste voordeel. Het is er één van drie.</p>
+      <ol>
+        <li><strong>Niemand leest mee.</strong> Typt een klant zijn naam, telefoonnummer en vraag in je contactformulier? Dan kan iemand op hetzelfde wifi-netwerk in een koffiezaak daar niets mee. Hij ziet alleen onleesbare tekens.</li>
+        <li><strong>Niemand verandert iets.</strong> Over een open verbinding kan elke tussenpersoon de pagina aanpassen voordat die bij je bezoeker aankomt. Een ander rekeningnummer op een betaalpagina. Een extra script. Een advertentie die jij er nooit op zette. Met versleuteling merkt de browser elke wijziging en toont hij de pagina niet.</li>
+        <li><strong>Je praat met de echte server.</strong> Het certificaat bewijst dat de server echt bij jouwbedrijf.nl hoort. Een nagemaakte server achter een vals wifi-punt valt door de mand.</li>
+      </ol>
+      <p>In vaktaal heten die drie vertrouwelijkheid, integriteit en authenticiteit. Voor jou komt het neer op één ding: de gegevens die je klant typt, komen ongezien en onveranderd bij jou aan. Dat sluit aan bij wat de AVG vraagt, namelijk dat je persoonsgegevens passend beveiligt.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="niet">Wat de beveiligde verbinding niet doet</h2></div>
+      <p>Het is een slot op de verbinding. Over wat er aan beide uiteinden gebeurt, zegt het niets.</p>
+      <ul>
+        <li><strong>Het maakt een site niet betrouwbaar.</strong> Oplichters krijgen net zo makkelijk een gratis certificaat. Veel phishingsites draaien er gewoon op. Kijk dus altijd naar de domeinnaam zelf. Waarom het slotje daarom uit Chrome verdween, lees je bij <a href="/kennisbank/wat-is/ssl-certificaat/">het SSL-certificaat</a>.</li>
+        <li><strong>Het beveiligt je website niet.</strong> Een verouderde plugin of een zwak wachtwoord blijft een open deur. Hackers komen via je beheeromgeving binnen, niet via de verbinding.</li>
+        <li><strong>Het verbergt niet alles.</strong> Je internetprovider of de beheerder van een netwerk ziet nog welke domeinnaam je bezoekt, wanneer, en hoeveel data er heen en weer gaat. Welke pagina je opent en wat je invult, blijft wel verborgen.</li>
+        <li><strong>Het beschermt niets op de server zelf.</strong> Komt een formulier binnen in een mailbox zonder tweestapsverificatie? Dan ligt het daar alsnog voor het oprapen.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="werking">Zo komt een beveiligde verbinding tot stand</h2></div>
+      <p>Je typt jouwbedrijf.nl en drukt op Enter. In een fractie van een seconde gebeurt er dit:</p>
+      <ol>
+        <li><strong>Opzoeken.</strong> De browser vraagt via <a href="/kennisbank/wat-is/dns/">DNS</a> op bij welk IP-adres je domein hoort.</li>
+        <li><strong>Aankloppen op poort 443.</strong> De browser maakt contact met de server, op de poort die voor beveiligd verkeer is afgesproken.</li>
+        <li><strong>De handdruk.</strong> Browser en server spreken af welke TLS-versie en welke versleuteling ze gebruiken. De server laat zijn certificaat zien en de browser controleert het. Samen maken ze een sleutel die alleen voor dit bezoek geldt.</li>
+        <li><strong>De eigenlijke vraag.</strong> Pas nu stuurt de browser het http-verzoek: geef mij de pagina /offerte/. Dat verzoek en het antwoord gaan allebei versleuteld.</li>
+      </ol>
+      <p>De huidige versie, TLS 1.3, is in augustus 2018 vastgesteld. Die heeft minder heen-en-weer nodig dan zijn voorgangers, dus de handdruk gaat sneller. Bij een volgend bezoek kunnen browser en server bovendien afspraken van de vorige keer hergebruiken.</p>
+      <div class="kader">
+        <p class="kader-titel">SSL, TLS en het certificaat: wie doet wat?</p>
+        <p>TLS is de techniek die versleutelt. SSL is de oude naam ervan, die iedereen nog gebruikt. Het certificaat is het identiteitsbewijs van je server. Stuur je http over TLS, dan heb je een beveiligde verbinding. Soorten certificaten, de handdruk in detail en de kortere looptijd vanaf 2026 staan op de pagina over het <a href="/kennisbank/wat-is/ssl-certificaat/">SSL-certificaat</a>.</p>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="google">Wat https doet voor je plek in Google</h2></div>
+      <p>Op 7 augustus 2014 maakte Google bekend dat https meetelt in de ranking. Volgens Google zelf was het een heel licht signaal. Het speelde mee bij minder dan 1 procent van de zoekopdrachten wereldwijd en woog minder dan goede inhoud. Inmiddels is Google nog voorzichtiger. In de huidige uitleg over pagina-ervaring staat dat alleen de Core Web Vitals echt meetellen in de ranking. De andere onderdelen, waaronder een veilige verbinding, laten je volgens Google niet direct hoger komen. Ze maken je site wel prettiger in gebruik, en dat is waar de systemen van Google op uit zijn. Verwacht dus geen sprong omhoog na de overstap.</p>
+      <p>Belangrijker zijn drie andere effecten:</p>
+      <ul>
+        <li><strong>Google kiest de https-versie.</strong> Bestaan er twee versies van dezelfde pagina, dan kiest Google volgens de eigen documentatie de beveiligde als hoofdversie (de canonical). Behalve als het certificaat ongeldig is, als de pagina onveilige onderdelen laadt (afbeeldingen uitgezonderd) of als hij via een http-adres doorstuurt.</li>
+        <li><strong>Het hoort bij de pagina-ervaring.</strong> In de zelftest die Google geeft voor een goede pagina-ervaring staat de vraag of je pagina's veilig worden aangeboden. Samen met snelheid (de <a href="/kennisbank/gidsen/website-sneller-maken/">Core Web Vitals</a>), een goede weergave op mobiel en geen opdringerige pop-ups.</li>
+        <li><strong>Je ziet waar bezoekers vandaan komen.</strong> Browsers sturen standaard geen herkomst mee als iemand van een beveiligde site naar een onbeveiligde site klikt. Dat staat in de uitleg van MDN over het Referrer-Policy-beleid. Draait jouw site nog op http, dan zie je bezoekers via links op andere sites in Analytics als direct verkeer. Je weet dan niet welke link je klanten oplevert.</li>
+      </ul>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="browsers">Browsers waarschuwen steeds harder</h2></div>
+      <p>Google gebruikt Chrome al jaren als stok achter de deur. Sinds Chrome 68, in juli 2018, staat er "Niet beveiligd" naast elke site zonder https. Dat werkte. Volgens Google ging het aandeel pagina's dat in Chrome via https laadt van zo'n 30 tot 45 procent in 2015 naar 95 tot 99 procent rond 2020. Kijk je alleen naar openbare sites, dan gaat op Windows 98 procent van de bezoeken via https. Op Android en Mac is dat meer dan 99 procent.</p>
+      <p>De volgende stap komt nu. In oktober 2025 kondigde Google aan dat Chrome de instelling Altijd beveiligde verbindingen gebruiken standaard aanzet, vanaf versie 154 in het najaar van 2026. Chrome probeert dan elke site eerst via https te openen. Lukt dat niet, dan vraagt de browser toestemming voordat hij een openbare site zonder versleuteling laat zien. Wie de strengste beveiligingsstand van Chrome gebruikt (Enhanced Safe Browsing), kreeg dit volgens de planning al in april 2026, met versie 147.</p>
+      <p>Bezoekers die je site vaker openen, krijgen die melding niet steeds opnieuw. Maar een nieuwe klant die je adres van een bedrijfsbus of visitekaartje overtypt, krijgt hem als eerste indruk. Dat kost aanvragen.</p>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2 id="hsts">HSTS: de achterdeur naar http dicht</h2></div>
+      <p>Een doorverwijzing van http naar https heeft één zwak moment: het allereerste verzoek. Typt iemand jouwbedrijf.nl zonder iets ervoor, dan gaat die eerste vraag even onbeveiligd over de lijn. Een aanvaller op hetzelfde netwerk kan precies daar tussen gaan zitten en de bezoeker op de onveilige versie houden.</p>
+      <p>HSTS lost dat op. Het staat voor HTTP Strict Transport Security. Je server stuurt bij elk antwoord deze regel mee:</p>
+      <pre><code>{hsts}</code></pre>
+      <p>Daarmee zegt je site tegen de browser: kom hier het komende jaar alleen nog via https, ook op alle subdomeinen. De browser zet daarna elk http-adres zelf om, nog voordat er iets over de lijn gaat. En is het certificaat ongeldig, dan kan de bezoeker de waarschuwing niet meer wegklikken.</p>
+      <p>Ga voorzichtig te werk. Een browser onthoudt de instructie zo lang als max-age aangeeft, in seconden. Werkt een subdomein niet op https, zoals een oude webmail of een testomgeving? Dan is dat subdomein voor die bezoekers onbereikbaar. De beheerders van de HSTS-lijst van Chrome raden aan de duur in stappen op te bouwen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>max-age</th><th>Betekent</th><th>Daarna</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>300</td><td>5 minuten</td><td>Alles nalopen, ook subdomeinen</td></tr>
+            <tr><td>2</td><td>604800</td><td>1 week</td><td>Een week wachten en je cijfers bekijken</td></tr>
+            <tr><td>3</td><td>2592000</td><td>1 maand</td><td>Een volle maand wachten</td></tr>
+            <tr><td>4</td><td>31536000</td><td>1 jaar</td><td>Zo laten staan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Er bestaat ook een preload-lijst: domeinen die als beveiligd-only in de browser zelf zijn ingebouwd. Daarvoor moet max-age minstens een jaar zijn, met includeSubDomains en preload erbij. De beheerders van die lijst raden het voor gewone sites af. Moderne browsers proberen toch al eerst https, en van de lijst afkomen duurt maanden.</p>
+      <p>Ter vergelijking: voor overheden zijn https en HSTS sinds 1 juli 2023 wettelijk verplicht, volgens het Forum Standaardisatie. Voor bedrijven niet, maar het laat zien wat inmiddels als basisbeveiliging geldt.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="overstap">Van http naar https in tien stappen</h2></div>
+      <ol>
+        <li><strong>Maak een back-up</strong> van je bestanden en je database.</li>
+        <li><strong>Zet het certificaat aan</strong> in het controlepaneel van je hostingpartij. Meestal is dat een gratis certificaat van Let's Encrypt, met één schakelaar. Zorg dat het geldt voor je domein met en zonder www.</li>
+        <li><strong>Test de https-versie</strong> in een privévenster. Ook je formulieren en je betaalpagina.</li>
+        <li><strong>Pas het adres van je site aan.</strong> In WordPress ga je naar Instellingen › Algemeen. Zet bij WordPress-adres (URL) en Siteadres (URL) https in plaats van http.</li>
+        <li><strong>Vervang interne links</strong> in teksten, menu's, afbeeldingen en je thema. Zo voorkom je <a href="/kennisbank/wat-is/mixed-content/">mixed content</a>.</li>
+        <li><strong>Stel een 301-redirect in</strong> van elk http-adres naar hetzelfde adres op https. Pagina voor pagina, niet alles naar de homepage.</li>
+        <li><strong>Werk de rest bij:</strong> je canonical-tags, je XML-sitemap, de verwijzing naar die sitemap in robots.txt en eventuele hreflang-tags.</li>
+        <li><strong>Regel Search Console.</strong> Een domeinproperty dekt beide versies in één keer. Werk je met een URL-voorvoegsel, voeg dan de https-versie toe en dien de sitemap opnieuw in. Een adreswijziging hoef je volgens Google niet in te dienen bij deze overstap.</li>
+        <li><strong>Pas je adressen elders aan:</strong> je Google Bedrijfsprofiel, de landingspagina's in Google Ads, je social-mediaprofielen, je e-mailhandtekening en de belangrijkste links op andere sites.</li>
+        <li><strong>Laat de redirects staan.</strong> Google adviseert verhuisde adressen minstens een jaar door te sturen. Voor bezoekers met oude bladwijzers zet je ze het liefst nooit uit.</li>
+      </ol>
+      <p>Een kleine of middelgrote site is volgens Google meestal binnen een paar weken verhuisd in de index. Een tijdelijke schommeling in posities is normaal en trekt weer bij.</p>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2 id="redirects">Doorverwijzen in één sprong</h2></div>
+      <p>Elke site is op vier manieren bereikbaar. Kies er één als hoofdadres en stuur de andere drie daar rechtstreeks naartoe:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Iemand opent</th><th>Komt uit op</th><th>Statuscode</th></tr></thead>
+          <tbody>
+            <tr><td>http://jouwbedrijf.nl</td><td>het hoofdadres</td><td>301</td></tr>
+            <tr><td>http://www.jouwbedrijf.nl</td><td>het hoofdadres</td><td>301</td></tr>
+            <tr><td>https://jouwbedrijf.nl</td><td>het hoofdadres</td><td>301</td></tr>
+            <tr><td>https://www.jouwbedrijf.nl (hoofdadres)</td><td>blijft staan</td><td>200</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Met of zonder www maakt voor Google niet uit. Kies en wees consequent. Wat wel uitmaakt: geen ketting. Eerst naar www, dan naar de beveiligde versie, dan nog eens naar een schuine streep aan het eind. Elke sprong kost je bezoeker tijd. Google volgt maximaal tien sprongen, maar elke tussenstap is een kans op fouten.</p>
+      <p>Gebruik een 301 of een 308. Google ziet die als sterk signaal dat het nieuwe adres het juiste is. Een 302 is een zwak signaal, bedoeld voor tijdelijk. Meer over de soorten lees je bij <a href="/kennisbank/wat-is/redirect/">wat is een redirect</a>. Draait je site op Apache, dan regelt dit blok in het .htaccess-bestand alles in één keer:</p>
+      <pre><code>{htaccess}</code></pre>
+      <p>Bij veel hostingpartijen kan het ook met een schakelaar die "https afdwingen" heet. Gebruik dan niet daarnaast nog een plugin die hetzelfde doet. Zo ontstaan kettingen en lussen.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2 id="snelheid">Wordt je site er trager van?</h2></div>
+      <p>Dat was ooit een argument. Versleutelen kost rekenwerk en de handdruk kost een extra rondje. Op moderne servers en telefoons merk je daar niets van.</p>
+      <p>Het omgekeerde is eerder waar. Volgens het overzicht van Can I use ondersteunen browsers HTTP/2 alleen over een versleutelde verbinding. Bij HTTP/3 zit TLS standaard ingebouwd, zo staat in RFC 9001. Beide nieuwe versies halen meerdere bestanden tegelijk over één verbinding op. Een pagina met veel foto's en scripts wordt daar juist sneller van. Moderne browserfuncties, zoals locatie opvragen of pushmeldingen sturen, werken volgens MDN bovendien alleen in een beveiligde omgeving.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2 id="voorbeeld">Voorbeeld: een fysiotherapeut in Meppel</h2></div>
+      <p>Een fysiotherapiepraktijk in Meppel heeft een WordPress-site uit 2016. De site zelf is beveiligd, maar het afsprakenformulier staat op een subdomein: afspraak.praktijkvoorbeeld.nl. Dat subdomein is bij de overstap vergeten. Patiënten vullen daar hun naam, geboortedatum en klacht in, over een open lijn. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <ol>
+        <li>Het certificaat wordt uitgebreid naar het subdomein, via het controlepaneel van de hostingpartij. Tien minuten werk.</li>
+        <li>Op het subdomein komt een 301 van de oude naar de beveiligde adressen.</li>
+        <li>De link in het menu en in de bevestigingsmail wordt aangepast.</li>
+        <li>Na een maand zonder problemen gaat HSTS aan, met includeSubDomains, opgebouwd van vijf minuten naar een jaar.</li>
+      </ol>
+      <p>Het resultaat: geen melding meer in Chrome, ook niet straks als de nieuwe standaardinstelling aanstaat. En de praktijk voldoet beter aan de AVG. Gezondheidsgegevens zijn bijzondere persoonsgegevens, waarvoor zwaardere eisen gelden dan voor een naam en een telefoonnummer.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><strong>Half werk.</strong> Alleen de homepage of alleen www is beveiligd. Of de webshop wel, maar het offerteformulier op een subdomein niet.</li>
+        <li><strong>Alles naar de homepage.</strong> Wie een oude link naar /tarieven/ volgt, hoort op de https-versie van /tarieven/ uit te komen. Niet op de homepage, waar hij opnieuw moet zoeken.</li>
+        <li><strong>Dubbel doorsturen.</strong> De hostingpartij én een plugin sturen door, met een ketting of een lus als gevolg.</li>
+        <li><strong>Oude adressen in de sitemap.</strong> De sitemap en de canonical-tags wijzen nog naar http, zodat Google tegenstrijdige signalen krijgt.</li>
+        <li><strong>HSTS meteen op een jaar.</strong> Terwijl de webmail op een subdomein nog geen certificaat heeft.</li>
+        <li><strong>Formulieren die naar een http-adres versturen.</strong> De pagina is veilig, de inzending niet.</li>
+        <li><strong>Denken dat het slot genoeg is.</strong> Updates, sterke wachtwoorden en back-ups blijven gewoon nodig.</li>
+      </ul>
+
+      <h2 id="controleren">Zo controleer je je eigen site in vijf minuten</h2>
+      <ul class="vink">
+        <li>Typ http://jouwbedrijf.nl en http://www.jouwbedrijf.nl in een privévenster. Kom je allebei in één keer op hetzelfde beveiligde adres uit? Goed.</li>
+        <li>Probeer een diepe pagina met http ervoor, bijvoorbeeld /contact/. Kom je ook echt op /contact/ uit?</li>
+        <li>Doe de gratis websitetest op internet.nl. Die controleert je instellingen voor de beveiligde verbinding, waaronder HSTS en de TLS-versie van je server.</li>
+        <li>Kijk in Search Console of Google pagina's alleen via http kent.</li>
+        <li>Zet in je eigen Chrome de instelling Altijd beveiligde verbindingen gebruiken aan, via chrome://settings/security. Klik daarna je site en je subdomeinen door. Zie je een waarschuwing, dan ziet je klant die straks ook.</li>
+      </ul>
+      <p>Hosting en certificaten verkopen we zelf niet. In een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> (vanaf € 395) lopen we de beveiligde verbinding, doorverwijzingen, HSTS en mixed content wel voor je na. En met <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a> (vanaf € 39 per maand) houden we updates, back-ups en certificaten in de gaten.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees hoe een <a href="/kennisbank/wat-is/ssl-certificaat/">SSL-certificaat</a> werkt en wat <a href="/kennisbank/wat-is/hosting/">hosting</a> is. Is je site al eens overgenomen, kijk dan bij <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt: wat nu?</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is https in gewone taal?', a: 'De beveiligde versie van http, de taal waarmee je browser pagina\'s opvraagt. Alles wat je browser en de server uitwisselen, wordt versleuteld. Niemand onderweg kan meelezen of iets veranderen.' },
+      { v: 'Is een beveiligde verbinding verplicht?', a: 'Voor overheden wel: sinds 1 juli 2023 zijn https en HSTS voor hun websites wettelijk verplicht. Voor bedrijven staat het niet letterlijk in de wet. Maar verwerk je persoonsgegevens via een formulier, dan vraagt de AVG passende beveiliging. Zonder versleuteling is dat lastig te verdedigen.' },
+      { v: 'Kost het geld?', a: 'Meestal niet. Bijna elke hostingpartij levert een gratis certificaat van Let\'s Encrypt dat zichzelf verlengt. Een betaald certificaat versleutelt niet sterker. Het verschil zit in de controle van je bedrijfsgegevens.' },
+      { v: 'Wat is het verschil tussen SSL en TLS?', a: 'TLS is de opvolger van SSL. SSL wordt al jaren niet meer gebruikt, maar de naam is blijven hangen. Een SSL-certificaat is dus in werkelijkheid een TLS-certificaat.' },
+      { v: 'Verlies ik posities als ik overstap?', a: 'Een korte schommeling is normaal. Stuur je elke oude pagina met een 301 door naar dezelfde pagina op https, dan neemt Google de signalen mee. Volgens Google duurt het bij een kleine site meestal een paar weken tot de meeste pagina\'s zijn verhuisd.' },
+      { v: 'Waarom zegt Chrome "Niet beveiligd" terwijl ik een certificaat heb?', a: 'Vaak laadt de pagina nog onderdelen via http (mixed content), verstuurt een formulier naar een http-adres of is het certificaat verlopen. Klik op het icoon links van het adres voor de details.' },
+      { v: 'Is mijn e-mail dan ook beveiligd?', a: 'Nee, https gaat alleen over je website. Mailservers gebruiken dezelfde techniek, TLS, maar dat stel je apart in. De gratis e-mailtest op internet.nl laat zien of dat bij jouw domein goed staat.' },
+      { v: 'Moet ik HSTS aanzetten?', a: 'Als je zeker weet dat je hele domein beveiligd werkt, ook alle subdomeinen, dan is het een goede extra stap. Bouw de duur op van vijf minuten naar een jaar en kijk tussendoor of alles werkt.' },
+    ]}
+  />
+
+  <Actie titel="Draait je hele site beveiligd?" tekst={`We kijken gratis naar je certificaat, je doorverwijzingen en je subdomeinen. ${site.contactpersoon} belt je met wat er goed staat en wat beter kan.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

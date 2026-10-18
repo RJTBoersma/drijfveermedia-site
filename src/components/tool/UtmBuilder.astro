@@ -1,0 +1,186 @@
+---
+// UTM-builder: URL, bron, medium en campagne (plus optioneel term en content) worden een nette campagnelink met kopieerknop.
+// Waarschuwt bij hoofdletters, spaties, ontbrekende velden, persoonsgegevens en een medium dat Google Analytics niet kent.
+// Bronnen (opgehaald 18-10-2026): support.google.com/analytics/answer/10917952 (parameters, hoofdlettergevoelig, altijd source/medium/campaign)
+// en support.google.com/analytics/answer/9756891 (standaardkanalen: welke mediumwaarden GA4 herkent).
+// Deelbaar via #utm&url=...&bron=...&medium=...&campagne=...&term=...&content=...
+interface Props { id?: string; kop?: 'h2' | 'h3'; url?: string }
+const { id = 'utm', kop = 'h3', url = '' } = Astro.props;
+const Kop = kop;
+const velden = [
+  { n: 'bron', p: 'utm_source', label: 'Bron (utm_source)', ph: 'Bijvoorbeeld: nieuwsbrief', lijst: ['nieuwsbrief', 'google', 'facebook', 'linkedin', 'instagram', 'flyer', 'handtekening'], verplicht: true },
+  { n: 'medium', p: 'utm_medium', label: 'Medium (utm_medium)', ph: 'Bijvoorbeeld: email', lijst: ['email', 'social', 'organic', 'cpc', 'referral', 'print', 'display'], verplicht: true },
+  { n: 'campagne', p: 'utm_campaign', label: 'Campagne (utm_campaign)', ph: 'Bijvoorbeeld: voorjaar-2027', lijst: [], verplicht: true },
+  { n: 'term', p: 'utm_term', label: 'Zoekwoord (utm_term, mag leeg)', ph: 'Bijvoorbeeld: dakkapel', lijst: [], verplicht: false },
+  { n: 'content', p: 'utm_content', label: 'Inhoud (utm_content, mag leeg)', ph: 'Bijvoorbeeld: knop-boven', lijst: [], verplicht: false },
+];
+---
+<div class="ub card" id={id} data-utm={id}>
+  <p class="kicker">Gratis tool · direct resultaat</p>
+  <Kop class="ub-titel">Maak je UTM-link</Kop>
+  <p class="muted ub-intro">Vul de pagina en de drie vaste velden in. Je link staat er meteen, klaar om te kopiëren. Klopt er iets niet, dan zie je dat direct onder het formulier.</p>
+  <div class="ub-voorbeelden">
+    <span class="klein muted">Vul een voorbeeld in:</span>
+    <button type="button" class="ub-chip" data-voorbeeld="nieuwsbrief">Nieuwsbrief</button>
+    <button type="button" class="ub-chip" data-voorbeeld="profiel">Google Bedrijfsprofiel</button>
+    <button type="button" class="ub-chip" data-voorbeeld="flyer">QR-code op een flyer</button>
+    <button type="button" class="ub-chip" data-voorbeeld="linkedin">LinkedIn-bericht</button>
+  </div>
+  <form class="ub-form" data-form>
+    <div class="veld"><label for={`${id}-url`}>Pagina waar de link naartoe gaat</label><input id={`${id}-url`} name="url" value={url} inputmode="url" placeholder="https://www.jouwbedrijf.nl/pagina/" autocomplete="off" maxlength="500" /></div>
+    <div class="ub-raster">
+      {velden.map((v) => (
+        <div class="veld">
+          <label for={`${id}-${v.n}`}>{v.label}</label>
+          <input id={`${id}-${v.n}`} name={v.n} placeholder={v.ph} autocomplete="off" maxlength="100" list={v.lijst.length ? `${id}-${v.n}-lijst` : undefined} />
+          {v.lijst.length > 0 && <datalist id={`${id}-${v.n}-lijst`}>{v.lijst.map((o) => <option value={o} />)}</datalist>}
+        </div>
+      ))}
+    </div>
+  </form>
+
+  <div class="ub-uitkomst">
+    <label class="ub-label" for={`${id}-link`}>Je campagnelink</label>
+    <output class="ub-link" id={`${id}-link`} data-link>Vul de velden hierboven in.</output>
+    <div class="ub-acties">
+      <button class="btn" type="button" data-kopieer disabled>Kopieer de link</button>
+      <button class="btn btn-ghost" type="button" data-deel>Deel deze instellingen</button>
+    </div>
+    <div class="ub-live" aria-live="polite">
+      <p class="klein ub-status" data-status></p>
+      <ul class="ub-meldingen" data-meldingen></ul>
+    </div>
+  </div>
+  <p class="ub-vervolg"><a class="btn btn-ghost" href="/gratis-website-analyse/#scan">Laat je meting gratis nakijken</a></p>
+  <noscript><p class="klein">Zonder JavaScript bouwt deze tool geen link. Zet zelf achter je pagina een vraagteken, dan utm_source=, utm_medium= en utm_campaign=, gescheiden door een &amp;. Alles in kleine letters en zonder spaties.</p></noscript>
+  <p class="klein muted ub-bron">Bron: Google Analytics Help over <a href="https://support.google.com/analytics/answer/10917952?hl=nl" rel="noopener">UTM-parameters</a> en <a href="https://support.google.com/analytics/answer/9756891?hl=nl" rel="noopener">standaardkanalen</a> (gelezen op 18 oktober 2026). Waarden zijn hoofdlettergevoelig: voor Google is Nieuwsbrief een andere bron dan nieuwsbrief.</p>
+</div>
+
+<script>
+  const PARAMS: [string, string][] = [['bron', 'utm_source'], ['medium', 'utm_medium'], ['campagne', 'utm_campaign'], ['term', 'utm_term'], ['content', 'utm_content']];
+  const VOORBEELDEN: Record<string, Record<string, string>> = {
+    nieuwsbrief: { url: 'https://www.jouwbedrijf.nl/dakkapel/', bron: 'nieuwsbrief', medium: 'email', campagne: 'voorjaar-2027', term: '', content: 'knop-boven' },
+    profiel: { url: 'https://www.jouwbedrijf.nl/', bron: 'google', medium: 'organic', campagne: 'bedrijfsprofiel', term: '', content: '' },
+    flyer: { url: 'https://www.jouwbedrijf.nl/warmtepomp/', bron: 'flyer', medium: 'print', campagne: 'warmtepomp-voorjaar', term: '', content: '' },
+    linkedin: { url: 'https://www.jouwbedrijf.nl/blog/nieuw-pand/', bron: 'linkedin', medium: 'social', campagne: 'nieuw-pand', term: '', content: '' },
+  };
+  // Welk standaardkanaal Google Analytics 4 bij een medium kiest (regels voor handmatig verkeer, vereenvoudigd).
+  const kanaal = (m: string, bron: string) => {
+    m = m.toLowerCase(); bron = bron.toLowerCase();
+    if (/^(email|e-mail|e_mail|e mail)$/.test(m) || /^(email|e-mail|e_mail|e mail)$/.test(bron)) return 'E-mail';
+    if (['social', 'social-network', 'social-media', 'sm', 'social network', 'social media'].includes(m)) return 'Organische social';
+    if (m === 'organic') return 'Organisch zoeken';
+    if (['referral', 'app', 'link'].includes(m)) return 'Verwijzing';
+    if (['display', 'banner', 'expandable', 'interstitial', 'cpm'].includes(m)) return 'Display';
+    if (/^(.*cp.*|ppc|retargeting|paid.*)$/.test(m)) return 'een betaald kanaal (zoeken, social of overig, afhankelijk van de bron)';
+    if (/video/.test(m)) return 'Organische video';
+    if (m === 'affiliate') return 'Affiliates';
+    if (m === 'audio') return 'Audio';
+    if (m === 'sms' || bron === 'sms') return 'Sms';
+    if (/push$|mobile|notification/.test(m)) return 'Pushmeldingen';
+    return '';
+  };
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+
+  document.querySelectorAll<HTMLElement>('[data-utm]').forEach((el) => {
+    const id = el.dataset.utm!;
+    const form = el.querySelector<HTMLFormElement>('[data-form]')!;
+    const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const uitvoer = el.querySelector<HTMLElement>('[data-link]')!;
+    const knop = el.querySelector<HTMLButtonElement>('[data-kopieer]')!;
+    const status = el.querySelector<HTMLElement>('[data-status]')!;
+    let link = '';
+    let wacht = 0;
+
+    const deelHash = () => {
+      const p = new URLSearchParams(); p.set(id, '');
+      ['url', ...PARAMS.map(([n]) => n)].forEach((n) => { const v = veld(n).value.trim(); if (v) p.set(n, v); });
+      return p.toString().replace(`${id}=`, id);
+    };
+
+    const bouw = () => {
+      const meldingen: string[] = [];
+      const ruw = veld('url').value.trim();
+      const waarden = Object.fromEntries(PARAMS.map(([n]) => [n, veld(n).value.trim()]));
+      link = '';
+      let u: URL | null = null;
+      if (!ruw) meldingen.push('Vul de pagina in waar de link naartoe gaat.');
+      else {
+        try { u = new URL(/^[a-z]+:\/\//i.test(ruw) ? ruw : `https://${ruw}`); if (!u.hostname.includes('.')) throw new Error(); }
+        catch { u = null; meldingen.push('Dit is geen geldig webadres. Begin met https:// of met je domeinnaam.'); }
+      }
+      const mist = PARAMS.slice(0, 3).filter(([n]) => !waarden[n]).map(([, p]) => p);
+      if (mist.length) meldingen.push(`Nog leeg: ${mist.join(', ')}. Google raadt aan deze drie altijd in te vullen, anders zie je (not set) in je rapporten.`);
+      PARAMS.forEach(([n, p]) => {
+        const v = waarden[n];
+        if (!v) return;
+        if (/[A-Z]/.test(v)) meldingen.push(`Hoofdletters in ${p}: "${v}". Google Analytics ziet ${v} en ${v.toLowerCase()} als twee verschillende waarden. Gebruik kleine letters.`);
+        if (/\s/.test(v)) meldingen.push(`Spatie in ${p}: "${v}". In de link wordt dat %20. Gebruik liever een koppelteken: ${v.trim().replace(/\s+/g, '-').toLowerCase()}.`);
+        if (/@/.test(v) || /\b\d{9,}\b/.test(v)) meldingen.push(`In ${p} lijkt een e-mailadres of nummer te staan. Zet nooit persoonsgegevens in een UTM-code.`);
+      });
+      if (waarden.medium && !kanaal(waarden.medium, waarden.bron)) meldingen.push(`Het medium "${waarden.medium}" kent Google Analytics niet als kanaal. Je bezoekers staan dan onder Niet toegewezen. Bij print of een flyer is dat prima, zolang je weet waar je moet kijken.`);
+      if (u) {
+        if (u.protocol === 'http:') meldingen.push('Je link begint met http://. Gebruik https:// als je site dat heeft, anders gaat er een omleiding tussen.');
+        const oud = [...u.searchParams.keys()].filter((k) => k.toLowerCase().startsWith('utm_'));
+        if (oud.length) meldingen.push(`Je pagina had al UTM-codes (${oud.join(', ')}). Die zijn vervangen door de nieuwe.`);
+        oud.forEach((k) => u!.searchParams.delete(k));
+        PARAMS.forEach(([n, p]) => { if (waarden[n]) u!.searchParams.set(p, waarden[n]); });
+        if (!mist.length) link = u.href;
+      }
+      const k = waarden.medium ? kanaal(waarden.medium, waarden.bron) : '';
+      if (link && k) meldingen.push(`Google Analytics zet dit bezoek waarschijnlijk onder: ${k}.`);
+      uitvoer.textContent = link || 'Vul de velden hierboven in.';
+      uitvoer.classList.toggle('ub-leeg', !link);
+      knop.disabled = !link;
+      el.querySelector('[data-meldingen]')!.innerHTML = meldingen.map((m) => `<li${m.startsWith('Google Analytics zet') ? ' class="ub-ok"' : ''}>${esc(m)}</li>`).join('');
+      status.textContent = '';
+      clearTimeout(wacht);
+      wacht = window.setTimeout(() => { try { history.replaceState(null, '', `${location.pathname}${location.search}#${deelHash()}`); } catch {} }, 600);
+    };
+
+    const kopieer = async (t: string, ok: string) => {
+      try { await navigator.clipboard.writeText(t); status.textContent = ok; }
+      catch { const r = document.createRange(); r.selectNodeContents(uitvoer); const s = getSelection(); s?.removeAllRanges(); s?.addRange(r); status.textContent = 'Kopiëren lukte niet automatisch. De link is geselecteerd: kopieer hem met Ctrl+C of Cmd+C.'; }
+    };
+    knop.addEventListener('click', () => { if (link) kopieer(link, 'Gekopieerd. Klik zelf een keer op de link en kijk in het rapport Realtime of je bezoek goed binnenkomt.'); });
+    el.querySelector('[data-deel]')!.addEventListener('click', () => kopieer(`${location.origin}${location.pathname}#${deelHash()}`, 'De link naar deze instellingen staat op je klembord.'));
+    form.addEventListener('input', bouw);
+    form.addEventListener('submit', (e) => e.preventDefault());
+    el.querySelectorAll<HTMLButtonElement>('[data-voorbeeld]').forEach((b) => b.addEventListener('click', () => {
+      const v = VOORBEELDEN[b.dataset.voorbeeld!];
+      Object.entries(v).forEach(([n, w]) => (veld(n).value = w));
+      bouw();
+    }));
+
+    const h = new URLSearchParams(location.hash.slice(1));
+    if (h.has(id)) {
+      ['url', ...PARAMS.map(([n]) => n)].forEach((n) => { const v = h.get(n); if (v) veld(n).value = v.slice(0, n === 'url' ? 500 : 100); });
+      bouw();
+      el.scrollIntoView({ block: 'start' });
+    } else if (veld('url').value) bouw();
+  });
+</script>
+
+<style>
+  .ub { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .ub-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .ub-intro { margin-bottom: 14px; }
+  .ub-voorbeelden { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; }
+  .ub-chip { font: inherit; font-size: 0.92rem; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 14px; min-height: 44px; cursor: pointer; }
+  .ub-chip:hover { border-color: var(--navy); }
+  .ub-form { display: grid; gap: 14px; }
+  .ub-raster { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .ub-uitkomst { margin-top: 20px; padding: 18px; border-radius: 12px; background: var(--tint); border: 1px solid #ffd6b8; }
+  .ub-label { display: block; font-weight: 800; margin-bottom: 6px; }
+  .ub-link { display: block; font-family: var(--mono); font-size: 0.92rem; line-height: 1.5; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; overflow-wrap: anywhere; word-break: break-all; }
+  .ub-link.ub-leeg { color: var(--muted); font-family: var(--font); word-break: normal; }
+  .ub-acties { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+  .ub-acties .btn[disabled] { opacity: 0.5; cursor: not-allowed; filter: none; }
+  .ub-status { min-height: 1.4em; margin: 10px 0 0; }
+  .ub-meldingen { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 6px; }
+  .ub-meldingen :global(li) { margin: 0; padding: 8px 12px; border-radius: 8px; background: #fff; border-left: 4px solid var(--orange); font-size: 0.95rem; }
+  .ub-meldingen :global(li.ub-ok) { border-left-color: var(--ok); }
+  .ub-vervolg { margin: 18px 0 0; }
+  .ub-bron { margin: 14px 0 0; }
+  @media (max-width: 560px) { .ub-acties .btn, .ub-vervolg .btn { width: 100%; } }
+</style>

@@ -1,0 +1,233 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--500-fout.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/500-fout/';
+const datum = '2026-10-18';
+const definitie = 'Een 500 error (500 Internal Server Error) is een statuscode waarmee de server meldt dat er iets onverwachts misging, zonder te zeggen wat.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat de statuscode zegt' },
+  { id: 'herkennen', titel: 'Zo ziet de melding eruit' },
+  { id: 'familie', titel: '500, 502, 503 of 504' },
+  { id: 'oorzaken', titel: 'De zeven vaakste oorzaken' },
+  { id: 'eerst', titel: 'Vijf vragen vooraf' },
+  { id: 'wordpress', titel: 'Oplossen in WordPress' },
+  { id: 'log', titel: 'Een logbestand lezen' },
+  { id: 'google', titel: 'Gevolgen in Google' },
+  { id: 'voorbeeld', titel: 'Voorbeeld uit Zuidlaren' },
+  { id: 'voorkomen', titel: 'Voorkomen' },
+];
+const debug = `define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );`;
+const logregel = `[14-Oct-2026 08:12:31 UTC] PHP Fatal error:  Uncaught Error:
+Call to undefined function agenda_laad_tijden() in
+/home/jouwsite/public_html/wp-content/plugins/agenda-pro/includes/main.php:214`;
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: '500 Internal Server Error',
+    alternateName: ['500 error', '500-fout', 'HTTP-fout 500', 'Interne serverfout'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: '500 error: wat het is en hoe je het oplost',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.rfc-editor.org/rfc/rfc9110.html#name-500-internal-server-error',
+      'https://developers.google.com/search/docs/crawling-indexing/http-network-errors',
+      'https://developers.google.com/search/docs/crawling-indexing/pause-online-business',
+      'https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/',
+      'https://developer.wordpress.org/advanced-administration/wordpress/common-errors/',
+      'https://make.wordpress.org/core/2019/04/16/fatal-error-recovery-mode-in-5-2/',
+      'https://www.php.net/supported-versions.php',
+    ],
+  },
+];
+---
+<Base
+  title="500 error: oorzaak vinden en oplossen | Drijfveer Media"
+  description="Een 500 error betekent dat er op de server iets misgaat. Zo vind je de oorzaak in je logbestand, los je het op in WordPress en beperk je de schade in Google."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: '500-fout', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>500 error: wat het is en hoe je het oplost</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je opent je eigen website en in plaats van je homepage staat er een kale melding: 500 Internal Server Error. Of je ziet alleen een wit scherm. Schrikken is begrijpelijk. Paniek is meestal niet nodig. Er loopt iets vast op de server, en dat iets is bijna altijd te vinden.</p>
+      <p>Hieronder lees je wat de foutmelding betekent, welke oorzaken het vaakst voorkomen en hoe je hem stap voor stap oplost, met de nadruk op WordPress. Plus wat zo'n storing doet met je plek in Google, en hoe je de volgende voorkomt.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={9} />
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="betekenis">Wat de statuscode 500 precies zegt</h2></div>
+      <p>Elke keer dat je browser een pagina opvraagt, antwoordt de server met een statuscode van drie cijfers. 200 betekent: alles goed, hier is je pagina. Codes die met een 4 beginnen, gaan over de vraag zelf, zoals 404 voor een pagina die niet bestaat. Een code met een 5 zegt: je vraag was prima, maar aan mijn kant ging het mis.</p>
+      <p>De officiële standaard voor http, RFC 9110 uit juni 2022, omschrijft 500 als een onverwachte situatie waardoor de server het verzoek niet kan afhandelen. Het is een verzamelbak. De server kiest 500 als er geen preciezere code past. Daarom zegt de melding zo weinig. De echte oorzaak staat in de logbestanden.</p>
+      <p>Het ligt dus niet aan je bezoeker. Een andere browser, de cache legen of een ander wifi-netwerk lost een echte 500 niet op. Het probleem zit op de server, en daar los je het ook op.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="herkennen">Zo ziet de foutmelding eruit</h2></div>
+      <p>Hoe de melding eruitziet, hangt af van je server, je CMS en je browser. Varianten die je kunt tegenkomen:</p>
+      <ul>
+        <li>500 Internal Server Error, op een witte pagina met een paar regels tekst</li>
+        <li>HTTP ERROR 500, in Chrome onder de melding dat de pagina niet werkt</li>
+        <li>Een melding van WordPress dat er een kritieke fout op de website is</li>
+        <li>Een helemaal wit scherm zonder tekst, in WordPress-kringen het white screen of death</li>
+        <li>Een eigen foutpagina van je hostingpartij, met hun logo erop</li>
+      </ul>
+      <p>Let op het verschil tussen de hele site en één pagina. Doet alleen je contactpagina het niet? Dan zit het probleem in iets wat alleen daar draait, zoals een formulierplugin. Ligt alles plat, ook de beheeromgeving, dan zit het dieper.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="familie">500, 502, 503 of 504: welke heb je?</h2></div>
+      <p>De 500 heeft een paar familieleden. Ze lijken op elkaar, maar wijzen elk een andere kant op.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Code</th><th>Betekenis volgens de standaard</th><th>Meestal</th><th>Eerste stap</th></tr></thead>
+          <tbody>
+            <tr><td><b>500</b> Internal Server Error</td><td>Onverwachte fout op de server</td><td>Fout in een plugin, het thema, .htaccess of de PHP-instellingen</td><td>Logbestand bekijken</td></tr>
+            <tr><td><b>502</b> Bad Gateway</td><td>Een tussenserver kreeg een ongeldig antwoord van de server erachter</td><td>Gecrasht PHP-proces, storing bij een CDN of proxy</td><td>Status van hosting of CDN checken</td></tr>
+            <tr><td><b>503</b> Service Unavailable</td><td>Tijdelijk overbelast of in onderhoud</td><td>Onderhoudsmodus, piek in bezoekers, limiet van je pakket</td><td>Even wachten, onderhoudsmodus controleren</td></tr>
+            <tr><td><b>504</b> Gateway Timeout</td><td>Een tussenserver kreeg niet op tijd antwoord</td><td>Trage database, script of externe koppeling die te lang duurt</td><td>Zware plugins en koppelingen nalopen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De 503 is de nette manier om te zeggen: even niet. Haal je je site bewust offline voor onderhoud, stuur dan een 503 en geen 500.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="oorzaken">De zeven oorzaken die we het vaakst zien</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Oorzaak</th><th>Zo herken je het</th><th>Oplossing</th></tr></thead>
+          <tbody>
+            <tr><td><b>Plugin of thema</b></td><td>De fout verschijnt direct na een update of installatie</td><td>Uitschakelen, vorige versie terugzetten, melden bij de maker</td></tr>
+            <tr><td><b>Kapot .htaccess-bestand</b></td><td>Na een wijziging in permalinks of in een beveiligings- of cacheplugin</td><td>Bestand hernoemen en opnieuw laten aanmaken</td></tr>
+            <tr><td><b>Nieuwe PHP-versie</b></td><td>Na een upgrade door jezelf of je hostingpartij</td><td>Tijdelijk terug naar de vorige versie, daarna de code bijwerken</td></tr>
+            <tr><td><b>Te weinig geheugen</b></td><td>Het log noemt "Allowed memory size exhausted"</td><td>Geheugenlimiet verhogen of de zware plugin vervangen</td></tr>
+            <tr><td><b>Verkeerde bestandsrechten</b></td><td>Na een verhuizing of uploaden via FTP</td><td>Mappen op 755, bestanden op 644</td></tr>
+            <tr><td><b>Database</b></td><td>Melding over de databaseverbinding, of een site die eerst traag werd</td><td>Gegevens in wp-config.php controleren, hostingpartij bellen</td></tr>
+            <tr><td><b>Een hack</b></td><td>Onbekende bestanden of beheerders, doorverwijzingen naar spam</td><td>Zie <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De eerste drie zijn verreweg de bekendste. De documentatie van WordPress noemt een beschadigd .htaccess-bestand zelfs als waarschijnlijkste oorzaak van een interne serverfout.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="eerst">Eerst dit: vijf vragen voordat je gaat sleutelen</h2></div>
+      <ol>
+        <li><strong>Wat is er net veranderd?</strong> Een update, een nieuwe plugin, een stukje code, een verhuizing? Vaak zit daar het antwoord.</li>
+        <li><strong>Is het de hele site of één pagina?</strong> Dat bepaalt waar je zoekt.</li>
+        <li><strong>Werkt de beheeromgeving nog?</strong> Kun je inloggen op /wp-admin/, dan los je veel op zonder FTP.</li>
+        <li><strong>Heeft je hostingpartij een storing?</strong> Kijk op hun statuspagina of hun socialemediakanaal.</li>
+        <li><strong>Waar staat je laatste back-up?</strong> Weet dat voordat je iets aanpast.</li>
+      </ol>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="wordpress">Een 500-fout oplossen in WordPress: het stappenplan</h2></div>
+      <ol>
+        <li><strong>Kijk in je mail.</strong> Sinds versie 5.2 stuurt WordPress bij een fatale fout een e-mail naar het beheerdersadres. Daarin staat welke plugin of welk thema het probleem veroorzaakt, met een link naar de herstelmodus. In die modus wordt de boosdoener alleen voor jou gepauzeerd. Je kunt dan inloggen en hem uitschakelen.</li>
+        <li><strong>Open het foutlogboek.</strong> In het controlepaneel van je hostingpartij heet dat meestal Error log, Foutlogboek of Logs. Herlaad je site en kijk welke regel er onderaan bij komt.</li>
+        <li><strong>Zet de log van WordPress aan</strong> als je hostingpartij niets toont. Zet deze drie regels in wp-config.php, boven de regel die zegt dat je moet stoppen met bewerken. De fouten komen dan in wp-content/debug.log terecht, zonder dat bezoekers ze zien. Volgens WordPress is dit niet bedoeld voor een live site, dus zet het daarna weer uit.</li>
+      </ol>
+      <pre><code>{debug}</code></pre>
+      <ol start="4">
+        <li><strong>Schakel alle plugins uit.</strong> Kom je niet in het beheer? Hernoem dan via FTP of het bestandsbeheer van je hostingpartij de map wp-content/plugins naar plugins_old. Werkt de site weer, zet de naam dan terug en activeer de plugins één voor één tot de fout terugkomt.</li>
+        <li><strong>Probeer een standaardthema.</strong> Hernoem de map van je actieve thema in wp-content/themes. WordPress valt dan terug op een standaardthema, als dat geïnstalleerd is.</li>
+        <li><strong>Vervang het .htaccess-bestand.</strong> Hernoem het naar .htaccess_old. Werkt de site weer, ga dan naar Instellingen › Permalinks en klik op Wijzigingen opslaan. WordPress maakt dan een nieuw bestand aan.</li>
+        <li><strong>Geef PHP meer geheugen</strong> als het log daarover klaagt. Dat kan met de regel <code>define( 'WP_MEMORY_LIMIT', '256M' );</code> in wp-config.php, of via je hostingpartij.</li>
+        <li><strong>Controleer de PHP-versie.</strong> WordPress raadt nu PHP 8.3 of hoger aan. Ontstond de fout na een upgrade? Zet de versie dan tijdelijk terug en werk daarna je plugins en thema bij.</li>
+        <li><strong>Zet een back-up terug</strong> als niets helpt, of vraag je hostingpartij om mee te kijken. Stuur de foutregel uit het log mee. Dat scheelt een hoop heen en weer.</li>
+      </ol>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2 id="log">Een logbestand lezen zonder programmeur te zijn</h2></div>
+      <p>Een foutregel ziet er eng uit, maar je hebt maar drie stukjes nodig. Een voorbeeld <span class="muted">(verzonnen plugin)</span>:</p>
+      <pre><code>{logregel}</code></pre>
+      <ul>
+        <li><strong>Het tijdstip.</strong> Past het bij het moment dat de fout begon?</li>
+        <li><strong>Het soort fout.</strong> Een Fatal error stopt alles. Een Warning of Notice is zelden de oorzaak van een 500.</li>
+        <li><strong>Het pad.</strong> Staat er wp-content/plugins/ met een naam erachter, dan weet je welke plugin het is. Hier is dat agenda-pro. Staat er wp-content/themes/, dan zit het in je thema.</li>
+      </ul>
+      <p>Plak je zo'n regel in een zoekmachine of een AI-assistent, dan krijg je vaak meteen een richting. Haal er wel eerst je eigen mapnamen en domeinnaam uit.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="google">Wat doet een 500 error met je plek in Google?</h2></div>
+      <p>Een paar minuten onbereikbaar: daar merkt Google weinig van. Een fout die dagen blijft staan, kost wel posities. Volgens de documentatie van Google gebeurt er dit:</p>
+      <ul>
+        <li><a href="/kennisbank/wat-is/googlebot/">Googlebot</a> gaat langzamer crawlen zodra hij serverfouten krijgt. Hoe meer adressen een fout geven, hoe sterker hij afremt.</li>
+        <li>Pagina's die al in de index staan, blijven daar eerst staan. Geven ze aanhoudend een serverfout, dan haalt Google ze eruit.</li>
+        <li>Werkt de server weer, dan voert Google het tempo geleidelijk op.</li>
+        <li>Geeft je robots.txt een serverfout, dan stopt Google de eerste twaalf uur helemaal met het crawlen van je site.</li>
+      </ul>
+      <p>In Search Console zie je het terug. Bij Pagina-indexering staat dan de reden Serverfout (5xx). Bij Instellingen › Crawlstatistieken zie je onder Status van de host of Google de afgelopen 90 dagen moeite had om je site te bereiken. Met de URL-inspectie test je of een pagina nu weer werkt.</p>
+      <p>Ga je zelf onderhoud doen? Stuur dan een 503, liefst met een Retry-After-header, en houd het bij een of twee dagen. Zo adviseert Google het. Geef nooit een 503 op je robots.txt, want dan blokkeer je al het crawlen.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="voorbeeld">Voorbeeld: dinsdagochtend na een update</h2></div>
+      <p>Een hoveniersbedrijf in Zuidlaren laat automatische updates aanstaan. Dinsdag om 7.40 uur krijgt een agendaplugin een nieuwe versie. Om 8.15 uur belt een klant: de site geeft een foutmelding. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>De eigenaar vindt in zijn mail een bericht van WordPress over een technisch probleem, met de naam van de plugin erin. Via de herstellink logt hij in en schakelt hij de plugin uit. Om 8.30 uur werkt de site weer. Daarna zet hij de vorige versie van de plugin terug en meldt hij de fout bij de maker. Een week later staat er een gerepareerde versie klaar, die hij eerst op een testkopie probeert.</p>
+      <p>Schade: drie kwartier. Zonder die mail had hij via FTP mappen moeten hernoemen, of in de wachtrij van zijn hostingpartij gestaan.</p>
+
+      <h2 id="voorkomen">Zo voorkom je de volgende 500-fout</h2>
+      <ul class="vink">
+        <li>Update niet alles tegelijk. Werk plugins één voor één bij, of eerst op een testkopie (staging).</li>
+        <li>Zorg voor dagelijkse back-ups die buiten je hosting worden bewaard. Test af en toe of terugzetten echt werkt.</li>
+        <li>Laat een gratis dienst als UptimeRobot elke paar minuten je site controleren. Dan weet je het voordat een klant belt.</li>
+        <li>Houd PHP bij. Volgens php.net krijgt PHP 8.2 nog tot 31 december 2026 beveiligingsupdates. Oudere versies krijgen niets meer.</li>
+        <li>Houd het aantal plugins klein. Elke plugin is code van een ander die bij een update kan breken.</li>
+        <li>Zet het beheerdersadres van WordPress op een mailbox die iemand leest. Daar komt de herstelmail binnen.</li>
+      </ul>
+      <p>Liever niet zelf sleutelen? Met <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a> (vanaf € 39 per maand) doen we de updates, back-ups en controles voor je. Ligt je site plat door een hack, dan helpen we met <a href="/website-laten-maken/wordpress-hack/">spoedhulp bij een gehackte site</a> (consult € 85 per uur).</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Een pagina die niet bestaat, is een ander verhaal: lees <a href="/kennisbank/wat-is/404-pagina/">wat een 404-pagina is</a>. Wat er op die server draait, staat bij <a href="/kennisbank/wat-is/hosting/">wat is hosting</a> en <a href="/kennisbank/wat-is/cms/">wat is een cms</a>. Wil je weten of Google je site goed kan lezen, dan helpt een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent 500 Internal Server Error?', a: 'Dat de server tegen een onverwacht probleem aanliep en je verzoek niet kon afhandelen. De melding zegt niet wat er mis is. Dat staat in het foutlogboek van de server.' },
+      { v: 'Ligt een 500-fout aan mij of aan de website?', a: 'Aan de website. Een andere browser of een ander netwerk helpt niet. Zie je de fout op een site van een ander, probeer het dan later nog eens. Is het je eigen site, kijk dan in je logbestand.' },
+      { v: 'Wat is het verschil met een 404?', a: 'Een 404 betekent dat de pagina niet bestaat. Bij een 500 bestaat de pagina misschien wel, maar kan de server hem niet maken. Een 404 los je op met een redirect of een nieuwe pagina, een 500 met reparatie op de server.' },
+      { v: 'Kan mijn hostingpartij de oorzaak zijn?', a: 'Ja. Overbelasting, een verkeerde serverinstelling of een PHP-upgrade aan hun kant kan een 500 geven. Kijk op hun statuspagina en vraag om de regel uit het foutlogboek.' },
+      { v: 'Hoe snel herstelt mijn plek in Google?', a: 'Krijgt Google weer gewone antwoorden, dan voert het het crawltempo geleidelijk op. Pagina\'s die uit de index zijn gevallen, komen terug na een nieuwe crawl. Voor belangrijke pagina\'s kun je in Search Console via de URL-inspectie indexering aanvragen.' },
+      { v: 'Hoe haal ik mijn site netjes offline voor onderhoud?', a: 'Stuur een 503 met een Retry-After-header en houd het kort, een of twee dagen hooguit. Laat je robots.txt gewoon bereikbaar. Gebruik je een onderhoudsplugin, controleer dan welke statuscode die stuurt.' },
+    ]}
+  />
+
+  <Actie titel="Ligt je site plat of hapert hij vaker?" tekst={`Stuur ons je adres. We kijken gratis waar het misgaat en ${site.contactpersoon} belt je met de eerste stappen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

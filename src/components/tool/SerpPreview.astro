@@ -1,0 +1,250 @@
+---
+// SERP-preview: titel, omschrijving en URL invullen en direct zien hoe het resultaat er ongeveer uitziet in Google, op een computer en op een telefoon.
+// De breedte meten we in pixels met canvas (measureText) in Arial. Het blijft een benadering:
+// Google noemt zelf geen maximum en kapt af "op de breedte van het apparaat" (developers.google.com/search/docs/appearance/title-link en /snippet, opgehaald 18-10-2026).
+// Onze maten: titel Arial 20 px, op een computer één regel van ca. 600 px (Semrush noemt 550 px als veilige grens), op een telefoon twee regels van ca. 340 px;
+// omschrijving Arial 14 px, ca. 920 px op een computer en ca. 680 px op een telefoon (Moz noemt ongeveer 680 px). Pas MATEN aan als Google iets verandert.
+// Deelbaar via #serp&titel=...&omschrijving=...&url=...
+interface Props { id?: string; kop?: 'h2' | 'h3'; titel?: string; omschrijving?: string; url?: string }
+const {
+  id = 'serp',
+  kop = 'h3',
+  titel = 'Dakkapel laten plaatsen in Assen | Bouwbedrijf Mulder',
+  omschrijving = 'Dakkapel laten plaatsen in Assen? Vaste prijs per meter en binnen drie weken geplaatst. Bekijk de prijzen en vraag een offerte aan.',
+  url = 'https://www.voorbeeld.nl/dakkapel-assen/',
+} = Astro.props;
+const Kop = kop;
+---
+<div class="sp card" id={id} data-serp={id}>
+  <p class="kicker">Gratis tool · direct resultaat</p>
+  <Kop class="sp-titel">Zo ziet je pagina eruit in Google</Kop>
+  <p class="muted sp-intro">Typ je titel en omschrijving. Het voorbeeld past zich meteen aan, op een computer en op een telefoon. Je ziet ook waar Google ongeveer gaat afkappen. De tekst die er nu staat, is een verzonnen voorbeeld.</p>
+
+  <form class="sp-form" data-form>
+    <div class="veld">
+      <label for={`${id}-titel`}>Titel (title tag)</label>
+      <input id={`${id}-titel`} name="titel" value={titel} maxlength="200" autocomplete="off" />
+      <div class="sp-meter" data-meter="titel"><span class="sp-balk"><i></i></span><output class="klein" data-telling="titel"></output></div>
+    </div>
+    <div class="veld">
+      <label for={`${id}-omschrijving`}>Omschrijving (meta description)</label>
+      <textarea id={`${id}-omschrijving`} name="omschrijving" maxlength="400" rows="3">{omschrijving}</textarea>
+      <div class="sp-meter" data-meter="omschrijving"><span class="sp-balk"><i></i></span><output class="klein" data-telling="omschrijving"></output></div>
+    </div>
+    <div class="veld">
+      <label for={`${id}-url`}>URL van de pagina</label>
+      <input id={`${id}-url`} name="url" value={url} inputmode="url" maxlength="300" autocomplete="off" />
+    </div>
+  </form>
+
+  <div class="sp-live" aria-live="polite">
+    <ul class="sp-meldingen" data-meldingen></ul>
+  </div>
+
+  <div class="sp-voorbeelden" data-voorbeelden hidden>
+    <p class="sp-label">Op een computer <span class="muted" data-verkleind hidden>(verkleind)</span></p>
+    <div class="sp-schaal" data-schaal="desktop">
+      <div class="sp-res sp-desktop" data-res="desktop">
+        <div class="sp-site"><span class="sp-fav" aria-hidden="true" data-fav></span><span class="sp-site-tekst"><span class="sp-naam" data-naam></span><span class="sp-pad" data-pad></span></span></div>
+        <div class="sp-t" data-t></div>
+        <div class="sp-d" data-d></div>
+      </div>
+    </div>
+    <p class="sp-label">Op een telefoon</p>
+    <div class="sp-schaal sp-schaal-mobiel" data-schaal="mobiel">
+      <div class="sp-res sp-mobiel" data-res="mobiel">
+        <div class="sp-site"><span class="sp-fav" aria-hidden="true" data-fav></span><span class="sp-site-tekst"><span class="sp-naam" data-naam></span><span class="sp-pad" data-pad></span></span></div>
+        <div class="sp-t" data-t></div>
+        <div class="sp-d" data-d></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sp-acties">
+    <a class="btn" href="/gratis-website-analyse/#scan">Laat je titels gratis nakijken</a>
+    <button class="btn btn-ghost" type="button" data-deel>Deel dit voorbeeld</button>
+  </div>
+  <p class="klein muted sp-status" data-status></p>
+  <noscript><p class="klein">Zonder JavaScript kan dit voorbeeld niet meten. Vuistregel: houd je titel onder de 60 tekens en je omschrijving tussen de 120 en 155 tekens, met het belangrijkste vooraan.</p></noscript>
+  <p class="klein muted sp-bron">Dit is een benadering. Google noemt zelf geen maximum en kapt af op de breedte van het scherm (<a href="https://developers.google.com/search/docs/appearance/title-link?hl=nl" rel="noopener">titels</a>, <a href="https://developers.google.com/search/docs/appearance/snippet?hl=nl" rel="noopener">omschrijvingen</a>). Wij meten in Arial: de titel op 20 px, met ongeveer 600 px op een computer en twee regels op een telefoon. De omschrijving op 14 px, met ongeveer 920 px op een computer en 680 px op een telefoon. Semrush noemt 550 px als veilige titelbreedte, Moz ongeveer 680 px voor de omschrijving. Gelezen op 18 oktober 2026.</p>
+</div>
+
+<script>
+  // Maten in pixels. Benadering van wat Google toont; zie de uitleg bovenin het component.
+  const MATEN = {
+    desktop: { titelFont: '20px Arial, Helvetica, sans-serif', titelBreed: 600, titelRegels: 1, krap: 550, tekstFont: '14px Arial, Helvetica, sans-serif', tekstBudget: 920 },
+    mobiel: { titelFont: '20px Arial, Helvetica, sans-serif', titelBreed: 340, titelRegels: 2, tekstFont: '14px Arial, Helvetica, sans-serif', tekstBudget: 680 },
+  };
+  const PUNTJES = ' ...';
+  const ctx = document.createElement('canvas').getContext('2d')!;
+  const meet = (t: string, font: string) => { ctx.font = font; return ctx.measureText(t).width; };
+
+  // Kap een tekst af op een totale breedte, op een woordgrens, met puntjes erachter (zoals Google doet).
+  const kapAf = (t: string, font: string, budget: number) => {
+    if (meet(t, font) <= budget) return { tekst: t, af: false };
+    const woorden = t.split(/\s+/);
+    let uit = '';
+    for (const w of woorden) { const proef = uit ? `${uit} ${w}` : w; if (meet(proef + PUNTJES, font) > budget) break; uit = proef; }
+    if (!uit) { for (const c of t) { if (meet(uit + c + PUNTJES, font) > budget) break; uit += c; } }
+    return { tekst: uit.replace(/[\s,.;:|-]+$/, '') + PUNTJES, af: true };
+  };
+  // Verdeel een tekst over regels van een vaste breedte; wat niet past, wordt afgekapt op de laatste regel.
+  const regels = (t: string, font: string, breed: number, max: number) => {
+    const woorden = t.split(/\s+/).filter(Boolean);
+    const uit: string[] = [];
+    let regel = '', i = 0;
+    while (i < woorden.length && uit.length < max) {
+      const proef = regel ? `${regel} ${woorden[i]}` : woorden[i];
+      if (meet(proef, font) <= breed) { regel = proef; i++; }
+      else if (!regel) { uit.push(woorden[i]); i++; } // één woord dat breder is dan de regel
+      else { uit.push(regel); regel = ''; }
+    }
+    if (regel && uit.length < max) uit.push(regel);
+    const af = i < woorden.length || uit.some((r) => meet(r, font) > breed);
+    if (af && uit.length) uit[uit.length - 1] = kapAf(`${uit[uit.length - 1]} ${woorden.slice(i).join(' ')}`.trim(), font, breed).tekst;
+    return { tekst: uit.join(' '), af };
+  };
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  const kopieer = async (t: string) => { try { await navigator.clipboard.writeText(t); return true; } catch { window.prompt('Kopieer deze link:', t); return false; } };
+
+  document.querySelectorAll<HTMLElement>('[data-serp]').forEach((el) => {
+    const id = el.dataset.serp!;
+    const form = el.querySelector<HTMLFormElement>('[data-form]')!;
+    const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const status = el.querySelector<HTMLElement>('[data-status]')!;
+    let wacht = 0;
+
+    const deelHash = () => {
+      const p = new URLSearchParams();
+      p.set(id, ''); p.set('titel', veld('titel').value); p.set('omschrijving', veld('omschrijving').value); p.set('url', veld('url').value.trim());
+      return p.toString().replace(`${id}=`, id);
+    };
+
+    const meter = (naam: string, px: number, max: number, krap: number, tekens: number) => {
+      const m = el.querySelector<HTMLElement>(`[data-meter="${naam}"]`)!;
+      m.querySelector<HTMLElement>('i')!.style.width = `${Math.min(100, (px / max) * 100)}%`;
+      m.dataset.stand = px > max ? 'te-lang' : px > krap ? 'krap' : px === 0 ? 'leeg' : 'goed';
+      el.querySelector(`[data-telling="${naam}"]`)!.textContent = `${tekens} tekens · ${Math.round(px)} van ca. ${max} pixels`;
+    };
+
+    const teken = () => {
+      const titel = veld('titel').value.replace(/\s+/g, ' ').trim();
+      const oms = veld('omschrijving').value.replace(/\s+/g, ' ').trim();
+      const ruweUrl = veld('url').value.trim();
+      const meldingen: string[] = [];
+      let host = 'voorbeeld.nl', pad = 'https://www.voorbeeld.nl';
+      if (ruweUrl) {
+        try {
+          const u = new URL(/^[a-z]+:\/\//i.test(ruweUrl) ? ruweUrl : `https://${ruweUrl}`);
+          host = u.hostname.replace(/^www\./, '');
+          const delen = u.pathname.split('/').filter(Boolean).map((d) => decodeURIComponent(d));
+          pad = `${u.protocol}//${u.hostname}${delen.length ? ' › ' + delen.join(' › ') : ''}`;
+        } catch { meldingen.push('Dit is geen geldige URL. Het voorbeeld toont een standaardadres.'); }
+      }
+      const pxTitel = meet(titel, MATEN.desktop.titelFont);
+      const pxOms = meet(oms, MATEN.desktop.tekstFont);
+      meter('titel', pxTitel, MATEN.desktop.titelBreed, MATEN.desktop.krap, titel.length);
+      meter('omschrijving', pxOms, MATEN.desktop.tekstBudget, MATEN.mobiel.tekstBudget, oms.length);
+
+      const dT = regels(titel, MATEN.desktop.titelFont, MATEN.desktop.titelBreed, MATEN.desktop.titelRegels);
+      const mT = regels(titel, MATEN.mobiel.titelFont, MATEN.mobiel.titelBreed, MATEN.mobiel.titelRegels);
+      const dD = kapAf(oms, MATEN.desktop.tekstFont, MATEN.desktop.tekstBudget);
+      const mD = kapAf(oms, MATEN.mobiel.tekstFont, MATEN.mobiel.tekstBudget);
+      const laatste = (t: string) => t.replace(/ \.\.\.$/, '').split(' ').slice(-4).join(' ');
+
+      if (!titel) meldingen.push('Zonder titel maakt Google er zelf een, vaak van je kop of je menu.');
+      else {
+        if (dT.af) meldingen.push(`Te lang voor een computer: je titel stopt na "${laatste(dT.tekst)}". Zet het belangrijkste vooraan of kort hem in.`);
+        else if (pxTitel > MATEN.desktop.krap) meldingen.push('Krap op een computer. Op een smaller scherm kan het laatste woord wegvallen.');
+        if (mT.af && !dT.af) meldingen.push(`Op een telefoon wordt je titel afgekapt na "${laatste(mT.tekst)}".`);
+        if (titel.length < 30) meldingen.push('Korte titel. Je hebt nog ruimte voor je plaats, een voordeel of je bedrijfsnaam.');
+      }
+      if (!oms) meldingen.push('Zonder omschrijving kiest Google zelf een stuk tekst van je pagina.');
+      else {
+        if (dD.af) meldingen.push(`Te lang voor een computer: de omschrijving stopt na "${laatste(dD.tekst)}".`);
+        else if (mD.af) meldingen.push(`Op een telefoon valt het einde weg: de omschrijving stopt na "${laatste(mD.tekst)}". Staat je belangrijkste punt ervoor?`);
+        if (oms.length < 70) meldingen.push('Korte omschrijving. Google vult dan soms zelf aan met tekst van je pagina. Voeg een reden toe om te klikken.');
+      }
+      if (!meldingen.length) meldingen.push('Je titel en omschrijving passen volgens onze meting op een computer en op een telefoon.');
+      el.querySelector('[data-meldingen]')!.innerHTML = meldingen.map((m) => `<li>${esc(m)}</li>`).join('');
+
+      el.querySelectorAll<HTMLElement>('[data-res]').forEach((res) => {
+        const mob = res.dataset.res === 'mobiel';
+        res.querySelector('[data-fav]')!.textContent = (host[0] || 'w').toUpperCase();
+        res.querySelector('[data-naam]')!.textContent = host;
+        res.querySelector('[data-pad]')!.textContent = pad;
+        res.querySelector('[data-t]')!.textContent = (mob ? mT : dT).tekst || 'Je titel';
+        res.querySelector('[data-d]')!.textContent = (mob ? mD : dD).tekst;
+      });
+      el.querySelector<HTMLElement>('[data-voorbeelden]')!.hidden = false;
+      schaal();
+      clearTimeout(wacht);
+      wacht = window.setTimeout(() => { try { history.replaceState(null, '', `${location.pathname}${location.search}#${deelHash()}`); } catch {} }, 600);
+    };
+
+    // Het voorbeeld voor een computer is 600 px breed. Op een smal scherm verkleinen we het, zodat de regels gelijk blijven.
+    const schaal = () => {
+      el.querySelectorAll<HTMLElement>('[data-schaal]').forEach((w) => {
+        const res = w.firstElementChild as HTMLElement;
+        const s = Math.min(1, w.clientWidth / res.offsetWidth);
+        res.style.transform = s < 1 ? `scale(${s})` : '';
+        w.style.height = `${res.offsetHeight * s}px`;
+        if (w.dataset.schaal === 'desktop') el.querySelector<HTMLElement>('[data-verkleind]')!.hidden = s >= 1;
+      });
+    };
+    let breedte = 0;
+    addEventListener('resize', () => { if (el.clientWidth !== breedte) { breedte = el.clientWidth; schaal(); } });
+
+    form.addEventListener('input', teken);
+    form.addEventListener('submit', (e) => e.preventDefault());
+    el.querySelector('[data-deel]')!.addEventListener('click', async () => {
+      const ok = await kopieer(`${location.origin}${location.pathname}#${deelHash()}`);
+      status.textContent = ok ? 'De link naar dit voorbeeld staat op je klembord.' : '';
+    });
+
+    const h = new URLSearchParams(location.hash.slice(1));
+    if (h.has(id)) {
+      veld('titel').value = (h.get('titel') || '').slice(0, 200);
+      veld('omschrijving').value = (h.get('omschrijving') || '').slice(0, 400);
+      veld('url').value = (h.get('url') || '').slice(0, 300);
+    }
+    // Arial staat op bijna elk systeem; wacht toch even op de lettertypen, anders kloppen de metingen niet.
+    (document.fonts?.ready ?? Promise.resolve()).then(() => { teken(); if (h.has(id)) el.scrollIntoView({ block: 'start' }); });
+  });
+</script>
+
+<style>
+  .sp { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .sp-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .sp-intro { margin-bottom: 16px; }
+  .sp-form { display: grid; gap: 14px; }
+  .sp-form textarea { min-height: 96px; }
+  .sp-meter { display: grid; grid-template-columns: minmax(60px, 160px) auto; gap: 10px; align-items: center; }
+  .sp-meter output { color: var(--muted); }
+  .sp-balk { height: 8px; border-radius: 99px; background: var(--chip); overflow: hidden; }
+  .sp-balk i { display: block; height: 100%; width: 0; background: var(--ok); border-radius: inherit; transition: width 0.2s; }
+  .sp-meter[data-stand="krap"] i { background: #d98a00; }
+  .sp-meter[data-stand="te-lang"] i { background: #c0392b; }
+  .sp-meldingen { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 6px; }
+  .sp-meldingen :global(li) { margin: 0; padding: 8px 12px; border-radius: 8px; background: var(--bg); border-left: 4px solid var(--orange); font-size: 0.96rem; }
+  .sp-voorbeelden { margin-top: 18px; }
+  .sp-label { font-weight: 800; font-size: 0.95rem; margin: 14px 0 6px; }
+  .sp-schaal { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+  .sp-schaal-mobiel { max-width: 374px; }
+  .sp-res { transform-origin: top left; padding: 16px; font-family: Arial, Helvetica, sans-serif; color: #202124; background: #fff; }
+  .sp-desktop { width: 632px; }
+  .sp-mobiel { width: 372px; }
+  .sp-site { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .sp-fav { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--chip); border: 1px solid var(--line); display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--navy); }
+  .sp-site-tekst { display: grid; line-height: 1.3; min-width: 0; }
+  .sp-naam { font-size: 14px; color: #202124; }
+  .sp-pad { font-size: 12px; color: #4d5156; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sp-t { font-size: 20px; line-height: 1.3; color: #1a0dab; margin-bottom: 4px; }
+  .sp-desktop .sp-t { white-space: nowrap; }
+  .sp-d { font-size: 14px; line-height: 22px; color: #4d5156; overflow-wrap: break-word; }
+  .sp-acties { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+  .sp-status { min-height: 1.4em; margin: 8px 0 0; }
+  .sp-bron { margin: 12px 0 0; }
+  @media (max-width: 560px) { .sp-acties .btn { width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .sp-balk i { transition: none; } }
+</style>

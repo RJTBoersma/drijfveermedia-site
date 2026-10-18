@@ -1,0 +1,75 @@
+---
+// Scène voor /kennisbank/gidsen/seo-strategie/: een plattegrond met een kronkelende route van "Doel" via zoekwoorden,
+// pagina's en links naar de finishvlag "Top 5 in Google". Linksboven een kompas, rechtsonder een kalender met vier kwartalen.
+// Als hij leeft: een stip loopt rustig over de route, de vlaggetjes bij de tussenstops springen een voor een op en de naald van het kompas wiebelt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const stops = [
+  { x: 120, y: 196, t: 'Doel' },
+  { x: 196, y: 120, t: 'Zoekwoorden' },
+  { x: 290, y: 176, t: "Pagina's" },
+  { x: 352, y: 96, t: 'Links' },
+];
+const route = 'M70 226C96 222 108 210 120 196S150 128 196 120S262 178 290 176S330 104 352 96S398 70 420 62';
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een plattegrond met een route van je doel via zoekwoorden, pagina\'s en links naar een vlag bij de top 5 in Google, met een kompas en een kalender met vier kwartalen.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- kaart -->
+  <path d="M30 34l130-14 160 14 130-14v222l-130 14-160-14-130 14z" fill="#fff" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <path d="M160 20v222M320 34v222" stroke="#eef2f6" stroke-width="2" />
+  <path class="v" d="M44 60c20-8 40 6 58-2s26 8 26 20-24 18-44 14-46-16-40-32z" opacity="0.7" />
+
+  <!-- route -->
+  <path d={route} fill="none" stroke="#074663" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9" />
+  <circle cx="70" cy="226" r="7" fill="#074663" />
+  <text x="58" y="250" font-size="10" class="zacht">Start</text>
+
+  {stops.map((s) => (
+    <g>
+      <circle cx={s.x} cy={s.y} r="8" fill="#fff" stroke="#074663" stroke-width="2.5" />
+      <rect x={s.x - 34} y={s.y + 12} width="68" height="18" rx="9" fill="#e8eef4" />
+      <text x={s.x} y={s.y + 25} font-size="10" font-weight="800" text-anchor="middle">{s.t}</text>
+    </g>
+  ))}
+
+  <!-- finish -->
+  <path d="M420 62V22" stroke="#10283f" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M420 22h36l-8 9 8 9h-36z" fill="#ff6600" />
+  <rect x="380" y="70" width="80" height="18" rx="9" fill="#074663" />
+  <text x="420" y="83" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">Top 5 in Google</text>
+
+  <!-- kompas -->
+  <circle cx="232" cy="58" r="20" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="232" y="47" font-size="8" font-weight="800" text-anchor="middle" class="zacht">N</text>
+  <g class="naald"><path d="M232 44l5 14-5 14-5-14z" fill="#ff6600" /><path d="M232 58l5 0-5 14-5-14z" fill="#074663" /></g>
+
+  <!-- kalender -->
+  <rect x="330" y="196" width="112" height="40" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="330" y="196" width="112" height="11" rx="5" fill="#074663" />
+  {['K1', 'K2', 'K3', 'K4'].map((k, i) => <g><rect x={338 + i * 26} y="213" width="20" height="16" rx="4" fill={i === 0 ? '#ffd2b0' : '#e8eef4'} /><text x={348 + i * 26} y="225" font-size="8.5" font-weight="800" text-anchor="middle">{k}</text></g>)}
+
+  {!mini && (
+    <g>
+      {stops.map((s, i) => (
+        <g class="vlag" style={`animation-delay:${0.6 + i * 0.45}s`}>
+          <path d={`M${s.x + 6} ${s.y - 6}v-24`} stroke="#10283f" stroke-width="2" stroke-linecap="round" />
+          <path d={`M${s.x + 6} ${s.y - 30}h16l-5 6 5 6h-16z`} fill="#1f8a5b" />
+        </g>
+      ))}
+      <circle class="reiziger" r="6" fill="#ff6600" stroke="#fff" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .naald { transform-box: view-box; transform-origin: 232px 58px; }
+  .in-beeld .naald { animation: kennisbank-gidsen-seo-strategie-naald 6s ease-in-out infinite; }
+  .vlag { transform-box: fill-box; transform-origin: bottom left; }
+  :global(.teken-js) .vlag { opacity: 0; }
+  .in-beeld .vlag { animation-name: kennisbank-gidsen-seo-strategie-vlag; animation-duration: 0.5s; animation-timing-function: cubic-bezier(.3,1.6,.5,1); animation-fill-mode: forwards; }
+  .reiziger { offset-path: path('M70 226C96 222 108 210 120 196S150 128 196 120S262 178 290 176S330 104 352 96S398 70 420 62'); offset-rotate: 0deg; }
+  :global(.teken-js) .reiziger { opacity: 0; }
+  .in-beeld .reiziger { animation: kennisbank-gidsen-seo-strategie-reis 7s ease-in-out 1s infinite; }
+  @keyframes kennisbank-gidsen-seo-strategie-naald { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(10deg); } }
+  @keyframes kennisbank-gidsen-seo-strategie-vlag { from { opacity: 0; transform: scaleY(0.2); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-seo-strategie-reis { 0% { offset-distance: 0%; opacity: 0; } 8% { opacity: 1; } 88% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .naald, .in-beeld .vlag, .in-beeld .reiziger { animation: none; } }
+</style>

@@ -1,0 +1,389 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--seo-strategie.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/seo-strategie/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat is een SEO-strategie?' },
+  { id: 'doel', titel: '1. Begin bij je bedrijfsdoel' },
+  { id: 'nulmeting', titel: '2. Meet waar je nu staat' },
+  { id: 'concurrenten', titel: '3. Concurrentieanalyse' },
+  { id: 'zoekwoorden', titel: '4. Zoekwoorden per fase' },
+  { id: 'structuur', titel: '5. Eén zoekwoord, één pagina' },
+  { id: 'content', titel: '6. Content' },
+  { id: 'techniek', titel: '7. Technische SEO' },
+  { id: 'autoriteit', titel: '8. Autoriteit' },
+  { id: 'plannen', titel: '9. Prioriteren en plannen' },
+  { id: 'meten', titel: '10. Meten en bijsturen' },
+  { id: 'soorten', titel: 'Lokaal, landelijk of AI' },
+  { id: 'voorbeeld', titel: 'Een ingevuld voorbeeld' },
+  { id: 'sjabloon', titel: 'Sjabloon om te downloaden' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'hulp', titel: 'Zelf maken of laten maken?' },
+];
+const velden = [
+  ['Bedrijfsdoel', 'Wat moet SEO over twaalf maanden opleveren? In aanvragen of omzet.'],
+  ['SEO-doel', 'Hoeveel extra bezoekers uit Google heb je daarvoor nodig, en op welke zoekopdrachten?'],
+  ['Startpunt', 'Klikken, vertoningen, aanvragen en posities van vandaag (uit Search Console en Analytics).'],
+  ['Klanten en hun vragen', 'Wie zoekt jou, en wat typen ze in per fase: oriënteren, vergelijken, kiezen?'],
+  ['Zoekconcurrenten', 'Wie staat er nu in de top 5, en wat doet niemand van hen goed?'],
+  ['Zoekwoordplan', 'Per pagina: hoofdzoekwoord, zoekintentie, bestaande of nieuwe pagina.'],
+  ['Techniek', 'Wat moet eerst gerepareerd worden voordat de rest zin heeft?'],
+  ['Autoriteit', 'Van welke sites wil je een link of vermelding, en hoe krijg je die?'],
+  ['Prioriteiten', 'De drie acties met de meeste impact voor de minste moeite.'],
+  ['Planning en capaciteit', 'Wie doet wat, wanneer, met hoeveel uren of budget per maand?'],
+  ['Meten', 'Welke cijfers je maandelijks bekijkt, en wanneer je de strategie herziet.'],
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Je SEO-strategie op één pagina\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  velden.map(([k, v], i) => `${i + 1}. ${k}\n   ${v}\n   ...................................................\n`).join('\n') +
+  `\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Een SEO-strategie maken: tien stappen, een voorbeeld en een sjabloon',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'SEO-strategie',
+  citation: [
+    'https://developers.google.com/search/docs/fundamentals/seo-starter-guide',
+    'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+    'https://developers.google.com/search/docs/appearance/core-web-vitals',
+    'https://developers.google.com/search/docs/crawling-indexing/links-crawlable',
+    'https://developers.google.com/search/docs/fundamentals/do-i-need-seo',
+  ],
+}];
+---
+<Base
+  title="SEO-strategie maken: 10 stappen met sjabloon"
+  description="Een SEO-strategie maken in tien stappen: doelen, concurrentieanalyse, zoekwoorden, planning en rapportage. Met een ingevuld voorbeeld en een sjabloon."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'SEO-strategie', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Een SEO-strategie maken: tien stappen, een voorbeeld en een sjabloon" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een SEO-strategie is je plan om met de juiste pagina's op de juiste zoekopdrachten te verschijnen, zodat Google je klanten oplevert. In deze gids maak je er zelf een, in tien stappen. Met een ingevuld voorbeeld van een installateur uit Hoogeveen en een sjabloon om te downloaden.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een SEO-strategie begint bij een bedrijfsdoel, niet bij zoekwoorden. Hoeveel aanvragen moet Google opleveren?</li>
+            <li>Je echte concurrenten in Google zijn vaak andere bedrijven dan je concurrenten in de straat.</li>
+            <li>Koppel elk belangrijk zoekwoord aan één pagina. Dat is de ruggengraat van je plan.</li>
+            <li>Kies per kwartaal hooguit drie prioriteiten: de meeste impact voor de minste moeite.</li>
+            <li>Volgens Google duurt het van een paar uur tot een paar maanden voordat een wijziging effect heeft. Plan dus in maanden, niet in weken.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat is een SEO-strategie?</h2>
+        <p>Een SEO-strategie beschrijft hoe je website in Google gevonden wordt door de mensen die je klant kunnen worden. Welke zoekopdrachten tellen? Met welke pagina's? Wat maakt jouw pagina beter dan wat er nu staat? En wat doe je eerst?</p>
+        <p>Veel bedrijven doen wel aan SEO, maar hebben geen strategie. Ze passen hier een titel aan, schrijven daar een blog en kopen ergens een paar links. Dat zijn losse klusjes. Ze kosten tijd en leveren weinig op, omdat ze niet samen naar één doel werken. Het verschil zie je in deze tabel.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Wat het is</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td><b>Strategie</b></td><td>Waar je wilt winnen en waarom jij daar kunt winnen</td><td>"We willen in Zuidwest-Drenthe de eerste keus zijn voor warmtepompen, omdat we de enige zijn met eigen monteurs in de regio."</td></tr>
+              <tr><td><b>Plan</b></td><td>Wat er wanneer gebeurt, en door wie</td><td>"In januari schrijven we de pagina warmtepomp Hoogeveen, in februari de prijspagina."</td></tr>
+              <tr><td><b>Tactiek</b></td><td>Een losse actie binnen dat plan</td><td>"De titel van de prijspagina herschrijven."</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Waarom niet gewoon beginnen? Omdat SEO traag reageert. Google schrijft zelf dat sommige wijzigingen binnen een paar uur effect hebben en andere pas na een paar maanden. Je wacht volgens Google meestal een paar weken voordat je kunt zien of iets werkte. Als elke stap zo lang duurt, wil je zeker weten dat je de goede stappen zet.</p>
+        <p>Hoe Google precies werkt, lees je in <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe werkt SEO</a>. Zoek je vooral snelle verbeteringen voor een kleine site, begin dan bij <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a>. Deze gids gaat over het plan erboven.</p>
+
+        <h2 id="doel">Stap 1: begin bij je bedrijfsdoel</h2>
+        <p>"Op nummer 1 staan" is geen doel. Je wilt meer klanten, meer omzet of een vollere agenda in een rustige maand. Begin daar en reken terug naar wat Google moet opleveren.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een installateur wil volgend jaar 40 extra warmtepompen plaatsen. Eén op de vier offertes wordt een opdracht. Hij heeft dus 160 aanvragen nodig, ruim 13 per maand. Van de bezoekers op zijn dienstpagina's vraagt 3 procent een offerte aan. Dan heeft hij ongeveer 450 extra bezoekers per maand nodig uit Google, op zoekopdrachten van mensen die een warmtepomp willen.</p>
+        </div>
+        <p>Nu heb je een doel waar je iets mee kunt. Het vertelt je ook of het haalbaar is. Zoeken er in jouw regio maar 200 mensen per maand op alles rond warmtepompen, dan haal je 450 bezoekers niet. Dan moet je gebied groter, of je doel kleiner.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bedrijfsdoel</th><th>SEO-doel</th><th>Waar je het meet</th></tr></thead>
+            <tbody>
+              <tr><td>40 extra opdrachten per jaar</td><td>13 aanvragen per maand via Google</td><td>Conversies in Google Analytics, telefoontjes</td></tr>
+              <tr><td>Minder afhankelijk van Werkspot</td><td>Organisch verkeer op dienstpagina's verdubbelen</td><td>Search Console, Analytics</td></tr>
+              <tr><td>Nieuwe dienst bekend maken</td><td>Top 5 op tien zoekopdrachten rond die dienst</td><td>Posities in Search Console of een rank tracker</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nulmeting">Stap 2: meet waar je nu staat</h2>
+        <p>Zonder startpunt weet je over een jaar niet of het werkte. Schrijf deze zes getallen op, met de datum erbij:</p>
+        <ol>
+          <li><b>Klikken uit Google</b> over de laatste twaalf maanden, uit <a href="/kennisbank/gidsen/google-search-console/">Search Console</a>.</li>
+          <li><b>Klikken zonder je bedrijfsnaam.</b> Filter je naam eruit. Wat overblijft, zijn mensen die je nog niet kenden.</li>
+          <li><b>Vertoningen en gemiddelde positie</b> op je tien belangrijkste zoekopdrachten.</li>
+          <li><b>Aanvragen uit organisch verkeer</b>, uit <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>.</li>
+          <li><b>Aantal pagina's in Google</b>, onder Indexeren, Pagina's.</li>
+          <li><b>Aantal sites dat naar je linkt</b>, onder Links.</li>
+        </ol>
+        <p>Search Console bewaart 16 maanden aan gegevens. Vergelijk dus altijd met dezelfde maanden vorig jaar, zeker als je werk seizoensgebonden is. Een loodgieter heeft in januari meer vraag dan in juli. Dat is geen SEO.</p>
+        <p>Heb je nog geen Search Console? Typ dan site:jouwbedrijf.nl in Google, een tip uit de startgids van Google zelf. Je ziet meteen welke pagina's Google kent. Zet Search Console daarna alsnog aan, want de cijfers die je nu niet verzamelt, krijg je later niet terug.</p>
+
+        <h2 id="concurrenten">Stap 3: concurrentieanalyse in Google</h2>
+        <p>Je concurrent in Google is niet per se de collega verderop. Het is iedereen die bovenaan staat op de zoekopdrachten van jouw klanten. Dat kunnen vergelijkingssites zijn, een landelijke keten, Werkspot of een blog. Typ je tien belangrijkste zoekopdrachten in, in een incognitovenster, en noteer per zoekopdracht de top 5.</p>
+        <p>Kijk per resultaat naar deze punten:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je bekijkt</th><th>Waarom</th></tr></thead>
+            <tbody>
+              <tr><td>Soort pagina: dienstpagina, blog, vergelijking, overzicht</td><td>Laat zien welke zoekintentie Google achter de zoekopdracht ziet</td></tr>
+              <tr><td>Wat de pagina behandelt: prijzen, stappen, voorbeelden, FAQ</td><td>Dat is de lat. Jouw pagina moet minstens dat bieden.</td></tr>
+              <tr><td>Wat ontbreekt of verouderd is</td><td>Daar zit jouw kans</td></tr>
+              <tr><td>Kaartje met drie bedrijven, AI-overzicht, advertenties</td><td>Hoeveel ruimte er nog over is voor gewone resultaten</td></tr>
+              <tr><td>Hoe sterk de site is: bekende naam, veel verwijzende sites</td><td>Of je er binnen een jaar langs kunt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het meeste leer je van de vraag wat niemand goed doet. Staat er geen enkele prijs in de top 5? Geen echt voorbeeld uit de regio? Geen eerlijk antwoord op wat het kost? Dat gat vullen is vaak de snelste weg naar boven. Tools als SE Ranking of Ahrefs laten zien op welke zoekwoorden een concurrent scoort en jij nog niet. Hoe je dat grondig aanpakt, lees je in de gids <a href="/kennisbank/gidsen/concurrentieanalyse/">concurrentieanalyse</a>.</p>
+
+        <h2 id="zoekwoorden">Stap 4: zoekwoordonderzoek per fase van de customer journey</h2>
+        <p>Mensen zoeken anders naarmate ze dichter bij een keuze komen. Wie nog oriënteert, zoekt "hoeveel bespaart een warmtepomp". Wie wil kopen, zoekt "warmtepomp laten installeren hoogeveen". Beide zijn waardevol, maar ze vragen een ander soort pagina.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Fase van de klantreis</th><th>Voorbeeld van een zoekopdracht</th><th>Zoekintentie</th><th>Soort pagina</th></tr></thead>
+            <tbody>
+              <tr><td>Oriënteren</td><td>wat kost een warmtepomp</td><td>Informatief</td><td>Gids met prijzen en uitleg</td></tr>
+              <tr><td>Vergelijken</td><td>hybride of volledige warmtepomp</td><td>Commercieel</td><td>Vergelijking met tabel</td></tr>
+              <tr><td>Kiezen</td><td>warmtepomp installateur hoogeveen</td><td>Transactioneel</td><td>Dienstpagina met prijs en offerteknop</td></tr>
+              <tr><td>Na de opdracht</td><td>warmtepomp storing code</td><td>Informatief</td><td>Hulppagina, houdt klanten bij jou</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Begin bij de fase "kiezen". Die zoekopdrachten hebben vaak weinig volume, maar wie ze typt, wil een offerte. Werk daarna terug naar vergelijken en oriënteren. Hoe je zoekwoorden vindt en hun volume opzoekt, staat in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a>. Meer over de fases lees je bij de <a href="/kennisbank/gidsen/customer-journey/">customer journey</a> en het begrip <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>.</p>
+
+        <h2 id="structuur">Stap 5: koppel elk zoekwoord aan één pagina</h2>
+        <p>Dit is de ruggengraat van je plan. Maak een lijst met je belangrijkste zoekopdrachten en zet er één pagina naast. Bestaat die pagina nog niet, dan is dat werk voor je planning. Concurreren twee pagina's om hetzelfde zoekwoord, dan kies je er één. Anders weet Google niet welke het moet tonen. Dat heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekwoord</th><th>Pagina</th><th>Status</th><th>Linkt naar</th></tr></thead>
+            <tbody>
+              <tr><td>warmtepomp hoogeveen</td><td>/warmtepomp/</td><td>Bestaat, herschrijven</td><td>prijzen, subsidie, contact</td></tr>
+              <tr><td>warmtepomp prijs</td><td>/warmtepomp/prijzen/</td><td>Nieuw</td><td>/warmtepomp/</td></tr>
+              <tr><td>hybride of volledige warmtepomp</td><td>/kennis/hybride-of-volledig/</td><td>Nieuw</td><td>/warmtepomp/, /warmtepomp/prijzen/</td></tr>
+              <tr><td>cv-ketel vervangen hoogeveen</td><td>/cv-ketel-vervangen/</td><td>Bestaat, goed</td><td>/warmtepomp/</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld.</p>
+        <p>Zo ontstaan vanzelf groepjes pagina's rond één onderwerp: een hoofdpagina en pagina's die dieper ingaan op een deel ervan. De <a href="/kennisbank/wat-is/interne-links/">interne links</a> tussen die pagina's vertellen Google wat bij elkaar hoort en welke pagina de belangrijkste is. Google schrijft dat elke pagina die je belangrijk vindt, minstens één link moet krijgen vanaf een andere pagina op je site. Een vast aantal is er niet.</p>
+
+        <Tussenactie />
+        <h2 id="content">Stap 6: content die beter is dan de top 5</h2>
+        <p>Nu weet je welke pagina's je nodig hebt. De vraag is wat erop moet. Google stelt in zijn eigen richtlijnen voor nuttige content vragen als deze:</p>
+        <ul class="vink">
+          <li>Biedt de pagina eigen informatie, onderzoek of analyse?</li>
+          <li>Geeft hij duidelijk meer dan de andere pagina's in de zoekresultaten?</li>
+          <li>Is het een pagina die je zou bewaren of doorsturen naar een vriend?</li>
+          <li>Is hij geschreven of nagekeken door iemand die het vak aantoonbaar kent?</li>
+          <li>Gaat een bezoeker weg met het gevoel dat hij heeft wat hij zocht?</li>
+        </ul>
+        <p>Op de vraag of Google een ideaal aantal woorden heeft, antwoordt Google zelf: nee. Een lange pagina is niet beter omdat hij lang is. Hij is beter als hij meer antwoorden geeft. Denk aan een prijsindicatie, een rekenvoorbeeld, foto's van eigen werk, een tabel die keuzes vergelijkt. Als vakman heb je kennis die een tekstbureau in Amsterdam niet heeft. Gebruik die. Dat is ook wat Google bedoelt met <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a>.</p>
+        <p>Kijk eerst naar wat je al hebt. Een bestaande pagina op plek 8 verbeteren levert meestal sneller iets op dan een nieuwe pagina vanaf nul. Google kent hem al, en er wijzen misschien al links naar. Nieuwe pagina's maak je voor zoekopdrachten waar je nog helemaal niets voor hebt.</p>
+        <p>Leg in je strategie ook vast wie de content maakt. Schrijf je zelf, met hulp van AI, of besteed je het uit? Een plan met twaalf nieuwe pagina's en niemand die ze schrijft, is een wensenlijst.</p>
+
+        <h2 id="techniek">Stap 7: technische SEO als randvoorwaarde</h2>
+        <p>De beste tekst helpt niet als Google hem niet kan lezen. Technische SEO is daarom geen doel op zich, maar een voorwaarde. Loop deze punten na voordat je in content investeert:</p>
+        <ul>
+          <li><b>Staan je belangrijke pagina's in Google?</b> Controleer het in Search Console onder Pagina's.</li>
+          <li><b>Werkt de site goed op een telefoon?</b> De meeste zoekers komen daarvandaan.</li>
+          <li><b>Is de site snel genoeg?</b> Google meet dat met de Core Web Vitals.</li>
+          <li><b>Zijn er kapotte links, dubbele pagina's of omleidingen in een rondje?</b></li>
+        </ul>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Core Web Vital</th><th>Wat het meet</th><th>Goed volgens Google</th></tr></thead>
+            <tbody>
+              <tr><td>LCP</td><td>Hoe snel het grootste deel van de pagina zichtbaar is</td><td>Binnen 2,5 seconden</td></tr>
+              <tr><td>INP</td><td>Hoe snel de pagina reageert op een tik of klik</td><td>Onder 200 milliseconden</td></tr>
+              <tr><td>CLS</td><td>Hoeveel de pagina verspringt tijdens het laden</td><td>Onder 0,1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Losse pagina's test je met <a href="/kennisbank/wat-is/pagespeed-insights/">PageSpeed Insights</a>. Staat er veel in het rood, zet techniek dan bovenaan je planning. Wil je zeker weten wat er speelt, laat dan een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> doen. Bij ons vanaf € 395 eenmalig. Tips om zelf aan de slag te gaan, staan in <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+
+        <h2 id="autoriteit">Stap 8: autoriteit opbouwen met links en vermeldingen</h2>
+        <p>Google kijkt ook naar wat anderen over je zeggen. Een link van een site die over jouw vak gaat, werkt als een aanbeveling. Zonder enige autoriteit kom je op concurrerende zoekopdrachten zelden bovenaan, hoe goed je pagina ook is.</p>
+        <p>Neem in je strategie op welke pagina's sterker moeten worden en waar links vandaan kunnen komen. Voor een lokaal bedrijf zijn dat vaak leveranciers, brancheorganisaties, de regionale krant en lokale verenigingen. Vergeet je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> en je reviews niet: voor de kaart met drie bedrijven tellen die zwaar. Hoe je een plan voor <a href="/linkbuilding/">linkbuilding</a> maakt, lees je in de gids <a href="/kennisbank/gidsen/linkbuilding-strategie/">linkbuilding-strategie</a>.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort bron</th><th>Voorbeeld</th><th>Moeite</th></tr></thead>
+            <tbody>
+              <tr><td>Je eigen netwerk</td><td>Leveranciers, fabrikanten, vaste partners</td><td>Laag: vaak één mailtje</td></tr>
+              <tr><td>Je regio</td><td>Huis-aan-huiskrant, ondernemersvereniging, sportclub</td><td>Laag tot gemiddeld</td></tr>
+              <tr><td>Je vak</td><td>Brancheorganisatie, vakblad, vergelijkingssite</td><td>Gemiddeld</td></tr>
+              <tr><td>Je kennis</td><td>Een gids, rekenhulp of onderzoek waar anderen naar verwijzen</td><td>Hoog, maar blijft links opleveren</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Hoeveel links je nodig hebt, lees je af aan je zoekconcurrenten uit stap 3. Hebben de bovenste drie elk een paar dozijn verwijzende sites uit hun vak, dan weet je ongeveer waar de lat ligt.</p>
+
+        <h2 id="plannen">Stap 9: prioriteren en plannen</h2>
+        <p>Na acht stappen heb je een lange lijst. Daar zit de valkuil: alles tegelijk willen. Zet elke actie in dit raster.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Weinig moeite</th><th>Veel moeite</th></tr></thead>
+            <tbody>
+              <tr><td><b>Veel impact</b></td><td><b>Nu doen.</b> Titels herschrijven van pagina's op plek 5 tot 15, een noindex weghalen, je bedrijfsprofiel afmaken.</td><td><b>Inplannen.</b> Nieuwe dienstpagina's, een prijspagina, linkbuilding.</td></tr>
+              <tr><td><b>Weinig impact</b></td><td><b>Tussendoor.</b> Alt-teksten aanvullen, oude blogs samenvoegen.</td><td><b>Schrappen.</b> Honderd blogs over randonderwerpen, een tweede website.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Begin waar de grootste kans op snel verschil zit. Dat is ook hoe wij werken: eerst de 20 procent van het werk die 80 procent van het resultaat geeft, daarna perfectioneren. Het levert je snel iets op, en dat geeft vertrouwen om door te gaan.</p>
+        <h3>Een planning voor twaalf maanden</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Periode</th><th>Focus</th><th>Wat je aan het eind wilt zien</th></tr></thead>
+            <tbody>
+              <tr><td>Maand 1</td><td>Nulmeting, techniek repareren, snelle winst</td><td>Alle belangrijke pagina's in Google, betere titels</td></tr>
+              <tr><td>Maand 2 en 3</td><td>Belangrijkste dienstpagina's herschrijven of maken</td><td>Meer vertoningen op zoekopdrachten van kopers</td></tr>
+              <tr><td>Maand 4 tot 6</td><td>Vergelijkende en uitleggende content, eerste links</td><td>Stijgende posities, de eerste extra aanvragen</td></tr>
+              <tr><td>Maand 7 tot 12</td><td>Uitbouwen wat werkt, linkbuilding doorzetten</td><td>Het doel uit stap 1, of een eerlijk beeld waarom niet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Schrijf bij elke actie wie hem doet en hoeveel tijd het kost. Heb je vier uur per maand, dan past er minder in dan bij veertig.</p>
+
+        <h2 id="meten">Stap 10: meten, rapporteren en bijsturen</h2>
+        <p>Kies een paar vaste <a href="/kennisbank/wat-is/kpi/">KPI's</a> en kijk elke maand naar dezelfde cijfers. Niet elke dag: dagelijkse schommelingen zeggen weinig.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Cijfer</th><th>Waar</th><th>Hoe vaak</th><th>Wat het vertelt</th></tr></thead>
+            <tbody>
+              <tr><td>Aanvragen uit organisch verkeer</td><td>Google Analytics 4</td><td>Maandelijks</td><td>Of SEO je bedrijfsdoel dient</td></tr>
+              <tr><td>Klikken zonder je bedrijfsnaam</td><td>Search Console</td><td>Maandelijks</td><td>Of nieuwe mensen je vinden</td></tr>
+              <tr><td>Vertoningen op je zoekwoordplan</td><td>Search Console</td><td>Maandelijks</td><td>Of Google je pagina's relevanter vindt, vaak voordat de klikken komen</td></tr>
+              <tr><td>Posities van je tien hoofdzoekwoorden</td><td>Search Console of een rank tracker</td><td>Maandelijks</td><td>Of je richting de top 5 beweegt</td></tr>
+              <tr><td>Verwijzende sites</td><td>Search Console, Links</td><td>Per kwartaal</td><td>Of je autoriteit groeit</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een goede rapportage is kort en in gewone taal. Wat is er gedaan, wat leverde het op, wat is de volgende stap? Een rapport waar je uitleg bij nodig hebt, schiet zijn doel voorbij. En een rapport met alleen successen vertelt niet het hele verhaal. Je wilt ook weten wat niet werkte.</p>
+        <p>Herzie de strategie elk kwartaal kort en eens per jaar grondig. Stijgt iets niet na drie tot zes maanden, kijk dan of het aan de pagina, de concurrentie of de techniek ligt. Durf ook te stoppen met wat niets oplevert.</p>
+        <h3>Wanneer je de strategie omgooit</h3>
+        <p>Soms is bijsturen niet genoeg. Gooi je plan om als een van deze dingen gebeurt:</p>
+        <ul>
+          <li>Je bedrijf verandert: een nieuwe dienst, een ander werkgebied, een dienst die je niet meer wilt doen.</li>
+          <li>Je verkeer zakt in een paar dagen flink weg, rond een grote update van Google. Zoek dan eerst uit welke pagina's het verschil maken.</li>
+          <li>De zoekresultaten veranderen van vorm. Staat er ineens een AI-overzicht of kaart boven je, dan levert dezelfde positie minder klikken op.</li>
+          <li>Je gaat over naar een nieuwe website. Neem SEO dan mee vanaf het eerste ontwerp, niet na de lancering.</li>
+        </ul>
+
+        <h2 id="soorten">Lokaal, landelijk of in AI: welke SEO-strategie past bij jou?</h2>
+        <p>De tien stappen gelden voor iedereen. De nadruk verschilt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Lokale dienstverlener</th><th>Landelijke dienstverlener</th><th>Gevonden in AI-antwoorden</th></tr></thead>
+            <tbody>
+              <tr><td>Voorbeeld</td><td>Installateur, kapper, hovenier</td><td>Boekhouder online, opleider</td><td>Iedereen die advies verkoopt</td></tr>
+              <tr><td>Belangrijkste zoekopdrachten</td><td>Dienst plus plaats</td><td>Dienst, vergelijkingen, prijzen</td><td>Vragen in hele zinnen</td></tr>
+              <tr><td>Zwaartepunt</td><td>Bedrijfsprofiel, reviews, dienstpagina's</td><td>Content en linkbuilding</td><td>Heldere antwoorden, vermeldingen op andere sites</td></tr>
+              <tr><td>Eerste resultaat</td><td>Vaak binnen drie tot zes maanden</td><td>Vaak pas na zes tot twaalf maanden</td><td>Wisselend, en lastiger te meten</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Werk je vooral in je eigen regio, lees dan ook over <a href="/lokale-seo/">lokale SEO</a>. Wil je genoemd worden door ChatGPT of in het AI-overzicht van Google, dan komt daar <a href="/generative-engine-optimization/">GEO</a> bij. De basis blijft hetzelfde: AI-assistenten gebruiken vaak pagina's die al goed scoren in Google als bron.</p>
+
+        <Tussenactie />
+        <h2 id="voorbeeld">Voorbeeld: de SEO-strategie van een installateur in Hoogeveen</h2>
+        <p>Zo ziet een ingevulde strategie eruit. Het bedrijf en de cijfers zijn verzonnen, de aanpak is echt.</p>
+        <div class="kader voorbeeld">
+          <p class="kader-titel">Installatiebedrijf Hoogeveen (verzonnen voorbeeld)</p>
+          <dl>
+            <dt>Bedrijfsdoel</dt><dd>40 extra warmtepompen in twaalf maanden.</dd>
+            <dt>SEO-doel</dt><dd>13 aanvragen per maand via Google, ongeveer 450 extra bezoekers op dienstpagina's.</dd>
+            <dt>Startpunt</dt><dd>120 klikken per maand, waarvan 80 op de bedrijfsnaam. Dienstpagina warmtepomp op positie 14.</dd>
+            <dt>Zoekconcurrenten</dt><dd>Twee landelijke ketens, een vergelijkingssite en één collega uit Meppel. Niemand noemt een prijs voor de regio.</dd>
+            <dt>Kans</dt><dd>De enige zijn met eerlijke prijzen, foto's van eigen installaties in Zuidwest-Drenthe en een vergelijking hybride of volledig.</dd>
+            <dt>Techniek</dt><dd>Prijspagina staat op noindex, LCP op mobiel is 4,1 seconden. Eerst oplossen.</dd>
+            <dt>Autoriteit</dt><dd>Vermelding bij de leverancier als erkend installateur, artikel in de huis-aan-huiskrant, sponsoring van de lokale voetbalclub.</dd>
+            <dt>Top 3 prioriteiten</dt><dd>1. Noindex weg en titels herschrijven. 2. Dienstpagina warmtepomp uitbreiden met prijzen en foto's. 3. Prijspagina en vergelijking schrijven.</dd>
+            <dt>Capaciteit</dt><dd>Eigenaar levert foto's en prijzen, tekstschrijver acht uur per maand.</dd>
+            <dt>Meten</dt><dd>Eerste maandag van de maand: aanvragen, klikken zonder bedrijfsnaam, posities op tien zoekwoorden.</dd>
+          </dl>
+        </div>
+        <p>Let op wat er niet in staat: geen honderd blogs, geen tien plaatsnaampagina's voor dorpen waar hij nooit komt. Een strategie is ook kiezen wat je niet doet.</p>
+
+        <h2 id="sjabloon">Sjabloon: je SEO-strategie op één pagina</h2>
+        <p>Vul deze elf vragen in voor je eigen bedrijf. Lukt een vraag niet, dan weet je meteen waar je huiswerk zit.</p>
+        <div class="kader check-lijst">
+          <ol>{velden.map(([k, v]) => <li><b>{k}.</b> {v}</li>)}</ol>
+          <a class="btn" href={download} download="seo-strategie-sjabloon.txt">Download het sjabloon</a>
+        </div>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Beginnen bij zoekwoorden met het hoogste volume.</b> Daar zit de meeste concurrentie, en vaak de minste koopintentie.</li>
+          <li><b>Je concurrent in de straat analyseren in plaats van wie er in Google staat.</b></li>
+          <li><b>Twee pagina's op hetzelfde onderwerp.</b> Ze verdringen elkaar.</li>
+          <li><b>Content zonder techniek.</b> Twaalf nieuwe pagina's op een site die Google niet goed kan lezen.</li>
+          <li><b>Geen eigenaar.</b> Een actie zonder naam erbij wordt niet uitgevoerd.</li>
+          <li><b>Na zes weken oordelen.</b> SEO heeft maanden nodig. Meet maandelijks, oordeel per kwartaal.</li>
+          <li><b>Sturen op posities in plaats van aanvragen.</b> Plek 1 op een zoekwoord dat niemand iets oplevert, betaalt geen rekeningen.</li>
+        </ul>
+
+        <h2 id="hulp">Zelf maken of laten maken?</h2>
+        <p>Met deze gids kun je zelf een goede strategie opzetten. Reken op een dag werk voor de eerste versie, en daarna een paar uur per maand om hem bij te houden. Wil je een tweede paar ogen, plan dan een <a href="/consult/">consult</a> van een uur voor € 85. We lopen dan samen je sjabloon door.</p>
+        <p>Liever dat iemand het overneemt? Bij <a href="/zoekmachine-optimalisatie/">SEO van Drijfveer Media</a> maken we de strategie en voeren we hem uit, vanaf € 495 per maand. We spreken een doel af waar je ons op afrekent, met stijggarantie. Maandelijks opzegbaar, want je hoort te blijven omdat het werkt. Wat SEO gemiddeld kost, lees je in <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={17} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij de strategie maken?" intro="Wat je bij ons krijgt, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat staat er in een SEO-strategie?', a: 'Je bedrijfsdoel, het SEO-doel dat daaruit volgt, je startpunt, je zoekconcurrenten, een zoekwoordplan met per zoekwoord één pagina, wat er aan techniek en autoriteit moet gebeuren, je prioriteiten, een planning en hoe je meet.' },
+      { v: 'Hoe lang duurt het voordat een SEO-strategie resultaat oplevert?', a: 'Reken op drie tot zes maanden voor de eerste duidelijke resultaten bij een lokaal bedrijf, langer bij landelijke zoekopdrachten. Volgens Google kan één wijziging al een paar uur tot een paar maanden nodig hebben.' },
+      { v: 'Hoe vaak pas je een SEO-strategie aan?', a: 'Kijk elk kwartaal kort of je prioriteiten nog kloppen, en herzie de hele strategie eens per jaar. Bij een nieuwe website of een grote verandering in je bedrijf eerder.' },
+      { v: 'Wat is het verschil tussen een SEO-strategie en een contentstrategie?', a: 'Een contentstrategie gaat over wat je publiceert en voor wie. Een SEO-strategie omvat ook techniek, autoriteit en meten. Content is er een belangrijk onderdeel van.' },
+      { v: 'Heb ik als klein bedrijf een SEO-strategie nodig?', a: 'Ja, maar hij mag klein zijn. Eén pagina met je doel, je tien belangrijkste zoekopdrachten, de pagina die erbij hoort en drie prioriteiten is genoeg om gericht te werken.' },
+      { v: 'Welke tools heb je nodig?', a: 'Google Search Console en Google Analytics zijn gratis en genoeg voor de meeste kleine bedrijven. Voor concurrentieanalyse en zoekvolumes helpt een betaalde tool als SE Ranking, Semrush of Ahrefs.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Hoger in Google komen', href: '/kennisbank/gidsen/hoger-in-google/', tekst: 'De snelle winst voor een kleine site.' },
+      { label: 'Gids', titel: 'Zoekwoordonderzoek', href: '/kennisbank/gidsen/zoekwoordonderzoek/', tekst: 'De zoekwoorden vinden die klanten typen.' },
+      { label: 'Gids', titel: 'Linkbuilding-strategie', href: '/kennisbank/gidsen/linkbuilding-strategie/', tekst: 'Een plan voor links die je verder helpen.' },
+      { label: 'Dienst', titel: 'SEO uitbesteden', href: '/zoekmachine-optimalisatie/seo-uitbesteden/', tekst: 'Vanaf € 495 per maand, maandelijks opzegbaar.' },
+    ]}
+  />
+
+  <Actie titel="Zullen we samen naar je strategie kijken?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je concurrenten in Google, en belt je met de drie dingen die het meeste opleveren.`} />
+</Base>
+<style>
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+  .voorbeeld dl { margin: 0; display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 8px 16px; }
+  .voorbeeld dt { font-weight: 800; }
+  .voorbeeld dd { margin: 0; }
+  @media (max-width: 560px) { .voorbeeld dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } .voorbeeld dd { margin-bottom: 10px; } }
+</style>

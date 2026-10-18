@@ -1,0 +1,186 @@
+---
+// Offertechecker: "Is deze SEO- of website-offerte goed?" Twaalf ja/nee-vragen. Uitkomst: score en rode vlaggen met uitleg.
+// De vragen volgen de gids /kennisbank/gidsen/offerte-beoordelen/ en Google's eigen tips voor wie een SEO-bureau zoekt
+// (developers.google.com/search/docs/fundamentals/do-i-need-seo, opgehaald 18-10-2026): niemand kan een eerste plek garanderen,
+// vraag hoe succes gemeten wordt, wees op je hoede voor linkschema's. Het gewicht per vraag is onze eigen inschatting.
+// Deelbaar via #offertecheck&a=jnjn... (alleen de antwoorden, geen gegevens over de offerte of de afzender).
+import { site } from '../../data/site';
+interface Props { id?: string; kop?: 'h2' | 'h3' }
+const { id = 'offertecheck', kop = 'h3' } = Astro.props;
+const Kop = kop;
+const opConsult = Astro.url.pathname.startsWith('/consult');
+// Volgorde gelijk houden aan de lijst in het script.
+const vragen = [
+  'Staan je domeinnaam en hosting op jouw naam?',
+  'Blijven teksten, foto\'s en ontwerp van jou, ook als je stopt?',
+  'Krijg je zelf toegang tot Search Console, Analytics en je andere accounts?',
+  'Staat erin voor welke zoekwoorden of pagina\'s er gewerkt wordt?',
+  'Is er een nulmeting en een doel dat je kunt meten, zoals meer aanvragen?',
+  'Staat er per maand in aantallen wat er gebeurt?',
+  'Kun je maandelijks opzeggen, of is een langere looptijd goed uitgelegd?',
+  'Krijg je een rapport in gewone taal, met posities, bezoekers en aanvragen?',
+  'Weet je wie het werk doet, en wie je aanspreekpunt is?',
+  'Mag je rustig beslissen, zonder druk om snel te tekenen?',
+  'Belooft het bureau een vaste plek, zoals "gegarandeerd op 1 in Google"?',
+  'Worden er veel links beloofd voor weinig geld, zoals honderd links voor een paar tientjes?',
+];
+---
+<div class="oc card" id={id} data-offertecheck={id}>
+  <p class="kicker">Gratis check · twee minuten</p>
+  <Kop class="oc-titel">Is deze SEO- of website-offerte goed?</Kop>
+  <p class="muted oc-intro">Leg de offerte naast je en beantwoord twaalf vragen. Je ziet meteen waar het rammelt en wat je moet navragen.</p>
+  <form class="oc-form" data-form>
+    <ol class="oc-vragen">
+      {vragen.map((v, i) => (
+        <li class="oc-vraag" data-i={i}>
+          <fieldset>
+            <legend>{v}</legend>
+            <div class="oc-keuze">
+              <label><input type="radio" name={`v${i}`} value="j" /> Ja</label>
+              <label><input type="radio" name={`v${i}`} value="n" /> Nee</label>
+            </div>
+          </fieldset>
+        </li>
+      ))}
+    </ol>
+    <button class="btn" type="submit">Bekijk de uitslag</button>
+    <p class="klein muted oc-hint" data-hint aria-live="polite"></p>
+  </form>
+
+  <div class="oc-live" aria-live="polite">
+    <div class="oc-uitslag" data-uitslag hidden>
+      <div class="oc-score-rij">
+        <div class="oc-meter" data-meter style="--score:0"><span data-score>0</span><small>van 100</small></div>
+        <div><p class="oc-oordeel" data-oordeel></p><p class="muted oc-uitleg" data-uitleg></p></div>
+      </div>
+      <p class="oc-vlaggen-kop" data-vlaggen-kop>Rode vlaggen</p>
+      <ul class="oc-vlaggen" data-vlaggen></ul>
+      <div class="oc-acties">
+        <a class="btn" href="/contact/?vraag=second%20opinion%20offerte">Stuur je offerte, {site.contactpersoon} belt je met een second opinion</a>
+        <button class="btn btn-ghost" type="button" data-deel>Deel je uitslag</button>
+      </div>
+      <p class="klein muted oc-status" data-status></p>
+      <p class="klein muted">Laat je nummer achter en mail de offerte naar <a href={`mailto:${site.email}?subject=Second%20opinion%20offerte`}>{site.email}</a>.{!opConsult && <> Samen grondig doorlopen kan in een <a href="/consult/">consult</a> van € 85 per uur.</>}</p>
+    </div>
+  </div>
+  <noscript><p class="klein">Zonder JavaScript geen score. Vraag elke "nee" bij vraag 1 tot 10 na, en elke "ja" bij 11 en 12.</p></noscript>
+  <p class="klein muted oc-bron">Bron: Google's tips voor wie <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo" rel="noopener">een SEO-specialist zoekt</a> (gelezen op 18 oktober 2026). Het gewicht per vraag is onze inschatting.</p>
+</div>
+
+<script>
+  // goed: het antwoord dat in orde is. w: gewicht (onze inschatting). vlag: uitleg als het antwoord niet in orde is.
+  const vragen: { goed: 'j' | 'n'; w: number; vlag: string; titel: string }[] = [
+    { goed: 'j', w: 3, titel: 'Domein en hosting niet op jouw naam', vlag: 'Dan ben je je site kwijt als je wilt overstappen, of betaal je om hem terug te krijgen. Vraag of het domein op jouw naam wordt gezet, met jou als eigenaar bij de registrar.' },
+    { goed: 'j', w: 2, titel: 'Content niet van jou', vlag: 'Teksten en ontwerp waar jij voor betaalt, horen van jou te zijn. Laat vastleggen dat je ze mag houden en meenemen, ook na opzegging.' },
+    { goed: 'j', w: 3, titel: 'Geen eigen toegang tot je accounts', vlag: 'Search Console, Analytics, je Google Bedrijfsprofiel en je advertentieaccount horen op jouw naam. Het bureau krijgt toegang, niet andersom. Zo zie je zelf wat er gebeurt.' },
+    { goed: 'j', w: 2, titel: 'Geen concrete zoekwoorden of pagina\'s', vlag: '"Hoger in Google" zegt niets. Vraag voor welke zoekwoorden en pagina\'s er gewerkt wordt, en waarom juist die.' },
+    { goed: 'j', w: 2, titel: 'Geen nulmeting en geen meetbaar doel', vlag: 'Zonder startpunt kun je nooit zien of het werkt. Vraag om een nulmeting van posities, bezoekers en aanvragen, en spreek een doel af waar het bureau op afgerekend kan worden.' },
+    { goed: 'j', w: 2, titel: 'Onduidelijk wat er per maand gebeurt', vlag: '"Doorlopende optimalisatie" kun je niet controleren. Vraag om aantallen: hoeveel pagina\'s, artikelen, links of controles per maand.' },
+    { goed: 'j', w: 2, titel: 'Lange looptijd zonder goede reden', vlag: 'Een jaarcontract met stilzwijgende verlenging houdt je vast, ook als het niet werkt. Een bureau hoort te verdienen aan klanten die blijven omdat het werkt.' },
+    { goed: 'j', w: 1, titel: 'Geen rapport in gewone taal', vlag: 'Een rapport waar je uitleg bij nodig hebt, mist zijn doel. Vraag een voorbeeld: staan er posities, bezoekers en aanvragen in, plus wat er die maand gedaan is?' },
+    { goed: 'j', w: 1, titel: 'Onduidelijk wie het werk doet', vlag: 'Sommige bureaus verkopen het werk door aan een goedkopere partij. Vraag wie er aan je site werkt, en wie je belt als er iets is.' },
+    { goed: 'j', w: 1, titel: 'Druk om snel te tekenen', vlag: '"Deze prijs geldt alleen tot vrijdag" is een verkooptruc. Een goede partij geeft je de tijd om te vergelijken en vragen te stellen.' },
+    { goed: 'n', w: 3, titel: 'Een gegarandeerde plek in Google', vlag: 'Volgens Google zelf kan niemand een eerste plek garanderen. Wie dat belooft, kun je beter laten lopen. Een afspraak als "halen we het doel niet, dan werken we gratis door" is iets anders: dat gaat over inzet, niet over wat Google doet.' },
+    { goed: 'n', w: 3, titel: 'Veel links voor weinig geld', vlag: 'Honderden links voor een paar tientjes komen bijna altijd uit netwerken die Google als linkspam ziet. Dat kan je posities kosten. Vraag van wat voor sites de links komen en of je ze mag zien.' },
+  ];
+  const totaal = vragen.reduce((s, v) => s + v.w, 0);
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  const kopieer = async (t: string) => { try { await navigator.clipboard.writeText(t); return true; } catch { window.prompt('Kopieer deze link:', t); return false; } };
+
+  document.querySelectorAll<HTMLElement>('[data-offertecheck]').forEach((el) => {
+    const id = el.dataset.offertecheck!;
+    const form = el.querySelector<HTMLFormElement>('[data-form]')!;
+    const uitslag = el.querySelector<HTMLElement>('[data-uitslag]')!;
+    const status = el.querySelector<HTMLElement>('[data-status]')!;
+    const hint = el.querySelector<HTMLElement>('[data-hint]')!;
+    const antwoord = (i: number) => (form.querySelector<HTMLInputElement>(`input[name="v${i}"]:checked`)?.value ?? '') as 'j' | 'n' | '';
+    const code = () => vragen.map((_, i) => antwoord(i) || '-').join('');
+    const deelLink = () => `${location.origin}${location.pathname}#${id}&a=${code()}`;
+
+    const toon = (scroll: boolean) => {
+      const open = vragen.findIndex((_, i) => !antwoord(i));
+      if (open >= 0) {
+        const li = form.querySelector<HTMLElement>(`.oc-vraag[data-i="${open}"]`)!;
+        hint.textContent = `Vraag ${open + 1} heeft nog geen antwoord.`;
+        li.classList.add('oc-let-op'); setTimeout(() => li.classList.remove('oc-let-op'), 1800);
+        li.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+        li.querySelector<HTMLInputElement>('input')?.focus({ preventScroll: true });
+        return;
+      }
+      hint.textContent = '';
+      const fout = vragen.filter((v, i) => antwoord(i) !== v.goed);
+      const score = Math.round(((totaal - fout.reduce((s, v) => s + v.w, 0)) / totaal) * 100);
+      const zwaar = fout.filter((v) => v.w === 3).length;
+      const oordeel = score >= 85 && !zwaar ? 'Deze offerte ziet er degelijk uit' : score >= 60 && zwaar <= 1 ? 'Redelijk, maar vraag een paar dingen na' : 'Hier zou ik niet zomaar tekenen';
+      const uitleg = !fout.length
+        ? 'Alle twaalf punten zijn in orde. Vergelijk nog wel de prijs met wat je ervoor krijgt, en bel een klant van het bureau.'
+        : `${fout.length} van de 12 punten ${fout.length === 1 ? 'is' : 'zijn'} niet in orde${zwaar ? `, waarvan ${zwaar} zwaar` : ''}. Eén rode vlag hoeft geen reden te zijn om af te haken. Hoe het bureau op je vraag reageert, vertelt veel over de samenwerking.`;
+      el.querySelector('[data-score]')!.textContent = String(score);
+      el.querySelector<HTMLElement>('[data-meter]')!.style.setProperty('--score', String(score));
+      el.querySelector('[data-oordeel]')!.textContent = oordeel;
+      el.querySelector('[data-uitleg]')!.textContent = uitleg;
+      const gesorteerd = [...fout].sort((a, b) => b.w - a.w);
+      el.querySelector<HTMLElement>('[data-vlaggen-kop]')!.hidden = !fout.length;
+      el.querySelector('[data-vlaggen]')!.innerHTML = gesorteerd.map((v) => `<li${v.w === 3 ? ' class="oc-zwaar"' : ''}><b>${esc(v.titel)}.</b> ${esc(v.vlag)}</li>`).join('');
+      uitslag.hidden = false; status.textContent = '';
+      try { history.replaceState(null, '', `${location.pathname}${location.search}#${id}&a=${code()}`); } catch {}
+      if (scroll) uitslag.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    };
+
+    form.addEventListener('submit', (e) => { e.preventDefault(); toon(true); });
+    form.addEventListener('change', () => { if (!uitslag.hidden) toon(false); });
+    el.querySelector('[data-deel]')!.addEventListener('click', async () => {
+      const ok = await kopieer(deelLink());
+      status.textContent = ok ? 'De link naar je uitslag staat op je klembord. Er staan alleen je antwoorden in.' : '';
+    });
+
+    // Gedeelde uitslag: #offertecheck&a=jjnj-...
+    const h = new URLSearchParams(location.hash.slice(1));
+    const a = h.has(id) ? (h.get('a') || '') : '';
+    if (a) {
+      vragen.forEach((_, i) => { const r = form.querySelector<HTMLInputElement>(`input[name="v${i}"][value="${a[i] === 'j' ? 'j' : a[i] === 'n' ? 'n' : 'x'}"]`); if (r) r.checked = true; });
+      if (vragen.every((_, i) => antwoord(i))) { toon(false); el.scrollIntoView({ block: 'start' }); }
+    }
+  });
+</script>
+
+<style>
+  .oc { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .oc-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .oc-intro { margin-bottom: 16px; }
+  .oc-form { display: grid; gap: 14px; }
+  .oc-form .btn { justify-self: start; }
+  .oc-hint { margin: 0; min-height: 1.4em; }
+  .oc-vragen { list-style: none; counter-reset: oc; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .oc-vraag { counter-increment: oc; margin: 0; padding: 10px 14px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; transition: box-shadow 0.2s; }
+  .oc-vraag.oc-let-op { box-shadow: 0 0 0 3px var(--orange); }
+  .oc-vraag fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 16px; align-items: center; }
+  .oc-vraag legend { float: left; padding: 0; font-weight: 600; font-size: 0.98rem; line-height: 1.4; }
+  .oc-vraag legend::before { content: counter(oc) '. '; color: var(--orange); font-weight: 800; }
+  .oc-keuze { display: flex; gap: 6px; }
+  .oc-keuze label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; min-width: 64px; padding: 4px 12px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
+  .oc-keuze label:has(input:checked) { border-color: var(--navy); background: var(--chip); }
+  .oc-keuze input { accent-color: var(--navy); width: 18px; height: 18px; margin: 0; }
+  .oc-uitslag { margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--line); }
+  .oc-score-rij { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; align-items: center; margin-bottom: 16px; }
+  .oc-oordeel { font-size: var(--step-1); font-weight: 800; line-height: 1.2; margin: 0 0 6px; }
+  .oc-uitleg { margin: 0; }
+  .oc-meter { --score: 0; width: 120px; aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; text-align: center;
+    background: radial-gradient(closest-side, var(--panel) 78%, transparent 79% 100%), conic-gradient(var(--orange) calc(var(--score) * 1%), var(--chip) 0); }
+  .oc-meter span { font-size: 2.2rem; font-weight: 900; line-height: 1; color: var(--ink); }
+  .oc-meter small { color: var(--muted); font-size: 0.85rem; }
+  .oc-vlaggen-kop { font-weight: 800; font-size: 1.1rem; margin: 6px 0 8px; }
+  .oc-vlaggen { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 8px; }
+  .oc-vlaggen :global(li) { margin: 0; padding: 10px 14px; border-radius: 10px; background: var(--tint); border-left: 4px solid #ffb27a; }
+  .oc-vlaggen :global(li.oc-zwaar) { background: #fdecec; border-left-color: #c0392b; }
+  .oc-acties { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+  .oc-status { min-height: 1.4em; margin: 0 0 6px; }
+  .oc-bron { margin: 18px 0 0; }
+  @media (max-width: 560px) {
+    .oc-vraag fieldset { grid-template-columns: minmax(0, 1fr); }
+    .oc-score-rij { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+    .oc-meter { width: 104px; }
+    .oc-acties .btn { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .oc-vraag { transition: none; } }
+</style>

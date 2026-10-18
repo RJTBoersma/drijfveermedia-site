@@ -1,0 +1,90 @@
+---
+// Scène voor /kennisbank/wat-is/https/: een browser stuurt gegevens naar een server, twee keer.
+// Boven over een open lijn (http): een ansichtkaart die een meekijker gewoon kan lezen.
+// Onder door een afgesloten koker (https): een envelop met slot, de meekijker ziet alleen tekens.
+// Als hij leeft: kaart en envelop reizen naar de server en het slotje in de adresbalk licht op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een browser stuurt gegevens naar een server. Over de open http-lijn kan een meekijker de ansichtkaart lezen. Door de afgesloten https-koker gaat een envelop met slot, en de meekijker ziet alleen onleesbare tekens.'}>
+  <!-- browser -->
+  <rect x="20" y="40" width="132" height="196" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M21 64V52a11 11 0 0 1 11-11h108a11 11 0 0 1 11 11v12z" fill="#e8eef4" />
+  <circle cx="34" cy="53" r="3.5" fill="#d9e1ea" /><circle cx="45" cy="53" r="3.5" fill="#d9e1ea" /><circle cx="56" cy="53" r="3.5" fill="#d9e1ea" />
+  <rect x="30" y="74" width="112" height="20" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="38" y="83" width="9" height="7" rx="1.5" fill="#1f8a5b" />
+  <path d="M40 83v-2.2a2.5 2.5 0 0 1 5 0V83" fill="none" stroke="#1f8a5b" stroke-width="1.6" />
+  <text x="52" y="88.5" font-size="9" font-weight="800">https://</text>
+  <rect x="32" y="106" width="70" height="8" rx="4" fill="#074663" />
+  <rect x="32" y="120" width="96" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="32" y="146" width="108" height="16" rx="5" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="32" y="168" width="108" height="16" rx="5" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="32" y="192" width="60" height="18" rx="9" fill="#ff6600" />
+
+  <!-- server -->
+  <rect x="362" y="52" width="96" height="172" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="374" y="66" width="72" height="34" rx="6" class="v" />
+  <rect x="374" y="110" width="72" height="34" rx="6" class="v" />
+  <rect x="374" y="154" width="72" height="34" rx="6" class="v" />
+  <circle cx="434" cy="83" r="4" fill="#1f8a5b" /><circle cx="434" cy="127" r="4" fill="#1f8a5b" /><circle cx="434" cy="171" r="4" fill="#1f8a5b" />
+  <path class="l" d="M384 83h30M384 127h30M384 171h30" />
+  <text x="410" y="208" font-size="11" font-weight="800" text-anchor="middle" class="zacht">server</text>
+
+  <!-- open lijn (http) -->
+  <text x="164" y="80" font-size="11" font-weight="800" class="zacht">http</text>
+  <path d="M152 94H362" fill="none" stroke="#d9e1ea" stroke-width="3" stroke-dasharray="6 7" stroke-linecap="round" />
+  <g class="https-kaart">
+    <rect x="166" y="82" width="46" height="26" rx="3" fill="#fff" stroke="#074663" stroke-width="2" />
+    <path d="M190 86v18" stroke="#d9e1ea" stroke-width="1.5" />
+    <path d="M171 90h14M171 96h12M171 102h14" stroke="#074663" stroke-width="1.6" stroke-linecap="round" />
+    <rect x="196" y="86" width="11" height="9" rx="1.5" fill="#ff6600" />
+  </g>
+
+  <!-- afgesloten koker (https) -->
+  <text x="164" y="184" font-size="11" font-weight="800" style="fill:#1f8a5b">https</text>
+  <rect x="152" y="192" width="210" height="34" rx="17" fill="#e8eef4" stroke="#074663" stroke-width="2" />
+  <g class="https-brief">
+    <rect x="168" y="199" width="34" height="20" rx="3" fill="#fff" stroke="#074663" stroke-width="2" />
+    <path d="M169 200l16 11 16-11" fill="none" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+    <rect x="203" y="205" width="9" height="8" rx="1.5" fill="#1f8a5b" />
+    <path d="M205 205v-2.5a2.5 2.5 0 0 1 5 0V205" fill="none" stroke="#1f8a5b" stroke-width="1.6" />
+  </g>
+
+  <!-- de meekijker -->
+  <path d="M214 148c8-12 17-18 26-18s18 6 26 18c-8 12-17 18-26 18s-18-6-26-18z" fill="#fff" stroke="#074663" stroke-width="2" />
+  <circle cx="240" cy="148" r="8" fill="#074663" />
+  <circle cx="243" cy="145" r="2.4" fill="#fff" />
+  <rect x="278" y="112" width="78" height="22" rx="11" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="317" y="127" font-size="9.5" font-weight="800" text-anchor="middle">Jan, 06-1234</text>
+  <rect x="278" y="160" width="78" height="22" rx="11" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="317" y="175" font-size="9.5" font-weight="800" text-anchor="middle" class="zacht">#k7!q&amp;%x</text>
+
+  {!mini && (
+    <g>
+      <circle class="https-ring" cx="42.5" cy="85" r="9" fill="none" stroke="#1f8a5b" stroke-width="2" />
+      <g class="https-vink">
+        <circle cx="440" cy="210" r="10" fill="#1f8a5b" />
+        <path d="M435 210l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .https-ring, .https-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .https-ring, :global(.teken-js) .https-vink { opacity: 0; }
+  .in-beeld .https-kaart { animation: kennisbank-wat-is-https-reis 6s ease-in-out 0.4s infinite; }
+  .in-beeld .https-brief { animation: kennisbank-wat-is-https-reis 6s ease-in-out 0.9s infinite; }
+  .in-beeld .https-ring { animation: kennisbank-wat-is-https-ring 3s ease-out 0.6s infinite; }
+  .in-beeld .https-vink { animation: kennisbank-wat-is-https-vink 6s ease-out 0.9s infinite; }
+  @keyframes kennisbank-wat-is-https-reis {
+    0% { transform: translateX(0); opacity: 0; }
+    8% { opacity: 1; }
+    70% { transform: translateX(140px); opacity: 1; }
+    80%, 100% { transform: translateX(150px); opacity: 0; }
+  }
+  @keyframes kennisbank-wat-is-https-ring { 0% { opacity: 0.9; transform: scale(0.6); } 70%, 100% { opacity: 0; transform: scale(1.6); } }
+  @keyframes kennisbank-wat-is-https-vink { 0%, 66% { opacity: 0; transform: scale(0.4); } 74%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .https-kaart, .in-beeld .https-brief, .in-beeld .https-ring, .in-beeld .https-vink { animation: none; }
+  }
+</style>

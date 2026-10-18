@@ -1,0 +1,71 @@
+---
+// Scène voor /kennisbank/wat-is/500-fout/: links een browser met de foutcode 500, rechts het foutlogboek van de server.
+// Als hij leeft: een vergrootglas zakt langs de regels van het logboek, stopt bij de regel met de fatale fout,
+// die oranje oplicht, en er verschijnt een label met de gevonden plugin. Het statuslampje knippert rustig.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [70, 88, 106, 124, 160, 178, 196, 214];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een browser toont de foutcode 500. Ernaast het foutlogboek van de server, waarin een vergrootglas de regel met de fatale fout vindt.'}>
+  <!-- browser met 500 -->
+  <rect x="20" y="34" width="208" height="202" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M21 58V46a11 11 0 0 1 11-11h184a11 11 0 0 1 11 11v12z" fill="#e8eef4" />
+  <circle cx="34" cy="47" r="3.5" fill="#d9e1ea" /><circle cx="45" cy="47" r="3.5" fill="#d9e1ea" /><circle cx="56" cy="47" r="3.5" fill="#d9e1ea" />
+  <circle class="fout-lamp" cx="212" cy="47" r="5" fill="#ff6600" />
+  <text x="124" y="132" font-size="58" font-weight="800" text-anchor="middle" style="fill:#074663">500</text>
+  <text x="124" y="156" font-size="11" font-weight="800" text-anchor="middle" class="zacht">Internal Server Error</text>
+  <rect x="64" y="172" width="120" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="80" y="186" width="88" height="7" rx="3.5" fill="#e8eef4" />
+  <!-- tandwiel dat vastzit -->
+  <g transform="translate(124 214)">
+    <circle r="9" fill="none" stroke="#074663" stroke-width="3" />
+    <path d="M0-14v5M0 9v5M-14 0h5M9 0h5M-10-10l3.5 3.5M6.5 6.5L10 10M-10 10l3.5-3.5M6.5-6.5L10-10" stroke="#074663" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- foutlogboek -->
+  <rect x="252" y="34" width="208" height="202" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M253 58V46a11 11 0 0 1 11-11h184a11 11 0 0 1 11 11v12z" fill="#e8eef4" />
+  <text x="266" y="51" font-size="11" font-weight="800">error_log</text>
+  {regels.map((y, i) => (
+    <g>
+      <rect x="266" y={y - 5} width="34" height="6" rx="3" fill="#d9e1ea" />
+      <rect x="306" y={y - 5} width={[110, 86, 124, 70, 118, 96, 80, 104][i]} height="6" rx="3" fill="#e8eef4" />
+    </g>
+  ))}
+  <rect x="262" y="132" width="188" height="20" rx="5" fill="#fff" stroke="#ff6600" stroke-width="2" />
+  <text x="270" y="146" font-size="9.5" font-weight="800">PHP Fatal error … plugins/</text>
+
+  {!mini && (
+    <g>
+      <rect class="fout-gloed" x="262" y="132" width="188" height="20" rx="5" fill="#ff6600" opacity="0.18" />
+      <g class="fout-glas">
+        <circle cx="430" cy="66" r="13" fill="#fff" fill-opacity="0.6" stroke="#074663" stroke-width="3" />
+        <path d="M439 76l10 10" stroke="#074663" stroke-width="4" stroke-linecap="round" />
+      </g>
+      <g class="fout-label">
+        <rect x="300" y="196" width="134" height="26" rx="13" fill="#1f8a5b" />
+        <text x="367" y="213" font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">Oorzaak gevonden</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .fout-label, .fout-gloed { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .fout-label, :global(.teken-js) .fout-gloed, :global(.teken-js) .fout-glas { opacity: 0; }
+  .in-beeld .fout-lamp { animation: kennisbank-wat-is-500-fout-lamp 2.4s ease-in-out infinite; }
+  .in-beeld .fout-glas { animation: kennisbank-wat-is-500-fout-glas 7s ease-in-out 0.4s infinite; }
+  .in-beeld .fout-gloed { animation: kennisbank-wat-is-500-fout-gloed 7s ease-in-out 0.4s infinite; }
+  .in-beeld .fout-label { animation: kennisbank-wat-is-500-fout-label 7s ease-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-500-fout-lamp { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  @keyframes kennisbank-wat-is-500-fout-glas {
+    0% { opacity: 0; transform: translateY(0); }
+    8% { opacity: 1; }
+    40%, 80% { opacity: 1; transform: translateY(76px); }
+    90%, 100% { opacity: 0; transform: translateY(76px); }
+  }
+  @keyframes kennisbank-wat-is-500-fout-gloed { 0%, 38% { opacity: 0; } 44%, 82% { opacity: 1; } 92%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-500-fout-label { 0%, 46% { opacity: 0; transform: scale(0.6); } 52%, 84% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .fout-lamp, .in-beeld .fout-glas, .in-beeld .fout-gloed, .in-beeld .fout-label { animation: none; }
+  }
+</style>

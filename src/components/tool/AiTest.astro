@@ -3,6 +3,8 @@
 // opent elke vraag met één klik in ChatGPT, Perplexity, Copilot of de AI-modus van Google, en geeft na het afvinken een score
 // met de drie belangrijkste verbeterpunten. Alles gebeurt in de browser: er gaan geen gegevens naar ons of naar een API.
 // Later kan dezelfde tool overstappen op echte API-antwoorden (route 1), zonder dat de pagina verandert.
+// De uitslag is deelbaar: #ai-test&vak=...&plaats=...&score=... (zonder bedrijfsnaam). Wie zo'n link opent, ziet de score en kan zelf de test doen.
+// "Test ook een concurrent" start opnieuw met hetzelfde vak en dezelfde plaats.
 interface Props { id?: string }
 const { id = 'ai-test' } = Astro.props;
 ---
@@ -20,6 +22,7 @@ const { id = 'ai-test' } = Astro.props;
         <div class="veld"><label for={`${id}-plaats`}>In welke plaats?</label><input id={`${id}-plaats`} name="plaats" required placeholder="Bijvoorbeeld: Emmen" autocomplete="address-level2" /></div>
         <div class="veld"><label for={`${id}-naam`}>Je bedrijfsnaam</label><input id={`${id}-naam`} name="naam" required placeholder="Bijvoorbeeld: Installatiebedrijf Jansen" autocomplete="organization" /></div>
       </div>
+      <p class="klein muted concurrent-tip" data-concurrent-tip hidden></p>
       <button class="btn" type="submit">Maak mijn vijf vragen</button>
     </form>
 
@@ -40,12 +43,17 @@ const { id = 'ai-test' } = Astro.props;
           <p data-uitleg></p>
         </div>
       </div>
-      <h3 class="punten-kop">Hier zit je winst</h3>
-      <ol class="punten" data-punten></ol>
+      <p class="gedeeld" data-gedeeld hidden></p>
+      <h3 class="punten-kop" data-eigen>Hier zit je winst</h3>
+      <ol class="punten" data-punten data-eigen></ol>
       <div class="acties">
         <a class="btn" data-cta href="/generative-engine-optimization/ai-vindbaarheidsanalyse/#aanvragen">Laat Thorgall het gratis nakijken</a>
-        <button class="btn btn-ghost" type="button" data-terug>Terug naar de vragen</button>
+        <button class="btn btn-ghost" type="button" data-deel data-eigen>Deel je uitslag</button>
+        <button class="btn btn-ghost" type="button" data-concurrent data-eigen>Test ook een concurrent</button>
+        <button class="btn btn-ghost" type="button" data-terug data-eigen>Terug naar de vragen</button>
+        <button class="btn btn-ghost" type="button" data-zelf hidden>Doe de test zelf</button>
       </div>
+      <p class="klein muted deel-status" data-deel-status></p>
       <p class="klein muted">De gratis analyse gaat verder dan deze test: we stellen de vragen meerdere keren, in vijf assistenten, en kijken welke websites AI als bron gebruikt.</p>
     </div>
     <noscript><p class="klein">Deze test werkt met JavaScript. Liever dat wij het doen? Vraag de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a> aan.</p></noscript>
@@ -77,6 +85,12 @@ const { id = 'ai-test' } = Astro.props;
     eerst: 'Je wordt wel genoemd, maar niet als eerste. Meer vermeldingen in je regio en antwoorden op de vragen van klanten op je site schuiven je omhoog.',
     goed: 'Je wordt al vaak genoemd. Houd het vast: meet elk kwartaal met dezelfde vragen en kijk of concurrenten inlopen.',
   };
+  const oordeelVoor = (score: number) => (score >= 70 ? 'AI noemt je vaak' : score >= 30 ? 'AI kent je, maar niet overal' : 'AI noemt je (nog) niet');
+  const uitlegVoor = (score: number, vak: string, plaats: string) => score >= 70
+    ? `Bij de meeste vragen over ${vak} in ${plaats} kom je in beeld. Dat hebben weinig bedrijven.`
+    : score >= 30
+      ? `Bij een deel van de vragen kom je in beeld. Bij de rest gaat de klant naar een ander.`
+      : `Wie AI vraagt naar een ${vak} in ${plaats}, krijgt nu andere namen. Dat is goed te verbeteren.`;
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
   const lees = () => { try { return JSON.parse(localStorage.getItem(OPSLAG) || 'null'); } catch { return null; } };
   const bewaar = (d: unknown) => { try { localStorage.setItem(OPSLAG, JSON.stringify(d)); } catch {} };
@@ -88,6 +102,35 @@ const { id = 'ai-test' } = Astro.props;
     const form = el.querySelector<HTMLFormElement>('.stap-1')!;
     const lijst = el.querySelector<HTMLOListElement>('[data-vragen]')!;
     let staat: { vak: string; plaats: string; naam: string; antwoorden: Antwoord[] } = { vak: '', plaats: '', naam: '', antwoorden: [] };
+    let laatsteScore = -1;
+    const id = el.closest('section')?.id || 'ai-test';
+    const deelStatus = el.querySelector<HTMLElement>('[data-deel-status]')!;
+    const tip = el.querySelector<HTMLElement>('[data-concurrent-tip]')!;
+    const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const deelLink = (score: number) => {
+      const p = new URLSearchParams();
+      p.set(id, ''); p.set('vak', staat.vak); p.set('plaats', staat.plaats); p.set('score', String(score));
+      return `${location.origin}${location.pathname}#${p.toString().replace(`${id}=`, id)}`;
+    };
+    const wisHash = () => { if (new URLSearchParams(location.hash.slice(1)).has(id)) { try { history.replaceState(null, '', location.pathname + location.search); } catch {} } };
+    // Toont de uitslag. Bij een gedeelde link (gedeeld = true) kennen we alleen vak, plaats en score: dan geen persoonlijke verbeterpunten.
+    const toonUitslag = (score: number, gedeeld: boolean, lijstPunten: string[] = []) => {
+      el.querySelector('[data-score]')!.textContent = String(score);
+      el.querySelector<HTMLElement>('[data-meter]')!.style.setProperty('--score', String(score));
+      el.querySelector('[data-oordeel]')!.textContent = oordeelVoor(score);
+      el.querySelector('[data-uitleg]')!.textContent = uitlegVoor(score, staat.vak, staat.plaats);
+      el.querySelector('[data-punten]')!.innerHTML = lijstPunten.slice(0, 3).map((p) => `<li>${esc(p)}</li>`).join('');
+      el.querySelectorAll<HTMLElement>('[data-eigen]').forEach((x) => (x.hidden = gedeeld));
+      el.querySelector<HTMLElement>('[data-zelf]')!.hidden = !gedeeld;
+      const g = el.querySelector<HTMLElement>('[data-gedeeld]')!;
+      g.hidden = !gedeeld;
+      g.textContent = gedeeld ? `Dit is een gedeelde uitslag voor een ${staat.vak} in ${staat.plaats}. Doe de test zelf met je eigen bedrijfsnaam, dan zie je ook waar jouw winst zit.` : '';
+      el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/generative-engine-optimization/ai-vindbaarheidsanalyse/?vak=${encodeURIComponent(staat.vak)}&plaats=${encodeURIComponent(staat.plaats)}#aanvragen`;
+      deelStatus.textContent = '';
+      laatsteScore = gedeeld ? -1 : score;
+      if (!gedeeld) { try { history.replaceState(null, '', deelLink(score).replace(location.origin, '')); } catch {} }
+      toon(3);
+    };
 
     const bouwVragen = () => {
       const vragen = vragenVoor(staat.vak, staat.plaats, staat.naam);
@@ -107,7 +150,7 @@ const { id = 'ai-test' } = Astro.props;
       const nieuw = { vak: String(f.get('vak')).trim().toLowerCase(), plaats: String(f.get('plaats')).trim(), naam: String(f.get('naam')).trim() };
       const zelfde = nieuw.vak === staat.vak && nieuw.plaats === staat.plaats && nieuw.naam === staat.naam;
       staat = { ...nieuw, antwoorden: zelfde ? staat.antwoorden : [] };
-      bewaar(staat); bouwVragen(); toon(2); tel('vragen');
+      bewaar(staat); bouwVragen(); toon(2); tel('vragen'); tip.hidden = true; wisHash();
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
@@ -133,27 +176,36 @@ const { id = 'ai-test' } = Astro.props;
       }
       const waarde = { eerst: 2, genoemd: 1, nee: 0, '': 0 };
       const score = Math.round((staat.antwoorden.reduce((s, a) => s + waarde[a], 0) / (vragen.length * 2)) * 100);
-      const oordeel = score >= 70 ? 'AI noemt je vaak' : score >= 30 ? 'AI kent je, maar niet overal' : 'AI noemt je (nog) niet';
-      const uitleg = score >= 70
-        ? `Bij de meeste vragen over ${staat.vak} in ${staat.plaats} kom je in beeld. Dat hebben weinig bedrijven.`
-        : score >= 30
-          ? `Bij een deel van de vragen kom je in beeld. Bij de rest gaat de klant naar een ander.`
-          : `Wie AI vraagt naar een ${staat.vak} in ${staat.plaats}, krijgt nu andere namen. Dat is goed te verbeteren.`;
       // Verbeterpunten: eerst de soorten vragen waar je niet genoemd werd, dan de vragen waar je niet bovenaan stond
       const gemist = [...new Set(vragen.filter((_, i) => staat.antwoorden[i] === 'nee').map((v) => v.soort))];
       const lijstPunten = gemist.map((s) => punten[s]);
       if (lijstPunten.length < 3 && staat.antwoorden.includes('genoemd')) lijstPunten.push(punten.eerst);
       if (!lijstPunten.length) lijstPunten.push(punten.goed);
-      el.querySelector('[data-score]')!.textContent = String(score);
-      el.querySelector<HTMLElement>('[data-meter]')!.style.setProperty('--score', String(score));
-      el.querySelector('[data-oordeel]')!.textContent = oordeel;
-      el.querySelector('[data-uitleg]')!.textContent = uitleg;
-      el.querySelector('[data-punten]')!.innerHTML = lijstPunten.slice(0, 3).map((p) => `<li>${esc(p)}</li>`).join('');
-      el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/generative-engine-optimization/ai-vindbaarheidsanalyse/?vak=${encodeURIComponent(staat.vak)}&plaats=${encodeURIComponent(staat.plaats)}#aanvragen`;
-      toon(3); tel('score'); el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      toonUitslag(score, false, lijstPunten);
+      tel('score'); el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     el.querySelector('[data-opnieuw]')!.addEventListener('click', () => toon(1));
     el.querySelector('[data-terug]')!.addEventListener('click', () => toon(2));
+    el.querySelector('[data-deel]')!.addEventListener('click', async () => {
+      if (laatsteScore < 0) return;
+      const link = deelLink(laatsteScore);
+      try { await navigator.clipboard.writeText(link); deelStatus.textContent = 'De link naar je uitslag staat op je klembord. Je bedrijfsnaam zit er niet in.'; }
+      catch { window.prompt('Kopieer deze link:', link); }
+    });
+    // Opnieuw beginnen met hetzelfde vak en dezelfde plaats: eerst de naam van een concurrent invullen.
+    const opnieuwMet = (concurrent: boolean) => {
+      const eigenScore = laatsteScore;
+      veld('vak').value = staat.vak; veld('plaats').value = staat.plaats;
+      if (concurrent) veld('naam').value = '';
+      tip.hidden = !concurrent;
+      tip.textContent = concurrent ? `Vul de naam van een concurrent in. Vak en plaats blijven staan${eigenScore >= 0 ? `, zodat je zijn score kunt vergelijken met jouw ${eigenScore}` : ''}.` : '';
+      staat = { ...staat, naam: veld('naam').value.trim(), antwoorden: [] };
+      wisHash(); toon(1);
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      veld('naam').focus({ preventScroll: true });
+    };
+    el.querySelector('[data-concurrent]')!.addEventListener('click', () => opnieuwMet(true));
+    el.querySelector('[data-zelf]')!.addEventListener('click', () => opnieuwMet(false));
 
     // Terugkerende bezoeker: gegevens staan al klaar
     const oud = lees();
@@ -162,6 +214,16 @@ const { id = 'ai-test' } = Astro.props;
       (form.elements.namedItem('vak') as HTMLInputElement).value = staat.vak;
       (form.elements.namedItem('plaats') as HTMLInputElement).value = staat.plaats;
       (form.elements.namedItem('naam') as HTMLInputElement).value = staat.naam;
+    }
+
+    // Gedeelde uitslag: #ai-test&vak=...&plaats=...&score=...
+    const h = new URLSearchParams(location.hash.slice(1));
+    const gedeeldeScore = Number(h.get('score'));
+    if (h.has(id) && h.get('vak') && h.get('plaats') && h.get('score') !== null && Number.isInteger(gedeeldeScore) && gedeeldeScore >= 0 && gedeeldeScore <= 100) {
+      staat = { vak: (h.get('vak') || '').slice(0, 60).toLowerCase(), plaats: (h.get('plaats') || '').slice(0, 60), naam: '', antwoorden: [] };
+      veld('vak').value = staat.vak; veld('plaats').value = staat.plaats;
+      toonUitslag(gedeeldeScore, true);
+      el.scrollIntoView({ block: 'start' });
     }
   });
 </script>
@@ -194,6 +256,9 @@ const { id = 'ai-test' } = Astro.props;
   .meter span { font-size: 2.4rem; font-weight: 900; line-height: 1; color: var(--ink); }
   .meter small { color: var(--muted); font-size: 0.85rem; }
   .punten-kop { font-size: 1.15rem; margin: 6px 0 8px; }
+  .gedeeld { background: var(--tint); border: 1px solid #ffd6b8; border-radius: 10px; padding: 12px 14px; margin: 0 0 14px; }
+  .deel-status { min-height: 1.4em; margin: 0 0 8px; }
+  .concurrent-tip { margin: 0; }
   .punten { padding-left: 1.2em; margin: 0 0 12px; display: grid; gap: 8px; }
   .punten :global(li::marker) { color: var(--orange); font-weight: 800; }
   @media (max-width: 560px) { .uitslag { grid-template-columns: 1fr; justify-items: start; } .meter { width: 112px; } }

@@ -1,0 +1,228 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--googlebot.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/googlebot/';
+const datum = '2026-10-18';
+const definitie = 'Googlebot is het programma waarmee Google webpagina\'s ophaalt en leest, zodat ze in de zoekresultaten kunnen verschijnen.';
+const hoofdstukken = [
+  { id: 'werking', titel: 'Crawlen, renderen, indexeren' },
+  { id: 'soorten', titel: 'Smartphone en desktop' },
+  { id: 'tempo', titel: 'Hoe vaak komt hij langs?' },
+  { id: 'leest', titel: 'Wat hij leest en mist' },
+  { id: 'sturen', titel: 'Hem sturen' },
+  { id: 'echt', titel: 'Is het echt Google?' },
+  { id: 'zien', titel: 'Zien wat hij ziet' },
+  { id: 'fouten', titel: 'Problemen die we vaak zien' },
+  { id: 'voorbeeld', titel: 'Voorbeeld uit Emmen' },
+  { id: 'ondernemer', titel: 'Wat moet je ermee?' },
+];
+const controle = `host 66.249.66.1
+1.66.249.66.in-addr.arpa domain name pointer crawl-66-249-66-1.googlebot.com.
+
+host crawl-66-249-66-1.googlebot.com
+crawl-66-249-66-1.googlebot.com has address 66.249.66.1`;
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Googlebot',
+    alternateName: ['Google-crawler', 'Googlebot Smartphone', 'Googlebot Desktop'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat is Googlebot?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://developers.google.com/search/docs/crawling-indexing/googlebot',
+      'https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers',
+      'https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers',
+      'https://developers.google.com/search/docs/crawling-indexing/verifying-googlebot',
+      'https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics',
+      'https://developers.google.com/search/blog/2023/10/mobile-first-is-here',
+      'https://developers.google.com/search/docs/crawling-indexing/block-indexing',
+      'https://support.google.com/webmasters/answer/9679690?hl=nl',
+    ],
+  },
+];
+---
+<Base
+  title="Googlebot: zo leest Google je website | Drijfveer Media"
+  description="Wat is Googlebot? De crawler van Google haalt je pagina's op, rendert ze en geeft ze door aan de index. Zo werkt hij, zo stuur je hem en zo zie je wat hij ziet."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Googlebot', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO-techniek</p>
+        <h1>Wat is Googlebot? Zo leest Google je website</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Voordat een pagina in Google kan verschijnen, moet Google hem eerst hebben gezien. Dat doet Googlebot: een programma dat dag en nacht links volgt, pagina's ophaalt en ze doorgeeft aan de index. Kan hij je site niet goed lezen, dan bestaat je mooiste dienstpagina voor Google niet.</p>
+      <p>Hieronder lees je hoe hij werkt, wat hij wel en niet ziet, hoe je hem stuurt en hoe je controleert of een bezoeker echt van Google komt. Met de problemen die we bij mkb-sites het vaakst tegenkomen.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={8} />
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="werking">Van link naar zoekresultaat: crawlen, renderen, indexeren</h2></div>
+      <p>Google beschrijft het proces in drie fasen. De crawler doet het eerste deel en levert aan voor de rest.</p>
+      <ol>
+        <li><strong>Crawlen.</strong> Hij pakt een adres uit zijn wachtrij. Eerst kijkt hij in je robots.txt of hij er mag komen. Mag het, dan vraagt hij de pagina op en zoekt hij in de HTML naar links. Nieuwe adressen gaan de wachtrij in. Een <a href="/kennisbank/wat-is/sitemap/">sitemap</a> helpt hem adressen te vinden die hij via links zou missen.</li>
+        <li><strong>Renderen.</strong> Elke pagina met statuscode 200 gaat naar een tweede wachtrij. Daar opent Google hem in een Chromium-browser zonder scherm, die altijd de nieuwste versie draait. Pas dan wordt JavaScript uitgevoerd en ziet Google wat een bezoeker ziet. Dat kan seconden duren, soms langer.</li>
+        <li><strong>Indexeren.</strong> Google analyseert de gerenderde pagina: tekst, titels, afbeeldingen en links. Vindt Google de pagina goed genoeg, dan komt hij in de index. Pas dan kan hij in de zoekresultaten staan.</li>
+      </ol>
+      <p>Crawlen is dus geen garantie voor indexeren. Volgens Google betekent een 200-antwoord alleen dat de inhoud wordt overwogen. Hoe het daarna verdergaat met de volgorde in de resultaten, lees je in de gids <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe werkt SEO</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="telefoon" maat={52} /><h2 id="soorten">Twee hoofdcrawlers: smartphone en desktop</h2></div>
+      <p>De naam staat voor twee crawlers: Googlebot Smartphone en Googlebot Desktop. De ene gedraagt zich als een bezoeker op een telefoon, de andere als een bezoeker achter een computer. Op 31 oktober 2023 meldde Google dat de overstap naar mobile-first indexering klaar was. Voor vrijwel elke site leest Google dus de mobiele versie. De meeste verzoeken komen van de smartphone-crawler, een klein deel van de desktopversie.</p>
+      <p>Wat op je mobiele site ontbreekt, bestaat voor Google niet. Verberg je op de telefoon een tabel of een blok tekst om ruimte te sparen? Dan telt die inhoud niet mee.</p>
+      <p>Je herkent de crawlers aan hun user-agent, de naam die elke bezoeker meestuurt. Google gebruikt er meer dan twee:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Crawler</th><th>Herken je aan</th><th>Naam in robots.txt</th><th>Waarvoor</th></tr></thead>
+          <tbody>
+            <tr><td>Smartphone</td><td>Android … Mobile Safari … compatible; Googlebot/2.1</td><td>Googlebot</td><td>Zoeken, Discover, Nieuws</td></tr>
+            <tr><td>Desktop</td><td>compatible; Googlebot/2.1 … Chrome … Safari</td><td>Googlebot</td><td>Zoeken, in de minderheid</td></tr>
+            <tr><td>Afbeeldingen</td><td>Googlebot-Image/1.0</td><td>Googlebot-Image</td><td>Google Afbeeldingen</td></tr>
+            <tr><td>Video</td><td>Googlebot-Video/1.0</td><td>Googlebot-Video</td><td>Video in de zoekresultaten</td></tr>
+            <tr><td>Google-Extended</td><td>Geen eigen user-agent</td><td>Google-Extended</td><td>Training en antwoorden van Gemini</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De smartphone- en desktopcrawler luisteren naar dezelfde naam in robots.txt. Je kunt er dus niet één apart blokkeren. Google-Extended is een geval apart. Daarmee bepaal je of Google je inhoud mag gebruiken voor Gemini. Volgens Google heeft dat geen invloed op je plek in Google Zoeken. Meer over taalmodellen lees je bij <a href="/kennisbank/wat-is/llm/">wat is een LLM</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="tempo">Hoe vaak komt hij langs?</h2></div>
+      <p>Volgens Google komt de crawler bij de meeste sites gemiddeld niet vaker dan eens in de paar seconden. Hoe vaak precies, hangt af van twee dingen: wat je server aankan en hoeveel vraag er naar je pagina's is. Samen heet dat je <a href="/kennisbank/wat-is/crawlbudget/">crawlbudget</a>. Voor een mkb-site met een paar honderd pagina's is dat zelden een probleem.</p>
+      <p>Een paar technische weetjes uit de documentatie van Google:</p>
+      <ul>
+        <li>Hij crawlt vooral vanaf Amerikaanse IP-adressen. Blokkeert je site bezoekers uit de VS, dan probeert Google het mogelijk vanuit een ander land.</li>
+        <li>Hij gebruikt standaard HTTP/1.1 en soms HTTP/2. Dat laatste spaart serverkracht, maar levert geen hogere positie op.</li>
+        <li>Hij kan overweg met compressie: gzip, deflate en Brotli.</li>
+        <li>Hij let op de ETag- en Last-Modified-headers. Is een pagina niet veranderd, dan hoeft je server hem niet opnieuw te sturen.</li>
+      </ul>
+      <p>Zakt je server in door te veel verzoeken? Dan mag je volgens Google tijdelijk een 500, 503 of 429 terugsturen. Houd dat bij een paar uur tot twee dagen. Duurt het langer, dan kunnen pagina's uit de index vallen. Meer daarover bij de <a href="/kennisbank/wat-is/500-fout/">500-fout</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="leest">Wat hij leest en wat hij mist</h2></div>
+      <p>Bij het crawlen voor Zoeken leest Googlebot de eerste 2 MB van een HTML-bestand, gemeten zonder compressie. Bij een pdf is dat 64 MB. Wat daarna komt, telt niet mee. Elk CSS- en JavaScript-bestand haalt hij apart op, met dezelfde grens per bestand. Voor een normale pagina is 2 MB HTML ruim genoeg. Werk je met een pagebuilder die duizenden regels code in de pagina zet, dan is het goed om het eens te controleren.</p>
+      <p>Wat hij niet of slecht ziet:</p>
+      <ul>
+        <li><strong>Inhoud achter een inlog.</strong> Hij logt nergens in en vult geen formulieren in.</li>
+        <li><strong>Links zonder echt adres.</strong> Hij volgt links met een href. Een knop die alleen via JavaScript ergens heen springt, vindt hij lang niet altijd.</li>
+        <li><strong>Inhoud die pas na een klik verschijnt</strong> en geen eigen adres heeft.</li>
+        <li><strong>Bestanden die je blokkeert.</strong> Blokkeer je je CSS of JavaScript in robots.txt, dan ziet Google een kale of kapotte pagina.</li>
+        <li><strong>Pagina's met een foutcode.</strong> Bij een statuscode anders dan 200 slaat Google het renderen mogelijk over.</li>
+      </ul>
+      <p>Google raadt daarom aan belangrijke inhoud gewoon in de HTML te zetten, bijvoorbeeld met server-side rendering. Dat maakt je site ook sneller. En niet elke bot kan JavaScript uitvoeren.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="sturen">Sturen met robots.txt, noindex of een wachtwoord</h2></div>
+      <p>Crawlen en indexeren zijn twee verschillende dingen. Daarom zijn er ook verschillende knoppen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wat wil je?</th><th>Gebruik</th><th>Let op</th></tr></thead>
+          <tbody>
+            <tr><td>De crawler weghouden van een deel van je site</td><td>Disallow in robots.txt</td><td>De pagina kan toch in Google verschijnen als er links naartoe wijzen</td></tr>
+            <tr><td>Een pagina uit de zoekresultaten houden</td><td>noindex in een meta-tag of header</td><td>De crawler moet de pagina kunnen ophalen om de noindex te zien</td></tr>
+            <tr><td>Iets echt afschermen</td><td>Wachtwoord of inlog</td><td>Het enige wat ook mensen buiten houdt</td></tr>
+            <tr><td>Een kopie naar het origineel laten wijzen</td><td>Canonical-tag</td><td>Een sterke hint, geen bevel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De klassieke fout: een pagina blokkeren in robots.txt én een noindex geven. De crawler mag de pagina dan niet ophalen, ziet de noindex nooit, en de pagina kan gewoon in de resultaten blijven staan. Google zegt het zelf: noindex werkt alleen als de pagina niet geblokkeerd is.</p>
+      <p>Over robots.txt zelf: Google leest maximaal 500 KiB en onthoudt het bestand meestal een dag. Een wijziging werkt dus niet meteen.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="echt">Is het echt Googlebot? Zo controleer je dat</h2></div>
+      <p>Iedereen kan zich in zijn user-agent Googlebot noemen. Scrapers en spambots doen dat graag, omdat bijna niemand Google blokkeert. Google raadt aan een verdachte bezoeker eerst te controleren. Dat kan met twee opdrachten in een terminal. Dit voorbeeld komt uit de documentatie van Google:</p>
+      <pre><code>{controle}</code></pre>
+      <p>Eindigt de naam op googlebot.com, google.com of googleusercontent.com, en wijst die naam weer terug naar hetzelfde IP-adres? Dan is het echt Google. Heb je veel bezoekers te controleren, vergelijk het IP-adres dan met de lijsten die Google publiceert, zoals common-crawlers.json.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="zien">Zo zie je wat Google ziet</h2></div>
+      <ul>
+        <li><strong>URL-inspectie in Search Console.</strong> Plak een adres in de balk bovenaan. Je ziet of de pagina in de index staat, wanneer hij voor het laatst is gecrawld en door welke crawler. Met Live URL testen haal je de pagina nu op. Daarna zie je de HTML na het renderen en een schermafbeelding.</li>
+        <li><strong>Crawlstatistieken.</strong> Via Instellingen › Crawlstatistieken zie je het aantal verzoeken per dag, de gemiddelde reactietijd van je server en de verdeling per Googlebot-type. Google noemt dit rapport bedoeld voor gevorderden: onder de 1.000 pagina's heb je het meestal niet nodig.</li>
+        <li><strong>Pagina-indexering.</strong> Hier staat per reden welke pagina's niet in de index staan. Bijvoorbeeld URL geblokkeerd door robots.txt, URL gemarkeerd als 'noindex' of Gecrawld - momenteel niet geïndexeerd.</li>
+        <li><strong>Je serverlog.</strong> Je hostingpartij bewaart een toegangslog. Daar zie je elk bezoek van de crawler, ook op adressen die Search Console niet laat zien.</li>
+      </ul>
+      <p>Hoe je Search Console instelt, lees je in de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+
+      <Tussenactie />
+      <h2 id="fouten">Problemen die we vaak zien</h2>
+      <ul>
+        <li><strong>De bouwinstelling staat nog aan.</strong> Tijdens de bouw zet je in WordPress bij Instellingen › Lezen een vinkje om zoekmachines te ontmoedigen. Vergeet je dat na de lancering, dan krijgt elke pagina een noindex.</li>
+        <li><strong>Disallow: / in robots.txt.</strong> Eén regel die van de testomgeving is meegekomen, en de crawler mag nergens meer komen.</li>
+        <li><strong>Een firewall die Google tegenhoudt.</strong> Google noemt zelf een verkeerd ingestelde firewall of DoS-beveiliging als oorzaak. Denk aan een beveiligingsplugin die bezoekers uit de VS weert, terwijl de crawler juist vooral daar vandaan komt.</li>
+        <li><strong>Inhoud die alleen met JavaScript verschijnt</strong>, bijvoorbeeld reviews of vacatures uit een externe widget.</li>
+        <li><strong>Een mobiele versie met minder inhoud</strong> dan de desktopversie.</li>
+        <li><strong>Een haperende server.</strong> Bij serverfouten remt de crawler af, en bij aanhoudende fouten vallen pagina's uit de index.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2 id="voorbeeld">Voorbeeld: nieuwe site, nul bezoekers uit Google</h2></div>
+      <p>Een installatiebedrijf in Emmen lanceert in maart een nieuwe website. Zes weken later is het verkeer uit Google bijna nul. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>In Search Console staat bij Pagina-indexering bijna elke pagina onder URL gemarkeerd als 'noindex'. De URL-inspectie van de homepage bevestigt het: in de HTML staat een robots-meta-tag met noindex. Het vinkje uit de bouwfase stond nog aan.</p>
+      <p>Het vinkje gaat uit. De sitemap wordt opnieuw ingediend en voor de tien belangrijkste pagina's vraagt de eigenaar indexering aan. Binnen een paar dagen komt de crawler terug en na een paar weken staan de dienstpagina's weer in de index. De zes weken zijn wel verloren.</p>
+
+      <h2 id="ondernemer">Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Open jouwbedrijf.nl/robots.txt en kijk of er geen Disallow: / staat.</li>
+        <li>Koppel je site aan Search Console en kijk één keer per maand bij Pagina-indexering.</li>
+        <li>Test je belangrijkste dienstpagina met de URL-inspectie. Staat alles op de schermafbeelding?</li>
+        <li>Bekijk je site op je telefoon. Mist daar iets wat op de computer wel staat?</li>
+        <li>Vraag je hostingpartij of hun firewall de crawlers van Google doorlaat, zeker als je een beveiligingsplugin of CDN gebruikt.</li>
+      </ul>
+      <p>In ons proeflab, met meer dan honderd eigen leadsites, testen we technieken eerst zelf voordat we ze bij klanten inzetten. Wil je weten of Google jouw site goed kan lezen? Dat zoeken we uit in een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> (vanaf € 395).</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees wat <a href="/kennisbank/wat-is/duplicate-content/">duplicate content</a> met crawlen doet en hoe een <a href="/kennisbank/wat-is/redirect/">redirect</a> werkt. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is Googlebot precies?', a: 'De verzamelnaam voor de crawlers waarmee Google Zoeken pagina\'s ophaalt: een smartphoneversie en een desktopversie. Ze volgen links, halen pagina\'s op en geven ze door aan de index.' },
+      { v: 'Hoe vaak komt de crawler op mijn site?', a: 'Dat verschilt per site. Volgens Google bij de meeste sites gemiddeld niet vaker dan eens in de paar seconden. In Search Console zie je bij Crawlstatistieken hoeveel verzoeken er per dag zijn.' },
+      { v: 'Kan ik Google vragen sneller te komen?', a: 'Je kunt in Search Console via de URL-inspectie indexering aanvragen en je sitemap indienen. Een garantie is dat niet. Goede interne links en een snelle server helpen op de lange termijn meer.' },
+      { v: 'Voert Google mijn JavaScript uit?', a: 'Ja, met een actuele versie van Chromium. Dat gebeurt wel in een aparte stap die later kan komen. Zet belangrijke tekst en links daarom liefst direct in de HTML.' },
+      { v: 'Moet ik Googlebot blokkeren om mijn teksten uit AI te houden?', a: 'Nee. Dan verdwijn je uit Google Zoeken. Wil je niet dat Google je inhoud gebruikt voor Gemini, dan blokkeer je in robots.txt de naam Google-Extended. Volgens Google heeft dat geen invloed op je posities.' },
+      { v: 'Hoe weet ik of een bezoeker echt Googlebot is?', a: 'Doe een omgekeerde DNS-controle op het IP-adres. De naam moet eindigen op googlebot.com, google.com of googleusercontent.com en terugwijzen naar hetzelfde IP-adres.' },
+    ]}
+  />
+
+  <Actie titel="Kan Google jouw site goed lezen?" tekst={`We kijken gratis of je pagina's goed gecrawld en geïndexeerd worden. ${site.contactpersoon} belt je met wat we vonden.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

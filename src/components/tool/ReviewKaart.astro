@@ -1,0 +1,250 @@
+---
+// Reviewlink- en QR-kaartgenerator. De ondernemer plakt zijn reviewlink uit Google Bedrijfsprofiel en zijn bedrijfsnaam.
+// Uitkomst: een QR-code (SVG, ook te downloaden als PNG) en een printbaar kaartje op A6 of visitekaartformaat (window.print met print-CSS).
+// De QR-code maakt /js/qrcodegen.js (Project Nayuki, MIT-licentie, zie de kop van dat bestand). Die laden we pas als het nodig is.
+// Waar de reviewlink staat: support.google.com/business/answer/16816815 (opgehaald 18-10-2026).
+// Deelbaar via #reviewkaart&link=...&formaat=...&tekst=... De bedrijfsnaam gaat niet mee in de link.
+interface Props { id?: string; kop?: 'h2' | 'h3'; uitleg?: boolean; tekst?: string }
+const { id = 'reviewkaart', kop = 'h3', uitleg = true, tekst = 'Tevreden? Vertel het op Google.' } = Astro.props;
+const Kop = kop;
+---
+<div class="rk card" id={id} data-reviewkaart={id}>
+  <p class="kicker">Gratis hulpmiddel · drie minuten</p>
+  <Kop class="rk-titel">Maak je reviewkaartje met QR-code</Kop>
+  <p class="muted rk-intro">Plak je reviewlink en vul je bedrijfsnaam in. Je krijgt een QR-code en een kaartje om te printen, voor op de balie of bij de factuur. Alles gebeurt in je eigen browser.</p>
+  {uitleg ? (
+    <details class="rk-hulp">
+      <summary>Waar vind ik mijn reviewlink?</summary>
+      <ol>
+        <li>Open je Google Bedrijfsprofiel op een computer. Volgens Google kan dit niet op een telefoon.</li>
+        <li>Klik op "Reviews lezen" en daarna op "Meer reviews krijgen".</li>
+        <li>Klik op "Kopiëren". De link begint meestal met https://g.page/r/.</li>
+      </ol>
+    </details>
+  ) : (
+    <p class="klein muted">Je reviewlink haal je op zoals hierboven staat: "Reviews lezen", dan "Meer reviews krijgen" en "Kopiëren".</p>
+  )}
+
+  <form class="rk-form" data-form novalidate>
+    <div class="veld"><label for={`${id}-link`}>Je reviewlink</label><input id={`${id}-link`} name="link" type="url" inputmode="url" required placeholder="https://g.page/r/..." autocomplete="off" maxlength="300" /></div>
+    <div class="veld-rij">
+      <div class="veld"><label for={`${id}-naam`}>Je bedrijfsnaam</label><input id={`${id}-naam`} name="naam" placeholder="Bijvoorbeeld: Kapsalon Knip" autocomplete="organization" maxlength="50" /></div>
+      <div class="veld"><label for={`${id}-tekst`}>Tekst op het kaartje</label><input id={`${id}-tekst`} name="tekst" value={tekst} maxlength="70" /></div>
+    </div>
+    <fieldset class="rk-formaat">
+      <legend>Formaat</legend>
+      <label><input type="radio" name="formaat" value="a6" checked /> A6 voor de balie (10,5 × 14,8 cm)</label>
+      <label><input type="radio" name="formaat" value="visite" /> Visitekaartje (8,5 × 5,5 cm)</label>
+    </fieldset>
+    <button class="btn" type="submit">Maak mijn kaartje</button>
+  </form>
+
+  <div class="rk-live" aria-live="polite">
+    <p class="rk-melding" data-melding hidden></p>
+    <div class="rk-uitkomst" data-uitkomst hidden>
+      <div class="rk-voorbeeld">
+        <div class="rk-kaart rk-a6" data-kaart>
+          <div class="rk-binnen">
+            <p class="rk-naam" data-k-naam></p>
+            <p class="rk-tekst" data-k-tekst></p>
+            <p class="rk-sterren" aria-hidden="true">★★★★★</p>
+            <div class="rk-qr" data-k-qr></div>
+            <p class="rk-scan">Scan de code met de camera van je telefoon</p>
+            <p class="rk-link" data-k-link></p>
+          </div>
+        </div>
+      </div>
+      <div class="rk-knoppen">
+        <button class="rk-knop" type="button" data-print>Print het kaartje</button>
+        <button class="rk-knop" type="button" data-svg>Download QR (SVG)</button>
+        <button class="rk-knop" type="button" data-png>Download QR (PNG)</button>
+        <button class="rk-knop" type="button" data-deel>Deel deze kaart</button>
+      </div>
+      <p class="klein muted rk-status" data-status></p>
+      <p class="klein muted">Scan de code eerst zelf met je telefoon voordat je een stapel laat drukken. Bij printen: kies "werkelijke grootte" of 100%.</p>
+      <a class="btn" href="/gratis-website-analyse/#scan">Laat je profiel gratis nakijken</a>
+    </div>
+  </div>
+  <noscript><p class="klein">Zonder JavaScript kan deze tool geen QR-code maken. Je kunt de QR-code ook in je Google Bedrijfsprofiel zelf downloaden: klik met de rechtermuisknop op de code en kies "Afbeelding opslaan als".</p></noscript>
+  <p class="klein muted rk-bron">Bron: Google Bedrijfsprofiel Help, <a href="https://support.google.com/business/answer/16816815?hl=nl" rel="noopener">een link of QR-code maken om reviews te vragen</a> (gelezen op 18 oktober 2026). Een beloning in ruil voor een review mag volgens Google niet.</p>
+</div>
+
+<script>
+  type QrCode = { size: number; getModule: (x: number, y: number) => boolean };
+  type QrLib = { QrCode: { encodeText: (t: string, ecc: unknown) => QrCode; Ecc: { MEDIUM: unknown } } };
+  let laden: Promise<QrLib> | null = null;
+  const laadQr = () => (laden ??= new Promise<QrLib>((ok, fout) => {
+    const w = window as unknown as { qrcodegen?: QrLib };
+    if (w.qrcodegen) return ok(w.qrcodegen);
+    const s = document.createElement('script');
+    s.src = '/js/qrcodegen.js';
+    s.onload = () => (w.qrcodegen ? ok(w.qrcodegen) : fout(new Error('qr')));
+    s.onerror = () => { laden = null; fout(new Error('qr')); };
+    document.head.appendChild(s);
+  }));
+  const RAND = 4; // stille zone van vier modules rond de code, zoals de QR-norm vraagt
+  const svgVan = (qr: QrCode, label = '') => {
+    const n = qr.size + RAND * 2;
+    let d = '';
+    for (let y = 0; y < qr.size; y++) for (let x = 0; x < qr.size; x++) if (qr.getModule(x, y)) d += `M${x + RAND} ${y + RAND}h1v1h-1z`;
+    const a11y = label ? ` role="img" aria-label="${label}"` : '';
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges"${a11y}><rect width="${n}" height="${n}" fill="#ffffff"/><path d="${d}" fill="#10283f"/></svg>`;
+  };
+  const googleHost = /(^|\.)g\.page$|^search\.google\.com$|^maps\.app\.goo\.gl$|^(www\.|maps\.)?google\.[a-z.]+$|^g\.co$|^goo\.gl$/i;
+  const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'reviewlink';
+  const bewaar = (blob: Blob, naam: string) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = naam; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000); };
+  const kopieer = async (t: string) => { try { await navigator.clipboard.writeText(t); return true; } catch { window.prompt('Kopieer deze link:', t); return false; } };
+
+  document.querySelectorAll<HTMLElement>('[data-reviewkaart]').forEach((el) => {
+    const id = el.dataset.reviewkaart!;
+    const form = el.querySelector<HTMLFormElement>('[data-form]')!;
+    const melding = el.querySelector<HTMLElement>('[data-melding]')!;
+    const uitkomst = el.querySelector<HTMLElement>('[data-uitkomst]')!;
+    const kaart = el.querySelector<HTMLElement>('[data-kaart]')!;
+    const status = el.querySelector<HTMLElement>('[data-status]')!;
+    const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const formaat = () => (form.querySelector<HTMLInputElement>('input[name="formaat"]:checked')?.value === 'visite' ? 'visite' : 'a6');
+    let qr: QrCode | null = null;
+    let link = '';
+
+    const meld = (t: string, fout = false) => { melding.textContent = t; melding.hidden = !t; melding.classList.toggle('rk-fout', fout); };
+
+    const maak = async (scroll: boolean) => {
+      const ruw = veld('link').value.trim();
+      if (!ruw) { meld('Plak eerst je reviewlink.', true); veld('link').focus(); return; }
+      let u: URL;
+      try { u = new URL(/^[a-z]+:\/\//i.test(ruw) ? ruw : `https://${ruw}`); if (!/^https?:$/.test(u.protocol) || !u.hostname.includes('.')) throw new Error(); }
+      catch { meld('Dit is geen geldige link. Kopieer hem opnieuw uit je Google Bedrijfsprofiel.', true); veld('link').focus(); return; }
+      link = u.href;
+      meld(googleHost.test(u.hostname) ? '' : 'Let op: dit lijkt geen link van Google. Controleer of je hem bij "Meer reviews krijgen" hebt gekopieerd. De QR-code staat er toch, voor het geval je bewust een andere link gebruikt.');
+      let lib: QrLib;
+      try { lib = await laadQr(); } catch { meld('De QR-code kon niet laden. Controleer je internetverbinding en probeer het opnieuw.', true); return; }
+      qr = lib.QrCode.encodeText(link, lib.QrCode.Ecc.MEDIUM);
+      const naam = veld('naam').value.trim();
+      el.querySelector('[data-k-naam]')!.textContent = naam;
+      (el.querySelector('[data-k-naam]') as HTMLElement).hidden = !naam;
+      el.querySelector('[data-k-tekst]')!.textContent = veld('tekst').value.trim();
+      el.querySelector('[data-k-qr]')!.innerHTML = svgVan(qr, 'QR-code naar je Google-reviewlink');
+      el.querySelector('[data-k-link]')!.textContent = link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+      kaart.classList.toggle('rk-visite', formaat() === 'visite');
+      kaart.classList.toggle('rk-a6', formaat() === 'a6');
+      uitkomst.hidden = false; status.textContent = '';
+      try { history.replaceState(null, '', `${location.pathname}${location.search}#${deelHash()}`); } catch {}
+      if (scroll) uitkomst.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+    };
+
+    const deelHash = () => {
+      const p = new URLSearchParams();
+      p.set(id, ''); p.set('link', link || veld('link').value.trim()); p.set('formaat', formaat());
+      const t = veld('tekst').value.trim(); if (t) p.set('tekst', t);
+      return p.toString().replace(`${id}=`, id);
+    };
+
+    form.addEventListener('submit', (e) => { e.preventDefault(); maak(true); });
+    form.addEventListener('input', () => { if (!uitkomst.hidden) maak(false); });
+    form.addEventListener('change', () => { if (!uitkomst.hidden) maak(false); });
+
+    el.querySelector('[data-svg]')!.addEventListener('click', () => {
+      if (!qr) return;
+      bewaar(new Blob([svgVan(qr)], { type: 'image/svg+xml' }), `qr-review-${slug(veld('naam').value)}.svg`);
+      status.textContent = 'De SVG staat in je downloads. Die blijft scherp op elk formaat.';
+    });
+    el.querySelector('[data-png]')!.addEventListener('click', () => {
+      if (!qr) return;
+      const n = qr.size + RAND * 2, schaal = Math.max(8, Math.floor(1200 / n));
+      const c = document.createElement('canvas'); c.width = c.height = n * schaal;
+      const ctx = c.getContext('2d')!;
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, c.width, c.height); ctx.fillStyle = '#10283f';
+      for (let y = 0; y < qr.size; y++) for (let x = 0; x < qr.size; x++) if (qr.getModule(x, y)) ctx.fillRect((x + RAND) * schaal, (y + RAND) * schaal, schaal, schaal);
+      c.toBlob((b) => { if (b) { bewaar(b, `qr-review-${slug(veld('naam').value)}.png`); status.textContent = `De PNG (${c.width} × ${c.height} pixels) staat in je downloads.`; } }, 'image/png');
+    });
+    el.querySelector('[data-deel]')!.addEventListener('click', async () => {
+      const ok = await kopieer(`${location.origin}${location.pathname}#${deelHash()}`);
+      status.textContent = ok ? 'De link naar deze kaart staat op je klembord. Je bedrijfsnaam zit er niet in.' : '';
+    });
+    el.querySelector('[data-print]')!.addEventListener('click', () => {
+      if (!qr) return;
+      const vel = document.createElement('div');
+      vel.className = 'rk-printvel';
+      vel.appendChild(kaart.cloneNode(true));
+      document.body.appendChild(vel);
+      const pagina = document.createElement('style');
+      pagina.textContent = formaat() === 'visite' ? '@page { size: 85mm 55mm; margin: 0; }' : '@page { size: 105mm 148mm; margin: 0; }';
+      document.head.appendChild(pagina);
+      document.documentElement.classList.add('rk-printen');
+      const klaar = () => { vel.remove(); pagina.remove(); document.documentElement.classList.remove('rk-printen'); removeEventListener('afterprint', klaar); };
+      addEventListener('afterprint', klaar);
+      window.print();
+    });
+
+    // Gedeelde kaart: #reviewkaart&link=...&formaat=...&tekst=...
+    const h = new URLSearchParams(location.hash.slice(1));
+    if (h.has(id) && h.get('link')) {
+      veld('link').value = (h.get('link') || '').slice(0, 300);
+      if (h.get('tekst')) veld('tekst').value = (h.get('tekst') || '').slice(0, 70);
+      const r = form.querySelector<HTMLInputElement>(`input[name="formaat"][value="${h.get('formaat') === 'visite' ? 'visite' : 'a6'}"]`); if (r) r.checked = true;
+      maak(false).then(() => el.scrollIntoView({ block: 'start' }));
+    }
+  });
+</script>
+
+<style>
+  .rk { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .rk-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .rk-intro { margin-bottom: 14px; }
+  .rk-hulp { margin: 0 0 18px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 0 16px; }
+  .rk-hulp summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+  .rk-hulp ol { margin: 0 0 14px; padding-left: 1.3em; }
+  .rk-hulp li { margin-bottom: 4px; }
+  .rk-form { display: grid; gap: 16px; }
+  .rk-form .btn { justify-self: start; }
+  .rk-formaat { border: 0; padding: 0; margin: 0; min-width: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .rk-formaat legend { font-weight: 700; font-size: 0.98rem; padding: 0; margin-bottom: 6px; width: 100%; }
+  .rk-formaat label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+  .rk-formaat label:has(input:checked) { border-color: var(--navy); background: var(--chip); }
+  .rk-formaat input { accent-color: var(--navy); width: 18px; height: 18px; margin: 0; }
+  .rk-melding { margin: 16px 0 0; padding: 12px 14px; border-radius: 10px; background: var(--tint); border: 1px solid #ffd6b8; }
+  .rk-melding.rk-fout { background: #fdecec; border-color: #f3b6b6; }
+  .rk-uitkomst { margin-top: 22px; padding-top: 22px; border-top: 1px dashed var(--line); display: grid; gap: 12px; justify-items: start; }
+  .rk-uitkomst p { margin: 0; }
+  .rk-voorbeeld { width: 100%; display: grid; place-items: center; padding: 20px; background: var(--chip); border-radius: 12px; }
+  .rk-knoppen { display: flex; flex-wrap: wrap; gap: 8px; }
+  .rk-knop { font: inherit; font-size: 0.95rem; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 16px; min-height: 44px; cursor: pointer; }
+  .rk-knop:hover { border-color: var(--navy); }
+  .rk-status { min-height: 1.4em; }
+  .rk-bron { margin: 18px 0 0; }
+
+  /* Het kaartje: maten in cqi, zodat het voorbeeld op het scherm en de afdruk op papier dezelfde verhoudingen hebben */
+  .rk-kaart { container-type: inline-size; background: #fff; color: #10283f; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; box-shadow: 0 18px 40px -24px rgb(7 70 99 / 0.6); font-family: var(--font); }
+  .rk-kaart p { margin: 0; }
+  .rk-a6 { width: min(100%, 290px); aspect-ratio: 105 / 148; }
+  .rk-visite { width: min(100%, 340px); aspect-ratio: 85 / 55; }
+  .rk-binnen { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2.6cqi; padding: 8cqi 8cqi 7cqi; border-top: 3cqi solid #ff6600; }
+  .rk-naam { font-size: 7.6cqi; font-weight: 900; line-height: 1.1; overflow-wrap: anywhere; }
+  .rk-tekst { font-size: 5.6cqi; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+  .rk-sterren { font-size: 6cqi; letter-spacing: 1cqi; color: #ff6600; line-height: 1; }
+  .rk-qr { width: 60cqi; }
+  .rk-qr :global(svg) { width: 100%; height: auto; display: block; }
+  .rk-scan { font-size: 4cqi; line-height: 1.25; }
+  .rk-link { font-size: 3.3cqi; color: #4f6377; overflow-wrap: anywhere; line-height: 1.3; }
+  .rk-visite .rk-binnen { display: grid; grid-template-columns: 36cqi minmax(0, 1fr); align-content: center; justify-items: start; text-align: left; gap: 1.6cqi 5cqi; padding: 6cqi 6cqi 6cqi 7cqi; border-top: 0; border-left: 2.4cqi solid #ff6600; }
+  .rk-visite .rk-qr { width: 36cqi; grid-column: 1; grid-row: 1 / span 5; }
+  .rk-visite .rk-naam, .rk-visite .rk-tekst, .rk-visite .rk-sterren, .rk-visite .rk-scan, .rk-visite .rk-link { grid-column: 2; }
+  .rk-visite .rk-naam { font-size: 5.6cqi; }
+  .rk-visite .rk-tekst { font-size: 4.2cqi; }
+  .rk-visite .rk-sterren { font-size: 4cqi; }
+  .rk-visite .rk-scan { font-size: 3cqi; }
+  .rk-visite .rk-link { font-size: 2.5cqi; }
+
+  /* Printen: alleen het gekloonde kaartje, op ware grootte. Het paginaformaat zet het script vlak voor het printen. */
+  :global(.rk-printvel) { display: none; }
+  @media print {
+    :global(html.rk-printen body > *:not(.rk-printvel)) { display: none !important; }
+    :global(html.rk-printen body) { margin: 0; padding: 0; background: #fff; }
+    :global(html.rk-printen .rk-printvel) { display: block; }
+    :global(.rk-printvel .rk-kaart) { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    :global(.rk-printvel .rk-a6) { width: 105mm !important; height: 148mm !important; }
+    :global(.rk-printvel .rk-visite) { width: 85mm !important; height: 55mm !important; }
+  }
+  @media (max-width: 560px) { .rk-uitkomst > .btn { width: 100%; } }
+</style>

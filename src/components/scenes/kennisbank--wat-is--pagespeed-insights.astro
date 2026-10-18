@@ -1,0 +1,78 @@
+---
+// Scène voor /kennisbank/wat-is/pagespeed-insights/: een rapport met links een scoremeter (92, groen) en schakelaars
+// voor mobiel en desktop, rechts drie meetwaarden van echte bezoekers (LCP, INP, CLS) met balkjes en een groen vinkje.
+// Als hij leeft: de balkjes lopen vol, de schakelaar wisselt rustig tussen mobiel en desktop en een stip loopt langs de meter.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const r = 62;
+const omtrek = 2 * Math.PI * r;
+const metingen = [
+  { y: 92, naam: 'LCP', waarde: '2,1 s', vul: 0.62 },
+  { y: 138, naam: 'INP', waarde: '140 ms', vul: 0.48 },
+  { y: 184, naam: 'CLS', waarde: '0,04', vul: 0.3 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een snelheidsrapport met een scoremeter op 92 en schakelaars voor mobiel en desktop. Ernaast drie meetwaarden van echte bezoekers, LCP, INP en CLS, die alle drie goed zijn.'}>
+  <!-- kaart -->
+  <rect x="16" y="20" width="448" height="230" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+
+  <!-- schakelaar mobiel / desktop -->
+  <rect x="44" y="36" width="160" height="28" rx="14" fill="#e8eef4" />
+  <rect x="47" y="39" width="77" height="22" rx="11" fill="#fff" stroke="#d9e1ea" />
+  <text x="85.5" y="54" font-size="11" font-weight="800" text-anchor="middle">Mobiel</text>
+  <text x="165" y="54" font-size="11" font-weight="800" text-anchor="middle" class="zacht">Desktop</text>
+
+  <!-- scoremeter -->
+  <circle cx="124" cy="156" r={r} fill="none" stroke="#e8eef4" stroke-width="12" />
+  <circle cx="124" cy="156" r={r} fill="none" stroke="#1f8a5b" stroke-width="12" stroke-linecap="round" stroke-dasharray={`${omtrek * 0.92} ${omtrek}`} transform="rotate(-90 124 156)" />
+  <text x="124" y="168" font-size="36" font-weight="800" text-anchor="middle" style="fill:#1f8a5b">92</text>
+  <text x="124" y="236" font-size="10.5" font-weight="800" text-anchor="middle" class="zacht">Labtest</text>
+
+  <!-- velddata -->
+  <text x="240" y="58" font-size="12" font-weight="800">Echte bezoekers</text>
+  <text x="440" y="58" font-size="10.5" text-anchor="end" class="zacht">28 dagen</text>
+  {metingen.map((m) => (
+    <g>
+      <text x="240" y={m.y} font-size="11" font-weight="800">{m.naam}</text>
+      <text x="440" y={m.y} font-size="11" font-weight="800" text-anchor="end">{m.waarde}</text>
+      <rect x="240" y={m.y + 8} width="200" height="10" rx="5" fill="#e8eef4" />
+    </g>
+  ))}
+  <g transform="translate(240 218)">
+    <circle cx="8" cy="0" r="8" fill="#1f8a5b" />
+    <path d="M4 0l2.8 2.8 5-5.4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="24" y="4" font-size="11" font-weight="800" style="fill:#1f8a5b">Geslaagd</text>
+  </g>
+
+  {!mini && (
+    <g>
+      {metingen.map((m, i) => (
+        <rect class="psi-balk" style={`--i:${i}`} x="240" y={m.y + 8} width={200 * m.vul} height="10" rx="5" fill="#1f8a5b" />
+      ))}
+      <rect class="psi-knop" x="47" y="39" width="77" height="22" rx="11" fill="none" stroke="#ff6600" stroke-width="2" />
+      <g class="psi-ronde">
+        <circle cx="124" cy="94" r="5" fill="#ff6600" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .psi-balk { transform-box: fill-box; transform-origin: left center; }
+  .psi-ronde { transform-origin: 124px 156px; }
+  :global(.teken-js) .psi-balk { transform: scaleX(0); }
+  :global(.teken-js) .psi-knop, :global(.teken-js) .psi-ronde { opacity: 0; }
+  .in-beeld .psi-balk { animation: kennisbank-wat-is-pagespeed-insights-balk 1s cubic-bezier(.3,.7,.3,1) calc(0.5s + var(--i) * 0.3s) forwards; }
+  .in-beeld .psi-knop { animation: kennisbank-wat-is-pagespeed-insights-knop 6s ease-in-out 1.2s infinite; }
+  .in-beeld .psi-ronde { animation: kennisbank-wat-is-pagespeed-insights-ronde 7s linear 0.4s infinite; }
+  @keyframes kennisbank-wat-is-pagespeed-insights-balk { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes kennisbank-wat-is-pagespeed-insights-knop {
+    0%, 40% { opacity: 1; transform: translateX(0); }
+    50%, 90% { opacity: 1; transform: translateX(77px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes kennisbank-wat-is-pagespeed-insights-ronde { 0% { opacity: 1; transform: rotate(0deg); } 92% { opacity: 1; transform: rotate(331deg); } 100% { opacity: 0; transform: rotate(331deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .psi-balk, .in-beeld .psi-knop, .in-beeld .psi-ronde { animation: none; }
+    :global(.teken-js) .psi-balk { transform: none; }
+  }
+</style>

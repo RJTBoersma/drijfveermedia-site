@@ -1,0 +1,438 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wat-kost-google-ads.astro';
+import { site, persoon } from '../../../../data/site';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/wat-kost-google-ads/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'kort', titel: 'Het korte antwoord' },
+  { id: 'opbouw', titel: 'Waar je rekening uit bestaat' },
+  { id: 'veiling', titel: 'Hoe de veiling je prijs bepaalt' },
+  { id: 'klikprijzen', titel: 'Klikprijzen per beroep' },
+  { id: 'zoekwoordplanner', titel: 'Je eigen klikprijs opzoeken' },
+  { id: 'rekenhulp', titel: 'Rekenhulp' },
+  { id: 'budget', titel: 'Hoeveel budget heb je nodig?' },
+  { id: 'campagnetypes', titel: 'Performance Max en andere types' },
+  { id: 'beheer', titel: 'Beheerkosten' },
+  { id: 'facturering', titel: 'Facturering en ongeldige klikken' },
+  { id: 'rendabel', titel: 'CPA, ROAS en rendement' },
+  { id: 'verlagen', titel: 'Kosten verlagen' },
+  { id: 'fouten', titel: 'Rekenfouten die geld kosten' },
+  { id: 'laten-doen', titel: 'Zelf doen of laten doen?' },
+];
+// Gemiddelde klikprijzen en zoekvolumes in Nederland, opgevraagd in SE Ranking op 18 oktober 2026.
+// Dezelfde cijfers als op /online-adverteren/google-ads-campagne-opzetten/.
+const klikprijzen: [string, number, string][] = [
+  ['hypotheekadviseur', 8.15, '9.900'],
+  ['dakdekker', 4.81, '9.900'],
+  ['boekhouder', 3.8, '8.000'],
+  ['badkamer renovatie', 3.41, '4.400'],
+  ['verhuisbedrijf', 3.35, '5.400'],
+  ['elektricien', 3.29, '10.800'],
+  ['kozijnen', 2.57, '14.800'],
+  ['loodgieter', 2.25, '18.100'],
+  ['schilder', 1.73, '10.800'],
+  ['rijschool', 1.42, '14.800'],
+  ['hovenier', 0.88, '10.800'],
+  ['glazenwasser', 0.56, '4.400'],
+];
+const euro = (n: number, d = 2) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: d, maximumFractionDigits: d });
+// Standaardwaarden van de rekenhulp. De uitkomst staat ook in de HTML, zodat hij zonder JavaScript klopt.
+const start = { budget: 600, cpc: 2.25, conversie: 5, winkans: 33, waarde: 900 };
+const s = (() => {
+  const klikken = start.budget / start.cpc;
+  const aanvragen = klikken * (start.conversie / 100);
+  const klanten = aanvragen * (start.winkans / 100);
+  return {
+    dag: start.budget / 30.4,
+    klikken,
+    aanvragen,
+    cpa: start.budget / aanvragen,
+    klanten,
+    perKlant: start.budget / klanten,
+    terug: (klanten * start.waarde) / start.budget,
+    maxCpc: start.waarde * (start.conversie / 100) * (start.winkans / 100),
+  };
+})();
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google Ads kosten in 2026: echte klikprijzen en een rekenhulp',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google Ads',
+  citation: [
+    'https://support.google.com/google-ads/answer/2375454?hl=nl',
+    'https://support.google.com/google-ads/answer/6297?hl=nl',
+    'https://support.google.com/google-ads/answer/1752122?hl=nl',
+    'https://support.google.com/google-ads/answer/6167118?hl=nl',
+    'https://support.google.com/google-ads/answer/3022575?hl=nl',
+    'https://support.google.com/google-ads/answer/10724817?hl=nl',
+    'https://support.google.com/google-ads/answer/2375437?hl=nl',
+    'https://support.google.com/google-ads/answer/42995?hl=nl',
+    'https://localiq.com/blog/search-advertising-benchmarks/',
+  ],
+}];
+---
+<Base
+  title="Google Ads kosten 2026: klikprijzen en rekenhulp"
+  description="Google Ads kosten in 2026: echte klikprijzen per beroep, hoe de veiling je prijs bepaalt, beheerkosten en een rekenhulp voor je eigen budget."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat kost Google Ads?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Online adverteren" titel="Google Ads kosten in 2026: echte klikprijzen en een rekenhulp" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Google Ads kosten bestaan uit drie delen: wat je Google per klik betaalt, wat het beheer kost en de tijd die je er zelf in steekt. Hier zie je echte klikprijzen per beroep, hoe Google je prijs bepaalt en wat een nieuwe klant je via advertenties kost. Met een rekenhulp voor je eigen cijfers.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Google Ads kent geen minimumbudget. Bij een zoekcampagne betaal je alleen als iemand klikt.</li>
+            <li>Voor twaalf veelgezochte beroepen kost een klik in Nederland gemiddeld van € 0,56 (glazenwasser) tot € 8,15 (hypotheekadviseur), volgens SE Ranking.</li>
+            <li>Je betaalt per klik meestal minder dan je maximale bod. Meer kan alleen bij automatisch bieden of bodaanpassingen.</li>
+            <li>Per maand rekent Google nooit meer dan 30,4 keer je dagbudget.</li>
+            <li>Het getal dat telt, is niet de klikprijs. Het is wat een nieuwe klant je kost, vergeleken met wat die klant oplevert.</li>
+          </ul>
+        </div>
+
+        <h2 id="kort">Wat kost Google Ads? Het korte antwoord</h2>
+        <p>Je bepaalt het zelf. Google rekent geen opstartkosten en heeft geen minimumbudget. Je stelt per campagne een dagbudget in, en over een maand blijft Google daaronder. Bij een zoekcampagne betaal je per klik, niet per vertoning.</p>
+        <p>Toch is "je bepaalt het zelf" geen bruikbaar antwoord. Met € 5 per dag op een zoekwoord van € 4 per klik krijg je een paar bezoekers per week. Voor de meeste mkb'ers met een lokale dienst ligt een werkbaar advertentiebudget tussen een paar honderd en een paar duizend euro per maand. Waar jij uitkomt, hangt af van drie getallen: de klikprijs in je vak, hoeveel bezoekers iets aanvragen en hoeveel aanvragen je wilt. Verderop reken je dat uit.</p>
+
+        <h2 id="opbouw">Waar je rekening uit bestaat</h2>
+        <p>Veel ondernemers rekenen alleen met wat Google afschrijft. Dat is maar een deel van het verhaal. Dit zijn alle posten die bij een campagne horen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kostenpost</th><th>Aan wie</th><th>Eenmalig of maandelijks</th><th>Wat je ervoor krijgt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Advertentiebudget</b></td><td>Google</td><td>Maandelijks</td><td>De klikken zelf. Dit stel je in met je dagbudget.</td></tr>
+              <tr><td><b>Beheerkosten</b></td><td>Bureau of freelancer</td><td>Maandelijks</td><td>Zoektermen nakijken, biedingen bijsturen, advertenties testen</td></tr>
+              <tr><td><b>Landingspagina</b></td><td>Webbouwer</td><td>Eenmalig</td><td>Een pagina per dienst die van een klik een aanvraag maakt</td></tr>
+              <tr><td><b>Conversiemeting</b></td><td>Specialist of jijzelf</td><td>Eenmalig</td><td>Weten welke klik een telefoontje of formulier opleverde</td></tr>
+              <tr><td><b>Eigen tijd</b></td><td>Jijzelf</td><td>Doorlopend</td><td>Aanvragen snel opvolgen, of zelf beheren</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De Zoekwoordplanner en Google Ads zelf zijn gratis. Een <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina laten maken</a> kost bij ons vanaf € 250, en <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a> inrichten vanaf € 395. Sla die twee niet over. Zonder meting is adverteren gokken, en wie naar zijn homepage stuurt, betaalt voor bezoekers die meteen weer weg zijn.</p>
+
+        <h2 id="veiling">Hoe de veiling je klikprijs bepaalt</h2>
+        <p>Bij elke zoekopdracht houdt Google een veiling. Die bepaalt of je advertentie verschijnt, op welke plek, en wat je per klik betaalt. Google noemt de uitkomst je advertentierangschikking. Daarin tellen volgens Google mee: je maximale bod, de kwaliteit van je advertentie en <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina</a>, de drempels om te mogen verschijnen, de concurrentie, de context van de zoeker (plaats, apparaat, tijdstip) en het verwachte effect van extra's zoals sitelinks.</p>
+
+        <h3>Je betaalt net genoeg om de volgende te verslaan</h3>
+        <p>Je werkelijke klikprijs ligt meestal onder je maximale bod. Je betaalt wat nodig is om de drempel te halen en de adverteerder direct onder je te verslaan. Google geeft er een voorbeeld van, hier in eigen woorden.</p>
+        <p>Vijf adverteerders strijden om een zoekopdracht. Hun rangschikking is 80, 50, 30, 10 en 5. Om boven de zoekresultaten te komen, is minstens 40 nodig. Voor een plek onder de zoekresultaten is 8 genoeg.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Adverteerder</th><th>Rangschikking</th><th>Waar de advertentie staat</th><th>Betaalt net genoeg om</th></tr></thead>
+            <tbody>
+              <tr><td>A</td><td>80</td><td>Boven de resultaten, eerste plek</td><td>B te verslaan (50)</td></tr>
+              <tr><td>B</td><td>50</td><td>Boven de resultaten, tweede plek</td><td>de drempel van 40 te halen</td></tr>
+              <tr><td>C</td><td>30</td><td>Onder de resultaten, eerste plek</td><td>D te verslaan (10)</td></tr>
+              <tr><td>D</td><td>10</td><td>Onder de resultaten, tweede plek</td><td>de drempel van 8 te halen</td></tr>
+              <tr><td>E</td><td>5</td><td>Niet zichtbaar</td><td>niets, want hij haalt geen drempel</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Volgens Google liggen de drempels boven de zoekresultaten hoger. Een klik bovenaan is daarom vaak duurder dan onderaan, ook zonder concurrent vlak achter je. Daar staat tegenover dat er bovenaan veel vaker geklikt wordt. Meer betalen dan je maximale bod gebeurt volgens Google alleen bij bodaanpassingen of automatisch bieden.</p>
+
+        <h3>Waarom de bekende formule niet meer klopt</h3>
+        <p>Op veel sites lees je nog dat je positie gelijk is aan je bod keer je kwaliteitsscore. Dat is een vereenvoudiging die Google zelf niet meer gebruikt. Volgens Google is de kwaliteitsscore van 1 tot 10 een diagnosehulpmiddel en geen factor in de veiling. Wat wel meetelt, zijn de onderdelen erachter: de verwachte klikfrequentie, de advertentierelevantie en de ervaring op je landingspagina. Google vergelijkt die met andere adverteerders op dezelfde zoekopdracht in de afgelopen 90 dagen.</p>
+        <p>In de praktijk verandert de les niet. Een advertentie die precies past bij de zoekopdracht en een pagina die de vraag beantwoordt, winnen vaker en goedkoper. Gebruik de kwaliteitsscore als thermometer, niet als doel.</p>
+
+        <h2 id="klikprijzen">Google Ads kosten per beroep: wat een klik kost</h2>
+        <p>Dit zijn de gemiddelde klikprijzen in Nederland voor twaalf veelgezochte beroepen. Ze komen uit de zoekwoorddatabase van SE Ranking, opgevraagd op 18 oktober 2026. In de laatste kolom staat wat tien aanvragen per maand je aan klikken kosten, als 5 procent van je bezoekers iets aanvraagt. Dan heb je 200 klikken nodig.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekwoord</th><th>Gemiddelde klikprijs</th><th>Zoekvolume per maand</th><th>10 aanvragen kosten ongeveer</th></tr></thead>
+            <tbody>
+              {klikprijzen.map(([k, cpc, vol]) => <tr><td>{k}</td><td>{euro(cpc)}</td><td>{vol}</td><td>{euro(cpc * 200, 0)} per maand</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bron klikprijzen en zoekvolumes: SE Ranking, zoekwoorddatabase Nederland, oktober 2026. Laatste kolom: eigen berekening, 200 klikken keer de gemiddelde klikprijs.</p>
+        <p>Een hypotheekadviseur betaalt per klik bijna vijftien keer zoveel als een glazenwasser. Dat zegt niets over wat loont. Een hypotheek levert de adviseur veel meer op dan één keer de ramen wassen. De vraag is altijd of de klikprijs past bij wat een klant je oplevert.</p>
+        <p>Het zijn landelijke gemiddelden. Op "dakdekker assen" strijden vaak minder adverteerders dan op "dakdekker". En een klik op dat algemene woord komt vaker van iemand die rondkijkt dan een klik op "lekkage dak spoed".</p>
+        <div class="kader">
+          <p class="kader-titel">Ter vergelijking: Amerikaanse cijfers</p>
+          <p>Het Amerikaanse LocaliQ komt in zijn cijfers over zoekcampagnes (juni 2026) uit op een gemiddelde klikprijs van $ 5,42, een conversiepercentage van 8,18% en $ 66,69 per lead. Het conversiepercentage is een bruikbaar ijkpunt zolang je geen eigen cijfers hebt.</p>
+        </div>
+
+        <h2 id="zoekwoordplanner">Je eigen klikprijs opzoeken in de Zoekwoordplanner</h2>
+        <p>Staat jouw vak niet in de tabel? Zoek het op in de gratis Zoekwoordplanner. Google vraagt wel eerst je factureringsgegevens. Een campagne hoeft nog niet te lopen.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={44} /><h3>1. Open de Zoekwoordplanner</h3></div>
+        <p>Ga in Google Ads naar het menu <b>Tools</b> en kies <b>Zoekwoordplanner</b>. Je krijgt twee keuzes: <b>Nieuwe zoekwoorden ontdekken</b> als je ideeën zoekt, of <b>Zoekvolume en prognoses ophalen</b> als je al een lijst hebt.</p>
+        <div class="stap-kop"><Tekening naam="pin" maat={44} /><h3>2. Stel je gebied in</h3></div>
+        <p>Kies bovenaan je locatie, bijvoorbeeld Drenthe, en de taal Nederlands. De bedragen gelden voor dat gebied.</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={44} /><h3>3. Lees de twee bodkolommen</h3></div>
+        <p>Per zoekwoord zie je twee bedragen. <b>Bod voor bovenaan de pagina (laag bereik)</b> is volgens Google ongeveer wat de goedkoopste 20 procent van de adverteerders bood om bovenaan te komen. <b>Bod voor bovenaan de pagina (hoog bereik)</b> ligt rond het tachtigste percentiel. Beide zijn gebaseerd op de afgelopen 30 dagen. Reken voor je begroting met het hoge bedrag. Valt het mee, dan heb je geld over.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={44} /><h3>4. Bekijk de prognose</h3></div>
+        <p>Zet de zoekwoorden die passen in een plan en open <b>Prognose</b>. Google schat dan per dag de klikken, kosten en gemiddelde CPC bij een bod dat je zelf aanpast. Een schatting op basis van het verleden, geen belofte.</p>
+
+        <Tussenactie />
+        <h2 id="rekenhulp">Rekenhulp: wat levert jouw budget op?</h2>
+        <p>Vul je eigen getallen in, of kies een beroep om de klikprijs over te nemen. Weet je niet hoeveel bezoekers iets aanvragen? Begin met 5 procent.</p>
+        <div class="kader reken-ads">
+          <form class="reken-velden" data-ads-reken>
+            <label class="reken-breed">Beroep (vult de klikprijs in)
+              <select name="beroep">
+                <option value="">Kies een beroep</option>
+                {klikprijzen.map(([k, cpc]) => <option value={cpc}>{k} ({euro(cpc)})</option>)}
+              </select>
+            </label>
+            <label>Advertentiebudget per maand (€)<input type="number" name="budget" min="1" step="10" value={start.budget} inputmode="decimal" /></label>
+            <label>Klikprijs (€)<input type="number" name="cpc" min="0.01" step="0.01" value={start.cpc} inputmode="decimal" /></label>
+            <label>Bezoekers dat iets aanvraagt (%)<input type="number" name="conversie" min="0.1" max="100" step="0.1" value={start.conversie} inputmode="decimal" /></label>
+            <label>Aanvragen die klant worden (%)<input type="number" name="winkans" min="1" max="100" step="1" value={start.winkans} inputmode="decimal" /></label>
+            <label class="reken-breed">Wat een klant je oplevert, aan marge (€)<input type="number" name="waarde" min="0" step="10" value={start.waarde} inputmode="decimal" /></label>
+          </form>
+          <dl class="reken-uit" aria-live="polite">
+            <div><dt>Dagbudget</dt><dd data-uit="dag">{euro(s.dag)}</dd></div>
+            <div><dt>Klikken per maand</dt><dd data-uit="klikken">{Math.round(s.klikken)}</dd></div>
+            <div><dt>Aanvragen (conversies)</dt><dd data-uit="aanvragen">{s.aanvragen.toLocaleString('nl-NL', { maximumFractionDigits: 1 })}</dd></div>
+            <div><dt>Kosten per aanvraag (CPA)</dt><dd data-uit="cpa">{euro(s.cpa)}</dd></div>
+            <div><dt>Nieuwe klanten</dt><dd data-uit="klanten">{s.klanten.toLocaleString('nl-NL', { maximumFractionDigits: 1 })}</dd></div>
+            <div><dt>Kosten per klant</dt><dd data-uit="perKlant">{euro(s.perKlant)}</dd></div>
+            <div><dt>Marge terug per € 1 budget</dt><dd data-uit="terug">{euro(s.terug)}</dd></div>
+            <div><dt>Maximale klikprijs om quitte te spelen</dt><dd data-uit="maxCpc">{euro(s.maxCpc)}</dd></div>
+          </dl>
+          <p class="klein muted reken-noot">Alleen advertentiebudget, zonder beheerkosten. Standaard ingevuld: een verzonnen loodgieter met de gemiddelde klikprijs uit de tabel.</p>
+        </div>
+        <p>Zo rekent de rekenhulp, zodat je het ook op een bierviltje kunt doen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Uitkomst</th><th>Formule</th></tr></thead>
+            <tbody>
+              <tr><td>Dagbudget</td><td>Maandbudget gedeeld door 30,4</td></tr>
+              <tr><td>Klikken</td><td>Budget gedeeld door de klikprijs</td></tr>
+              <tr><td>Aanvragen</td><td>Klikken keer het conversiepercentage</td></tr>
+              <tr><td>Kosten per aanvraag (CPA)</td><td>Budget gedeeld door het aantal aanvragen</td></tr>
+              <tr><td>Kosten per klant</td><td>Budget gedeeld door het aantal nieuwe klanten</td></tr>
+              <tr><td>Marge terug per euro</td><td>Marge van de nieuwe klanten gedeeld door het budget</td></tr>
+              <tr><td>Maximale klikprijs</td><td>Marge per klant keer conversiepercentage keer winkans</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die laatste regel is de belangrijkste. Hij vertelt je hoeveel een klik maximaal mag kosten voordat je verlies draait. Ligt de klikprijs in jouw vak daarboven, dan heb je drie knoppen: een betere landingspagina, scherpere zoekwoorden of een ander kanaal.</p>
+
+        <h2 id="budget">Hoeveel budget heb je nodig?</h2>
+        <p>Begin niet bij een bedrag dat goed voelt. Begin bij wat je wilt bereiken en reken terug:</p>
+        <ol>
+          <li><b>Hoeveel aanvragen wil je per maand?</b> Bijvoorbeeld tien.</li>
+          <li><b>Hoeveel klikken heb je daarvoor nodig?</b> Bij 5 procent conversie: tien gedeeld door 0,05 is 200 klikken.</li>
+          <li><b>Wat kost dat?</b> 200 keer de klikprijs in jouw vak. Kijk in de tabel hierboven of in de Zoekwoordplanner.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Drie verzonnen voorbeelden met echte klikprijzen</p>
+          <ul>
+            <li><b>Een glazenwasser in Assen</b> wil 15 nieuwe vaste klanten. Bij 5 procent conversie heeft hij 300 klikken nodig. Bij € 0,56 per klik is dat € 168 per maand.</li>
+            <li><b>Een loodgieter in Groningen</b> wil 20 aanvragen. Dat zijn 400 klikken van € 2,25: € 900 per maand, een dagbudget van ongeveer € 30.</li>
+            <li><b>Een hypotheekadviseur in Zwolle</b> wil 8 gesprekken. Bij 4 procent conversie zijn dat 200 klikken van € 8,15: € 1.630 per maand.</li>
+          </ul>
+        </div>
+        <h3>Hoe het dagbudget werkt</h3>
+        <p>Google werkt met een gemiddeld dagbudget. Op een drukke dag mag een campagne tot twee keer dat bedrag uitgeven, op een rustige dag minder. Over een factureringsperiode betaal je volgens Google nooit meer dan 30,4 keer je dagbudget. Bij € 20 per dag is dat dus maximaal € 608 per maand. </p>
+        <p>Google laat in je budgetinstellingen ook een <b>aanbevolen budget</b> zien, meestal op basis van de afgelopen 15 dagen. Verhoog pas als je huidige klikken aanvragen opleveren.</p>
+        <h3>De ondergrens</h3>
+        <p>Een budget is te laag als je na een maand nog niets weet. Onze vuistregel: genoeg voor minstens tien klikken per dag. Lukt dat niet, maak je campagne dan kleiner in plaats van dunner: minder zoekwoorden, een kleiner gebied of alleen de uren dat je opneemt.</p>
+
+        <h2 id="campagnetypes">Performance Max en andere campagnetypes: hoe je betaalt</h2>
+        <p>Niet elke campagne rekent op dezelfde manier af. Dit is het verschil tussen de types die je het vaakst tegenkomt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Campagnetype</th><th>Waar je advertentie staat</th><th>Waar je voor betaalt</th><th>Hoeveel zicht je hebt op de kosten</th></tr></thead>
+            <tbody>
+              <tr><td><b>Zoeken</b></td><td>In de zoekresultaten van Google</td><td>Per klik</td><td>Veel: per zoekwoord en per zoekterm</td></tr>
+              <tr><td><b>Shopping</b></td><td>Productblokken met foto en prijs</td><td>Per klik</td><td>Per product</td></tr>
+              <tr><td><b>Performance Max</b></td><td>Zoeken, YouTube, Display, Discover, Gmail en Maps</td><td>Je budget, met een optioneel doel voor CPA of ROAS</td><td>Minder: Google verdeelt het budget zelf</td></tr>
+              <tr><td><b>Display en video</b></td><td>Op websites en in video's</td><td>Vaak per duizend vertoningen of per weergave</td><td>Per plaatsing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Performance Max verdient een eigen alinea, omdat het heel anders werkt. Je levert teksten, afbeeldingen en een doel aan, en Google bepaalt waar je advertentie verschijnt. Het budget gaat volgens Google automatisch naar de kanalen en plaatsingen die het best presteren. Dat kan goed werken met veel conversies, zoals bij een webshop. Voor een dienstverlener met een klein budget betekent het vaak dat een deel van je geld naar banners en video gaat, terwijl je klanten juist zoeken.</p>
+        <p>Draai je Performance Max naast een zoekcampagne, weet dan dit. Volgens Google krijgt een zoekcampagne met een exact zoekwoord voorrang als een zoekopdracht precies daarop lijkt. Maar is je zoekcampagne beperkt door het budget, dan kan Performance Max af en toe toch op die zoekopdrachten verschijnen. Gebruik merkuitsluitingen en uitgesloten zoekwoorden om overlap te voorkomen. Onze les: begin met een zoekcampagne. Pas als die stabiel aanvragen oplevert, is Performance Max een test waard.</p>
+
+        <h2 id="beheer">Beheerkosten: wat een bureau of freelancer rekent</h2>
+        <p>Laat je je campagnes beheren, dan betaal je bovenop je advertentiebudget een vergoeding. Er zijn vier manieren om dat af te rekenen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Model</th><th>Hoe het werkt</th><th>Voordeel</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td><b>Vast bedrag per maand</b></td><td>Elke maand hetzelfde bedrag</td><td>Voorspelbaar</td><td>Vraag welk werk erin zit, en hoe vaak er gekeken wordt</td></tr>
+              <tr><td><b>Percentage van je budget</b></td><td>Een deel van wat je aan Google uitgeeft</td><td>Groeit mee als je opschaalt</td><td>Het bureau verdient meer als jij meer uitgeeft, ook als dat niets oplevert</td></tr>
+              <tr><td><b>Opzetkosten plus beheer</b></td><td>Eenmalig voor de opbouw, daarna maandelijks</td><td>Duidelijke start</td><td>Kijk of je ook betaalt voor herbouwen als het misgaat</td></tr>
+              <tr><td><b>Uurtarief</b></td><td>Je betaalt de gewerkte uren</td><td>Goed voor een check of advies</td><td>Lastig te begroten voor doorlopend werk</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Twee pagina's die nu bovenaan Google staan voor deze vraag, noemen € 500 tot ruim € 2.000 per maand voor beheer, en een start vanaf € 1.500. Bij een advertentiebudget van € 600 kan het beheer dus duurder zijn dan de klikken. Dat is alleen terecht als het werk je kosten per klant omlaag brengt.</p>
+        <p>Bij Drijfveer Media hangt de prijs van <a href="/online-adverteren/google-ads-bureau/">Google Ads-beheer</a> af van je advertentiebudget. Dat hoor je na een kort gesprek, voordat je ergens aan vastzit. Het account staat op jouw naam en je kunt maandelijks opzeggen. Wil je het zelf doen met een expert achter de hand? Dan is er een <a href="/consult/">consult</a> voor € 85 per uur.</p>
+        <p>Vraag bij elke offerte twee dingen. Staat het account op jouw naam? En rapporteert het bureau kosten per aanvraag, of alleen klikken en vertoningen?</p>
+
+        <h2 id="facturering">Facturering: wanneer Google afschrijft</h2>
+        <p>Google Ads kent drie betaalinstellingen. Welke je kunt kiezen, hangt af van het land en de valuta van je account. Bij <b>achteraf betalen</b>, voorheen automatische betalingen, laat je eerst je advertenties lopen en schrijft Google daarna af. Bij <b>vooraf betalen</b> zet je eerst geld op je account en stoppen je advertenties als het tegoed op is. <b>Maandelijkse facturering</b> met een kredietlimiet is er voor accounts die daarvoor in aanmerking komen.</p>
+        <p>Bij achteraf betalen schrijft Google af op de eerste dag van de maand, of eerder als je je betalingsdrempel bereikt. Die drempel stijgt stap voor stap. In het voorbeeld van Google begint een nieuw account bij € 50, daarna volgen € 200, € 350 en € 500. De bedragen verschillen per account. Je eigen drempel staat onder <b>Facturering</b>.</p>
+        <h3>Ongeldige klikken</h3>
+        <p>Klikken zonder echte interesse noemt Google ongeldige klikken. Denk aan robots, iemand die je kosten wil opdrijven of de tweede klik van een dubbelklik. Google rekent die volgens eigen zeggen niet, en filtert ze uit je rapporten. Met de kolom <b>Ongeldige klikken</b> zie je hoeveel er zijn weggefilterd. Meer over klikfraude lees je in <a href="/kennisbank/gidsen/wat-is-google-ads/">wat Google Ads is</a>.</p>
+
+        <Tussenactie />
+        <h2 id="rendabel">Is het rendabel? CPA, ROAS en wat een klant mag kosten</h2>
+        <p>Twee afkortingen bepalen of je Google Ads-budget geld oplevert of kost.</p>
+        <ul>
+          <li><b><a href="/kennisbank/wat-is/cpa/">CPA</a></b>, kosten per acquisitie: wat één conversie je kost, zoals een aanvraag of een telefoontje.</li>
+          <li><b><a href="/kennisbank/wat-is/roas/">ROAS</a></b>, return on ad spend: hoeveel omzet je terugziet per euro advertentiekosten. Een ROAS van 400% betekent € 4 omzet per € 1.</li>
+        </ul>
+        <p>De <a href="/kennisbank/wat-is/cpc/">CPC</a> is daarbij alleen een tussenstap. Een klik van € 6 is goedkoop als hij een klant van € 3.000 oplevert. Een klik van € 0,50 is duur als er nooit iemand belt.</p>
+        <h3>Welke ROAS heb je nodig?</h3>
+        <p>Hier gaan veel webshops de mist in. Een ROAS van 300% klinkt goed, maar ROAS rekent met omzet, niet met winst. Om quitte te spelen heb je een ROAS nodig van 100% gedeeld door je brutomarge.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Brutomarge op je verkoop</th><th>ROAS om quitte te spelen</th><th>Per € 100 advertentiekosten heb je nodig</th></tr></thead>
+            <tbody>
+              <tr><td>10%</td><td>1.000%</td><td>€ 1.000 omzet</td></tr>
+              <tr><td>20%</td><td>500%</td><td>€ 500 omzet</td></tr>
+              <tr><td>30%</td><td>333%</td><td>€ 333 omzet</td></tr>
+              <tr><td>50%</td><td>200%</td><td>€ 200 omzet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een dienstverlener rekent makkelijker met de kosten per klant. Stel jezelf de vraag: hoeveel mag een nieuwe klant me kosten? Neem de marge op de eerste opdracht. Komen klanten vaak terug, zoals bij een boekhouder, dan mag een nieuwe klant meer kosten dan zijn eerste factuur. Reken wel met wat klanten gemiddeld opleveren, niet met je beste klant.</p>
+
+        <h2 id="verlagen">Je Google Ads-kosten verlagen: tien maatregelen</h2>
+        <p>Goedkoper adverteren betekent zelden een lager bod. Het betekent minder betalen voor klikken die niets opleveren.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Maatregel</th><th>Waarom het scheelt</th><th>Waar in Google Ads</th></tr></thead>
+            <tbody>
+              <tr><td>Uitsluitingszoekwoorden toevoegen</td><td>Geen klikken meer op "vacature", "gratis" of "zelf doen"</td><td>Zoekwoorden, Uitgesloten zoekwoorden</td></tr>
+              <tr><td>Elke week het zoektermenrapport lezen</td><td>Je ziet waar je echt op verscheen</td><td>Zoekwoorden, Zoektermen</td></tr>
+              <tr><td>Locatie op aanwezigheid zetten</td><td>Alleen mensen die echt in je gebied zijn</td><td>Campagne-instellingen, Locaties</td></tr>
+              <tr><td>Zoekpartners en Display uit bij een zoekcampagne</td><td>Je tekstadvertentie verschijnt niet als banner</td><td>Campagne-instellingen, Netwerken</td></tr>
+              <tr><td>Advertentieplanning op je openingstijden</td><td>Geen telefoontjes naar een lege zaak</td><td>Advertentieplanning</td></tr>
+              <tr><td>Woordgroep en exact in plaats van breed</td><td>Minder zoekopdrachten die er maar half mee te maken hebben</td><td>Zoekwoorden</td></tr>
+              <tr><td>Eén thema per advertentiegroep</td><td>Betere advertentierelevantie, vaak een lagere prijs</td><td>Advertentiegroepen</td></tr>
+              <tr><td>Een eigen landingspagina per dienst</td><td>Meer aanvragen uit dezelfde klikken</td><td>Je website</td></tr>
+              <tr><td>Automatisch toepassen van aanbevelingen uit</td><td>Google voert geen wijzigingen meer door zonder jou</td><td>Aanbevelingen</td></tr>
+              <tr><td>Stoppen met wat niet werkt</td><td>Geld dat weglekt, kun je beter elders inzetten</td><td>Overal</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die laatste wordt het minst gedaan. Een advertentiegroep schrappen die al drie maanden niets oplevert, is vaak meer waard dan een nieuwe campagne. Hoe je alle instellingen goed zet, staat stap voor stap in <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>. Heb je al een account, loop dan de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a> door.</p>
+
+        <h2 id="fouten">Rekenfouten die geld kosten</h2>
+        <ul>
+          <li><b>Sturen op de klikprijs.</b> Goedkope klikken zijn vaak klikken van mensen die niet kopen. Stuur op de kosten per klant.</li>
+          <li><b>ROAS op omzet lezen als winst.</b> Een ROAS van 300% bij 20% marge is verlies.</li>
+          <li><b>Rekenen zonder meting.</b> Zonder conversiemeting weet je niet welke klik iets opleverde. Dan is elke rekensom een gok.</li>
+          <li><b>Na twee weken oordelen.</b> Na een grote wijziging heeft automatisch bieden tijd nodig om te leren. Reken op een week of vier voordat je weet wat een aanvraag kost.</li>
+        </ul>
+        <div class="kader">
+          <p class="kader-titel">Google Ads naast SEO</p>
+          <p>Advertenties zijn huren: zodra je stopt met betalen, stoppen de bezoekers. Met <a href="/zoekmachine-optimalisatie/">SEO</a> bouw je iets op dat blijft, maar het duurt maanden. Adverteer voor de aanvragen van nu en gebruik wat de zoektermen leren voor de pagina's van later. Is de klikprijs in je vak hoog en je marge klein, dan is SEO vaak de betere route. Wat dat kost, lees je in <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+        </div>
+
+        <h2 id="laten-doen">Zelf doen of laten doen?</h2>
+        <p>Een account aanmaken kan iedereen. Het geld gaat verloren in de instellingen en het bijhouden. Heb je een paar uur per week en werk je graag met cijfers, doe het dan zelf. Anders: laat het doen.</p>
+        <p>Bij ons begint het met een gesprek over je doel. We rekenen samen uit wat een aanvraag mag kosten en spreken een doel af waar je ons op kunt afrekenen. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Het account blijft van jou.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={16} />
+        <div class="card prijs-eigen">
+          <p class="kicker">Wij rekenen met je mee</p>
+          <p class="prijs-kop">Beheer afhankelijk van je advertentiebudget</p>
+          <p class="muted klein">Exclusief btw. Maandelijks opzegbaar.</p>
+          <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het voor je doen?" intro="Wat je van ons mag verwachten als we je advertenties beheren." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost Google Ads per maand?', a: 'Dat bepaal je zelf met je dagbudget. Voor een lokale dienstverlener ligt een werkbaar budget meestal tussen een paar honderd en een paar duizend euro per maand. Reken het terug vanaf het aantal aanvragen dat je wilt, met de rekenhulp op deze pagina.' },
+      { v: 'Wat is het minimale budget voor Google Ads?', a: 'Google kent geen minimum. Onze vuistregel: genoeg voor minstens tien klikken per dag, anders weet je na een maand nog niets. Is dat te veel, maak de campagne dan kleiner: minder zoekwoorden of een kleiner gebied.' },
+      { v: 'Betaal je ook als niemand klikt?', a: 'Bij een zoekcampagne niet. Je betaalt per klik. Bij display- en videocampagnes betaal je soms per duizend vertoningen of per weergave.' },
+      { v: 'Wat zijn gemiddelde Google Ads kosten per klik in Nederland?', a: 'In de cijfers van SE Ranking (oktober 2026) van € 0,56 voor glazenwasser tot € 8,15 voor hypotheekadviseur. Voor jouw zoekwoorden zie je een schatting in de Zoekwoordplanner van Google.' },
+      { v: 'Wat kost een Google Ads-bureau?', a: 'Bovenop je advertentiebudget betaal je een vergoeding voor beheer. De bedragen die we online tegenkwamen bij het schrijven van deze gids, liggen tussen € 500 en ruim € 2.000 per maand. Bij Drijfveer Media hangt het af van je advertentiebudget en hoor je de prijs na een kort gesprek.' },
+      { v: 'Krijg ik geld terug voor nepklikken?', a: 'Klikken die Google als ongeldig ziet, worden niet in rekening gebracht of later als tegoed verrekend. Met de kolom Ongeldige klikken zie je hoeveel er zijn weggefilterd.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Wat is Google Ads?', href: '/kennisbank/gidsen/wat-is-google-ads/', tekst: 'Hoe het werkt, met voorbeelden.' },
+      { label: 'Gids', titel: 'Google Ads-campagne opzetten', href: '/online-adverteren/google-ads-campagne-opzetten/', tekst: 'Het stappenplan in tien stappen.' },
+      { label: 'Dienst', titel: 'Google Ads uitbesteden', href: '/online-adverteren/google-ads-bureau/', tekst: 'Wij zetten op en sturen bij.' },
+      { label: 'Gids', titel: 'Google Ads-check', href: '/kennisbank/gidsen/google-ads-check/', tekst: 'Waar je budget nu weglekt.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat Google Ads jou kost en oplevert?" tekst={`${site.contactpersoon} belt je binnen 15 minuten terug en rekent met je uit wat een aanvraag in jouw vak mag kosten. Daarna weet je of adverteren voor jou loont.`} />
+</Base>
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-ads-reken]');
+  const uit = (k: string) => document.querySelector<HTMLElement>(`[data-uit="${k}"]`);
+  const eur = (n: number) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const een = (n: number) => n.toLocaleString('nl-NL', { maximumFractionDigits: 1 });
+  function reken() {
+    if (!form) return;
+    const d = new FormData(form);
+    const g = (k: string) => Math.max(0, Number(String(d.get(k) ?? '').replace(',', '.')) || 0);
+    const budget = g('budget'), cpc = g('cpc'), conv = g('conversie') / 100, win = g('winkans') / 100, waarde = g('waarde');
+    const klikken = cpc ? budget / cpc : 0;
+    const aanvragen = klikken * conv;
+    const klanten = aanvragen * win;
+    const zet = (k: string, v: string) => { const el = uit(k); if (el) el.textContent = v; };
+    zet('dag', eur(budget / 30.4));
+    zet('klikken', String(Math.round(klikken)));
+    zet('aanvragen', een(aanvragen));
+    zet('cpa', aanvragen ? eur(budget / aanvragen) : 'n.v.t.');
+    zet('klanten', een(klanten));
+    zet('perKlant', klanten ? eur(budget / klanten) : 'n.v.t.');
+    zet('terug', budget ? eur((klanten * waarde) / budget) : 'n.v.t.');
+    zet('maxCpc', eur(waarde * conv * win));
+  }
+  form?.addEventListener('input', (e) => {
+    const t = e.target as HTMLInputElement | HTMLSelectElement;
+    if (t.name === 'beroep' && t.value) { const c = form.querySelector<HTMLInputElement>('input[name="cpc"]'); if (c) c.value = t.value; }
+    reken();
+  });
+  form?.addEventListener('change', reken);
+</script>
+<style>
+  .prijs-eigen { padding: 22px; }
+  .prijs-kop { font-size: 1.2rem; font-weight: 900; line-height: 1.25; margin: 6px 0 6px; }
+  .prijs-eigen .btn { width: 100%; margin-top: 8px; }
+  .reken-ads { display: grid; gap: 18px; }
+  .reken-velden { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+  .reken-velden label { display: grid; gap: 6px; font-weight: 700; font-size: 0.92rem; }
+  .reken-velden .reken-breed { grid-column: 1 / -1; }
+  .reken-velden input, .reken-velden select { width: 100%; min-width: 0; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 10px; font: inherit; font-weight: 600; background: #fff; color: var(--ink); }
+  .reken-velden input:focus-visible, .reken-velden select:focus-visible { outline: 3px solid var(--orange); outline-offset: 1px; }
+  .reken-uit { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .reken-uit div { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .reken-uit dt { font-size: 0.85rem; color: var(--muted); }
+  .reken-uit dd { margin: 2px 0 0; font-size: 1.35rem; font-weight: 900; letter-spacing: -0.02em; }
+  .reken-noot { margin: 0; }
+  @media (max-width: 560px) { .reken-velden { grid-template-columns: minmax(0, 1fr); } .reken-uit { gap: 8px; } .reken-uit div { padding: 10px 12px; } .reken-uit dd { font-size: 1.1rem; } }
+</style>

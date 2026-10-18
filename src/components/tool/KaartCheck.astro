@@ -1,0 +1,216 @@
+---
+// "Sta jij in het kaartje?" De bezoeker vult vak en plaats in en opent dezelfde zoekopdracht in Google Maps.
+// Daarna vinkt hij twaalf punten af, gegroepeerd naar de drie factoren die Google zelf noemt voor lokale resultaten:
+// relevantie, afstand en bekendheid (Google: prominentie). Bron: support.google.com/business/answer/7091 (opgehaald 18-10-2026).
+// Uitkomst: score en de drie punten die het meeste opleveren. De weging per punt is onze eigen inschatting.
+// Alles gebeurt in de browser. De uitslag is deelbaar via de hash (#kaartcheck&vak=...&plaats=...&c=...), zonder bedrijfsnaam.
+import { site } from '../../data/site';
+interface Props { id?: string; vak?: string; plaats?: string; kop?: 'h2' | 'h3' }
+const { id = 'kaartcheck', vak = '', plaats = '', kop = 'h3' } = Astro.props;
+const Kop = kop;
+// Volgorde en sleutels moeten gelijk blijven aan de lijst in het script (de deel-link gebruikt de volgorde).
+const groepen = [
+  { titel: 'Relevantie: past je profiel bij wat iemand zoekt?', punten: [
+    ['r1', 'Je hoofdcategorie is precies wat je doet, zoals "Loodgieter" en niet "Bouwbedrijf".'],
+    ['r2', 'Je hebt extra categorieën voor je andere diensten, en niet meer dan je echt doet.'],
+    ['r3', 'Je diensten staan los in je profiel, elk met een korte uitleg.'],
+    ['r4', 'Je beschrijving zegt in gewone woorden wat je doet en in welke plaatsen.'],
+    ['r5', 'Je openingstijden kloppen, ook de afwijkende tijden rond feestdagen.'],
+  ] },
+  { titel: 'Afstand: weet Google waar je zit en werkt?', punten: [
+    ['a1', 'Je profiel is geverifieerd. Google weet dat jij de eigenaar bent.'],
+    ['a2', 'Je adres of servicegebied klopt en dekt de plaatsen waar je werkt.'],
+    ['a3', 'Naam, adres en telefoonnummer staan op je website precies zo als in je profiel.'],
+  ] },
+  { titel: 'Bekendheid: hoe bekend en gewaardeerd ben je?', punten: [
+    ['b1', 'Je kreeg het afgelopen kwartaal nieuwe reviews.'],
+    ['b2', 'Je reageert op reviews, ook op de kritische.'],
+    ['b3', 'Je zette de laatste 30 dagen nieuwe foto\'s van je werk online.'],
+    ['b4', 'Andere websites uit je regio linken naar je of noemen je bedrijf.'],
+  ] },
+];
+---
+<div class="kc card" id={id} data-kaartcheck={id}>
+  <p class="kicker">Gratis check · vijf minuten</p>
+  <Kop class="kc-titel">Sta jij in het kaartje?</Kop>
+  <p class="muted kc-intro">Vul je vak en plaats in. Je ziet dan in Google Maps wat je klant ziet. Loop daarna de twaalf punten na en je krijgt een score, plus de drie dingen die het meeste opleveren.</p>
+
+  <form class="kc-zoek" data-zoek>
+    <div class="veld-rij">
+      <div class="veld"><label for={`${id}-vak`}>Wat doe je?</label><input id={`${id}-vak`} name="vak" required value={vak} placeholder="Bijvoorbeeld: schilder" autocomplete="off" maxlength="60" /></div>
+      <div class="veld"><label for={`${id}-plaats`}>In welke plaats?</label><input id={`${id}-plaats`} name="plaats" required value={plaats} placeholder="Bijvoorbeeld: Assen" autocomplete="address-level2" maxlength="60" /></div>
+    </div>
+    <button class="btn" type="submit">Open Google Maps</button>
+    <p class="klein muted kc-tip" data-maps-tip>Zoek liefst in een privévenster, dan telt je eigen zoekgeschiedenis niet mee.</p>
+  </form>
+
+  <form class="kc-lijst" data-lijst>
+    <fieldset class="kc-plek">
+      <legend>Waar sta je in Google Maps?</legend>
+      <label><input type="radio" name="plek" value="top" /> In de bovenste drie</label>
+      <label><input type="radio" name="plek" value="lager" /> Wel op de kaart, maar lager</label>
+      <label><input type="radio" name="plek" value="niet" /> Ik kon mezelf niet vinden</label>
+    </fieldset>
+    {groepen.map((g) => (
+      <fieldset class="kc-groep">
+        <legend>{g.titel}</legend>
+        {g.punten.map(([k, t]) => <label class="kc-punt"><input type="checkbox" name="punt" value={k} /> <span>{t}</span></label>)}
+      </fieldset>
+    ))}
+    <button class="btn" type="submit">Bereken mijn score</button>
+  </form>
+
+  <div class="kc-live" aria-live="polite" data-live>
+    <div class="kc-uitslag" data-uitslag hidden>
+      <div class="kc-score-rij">
+        <div class="kc-meter" data-meter style="--score:0"><span data-score>0</span><small>van 100</small></div>
+        <div><p class="kc-oordeel" data-oordeel></p><p class="muted kc-uitleg" data-uitleg></p></div>
+      </div>
+      <p class="kc-punten-kop">Hier zit je winst</p>
+      <ol class="kc-punten" data-punten></ol>
+      <div class="kc-acties">
+        <a class="btn" data-cta href="/gratis-website-analyse/#scan">Check gratis je plek op de kaart</a>
+        <button class="btn btn-ghost" type="button" data-deel>Deel je uitslag</button>
+      </div>
+      <p class="klein muted kc-status" data-status></p>
+      <p class="klein muted">{site.contactpersoon} zoekt op jouw vak in jouw plaats, ook vanaf andere plekken in je regio, en belt je terug met wat hij ziet.</p>
+    </div>
+  </div>
+  <noscript><p class="klein">Zonder JavaScript rekent de check niet. Zoek zelf in Google Maps op je vak en plaats en loop de punten hierboven na. Liever dat wij kijken? Vraag de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.</p></noscript>
+  <p class="klein muted kc-bron">Bron: Google Bedrijfsprofiel Help, <a href="https://support.google.com/business/answer/7091?hl=nl" rel="noopener">tips voor je positie in lokale zoekresultaten</a> (gelezen op 18 oktober 2026). Hoe zwaar elk punt telt, is onze eigen inschatting.</p>
+</div>
+
+<script>
+  // Gewicht per punt (onze inschatting) en het advies als het punt niet is afgevinkt. Volgorde gelijk aan de lijst in de HTML.
+  const punten: { k: string; w: number; advies: string }[] = [
+    { k: 'r1', w: 3, advies: 'Kies als hoofdcategorie het woord waarop je klant zoekt. Dit is het zwaarste veld van je profiel. Kijk welke categorie de bovenste drie op de kaart hebben.' },
+    { k: 'r2', w: 1, advies: 'Voeg extra categorieën toe voor de diensten die je echt levert. Dan kom je ook in beeld bij die zoekopdrachten.' },
+    { k: 'r3', w: 2, advies: 'Zet elke dienst los in je profiel, met een korte uitleg in de woorden van je klant. Google leest daaruit waar je bij past.' },
+    { k: 'r4', w: 1, advies: 'Herschrijf je beschrijving: wat je doet, voor wie en in welke plaatsen. Je hebt 750 tekens, zonder links of acties.' },
+    { k: 'r5', w: 1, advies: 'Controleer je openingstijden en zet de feestdagen erin. Een klant voor een dichte deur schrijft geen goede review.' },
+    { k: 'a1', w: 3, advies: 'Laat je profiel verifiëren. Volgens Google is de kans dan groter dat je bedrijf in de zoekresultaten verschijnt.' },
+    { k: 'a2', w: 2, advies: 'Controleer je adres of servicegebied. Werk je bij klanten thuis, zet dan de plaatsen erin waar je echt komt.' },
+    { k: 'a3', w: 2, advies: 'Maak naam, adres en telefoonnummer overal precies gelijk: op je site, in je profiel en in bedrijvengidsen. Elk verschil zaait twijfel.' },
+    { k: 'b1', w: 3, advies: 'Vraag elke tevreden klant om een review, met een directe reviewlink of QR-code. Volgens Google helpen meer reviews en goede beoordelingen je positie.' },
+    { k: 'b2', w: 1, advies: 'Reageer op elke review, kort en persoonlijk. Bij een kritische review: blijf rustig en bied een oplossing.' },
+    { k: 'b3', w: 2, advies: 'Zet elke maand een paar echte foto\'s online: je werk, je bus, je team. Een profiel waar iets gebeurt, oogt levend.' },
+    { k: 'b4', w: 2, advies: 'Zorg voor vermeldingen en links uit je regio: je branchevereniging, de lokale ondernemersvereniging, een sponsorpagina. Google telt mee hoeveel sites naar je linken.' },
+  ];
+  const totaal = punten.reduce((s, p) => s + p.w, 0);
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  const mapsUrl = (vak: string, plaats: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${vak} ${plaats}`)}`;
+  const kopieer = async (tekst: string) => { try { await navigator.clipboard.writeText(tekst); return true; } catch { window.prompt('Kopieer deze link:', tekst); return false; } };
+
+  document.querySelectorAll<HTMLElement>('[data-kaartcheck]').forEach((el) => {
+    const id = el.dataset.kaartcheck!;
+    const zoek = el.querySelector<HTMLFormElement>('[data-zoek]')!;
+    const lijst = el.querySelector<HTMLFormElement>('[data-lijst]')!;
+    const uitslag = el.querySelector<HTMLElement>('[data-uitslag]')!;
+    const status = el.querySelector<HTMLElement>('[data-status]')!;
+    const veld = (n: string) => zoek.elements.namedItem(n) as HTMLInputElement;
+    const vinkjes = () => [...lijst.querySelectorAll<HTMLInputElement>('input[name="punt"]')];
+    const plekVeld = () => lijst.querySelector<HTMLInputElement>('input[name="plek"]:checked');
+
+    zoek.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const vak = veld('vak').value.trim(), plaats = veld('plaats').value.trim();
+      const url = mapsUrl(vak, plaats);
+      window.open(url, '_blank', 'noopener');
+      const tip = el.querySelector<HTMLElement>('[data-maps-tip]')!;
+      tip.innerHTML = `Opent er niets? <a href="${esc(url)}" target="_blank" rel="noopener">Open de zoekopdracht "${esc(vak)} ${esc(plaats)}"</a>. Kijk daarna wie er bovenaan staat en loop de punten hieronder na.`;
+    });
+
+    const deelLink = () => {
+      const p = new URLSearchParams();
+      p.set(id, '');
+      p.set('vak', veld('vak').value.trim().slice(0, 60));
+      p.set('plaats', veld('plaats').value.trim().slice(0, 60));
+      const plek = plekVeld()?.value; if (plek) p.set('plek', plek);
+      p.set('c', vinkjes().map((v) => (v.checked ? '1' : '0')).join(''));
+      return `${location.origin}${location.pathname}#${p.toString().replace(`${id}=`, id)}`;
+    };
+
+    const toon = (scroll: boolean) => {
+      const aan = new Set(vinkjes().filter((v) => v.checked).map((v) => v.value));
+      const score = Math.round((punten.filter((p) => aan.has(p.k)).reduce((s, p) => s + p.w, 0) / totaal) * 100);
+      const vak = veld('vak').value.trim(), plaats = veld('plaats').value.trim();
+      const zoekterm = vak && plaats ? `"${vak} ${plaats}"` : 'jouw zoekterm';
+      const plek = plekVeld()?.value;
+      const oordeel = score >= 80 ? 'Je profiel staat er sterk voor' : score >= 50 ? 'Een goede basis, met duidelijke gaten' : 'Hier laat je klanten liggen';
+      let uitleg = score >= 80 ? 'Je hebt de meeste punten op orde. Nu gaat het om bijhouden.' : score >= 50 ? 'Het belangrijkste staat, maar een concurrent die alles op orde heeft, gaat voor.' : 'Er ontbreken punten die Google zwaar laat wegen. Goed nieuws: de meeste zijn in een middag te regelen.';
+      if (plek === 'top' && score < 80) uitleg += ` Je staat nu bovenaan bij ${zoekterm}. Met deze gaten kan een concurrent je inhalen.`;
+      if (plek === 'lager') uitleg += ` Bij ${zoekterm} sta je wel op de kaart, maar niet bij de eerste drie. Daar gaan de meeste klikken heen.`;
+      if (plek === 'niet') uitleg += ` Bij ${zoekterm} kwam je niet in beeld. Check eerst of je hoofdcategorie en je servicegebied kloppen.`;
+      const open = punten.filter((p) => !aan.has(p.k)).sort((a, b) => b.w - a.w).slice(0, 3);
+      const items = open.length ? open.map((p) => p.advies) : ['Houd het vol: elke week reviews vragen, elke maand foto\'s, en twee keer per jaar je gegevens nalopen. En zoek ook eens vanaf een andere plek in je regio, want afstand telt mee.'];
+      el.querySelector('[data-score]')!.textContent = String(score);
+      el.querySelector<HTMLElement>('[data-meter]')!.style.setProperty('--score', String(score));
+      el.querySelector('[data-oordeel]')!.textContent = oordeel;
+      el.querySelector('[data-uitleg]')!.textContent = uitleg;
+      el.querySelector('[data-punten]')!.innerHTML = items.map((t) => `<li>${esc(t)}</li>`).join('');
+      const q = new URLSearchParams(); if (vak) q.set('vak', vak); if (plaats) q.set('plaats', plaats);
+      el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/gratis-website-analyse/${q.toString() ? `?${q}` : ''}#scan`;
+      uitslag.hidden = false; status.textContent = '';
+      try { history.replaceState(null, '', deelLink().replace(location.origin, '')); } catch {}
+      if (scroll) uitslag.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    };
+
+    lijst.addEventListener('submit', (e) => { e.preventDefault(); toon(true); });
+    lijst.addEventListener('change', () => { if (!uitslag.hidden) toon(false); });
+    el.querySelector('[data-deel]')!.addEventListener('click', async () => {
+      const ok = await kopieer(deelLink());
+      status.textContent = ok ? 'De link naar je uitslag staat op je klembord. Je bedrijfsnaam zit er niet in.' : '';
+    });
+
+    // Gedeelde uitslag: #kaartcheck&vak=...&plaats=...&plek=...&c=101...
+    const h = new URLSearchParams(location.hash.slice(1));
+    if (h.has(id)) {
+      veld('vak').value = (h.get('vak') || '').slice(0, 60);
+      veld('plaats').value = (h.get('plaats') || '').slice(0, 60);
+      const plek = h.get('plek'); const r = lijst.querySelector<HTMLInputElement>(`input[name="plek"][value="${plek === 'top' || plek === 'lager' || plek === 'niet' ? plek : ''}"]`); if (r) r.checked = true;
+      const c = (h.get('c') || '').replace(/[^01]/g, '');
+      vinkjes().forEach((v, i) => (v.checked = c[i] === '1'));
+      toon(false);
+      el.scrollIntoView({ block: 'start' });
+    }
+  });
+</script>
+
+<style>
+  .kc { padding: clamp(20px, 4vw, 34px); margin: 32px 0; border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .kc-titel { font-size: var(--step-2); font-weight: 900; margin: 6px 0 10px; }
+  .kc-intro { margin-bottom: 18px; }
+  .kc-zoek { display: grid; gap: 12px; margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px dashed var(--line); }
+  .kc-zoek .btn { justify-self: start; }
+  .kc-tip { margin: 0; }
+  .kc-lijst { display: grid; gap: 18px; }
+  .kc-lijst .btn { justify-self: start; }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  legend { font-weight: 800; padding: 0; margin-bottom: 6px; }
+  .kc-plek { display: flex; flex-wrap: wrap; gap: 8px; }
+  .kc-plek legend { width: 100%; }
+  .kc-plek label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--line); border-radius: 999px; background: #fff; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+  .kc-plek label:has(input:checked) { border-color: var(--navy); background: var(--chip); }
+  .kc-plek input { accent-color: var(--navy); width: 18px; height: 18px; margin: 0; }
+  .kc-groep { display: grid; gap: 4px; }
+  .kc-punt { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; min-height: 44px; padding: 10px 12px; border-radius: 10px; background: var(--bg); cursor: pointer; font-size: 0.98rem; line-height: 1.45; }
+  .kc-punt:has(input:checked) { background: #eaf5ef; }
+  .kc-punt input { accent-color: var(--ok); width: 20px; height: 20px; margin: 1px 0 0; }
+  .kc-punt:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 2px; }
+  .kc-uitslag { margin-top: 24px; padding-top: 22px; border-top: 1px dashed var(--line); }
+  .kc-score-rij { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; align-items: center; margin-bottom: 16px; }
+  .kc-oordeel { font-size: var(--step-1); font-weight: 800; line-height: 1.2; margin: 0 0 6px; }
+  .kc-uitleg { margin: 0; }
+  .kc-meter { --score: 0; width: 120px; aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; text-align: center;
+    background: radial-gradient(closest-side, var(--panel) 78%, transparent 79% 100%), conic-gradient(var(--orange) calc(var(--score) * 1%), var(--chip) 0); }
+  .kc-meter span { font-size: 2.2rem; font-weight: 900; line-height: 1; color: var(--ink); }
+  .kc-meter small { color: var(--muted); font-size: 0.85rem; }
+  .kc-punten-kop { font-weight: 800; font-size: 1.1rem; margin: 6px 0 8px; }
+  .kc-punten { padding-left: 1.3em; margin: 0 0 16px; display: grid; gap: 8px; }
+  .kc-punten :global(li) { margin: 0; }
+  .kc-punten :global(li::marker) { color: var(--orange); font-weight: 800; }
+  .kc-acties { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
+  .kc-status { min-height: 1.4em; margin: 0 0 6px; }
+  .kc-bron { margin: 18px 0 0; }
+  @media (max-width: 560px) { .kc-score-rij { grid-template-columns: minmax(0, 1fr); justify-items: start; } .kc-meter { width: 104px; } .kc-acties .btn { width: 100%; } }
+</style>

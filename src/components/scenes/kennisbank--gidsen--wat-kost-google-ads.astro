@@ -1,0 +1,62 @@
+---
+// Scène voor /kennisbank/gidsen/wat-kost-google-ads/: een rekenmachine die een bonnetje print met de kosten van een campagne:
+// budget, klikken, aanvragen en wat één klant kost. Ernaast een stapel munten en een prijskaartje "per klik".
+// Als hij leeft: er valt een munt op de stapel, de onderste regel van het bonnetje licht op en een knop van de rekenmachine knippert rustig.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const toetsen = [0, 1, 2, 3].flatMap((r) => [0, 1, 2].map((k) => ({ x: 74 + k * 38, y: 150 + r * 24 })));
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een rekenmachine print een bonnetje met het budget, het aantal klikken, de aanvragen en wat één nieuwe klant kost. Ernaast een stapel munten en een prijskaartje per klik.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- rekenmachine -->
+  <rect x="58" y="70" width="140" height="180" rx="16" fill="#074663" />
+  <rect x="72" y="86" width="112" height="44" rx="8" fill="#e8eef4" />
+  <text x="176" y="117" font-size="20" font-weight="900" text-anchor="end">€ 600</text>
+  {toetsen.map((t, i) => <rect x={t.x} y={t.y} width="30" height="18" rx="5" fill={i === 11 ? '#ff6600' : '#ffffff'} opacity={i === 11 ? 1 : 0.9} />)}
+
+  <!-- printsleuf en bonnetje -->
+  <rect x="198" y="40" width="10" height="70" rx="3" fill="#10283f" />
+  <path d="M208 46h150v176l-12-8-12 8-12-8-12 8-12-8-12 8-12-8-12 8-12-8-12 8-12-8-12 8V46z" fill="#fff" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <text x="222" y="70" font-size="11" font-weight="800">Google Ads, oktober</text>
+  <path d="M222 80h122" stroke="#d9e1ea" stroke-width="1.5" stroke-dasharray="3 3" />
+  <text x="222" y="98" font-size="10.5" class="zacht">Budget</text><text x="344" y="98" font-size="10.5" text-anchor="end">€ 600</text>
+  <text x="222" y="116" font-size="10.5" class="zacht">Klikken</text><text x="344" y="116" font-size="10.5" text-anchor="end">267</text>
+  <text x="222" y="134" font-size="10.5" class="zacht">Aanvragen</text><text x="344" y="134" font-size="10.5" text-anchor="end">13</text>
+  <text x="222" y="152" font-size="10.5" class="zacht">Per aanvraag</text><text x="344" y="152" font-size="10.5" text-anchor="end">€ 45</text>
+  <path d="M222 164h122" stroke="#d9e1ea" stroke-width="1.5" stroke-dasharray="3 3" />
+  <rect class="totaal" x="216" y="172" width="134" height="26" rx="6" fill="#e8eef4" />
+  <text x="222" y="189" font-size="11" font-weight="800">Per klant</text><text x="344" y="189" font-size="12" font-weight="900" text-anchor="end">€ 136</text>
+
+  <!-- munten en prijskaartje -->
+  <ellipse cx="412" cy="236" rx="30" ry="9" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" />
+  <path d="M382 226v10a30 9 0 0 0 60 0v-10" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" />
+  <ellipse cx="412" cy="226" rx="30" ry="9" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" />
+  <path d="M382 214v12a30 9 0 0 0 60 0v-12" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" />
+  <ellipse cx="412" cy="214" rx="30" ry="9" fill="#fff4ec" stroke="#ff6600" stroke-width="2" />
+  <g transform="rotate(-10 410 120)">
+    <path d="M378 104h56l14 16-14 16h-56z" fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+    <circle cx="436" cy="120" r="3.5" fill="#074663" />
+    <text x="386" y="117" font-size="11" font-weight="900">€ 2,25</text>
+    <text x="386" y="130" font-size="9" class="zacht">per klik</text>
+  </g>
+
+  {!mini && (
+    <g>
+      <g class="munt"><ellipse cx="412" cy="202" rx="30" ry="9" fill="#ff6600" /><ellipse cx="412" cy="200" rx="30" ry="9" fill="#ffb27a" stroke="#ff6600" stroke-width="2" /><text x="412" y="204" font-size="10" font-weight="900" text-anchor="middle">€</text></g>
+      <rect class="knop" x="150" y="222" width="30" height="18" rx="5" fill="#fff" />
+      <rect class="gloed" x="216" y="172" width="134" height="26" rx="6" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    </g>
+  )}
+</svg>
+<style>
+  .munt { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .munt { opacity: 0; }
+  .in-beeld .munt { animation: kennisbank-gidsen-wat-kost-google-ads-munt 5s cubic-bezier(.5,0,.5,1) 0.8s infinite both; }
+  :global(.teken-js) .gloed { opacity: 0; }
+  .in-beeld .gloed { animation: kennisbank-gidsen-wat-kost-google-ads-gloed 0.6s ease-out 1.4s forwards; }
+  .knop { opacity: 0; }
+  .in-beeld .knop { animation: kennisbank-gidsen-wat-kost-google-ads-knop 5s ease-in-out 0.8s infinite; }
+  @keyframes kennisbank-gidsen-wat-kost-google-ads-munt { 0% { opacity: 0; transform: translateY(-70px); } 12% { opacity: 1; } 30% { transform: translateY(0); } 80% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(0); } }
+  @keyframes kennisbank-gidsen-wat-kost-google-ads-gloed { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes kennisbank-gidsen-wat-kost-google-ads-knop { 0%, 100% { opacity: 0; } 6% { opacity: 0.9; } 14% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .munt, .in-beeld .gloed, .in-beeld .knop { animation: none; } }
+</style>
