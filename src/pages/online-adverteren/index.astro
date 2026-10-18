@@ -32,16 +32,16 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', description: 'Prijs afhankelijk van het advertentiebudget, exclusief btw. Maandelijks opzegbaar.' },
+  offers: { '@type': 'Offer', price: 249, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: 249, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false }, description: 'Beheer vanaf € 249 per maand, exclusief btw. Het advertentiebudget betaal je rechtstreeks aan Google. Maandelijks opzegbaar.' },
 }];
 ---
 <Base
   title="Online adverteren waar je klant zoekt | Drijfveer Media"
-  description="Online adverteren in Google en ChatGPT, op het moment dat je klant zoekt. Met meting, een afgesproken doel en een prijs die past bij je advertentiebudget."
+  description="Online adverteren in Google en ChatGPT, op het moment dat je klant zoekt. Met meting en een afgesproken doel. Beheer vanaf € 249 per maand."
   kruimels={[{ naam: 'Online adverteren', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Online adverteren" titel="Online adverteren waar je klant al zoekt">
+  <Hero kicker="Gekozen · Online adverteren" titel="Online adverteren waar je klant al zoekt" prijs="vanaf € 249 per maand">
     <p>Iemand typt "dakkapel laten plaatsen" in Google of vraagt ChatGPT om een goede boekhouder. Op dat moment wil je in beeld zijn. Met online adverteren sta je er vanaf de eerste dag, en weet je precies wat een aanvraag kost.</p>
     <Scene slot="beeld" />
   </Hero>
@@ -177,7 +177,7 @@ const schema = [{
           <li><b>Het advertentiebudget.</b> Dat gaat rechtstreeks naar Google of OpenAI. Je bepaalt het zelf, en over een hele maand gaat Google er niet overheen.</li>
           <li><b>Opzet en beheer.</b> Het werk: meting, campagnes bouwen, teksten schrijven, bijsturen en rapporteren.</li>
         </ul>
-        <p>Wat het beheer bij ons kost, hangt af van je advertentiebudget. Wie € 300 per maand aan Google besteedt, heeft ander werk nodig dan wie er € 5.000 in steekt. Na een kort gesprek hoor je welk budget past bij je doel en wat ons beheer daarvan kost. Zonder kleine letters, en maandelijks opzegbaar.</p>
+        <p>Het beheer kost bij ons vanaf € 249 per maand. Wie € 300 per maand aan Google besteedt, heeft ander werk nodig dan wie er € 5.000 in steekt. Na een kort gesprek hoor je welk budget past bij je doel en wat ons beheer voor jou kost. Zonder kleine letters, en maandelijks opzegbaar.</p>
         <p>Hoeveel advertentiebudget je nodig hebt, reken je terug vanuit je doel. Wil je tien aanvragen per maand en kost een aanvraag naar schatting € 40, dan begin je rond € 400 per maand. Daar zit ook ruimte in om te testen, waaronder zoekwoorden waarvan je nog niet weet of ze aanvragen opleveren.</p>
         <p>Laat je account in elk geval op je eigen naam staan, bij welk bureau je ook zit. Dan blijven je gegevens en je historie van jou, ook als je ooit overstapt.</p>
 
@@ -190,8 +190,8 @@ const schema = [{
         <Inhoud items={hoofdstukken} leestijd={12} />
         <div class="card prijs-eigen">
           <p class="kicker">Online adverteren</p>
-          <p class="prijs-kop">Prijs afhankelijk van je advertentiebudget</p>
-          <p class="muted klein">Exclusief btw. Maandelijks opzegbaar.</p>
+          <p class="prijs-kop">Beheer vanaf € 249 per maand</p>
+          <p class="muted klein">Exclusief btw. Je advertentiebudget betaal je rechtstreeks aan Google. Maandelijks opzegbaar.</p>
           <ul class="vink">
             <li>Meting van aanvragen en verkopen</li>
             <li>Google Ads, Shopping en ChatGPT</li>
@@ -208,7 +208,7 @@ const schema = [{
 
   <Faq
     vragen={[
-      { v: 'Wat kost online adverteren?', a: 'Je betaalt een advertentiebudget aan Google of OpenAI, dat je zelf bepaalt. Daarnaast betaal je voor opzet en beheer. Wat dat bij ons kost, hangt af van je advertentiebudget. Dat hoor je na een kort gesprek.' },
+      { v: 'Wat kost online adverteren?', a: 'Je betaalt een advertentiebudget aan Google of OpenAI, dat je zelf bepaalt. Daarnaast betaal je voor opzet en beheer. Bij ons begint het beheer bij € 249 per maand. Wat het voor jou wordt, hoor je na een kort gesprek.' },
       { v: 'Hoe snel levert adverteren op Google iets op?', a: 'Je advertenties staan meestal binnen een dag online. De eerste aanvragen komen vaak in de eerste weken. Na een maand of twee weet je wat een aanvraag kost en waar de winst zit.' },
       { v: 'Wat is beter: adverteren of SEO?', a: 'Adverteren werkt direct maar stopt als je stopt. SEO kost tijd maar blijft werken. Voor de meeste bedrijven is de combinatie het sterkst: adverteren voor nu, SEO voor later.' },
       { v: 'Wat heb ik nodig om te beginnen?', a: 'Een website met een duidelijke pagina per dienst of product, een manier om aanvragen te meten en een budget dat past bij je doel. De meting regelen wij.' },

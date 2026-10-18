@@ -11,7 +11,7 @@ const regels: [RegExp, Stap][] = [
   [/^\/online-adverteren|google-ads|\/wat-is\/(sea|cpc|ctr|roas|cpa|zoekmachinemarketing)\/|google-ad-grants|adverteren/, {
     knop: 'Laat je Google Ads-account gratis checken', kort: 'Gratis Ads-check', href: '/contact/?vraag=Ik%20wil%20mijn%20Google%20Ads-account%20gratis%20laten%20checken.',
     zin: 'We kijken waar je budget weglekt en bellen je met wat we zien. Je account blijft van jou.',
-    dienst: { naam: 'Google Ads uitbesteden', prijs: 'beheer op maat', url: '/online-adverteren/google-ads-bureau/' } }],
+    dienst: { naam: 'Google Ads uitbesteden', prijs: 'beheer vanaf € 249 p/m', url: '/online-adverteren/google-ads-bureau/' } }],
   [/^\/(lokale-seo|seo-[a-z]+\/$)|bedrijfsprofiel|google-reviews|\/reviews\/|maps/, {
     knop: 'Check gratis je plek op de kaart', kort: 'Gratis kaart-check', href: '/gratis-website-analyse/',
     zin: 'Thorgall zoekt op jouw diensten in jouw plaats en belt je met wat hij ziet op de kaart en in Google.',

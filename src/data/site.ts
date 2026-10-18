@@ -13,7 +13,7 @@ export const site = {
   kaart: 'https://www.google.com/maps/search/?api=1&query=Drijfveer+Media+Lauwers+9+Assen',
   // Profielen elders (komen in het schema als sameAs en in de footer). Vul de echte URL's in.
   // Bijvoorbeeld bedrijf: ['https://www.linkedin.com/company/...', 'https://g.page/...'], robert: ['https://www.linkedin.com/in/...']
-  profielen: { bedrijf: [] as string[], robert: [] as string[], thorgall: [] as string[], evelien: [] as string[], johan: [] as string[] } as Record<string, string[]>,
+  profielen: { bedrijf: ['https://www.linkedin.com/company/2549664/'] as string[], robert: [] as string[], thorgall: [] as string[], evelien: [] as string[], johan: [] as string[] } as Record<string, string[]>,
 };
 
 // Het team. Getekende portretten (zwart-wit) staan in /public/img/team/.
