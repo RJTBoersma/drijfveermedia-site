@@ -3,8 +3,8 @@
 // Kaart en paginakop delen een view-transition-name, zodat het plaatje bij een klik uitgroeit tot de kop.
 import Tekening from './Tekening.astro';
 import { overgang, miniatuurVoor } from '../../data/miniaturen';
-interface Props { href: string; onderwerp?: string }
-const { href, onderwerp } = Astro.props;
+interface Props { href: string; onderwerp?: string; overgang?: boolean }
+const { href, onderwerp, overgang: metOvergang = true } = Astro.props;
 const soort = miniatuurVoor(href);
 const fallback = onderwerp ?? 'lamp';
 // Elke pagina kan een eigen scène hebben in src/components/scenes/<slug>.astro (slug: pad zonder slashes, / wordt --).
@@ -13,7 +13,7 @@ const scenes = import.meta.glob('../scenes/*.astro', { eager: true }) as Record<
 const slug = href.replace(/^\/|\/$/g, '').replace(/\//g, '--') || 'home';
 const Scene = !soort ? scenes[`../scenes/${slug}.astro`]?.default : undefined;
 ---
-<div class="plaatje" style={`view-transition-name:${overgang(href)}`} aria-hidden="true">
+<div class="plaatje" style={metOvergang ? `view-transition-name:${overgang(href)}` : undefined} aria-hidden="true">
   {soort === 'ai' && (
     <svg viewBox="0 0 320 180"><rect x="24" y="16" width="272" height="148" rx="12" fill="#fff" stroke="#d9e1ea" /><circle cx="42" cy="32" r="4" fill="#d9e1ea" /><circle cx="54" cy="32" r="4" fill="#d9e1ea" /><circle cx="66" cy="32" r="4" fill="#d9e1ea" /><rect x="150" y="54" width="128" height="30" rx="12" fill="#074663" /><circle cx="50" cy="108" r="10" fill="#e8eef4" /><rect x="68" y="98" width="190" height="8" rx="4" fill="#d9e1ea" /><rect x="68" y="114" width="96" height="10" rx="4" fill="#ffd2b0" /><rect x="170" y="116" width="80" height="8" rx="4" fill="#d9e1ea" /><rect x="68" y="132" width="150" height="8" rx="4" fill="#d9e1ea" /><path d="M276 18l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#ff6600" /></svg>
   )}

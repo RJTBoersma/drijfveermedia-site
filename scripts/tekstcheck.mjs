@@ -144,7 +144,8 @@ const dubbeleKw = dubbel(paginas.map((p) => p.zoekwoord));
 let totaalProblemen = 0;
 if (dubbeleKw.length) { console.log(`✗ zelfde zoekwoord op meerdere pagina's: ${dubbeleKw.join(', ')}`); totaalProblemen += dubbeleKw.length; }
 const titels = [], descs = [];
-for (const f of bestanden('dist')) {
+const DIST = process.env.DIST ?? 'dist';
+for (const f of bestanden(DIST)) {
   const ruw = readFileSync(f, 'utf8');
   const tekst = tekstVan(ruw);
   if (!/noindex/.test(ruw)) {
@@ -153,7 +154,7 @@ for (const f of bestanden('dist')) {
   }
   const laag = tekst.toLowerCase();
   const woorden = laag.match(/[a-zà-ÿ0-9€%'’-]+/g) ?? [];
-  const url = '/' + f.replace(/^dist\/?/, '').replace(/index\.html$/, '').replace(/\\/g, '/');
+  const url = '/' + f.slice(DIST.length).replace(/^\//, '').replace(/index\.html$/, '').replace(/\\/g, '/');
   const pagina = perUrl.get(url);
   if (alleen.length && !alleen.includes(url)) continue;
   if (woorden.length < 40 && !pagina?.min) continue;
@@ -221,7 +222,7 @@ for (const [wat, lijst] of alleen.length ? [] : [['title', titels], ['meta descr
 }
 
 // Welke pagina's uit de structuur bestaan nog niet?
-const ontbreekt = paginas.filter((p) => !p.wachtOpInhoud && (!alleen.length || alleen.includes(p.url)) && !existsSync(join('dist', p.url, 'index.html')));
+const ontbreekt = paginas.filter((p) => !p.wachtOpInhoud && (!alleen.length || alleen.includes(p.url)) && !existsSync(join(DIST, p.url, 'index.html')));
 const klaar = paginas.filter((p) => !p.wachtOpInhoud).length - ontbreekt.length;
 console.log(`\nVoortgang: ${klaar} van ${klaar + ontbreekt.length} pagina's gebouwd.`);
 if (lancering && ontbreekt.length) {

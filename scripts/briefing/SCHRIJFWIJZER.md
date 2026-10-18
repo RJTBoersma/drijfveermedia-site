@@ -177,3 +177,23 @@ Controleer je scène in de build (geen fouten) en kijk of de SVG-code klopt (ges
 - Eén duidelijke volgende stap: de gratis website-analyse of bellen met Thorgall.
 - Diensten-pagina's noemen de vanaf-prijs en wat erbij zit.
 - Plaatspagina's moeten echt over die plaats gaan: bedrijventerreinen, wijken, het soort ondernemers, afstand en reistijd vanaf Assen, regionale concurrentie in Google (zonder concurrenten bij naam af te kraken). Elke plaatspagina is anders; kopieer geen alinea's tussen plaatsen.
+
+## 8. Huisstijl na het expertpanel (18-10-2026)
+
+De tekstcheck keurt deze punten nu af (zie `STIJL` in `scripts/tekstcheck.mjs`):
+- "eerlijk" hooguit één keer per pagina, nooit in een kop of meta description. "Eerlijk is eerlijk" schrappen en meteen met het feit beginnen. Laat zien dat je eerlijk bent, zeg het niet.
+- "gewoon" hooguit één keer, en alleen in de betekenis "normaal". Nooit in een kop of meta description.
+- "in gewone taal" niet meer gebruiken. Zeg wat de klant concreet krijgt, bijvoorbeeld "elke maand één A4: wat we deden, wat het opleverde en wat we nu doen".
+- AI-patronen: hooguit twee keer "niet/geen X, maar Y" per pagina, hooguit één zin die met "Niet" begint, geen "Dat is geen …", geen "zegt alles/niets/weinig/genoeg", geen "goud waard".
+- "Uit interesse, niet om te verkopen" niet meer gebruiken. Schrijf: "Thorgall vraagt eerst wat je wilt bereiken."
+- "gelikte pitch" alleen op /over-ons/. "De koffie staat klaar" alleen op /contact/. Het penaltyverhaal (eigen site kreeg een straf) uitgebreid alleen op /proeflab/ en /linkbuilding/, elders hooguit één zin met een link.
+- Geen "rapport van dertig/veertig pagina's". Zeg wat je wel krijgt: één A4 per maand.
+- Kop "Fouten die we vaak zien" wordt "Veelgemaakte fouten".
+- "binnen 15 minuten" altijd met "op werkdagen" (of "tussen 8.00 en 17.00 uur") op dezelfde pagina; bij een losse belofte in de zin zelf.
+- Schrijfwijze: zoekmachineoptimalisatie, Google-reviews, SEO-bureau, SEO-specialist, Google Ads-specialist, brandingbureau, socialemediabureau, contentmarketing, AI-overzicht (AI Overviews alleen als productnaam), Apple Business (niet meer "Apple Business Connect"), vóór 8.15 uur, "een vaste groep freelancers die we al jaren kennen". "p/m" alleen in tabellen en prijskaarten, in lopende tekst "per maand".
+- Termijnen ("hoe snel zie ik resultaat?") komen uit `src/data/termijnen.ts`. Opzeggen: "per maand, met één maand opzegtermijn, per e-mail".
+- Wat we niet doen komt uit `src/data/niet.ts`. Nooit iets toevoegen dat daar niet staat. Webshops: "bouwen of optimaliseren doen we niet; Google Shopping voor een bestaande webshop wel".
+- Garantie: alleen bij maandelijkse diensten, met een doel en datum die we bij de start vastleggen. Bij eenmalig werk (website, logo, huisstijl, audit) beloof je een vaste prijs vooraf, geen garantie.
+- Klantnamen (Kärcher, bol.com, Nyenrode, Glaspunt): "we werkten onder meer voor", nooit "vertrouwd door" of "op onze klantenlijst".
+- FAQ-vragen specifiek per pagina maken ("Hoe snel sta ik hoger in Zwolle?" in plaats van "Hoe snel zie ik resultaat?"), met het antwoord uit termijnen.ts.
+- Geen zelfverdediging ("zonder trucs", "zonder verkooppraatje", "geen marketingpraatje") en geen afzetten tegen andere bureaus ("cowboys"). Laat zien wat je doet.
