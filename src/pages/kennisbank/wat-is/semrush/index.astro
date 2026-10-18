@@ -1,0 +1,229 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--semrush.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/semrush/';
+const datum = '2026-10-18';
+const definitie = 'Semrush is een betaalde online SEO-tool waarmee je zoekwoorden onderzoekt, je posities in Google volgt, je website technisch controleert en ziet hoe concurrenten aan hun bezoekers komen.';
+const hoofdstukken = [
+  { id: 'kort', titel: 'Het pakket in het kort' },
+  { id: 'functies', titel: 'Wat kun je ermee?' },
+  { id: 'cijfers', titel: 'Zoekvolume en keyword difficulty lezen' },
+  { id: 'prijs', titel: 'Wat kost het?' },
+  { id: 'vergelijking', titel: 'Vergeleken met Ahrefs, SE Ranking en Search Console' },
+  { id: 'nodig', titel: 'Heb je het als mkb\'er nodig?' },
+  { id: 'eerste-uur', titel: 'Je eerste uur in de tool' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Semrush',
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is Semrush?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.semrush.com/prices/',
+      'https://nl.semrush.com/pricing/seo-ai-search/',
+      'https://www.semrush.com/features/',
+      'https://www.semrush.com/kb/1158-what-is-kd',
+      'https://www.semrush.com/news/455953-adobe-completes-semrush-acquisition-strengthening-cx-enterprise-with-enhanced-brand-visibility-capabilities',
+      'https://ahrefs.com/pricing',
+      'https://seranking.com/subscription.html',
+      'https://support.google.com/webmasters/answer/7576553?hl=nl',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is Semrush? Prijzen 2026 en een eerlijke vergelijking"
+  description="Wat is Semrush? Zo werkt de SEO-tool, dit kost hij in oktober 2026 en zo verhoudt hij zich tot Ahrefs, SE Ranking en het gratis Search Console."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Semrush', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO-tools</p>
+        <h1>Wat is Semrush? Uitleg, prijzen en een eerlijke vergelijking</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je webbouwer of een SEO-bureau stuurt je een rapport met grafieken, een "Authority Score" en lijsten met zoekwoorden. Onderaan staat een logo. Grote kans dat het uit Semrush komt. Wat is Semrush precies, wat kost het en heb je het zelf nodig? Op deze pagina lees je het in gewone taal.</p>
+      <p>We zijn geen verkoper van het pakket en krijgen er niets voor. Zelf werken we met SE Ranking. Daarom kunnen we eerlijk zijn over wat Semrush goed doet en waar je met minder geld of zelfs gratis ook uitkomt.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={9} />
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="kort">Het pakket in het kort</h2></div>
+      <p>Semrush is software die je in je browser gebruikt. Je betaalt een abonnement per maand of per jaar. Het bedrijf bestaat volgens eigen zeggen al ruim zeventien jaar. Sinds april 2026 is het onderdeel van Adobe, de maker van Photoshop. Adobe maakte op 28 april 2026 bekend dat de overname rond was.</p>
+      <p>Het begon als hulpmiddel voor zoekmachineoptimalisatie. Inmiddels is het een hele gereedschapskist. Je vindt er zoekwoordonderzoek, concurrentieanalyse, backlinks, een technische controle van je site, het volgen van posities en rapportages. Nieuw is het meten van je zichtbaarheid in AI-antwoorden, zoals die van ChatGPT, Gemini en de AI-overzichten in Google.</p>
+      <p>Belangrijk om te snappen: bijna alle cijfers over andere websites zijn schattingen. Semrush ziet niet in jouw Google-account of in dat van je concurrent. Het verzamelt zelf data uit zoekresultaten en rekent daarmee. Dat maakt het sterk voor vergelijken, en zwak als je exacte aantallen wilt.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="functies">Wat kun je met Semrush?</h2></div>
+      <p>Het menu is groot en verandert geregeld. Dit zijn de onderdelen die je als ondernemer of marketeer echt tegenkomt, met de namen zoals ze in de tool staan:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat het doet</th><th>Handig als je wilt weten</th></tr></thead>
+          <tbody>
+            <tr><td><b>Keyword Magic Tool</b></td><td>Geeft bij één woord honderden varianten met zoekvolume en moeilijkheid</td><td>Waar mensen in jouw vak allemaal op zoeken</td></tr>
+            <tr><td><b>Keyword Overview</b></td><td>Alles over één zoekwoord: volume, trend, moeilijkheid, wie er bovenaan staat</td><td>Of een zoekwoord de moeite waard is</td></tr>
+            <tr><td><b>Domain Overview</b> en <b>Organic Research</b></td><td>Schat het verkeer van elke website en laat zien op welke zoekwoorden die gevonden wordt</td><td>Hoe een concurrent aan zijn bezoekers komt</td></tr>
+            <tr><td><b>Keyword Gap</b> en <b>Backlink Gap</b></td><td>Zet jouw site naast die van concurrenten</td><td>Welke zoekwoorden en links zij hebben en jij niet</td></tr>
+            <tr><td><b>Backlinkanalyse</b></td><td>Toont welke sites naar een domein linken, met een eigen score: Authority Score</td><td>Hoe sterk je linkprofiel is</td></tr>
+            <tr><td><b>Site Audit</b></td><td>Loopt je website na op technische fouten, zoals kapotte links en trage pagina's</td><td>Wat er technisch aan je site mankeert</td></tr>
+            <tr><td><b>Position Tracking</b></td><td>Volgt elke dag je posities op de zoekwoorden die je kiest</td><td>Of je stijgt of zakt, en wanneer</td></tr>
+            <tr><td><b>Rapportage</b></td><td>Bouwt pdf-rapporten met cijfers uit de tool, Google Analytics en Search Console</td><td>Hoe je maandelijks verslag doet</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Daarnaast zit er een schrijfhulp in voor content, met AI. En een deel voor Google Ads: je ziet op welke zoekwoorden concurrenten adverteren. Lokale vindbaarheid, social media en advertenties zijn aparte pakketten met een eigen prijs. Daar heb je voor gewone SEO niets aan.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="cijfers">Zoekvolume en keyword difficulty lezen</h2></div>
+      <p>Twee getallen zie je overal terug: het zoekvolume en de keyword difficulty, kortweg KD.</p>
+      <p><b>Zoekvolume</b> is het geschatte aantal zoekopdrachten per maand, voor één land. Kies dus altijd eerst Nederland als database. Anders kijk je naar Amerikaanse cijfers. Bij kleine Nederlandse zoekwoorden staat er vaak 0 of 10, terwijl er in het echt wel degelijk op gezocht wordt. Voor "dakkapel plaatsen Assen" is dat heel normaal. Je echte aantallen zie je alleen in je eigen <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+      <p><b>Keyword difficulty</b> is een percentage van 0 tot 100. Volgens Semrush zelf meet het hoeveel moeite het kost om in de top 10 van Google te komen. Het rekent onder meer met het aantal sites dat naar de huidige toppagina's linkt en met de Authority Score van die domeinen. Semrush deelt de schaal zo in:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>KD</th><th>Volgens Semrush</th><th>Wat dat in de praktijk betekent</th></tr></thead>
+          <tbody>
+            <tr><td>0 tot 14</td><td>Heel makkelijk</td><td>Een goede pagina kan hier snel scoren</td></tr>
+            <tr><td>15 tot 29</td><td>Makkelijk</td><td>Haalbaar, ook voor een jonge site, met tekst die past bij de vraag</td></tr>
+            <tr><td>30 tot 49</td><td>Mogelijk</td><td>Vraagt een sterke, goed opgebouwde pagina</td></tr>
+            <tr><td>50 tot 69</td><td>Moeilijk</td><td>Zonder goede backlinks wordt het lastig</td></tr>
+            <tr><td>70 tot 84</td><td>Zwaar</td><td>Veel werk aan content én links</td></tr>
+            <tr><td>85 tot 100</td><td>Heel zwaar</td><td>Alleen met een groot budget en lange adem</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Lees KD als een richting, niet als een vonnis. Het getal kijkt vooral naar links en autoriteit. Het weet niet dat jij als enige installateur in de regio een pagina over warmtepompen in Hoogeveen hebt. Bij lokale zoekwoorden ligt de drempel vaak lager dan het getal doet vermoeden. Meer over de keuze van zoekwoorden lees je in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a>.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="prijs">Wat kost Semrush?</h2></div>
+      <p>Dit zijn de prijzen van het SEO-deel zoals ze op 18 oktober 2026 op de officiële prijspagina stonden. Semrush rekent in Amerikaanse dollars, ook op de Nederlandse versie van de site. Bij jaarbetaling is het tot 17 procent goedkoper.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Abonnement</th><th>Per maand</th><th>Per maand bij jaarbetaling</th><th>Wat je krijgt</th></tr></thead>
+          <tbody>
+            <tr><td><b>Free</b></td><td>$ 0</td><td>$ 0</td><td>1 demoproject, 10 rapporten per dag, geen creditcard nodig</td></tr>
+            <tr><td><b>SEO</b></td><td>$ 139</td><td>$ 117,33</td><td>5 websites, 500 zoekwoorden dagelijks gevolgd, basis zoekwoord- en concurrentieonderzoek, Site Audit</td></tr>
+            <tr><td><b>Starter</b></td><td>$ 199</td><td>$ 165,17</td><td>Als SEO, plus uitgebreidere zoekwoord- en concurrentietools en het volgen van 50 AI-prompts</td></tr>
+            <tr><td><b>Pro+</b></td><td>$ 299</td><td>$ 248,17</td><td>15 websites, 1.500 zoekwoorden, historische data, contentoptimalisatie</td></tr>
+            <tr><td><b>Advanced</b></td><td>Op aanvraag</td><td>Op aanvraag</td><td>40 of meer websites, 5.000 of meer zoekwoorden, API, teamgebruikers</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron: semrush.com/prices en nl.semrush.com, prijspeil oktober 2026. Prijzen veranderen regelmatig, kijk dus altijd zelf voordat je afsluit.</p>
+      <p>Let op de extra kosten. Een tweede gebruiker kost vanaf $ 45 per maand. Een rapport met je eigen logo erop is een losse uitbreiding van $ 20 per maand, het basisrapport $ 10. Je kunt alle betaalde abonnementen zeven dagen gratis proberen en in die week opzeggen. Zet wel een herinnering in je agenda, want daarna loopt het abonnement gewoon door.</p>
+      <p>Wat betekent dat per jaar? Reken voor het goedkoopste volledige abonnement op ruim $ 1.400 bij jaarbetaling. Voor een eenmanszaak die één site heeft, is dat veel geld voor een tool die je misschien één keer per maand opent.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="vergelijking">Semrush, Ahrefs, SE Ranking of Search Console?</h2></div>
+      <p>Dit is de vergelijking die we zelf hadden willen lezen toen we een tool kozen. Alle prijzen hebben we op 18 oktober 2026 van de officiële sites gehaald.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Semrush</th><th>Ahrefs</th><th>SE Ranking</th><th>Google Search Console</th></tr></thead>
+          <tbody>
+            <tr><td><b>Goedkoopste volledige abonnement</b></td><td>$ 139 per maand (SEO)</td><td>$ 129 per maand (Lite)</td><td>$ 129 per maand (Core)</td><td>Gratis</td></tr>
+            <tr><td><b>Gratis versie</b></td><td>Ja, 10 rapporten per dag</td><td>Ja, Ahrefs Free, alleen voor je eigen geverifieerde site</td><td>Nee</td><td>Volledig gratis</td></tr>
+            <tr><td><b>Proefperiode</b></td><td>7 dagen</td><td>Geen, en ook geen kortingsacties</td><td>14 dagen, zonder creditcard</td><td>Niet nodig</td></tr>
+            <tr><td><b>Posities volgen</b></td><td>Dagelijks, 500 zoekwoorden</td><td>Wekelijks, 750 zoekwoorden</td><td>Dagelijks, 2.000 zoekwoorden</td><td>Gemiddelde positie per zoekopdracht, alleen voor je eigen site</td></tr>
+            <tr><td><b>Concurrenten bekijken</b></td><td>Ja, sterk</td><td>Ja, sterk</td><td>Ja</td><td>Nee</td></tr>
+            <tr><td><b>Backlinks</b></td><td>Ja, met Authority Score</td><td>Ja, de sterkste kant, met Domain Rating</td><td>Ja</td><td>Een steekproef van links naar je eigen site</td></tr>
+            <tr><td><b>Site audit</b></td><td>Ja</td><td>Ja, ook in de gratis versie voor je eigen site</td><td>Ja</td><td>Indexering, snelheid en fouten volgens Google</td></tr>
+            <tr><td><b>Echte of geschatte cijfers</b></td><td>Geschat</td><td>Geschat</td><td>Geschat</td><td>Echt: klikken en vertoningen uit Google</td></tr>
+            <tr><td><b>Past bij</b></td><td>Marketeers en bureaus die alles in één pakket willen</td><td>Wie veel met links en concurrenten werkt</td><td>Mkb en bureaus die goed willen meten voor minder geld</td><td>Iedereen met een website, als eerste stap</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bronnen: de prijspagina's van Semrush, Ahrefs en SE Ranking, en de uitleg van Google over het prestatierapport en het linksrapport in Search Console. Bedragen in dollars, prijspeil oktober 2026.</p>
+      <p>De eerlijke conclusie: het verschil tussen de drie betaalde pakketten zit vooral in de details. Semrush is het breedst, Ahrefs is het sterkst in links, SE Ranking laat je voor hetzelfde geld de meeste zoekwoorden volgen. Alle drie geven schattingen. Search Console geeft de echte cijfers, maar alleen van jezelf. Een uitgebreide uitleg over de concurrent lees je op <a href="/kennisbank/wat-is/ahrefs/">wat is Ahrefs</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="nodig">Heb je Semrush nodig als mkb'er?</h2></div>
+      <p>Meestal niet. Dat is geen mening tegen de tool, maar een rekensom. Voor de meeste kleine bedrijven zit de grootste winst in een paar basiszaken: goede pagina's per dienst, een sterk Google Bedrijfsprofiel en een technisch gezonde site. Dat kun je met gratis gereedschap prima volgen.</p>
+      <ul class="vink">
+        <li><b>Begin gratis.</b> Search Console laat zien op welke zoekwoorden je nu al verschijnt, met echte klikken. Google Analytics laat zien wat bezoekers daarna doen.</li>
+        <li><b>Gebruik de gratis versie voor een snelle blik.</b> Tien rapporten per dag is genoeg om drie concurrenten en een handvol zoekwoorden te bekijken.</li>
+        <li><b>Neem een maand als je een project hebt.</b> Een nieuwe website, een grote verhuizing of een uitgebreid zoekwoordonderzoek. Daarna zeg je weer op.</li>
+        <li><b>Neem een vast abonnement</b> als je elke week met SEO bezig bent, meerdere sites beheert of maandelijks moet rapporteren.</li>
+      </ul>
+      <p>Een voorbeeld. Een installatiebedrijf in Hoogeveen met vijf monteurs wil meer aanvragen voor warmtepompen. De eigenaar neemt één maand het SEO-abonnement. In die maand zoekt hij met de Keyword Magic Tool alle varianten rond "warmtepomp" in Drenthe. Met Organic Research kijkt hij welke pagina's van twee concurrenten in Emmen en Meppel het goed doen. De Site Audit vindt 40 kapotte links en een trage homepage. Hij maakt een lijst van tien pagina's die hij wil schrijven of verbeteren en zegt op. De rest van het jaar volgt hij zijn resultaat in Search Console. Kosten: $ 139. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="eerste-uur">Je eerste uur in de tool</h2></div>
+      <p>Neem je de proefweek of de gratis versie? Dan haal je met dit stappenplan in een uur het meeste eruit.</p>
+      <ol>
+        <li><b>Kies Nederland als database.</b> Dat stel je per rapport in. Vergeet je dit, dan kloppen al je volumes niet.</li>
+        <li><b>Typ je eigen domein in bij Domain Overview.</b> Kijk naar het aantal zoekwoorden waarop je gevonden wordt en naar je best scorende pagina's.</li>
+        <li><b>Doe hetzelfde voor twee of drie concurrenten.</b> Kies bedrijven die je in Google tegenkomt, niet per se die je in het echt als concurrent ziet.</li>
+        <li><b>Open Keyword Gap.</b> Zet je eigen domein naast die van je concurrenten en filter op de zoekwoorden waarop zij wel scoren en jij niet.</li>
+        <li><b>Zoek in de Keyword Magic Tool</b> op je belangrijkste dienst. Filter op KD onder de 30 en op vragen. Daar zitten vaak de snelste kansen.</li>
+        <li><b>Start een Site Audit</b> van je eigen site. Begin bij de zwaarste fouten, niet bij de waarschuwingen.</li>
+        <li><b>Exporteer wat je vond</b> naar Excel of Google Sheets. Na de proefweek ben je anders alles kwijt.</li>
+      </ol>
+      <p>Wil je dit echt goed doen, lees dan ook onze gids <a href="/kennisbank/gidsen/concurrentieanalyse/">concurrentieanalyse</a>. Daar staat hoe je van een lijst cijfers naar keuzes komt.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><b>Vergeten op te zeggen.</b> De proefweek gaat automatisch over in een betaald abonnement.</li>
+        <li><b>Sturen op Authority Score.</b> Dat getal is van Semrush zelf. Google kent het niet en gebruikt het niet. Het lijkt op de <a href="/kennisbank/wat-is/domain-authority/">domain authority</a> van andere tools: handig om te vergelijken, geen doel op zich.</li>
+        <li><b>Het geschatte verkeer als waarheid zien.</b> Een concurrent met "200 bezoekers per maand" kan er in het echt 50 of 800 hebben.</li>
+        <li><b>Elke melding uit de Site Audit willen oplossen.</b> Een lange lijst waarschuwingen ziet er eng uit. Veel ervan doen weinig voor je vindbaarheid. Begin bij de echte fouten. Twijfel je, laat dan een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-check</a> doen.</li>
+        <li><b>Alleen op hoog zoekvolume mikken.</b> Een zoekwoord met 30 zoekopdrachten per maand en een duidelijke koopvraag levert een lokaal bedrijf vaak meer op dan een algemeen woord met 3.000.</li>
+        <li><b>Een rapport doorsturen zonder uitleg.</b> Een rapport waar je zelf uitleg bij nodig hebt, schiet zijn doel voorbij.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Zo doen wij het</p>
+        <p>Wij gebruiken SE Ranking voor zoekwoorden, posities en backlinks, en altijd de echte cijfers uit je eigen Search Console. Een tool is gereedschap, geen strategie. Wat je met de cijfers doet, bepaalt het resultaat. Lees hoe we dat aanpakken bij <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>, of laat eerst gratis kijken waar jouw grootste kans zit met de <a href="/gratis-website-analyse/">gratis website-analyse</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is Semrush gratis?', a: 'Er is een gratis account zonder creditcard. Daarmee kun je volgens Semrush 10 rapporten per dag opvragen en 1 demoproject aanmaken. Voor serieus gebruik heb je een betaald abonnement nodig, vanaf $ 139 per maand (prijspeil oktober 2026).' },
+      { v: 'Is Semrush in het Nederlands?', a: 'De website is in het Nederlands te lezen via nl.semrush.com. Op de Nederlandse prijspagina staan wel nog Engelse stukken, en de namen van de onderdelen zijn Engels. Kies bij elk rapport de Nederlandse database, anders zie je cijfers voor een ander land.' },
+      { v: 'Hoe betrouwbaar is het zoekvolume?', a: 'Het is een schatting. Voor grote zoekwoorden klopt de orde van grootte meestal. Bij kleine en lokale zoekwoorden zit het er vaak naast. Je echte klikken en vertoningen zie je alleen in Google Search Console.' },
+      { v: 'Wat is beter, Semrush of Ahrefs?', a: 'Ze ontlopen elkaar weinig. Semrush is breder, met dagelijkse positiecontrole en meer marketingonderdelen. Ahrefs is sterker in backlinks. Kies op basis van waar je het meest mee werkt, en probeer het eerst. Bij Ahrefs kan dat alleen met de gratis versie voor je eigen site.' },
+      { v: 'Kan ik het per maand afsluiten?', a: 'Ja. Je kunt per maand of per jaar betalen. Per jaar is tot 17 procent goedkoper, maar dan zit je er ook een jaar aan vast. Voor een eenmalig project is één maand vaak genoeg.' },
+      { v: 'Gebruikt Drijfveer Media Semrush?', a: 'Nee, wij werken met SE Ranking en de gegevens uit Google Search Console van de klant. We hebben geen afspraken met Semrush, Ahrefs of SE Ranking en verdienen niets aan een abonnement.' },
+    ]}
+  />
+
+  <Actie titel="Liever eerst weten waar je staat?" tekst={`We zoeken gratis uit op welke zoekwoorden jij en je concurrenten gevonden worden. ${site.contactpersoon} belt je met de drie kansen die het snelst verschil maken.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

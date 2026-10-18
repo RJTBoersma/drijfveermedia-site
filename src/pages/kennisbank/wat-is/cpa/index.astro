@@ -1,0 +1,330 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--cpa.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/cpa/';
+const datum = '2026-10-18';
+const definitie = 'CPA (cost per acquisition) is wat je gemiddeld betaalt voor één conversie, zoals een bestelling of offerteaanvraag: je kosten gedeeld door het aantal conversies.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'De betekenis' },
+  { id: 'berekenen', titel: 'Berekenen' },
+  { id: 'rekenhulp', titel: 'Rekenhulp' },
+  { id: 'maximaal', titel: 'Je maximum' },
+  { id: 'goed', titel: 'Wat is goed?' },
+  { id: 'verschil', titel: 'Verwante getallen' },
+  { id: 'doel-cpa', titel: 'Doel-CPA in Google Ads' },
+  { id: 'affiliate', titel: 'Bij affiliate' },
+  { id: 'verlagen', titel: 'Verlagen' },
+  { id: 'fouten', titel: 'Valkuilen' },
+];
+// Voorbeeld voor de rekenhulp: dezelfde getallen als in de Google Ads-check.
+const kosten = 800;
+const conversies = 16;
+const waarde = 2400;
+const marge = 30;
+const afsluit = 25;
+const cpa = kosten / conversies;
+const maxCpa = waarde * (marge / 100) * (afsluit / 100);
+const euro = (n: number) => '€ ' + n.toLocaleString('nl-NL', { maximumFractionDigits: 2, minimumFractionDigits: n % 1 ? 2 : 0 });
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'CPA (cost per acquisition)',
+  alternateName: ['Cost per acquisition', 'Cost per action', 'Kosten per conversie'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is CPA? Berekenen, maximum en doel-CPA | Drijfveer Media"
+  description="Wat is CPA? Zo bereken je de kosten per conversie, reken je uit wat een aanvraag maximaal mag kosten en stel je een doel-CPA in die winst oplevert."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'CPA', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Online adverteren</p>
+        <h1>Wat is CPA? Zo reken je uit wat een klant mag kosten</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Wat is CPA, en waarom vragen bureaus er steeds naar? Het is het getal dat vertelt wat één aanvraag of bestelling je kost. Niet wat een klik kost, maar wat er onderaan de streep uitkomt. Voor een dienstverlener die adverteert, is het misschien wel het belangrijkste getal in het hele account. Maar een CPA zonder maximum zegt niets. € 50 per aanvraag is een koopje voor een aannemer en een strop voor een kapper. Hieronder lees je hoe je hem berekent, hoe je je eigen maximum vindt, en hoe je hem in Google Ads gebruikt. Met een rekenhulp om het meteen voor jouw bedrijf te doen.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>CPA = kosten ÷ aantal conversies.</li>
+          <li>De A staat voor acquisition of action. Een conversie kan een bestelling zijn, maar ook een offerteaanvraag of telefoontje.</li>
+          <li>Wat een aanvraag maximaal mag kosten: opdrachtwaarde × brutomarge × het deel van de aanvragen dat klant wordt.</li>
+          <li>Doel-CPA is een biedstrategie in Google Ads die stuurt op een gemiddelde prijs per conversie.</li>
+          <li>Bij affiliate is het een afrekenmodel: je betaalt alleen per conversie.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={12} />
+
+      <div class="stap-kop" id="betekenis"><Tekening naam="boek" maat={52} /><h2>Wat betekent CPA?</h2></div>
+      <p>CPA staat voor cost per acquisition: kosten per verwerving. Je ziet ook cost per action, kosten per actie. In Google Ads heet de kolom gewoon "Kosten/conv.", kosten per conversie. Het is allemaal hetzelfde getal.</p>
+      <p>Wat een conversie is, bepaal je zelf. Voor een webshop is het een bestelling. Voor een installateur een offerteaanvraag of een telefoontje van meer dan een minuut. Voor een opleider een inschrijving voor een open dag. Kies de actie die het dichtst bij omzet ligt en die je betrouwbaar kunt meten.</p>
+      <p>Het woord wordt in twee betekenissen gebruikt:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Gebruik</th><th>Wat het is</th><th>Wie betaalt waarvoor</th></tr></thead>
+          <tbody>
+            <tr><td>Als stuurgetal</td><td>Een uitkomst: wat een conversie je gemiddeld gekost heeft</td><td>Je betaalt per klik of vertoning, de kosten per conversie reken je achteraf uit</td></tr>
+            <tr><td>Als afrekenmodel</td><td>Een afspraak: je betaalt alleen als er een conversie is</td><td>Bij affiliate marketing en sommige leadplatforms</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="kader">
+        <p class="kader-titel">Geen accountant</p>
+        <p>Zocht je naar een Certified Public Accountant? In de Verenigde Staten staat CPA ook voor een beëdigd accountant. Deze pagina gaat over de marketingterm.</p>
+      </div>
+
+      <div class="stap-kop" id="berekenen"><Tekening naam="pen" maat={52} /><h2>CPA berekenen: de formule</h2></div>
+      <div class="kader formule">
+        <p><b>CPA = kosten ÷ aantal conversies</b></p>
+      </div>
+      <p>Een campagne kost in oktober € 800 en levert 16 aanvragen op. Je betaalt dan € 800 ÷ 16 = € 50 per aanvraag. Zo simpel is het.</p>
+      <p>Je kunt hem ook opbouwen uit twee andere getallen: wat een klik kost en hoeveel klikken er converteren.</p>
+      <div class="kader formule">
+        <p><b>CPA = klikprijs (CPC) ÷ conversiepercentage</b></p>
+        <p>Een klik kost € 2,50 en 5 procent van de bezoekers vraagt een offerte aan. Dan kost een aanvraag € 2,50 ÷ 0,05 = € 50.</p>
+      </div>
+      <p>Die tweede formule is handig, omdat hij laat zien waar je knoppen zitten. Volgens de zoekwoorddatabase van SE Ranking kostte een klik op "dakdekker" in Nederland in oktober 2026 gemiddeld € 4,81. Converteert 4 procent van die bezoekers, dan betaal je zo'n € 120 per aanvraag. Haal je dat naar 8 procent met een betere landingspagina, dan halveren je kosten per aanvraag naar ongeveer € 60. Zonder dat de klikprijs verandert.</p>
+      <h3>Welke kosten tel je mee?</h3>
+      <p>In Google Ads zie je alleen het advertentiebudget, zonder btw. Voor een eerlijk beeld tel je er zelf bij wat de campagne verder kost.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kostenpost</th><th>In Google Ads?</th><th>Meetellen?</th></tr></thead>
+          <tbody>
+            <tr><td>Advertentiekosten</td><td>Ja</td><td>Altijd</td></tr>
+            <tr><td>Beheer door een bureau</td><td>Nee</td><td>Ja, voor je echte kosten per klant</td></tr>
+            <tr><td>Je eigen uren</td><td>Nee</td><td>Ja, als je er wekelijks mee bezig bent</td></tr>
+            <tr><td>Landingspagina of tool</td><td>Nee</td><td>Verdeeld over de maanden dat je hem gebruikt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Gebruik voor het dagelijkse sturen de kosten per conversie uit Google Ads. Gebruik voor de vraag "levert dit geld op?" het bedrag met alle kosten erbij.</p>
+
+      <div class="stap-kop" id="rekenhulp"><Tekening naam="munten" maat={52} /><h2>Rekenhulp: wat kost een conversie en wat mag hij kosten?</h2></div>
+      <p>Vul je eigen getallen in. Bovenaan reken je uit wat een conversie nu kost. Daaronder wat hij maximaal mag kosten voordat je verlies draait.</p>
+      <form class="reken card" data-cpa aria-label="Rekenhulp CPA">
+        <fieldset>
+          <legend>1. Wat kost een conversie nu?</legend>
+          <label>Kosten in de periode (€)<input type="number" name="kosten" value={kosten} min="0" step="1" inputmode="decimal" /></label>
+          <label>Aantal conversies<input type="number" name="conversies" value={conversies} min="0" step="1" inputmode="numeric" /></label>
+          <p class="uit">Kosten per conversie: <output name="cpa">{euro(cpa)}</output></p>
+        </fieldset>
+        <fieldset>
+          <legend>2. Wat mag een aanvraag maximaal kosten?</legend>
+          <label>Gemiddelde opdracht of bestelling (€)<input type="number" name="waarde" value={waarde} min="0" step="1" inputmode="decimal" /></label>
+          <label>Brutomarge (%)<input type="number" name="marge" value={marge} min="0" max="100" step="1" inputmode="decimal" /></label>
+          <label>Aanvragen die klant worden (%)<input type="number" name="afsluit" value={afsluit} min="0" max="100" step="1" inputmode="decimal" /></label>
+          <p class="uit">Maximaal per conversie: <output name="max">{euro(maxCpa)}</output></p>
+        </fieldset>
+        <p class="oordeel" aria-live="polite"><output name="oordeel">Een conversie kost nu {euro(cpa)}. Dat ligt onder je maximum van {euro(maxCpa)}. Elke aanvraag levert gemiddeld {euro(maxCpa - cpa)} brutowinst op na advertentiekosten.</output></p>
+        <p class="klein muted">Webshop? Zet "aanvragen die klant worden" op 100, want elke conversie is dan al een verkoop. Ingevuld staat een verzonnen voorbeeld.</p>
+      </form>
+
+      <div class="stap-kop" id="maximaal"><Tekening naam="doel" maat={52} /><h2>Je maximum uit marge en afsluitratio</h2></div>
+      <p>Het getal dat je naast je kosten per conversie legt, is je maximum. Het punt waarop een aanvraag precies evenveel kost als hij gemiddeld oplevert. Daarboven verlies je geld op elke conversie.</p>
+      <div class="kader formule">
+        <p><b>Maximale CPA = opdrachtwaarde × brutomarge × afsluitratio</b></p>
+      </div>
+      <p>Met brutomarge bedoelen we wat er van de opdracht overblijft na inkoop en de uren die je erin steekt. De afsluitratio is het deel van de aanvragen dat echt klant wordt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Berekening</th><th>Uitkomst</th></tr></thead>
+          <tbody>
+            <tr><td>Brutowinst per klant</td><td>€ 2.400 × 30%</td><td>€ 720</td></tr>
+            <tr><td>Aanvragen per klant</td><td>1 op de 4 wordt klant</td><td>4</td></tr>
+            <tr><td>Maximum per aanvraag</td><td>€ 720 ÷ 4</td><td>€ 180</td></tr>
+            <tr><td>Wat het nu kost</td><td>€ 800 ÷ 16</td><td>€ 50</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld van een klusbedrijf in Assen.</p>
+      <p>Dit bedrijf zit ruim onder zijn maximum. Dat betekent ook: er is ruimte om meer budget in te zetten. Elke extra aanvraag tot € 180 levert nog geld op. Veel ondernemers die hun CPA zien dalen, zijn tevreden. Maar wie ver onder zijn maximum zit, laat vaak klanten liggen.</p>
+      <h3>Met klantwaarde rekenen</h3>
+      <p>Komt een klant vaker terug? Een onderhoudsbedrijf dat een cv-ketel installeert, krijgt er vaak een onderhoudscontract bij. Reken dan met de klantwaarde over een paar jaar in plaats van met de eerste opdracht. Je maximum gaat omhoog, en je kunt meebieden waar concurrenten afhaken. Wees wel eerlijk over hoeveel klanten echt blijven. Neem een gemiddelde uit je eigen administratie, geen hoopvolle schatting.</p>
+
+      <h3>Voor een webshop</h3>
+      <p>Verkoop je online, dan valt de afsluitratio weg. Elke conversie is al een verkoop. Je maximum is dan de orderwaarde maal je brutomarge. Een webshop in tuingereedschap met een gemiddelde bestelling van € 120 en 35 procent marge mag per bestelling hooguit € 42 aan advertenties uitgeven. Reken met de orderwaarde zonder btw en verzendkosten. En haal er een stuk af voor retouren: stuurt een op de tien klanten iets terug, dan ligt je echte maximum eerder rond de € 38. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Heb je veel producten met sterk verschillende prijzen, dan werkt één vast bedrag per bestelling slecht. Een grasmaaier van € 600 mag veel meer kosten dan een handschoen van € 12. Stuur dan op rendement in plaats van op een bedrag per conversie.</p>
+
+      <div class="stap-kop" id="goed"><Tekening naam="ster" maat={52} /><h2>Wat is een goede CPA?</h2></div>
+      <p>Een goed bedrag ligt onder je maximum, met genoeg ruimte voor winst. Een gemiddelde uit een branchelijstje helpt je niet: dat zegt niets over jouw marge, je prijzen en hoe goed jij offertes omzet in opdrachten.</p>
+      <p>Een paar richtpunten die wel werken:</p>
+      <ul>
+        <li><b>Houd ruimte.</b> Mik in het begin op hooguit de helft tot twee derde van je maximum. Dan vang je tegenvallers op, zoals een maand met minder opdrachten.</li>
+        <li><b>Kijk per campagne.</b> Een campagne op je bedrijfsnaam heeft bijna altijd lage kosten per conversie. Die trekt het gemiddelde omlaag en verbergt een dure campagne ernaast.</li>
+        <li><b>Kijk naar de trend.</b> Eén maand zegt weinig. Bij weinig conversies schommelt het getal flink. Kijk naar drie maanden.</li>
+        <li><b>Kijk naar het aantal.</b> € 20 per aanvraag met twee aanvragen per maand is minder waard dan € 60 met twintig aanvragen, zolang je onder je maximum blijft.</li>
+      </ul>
+
+      <h3>Een voorbeeld over drie maanden</h3>
+      <p>Waarom je verder kijkt dan de aanvraag, zie je in deze tabel. Hetzelfde budget, drie maanden achter elkaar.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Maand</th><th>Kosten</th><th>Aanvragen</th><th>Per aanvraag</th><th>Nieuwe klanten</th><th>Per klant</th></tr></thead>
+          <tbody>
+            <tr><td>Juli</td><td>€ 800</td><td>10</td><td>€ 80</td><td>3</td><td>€ 267</td></tr>
+            <tr><td>Augustus</td><td>€ 800</td><td>20</td><td>€ 40</td><td>4</td><td>€ 200</td></tr>
+            <tr><td>September</td><td>€ 800</td><td>16</td><td>€ 50</td><td>5</td><td>€ 160</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld.</p>
+      <p>Wie alleen naar Google Ads kijkt, noemt augustus de beste maand: de goedkoopste aanvragen. Maar in augustus kwamen ook veel vragen van mensen die alleen een prijs wilden horen. September leverde minder aanvragen op, en meer klanten. Houd daarom bij welke aanvragen klant worden. Dan stuur je op wat een klant kost, en dat is het getal dat op je bankrekening terechtkomt.</p>
+
+      <div class="stap-kop" id="verschil"><Tekening naam="grafiek" maat={52} /><h2>Verwante getallen naast elkaar</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Getal</th><th>Formule</th><th>Wat het zegt</th></tr></thead>
+          <tbody>
+            <tr><td>CPC</td><td>Kosten ÷ klikken</td><td>Wat één bezoeker kost</td></tr>
+            <tr><td>CPA</td><td>Kosten ÷ conversies</td><td>Wat één bestelling of aanvraag kost</td></tr>
+            <tr><td>CPL</td><td>Kosten ÷ leads</td><td>Hetzelfde getal, als je conversie een lead is</td></tr>
+            <tr><td>CAC</td><td>Alle marketing- en verkoopkosten ÷ nieuwe klanten</td><td>Wat een betalende klant echt kost</td></tr>
+            <tr><td>ROAS</td><td>Omzet uit advertenties ÷ advertentiekosten</td><td>Hoeveel omzet elke advertentie-euro oplevert</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>CPA en ROAS zijn twee kanten van dezelfde munt. Dienstverleners zonder vaste orderwaarde sturen meestal op kosten per conversie. Webshops met veel verschillende prijzen sturen beter op <a href="/kennisbank/wat-is/roas/">ROAS</a>, omdat een bestelling van € 30 en een van € 900 anders niet uit elkaar te houden zijn. Wat een klik kost en hoe je die omlaag krijgt, lees je bij <a href="/kennisbank/wat-is/cpc/">CPC</a>.</p>
+
+      <div class="stap-kop" id="doel-cpa"><Tekening naam="tandwiel" maat={52} /><h2>Doel-CPA in Google Ads</h2></div>
+      <p>Doel-CPA is een biedstrategie in Google Ads. Je geeft op wat een conversie gemiddeld mag kosten. Google bepaalt dan bij elke veiling hoe hoog het biedt, op basis van de kans dat die klik een conversie wordt. Je betaalt nog steeds per klik. Wat Google er zelf over schrijft, op een rij:</p>
+      <ul>
+        <li><b>Het is een gemiddelde.</b> Sommige conversies kosten meer dan je doel, andere minder. Google probeert het gemiddelde op je doel te houden.</li>
+        <li><b>Conversiemeting is verplicht.</b> Zonder "Conversies bijhouden" kun je de strategie niet instellen. Conversiegeschiedenis is niet verplicht.</li>
+        <li><b>Budgetruimte.</b> Google raadt aan je budget zo in te stellen dat het systeem op een dag tot twee keer je gemiddelde dagbudget kan uitgeven.</li>
+        <li><b>Aanbevolen doel.</b> Heeft de campagne al conversies, dan stelt Google een doel voor: je gemiddelde kosten per conversie van de afgelopen 30 dagen.</li>
+        <li><b>Beoordelen.</b> Google adviseert om te meten over een periode met minstens 30 conversies.</li>
+        <li><b>Nieuwe naam.</b> Vanaf juni 2026 heet "Aantal conversies maximaliseren met een doel-CPA" kortweg Doel-CPA. Het biedgedrag is hetzelfde gebleven.</li>
+      </ul>
+      <p>Het grootste misverstand: denken dat een lager doel altijd beter is. Google schrijft het zelf: zet je het doel te laag, dan mis je klikken die tot conversies hadden geleid, en krijg je er in totaal minder. Begin rond wat een conversie nu kost. Verlaag in stappen van tien tot twintig procent en geef het systeem na elke stap een paar weken. Wil je eerst zien wat een wijziging doet, gebruik dan de optie Opslaan als experiment.</p>
+      <p>Heb je weinig conversies, zeg minder dan een stuk of dertig per maand? Dan is "Aantal conversies maximaliseren" zonder doel vaak rustiger. Een dagbudget dat je je kunt veroorloven, werkt dan als grens. Hoe je zo'n campagne vanaf nul opzet, staat in <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>. Wat je per maand kwijt bent, lees je in <a href="/kennisbank/gidsen/wat-kost-google-ads/">wat kost Google Ads</a>.</p>
+
+      <div class="stap-kop" id="affiliate"><Tekening naam="ketting" maat={52} /><h2>Als afrekenmodel bij affiliate marketing</h2></div>
+      <p>Bij <a href="/kennisbank/wat-is/affiliate-marketing/">affiliate marketing</a> is CPA geen uitkomst maar een afspraak. Een website, blogger of vergelijker stuurt bezoekers naar jou. Je betaalt alleen als er een conversie volgt: een vast bedrag per aanmelding, of een percentage van de verkoop. Dat laatste heet ook wel CPS, cost per sale.</p>
+      <p>Voor de adverteerder klinkt dat risicoloos. Dat is het niet helemaal. Het netwerk dat de afspraken regelt, rekent vaak een vergoeding bovenop de commissie. En je moet goed controleren welke conversies je goedkeurt: een bestelling die wordt teruggestuurd, wil je niet betalen. De rekensom is dezelfde als hierboven. Commissie plus netwerkkosten moet onder je maximum blijven.</p>
+
+      <div class="stap-kop" id="verlagen"><Tekening naam="raket" maat={52} /><h2>Zo verlaag je je CPA</h2></div>
+      <p>Kosten per conversie zijn klikprijs gedeeld door conversiepercentage. Je kunt dus aan twee kanten werken.</p>
+      <h3>Meer conversies uit dezelfde klikken</h3>
+      <ul>
+        <li><b>Een eigen landingspagina per dienst.</b> Wie zoekt op "dakkapel plaatsen", wil een pagina over dakkapellen. Niet je homepage. Lees hoe in <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken</a>.</li>
+        <li><b>Je telefoonnummer bovenaan, klikbaar.</b> Op mobiel bellen veel mensen liever dan een formulier invullen. Meet die telefoontjes ook, anders lijken je kosten per aanvraag hoger dan ze zijn.</li>
+        <li><b>Een korter formulier.</b> Naam, telefoon, wat je wilt. De rest vraag je in het gesprek.</li>
+        <li><b>Bewijs.</b> Reviews, foto's van eigen werk, een duidelijke prijsindicatie.</li>
+      </ul>
+      <h3>Goedkopere en betere klikken</h3>
+      <ul>
+        <li><b>Sluit zoektermen uit.</b> "Vacature", "zelf", "gratis", "cursus": kijk in het rapport met zoektermen en zet wat niet past op je uitsluitingslijst.</li>
+        <li><b>Schrap wat alleen kost.</b> Zoekwoorden of campagnes die al drie maanden boven je maximum zitten, mogen eruit. Verspild budget schrappen is soms meer waard dan een nieuwe campagne.</li>
+        <li><b>Beperk je gebied.</b> Een schilder uit Emmen hoeft niet in Utrecht te adverteren.</li>
+        <li><b>Let op de tijden.</b> Komen er 's nachts klikken maar nooit aanvragen? Zet de advertenties dan op de uren dat je bereikbaar bent.</li>
+      </ul>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="lamp" maat={52} /><h2>Valkuilen bij het lezen van het getal</h2></div>
+      <ul>
+        <li><b>De verkeerde conversie meten.</b> Telt een klik op "contact" al als conversie, dan zijn je kosten per conversie prachtig en is je agenda leeg. Meet verzonden formulieren en echte telefoontjes.</li>
+        <li><b>Dubbel tellen.</b> Staat dezelfde aanvraag in Google Ads en in Analytics als conversie, en importeer je die laatste ook? Dan telt hij twee keer. Kies welke conversies meetellen in de kolom Conversies.</li>
+        <li><b>Alle leads gelijk behandelen.</b> Een aanvraag voor een complete badkamer en een vraag naar een losse kraan kosten je evenveel, maar zijn niet evenveel waard. Geef ze in Google Ads een verschillende waarde.</li>
+        <li><b>Niet terugkoppelen.</b> Google weet niet welke aanvragen klant werden. Houd dat zelf bij, bijvoorbeeld in je <a href="/kennisbank/wat-is/crm/">CRM</a>, en kijk per campagne wat de kosten per klant zijn.</li>
+        <li><b>Te snel oordelen.</b> Na een wijziging in je biedstrategie heeft Google een paar weken nodig. Wie elke week ingrijpt, start steeds opnieuw.</li>
+      </ul>
+      <p>Wil je weten of jouw campagnes onder hun maximum zitten? Loop dan de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a> door. Punt drie gaat precies hierover.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees hoe <a href="/kennisbank/wat-is/sea/">zoekmachine adverteren</a> werkt, welke getallen je ernaast volgt bij <a href="/kennisbank/wat-is/kpi/">KPI</a>, of laat je campagnes beheren door ons <a href="/online-adverteren/google-ads-bureau/">Google Ads-team</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is CPA in marketing?', a: 'CPA staat voor cost per acquisition of cost per action: wat je gemiddeld betaalt voor één conversie, zoals een bestelling of offerteaanvraag. Je berekent het door je kosten te delen door het aantal conversies.' },
+      { v: 'Hoe bereken je CPA?', a: 'Deel je kosten door het aantal conversies. € 800 advertentiekosten en 16 aanvragen geeft € 50 per aanvraag. Je kunt ook de klikprijs delen door het conversiepercentage: € 2,50 ÷ 5% is ook € 50.' },
+      { v: 'Wat is een goede CPA?', a: 'Een bedrag onder je maximum, met ruimte voor winst. Je maximum is opdrachtwaarde × brutomarge × het deel van de aanvragen dat klant wordt. Een algemeen goed getal bestaat niet, omdat marges per bedrijf verschillen.' },
+      { v: 'Wat is doel-CPA?', a: 'Een biedstrategie in Google Ads. Je geeft op wat een conversie gemiddeld mag kosten en Google past per veiling je bod aan. Je betaalt nog steeds per klik. Google adviseert om te beoordelen over een periode met minstens 30 conversies.' },
+      { v: 'Wat is het verschil tussen CPA en CPC?', a: 'CPC is wat één klik kost. CPA is wat één conversie kost. Voor je winst telt dat laatste: een dure klik is prima als genoeg bezoekers klant worden.' },
+      { v: 'Waarom stijgt mijn CPA als ik meer budget uitgeef?', a: 'Met meer budget komt Google in veilingen waar de kans op een conversie kleiner is. Dat is normaal. Zolang je onder je maximum blijft, levert elke extra conversie nog geld op.' },
+    ]}
+  />
+
+  <Verder
+    titel="Lees ook"
+    links={[
+      { label: 'Begrip', titel: 'Wat is ROAS?', href: '/kennisbank/wat-is/roas/', tekst: 'Rendement op je advertenties, voor webshops.', teken: 'grafiek' },
+      { label: 'Gids', titel: 'De Google Ads-check', href: '/kennisbank/gidsen/google-ads-check/', tekst: 'Tien punten om te zien waar je budget weglekt.' },
+      { label: 'Gids', titel: 'Landingspagina maken', href: '/kennisbank/gidsen/landingspagina-maken/', tekst: 'Meer aanvragen uit dezelfde klikken.' },
+    ]}
+  />
+
+  <Actie titel="Wat kost een aanvraag bij jou, en wat mag hij kosten?" tekst={`${site.contactpersoon} rekent gratis met je uit waar je maximum ligt en of je campagnes daaronder zitten. Ook als het eerlijke antwoord is dat je beter iets kunt stoppen.`} />
+</Base>
+<script>
+  const f = document.querySelector<HTMLFormElement>('[data-cpa]');
+  const euro = (n: number) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+  function reken() {
+    if (!f) return;
+    const g = (n: string) => Math.max(0, Number((f.elements.namedItem(n) as HTMLInputElement).value.replace(',', '.')) || 0);
+    const o = (n: string) => f.elements.namedItem(n) as HTMLOutputElement;
+    const kosten = g('kosten');
+    const conv = g('conversies');
+    const max = g('waarde') * (g('marge') / 100) * (g('afsluit') / 100);
+    const cpa = conv > 0 ? kosten / conv : 0;
+    o('cpa').value = conv > 0 ? euro(Math.round(cpa * 100) / 100) : 'vul het aantal conversies in';
+    o('max').value = euro(Math.round(max * 100) / 100);
+    let oordeel = '';
+    if (conv === 0 || max === 0) oordeel = 'Vul alle velden in om je kosten met je maximum te vergelijken.';
+    else if (cpa <= max) oordeel = `Een conversie kost nu ${euro(Math.round(cpa * 100) / 100)}. Dat ligt onder je maximum van ${euro(Math.round(max * 100) / 100)}. Elke aanvraag levert gemiddeld ${euro(Math.round((max - cpa) * 100) / 100)} brutowinst op na advertentiekosten.`;
+    else oordeel = `Een conversie kost nu ${euro(Math.round(cpa * 100) / 100)}. Dat ligt boven je maximum van ${euro(Math.round(max * 100) / 100)}. Op elke aanvraag verlies je gemiddeld ${euro(Math.round((cpa - max) * 100) / 100)}. Kijk eerst naar je landingspagina en je zoektermen.`;
+    o('oordeel').value = oordeel;
+  }
+  f?.addEventListener('input', reken);
+  f?.addEventListener('submit', (e) => e.preventDefault());
+</script>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .formule p { margin: 0; }
+  .formule p + p { margin-top: 10px; }
+  .reken { padding: 24px; margin: 8px 0 32px; display: grid; gap: 18px; box-shadow: 0 24px 60px -30px rgb(7 70 99 / 0.45); }
+  .reken fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .reken legend { font-weight: 800; margin-bottom: 8px; }
+  .reken label { display: grid; gap: 4px; font-size: 0.95rem; font-weight: 600; }
+  .reken input { font: inherit; padding: 9px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); width: 100%; max-width: 220px; }
+  .reken input:focus-visible { outline: 3px solid var(--orange); outline-offset: 1px; }
+  .reken .uit { margin: 4px 0 0; font-weight: 700; }
+  .reken output { font-weight: 900; }
+  .reken .oordeel { margin: 0; padding: 14px 16px; border-radius: 12px; background: var(--tint); }
+  .reken .oordeel output { font-weight: 600; }
+  .reken p.klein { margin: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

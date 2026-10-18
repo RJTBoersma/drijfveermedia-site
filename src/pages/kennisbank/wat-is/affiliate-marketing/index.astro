@@ -1,0 +1,274 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--affiliate-marketing.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/affiliate-marketing/';
+const datum = '2026-10-18';
+const definitie = 'Affiliate marketing is een samenwerking waarbij een andere website of maker jouw product promoot en alleen een commissie krijgt als daar een verkoop of aanvraag uit voortkomt.';
+const hoofdstukken = [
+  { id: 'werking', titel: 'Hoe het werkt' },
+  { id: 'vergoeding', titel: 'CPS, CPA, CPL en CPC' },
+  { id: 'netwerken', titel: 'Netwerken in Nederland' },
+  { id: 'adverteerder', titel: 'Rekenvoorbeeld adverteerder' },
+  { id: 'publisher', titel: 'Verdienen als publisher' },
+  { id: 'cookies', titel: 'Cookies en toestemming' },
+  { id: 'regels', titel: 'Reclameregels' },
+  { id: 'google', titel: 'Affiliate links en Google' },
+  { id: 'valkuilen', titel: 'Valkuilen en fraude' },
+  { id: 'voor-wie', titel: 'Iets voor jouw bedrijf?' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Affiliate marketing',
+  alternateName: ['Affiliatemarketing', 'Partnermarketing'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Affiliate marketing: zo werkt het in 2026 | Drijfveer Media"
+  description="Wat is affiliate marketing? Hoe adverteerder, publisher en netwerk samenwerken, wat het kost of oplevert, en welke regels gelden voor cookies en reclame."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Affiliate marketing', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Online marketing</p>
+        <h1>Wat is affiliate marketing? Uitleg voor beide kanten</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je leest een review van een fietstas op een blog en klikt op de link naar de webshop. Je koopt de tas. Een paar weken later krijgt de blogger een paar euro. Dat is affiliate marketing in het kort: iemand anders promoot jouw product, en je betaalt pas als er iets uitkomt. Klinkt als reclame zonder risico. Voor de adverteerder is het dat niet helemaal, en voor de publisher is het geen snelle weg naar slapend rijk. Hieronder lees je hoe het werkt, wat het kost en oplevert, en welke regels gelden. Van beide kanten bekeken.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>De adverteerder verkoopt, de publisher (of affiliate) promoot, een affiliate netwerk meet en betaalt uit.</li>
+          <li>Je betaalt meestal per verkoop (CPS) of per conversie (CPA), soms per lead of klik.</li>
+          <li>De verkoop wordt herkend via een affiliate link met een code en meestal een cookie.</li>
+          <li>Trackingcookies vragen toestemming. Reclame moet herkenbaar zijn, ook bij een affiliate link.</li>
+          <li>Google wil dat betaalde links rel="sponsored" krijgen en straft pagina's zonder eigen inhoud af.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={13} />
+
+      <div class="stap-kop" id="werking"><Tekening naam="ketting" maat={52} /><h2>Hoe werkt affiliate marketing?</h2></div>
+      <p>Er zijn vier partijen bij betrokken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Partij</th><th>Rol</th><th>Voorbeeld</th></tr></thead>
+          <tbody>
+            <tr><td>Adverteerder</td><td>Verkoopt het product en betaalt de commissie</td><td>Een webshop in fietstassen</td></tr>
+            <tr><td>Publisher of affiliate</td><td>Promoot het product op een eigen kanaal</td><td>Een fietsblog, vergelijkingssite, nieuwsbrief of influencer</td></tr>
+            <tr><td>Affiliate netwerk</td><td>Brengt beide samen, meet de verkopen en regelt de uitbetaling</td><td>TradeTracker, Awin, Daisycon</td></tr>
+            <tr><td>Consument</td><td>Klikt, koopt, en merkt er meestal niets van</td><td>Jij, als je die fietstas bestelt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Van klik tot uitbetaling gaat het zo:</p>
+      <ol class="stappen">
+        <li><b>Aanmelden.</b> De publisher sluit zich aan bij het partnerprogramma van de adverteerder, meestal via een netwerk. De adverteerder keurt de aanmelding goed of af.</li>
+        <li><b>Link maken.</b> De publisher krijgt een affiliate link: een gewone link met een unieke code erin. Daaraan herkent het netwerk wie de bezoeker stuurde.</li>
+        <li><b>Klikken.</b> Een lezer klikt. Er wordt een cookie geplaatst, of de code reist op een andere manier mee naar de webshop.</li>
+        <li><b>Converteren.</b> De lezer koopt, binnen de periode die het programma toestaat. Het netwerk koppelt de conversie aan de publisher.</li>
+        <li><b>Beoordelen.</b> De adverteerder keurt de verkoop goed, of af bij een retour of een nepbestelling.</li>
+        <li><b>Uitbetalen.</b> Het netwerk betaalt de commissie aan de publisher en rekent zijn eigen vergoeding bij de adverteerder.</li>
+      </ol>
+      <p>Grote webshops hebben vaak een eigen partnerprogramma, zonder netwerk ertussen. Dat schrijft ook de KVK. Het principe blijft hetzelfde.</p>
+
+      <div class="stap-kop" id="vergoeding"><Tekening naam="munten" maat={52} /><h2>Vergoedingsmodellen: CPS, CPA, CPL en CPC</h2></div>
+      <p>Hoe de publisher betaald wordt, spreek je per programma af. Dit zijn de vormen die je tegenkomt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Model</th><th>Je betaalt voor</th><th>Voorbeeld</th><th>Risico ligt bij</th></tr></thead>
+          <tbody>
+            <tr><td>CPS (cost per sale)</td><td>Een verkoop, als percentage van het bedrag</td><td>8% van elke bestelling</td><td>Vooral de publisher</td></tr>
+            <tr><td>CPA (cost per action)</td><td>Een vooraf afgesproken actie</td><td>€ 15 per afgesloten abonnement</td><td>Vooral de publisher</td></tr>
+            <tr><td>CPL (cost per lead)</td><td>Een aanvraag of inschrijving</td><td>€ 4 per offerteaanvraag</td><td>Gedeeld</td></tr>
+            <tr><td>CPC (cost per click)</td><td>Een klik naar de site</td><td>€ 0,10 per bezoeker</td><td>Vooral de adverteerder</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bedragen verzonnen, ter illustratie.</p>
+      <p>CPS en CPA zijn het meest gebruikelijk. Bij <a href="/kennisbank/wat-is/cpa/">CPA</a> als afrekenmodel betaal je alleen als het resultaat er is. Dat is iets anders dan de CPA in Google Ads, waar je per klik betaalt en de kosten per conversie achteraf uitrekent. CPL zie je veel bij diensten die je niet online afrekent, zoals een verbouwing of een verzekering.</p>
+      <p>Sommige programma's betalen ook bij een herhaalaankoop van dezelfde klant. Bij abonnementen kan dat flink oplopen. Lees de voorwaarden: daar staat wat telt als conversie, hoe lang een klik meetelt en wanneer een verkoop wordt afgekeurd.</p>
+
+      <div class="stap-kop" id="netwerken"><Tekening naam="team" maat={52} /><h2>Affiliate netwerken in Nederland</h2></div>
+      <p>Een affiliate netwerk is de marktplaats tussen adverteerders en publishers. Het levert de meettechniek, een overzicht van programma's, en regelt de betalingen. Drie namen kom je in Nederland vaak tegen. De cijfers komen van hun eigen websites, opgevraagd op 18 oktober 2026.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Netwerk</th><th>Wat ze zelf zeggen</th></tr></thead>
+          <tbody>
+            <tr><td>TradeTracker</td><td>Ruim 5.000 adverteerders, meer dan 250.000 publishers en kantoren in 25 landen</td></tr>
+            <tr><td>Awin</td><td>Ruim 30.000 merken en meer dan 1 miljoen goedgekeurde partners, actief in 14 landen</td></tr>
+            <tr><td>Daisycon</td><td>Onderdeel van Linehub, meer dan 40.000 partners en ruim 25 jaar ervaring</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het grootste netwerk is niet automatisch het beste voor jou. Kijk welke publishers in jouw branche er al zitten, wat het netwerk aan opstart en per maand rekent, en welk percentage het bovenop de commissie neemt. Vraag die tarieven altijd zwart op wit op. Als publisher geeft de KVK een nuttige tip: meld je niet meteen bij tien netwerken aan, maar begin met een of twee.</p>
+
+      <div class="stap-kop" id="adverteerder"><Tekening naam="grafiek" maat={52} /><h2>Wat kost het een adverteerder? Een rekenvoorbeeld</h2></div>
+      <p>Stel: een webshop uit Leeuwarden verkoopt fietstassen. Een bestelling is gemiddeld € 80 zonder btw. Na inkoop en verzending blijft er 40 procent over: € 32 brutowinst. De webshop biedt publishers 10 procent commissie.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Post</th><th>Berekening</th><th>Per bestelling</th></tr></thead>
+          <tbody>
+            <tr><td>Brutowinst</td><td>40% van € 80</td><td>€ 32,00</td></tr>
+            <tr><td>Commissie publisher</td><td>10% van € 80</td><td>€ 8,00</td></tr>
+            <tr><td>Vergoeding netwerk</td><td>Stel 30% bovenop de commissie</td><td>€ 2,40</td></tr>
+            <tr><td>Totale kosten per verkoop</td><td>€ 8,00 + € 2,40</td><td>€ 10,40</td></tr>
+            <tr><td>Over na affiliatekosten</td><td>€ 32,00 − € 10,40</td><td>€ 21,60</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld. De vergoeding van het netwerk verschilt per netwerk en pakket; vraag de echte tarieven op.</p>
+      <p>Dat ziet er gezond uit. Maar er zijn drie vragen die het plaatje kunnen kantelen. Hoeveel van die bestellingen waren er ook zonder de publisher gekomen? Hoeveel wordt teruggestuurd? En wat kost het je aan tijd om programma's te beheren en verkopen te beoordelen? Een kortingssite die klanten onderschept die toch al bij je wilden kopen, kost je € 10,40 per bestelling voor niets.</p>
+      <p>Vergelijk de uitkomst met wat een klant je via andere kanalen kost. Komt een verkoop via Google Ads op € 14, dan is affiliate goedkoper. Komt hij via je eigen nieuwsbrief op € 2, dan niet.</p>
+
+      <h3>Zo start je een programma</h3>
+      <ol class="stappen">
+        <li><b>Reken je maximum uit.</b> Wat mag een verkoop je kosten, commissie en netwerk samen? Begin daar, niet bij wat concurrenten bieden.</li>
+        <li><b>Kies een netwerk.</b> Vergelijk er twee of drie. De KVK raadt aan om dezelfde vragen naar meerdere netwerken te sturen, zodat je de antwoorden naast elkaar kunt leggen.</li>
+        <li><b>Schrijf heldere voorwaarden.</b> Mag een publisher op je merknaam adverteren? Zijn kortingscodesites welkom? Hoe lang telt een klik mee? Wanneer keur je een verkoop af, en binnen hoeveel dagen beoordeel je?</li>
+        <li><b>Lever goed materiaal.</b> Een actuele productfeed, goede foto's, korte teksten over wat je product anders maakt. Hoe makkelijker je het maakt, hoe beter de publishers je promoten.</li>
+        <li><b>Kies je partners.</b> Kijk bij elke aanmelding naar de site. Past die bij je merk en je doelgroep? Een kleine, goede vakblog levert vaak meer op dan een grote site vol aanbiedingen.</li>
+      </ol>
+
+      <div class="stap-kop" id="publisher"><Tekening naam="pen" maat={52} /><h2>Geld verdienen als publisher: reële verwachtingen</h2></div>
+      <p>Op internet lees je vaak dat je met affiliate marketing slapend rijk wordt. Reken het even na. Een blog over fietsen trekt 10.000 bezoekers per maand. Van hen klikt 5 procent op een affiliate link. Van die klikkers koopt 3 procent iets van gemiddeld € 80. De commissie is 8 procent.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Berekening</th><th>Per maand</th></tr></thead>
+          <tbody>
+            <tr><td>Klikken op een affiliate link</td><td>10.000 × 5%</td><td>500</td></tr>
+            <tr><td>Verkopen</td><td>500 × 3%</td><td>15</td></tr>
+            <tr><td>Omzet bij de adverteerder</td><td>15 × € 80</td><td>€ 1.200</td></tr>
+            <tr><td>Jouw commissie</td><td>8% van € 1.200</td><td>€ 96</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld. Retouren en afgekeurde verkopen gaan er nog af.</p>
+      <p>Tienduizend bezoekers per maand is voor een nieuw blog al een flinke prestatie. Wie het als bijverdienste ziet naast een site die er toch al is, kan er plezier van hebben. Wie er een inkomen van wil maken, heeft veel bezoekers nodig, of producten met een hogere commissie. De KVK zegt het nuchter: duurdere producten leveren per verkoop meer op, maar worden minder vaak gekocht.</p>
+      <h3>Praktisch: wat je regelt</h3>
+      <ul class="vink">
+        <li>Verdien je er structureel aan, schrijf je dan in bij de KVK als ondernemer. Twijfel je wanneer dat moet, dan kun je de KVK om advies vragen.</li>
+        <li>Lees de standaardvoorwaarden van het netwerk en de programmavoorwaarden van elke adverteerder. Houd je je er niet aan, dan mag de adverteerder weigeren te betalen.</li>
+        <li>Zet de link waar lezers hem zien. Niet onderaan een tekst van tweeduizend woorden.</li>
+        <li>Promoot alleen wat je zelf zou aanraden. Je lezers merken het als je alles aanprijst wat commissie oplevert.</li>
+      </ul>
+
+      <div class="stap-kop" id="cookies"><Tekening naam="schild" maat={52} /><h2>Cookies, tracking en toestemming</h2></div>
+      <p>Hoe weet de webshop dat een koper van jouw blog kwam? Meestal via een cookie. Bij de klik op de affiliate link slaat de browser een klein bestandje op met jouw code. Koopt de bezoeker binnen de afgesproken periode, dan krijg jij de commissie. Die periode verschilt per programma: soms een dag, soms een maand. Klikt iemand daarna op de link van een andere publisher, dan krijgt in veel programma's de laatste klik de commissie. TradeTracker schrijft op zijn site dat commissies traditioneel alleen aan het laatste contactpunt worden toegekend, en dat ze daar verandering in willen brengen.</p>
+      <p>Hier speelt de wet mee. De Autoriteit Persoonsgegevens is duidelijk over trackingcookies, die je surfgedrag over meerdere sites volgen:</p>
+      <ul>
+        <li>Een website mag ze alleen plaatsen als de bezoeker vooraf is geïnformeerd en toestemming heeft gegeven.</li>
+        <li>Verder scrollen of niets doen geldt niet als toestemming.</li>
+        <li>Alle categorieën standaard aanvinken in een diepere laag van de cookiebanner mag niet.</li>
+        <li>Een cookiewall, waarbij je de site niet kunt gebruiken als je weigert, is onder de AVG verboden.</li>
+      </ul>
+      <p>Voor een adverteerder betekent dat: weigert een bezoeker cookies, dan kan een verkoop zoekraken in de meting. Vraag je netwerk hoe het meet zonder trackingcookies, en zet het programma in je cookiebanner en <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring</a>. Wat een cookie precies is, lees je bij het begrip <a href="/kennisbank/wat-is/cookie/">cookie</a>.</p>
+
+      <div class="stap-kop" id="regels"><Tekening naam="boek" maat={52} /><h2>Reclameregels: zeg dat het reclame is</h2></div>
+      <p>Volgens de Nederlandse Reclame Code moet reclame duidelijk als reclame herkenbaar zijn. Een affiliate link is reclame: je krijgt geld als iemand koopt. Dat moet de lezer dus kunnen zien.</p>
+      <p>Voor social media is er een eigen code, de Reclamecode Social Media & Influencer Marketing. In de versie van 2026 staat met zoveel woorden dat affiliate links en commissies over verkopen tellen als voordeel. Dan moet de relatie met de adverteerder in de post staan. Een paar dingen die de code noemt:</p>
+      <ul>
+        <li>Labels als #ad, "Reclame", "Advertentie" of "Betaalde samenwerking" voldoen, samen met de naam van de adverteerder.</li>
+        <li>Bij affiliate werkt ook een zin als "Ik ontvang commissie voor de verkopen".</li>
+        <li>Alleen het woord "affiliate" of "commissie", of een afkorting daarvan, is volgens de code niet genoeg.</li>
+        <li>Ook de adverteerder heeft een zorgplicht. Je kunt het dus niet alleen bij de influencer neerleggen.</li>
+      </ul>
+      <p>Blogs en bedrijfswebsites vallen niet onder die socialemediacode, maar onder de algemene regel dat reclame herkenbaar moet zijn. De KVK noemt als voorbeeld een vermelding achter de link of een opvallend kader. Kies een vermelding die je lezer meteen begrijpt.</p>
+
+      <div class="stap-kop" id="google"><Tekening naam="vergrootglas" maat={52} /><h2>Affiliate links en Google</h2></div>
+      <p>Twee dingen uit de documentatie van Google moet elke publisher kennen.</p>
+      <h3>Markeer betaalde links</h3>
+      <p>Google vraagt om links die advertenties of betaalde plaatsingen zijn, te markeren met rel="sponsored". Een affiliate link valt daaronder. Het oudere rel="nofollow" mag ook nog, maar sponsored heeft de voorkeur. Zo'n link geeft geen kracht door aan de site waar hij naartoe wijst. Wat dat betekent voor je eigen vindbaarheid, lees je bij <a href="/kennisbank/wat-is/dofollow/">dofollow</a> en in de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</p>
+      <h3>Voeg iets toe</h3>
+      <p>In de spamregels van Google staat "thin affiliation". Daarmee bedoelt Google pagina's met affiliate links waarop de productteksten en reviews letterlijk van de winkel komen, zonder eigen inhoud. Of netwerken van sites die allemaal dezelfde teksten hebben. Google zegt er wel bij dat niet elke affiliatesite zo is. Goede voorbeelden volgens Google: extra informatie over prijzen, eigen productreviews, grondig testen met beoordelingen, productvergelijkingen en een handige indeling in categorieën.</p>
+      <p>Dat is ook gewoon goed schrijven. Een vergelijking van vijf fietstassen die je zelf hebt volgeladen en door de regen hebt gereden, is meer waard dan vijf overgenomen productomschrijvingen. In ons <a href="/proeflab/">proeflab</a> testen we op meer dan honderd eigen sites wat werkt in Google, voordat we het bij klanten inzetten. Pagina's zonder eigen inhoud houden het daar niet lang vol.</p>
+
+      <div class="stap-kop" id="valkuilen"><Tekening naam="lamp" maat={52} /><h2>Valkuilen en fraude</h2></div>
+      <p>Volgens Wikipedia geldt het model als fraudegevoelig, aan beide kanten. Adverteerders kunnen verkopen verzwijgen, publishers kunnen klikken of leads verzinnen. De bekendste valkuilen:</p>
+      <ul>
+        <li><b>Bieden op je merknaam.</b> Een publisher adverteert in Google op jouw bedrijfsnaam en vangt klanten die je toch al zochten. Verbied dat in je programmavoorwaarden.</li>
+        <li><b>Kortingscodesites aan het eind.</b> Een klant zit al bij de kassa, zoekt een kortingscode en klikt via een codesite. Die krijgt de commissie voor een verkoop die er al was.</li>
+        <li><b>Nepleads.</b> Bij betaling per lead loont het om formulieren te laten invullen door mensen die niets willen. Keur leads pas goed na controle.</li>
+        <li><b>Retouren.</b> Spreek af dat je teruggestuurde bestellingen afkeurt, en keur op tijd.</li>
+        <li><b>Je merk in slecht gezelschap.</b> Een site vol pop-ups of misleidende teksten met jouw link erop doet je naam geen goed. Kijk wie je toelaat.</li>
+      </ul>
+      <p>Voor publishers geldt het omgekeerde: kies adverteerders die snel en eerlijk beoordelen. Een programma dat de helft van je verkopen afkeurt zonder uitleg, kun je beter laten liggen.</p>
+
+      <div class="stap-kop" id="voor-wie"><Tekening naam="huis" maat={52} /><h2>Is het iets voor jouw bedrijf?</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Past goed</th><th>Past minder</th></tr></thead>
+          <tbody>
+            <tr><td>Webshop met producten die mensen vergelijken voor ze kopen</td><td>Lokale dienstverlener met een werkgebied van dertig kilometer</td></tr>
+            <tr><td>Abonnementen, software, verzekeringen, reizen</td><td>Maatwerk waarvoor eerst een gesprek of inmeting nodig is</td></tr>
+            <tr><td>Genoeg marge om een flinke commissie te betalen</td><td>Krappe marges waar elke euro telt</td></tr>
+            <tr><td>Je hebt tijd om een programma te beheren</td><td>Je wilt er geen omkijken naar hebben</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Ben je een installateur in Assen of een aannemer in Emmen? Dan lijkt affiliate marketing op werken met een leadplatform: je betaalt per aanvraag die een ander voor je binnenhaalt. Dat kan een aanvulling zijn, maar je bouwt er niets eigens mee op. Lees wat de opties zijn in <a href="/kennisbank/gidsen/werkspot-alternatieven/">Werkspot-alternatieven</a>. Aanvragen via je eigen website, uit Google of uit advertenties, zijn op de lange duur vaak goedkoper. Hoe je die meer krijgt, lees je bij <a href="/leadgeneratie/">leadgeneratie</a>.</p>
+      <p>Wil je als webshop beginnen? Start klein. Kies één netwerk, schrijf heldere voorwaarden, en reken vooraf uit wat een verkoop je maximaal mag kosten. Leg die som na drie maanden naast wat Google Ads en je eigen nieuwsbrief per klant kosten.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees wat een <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a> is en waarom de juiste publisher daar begint, of hoe <a href="/kennisbank/wat-is/contentmarketing/">contentmarketing</a> klanten trekt zonder commissie. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is affiliate marketing in het kort?', a: 'Een samenwerking waarbij een andere website, blogger of influencer jouw product promoot met een speciale link. Komt er een verkoop of aanvraag uit, dan krijgt die partij een commissie. Zonder resultaat betaal je meestal niets.' },
+      { v: 'Hoeveel kun je verdienen met affiliate marketing?', a: 'Dat hangt af van je bezoekers, hoeveel er klikken en kopen, en de commissie. Een blog met 10.000 bezoekers per maand kan bij 8 procent commissie op zo\'n € 100 per maand uitkomen. Wie er een inkomen van wil maken, heeft veel meer bereik nodig.' },
+      { v: 'Wat is een affiliate netwerk?', a: 'Een partij die adverteerders en publishers samenbrengt, de verkopen meet en de commissies uitbetaalt. Bekende netwerken in Nederland zijn TradeTracker, Awin en Daisycon. Het netwerk rekent de adverteerder een vergoeding.' },
+      { v: 'Moet ik vermelden dat een link een affiliate link is?', a: 'Ja. Reclame moet herkenbaar zijn. Op social media zegt de reclamecode dat alleen het woord "affiliate" of "commissie" niet genoeg is. Een label als #ad of de zin "Ik ontvang commissie voor de verkopen" wel.' },
+      { v: 'Moet ik me inschrijven bij de KVK als publisher?', a: 'Verdien je er structureel aan, dan schrijf je je in als ondernemer. Twijfel je of het al nodig is, bijvoorbeeld omdat je nog weinig bezoekers hebt, dan kun je de KVK om advies vragen.' },
+      { v: 'Hoe lang blijft een affiliate cookie geldig?', a: 'Dat bepaalt de adverteerder per programma, van een dag tot een maand of langer. Het staat in de programmavoorwaarden. Weigert een bezoeker trackingcookies, dan kan een verkoop missen in de meting.' },
+    ]}
+  />
+
+  <Verder
+    titel="Lees ook"
+    links={[
+      { label: 'Begrip', titel: 'Wat is CPA?', href: '/kennisbank/wat-is/cpa/', tekst: 'Wat een conversie mag kosten, met rekenhulp.', teken: 'munten' },
+      { label: 'Begrip', titel: 'Wat is een cookie?', href: '/kennisbank/wat-is/cookie/', tekst: 'Wat een cookie doet en wanneer je toestemming nodig hebt.', teken: 'schild' },
+      { label: 'Gids', titel: 'Werkspot-alternatieven', href: '/kennisbank/gidsen/werkspot-alternatieven/', tekst: 'Zelf aanvragen binnenhalen in plaats van per lead betalen.' },
+    ]}
+  />
+
+  <Actie titel="Wat kost een klant je via elk kanaal?" tekst={`${site.contactpersoon} zet gratis met je op een rij wat een klant je nu kost via Google, advertenties en partners. Dan weet je waar je budget het meeste oplevert.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .stappen li { margin-bottom: 10px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

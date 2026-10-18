@@ -1,0 +1,72 @@
+---
+// Scène voor /kennisbank/wat-is/inbound-marketing/: een zoekopdracht, een artikel en een nieuwsbrief leiden naar jouw website, die als een magneet klanten aantrekt.
+// Als hij leeft: bolletjes lopen van de drie bronnen naar de magneet, de magneet trekt zachtjes aan en er verschijnt een nieuwe aanvraag.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const bronnen = [
+  { y: 40, tekst: 'warmtepomp kosten', icoon: 'zoek' },
+  { y: 118, tekst: 'Artikel: subsidie', icoon: 'blad' },
+  { y: 196, tekst: 'Nieuwsbrief', icoon: 'mail' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een zoekopdracht, een artikel en een nieuwsbrief leiden allemaal naar jouw website. De website trekt als een magneet bezoekers aan, en daar komt een aanvraag uit.'}>
+  {bronnen.map((b) => (
+    <g>
+      <rect x="20" y={b.y} width="150" height="34" rx="17" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      {b.icoon === 'zoek' && <g><circle cx="39" cy={b.y + 15} r="6" fill="none" stroke="#074663" stroke-width="2.2" /><path d={`M43.5 ${b.y + 19.5}l4.5 4.5`} stroke="#074663" stroke-width="2.4" stroke-linecap="round" /></g>}
+      {b.icoon === 'blad' && <g><rect x="33" y={b.y + 8} width="13" height="18" rx="2" fill="none" stroke="#074663" stroke-width="2" /><path d={`M36 ${b.y + 14}h7M36 ${b.y + 18}h7M36 ${b.y + 22}h4`} stroke="#074663" stroke-width="1.6" stroke-linecap="round" /></g>}
+      {b.icoon === 'mail' && <g><rect x="31" y={b.y + 10} width="17" height="13" rx="2" fill="none" stroke="#074663" stroke-width="2" /><path d={`M31.5 ${b.y + 11}l8 6.5 8-6.5`} fill="none" stroke="#074663" stroke-width="1.8" stroke-linejoin="round" /></g>}
+      <text x="56" y={b.y + 21.5} font-size="12" font-weight="700">{b.tekst}</text>
+    </g>
+  ))}
+  <path d="M170 57C220 60 250 100 300 124" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+  <path d="M170 135H300" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+  <path d="M170 213C220 210 250 170 300 146" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+
+  <rect x="262" y="56" width="190" height="150" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M262 68a12 12 0 0 1 12-12h166a12 12 0 0 1 12 12v10H262Z" fill="#e8eef4" />
+  <circle cx="276" cy="67" r="3" fill="#d9e1ea" /><circle cx="286" cy="67" r="3" fill="#d9e1ea" /><circle cx="296" cy="67" r="3" fill="#d9e1ea" />
+  <g class="inbound-magneet">
+    <path d="M330 110H364A25 25 0 0 1 364 160H330" fill="none" stroke="#074663" stroke-width="13" />
+    <rect x="312" y="103.5" width="18" height="13" rx="2" fill="#ff6600" />
+    <rect x="312" y="153.5" width="18" height="13" rx="2" fill="#ff6600" />
+  </g>
+  <text x="357" y="192" font-size="12" font-weight="800" text-anchor="middle">Jouw website</text>
+  <rect class="v" x="408" y="96" width="30" height="8" rx="4" />
+  <rect class="v" x="408" y="112" width="22" height="8" rx="4" />
+
+  <g>
+    <rect x="300" y="222" width="114" height="32" rx="16" fill="#fff" stroke="#1f8a5b" stroke-width="2" />
+    <circle cx="318" cy="238" r="8" fill="#1f8a5b" />
+    <path d="M314 238l3 3 5-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="368" y="242.5" font-size="12.5" font-weight="800" text-anchor="middle">Aanvraag</text>
+  </g>
+  <path class="a" d="M357 206v12" />
+
+  {!mini && (
+    <g>
+      <circle class="inbound-bol inbound-bol-1" cx="170" cy="57" r="6" fill="#ff6600" />
+      <circle class="inbound-bol inbound-bol-2" cx="170" cy="135" r="6" fill="#074663" />
+      <circle class="inbound-bol inbound-bol-3" cx="170" cy="213" r="6" fill="#ff6600" />
+      <g class="inbound-plus">
+        <rect x="420" y="222" width="46" height="24" rx="12" fill="#1f8a5b" />
+        <text x="443" y="238.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">+1</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .inbound-bol, .inbound-plus, .inbound-magneet { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .inbound-bol, :global(.teken-js) .inbound-plus { opacity: 0; }
+  .in-beeld .inbound-bol-1 { animation: kennisbank-wat-is-inbound-marketing-b1 6s ease-in 0.4s infinite; }
+  .in-beeld .inbound-bol-2 { animation: kennisbank-wat-is-inbound-marketing-b2 6s ease-in 1.2s infinite; }
+  .in-beeld .inbound-bol-3 { animation: kennisbank-wat-is-inbound-marketing-b3 6s ease-in 2s infinite; }
+  .in-beeld .inbound-plus { animation: kennisbank-wat-is-inbound-marketing-plus 6s ease-out 0.4s infinite; }
+  .in-beeld .inbound-magneet { animation: kennisbank-wat-is-inbound-marketing-trek 3s ease-in-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-inbound-marketing-b1 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 40% { opacity: 1; transform: translate(134px, 72px); } 46%, 100% { opacity: 0; transform: translate(140px, 74px); } }
+  @keyframes kennisbank-wat-is-inbound-marketing-b2 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 40% { opacity: 1; transform: translate(134px, 0); } 46%, 100% { opacity: 0; transform: translate(140px, 0); } }
+  @keyframes kennisbank-wat-is-inbound-marketing-b3 { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 40% { opacity: 1; transform: translate(134px, -72px); } 46%, 100% { opacity: 0; transform: translate(140px, -74px); } }
+  @keyframes kennisbank-wat-is-inbound-marketing-plus { 0%, 72% { opacity: 0; transform: translateY(8px) scale(0.6); } 80%, 94% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-inbound-marketing-trek { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-4px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .inbound-bol, .in-beeld .inbound-plus, .in-beeld .inbound-magneet { animation: none; } }
+</style>

@@ -1,0 +1,283 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--crm.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/crm/';
+const datum = '2026-10-18';
+const definitie = 'CRM (customer relationship management) is de manier waarop je klantcontact, leads en afspraken op één plek bijhoudt, meestal in software die een CRM-systeem heet.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat het betekent' },
+  { id: 'functies', titel: 'Wat het systeem doet' },
+  { id: 'pipeline', titel: 'De pipeline' },
+  { id: 'vergelijking', titel: 'Excel, CRM of ERP' },
+  { id: 'wanneer', titel: 'Wanneer je het nodig hebt' },
+  { id: 'kiezen', titel: 'Kiezen: tien vragen' },
+  { id: 'koppelen', titel: 'Koppelen aan je marketing' },
+  { id: 'avg', titel: 'De AVG' },
+  { id: 'invoeren', titel: 'Invoeren in 7 stappen' },
+  { id: 'rapportage', titel: 'Rapportage' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const functies = [
+  ['Contactbeheer', 'Alle klantgegevens en contactmomenten op één kaart', 'Je ziet dat een klant uit Roden vorig jaar een offerte voor een dakkapel kreeg'],
+  ['Pipeline', 'Lopende kansen per fase, van eerste vraag tot opdracht', 'Zes offertes staan open, samen € 38.000'],
+  ['Taken en herinneringen', 'Wie belt wie wanneer terug', 'Donderdag nabellen over de offerte van dinsdag'],
+  ['Koppeling met je mail', 'Mails komen automatisch bij het juiste contact', 'Een collega leest mee als jij op vakantie bent'],
+  ['Offertes', 'Offertes maken vanuit de klantgegevens', 'Geen adres meer overtypen'],
+  ['Formulieren', 'Aanvragen van je website komen er direct in', 'Geen aanvraag meer kwijt in een gedeelde inbox'],
+  ['Segmenten', 'Groepen maken voor gerichte e-mail', 'Iedereen met een warmtepomp ouder dan vijf jaar'],
+  ['Rapportage', 'Overzichten van leads, verkoop en bronnen', 'Hoeveel aanvragen uit Google kwamen en hoeveel klant werden'],
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'CRM (customer relationship management)',
+  alternateName: ['Customer relationship management', 'Klantrelatiebeheer', 'CRM-systeem'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is CRM? Uitleg, kiezen en de AVG | Drijfveer Media"
+  description="Wat is CRM? Wat een CRM-systeem doet, wanneer Excel niet meer genoeg is, hoe je kiest en wat de AVG vraagt. Met een voorbeeld-pipeline voor het mkb."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'CRM', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Klanten en verkoop</p>
+        <h1>Wat is CRM? Klanten en leads op één plek</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Een aanvraag komt binnen via je website. Je collega belt terug, noteert iets op een geeltje en gaat op vakantie. Drie weken later belt de klant boos op. Wie had hem ook alweer gesproken? Herkenbaar? Dan is de vraag wat is CRM ineens geen theorie meer. Het is het antwoord op "waar staat dat ook alweer". Hieronder lees je wat het is, wat het systeem doet, wanneer een spreadsheet niet meer volstaat, waar je op let bij het kiezen en wat de AVG ervan vraagt.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>CRM staat voor customer relationship management: klantrelatiebeheer.</li>
+          <li>Het is een werkwijze, en de software die daarbij helpt.</li>
+          <li>Het hart is de pipeline: alle lopende kansen per fase, met de volgende actie erbij.</li>
+          <li>Een ERP regelt je hele bedrijfsvoering, een CRM alleen het klantdeel.</li>
+          <li>Klantgegevens zijn persoonsgegevens. De AVG geldt dus ook voor je CRM, ook als je klein bent.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={12} />
+
+      <div class="stap-kop" id="betekenis"><Tekening naam="boek" maat={52} /><h2>Wat betekent CRM?</h2></div>
+      <p>CRM staat voor customer relationship management. In gewoon Nederlands: klantrelatiebeheer. De term heeft twee lagen.</p>
+      <ul>
+        <li><b>Een werkwijze.</b> Afspraken over hoe je met leads en klanten omgaat. Wie belt een nieuwe aanvraag terug, binnen welke tijd? Wanneer volg je een offerte op? Hoe vaak hoort een vaste klant iets van je?</li>
+        <li><b>De software.</b> Het programma waarin je dat vastlegt. Klantgegevens, gesprekken, offertes en taken staan op één plek, voor iedereen in je team.</li>
+      </ul>
+      <p>Die volgorde is belangrijk. Software lost geen rommelige werkwijze op. Wie nu geen vaste afspraak heeft over terugbellen, heeft die na de aanschaf van een pakket nog steeds niet. Je kunt het alleen beter zien.</p>
+      <p>In de vakliteratuur lees je vaak over drie soorten: operationeel (de dagelijkse verkoop en service), analytisch (patronen in je klantgegevens zoeken) en collaboratief (informatie delen tussen afdelingen). Voor een mkb-bedrijf is dat onderscheid vooral theorie. Het pakket dat je kiest, doet meestal alle drie een beetje.</p>
+
+      <div class="stap-kop" id="functies"><Tekening naam="tandwiel" maat={52} /><h2>Wat doet een CRM-systeem?</h2></div>
+      <p>De pakketten verschillen flink, maar dit zijn de onderdelen die je bijna overal tegenkomt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Functie</th><th>Wat het doet</th><th>In de praktijk</th></tr></thead>
+          <tbody>{functies.map(([a, b, c]) => <tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p class="klein muted">Voorbeelden verzonnen.</p>
+      <p>Het verschil met een adresboek zit in de geschiedenis en de volgende stap. Een adresboek zegt wie iemand is. Een goed bijgehouden klantenkaart zegt wat je hebt afgesproken, wat er nog openstaat en wie aan zet is.</p>
+
+      <div class="stap-kop" id="pipeline"><Tekening naam="doel" maat={52} /><h2>De pipeline: van lead tot klant</h2></div>
+      <p>De pipeline is het overzicht van al je lopende verkoopkansen, verdeeld over fases. In de meeste pakketten zie je hem als kolommen met kaartjes die je van links naar rechts schuift. Zo ziet hij eruit voor een dakkapelbouwer in Drachten:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Fase</th><th>Wat er gebeurd is</th><th>Volgende actie</th><th>Kans op opdracht</th></tr></thead>
+          <tbody>
+            <tr><td>Nieuwe lead</td><td>Aanvraag via de website of telefoon</td><td>Binnen een uur terugbellen</td><td>10%</td></tr>
+            <tr><td>Contact gehad</td><td>Wensen en budget besproken</td><td>Afspraak voor inmeten</td><td>25%</td></tr>
+            <tr><td>Ingemeten</td><td>Op locatie geweest</td><td>Offerte binnen drie werkdagen</td><td>40%</td></tr>
+            <tr><td>Offerte verstuurd</td><td>Prijs en planning liggen bij de klant</td><td>Na vijf werkdagen nabellen</td><td>50%</td></tr>
+            <tr><td>Gewonnen of verloren</td><td>Getekend, of nee met reden</td><td>Inplannen, of reden noteren</td><td>100% of 0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld. De kanspercentages zijn schattingen die je na een paar maanden vervangt door je eigen cijfers.</p>
+      <p>Twee dingen maken de pipeline waardevol. Elke kaart heeft altijd een volgende actie met een datum. En je ziet waar kansen blijven hangen. Liggen er twaalf offertes langer dan drie weken zonder reactie? Dan weet je wat je maandagochtend gaat doen.</p>
+      <p>Vermenigvuldig je de waarde van elke kans met de kans op een opdracht, dan krijg je de gewogen pipeline. Drie offertes van € 10.000 met 50 procent kans tellen samen voor € 15.000. Dat is geen belofte, wel een redelijke schatting van wat er de komende maanden binnenkomt.</p>
+
+      <div class="stap-kop" id="vergelijking"><Tekening naam="grafiek" maat={52} /><h2>Excel, CRM of ERP?</h2></div>
+      <p>Niet elk bedrijf heeft meteen een uitgebreid pakket nodig. Dit zijn de vier smaken, van eenvoudig tot zwaar.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Oplossing</th><th>Past bij</th><th>Sterk</th><th>Zwak</th></tr></thead>
+          <tbody>
+            <tr><td>Spreadsheet</td><td>Zzp'er met een handvol aanvragen per maand</td><td>Gratis, snel, je kent het al</td><td>Geen herinneringen, geen geschiedenis, één versie raakt zoek</td></tr>
+            <tr><td>Los CRM-pakket</td><td>Team van 2 tot 20 dat actief verkoopt</td><td>Pipeline, taken, mailkoppeling</td><td>Offertes en facturen vaak in een ander programma</td></tr>
+            <tr><td>Alles-in-één</td><td>Dienstverlener die uren en projecten bijhoudt</td><td>Klant, offerte, project en factuur in één</td><td>Minder diep per onderdeel, overstappen is lastiger</td></tr>
+            <tr><td>ERP</td><td>Bedrijf met voorraad, productie of meerdere vestigingen</td><td>Hele bedrijfsvoering in één systeem</td><td>Duur en zwaar om in te voeren</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>ERP staat voor enterprise resource planning. Zo'n systeem regelt naast klanten ook inkoop, voorraad, productie, boekhouding en personeel. Een klantmodule zit er vaak in. Andersom niet: een CRM doet geen voorraad of loonadministratie. Voor de meeste dienstverleners in het mkb is een ERP te zwaar.</p>
+
+      <div class="stap-kop" id="wanneer"><Tekening naam="lamp" maat={52} /><h2>Wanneer heb je het nodig?</h2></div>
+      <p>Er is geen vast moment. Wel een paar signalen dat je spreadsheet of inbox je in de weg zit:</p>
+      <ul class="vink">
+        <li>Je weet niet zeker of elke aanvraag van vorige week is teruggebeld.</li>
+        <li>Offertes worden niet of te laat nagebeld, omdat niemand eraan herinnerd wordt.</li>
+        <li>Als een collega ziek is, kan niemand zien wat hij met een klant had afgesproken.</li>
+        <li>Je hebt geen idee welk kanaal je de beste klanten oplevert.</li>
+        <li>Je verstuurt een nieuwsbrief naar iedereen, omdat je niet kunt filteren.</li>
+        <li>Je zoekt geregeld in drie plekken naar hetzelfde telefoonnummer.</li>
+      </ul>
+      <p>Twee of meer herkend? Dan gaat het je waarschijnlijk al klanten kosten. Niet omdat je slecht werk levert, maar omdat aanvragen tussen wal en schip vallen. Wij beloven zelf dat je op werkdagen binnen 15 minuten wordt teruggebeld. Zo'n belofte hou je alleen vol als je precies weet wie er nog wacht.</p>
+
+      <h3>De kleinste versie die werkt</h3>
+      <p>Ben je zzp'er of werk je met twee of drie mensen? Begin dan niet met een groot pakket vol functies. Dit is genoeg om geen aanvraag meer te missen:</p>
+      <ul>
+        <li><b>Vijf velden:</b> naam, telefoon, mail, wat de klant wil en waar hij je vond.</li>
+        <li><b>Vier fases:</b> nieuw, contact gehad, offerte verstuurd, gewonnen of verloren.</li>
+        <li><b>Eén regel:</b> elke kaart heeft een volgende actie met een datum.</li>
+        <li><b>Eén moment:</b> elke maandagochtend tien minuten de pipeline doorlopen.</li>
+      </ul>
+      <p>Dat kan in een gratis pakket, of desnoods in een gedeelde spreadsheet met een kolom "volgende actie". Werkt dit een paar maanden, dan weet je ook precies wat je mist. Pas dan kies je iets uitgebreiders, met een lijstje eisen uit de praktijk in plaats van uit een brochure.</p>
+
+      <div class="stap-kop" id="kiezen"><Tekening naam="kompas" maat={52} /><h2>Een pakket kiezen: tien vragen</h2></div>
+      <p>Bekende namen zijn HubSpot, Pipedrive, Teamleader, Salesforce, Zoho en Microsoft Dynamics 365. HubSpot biedt volgens zijn eigen site een gratis versie zonder einddatum. Welke het beste is, hangt af van je werkwijze. Stel deze vragen voordat je een abonnement afsluit:</p>
+      <ol class="stappen">
+        <li><b>Wat moet het oplossen?</b> Schrijf de drie grootste ergernissen van nu op. Kies het pakket dat die oplost, niet het pakket met de langste lijst functies.</li>
+        <li><b>Hoeveel mensen gaan ermee werken?</b> De meeste pakketten rekenen per gebruiker per maand.</li>
+        <li><b>Werkt het op je telefoon?</b> Wie veel op pad is, moet na een afspraak in de bus een notitie kunnen maken.</li>
+        <li><b>Is het in het Nederlands?</b> Voor jezelf maakt het misschien niet uit, voor je team vaak wel.</li>
+        <li><b>Koppelt het met je mail en agenda?</b> Gmail of Outlook, zonder handwerk.</li>
+        <li><b>Komen je websiteformulieren er direct in?</b> Zonder koppeling typt iemand ze over, en dan gaat het mis.</li>
+        <li><b>Past het bij je boekhoudprogramma?</b> Anders voer je klanten twee keer in.</li>
+        <li><b>Waar staan de gegevens en krijg je een verwerkersovereenkomst?</b> Een nette leverancier heeft die standaard.</li>
+        <li><b>Kun je er makkelijk weer uit?</b> Vraag hoe je al je gegevens exporteert als je ooit overstapt.</li>
+        <li><b>Mag je het eerst proberen?</b> Test twee weken met echte aanvragen, niet met verzonnen contacten.</li>
+      </ol>
+      <p>Prijzen veranderen geregeld, dus we noemen ze hier niet. Reken bij een vergelijking altijd met het aantal gebruikers dat je over een jaar hebt, en met de functies die je echt gebruikt. Een goedkoop instappakket wordt duur als je voor de mailkoppeling een duurder abonnement nodig hebt.</p>
+
+      <div class="stap-kop" id="koppelen"><Tekening naam="ketting" maat={52} /><h2>Koppelen aan je website en marketing</h2></div>
+      <p>Hier zit de grootste winst voor wie online adverteert of aan SEO werkt. De meeste ondernemers meten tot de aanvraag. Daarna houdt het op. Welke aanvragen klant werden, weet alleen het CRM.</p>
+      <ul>
+        <li><b>Bron meegeven.</b> Laat je websiteformulier de bron van de bezoeker meesturen: Google, een advertentie, een nieuwsbrief. Met <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a> kan dat tot op de campagne. Dan zie je na een paar maanden welk kanaal klanten oplevert, niet alleen aanvragen.</li>
+        <li><b>Terug naar Google Ads.</b> Google Ads kan conversies uit je eigen administratie importeren. Zo leert het systeem welke klikken echte opdrachten werden, in plaats van alleen ingevulde formulieren.</li>
+        <li><b>Gerichte e-mail.</b> Met de gegevens in je CRM stuur je een klant die vijf jaar geleden een cv-ketel kocht, een mail over onderhoud. Dat werkt beter dan dezelfde nieuwsbrief voor iedereen. Lees meer bij <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing en automatisering</a>.</li>
+        <li><b>Automatisch opvolgen.</b> Een offerte die na een week nog openstaat, krijgt vanzelf een herinnering. Dat heet <a href="/kennisbank/wat-is/marketing-automation/">marketing automation</a>.</li>
+      </ul>
+      <p>Zonder die koppeling stuur je je marketing op aanvragen. Met de koppeling stuur je op klanten en omzet. Dat verschil kan groot zijn: de campagne met de meeste aanvragen is niet altijd de campagne met de meeste opdrachten.</p>
+
+      <div class="stap-kop" id="avg"><Tekening naam="schild" maat={52} /><h2>CRM en de AVG</h2></div>
+      <p>Een naam, telefoonnummer of mailadres is een persoonsgegeven. De Autoriteit Persoonsgegevens schrijft dat de AVG sinds 25 mei 2018 in de hele EU geldt, en niet alleen voor grote bedrijven maar ook voor kleine ondernemers. Wat betekent dat voor je klantbestand?</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Regel</th><th>Wat het voor je CRM betekent</th></tr></thead>
+          <tbody>
+            <tr><td>Grondslag</td><td>Je hebt een van de zes wettelijke grondslagen nodig. Voor klanten is dat meestal de uitvoering van een overeenkomst. Voor een lead die een offerte vraagt vaak ook.</td></tr>
+            <tr><td>Dataminimalisatie</td><td>Leg alleen vast wat je nodig hebt. Een geboortedatum hoort zelden in een verkoopsysteem.</td></tr>
+            <tr><td>Opslagbeperking</td><td>Verwijder gegevens zodra je ze niet meer nodig hebt. Een lead die twee jaar geleden nee zei, hoeft er niet eeuwig in.</td></tr>
+            <tr><td>Recht op inzage</td><td>Vraagt iemand welke gegevens je van hem hebt, dan moet je binnen een maand reageren. Bij ingewikkelde verzoeken mag dat met twee maanden verlengd worden.</td></tr>
+            <tr><td>Verwerkersovereenkomst</td><td>De leverancier van je software verwerkt gegevens voor jou. Sluit met hem een verwerkersovereenkomst.</td></tr>
+            <tr><td>Beveiliging</td><td>Persoonlijke inlog per collega, geen gedeeld wachtwoord, en tweestapsverificatie waar het kan.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Mailen naar je contacten</h3>
+      <p>Wil je je contacten reclame mailen, dan gelden extra regels. De hoofdregel volgens de AP: je hebt vooraf toestemming nodig, dat staat in artikel 11.7 van de Telecommunicatiewet. Er is één uitzondering. Bestaande klanten mag je zonder toestemming mailen over je eigen, soortgelijke producten. Ook dan moet je iedereen bij elke mail een makkelijke en gratis manier geven om zich af te melden. Let op: ook voor zakelijke ontvangers is in principe toestemming nodig. Een lead die alleen een offerte vroeg, is dus nog geen nieuwsbriefabonnee. Leg in je CRM vast wie waarvoor toestemming gaf.</p>
+      <p>Dit is een samenvatting, geen juridisch advies. Twijfel je, kijk dan op de site van de AP of vraag het een jurist. In de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a> lees je wat je op je site moet vermelden.</p>
+
+      <div class="stap-kop" id="invoeren"><Tekening naam="pen" maat={52} /><h2>In zeven stappen invoeren</h2></div>
+      <ol class="stappen">
+        <li><b>Teken je proces op papier.</b> Van aanvraag tot factuur. Welke fases zijn er, wie doet wat?</li>
+        <li><b>Kies je velden.</b> Zo weinig mogelijk. Naam, bedrijf, telefoon, mail, bron, dienst, waarde. Elk extra verplicht veld is een reden om het niet in te vullen.</li>
+        <li><b>Schoon je bestand op.</b> Dubbele contacten eruit, oude leads weg, schrijfwijzen gelijk. Rommel importeren is rommel houden.</li>
+        <li><b>Importeer en koppel.</b> Eerst je contacten, dan je mail en agenda, dan de formulieren van je website.</li>
+        <li><b>Maak afspraken met je team.</b> Wat leg je vast na een telefoontje? Binnen welke tijd volg je een lead op? Wie is eigenaar van een kans?</li>
+        <li><b>Begin klein.</b> Eerst alleen de pipeline en taken. Mailings en automatische opvolging komen later.</li>
+        <li><b>Kijk na dertig dagen terug.</b> Welke velden vult niemand in? Waar wordt omheen gewerkt? Pas aan.</li>
+      </ol>
+      <p>Het invoeren mislukt zelden door de software. Het mislukt omdat mensen er omheen blijven werken. Laat zien wat het hen oplevert: minder zoeken, geen vergeten terugbelverzoeken, rust tijdens de vakantie.</p>
+
+      <div class="stap-kop" id="rapportage"><Tekening naam="scherm" maat={52} /><h2>Welke rapportage haal je eruit?</h2></div>
+      <p>Een bijgehouden systeem geeft je getallen die nergens anders staan. Deze vijf zijn de moeite waard om maandelijks te bekijken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Getal</th><th>Formule</th><th>Wat je ermee doet</th></tr></thead>
+          <tbody>
+            <tr><td>Leads per bron</td><td>Aantal nieuwe leads per kanaal</td><td>Zien waar je marketing werkt</td></tr>
+            <tr><td>Afsluitratio per bron</td><td>Gewonnen ÷ alle leads uit dat kanaal</td><td>Zien welk kanaal de beste klanten geeft</td></tr>
+            <tr><td>Reactietijd</td><td>Tijd tussen aanvraag en eerste contact</td><td>Sneller terugbellen wint opdrachten</td></tr>
+            <tr><td>Doorlooptijd</td><td>Dagen van lead tot getekende offerte</td><td>Planning en cashflow voorspellen</td></tr>
+            <tr><td>Redenen van verlies</td><td>Telling van de reden bij verloren kansen</td><td>Prijs, timing of iets anders aanpakken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Wil je weten welke van deze getallen een echte stuurwaarde verdienen? Lees dan hoe je een <a href="/kennisbank/wat-is/kpi/">KPI</a> kiest met een streefwaarde en een periode.</p>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="huis" maat={52} /><h2>Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><b>Software kopen voordat de werkwijze er is.</b> Het pakket wordt dan een duurdere versie van je oude chaos.</li>
+        <li><b>Te veel velden.</b> Als het invullen van een lead vijf minuten kost, gebeurt het niet.</li>
+        <li><b>Geen eigenaar.</b> Elke kans moet van iemand zijn. "Iemand belt wel" betekent dat niemand belt.</li>
+        <li><b>Leads van de website handmatig overtypen.</b> Fouten, vertraging, en op drukke dagen raakt er een zoek.</li>
+        <li><b>Nooit opschonen.</b> Een bestand vol oude, foute en dubbele contacten maakt elke rapportage onbetrouwbaar.</li>
+        <li><b>Alleen de verkoop laten werken.</b> Wie klanten aan de telefoon heeft, hoort ook in het systeem te kijken.</li>
+      </ul>
+      <p>Voor ons geldt hetzelfde als bij je website: begin waar de grootste kans op snel verschil zit. Meestal is dat geen nieuw pakket, maar de afspraak dat elke aanvraag binnen een uur teruggebeld wordt en op één plek wordt vastgelegd.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees hoe je meer aanvragen krijgt in de gids <a href="/kennisbank/gidsen/leads-genereren/">leads genereren</a>, of bekijk hoe we met <a href="/leadgeneratie/">leadgeneratie</a> doelen afspreken waar we op afgerekend worden. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is CRM in het kort?', a: 'CRM staat voor customer relationship management, klantrelatiebeheer. Het is de manier waarop je klantcontact, leads en afspraken bijhoudt, meestal in software. Alles staat op één plek, voor iedereen in je team.' },
+      { v: 'Wat kost een CRM-systeem?', a: 'Dat hangt af van het pakket en het aantal gebruikers. De meeste rekenen per gebruiker per maand. Er zijn ook gratis versies, zoals het gratis pakket van HubSpot. Reken met de functies die je echt nodig hebt, zoals de koppeling met je mail.' },
+      { v: 'Is Excel ook een CRM?', a: 'Voor een zzp\'er met een paar aanvragen per maand kan een spreadsheet volstaan. Je mist wel herinneringen, een geschiedenis per klant en koppelingen met je mail en website. Zodra er aanvragen blijven liggen, is het tijd voor iets anders.' },
+      { v: 'Wat is het verschil tussen CRM en ERP?', a: 'Een CRM beheert je klantrelaties en verkoop. Een ERP regelt je hele bedrijfsvoering: inkoop, voorraad, productie, boekhouding en personeel. Een ERP heeft vaak een klantmodule, een CRM doet geen voorraad.' },
+      { v: 'Mag ik klantgegevens zomaar in een CRM zetten?', a: 'Je hebt een grondslag uit de AVG nodig, voor klanten meestal de uitvoering van een overeenkomst. Leg alleen vast wat nodig is, verwijder wat je niet meer nodig hebt en sluit een verwerkersovereenkomst met je leverancier. Voor reclamemail heb je in principe toestemming nodig.' },
+      { v: 'Wat is een pipeline in een CRM?', a: 'Het overzicht van al je lopende verkoopkansen, verdeeld over fases zoals nieuwe lead, offerte verstuurd en gewonnen. Elke kans heeft een volgende actie met een datum, zodat niets blijft liggen.' },
+    ]}
+  />
+
+  <Verder
+    titel="Lees ook"
+    links={[
+      { label: 'Begrip', titel: 'Wat is marketing automation?', href: '/kennisbank/wat-is/marketing-automation/', tekst: 'Leads automatisch opvolgen met de juiste mail.', teken: 'mail' },
+      { label: 'Dienst', titel: 'E-mailmarketing en automatisering', href: '/leadgeneratie/e-mailmarketing/', tekst: 'Nieuwsbrieven en automatische opvolging.' },
+      { label: 'Gids', titel: 'Leads genereren', href: '/kennisbank/gidsen/leads-genereren/', tekst: 'Zo krijg je meer aanvragen binnen.' },
+    ]}
+  />
+
+  <Actie titel="Weet je welke aanvragen echt klant worden?" tekst={`${site.contactpersoon} kijkt gratis met je mee waar je aanvragen vandaan komen en waar ze blijven hangen. Je hoort eerlijk wat het snelst verschil maakt, ook als dat geen nieuw pakket is.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .stappen li { margin-bottom: 10px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

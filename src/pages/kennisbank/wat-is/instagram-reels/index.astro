@@ -1,0 +1,245 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--instagram-reels.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/instagram-reels/';
+const datum = '2026-10-18';
+const definitie = 'Instagram Reels zijn korte, verticale video\'s met muziek, tekst en effecten die je in Instagram maakt en deelt, en die Instagram ook laat zien aan mensen die je nog niet volgen.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat het zijn' },
+  { id: 'geschiedenis', titel: 'Van 15 seconden tot drie minuten' },
+  { id: 'verschil', titel: 'Reel, story of bericht?' },
+  { id: 'algoritme', titel: 'Hoe Instagram kiest' },
+  { id: 'maken', titel: 'Een reel maken in zeven stappen' },
+  { id: 'formaat', titel: 'Formaat en techniek' },
+  { id: 'muziek', titel: 'Muziek: let op als bedrijf' },
+  { id: 'ideeen', titel: 'Tien ideeën voor je bedrijf' },
+  { id: 'statistieken', titel: 'Statistieken en trial reels' },
+  { id: 'tiktok', titel: 'Reels of TikTok?' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Instagram Reels',
+    alternateName: ['Reels', 'Instagram Reel'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat zijn Instagram Reels?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://about.fb.com/news/2020/08/introducing-instagram-reels/',
+      'https://about.instagram.com/blog/announcements/instagram-ranking-explained',
+      'https://www.facebook.com/help/instagram/1038071743007909',
+      'https://www.facebook.com/help/instagram/402084904469945',
+      'https://about.fb.com/news/2024/12/trial-reels-try-content-non-followers-first-see-what-perfoms-best/',
+      'https://about.fb.com/news/2025/04/introducing-edits-streamlined-video-creation-app/',
+      'https://about.fb.com/news/2025/10/discover-reels-around-world-meta-ai-translation/',
+      'https://en.wikipedia.org/wiki/Instagram',
+    ],
+  },
+];
+---
+<Base
+  title="Instagram Reels: wat het zijn en hoe je ze maakt (2026)"
+  description="Wat zijn Instagram Reels? Korte verticale video's die ook nieuwe mensen bereiken. Met het verschil met stories, formaat, muziekregels, statistieken en tips."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Instagram Reels', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Social media</p>
+        <h1>Wat zijn Instagram Reels? Uitleg en tips voor 2026</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Open Instagram en grote kans dat je binnen een paar tellen een filmpje ziet van iemand die je niet kent. Een kok die in dertig seconden een saus maakt. Een schilder die laat zien hoe hij een kozijn afplakt. Dat zijn Instagram Reels: korte video's die het hele scherm vullen en die Instagram actief rondstuurt. Voor een bedrijf zijn ze de makkelijkste manier om op Instagram nieuwe mensen te bereiken.</p>
+      <p>Hieronder lees je wat een reel precies is, hoe hij verschilt van een story, hoe je er een maakt, welke regels er gelden voor muziek en hoe je meet of het iets oplevert.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={10} />
+
+      <div class="stap-kop"><Tekening naam="social" maat={52} /><h2 id="betekenis">Wat Instagram Reels zijn</h2></div>
+      <p>Een reel is een verticale video binnen Instagram. Je neemt hem op in de app of je uploadt een filmpje van je telefoon. Daarna voeg je muziek, tekst, effecten of een voice-over toe. De video speelt automatisch af en herhaalt zich, en kijkers swipen naar boven voor de volgende.</p>
+      <p>Wat een reel bijzonder maakt, is waar hij terechtkomt. Een gewoon bericht zien vooral je volgers. Een reel kan ook verschijnen bij mensen die je niet kennen: in het tabblad met reels, op de verkennen-pagina en tussen de berichten in iemands feed. Volgens Instagram zelf komt het meeste wat je in reels ziet van accounts die je niet volgt. Dat is precies waarom ze interessant zijn als je wilt groeien.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="geschiedenis">Van 15 seconden tot drie minuten</h2></div>
+      <p>Instagram kondigde de functie aan op 5 augustus 2020. Het was het antwoord op de opmars van TikTok. Een reel mocht toen 15 seconden duren, opgebouwd uit meerdere korte clips. Meta noemde bij de lancering de vaste gereedschappen: audio uit de muziekbibliotheek of je eigen geluid, effecten, een timer met aftellen, een functie om clips op elkaar te laten aansluiten en een knop om de snelheid aan te passen.</p>
+      <p>Daarna werd de maximale lengte stap voor stap opgerekt. Volgens Wikipedia ging het naar 30 seconden, vanaf juni 2022 naar 90 seconden, en in januari 2025 kondigde Instagram aan dat reels tot drie minuten mogen duren. Ondertussen kwamen er functies bij zoals reposten (augustus 2025), trial reels om te testen bij onbekenden (december 2024) en de losse bewerkingsapp Edits (april 2025).</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="verschil">Reel, story of bericht?</h2></div>
+      <p>Instagram heeft drie manieren om iets te delen. Ze hebben elk een eigen doel:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Reel</th><th>Story</th><th>Bericht in je feed</th></tr></thead>
+          <tbody>
+            <tr><td><b>Vorm</b></td><td>Verticale video</td><td>Verticale foto of video</td><td>Foto, carrousel of video</td></tr>
+            <tr><td><b>Blijft staan?</b></td><td>Ja, op je profiel</td><td>24 uur, tenzij highlight</td><td>Ja, op je profiel</td></tr>
+            <tr><td><b>Wie ziet het?</b></td><td>Ook mensen die je niet volgen</td><td>Vooral je volgers</td><td>Vooral je volgers</td></tr>
+            <tr><td><b>Sterk in</b></td><td>Bereik en nieuwe volgers</td><td>Band met vaste volgers, dagelijkse updates</td><td>Je visitekaartje, uitleg</td></tr>
+            <tr><td><b>Moeite</b></td><td>Gemiddeld tot veel</td><td>Weinig</td><td>Gemiddeld</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Wil je je vaste klanten bijpraten, dan zijn stories het handigst. Daarover gaat de gids over <a href="/kennisbank/gidsen/instagram-stories/">Instagram Stories</a>. Wil je nieuwe mensen bereiken, dan is een reel de beste route. De meeste bedrijven gebruiken een mix van alle drie.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="algoritme">Hoe Instagram kiest wie je reel ziet</h2></div>
+      <p>Het algoritme van reels draait om vermaak en ontdekken. In het stuk <i>Instagram Ranking Explained</i> schrijft Instagram dat het vooral voorspelt hoe groot de kans is dat iemand je reel:</p>
+      <ul class="vink">
+        <li>doorstuurt naar een ander,</li>
+        <li>helemaal uitkijkt,</li>
+        <li>liket,</li>
+        <li>en naar de pagina van het gebruikte geluid gaat, als teken dat hij zelf iets wil maken.</li>
+      </ul>
+      <p>Instagram laat reels juist minder zien als ze een lage resolutie hebben, een watermerk van een andere app, geen geluid, randen eromheen, vooral uit tekst bestaan of al eerder op Instagram stonden. Een TikTok-video met logo erop doorplaatsen kost je dus bereik. De volledige uitleg, ook voor de feed en stories, staat in de gids over het <a href="/kennisbank/gidsen/instagram-algoritme/">Instagram algoritme</a>.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="maken">Een reel maken in zeven stappen</h2></div>
+      <ol>
+        <li><strong>Bepaal één boodschap.</strong> Eén tip, één klus, één vraag. Een reel die drie dingen wil zeggen, zegt niets.</li>
+        <li><strong>Schrijf je hook.</strong> De eerste zin of het eerste beeld moet mensen laten stoppen met scrollen. "Dit doen de meeste mensen fout bij..." werkt beter dan "Hallo, wij zijn...".</li>
+        <li><strong>Film verticaal.</strong> Houd je telefoon rechtop, zorg voor daglicht en een rustige achtergrond. Neem korte stukjes op in plaats van één lange opname.</li>
+        <li><strong>Open de camera in Instagram.</strong> Tik op het plusje en kies <i>Reel</i>. Neem op, of kies je filmpjes uit je galerij. Voor meer controle kun je eerst bewerken in een app als Edits van Instagram zelf.</li>
+        <li><strong>Voeg geluid en tekst toe.</strong> Kies muziek die je als bedrijf mag gebruiken (zie hieronder), zet de belangrijkste woorden in beeld en voeg ondertiteling toe. Veel mensen kijken zonder geluid.</li>
+        <li><strong>Kies een omslag en schrijf je tekst.</strong> Een duidelijke omslagfoto maakt je profiel rustig. Begin de beschrijving met de woorden waarop mensen zoeken, en eindig met één vraag of oproep.</li>
+        <li><strong>Plaats en blijf erbij.</strong> Reageer het eerste uur op reacties. Zo begint het gesprek, en dat ziet het algoritme.</li>
+      </ol>
+      <p>Hoe vaak? Liever één goede reel per week, een halfjaar lang, dan tien in de eerste maand en daarna niets. Een vaste <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a> helpt je dat vol te houden.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="formaat">Formaat en techniek</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat Instagram aanhoudt</th><th>Ons advies</th></tr></thead>
+          <tbody>
+            <tr><td><b>Verhouding</b></td><td>Tussen 1,91:1 (liggend) en 9:16 (staand)</td><td>Altijd 9:16, het hele scherm vol</td></tr>
+            <tr><td><b>Resolutie</b></td><td>Minimaal 720 pixels</td><td>1080 bij 1920 pixels</td></tr>
+            <tr><td><b>Beelden per seconde</b></td><td>Minimaal 30</td><td>30, zoals je telefoon standaard filmt</td></tr>
+            <tr><td><b>Omslagfoto</b></td><td>420 bij 654 pixels aanbevolen (1:1,55)</td><td>Gezicht of resultaat, met een korte titel</td></tr>
+            <tr><td><b>Lengte</b></td><td>Tot drie minuten</td><td>Zo kort als het verhaal toelaat, vaak onder een minuut</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De cijfers voor verhouding, resolutie, beelden per seconde en omslag komen uit het Helpcentrum van Instagram. Zet in je instellingen ook het uploaden in de hoogste kwaliteit aan. In het Engelse Helpcentrum heet die schakelaar <i>Upload at highest quality</i>, onder <i>Media quality</i>. Het uploaden duurt dan wat langer, maar je video blijft scherp.</p>
+      <p>Houd onderin en rechts wat ruimte vrij. Daar staan je naam, de beschrijving en de knoppen om te liken en te delen. Tekst die daar staat, valt weg.</p>
+
+      <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="muziek">Muziek: let op als bedrijf</h2></div>
+      <p>Hier gaat het vaak mis. De muziekbibliotheek van Instagram is volgens Meta bedoeld voor persoonlijk, niet-commercieel gebruik. Daarom hebben bepaalde zakelijke accounts en bepaalde soorten berichten er geen toegang toe. Zie je een populair nummer niet staan op je bedrijfsaccount, dan is dat geen fout.</p>
+      <p>Wat dan wel? Meta heeft de Sound Collection: volgens het Helpcentrum meer dan 14.000 nummers en geluiden die rechtenvrij zijn en die je ook commercieel mag gebruiken, zelfs in advertenties. Je vindt ze via <i>Audio</i> in de camera voor reels. Je eigen stem, het geluid van je werkplaats of een voice-over werkt ook. En vaak beter, omdat het echt van jou is.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="ideeen">Tien ideeën voor je bedrijf</h2></div>
+      <p>Je hoeft niet te dansen. Deze vormen werken voor ondernemers in de bouw, de zorg, de horeca of de dienstverlening:</p>
+      <ol>
+        <li><strong>Voor en na.</strong> De tuin voor de hovenier kwam, en erna. Drie seconden elk.</li>
+        <li><strong>Eén tip in 20 seconden.</strong> "Zo voorkom je dat je kozijn gaat rotten."</li>
+        <li><strong>Een veelgestelde vraag.</strong> Beantwoord elke week één vraag die klanten aan de telefoon stellen.</li>
+        <li><strong>Achter de schermen.</strong> De bakkerij om vier uur 's nachts, de werkplaats op maandagochtend.</li>
+        <li><strong>Het team.</strong> Wie komt er bij je over de vloer? Een kort voorstelrondje schept vertrouwen.</li>
+        <li><strong>Een fout die je vaak ziet.</strong> "Dit zien we bij negen van de tien badkamers." Herkenning wordt gedeeld.</li>
+        <li><strong>Een klus in tijdversnelling.</strong> Een hele dag schilderen in vijftien seconden.</li>
+        <li><strong>Een klant aan het woord.</strong> Met toestemming, in eigen woorden. Sterker dan elke reclame.</li>
+        <li><strong>Lokaal.</strong> Een klus in Zuidlaren, de markt in Assen, de route naar je zaak. Mensen uit de buurt herkennen het.</li>
+        <li><strong>Een mythe ontkracht.</strong> "Moet je een houten vloer elk jaar oliën? Nee, en dit is waarom."</li>
+      </ol>
+      <p>Twijfel je over welke onderwerpen je doelgroep wil zien? Kijk naar de vragen in je mailbox en naar de reacties onder je berichten. Daar staat je content voor de komende maanden al.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="statistieken">Statistieken en trial reels</h2></div>
+      <p>Met een zakelijk account of makersaccount zie je per reel hoe hij het doet. Kijk niet alleen naar het aantal views. Deze cijfers zeggen meer:</p>
+      <ul>
+        <li><strong>Bereik:</strong> hoeveel verschillende accounts je reel zagen, en welk deel geen volger was.</li>
+        <li><strong>Kijktijd:</strong> hoe lang mensen gemiddeld bleven kijken. Haken ze na twee seconden af, dan werkt je hook niet.</li>
+        <li><strong>Delen en opslaan:</strong> het beste teken dat je reel waarde heeft.</li>
+        <li><strong>Nieuwe volgers en profielbezoeken:</strong> of kijkers meer van je willen zien.</li>
+        <li><strong>Websiteklikken en berichten:</strong> of het iets oplevert voor je bedrijf.</li>
+      </ul>
+      <p>Twijfel je of een idee aanslaat? Gebruik dan trial reels. Sinds december 2024 kun je een reel eerst laten zien aan mensen die je niet volgen. Je zet daarvoor voor het plaatsen de schakelaar <i>Trial</i> aan. Na ongeveer 24 uur zie je de views, likes, reacties en shares. Volgens Instagram kun je hem daarna met één tik delen met je volgers, of dat automatisch laten doen als hij in de eerste 72 uur goed scoort. Zo test je zonder je vaste volgers te vermoeien. Wie graag zo experimenteert, leest ook over <a href="/kennisbank/wat-is/growth-hacking/">growth hacking</a>.</p>
+      <p>Meta biedt ook automatische vertaling en nasynchronisatie van reels met Meta AI. Sinds juli 2026 werkt dat op Instagram onder meer in het Engels, Spaans, Portugees, Frans, Duits en Italiaans. Nederlands staat (oktober 2026) nog niet in de lijst.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="tiktok">Reels of TikTok?</h2></div>
+      <p>Het formaat is bijna hetzelfde: korte verticale video met muziek en tekst. Toch is de keuze niet altijd hetzelfde.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Instagram</th><th>TikTok</th></tr></thead>
+          <tbody>
+            <tr><td><b>Startpunt</b></td><td>Je hebt misschien al een account met volgers</td><td>Je begint vaak vanaf nul</td></tr>
+            <tr><td><b>Wat je er nog meer doet</b></td><td>Foto's, stories, berichten, een winkel</td><td>Vooral video</td></tr>
+            <tr><td><b>Kans voor kleine accounts</b></td><td>Goed, via het tabblad reels en verkennen</td><td>Goed, volgers zijn volgens TikTok geen directe factor</td></tr>
+            <tr><td><b>Hergebruik</b></td><td>Zonder watermerk van een andere app</td><td>Zonder watermerk van een andere app</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Ons advies: begin waar je klanten al zitten. Voor veel lokale bedrijven is dat Instagram, omdat het past bij een bestaand profiel met foto's van je werk. Maak je de video's zelf, exporteer ze dan zonder watermerk en plaats ze op beide. Wat er gebeurt als een video ineens overal opduikt, lees je bij <a href="/kennisbank/wat-is/viraal-gaan/">viraal gaan</a>.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><strong>Beginnen met je logo.</strong> In de eerste seconde beslist de kijker. Een logo is geen reden om te blijven.</li>
+        <li><strong>Liggend filmen.</strong> Een liggende video in een staand scherm voelt als een postzegel.</li>
+        <li><strong>Geen ondertiteling.</strong> Zonder tekst in beeld mis je iedereen die zonder geluid kijkt.</li>
+        <li><strong>Populaire muziek op een bedrijfsaccount.</strong> De muziekbibliotheek is volgens Meta bedoeld voor niet-commercieel gebruik. Gebruik de Sound Collection of je eigen geluid.</li>
+        <li><strong>Doorplaatsen met een watermerk.</strong> Instagram laat zulke reels minder zien.</li>
+        <li><strong>Na drie keer stoppen.</strong> Het algoritme en je publiek moeten je leren kennen. Geef het een paar maanden.</li>
+        <li><strong>Alleen naar views kijken.</strong> Duizend views uit het buitenland zeggen minder dan tien profielbezoeken uit je eigen regio.</li>
+      </ul>
+
+      <h2 id="ondernemer">Wat moet je ermee als ondernemer?</h2>
+      <p>Volgens het Nationale Social Media Onderzoek 2026 van Newcom gebruiken 14,6 miljoen Nederlanders van 15 jaar en ouder sociale media. Je klanten zitten er dus, ook in Drenthe. Reels zijn de manier om ze te bereiken voordat ze je volgen.</p>
+      <p>Je hebt geen filmploeg nodig. Een telefoon, daglicht en een duidelijk verhaal zijn genoeg. Wat wel nodig is: volhouden. Bij ons <a href="/social-media-beheer/">social media beheer</a> (vanaf € 395 per maand) nemen we de planning, de teksten, het plaatsen en het bijhouden van reacties over. De video's zelf maken we niet. Die film jij, met je telefoon, en wij zorgen dat ze op het juiste moment met de juiste tekst online komen.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees hoe je met <a href="/kennisbank/wat-is/storytelling/">storytelling</a> een verhaal vertelt dat blijft hangen, of hoe <a href="/kennisbank/wat-is/engagement/">engagement</a> wordt gemeten. Wanneer je het best post, staat in de gids <a href="/kennisbank/gidsen/beste-tijden-om-te-posten/">beste tijd om te posten</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een reel op Instagram?', a: 'Een korte, verticale video die je in Instagram maakt of uploadt, met muziek, tekst en effecten. Een reel blijft op je profiel staan en wordt ook getoond aan mensen die je nog niet volgen.' },
+      { v: 'Hoe lang mag een reel zijn?', a: 'Instagram kondigde in januari 2025 aan dat reels tot drie minuten mogen duren. Bij de start in 2020 was dat 15 seconden. Korter is meestal beter: een video die mensen helemaal uitkijken, scoort het best.' },
+      { v: 'Wat is het verschil tussen reels en stories?', a: 'Een story verdwijnt na 24 uur en is vooral voor je volgers. Een reel blijft op je profiel staan en kan ook bij nieuwe mensen terechtkomen, via het tabblad reels en de verkennen-pagina.' },
+      { v: 'Waarom kan ik geen populaire muziek gebruiken?', a: 'De muziekbibliotheek van Instagram is bedoeld voor persoonlijk gebruik. Bepaalde zakelijke accounts hebben er daarom geen toegang toe. Gebruik de Sound Collection van Meta: rechtenvrije nummers die je ook commercieel mag gebruiken.' },
+      { v: 'Wat zijn trial reels?', a: 'Reels die Instagram eerst alleen laat zien aan mensen die je niet volgen. Na ongeveer een dag zie je hoe hij scoort. Daarna kun je hem alsnog delen met je volgers, of dat automatisch laten doen als hij goed presteert.' },
+      { v: 'Hoe vaak moet ik een reel plaatsen?', a: 'Er is geen vast getal. Regelmaat is belangrijker dan aantal. Eén goede reel per week die je maandenlang volhoudt, levert meer op dan een korte periode met veel video\'s.' },
+      { v: 'Kan ik een TikTok-video ook als reel plaatsen?', a: 'Ja, maar zonder het TikTok-watermerk. Instagram laat reels met een watermerk van een andere app minder zien. Bewaar je originele video of exporteer hem zonder logo.' },
+    ]}
+  />
+
+  <Actie titel="Wil je dat je socials eindelijk volgehouden worden?" tekst={`${site.contactpersoon} belt je terug en kijkt samen met je welke kanalen bij jouw klanten passen. Eerlijk, ook als het antwoord is dat je het zelf kunt.`} knop={{ tekst: 'Neem contact op', href: '/contact/' }} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop, h2 { scroll-margin-top: 96px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

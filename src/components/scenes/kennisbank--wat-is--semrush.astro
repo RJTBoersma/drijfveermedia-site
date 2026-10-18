@@ -1,0 +1,91 @@
+---
+// Scène voor /kennisbank/wat-is/semrush/: een SEO-dashboard met links een lijst zoekwoorden (volume als balkje, moeilijkheid als chip) en rechts een grafiek met je positie in Google.
+// Als hij leeft: een vergrootglas glijdt rustig langs de zoekwoorden, de positielijn tekent zich omhoog en een chip meldt de nieuwe positie.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [
+  { y: 92, woord: 'warmtepomp', balk: 92, kd: '48', kleur: '#ff6600' },
+  { y: 128, woord: 'warmtepomp kosten', balk: 64, kd: '31', kleur: '#074663' },
+  { y: 164, woord: 'warmtepomp hoogeveen', balk: 22, kd: '9', kleur: '#1f8a5b' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een dashboard van een SEO-tool. Links drie zoekwoorden met hun zoekvolume en moeilijkheid, rechts een grafiek waarin je positie in Google stijgt naar plek 3.'}>
+  <rect x="20" y="22" width="440" height="226" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M20 58H460" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="40" cy="40" r="5" fill="#e8eef4" />
+  <circle cx="56" cy="40" r="5" fill="#e8eef4" />
+  <circle cx="72" cy="40" r="5" fill="#e8eef4" />
+  <rect class="v" x="96" y="30" width="210" height="20" rx="10" />
+  <circle cx="111" cy="40" r="5" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M115 44l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <text x="126" y="44" font-size="11" font-weight="700">warmtepomp drenthe</text>
+  <text x="440" y="44" font-size="10" text-anchor="end" class="zacht">voorbeeld</text>
+
+  <!-- zoekwoorden -->
+  <text x="38" y="76" font-size="10" font-weight="800" class="zacht">ZOEKWOORD</text>
+  <text x="226" y="76" font-size="10" font-weight="800" text-anchor="end" class="zacht">KD</text>
+  {rijen.map((r) => (
+    <g>
+      <text x="38" y={r.y} font-size="12" font-weight="800">{r.woord}</text>
+      <rect x="38" y={r.y + 7} width="120" height="7" rx="3.5" fill="#e8eef4" />
+      <rect x="38" y={r.y + 7} width={r.balk} height="7" rx="3.5" fill="#074663" opacity="0.75" />
+      <rect x="198" y={r.y - 13} width="30" height="20" rx="10" fill={r.kleur} />
+      <text x="213" y={r.y + 1} font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">{r.kd}</text>
+    </g>
+  ))}
+  <path d="M246 70V230" stroke="#e8eef4" stroke-width="2" />
+
+  <!-- positiegrafiek -->
+  <text x="262" y="76" font-size="10" font-weight="800" class="zacht">POSITIE IN GOOGLE</text>
+  <path d="M268 96H440M268 136H440M268 176H440" stroke="#e8eef4" stroke-width="1.5" />
+  <text x="262" y="100" font-size="9" text-anchor="end" class="zacht">1</text>
+  <text x="262" y="140" font-size="9" text-anchor="end" class="zacht">10</text>
+  <text x="262" y="180" font-size="9" text-anchor="end" class="zacht">20</text>
+  <path d="M268 214H440" stroke="#d9e1ea" stroke-width="2" />
+  <path class="l" d="M272 196L300 188L328 192L352 170" />
+  <circle cx="352" cy="170" r="4.5" fill="#074663" />
+  <text x="272" y="232" font-size="9" class="zacht">jan</text>
+  <text x="436" y="232" font-size="9" text-anchor="end" class="zacht">okt</text>
+  <rect x="38" y="196" width="190" height="34" rx="10" class="v" />
+  <text x="52" y="217" font-size="11" font-weight="800">Site Audit</text>
+  <rect x="132" y="207" width="84" height="8" rx="4" fill="#d9e1ea" />
+  <rect x="132" y="207" width="62" height="8" rx="4" fill="#1f8a5b" />
+
+  {!mini && (
+    <g>
+      <path class="semrush-lijn" d="M352 170L378 142L404 128L430 104" fill="none" stroke="#ff6600" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <circle class="semrush-punt" cx="430" cy="104" r="6" fill="#ff6600" />
+      <g class="semrush-chip">
+        <rect x="370" y="78" width="54" height="22" rx="11" fill="#1f8a5b" />
+        <text x="397" y="93.5" font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">plek 3</text>
+      </g>
+      <g class="semrush-loep">
+        <circle cx="0" cy="0" r="11" fill="#fff" fill-opacity="0.35" stroke="#ff6600" stroke-width="3" />
+        <path d="M8 8l8 8" stroke="#ff6600" stroke-width="3.5" stroke-linecap="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .semrush-lijn { stroke-dasharray: 1; }
+  .semrush-punt, .semrush-chip { transform-box: fill-box; transform-origin: center; }
+  .semrush-loep { transform: translate(176px, 88px); }
+  :global(.teken-js) .semrush-lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .semrush-punt, :global(.teken-js) .semrush-chip, :global(.teken-js) .semrush-loep { opacity: 0; }
+  .in-beeld .semrush-lijn { animation: kennisbank-wat-is-semrush-lijn 1.4s cubic-bezier(.6,.1,.3,1) 0.6s forwards; }
+  .in-beeld .semrush-punt { animation: kennisbank-wat-is-semrush-pop 0.4s ease-out 1.9s forwards, kennisbank-wat-is-semrush-puls 3s ease-in-out 2.4s infinite; }
+  .in-beeld .semrush-chip { animation: kennisbank-wat-is-semrush-pop 0.5s cubic-bezier(.3,1.6,.5,1) 2.1s forwards; }
+  .in-beeld .semrush-loep { animation: kennisbank-wat-is-semrush-loep 7s ease-in-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-semrush-lijn { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-wat-is-semrush-pop { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-wat-is-semrush-puls { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+  @keyframes kennisbank-wat-is-semrush-loep {
+    0% { opacity: 0; transform: translate(176px, 88px); }
+    8% { opacity: 1; }
+    30%, 38% { transform: translate(176px, 124px); }
+    62%, 72% { transform: translate(176px, 160px); }
+    92% { opacity: 1; }
+    100% { opacity: 0; transform: translate(176px, 160px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .semrush-lijn, .in-beeld .semrush-punt, .in-beeld .semrush-chip, .in-beeld .semrush-loep { animation: none; } }
+</style>

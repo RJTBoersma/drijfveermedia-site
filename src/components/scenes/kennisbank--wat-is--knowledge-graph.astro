@@ -1,0 +1,92 @@
+---
+// Scène voor /kennisbank/wat-is/knowledge-graph/: links een netwerk van feiten rond "Jouw bedrijf" (plaats, eigenaar, website, branche, logo),
+// rechts het kennisvenster dat Google daaruit opbouwt. Als hij leeft: er lopen bolletjes langs de verbindingen naar het midden
+// en de regels in het kennisvenster vullen zich een voor een.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const midden = { x: 150, y: 138 };
+const knopen = [
+  { x: 56, y: 60, label: 'Plaats' },
+  { x: 244, y: 52, label: 'Eigenaar' },
+  { x: 274, y: 150, label: 'Logo' },
+  { x: 236, y: 232, label: 'Branche' },
+  { x: 52, y: 214, label: 'Website' },
+];
+const regels = [150, 172, 194];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een netwerk van feiten rond jouw bedrijf, zoals plaats, eigenaar, logo, branche en website, met lijnen ertussen. Rechts het kennisvenster dat Google uit die feiten opbouwt.'}>
+  <!-- verbindingen -->
+  {knopen.map((k) => (
+    <path d={`M${k.x} ${k.y}L${midden.x} ${midden.y}`} stroke="#d9e1ea" stroke-width="2.5" stroke-linecap="round" />
+  ))}
+  <rect x="64" y="88" width="72" height="18" rx="9" fill="#fff" stroke="#d9e1ea" />
+  <text x="100" y="100.5" font-size="9.5" text-anchor="middle" class="zacht">gevestigd in</text>
+  <rect x="166" y="84" width="76" height="18" rx="9" fill="#fff" stroke="#d9e1ea" />
+  <text x="204" y="96.5" font-size="9.5" text-anchor="middle" class="zacht">opgericht door</text>
+
+  <!-- knopen -->
+  {knopen.map((k) => (
+    <g>
+      <circle cx={k.x} cy={k.y} r="18" fill="#fff" stroke="#074663" stroke-width="2.5" />
+      <circle class="v" cx={k.x} cy={k.y} r="9" />
+      <text x={k.x} y={k.y + 33} font-size="10.5" font-weight="700" text-anchor="middle">{k.label}</text>
+    </g>
+  ))}
+  <circle cx={midden.x} cy={midden.y} r="34" fill="#fff" stroke="#ff6600" stroke-width="3" />
+  <text x={midden.x} y={midden.y - 2} font-size="11" font-weight="800" text-anchor="middle">Jouw</text>
+  <text x={midden.x} y={midden.y + 12} font-size="11" font-weight="800" text-anchor="middle">bedrijf</text>
+
+  <!-- kennisvenster -->
+  <path class="a" d="M300 120c6-10 10-12 16-12" />
+  <path class="a" d="M309 101l7 7-8 6" />
+  <rect x="320" y="30" width="142" height="212" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="332" y="42" width="118" height="58" rx="6" />
+  <circle cx="356" cy="71" r="14" fill="#074663" />
+  <path d="M349 71h14M356 64v14" stroke="#fff" stroke-width="2.4" stroke-linecap="round" />
+  <text x="332" y="120" font-size="12" font-weight="800">Jouw bedrijf</text>
+  <rect x="332" y="128" width="84" height="6" rx="3" fill="#d9e1ea" />
+  {regels.map((y) => (
+    <g>
+      <rect x="332" y={y} width="34" height="7" rx="3.5" fill="#10283f" opacity="0.75" />
+      <rect x="372" y={y} width="66" height="7" rx="3.5" fill="#e8eef4" />
+    </g>
+  ))}
+  <rect x="332" y="214" width="56" height="16" rx="8" fill="#e8eef4" />
+  <rect x="394" y="214" width="56" height="16" rx="8" fill="#e8eef4" />
+
+  {!mini && (
+    <g>
+      {knopen.map((k, i) => (
+        <circle class={`kg-bol kg-bol-${i}`} cx={k.x} cy={k.y} r="5" fill="#ff6600" style={`--dx:${midden.x - k.x}px;--dy:${midden.y - k.y}px`} />
+      ))}
+      {regels.map((y, i) => (
+        <rect class={`kg-regel kg-regel-${i}`} x="372" y={y} width="66" height="7" rx="3.5" fill="#074663" />
+      ))}
+      <g class="kg-vink"><circle cx="446" cy="120" r="9" fill="#1f8a5b" /><path d="M441.5 120l3 3 5.5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+    </g>
+  )}
+</svg>
+<style>
+  .kg-regel { transform-box: fill-box; transform-origin: left center; }
+  .kg-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .kg-bol, :global(.teken-js) .kg-vink { opacity: 0; }
+  :global(.teken-js) .kg-regel { transform: scaleX(0); }
+  .in-beeld .kg-bol { animation: kennisbank-wat-is-knowledge-graph-bol 5s ease-in-out infinite; }
+  .in-beeld .kg-bol-1 { animation-delay: 1s; }
+  .in-beeld .kg-bol-2 { animation-delay: 2s; }
+  .in-beeld .kg-bol-3 { animation-delay: 3s; }
+  .in-beeld .kg-bol-4 { animation-delay: 4s; }
+  .in-beeld .kg-regel-0 { animation: kennisbank-wat-is-knowledge-graph-regel 0.6s ease-out 0.8s forwards; }
+  .in-beeld .kg-regel-1 { animation: kennisbank-wat-is-knowledge-graph-regel 0.6s ease-out 1.4s forwards; }
+  .in-beeld .kg-regel-2 { animation: kennisbank-wat-is-knowledge-graph-regel 0.6s ease-out 2s forwards; }
+  .in-beeld .kg-vink { animation: kennisbank-wat-is-knowledge-graph-vink 0.5s cubic-bezier(.3,1.6,.5,1) 2.7s forwards; }
+  @keyframes kennisbank-wat-is-knowledge-graph-bol {
+    0% { opacity: 0; transform: translate(0, 0); }
+    8% { opacity: 1; }
+    40% { opacity: 1; transform: translate(var(--dx), var(--dy)); }
+    48%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)); }
+  }
+  @keyframes kennisbank-wat-is-knowledge-graph-regel { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes kennisbank-wat-is-knowledge-graph-vink { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .kg-bol, .in-beeld .kg-regel, .in-beeld .kg-vink { animation: none; } }
+</style>

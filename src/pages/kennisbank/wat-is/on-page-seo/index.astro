@@ -1,0 +1,336 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--on-page-seo.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/on-page-seo/';
+const datum = '2026-10-18';
+const definitie = 'On-page SEO is alles wat je op een pagina zelf verbetert, zoals de tekst, de koppen, de title tag, de afbeeldingen en de interne links, zodat zoekmachines en bezoekers snappen waar die pagina over gaat.';
+const hoofdstukken = [
+  { id: 'verschil', titel: 'On-page, off-page en technisch' },
+  { id: 'waarom', titel: 'Waarom je hier begint' },
+  { id: 'zoekintentie', titel: 'Eerst de zoekintentie' },
+  { id: 'onderdelen', titel: 'De onderdelen één voor één' },
+  { id: 'mythes', titel: 'Wat niet uitmaakt' },
+  { id: 'voorbeeld', titel: 'Voor en na' },
+  { id: 'checklist', titel: 'Checklist om af te vinken' },
+  { id: 'meten', titel: 'Meten of het werkt' },
+  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden' },
+];
+const checklist = [
+  { groep: 'Voorbereiding', punten: [
+    'De pagina heeft één hoofdzoekwoord, en geen andere pagina op je site richt zich op hetzelfde woord.',
+    'Je hebt de top 5 in Google voor dat woord bekeken en weet welke zoekintentie erachter zit.',
+    'De pagina beantwoordt de vraag van de zoeker beter of vollediger dan wat er nu bovenaan staat.',
+  ] },
+  { groep: 'In de zoekresultaten', punten: [
+    'De title tag is uniek, beschrijft de pagina en zet het zoekwoord vooraan.',
+    'De title tag is kort genoeg om op een telefoon niet midden in een woord te worden afgekapt.',
+    'De meta description vat de pagina in een of twee zinnen samen en geeft een reden om te klikken.',
+    'De URL is kort, leesbaar en bevat geen datums of nummers.',
+  ] },
+  { groep: 'Op de pagina', punten: [
+    'Er staat precies één H1, met het zoekwoord erin.',
+    'Het zoekwoord staat in de eerste alinea, in gewone taal.',
+    'De koppen (H2, H3) vertellen samen het verhaal; wie alleen de koppen leest, snapt de pagina.',
+    'De tekst is eigen werk, actueel en zonder taalfouten.',
+    'Je herhaalt het zoekwoord niet krampachtig, maar gebruikt ook varianten en verwante woorden.',
+    'Er is een duidelijke volgende stap: bellen, een formulier of een offerte.',
+  ] },
+  { groep: 'Beeld en links', punten: [
+    'Elke afbeelding heeft een beschrijvende alt-tekst en een bestandsnaam die zegt wat erop staat.',
+    'Foto\'s zijn verkleind en opgeslagen als WebP of een ander licht formaat.',
+    'De pagina linkt naar minstens drie verwante pagina\'s op je eigen site, met beschrijvende linkteksten.',
+    'Belangrijke pagina\'s op je site linken ook naar deze pagina.',
+    'Waar je een feit of cijfer noemt, link je naar de bron.',
+  ] },
+  { groep: 'Techniek op paginaniveau', punten: [
+    'De pagina laadt op een telefoon snel; in PageSpeed Insights is de LCP onder de 2,5 seconden.',
+    'De pagina werkt goed op een smal scherm: geen horizontaal scrollen, knoppen groot genoeg.',
+    'Er staat passende gestructureerde data op, zoals Article, LocalBusiness of FAQPage.',
+    'Je ziet wie de tekst schreef en wanneer hij voor het laatst is bijgewerkt.',
+  ] },
+];
+const totaal = checklist.reduce((n, g) => n + g.punten.length, 0);
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'On-page SEO',
+  alternateName: ['Onpage SEO', 'On page SEO', 'On-page optimalisatie'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is on-page SEO? Uitleg, voorbeelden en een checklist om af te vinken',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wat is on-page SEO? Uitleg en checklist | Drijfveer Media"
+  description="Wat is on-page SEO? Alles wat je op de pagina zelf verbetert, van title tag tot interne links. Met voorbeelden, de mythes en een checklist om af te vinken."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'On-page SEO', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is on-page SEO?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je kunt niet bepalen wie er naar je site linkt. Je kunt wel bepalen wat er op je eigen pagina's staat. Dat is on-page SEO: de titel die in Google verschijnt, de koppen, de tekst, de foto's en de links naar je andere pagina's. Het is het deel van vindbaarheid dat helemaal in je eigen hand ligt. En het is vaak het snelst te verbeteren. Hieronder lees je wat er allemaal onder valt, wat volgens Google zelf niet uitmaakt, en je krijgt een checklist die je per pagina kunt afvinken.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>On-page is wat je op de pagina zelf doet. Off-page is wat elders gebeurt, zoals links van andere sites. Technische SEO zorgt dat Google je site kan lezen.</li>
+          <li>Begin altijd bij de vraag van de zoeker: welke zoekintentie zit achter het woord?</li>
+          <li>De belangrijkste onderdelen: title tag, meta description, URL, koppen, tekst, afbeeldingen, interne links, schema en laadsnelheid.</li>
+          <li>Google zegt zelf dat meta keywords, een ideaal aantal woorden en de volgorde van je koppen niet uitmaken voor je positie.</li>
+          <li>Onderaan staat een checklist met {totaal} punten om per pagina af te vinken.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={14} />
+
+      <div class="stap-kop" id="verschil"><Tekening naam="kompas" maat={52} /><h2>On-page SEO, off-page SEO en technische SEO</h2></div>
+      <p>SEO wordt vaak in drie stukken geknipt. Ze overlappen, maar het helpt om ze apart te zien:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>On-page</th><th>Off-page</th><th>Technisch</th></tr></thead>
+          <tbody>
+            <tr><td>Waar</td><td>Op de pagina zelf</td><td>Buiten je site</td><td>Onder de motorkap van je site</td></tr>
+            <tr><td>Voorbeelden</td><td>Tekst, koppen, title tag, alt-tekst, interne links</td><td>Backlinks, vermeldingen, reviews, naamsbekendheid</td><td>Indexering, sitemap, redirects, https, snelheid van de server</td></tr>
+            <tr><td>Wie heeft het in de hand</td><td>Jij, volledig</td><td>Deels anderen</td><td>Jij of je webbouwer</td></tr>
+            <tr><td>Hoe snel effect</td><td>Vaak binnen weken</td><td>Maanden</td><td>Wisselend</td></tr>
+            <tr><td>Meer lezen</td><td>Deze pagina</td><td><a href="/linkbuilding/">Linkbuilding</a></td><td><a href="/zoekmachine-optimalisatie/technische-seo/">Technische SEO</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Sommige onderdelen zitten op de grens. Laadsnelheid hangt af van je server, maar ook van de foto's op een pagina. Schema is code, maar beschrijft de inhoud van één pagina. Wij rekenen ze hier mee, omdat je ze per pagina regelt.</p>
+
+      <div class="stap-kop" id="waarom"><Tekening naam="raket" maat={52} /><h2>Waarom je hier begint</h2></div>
+      <p>Links van andere sites helpen pas als de pagina waar ze naartoe wijzen zelf klopt. Een sterke link naar een pagina die de vraag van de zoeker niet beantwoordt, levert weinig op. Andersom zien we vaak dat een pagina een paar plekken stijgt na een middag werk: een betere titel, een tekst die eindelijk de vraag beantwoordt, links vanaf de homepage.</p>
+      <p>Het is ook het goedkoopste deel. Je hebt geen budget nodig voor advertenties of linkbuilding. Alleen tijd en aandacht. Daarom beginnen we bij nieuwe klanten bijna altijd hier. Eerst de 20 procent van het werk dat het meeste verschil maakt, zoals in <a href="/werkwijze/">onze werkwijze</a>.</p>
+
+      <div class="stap-kop" id="zoekintentie"><Tekening naam="doel" maat={52} /><h2>Eerst de zoekintentie, dan de tekst</h2></div>
+      <p>Voordat je één woord schrijft, kijk je naar wat iemand wil die op jouw zoekwoord zoekt. Dat heet <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>. Zoekt iemand op "dakgoot repareren", dan wil hij misschien weten hoe het moet, of iemand die het komt doen. Kijk naar de top 5 in Google. Staan er vooral uitleggidsen, dan wil de zoeker informatie. Staan er vooral bedrijven met een offerteknop, dan wil hij iets laten doen.</p>
+      <p>Twee vaste regels:</p>
+      <ul class="vink">
+        <li><b>Eén hoofdzoekwoord per pagina.</b> Twee pagina's die op hetzelfde woord mikken, zitten elkaar in de weg. Dat heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>.</li>
+        <li><b>Het type pagina moet passen.</b> Een dienstpagina scoort zelden op een vraag als "wat is", en een uitleg zelden op "laten doen".</li>
+      </ul>
+      <p>Welke woorden je kiest, lees je in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a>.</p>
+
+      <div class="stap-kop" id="onderdelen"><Tekening naam="tandwiel" maat={52} /><h2>De onderdelen van on-page SEO, één voor één</h2></div>
+
+      <h3>Title tag</h3>
+      <p>De title tag is de titel van je pagina in de code. Google gebruikt hem vaak als blauwe kop in de zoekresultaten. Volgens Google is het vaak het belangrijkste stukje informatie waarop mensen kiezen waar ze klikken. Er is geen officiële maximale lengte, maar Google kapt de titel af waar het scherm ophoudt. Zet het zoekwoord dus vooraan en houd het kort. Elke pagina een eigen titel, zonder herhaling van hetzelfde woord. Google kiest de getoonde titel overigens zelf, uit je title tag, je koppen en andere bronnen. Een goede title tag maakt de kans groot dat het de jouwe wordt. Meer bij <a href="/kennisbank/wat-is/title-tag/">wat is een title tag</a>.</p>
+
+      <h3>Meta description</h3>
+      <p>De korte omschrijving onder de titel. Google maakt die tekst volgens eigen zeggen vooral uit de inhoud van de pagina zelf, en gebruikt je meta description als die de pagina beter samenvat. Volgens Google telt hij niet mee voor je positie. Wel voor de vraag of iemand klikt. Schrijf per pagina een eigen omschrijving van een of twee zinnen, met een reden om te klikken. De gids <a href="/kennisbank/gidsen/meta-description/">meta description schrijven</a> gaat er dieper op in.</p>
+
+      <h3>URL</h3>
+      <p>Een goed webadres is kort en leesbaar: <code>/schilder-groningen/</code> in plaats van <code>/?p=1234</code>. Google zegt wel dat woorden in de URL zelf nauwelijks effect hebben op je positie. Het gaat dus vooral om de lezer, die in één oogopslag ziet waar de pagina over gaat. Verander een bestaand adres niet zomaar. Doe je het toch, zet dan een redirect. Meer in de gids <a href="/kennisbank/gidsen/seo-vriendelijke-urls/">SEO-vriendelijke URL's</a>.</p>
+
+      <h3>Koppen</h3>
+      <p>Eén H1 bovenaan met het onderwerp, daaronder H2's voor de hoofdstukken en H3's voor de stukken daarbinnen. Koppen helpen lezers scannen. Schrijf ze zo dat iemand die alleen de koppen leest, de structuur van de pagina snapt. Zet het zoekwoord in de H1 en in een paar H2's, niet in allemaal. Lees meer bij <a href="/kennisbank/wat-is/headings/">wat zijn headings</a>.</p>
+
+      <h3>De tekst zelf</h3>
+      <p>Hier zit het meeste werk en de meeste winst. Google beschrijft in zijn SEO-starthandleiding wat goede content is: goed geschreven, makkelijk te volgen, eigen werk, actueel en betrouwbaar. Beantwoord de vraag van de zoeker vroeg op de pagina. Gebruik het zoekwoord in de eerste alinea en daarna op een natuurlijke manier, met varianten en verwante woorden. Google noemt overmatig herhalen expliciet tegen zijn spamregels. Geef wat anderen missen: een rekenvoorbeeld, een tabel, een foto van je eigen werk. Hoe je zo schrijft, staat in de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>.</p>
+
+      <h3>Afbeeldingen en alt-tekst</h3>
+      <p>De alt-tekst beschrijft wat er op een afbeelding staat. Volgens Google helpt hij zoekmachines snappen wat de afbeelding laat zien en hoe die bij de tekst hoort. Schrijf wat je ziet, kort en concreet: "Schilder zet een kozijn in de grondverf in Groningen" in plaats van "foto1". Geef het bestand ook een naam die klopt. En maak foto's licht, anders gaat het ten koste van de laadsnelheid. Meer bij <a href="/kennisbank/wat-is/alt-tekst/">wat is een alt-tekst</a> en <a href="/kennisbank/wat-is/webp/">wat is WebP</a>.</p>
+
+      <h3>Interne links</h3>
+      <p>Links tussen je eigen pagina's laten Google zien welke pagina's bij elkaar horen en welke belangrijk zijn. Ze brengen bezoekers bovendien naar de volgende stap. Gebruik een linktekst die zegt waar de link naartoe gaat, niet "klik hier". Laat belangrijke pagina's vanaf je homepage of menu bereikbaar zijn. Alles hierover lees je bij <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</p>
+
+      <h3>Externe links naar bronnen</h3>
+      <p>Noem je een cijfer of regel, link dan naar de bron. Dat helpt de lezer en laat zien dat je je huiswerk deed. Je hoeft niet bang te zijn dat je daarmee waarde weggeeft.</p>
+
+      <h3>Schema</h3>
+      <p>Gestructureerde data vertelt in code wat er op een pagina staat: een artikel, een bedrijf met adres, een lijst met veelgestelde vragen. Het levert geen hogere positie op, maar kan wel zorgen voor een rijker zoekresultaat en helpt zoekmachines en AI-tools je pagina te begrijpen. Zie <a href="/kennisbank/wat-is/schema-markup/">wat is schema markup</a>.</p>
+
+      <h3>Laadsnelheid en mobiel</h3>
+      <p>Google meet de ervaring op je pagina met de Core Web Vitals. De grenzen voor een goede score: de LCP, het moment dat het grootste stuk inhoud in beeld staat, binnen 2,5 seconden. De INP, hoe snel de pagina reageert op een klik, onder de 200 milliseconden. En de CLS, hoeveel de pagina verspringt tijdens het laden, onder 0,1. Snelheid alleen zet je niet bovenaan, maar een trage pagina kost je bezoekers. Meten doe je met <a href="/kennisbank/wat-is/pagespeed-insights/">PageSpeed Insights</a>, verbeteren met de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+
+      <h3>Wie schreef het, en wanneer</h3>
+      <p>Laat zien wie achter een tekst zit en wanneer die is bijgewerkt. Google noemt <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a> zelf geen rankingfactor. Toch helpt het bezoekers te beslissen of ze je vertrouwen, en zoekt Google naar signalen van ervaring en betrouwbaarheid. Een auteursnaam met een korte bio en een datum kosten je niets.</p>
+
+      <div class="stap-kop" id="mythes"><Tekening naam="schild" maat={52} /><h2>Wat volgens Google niet uitmaakt</h2></div>
+      <p>Over SEO op de pagina circuleren nog veel oude regels. Google zette in zijn eigen SEO-starthandleiding een rijtje op dat je kunt overslaan:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wat je soms hoort</th><th>Wat Google zegt</th></tr></thead>
+          <tbody>
+            <tr><td>"Vul de meta keywords in."</td><td>Google gebruikt de meta keywords-tag niet.</td></tr>
+            <tr><td>"Het zoekwoord moet in je domeinnaam."</td><td>Woorden in de domeinnaam of het URL-pad hebben nauwelijks effect.</td></tr>
+            <tr><td>"Een pagina moet minstens 1.000 woorden hebben."</td><td>Er is geen magisch minimum of maximum. Lengte alleen telt niet.</td></tr>
+            <tr><td>"Je koppen moeten in de juiste volgorde staan."</td><td>Fijn voor schermlezers, maar voor Google maakt de volgorde niet uit.</td></tr>
+            <tr><td>"Er is een ideaal aantal koppen."</td><td>Nee. Voelt het als te veel, dan is het waarschijnlijk te veel.</td></tr>
+            <tr><td>"E-E-A-T is een rankingfactor."</td><td>Nee, dat is het niet.</td></tr>
+            <tr><td>"Dubbele inhoud levert een straf op."</td><td>Het is geen overtreding van de spamregels, wel inefficiënt.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: SEO-starthandleiding van Google Search Central, geraadpleegd op 18 oktober 2026.</p>
+      <p>Over de zoekwoorddichtheid zegt Google niets in procenten. Op deze site houden we zelf een ruime bandbreedte aan, vooral om te voorkomen dat een tekst volgepropt raakt. Schrijf voor de lezer en lees je tekst hardop voor. Klinkt het als een robot, dan herhaal je te veel.</p>
+
+      <div class="stap-kop" id="voorbeeld"><Tekening naam="pen" maat={52} /><h2>Voor en na: een schilder in Groningen</h2></div>
+      <p>Stel: een schildersbedrijf in Groningen heeft een pagina over buitenschilderwerk. Hij staat op plek 14 voor "buitenschilder groningen". Na een uur werk ziet de pagina er zo uit:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Voor</th><th>Na</th></tr></thead>
+          <tbody>
+            <tr><td>Title tag</td><td>Diensten | Schildersbedrijf Van Dijk</td><td>Buitenschilder in Groningen, offerte binnen 2 dagen | Van Dijk</td></tr>
+            <tr><td>URL</td><td>/diensten-2/</td><td>/buitenschilder-groningen/</td></tr>
+            <tr><td>H1</td><td>Welkom</td><td>Buitenschilder in Groningen</td></tr>
+            <tr><td>Tekst</td><td>120 woorden over "kwaliteit en service"</td><td>Wat het kost per kozijn, hoe lang verf meegaat, wanneer je moet schilderen, foto's van eigen werk</td></tr>
+            <tr><td>Afbeeldingen</td><td>IMG_0042.jpg, 4 MB, zonder alt</td><td>buitenschilder-kozijnen-groningen.webp, 180 kB, met alt</td></tr>
+            <tr><td>Interne links</td><td>Geen</td><td>Vanaf de homepage, en naar de pagina's over binnenschilderwerk en houtrot</td></tr>
+            <tr><td>Volgende stap</td><td>Contactformulier onderaan de site</td><td>Knop "Offerte aanvragen" bovenaan en onderaan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld. De oude URL krijgt een redirect naar de nieuwe.</p>
+      <p>Geen van die stappen is moeilijk. Samen maken ze het verschil tussen een pagina die er gewoon staat en een pagina die de vraag van de zoeker echt beantwoordt.</p>
+
+      <div class="stap-kop" id="checklist"><Tekening naam="klik" maat={52} /><h2>De on-page SEO-checklist om af te vinken</h2></div>
+      <p>Loop deze lijst per pagina langs. Begin bij je belangrijkste dienstpagina's. Vink af wat klopt. Wat open blijft, is je werklijst.</p>
+      <div class="card checklist" data-checklist>
+        <p class="voortgang" aria-live="polite"><span data-teller>0</span> van {totaal} punten afgevinkt</p>
+        <div class="balk" aria-hidden="true"><span data-balk></span></div>
+        {checklist.map((g) => (
+          <fieldset>
+            <legend>{g.groep}</legend>
+            <ul>
+              {g.punten.map((p) => (
+                <li><label><input type="checkbox" /> <span>{p}</span></label></li>
+              ))}
+            </ul>
+          </fieldset>
+        ))}
+        <button type="button" class="btn-licht" data-wis hidden>Alles uitvinken</button>
+      </div>
+      <p class="klein muted">Je vinkjes worden alleen in je eigen browser bewaard. Wij zien ze niet.</p>
+
+      <div class="stap-kop" id="meten"><Tekening naam="grafiek" maat={52} /><h2>Zo meet je of het werkt</h2></div>
+      <p>Noteer voordat je begint hoe de pagina ervoor staat. Daarna meet je na vier tot acht weken opnieuw, want Google moet de pagina eerst opnieuw bezoeken.</p>
+      <ol>
+        <li>Open <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> en ga naar <b>Prestaties</b>.</li>
+        <li>Klik op <b>Nieuw</b>, kies <b>Pagina</b> en vul het adres van je pagina in.</li>
+        <li>Kijk naar klikken, vertoningen, de gemiddelde <a href="/kennisbank/wat-is/ctr/">CTR</a> en de gemiddelde positie. Onder <b>Zoekopdrachten</b> zie je op welke woorden de pagina verschijnt.</li>
+        <li>Vergelijk de periode na je wijziging met een even lange periode ervoor.</li>
+      </ol>
+      <p>Stijgen de vertoningen, dan vindt Google de pagina relevanter. Stijgt de CTR, dan werken je titel en omschrijving beter. En kijk vooral of er meer aanvragen uit de pagina komen. Daar doe je het uiteindelijk voor.</p>
+
+      <div class="stap-kop" id="uitbesteden"><Tekening naam="team" maat={52} /><h2>Zelf doen of uitbesteden?</h2></div>
+      <p>Met deze checklist kom je zelf een heel eind. Plan per pagina een uur en begin bij de pagina's die het meeste geld opleveren. Wil je het liever laten doen, dan kan dat op drie manieren:</p>
+      <ul>
+        <li><b>Nieuwe of herschreven teksten.</b> We schrijven <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> vanaf € 75 per pagina, inclusief titel, omschrijving en koppen.</li>
+        <li><b>Een technische check van je hele site.</b> Bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a> lopen we techniek en pagina's na, vanaf € 395.</li>
+        <li><b>Alles in één.</b> Met <a href="/zoekmachine-optimalisatie/">zoekmachine optimalisatie</a> werken we elke maand aan je pagina's, links en techniek, vanaf € 495 per maand. Maandelijks opzegbaar, met stijggarantie.</li>
+      </ul>
+      <p>Hoe het geheel van SEO werkt, van crawlen tot ranking, lees je in de gids <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe werkt SEO</a>.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Wil je een plan voor je hele site in plaats van per pagina? Lees de gids <a href="/kennisbank/gidsen/seo-strategie/">SEO-strategie</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen on-page en off-page SEO?', a: 'On-page gaat over wat je op je eigen pagina verbetert: tekst, koppen, titels, afbeeldingen en interne links. Off-page gaat over wat buiten je site gebeurt, vooral links en vermeldingen op andere sites.' },
+      { v: 'Valt technische SEO onder on-page?', a: 'Deels. Snelheid en schema regel je per pagina, dus die rekenen veel mensen mee. Zaken als indexering, sitemaps en redirects voor de hele site horen bij technische SEO.' },
+      { v: 'Hoe vaak moet het zoekwoord in de tekst?', a: 'Daar geeft Google geen getal voor. Zet het in de titel, de H1 en de eerste alinea, en gebruik daarna natuurlijke varianten. Overmatig herhalen is volgens Google tegen de spamregels.' },
+      { v: 'Hoe lang duurt het voordat ik resultaat zie?', a: 'Google moet de pagina eerst opnieuw bezoeken. Reken op vier tot acht weken voordat je verschil ziet in Search Console. Bij weinig bezochte sites kan het langer duren.' },
+      { v: 'Telt de meta description mee voor mijn positie?', a: 'Nee. Hij kan wel bepalen of iemand op je resultaat klikt. Google toont hem als hij de pagina beter samenvat dan een stuk uit de tekst zelf.' },
+      { v: 'Kan ik on-page SEO zelf doen?', a: 'Ja. Met de checklist op deze pagina kom je een heel eind. Plan een uur per pagina en begin met de pagina\'s die het meeste opleveren.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over SEO"
+    links={[
+      { label: 'Gids', titel: 'Hoe werkt SEO?', href: '/kennisbank/gidsen/hoe-werkt-seo/', tekst: 'Van crawlen tot ranking, in gewone taal.', teken: 'vergrootglas' },
+      { label: 'Begrip', titel: 'Wat is een title tag?', href: '/kennisbank/wat-is/title-tag/', tekst: 'De kop in Google, en hoe je hem schrijft.', teken: 'pen' },
+      { label: 'Gids', titel: 'SEO-teksten schrijven', href: '/kennisbank/gidsen/seo-teksten-schrijven/', tekst: 'Teksten die gevonden worden en overtuigen.', teken: 'boek' },
+    ]}
+  />
+
+  <Actie titel="Welke pagina levert het meeste op als je hem verbetert?" tekst={`We lopen je site gratis na en kijken welke pagina's het dichtst bij de eerste pagina van Google staan. ${site.contactpersoon} belt je met de drie verbeteringen die het snelst verschil maken.`} />
+</Base>
+
+<script>
+  const lijst = document.querySelector<HTMLElement>('[data-checklist]');
+  if (lijst) {
+    const vakjes = [...lijst.querySelectorAll<HTMLInputElement>('input[type="checkbox"]')];
+    const teller = lijst.querySelector<HTMLElement>('[data-teller]');
+    const balk = lijst.querySelector<HTMLElement>('[data-balk]');
+    const wis = lijst.querySelector<HTMLButtonElement>('[data-wis]');
+    const sleutel = 'drijfveer-onpage-checklist';
+    try {
+      const bewaard = JSON.parse(localStorage.getItem(sleutel) ?? '[]');
+      if (Array.isArray(bewaard)) vakjes.forEach((v, i) => { v.checked = !!bewaard[i]; });
+    } catch { /* geen opslag beschikbaar */ }
+    const bij = () => {
+      const aan = vakjes.filter((v) => v.checked).length;
+      if (teller) teller.textContent = String(aan);
+      if (balk) balk.style.width = `${Math.round((aan / vakjes.length) * 100)}%`;
+      try { localStorage.setItem(sleutel, JSON.stringify(vakjes.map((v) => v.checked))); } catch { /* negeren */ }
+    };
+    vakjes.forEach((v) => v.addEventListener('change', bij));
+    if (wis) {
+      wis.hidden = false;
+      wis.addEventListener('click', () => { vakjes.forEach((v) => { v.checked = false; }); bij(); });
+    }
+    bij();
+  }
+</script>
+
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .checklist { padding: 22px 24px; margin: 8px 0 12px; }
+  .voortgang { font-weight: 800; margin: 0 0 8px; }
+  .balk { height: 10px; border-radius: 5px; background: var(--chip, #e8eef4); overflow: hidden; margin-bottom: 18px; }
+  .balk span { display: block; height: 100%; width: 0; background: var(--ok, #1f8a5b); transition: width 0.3s ease; }
+  fieldset { border: 0; padding: 0; margin: 0 0 18px; min-width: 0; }
+  legend { font-weight: 800; padding: 0; margin-bottom: 8px; }
+  .checklist ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  .checklist label { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; padding: 6px 8px; margin-left: -8px; border-radius: 8px; }
+  .checklist label:hover { background: var(--bg); }
+  .checklist input { flex: none; width: 20px; height: 20px; margin-top: 3px; accent-color: var(--ok, #1f8a5b); }
+  .checklist input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 50%, transparent); }
+  .btn-licht { font: inherit; font-weight: 700; background: none; border: 2px solid var(--line, #d9e1ea); border-radius: 10px; padding: 8px 14px; cursor: pointer; color: var(--ink); }
+  .btn-licht:hover { border-color: var(--navy); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

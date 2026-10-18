@@ -1,0 +1,80 @@
+---
+// Scène voor /kennisbank/wat-is/zoekmachinemarketing/: één pagina met zoekresultaten, opgedeeld in de plekken waar je kunt staan:
+// advertenties (SEA), het AI-overzicht (GEO), de kaart met bedrijven (lokale SEO) en de gewone resultaten (SEO).
+// Rechts het label SEM met de vier onderdelen. Als hij leeft: een oranje kader loopt rustig langs de vier plekken en het bijbehorende label licht op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const zones = [
+  { y: 66, h: 36, label: 'SEA', uitleg: 'advertenties' },
+  { y: 108, h: 34, label: 'GEO', uitleg: 'AI-overzicht' },
+  { y: 148, h: 40, label: 'Lokaal', uitleg: 'kaart' },
+  { y: 194, h: 46, label: 'SEO', uitleg: 'organisch' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een pagina met zoekresultaten, verdeeld in vier plekken: bovenaan advertenties (SEA), dan het AI-overzicht (GEO), een kaart met bedrijven (lokale SEO) en daaronder de gewone resultaten (SEO). Samen heet dat zoekmachinemarketing, of SEM.'}>
+  <!-- zoekpagina -->
+  <rect x="24" y="16" width="286" height="238" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="38" y="28" width="258" height="28" rx="14" fill="#e8eef4" />
+  <text x="54" y="46.5" font-size="11.5" font-weight="700">kozijnen laten plaatsen</text>
+  <circle cx="276" cy="42" r="6" fill="none" stroke="#074663" stroke-width="2.2" />
+  <path d="M280.5 46.5l4.5 4.5" stroke="#074663" stroke-width="2.2" stroke-linecap="round" />
+
+  <!-- advertentie -->
+  <rect x="40" y="72" width="62" height="13" rx="6.5" fill="#fff4ec" stroke="#ff6600" stroke-width="1.2" />
+  <text x="71" y="81.6" font-size="8" font-weight="800" text-anchor="middle">Gesponsord</text>
+  <rect x="108" y="74" width="140" height="8" rx="4" fill="#074663" />
+  <rect x="40" y="90" width="230" height="5" rx="2.5" fill="#d9e1ea" />
+  <!-- AI-overzicht -->
+  <rect x="38" y="110" width="258" height="30" rx="8" fill="#f3f6f9" />
+  <path d="M52 118l2.2 5 5 2.2-5 2.2-2.2 5-2.2-5-5-2.2 5-2.2z" fill="#ff6600" />
+  <rect x="66" y="117" width="150" height="6" rx="3" fill="#10283f" opacity="0.7" />
+  <rect x="66" y="128" width="210" height="5" rx="2.5" fill="#d9e1ea" />
+  <!-- kaart -->
+  <rect x="38" y="150" width="96" height="36" rx="6" fill="#e9eef3" />
+  <path d="M38 176c30-8 50 6 96-6" stroke="#fff" stroke-width="5" fill="none" />
+  <path d="M86 160c0-5 4-8 8-8s8 3 8 8c0 6-8 13-8 13s-8-7-8-13z" fill="#ff6600" />
+  <rect x="144" y="154" width="110" height="7" rx="3.5" fill="#074663" />
+  <rect x="144" y="166" width="140" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="144" y="176" width="90" height="5" rx="2.5" fill="#d9e1ea" />
+  <!-- gewone resultaten -->
+  <rect x="40" y="198" width="150" height="8" rx="4" fill="#074663" />
+  <rect x="40" y="211" width="236" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="40" y="224" width="130" height="8" rx="4" fill="#074663" opacity="0.8" />
+  <rect x="40" y="237" width="210" height="5" rx="2.5" fill="#d9e1ea" />
+
+  <!-- SEM-label -->
+  <rect x="330" y="34" width="132" height="202" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="396" y="60" font-size="18" font-weight="900" text-anchor="middle">SEM</text>
+  <text x="396" y="76" font-size="9.5" text-anchor="middle" class="zacht">zoekmachinemarketing</text>
+  {zones.map((z, i) => (
+    <g>
+      <rect x="344" y={92 + i * 34} width="104" height="26" rx="13" fill="#e8eef4" />
+      <text x="358" y={109 + i * 34} font-size="11" font-weight="800">{z.label}</text>
+      <text x="440" y={109 + i * 34} font-size="8.5" text-anchor="end" class="zacht">{z.uitleg}</text>
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      {zones.map((z, i) => (
+        <g class={`zm-zone zm-zone-${i}`}>
+          <rect x="32" y={z.y} width="270" height={z.h} rx="8" fill="none" stroke="#ff6600" stroke-width="2.5" />
+          <rect x="344" y={92 + i * 34} width="104" height="26" rx="13" fill="none" stroke="#ff6600" stroke-width="2.5" />
+        </g>
+      ))}
+      <g class="zm-lupe"><circle cx="455" cy="22" r="9" fill="#fff" stroke="#074663" stroke-width="2.5" /><path d="M461.5 28.5l6 6" stroke="#074663" stroke-width="3" stroke-linecap="round" /></g>
+    </g>
+  )}
+</svg>
+<style>
+  .zm-zone { opacity: 0; }
+  .zm-lupe { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .zm-zone { animation: kennisbank-wat-is-zoekmachinemarketing-zone 8s ease-in-out infinite; }
+  .in-beeld .zm-zone-1 { animation-delay: 2s; }
+  .in-beeld .zm-zone-2 { animation-delay: 4s; }
+  .in-beeld .zm-zone-3 { animation-delay: 6s; }
+  .in-beeld .zm-lupe { animation: kennisbank-wat-is-zoekmachinemarketing-lupe 4s ease-in-out infinite; }
+  @keyframes kennisbank-wat-is-zoekmachinemarketing-zone { 0% { opacity: 0; } 5%, 22% { opacity: 1; } 28%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-zoekmachinemarketing-lupe { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(-4px, 3px) rotate(-8deg); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .zm-zone, .in-beeld .zm-lupe { animation: none; } }
+</style>

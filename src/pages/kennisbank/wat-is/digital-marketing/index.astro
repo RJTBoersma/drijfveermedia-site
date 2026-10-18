@@ -1,0 +1,312 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--digital-marketing.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/digital-marketing/';
+const datum = '2026-10-18';
+const definitie = 'Digital marketing is alle marketing via digitale kanalen, zoals je website, Google, social media, e-mail en AI-assistenten, met één doel: dat de juiste mensen je vinden, vertrouwen en klant worden.';
+const hoofdstukken = [
+  { id: 'wat', titel: 'In gewone taal' },
+  { id: 'verschil', titel: 'Digitaal tegenover traditioneel' },
+  { id: 'kanalen', titel: 'De kanalen op een rij' },
+  { id: 'media', titel: 'Eigen, betaalde en verdiende aandacht' },
+  { id: 'klantreis', titel: 'Van eerste zoekopdracht tot vaste klant' },
+  { id: 'b2b', titel: 'B2B of B2C: wat is het verschil?' },
+  { id: 'strategie', titel: 'Een strategie in zes stappen' },
+  { id: 'meten', titel: 'Meten: data, analytics en KPI\'s' },
+  { id: 'ai', titel: 'AI en GEO: het nieuwe kanaal' },
+  { id: 'begrippen', titel: 'Begrippen die je tegenkomt' },
+  { id: 'kosten', titel: 'Wat kost het?' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een loodgieter in Emmen' },
+  { id: 'zelf', titel: 'Zelf doen of uitbesteden?' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'deze-week', titel: 'Wat je deze week kunt doen' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Digital marketing',
+    alternateName: ['Digitale marketing', 'Online marketing'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Digital marketing: wat is het?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://opendata.cbs.nl/ODataApi/odata/84888NED',
+      'https://opendata.cbs.nl/ODataApi/odata/86117NED',
+      'https://opendata.cbs.nl/ODataApi/odata/86118NED',
+    ],
+  },
+];
+---
+<Base
+  title="Digital marketing: wat is het en hoe begin je in 2026?"
+  description="Digital marketing in gewone taal: welke kanalen er zijn, wat ze kosten, hoe je een strategie maakt en meet, met een voorbeeld van een mkb'er uit Emmen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Digital marketing', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Online marketing</p>
+        <h1>Digital marketing: wat is het en hoe pak je het aan?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Iedereen heeft het over digital marketing, maar wat is het nu precies? En belangrijker: wat moet je er als ondernemer mee? Het korte antwoord: alles wat je online doet om klanten te krijgen en te houden. Het lange antwoord lees je hieronder. Met de kanalen, wat ze kosten, hoe je kiest en hoe je ziet of het werkt. In gewone taal, want vakjargon verbergt vaak gebrek aan inhoud.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={14} />
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="wat">Digital marketing in gewone taal</h2></div>
+      <p>Marketing is zorgen dat de juiste mensen weten dat je bestaat, je vertrouwen en bij jou kopen. Digitale marketing doet dat via digitale kanalen. Denk aan je website, Google, social media, e-mail en tegenwoordig ook AI-assistenten zoals ChatGPT.</p>
+      <p>Je hoort ook online marketing, internetmarketing of het Engelse digital marketing. In de praktijk bedoelen mensen hetzelfde. Soms valt bij digitale marketing ook reclame op digitale schermen langs de weg of in de winkel eronder. Voor de meeste mkb'ers gaat het om internet.</p>
+      <p>Waarom is het zo groot geworden? Omdat je klanten er zijn. Volgens het CBS gebruikte in 2025 95,6 procent van de Nederlanders van 12 jaar en ouder dagelijks internet. 94,1 procent verstuurde of ontving e-mail en 76,3 procent zat op een sociaal netwerk. 86,2 procent zocht online informatie over producten. Wie een dakkapel, een boekhouder of een nieuwe keuken zoekt, begint dus bijna altijd op een scherm.</p>
+      <p>Bedrijven gaan daarin mee, maar niet allemaal even hard. Van de bedrijven met twee of meer werkzame personen had in 2025 73 procent een website en gebruikte 60 procent social media, meldt het CBS. Bij bedrijven met precies twee mensen had 59 procent een website. Juist in die groep valt dus nog veel te winnen.</p>
+
+      <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="verschil">Digitaal tegenover traditioneel</h2></div>
+      <p>Traditionele marketing is niet dood. Een bus met je logo, een advertentie in de streekkrant of een stand op een beurs kan prima werken. Het verschil zit in drie dingen: je kunt digitaal veel preciezer kiezen wie je bereikt, je ziet direct wat het oplevert en je kunt elke dag bijsturen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Traditionele marketing</th><th>Digitale marketing</th></tr></thead>
+          <tbody>
+            <tr><td><b>Voorbeelden</b></td><td>Folder, krant, radio, billboard, beurs</td><td>Website, Google, social media, e-mail, AI-assistenten</td></tr>
+            <tr><td><b>Wie je bereikt</b></td><td>Iedereen in een gebied of lezerskring</td><td>Mensen die nu zoeken, of een gekozen doelgroep</td></tr>
+            <tr><td><b>Meten</b></td><td>Lastig, vaak een schatting</td><td>Per klik, per aanvraag, per euro</td></tr>
+            <tr><td><b>Bijsturen</b></td><td>Pas bij de volgende druk of uitzending</td><td>Dezelfde dag</td></tr>
+            <tr><td><b>Instap</b></td><td>Vaak een vast bedrag vooraf</td><td>Klein beginnen kan, met tientjes per dag</td></tr>
+            <tr><td><b>Houdbaarheid</b></td><td>Weg na de campagne</td><td>Een goede pagina blijft jaren bezoekers trekken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het beste werkt vaak de combinatie. Iemand ziet je bus rijden in Assen, zoekt je naam later op in Google en belt via je website. Zonder vindbare site was die bus half zoveel waard.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="kanalen">De kanalen op een rij</h2></div>
+      <p>Er zijn veel kanalen, en je hoeft ze niet allemaal te doen. Dit zijn de belangrijkste, met wat ze vragen en hoe snel je resultaat ziet:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kanaal</th><th>Wat het is</th><th>Resultaat</th><th>Wat het vraagt</th></tr></thead>
+          <tbody>
+            <tr><td><b>SEO</b></td><td>Hoger in de gewone zoekresultaten van Google komen</td><td>Na maanden, daarna blijvend</td><td>Goede pagina's, techniek, links, geduld</td></tr>
+            <tr><td><b>Lokale SEO</b></td><td>Gevonden worden in Google Maps en bij "in de buurt"</td><td>Vaak binnen weken merkbaar</td><td>Een goed Google Bedrijfsprofiel en reviews</td></tr>
+            <tr><td><b>SEA</b></td><td>Adverteren in Google, betalen per klik</td><td>Dezelfde dag</td><td>Advertentiebudget en strak beheer</td></tr>
+            <tr><td><b>GEO</b></td><td>Genoemd worden in antwoorden van ChatGPT, Gemini en Google AI</td><td>Maanden, het kanaal is nieuw</td><td>Duidelijke, betrouwbare informatie over je bedrijf</td></tr>
+            <tr><td><b>Social media</b></td><td>Berichten op Facebook, Instagram en LinkedIn</td><td>Geleidelijk</td><td>Regelmaat en herkenbare inhoud</td></tr>
+            <tr><td><b>E-mailmarketing</b></td><td>Nieuwsbrieven en automatische opvolging</td><td>Snel, als je al een lijst hebt</td><td>Een lijst met toestemming en iets te vertellen</td></tr>
+            <tr><td><b>Contentmarketing</b></td><td>Artikelen, gidsen en antwoorden die klanten zoeken</td><td>Na maanden, stapelt zich op</td><td>Kennis delen en volhouden</td></tr>
+            <tr><td><b>Website en conversie</b></td><td>De plek waar alle kanalen op uitkomen</td><td>Direct merkbaar in aanvragen</td><td>Snelheid, duidelijke teksten, een makkelijk formulier</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Daarnaast bestaan display-advertenties, adverteren op social media, video, influencers en affiliate marketing. Die kunnen voor sommige bedrijven werken. Wij doen ze niet, en we zeggen dat liever eerlijk. Voor de meeste dienstverleners in het mkb zit de grootste winst in zoeken: SEO, lokale SEO, Google Ads en sinds kort GEO. Het verschil tussen de eerste en de derde lees je bij <a href="/kennisbank/wat-is/seo-en-sea/">SEO en SEA</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="magneet" maat={52} /><h2 id="media">Eigen, betaalde en verdiende aandacht</h2></div>
+      <p>Een handige manier om naar al die kanalen te kijken: van wie is de aandacht?</p>
+      <ul>
+        <li><b>Eigen kanalen</b> heb je zelf in handen: je website, je nieuwsbrieflijst, je Google Bedrijfsprofiel. Wat je hier bouwt, blijft van jou.</li>
+        <li><b>Betaalde kanalen</b> huur je: advertenties in Google of op social media. Snel, maar stop je met betalen, dan stopt het verkeer ook.</li>
+        <li><b>Verdiende aandacht</b> krijg je van anderen: een review, een link van een andere site, een vermelding in een AI-antwoord, iemand die je bericht deelt.</li>
+      </ul>
+      <p>Een gezonde mix leunt niet op één poot. Een bedrijf dat al zijn aanvragen uit Google Ads haalt, staat stil op de dag dat het budget op is. Een bedrijf dat alleen op Facebook zit, hangt aan de keuzes van Facebook. Bouw daarom altijd aan je eigen kanalen, vooral aan je <a href="/website-laten-maken/">website</a>. Die aanpak, mensen naar je toe laten komen in plaats van ze te achtervolgen, heet ook wel <a href="/kennisbank/wat-is/inbound-marketing/">inbound marketing</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="klantreis">Van eerste zoekopdracht tot vaste klant</h2></div>
+      <p>Niemand koopt bij de eerste klik. Iemand oriënteert zich, vergelijkt, twijfelt en beslist. Elk kanaal heeft daarin zijn eigen rol.</p>
+      <ol>
+        <li><b>Oriënteren.</b> "Wat kost een warmtepomp?" Hier helpen contentmarketing, SEO en een antwoord in een AI-assistent.</li>
+        <li><b>Vergelijken.</b> "Warmtepomp installateur Drenthe." Nu tellen je positie in Google, je reviews en een overzichtelijke website.</li>
+        <li><b>Beslissen.</b> De bezoeker vraagt een offerte aan of belt. Hier draait het om conversie: een duidelijke knop, een kort formulier, snel terugbellen.</li>
+        <li><b>Terugkomen.</b> Een tevreden klant krijgt een onderhoudsherinnering per mail en laat een review achter. Die review helpt de volgende klant bij stap 2.</li>
+      </ol>
+      <p>Dat model heeft veel namen: <a href="/kennisbank/wat-is/funnel/">funnel</a>, klantreis of See Think Do Care. Het idee is hetzelfde. Kijk welke stap bij jou het zwakst is en begin daar. Meer daarover in de gids <a href="/kennisbank/gidsen/customer-journey/">customer journey</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="merk" maat={52} /><h2 id="b2b">B2B of B2C: wat is het verschil?</h2></div>
+      <p>Verkoop je aan bedrijven (B2B) of aan consumenten (B2C)? Dat maakt uit voor je aanpak. De kanalen zijn grotendeels dezelfde, de manier waarop mensen kopen niet.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Aan bedrijven (B2B)</th><th>Aan consumenten (B2C)</th></tr></thead>
+          <tbody>
+            <tr><td><b>Wie beslist</b></td><td>Vaak meerdere mensen: een gebruiker, een leidinggevende, iemand van inkoop</td><td>Meestal één persoon of een stel</td></tr>
+            <tr><td><b>Hoe lang</b></td><td>Weken tot maanden, met offertes en overleg</td><td>Van een paar minuten tot een paar weken</td></tr>
+            <tr><td><b>Wat overtuigt</b></td><td>Kennis, cases, betrouwbaarheid, een duidelijke prijsindicatie</td><td>Reviews, foto's, snelheid, een goed gevoel</td></tr>
+            <tr><td><b>Sterke kanalen</b></td><td>SEO met diepgaande pagina's, LinkedIn, e-mail met opvolging</td><td>Lokale SEO, Google Ads, Instagram en Facebook</td></tr>
+            <tr><td><b>Belangrijkste KPI</b></td><td>Gekwalificeerde aanvragen en offertes</td><td>Aanvragen, telefoontjes, bestellingen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Veel mkb'ers doen allebei. Een installateur werkt voor particulieren en voor een woningcorporatie. Maak dan aparte pagina's voor beide groepen. Een inkoper wil andere dingen lezen dan een huiseigenaar met een kapotte ketel.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="strategie">Een strategie in zes stappen</h2></div>
+      <p>Een strategie klinkt groot. Voor een mkb'er past hij op één A4. Dit zijn de stappen:</p>
+      <ol>
+        <li><b>Kies één doel dat je kunt tellen.</b> Niet "meer naamsbekendheid", maar "tien offerteaanvragen per maand voor badkamers". Een doel dat je niet kunt tellen, kun je ook niet halen.</li>
+        <li><b>Beschrijf je doelgroep.</b> Wie is je beste klant, waar woont hij, waar zoekt hij op en wat houdt hem tegen? Gebruik je eigen klantenbestand. Lees ook wat een <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a> precies is.</li>
+        <li><b>Kijk wat er al is.</b> Hoeveel bezoekers heb je, waar komen ze vandaan, op welke zoekwoorden word je gevonden? Search Console en Google Analytics geven het antwoord.</li>
+        <li><b>Kies twee of drie kanalen.</b> Begin waar je klanten al zoeken en waar de kans op snel verschil het grootst is. Liever twee kanalen goed dan zes half.</li>
+        <li><b>Zet je website op orde.</b> Elk kanaal stuurt mensen naar je site. Is die traag, onduidelijk of zonder telefoonnummer bovenaan, dan lekt alles weg.</li>
+        <li><b>Meet, kijk elke maand en stuur bij.</b> Schrap wat niet werkt. Verspild budget schrappen is soms meer waard dan een nieuwe campagne.</li>
+      </ol>
+      <p>Wil je het helemaal uitschrijven, inclusief budget en planning? Gebruik dan de gids <a href="/kennisbank/gidsen/marketingplan-maken/">marketingplan maken</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="meten">Meten: data, analytics en KPI's</h2></div>
+      <p>Het grote voordeel van online werken is dat je kunt meten. Dan moet je het wel doen, en de goede dingen meten. Bezoekers en volgers zijn leuk. Aanvragen en omzet betalen de rekeningen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Doel</th><th>KPI die ertoe doet</th><th>Waar je het ziet</th></tr></thead>
+          <tbody>
+            <tr><td>Meer aanvragen</td><td>Aantal offerteaanvragen en telefoontjes via de site</td><td>Google Analytics, met formulieren en klikken op je nummer als conversie</td></tr>
+            <tr><td>Beter gevonden worden</td><td>Klikken uit Google op je belangrijkste zoekwoorden</td><td>Google Search Console</td></tr>
+            <tr><td>Lokaal zichtbaar zijn</td><td>Belverzoeken en routeaanvragen</td><td>De statistieken van je Google Bedrijfsprofiel</td></tr>
+            <tr><td>Advertenties die lonen</td><td>Kosten per aanvraag</td><td>Google Ads, gekoppeld aan je conversies</td></tr>
+            <tr><td>Klanten houden</td><td>Klikken in je nieuwsbrief, terugkerende klanten</td><td>Je mailprogramma en je eigen administratie</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een KPI is zo'n kerngetal waar je op stuurt. Kies er per doel één of twee, niet twintig. Hoe je ze kiest, lees je bij <a href="/kennisbank/wat-is/kpi/">KPI</a>. Voor het meten zelf gebruik je meestal <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a> en Search Console.</p>
+      <p>Let op de privacyregels. Volg je bezoekers met cookies voor marketing, dan heb je toestemming nodig. Het kan ook zonder cookiemelding, met meetinstellingen die geen persoonsgegevens verzamelen. Dat regelen we bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>. En een laatste tip: een rapportage waar je uitleg bij nodig hebt, schiet zijn doel voorbij. Eén A4 met vijf getallen en wat je ermee doet, is genoeg.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2 id="ai">AI en GEO: het nieuwe kanaal</h2></div>
+      <p>Steeds meer mensen stellen hun vraag niet meer aan Google, maar aan ChatGPT, Gemini of Copilot. Of ze lezen het AI-overzicht bovenaan in Google en klikken niet verder. Dat verandert digitale marketing. Het gaat niet meer alleen om gevonden worden, maar ook om genoemd worden.</p>
+      <p>Daar is een nieuw vak voor: <a href="/kennisbank/wat-is/geo/">GEO</a>, generative engine optimization. De basis lijkt op goede SEO: duidelijke pagina's per dienst, echte antwoorden op echte vragen, consistente bedrijfsgegevens overal op internet en vermeldingen op betrouwbare sites. Een AI-assistent noemt je liever als hij zeker weet wie je bent, wat je doet en waar je zit.</p>
+      <p>Ook bedrijven werken er zelf mee. Volgens het CBS gebruikte in 2025 18 procent van de bedrijven met twee of meer werkzame personen AI, en 33 procent van de bedrijven met tien of meer. Wij gebruiken het zelf ook, open en eerlijk. Lees <a href="/zo-werken-we-met-ai/">hoe we met AI werken</a>.</p>
+
+      <h2 id="begrippen">Begrippen die je tegenkomt</h2>
+      <p>Wie met een bureau of een tool praat, krijgt een stroom afkortingen over zich heen. De belangrijkste, met een link naar de uitgebreide uitleg:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Begrip</th><th>In één zin</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/kennisbank/wat-is/ctr/">CTR</a></td><td>Het percentage mensen dat klikt nadat ze je zoekresultaat of advertentie zagen</td></tr>
+            <tr><td><a href="/kennisbank/wat-is/cpc/">CPC</a></td><td>Wat je gemiddeld betaalt voor één klik op je advertentie</td></tr>
+            <tr><td><a href="/kennisbank/wat-is/cpa/">CPA</a></td><td>Wat je betaalt voor één aanvraag of klant</td></tr>
+            <tr><td><a href="/kennisbank/wat-is/roas/">ROAS</a></td><td>Hoeveel omzet elke euro advertentiegeld oplevert</td></tr>
+            <tr><td><a href="/kennisbank/wat-is/zoekintentie/">Zoekintentie</a></td><td>Wat iemand echt wil weten of doen als hij iets intypt</td></tr>
+            <tr><td><a href="/kennisbank/wat-is/engagement/">Engagement</a></td><td>Hoe actief mensen reageren op je berichten of site</td></tr>
+            <tr><td><a href="/kennisbank/wat-is/call-to-action/">Call to action</a></td><td>De knop of zin die de lezer vertelt wat de volgende stap is</td></tr>
+            <tr><td>Conversie</td><td>Het moment dat een bezoeker doet wat je hoopt: bellen, een formulier invullen, kopen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="kosten">Wat kost digitale marketing?</h2></div>
+      <p>Dat hangt af van wat je zelf doet en wat je uitbesteedt. Ter oriëntatie: dit zijn onze vanaf-prijzen, exclusief btw en maandelijks opzegbaar.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kanaal</th><th>Bij ons vanaf</th><th>Extra kosten buiten ons om</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/zoekmachine-optimalisatie/">SEO</a></td><td>€ 495 per maand</td><td>Geen</td></tr>
+            <tr><td><a href="/lokale-seo/">Lokale SEO</a></td><td>€ 295 per maand</td><td>Geen</td></tr>
+            <tr><td><a href="/online-adverteren/google-ads-bureau/">Google Ads</a></td><td>Afhankelijk van je advertentiebudget</td><td>Je klikkosten, rechtstreeks aan Google</td></tr>
+            <tr><td><a href="/generative-engine-optimization/">GEO</a></td><td>€ 495 per maand</td><td>Geen</td></tr>
+            <tr><td><a href="/social-media-beheer/">Social media beheer</a></td><td>€ 395 per maand</td><td>Geen, wij doen geen betaalde social advertenties</td></tr>
+            <tr><td><a href="/leadgeneratie/e-mailmarketing/">E-mailmarketing</a></td><td>€ 295 per maand</td><td>Je verzendtool, bij een kleine lijst vaak gratis</td></tr>
+            <tr><td><a href="/tekstschrijver/contentmarketing/">Contentmarketing</a></td><td>€ 495 per maand</td><td>Geen</td></tr>
+            <tr><td><a href="/online-marketing-uitbesteden/">Alles in één hand</a></td><td>€ 595 per maand</td><td>Eventueel advertentiebudget</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Doe je het zelf, dan betaal je in tijd. Reken voor een nieuwsbrief, een paar berichten op social media en het bijhouden van je Google Bedrijfsprofiel al snel op een dag per maand. Met een paar honderd euro per maand kun je bij ons op één of twee kanalen echt verschil maken. Alle bedragen staan op onze pagina <a href="/prijzen/">prijzen</a>.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2 id="voorbeeld">Voorbeeld: een loodgieter in Emmen</h2></div>
+      <p>Een loodgietersbedrijf in Emmen met drie mensen krijgt zijn werk vooral via mond-tot-mondreclame. De eigenaar wil meer badkamerrenovaties, het werk met de beste marge. De website is zes jaar oud, er staat één pagina over badkamers op en het Google Bedrijfsprofiel heeft vier reviews. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <ul>
+        <li><b>Doel:</b> acht aanvragen voor een badkamerrenovatie per maand, nu zijn het er twee.</li>
+        <li><b>Maand 1:</b> het Bedrijfsprofiel wordt volledig ingevuld, met foto's van eigen projecten. Na elke klus vraagt hij een review, met een link per sms.</li>
+        <li><b>Maand 1 en 2:</b> er komt een sterke pagina over badkamerrenovatie in Emmen en omgeving, met prijsindicaties, een stappenplan en echte projectfoto's. Daarnaast losse pagina's voor Klazienaveen en Coevorden. Het formulier wordt korter: naam, telefoon, wat je wilt.</li>
+        <li><b>Maand 2 tot 4:</b> een kleine Google Ads-campagne op "badkamer renoveren Emmen" vult het gat zolang de pagina nog moet stijgen.</li>
+        <li><b>Elke maand:</b> één blik op vijf getallen: aanvragen, telefoontjes via de site, klikken uit Google, reviews, kosten per aanvraag.</li>
+      </ul>
+      <p>Wat hij bewust niet doet: TikTok, een nieuwsbrief en een duur nieuw logo. Niet omdat dat slecht is, maar omdat het nu niet bijdraagt aan zijn doel. Zo werkt het ook bij ons: beginnen waar de grootste kans op snel verschil zit, daarna verfijnen.</p>
+
+      <div class="stap-kop"><Tekening naam="koffie" maat={52} /><h2 id="zelf">Zelf doen of uitbesteden?</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Zelf doen</th><th>Uitbesteden</th></tr></thead>
+          <tbody>
+            <tr><td><b>Kosten</b></td><td>Je eigen uren en eventuele tools</td><td>Een maandbedrag, plus eventueel advertentiebudget</td></tr>
+            <tr><td><b>Kennis</b></td><td>Je leert het vak, met vallen en opstaan</td><td>Je koopt ervaring in die al getest is</td></tr>
+            <tr><td><b>Tempo</b></td><td>Afhankelijk van hoe druk je zaak is</td><td>Vast ritme, ook in drukke maanden</td></tr>
+            <tr><td><b>Risico</b></td><td>Fouten kosten tijd en soms posities</td><td>Kies een partij die je afrekent op resultaat</td></tr>
+            <tr><td><b>Past bij</b></td><td>Wie het leuk vindt en er tijd voor maakt</td><td>Wie liever zijn eigen vak uitoefent</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Kies je voor uitbesteden, let dan op het contract en de afspraken. Veel bureaus zijn beter in zichzelf verkopen dan in klanten laten groeien. Vraag naar concrete doelen, naar wat er gebeurt als die niet gehaald worden en of je maandelijks kunt opzeggen. Bij ons spreek je samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><b>Overal tegelijk beginnen.</b> Zes kanalen half doen levert minder op dan twee goed.</li>
+        <li><b>Sturen op volgers en likes.</b> Een volger is geen klant. Tel aanvragen.</li>
+        <li><b>Alles in betaalde kanalen stoppen.</b> Stopt het budget, dan stopt de stroom. Bouw ook aan je eigen kanalen.</li>
+        <li><b>Een mooie website die niemand vindt.</b> Een site zonder plan voor vindbaarheid is een folder in een la.</li>
+        <li><b>Niet meten.</b> Zonder conversiemeting weet je niet welk kanaal je aanvragen oplevert.</li>
+        <li><b>Te snel stoppen.</b> SEO en contentmarketing hebben maanden nodig. Wie na zes weken stopt, betaalt wel en oogst niet.</li>
+        <li><b>Het account op naam van het bureau.</b> Je Google Ads, je Analytics en je domein horen op jouw naam te staan.</li>
+      </ul>
+
+      <h2 id="deze-week">Wat je deze week kunt doen</h2>
+      <p>Geen tijd voor een heel plan? Deze vijf dingen kosten samen een middag en leveren bijna altijd iets op:</p>
+      <ul class="vink">
+        <li>Zoek je eigen bedrijf en je belangrijkste dienst op in Google, op je telefoon. Wat ziet een klant als eerste?</li>
+        <li>Loop je Google Bedrijfsprofiel na: openingstijden, foto's, diensten, een beschrijving in gewone taal.</li>
+        <li>Meld je site aan bij <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> en kijk op welke zoekwoorden je al verschijnt.</li>
+        <li>Zet je telefoonnummer bovenaan elke pagina, klikbaar op mobiel.</li>
+        <li>Stuur de laatste vijf tevreden klanten een korte mail met het verzoek om een review.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Begin bij het kanaal dat het best bij je past: <a href="/kennisbank/wat-is/sea/">wat is SEA</a>, <a href="/kennisbank/wat-is/contentmarketing/">wat is contentmarketing</a> of <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe werkt SEO</a>. Wil je meer aanvragen uit de bezoekers die je al hebt, lees dan over <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen digital marketing en online marketing?', a: 'In de praktijk niets. Beide gaan over marketing via internet: je website, Google, social media, e-mail en AI-assistenten. Digitale marketing wordt soms iets breder gebruikt, bijvoorbeeld ook voor reclame op digitale schermen.' },
+      { v: 'Met welk kanaal moet ik beginnen?', a: 'Voor de meeste dienstverleners met zoeken: een goede website, lokale SEO met een volledig Google Bedrijfsprofiel en eventueel Google Ads voor snelle aanvragen. Social media en e-mail komen daarna, als je weet wat werkt.' },
+      { v: 'Hoeveel budget heb ik nodig?', a: 'Klein beginnen kan. Wie het uitbesteedt, zit voor één kanaal vaak tussen de € 295 en € 495 per maand. Bij Google Ads komt daar je klikbudget bij. Belangrijker dan het bedrag is dat je meet wat het oplevert.' },
+      { v: 'Hoe lang duurt het voordat ik resultaat zie?', a: 'Google Ads werkt dezelfde dag. Lokale SEO laat vaak binnen een paar weken verschil zien. SEO en contentmarketing hebben meestal maanden nodig, maar blijven daarna werken zonder dat je per klik betaalt.' },
+      { v: 'Kan ik digital marketing zelf leren?', a: 'Ja. Er is veel gratis kennis, ook in onze kennisbank. Begin met Google Search Console en je Google Bedrijfsprofiel. Wil je het sneller onder de knie krijgen, dan geven we ook trainingen voor teams.' },
+      { v: 'Wat doet Drijfveer Media wel en niet?', a: 'We doen SEO, lokale SEO, linkbuilding, GEO, Google Ads, websites, teksten, social media beheer, e-mailmarketing en leadgeneratie. Betaalde social advertenties, display, video en influencers doen we niet.' },
+    ]}
+  />
+
+  <Actie titel="Waar zit jouw grootste kans online?" tekst={`We kijken gratis naar je website, je vindbaarheid en je concurrenten. ${site.contactpersoon} belt je met de twee kanalen die voor jou het snelst verschil maken.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

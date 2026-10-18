@@ -1,0 +1,302 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--inbound-marketing.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/inbound-marketing/';
+const datum = '2026-10-18';
+const definitie = 'Inbound marketing is een aanpak waarbij klanten jou zelf vinden, omdat je ze helpt met nuttige informatie op het moment dat ze zoeken, in plaats van dat je ze ongevraagd benadert met reclame, telefoontjes of mailings.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat het betekent' },
+  { id: 'herkomst', titel: 'Waar het idee vandaan komt' },
+  { id: 'verschil', titel: 'Inbound en outbound naast elkaar' },
+  { id: 'fases', titel: 'Aantrekken, betrekken, enthousiasmeren' },
+  { id: 'persona', titel: 'Begin bij je buyer persona' },
+  { id: 'middelen', titel: 'De middelen en wat ze doen' },
+  { id: 'tools', titel: 'Tools: HubSpot en de rest' },
+  { id: 'ai', titel: 'Inbound in de tijd van AI' },
+  { id: 'voorbeeld', titel: 'Rekenvoorbeeld: een installateur' },
+  { id: 'stappenplan', titel: 'Zo begin je in zes stappen' },
+  { id: 'meten', titel: 'Wat je meet' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'niet', titel: 'Wanneer het niet werkt' },
+  { id: 'kosten', titel: 'Wat kost het?' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Inbound marketing',
+    alternateName: ['Inboundmarketing', 'Inbound'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is inbound marketing?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.hubspot.com/inbound-marketing',
+      'https://www.hubspot.com/flywheel',
+      'https://en.wikipedia.org/wiki/Brian_Halligan',
+      'https://en.wikipedia.org/wiki/Michelin_Guide',
+      'https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/verkoop-telemarketing',
+      'https://www.acm.nl/nl/onderwerpen/telecommunicatie/internet/spam',
+    ],
+  },
+];
+---
+<Base
+  title="Inbound marketing: wat het is en hoe je begint (2026)"
+  description="Wat is inbound marketing? Klanten vinden jou zelf via Google, content en e-mail. Met de fases, een rekenvoorbeeld, tools en een stappenplan voor het mkb."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Inbound marketing', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Leadgeneratie</p>
+        <h1>Wat is inbound marketing? Klanten die jou zelf vinden</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Iemand in Assen merkt dat zijn cv-ketel rare geluiden maakt. Hij belt niet meteen een installateur. Eerst zoekt hij in Google wat het kan zijn. Hij leest een artikel, kijkt een filmpje en vraagt het misschien aan ChatGPT. Pas daarna kiest hij wie hij belt. Grote kans dat dat het bedrijf is dat zijn vraag het best beantwoordde. Dat is inbound marketing in één voorbeeld.</p>
+      <p>Hieronder lees je wat het precies is, hoe het verschilt van ouderwets zenden, welke middelen erbij horen, wat het kost en hoe je als mkb'er begint. Met een rekenvoorbeeld en de fouten die we het vaakst tegenkomen.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={13} />
+
+      <div class="stap-kop"><Tekening naam="magneet" maat={52} /><h2 id="betekenis">Wat inbound marketing betekent</h2></div>
+      <p>Inbound betekent letterlijk: naar binnen gericht. De klant komt naar jou toe. Dat gebeurt niet vanzelf. Je zorgt dat je te vinden bent op de plekken waar mensen zoeken, met antwoorden die echt helpen. Wie geholpen wordt, onthoudt wie hem hielp. En als hij klaar is om te kopen, staat jouw naam bovenaan zijn lijstje.</p>
+      <p>Het tegenovergestelde is outbound marketing. Dan ga jij op de klant af, of hij daar nu om vraagt of niet. Denk aan koude acquisitie, een folder in de bus, een advertentie op de radio of een gekochte adressenlijst voor een mailing.</p>
+      <p>De kern van inbound zit in drie dingen:</p>
+      <ul class="vink">
+        <li><strong>Gevonden worden.</strong> Via <a href="/zoekmachine-optimalisatie/">SEO</a>, je Google Bedrijfsprofiel, AI-assistenten en social media.</li>
+        <li><strong>Helpen voordat je verkoopt.</strong> Met content die een vraag beantwoordt, ook als iemand nog niets wil kopen.</li>
+        <li><strong>De relatie vasthouden.</strong> Met een nieuwsbrief, opvolging per e-mail en goede service, zodat klanten terugkomen en je aanbevelen.</li>
+      </ul>
+      <p>Het is geen trucje en ook geen tool. Het is een manier van denken over hoe je klanten krijgt: aantrekken in plaats van achtervolgen.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="herkomst">Waar het idee vandaan komt</h2></div>
+      <p>De term komt van Brian Halligan en Dharmesh Shah. Zij richtten in juni 2006 in de Verenigde Staten het softwarebedrijf HubSpot op. In 2009 schreven ze samen het boek <i>Inbound Marketing: Get Found Using Google, Social Media, and Blogs</i>. Hun stelling: mensen blokkeren steeds vaker marketing die ze stoort, zoals reclame en spam. Bedrijven moeten daarom informatie bieden die mensen zelf willen hebben.</p>
+      <p>Het idee zelf is veel ouder. In 1900 gaven de broers André en Édouard Michelin een gids uit voor Franse automobilisten. Er reden toen minder dan 3.000 auto's in Frankrijk. De eerste gids was gratis. Er stonden kaarten in, uitleg over het verwisselen van een band en adressen van garages, hotels en tankstations. Het idee: hoe meer mensen gingen rijden, hoe meer banden ze verkochten. Die gids bestaat nog steeds, als de bekende Michelingids. Een betere vorm van helpen voordat je verkoopt is er nauwelijks.</p>
+      <p>Bij ons in Noord-Nederland zie je hetzelfde principe in het klein. De slager die op zijn site uitlegt hoe je een rollade braadt. De hovenier die een plantkalender per maand bijhoudt. Ze verkopen er niets mee op die pagina. Toch komen klanten daardoor bij hen terecht.</p>
+
+      <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="verschil">Inbound en outbound marketing naast elkaar</h2></div>
+      <p>Outbound is niet verkeerd. Het werkt anders. Deze tabel laat de verschillen zien:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Inbound</th><th>Outbound</th></tr></thead>
+          <tbody>
+            <tr><td><b>Wie zet de eerste stap?</b></td><td>De klant zoekt zelf</td><td>Jij benadert de klant</td></tr>
+            <tr><td><b>Voorbeelden</b></td><td>SEO, blogartikelen, gidsen, nieuwsbrief, Google Bedrijfsprofiel, social media</td><td>Koud bellen, folders, beurzen, radio, gekochte mailinglijsten</td></tr>
+            <tr><td><b>Timing</b></td><td>Op het moment dat de klant een vraag heeft</td><td>Op het moment dat het jou uitkomt</td></tr>
+            <tr><td><b>Kosten</b></td><td>Vooral tijd, in het begin hoog, daarna lager per lead</td><td>Per actie, elke keer opnieuw</td></tr>
+            <tr><td><b>Tempo</b></td><td>Traag op gang, groeit door</td><td>Direct effect, stopt als jij stopt</td></tr>
+            <tr><td><b>Wat blijft er over?</b></td><td>Pagina's, posities en een lijst die van jou zijn</td><td>Weinig, behalve de klanten die je binnenhaalde</td></tr>
+            <tr><td><b>Regels</b></td><td>Toestemming nodig voor je nieuwsbrief</td><td>Steeds strenger, zie hieronder</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Over die regels. Volgens de Autoriteit Consument &amp; Markt (ACM) mag je consumenten alleen nog telefonisch iets verkopen als ze daar toestemming voor gaven, of als ze de afgelopen drie jaar klant bij je waren. Dat geldt ook voor eenmanszaken, vof's en maatschappen. En je moet per persoon kunnen bewijzen dat je mocht bellen. Voor reclame per e-mail of WhatsApp geldt hetzelfde principe: eerst toestemming, dan versturen. Wie zijn klanten vooral via koude acquisitie haalde, merkt dat die weg smaller wordt.</p>
+      <p>Daar komt bij dat mensen steeds beter zijn in wegfilteren. Een spamfilter, een adblocker, een nummer dat niet opneemt. Inbound draait dat om: jij bent er op het moment dat iemand je zoekt.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="fases">Aantrekken, betrekken en enthousiasmeren</h2></div>
+      <p>HubSpot verdeelt de methode in drie fases. Ze heten in het Engels attract, engage en delight.</p>
+      <ol>
+        <li><strong>Aantrekken.</strong> De juiste mensen naar je toe halen met content die een vraag beantwoordt. Een artikel, een checklist, een video. Alles geoptimaliseerd voor zoekmachines, zodat het gevonden wordt.</li>
+        <li><strong>Betrekken.</strong> Inzichten en oplossingen bieden die passen bij hun probleem. Hier zet je bezoekers om in leads. Ze vragen een offerte aan, downloaden een gids of schrijven zich in voor je nieuwsbrief. Dat omzetten heet converteren.</li>
+        <li><strong>Enthousiasmeren.</strong> Klanten na de koop goed helpen. Zodat ze tevreden zijn, terugkomen en je aanbevelen bij anderen.</li>
+      </ol>
+      <p>Vroeger tekende iedereen dit als een <a href="/kennisbank/wat-is/funnel/">funnel</a>: een trechter met bovenin veel bezoekers en onderin een paar klanten. HubSpot tekent het nu als een vliegwiel. Het verschil is niet alleen een plaatje. In een trechter is de klant aan het eind klaar. In een vliegwiel geeft een tevreden klant nieuwe vaart, omdat hij anderen naar je toe stuurt. Volgens HubSpot zijn aanbevelingen en mond-tot-mondreclame inmiddels de grootste invloed op een aankoop.</p>
+      <p>Voor een mkb'er in Drenthe klopt dat precies. Een loodgieter in Beilen leeft van "die kun je bellen, die is goed". Inbound maakt dat zichtbaar en meetbaar, en zorgt dat de mensen die via Google zoeken dezelfde indruk krijgen als wie via de buren komt.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="persona">Begin bij je buyer persona</h2></div>
+      <p>Inbound werkt alleen als je weet wie je wilt helpen. Daarvoor maak je een buyer persona: een korte beschrijving van je ideale klant, gebaseerd op echte klanten. Geen marketingverzinsel met een stockfoto, maar antwoorden op vragen als:</p>
+      <ul>
+        <li>Welk probleem heeft hij op het moment dat hij gaat zoeken?</li>
+        <li>Welke woorden typt hij in Google of vraagt hij aan een AI-assistent?</li>
+        <li>Wat houdt hem tegen om te kopen? Prijs, twijfel, tijd, slechte ervaringen?</li>
+        <li>Wie beslist er mee? Een partner, een collega, een directeur?</li>
+        <li>Wat moet hij weten voordat hij je durft te bellen?</li>
+      </ul>
+      <p>De beste bron zijn je eigen klanten. Bel er vijf en vraag hoe ze bij je terechtkwamen en wat ze vooraf wilden weten. Je mailbox en je offerteaanvragen zitten vol met vragen die je zo kunt beantwoorden op je site. Hoe je dat aanpakt, staat in de gids <a href="/kennisbank/gidsen/persona-maken/">persona maken</a>. Wat het verschil is met een <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a>, lees je bij dat begrip.</p>
+      <p>Koppel daarna je content aan de fase waarin iemand zit. Iemand die oriënteert, wil uitleg. Iemand die vergelijkt, wil prijzen en voorbeelden. Iemand die bijna koopt, wil zekerheid: reviews, garanties en een duidelijke volgende stap. De gids over de <a href="/kennisbank/gidsen/customer-journey/">customer journey</a> helpt je die fases in kaart te brengen.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="middelen">De middelen en wat ze doen</h2></div>
+      <p>Inbound bestaat uit een paar vaste onderdelen. Elk onderdeel heeft een eigen taak.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Middel</th><th>Rol</th><th>Eerste resultaat</th><th>Valkuil</th></tr></thead>
+          <tbody>
+            <tr><td><b>SEO</b></td><td>Zorgt dat je content gevonden wordt in Google</td><td>Vaak na 3 tot 6 maanden</td><td>Schrijven voor Google in plaats van voor mensen</td></tr>
+            <tr><td><b>Content</b></td><td>Beantwoordt vragen en bouwt vertrouwen op</td><td>Groeit met elk artikel</td><td>Te algemeen, geen eigen kennis erin</td></tr>
+            <tr><td><b>Google Bedrijfsprofiel</b></td><td>Laat je zien op de kaart bij lokale zoekopdrachten</td><td>Binnen weken</td><td>Eén keer invullen en vergeten</td></tr>
+            <tr><td><b>Landingspagina's</b></td><td>Zetten bezoekers om in leads</td><td>Direct meetbaar</td><td>Te veel keuzes, geen duidelijke vraag</td></tr>
+            <tr><td><b>E-mail</b></td><td>Houdt leads warm en klanten betrokken</td><td>Na een paar maanden</td><td>Alleen aanbiedingen sturen</td></tr>
+            <tr><td><b>Marketing automation</b></td><td>Stuurt de juiste mail op het juiste moment</td><td>Na de eerste workflow</td><td>Te ingewikkeld beginnen</td></tr>
+            <tr><td><b>Social media</b></td><td>Verspreidt content en laat zien wie je bent</td><td>Wisselend</td><td>Overal tegelijk willen zijn</td></tr>
+            <tr><td><b>Reviews</b></td><td>Leveren bewijs voor wie twijfelt</td><td>Bij elke klus</td><td>Er nooit om vragen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Je hoeft ze niet allemaal tegelijk in te zetten. Voor de meeste lokale bedrijven zijn SEO, een goed bedrijfsprofiel en een paar sterke pagina's de basis. E-mail en <a href="/kennisbank/wat-is/marketing-automation/">marketing automation</a> worden interessant als je een flinke klantenlijst hebt of als klanten lang nadenken voordat ze kopen. Over contentmarketing als losse discipline lees je meer bij <a href="/kennisbank/wat-is/contentmarketing/">wat is contentmarketing</a>.</p>
+      <p>Betaalde advertenties in Google passen er ook in, als aanvulling. Ze verschijnen alleen bij iemand die actief zoekt, en dat is precies de inbound-gedachte. Ze helpen je in de maanden dat je SEO nog moet groeien.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="tools">Tools: HubSpot en de rest</h2></div>
+      <p>HubSpot is het bekendste platform voor inbound. Logisch, want de makers bedachten de term. Het combineert een CRM, e-mail, formulieren, landingspagina's, een blog en rapportages. Er is een gratis versie met basisfuncties, die volgens HubSpot zelf niet verloopt. Voor de uitgebreide marketingfuncties betaal je per maand, en dat loopt snel op naarmate je meer contacten hebt.</p>
+      <p>Voor een mkb'er is een all-in-oneplatform zelden nodig om te beginnen. Je komt vaak een heel eind met:</p>
+      <ul>
+        <li>Je eigen website, bijvoorbeeld in WordPress, voor content en landingspagina's.</li>
+        <li><a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> om te zien waarop je gevonden wordt.</li>
+        <li>Een nieuwsbriefprogramma zoals <a href="/kennisbank/wat-is/mailchimp/">Mailchimp</a>, MailerLite of Laposta voor e-mail en eenvoudige automatisering.</li>
+        <li>Een simpel <a href="/kennisbank/wat-is/crm/">CRM</a> of zelfs een gedeelde spreadsheet om leads bij te houden.</li>
+        <li>Je Google Bedrijfsprofiel voor lokale zichtbaarheid.</li>
+      </ul>
+      <p>Pas als je merkt dat je leads kwijtraakt tussen al die losse onderdelen, is één systeem de moeite waard. Een tool lost geen gebrek aan goede content op. Eerst de inhoud, dan de software.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2 id="ai">Inbound marketing in de tijd van AI</h2></div>
+      <p>Steeds meer mensen stellen hun vraag niet meer alleen aan Google, maar ook aan ChatGPT, Gemini of Copilot. En Google zelf zet vaak een AI-antwoord boven de gewone resultaten. Betekent dat het einde van inbound? Nee. Het verandert wel waar je gevonden moet worden.</p>
+      <p>HubSpot heeft er een nieuwe naam voor bedacht: Loop Marketing, met vier stappen (express, tailor, amplify, evolve). Volgens HubSpot vervangt dat inbound niet, maar bouwt het erop voort met AI voor personalisatie en het steeds bijsturen van campagnes. Laat je niet gek maken door nieuwe namen. De basis blijft hetzelfde: wie de vraag van de klant het helderst beantwoordt, wordt gevonden. Door mensen, en door AI.</p>
+      <p>Wat er wel bij komt: AI-assistenten noemen bedrijven waarover ze duidelijke, betrouwbare informatie vinden. Duidelijke antwoorden op je site, een goed ingevuld bedrijfsprofiel, reviews en vermeldingen op andere sites helpen daarbij. Dat vakgebied heet <a href="/generative-engine-optimization/">generative engine optimization</a>. Het is eigenlijk inbound voor AI.</p>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="voorbeeld">Rekenvoorbeeld: een installateur in Hoogeveen</h2></div>
+      <p>Stel: een installatiebedrijf in Hoogeveen wil meer aanvragen voor warmtepompen. Tot nu toe kwam werk vooral via via. De eigenaar besluit tot inbound. <span class="muted">(Verzonnen voorbeeld, met realistische getallen.)</span></p>
+      <ol>
+        <li><strong>Maand 1 en 2.</strong> Hij schrijft met hulp tien pagina's die de vragen van klanten beantwoorden. Wat kost een warmtepomp, welke subsidie is er, past het in een jaren-zeventigwoning, hoeveel lawaai maakt hij. Hij vult zijn Google Bedrijfsprofiel aan en vraagt tevreden klanten om een review.</li>
+        <li><strong>Maand 3 tot 6.</strong> De pagina's beginnen te stijgen. Per maand komen er 1.200 bezoekers op die tien pagina's.</li>
+        <li><strong>Converteren.</strong> Op elke pagina staat een korte check: "Past een warmtepomp in jouw huis?" Twee procent vult hem in. Dat zijn 24 leads per maand.</li>
+        <li><strong>Opvolgen.</strong> Elke lead krijgt binnen een dag een telefoontje en daarna drie mails met uitleg en een voorbeeldberekening. Een kwart wordt klant: zes opdrachten per maand.</li>
+      </ol>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Aantal per maand</th><th>Omzetting</th></tr></thead>
+          <tbody>
+            <tr><td>Bezoekers op de tien pagina's</td><td>1.200</td><td></td></tr>
+            <tr><td>Leads (check ingevuld)</td><td>24</td><td>2% van de bezoekers</td></tr>
+            <tr><td>Offertes</td><td>12</td><td>50% van de leads</td></tr>
+            <tr><td>Opdrachten</td><td>6</td><td>50% van de offertes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het mooie: die pagina's blijven staan. Stopt hij een maand met nieuwe content, dan komen er nog steeds bezoekers. Vergelijk dat met een advertentie in het huis-aan-huisblad: na die week is het voorbij. Het nadeel zie je ook. De eerste drie maanden kost het vooral tijd en levert het weinig op. Wie geduld mist, haakt hier af.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="stappenplan">Zo begin je in zes stappen</h2></div>
+      <ol>
+        <li><strong>Kies één doel.</strong> Meer offerteaanvragen voor één dienst, bijvoorbeeld. Niet tien doelen tegelijk.</li>
+        <li><strong>Schrijf de twintig vragen op die klanten je stellen.</strong> Aan de telefoon, in de mail, bij de keukentafel. Dat is je contentlijst.</li>
+        <li><strong>Zoek uit hoe mensen die vragen typen.</strong> Met een <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a> zie je welke woorden ze echt gebruiken en hoe vaak.</li>
+        <li><strong>Maak per vraag één goede pagina.</strong> Met een eerlijk antwoord, je eigen ervaring en een duidelijke volgende stap. Liever vijf goede pagina's dan twintig matige.</li>
+        <li><strong>Zorg voor een plek om te converteren.</strong> Een kort formulier, een telefoonnummer dat opvalt, een <a href="/kennisbank/wat-is/call-to-action/">call to action</a> die past bij de vraag. Een aparte <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina</a> per dienst werkt vaak beter dan één algemeen contactformulier.</li>
+        <li><strong>Volg op en meet.</strong> Bel leads snel terug. Kijk na drie maanden welke pagina's leads opleveren en maak daar meer van.</li>
+      </ol>
+      <p>Wil je het groter aanpakken met een contentkalender? De gids <a href="/kennisbank/gidsen/content-plan-maken/">content plan maken</a> laat zien hoe je dat in een middag opzet.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="meten">Wat je meet</h2></div>
+      <p>Inbound is goed meetbaar, mits je het vooraf instelt. Deze cijfers zeggen het meest:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Cijfer</th><th>Wat het zegt</th><th>Waar je het vindt</th></tr></thead>
+          <tbody>
+            <tr><td><b>Organische bezoekers</b></td><td>Of je content gevonden wordt</td><td>Google Analytics, Search Console</td></tr>
+            <tr><td><b>Posities op je belangrijkste zoekwoorden</b></td><td>Of je stijgt waar het telt</td><td>Search Console, een SEO-tool</td></tr>
+            <tr><td><b>Leads per maand</b></td><td>Of bezoekers iets doen</td><td>Je formulieren en je telefoon</td></tr>
+            <tr><td><b>Conversieratio</b></td><td>Welk deel van de bezoekers een lead wordt</td><td>Analytics met ingestelde doelen</td></tr>
+            <tr><td><b>Klanten uit leads</b></td><td>Of de leads ook goed zijn</td><td>Je CRM of je offertelijst</td></tr>
+            <tr><td><b>Kosten per klant</b></td><td>Wat een nieuwe klant je kost</td><td>Je eigen sommetje</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Vraag elke nieuwe klant ook gewoon hoe hij je vond. Dat klinkt ouderwets, maar het vult de gaten die software laat. Hoe je meet zonder cookiemelding, lees je bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><strong>Content zonder vraag.</strong> Een blog over het bedrijfsuitje leest niemand. Een antwoord op een vraag die klanten echt stellen wel.</li>
+        <li><strong>Te snel opgeven.</strong> Na twee maanden stoppen omdat het nog niets oplevert. Inbound heeft aanloop nodig.</li>
+        <li><strong>Alleen bezoekers tellen.</strong> Duizend bezoekers zonder één aanvraag zijn niets waard. Kijk naar leads en klanten.</li>
+        <li><strong>Geen opvolging.</strong> Een lead die pas na vier dagen wordt teruggebeld, heeft al een ander gekozen.</li>
+        <li><strong>Alles achter een formulier.</strong> Wie voor elke checklist een e-mailadres eist, schrikt mensen af. Geef het meeste gewoon weg.</li>
+        <li><strong>Mailen zonder toestemming.</strong> Een lijst kopen of iedereen uit je adresboek op de nieuwsbrief zetten, past niet bij inbound en mag vaak niet.</li>
+        <li><strong>Te veel tegelijk.</strong> Blog, podcast, drie social kanalen en een nieuwsbrief, allemaal half. Kies twee dingen en doe die goed.</li>
+      </ul>
+
+      <h2 id="niet">Wanneer inbound niet (alleen) werkt</h2>
+      <p>Eerlijk is eerlijk: het is niet voor elke situatie de beste keuze.</p>
+      <ul>
+        <li><strong>Je hebt volgende maand al klanten nodig.</strong> Dan is Google Ads of je netwerk bellen sneller. Inbound kun je ernaast opbouwen.</li>
+        <li><strong>Er wordt niet gezocht naar wat je doet.</strong> Een nieuw soort product kent nog niemand. Dan moet je eerst bekendheid opbouwen, en daar is outbound soms beter in.</li>
+        <li><strong>Je hebt een handvol grote droomklanten.</strong> Bij tien potentiële klanten in heel Nederland is een persoonlijke aanpak logischer dan wachten tot ze je vinden.</li>
+        <li><strong>Je hebt geen tijd of budget voor content.</strong> Inbound draait op goede inhoud. Zonder inhoud geen inbound.</li>
+      </ul>
+      <p>In de praktijk is het meestal een mix. Inbound als fundament, met hier en daar een gerichte actie erbij.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="kosten">Wat kost het, en wat doen wij?</h2></div>
+      <p>Zelf doen kost vooral tijd. Reken op een paar uur per week voor schrijven, bijhouden en meten. Uitbesteden kan per onderdeel. Bij ons zijn dit de vanaf-prijzen, exclusief btw:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Dienst</th><th>Vanaf</th></tr></thead>
+          <tbody>
+            <tr><td>Gevonden worden in Google</td><td><a href="/zoekmachine-optimalisatie/">SEO</a></td><td>€ 495 per maand</td></tr>
+            <tr><td>Gevonden worden in je regio</td><td><a href="/lokale-seo/">Lokale SEO</a></td><td>€ 295 per maand</td></tr>
+            <tr><td>Elke maand nieuwe artikelen</td><td><a href="/tekstschrijver/contentmarketing/">Contentmarketing</a></td><td>€ 495 per maand</td></tr>
+            <tr><td>Nieuwsbrief en automatische opvolging</td><td><a href="/leadgeneratie/e-mailmarketing/">E-mailmarketing</a></td><td>€ 295 per maand</td></tr>
+            <tr><td>Van bezoeker naar aanvraag</td><td><a href="/leadgeneratie/">Leadgeneratie</a></td><td>€ 495 per maand</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>We doen zelf aan inbound, ook voor onze eigen site. Elke maand laten we in het <a href="/logboek/">logboek</a> zien hoe die groeit, ook als het tegenvalt. En we testen ideeën eerst op onze eigen sites in het <a href="/proeflab/">proeflab</a>, voordat we ze bij klanten inzetten.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>De praktische kant van leadgeneratie staat in de gids <a href="/kennisbank/gidsen/leads-genereren/">leads genereren</a>. Wil je snel groeien met kleine experimenten, lees dan over <a href="/kennisbank/wat-is/growth-hacking/">growth hacking</a>. Hoe je bezoekers vaker laat converteren, lees je in de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is inbound marketing in het kort?', a: 'Een aanpak waarbij klanten jou zelf vinden, omdat je hun vragen beantwoordt op het moment dat ze zoeken. Met content, SEO, e-mail en social media in plaats van koude acquisitie en reclame die stoort.' },
+      { v: 'Wat is het verschil tussen inbound en outbound marketing?', a: 'Bij inbound zet de klant de eerste stap: hij zoekt en vindt jou. Bij outbound zet jij die stap, met bellen, folders of advertenties. Inbound is trager op gang maar bouwt iets blijvends op. Outbound werkt direct, maar stopt als jij stopt.' },
+      { v: 'Hoe lang duurt het voordat inbound marketing resultaat geeft?', a: 'Reken op drie tot zes maanden voordat je duidelijk meer bezoekers en leads ziet. Daarna groeit het meestal door, omdat je content blijft staan en steeds beter gevonden wordt.' },
+      { v: 'Heb ik HubSpot nodig voor inbound marketing?', a: 'Nee. HubSpot is handig, maar je kunt prima beginnen met je eigen website, Google Search Console, een nieuwsbriefprogramma en een simpel overzicht van je leads. Een groter platform is pas zinvol als je leads kwijtraakt tussen losse tools.' },
+      { v: 'Werkt inbound marketing ook voor kleine lokale bedrijven?', a: 'Ja, juist daar. Een lokaal bedrijf heeft minder concurrentie in Google dan een landelijke speler. Een paar goede pagina\'s, een volledig Google Bedrijfsprofiel en reviews leveren vaak al snel aanvragen op.' },
+      { v: 'Is inbound marketing hetzelfde als contentmarketing?', a: 'Niet helemaal. Contentmarketing is het maken en verspreiden van nuttige content. Inbound marketing is breder: het omvat ook gevonden worden, bezoekers omzetten in leads, opvolgen en klanten tevreden houden. Content is de brandstof, inbound is de hele motor.' },
+      { v: 'Wat is een buyer persona?', a: 'Een korte beschrijving van je ideale klant, op basis van echte klanten. Met zijn probleem, zijn vragen, zijn twijfels en hoe hij zoekt. Het helpt je content te maken die precies aansluit bij wat hij wil weten.' },
+    ]}
+  />
+
+  <Actie titel="Vinden klanten jou al zelf?" tekst={`We kijken gratis waar je nu gevonden wordt en waar je aanvragen laat liggen. ${site.contactpersoon} belt je met de drie dingen die het snelst verschil maken.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop, h2 { scroll-margin-top: 96px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,85 @@
+---
+// Scène voor /kennisbank/wat-is/mailchimp/: links een scherm met een nieuwsbrief in de editor, rechts drie inboxen van ontvangers, onderaan een inschrijfformulier.
+// Als hij leeft: enveloppen vliegen rustig van het scherm naar de inboxen, een inbox krijgt een vinkje 'geklikt' en het formulier voegt een nieuw contact toe.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const inboxen = [{ y: 34 }, { y: 104 }, { y: 174 }];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een nieuwsbrief in een e-mailprogramma wordt naar drie inboxen verstuurd. Eén ontvanger klikt, en via het inschrijfformulier komt er een nieuw contact bij.'}>
+  <!-- scherm met nieuwsbrief -->
+  <rect x="24" y="30" width="196" height="150" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M24 54H220" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="40" cy="42" r="4.5" fill="#e8eef4" />
+  <circle cx="54" cy="42" r="4.5" fill="#e8eef4" />
+  <text x="208" y="46" font-size="10" text-anchor="end" class="zacht">nieuwsbrief</text>
+  <rect x="44" y="66" width="156" height="40" rx="6" class="v" />
+  <circle class="o" cx="176" cy="80" r="9" />
+  <path d="M44 106L84 82L108 98L130 86L160 106Z" fill="#074663" />
+  <rect x="44" y="116" width="120" height="7" rx="3.5" fill="#10283f" opacity="0.7" />
+  <rect x="44" y="130" width="150" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="44" y="141" width="136" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="44" y="154" width="64" height="16" rx="8" fill="#ff6600" />
+  <text x="76" y="165.5" font-size="9" font-weight="800" text-anchor="middle" style="fill:#fff">Lees meer</text>
+  <path d="M100 180L92 200H152L144 180" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+
+  <!-- route naar de inboxen -->
+  <path d="M226 105C270 105 280 56 318 56M226 105C270 105 280 127 318 127M226 105C270 105 280 196 318 196" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 6" />
+
+  <!-- inboxen -->
+  {inboxen.map((b) => (
+    <g>
+      <rect x="320" y={b.y} width="136" height="46" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <circle cx="342" cy={b.y + 23} r="10" fill="#e8eef4" />
+      <rect x="360" y={b.y + 13} width="70" height="6" rx="3" fill="#10283f" opacity="0.7" />
+      <rect x="360" y={b.y + 26} width="84" height="5" rx="2.5" fill="#d9e1ea" />
+    </g>
+  ))}
+
+  <!-- inschrijfformulier -->
+  <rect x="24" y="212" width="196" height="40" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="34" y="222" width="116" height="20" rx="6" class="v" />
+  <text x="42" y="236" font-size="10" class="zacht">je@mailadres.nl</text>
+  <rect x="156" y="222" width="56" height="20" rx="6" fill="#074663" />
+  <text x="184" y="236" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">Aanmelden</text>
+  <rect x="320" y="232" width="136" height="24" rx="12" class="v" />
+  <text x="388" y="248" font-size="11" font-weight="800" text-anchor="middle">248 contacten</text>
+
+  {!mini && (
+    <g>
+      {[0, 1, 2].map((i) => (
+        <g class="mc-envelop" style={`--i:${i}`}>
+          <g class={`mc-baan mc-baan-${i}`}>
+            <rect x="-11" y="-8" width="22" height="16" rx="2.5" fill="#fff" stroke="#ff6600" stroke-width="2" />
+            <path d="M-10 -6.5L0 1L10 -6.5" fill="none" stroke="#ff6600" stroke-width="2" stroke-linejoin="round" />
+          </g>
+        </g>
+      ))}
+      <g class="mc-klik">
+        <rect x="392" y="96" width="60" height="20" rx="10" fill="#1f8a5b" />
+        <text x="422" y="110" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">geklikt</text>
+      </g>
+      <g class="mc-plus">
+        <rect x="320" y="232" width="136" height="24" rx="12" fill="#fff" stroke="#1f8a5b" stroke-width="2" />
+        <text x="388" y="248" font-size="11" font-weight="800" text-anchor="middle">249 contacten</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .mc-klik, .mc-plus { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .mc-envelop, :global(.teken-js) .mc-klik, :global(.teken-js) .mc-plus { opacity: 0; }
+  .mc-baan { transform: translate(226px, 105px); }
+  .in-beeld .mc-envelop { animation: kennisbank-wat-is-mailchimp-zicht 6s ease-in-out calc(var(--i) * 0.35s + 0.5s) infinite; }
+  .in-beeld .mc-baan-0 { animation: kennisbank-wat-is-mailchimp-baan0 6s ease-in-out 0.5s infinite; }
+  .in-beeld .mc-baan-1 { animation: kennisbank-wat-is-mailchimp-baan1 6s ease-in-out 0.85s infinite; }
+  .in-beeld .mc-baan-2 { animation: kennisbank-wat-is-mailchimp-baan2 6s ease-in-out 1.2s infinite; }
+  .in-beeld .mc-klik { animation: kennisbank-wat-is-mailchimp-klik 6s ease-out 0.5s infinite; }
+  .in-beeld .mc-plus { animation: kennisbank-wat-is-mailchimp-plus 0.6s cubic-bezier(.3,1.6,.5,1) 2.2s forwards; }
+  @keyframes kennisbank-wat-is-mailchimp-zicht { 0% { opacity: 0; } 8%, 40% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-mailchimp-baan0 { 0% { transform: translate(226px, 105px); } 22% { transform: translate(276px, 80px); } 45%, 100% { transform: translate(318px, 56px); } }
+  @keyframes kennisbank-wat-is-mailchimp-baan1 { 0% { transform: translate(226px, 105px); } 22% { transform: translate(276px, 112px); } 45%, 100% { transform: translate(318px, 127px); } }
+  @keyframes kennisbank-wat-is-mailchimp-baan2 { 0% { transform: translate(226px, 105px); } 22% { transform: translate(276px, 150px); } 45%, 100% { transform: translate(318px, 196px); } }
+  @keyframes kennisbank-wat-is-mailchimp-klik { 0%, 50% { opacity: 0; transform: scale(0.6); } 58%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-mailchimp-plus { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .mc-envelop, .in-beeld .mc-baan-0, .in-beeld .mc-baan-1, .in-beeld .mc-baan-2, .in-beeld .mc-klik, .in-beeld .mc-plus { animation: none; } }
+</style>

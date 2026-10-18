@@ -1,0 +1,280 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--growth-hacking.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/growth-hacking/';
+const datum = '2026-10-18';
+const definitie = 'Growth hacking is een manier van marketing waarbij je met snelle, kleine experimenten en harde data zoekt naar wat je bedrijf het meest laat groeien, en alleen opschaalt wat aantoonbaar werkt.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat het betekent' },
+  { id: 'herkomst', titel: 'Hoe de term ontstond' },
+  { id: 'verschil', titel: 'Verschil met gewone marketing' },
+  { id: 'aarrr', titel: 'Het AARRR-model' },
+  { id: 'cyclus', titel: 'De experimentcyclus' },
+  { id: 'ice', titel: 'Kiezen met de ICE-score' },
+  { id: 'hypothese', titel: 'Een goede hypothese' },
+  { id: 'testen', titel: 'Testen met weinig bezoekers' },
+  { id: 'voorbeelden', titel: 'Drie bekende voorbeelden' },
+  { id: 'mkb', titel: 'Tien experimenten voor het mkb' },
+  { id: 'regels', titel: 'Wat niet mag' },
+  { id: 'team', titel: 'Heb je een growth hacker nodig?' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Growth hacking',
+    alternateName: ['Growth marketing', 'Groeimarketing'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is growth hacking?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.startup-marketing.com/where-are-all-the-growth-hackers/',
+      'https://andrewchen.com/how-to-be-a-growth-hacker-an-airbnbcraigslist-case-study/',
+      'https://en.wikipedia.org/wiki/Dave_McClure',
+      'https://en.wikipedia.org/wiki/Viral_marketing',
+      'https://www.acm.nl/nl/onderwerpen/telecommunicatie/internet/spam',
+    ],
+  },
+];
+---
+<Base
+  title="Growth hacking: wat het is en hoe je het inzet (2026)"
+  description="Wat is growth hacking? Groeien met kleine experimenten en data. Met het AARRR-model, de ICE-score, bekende voorbeelden en tien tests voor het mkb."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Growth hacking', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Groei</p>
+        <h1>Wat is growth hacking? Groeien met kleine experimenten</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Het woord klinkt alsof er iets gekraakt moet worden. Dat valt mee. Bij growth hacking draait het om een simpele vraag: wat is het kleinste dat ik kan veranderen om meer klanten te krijgen? En hoe weet ik zeker dat het werkt? Je bedenkt een idee, test het kort, meet wat het doet en gaat door met wat werkt. De rest schrap je.</p>
+      <p>De aanpak komt uit de wereld van startups in Amerika. Toch kan elke ondernemer er iets mee, ook een schildersbedrijf in Emmen of een kapsalon in Meppel. Je leest hier waar het vandaan komt, hoe je een experiment opzet en welke tests je morgen al kunt doen.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={12} />
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2 id="betekenis">Wat growth hacking betekent</h2></div>
+      <p>"Growth" is groei. "Hacking" verwijst naar de manier van werken: snel iets uitproberen, slim gebruikmaken van wat er al is, en niet wachten tot alles perfect is. Een growth hacker kijkt naar elk onderdeel van je bedrijf met één bril op. Helpt dit de groei, of niet?</p>
+      <p>Dat is breder dan reclame maken. Ook je offerteproces, je website, je product, je prijs en je service horen erbij. Als een snellere reactie op aanvragen meer klanten oplevert dan een nieuwe advertentie, kies je voor de snellere reactie.</p>
+      <p>Drie dingen maken het anders dan gewone marketing:</p>
+      <ul class="vink">
+        <li><strong>Experimenten in plaats van plannen.</strong> Je maakt geen jaarplan vol aannames, maar test elke week of elke maand iets kleins.</li>
+        <li><strong>Data in plaats van gevoel.</strong> Een idee is pas goed als de cijfers het laten zien.</li>
+        <li><strong>Schaalbaar in plaats van eenmalig.</strong> Je zoekt iets dat blijft werken als je het groter maakt, niet een stunt die één keer scoort.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="herkomst">Hoe de term ontstond</h2></div>
+      <p>De term komt van Sean Ellis, een Amerikaanse marketeer. Hij hielp volgens zijn eigen blog onder meer Dropbox, LogMeIn en Lookout op de markt te brengen. In juli 2010 schreef hij het stuk <i>Find a Growth Hacker for Your Startup</i>. Daarin stelt hij dat een jonge startup geen klassieke marketingdirecteur nodig heeft, maar iemand "wiens kompas op groei staat". Alles wat die persoon doet, wordt beoordeeld op één ding: helpt het de schaalbare groei van het bedrijf?</p>
+      <p>Twee jaar later maakte Andrew Chen de term bekend bij een groot publiek met zijn blog <i>Growth Hacker is the new VP Marketing</i>. Hij beschreef de growth hacker als een mix van marketeer en programmeur. Iemand die de oude vraag "hoe kom ik aan klanten?" beantwoordt met A/B-tests, landingspagina's en slimme koppelingen met grote platforms. In 2017 verscheen het boek <i>Hacking Growth</i> van Sean Ellis en Morgan Brown. Dat boek beschrijft de aanpak als een vast proces voor teams.</p>
+      <p>Tegenwoordig hoor je ook vaak growth marketing. Dat is grotendeels hetzelfde, met minder nadruk op trucjes en meer op het systematisch testen.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="verschil">Verschil met gewone marketing</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Klassieke marketing</th><th>Growth hacking</th></tr></thead>
+          <tbody>
+            <tr><td><b>Uitgangspunt</b></td><td>Een plan voor het hele jaar</td><td>Een reeks korte experimenten</td></tr>
+            <tr><td><b>Doel</b></td><td>Vaak bekendheid of bereik</td><td>Eén meetbaar groeicijfer</td></tr>
+            <tr><td><b>Werkterrein</b></td><td>Communicatie en reclame</td><td>De hele klantreis, van eerste bezoek tot aanbeveling</td></tr>
+            <tr><td><b>Beslissen op</b></td><td>Ervaring en smaak</td><td>Testresultaten</td></tr>
+            <tr><td><b>Budget</b></td><td>Vooraf verdeeld</td><td>Schuift naar wat werkt</td></tr>
+            <tr><td><b>Mislukking</b></td><td>Liever niet</td><td>Hoort erbij, je leert ervan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het een sluit het ander niet uit. Een sterk merk en een goed verhaal blijven nodig. Growth hacking zorgt dat je weet welk deel van je inspanningen echt iets oplevert.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="aarrr">Het AARRR-model: vijf plekken om te groeien</h2></div>
+      <p>Waar zoek je naar groei? Daarvoor gebruiken veel growth hackers het AARRR-model. Dave McClure, een Amerikaanse investeerder, presenteerde het in 2007 in een praatje van vijf minuten met de titel <i>Startup Metrics for Pirates</i>. Vandaar de bijnaam piratenmetrics: hardop uitgesproken klinkt het als een piraat.</p>
+      <p>Het model is een <a href="/kennisbank/wat-is/funnel/">funnel</a> met vijf fases. Per fase kies je één cijfer om te volgen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Fase</th><th>Vraag</th><th>Voorbeeld bij een lokaal bedrijf</th><th>Cijfer</th></tr></thead>
+          <tbody>
+            <tr><td><b>Acquisitie</b></td><td>Hoe vinden mensen je?</td><td>Via Google, je bedrijfsprofiel, een aanbeveling</td><td>Bezoekers per kanaal</td></tr>
+            <tr><td><b>Activatie</b></td><td>Hebben ze een goede eerste ervaring?</td><td>Ze vinden snel wat ze zoeken en vragen een offerte aan</td><td>Conversie naar aanvraag</td></tr>
+            <tr><td><b>Retentie</b></td><td>Komen ze terug?</td><td>Onderhoudscontract, tweede klus, vaste klant</td><td>Herhaalklanten per jaar</td></tr>
+            <tr><td><b>Referral</b></td><td>Bevelen ze je aan?</td><td>Ze geven je naam door aan buren en schrijven een review</td><td>Aanbevelingen en reviews</td></tr>
+            <tr><td><b>Revenue</b></td><td>Verdien je eraan?</td><td>De gemiddelde opdracht en de marge erop</td><td>Omzet per klant</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De kracht zit in het zoeken naar de zwakste schakel. Veel ondernemers stoppen al hun energie in acquisitie: meer bezoekers, meer advertenties. Terwijl het lek vaak bij activatie zit. Duizend bezoekers die geen aanvraag doen, zijn geen marketingprobleem maar een websiteprobleem. Lees ook de gids over <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="cyclus">De experimentcyclus in vijf stappen</h2></div>
+      <p>Het hart van de aanpak is een vaste cyclus. Je herhaalt hem steeds opnieuw, het liefst elke week of twee weken.</p>
+      <ol>
+        <li><strong>Ideeën verzamelen.</strong> Schrijf alles op wat de groei zou kunnen helpen. Van jezelf, je medewerkers, je klanten. Geen idee is te klein.</li>
+        <li><strong>Prioriteren.</strong> Geef elk idee een score, bijvoorbeeld met de ICE-methode hieronder. Begin met de hoogste.</li>
+        <li><strong>Hypothese opstellen.</strong> Schrijf vooraf op wat je verwacht en hoe je dat meet.</li>
+        <li><strong>Testen.</strong> Voer het experiment uit, zo klein en snel mogelijk. Een week of een maand.</li>
+        <li><strong>Analyseren en beslissen.</strong> Werkte het? Dan opschalen. Niet? Dan schrappen en noteren wat je leerde.</li>
+      </ol>
+      <p>Houd een simpel logboek bij met elk experiment: het idee, de hypothese, de uitkomst en het besluit. Na een halfjaar heb je een schat aan kennis over je eigen klanten. Die kennis heeft je concurrent niet.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="ice">Kiezen met de ICE-score</h2></div>
+      <p>Je hebt al snel meer ideeën dan tijd. De ICE-score helpt kiezen. Je geeft elk idee drie cijfers van 1 tot 10:</p>
+      <ul>
+        <li><strong>Impact:</strong> hoeveel groei levert het op als het werkt?</li>
+        <li><strong>Confidence (vertrouwen):</strong> hoe zeker ben je dat het werkt?</li>
+        <li><strong>Ease (gemak):</strong> hoe makkelijk en goedkoop is het om te testen?</li>
+      </ul>
+      <p>Tel de drie op of neem het gemiddelde. Het hoogste getal test je eerst. Zo ziet dat eruit bij een schildersbedrijf <span class="muted">(verzonnen voorbeeld)</span>:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Idee</th><th>Impact</th><th>Vertrouwen</th><th>Gemak</th><th>ICE</th></tr></thead>
+          <tbody>
+            <tr><td>Binnen een uur terugbellen op elke aanvraag</td><td>8</td><td>8</td><td>7</td><td><b>23</b></td></tr>
+            <tr><td>Na elke klus een kaartje met QR-code voor een review</td><td>6</td><td>7</td><td>9</td><td><b>22</b></td></tr>
+            <tr><td>Prijsindicatie op de website zetten</td><td>7</td><td>5</td><td>8</td><td><b>20</b></td></tr>
+            <tr><td>Nieuwe pagina over houtrot herstellen</td><td>6</td><td>6</td><td>6</td><td><b>18</b></td></tr>
+            <tr><td>Advertentie in het plaatselijke sportprogramma</td><td>3</td><td>3</td><td>8</td><td><b>14</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De scores zijn een inschatting, geen wetenschap. Het gaat erom dat je bewust kiest in plaats van te doen wat het leukst voelt of wat de laatste vertegenwoordiger voorstelde.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="hypothese">Een goede hypothese schrijven</h2></div>
+      <p>Zonder hypothese is een test gewoon iets proberen. Met een hypothese leer je er iets van, ook als het mislukt. Gebruik dit format:</p>
+      <div class="kader">
+        <p class="kader-titel">Format</p>
+        <p>Als ik <b>[verandering]</b> doe, dan verwacht ik dat <b>[cijfer]</b> stijgt van <b>[nu]</b> naar <b>[doel]</b>, omdat <b>[reden]</b>. Ik meet dit <b>[zo lang]</b> via <b>[bron]</b>.</p>
+      </div>
+      <p>Een voorbeeld: "Als ik de knop 'Offerte aanvragen' vervang door 'Gratis prijsindicatie', dan verwacht ik dat het aantal aanvragen stijgt van 20 naar 26 per maand. Mensen vinden een offerte een grote stap en een indicatie niet. Ik meet dit twee maanden via de formulieren op de site." <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Let op het woordje "omdat". Daar zit je aanname over de klant. Klopt de uitkomst niet, dan weet je dat je aanname niet klopte. Ook dat is winst.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="testen">Testen met weinig bezoekers</h2></div>
+      <p>Grote bedrijven testen twee versies van een pagina tegelijk, elk voor de helft van de bezoekers. Dat heet een A/B-test. Bij honderdduizenden bezoekers zie je na een paar dagen welke versie wint. Een mkb-site heeft die aantallen niet.</p>
+      <p>Een rekensom maakt dat duidelijk. Stel: je site krijgt 30 aanvragen per maand. Je splitst je bezoekers in twee groepen. Na een maand heeft versie A er 14 en versie B 16. Is B beter? Dat weet je niet. Zo'n verschil kan net zo goed toeval zijn. Pas als het verschil groot blijft over veel meer aanvragen, durf je een conclusie te trekken. Bij zulke aantallen duurt dat al gauw een halfjaar of langer. <span class="muted">(Verzonnen cijfers.)</span></p>
+      <p>Wat kun je dan wel doen?</p>
+      <ul class="vink">
+        <li><strong>Test grote verschillen.</strong> Geen andere kleur knop, maar een heel andere aanpak. Prijzen tonen of niet. Een formulier van drie velden in plaats van tien.</li>
+        <li><strong>Vergelijk voor en na.</strong> Meet een maand, verander iets, meet weer een maand. Minder zuiver, maar bruikbaar als je let op seizoenen en vakanties.</li>
+        <li><strong>Test buiten je website.</strong> Twee teksten voor een advertentie, twee onderwerpregels voor je nieuwsbrief, twee manieren van telefonisch opvolgen.</li>
+        <li><strong>Vraag het aan klanten.</strong> Vijf gesprekken leveren soms meer inzicht op dan een maand data.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2 id="voorbeelden">Drie bekende voorbeelden</h2></div>
+      <p>Elke uitleg over growth hacking noemt deze drie. Ze laten goed zien hoe het werkt: de groei zit in het product zelf.</p>
+      <ul>
+        <li><strong>Hotmail.</strong> In 1996 en 1997 zette Hotmail onder elke verstuurde mail de regel "Get your free e-mail at Hotmail". Elke gebruiker werd zo een reclamezuil. Volgens Wikipedia haalde Hotmail daarmee 12 miljoen gebruikers binnen in 18 maanden.</li>
+        <li><strong>Airbnb.</strong> In de begintijd konden verhuurders hun woning met één knop ook op Craigslist zetten, toen een enorme advertentiesite in Amerika. Andrew Chen beschreef dat als schoolvoorbeeld: Airbnb liftte mee op het publiek van een veel groter platform.</li>
+        <li><strong>Dropbox.</strong> Wie een vriend uitnodigde, kreeg extra opslagruimte. De vriend ook. Zo werd elke gebruiker een verkoper, met een beloning die het bedrijf weinig kostte.</li>
+      </ul>
+      <p>Belangrijk om te onthouden: dit zijn uitkomsten van een proces, geen recepten. De trucs van toen werken nu meestal niet meer. Airbnb bouwde zijn koppeling zonder officiële toegang tot Craigslist, schreef Chen. Zoiets werkt alleen zolang het andere platform het toelaat. En een regel onder je mail valt niemand meer op. Kopieer niet de truc, maar de manier van denken.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="mkb">Tien experimenten voor het mkb</h2></div>
+      <p>Je hoeft geen app te bouwen. Deze experimenten kan een ondernemer in Drenthe, Groningen of Friesland morgen al starten. Ze kosten weinig en zijn goed te meten.</p>
+      <ol>
+        <li><strong>Reactiesnelheid.</strong> Bel elke aanvraag binnen een uur terug, een maand lang. Vergelijk het aantal opdrachten met de maand ervoor.</li>
+        <li><strong>Reviewkaartje.</strong> Laat na elke klus een kaartje met een QR-code achter die direct naar je <a href="/kennisbank/gidsen/google-reviews/">Google reviews</a> leidt. Tel de nieuwe reviews per maand.</li>
+        <li><strong>Prijsindicatie.</strong> Zet een vanaf-prijs of een rekenvoorbeeld op je dienstpagina. Kijk of de aanvragen beter passen.</li>
+        <li><strong>Korter formulier.</strong> Haal alle velden weg die je niet direct nodig hebt. Meet het aantal ingevulde formulieren.</li>
+        <li><strong>Opvolgmail na een offerte.</strong> Stuur drie dagen na elke offerte een korte, persoonlijke mail. Meet hoeveel offertes je wint.</li>
+        <li><strong>Eén vraag per pagina.</strong> Schrijf een pagina die precies één klantvraag beantwoordt, zoals "Wat kost een dakkapel in 2026?" Kijk na drie maanden hoeveel bezoekers en aanvragen die oplevert.</li>
+        <li><strong>WhatsApp-knop.</strong> Voeg naast je telefoonnummer een WhatsApp-knop toe. Tel de berichten.</li>
+        <li><strong>Seizoensmail.</strong> Mail je bestaande klanten in het voorjaar over onderhoud. Retentie is vaak goedkoper dan nieuwe klanten werven.</li>
+        <li><strong>Bedrijfsprofiel.</strong> Plaats een maand lang elke week een foto van een klus op je Google Bedrijfsprofiel. Volg in het profiel hoeveel mensen bellen of een route opvragen.</li>
+        <li><strong>Tip een buur.</strong> Geef klanten een paar visitekaartjes mee om door te geven, met een kleine korting voor de nieuwe klant. Vraag elke nieuwe klant hoe hij je vond.</li>
+      </ol>
+      <p>Doe er één of twee tegelijk, niet tien. Anders weet je niet welke verandering het verschil maakte.</p>
+
+      <Tussenactie />
+      <h2 id="regels">Wat niet mag</h2>
+      <p>"Hacking" is geen vrijbrief. Een paar regels om rekening mee te houden:</p>
+      <ul>
+        <li><strong>Geen reclamemail zonder toestemming.</strong> Volgens de ACM mag je reclame per e-mail, sms of WhatsApp alleen sturen naar mensen die vooraf toestemming gaven. Bestaande klanten mag je mailen over vergelijkbare producten, met een afmeldlink.</li>
+        <li><strong>Tell-a-friend met regels.</strong> Laat je klanten via jouw site een bericht naar een vriend sturen? Dat mag volgens de ACM alleen als ze dat zelf beslissen, als je niemand beloont voor het doorsturen en als je de gegevens daarna verwijdert. Een beloning voor een doorgestuurde mail mag dus niet. Een kortingskaartje dat een klant zelf aan zijn buurman geeft, is iets anders.</li>
+        <li><strong>Geen nepvolgers of nepreviews.</strong> Gekochte volgers en reviews misleiden je klanten. Ze leveren bovendien niets op.</li>
+        <li><strong>Geen adressen verzamelen van andermans sites.</strong> Mailadressen van websites plukken en daarna mailen, past niet bij de regels voor toestemming.</li>
+      </ul>
+      <p>In ons <a href="/proeflab/">proeflab</a> namen we vroeger met eigen sites soms te veel risico. Een eigen site kreeg zelfs een penalty van Google. Juist daarom testen we nu eerst op eigen sites, en blijven we bij klanten ruim binnen de regels.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="team">Heb je een growth hacker nodig?</h2></div>
+      <p>Bij grote bedrijven werkt een groeiteam met een marketeer, een ontwikkelaar, een ontwerper en iemand voor de data. Bij een mkb'er is dat meestal één persoon: de eigenaar. Dat is geen probleem. Een vaste dienst met een groeiteam inhuren is voor de meeste mkb'ers ook niet nodig.</p>
+      <p>Wat je wel nodig hebt:</p>
+      <ul class="vink">
+        <li>Eén groeicijfer waar je je een kwartaal op richt, bijvoorbeeld het aantal offerteaanvragen.</li>
+        <li>Een meetopzet die werkt. Zonder goede data geen experimenten. Lees bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a> hoe dat zonder cookiemelding kan.</li>
+        <li>Een vast moment per week of twee weken om resultaten te bekijken en het volgende experiment te kiezen.</li>
+        <li>De discipline om te stoppen met wat niet werkt. Dat is moeilijker dan het klinkt.</li>
+      </ul>
+      <p>Wil je hulp bij het testen van je website? Bij <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> zoeken we vanaf € 395 uit waar bezoekers afhaken en wat je daaraan kunt doen.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><strong>Trucs kopiëren zonder proces.</strong> Een lijstje met "50 growth hacks" afwerken levert weinig op. Het proces is de waarde.</li>
+        <li><strong>Te veel tegelijk veranderen.</strong> Nieuwe site, nieuwe prijzen en een nieuwe advertentie in dezelfde maand. Wat werkte er nu?</li>
+        <li><strong>Te snel conclusies trekken.</strong> Drie aanvragen meer in een week zegt niets. Kijk naar langere periodes.</li>
+        <li><strong>Alleen naar acquisitie kijken.</strong> Meer bezoekers naar een site die niet converteert, is geld weggooien.</li>
+        <li><strong>Geen logboek.</strong> Na een jaar weet niemand meer wat er getest is en wat eruit kwam.</li>
+        <li><strong>Groei boven klanttevredenheid.</strong> Wie klanten misleidt om sneller te groeien, verliest ze net zo snel.</li>
+      </ul>
+
+      <h2 id="ondernemer">Wat moet je ermee als ondernemer?</h2>
+      <p>Neem van growth hacking de houding over, niet het jargon. Kies één cijfer. Bedenk wat het zou kunnen verbeteren. Test het klein, meet het eerlijk en ga door met wat werkt. Dat is ook hoe wij werken: we beginnen waar de grootste kans op snel verschil zit, en perfectioneren daarna. Wie veel aanvragen krijgt maar ze niet goed opvolgt, haalt vaak meer uit <a href="/kennisbank/wat-is/marketing-automation/">marketing automation</a> dan uit nog meer bezoekers.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Groeien op de lange termijn doe je met <a href="/kennisbank/wat-is/inbound-marketing/">inbound marketing</a>. Hoe je meer uit je bestaande bezoekers haalt, lees je bij <a href="/leadgeneratie/">leadgeneratie</a>. En wat er gebeurt als iets zich vanzelf verspreidt, staat bij <a href="/kennisbank/wat-is/viraal-gaan/">viraal gaan</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is growth hacking in het kort?', a: 'Een manier van marketing waarbij je met snelle experimenten en data zoekt naar wat je bedrijf laat groeien. Wat werkt schaal je op, wat niet werkt schrap je.' },
+      { v: 'Wat doet een growth hacker?', a: 'Hij verzamelt ideeën voor groei, kiest de beste, test ze kort en meet het resultaat. Hij kijkt naar de hele klantreis, van het eerste bezoek tot de aanbeveling, en niet alleen naar reclame.' },
+      { v: 'Is growth hacking alleen voor startups?', a: 'Nee. Het begon bij startups, maar elke ondernemer kan de aanpak gebruiken. Een lokaal bedrijf test dan geen app, maar bijvoorbeeld een snellere reactie op aanvragen of een kortere offerte.' },
+      { v: 'Wat betekent AARRR?', a: 'Het staat voor acquisitie, activatie, retentie, referral en revenue: vijf fases waarin je kunt groeien. Dave McClure bedacht het model in 2007. Per fase volg je één cijfer.' },
+      { v: 'Wat is het verschil tussen growth hacking en growth marketing?', a: 'Ze lijken sterk op elkaar. Growth marketing is de nieuwere naam, met minder nadruk op slimme trucs en meer op systematisch testen over de hele klantreis.' },
+      { v: 'Kan ik A/B-testen met een kleine website?', a: 'Beperkt. Met weinig bezoekers duurt het lang voordat je een betrouwbaar verschil ziet. Test daarom grote verschillen, vergelijk periodes voor en na een verandering, of test in je advertenties en nieuwsbrief.' },
+      { v: 'Is growth hacking legaal?', a: 'Ja, zolang je je aan de regels houdt. Reclame per e-mail mag alleen met toestemming, en een beloning voor het doorsturen van een bericht via jouw site mag volgens de ACM niet. Nepvolgers en nepreviews horen er niet bij.' },
+    ]}
+  />
+
+  <Actie titel="Waar zit jouw snelste groei?" tekst={`We kijken gratis naar je site en zoeken de plek waar je nu de meeste klanten laat liggen. ${site.contactpersoon} belt je met het eerste experiment dat we zouden doen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop, h2 { scroll-margin-top: 96px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,87 @@
+---
+// Scène voor /kennisbank/wat-is/on-page-seo/: een webpagina met de onderdelen die je zelf verbetert (tabblad met titel, adresbalk, H1, H2,
+// foto met alt-tekst, interne link) en rechts een checklist. Als hij leeft: de vinkjes op de checklist gaan een voor een aan
+// en het bijbehorende onderdeel op de pagina licht kort op; daarna begint het rustig opnieuw.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const punten = [
+  { y: 64, tekst: 'Title tag' },
+  { y: 96, tekst: 'URL' },
+  { y: 128, tekst: 'Koppen' },
+  { y: 160, tekst: 'Alt-tekst' },
+  { y: 192, tekst: 'Interne links' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een webpagina met de onderdelen die je zelf verbetert, zoals de titel in het tabblad, de URL, de koppen H1 en H2, een foto met alt-tekst en een interne link. Rechts een checklist die punt voor punt wordt afgevinkt.'}>
+  <!-- webpagina -->
+  <rect x="22" y="20" width="286" height="232" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M22 58h286" stroke="#e8eef4" stroke-width="2" />
+  <path d="M34 42V30a6 6 0 0 1 6-6h112a6 6 0 0 1 6 6v12" fill="#e8eef4" />
+  <text x="44" y="38" font-size="9.5" font-weight="700">Schilder Groningen | …</text>
+  <rect x="168" y="28" width="128" height="18" rx="9" fill="#e8eef4" />
+  <text x="176" y="40.5" font-size="8.5" class="zacht">/schilder-groningen/</text>
+
+  <rect x="36" y="70" width="22" height="14" rx="4" fill="#074663" />
+  <text x="47" y="80.5" font-size="8" font-weight="800" text-anchor="middle" style="fill:#fff">H1</text>
+  <rect x="64" y="72" width="150" height="11" rx="4" fill="#10283f" />
+  <rect x="36" y="92" width="232" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="36" y="102" width="200" height="5" rx="2.5" fill="#d9e1ea" />
+
+  <rect x="36" y="118" width="22" height="13" rx="4" fill="#9fb3c5" />
+  <text x="47" y="127.8" font-size="8" font-weight="800" text-anchor="middle" style="fill:#fff">H2</text>
+  <rect x="64" y="120" width="110" height="9" rx="4" fill="#10283f" opacity="0.8" />
+
+  <rect class="v" x="36" y="140" width="110" height="72" rx="6" />
+  <path d="M36 196l28-24 18 14 22-20 42 36v4a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6z" fill="#074663" opacity="0.85" />
+  <rect x="44" y="146" width="30" height="14" rx="7" fill="#fff" />
+  <text x="59" y="156" font-size="8.5" font-weight="800" text-anchor="middle">alt</text>
+
+  <rect x="158" y="142" width="132" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="158" y="152" width="120" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="158" y="162" width="66" height="5" rx="2.5" fill="#ff6600" />
+  <rect x="228" y="162" width="56" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="158" y="172" width="126" height="5" rx="2.5" fill="#d9e1ea" />
+  <path class="a" d="M190 182c6 14 20 20 36 20" />
+  <path class="a" d="M220 196l7 6-8 5" />
+  <rect x="36" y="226" width="250" height="5" rx="2.5" fill="#e8eef4" />
+
+  <!-- checklist -->
+  <rect x="326" y="34" width="134" height="196" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="340" y="54" font-size="10.5" font-weight="800">Checklist</text>
+  {punten.map((p) => (
+    <g>
+      <rect x="340" y={p.y} width="16" height="16" rx="4" fill="#fff" stroke="#9fb3c5" stroke-width="2" />
+      <text x="364" y={p.y + 12} font-size="10.5" font-weight="700">{p.tekst}</text>
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      {punten.map((p, i) => (
+        <g class={`ops-vink ops-vink-${i}`}>
+          <rect x="340" y={p.y} width="16" height="16" rx="4" fill="#1f8a5b" />
+          <path d={`M344 ${p.y + 8}l3 3 5.5-6`} stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <rect class="ops-gloed ops-gloed-0" x="32" y="22" width="130" height="24" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+      <rect class="ops-gloed ops-gloed-1" x="164" y="25" width="136" height="24" rx="12" fill="none" stroke="#ff6600" stroke-width="2" />
+      <rect class="ops-gloed ops-gloed-2" x="32" y="66" width="188" height="68" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+      <rect class="ops-gloed ops-gloed-3" x="32" y="136" width="118" height="80" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+      <rect class="ops-gloed ops-gloed-4" x="152" y="156" width="138" height="52" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .ops-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .ops-vink, :global(.teken-js) .ops-gloed { opacity: 0; }
+  .ops-gloed { opacity: 0; }
+  .in-beeld .ops-vink { animation: kennisbank-wat-is-on-page-seo-vink 7s ease-out infinite; }
+  .in-beeld .ops-gloed { animation: kennisbank-wat-is-on-page-seo-gloed 7s ease-out infinite; }
+  .in-beeld .ops-vink-1, .in-beeld .ops-gloed-1 { animation-delay: 0.8s; }
+  .in-beeld .ops-vink-2, .in-beeld .ops-gloed-2 { animation-delay: 1.6s; }
+  .in-beeld .ops-vink-3, .in-beeld .ops-gloed-3 { animation-delay: 2.4s; }
+  .in-beeld .ops-vink-4, .in-beeld .ops-gloed-4 { animation-delay: 3.2s; }
+  @keyframes kennisbank-wat-is-on-page-seo-vink { 0%, 4% { opacity: 0; transform: scale(0.4); } 9%, 74% { opacity: 1; transform: none; } 82%, 100% { opacity: 0; transform: none; } }
+  @keyframes kennisbank-wat-is-on-page-seo-gloed { 0%, 3% { opacity: 0; } 8% { opacity: 1; } 18%, 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .ops-vink, .in-beeld .ops-gloed { animation: none; } }
+</style>

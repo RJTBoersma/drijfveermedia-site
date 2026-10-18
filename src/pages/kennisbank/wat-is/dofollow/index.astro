@@ -1,0 +1,241 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--dofollow.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/dofollow/';
+const datum = '2026-10-18';
+const definitie = 'Een dofollow link is een gewone link zonder label als nofollow, sponsored of ugc: Google mag hem volgen en kan hem meetellen als aanbeveling voor de pagina waar hij naartoe wijst.';
+const hoofdstukken = [
+  { id: 'bestaat-niet', titel: 'Een woord dat niet in de code staat' },
+  { id: 'labels', titel: 'De vier soorten links' },
+  { id: 'geschiedenis', titel: 'Van regel naar hint' },
+  { id: 'waarde', titel: 'Waarom een gewone link telt' },
+  { id: 'waardeloos', titel: 'Is een label waardeloos?' },
+  { id: 'betaald', titel: 'Betaalde links' },
+  { id: 'herkennen', titel: 'Zo zie je het verschil' },
+  { id: 'zelf', titel: 'Wanneer jij een label zet' },
+  { id: 'profiel', titel: 'Een gezond linkprofiel' },
+  { id: 'misverstanden', titel: 'Vijf misverstanden' },
+];
+const gewoon = `<a href="https://www.jouwsite.nl/">Jouw Bedrijf</a>`;
+const metLabel = `<a href="https://www.jouwsite.nl/" rel="nofollow">Jouw Bedrijf</a>`;
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Dofollow link',
+  alternateName: ['Dofollow', 'Follow link', 'Gewone link'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Dofollow en nofollow: wat is het verschil en wat moet je ermee?',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Dofollow en nofollow: wat is het verschil? | Drijfveer Media"
+  description="Wat is een dofollow link en wat doet nofollow, sponsored of ugc? Zo zie je het verschil in de html, zo telt Google het mee en zo blijf je binnen de regels."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Dofollow', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Linkbuilding</p>
+        <h1>Wat is een dofollow link?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Iemand biedt je een plaatsing aan "met dofollow link". Of je linkbouwer zegt dat een link "maar nofollow" is. Wat betekent dat, en maakt het uit? In het kort: een link is een aanbeveling. Met een klein labeltje in de code kan een website zeggen dat hij niet voor die aanbeveling instaat. Een link zonder zo'n label noemen SEO'ers dofollow. Hieronder lees je hoe je het verschil ziet, hoe Google ermee omgaat en wanneer je zelf een label moet zetten.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>Een gewone link heeft geen rel-label. Google kan hem meetellen voor de ranking van de pagina waar hij naartoe gaat.</li>
+          <li>Met <code>rel="sponsored"</code>, <code>rel="ugc"</code> of <code>rel="nofollow"</code> zegt een site: dit is betaald, door een bezoeker geplaatst, of ik sta er niet voor in.</li>
+          <li>Sinds 2019 ziet Google die labels als hint, niet als harde regel.</li>
+          <li>Betaalde links horen het label sponsored of nofollow te krijgen. Zonder label is het tegen de regels van Google.</li>
+          <li>Een natuurlijk linkprofiel bevat beide soorten. Alleen maar gewone links valt juist op.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={9} />
+
+      <div class="stap-kop" id="bestaat-niet"><Tekening naam="pen" maat={52} /><h2>Een woord dat niet in de code staat</h2></div>
+      <p>Het rare aan dofollow: je komt het nergens in de html tegen. Er bestaat geen <code>rel="dofollow"</code>. Een gewone link ziet er zo uit:</p>
+      <pre><code>{gewoon}</code></pre>
+      <p>Geen extra label, dus Google mag de link volgen en kan hem meewegen. Zet je er een label bij, dan wordt het:</p>
+      <pre><code>{metLabel}</code></pre>
+      <p>Het woord dofollow is dus vakjargon voor de afwezigheid van een label. Sommige tools spreken van een followed link. Bedoeld wordt hetzelfde. De klikbare woorden zelf, hier "Jouw Bedrijf", heten de <a href="/kennisbank/wat-is/anchortekst/">ankertekst</a>. Die leest Google ook, om te snappen waar de gelinkte pagina over gaat.</p>
+      <p>Let op: andere waarden in rel veranderen niets aan de waarde van een link. WordPress zet bij links die in een nieuw tabblad openen vaak <code>rel="noopener"</code>. Dat is een beveiligingsinstelling voor de browser, geen signaal aan Google.</p>
+
+      <div class="stap-kop" id="labels"><Tekening naam="ketting" maat={52} /><h2>De vier soorten links op een rij</h2></div>
+      <p>Google erkent drie labels. Samen met de gewone link geeft dat vier smaken:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>In de html</th><th>Gebruik je voor</th><th>Wat Google ermee doet</th></tr></thead>
+          <tbody>
+            <tr><td><b>Gewoon</b> (dofollow)</td><td><code>&lt;a href="…"&gt;</code></td><td>Elke link waar je achter staat</td><td>Volgt hem en kan hem meetellen</td></tr>
+            <tr><td><b>Sponsored</b></td><td><code>rel="sponsored"</code></td><td>Advertenties, betaalde plaatsingen, affiliatelinks</td><td>Hint: reken op geen waarde</td></tr>
+            <tr><td><b>UGC</b></td><td><code>rel="ugc"</code></td><td>Links in reacties en forumberichten</td><td>Hint: meestal geen waarde</td></tr>
+            <tr><td><b>Nofollow</b></td><td><code>rel="nofollow"</code></td><td>Als de andere niet passen en je er niet voor instaat</td><td>Hint: meestal geen waarde</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Je mag waarden combineren, zoals <code>rel="ugc nofollow"</code>. Dat staat zo in de documentatie van Google. Een label kan ook voor een hele pagina gelden: met een robots-metatag met nofollow erin vallen alle links op die pagina eronder.</p>
+
+      <div class="stap-kop" id="geschiedenis"><Tekening naam="kalender" maat={52} /><h2>Van regel naar hint: hoe het zo gekomen is</h2></div>
+      <ul>
+        <li><b>2005.</b> Het label nofollow komt er als middel tegen reactiespam op blogs. Spammers plaatsten massaal links in reacties om hoger te komen. Met het label telde Google die links niet meer mee.</li>
+        <li><b>2009.</b> SEO'ers gebruiken het label om waarde binnen hun eigen site te sturen. Google past de berekening aan, waardoor dat niet meer werkt. Meer daarover bij <a href="/kennisbank/wat-is/link-juice/">link juice</a>.</li>
+        <li><b>10 september 2019.</b> Google introduceert sponsored en ugc. Alle drie de labels worden vanaf dan behandeld als hint voor de ranking. Google kan zelf beslissen of het een link meetelt.</li>
+        <li><b>1 maart 2020.</b> Ook voor crawlen en indexeren wordt het label een hint. Wie het gebruikte om een pagina buiten Google te houden, moest iets anders gaan doen.</li>
+      </ul>
+      <p>Waarom die hint? Volgens Google bevatten links nuttige informatie, zoals de woorden waarmee ze een pagina beschrijven. Door ze niet helemaal te negeren, ziet Google ook beter welke linkpatronen onnatuurlijk zijn. In de praktijk behandelt Google gelabelde links volgens eigen zeggen meestal nog net als vroeger: niet meetellen voor posities.</p>
+
+      <div class="stap-kop" id="waarde"><Tekening naam="grafiek" maat={52} /><h2>Waarom een dofollow link telt voor je ranking</h2></div>
+      <p>Google gebruikt links van andere sites als een van de signalen om te bepalen welke pagina's betrouwbaar en belangrijk zijn. Een gewone link van een site die zelf veel vertrouwen geniet, draagt daar iets van over. Die overdracht noemen SEO'ers link juice. De optelsom van al je backlinks bouwt de autoriteit van je site op.</p>
+      <p>Niet elke gewone link is evenveel waard. Wat telt:</p>
+      <ul>
+        <li><b>Relevantie.</b> Een link van een vakblad voor installateurs zegt meer over een installateur dan een link van een receptenblog.</li>
+        <li><b>De bron.</b> Een site waar echte mensen komen en die zelf goede links heeft, geeft meer door dan een site die alleen bestaat om links te verkopen.</li>
+        <li><b>De plek.</b> Een link midden in een artikel weegt anders dan een link in een footer op duizend pagina's.</li>
+        <li><b>De ankertekst.</b> Beschrijvend en gevarieerd is goed. Overal precies hetzelfde zoekwoord oogt gekunsteld.</li>
+      </ul>
+      <p>Wil je weten hoe je aan goede links komt? Lees de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks</a> of onze aanpak voor <a href="/linkbuilding/">linkbuilding</a>.</p>
+
+      <div class="stap-kop" id="waardeloos"><Tekening naam="lamp" maat={52} /><h2>Is een nofollow link waardeloos?</h2></div>
+      <p>Nee. Een link met label kan je nog steeds veel opleveren:</p>
+      <ul class="vink">
+        <li><b>Bezoekers.</b> Een vermelding op een drukbezochte site brengt mensen die echt klikken, met of zonder label.</li>
+        <li><b>Naamsbekendheid.</b> Wie je naam vaker tegenkomt, zoekt je sneller op.</li>
+        <li><b>Een natuurlijk beeld.</b> Elk echt linkprofiel bevat links met labels. Denk aan Wikipedia: kijk maar eens in de code van de pagina over Assen. De link naar de gemeente heeft het label nofollow.</li>
+        <li><b>Een hint blijft een hint.</b> Google kan zelf beslissen een gelabelde link toch mee te nemen. Reken er niet op, maar het kan.</li>
+      </ul>
+
+      <div class="stap-kop" id="betaald"><Tekening naam="munten" maat={52} /><h2>Betaalde links: wanneer moet er sponsored op?</h2></div>
+      <p>Google noemt links kopen of verkopen om posities te beïnvloeden expliciet linkspam. Daaronder valt meer dan je denkt:</p>
+      <ul>
+        <li>geld betalen voor een link of een artikel met een link;</li>
+        <li>goederen of diensten ruilen voor een link;</li>
+        <li>iemand een product sturen in ruil voor een review met link;</li>
+        <li>advertorials of gesponsorde artikelen waarin een link waarde doorgeeft;</li>
+        <li>overmatig links ruilen, "link jij naar mij, dan link ik naar jou".</li>
+      </ul>
+      <p>Tegelijk zegt Google dat betaalde links bij reclame en sponsoring gewoon horen. Het mag, zolang de link het label sponsored of nofollow heeft. Een betaalde dofollow link is dus een gok dat Google het niet merkt. Wij doen dat niet. Vraagt een site om geld voor een plaatsing, dan zeggen we je dat vooraf en of de link een label krijgt. Zo staat het ook bij <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>.</p>
+      <p>Eerlijk verhaal: we hebben dit zelf geleerd. In ons <a href="/proeflab/">proeflab</a> namen we met eigen sites vroeger soms te veel risico, en een eigen site kreeg ooit een penalty van Google. Juist daarom blijven we bij klanten ruim binnen de regels.</p>
+
+      <div class="stap-kop" id="herkennen"><Tekening naam="vergrootglas" maat={52} /><h2>Zo zie je of een link een label heeft</h2></div>
+      <p>Op een pagina van een ander:</p>
+      <ol>
+        <li>Klik in Chrome of Edge met rechts op de link en kies <b>Inspecteren</b>.</li>
+        <li>De code van de link licht op. Staat er <code>rel=</code> met sponsored, ugc of nofollow in? Dan heeft de link een label. Staat er niets, of alleen iets als noopener, dan is het een gewone link.</li>
+        <li>Check ook de bovenkant van de pagina. Bekijk de broncode met Ctrl+U en zoek op "robots". Staat daar nofollow in de metatag, dan gelden alle links op de pagina als gelabeld.</li>
+      </ol>
+      <p>Voor je eigen backlinks: het rapport Links in Google Search Console laat zien wie naar je linkt, maar niet of die links een label hebben. Daarvoor heb je een SEO-tool nodig. Wij gebruiken SE Ranking. In tools als Ahrefs en Semrush kun je ook filteren op links zonder label. Zo zie je in een paar minuten hoe je profiel eruitziet.</p>
+
+      <div class="stap-kop" id="zelf"><Tekening naam="tandwiel" maat={52} /><h2>Wanneer zet je zelf een label?</h2></div>
+      <p>Op je eigen site bepaal jij welke links een label krijgen. Een praktische lijst:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Situatie</th><th>Label</th></tr></thead>
+          <tbody>
+            <tr><td>Je linkt naar een leverancier omdat je zijn product goed vindt</td><td>Geen</td></tr>
+            <tr><td>Een affiliatelink waarmee je commissie verdient</td><td>sponsored</td></tr>
+            <tr><td>Een partner betaalt voor een vermelding of artikel</td><td>sponsored</td></tr>
+            <tr><td>Je sponsort de voetbalclub en die linkt terug</td><td>Aan de club; bij voorkeur sponsored</td></tr>
+            <tr><td>Links die bezoekers in reacties of een forum plaatsen</td><td>ugc</td></tr>
+            <tr><td>Je linkt naar een site als slecht voorbeeld</td><td>nofollow</td></tr>
+            <tr><td>Links naar je eigen pagina's</td><td>Geen, nooit</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Werk je met WordPress? Dat geeft links in reacties sinds versie 5.3 automatisch het label ugc. Wil je een eigen pagina buiten Google houden, gebruik dan geen label op je interne links. Volgens Google regel je dat met robots.txt of met een noindex-tag. Hoe je je eigen pagina's slim aan elkaar koppelt, lees je bij <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</p>
+
+      <div class="stap-kop" id="profiel"><Tekening naam="doel" maat={52} /><h2>Een gezond linkprofiel</h2></div>
+      <p>Op internet lees je vaste percentages, zoals 70 procent gewone links en 30 procent met label. Google heeft nooit zo'n getal genoemd. Het hangt af van je branche en van waar je links vandaan komen. Wat wel klopt: een profiel dat natuurlijk is gegroeid, is gevarieerd. Zo ziet dat er bijvoorbeeld uit voor een bakker in Hoogeveen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Bron</th><th>Soort link</th><th>Waarom het telt</th></tr></thead>
+          <tbody>
+            <tr><td>Artikel in de regionale krant</td><td>Gewoon</td><td>Relevant, lokaal en betrouwbaar</td></tr>
+            <tr><td>Ledenlijst van de ondernemersvereniging</td><td>Gewoon</td><td>Echte band met de regio</td></tr>
+            <tr><td>Recept dat een foodblogger deelt</td><td>Gewoon</td><td>Verdiend met goede inhoud</td></tr>
+            <tr><td>Sponsorpagina van de korfbalclub</td><td>Sponsored</td><td>Lokale zichtbaarheid, eerlijk gelabeld</td></tr>
+            <tr><td>Reactie op een forum over glutenvrij bakken</td><td>UGC</td><td>Bezoekers die zoeken wat jij maakt</td></tr>
+            <tr><td>Wikipedia-pagina over het dorp</td><td>Nofollow</td><td>Vertrouwen en af en toe een klik</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld.</p>
+      <p>Niemand heeft een profiel met alleen perfecte links. Een profiel dat in een paar weken honderd gewone links krijgt van onbekende sites met precies dezelfde ankertekst, valt juist op. Bij Google, en bij elke linkbouwer die zijn vak verstaat.</p>
+
+      <div class="stap-kop" id="misverstanden"><Tekening naam="schild" maat={52} /><h2>Vijf misverstanden</h2></div>
+      <ol>
+        <li><b>"Een betaalde dofollow link is veilig als niemand het weet."</b> Google spoort linkverkopers ook zelf op en zet de waarde van zulke links op nul.</li>
+        <li><b>"Een link met label schaadt je site."</b> Nee. In het slechtste geval telt hij niet mee.</li>
+        <li><b>"Noopener is hetzelfde als nofollow."</b> Nee, noopener is een browserinstelling.</li>
+        <li><b>"Interne links op nofollow sparen waarde."</b> Sinds 2009 niet meer. De waarde verdwijnt gewoon.</li>
+        <li><b>"Hoe meer gewone links, hoe beter."</b> Vijf relevante links van echte sites zijn meer waard dan vijftig van linkfarms.</li>
+      </ol>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Begin bij de gids <a href="/kennisbank/gidsen/backlinks/">backlinks</a> of de <a href="/kennisbank/gidsen/linkbuilding-strategie/">linkbuilding-strategie</a>. Heb je slechte links en een handmatige actie van Google? Lees dan over de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen dofollow en nofollow?', a: 'Een gewone link heeft geen label en kan meetellen voor je posities. Een link met rel="nofollow" zegt dat de site er niet voor instaat. Google ziet dat als hint en telt zo\'n link meestal niet mee.' },
+      { v: 'Hoe maak ik een dofollow link?', a: 'Door niets toe te voegen. Elke link zonder rel-label met sponsored, ugc of nofollow is vanzelf een gewone link.' },
+      { v: 'Moet een betaalde link nofollow zijn?', a: 'Ja, of beter sponsored. Volgens Google is een betaalde link zonder een van die labels linkspam. Met label mag het gewoon.' },
+      { v: 'Tellen nofollow links helemaal niet mee?', a: 'Sinds september 2019 ziet Google het label als hint. Google kan zelf besluiten zo\'n link toch te gebruiken, maar behandelt ze volgens eigen zeggen meestal als vroeger: niet meetellen voor posities.' },
+      { v: 'Hoe zie ik of mijn backlinks een label hebben?', a: 'Google Search Console laat het niet zien. Gebruik een SEO-tool zoals SE Ranking, Ahrefs of Semrush, of controleer losse links met Inspecteren in je browser.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over links"
+    links={[
+      { label: 'Gids', titel: 'Backlinks', href: '/kennisbank/gidsen/backlinks/', tekst: 'Wat ze zijn, wat ze opleveren en hoe je eraan komt.', teken: 'ketting' },
+      { label: 'Begrip', titel: 'Wat is link juice?', href: '/kennisbank/wat-is/link-juice/', tekst: 'Hoe waarde via links van pagina naar pagina gaat.', teken: 'grafiek' },
+      { label: 'Begrip', titel: 'Wat is een anchortekst?', href: '/kennisbank/wat-is/anchortekst/', tekst: 'De klikbare woorden, en waarom variatie telt.', teken: 'pen' },
+    ]}
+  />
+
+  <Actie titel="Hoe gezond is jouw linkprofiel?" tekst={`We kijken gratis welke sites naar je linken, welke links meetellen en waar risico zit. ${site.contactpersoon} belt je met wat we zien.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  pre { overflow-x: auto; max-width: 100%; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

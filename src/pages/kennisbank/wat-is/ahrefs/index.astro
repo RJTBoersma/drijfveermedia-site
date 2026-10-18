@@ -1,0 +1,258 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--ahrefs.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/ahrefs/';
+const datum = '2026-10-18';
+const definitie = 'Ahrefs is een betaalde SEO-tool met een eigen index van het web, waarmee je de backlinks, zoekwoorden en posities van elke website onderzoekt, ook die van je concurrenten.';
+const hoofdstukken = [
+  { id: 'kort', titel: 'De tool in het kort' },
+  { id: 'begrippen', titel: 'De getallen die je overal ziet' },
+  { id: 'site-explorer', titel: 'Site Explorer: elke site doorlichten' },
+  { id: 'keywords-explorer', titel: 'Keywords Explorer: zoekwoorden vinden' },
+  { id: 'concurrentie', titel: 'Concurrentieanalyse in vijf stappen' },
+  { id: 'audit', titel: 'Je site controleren en posities volgen' },
+  { id: 'prijs', titel: 'Wat kost het?' },
+  { id: 'gratis', titel: 'Ahrefs Free: gratis voor je eigen site' },
+  { id: 'vergelijking', titel: 'Vergeleken met Semrush en Search Console' },
+  { id: 'wanneer', titel: 'Wanneer is het de moeite waard?' },
+  { id: 'fouten', titel: 'Fouten bij het lezen van de cijfers' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Ahrefs',
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is Ahrefs?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://ahrefs.com/pricing',
+      'https://ahrefs.com/free',
+      'https://ahrefs.com/about',
+      'https://ahrefs.com/site-explorer',
+      'https://ahrefs.com/keywords-explorer',
+      'https://help.ahrefs.com/en/articles/1409408-what-is-domain-rating-dr',
+      'https://www.semrush.com/prices/',
+      'https://support.google.com/webmasters/answer/9049606?hl=nl',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is Ahrefs? Uitleg, prijzen 2026 en vergelijking"
+  description="Wat is Ahrefs? Zo werken Site Explorer, Keywords Explorer en Domain Rating, dit kost Ahrefs in 2026 en zo gebruik je de gratis versie voor je site."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Ahrefs', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO-tools</p>
+        <h1>Wat is Ahrefs? Zo werkt de SEO-tool, en dit kost hij</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Een linkbuilder belooft je "links met een hoge DR". Een bureau laat een grafiek zien met je "organische verkeer" en dat van je concurrent. Allebei komen ze vaak uit dezelfde bron. Wat is Ahrefs, hoe lees je die cijfers en heb je het zelf nodig? Op deze pagina lees je hoe het werkt, wat het kost en waar je gratis ook ver mee komt.</p>
+      <p>We verkopen Ahrefs niet en verdienen er niets aan. Zelf werken we met SE Ranking. Juist daardoor kunnen we nuchter vertellen wat de tool sterk maakt en waar je op moet letten.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={13} />
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="kort">De tool in het kort</h2></div>
+      <p>Ahrefs is software in je browser, met een abonnement per maand. Het hoofdkantoor staat in Singapore. Het bedrijf noemt zichzelf "bootstrapped": het is groot geworden zonder geld van investeerders. Volgens de eigen pagina werken er 149 mensen, verspreid over 27 locaties.</p>
+      <p>Wat Ahrefs bijzonder maakt, is de eigen crawler. Net als Google laat het programma dag en nacht een robot over het web lopen, de AhrefsBot. Die noteert welke pagina naar welke pagina linkt. Ahrefs noemt het zelf de op één na actiefste crawler ter wereld. Op de pagina van Site Explorer staan deze aantallen: 22,6 miljard pagina's in de index en 35 biljoen werkende links, met meer dan tien jaar geschiedenis.</p>
+      <p>Daardoor is Ahrefs van oudsher sterk in <a href="/kennisbank/gidsen/backlinks/">backlinks</a>. Inmiddels is het veel meer: zoekwoordonderzoek, een technische controle van je site, posities volgen, contentonderzoek en het meten van je zichtbaarheid in AI-antwoorden met Brand Radar.</p>
+      <p>Eén ding vooraf. Alles wat Ahrefs over een andere website zegt, is een schatting. De tool kijkt niet mee in de Google-account van je concurrent. Het verzamelt zelf gegevens en rekent daarmee. Voor vergelijken is dat prima. Voor exacte aantallen niet.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="begrippen">De getallen die je overal ziet</h2></div>
+      <p>Wie Ahrefs opent, krijgt meteen een rij afkortingen. Dit betekenen ze:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Term</th><th>Wat het is</th><th>Waar je op let</th></tr></thead>
+          <tbody>
+            <tr><td><b>Domain Rating (DR)</b></td><td>De sterkte van het linkprofiel van een heel domein, op een schaal van 0 tot 100</td><td>Vergelijk alleen met sites in je eigen vak en regio</td></tr>
+            <tr><td><b>URL Rating (UR)</b></td><td>Hetzelfde, maar voor één pagina</td><td>Zegt volgens Ahrefs meer over posities dan DR</td></tr>
+            <tr><td><b>Verwijzende domeinen</b></td><td>Het aantal verschillende websites dat naar je linkt</td><td>Belangrijker dan het totaal aantal links</td></tr>
+            <tr><td><b>Ankertekst</b></td><td>De klikbare tekst van een link</td><td>Een natuurlijke mix, niet overal je zoekwoord</td></tr>
+            <tr><td><b>Zoekvolume</b></td><td>Geschat aantal zoekopdrachten per maand in een land, als gemiddelde over twaalf maanden</td><td>Kies Nederland, en wantrouw lage getallen bij lokale woorden</td></tr>
+            <tr><td><b>Keyword Difficulty (KD)</b></td><td>Hoe moeilijk de top 10 is, berekend uit de links naar de pagina's die er nu staan</td><td>Kijkt alleen naar links, niet naar de kwaliteit van je tekst</td></tr>
+            <tr><td><b>Traffic Potential</b></td><td>Het verkeer dat je zou krijgen op plek 1, inclusief alle verwante zoekopdrachten</td><td>Vaak een beter beeld dan het volume van één zoekwoord</td></tr>
+            <tr><td><b>Parent Topic</b></td><td>Het bredere onderwerp waar een zoekwoord onder valt</td><td>Helpt bepalen of je een aparte pagina nodig hebt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Hoe Domain Rating werkt</h3>
+      <p>DR is het bekendste getal van Ahrefs en het meest misbruikte. In de uitleg van Ahrefs zelf staat hoe het werkt. Elk domein verdeelt zijn kracht gelijk over alle domeinen waar het naar linkt. Een site met DR 10 die naar drie andere sites linkt, kan je daardoor meer helpen dan een site met DR 80 die naar een miljoen sites linkt. De uitkomst wordt omgerekend naar een schaal van 0 tot 100.</p>
+      <p>Twee dingen volgen daaruit. DR is relatief: het hangt af van alle andere sites in de database. En DR is van Ahrefs, niet van Google. Ahrefs schrijft zelf dat DR minder goed samenhangt met posities dan UR, en raadt het vooral aan om te kiezen van welke sites je links wilt. Het lijkt sterk op de <a href="/kennisbank/wat-is/domain-authority/">domain authority</a> van andere tools: handig om te vergelijken, geen doel.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="site-explorer">Site Explorer: elke website doorlichten</h2></div>
+      <p>Site Explorer is het hart van Ahrefs. Je typt een domein in, van jezelf of van een ander, en krijgt een overzicht met DR, het aantal verwijzende domeinen, het geschatte verkeer uit Google en de belangrijkste zoekwoorden. Volgens Ahrefs werkt het voor drie gebieden: verkeer uit zoekmachines en AI, het linkprofiel en betaalde advertenties.</p>
+      <p>De rapporten die je het meest gebruikt:</p>
+      <ul>
+        <li><b>Organic keywords.</b> Op welke zoekwoorden een site gevonden wordt, op welke positie, met het geschatte verkeer per woord. Zo zie je in een paar minuten hoe een concurrent aan zijn bezoekers komt.</li>
+        <li><b>Top pages.</b> Welke pagina's het meeste verkeer trekken. Vaak een eye-opener: het is zelden de homepage.</li>
+        <li><b>Backlinks en Referring domains.</b> Wie er naar een site linkt. Filter op één link per domein, dan zie je sneller welke verschillende sites het zijn.</li>
+        <li><b>New en Lost.</b> Links die er net bij kwamen en links die verdwenen. Een verdwenen link kun je soms terugkrijgen met één vriendelijke mail.</li>
+        <li><b>Best by links.</b> De pagina's met de meeste links. Zo zie je welk soort content bij jouw concurrent vanzelf links trekt: een prijsoverzicht, een handige rekentool, een onderzoek.</li>
+        <li><b>Broken backlinks.</b> Links naar pagina's die niet meer bestaan. Op je eigen site is dat gratis winst: zet een <a href="/kennisbank/wat-is/redirect/">redirect</a> en de kracht van die link telt weer mee. Dit rapport zit in Standard en hoger.</li>
+      </ul>
+      <p>Voor advertenties laat Site Explorer zien op welke zoekwoorden een concurrent adverteert en hoe zijn advertenties eruitzien. Het geschatte budget is een grove indicatie.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="keywords-explorer">Keywords Explorer: zoekwoorden vinden</h2></div>
+      <p>Keywords Explorer is het onderdeel voor zoekwoordonderzoek. Volgens Ahrefs bevat de database 28,7 miljard zoekwoorden in 217 locaties. Je typt een woord in en krijgt drie dingen.</p>
+      <ol>
+        <li><b>De cijfers van dat woord:</b> zoekvolume, KD, Traffic Potential en hoeveel van het volume van mobiel komt.</li>
+        <li><b>Ideeën:</b> zes soorten lijsten met verwante zoekopdrachten, waaronder woorden met jouw term erin, vragen die mensen stellen en woorden waar de toppagina's óók op scoren. Je kunt ze automatisch laten groeperen per Parent Topic.</li>
+        <li><b>De huidige top 10:</b> welke pagina's er nu staan, met hun links en hun verkeer. Kijk hier altijd naar voordat je aan een pagina begint.</li>
+      </ol>
+      <p>Die laatste stap is waar het om draait. Staan er in de top 10 vooral grote landelijke sites met honderden links, dan wordt het zwaar. Staan er kleine lokale bedrijven met een dunne pagina, dan ligt er een kans. Wil je weten hoe je van zo'n lijst naar keuzes komt, lees dan de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a> en het begrip <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="concurrentie">Concurrentieanalyse met Ahrefs in vijf stappen</h2></div>
+      <p>Dit is waar Ahrefs zijn geld waard is. Een voorbeeld: een hoveniersbedrijf uit Assen wil hoger komen op "hovenier Assen" en "tuinontwerp Drenthe". <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <ol>
+        <li><b>Zoek je echte concurrenten.</b> Typ je belangrijkste zoekwoorden in Google of in Keywords Explorer. De bedrijven die steeds terugkomen, zijn je concurrenten in Google. Dat zijn niet altijd de bedrijven die je bij een offerte tegenkomt.</li>
+        <li><b>Leg ze naast elkaar.</b> Met Domain Comparison, of Batch Analysis vanaf Standard, zet je jouw site en die van drie concurrenten in één tabel. DR, verwijzende domeinen, geschat verkeer.</li>
+        <li><b>Open Content Gap.</b> Vul de concurrenten in en je eigen site. Je krijgt de zoekwoorden waarop zij wel gevonden worden en jij niet. De hovenier ziet dat twee concurrenten scoren op "bestrating aanleggen kosten". Hij heeft daar geen pagina voor.</li>
+        <li><b>Open Link Intersect.</b> Die laat zien welke sites naar meerdere concurrenten linken, maar niet naar jou. Een lokale vereniging, een regionale bedrijvengids, een leverancier met een dealeroverzicht. Dat zijn je eerste linkkansen.</li>
+        <li><b>Bekijk hun beste pagina's.</b> In Top pages en Best by links zie je wat bij hen werkt. Niet om na te maken, wel om beter te doen.</li>
+      </ol>
+      <p>Na een uur heeft hij een lijst van vijf pagina's die hij wil maken en tien sites die hij wil benaderen. Meer over deze aanpak, ook zonder betaalde tool, staat in de gids <a href="/kennisbank/gidsen/concurrentieanalyse/">concurrentieanalyse</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="audit">Je site controleren en posities volgen</h2></div>
+      <p><b>Site Audit</b> loopt je website na zoals een zoekmachine dat doet. Volgens Ahrefs vindt het meer dan 170 soorten technische en inhoudelijke fouten: kapotte links, ketens van redirects, ontbrekende titels, dubbele pagina's, trage pagina's. Je krijgt een Health Score die je in de tijd kunt volgen. Hoeveel pagina's je mag laten controleren, hangt af van je abonnement.</p>
+      <p><b>Rank Tracker</b> volgt je posities op de zoekwoorden die je kiest. Let op: in alle abonnementen werkt Ahrefs die posities wekelijks bij, volgens de prijspagina. Semrush en SE Ranking doen dat dagelijks. Wil je na een grote wijziging snel zien wat er gebeurt, dan kijk je beter in Search Console.</p>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="prijs">Wat kost Ahrefs?</h2></div>
+      <p>Dit stond op 18 oktober 2026 op de officiële prijspagina van Ahrefs. Bedragen in Amerikaanse dollars, per maand bij maandelijkse betaling. Jaarbetaling is volgens Ahrefs tot 17 procent goedkoper.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Abonnement</th><th>Per maand</th><th>Gebruikers</th><th>Belangrijkste grenzen</th></tr></thead>
+          <tbody>
+            <tr><td><b>Ahrefs Free</b></td><td>$ 0</td><td>1</td><td>Alleen je eigen geverifieerde sites, beperkt</td></tr>
+            <tr><td><b>Starter</b></td><td>$ 29</td><td>1</td><td>Ruimere toegang tot Site Explorer, Site Audit en Keywords Explorer</td></tr>
+            <tr><td><b>Lite</b></td><td>$ 129</td><td>1, tot 2 extra à $ 40</td><td>5 projecten, 6 maanden geschiedenis, 750 gevolgde zoekwoorden, 1.000 credits per gebruiker</td></tr>
+            <tr><td><b>Standard</b></td><td>$ 249</td><td>1, tot 5 extra à $ 60</td><td>20 projecten, 2 jaar geschiedenis, 2.000 zoekwoorden, onbeperkt gebruik, Content Explorer</td></tr>
+            <tr><td><b>Advanced</b></td><td>$ 449</td><td>1, tot 10 extra à $ 80</td><td>50 projecten, 5 jaar geschiedenis, 5.000 zoekwoorden, koppeling met Looker Studio</td></tr>
+            <tr><td><b>Enterprise</b></td><td>$ 1.499</td><td>Vanaf 3</td><td>Alleen met een jaarcontract, onbeperkte geschiedenis</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron: ahrefs.com/pricing en ahrefs.com/free, prijspeil oktober 2026. Kijk altijd zelf voordat je afsluit.</p>
+      <p>Drie dingen om te weten. Ahrefs geeft volgens eigen zeggen nooit korting. Een proefperiode is er niet: wie wil proberen, krijgt de gratis versie voor zijn eigen site. Bij Lite heb je 1.000 credits per gebruiker per maand. Elke opvraag kost credits, dus bij intensief gebruik zit je snel aan je grens. En wie extra credits of gebruikers aanzet, betaalt automatisch bij. Je kunt wel op elk moment opzeggen. Je houdt toegang tot het einde van je betaalde periode en valt daarna terug op Ahrefs Free.</p>
+      <p>Voor een eenmanszaak die één site heeft, is $ 129 per maand stevig. Reken het om naar een jaar: $ 1.290 bij jaarbetaling. En dan heb je nog alleen cijfers. Iemand moet er ook iets mee doen.</p>
+
+      <div class="stap-kop"><Tekening naam="ster" maat={52} /><h2 id="gratis">Ahrefs Free: gratis voor je eigen site</h2></div>
+      <p>Weinig ondernemers weten dat Ahrefs een gratis account heeft dat niet afloopt. Het heette eerst Ahrefs Webmaster Tools. Je hebt geen creditcard nodig. Wel moet je eerst bewijzen dat de site van jou is. Daarna krijg je volgens Ahrefs dit:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Gratis grens</th><th>Wat je eraan hebt</th></tr></thead>
+          <tbody>
+            <tr><td><b>Site Explorer</b></td><td>1.000 backlinks en zoekwoorden tegelijk zichtbaar</td><td>Zien wie naar je linkt en waarop je gevonden wordt</td></tr>
+            <tr><td><b>Site Audit</b></td><td>5.000 crawlcredits per maand per project</td><td>Technische fouten op je site vinden</td></tr>
+            <tr><td><b>Web Analytics</b></td><td>Tot 1 miljoen gebeurtenissen per project</td><td>Simpele bezoekersstatistieken</td></tr>
+            <tr><td><b>SEO Toolbar</b></td><td>Geen verificatie nodig</td><td>DR en UR van elke site zien in je browser</td></tr>
+            <tr><td><b>AI Content Helper</b></td><td>1 document per maand</td><td>Een tekst laten beoordelen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Voor een mkb'er is dit vaak genoeg. Je ziet je eigen backlinks, je krijgt een technische controle en je kunt die naast de echte cijfers uit Search Console leggen. Alleen concurrenten onderzoeken kan niet. Daarvoor heb je minstens Starter nodig.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="vergelijking">Ahrefs, Semrush of Search Console?</h2></div>
+      <p>De vraag die iedereen stelt. Hieronder de verschillen die er voor een gewone gebruiker echt toe doen. Alle cijfers komen van de officiële sites, opgehaald op 18 oktober 2026.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Ahrefs</th><th>Semrush</th><th>Google Search Console</th></tr></thead>
+          <tbody>
+            <tr><td><b>Instapprijs volledig abonnement</b></td><td>$ 129 per maand (Lite)</td><td>$ 139 per maand (SEO)</td><td>Gratis</td></tr>
+            <tr><td><b>Goedkope tussenoptie</b></td><td>Starter, $ 29 per maand</td><td>Geen</td><td>Niet nodig</td></tr>
+            <tr><td><b>Gratis versie</b></td><td>Ahrefs Free, alleen voor eigen sites</td><td>10 rapporten per dag</td><td>Volledig gratis</td></tr>
+            <tr><td><b>Proefperiode</b></td><td>Geen</td><td>7 dagen</td><td>Niet nodig</td></tr>
+            <tr><td><b>Posities bijwerken</b></td><td>Wekelijks</td><td>Dagelijks</td><td>Echte gemiddelde positie uit Google</td></tr>
+            <tr><td><b>Gevolgde zoekwoorden instap</b></td><td>750</td><td>500</td><td>Alle zoekopdrachten waarop je verschijnt</td></tr>
+            <tr><td><b>Extra gebruiker</b></td><td>$ 40 per maand (Lite)</td><td>Vanaf $ 45 per maand</td><td>Gratis, met rechten per persoon</td></tr>
+            <tr><td><b>Sterkste kant</b></td><td>Backlinks en de eigen webindex</td><td>Breed pakket, ook voor advertenties en content</td><td>Echte klikken en vertoningen, indexering</td></tr>
+            <tr><td><b>Zwakke kant</b></td><td>Credits bij Lite, geen proefperiode</td><td>Extra pakketten kosten apart</td><td>Alleen je eigen site, links als steekproef</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bronnen: de prijspagina's van Ahrefs en Semrush, en de uitleg van Google over het linksrapport. Prijspeil oktober 2026.</p>
+      <p>Over Search Console nog dit. Het linksrapport van Google is volgens Google zelf een steekproef, toont maximaal 1.000 rijen en zegt niet of een link nofollow is. Voor een complete lijst van je backlinks heb je dus wel een tool als Ahrefs nodig. Voor je eigen zoekwoorden, klikken en indexering is Search Console de beste bron die er is, en gratis. De uitgebreide vergelijking met ook SE Ranking erbij lees je op <a href="/kennisbank/wat-is/semrush/">wat is Semrush</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="wanneer">Wanneer is Ahrefs de moeite waard?</h2></div>
+      <p>Het eerlijke antwoord: voor de meeste kleine bedrijven niet als vast abonnement. Wel in deze gevallen:</p>
+      <ul class="vink">
+        <li>Je doet zelf aan <a href="/linkbuilding/">linkbuilding</a> en wilt weten welke links je concurrenten hebben.</li>
+        <li>Je gaat een nieuwe website bouwen en wilt vooraf goed weten op welke zoekwoorden je moet mikken.</li>
+        <li>Je zit in een vak met veel concurrentie, bijvoorbeeld advocatuur, verzekeringen of webshops.</li>
+        <li>Je beheert meerdere sites of werkt als marketeer voor verschillende bedrijven.</li>
+      </ul>
+      <p>In alle andere gevallen: begin met Search Console en Ahrefs Free. Heb je eenmalig meer nodig, neem dan één maand Starter of Lite voor een project en zeg daarna op. Exporteer alles wat je vond voordat je abonnement afloopt.</p>
+
+      <h2 id="fouten">Fouten bij het lezen van de cijfers</h2>
+      <ul>
+        <li><b>DR als doel zien.</b> "We moeten naar DR 40." Google kent DR niet. Tien relevante links uit je eigen regio doen meer dan één link van een grote site die nergens over gaat.</li>
+        <li><b>Links kopen op basis van DR.</b> Een hoge DR is makkelijk op te pompen met links van linkfarms. Kijk of de site echte bezoekers heeft en over jouw onderwerp gaat.</li>
+        <li><b>Geschat verkeer letterlijk nemen.</b> "Mijn concurrent heeft 1.200 bezoekers per maand." Misschien. Het kan ook de helft zijn, of het dubbele.</li>
+        <li><b>Lage volumes wegstrepen.</b> Bij lokale zoekwoorden toont Ahrefs vaak 0 of 10. Een zoekwoord als "dakgoot vervangen Emmen" kan toch elke maand aanvragen opleveren.</li>
+        <li><b>KD blind volgen.</b> KD kijkt alleen naar links. Een sterke, lokale pagina komt vaak verder dan het getal voorspelt.</li>
+        <li><b>Vergeten op te zeggen of credits bijkopen</b> zonder het door te hebben. Zet een grens in je account.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Zo doen wij het</p>
+        <p>We gebruiken SE Ranking voor zoekwoorden, posities en backlinks, en altijd de echte cijfers uit je eigen Search Console. Een tool levert cijfers, geen beslissingen. Het verschil zit in wat je ermee doet. Lees hoe we dat aanpakken bij <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a> en <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>, of laat eerst gratis kijken waar je staat met de <a href="/gratis-website-analyse/">gratis website-analyse</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is Ahrefs gratis?', a: 'Gedeeltelijk. Met Ahrefs Free kun je je eigen, geverifieerde website gratis onderzoeken: je backlinks, je zoekwoorden en een technische controle. Concurrenten bekijken kan pas vanaf het Starter-abonnement van $ 29 per maand (prijspeil oktober 2026).' },
+      { v: 'Heeft Ahrefs een proefperiode?', a: 'Nee. Op de vraag naar korting of een proefperiode antwoordt Ahrefs dat het nooit korting geeft en verwijst het naar de gratis versie voor je eigen site. Je kunt wel maandelijks betalen en op elk moment opzeggen. Om terugbetaling kun je alleen vragen als je het maandabonnement niet gebruikt hebt.' },
+      { v: 'Wat is een goede Domain Rating?', a: 'Dat hangt af van je concurrenten. Voor een lokaal bedrijf is een DR van 15 tot 25 vaak al sterker dan de rest in de regio. Vergelijk je DR daarom alleen met de sites die bij jouw zoekwoorden bovenaan staan.' },
+      { v: 'Wat is het verschil tussen Ahrefs en Semrush?', a: 'Ahrefs is sterker in backlinks en heeft een goedkope Starter-optie. Semrush is breder, heeft een proefweek en werkt posities dagelijks bij in plaats van wekelijks. Voor de meeste gebruikers is het verschil kleiner dan de reclame doet denken.' },
+      { v: 'Is Ahrefs in het Nederlands?', a: 'Nee. De website bestaat in een stuk of twaalf talen, waaronder Duits en Frans, maar niet in het Nederlands. Je kunt wel Nederland kiezen als land, zodat je Nederlandse zoekvolumes en zoekresultaten ziet.' },
+      { v: 'Gebruikt Drijfveer Media Ahrefs?', a: 'Nee, wij werken met SE Ranking en met de gegevens uit Google Search Console van de klant. We hebben geen afspraken met Ahrefs en verdienen niets aan een abonnement.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten hoe je ervoor staat tegenover je concurrenten?" tekst={`We leggen je site gratis naast die van drie concurrenten. ${site.contactpersoon} belt je met wat je mist en waar je het snelst wint.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,312 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--zoekmachinemarketing.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/zoekmachinemarketing/';
+const datum = '2026-10-18';
+const definitie = 'Zoekmachinemarketing (SEM) is alles wat je doet om gevonden te worden in zoekmachines: betaald met advertenties (SEA), onbetaald in de gewone resultaten (SEO) en steeds vaker ook in AI-antwoorden.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat SEM betekent' },
+  { id: 'zoekpagina', titel: 'Wat er op de zoekpagina staat' },
+  { id: 'onderdelen', titel: 'De vier onderdelen' },
+  { id: 'zoekmachines', titel: 'Welke zoekmachines tellen' },
+  { id: 'zoekintentie', titel: 'Zoekintentie bepaalt het kanaal' },
+  { id: 'strategie', titel: 'Een strategie in zes stappen' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld' },
+  { id: 'samen', titel: 'Zo versterken ze elkaar' },
+  { id: 'jaar', titel: 'Het eerste jaar' },
+  { id: 'situatie', titel: 'Welk kanaal past bij jou' },
+  { id: 'meten', titel: 'Meten per kanaal' },
+  { id: 'ai', titel: 'Zoeken verandert' },
+  { id: 'fouten', titel: 'Zeven fouten' },
+  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden' },
+];
+// Marktaandeel zoekmachines in Nederland, StatCounter Global Stats, september 2026 (opgehaald op 18 oktober 2026).
+const marktaandeel = [
+  ['Google', '89,1%'],
+  ['Bing', '4,6%'],
+  ['Yandex', '2,6%'],
+  ['Yahoo', '1,5%'],
+  ['DuckDuckGo', '1,5%'],
+  ['Ecosia', '0,5%'],
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Zoekmachinemarketing',
+  alternateName: ['SEM', 'Search engine marketing', 'Zoekmachine marketing'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is zoekmachinemarketing (SEM)? SEO, SEA en AI in één aanpak',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wat is zoekmachinemarketing? SEM uitgelegd | Drijfveer Media"
+  description="Wat is zoekmachinemarketing (SEM)? SEO, SEA, lokale SEO en AI-antwoorden in één aanpak, met een rekenvoorbeeld en een stappenplan voor je strategie."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Zoekmachinemarketing', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Online marketing</p>
+        <h1>Wat is zoekmachinemarketing?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Iemand zoekt "kozijnen laten plaatsen". Op die ene pagina met resultaten staan advertenties, een samenvatting door AI, een kaart met bedrijven en daaronder de gewone resultaten. Overal daar kun je staan. Zoekmachinemarketing is het werk om op die plekken te komen, met een plan erachter. Dat plan is wat het verschil maakt. Losse advertenties hier en een blog daar leveren weinig op. Hieronder lees je uit welke onderdelen het bestaat, hoe je kiest waar je je geld en tijd in steekt, en hoe je meet of het werkt.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>Zoekmachinemarketing, afgekort SEM, is de verzamelnaam voor SEO en SEA. Lokale SEO en zichtbaarheid in AI-antwoorden horen er tegenwoordig bij.</li>
+          <li>In Nederland gaat ruim 89 procent van de zoekopdrachten via Google. Daar ligt dus het zwaartepunt.</li>
+          <li>Advertenties werken direct maar stoppen als je stopt met betalen. SEO kost tijd maar blijft werken.</li>
+          <li>De zoekintentie van je klant bepaalt welk kanaal het meeste oplevert.</li>
+          <li>Begin bij wat een klant je waard is. Dan weet je wat een klik en een aanvraag mogen kosten.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={14} />
+
+      <div class="stap-kop" id="betekenis"><Tekening naam="boek" maat={52} /><h2>Zoekmachinemarketing: wat SEM precies betekent</h2></div>
+      <p>SEM komt uit het Engels: search engine marketing. In het Nederlands schrijf je zoekmachinemarketing aan elkaar, al zie je ook vaak zoekmachine marketing. De gangbare uitleg in Nederland: SEM is de paraplu, met daaronder twee hoofdroutes.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Afkorting</th><th>Voluit</th><th>Wat het is</th></tr></thead>
+          <tbody>
+            <tr><td><b>SEM</b></td><td>Search engine marketing</td><td>Alles wat je doet om in zoekmachines gevonden te worden</td></tr>
+            <tr><td><b>SEO</b></td><td>Search engine optimization</td><td>Onbetaald hoger komen in de organische zoekresultaten</td></tr>
+            <tr><td><b>SEA</b></td><td>Search engine advertising</td><td>Betaalde zoekresultaten: advertenties, per klik</td></tr>
+            <tr><td><b>GEO</b></td><td>Generative engine optimization</td><td>Genoemd worden in antwoorden van AI-assistenten</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Let op: niet iedereen bedoelt hetzelfde. Sommige bureaus en Engelstalige bronnen gebruiken SEM alleen voor het betaalde deel. Krijg je een offerte voor SEM, vraag dan even of er ook SEO in zit. Het verschil tussen de twee hoofdroutes staat uitgebreid in <a href="/kennisbank/wat-is/seo-en-sea/">het verschil tussen SEO en SEA</a>. Hier gaat het over hoe je ze samen inzet.</p>
+
+      <div class="stap-kop" id="zoekpagina"><Tekening naam="scherm" maat={52} /><h2>Wat er op een pagina met zoekresultaten staat</h2></div>
+      <p>Een pagina met resultaten is geen simpele lijst meer. Afhankelijk van de zoekopdracht zie je verschillende blokken. Voor elk blok is er een andere manier om erin te komen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Plek</th><th>Hoe je erin komt</th><th>Betaal je per klik?</th><th>Meer lezen</th></tr></thead>
+          <tbody>
+            <tr><td>Advertenties met het label Gesponsord</td><td>Google Ads: bieden op zoekwoorden</td><td>Ja</td><td><a href="/kennisbank/wat-is/sea/">SEA</a></td></tr>
+            <tr><td>Het AI-overzicht bovenaan</td><td>Een duidelijke, betrouwbare bron zijn die Google aanhaalt</td><td>Nee</td><td><a href="/generative-engine-optimization/google-ai-overviews/">AI Overviews</a></td></tr>
+            <tr><td>De kaart met bedrijven</td><td>Een volledig Google Bedrijfsprofiel, reviews, afstand</td><td>Nee</td><td><a href="/lokale-seo/">Lokale SEO</a></td></tr>
+            <tr><td>De gewone resultaten</td><td>Goede pagina's, techniek en links</td><td>Nee</td><td><a href="/zoekmachine-optimalisatie/">SEO</a></td></tr>
+            <tr><td>Producten met foto en prijs</td><td>Een productfeed via Google Merchant Center</td><td>Ja, voor de advertenties</td><td><a href="/online-adverteren/google-shopping/">Google Shopping</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Hoe je die pagina leest, verschilt per zoekopdracht. Typ je zoekwoord zelf eens in, in een privévenster, en kijk welke blokken er staan. Staat er een kaart bovenaan, dan is lokale SEO voor dat woord belangrijker dan plek 1 in de gewone resultaten. Staan er vier advertenties, dan zakt het eerste gewone resultaat ver naar beneden, zeker op een telefoon.</p>
+
+      <div class="stap-kop" id="onderdelen"><Tekening naam="tandwiel" maat={52} /><h2>De vier onderdelen</h2></div>
+      <h3>SEO: verdiend, en blijvend</h3>
+      <p>Met zoekmachineoptimalisatie werk je aan je site zodat Google hem relevant en betrouwbaar vindt: inhoud, techniek en links. Het duurt meestal een paar maanden voordat je resultaat ziet. Daarna blijft het werken, ook in een maand dat je niets uitgeeft. Hoe dat werkt, lees je in de gids <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe werkt SEO</a>. Wat je op de pagina zelf kunt doen, staat bij <a href="/kennisbank/wat-is/on-page-seo/">on-page SEO</a>.</p>
+      <h3>SEA: gekocht, en direct</h3>
+      <p>Met zoekmachineadverteren sta je dezelfde dag bovenaan, mits je advertentie wordt goedgekeurd. Je betaalt per klik. In Nederland betekent dat bijna altijd Google Ads. Voor Bing bestaat Microsoft Advertising. Dat bieden wij niet aan, omdat de zoekopdrachten van onze klanten vooral via Google lopen. Wat een klik kost en hoe de veiling werkt, lees je bij <a href="/kennisbank/wat-is/cpc/">CPC</a>.</p>
+      <h3>Lokale SEO: de kaart</h3>
+      <p>Zoek je op een dienst met een plaatsnaam, of op "bij mij in de buurt", dan toont Google vaak een kaart met een paar bedrijven. Die plek verdien je met je <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>, je reviews en je afstand tot de zoeker. Voor een loodgieter of kapper is dit blok vaak het belangrijkste van de hele pagina.</p>
+      <h3>GEO: de AI-antwoorden</h3>
+      <p>Steeds meer mensen stellen hun vraag aan ChatGPT, Gemini of Copilot, of lezen het AI-overzicht in Google. Daar wil je genoemd worden. Dat vraagt om duidelijke pagina's, eenduidige feiten over je bedrijf en vermeldingen op betrouwbare plekken. Wat de afkorting precies inhoudt, lees je bij <a href="/kennisbank/wat-is/geo/">GEO</a>.</p>
+
+      <div class="stap-kop" id="zoekmachines"><Tekening naam="vergrootglas" maat={52} /><h2>Welke zoekmachines tellen in Nederland</h2></div>
+      <p>Zoekmachinemarketing in Nederland betekent vooral Google. Dit is het marktaandeel van zoekmachines in september 2026:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekmachine</th><th>Aandeel in Nederland</th></tr></thead>
+          <tbody>
+            {marktaandeel.map(([z, a]) => <tr><td>{z}</td><td>{a}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: StatCounter Global Stats, zoekmachines in Nederland, alle apparaten, september 2026.</p>
+      <p>De conclusie voor een mkb'er is simpel. Zorg eerst dat je in Google goed staat. Bing komt daarna, en veel van wat voor Google werkt, werkt daar ook. Let wel op: Bing en de AI-assistent Copilot zijn allebei van Microsoft. Wie in AI-antwoorden wil verschijnen, laat Bing dus niet liggen. Daarover meer bij <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar in ChatGPT</a>.</p>
+
+      <div class="stap-kop" id="zoekintentie"><Tekening naam="doel" maat={52} /><h2>Zoekintentie bepaalt het kanaal</h2></div>
+      <p>Niet elke zoekopdracht is evenveel waard. Wie "wat kost een dakkapel" typt, oriënteert zich. Wie "dakkapel plaatsen Assen" typt, wil een offerte. Die bedoeling achter een zoekopdracht heet <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>. Ze bepaalt welk kanaal het meeste oplevert:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekintentie</th><th>Voorbeeld</th><th>Wat meestal het beste werkt</th></tr></thead>
+          <tbody>
+            <tr><td>Informeren</td><td>"hoe lang gaat een cv-ketel mee"</td><td>SEO met een goede uitleg, en kans op het AI-overzicht</td></tr>
+            <tr><td>Vergelijken</td><td>"warmtepomp of hybride"</td><td>SEO met een eerlijke vergelijking, advertenties alleen bij hoge marge</td></tr>
+            <tr><td>Kopen of laten doen</td><td>"cv-ketel vervangen Emmen"</td><td>Advertenties, lokale SEO en een sterke dienstpagina</td></tr>
+            <tr><td>Op naam zoeken</td><td>"installatiebedrijf de boer"</td><td>Je eigen site en Bedrijfsprofiel op orde</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Met advertenties op informatieve zoekwoorden betaal je vaak voor klikken van mensen die nog lang niet kopen. Met SEO op koopwoorden in een drukke markt duurt het lang voordat je bovenaan staat. Een goede strategie verdeelt de zoekwoorden over de kanalen.</p>
+
+      <div class="stap-kop" id="strategie"><Tekening naam="kompas" maat={52} /><h2>Een strategie voor zoekmachinemarketing in zes stappen</h2></div>
+      <ol>
+        <li><b>Bepaal wat een klant je waard is.</b> Hoeveel marge levert een gemiddelde opdracht op, en hoeveel mag het werven daarvan kosten? Zonder dat getal kun je niets afwegen.</li>
+        <li><b>Zoek de zoekwoorden.</b> Op welke woorden zoeken je klanten, en hoe vaak? De Zoekwoordplanner in Google Ads geeft zoekvolumes en een schatting van de klikprijs. Hoe je dat aanpakt, staat in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a>.</li>
+        <li><b>Kijk naar de concurrentie.</b> Wie staat er nu, in de advertenties en in de gewone resultaten? Hoe sterk zijn die pagina's? Zie de gids <a href="/kennisbank/gidsen/concurrentieanalyse/">concurrentieanalyse</a>.</li>
+        <li><b>Verdeel de zoekwoorden over de kanalen.</b> Koopwoorden waar je organisch nog nergens staat: advertenties. Vragen en uitleg: SEO. Plaatsnamen: lokale SEO. Herzie die verdeling elk kwartaal.</li>
+        <li><b>Zorg voor goede landingspagina's.</b> Elke groep zoekwoorden krijgt een pagina die precies die vraag beantwoordt. Dat helpt je advertenties en je SEO tegelijk. Zie <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken</a>.</li>
+        <li><b>Meet en stuur bij.</b> Meet aanvragen en telefoontjes per kanaal en per zoekwoord. Stop met wat niet werkt, schaal op wat wel werkt.</li>
+      </ol>
+      <p>Wil je een plan voor het organische deel? De gids <a href="/kennisbank/gidsen/seo-strategie/">SEO-strategie</a> gaat daar dieper op in.</p>
+
+      <div class="stap-kop" id="rekenvoorbeeld"><Tekening naam="munten" maat={52} /><h2>Rekenvoorbeeld: een kozijnbedrijf in Assen</h2></div>
+      <p>Stel: een kozijnbedrijf in Assen wil meer aanvragen voor kunststof kozijnen. Een gemiddelde opdracht levert € 1.500 marge op. Het bedrijf wil maximaal 20 procent daarvan aan werving kwijt zijn: € 300 per nieuwe klant. Gemiddeld kost een klik op "kozijnen" in Nederland € 2,57, volgens SE Ranking.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Getal</th><th>Uitleg</th></tr></thead>
+          <tbody>
+            <tr><td>Advertentiebudget</td><td>€ 600 per maand</td><td>Zelf gekozen</td></tr>
+            <tr><td>Klikprijs</td><td>€ 2,57</td><td>Landelijk gemiddelde, SE Ranking</td></tr>
+            <tr><td>Klikken</td><td>233</td><td>€ 600 gedeeld door € 2,57</td></tr>
+            <tr><td>Aanvragen</td><td>12</td><td>5 procent conversie op de landingspagina</td></tr>
+            <tr><td>Opdrachten</td><td>3</td><td>Eén op de vier offertes wordt een klus</td></tr>
+            <tr><td>Kosten per klant</td><td>€ 200</td><td>Onder de grens van € 300</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld. De klikprijs komt uit de zoekwoorddatabase van SE Ranking voor Nederland, opgevraagd op 18 oktober 2026; de overige getallen zijn aannames.</p>
+      <p>De advertenties lonen dus. Tegelijk werkt het bedrijf aan SEO op dezelfde woorden: een sterke pagina per type kozijn, foto's van eigen werk, reviews in het Bedrijfsprofiel. Na een paar maanden komen er ook aanvragen uit de gewone resultaten en de kaart, zonder klikprijs. Dan kan het advertentiebudget omlaag, of verschuiven naar woorden waar ze organisch nog niet staan. Dat samenspel is de kern van zoekmachinemarketing.</p>
+
+      <div class="stap-kop" id="samen"><Tekening naam="ketting" maat={52} /><h2>Zo versterken SEO en SEA elkaar</h2></div>
+      <p>De echte winst zit niet in het kiezen, maar in het combineren. Vier manieren waarop de kanalen elkaar helpen:</p>
+      <ul class="vink">
+        <li><b>Advertenties als testlab.</b> In het zoektermenrapport van Google Ads zie je binnen een paar weken welke zoekopdrachten aanvragen opleveren. Precies op die woorden zet je daarna met SEO in. Zo steek je geen maanden werk in woorden die niets opleveren.</li>
+        <li><b>Search Console als schatkaart.</b> Woorden waarop je organisch op plek 8 tot 15 staat, zijn vaak met een betere pagina naar de eerste pagina te tillen. Tot het zover is, kun je er tijdelijk op adverteren.</li>
+        <li><b>Eén landingspagina voor allebei.</b> Een pagina die de vraag van de zoeker goed beantwoordt, scoort beter in Google en verlaagt de prijs die je per aanvraag betaalt. Dubbel rendement van één keer werk.</li>
+        <li><b>Twee keer zichtbaar.</b> Sta je in de advertenties én in de gewone resultaten of de kaart, dan ziet de zoeker je naam twee keer. Dat wekt vertrouwen.</li>
+      </ul>
+
+      <div class="stap-kop" id="jaar"><Tekening naam="kalender" maat={52} /><h2>Het eerste jaar in vier fases</h2></div>
+      <p>Zo ziet een nuchtere planning eruit voor een mkb'er die vanaf nul begint:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Periode</th><th>Wat je doet</th><th>Wat je mag verwachten</th></tr></thead>
+          <tbody>
+            <tr><td>Maand 1</td><td>Meting instellen, Bedrijfsprofiel invullen, zoekwoorden kiezen, eerste campagne starten</td><td>De eerste klikken en aanvragen uit advertenties</td></tr>
+            <tr><td>Maand 2 tot 3</td><td>Landingspagina's verbeteren, zoektermen uitsluiten, de eerste SEO-pagina's schrijven</td><td>Een betrouwbaar beeld van wat een aanvraag kost</td></tr>
+            <tr><td>Maand 4 tot 6</td><td>Meer pagina's, interne links, reviews verzamelen, eerste links van andere sites</td><td>De eerste organische posities en telefoontjes via de kaart</td></tr>
+            <tr><td>Maand 7 tot 12</td><td>Opschalen wat werkt, advertentiebudget verschuiven, oude pagina's bijwerken</td><td>Een groter deel van de aanvragen zonder klikprijs</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Hoe snel het precies gaat, hangt af van je branche, je concurrenten en wat er al staat. Een bestaande site met een paar goede pagina's is sneller dan een nieuwe. Daarom beginnen wij altijd met kijken waar de grootste kans op snel verschil zit, en werken we van daaruit verder.</p>
+
+      <div class="stap-kop" id="situatie"><Tekening naam="lamp" maat={52} /><h2>Welk kanaal past bij jouw situatie?</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Situatie</th><th>Begin met</th><th>Waarom</th></tr></thead>
+          <tbody>
+            <tr><td>Nieuw bedrijf of nieuwe website</td><td>Advertenties en je Bedrijfsprofiel</td><td>SEO heeft tijd nodig; zo heb je meteen aanvragen</td></tr>
+            <tr><td>Lokale dienstverlener</td><td>Lokale SEO</td><td>De kaart levert telefoontjes op zonder klikprijs</td></tr>
+            <tr><td>Seizoenswerk, zoals airco's of tuinonderhoud</td><td>Advertenties in het seizoen, SEO het hele jaar</td><td>Je zet de kraan open wanneer de vraag er is</td></tr>
+            <tr><td>Hoge klikprijzen in je branche</td><td>SEO</td><td>Elke klik die je niet hoeft te kopen, scheelt geld</td></tr>
+            <tr><td>Product of dienst waar nog niemand op zoekt</td><td>Geen van beide eerst</td><td>Zonder zoekvolume geen klikken; kijk naar andere kanalen</td></tr>
+            <tr><td>Veel vragen van klanten over je vak</td><td>SEO en GEO</td><td>Goede antwoorden worden gevonden en door AI aangehaald</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop" id="meten"><Tekening naam="grafiek" maat={52} /><h2>Meten: welke cijfers per kanaal</h2></div>
+      <p>Elk kanaal heeft zijn eigen dashboard. Leg ze naast elkaar en kijk vooral naar wat het oplevert:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kanaal</th><th>Waar je kijkt</th><th>Cijfers die tellen</th></tr></thead>
+          <tbody>
+            <tr><td>SEA</td><td>Google Ads</td><td>Klikprijs, conversies, kosten per conversie</td></tr>
+            <tr><td>SEO</td><td><a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a></td><td>Vertoningen, klikken, CTR, gemiddelde positie</td></tr>
+            <tr><td>Lokale SEO</td><td>Google Bedrijfsprofiel</td><td>Telefoontjes, routeverzoeken, websiteklikken</td></tr>
+            <tr><td>Alles samen</td><td><a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a> of een privacyvriendelijk alternatief</td><td>Aanvragen en verkopen per kanaal</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Zorg dat je formulieren en klikken op je telefoonnummer worden gemeten als conversie. Anders weet je niet welk kanaal je klanten oplevert. Weten waar je aanvragen vandaan komen, zonder cookiemelding? Dat regelen we bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+      <div class="stap-kop" id="ai"><Tekening naam="ai" maat={52} /><h2>Zoeken verandert: AI-antwoorden</h2></div>
+      <p>Het zoekgedrag schuift. In Google zie je steeds vaker een AI-overzicht boven de resultaten, en met de <a href="/kennisbank/gidsen/google-ai-modus/">AI-modus</a> een hele chat. Daarnaast stellen mensen hun vraag direct aan ChatGPT of Perplexity. Voor zoekmachinemarketing betekent dat twee dingen. Je wilt als bron genoemd worden in die antwoorden. En er komen nieuwe advertentieplekken bij, zoals <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</p>
+      <p>Het goede nieuws: wat werkt voor SEO, werkt grotendeels ook voor AI. Duidelijke antwoorden, eenduidige feiten, een herkenbaar bedrijf en vermeldingen op betrouwbare plekken. Wij noemen dat gevonden, genoemd en gekozen worden. Hoe we dat aanpakken, lees je bij <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="schild" maat={52} /><h2>Zeven fouten die geld kosten</h2></div>
+      <ol>
+        <li><b>Alleen adverteren.</b> Dan betaal je elke maand opnieuw voor elke bezoeker, en ben je onzichtbaar zodra je stopt.</li>
+        <li><b>Alleen SEO, met haast.</b> Wie volgende maand klanten nodig heeft, moet niet alleen op SEO wachten.</li>
+        <li><b>Geen conversiemeting.</b> Dan stuur je op klikken en posities in plaats van op klanten.</li>
+        <li><b>Alles naar de homepage.</b> Wie op een specifieke dienst zoekt, wil een pagina over die dienst.</li>
+        <li><b>Zoekwoorden kiezen zonder naar de zoekintentie te kijken.</b> Veel volume, geen klanten.</li>
+        <li><b>Het budget versnipperen.</b> Een beetje Google, een beetje Bing, een beetje overal. Begin waar je klanten zijn en doe dat goed.</li>
+        <li><b>Nooit iets stoppen.</b> Zoekwoorden of pagina's die al maanden niets opleveren, mogen weg. Verspild geld schrappen is soms meer waard dan iets nieuws beginnen.</li>
+      </ol>
+
+      <div class="stap-kop" id="uitbesteden"><Tekening naam="team" maat={52} /><h2>Zelf doen of uitbesteden?</h2></div>
+      <p>Een Bedrijfsprofiel invullen en je belangrijkste pagina's verbeteren kun je zelf. Een advertentiecampagne opzetten ook, als je er de tijd voor neemt; het stappenplan staat in <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>. Het lastige zit in het volhouden en in het slim verdelen van tijd en budget.</p>
+      <p>Wil je het uitbesteden, dan kan het per onderdeel of in één hand:</p>
+      <ul>
+        <li><a href="/zoekmachine-optimalisatie/">SEO</a> vanaf € 495 per maand, met stijggarantie.</li>
+        <li><a href="/lokale-seo/">Lokale SEO</a> vanaf € 295 per maand.</li>
+        <li><a href="/online-adverteren/google-ads-bureau/">Google Ads</a>: de prijs hangt af van je advertentiebudget.</li>
+        <li><a href="/online-marketing-uitbesteden/">Alles in één hand</a> vanaf € 595 per maand.</li>
+      </ul>
+      <p>Alles is maandelijks opzegbaar. We spreken vooraf een doel af waar je ons op kunt afrekenen, met <a href="/garantie/">garantie</a>. En we vertellen je ook eerlijk wanneer een kanaal niets voor je is.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees over <a href="/online-adverteren/">online adverteren</a> in het algemeen of de gids <a href="/kennisbank/gidsen/wat-is-google-ads/">wat is Google Ads</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is zoekmachinemarketing?', a: 'Alles wat je doet om gevonden te worden in zoekmachines. Het bestaat uit SEO, onbetaald hoger komen in de gewone resultaten, en SEA, adverteren per klik. Lokale SEO en zichtbaarheid in AI-antwoorden horen er tegenwoordig ook bij.' },
+      { v: 'Wat is het verschil tussen SEM en SEA?', a: 'SEM is de verzamelnaam, SEA is het betaalde deel ervan. Sommige bureaus gebruiken SEM alleen voor adverteren, dus vraag bij een offerte wat ermee bedoeld wordt.' },
+      { v: 'Wat kost zoekmachinemarketing?', a: 'Dat hangt af van de mix. Bij advertenties betaal je per klik; in Nederland kost een klik gemiddeld van zo\'n 50 cent tot ruim € 8, afhankelijk van je branche. SEO doen wij vanaf € 495 per maand, lokale SEO vanaf € 295 per maand.' },
+      { v: 'Is SEO of SEA beter?', a: 'Geen van beide is altijd beter. SEA levert snel bezoekers op, SEO bouwt aan bezoekers die blijven komen. De meeste bedrijven doen het slimst met allebei, en gebruiken de cijfers uit hun advertenties om te kiezen waar ze met SEO op inzetten.' },
+      { v: 'Hoe snel werkt zoekmachinemarketing?', a: 'Advertenties kunnen dezelfde dag verschijnen. SEO heeft meestal een paar maanden nodig. Reken voor een eerlijk beeld van het geheel op een half jaar.' },
+      { v: 'Moet ik ook in Bing adverteren?', a: 'Pas als Google goed loopt en je meer volume zoekt. Bing had in september 2026 4,6 procent van de zoekopdrachten in Nederland. Wij richten ons zelf op Google Ads.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over gevonden worden"
+    links={[
+      { label: 'Begrip', titel: 'Het verschil tussen SEO en SEA', href: '/kennisbank/wat-is/seo-en-sea/', tekst: 'De twee hoofdroutes naast elkaar, met kosten.', teken: 'kompas' },
+      { label: 'Begrip', titel: 'Wat is SEA?', href: '/kennisbank/wat-is/sea/', tekst: 'Adverteren in Google: veiling, klikprijs en valkuilen.', teken: 'megafoon' },
+      { label: 'Gids', titel: 'Hoe werkt SEO?', href: '/kennisbank/gidsen/hoe-werkt-seo/', tekst: 'Van crawlen tot ranking, in gewone taal.', teken: 'vergrootglas' },
+    ]}
+  />
+
+  <Actie titel="Waar zit jouw grootste kans in Google?" tekst={`We kijken gratis waar je nu staat in advertenties, de kaart en de gewone resultaten. ${site.contactpersoon} belt je met waar je het beste kunt beginnen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

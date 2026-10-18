@@ -1,0 +1,252 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--mailchimp.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/mailchimp/';
+const datum = '2026-10-18';
+const definitie = 'Mailchimp is een Amerikaans programma voor e-mailmarketing, sinds 2021 van Intuit, waarmee je nieuwsbrieven en automatische mails maakt, verstuurt en meet.';
+const hoofdstukken = [
+  { id: 'kort', titel: 'Het programma in het kort' },
+  { id: 'functies', titel: 'Wat kun je ermee?' },
+  { id: 'contacten', titel: 'Contacten, tags en segmentatie' },
+  { id: 'automations', titel: 'Automations: mails die vanzelf gaan' },
+  { id: 'prijs', titel: 'Wat kost het?' },
+  { id: 'avg', titel: 'Mailchimp en de AVG' },
+  { id: 'open-rate', titel: 'Wat zegt de open rate nog?' },
+  { id: 'koppelingen', titel: 'Koppelingen met je website' },
+  { id: 'alternatieven', titel: 'Alternatieven, zoals Laposta' },
+  { id: 'starten', titel: 'Zo begin je in zeven stappen' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Mailchimp',
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is Mailchimp?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://mailchimp.com/pricing/marketing/',
+      'https://mailchimp.com/pricing/marketing/compare-plans/',
+      'https://mailchimp.com/about/',
+      'https://mailchimp.com/gdpr/',
+      'https://mailchimp.com/help/about-double-opt-in/',
+      'https://mailchimp.com/help/about-open-and-click-rates/',
+      'https://mailchimp.com/resources/email-marketing-benchmarks/',
+      'https://www.intuit.com/company/press-room/press-releases/2021/intuit-completes-acquisition-of-mailchimp/',
+      'https://www.laposta.nl/tarieven/gratis-gebruik',
+      'https://www.laposta.nl/tarieven/abonnement',
+      'https://www.mailerlite.com/pricing',
+      'https://www.brevo.com/pricing/',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is Mailchimp? Uitleg, prijzen 2026 en alternatieven"
+  description="Wat is Mailchimp? Zo werkt het nieuwsbriefprogramma, dit kost het in 2026, zo zit het met de AVG en zo vergelijk je het met Laposta en MailerLite."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Mailchimp', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · E-mailmarketing</p>
+        <h1>Wat is Mailchimp? Uitleg, kosten en Nederlandse alternatieven</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je wilt een nieuwsbrief versturen en iedereen noemt dezelfde naam. Wat is Mailchimp eigenlijk, wat kun je ermee en wat kost het als je lijst groeit? En is het een goede keus voor een Nederlands bedrijf, met de AVG in je achterhoofd? Op deze pagina lees je het allemaal, inclusief de punten waar andere uitleg vaak overheen stapt.</p>
+      <p>We hebben geen afspraken met Mailchimp of met een van de alternatieven. Alle prijzen hieronder hebben we op 18 oktober 2026 zelf van de officiële sites gehaald.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={13} />
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="kort">Het programma in het kort</h2></div>
+      <p>Mailchimp is software in je browser, met een app voor je telefoon. Je bewaart er je adressen in, je maakt er mails mee en je ziet wie ze opent en waarop geklikt wordt. Het begon in 2001 in Atlanta. Ben Chestnut en Dan Kurzius hadden een webdesignbureau, de Rocket Science Group. Naast hun werk voor grote klanten bouwden ze een eenvoudig mailprogramma voor kleine bedrijven. Dat bijproduct werd het hoofdproduct.</p>
+      <p>Op 1 november 2021 rondde Intuit de overname af, het Amerikaanse bedrijf achter boekhoudpakket QuickBooks. Je ziet de naam Intuit Mailchimp sindsdien steeds vaker. De koers is opgeschoven: van simpele nieuwsbrieftool naar een breed marketingplatform met automatische mails, sms, landingspagina's, AI-functies en meer dan 300 koppelingen.</p>
+      <p>Goed om te weten voor Nederlandse gebruikers: de website van Mailchimp bestaat in het Engels, Spaans, Frans, Portugees, Duits en Italiaans. Een Nederlandse versie is er niet. Je mails zelf schrijf je natuurlijk gewoon in het Nederlands.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="functies">Wat kun je met Mailchimp?</h2></div>
+      <p>De onderdelen die je als ondernemer echt gebruikt:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat het doet</th><th>Wanneer je het nodig hebt</th></tr></thead>
+          <tbody>
+            <tr><td><b>Audience</b></td><td>Je adressenbestand, met per contact gegevens, tags en activiteit</td><td>Altijd, dit is de basis</td></tr>
+            <tr><td><b>Templates en editor</b></td><td>Kant-en-klare ontwerpen die je met slepen aanpast, zonder code</td><td>Voor elke nieuwsbrief</td></tr>
+            <tr><td><b>Formulieren en pop-ups</b></td><td>Inschrijfformulieren voor je site, of een losse aanmeldpagina</td><td>Om je lijst te laten groeien</td></tr>
+            <tr><td><b>Landingspagina's</b></td><td>Eenvoudige losse pagina's, bijvoorbeeld voor een actie</td><td>Als je geen eigen website hebt of snel iets wilt testen</td></tr>
+            <tr><td><b>Marketing Automation Flows</b></td><td>Reeksen mails die vanzelf vertrekken na een gebeurtenis</td><td>Welkomstmails, opvolging, verjaardagen</td></tr>
+            <tr><td><b>A/B-test</b></td><td>Twee versies van een onderwerpregel of mail tegen elkaar testen</td><td>Als je lijst groot genoeg is om verschil te zien</td></tr>
+            <tr><td><b>Rapporten</b></td><td>Opens, klikken, afmeldingen, bounces per mail</td><td>Na elke verzending</td></tr>
+            <tr><td><b>Sms</b></td><td>Berichten per sms, als losse uitbreiding</td><td>Zelden voor een klein bedrijf</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Mailchimp zet ook steeds meer AI in. In Standard en Premium zitten generatieve AI-functies zonder meerprijs. Een hulp voor onderwerpregels zit zelfs in alle abonnementen. Handig, maar je moet de tekst nog altijd zelf nalezen. Een AI weet niet wat jouw klanten in Drenthe belangrijk vinden.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="contacten">Contacten, tags en segmentatie</h2></div>
+      <p>In Mailchimp heet je adressenlijst een audience. Elke persoon daarin is een contact. Dat woord is belangrijk, want je betaalt per contact. Niet per verstuurde mail, zoals bij sommige andere tools.</p>
+      <p>Een veelgemaakte fout is meerdere audiences aanmaken: één voor klanten, één voor leveranciers, één voor de nieuwsbrief. Staat iemand in twee lijsten, dan betaal je dubbel. Bovendien kun je in het gratis abonnement maar één audience maken. Beter is één audience, met tags om mensen te groeperen. Een tag is een etiket dat je zelf plakt: "klant", "offerte 2026", "beurs Assen".</p>
+      <p>Met segmentatie stuur je een mail aan een deel van je lijst. Bijvoorbeeld: iedereen met de tag "klant" die de laatste drie maanden niets heeft geopend. Of iedereen in de regio Groningen. In Free en Essentials heb je basissegmentatie. Geavanceerde segmentatie en voorspellende segmenten, zoals de kans op een aankoop, zitten in Standard en Premium.</p>
+      <p>Ruim ook op. Contacten die zich afmeldden of al een jaar niets openen, kun je archiveren. Volgens Mailchimp tellen gearchiveerde contacten niet mee voor je abonnement, terwijl hun gegevens en geschiedenis bewaard blijven. Schrijft iemand zich later opnieuw in via je formulier, dan komt hij vanzelf terug. Voor een lijst die al jaren groeit, scheelt dat al snel een prijstrede.</p>
+      <p>Waarom zou je dat doen? Omdat een mail die over jou gaat, beter werkt dan een mail die over iedereen gaat. Een installateur die zijn klanten met een cv-ketel van voor 2015 apart mailt over een warmtepomp, krijgt meer reacties dan met een algemene nieuwsbrief. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2 id="automations">Automations: mails die vanzelf gaan</h2></div>
+      <p>De automations heten in Mailchimp tegenwoordig Marketing Automation Flows. Je stelt één keer in wat er moet gebeuren, en daarna loopt het vanzelf. Het verschil met een nieuwsbrief: die stuur je aan iedereen tegelijk. Een flow start per persoon, op het moment dat die persoon iets doet.</p>
+      <p>Een voorbeeld: een fietsenmaker in Meppel laat klanten zich inschrijven bij de aankoop van een nieuwe fiets. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <ol>
+        <li><b>Dag 0:</b> welkomstmail met een bedankje en de onderhoudstips voor de eerste weken.</li>
+        <li><b>Na 6 weken:</b> herinnering aan de gratis eerste controlebeurt, met een link om een afspraak te maken.</li>
+        <li><b>Na 11 maanden:</b> uitnodiging voor de jaarlijkse onderhoudsbeurt.</li>
+        <li><b>Voor het voorjaar:</b> een mail aan alleen de e-bikerijders over de accu na de winter.</li>
+      </ol>
+      <p>Wat je kunt bouwen, hangt af van je abonnement. Volgens de vergelijking op de site van Mailchimp krijg je in Free alleen een voorproefje. Essentials staat flows toe van hooguit vier stappen. Standard en Premium gaan tot 200 flows, met vertakkingen en meerdere startpunten. Voor het voorbeeld hierboven heb je dus minstens Essentials nodig. Meer over dit soort reeksen lees je bij <a href="/kennisbank/wat-is/marketing-automation/">marketing automation</a>.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="prijs">Wat kost Mailchimp?</h2></div>
+      <p>Mailchimp heeft vier abonnementen voor e-mailmarketing. De prijs stijgt met het aantal contacten. Dit stond op 18 oktober 2026 op de officiële prijspagina, in Amerikaanse dollars, voor de kleinste lijst (tot 500 contacten):</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Free</th><th>Essentials</th><th>Standard</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><td><b>Vanaf per maand</b></td><td>$ 0</td><td>$ 13</td><td>$ 20</td><td>$ 350</td></tr>
+            <tr><td><b>Contacten</b></td><td>Tot 250</td><td>Tot 50.000 (dan $ 385 per maand)</td><td>Tot 100.000 (dan $ 800 per maand)</td><td>Op maat</td></tr>
+            <tr><td><b>Mails per maand</b></td><td>Max. 500, en max. 250 per dag</td><td>10 keer je aantal contacten</td><td>12 keer je aantal contacten</td><td>15 keer je aantal contacten</td></tr>
+            <tr><td><b>Gebruikers</b></td><td>1</td><td>3</td><td>5</td><td>Onbeperkt</td></tr>
+            <tr><td><b>Audiences</b></td><td>1</td><td>3</td><td>5</td><td>Onbeperkt</td></tr>
+            <tr><td><b>Automations</b></td><td>Voorproefje</td><td>Tot 4 stappen</td><td>Tot 200 flows</td><td>Tot 200 flows</td></tr>
+            <tr><td><b>Mailchimp-logo weg</b></td><td>Nee</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+            <tr><td><b>Inplannen en A/B-test</b></td><td>Nee</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+            <tr><td><b>Hulp</b></td><td>E-mail, eerste 30 dagen</td><td>E-mail en chat, 24/7</td><td>E-mail en chat, 24/7</td><td>Ook telefonisch, met voorrang</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron: mailchimp.com/pricing/marketing en de pagina Compare plans, prijspeil oktober 2026. De bedragen zijn startprijzen; Mailchimp past ze aan op je aantal contacten en kan ze in euro's tonen. Kijk altijd zelf voordat je afsluit.</p>
+      <p>Essentials en Standard kun je 14 dagen gratis proberen. Wie zijn proef in die periode stopzet, betaalt niets. Let op het gratis abonnement: kom je boven de 250 contacten of het maximum aantal mails, dan pauzeert Mailchimp het versturen. Je moet dan overstappen of opruimen.</p>
+      <p>Een rekenvoorbeeld. Een kapsalon met 900 klanten in het bestand komt niet meer weg met Free en zit bij Mailchimp dus in een betaald abonnement boven de kleinste prijs. Bij Laposta mag dezelfde salon gratis blijven tot 2.000 relaties. Voor kleine Nederlandse bedrijven maakt dat een groot verschil. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="avg">Mailchimp en de AVG</h2></div>
+      <p>Mailchimp is een Amerikaans bedrijf. De adressen van je klanten gaan dus naar de Verenigde Staten. Mag dat onder de AVG? Ja, als het goed geregeld is. Mailchimp schrijft op zijn AVG-pagina dat het gecertificeerd is onder het EU-U.S. Data Privacy Framework. Dat is de afspraak uit juli 2023 waarmee gecertificeerde bedrijven persoonsgegevens uit de EU naar de VS mogen halen. Daarnaast is de verwerkersovereenkomst (Data Processing Addendum) met de standaardcontractbepalingen van de EU automatisch onderdeel van de gebruiksvoorwaarden.</p>
+      <p>Wat moet je zelf doen?</p>
+      <ul class="vink">
+        <li>Noem Mailchimp in je <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring</a>, met de vermelding dat gegevens in de VS worden verwerkt.</li>
+        <li>Mail alleen mensen die toestemming gaven, of bestaande klanten over vergelijkbare diensten. De regels staan uitgelegd op onze pagina over <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing</a>.</li>
+        <li>Zet double opt-in aan. Dan bevestigt iemand zijn inschrijving eerst via een mail. Volgens Mailchimp staat dat voor accounts met een adres in de EU bij sommige audiences al standaard aan. Controleer het in de instellingen van je audience.</li>
+        <li>Zet geen gevoelige gegevens in Mailchimp. Een geboortedatum voor een verjaardagsmail kan, een medische notitie niet.</li>
+      </ul>
+      <p>Wil je dat je gegevens in Nederland blijven, of wil je die discussie in je organisatie niet voeren? Kies dan een Nederlands alternatief zoals Laposta. Die schrijft dat al je data in Nederland blijft en noemt een ISO 27001-certificering.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="open-rate">Wat zegt de open rate nog?</h2></div>
+      <p>De open rate is het percentage afgeleverde mails dat geopend is. Mailchimp meet dat met een onzichtbaar plaatje in elke mail. Wordt dat plaatje geladen, dan telt het als geopend. Klikt iemand op een link, dan telt Mailchimp de mail ook als geopend, ook als het plaatje niet laadde.</p>
+      <p>Dat systeem is minder betrouwbaar geworden. Apple Mail laadt met Mail Privacy Protection de plaatjes vooraf, ook als de ontvanger de mail nooit leest. Mailchimp schrijft zelf dat zulke "botactiviteit" de cijfers voor opens en klikken kunstmatig opdrijft, en raadt aan die uit je rapporten te filteren.</p>
+      <p>Ter vergelijking: in de benchmark van Mailchimp, bijgewerkt in december 2023, was de gemiddelde open rate over alle gebruikers 35,63 procent en de klikratio 2,62 procent. Voor de categorie zakelijke en financiële dienstverlening was dat 31,35 en 2,78 procent. Kijk daarom vooral naar je klikken en naar wat er daarna gebeurt: aanvragen, afspraken, bestellingen. Dat zijn de cijfers die je bedrijf iets zeggen.</p>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2 id="koppelingen">Koppelingen met je website en andere software</h2></div>
+      <p>Mailchimp noemt meer dan 300 koppelingen. Bij de populairste staan WordPress, WooCommerce, Shopify, Wix, Squarespace, Canva, Zapier, Stripe, Salesforce, LinkedIn en Facebook. De koppeling die je het meest nodig hebt, is die met je website: wie zich daar inschrijft, moet automatisch in je audience komen. Anders typ je adressen over, en dat houdt niemand vol.</p>
+      <p>Twee tips. Zet in een koppeling altijd een tag mee, zodat je later ziet waar iemand vandaan kwam. En test het formulier zelf, met een eigen adres, voordat je het live zet. Een kapotte koppeling merk je pas als je over een half jaar je lijst opent en die nauwelijks gegroeid is.</p>
+      <h3>Heb je een webshop?</h3>
+      <p>Dan wordt Mailchimp sterker. Met een koppeling met Shopify of WooCommerce ziet Mailchimp wat klanten kopen. Daarmee kun je in alle abonnementen productaanbevelingen in je mails zetten. Bij de sms-uitbreiding hoort zelfs een kant-en-klare reeks voor verlaten winkelwagens. Advertenties in Google voor mensen die je site al bezochten, zitten in Standard en Premium. Voor een dienstverlener zonder webshop zijn dit functies die je niet gebruikt, en waar je dus ook niet voor hoeft te betalen.</p>
+      <p>Werk je met een boekhoud- of planningspakket dat zelf al mails kan sturen? Kijk dan eerst wat daar al in zit. Twee systemen naast elkaar betekent dubbele gegevens en dubbel werk.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="alternatieven">Alternatieven voor Mailchimp, zoals Laposta</h2></div>
+      <p>Mailchimp is bekend, maar zeker niet de enige. Vooral bij een kleine lijst zijn er alternatieven die meer gratis geven. Dit bieden ze volgens hun eigen prijspagina's op 18 oktober 2026:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Tool</th><th>Gratis tot</th><th>Betaald vanaf</th><th>Goed om te weten</th></tr></thead>
+          <tbody>
+            <tr><td><b>Mailchimp</b></td><td>250 contacten, 500 mails per maand</td><td>$ 13 per maand (Essentials)</td><td>Groot en compleet, Engelstalig, gegevens in de VS</td></tr>
+            <tr><td><b>Laposta</b></td><td>2.000 relaties, 12.000 mails per maand</td><td>€ 210 per jaar tot 500 relaties, excl. btw</td><td>Nederlands, met Laposta-vermelding onder gratis mails, telefonische hulp alleen bij een abonnement</td></tr>
+            <tr><td><b>MailerLite</b></td><td>250 abonnees, 2.500 mails per maand, 2 gebruikers</td><td>Afhankelijk van je lijst</td><td>Automations en een landingspagina zitten ook in de gratis versie</td></tr>
+            <tr><td><b>Brevo</b></td><td>300 mails per dag</td><td>Afhankelijk van het aantal mails</td><td>Rekent vooral per mail in plaats van per contact</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bronnen: de prijspagina's van Mailchimp, Laposta, MailerLite en Brevo, prijspeil oktober 2026.</p>
+      <h3>Wanneer kies je Mailchimp, en wanneer Laposta?</h3>
+      <ul>
+        <li><b>Mailchimp</b> past bij je als je een webshop hebt met Shopify of WooCommerce, als je uitgebreide automations wilt, of als je internationaal werkt.</li>
+        <li><b>Laposta</b> past bij je als je een Nederlands mkb-bedrijf bent met een lijst tot een paar duizend adressen, je in het Nederlands geholpen wilt worden en je gegevens in Nederland wilt houden.</li>
+        <li><b>MailerLite of Brevo</b> zijn het bekijken waard als je in de gratis versie al automatische reeksen wilt.</li>
+      </ul>
+      <p>In de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a> lees je hoe je een nieuwsbrief opbouwt die gelezen wordt, ongeacht de tool.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="starten">Zo begin je in zeven stappen</h2></div>
+      <ol>
+        <li><b>Maak een account aan op je zakelijke adres</b>, op naam van je bedrijf. Zo blijft de lijst van jou, ook als je ooit van bureau wisselt.</li>
+        <li><b>Regel je afzenderdomein.</b> Verstuur vanaf je eigen domein, niet vanaf een Gmail-adres. Zorg dat SPF en DKIM goed staan in je <a href="/kennisbank/wat-is/dns/">DNS</a>, anders belandt je mail eerder in de spam.</li>
+        <li><b>Maak één audience</b> en bedenk vooraf drie tot vijf tags.</li>
+        <li><b>Importeer alleen adressen met toestemming.</b> Een oud Excelbestand met iedereen die ooit een offerte vroeg, hoort daar niet bij.</li>
+        <li><b>Zet een inschrijfformulier op je website</b>, met double opt-in en een duidelijke belofte: wat krijg je en hoe vaak.</li>
+        <li><b>Kies een eenvoudig template</b> in je huisstijl. Eén kolom, je logo, één duidelijke knop. Dat leest het fijnst op een telefoon.</li>
+        <li><b>Stuur een test naar jezelf</b>, op je telefoon en op je computer. Klik elke link aan. Pas dan verstuur je.</li>
+      </ol>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><b>Meerdere audiences.</b> Dubbele contacten, dus dubbel betalen.</li>
+        <li><b>Nooit opruimen.</b> Wie al een jaar niets opent, kost je wel geld per maand. Vraag ze één keer of ze nog willen blijven en verwijder de rest.</li>
+        <li><b>Alleen naar de open rate kijken.</b> Door Apple Mail zegt dat getal steeds minder.</li>
+        <li><b>Een gekochte adressenlijst importeren.</b> Dat mag volgens de wet bijna nooit, en de gebruiksregels van Mailchimp verbieden mailen naar gekochte, gehuurde of openbare lijsten.</li>
+        <li><b>Een account op naam van je webbouwer of je bureau.</b> Vertrekt die, dan ben je je lijst kwijt.</li>
+        <li><b>Geen afmeldlink of een ingewikkelde afmelding.</b> Dat is in strijd met de wet en levert spamklachten op.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Hulp nodig?</p>
+        <p>We kunnen je e-mailmarketing helemaal voor je doen: nieuwsbrieven schrijven en versturen, automatische opvolging bouwen en SPF, DKIM en DMARC instellen. Dat begint bij € 295 per maand, exclusief btw en maandelijks opzegbaar. De verzendtool betaal je zelf, op je eigen naam. Lees meer bij <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is Mailchimp gratis?', a: 'Tot 250 contacten wel. Je mag dan maximaal 500 mails per maand versturen en 250 per dag. Het Mailchimp-logo staat onder je mails en inplannen kan niet. Daarboven betaal je vanaf $ 13 per maand (prijspeil oktober 2026).' },
+      { v: 'Is Mailchimp in het Nederlands?', a: 'Nee. De website bestaat in zes talen, maar niet in het Nederlands. Je mails schrijf je natuurlijk wel gewoon in het Nederlands. Wil je alles in het Nederlands, dan is Laposta een logische keus.' },
+      { v: 'Mag ik Mailchimp gebruiken onder de AVG?', a: 'Ja. Mailchimp is gecertificeerd onder het EU-U.S. Data Privacy Framework en de verwerkersovereenkomst zit in de voorwaarden. Vermeld het wel in je privacyverklaring en mail alleen mensen die toestemming gaven of bestaande klanten.' },
+      { v: 'Wat gebeurt er als ik boven de 250 contacten kom?', a: 'In het gratis abonnement pauzeert Mailchimp dan het versturen. Je stapt over naar een betaald abonnement of je ruimt je lijst op. Contacten die zich afmeldden, kun je archiveren zodat ze niet meer meetellen.' },
+      { v: 'Wat is het verschil tussen Mailchimp en Laposta?', a: 'Laposta is Nederlands, gratis tot 2.000 relaties en bewaart de gegevens in Nederland. Mailchimp is Amerikaans, gratis tot 250 contacten en heeft meer koppelingen en uitgebreidere automations. Voor de meeste kleine Nederlandse bedrijven is Laposta goedkoper.' },
+      { v: 'Kunnen jullie Mailchimp voor mij inrichten?', a: 'Ja. We richten de tool in, koppelen je website, zetten de techniek goed en schrijven je mails als je dat wilt. E-mailmarketing bij ons begint bij € 295 per maand. Werk je liever met Laposta of een andere tool, dan kan dat ook.' },
+    ]}
+  />
+
+  <Actie titel="Wil je dat je nieuwsbrief iets oplevert?" tekst={`We kijken gratis naar je website, je inschrijfformulier en je mailinstellingen. ${site.contactpersoon} belt je met wat er beter kan.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

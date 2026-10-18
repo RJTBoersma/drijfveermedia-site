@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
 import Breadcrumbs, { type Kruimel } from '../components/Breadcrumbs.astro';
 import { site, team } from '../data/site';
+import { existsSync } from 'node:fs';
 import fontLatin from '@fontsource-variable/albert-sans/files/albert-sans-latin-wght-normal.woff2?url';
 
 interface Props {
@@ -19,9 +20,13 @@ interface Props {
   lang?: 'nl' | 'en' | 'de'; // taal van de pagina (standaard Nederlands)
   alternatief?: { lang: string; url: string }[]; // hreflang-verwijzingen naar dezelfde pagina in andere talen
   ogImage?: string; // pad naar een eigen deelafbeelding van 1200 x 630
+  bronnenBlok?: boolean; // false als de pagina zelf al een zichtbare bronnenlijst heeft
 }
 
-const { title, description, kruimels = [], noindex = false, schema = [], ogType = 'website', ogImage = '/og-drijfveer-media.jpg', lang = 'nl', alternatief = [] } = Astro.props;
+const { title, description, kruimels = [], noindex = false, schema = [], ogType = 'website', ogImage: eigenOg, lang = 'nl', alternatief = [], bronnenBlok = true } = Astro.props;
+// Eigen deelafbeelding per pagina (gemaakt met scripts/og.py), anders de algemene
+const ogSlug = Astro.url.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '--') || 'home';
+const ogImage = eigenOg ?? (existsSync(`public/og/${ogSlug}.jpg`) ? `/og/${ogSlug}.jpg` : '/og-drijfveer-media.jpg');
 const locale = { nl: 'nl_NL', en: 'en_GB', de: 'de_DE' }[lang];
 const ogImageUrl = new URL(ogImage, site.url).href;
 const canonical = new URL(Astro.url.pathname, site.url).href;
@@ -131,6 +136,8 @@ const loop = (n: any, top = false): any => {
     if (t && !n['@id']) { const f = fragment[t]; telling[f] = (telling[f] ?? 0) + 1; n['@id'] = `${canonical}#${f}${telling[f] > 1 ? telling[f] : ''}`; }
     if (typen(n).some((x) => ['Article', 'BlogPosting'].includes(x))) {
       n.image ??= ogImageUrl;
+      n.author ??= { '@id': persoonId('robert') };
+      if (Astro.url.pathname.startsWith('/cases/')) { n.datePublished ??= '2026-10-17'; n.dateModified ??= '2026-10-18'; }
       n.mainEntityOfPage ??= { '@id': webpageId };
       n.publisher ??= { '@id': orgId };
       n.inLanguage ??= taal;
@@ -145,7 +152,7 @@ const loop = (n: any, top = false): any => {
 const paginaSchema = eigen.map((n) => loop(n, true));
 
 // Bronnen uit het schema ook zichtbaar maken onderaan de pagina.
-const bronnen = [...new Set(paginaSchema.flatMap((n: any) => ([] as any[]).concat(n.citation ?? [])).map((c: any) => (typeof c === 'string' ? c : c?.url)).filter(Boolean))] as string[];
+const bronnen = !bronnenBlok ? [] : [...new Set(paginaSchema.flatMap((n: any) => ([] as any[]).concat(n.citation ?? [])).map((c: any) => (typeof c === 'string' ? c : c?.url)).filter(Boolean))] as string[];
 const bronNaam = (u: string) => {
   try {
     const x = new URL(u);
@@ -183,7 +190,7 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Drijfveer Media: Gevonden. Genoemd. Gekozen." />
+    <meta property="og:image:alt" content={ogImage.startsWith('/og/') ? `${title.replace(/\s*\|\s*Drijfveer Media$/, '')} (Drijfveer Media)` : 'Drijfveer Media: Gevonden. Genoemd. Gekozen.'} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="author" href="/humans.txt" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />

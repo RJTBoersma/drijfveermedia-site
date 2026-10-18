@@ -1,0 +1,279 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--knowledge-graph.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/knowledge-graph/';
+const datum = '2026-10-18';
+const definitie = 'De Knowledge Graph is de kennisdatabase van Google: een netwerk van miljarden feiten over personen, organisaties, plaatsen en dingen, en over hoe die met elkaar samenhangen.';
+const hoofdstukken = [
+  { id: 'geschiedenis', titel: 'Dingen in plaats van woorden' },
+  { id: 'opbouw', titel: 'Hoe hij in elkaar zit' },
+  { id: 'bronnen', titel: 'Waar de feiten vandaan komen' },
+  { id: 'kennisvenster', titel: 'Het kennisvenster' },
+  { id: 'bedrijfsprofiel', titel: 'Kennisvenster of Bedrijfsprofiel' },
+  { id: 'controleren', titel: 'Sta je erin?' },
+  { id: 'herkennen', titel: 'Zo herkent Google je bedrijf' },
+  { id: 'claimen', titel: 'Een kennisvenster claimen' },
+  { id: 'ai', titel: 'AI-antwoorden' },
+  { id: 'anderen', titel: 'Niet alleen Google' },
+  { id: 'grenzen', titel: 'Wat je niet in de hand hebt' },
+  { id: 'voorbeeld', titel: 'Een voorbeeld' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const voorbeeldcode = `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Installatiebedrijf De Boer",
+  "url": "https://www.installatiebedrijfdeboer.nl",
+  "logo": "https://www.installatiebedrijfdeboer.nl/logo.png",
+  "telephone": "+31-591-000000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Voorbeeldstraat 1",
+    "postalCode": "7811 AA",
+    "addressLocality": "Emmen",
+    "addressCountry": "NL"
+  },
+  "founder": { "@type": "Person", "name": "Jan de Boer" },
+  "foundingDate": "2004",
+  "sameAs": [
+    "https://www.linkedin.com/company/voorbeeld",
+    "https://www.facebook.com/voorbeeld"
+  ]
+}
+</script>`;
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Knowledge Graph',
+  alternateName: ['Kenniskaart', 'Google Knowledge Graph'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is de Knowledge Graph? Zo bepaalt Google wat het over je bedrijf weet',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Knowledge Graph: zo kent Google je bedrijf | Drijfveer Media"
+  description="Wat is de Knowledge Graph van Google? Zo komen feiten in het kennisvenster, zo check je of Google je bedrijf kent en zo help je het een handje."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Knowledge Graph', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Vindbaarheid</p>
+        <h1>Wat is de Knowledge Graph?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Zoek op een bekend bedrijf, een stad of een voetbalclub en je krijgt meer dan tien blauwe links. Je ziet een blok met een foto, een korte omschrijving, een adres, een oprichter, een website. Die feiten komen uit de Knowledge Graph van Google. In de Nederlandse hulppagina's noemt Google hem de Kenniskaart. Het blok zelf heet een kennisvenster. Hieronder lees je hoe die database werkt, waar de feiten vandaan komen en wat jij kunt doen zodat Google, en de AI-assistenten die erop leunen, de juiste dingen over jouw bedrijf weten.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>Google startte de Knowledge Graph in mei 2012. In 2020 bevatte hij volgens Google 500 miljard feiten over 5 miljard entiteiten.</li>
+          <li>De feiten komen uit honderden bronnen: Wikipedia en Wikidata, ingekochte gegevens, websites zelf en mensen die hun kennisvenster beheren.</li>
+          <li>Een kennisvenster maak je niet aan. Google maakt het zelf, als er genoeg informatie op internet staat.</li>
+          <li>Voor een lokaal bedrijf is het Google Bedrijfsprofiel de snelste route naar zo'n blok.</li>
+          <li>Wat je wel kunt doen: overal dezelfde gegevens, gestructureerde data op je site en vermeldingen op betrouwbare plekken.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={14} />
+
+      <div class="stap-kop" id="geschiedenis"><Tekening naam="boek" maat={52} /><h2>Dingen in plaats van woorden</h2></div>
+      <p>Tot 2012 keek Google vooral naar letters. Typte je "jaguar", dan zocht Google pagina's met dat woord. Of je het dier bedoelde of de auto, moest je zelf uitzoeken in de resultaten. Op 16 mei 2012 kondigde Google de Knowledge Graph aan met de slogan "things, not strings": dingen, geen reeksen letters.</p>
+      <p>Het idee: Google moet weten dat een woord naar iets echts verwijst, en wat dat ding met andere dingen te maken heeft. Bij de start bevatte de database volgens Google meer dan 500 miljoen objecten en 3,5 miljard feiten en verbanden. Acht jaar later meldde Google 500 miljard feiten over 5 miljard entiteiten. Het begon in het Engels, voor gebruikers in de Verenigde Staten. Inmiddels zie je het ook in Nederland op veel zoekopdrachten terug.</p>
+      <p>Leuk detail voor wie in het Noorden woont. Het woord knowledge graph is ouder dan Google. Volgens Wikipedia werkten de Rijksuniversiteit Groningen en de Universiteit Twente eind jaren tachtig al samen aan een onderzoeksproject met precies die naam.</p>
+
+      <div class="stap-kop" id="opbouw"><Tekening naam="ketting" maat={52} /><h2>Hoe een knowledge graph in elkaar zit</h2></div>
+      <p>Een knowledge graph bestaat uit knooppunten en verbindingen. Een knooppunt is een ding: een persoon, een organisatie, een plaats, een product, een begrip. In de SEO-wereld heten die dingen <a href="/kennisbank/wat-is/entiteiten/">entiteiten</a>. De verbindingen zijn de relaties ertussen. Elk feit is in feite een zinnetje van drie delen: onderwerp, relatie, waarde.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderwerp</th><th>Relatie</th><th>Waarde</th></tr></thead>
+          <tbody>
+            <tr><td>Drijfveer Media</td><td>is gevestigd in</td><td>Assen</td></tr>
+            <tr><td>Drijfveer Media</td><td>is opgericht door</td><td>Robert Boersma en Evelien Heerema</td></tr>
+            <tr><td>Drijfveer Media</td><td>is opgericht in</td><td>2011</td></tr>
+            <tr><td>Assen</td><td>is de hoofdstad van</td><td>Drenthe</td></tr>
+            <tr><td>Drenthe</td><td>is een provincie van</td><td>Nederland</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Omdat die zinnetjes aan elkaar vastzitten, kan een systeem zelf conclusies trekken. Weet het dat wij in Assen zitten en dat Assen in Drenthe ligt, dan weet het ook dat wij een Drents bedrijf zijn. Zonder dat iemand dat ergens letterlijk heeft opgeschreven. Dat is de kracht van een graaf: het is geen lijst met losse feiten, maar een web.</p>
+      <p>Elk ding krijgt in de database een eigen nummer. Daardoor kan Google twee bedrijven met dezelfde naam uit elkaar houden. Bakkerij Jansen in Assen en Bakkerij Jansen in Zwolle zijn voor Google twee verschillende knooppunten, met elk hun eigen adres, eigenaar en reviews. Hoe Google woorden aan betekenis koppelt, lees je ook bij <a href="/kennisbank/wat-is/semantisch-zoeken/">semantisch zoeken</a>.</p>
+
+      <div class="stap-kop" id="bronnen"><Tekening naam="vergrootglas" maat={52} /><h2>Waar Google zijn feiten vandaan haalt</h2></div>
+      <p>Google zegt er zelf vrij open over te zijn. De feiten komen uit verschillende soorten bronnen:</p>
+      <ul>
+        <li><b>Open databases.</b> Bij de start noemde Google Freebase, Wikipedia en het CIA World Factbook. Tegenwoordig is Wikidata een belangrijke open bron.</li>
+        <li><b>Ingekochte gegevens.</b> Voor sportuitslagen, aandelenkoersen, weer, muziek en tv koopt Google gegevens in bij partners.</li>
+        <li><b>Het web zelf.</b> Informatie op websites, en speciale code die website-eigenaren toevoegen, de gestructureerde data.</li>
+        <li><b>Mensen die het over zichzelf hebben.</b> Wie zijn kennisvenster heeft geclaimd, kan wijzigingen voorstellen.</li>
+        <li><b>Bedrijfsprofielen.</b> Lokale bedrijven beheren hun eigen gegevens in Google Bedrijfsprofiel.</li>
+      </ul>
+      <p>Wikipedia wordt vaak genoemd, maar volgens Google is het een van honderden bronnen. Google legt feiten naast elkaar en toetst ze. Volgens het eigen beleid kan Google feiten weigeren die redelijkerwijs betwist worden of niet te bewijzen zijn. Eén website die iets roept, is dus niet genoeg. Hoe vaker en hoe consequenter een feit op betrouwbare plekken terugkomt, hoe groter de kans dat Google het overneemt.</p>
+
+      <div class="stap-kop" id="kennisvenster"><Tekening naam="scherm" maat={52} /><h2>Het kennisvenster: zo ziet het eruit</h2></div>
+      <p>Het kennisvenster is de plek waar je de Knowledge Graph het duidelijkst ziet. Op een computer staat het meestal rechts naast de zoekresultaten. Op een telefoon is daar geen ruimte voor. Daar toont Google volgens eigen zeggen vaak meerdere kleinere blokken tussen de gewone resultaten door. Wat erin staat verschilt per onderwerp, maar meestal zie je:</p>
+      <ul>
+        <li>een naam en een korte samenvatting;</li>
+        <li>een langere omschrijving, vaak met bronvermelding;</li>
+        <li>een of meer foto's;</li>
+        <li>kernfeiten, zoals oprichter, oprichtingsjaar of hoofdkantoor;</li>
+        <li>links naar de officiële website en sociale profielen;</li>
+        <li>een blok met wat andere mensen ook zochten.</li>
+      </ul>
+      <p>Bij een artiest staan er nummers in, bij een voetbalclub de selectie, bij een film de cast. De Knowledge Graph voedt ook de korte antwoorden die je bovenaan ziet bij vragen als "hoe hoog is de Martinitoren". Dat zijn feiten, direct uit de database.</p>
+
+      <div class="stap-kop" id="bedrijfsprofiel"><Tekening naam="pin" maat={52} /><h2>Kennisvenster of Google Bedrijfsprofiel?</h2></div>
+      <p>Hier gaat het in de praktijk vaak mis. Een kennisvenster en een bedrijfsprofiel lijken op elkaar, maar ze werken anders:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Kennisvenster</th><th>Google Bedrijfsprofiel</th></tr></thead>
+          <tbody>
+            <tr><td>Voor wie</td><td>Personen, merken, organisaties, plaatsen, dingen</td><td>Bedrijven met een vestiging of een werkgebied</td></tr>
+            <tr><td>Wie maakt het aan</td><td>Google, automatisch</td><td>Jij, of je claimt een bestaand profiel</td></tr>
+            <tr><td>Waar komen de gegevens vandaan</td><td>Bronnen op internet en databases</td><td>Grotendeels van jou, aangevuld door Google en gebruikers</td></tr>
+            <tr><td>Wat staat erin</td><td>Feiten, omschrijving, foto's, profielen</td><td>Adres, openingstijden, telefoon, reviews, foto's, berichten</td></tr>
+            <tr><td>Beheren</td><td>Claimen en wijzigingen voorstellen</td><td>Zelf aanpassen in je profiel</td></tr>
+            <tr><td>Haalbaar voor een mkb'er</td><td>Lastig, vraagt naamsbekendheid</td><td>Binnen een paar dagen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Voor de schilder, de kapper of de boekhouder is het Bedrijfsprofiel dus de route. Daarmee zet je je bedrijf als ding op de kaart, met een vast adres en vaste gegevens. Hoe je het aanmaakt en vult, staat in de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Liever laten doen? We richten je profiel in bij <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel laten optimaliseren</a>, vanaf € 249.</p>
+
+      <div class="stap-kop" id="controleren"><Tekening naam="scan" maat={52} /><h2>Staat jouw bedrijf in de Knowledge Graph?</h2></div>
+      <p>Drie manieren om het te controleren, van simpel naar technisch:</p>
+      <ol>
+        <li><b>Zoek op je bedrijfsnaam.</b> Doe het in een privévenster, zodat je eigen geschiedenis niet meetelt. Verschijnt er een blok met jouw gegevens, dan kent Google je. Kijk of alles klopt: naam, adres, logo, website.</li>
+        <li><b>Zoek je naam op Wikidata.</b> Op wikidata.org zie je of er een item over je bedrijf bestaat. Staat het er, dan heeft het een nummer dat met een Q begint.</li>
+        <li><b>Vraag het de Knowledge Graph Search API.</b> Google heeft een gratis programmeerkoppeling waarmee je entiteiten opzoekt. Met een API-sleutel vraag je naar je bedrijfsnaam. Krijg je een resultaat met een id dat begint met <code>kg:/</code>, dan heb je een eigen knooppunt. Google zegt er wel bij dat deze koppeling alleen-lezen is en niet bedoeld als onmisbaar onderdeel van een product. Nieuwe gebruikers verwijst Google naar Enterprise Knowledge Graph in Google Cloud.</li>
+      </ol>
+      <p>Geen resultaat? Geen paniek. De meeste mkb-bedrijven hebben geen kennisvenster en hebben het ook niet nodig. Wel goed om te weten waar je staat, voordat je ergens tijd in steekt.</p>
+
+      <div class="stap-kop" id="herkennen"><Tekening naam="doel" maat={52} /><h2>Zo help je Google je bedrijf te herkennen</h2></div>
+      <p>Je kunt Google niet vragen om een kennisvenster. Je kunt wel zorgen dat de feiten over je bedrijf overal hetzelfde zijn en makkelijk te vinden. Dit is de volgorde die wij aanhouden:</p>
+      <ol>
+        <li><b>Eén versie van je gegevens.</b> Kies hoe je bedrijfsnaam, adres en telefoonnummer geschreven worden en gebruik precies dat overal. Op je site, in je Bedrijfsprofiel, op LinkedIn, in branchegidsen. "De Boer Installatie" en "Installatiebedrijf de Boer B.V." zijn voor een machine twee kandidaten.</li>
+        <li><b>Een goede over-onspagina.</b> Wie je bent, sinds wanneer, wie de eigenaren zijn, waar je zit en wat je doet. In gewone zinnen. Dat is de pagina waar Google en AI-tools hun feiten halen.</li>
+        <li><b>Gestructureerde data van het type Organization.</b> Met <a href="/kennisbank/wat-is/schema-markup/">schema markup</a> vertel je in code wat je bedrijf is. Volgens Google helpt het om je organisatie te onderscheiden van andere en kan het bepalen welk logo in de zoekresultaten en het kennisvenster verschijnt. Er zijn geen verplichte velden. Vul in wat klopt, en gebruik <code>sameAs</code> om naar je officiële profielen te wijzen.</li>
+        <li><b>Je Google Bedrijfsprofiel volledig ingevuld.</b> Met dezelfde naam, hetzelfde adres en dezelfde website.</li>
+        <li><b>Vermeldingen op betrouwbare plekken.</b> Een artikel in de regionale krant, een vermelding bij je brancheorganisatie, een pagina op de site van een partner. Elke onafhankelijke bron die dezelfde feiten noemt, maakt het verhaal sterker. Dat is ook waarom <a href="/linkbuilding/">linkbuilding</a> en naamsbekendheid samen opgaan.</li>
+        <li><b>Wikidata, alleen als het klopt.</b> Wikidata neemt een item op als het een duidelijk herkenbaar ding is dat met serieuze, openbare bronnen te beschrijven is. Een bedrijf dat in de krant en bij officiële instanties voorkomt, kan daaraan voldoen. Een eenmanszaak zonder externe bronnen meestal niet.</li>
+      </ol>
+      <p>Zo kan de code eruitzien voor een verzonnen installatiebedrijf in Emmen. Je zet hem in de <code>&lt;head&gt;</code> van je homepage of over-onspagina:</p>
+      <pre><code>{voorbeeldcode}</code></pre>
+      <p class="klein muted">Verzonnen voorbeeld. Vervang alles door je eigen gegevens en zet in sameAs alleen profielen die echt van jou zijn.</p>
+      <p>Test de code daarna met de Test voor rich results van Google en controleer de pagina met de URL-inspectie in Search Console. Wil je dit niet zelf doen? Bij <a href="/generative-engine-optimization/structured-data/">structured data en schema</a> zetten we het voor je op, vanaf € 295.</p>
+      <h3>En Wikipedia dan?</h3>
+      <p>Een eigen Wikipedia-artikel schrijven lijkt de snelste weg. Doe het niet. De Nederlandstalige Wikipedia raadt het in zijn richtlijn over belangenverstrengeling sterk af om artikelen over jezelf of je eigen organisatie te maken. Zo'n artikel wordt vaak voorgedragen voor verwijdering, en dan ben je verder van huis. Ben je echt relevant genoeg, dan schrijft iemand anders het. Klopt er iets niet in een bestaand artikel over je bedrijf? Zet een suggestie op de overlegpagina, met een bron.</p>
+
+      <div class="stap-kop" id="claimen"><Tekening naam="klik" maat={52} /><h2>Een kennisvenster claimen en aanpassen</h2></div>
+      <p>Heeft je bedrijf of heb jij zelf al een kennisvenster? Dan kun je het claimen. Google noemt dat geverifieerd worden. Zo gaat het volgens de hulppagina van Google:</p>
+      <ol>
+        <li>Log in met een Google-account.</li>
+        <li>Zoek op Google naar jezelf of je organisatie en open het kennisvenster.</li>
+        <li>Klik onderaan op <b>Dit kennisvenster claimen</b>. Soms staat de optie bij het gedeelte Over. Op een telefoon vind je hem via het menu.</li>
+        <li>Log in bij een van de officiële sites of profielen die Google noemt, zoals Search Console, YouTube, Facebook of Twitter.</li>
+        <li>Na verificatie kun je wijzigingen voorstellen via <b>Feedback</b>. Geef bij elk feit een link naar een pagina die het bevestigt.</li>
+      </ol>
+      <p>Na verificatie kun je anderen toegang geven, als eigenaar, beheerder of bijdrager. Een bijdrager mag wijzigingen voorstellen, een beheerder ook mensen toevoegen. Niet elk kennisvenster is te claimen. Ook dan kan iedereen via Feedback een fout melden. Google beoordeelt die meldingen en past soms zijn systemen aan, maar belooft niets per melding.</p>
+
+      <div class="stap-kop" id="ai"><Tekening naam="ai" maat={52} /><h2>De Knowledge Graph en AI-antwoorden</h2></div>
+      <p>Waarom zou je hier in 2026 meer aandacht aan geven dan vijf jaar geleden? Omdat mensen steeds vaker een antwoord krijgen in plaats van een lijst links. In het AI-overzicht van Google, in ChatGPT, in Gemini of in Copilot. Die systemen moeten weten over welk ding een vraag gaat en welke feiten erbij horen. Een taalmodel dat raadt, verzint soms iets. Een systeem dat terug kan vallen op vastgelegde feiten en relaties, raadt minder.</p>
+      <p>Volgens Wikipedia is de belangstelling voor knowledge graphs juist door grote taalmodellen weer gegroeid. Een bekend voorbeeld is GraphRAG van Microsoft Research uit 2024, dat een graaf gebruikt om een taalmodel betere bronnen te geven. Hoe elk AI-systeem het precies doet, maken de makers niet openbaar. Het advies blijft hetzelfde: zorg dat de feiten over je bedrijf eenduidig, consequent en goed vindbaar zijn. Dan heeft elk systeem, oud of nieuw, minder te raden.</p>
+      <p>Wil je weten wat AI-assistenten nu over je bedrijf zeggen? Dat zoeken we uit bij <a href="/generative-engine-optimization/">generative engine optimization</a>. Hoe zo'n taalmodel werkt, lees je bij <a href="/kennisbank/wat-is/llm/">wat is een LLM</a>.</p>
+
+      <div class="stap-kop" id="anderen"><Tekening naam="team" maat={52} /><h2>Niet alleen Google</h2></div>
+      <p>Google maakte het begrip bekend, maar is niet de enige. Wikipedia noemt onder meer Satori van Microsoft en de grafen van LinkedIn en Facebook. Dan zijn er open projecten als Wikidata en DBpedia, die iedereen mag gebruiken. Wikidata publiceert zijn gegevens zonder auteursrechten, zodat ook bedrijven ze vrij kunnen hergebruiken. Daardoor kan een fout of een feit in Wikidata op heel veel plekken opduiken.</p>
+      <p>Grote bedrijven bouwen ook hun eigen knowledge graph, voor hun productcatalogus of klantgegevens. Wil je dat voor je eigen bedrijf? Dat is maatwerk voor ontwikkelaars en valt buiten wat wij doen. Voor je vindbaarheid gaat het om de grafen van de zoekmachines.</p>
+
+      <div class="stap-kop" id="grenzen"><Tekening naam="schild" maat={52} /><h2>Wat je niet in de hand hebt</h2></div>
+      <ul>
+        <li><b>Of er een kennisvenster komt.</b> Google maakt het automatisch als er genoeg informatie op het open web staat. Betalen kan niet.</li>
+        <li><b>Of het blijft.</b> Volgens Google bepalen de systemen zelf wanneer en hoe een venster verschijnt. Het kan dus ook weer verdwijnen.</li>
+        <li><b>Welke feiten erin staan.</b> Je kunt voorstellen doen. Google beslist.</li>
+        <li><b>Verwijderen.</b> Wil je uit een kennisvenster verdwijnen, dan kan dat alleen via het formulier voor juridische verwijderingen, met een goede reden.</li>
+      </ul>
+      <p>Wie je iets anders belooft, zoals een gegarandeerd kennisvenster binnen een maand, verkoopt lucht. Wij beloven dat we de bouwstenen goed neerleggen. De rest is aan Google.</p>
+
+      <div class="stap-kop" id="voorbeeld"><Tekening naam="pen" maat={52} /><h2>Een voorbeeld uit Emmen</h2></div>
+      <p>Stel: Installatiebedrijf De Boer in Emmen bestaat twintig jaar. Wie op de naam zoekt, krijgt een rommelig beeld. Op de site staat "De Boer Installatietechniek", in het Bedrijfsprofiel "Installatiebedrijf de Boer", in een oude branchegids nog het vorige adres. ChatGPT noemt bij een vraag over het bedrijf een andere De Boer, uit Friesland.</p>
+      <p>Wat ze doen: één naam kiezen en die overal doorvoeren. Het oude adres laten aanpassen. Een over-onspagina schrijven met oprichter, oprichtingsjaar en werkgebied. Organization-markup toevoegen met sameAs naar hun LinkedIn- en Facebookpagina. En de regionale krant tipt een verhaal over twintig jaar vakmanschap. Een paar maanden later klopt het Bedrijfsprofiel overal, en noemen AI-assistenten bij een vraag over het bedrijf de juiste plaats. Een kennisvenster is er niet gekomen, en dat hoeft ook niet. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="lamp" maat={52} /><h2>Veelgemaakte fouten</h2></div>
+      <ol>
+        <li><b>Drie schrijfwijzen van je naam.</b> Een machine kan niet raden dat ze bij elkaar horen.</li>
+        <li><b>Feiten in de code die niet op de pagina staan.</b> Volgens de richtlijnen van Google mag gestructureerde data niet gaan over inhoud die voor bezoekers verborgen is.</li>
+        <li><b>sameAs naar profielen die niet van jou zijn,</b> zoals een vermelding in een gids. Gebruik het alleen voor je eigen, officiële profielen.</li>
+        <li><b>Zelf een Wikipedia-artikel schrijven.</b> Kost veel tijd en wordt vaak verwijderd.</li>
+        <li><b>Een kennisvenster verwarren met een Bedrijfsprofiel.</b> Dan zoek je naar een knop die er voor jou niet is.</li>
+        <li><b>Een oud adres laten staan.</b> Na een verhuizing even alle vermeldingen langs. Het kost een middag en scheelt veel verwarring.</li>
+      </ol>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees meer bij <a href="/kennisbank/wat-is/entiteiten/">entiteiten</a> voor het bredere verhaal over dingen en relaties, of bij <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a> over waarom Google wil weten wie er achter een site zit. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is de Knowledge Graph van Google?', a: 'De kennisdatabase van Google, gestart in mei 2012. Hij legt feiten vast over personen, organisaties, plaatsen en dingen, en over hoe die samenhangen. In 2020 ging het volgens Google om 500 miljard feiten over 5 miljard entiteiten.' },
+      { v: 'Wat is het verschil tussen de Knowledge Graph en een kennisvenster?', a: 'De Knowledge Graph is de database. Het kennisvenster is het blok in de zoekresultaten waarin Google een deel van die feiten laat zien.' },
+      { v: 'Hoe kom ik in een kennisvenster?', a: 'Aanvragen kan niet. Google maakt een kennisvenster automatisch als er genoeg betrouwbare informatie op internet staat. Je helpt het door overal dezelfde bedrijfsgegevens te gebruiken, Organization-markup op je site te zetten en vermeldingen te krijgen op betrouwbare plekken.' },
+      { v: 'Heb ik een Wikipedia-pagina nodig?', a: 'Nee. Wikipedia is een van honderden bronnen. Schrijf er ook niet zelf een: de Nederlandstalige Wikipedia raadt artikelen over je eigen organisatie sterk af. Voor een lokaal bedrijf is een goed Google Bedrijfsprofiel veel belangrijker.' },
+      { v: 'Er staat een fout in mijn kennisvenster. Wat nu?', a: 'Claim het venster als dat kan en stel een wijziging voor via Feedback, met een link naar een pagina die het juiste feit bevestigt. Kun je het niet claimen, meld de fout dan via Feedback. Pas ook de bron aan waar de fout vandaan komt.' },
+      { v: 'Is de Knowledge Graph hetzelfde als schema markup?', a: 'Nee. Schema markup is code op je eigen site die zegt wat er op een pagina staat. Google kan die gestructureerde data gebruiken als een van de bronnen voor de Knowledge Graph.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over vindbaarheid"
+    links={[
+      { label: 'Begrip', titel: 'Wat zijn entiteiten?', href: '/kennisbank/wat-is/entiteiten/', tekst: 'Dingen en relaties: zo snapt Google waar het over gaat.', teken: 'ketting' },
+      { label: 'Begrip', titel: 'Wat is schema markup?', href: '/kennisbank/wat-is/schema-markup/', tekst: 'Code die zoekmachines vertelt wat je pagina is.', teken: 'tandwiel' },
+      { label: 'Gids', titel: 'Google Bedrijfsprofiel', href: '/kennisbank/gidsen/google-bedrijfsprofiel/', tekst: 'Je bedrijf op de kaart, stap voor stap.', teken: 'pin' },
+    ]}
+  />
+
+  <Actie titel="Wat weet Google over jouw bedrijf?" tekst={`We zoeken gratis uit hoe Google en AI-assistenten je bedrijf nu zien. ${site.contactpersoon} belt je met wat er klopt, wat niet en wat je eerst aanpakt.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  pre { overflow-x: auto; max-width: 100%; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

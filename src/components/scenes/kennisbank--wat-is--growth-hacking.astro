@@ -1,0 +1,70 @@
+---
+// Scène voor /kennisbank/wat-is/growth-hacking/: een proefkolf, twee testversies naast elkaar en een groeilijn, met onderin de vijf fases van AARRR.
+// Als hij leeft: belletjes stijgen in de kolf, de balk van versie B loopt voller dan die van A en krijgt een vinkje, en de groeilijn tekent zichzelf.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const fases = ['A', 'A', 'R', 'R', 'R'];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een proefkolf met belletjes, twee testversies A en B waarvan B beter scoort, en een lijn die trapsgewijs stijgt. Onderin staan de letters AARRR.'}>
+  <path d="M74 48h42" class="l" />
+  <path d="M82 48V106L44 190a14 14 0 0 0 13 20H133a14 14 0 0 0 13-20L108 106V48" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <path d="M64 150H126L146 190a14 14 0 0 1-13 20H57a14 14 0 0 1-13-20Z" fill="#074663" />
+  <circle cx="78" cy="180" r="5" fill="#fff" opacity="0.6" />
+  <circle cx="108" cy="168" r="4" fill="#fff" opacity="0.6" />
+  <circle class="o" cx="96" cy="192" r="4" />
+  <path d="M92 70h8M92 86h8" stroke="#d9e1ea" stroke-width="2" stroke-linecap="round" />
+
+  <g>
+    <rect x="176" y="46" width="132" height="58" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <text x="190" y="68" font-size="12" font-weight="800">Versie A</text>
+    <rect x="190" y="80" width="104" height="10" rx="5" fill="#e8eef4" />
+    <rect x="190" y="80" width="42" height="10" rx="5" fill="#074663" />
+  </g>
+  <g>
+    <rect x="176" y="118" width="132" height="58" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <text x="190" y="140" font-size="12" font-weight="800">Versie B</text>
+    <rect x="190" y="152" width="104" height="10" rx="5" fill="#e8eef4" />
+    <rect x="190" y="152" width="70" height="10" rx="5" fill="#ff6600" />
+  </g>
+
+  <path d="M334 52V176H462" class="l" />
+  <path d="M342 164H370V146H398V122H426V92H454" fill="none" stroke="#d9e1ea" stroke-width="3" stroke-linejoin="round" />
+  <text x="342" y="64" font-size="11" class="zacht">groei</text>
+
+  {fases.map((f, i) => (
+    <g>
+      <rect x={176 + i * 58} y="206" width="48" height="32" rx="16" fill={i === 1 ? '#074663' : '#e8eef4'} />
+      <text x={200 + i * 58} y="227" font-size="14" font-weight="900" text-anchor="middle" style={i === 1 ? 'fill:#fff' : undefined}>{f}</text>
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      <circle class="groei-bel groei-bel-1" cx="88" cy="200" r="4" fill="#fff" stroke="#9fb4c6" stroke-width="1.5" />
+      <circle class="groei-bel groei-bel-2" cx="96" cy="204" r="3" fill="#ff6600" />
+      <circle class="groei-bel groei-bel-3" cx="103" cy="198" r="3.5" fill="#fff" stroke="#9fb4c6" stroke-width="1.5" />
+      <rect class="groei-balk" x="190" y="152" width="94" height="10" rx="5" fill="#ff6600" />
+      <g class="groei-vink"><circle cx="292" cy="133" r="9" fill="#1f8a5b" /><path d="M287.5 133l3 3 5.5-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+      <path class="groei-lijn" d="M342 164H370V146H398V122H426V92H454" fill="none" stroke="#ff6600" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" pathLength="1" />
+    </g>
+  )}
+</svg>
+<style>
+  .groei-bel, .groei-vink { transform-box: fill-box; transform-origin: center; }
+  .groei-balk { transform-box: fill-box; transform-origin: left center; }
+  .groei-lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .groei-bel, :global(.teken-js) .groei-vink { opacity: 0; }
+  :global(.teken-js) .groei-balk { transform: scaleX(0); }
+  :global(.teken-js) .groei-lijn { stroke-dashoffset: 1; }
+  .in-beeld .groei-bel-1 { animation: kennisbank-wat-is-growth-hacking-bel 4s ease-in 0.2s infinite; }
+  .in-beeld .groei-bel-2 { animation: kennisbank-wat-is-growth-hacking-bel 4s ease-in 1.5s infinite; }
+  .in-beeld .groei-bel-3 { animation: kennisbank-wat-is-growth-hacking-bel 4s ease-in 2.7s infinite; }
+  .in-beeld .groei-balk { animation: kennisbank-wat-is-growth-hacking-balk 6s ease-out 0.6s infinite; }
+  .in-beeld .groei-vink { animation: kennisbank-wat-is-growth-hacking-vink 6s ease-out 0.6s infinite; }
+  .in-beeld .groei-lijn { animation: kennisbank-wat-is-growth-hacking-lijn 1.6s cubic-bezier(.6,.1,.3,1) 1.2s forwards; }
+  @keyframes kennisbank-wat-is-growth-hacking-bel { 0% { opacity: 0; transform: translateY(0); } 15% { opacity: 1; } 80% { opacity: 1; transform: translateY(-120px); } 100% { opacity: 0; transform: translateY(-140px); } }
+  @keyframes kennisbank-wat-is-growth-hacking-balk { 0% { transform: scaleX(0); } 30%, 90% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+  @keyframes kennisbank-wat-is-growth-hacking-vink { 0%, 30% { opacity: 0; transform: scale(0.4); } 36%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-growth-hacking-lijn { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .groei-bel, .in-beeld .groei-balk, .in-beeld .groei-vink, .in-beeld .groei-lijn { animation: none; } }
+</style>

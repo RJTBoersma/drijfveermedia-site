@@ -1,0 +1,222 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--heatmap.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/heatmap/';
+const datum = '2026-10-18';
+const definitie = 'Een heatmap is een kleurenkaart over je webpagina heen die laat zien waar bezoekers klikken, hoe ver ze scrollen en waar ze blijven hangen: warm is druk, koel is stil.';
+const hoofdstukken = [
+  { id: 'werking', titel: 'Hoe het werkt' },
+  { id: 'soorten', titel: 'Soorten heatmaps' },
+  { id: 'tools', titel: 'Microsoft Clarity of Hotjar' },
+  { id: 'instellen', titel: 'Instellen in vijf stappen' },
+  { id: 'lezen', titel: 'Zo lees je wat je ziet' },
+  { id: 'voorbeeld', titel: 'Een voorbeeld' },
+  { id: 'avg', titel: 'AVG en toestemming' },
+  { id: 'testen', titel: 'Van kaart naar A/B-test' },
+  { id: 'fouten', titel: 'Vijf fouten' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Heatmap',
+  alternateName: ['Heatmap website', 'Hittekaart'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is een heatmap? Zien waar bezoekers klikken en afhaken',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wat is een heatmap? Zie wat bezoekers doen | Drijfveer Media"
+  description="Wat is een heatmap? Zo zie je waar bezoekers op je website klikken en afhaken, met Microsoft Clarity of Hotjar, en zo blijf je binnen de AVG."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Heatmap', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Conversie</p>
+        <h1>Wat is een heatmap?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je statistieken vertellen hoeveel mensen op een pagina komen. Ze vertellen niet wat die mensen daar doen. Zien ze je knop wel? Lezen ze tot onderaan? Klikken ze op een foto die nergens heen gaat? Een heatmap laat dat zien in één plaatje. Je legt een kleurenlaag over je pagina: rood en oranje waar veel gebeurt, blauw of grijs waar niemand komt. Zo zie je in een paar seconden waar bezoekers afhaken. Hieronder lees je hoe het werkt, welke gratis tools er zijn en hoe je het netjes regelt met de AVG.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>Een heatmap telt het klikgedrag en scrollgedrag van al je bezoekers bij elkaar op en kleurt de pagina daarmee in.</li>
+          <li>De bekendste soorten: een klikkaart, een scrollkaart en een aandachtskaart.</li>
+          <li>Microsoft Clarity is volgens Microsoft gratis, zonder limiet op het aantal bezoekers. Hotjar is opgegaan in Contentsquare.</li>
+          <li>Beide tools plaatsen cookies. Voor bezoekers uit Europa vraag je dus toestemming.</li>
+          <li>Een heatmap laat zien wát er gebeurt, niet waarom. Gebruik hem om te kiezen wat je test.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={9} />
+
+      <div class="stap-kop" id="werking"><Tekening naam="scan" maat={52} /><h2>Hoe een heatmap werkt</h2></div>
+      <p>Je zet een klein stukje code op je website. Dat script noteert wat elke bezoeker doet: waar hij klikt of tikt, hoe ver hij scrollt, hoe lang een stuk van de pagina in beeld blijft. De tool telt al die sessies bij elkaar op en legt het resultaat als kleuren over een schermafbeelding van je pagina. Hoe warmer de kleur, hoe meer activiteit.</p>
+      <p>Het verschil met Google Analytics zit in de vorm. Analytics geeft je tabellen en grafieken per pagina. Een heatmap geeft je de pagina zelf, met daarop wat er gebeurt. Dat maakt het makkelijk om te bespreken met je webbouwer of je collega's. Niemand hoeft een rapport te lezen. Je ziet het gewoon.</p>
+      <p>Clarity bouwt zijn klikkaarten op uit de elementen waarop geklikt wordt, niet uit de exacte positie van de muis. Volgens Microsoft blijft de kaart daardoor kloppen op schermen van verschillende breedte. Handig, want je site ziet er op een telefoon heel anders uit dan op een laptop.</p>
+
+      <div class="stap-kop" id="soorten"><Tekening naam="grafiek" maat={52} /><h2>Soorten heatmaps en wat ze je vertellen</h2></div>
+      <p>Heatmap is een verzamelnaam. Elke soort beantwoordt een andere vraag:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Wat je ziet</th><th>De vraag die hij beantwoordt</th></tr></thead>
+          <tbody>
+            <tr><td><b>Klikkaart</b></td><td>Waar mensen klikken, op mobiel waar ze tikken</td><td>Gebruiken bezoekers mijn knoppen, of klikken ze op iets anders?</td></tr>
+            <tr><td><b>Scrollkaart</b></td><td>Welk deel van de bezoekers elk stuk van de pagina bereikt</td><td>Ziet iemand mijn belangrijkste boodschap eigenlijk wel?</td></tr>
+            <tr><td><b>Aandachtskaart</b></td><td>Hoe lang een stuk van de pagina in beeld blijft</td><td>Welke alinea's lezen mensen echt, en waar scrollen ze langs?</td></tr>
+            <tr><td><b>Bewegingskaart</b></td><td>Waar de muis beweegt, alleen op een computer</td><td>Waar kijkt iemand ongeveer naar?</td></tr>
+            <tr><td><b>Gebiedskaart</b></td><td>Alle klikken binnen een stuk dat jij aanwijst</td><td>Hoe presteert dit blok als geheel, bijvoorbeeld het menu?</td></tr>
+            <tr><td><b>Conversiekaart</b></td><td>Welke klikken tot een aankoop leiden</td><td>Wat werkt in mijn webshop?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>In de klikkaart van Clarity kun je bovendien filteren op soorten klikken. Twee zijn goud waard. Een <b>dead click</b> is een klik waar niets op gebeurt, bijvoorbeeld op een foto die geen link is. Een <b>rage click</b> is snel achter elkaar klikken op dezelfde plek, vaak uit ergernis over een knop die niet reageert. Clarity toont ook de eerste en de laatste klik op een pagina, en klikken vlak voor een JavaScript-fout.</p>
+      <p>De scrollkaart laat per stap van 5 procent zien hoeveel bezoekers nog meekijken. Clarity tekent er ook de gemiddelde vouw in: de lijn tot waar mensen gemiddeld kunnen kijken voordat ze gaan scrollen. Staat je knop daaronder, dan moet een groot deel er eerst voor scrollen.</p>
+
+      <div class="stap-kop" id="tools"><Tekening naam="tandwiel" maat={52} /><h2>Microsoft Clarity of Hotjar?</h2></div>
+      <p>Voor een mkb-site kom je bijna altijd bij een van deze twee uit. Bij het schrijven van dit stuk is er nieuws: volgens Contentsquare kun je geen nieuw account bij Hotjar meer aanmaken. Hotjar is onderdeel van Contentsquare geworden en nieuwe gebruikers beginnen daar.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Microsoft Clarity</th><th>Contentsquare (voorheen Hotjar)</th></tr></thead>
+          <tbody>
+            <tr><td>Prijs</td><td>Gratis, volgens Microsoft voor altijd</td><td>Gratis plan; Growth vanaf $ 39 per maand bij jaarbetaling</td></tr>
+            <tr><td>Verkeer</td><td>Geen limiet, geen steekproef</td><td>Gratis tot 200.000 sessies per maand</td></tr>
+            <tr><td>Sessie-opnames</td><td>Ja</td><td>Gratis: 5 procent van de sessies, maximaal 10.000</td></tr>
+            <tr><td>Hoe lang je data ziet</td><td>30 dagen, opnames die je bewaart tot 9 maanden</td><td>Gratis: 1 maand, Growth: 13 maanden</td></tr>
+            <tr><td>Heatmaps</td><td>Klik, scroll, aandacht, gebied, conversie</td><td>Klik, scroll, beweging, aandacht; zones vanaf Growth</td></tr>
+            <tr><td>Heatmaps vergelijken</td><td>Ja</td><td>Vanaf Growth</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bronnen: de documentatie van Microsoft Clarity en de prijspagina van Contentsquare, opgehaald op 18 oktober 2026 (prijspeil oktober 2026). Prijzen in dollars, exclusief btw.</p>
+      <p>Onze nuchtere keuze voor een mkb'er: begin met Microsoft Clarity. Het kost niets, je zit nergens aan vast en voor de meeste vragen is het genoeg. Heb je een grote webshop of wil je enquêtes op je site, kijk dan naar Contentsquare.</p>
+
+      <div class="stap-kop" id="instellen"><Tekening naam="klik" maat={52} /><h2>Een heatmap op je website instellen in vijf stappen</h2></div>
+      <p>Met Clarity heb je dit in een half uur staan. Zo ga je te werk:</p>
+      <ol>
+        <li><b>Maak een gratis account</b> op clarity.microsoft.com en voeg je site toe als nieuw project.</li>
+        <li><b>Installeer de code.</b> Ga naar <b>Settings</b> en dan <b>Setup</b>. Kies je platform, zoals WordPress, Wix of Shopify, of plak de code zelf in de <code>&lt;head&gt;</code> van je site. Gebruik je Google Tag Manager, dan kan het ook daarmee.</li>
+        <li><b>Regel de toestemming.</b> Koppel Clarity aan je cookiemelding, zodat het pas meekijkt als iemand akkoord geeft. Daarover hieronder meer.</li>
+        <li><b>Controleer of het werkt.</b> Open je site, klik met rechts en kies <b>Inspecteren</b>. Bij het tabblad Netwerk zie je verzoeken naar clarity.ms/collect zodra je klikt en scrollt. In Clarity zelf zie je meteen live bezoekers.</li>
+        <li><b>Wacht op genoeg data.</b> Een kaart is er binnen seconden, maar een kaart van tien bezoekers zegt niets. Contentsquare adviseert minstens 2.000 tot 3.000 paginaweergaven voordat je conclusies trekt. Op een kleine site duurt dat dus een paar weken.</li>
+      </ol>
+      <p>Clarity maskeert volgens Microsoft standaard alle gevoelige inhoud, zoals wat mensen in een formulier typen. Laat dat zo staan. Let op twee beperkingen: Clarity is niet bedoeld voor sites die zich op jongeren onder de 18 richten, en het kan niet meekijken in iframes van anderen, zoals een ingesloten afsprakenmodule.</p>
+
+      <div class="stap-kop" id="lezen"><Tekening naam="vergrootglas" maat={52} /><h2>Zo lees je een heatmap: vijf patronen</h2></div>
+      <p>Kijk niet naar mooie kleuren, kijk naar verrassingen. Dit zijn de patronen die het vaakst iets opleveren:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wat je ziet</th><th>Wat het meestal betekent</th><th>Wat je doet</th></tr></thead>
+          <tbody>
+            <tr><td>Veel klikken op een foto, icoon of kopje</td><td>Mensen verwachten dat het een link is</td><td>Maak er een link van, of laat het minder op een knop lijken</td></tr>
+            <tr><td>Je belangrijkste knop is koud</td><td>Niemand ziet hem, of hij valt niet op</td><td>Zet hem hoger, geef hem meer contrast, maak de tekst concreter</td></tr>
+            <tr><td>De scrollkaart valt ineens van warm naar koel</td><td>Op dat punt haken mensen af</td><td>Kijk wat daar staat: een saai blok, een grote witruimte, een muur van tekst</td></tr>
+            <tr><td>Rage clicks op één plek</td><td>Iets werkt niet, of reageert te traag</td><td>Bekijk een paar sessie-opnames en laat het repareren</td></tr>
+            <tr><td>Op mobiel een ander beeld dan op een computer</td><td>De mobiele versie verstopt iets of zet het lager</td><td>Bekijk de kaarten altijd per apparaat</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Bij een vreemd patroon kijk je daarna een paar sessie-opnames terug. Die laten één bezoeker zien, van begin tot eind. Vanuit de klikkaart van Clarity open je direct de opnames waarin op dat element werd geklikt. Zo snap je de context achter de kleuren. Hoe het voelt voor een bezoeker, de <a href="/kennisbank/wat-is/ux/">UX</a>, wordt dan ineens heel concreet.</p>
+
+      <div class="stap-kop" id="voorbeeld"><Tekening naam="pen" maat={52} /><h2>Een voorbeeld: de fysiotherapeut in Meppel</h2></div>
+      <p>Stel: een fysiotherapiepraktijk in Meppel krijgt elke maand zo'n 1.500 bezoekers op de pagina over rugklachten. Toch komen er maar vijf aanmeldingen per maand uit. De praktijk zet Clarity aan en kijkt na een maand naar de kaarten.</p>
+      <ul>
+        <li>De scrollkaart op mobiel laat zien dat maar 38 procent van de bezoekers het aanmeldformulier onderaan bereikt.</li>
+        <li>Op de foto van de behandelruimte zitten veel dead clicks. Mensen willen meer zien.</li>
+        <li>De knop Afspraak maken bovenaan is warm, maar leidt naar de homepage in plaats van naar het formulier.</li>
+      </ul>
+      <p>Drie aanpassingen dus: de knop gaat direct naar het formulier, er komt halverwege de pagina een tweede knop en de foto linkt naar een pagina over de praktijk. Een maand later vergelijkt de praktijk de oude en nieuwe kaarten en telt de aanmeldingen. <span class="muted">(Verzonnen voorbeeld, met realistische getallen.)</span></p>
+      <p>Merk op dat geen van deze aanpassingen over kleur of lettertype gaat. Het zijn knoppen die op de verkeerde plek staan of naar de verkeerde plek gaan. Dat zie je met een heatmap in één oogopslag, en het levert vaak meer <a href="/kennisbank/gidsen/conversie-verhogen/">conversie</a> op dan een nieuw ontwerp.</p>
+
+      <div class="stap-kop" id="avg"><Tekening naam="schild" maat={52} /><h2>Heatmaps, de AVG en toestemming</h2></div>
+      <p>Een heatmaptool volgt wat mensen op je site doen en plaatst daarvoor cookies. Dat valt onder de cookieregels en onder de AVG. De ACM, die in Nederland op de cookieregels let, maakt onderscheid tussen analytische cookies met weinig gevolgen voor de privacy en cookies die gedrag volgen. Die eerste soort mag zonder toestemming, als je het wel vertelt. Voor de tweede soort vraag je eerst toestemming, en vooraf aangevinkte vakjes zijn verboden.</p>
+      <p>Een tool die elke klik en elke scroll vastlegt en opnames maakt, valt in de praktijk in de tweede groep. Microsoft maakt het ook concreet. Sinds 31 oktober 2025 vraagt Clarity voor bezoekers uit de Europese Economische Ruimte een geldig toestemmingssignaal. Zonder dat signaal werkt Clarity voor die bezoekers maar beperkt. Je koppelt het via een cookiemelding die het ondersteunt, of via de Consent API van Clarity.</p>
+      <ul class="vink">
+        <li>Laat de tool pas meekijken na toestemming in je cookiemelding.</li>
+        <li>Noem de tool, wat hij verzamelt en waarom in je privacyverklaring. Clarity schrijft zelf dat je bezoekers moet informeren over de cookie.</li>
+        <li>Laat maskeren van formulieren en persoonsgegevens aan staan.</li>
+        <li>Kijk alleen naar wat je nodig hebt en ruim op. Clarity bewaart je gegevens 30 dagen.</li>
+      </ul>
+      <p>Hoe cookies precies werken, lees je in het begrip <a href="/kennisbank/wat-is/cookie/">cookie</a>. Wat er in je privacyverklaring moet staan, staat in de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>. Twijfel je over jouw situatie, vraag het dan na bij een jurist. Wij zijn geen advocaten.</p>
+
+      <div class="stap-kop" id="testen"><Tekening naam="kolf" maat={52} /><h2>Van heatmap naar A/B-test</h2></div>
+      <p>Een heatmap geeft je ideeën, geen bewijs. Je ziet dat de knop koud is, maar weet nog niet of een andere plek beter werkt. Dat zoek je uit met een A/B-test: de helft van je bezoekers ziet versie A, de andere helft versie B, en je telt welke meer aanvragen oplevert.</p>
+      <p>Heb je te weinig bezoekers voor een eerlijke test? Dat geldt voor veel mkb-sites. Pas dan de pagina aan en vergelijk een maand voor en een maand na. Clarity heeft daarvoor een functie om twee heatmaps naast elkaar te zetten, bijvoorbeeld van voor en na je wijziging. Kijk dan ook naar het aantal aanvragen in je statistieken. Een mooiere kaart zonder meer klanten is geen winst.</p>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="lamp" maat={52} /><h2>Vijf fouten die we vaak zien</h2></div>
+      <ol>
+        <li><b>Te vroeg conclusies trekken.</b> Na drie dagen en veertig bezoekers zie je vooral toeval.</li>
+        <li><b>Mobiel en desktop door elkaar.</b> Bij veel mkb-sites komt een groot deel van de bezoekers via een telefoon. Bekijk ze apart.</li>
+        <li><b>Kijken zonder vraag.</b> Bepaal vooraf wat je wilt weten, zoals: waarom vragen zo weinig mensen een offerte aan?</li>
+        <li><b>Niets doen met wat je ziet.</b> Een heatmap is pas iets waard als er een wijziging uit volgt.</li>
+        <li><b>Geen toestemming regelen.</b> Dan riskeer je gedoe met de toezichthouder, en voor Europese bezoekers werkt Clarity dan toch al beperkt.</li>
+      </ol>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>In de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a> lees je wat je nog meer kunt meten en testen. Wil je het liever laten doen? Bij <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> lopen we je site door als een klant, met heatmaps waar dat met toestemming kan. Vanaf € 395. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een heatmap op een website?', a: 'Een kleurenlaag over je pagina die laat zien waar bezoekers klikken, hoe ver ze scrollen en waar ze lang blijven kijken. Warme kleuren betekenen veel activiteit, koele kleuren weinig.' },
+      { v: 'Is Microsoft Clarity echt gratis?', a: 'Volgens Microsoft wel, voor altijd en zonder limiet op het aantal bezoekers. Je betaalt dus niets, ook niet bij veel verkeer.' },
+      { v: 'Bestaat Hotjar nog?', a: 'Hotjar is onderdeel van Contentsquare geworden. Volgens Contentsquare kun je geen nieuw Hotjar-account meer aanmaken. Nieuwe gebruikers beginnen bij Contentsquare, dat ook een gratis plan heeft.' },
+      { v: 'Heb ik toestemming nodig voor een heatmap?', a: 'Voor een tool die gedrag volgt en opnames maakt, vraag je toestemming via je cookiemelding. Microsoft vraagt sinds 31 oktober 2025 zelf om een toestemmingssignaal voor bezoekers uit Europa.' },
+      { v: 'Hoeveel bezoekers heb ik nodig?', a: 'Contentsquare adviseert minstens 2.000 tot 3.000 paginaweergaven voordat je conclusies trekt. Met minder zie je vooral toeval. Kijk dan liever naar een paar sessie-opnames.' },
+      { v: 'Maakt een heatmap mijn site trager?', a: 'Het script is licht en laadt op de achtergrond. Merk je toch iets in de laadtijd, zet de tool dan alleen aan op de pagina\'s die je wilt onderzoeken.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over conversie"
+    links={[
+      { label: 'Gids', titel: 'Conversie verhogen', href: '/kennisbank/gidsen/conversie-verhogen/', tekst: 'Meer aanvragen uit dezelfde bezoekers, stap voor stap.', teken: 'klik' },
+      { label: 'Begrip', titel: 'Wat is UX?', href: '/kennisbank/wat-is/ux/', tekst: 'Hoe het voelt om je site te gebruiken, en waarom dat telt.', teken: 'scherm' },
+      { label: 'Begrip', titel: 'Wat is een cookie?', href: '/kennisbank/wat-is/cookie/', tekst: 'Welke cookies toestemming vragen en welke niet.', teken: 'schild' },
+    ]}
+  />
+
+  <Actie titel="Waar haken jouw bezoekers af?" tekst={`We kijken gratis mee naar je site en je cijfers. ${site.contactpersoon} belt je met de drie plekken waar je de meeste aanvragen laat liggen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

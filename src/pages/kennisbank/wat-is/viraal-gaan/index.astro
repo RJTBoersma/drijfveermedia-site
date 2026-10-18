@@ -1,0 +1,308 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--viraal-gaan.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/wat-is/viraal-gaan/';
+const datum = '2026-10-18';
+const definitie = 'Viraal gaan betekent dat een video, foto of bericht zich in korte tijd razendsnel verspreidt, doordat mensen het massaal delen en algoritmes het aan steeds meer mensen laten zien, ver buiten je eigen volgers.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat het betekent' },
+  { id: 'drempel', titel: 'Hoeveel views zijn genoeg?' },
+  { id: 'herkomst', titel: 'Waar de term vandaan komt' },
+  { id: 'algoritme', titel: 'Hoe een algoritme iets groot maakt' },
+  { id: 'delen', titel: 'Waarom mensen iets delen' },
+  { id: 'rekenen', titel: 'Rekenhulp: zo snel gaat het' },
+  { id: 'voorbeelden', titel: 'Bekende voorbeelden' },
+  { id: 'plannen', titel: 'Kun je het plannen?' },
+  { id: 'kans', titel: 'Twaalf dingen die je kans vergroten' },
+  { id: 'keerzijde', titel: 'De keerzijde' },
+  { id: 'mkb', titel: 'Wat het een mkb\'er oplevert' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+];
+// Standaardwaarden van de rekenhulp, ook zichtbaar zonder JavaScript.
+const start = 1000, deelt = 2, perDeling = 30;
+const k = (deelt / 100) * perDeling;
+const rondes = Array.from({ length: 5 }, (_, i) => Math.round(start * k ** i));
+const totaal = rondes.reduce((a, b) => a + b, 0);
+const nl = (n: number) => n.toLocaleString('nl-NL');
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Viraal gaan',
+    alternateName: ['Viral gaan', 'Going viral'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Viraal gaan: wat betekent het?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://jonahberger.com/wp-content/uploads/2013/02/ViralityB.pdf',
+      'https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you',
+      'https://about.fb.com/news/2023/06/how-ai-ranks-content-on-facebook-and-instagram/',
+      'https://about.fb.com/news/2025/08/new-instagram-features-help-you-connect/',
+      'https://about.fb.com/news/2024/12/trial-reels-try-content-non-followers-first-see-what-perfoms-best/',
+      'https://en.wikipedia.org/wiki/Viral_marketing',
+      'https://en.wikipedia.org/wiki/Ice_Bucket_Challenge',
+      'https://www.newcom.nl/nationale-sociale-media-onderzoek-2026/',
+      'https://about.instagram.com/blog/announcements/instagram-ranking-explained',
+    ],
+  },
+];
+---
+<Base
+  title="Viraal gaan: wat het is en hoe je de kans vergroot"
+  description="Wat betekent viraal gaan? Hoe algoritmes en delen een video groot maken, wat de wetenschap zegt over emotie, een rekenhulp en twaalf tips voor je bedrijf."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Viraal gaan', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Social media</p>
+        <h1>Viraal gaan: wat betekent het en kun je het plannen?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Een bakker in Stadskanaal filmt hoe hij om vier uur 's nachts zijn eerste broden uit de oven haalt. Hij zet het filmpje op TikTok en gaat slapen. Als hij wakker wordt, staat de teller op 400.000 views. Mensen uit heel Nederland reageren. Dat is viraal gaan. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Het klinkt als een droom voor elk bedrijf. Toch is het minder maakbaar dan veel bureaus beweren, en het levert niet altijd op wat je hoopt. Hieronder lees je wat het precies is, hoe algoritmes en mensen samen een bericht groot maken, wat onderzoek zegt over waarom we iets delen, en wat je er als ondernemer echt mee kunt.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={13} />
+
+      <div class="stap-kop"><Tekening naam="social" maat={52} /><h2 id="betekenis">Wat viraal gaan betekent</h2></div>
+      <p>Het woord komt van virus. Net als een griepvirus gaat het van persoon naar persoon, en elke besmette persoon steekt er weer een paar aan. Bij een bericht op sociale media werkt het hetzelfde. Iemand ziet je video, stuurt hem door naar drie vrienden, die sturen hem weer door. Ondertussen ziet het algoritme dat de video het goed doet en laat het hem aan nog meer mensen zien.</p>
+      <p>Drie kenmerken horen erbij:</p>
+      <ul class="vink">
+        <li><strong>Snelheid.</strong> Het gebeurt binnen uren of dagen, niet in maanden.</li>
+        <li><strong>Bereik buiten je kring.</strong> Het grootste deel van de kijkers volgt je niet en kende je niet.</li>
+        <li><strong>Verspreiding door anderen.</strong> Niet jij duwt het rond, maar je kijkers. Door te delen, te reageren en door te sturen.</li>
+      </ul>
+      <p>Een advertentie die een miljoen keer vertoond wordt omdat je ervoor betaalt, is dus niet viral. Het verschil zit in wie het werk doet: jouw budget of het publiek.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="drempel">Hoeveel views zijn genoeg?</h2></div>
+      <p>Er is geen officiële grens. Je leest op internet van alles: honderdduizend views, een miljoen, of 2,5 miljoen in een maand. Die getallen zijn vuistregels van marketeers, geen afspraak van TikTok of Instagram.</p>
+      <p>Het is zinvoller om te kijken naar het verschil met normaal. Haalt je account meestal 300 views en heeft één video er ineens 60.000? Dan is dat voor jou een virale video, ook al haalt een bekende maker dat elke dag. Kijk daarbij naar:</p>
+      <ul>
+        <li><strong>Hoe snel</strong> de views binnenkomen, vooral in de eerste 24 tot 48 uur.</li>
+        <li><strong>Hoeveel shares</strong> er zijn ten opzichte van de views. Delen is de motor.</li>
+        <li><strong>Waar de kijkers vandaan komen.</strong> In de statistieken van TikTok en Instagram zie je welk deel geen volger is.</li>
+      </ul>
+      <p>Voor een lokaal bedrijf is de vraag ook: wie keek er? Tienduizend views uit je eigen regio kunnen meer waard zijn dan een miljoen uit de hele wereld.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="herkomst">Waar de term vandaan komt</h2></div>
+      <p>Het begrip viral marketing dook volgens Wikipedia al in 1989 op in het blad <i>PC User</i>. Bekend werd het door een artikel van Jeffrey Rayport in <i>Fast Company</i> uit 1996, met de titel <i>The Virus of Marketing</i>. Een jaar later gebruikten investeerders Tim Draper en Steve Jurvetson het om te beschrijven wat Hotmail deed.</p>
+      <p>Dat voorbeeld is nog altijd leerzaam. Hotmail zette onder elke mail die gebruikers verstuurden de regel "Get your free e-mail at Hotmail". Wie een mail kreeg, zag de reclame en maakte zelf een account. Volgens Wikipedia leverde dat 12 miljoen gebruikers op in 18 maanden. De gebruikers deden het werk, zonder het te merken. Die gedachte, groei die in het product zelf zit, vind je ook terug bij <a href="/kennisbank/wat-is/growth-hacking/">growth hacking</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="algoritme">Hoe een algoritme iets groot maakt</h2></div>
+      <p>Vroeger hing verspreiding af van mensen die een link doorstuurden. Nu doet een algoritme het grootste deel. Dat is een systeem dat per gebruiker voorspelt welke berichten hij interessant vindt. Wat het goed doet bij een kleine groep, krijgt een grotere groep te zien. En zo verder.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Platform</th><th>Wat het zelf zegt</th><th>Wat dat voor jou betekent</th></tr></thead>
+          <tbody>
+            <tr><td><b>TikTok</b></td><td>De For You-feed kijkt naar wat je liket, deelt en volgt, naar de video zelf (tekst, geluid, hashtags) en minder zwaar naar taal en land. Een video helemaal uitkijken telt zwaar.</td><td>Kijktijd is alles. Een video die mensen tot het eind uitkijken, krijgt meer kansen.</td></tr>
+            <tr><td><b>TikTok</b></td><td>Het aantal volgers en eerdere hits zijn geen directe factor, al krijgen grote accounts vaak meer views.</td><td>Ook met weinig volgers kun je een groot bereik halen.</td></tr>
+            <tr><td><b>Instagram</b></td><td>Bij reels voorspelt Instagram vooral of je een reel gaat doorsturen, helemaal uitkijkt, liket en naar de geluidspagina gaat. Het meeste wat je in reels ziet, komt van accounts die je niet volgt.</td><td>Maak iets dat mensen willen doorsturen en tot het eind bekijken, niet alleen liken.</td></tr>
+            <tr><td><b>Instagram</b></td><td>Sinds augustus 2025 kun je reels en berichten reposten. Een repost kan worden aanbevolen aan de volgers van wie hem deelt, ook als die jou niet volgen.</td><td>Elke repost opent een nieuw publiek.</td></tr>
+            <tr><td><b>Instagram</b></td><td>Met trial reels test je sinds december 2024 een reel eerst bij mensen die je niet volgen.</td><td>Je kunt proberen zonder je volgers te vermoeien.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De bronnen: de uitleg van TikTok over de For You-feed (2020), het stuk <i>Instagram Ranking Explained</i> van Instagram en de aankondigingen over reposts en trial reels. Ook Meta zelf schrijft dat de voorspelling of je iets gaat delen meeweegt bij het rangschikken. Over Instagram lees je meer in de gids over het <a href="/kennisbank/gidsen/instagram-algoritme/">Instagram algoritme</a>.</p>
+      <p>Het gevolg is een sneeuwbaleffect. Een video die in het eerste uur goed scoort, gaat naar een grotere groep. Scoort hij daar ook goed, dan weer een grotere. Zo kan een account met 200 volgers een miljoen mensen bereiken. Andersom geldt het ook: scoort hij bij die eerste groep slecht, dan stopt het.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="ster" maat={52} /><h2 id="delen">Waarom mensen iets delen</h2></div>
+      <p>Het bekendste onderzoek naar deze vraag komt van Jonah Berger en Katherine Milkman. Ze bekeken bijna 7.000 artikelen van <i>The New York Times</i> uit een periode van drie maanden. Welke kwamen op de lijst van meest gemailde artikelen? Hun conclusies verschenen in 2012 in het <i>Journal of Marketing Research</i>:</p>
+      <ul>
+        <li>Positieve inhoud werd vaker gedeeld dan negatieve.</li>
+        <li>Het ging vooral om hoe sterk een emotie iemand in beweging zet. Ontzag, boosheid en angst zorgden voor meer delen.</li>
+        <li>Emoties die je juist rustig maken, zoals verdriet, zorgden voor minder delen.</li>
+        <li>Inhoud die verrassend, interessant of praktisch nuttig was, werd ook vaker gedeeld.</li>
+      </ul>
+      <p>Vertaal je dat naar een bedrijf, dan kom je op vier soorten berichten die het vaakst worden doorgestuurd:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Waarom het gedeeld wordt</th><th>Voorbeeld bij een mkb'er</th></tr></thead>
+          <tbody>
+            <tr><td><b>Verwondering</b></td><td>"Dit moet je zien"</td><td>Een vakman die iets doet wat niemand voor mogelijk hield</td></tr>
+            <tr><td><b>Herkenning</b></td><td>"Dit zijn wij"</td><td>Een grap over de klant die "even snel" iets wil</td></tr>
+            <tr><td><b>Nut</b></td><td>"Hier heb jij wat aan"</td><td>Een handige tip die geld of tijd bespaart</td></tr>
+            <tr><td><b>Ophef</b></td><td>"Hier moet je iets van vinden"</td><td>Riskant: werkt, maar kan ook tegen je keren</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Wie iets deelt, zegt er ook iets mee over zichzelf. Kijk mij, ik ken handige dingen. Of: dit is precies mijn humor. Zorg dus dat je bericht iets is waar mensen graag mee gezien worden.</p>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="rekenen">Rekenhulp: zo snel gaat het</h2></div>
+      <p>Of iets blijft groeien, hangt af van één getal. Marketeers noemen het de virale factor of k-factor: hoeveel nieuwe kijkers levert elke kijker gemiddeld op? Je rekent het zo uit: het deel van de kijkers dat deelt, keer het aantal nieuwe kijkers per keer delen. Ligt dat getal onder de 1, dan dooft het uit. Ligt het boven de 1, dan groeit het vanzelf door. Vul hieronder je eigen getallen in.</p>
+      <figure class="reken card" aria-label="Rekenhulp virale factor">
+        <p class="kicker">Rekenhulp</p>
+        <form class="invoer" data-viraal>
+          <label>Kijkers in de eerste ronde <input type="number" name="start" value={start} min="1" step="1" inputmode="numeric" /></label>
+          <label>Procent dat deelt <input type="number" name="deelt" value={deelt} min="0" max="100" step="0.1" inputmode="decimal" /></label>
+          <label>Nieuwe kijkers per keer delen <input type="number" name="per" value={perDeling} min="0" step="1" inputmode="numeric" /></label>
+        </form>
+        <div class="uitkomst" aria-live="polite">
+          <p>Virale factor: <b data-k>{k.toLocaleString('nl-NL', { maximumFractionDigits: 2 })}</b></p>
+          <p data-oordeel>{k < 1 ? 'Onder de 1: het bereik dooft na een paar rondes uit.' : 'Boven de 1: elke ronde is groter dan de vorige.'}</p>
+        </div>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Ronde</th><th>Nieuwe kijkers</th></tr></thead>
+            <tbody data-rondes>
+              {rondes.map((r, i) => <tr><td>{i + 1}</td><td>{nl(r)}</td></tr>)}
+            </tbody>
+            <tfoot><tr><td><b>Totaal na 5 rondes</b></td><td><b data-totaal>{nl(totaal)}</b></td></tr></tfoot>
+          </table>
+        </div>
+        <figcaption class="klein muted">Een vereenvoudigd model. In het echt helpt het algoritme mee en verschilt elke ronde.</figcaption>
+      </figure>
+      <p>Met de standaardgetallen zie je het gebeuren. Bij 2 procent die deelt en 30 nieuwe kijkers per keer is de factor 0,6. Na vijf rondes heb je zo'n 2.300 kijkers en dan houdt het op. Verdubbel het percentage dat deelt naar 4 procent, en de factor wordt 1,2. Elke ronde wordt groter dan de vorige. Een klein verschil in hoe deelbaar je bericht is, maakt dus een enorm verschil in bereik. <span class="muted">(Verzonnen getallen.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2 id="voorbeelden">Bekende voorbeelden</h2></div>
+      <ul>
+        <li><strong>De Ice Bucket Challenge (2014).</strong> Mensen lieten zich filmen terwijl er een emmer ijswater over hun hoofd ging, vroegen aandacht en geld voor de spierziekte ALS en nomineerden daarna anderen om hetzelfde te doen. Volgens <i>The New York Times</i>, geciteerd op Wikipedia, kreeg de Amerikaanse ALS Association tussen 29 juli en 21 augustus $41,8 miljoen binnen van ruim 739.000 nieuwe donateurs. Dat was meer dan het dubbele van wat de vereniging in een heel jaar ervoor ophaalde. Het werkte omdat elke deelnemer weer nieuwe mensen nomineerde, vaak met een termijn van 24 uur. Zo zat een k-factor boven de 1 in het spel zelf ingebouwd.</li>
+        <li><strong>Spotify Wrapped.</strong> Sinds 2016 krijgen gebruikers elk jaar eind november of begin december een kleurrijk overzicht van wat ze luisterden, gemaakt om te delen op sociale media. In 2021 bekeken 120 miljoen gebruikers hun overzicht. De gebruikers maken de reclame, elk jaar weer.</li>
+        <li><strong>De Grimace Shake (2023).</strong> McDonald's bracht in Amerika een paarse milkshake uit. Gebruikers maakten er een trend van met korte horrorfilmpjes waarin ze na een slok "omvielen". McDonald's had het niet bedacht, maar speelde er wel op in. Het laat zien dat je niet bepaalt wat het publiek met je merk doet.</li>
+      </ul>
+      <p>Wat ze delen: een simpel idee, een reden om mee te doen en een vorm die iedereen kan namaken.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="plannen">Kun je het plannen?</h2></div>
+      <p>Kort antwoord: nee. Niemand kan garanderen dat een bericht explodeert. Wie dat wel belooft, overschat zichzelf of verkoopt iets. Ook grote merken met grote budgetten zien de meeste video's gewoon matig scoren.</p>
+      <p>Wat je wel kunt: de kans vergroten. Door vaak te posten, te leren van wat werkt, en te maken wat mensen willen doorsturen. Vergelijk het met vissen. Je kunt niet bepalen dat er vandaag een grote vis bijt, maar met de juiste plek, het juiste aas en veel geduld vang je meer dan iemand die één keer per jaar zijn hengel uitgooit.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="kans">Twaalf dingen die je kans vergroten</h2></div>
+      <ol>
+        <li><strong>Pak de aandacht in de eerste seconde.</strong> Begin met het spannendste moment, niet met je logo. Mensen scrollen in een tel door.</li>
+        <li><strong>Houd het kort.</strong> Een korte video die mensen helemaal uitkijken, scoort beter dan een lange die ze halverwege wegvegen.</li>
+        <li><strong>Maak het verticaal.</strong> Op TikTok, in reels en in stories vult een staande video het hele scherm.</li>
+        <li><strong>Ondertitel alles.</strong> Veel mensen kijken zonder geluid, in de trein of op de bank naast iemand die slaapt.</li>
+        <li><strong>Raak een emotie.</strong> Verwondering, herkenning of een lach. Een neutraal productfilmpje deelt niemand.</li>
+        <li><strong>Wees nuttig.</strong> Een tip die echt helpt, wordt opgeslagen en doorgestuurd.</li>
+        <li><strong>Speel in op trends die bij je passen.</strong> Een bekend geluid of format met jouw eigen draai. Niet elke trend past bij je merk, en geforceerd meedoen valt op.</li>
+        <li><strong>Gebruik een paar relevante hashtags.</strong> Ze helpen het platform begrijpen waar je video over gaat. Een rij van dertig algemene tags helpt niet.</li>
+        <li><strong>Laat mensen zien.</strong> Gezichten en echte vakmensen werken beter dan stockbeelden.</li>
+        <li><strong>Vraag om een reactie.</strong> Een vraag aan het eind zet mensen aan het praten, en reacties tellen mee.</li>
+        <li><strong>Reageer snel.</strong> Beantwoord reacties in het eerste uur. Zo houd je het gesprek gaande.</li>
+        <li><strong>Post regelmatig.</strong> Elke video is een lot in de loterij. Meer loten, meer kans. Een vaste <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a> helpt.</li>
+      </ol>
+      <p>Wanneer je post, maakt minder uit dan vaak wordt gedacht, maar het speelt wel mee. In de gids over de <a href="/kennisbank/gidsen/beste-tijden-om-te-posten/">beste tijd om te posten</a> lees je hoe je dat voor je eigen account uitzoekt.</p>
+
+      <Tussenactie />
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="keerzijde">De keerzijde: negatief viraal</h2></div>
+      <p>Een bericht kan ook de verkeerde kant op gaan. Een boze klant die filmt hoe je medewerker onbeleefd is. Een grap die verkeerd valt. Een advertentie die als ongepast wordt gezien. Ophef verspreidt zich minstens zo snel als iets leuks, zo bleek ook uit het onderzoek van Berger en Milkman: boosheid zet mensen aan tot delen.</p>
+      <p>Drie tips als het misgaat:</p>
+      <ul class="vink">
+        <li><strong>Reageer snel en menselijk.</strong> Geen standaardzin van de afdeling communicatie, maar een eerlijke reactie met je naam eronder.</li>
+        <li><strong>Ga niet in discussie in de reacties.</strong> Bied aan het gesprek buiten het openbare kanaal voort te zetten.</li>
+        <li><strong>Verwijder niet stiekem.</strong> Mensen maken schermafbeeldingen. Weghalen zonder uitleg maakt het vaak erger.</li>
+      </ul>
+      <p>Ook positieve aandacht heeft een prijs. Een bakker met 400.000 views krijgt honderden berichten, vragen over verzenden naar Maastricht en misschien een paar onaardige reacties. Zorg dat je dat aankunt.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2 id="mkb">Wat het een mkb'er oplevert</h2></div>
+      <p>Volgens het Nationale Social Media Onderzoek 2026 van Newcom gebruiken 14,6 miljoen Nederlanders van 15 jaar en ouder een of meer sociale media, gemiddeld zo'n twee uur per dag. Het publiek is er dus. Maar is een video met een miljoen views goed voor jouw bedrijf? Dat hangt ervan af.</p>
+      <ul>
+        <li><strong>Lokale dienstverlener.</strong> Een loodgieter in Assen heeft weinig aan kijkers uit Brabant. Wel aan een merk dat mensen in de regio herkennen. Lokale bekendheid is meer waard dan landelijke hype.</li>
+        <li><strong>Webwinkel of landelijk aanbod.</strong> Hier kan een virale video direct verkoop opleveren, mits je voorraad en je website de toeloop aankunnen.</li>
+        <li><strong>Werving.</strong> Een leuk filmpje over je team kan meer sollicitanten trekken dan een vacaturetekst.</li>
+      </ul>
+      <p>Het eerlijke verhaal: voor de meeste ondernemers is structureel gevonden worden waardevoller dan één keer viraal gaan. Een video is na een week vergeten. Een pagina die bovenaan Google staat, levert jaren aanvragen op. Daarom bouwen we liever aan <a href="/kennisbank/wat-is/inbound-marketing/">inbound marketing</a> en <a href="/lokale-seo/">lokale SEO</a> dan dat we op een hit gokken.</p>
+      <p>Bij ons <a href="/social-media-beheer/">social media beheer</a> (vanaf € 395 per maand) houden we je kanalen consistent actief met een vast plan. We beloven geen virale hits, want niemand bepaalt wat een algoritme morgen doet. Video's maken we niet zelf: die lever je aan, wij zorgen voor de planning, de teksten en het bijhouden.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><strong>Volgers of views kopen.</strong> Het lijkt even succesvol, maar gekochte kijkers delen niets en kopen niets. Het algoritme ziet dat ook.</li>
+        <li><strong>Alles op één video zetten.</strong> Maanden werken aan die ene perfecte video. Tien eenvoudige video's leren je meer.</li>
+        <li><strong>Een trend najagen die niet bij je past.</strong> Een accountantskantoor dat ongemakkelijk danst, wordt eerder uitgelachen dan gedeeld.</li>
+        <li><strong>Geen vervolg.</strong> Een video gaat los, maar je profiel is leeg en je website noemt je telefoonnummer nergens. Zorg dat nieuwe kijkers ergens heen kunnen.</li>
+        <li><strong>Watermerk van een andere app.</strong> Instagram schrijft zelf dat het reels met een watermerk, een lage resolutie of die al eerder op Instagram stonden minder laat zien. Een TikTok-video met logo erop overzetten kost je dus bereik.</li>
+        <li><strong>Alleen naar views kijken.</strong> Kijk ook naar wat het opleverde: volgers uit je regio, websitebezoek, aanvragen.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Wat korte video op Instagram precies is, lees je bij <a href="/kennisbank/wat-is/instagram-reels/">Instagram Reels</a>. Hoe interactie wordt gemeten, staat bij <a href="/kennisbank/wat-is/engagement/">engagement</a>. Een verhaal dat blijft hangen vertellen? Lees over <a href="/kennisbank/wat-is/storytelling/">storytelling</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent viraal gaan?', a: 'Dat een video, foto of bericht zich in korte tijd razendsnel verspreidt omdat veel mensen het delen en algoritmes het aan steeds meer mensen laten zien. Het grootste deel van de kijkers kende je daarvoor niet.' },
+      { v: 'Hoeveel views heb je nodig om viral te zijn?', a: 'Er is geen officiële grens. Het gaat om de snelheid en het verschil met normaal. Haalt een account meestal een paar honderd views en heeft één video er tienduizenden, dan is dat voor dat account viraal.' },
+      { v: 'Kun je met weinig volgers viraal gaan?', a: 'Ja. Volgens TikTok zijn het aantal volgers en eerdere hits geen directe factor in de aanbevelingen. Een video die bij de eerste kijkers goed scoort, kan ook bij een klein account een groot publiek bereiken.' },
+      { v: 'Op welk platform ga je het makkelijkst viraal?', a: 'Platforms die vooral video laten zien van mensen die je nog niet volgt, zoals TikTok en Instagram Reels, geven nieuwe makers de meeste kans. Op LinkedIn en Facebook speelt je eigen netwerk een grotere rol.' },
+      { v: 'Wat is een virale factor?', a: 'Het gemiddelde aantal nieuwe kijkers of gebruikers dat elke kijker oplevert. Boven de 1 groeit het bereik vanzelf door, onder de 1 dooft het uit.' },
+      { v: 'Kan een bureau garanderen dat ik viraal ga?', a: 'Nee. Niemand bepaalt wat een algoritme of het publiek doet. Een bureau kan de kans vergroten met goede content en een vast plan, maar een garantie op een virale hit is een rode vlag.' },
+      { v: 'Wat doe ik als iets negatiefs over mijn bedrijf viraal gaat?', a: 'Reageer snel, eerlijk en met je naam. Ga niet in discussie in de reacties, maar bied een gesprek aan. Verwijder berichten niet stiekem, want dat maakt het vaak erger.' },
+    ]}
+  />
+
+  <Actie titel="Liever structureel gevonden dan één keer viraal?" tekst={`We kijken gratis waar je online nu staat en wat het snelst meer aanvragen oplevert. ${site.contactpersoon} belt je met een eerlijk advies.`} />
+</Base>
+<script>
+  const f = document.querySelector<HTMLFormElement>('[data-viraal]');
+  const kUit = document.querySelector<HTMLElement>('[data-k]');
+  const oordeel = document.querySelector<HTMLElement>('[data-oordeel]');
+  const rondesUit = document.querySelector<HTMLElement>('[data-rondes]');
+  const totaalUit = document.querySelector<HTMLElement>('[data-totaal]');
+  function reken() {
+    if (!f || !kUit || !oordeel || !rondesUit || !totaalUit) return;
+    const d = new FormData(f);
+    const start = Math.max(0, Number(d.get('start')) || 0);
+    const deelt = Math.min(100, Math.max(0, Number(d.get('deelt')) || 0));
+    const per = Math.max(0, Number(d.get('per')) || 0);
+    const k = (deelt / 100) * per;
+    const rondes = Array.from({ length: 5 }, (_, i) => Math.round(start * k ** i));
+    kUit.textContent = k.toLocaleString('nl-NL', { maximumFractionDigits: 2 });
+    oordeel.textContent = k < 1 ? 'Onder de 1: het bereik dooft na een paar rondes uit.' : k === 1 ? 'Precies 1: elke ronde is even groot.' : 'Boven de 1: elke ronde is groter dan de vorige.';
+    rondesUit.innerHTML = rondes.map((r, i) => `<tr><td>${i + 1}</td><td>${r.toLocaleString('nl-NL')}</td></tr>`).join('');
+    totaalUit.textContent = rondes.reduce((a, b) => a + b, 0).toLocaleString('nl-NL');
+  }
+  f?.addEventListener('input', reken);
+</script>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop, h2 { scroll-margin-top: 96px; }
+  .reken { margin: 24px 0; padding: 22px; }
+  .invoer { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 8px 0 14px; }
+  .invoer label { display: grid; gap: 6px; font-weight: 700; font-size: 0.92rem; }
+  .invoer input { width: 100%; min-width: 0; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 10px; font: inherit; font-weight: 600; background: #fff; }
+  .invoer input:focus-visible { outline: 3px solid var(--orange); outline-offset: 1px; }
+  .uitkomst { padding: 14px 16px; border-radius: 12px; background: var(--tint); margin-bottom: 12px; }
+  .uitkomst p { margin: 0; }
+  .uitkomst b { font-size: var(--step-2); font-weight: 900; }
+  .reken figcaption { margin-top: 8px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 620px) { .invoer { grid-template-columns: minmax(0, 1fr); } }
+</style>

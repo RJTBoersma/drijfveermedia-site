@@ -1,0 +1,362 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--kpi.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/kpi/';
+const datum = '2026-10-18';
+const definitie = 'Een KPI (key performance indicator) is een meetbaar getal dat laat zien of je op koers ligt voor een doel dat echt telt voor je bedrijf.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat het betekent' },
+  { id: 'begrippen', titel: 'PI, KSF, metric en OKR' },
+  { id: 'kenmerken', titel: 'Een goede indicator' },
+  { id: 'smart', titel: 'SMART formuleren' },
+  { id: 'voorbeelden', titel: 'Voorbeelden per doel' },
+  { id: 'ijdel', titel: 'IJdele cijfers' },
+  { id: 'opstellen', titel: 'Zelf opstellen in 6 stappen' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld' },
+  { id: 'dashboard', titel: 'Dashboard en meetritme' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'ondernemer', titel: 'Wat moet je ermee?' },
+];
+// Voorbeelden per doel, met formule en de plek waar je het getal vindt.
+const website = [
+  ['Conversieratio', 'Aanvragen ÷ sessies × 100', 'Google Analytics 4, belangrijke gebeurtenissen'],
+  ['Aantal leads per maand', 'Formulieren + gebelde nummers + mails via de site', 'GA4 plus je eigen telefoonlijst'],
+  ['Engagementpercentage', 'Sessies met engagement ÷ alle sessies', 'GA4, rapport aanpassen'],
+  ['Kosten per lead (alle kanalen)', 'Marketingkosten ÷ aantal leads', 'Je boekhouding en GA4'],
+];
+const seo = [
+  ['Klikken uit Google', 'Aantal klikken in de periode', 'Search Console, rapport Prestaties'],
+  ['Klikfrequentie (CTR)', 'Klikken ÷ vertoningen × 100', 'Search Console'],
+  ['Gemiddelde positie', 'Gemiddelde plek van je hoogste resultaat', 'Search Console, per zoekopdracht'],
+  ['Leads uit organisch verkeer', 'Aanvragen van bezoekers via Google zonder advertentie', 'GA4, kanaal Organic Search'],
+];
+const ads = [
+  ['Kosten per conversie (CPA)', 'Advertentiekosten ÷ conversies', 'Google Ads, kolom Kosten/conv.'],
+  ['ROAS', 'Omzet uit advertenties ÷ advertentiekosten', 'Google Ads, kolom Conv. waarde/kosten'],
+  ['Conversiepercentage', 'Conversies ÷ klikken × 100', 'Google Ads'],
+  ['Klikprijs (CPC)', 'Kosten ÷ klikken', 'Google Ads'],
+];
+const mail = [
+  ['Klikratio', 'Unieke klikken ÷ afgeleverde mails × 100', 'Je mailprogramma'],
+  ['Afmeldingen', 'Afmeldingen ÷ afgeleverde mails × 100', 'Je mailprogramma'],
+  ['Omzet of aanvragen per mailing', 'Bestellingen of aanvragen die uit de mail komen', 'GA4 met UTM-codes'],
+  ['Groei van je lijst', 'Nieuwe inschrijvers − afmeldingen', 'Je mailprogramma'],
+];
+const verkoop = [
+  ['Afsluitratio', 'Nieuwe klanten ÷ leads × 100', 'Je CRM of offertelijst'],
+  ['Gemiddelde opdrachtwaarde', 'Omzet ÷ aantal opdrachten', 'Je boekhouding'],
+  ['Klantwaarde (CLV)', 'Opdrachtwaarde × aantal opdrachten per klant', 'Je boekhouding'],
+  ['Omzet uit online kanalen', 'Omzet van klanten die via de site binnenkwamen', 'CRM of je eigen bijhouding'],
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'KPI (key performance indicator)',
+  alternateName: ['Key performance indicator', 'Kritieke prestatie-indicator'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="KPI betekenis: uitleg en 20 voorbeelden | Drijfveer Media"
+  description="KPI betekenis in gewone taal: wat een key performance indicator is, hoe je hem SMART opstelt en 20 voorbeelden met formule voor website, SEO, ads en e-mail."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'KPI', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Meten en sturen</p>
+        <h1>KPI betekenis: wat is het en welke kies je?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je boekhouder vraagt naar je KPI's. Of een bureau belooft "te sturen op KPI's". Wat bedoelen ze? De KPI betekenis is eenvoudiger dan het klinkt. Het is het getal dat je elke maand wilt zien om te weten of het goed gaat. Niet tien getallen. Een paar, die direct iets zeggen over omzet of klanten. Hieronder lees je wat het precies is, hoe het verschilt van een doel, en welke indicatoren een mkb'er echt nodig heeft. Met twintig voorbeelden en hun formule.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>KPI staat voor key performance indicator. In het Nederlands: kritieke prestatie-indicator.</li>
+          <li>Het is geen doel, maar het meetpunt waarmee je ziet of je je doel haalt.</li>
+          <li>Een goede indicator is meetbaar, beïnvloedbaar en heeft een streefwaarde en een periode.</li>
+          <li>Kies per doel één hoofdgetal en twee of drie getallen die vooruit voorspellen.</li>
+          <li>Volgers, vertoningen en paginaweergaven zijn zelden een goede keuze.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={13} />
+
+      <div class="stap-kop" id="betekenis"><Tekening naam="boek" maat={52} /><h2>Wat betekent KPI precies?</h2></div>
+      <p>De afkorting komt uit het Engels: key performance indicator. Elk woord heeft een functie.</p>
+      <ul>
+        <li><b>Key</b>: het gaat om de paar getallen die er echt toe doen. Niet alles wat je kunt meten.</li>
+        <li><b>Performance</b>: het zegt iets over prestaties. Van je bedrijf, een campagne, een team of je website.</li>
+        <li><b>Indicator</b>: het wijst iets aan. Het getal zelf is niet het doel. Het vertelt of je richting het doel beweegt.</li>
+      </ul>
+      <p>Dat laatste is waar het vaak misgaat. "Meer omzet" is een doelstelling. "Het aantal offerteaanvragen via de website per maand" is een indicator. Pas als je er een streefwaarde en een periode aan hangt, wordt het iets waarop je kunt sturen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Voorbeeld</th><th>Wat het doet</th></tr></thead>
+          <tbody>
+            <tr><td>Doelstelling</td><td>Meer klanten voor zonnepanelen uit de regio</td><td>Zegt waar je heen wilt</td></tr>
+            <tr><td>Indicator</td><td>Aantal offerteaanvragen via de website</td><td>Maakt de voortgang meetbaar</td></tr>
+            <tr><td>Streefwaarde</td><td>15 aanvragen per maand</td><td>Zegt wanneer het goed genoeg is</td></tr>
+            <tr><td>Periode</td><td>Gemiddeld over het tweede kwartaal van 2027</td><td>Zegt wanneer je de balans opmaakt</td></tr>
+            <tr><td>Nulmeting</td><td>Nu 8 aanvragen per maand</td><td>Zegt waar je vandaan komt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld.</p>
+      <p>Zonder nulmeting weet je niet of 15 veel of weinig is. Zonder periode kun je eindeloos blijven wachten. Alle vijf horen bij elkaar.</p>
+
+      <div class="stap-kop" id="begrippen"><Tekening naam="pen" maat={52} /><h2>Het verschil met PI, KSF, metric en OKR</h2></div>
+      <p>Rond dit onderwerp vliegen de afkortingen je om de oren. Ze lijken op elkaar, maar ze doen elk iets anders.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Begrip</th><th>Wat het is</th><th>Voorbeeld</th></tr></thead>
+          <tbody>
+            <tr><td>Metric</td><td>Elk getal dat je kunt meten</td><td>Aantal bezoekers op je contactpagina</td></tr>
+            <tr><td>PI (prestatie-indicator)</td><td>Een getal dat iets over prestaties zegt, maar niet het belangrijkste</td><td>Gemiddelde reactietijd op een mail</td></tr>
+            <tr><td>KPI</td><td>Een van de paar getallen die bepalen of je doel lukt</td><td>Aanvragen per maand</td></tr>
+            <tr><td>KRI (resultaatindicator)</td><td>Het eindresultaat van veel inspanningen samen</td><td>Klanttevredenheid, jaarwinst</td></tr>
+            <tr><td>KSF (kritieke succesfactor)</td><td>Wat er goed moet gaan om te slagen, nog zonder getal</td><td>Snel reageren op aanvragen</td></tr>
+            <tr><td>OKR</td><td>Een methode: één doel met drie tot vijf meetbare resultaten</td><td>Doel: de vaste installateur van Assen worden</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een KSF is dus het "wat", de indicator het "hoeveel". Snel reageren is een succesfactor. Het percentage aanvragen dat binnen een uur antwoord krijgt, is het getal erbij.</p>
+      <h3>En wat is een OKR dan?</h3>
+      <p>OKR staat voor objectives and key results. Het idee wordt toegeschreven aan Andrew Grove, die het in de jaren zeventig bij Intel invoerde. Investeerder John Doerr bracht het in 1999 naar Google, zo staat op Wikipedia. Je kiest een ambitieus doel en schrijft daaronder drie tot vijf meetbare resultaten die laten zien of je het haalt. Een OKR kijkt vooruit en zet iets in beweging. Een indicator houdt de vinger aan de pols van wat er al loopt. Ze bijten elkaar niet: de key results van een OKR zijn vaak gewoon je belangrijkste meetpunten voor dat kwartaal.</p>
+
+      <div class="stap-kop" id="kenmerken"><Tekening naam="doel" maat={52} /><h2>Waaraan herken je een goede indicator?</h2></div>
+      <p>Een goed getal voldoet aan zes eisen. Mist er één, dan gaat het in de praktijk schuren.</p>
+      <ul class="vink">
+        <li><b>Hangt aan een doel.</b> Je kunt in één zin zeggen welk bedrijfsdoel ermee gediend is.</li>
+        <li><b>Is meetbaar uit een bron die je al hebt.</b> Google Analytics, Search Console, je boekhouding, je offertelijst. Moet je het elke maand met de hand tellen, dan stop je er binnen een halfjaar mee.</li>
+        <li><b>Is te beïnvloeden.</b> Jij of je team kan er iets aan doen. Het weer is geen indicator, hoe groot de invloed op je omzet ook is.</li>
+        <li><b>Komt op tijd.</b> Een cijfer dat je pas na een jaar ziet, helpt niet bij bijsturen.</li>
+        <li><b>Is begrijpelijk.</b> Iedereen die erop stuurt, weet wat het betekent zonder uitleg.</li>
+        <li><b>Heeft een eigenaar.</b> Eén persoon kijkt ernaar en komt in actie als het afwijkt.</li>
+      </ul>
+      <h3>Vooruitlopend en achterlopend</h3>
+      <p>Er is nog een onderscheid dat de meeste uitleg overslaat, en dat in de praktijk het verschil maakt. Sommige getallen vertellen wat er gebeurd is. Andere voorspellen wat er gaat gebeuren.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Wat het zegt</th><th>Voorbeelden</th></tr></thead>
+          <tbody>
+            <tr><td>Achterlopend (lagging)</td><td>Het resultaat, als het al te laat is om het te veranderen</td><td>Omzet, winst, nieuwe klanten dit kwartaal</td></tr>
+            <tr><td>Vooruitlopend (leading)</td><td>Een signaal vooraf, waar je nog op kunt sturen</td><td>Aanvragen deze week, verstuurde offertes, klikken uit Google</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Omzet is het getal dat telt. Maar als de omzet daalt, ben je drie maanden te laat. Daarom kies je naast elk resultaatgetal een paar voorlopers. Dalen je aanvragen twee weken op rij, dan kun je nog ingrijpen voordat het in de boeken staat.</p>
+
+      <div class="stap-kop" id="smart"><Tekening naam="kompas" maat={52} /><h2>SMART formuleren, met voorbeelden</h2></div>
+      <p>Het getal zelf hoeft niet SMART te zijn. Het doel waar het bij hoort wel. SMART staat volgens de gangbare uitleg voor:</p>
+      <ul>
+        <li><b>Specifiek</b>: er is maar één manier om het te lezen.</li>
+        <li><b>Meetbaar</b>: je kunt met een getal zeggen of het gelukt is.</li>
+        <li><b>Acceptabel</b>: de mensen die het moeten doen, staan erachter. Soms lees je hier ambitieus of actiegericht.</li>
+        <li><b>Realistisch</b>: het is haalbaar met de tijd en het geld dat je hebt.</li>
+        <li><b>Tijdsgebonden</b>: er staat een datum of periode bij.</li>
+      </ul>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zo niet</th><th>Zo wel</th></tr></thead>
+          <tbody>
+            <tr><td>We willen beter gevonden worden.</td><td>In het eerste kwartaal van 2027 komen er 600 klikken per maand uit Google, nu 420.</td></tr>
+            <tr><td>Meer aanvragen via de site.</td><td>De conversieratio van de dienstpagina's stijgt voor 1 juli van 1,2 naar 2 procent.</td></tr>
+            <tr><td>Google Ads moet goedkoper.</td><td>De kosten per aanvraag dalen in drie maanden van € 85 naar onder de € 60, bij minstens evenveel aanvragen.</td></tr>
+            <tr><td>Meer uit de nieuwsbrief halen.</td><td>Elke maandelijkse mailing levert gemiddeld 4 afspraken op, gemeten over zes mailings.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeelden.</p>
+      <p>Let op het derde voorbeeld. "Bij minstens evenveel aanvragen" staat er niet voor niets. Een goedkopere aanvraag is makkelijk: zet je budget lager en houd alleen de goedkoopste zoekwoorden over. Dan haal je je doel en heb je toch minder klanten.</p>
+
+      <div class="stap-kop" id="voorbeelden"><Tekening naam="grafiek" maat={52} /><h2>KPI-voorbeelden per doel, met formule</h2></div>
+      <p>De meeste lijstjes op internet gooien alles op één hoop: productie, HR, financiën. Hier staan alleen de getallen die tellen voor online marketing van een mkb-bedrijf. Per doel de formule en de plek waar je het getal vindt. Kies er per doel hooguit drie.</p>
+
+      <h3>Website: van bezoeker naar aanvraag</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Indicator</th><th>Formule</th><th>Waar je het vindt</th></tr></thead>
+          <tbody>{website.map(([a, b, c]) => <tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Google Analytics telt een sessie als sessie met engagement als die langer duurt dan tien seconden, een belangrijke gebeurtenis heeft of twee of meer paginaweergaven telt. Dat staat in de uitleg van Google zelf. Het bouncepercentage is precies het omgekeerde. Een aanvraag telt pas mee als je hem instelt als belangrijke gebeurtenis. Hoe dat werkt, lees je in de gids <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>.</p>
+
+      <h3>SEO: gevonden worden in Google</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Indicator</th><th>Formule</th><th>Waar je het vindt</th></tr></thead>
+          <tbody>{seo.map(([a, b, c]) => <tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Search Console rekent de klikfrequentie zelf uit als klikken gedeeld door vertoningen. Kijk niet alleen naar het totaal. Een stijging van klikken op je eigen bedrijfsnaam zegt weinig over nieuwe klanten. Filter op zoekopdrachten zonder je naam erin. Meer daarover in de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+
+      <h3>Google Ads: wat een klant kost</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Indicator</th><th>Formule</th><th>Waar je het vindt</th></tr></thead>
+          <tbody>{ads.map(([a, b, c]) => <tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Voor een dienstverlener is de kosten per aanvraag meestal het hoofdgetal. Lees hoe je dat berekent en wat het maximaal mag zijn bij <a href="/kennisbank/wat-is/cpa/">CPA</a>. Verkoop je online, dan kijk je naar <a href="/kennisbank/wat-is/roas/">ROAS</a>.</p>
+
+      <h3>E-mail: van inbox naar actie</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Indicator</th><th>Formule</th><th>Waar je het vindt</th></tr></thead>
+          <tbody>{mail.map(([a, b, c]) => <tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Mis je het openpercentage? Dat is bewust. Apple schrijft dat de functie Privacybescherming in Mail voorkomt dat afzenders kunnen zien of je hun mail hebt geopend. Daardoor zegt dat getal steeds minder. Klikken en aanvragen zeggen veel meer.</p>
+
+      <h3>Verkoop: van aanvraag naar omzet</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Indicator</th><th>Formule</th><th>Waar je het vindt</th></tr></thead>
+          <tbody>{verkoop.map(([a, b, c]) => <tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Deze laatste groep wordt vaak vergeten, omdat hij niet in een marketingtool zit. Toch is het de schakel tussen je website en je bankrekening. Duizend bezoekers zijn niets waard als niemand de offertes opvolgt. Wie zijn leads bijhoudt in een <a href="/kennisbank/wat-is/crm/">CRM</a>, heeft deze getallen met één klik.</p>
+
+      <div class="stap-kop" id="ijdel"><Tekening naam="lamp" maat={52} /><h2>IJdele cijfers die je beter laat liggen</h2></div>
+      <p>Sommige getallen voelen goed, maar sturen nergens op. In het Engels heten ze vanity metrics. Ze stijgen makkelijk en zeggen weinig over omzet.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Lijkt goed</th><th>Waarom het misleidt</th><th>Kijk liever naar</th></tr></thead>
+          <tbody>
+            <tr><td>Aantal volgers</td><td>Volgers kun je kopen of trekken met een winactie die niets met je vak te maken heeft</td><td>Aanvragen en kliks naar je site vanuit social</td></tr>
+            <tr><td>Vertoningen</td><td>Een vertoning is geen bezoek, laat staan een klant</td><td>Klikken en klikfrequentie</td></tr>
+            <tr><td>Paginaweergaven</td><td>Iemand die verdwaalt, klikt ook veel</td><td>Conversieratio per pagina</td></tr>
+            <tr><td>Posities op losse zoekwoorden</td><td>Nummer één op een woord waar niemand op zoekt, levert niets op</td><td>Klikken en aanvragen uit organisch verkeer</td></tr>
+            <tr><td>Openpercentage van mails</td><td>Door privacyfuncties onbetrouwbaar geworden</td><td>Klikratio en afspraken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Daarmee zijn ze niet waardeloos. Vertoningen helpen bij het zoeken naar de oorzaak als je klikken dalen. Gebruik ze als hulpgetal in een analyse, niet als iets waar je op stuurt.</p>
+
+      <div class="stap-kop" id="opstellen"><Tekening naam="tandwiel" maat={52} /><h2>In zes stappen je eigen KPI's opstellen</h2></div>
+      <ol class="stappen">
+        <li><b>Begin bij geld.</b> Hoeveel omzet of hoeveel nieuwe klanten wil je dit jaar uit online halen? Dat is je vertrekpunt. Niet "meer bezoekers".</li>
+        <li><b>Reken terug.</b> Hoeveel opdrachten is dat? Hoeveel aanvragen heb je daarvoor nodig? En hoeveel bezoekers? Het rekenvoorbeeld hieronder laat zien hoe.</li>
+        <li><b>Kies één hoofdgetal en een paar voorlopers.</b> Bijvoorbeeld aanvragen per maand als hoofdgetal, met klikken uit Google en conversieratio ernaast.</li>
+        <li><b>Doe een nulmeting.</b> Zoek op wat de getallen de afgelopen twaalf maanden waren. Dan zie je ook seizoenen. Een dakdekker heeft in de herfst andere aantallen dan in juli.</li>
+        <li><b>Hang er een streefwaarde en een periode aan.</b> Realistisch, maar met wat rek. Liever per kwartaal dan per week; losse weken schommelen te veel.</li>
+        <li><b>Spreek af wie kijkt en wanneer.</b> Eén eigenaar per getal en een vast moment in de maand. En vooraf: wat doen we als het onder de streefwaarde zakt?</li>
+      </ol>
+      <p>Twijfel je of de metingen kloppen? Begin dan daar. Een formulier dat niet als conversie wordt geteld, of een telefoonnummer dat niemand meet, maakt elke streefwaarde zinloos. Met <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a> zetten we dat goed, zonder cookiemelding.</p>
+
+      <div class="stap-kop" id="rekenvoorbeeld"><Tekening naam="munten" maat={52} /><h2>Rekenvoorbeeld: van omzetdoel naar streefwaarden</h2></div>
+      <p>Stel: een installatiebedrijf in Hoogeveen wil volgend jaar € 120.000 extra omzet uit de website halen. Een gemiddelde opdracht voor een warmtepomp levert € 4.000 op. Van de vier aanvragen wordt er één een opdracht. Van de honderd bezoekers op de dienstpagina's vragen er twee een offerte aan.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Berekening</th><th>Per jaar</th><th>Per maand</th></tr></thead>
+          <tbody>
+            <tr><td>Opdrachten nodig</td><td>€ 120.000 ÷ € 4.000</td><td>30</td><td>2,5</td></tr>
+            <tr><td>Aanvragen nodig</td><td>30 ÷ 25%</td><td>120</td><td>10</td></tr>
+            <tr><td>Bezoekers nodig</td><td>120 ÷ 2%</td><td>6.000</td><td>500</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld, met ronde getallen.</p>
+      <p>Nu heeft het bedrijf vier getallen om op te sturen: 500 bezoekers per maand op de dienstpagina's, een conversieratio van 2 procent, 10 aanvragen per maand en een afsluitratio van 25 procent. Het mooie van terugrekenen: je ziet meteen waar de knoppen zitten. Lukt 500 bezoekers niet, dan kan een betere conversieratio het gat dichten. Bij 3 procent heb je er nog maar 333 nodig. Dat is vaak goedkoper dan meer verkeer kopen. Lees hoe in <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a>.</p>
+      <p>Dezelfde rekensom werkt voor een webshop. Vervang de opdracht door de gemiddelde bestelling en sla de afsluitratio over.</p>
+
+      <div class="stap-kop" id="dashboard"><Tekening naam="scherm" maat={52} /><h2>Een dashboard dat je wél leest</h2></div>
+      <p>Hoeveel getallen moet je volgen? Zo weinig als je kunt. Ons advies: alles op één scherm, zonder te scrollen. Bovenaan je hoofdgetal met de streefwaarde ernaast. Daaronder twee of drie voorlopers. Per getal de vergelijking met dezelfde periode vorig jaar, zodat seizoenen je niet op het verkeerde been zetten.</p>
+      <p>Een gratis dashboard maak je in Looker Studio van Google, dat cijfers uit Analytics, Search Console en Google Ads op één plek zet. Een spreadsheet met vijf regels werkt ook. Het gereedschap doet er minder toe dan de discipline om er elke maand naar te kijken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Hoe vaak</th><th>Wat je bekijkt</th><th>Waarom</th></tr></thead>
+          <tbody>
+            <tr><td>Wekelijks</td><td>Aanvragen, advertentiekosten</td><td>Snel zien als er iets kapot is, zoals een formulier</td></tr>
+            <tr><td>Maandelijks</td><td>Klikken uit Google, conversieratio, kosten per aanvraag</td><td>Bijsturen op wat werkt en wat niet</td></tr>
+            <tr><td>Per kwartaal</td><td>Afsluitratio, omzet uit online, streefwaarden</td><td>Grote beslissingen: budget, nieuwe pagina's, stoppen met een kanaal</td></tr>
+            <tr><td>Per jaar</td><td>Klantwaarde, totale kosten per klant</td><td>Nieuwe doelen zetten</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een rapportage waar je uitleg bij nodig hebt, schiet zijn doel voorbij. Krijg je van je bureau elke maand twintig grafieken met vertoningen en sessieduur? Vraag dan om drie getallen: aanvragen, kosten per aanvraag en wat er volgende maand anders gaat.</p>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="schild" maat={52} /><h2>Veelgemaakte fouten</h2></div>
+      <p>De Britse econoom Charles Goodhart schreef in 1975 iets wat inmiddels als wet van Goodhart bekendstaat: wanneer een maatstaf een doel wordt, houdt hij op een goede maatstaf te zijn. In marketing zie je dat elke week.</p>
+      <ul>
+        <li><b>Sturen op het verkeerde getal.</b> Reken je een bureau af op het aantal leads, dan krijg je leads. Ook goedkope, slechte leads van mensen die alleen een prijs willen. Koppel aantallen daarom altijd aan kwaliteit: afsluitratio of omzet.</li>
+        <li><b>Te veel getallen.</b> Twintig meetpunten betekent dat er altijd wel eentje stijgt. Dan voelt elke maand als een succes.</li>
+        <li><b>Geen nulmeting.</b> "We zitten op 12 aanvragen" zegt niets als je niet weet of het er vorig jaar 8 of 20 waren.</li>
+        <li><b>Meten wat makkelijk is.</b> Paginaweergaven zijn makkelijk te meten. Telefoontjes uit Google niet. Toch zijn die laatste vaak het meest waard.</li>
+        <li><b>Periodes door elkaar.</b> Een week in december vergelijken met een week in maart. Vergelijk met dezelfde periode vorig jaar.</li>
+        <li><b>Nooit iets laten vallen.</b> Een getal dat al een jaar niemand iets zegt, mag van het dashboard af.</li>
+      </ul>
+
+      <div class="stap-kop" id="ondernemer"><Tekening naam="huis" maat={52} /><h2>Wat moet je ermee als ondernemer?</h2></div>
+      <p>Begin klein. Pak een vel papier en schrijf drie dingen op: hoeveel nieuwe klanten je dit jaar via online wilt, wat een klant gemiddeld oplevert, en hoeveel aanvragen er nu per maand binnenkomen. Met die drie kun je de rest uitrekenen.</p>
+      <ul class="vink">
+        <li>Controleer of elke aanvraag gemeten wordt: formulier, telefoon, mail en WhatsApp.</li>
+        <li>Kies per doel één hoofdgetal met een streefwaarde en een periode.</li>
+        <li>Zet er twee voorlopers naast die je wekelijks of maandelijks ziet.</li>
+        <li>Plan een vast moment per maand om ernaar te kijken, en spreek af wat je doet als het tegenvalt.</li>
+        <li>Vraag je bureau om op die getallen te rapporteren, niet op vertoningen.</li>
+      </ul>
+      <p>Zo werken we zelf ook. In stap vier van <a href="/werkwijze/">onze werkwijze</a> spreken we concrete targets af waar we op afgerekend kunnen worden. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Dat staat op onze <a href="/garantie/">garantiepagina</a>, met de voorwaarden erbij. Een getal dat je samen kiest, houdt beide partijen scherp.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees hoe een <a href="/kennisbank/wat-is/funnel/">funnel</a> je helpt om van bezoeker naar klant te rekenen, of zet je doelen op papier met de gids <a href="/kennisbank/gidsen/marketingplan-maken/">marketingplan maken</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is de betekenis van KPI?', a: 'KPI staat voor key performance indicator, in het Nederlands kritieke prestatie-indicator. Het is een meetbaar getal dat laat zien of je op koers ligt voor een belangrijk doel, zoals het aantal aanvragen per maand.' },
+      { v: 'Wat is het verschil tussen een doelstelling en een KPI?', a: 'De doelstelling zegt waar je heen wilt, bijvoorbeeld meer klanten uit de regio. De indicator meet of je daar komt, bijvoorbeeld offerteaanvragen per maand. Met een streefwaarde en periode erbij kun je erop sturen.' },
+      { v: 'Hoeveel KPI\'s moet je hebben?', a: 'Zo weinig mogelijk. Kies per doel één hoofdgetal en twee of drie getallen die vooruit voorspellen. Voor een mkb-bedrijf passen ze meestal samen op één scherm.' },
+      { v: 'Wat is het verschil tussen een KPI en een OKR?', a: 'OKR is een methode om doelen te stellen: één ambitieus doel met drie tot vijf meetbare resultaten. Een indicator meet doorlopend hoe iets presteert. De meetbare resultaten van een OKR zijn vaak je belangrijkste indicatoren voor dat kwartaal.' },
+      { v: 'Wat zijn goede voorbeelden voor een website?', a: 'Aanvragen per maand, conversieratio van je dienstpagina\'s, klikken uit Google op zoekopdrachten zonder je bedrijfsnaam, en kosten per aanvraag. Volgers en paginaweergaven zijn zelden een goede keuze.' },
+      { v: 'Wat is een streefwaarde?', a: 'Het getal dat je wilt halen, binnen een bepaalde periode. Bijvoorbeeld 15 aanvragen per maand in het tweede kwartaal. Zonder streefwaarde weet je niet wanneer het goed genoeg is.' },
+    ]}
+  />
+
+  <Verder
+    titel="Lees ook"
+    links={[
+      { label: 'Gids', titel: 'Google Analytics 4', href: '/kennisbank/gidsen/google-analytics-4/', tekst: 'Zo meet je aanvragen en zie je waar ze vandaan komen.' },
+      { label: 'Begrip', titel: 'Wat is CPA?', href: '/kennisbank/wat-is/cpa/', tekst: 'Wat een aanvraag kost en wat hij mag kosten.', teken: 'munten' },
+      { label: 'Dienst', titel: 'Tracking en analytics', href: '/leadgeneratie/tracking-en-analytics/', tekst: 'Weten waar je aanvragen vandaan komen, zonder cookiemelding.' },
+    ]}
+  />
+
+  <Actie titel="Welke getallen tellen voor jouw bedrijf?" tekst={`${site.contactpersoon} kijkt gratis met je mee: wordt elke aanvraag gemeten, en welke drie getallen laten zien of je online groeit? Je krijgt een eerlijk antwoord, ook als het meeste al goed staat.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .stappen li { margin-bottom: 10px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

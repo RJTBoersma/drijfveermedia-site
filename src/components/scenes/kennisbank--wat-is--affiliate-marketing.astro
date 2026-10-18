@@ -1,0 +1,74 @@
+---
+// Scène voor /kennisbank/wat-is/affiliate-marketing/: links een blog (publisher) met een affiliate link, rechts een webshop (adverteerder),
+// bovenin het netwerk dat meekijkt. Bovenste lijn: de klik met cookie. Onderste lijn: de commissie die terugkomt.
+// Als hij leeft: een bezoeker reist van de link naar de webshop, de cookie wordt gezet, het netwerk knippert en er rolt een munt terug naar het blog.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een blog met een affiliate link stuurt een bezoeker naar een webshop. Daar wordt een cookie gezet. Een netwerk in het midden meet de verkoop, en de commissie gaat terug naar het blog.'}>
+  <!-- blog -->
+  <rect x="22" y="34" width="152" height="176" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="38" y="60" font-size="12" font-weight="800">Fietsblog</text>
+  <text x="38" y="76" font-size="10" font-weight="700" class="zacht">publisher</text>
+  <rect class="v" x="38" y="88" width="120" height="8" rx="4" />
+  <rect class="v" x="38" y="104" width="104" height="8" rx="4" />
+  <rect class="v" x="38" y="120" width="112" height="8" rx="4" />
+  <rect x="38" y="136" width="106" height="24" rx="12" fill="#fff4ec" stroke="#ff6600" stroke-width="2" />
+  <text x="91" y="152" font-size="11" font-weight="800" text-anchor="middle">Bekijk de tas</text>
+  <rect class="v" x="38" y="174" width="96" height="8" rx="4" />
+
+  <!-- webshop -->
+  <rect x="306" y="34" width="152" height="176" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="322" y="60" font-size="12" font-weight="800">Webshop</text>
+  <text x="322" y="76" font-size="10" font-weight="700" class="zacht">adverteerder</text>
+  <rect class="v" x="322" y="88" width="56" height="56" rx="8" />
+  <path d="M342 108v-5a8 8 0 0 1 16 0v5" fill="none" stroke="#074663" stroke-width="3" stroke-linecap="round" />
+  <path d="M332 108h36l-3 26h-30z" fill="#074663" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+  <path d="M340 118h20" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+  <text x="390" y="104" font-size="11" font-weight="800">Fietstas</text>
+  <text x="390" y="122" font-size="11" font-weight="700" class="zacht">€ 80</text>
+  <rect x="322" y="160" width="120" height="26" rx="13" fill="#074663" />
+  <text x="382" y="177.5" font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">Bestellen</text>
+
+  <!-- klik en commissie -->
+  <path d="M146 148H306" stroke="#074663" stroke-width="2.5" stroke-dasharray="6 6" />
+  <path d="M296 142l10 6-10 6" fill="none" stroke="#074663" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="200" y="140" font-size="10" font-weight="800" text-anchor="middle" class="zacht">klik</text>
+  <path d="M306 232H174" stroke="#ff6600" stroke-width="2.5" stroke-dasharray="6 6" />
+  <path d="M184 226l-10 6 10 6" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="240" y="254" font-size="11" font-weight="800" text-anchor="middle">8% commissie</text>
+  <path d="M98 210v22h76M382 210v22h-76" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-dasharray="6 6" />
+
+  <!-- netwerk -->
+  <circle cx="240" cy="70" r="28" fill="#fff" stroke="#074663" stroke-width="2" />
+  <circle cx="240" cy="62" r="5" fill="#074663" /><circle cx="228" cy="80" r="5" fill="#074663" /><circle cx="252" cy="80" r="5" fill="#074663" />
+  <path d="M240 62L228 80H252Z" fill="none" stroke="#074663" stroke-width="1.5" />
+  <text x="240" y="114" font-size="10" font-weight="800" text-anchor="middle" class="zacht">netwerk</text>
+  <path d="M240 120v12" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="3 4" />
+
+  <!-- cookie -->
+  <circle cx="290" cy="112" r="11" fill="#ffd2b0" stroke="#ff6600" stroke-width="1.5" />
+  <circle cx="286" cy="108" r="1.8" fill="#10283f" /><circle cx="293" cy="113" r="1.8" fill="#10283f" /><circle cx="287" cy="116" r="1.6" fill="#10283f" />
+
+  {!mini && (
+    <g>
+      <g class="aff-bezoeker"><circle cx="150" cy="148" r="8" fill="#ff6600" stroke="#fff" stroke-width="2" /></g>
+      <circle class="aff-ring" cx="240" cy="70" r="28" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="aff-munt"><circle cx="300" cy="232" r="10" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" /><text x="300" y="236" font-size="11" font-weight="800" text-anchor="middle">€</text></g>
+      <g class="aff-vink"><circle cx="444" cy="173" r="10" fill="#1f8a5b" /><path d="M439 173l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+    </g>
+  )}
+</svg>
+<style>
+  .aff-ring, .aff-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .aff-bezoeker, :global(.teken-js) .aff-ring, :global(.teken-js) .aff-munt, :global(.teken-js) .aff-vink { opacity: 0; }
+  .in-beeld .aff-bezoeker { animation: kennisbank-wat-is-affiliate-marketing-klik 6s ease-in-out 0.6s infinite; }
+  .in-beeld .aff-vink { animation: kennisbank-wat-is-affiliate-marketing-vink 6s ease-out 0.6s infinite; }
+  .in-beeld .aff-ring { animation: kennisbank-wat-is-affiliate-marketing-ring 6s ease-out 0.6s infinite; }
+  .in-beeld .aff-munt { animation: kennisbank-wat-is-affiliate-marketing-munt 6s ease-in-out 0.6s infinite; }
+  @keyframes kennisbank-wat-is-affiliate-marketing-klik { 0% { opacity: 0; transform: none; } 5% { opacity: 1; } 30% { opacity: 1; transform: translateX(146px); } 36%, 100% { opacity: 0; transform: translateX(146px); } }
+  @keyframes kennisbank-wat-is-affiliate-marketing-vink { 0%, 32% { opacity: 0; transform: scale(0.4); } 38%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-affiliate-marketing-ring { 0%, 38% { opacity: 0; transform: scale(1); } 44% { opacity: 1; } 58%, 100% { opacity: 0; transform: scale(1.4); } }
+  @keyframes kennisbank-wat-is-affiliate-marketing-munt { 0%, 50% { opacity: 0; transform: none; } 55% { opacity: 1; } 85% { opacity: 1; transform: translateX(-116px); } 92%, 100% { opacity: 0; transform: translateX(-116px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .aff-bezoeker, .in-beeld .aff-vink, .in-beeld .aff-ring, .in-beeld .aff-munt { animation: none; } }
+</style>
