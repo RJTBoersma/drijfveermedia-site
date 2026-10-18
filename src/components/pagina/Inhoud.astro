@@ -40,7 +40,7 @@ const dienstHier = stap.dienst && Astro.url.pathname.startsWith(stap.dienst.url)
   if (nav && det && eersteKop && matchMedia('(max-width: 960px)').matches) {
     det.open = false;
     nav.classList.add('inhoud-boven');
-    eersteKop.before(nav);
+    (eersteKop.closest('.stap-kop') ?? eersteKop).before(nav);
     det.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { det.open = false; }));
   }
 </script>

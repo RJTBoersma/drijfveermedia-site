@@ -110,9 +110,9 @@ const pad = Astro.url.pathname;
   .acties { display: flex; align-items: center; gap: 16px; }
   .btn-sm { font-size: 1rem; padding: 0.6em 1em; white-space: nowrap; }
   .mobiel { display: none; margin-left: auto; }
-  .mobiel summary { list-style: none; width: 44px; height: 44px; display: grid; place-content: center; gap: 5px; cursor: pointer; border-radius: 10px; }
-  .mobiel summary::-webkit-details-marker { display: none; }
-  .mobiel summary span { display: block; width: 22px; height: 2px; background: var(--ink); }
+  .mobiel > summary { list-style: none; width: 44px; height: 44px; display: grid; place-content: center; gap: 5px; cursor: pointer; border-radius: 10px; }
+  .mobiel > summary::-webkit-details-marker { display: none; }
+  .mobiel > summary span { display: block; width: 22px; height: 2px; background: var(--ink); }
   .mobiel-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--panel); border-bottom: 1px solid var(--line); padding: 20px max(16px, env(safe-area-inset-left, 0px)) 24px; display: grid; gap: 18px; max-height: calc(100dvh - 72px); overflow: auto; }
   .mobiel-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
   .mobiel-panel a { color: var(--ink); text-decoration: none; font-weight: 600; display: block; padding-block: 10px; }
@@ -126,12 +126,12 @@ const pad = Astro.url.pathname;
   .pijler-menu[open] summary::after { content: '−'; }
   .pijler-menu ul { padding: 0 0 10px 12px; }
   .mobiel-panel :global(.reach) { white-space: normal; }
-  .mobiel[open] summary span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .mobiel[open] summary span:nth-child(2) { opacity: 0; }
-  .mobiel[open] summary span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  .mobiel summary span { transition: transform 0.2s, opacity 0.2s; }
+  .mobiel[open] > summary span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobiel[open] > summary span:nth-child(2) { opacity: 0; }
+  .mobiel[open] > summary span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobiel > summary span { transition: transform 0.2s, opacity 0.2s; }
   .bel-icoon { display: none; width: 44px; height: 44px; place-content: center; border-radius: 10px; color: var(--navy); border: 1.5px solid var(--line); margin-left: auto; }
-  @media (prefers-reduced-motion: reduce) { .mobiel summary span { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .mobiel > summary span { transition: none; } }
   .los { border-top: 1px solid var(--line); padding-top: 14px !important; }
   @media (max-width: 1280px) { .acties :global(.reach .lbl), .acties :global(.reach .sep) { display: none; } }
   @media (max-width: 1060px) { .acties :global(.reach) { display: none; } }
