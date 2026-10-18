@@ -48,7 +48,7 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
           <ul class="gidsen">
             {lijst.map((x: any) => (
               <li data-item data-zoek={`${x.naam} ${x.onderwerp} ${x.zoekwoord ?? ''}`.toLowerCase()}>
-                <a href={x.url}><Plaatje href={x.url} onderwerp={tekeningVoor(x.url, perOnderwerp[x.onderwerp] ?? 'boek')} /><span class="tx"><span class="kicker">{x.onderwerp}</span><b>{x.naam}</b></span></a>
+                <div class="kl"><div aria-hidden="true"><Plaatje href={x.url} onderwerp={tekeningVoor(x.url, perOnderwerp[x.onderwerp] ?? 'boek')} /></div><span class="tx"><span class="kicker">{x.onderwerp}</span><a href={x.url}><b>{x.naam}</b></a></span></div>
               </li>
             ))}
           </ul>
@@ -105,8 +105,8 @@ const begrippen = paginas.filter((p: any) => p.type === 'begrip').sort((a: any, 
   .groep h2 { margin-bottom: 18px; }
   .pijl { color: var(--orange); }
   .gidsen { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
-  .gidsen a { display: grid; align-content: start; gap: 8px; height: 100%; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; }
-  .gidsen a:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .gidsen .kl { display: grid; align-content: start; gap: 8px; height: 100%; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; }
+  .gidsen .kl:hover { border-color: var(--navy); transform: translateY(-2px); }
   .gidsen b { font-weight: 700; line-height: 1.3; }
   .begrippen a { text-decoration: none; }
   .begrippen a:hover { background: var(--navy); color: #fff; }

@@ -10,13 +10,13 @@ const standaard: Record<string, string> = { Gids: 'boek', Dienst: 'klik', Pillar
   <h2>{titel}</h2>
   <div class="raster">
     {links.map((l, i) => (
-      <a class="card" href={l.href}>
-        <Plaatje href={l.href} onderwerp={l.teken ?? standaard[l.label ?? ''] ?? 'lamp'} />
+      <div class="card kaart-link">
+        <div aria-hidden="true"><Plaatje href={l.href} onderwerp={l.teken ?? standaard[l.label ?? ''] ?? 'lamp'} /></div>
         {l.label && <span class="kicker">{l.label}</span>}
-        <h3>{l.titel}</h3>
+        <h3><a href={l.href}>{l.titel}</a></h3>
         {l.tekst && <p>{l.tekst}</p>}
-        <span class="meer">Lees meer</span>
-      </a>
+        <span class="meer" aria-hidden="true">Lees meer</span>
+      </div>
     ))}
   </div>
 </section>

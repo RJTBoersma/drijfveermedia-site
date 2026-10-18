@@ -99,10 +99,10 @@ const anker = (l: string) => `letter-${l.toLowerCase()}`;
         <ul class="kaarten">
           {lijst.map((b: any) => (
             <li>
-              <a href={b.url}>
-                <Plaatje href={b.url} onderwerp="boek" />
-                <span class="tx"><b>{b.naam}</b>{kort[b.url] && <span class="muted">{kort[b.url]}</span>}</span>
-              </a>
+              <div class="kl">
+                <div aria-hidden="true"><Plaatje href={b.url} onderwerp="boek" /></div>
+                <span class="tx"><a href={b.url}><b>{b.naam}</b></a>{kort[b.url] && <span class="muted">{kort[b.url]}</span>}</span>
+              </div>
             </li>
           ))}
         </ul>
@@ -126,12 +126,12 @@ const anker = (l: string) => `letter-${l.toLowerCase()}`;
   .groep { margin-bottom: 36px; }
   .groep h2 { font-size: var(--step-2); color: var(--navy); margin-bottom: 14px; scroll-margin-top: 150px; }
   .kaarten { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
-  .kaarten a { display: grid; align-content: start; gap: 8px; height: 100%; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; }
-  .kaarten a:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .kaarten .kl { display: grid; align-content: start; gap: 8px; height: 100%; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; }
+  .kaarten .kl:hover { border-color: var(--navy); transform: translateY(-2px); }
   .tx { display: grid; gap: 4px; }
   .tx b { font-weight: 800; line-height: 1.3; }
   .tx .muted { font-size: 0.95rem; line-height: 1.4; }
   .slot { margin-top: 8px; }
   @media (max-width: 860px) { .kop { grid-template-columns: minmax(0, 1fr); } .kop-beeld { max-width: 420px; } }
-  @media (prefers-reduced-motion: reduce) { .kaarten a { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .kaarten .kl { transition: none; } }
 </style>

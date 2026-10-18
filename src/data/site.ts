@@ -10,6 +10,10 @@ export const site = {
   geo: { lat: 52.9927, lng: 6.5295 }, // Lauwers 9 (OpenStreetMap)
   opgericht: 2011,
   openingHours: 'Mo-Fr 08:00-17:00',
+  kaart: 'https://www.google.com/maps/search/?api=1&query=Drijfveer+Media+Lauwers+9+Assen',
+  // Profielen elders (komen in het schema als sameAs en in de footer). Vul de echte URL's in.
+  // Bijvoorbeeld bedrijf: ['https://www.linkedin.com/company/...', 'https://g.page/...'], robert: ['https://www.linkedin.com/in/...']
+  profielen: { bedrijf: [] as string[], robert: [] as string[], thorgall: [] as string[], evelien: [] as string[], johan: [] as string[] } as Record<string, string[]>,
 };
 
 // Het team. Getekende portretten (zwart-wit) staan in /public/img/team/.

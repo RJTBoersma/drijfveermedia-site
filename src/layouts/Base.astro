@@ -6,7 +6,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
 import Breadcrumbs, { type Kruimel } from '../components/Breadcrumbs.astro';
-import { site } from '../data/site';
+import { site, team } from '../data/site';
+import fontLatin from '@fontsource-variable/albert-sans/files/albert-sans-latin-wght-normal.woff2?url';
 
 interface Props {
   title: string; // komt in <title> en og:title
@@ -26,6 +27,19 @@ const ogImageUrl = new URL(ogImage, site.url).href;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const orgId = `${site.url}/#organisatie`;
 
+const telefoon = site.telefoonLink.replace('tel:', '');
+const persoonId = (slug: string) => slug === 'robert' ? `${site.url}/over-ons/robert-boersma/#persoon` : `${site.url}/over-ons/#${slug}`;
+const personen = team.map((p) => ({
+  '@type': 'Person',
+  '@id': persoonId(p.slug),
+  name: p.naam,
+  jobTitle: p.rol,
+  image: `${site.url}/img/team/${p.slug}.webp`,
+  url: p.slug === 'robert' ? `${site.url}/over-ons/robert-boersma/` : `${site.url}/over-ons/`,
+  worksFor: { '@id': orgId },
+  ...(site.profielen?.[p.slug]?.length ? { sameAs: site.profielen[p.slug] } : {}),
+}));
+
 const basis = [
   {
     '@type': ['Organization', 'ProfessionalService'],
@@ -33,10 +47,13 @@ const basis = [
     name: site.naam,
     url: `${site.url}/`,
     logo: `${site.url}/icon-512.png`,
-    image: ogImageUrl,
-    telephone: '+31881155666',
+    image: `${site.url}/img/kantoor-assen.webp`,
+    description: 'Online marketingbureau in Assen voor ondernemers: gevonden worden in Google (SEO), genoemd worden door AI-assistenten (GEO) en gekozen worden met een website die aanvragen oplevert.',
+    slogan: 'Gevonden. Genoemd. Gekozen.',
+    telephone: telefoon,
     email: site.email,
     foundingDate: String(site.opgericht),
+    identifier: { '@type': 'PropertyValue', propertyID: 'KvK', value: site.kvk },
     address: {
       '@type': 'PostalAddress',
       streetAddress: site.straat,
@@ -45,26 +62,97 @@ const basis = [
       addressRegion: site.provincie,
       addressCountry: site.land,
     },
+    geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+    hasMap: site.kaart,
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', telephone: telefoon, email: site.email, areaServed: 'NL', availableLanguage: ['nl', 'en'] },
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
       opens: '08:00',
       closes: '17:00',
     },
-    areaServed: [{ '@type': 'Country', name: 'Nederland' }, 'Drenthe', 'Friesland', 'Groningen'],
+    founder: [{ '@id': persoonId('robert') }, { '@id': persoonId('evelien') }],
+    employee: team.map((p) => ({ '@id': persoonId(p.slug) })),
+    knowsAbout: ['Zoekmachine optimalisatie', 'Generative engine optimization', 'Lokale SEO', 'Linkbuilding', 'Google Ads', 'Website laten maken', 'Contentmarketing', 'E-mailmarketing'],
+    areaServed: [{ '@type': 'Country', name: 'Nederland' }, { '@type': 'AdministrativeArea', name: 'Drenthe' }, { '@type': 'AdministrativeArea', name: 'Friesland' }, { '@type': 'AdministrativeArea', name: 'Groningen' }, { '@type': 'AdministrativeArea', name: 'Overijssel' }],
     priceRange: '€€',
+    ...(site.profielen?.bedrijf?.length ? { sameAs: site.profielen.bedrijf } : {}),
   },
   { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.naam, inLanguage: 'nl-NL', publisher: { '@id': orgId } },
+  ...personen,
 ];
 
+const taal = { nl: 'nl-NL', en: 'en-GB', de: 'de-DE' }[lang];
 const kruimelSchema = kruimels.length
   ? [{
       '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
       itemListElement: [{ naam: 'Home', url: '/' }, ...kruimels].map((k, i) => ({ '@type': 'ListItem', position: i + 1, name: k.naam, item: new URL(k.url, site.url).href })),
     }]
   : [];
 
-const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruimelSchema, ...schema] };
+// Het schema van de pagina zelf netjes aan de rest koppelen: één WebPage-node, vaste @id's,
+// auteurs als verwijzing naar de Person-node en een afbeelding bij elk artikel.
+const paginaTypes = ['WebPage', 'AboutPage', 'ContactPage', 'CollectionPage', 'FAQPage', 'ItemPage', 'ProfilePage', 'CheckoutPage', 'SearchResultsPage'];
+const typen = (n: any) => ([] as string[]).concat(n?.['@type'] ?? []);
+const eigen = structuredClone(schema) as any[];
+const webpageId = `${canonical}#webpage`;
+const hernoem: Record<string, string> = {};
+let webpage = eigen.find((n) => typen(n).some((t) => paginaTypes.includes(t) && t !== 'FAQPage'));
+if (webpage) {
+  if (webpage['@id'] && webpage['@id'] !== webpageId) hernoem[webpage['@id']] = webpageId;
+  webpage['@id'] = webpageId;
+} else {
+  webpage = { '@type': 'WebPage', '@id': webpageId };
+  eigen.unshift(webpage);
+}
+Object.assign(webpage, {
+  url: webpage.url ?? canonical,
+  name: webpage.name ?? title,
+  description: webpage.description ?? description,
+  isPartOf: { '@id': `${site.url}/#website` },
+  inLanguage: webpage.inLanguage ?? taal,
+  primaryImageOfPage: webpage.primaryImageOfPage ?? { '@type': 'ImageObject', url: ogImageUrl, width: 1200, height: 630 },
+  ...(kruimels.length ? { breadcrumb: { '@id': `${canonical}#breadcrumb` } } : {}),
+});
+const naarPersoon = Object.fromEntries(team.map((p) => [p.naam, persoonId(p.slug)]));
+const fragment: Record<string, string> = { Service: 'dienst', DefinedTerm: 'begrip', Article: 'artikel', BlogPosting: 'artikel', HowTo: 'stappen', OfferCatalog: 'prijzen', ItemList: 'lijst' };
+const telling: Record<string, number> = {};
+const loop = (n: any, top = false): any => {
+  if (Array.isArray(n)) return n.map((x) => loop(x));
+  if (!n || typeof n !== 'object') return n;
+  if (n['@id'] && Object.keys(n).length === 1 && hernoem[n['@id']]) return { '@id': hernoem[n['@id']] };
+  if (typen(n).includes('Person') && naarPersoon[n.name]) return { '@id': naarPersoon[n.name] };
+  for (const k of Object.keys(n)) n[k] = loop(n[k]);
+  if (top && n !== webpage) {
+    const t = typen(n).find((x) => fragment[x]);
+    if (t && !n['@id']) { const f = fragment[t]; telling[f] = (telling[f] ?? 0) + 1; n['@id'] = `${canonical}#${f}${telling[f] > 1 ? telling[f] : ''}`; }
+    if (typen(n).some((x) => ['Article', 'BlogPosting'].includes(x))) {
+      n.image ??= ogImageUrl;
+      n.mainEntityOfPage ??= { '@id': webpageId };
+      n.publisher ??= { '@id': orgId };
+      n.inLanguage ??= taal;
+      if (!webpage.mainEntity) webpage.mainEntity = { '@id': n['@id'] };
+    }
+    if (typen(n).includes('Service')) { n.description ??= description; n.provider ??= { '@id': orgId }; }
+    if (typen(n).includes('DefinedTerm') && !webpage.mainEntity) webpage.mainEntity = { '@id': n['@id'] };
+    if (typen(n).includes('Service') && !webpage.about) webpage.about = { '@id': n['@id'] };
+  }
+  return n;
+};
+const paginaSchema = eigen.map((n) => loop(n, true));
+
+// Bronnen uit het schema ook zichtbaar maken onderaan de pagina.
+const bronnen = [...new Set(paginaSchema.flatMap((n: any) => ([] as any[]).concat(n.citation ?? [])).map((c: any) => (typeof c === 'string' ? c : c?.url)).filter(Boolean))] as string[];
+const bronNaam = (u: string) => {
+  try {
+    const x = new URL(u);
+    const stuk = decodeURIComponent(x.pathname.split('/').filter(Boolean).pop() ?? '').replace(/\.(html?|php|pdf)$/i, '').replace(/[-_]+/g, ' ').trim();
+    return { host: x.hostname.replace(/^www\./, ''), stuk: stuk && !/^\d+$/.test(stuk) ? stuk.charAt(0).toUpperCase() + stuk.slice(1) : '' };
+  } catch { return { host: u, stuk: '' }; }
+};
+
+const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruimelSchema, ...paginaSchema] };
 ---
 <!doctype html>
 <html lang={lang}>
@@ -73,8 +161,9 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
+    <meta name="color-scheme" content="light" />
+    <link rel="preload" href={fontLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
@@ -86,6 +175,7 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={locale} />
+    {alternatief.length > 0 && <link rel="alternate" hreflang={lang} href={canonical} />}
     {alternatief.map((a) => <link rel="alternate" hreflang={a.lang} href={new URL(a.url, site.url).href} />)}
     <meta property="og:site_name" content={site.naam} />
     <meta property="og:image" content={ogImageUrl} />
@@ -115,6 +205,14 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     <Breadcrumbs items={kruimels} />
     <main id="inhoud">
       <slot />
+      {bronnen.length > 0 && (
+        <section class="wrap sectie bronnen" aria-labelledby="bronnen-kop">
+          <h2 id="bronnen-kop" class="bronnen-kop">Bronnen</h2>
+          <ol>
+            {bronnen.map((u) => { const b = bronNaam(u); return <li><a href={u} rel="noopener" target="_blank">{b.host}</a>{b.stuk && <span>: {b.stuk}</span>}</li>; })}
+          </ol>
+        </section>
+      )}
     </main>
     <Footer />
     <MobileBar />

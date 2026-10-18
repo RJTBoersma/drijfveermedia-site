@@ -4,9 +4,12 @@ interface Vraag { v: string; a: string } // a mag eenvoudige HTML bevatten (link
 interface Props { titel?: string; vragen: Vraag[] }
 const { titel = 'Veelgestelde vragen', vragen } = Astro.props;
 const schone = (html: string) => html.replace(/<[^>]+>/g, '');
+const pagina = new URL(Astro.url.pathname, 'https://www.drijfveermedia.nl').href;
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  '@id': `${pagina}#faq`,
+  isPartOf: { '@id': `${pagina}#webpage` },
   mainEntity: vragen.map((q) => ({ '@type': 'Question', name: q.v, acceptedAnswer: { '@type': 'Answer', text: schone(q.a) } })),
 };
 ---

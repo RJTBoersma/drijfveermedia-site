@@ -93,13 +93,13 @@ const schema = [
     </div>
     <div class="raster provincies">
       {groepen.filter((g) => g.regio).map((g) => (
-        <a class="card" href={g.regio}>
-          <Plaatje href={g.regio!} onderwerp="huis" />
+        <div class="card kaart-link">
+          <div aria-hidden="true"><Plaatje href={g.regio!} onderwerp="huis" /></div>
           <span class="kicker">Provincie</span>
-          <h3>{g.naam}</h3>
+          <h3><a href={g.regio}>Online marketing in {g.naam}</a></h3>
           <p>{g.intro}</p>
-          <span class="meer">Online marketing in {g.naam}</span>
-        </a>
+          <span class="meer" aria-hidden="true">Bekijk {g.naam}</span>
+        </div>
       ))}
     </div>
 

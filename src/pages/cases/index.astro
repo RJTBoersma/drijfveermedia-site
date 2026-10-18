@@ -64,15 +64,15 @@ const schema = [{
     <ul class="case-lijst">
       {cases.map((c) => (
         <li>
-          <a class="card case-kaart" href={c.href}>
-            <Plaatje href={c.href} onderwerp="raket" />
+          <div class="card case-kaart kaart-link">
+            <div aria-hidden="true"><Plaatje href={c.href} onderwerp="raket" /></div>
             <span class="kicker">{c.soort}</span>
-            <h3>{c.naam}</h3>
+            <h3><a href={c.href}>{c.naam}</a></h3>
             <p class="getal"><b>{c.getal}</b> <span>{c.wat}</span></p>
             <p class="muted">{c.tekst}</p>
             <ul class="chips">{c.diensten.map((d) => <li><span class="chip">{d}</span></li>)}</ul>
-            <span class="meer">Lees de case</span>
-          </a>
+            <span class="meer" aria-hidden="true">Lees de case</span>
+          </div>
         </li>
       ))}
     </ul>
