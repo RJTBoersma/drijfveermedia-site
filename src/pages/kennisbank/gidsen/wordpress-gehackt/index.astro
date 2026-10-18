@@ -32,7 +32,7 @@ const hoofdstukken = [
 ];
 const schema = [{
   '@type': 'Article',
-  headline: 'WordPress gehackt? Eerste hulp en stappenplan',
+  headline: 'WordPress gehackt? Zo herstel je je site zelf, stap voor stap',
   datePublished: gepubliceerd,
   dateModified: datum,
   author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
@@ -51,13 +51,13 @@ const schema = [{
 }];
 ---
 <Base
-  title="WordPress gehackt? Eerste hulp en stappenplan"
-  description="WordPress gehackt? Zo herken je een hack, dit doe je in het eerste uur en zo maak je je site stap voor stap schoon. Spoed? Bel ons direct."
+  title="WordPress gehackt? Zelf herstellen: stappenplan"
+  description="WordPress gehackt? Zo herken je een hack, dit doe je in het eerste uur en zo herstel je je site zelf, stap voor stap. Plus maatregelen tegen een nieuwe hack."
   kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'WordPress gehackt', url }]}
   schema={schema}
   ogType="article"
 >
-  <Hero kicker="Gids · Website" titel="WordPress gehackt? Eerste hulp en stappenplan" knop={{ tekst: `Spoed? Bel ${site.telefoon}`, href: site.telefoonLink }} bel={false}>
+  <Hero kicker="Gids · Website" titel="WordPress gehackt? Zo herstel je je site zelf, stap voor stap" knop={{ tekst: 'Naar het stappenplan', href: '#stappenplan' }} bel={false}>
     <p>Is je WordPress gehackt? Rustig blijven, en niet meteen alles weggooien. Hier lees je wat je het eerste uur doet, hoe je een hack herkent en hoe je je site stap voor stap schoon krijgt. Liever hulp? <a href="/website-laten-maken/wordpress-hack/">Wij lossen het op</a>.</p>
     <Scene slot="beeld" />
   </Hero>
@@ -121,6 +121,7 @@ const schema = [{
           <li>In Search Console staat een melding in het rapport Beveiligingsproblemen.</li>
           <li>Je hostingpartij mailt dat je site is geblokkeerd, of dat je server ineens veel mail verstuurt.</li>
           <li>Je eigen mail komt niet meer aan. Dan staat het IP-adres van je server vaak op een zwarte lijst voor spam.</li>
+          <li>Je site geeft ineens een <a href="/kennisbank/wat-is/500-fout/">500-fout</a>. Meestal is dat een kapotte plugin of update, soms een hack die bestanden heeft aangepast.</li>
         </ul>
         <h3>Wat je bezoekers merken</h3>
         <ul>
@@ -387,11 +388,6 @@ const schema = [{
         </div>
       </article>
       <aside class="zijkolom">
-        <div class="kader kader-oranje zij-spoed">
-          <p class="kader-titel">Gehackt? Bel {site.contactpersoon}</p>
-          <p><a class="spoed-tel" href={site.telefoonLink}>{site.telefoon}</a></p>
-          <p class="klein muted">Werkdagen 8.00 tot 17.00 uur</p>
-        </div>
         <Inhoud items={hoofdstukken} leestijd={24} />
       </aside>
     </div>
@@ -425,7 +421,5 @@ const schema = [{
 <style>
   .spoed-tel { font-size: var(--step-2); font-weight: 900; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; white-space: nowrap; }
   .spoed p { margin: 0 0 6px; }
-  .zij-spoed { margin: 0; }
-  .zij-spoed p { margin: 0 0 4px; }
   code { font-size: 0.9em; background: var(--chip); padding: 1px 6px; border-radius: 6px; overflow-wrap: anywhere; }
 </style>

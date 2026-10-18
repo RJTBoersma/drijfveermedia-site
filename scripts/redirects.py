@@ -2,7 +2,9 @@
 # Invoer: scripts/oude-urls.txt (uit de oude sitemap) en de tabel "Oude blogs" in scripts/briefing/STRUCTUUR.md.
 import re, json, sys
 weg = ['/404-2/']  # bestaat niet meer en heeft geen opvolger: 410 Gone
-oud = [l.strip().replace('https://www.drijfveermedia.nl', '') for l in open('scripts/oude-urls.txt') if l.strip()] + ['/DM-algemenevoorwaarden.pdf', '/wp-content/uploads/Algemene-Voorwaarden-2.pdf', '/regio/']
+oud = [l.strip().replace('https://www.drijfveermedia.nl', '') for l in open('scripts/oude-urls.txt') if l.strip()] + ['/DM-algemenevoorwaarden.pdf', '/wp-content/uploads/Algemene-Voorwaarden-2.pdf', '/regio/',
+       # Samengevoegd na het SEO-panel (18-10-2026): deze nieuwe URL's zijn opgegaan in een andere pagina
+       '/regio/groningen/', '/online-marketing-friesland/', '/kennisbank/wat-is/geo/']
 nieuw = {p['url'] for p in json.load(open('scripts/paginas.json'))}
 kaart = {}
 # 1. Blogs die in een gids opgaan (STRUCTUUR.md)
@@ -49,9 +51,10 @@ vast = {
  '/blog/hoeveel-invloed-hebben-google-recensies-op-je-ranking-in-google/': '/kennisbank/gidsen/google-reviews/',
  '/blog/6-gratis-alternatieven-voor-googles-keyword-tool/': '/kennisbank/gidsen/zoekwoordonderzoek/',
  '/blog/zoekwoorden-onderzoek/': '/kennisbank/gidsen/zoekwoordonderzoek/',
- '/blog/17-soorten-linkbait-om-je-site-te-verbeteren/': '/kennisbank/gidsen/backlinks/',
- '/blog/5-linkbuilding-tips-na-google-penguin/': '/kennisbank/gidsen/backlinks/',
- '/blog/googles-nofollow-tag-gewijzigd-de-consequenties/': '/kennisbank/gidsen/backlinks/',
+ '/blog/17-soorten-linkbait-om-je-site-te-verbeteren/': '/kennisbank/gidsen/linkbuilding-strategie/',
+ '/blog/5-linkbuilding-tips-na-google-penguin/': '/kennisbank/gidsen/linkbuilding-strategie/',
+ '/blog/8-mythes-over-linkbuilding/': '/kennisbank/gidsen/linkbuilding-strategie/',
+ '/blog/googles-nofollow-tag-gewijzigd-de-consequenties/': '/kennisbank/wat-is/dofollow/',
  '/blog/google-introduceert-penguin-2-0/': '/linkbuilding/',
  '/blog/negatieve-seo-de-keerzijde-van-googles-ranking-systeem/': '/linkbuilding/google-disavow-tool/',
  '/blog/whitelabel-seo-alleen-maar-winnaars/': '/zoekmachine-optimalisatie/seo-uitbesteden/',
@@ -63,16 +66,17 @@ vast = {
  '/blog/hoe-optimaliseer-je-voor-google-discover/': '/kennisbank/gidsen/hoger-in-google/',
  '/blog/de-voordelen-van-pillarpages/': '/kennisbank/wat-is/interne-links/',
  '/blog/mobielvriendelijkheid-wordt-nog-belangrijker-door-amp/': '/kennisbank/gidsen/website-sneller-maken/',
- '/blog/6-meest-interessante-websitestatistieken-voor-kleine-ondernemer/': '/kennisbank/gidsen/google-analytics-4/',
+ '/blog/6-meest-interessante-websitestatistieken-voor-kleine-ondernemer/': '/kennisbank/wat-is/kpi/',
  '/blog/what-the-floc-google-stopt-met-third-party-cookies/': '/kennisbank/gidsen/privacyverklaring-en-cookies/',
  '/blog/een-nieuw-waarschuwingssysteem-bij-google-ads/': '/kennisbank/gidsen/wat-is-google-ads/',
- '/blog/drie-manieren-om-meer-uit-contentmarketing-te-halen/': '/tekstschrijver/contentmarketing/',
+ '/blog/drie-manieren-om-meer-uit-contentmarketing-te-halen/': '/kennisbank/wat-is/contentmarketing/',
+ '/blog/hoe-je-blogposts-effectief-te-promoten/': '/kennisbank/gidsen/content-plan-maken/',
  '/blog/8-tips-voor-het-schrijven-van-effectieve-video-marketing-scripts/': '/tekstschrijver/',
  '/blog/promotie-seizoensgebonden-producten/': '/kennisbank/gidsen/inhaakkalender/',
  '/blog/17-tips-om-meer-twittervolgers-te-krijgen/': '/kennisbank/gidsen/social-media-planning/',
  '/blog/de-invloed-van-social-media-op-zoekmachine-optimalisatie/': '/social-media-beheer/',
  '/blog/demografie-per-sociaal-media-platform-anno-2021/': '/kennisbank/gidsen/social-media-planning/',
- '/blog/meeste-facebook-videos-worden-bekeken-zonder-geluid/': '/kennisbank/gidsen/social-media-planning/',
+ '/blog/meeste-facebook-videos-worden-bekeken-zonder-geluid/': '/kennisbank/wat-is/instagram-reels/',
  '/blog/seo-voor-pinterest/': '/social-media-beheer/',
  '/blog/tiktok-marketing-een-inleiding/': '/social-media-beheer/',
  '/blog/de-leukste-google-easter-eggs/': '/kennisbank/geavanceerd-zoeken-met-google/',
@@ -113,6 +117,17 @@ vast = {
  '/blog/zeven-tips-om-je-merk-neer-te-zetten-op-de-social-media/': '/kennisbank/gidsen/social-media-planning/',
 }
 kaart.update(vast)
+# Samengevoegde pagina's (SEO-panel, 18-10-2026): 301 naar de pagina die blijft
+kaart.update({
+ '/regio/groningen/': '/online-marketing-groningen/',
+ '/online-marketing-friesland/': '/regio/friesland/',
+ '/kennisbank/wat-is/geo/': '/kennisbank/gidsen/wat-is-geo/',
+})
+# Ketens oplossen: wijst een doel zelf weer door (bijvoorbeeld naar een samengevoegde pagina), ga dan in één stap naar het eindpunt
+for u in list(kaart):
+    gezien = {u}
+    while kaart[u] in kaart and kaart[u] not in gezien and kaart[kaart[u]] != kaart[u]:
+        gezien.add(kaart[u]); kaart[u] = kaart[kaart[u]]
 for u in oud:
     if u.startswith('/ervaringsberoepen/'): kaart.setdefault(u, '/proeflab/')
 regels, mis = [], []

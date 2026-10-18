@@ -16,8 +16,8 @@ const server = createServer((req, res) => {
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' }).catch(() => chromium.launch());
 const page = await b.newPage();
 await page.goto('http://localhost:4499/algemene-voorwaarden/', { waitUntil: 'networkidle' });
-await page.addStyleTag({ content: 'header.site-header, .site-footer, .mbar, nav[aria-label="Kruimelpad"], .kop-beeld, .zijkolom, .av-pdf, .skiplink, [class*="mobiel"] { display: none !important; } body { background: #fff !important; } .met-zijkolom { display: block !important; }' });
-await page.pdf({ path: 'public/algemene-voorwaarden.pdf', format: 'A4', margin: { top: '18mm', bottom: '18mm', left: '16mm', right: '16mm' }, printBackground: false, displayHeaderFooter: true, headerTemplate: '<span></span>', footerTemplate: '<div style="font-size:8px;width:100%;text-align:center;color:#555">Algemene voorwaarden Drijfveer Media · pagina <span class="pageNumber"></span> van <span class="totalPages"></span></div>' });
+await page.addStyleTag({ content: 'header.site-header, .site-footer, .mbar, nav[aria-label="Kruimelpad"], .kop-beeld, .zijkolom, .av-pdf, .skiplink, [class*="mobiel"] { display: none !important; } body { background: #fff !important; } .met-zijkolom { display: block !important; } .tekst, .juridisch, article { max-width: none !important; }' });
+await page.pdf({ path: 'public/algemene-voorwaarden.pdf', format: 'A4', scale: 0.72, margin: { top: '18mm', bottom: '18mm', left: '16mm', right: '16mm' }, printBackground: false, displayHeaderFooter: true, headerTemplate: '<span></span>', footerTemplate: '<div style="font-size:8px;width:100%;text-align:center;color:#555">Algemene voorwaarden Drijfveer Media · pagina <span class="pageNumber"></span> van <span class="totalPages"></span></div>' });
 await b.close(); server.close();
 if (existsSync(dist)) copyFileSync('public/algemene-voorwaarden.pdf', join(dist, 'algemene-voorwaarden.pdf'));
 console.log('pdf gemaakt');

@@ -144,7 +144,7 @@ Plaatspagina's staan in de root (/webdesign-groningen/) en linken naar hun diens
 | Werkgebied | /werkgebied/ | Kaart van het Noorden, alle plaatspagina's, ook heel Nederland |
 | Drenthe | /regio/drenthe/ | Alle diensten in Drenthe |
 | Friesland | /regio/friesland/ | Alle diensten in Friesland |
-| Groningen | /regio/groningen/ | Alle diensten in Groningen |
+| Groningen | /online-marketing-groningen/ (samengevoegd met /regio/groningen/, 301) | Alle diensten in Groningen |
 
 | Plaatspagina | URL | Zoekvolume per maand |
 |---|---|---|
@@ -155,7 +155,7 @@ Plaatspagina's staan in de root (/webdesign-groningen/) en linken naar hun diens
 | Webdesign Zwolle | /webdesign-zwolle/ | 580 |
 | Webdesign Assen | /webdesign-assen/ | 540 |
 | Webdesign Leeuwarden | /webdesign-leeuwarden/ | 520 |
-| Online marketing Friesland | /online-marketing-friesland/ | 380 |
+| Online marketing Friesland | samengevoegd met /regio/friesland/ (301) | 380 |
 | Webdesign Emmen | /webdesign-emmen/ | 360 |
 | Online marketing Leeuwarden | /online-marketing-leeuwarden/ | 360 |
 | SEO Leeuwarden | /seo-leeuwarden/ | 330 |
@@ -280,7 +280,7 @@ Korte pagina's met een definitie van één zin bovenaan.
 | Crawlbudget | /kennisbank/wat-is/crawlbudget/ |
 | Interne links | /kennisbank/wat-is/interne-links/ |
 | Entiteiten | /kennisbank/wat-is/entiteiten/ |
-| GEO (generative engine optimization) | /kennisbank/wat-is/geo/ |
+| GEO (generative engine optimization) | samengevoegd met /kennisbank/gidsen/wat-is-geo/ (301) |
 | USP | /kennisbank/wat-is/usp/ |
 | Breadcrumbs | /kennisbank/wat-is/breadcrumbs/ |
 | Call to action | /kennisbank/wat-is/call-to-action/ |

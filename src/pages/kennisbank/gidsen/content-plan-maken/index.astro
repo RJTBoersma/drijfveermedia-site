@@ -54,6 +54,16 @@ const csv = (rijen: string[][]) => '﻿' + rijen.map((r) => r.map((c) => `"${c.r
 const kalenderDownload = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv([kop, ...kalender, ['Week ..', '', '', '', '', '', '', '', '']]));
 const planDownload = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv([['Onderdeel', 'Vraag', 'Jouw antwoord'], ...plan.map(([a, b]) => [a, b, ''])]));
 
+const stapTekst = [
+  "Schrijf op wat content moet opleveren, in één getal. \"Meer naamsbekendheid\" is geen doel, want je kunt het niet meten.",
+  "Een artikel voor iedereen raakt niemand. Beschrijf je ideale klant in een paar zinnen: wie is het, wat wil hij bereiken, waar twijfelt hij over?",
+  "De beste onderwerpen liggen al op je bureau. Klanten stellen je elke week dezelfde vragen.",
+  "Groepeer de vragen. Je ziet vanzelf clusters ontstaan, zoals kosten, kiezen, onderhoud of het proces.",
+  "Lang niet iedereen die zoekt, wil meteen kopen. De ene lezer weet nog niet wat hij nodig heeft, de ander vergelijkt al drie offertes.",
+  "Een format is de vorm van je content. Lang niet elk onderwerp wordt een blog. Een vraag over kosten werkt beter als prijsuitleg met een tabel.",
+  "Nu wordt het concreet. Zet de onderwerpen in een kalender: welke week, welk format, welk kanaal, welk zoekwoord en wie het maakt.",
+  "Zet elke maand een halfuur in je agenda. Kijk dan naar de cijfers die bij je doel horen, en verder nergens naar.",
+];
 const schema = [{
   '@type': 'Article',
   headline: 'Content plan maken: in 8 stappen naar een plan dat je volhoudt',
@@ -76,7 +86,7 @@ const schema = [{
   step: [
     'Begin bij je doel en reken terug', 'Kies voor wie je schrijft', 'Verzamel de vragen van je klanten', 'Kies drie tot vijf thema\'s',
     'Leg onderwerpen op de customer journey', 'Kies formats en kanalen', 'Vul je contentkalender', 'Meet en stuur bij',
-  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, url: `${site.url}${url}#stappen` })),
+  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, text: stapTekst[i], url: `${site.url}${url}#stappen` })),
 }];
 ---
 <Base

@@ -17,6 +17,8 @@ const hoofdstukken = [
   { id: 'kantoor', titel: 'Kantoor in Drenthe, klanten in Friesland' },
   { id: 'plaatsen', titel: 'Plaatsen met een eigen pagina' },
   { id: 'diensten', titel: 'Wat we doen' },
+  { id: 'kanaal', titel: 'Welk kanaal bij welk doel' },
+  { id: 'maand', titel: 'Zo ziet een maand eruit' },
   { id: 'resultaat', titel: 'Wat dit elders opleverde' },
   { id: 'sectoren', titel: 'Waar het meest te halen is' },
   { id: 'strategie', titel: 'Van koffie tot resultaat' },
@@ -29,7 +31,7 @@ const plaatsen = [
   { plaats: 'Heerenveen', over: 'Gemeente met 51.787 inwoners en 7.015 vestigingen, waarvan 1.765 in de zakelijke dienstverlening.', links: [['Webdesign', '/webdesign-heerenveen/'], ['SEO', '/seo-heerenveen/'], ['Online marketing', '/online-marketing-heerenveen/']] },
   { plaats: 'Sneek', over: 'Ligt in Súdwest-Fryslân, na Leeuwarden de gemeente met de meeste vestigingen: 12.660.', links: [['Webdesign', '/webdesign-sneek/'], ['Online marketing', '/online-marketing-sneek/']] },
   { plaats: 'Joure', over: 'Ligt in De Fryske Marren, waar 22 procent van de werkende inwoners zelfstandige is.', links: [['Webdesign', '/webdesign-joure/']] },
-  { plaats: 'Heel Friesland', over: 'Voor bedrijven die in de hele provincie klanten zoeken.', links: [['Webdesign', '/webdesign-friesland/'], ['SEO', '/seo-friesland/'], ['Online marketing', '/online-marketing-friesland/']] },
+  { plaats: 'Heel Friesland', over: 'Voor bedrijven die in de hele provincie klanten zoeken.', links: [['Webdesign', '/webdesign-friesland/'], ['SEO', '/seo-friesland/']] },
 ];
 const schema = [{
   '@type': 'Service',
@@ -39,10 +41,17 @@ const schema = [{
   areaServed: { '@type': 'AdministrativeArea', name: 'Friesland' },
   url: `${site.url}${url}`,
   dateModified: datum,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', price: 595, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+}, {
+  '@type': 'WebPage',
+  citation: [
+    'https://www.cbs.nl/nl-nl/cijfers/detail/85984NED',
+    'https://www.cbs.nl/nl-nl/cijfers/detail/82061NED',
+  ],
 }];
 ---
 <Base
-  title="Marketingbureau Friesland | Drijfveer Media"
+  title="Marketingbureau Friesland: online marketing vanaf € 295 p/m"
   description="Marketingbureau voor Friesland: SEO, websites, GEO en Google Ads voor ondernemers van Leeuwarden tot Lemmer. Vanuit Assen, met vaste vanaf-prijzen."
   kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Friesland', url }]}
   schema={schema}
@@ -89,7 +98,7 @@ const schema = [{
             </div>
           ))}
         </div>
-        <p class="muted klein">Cijfers: CBS, Kerncijfers wijken en buurten 2024, per gemeente.</p>
+        <p class="muted klein">Cijfers: <a href="https://www.cbs.nl/nl-nl/cijfers/detail/85984NED" rel="noopener">CBS, Kerncijfers wijken en buurten 2024</a>, per gemeente.</p>
         <h3>En de rest van Friesland</h3>
         <p>Zit je in Harlingen, Franeker, Dokkum, Wolvega, Bolsward of Lemmer? Ook dan helpen we je graag. Elke plaats vraagt om andere zoekwoorden, maar de aanpak is dezelfde. Een paar dingen die opvallen in de cijfers:</p>
         <div class="tabel-scroll">
@@ -135,7 +144,45 @@ const schema = [{
             <p><a href="/website-laten-maken/">Websites</a> vanaf € 250, een <a href="/branding/huisstijl-laten-maken/">huisstijl</a> vanaf € 995. Een eerste indruk die past bij wie je bent.</p>
           </div>
         </div>
-        <p>Geen vast pakket dus. Bij de ene klant ligt de grootste kans in een beter Google Bedrijfsprofiel, bij de andere in een website die eindelijk laat zien wat het bedrijf kan. De uitvoering doen we zelf, met ons team van vier en een vaste groep freelancers die we al jaren kennen. Zo werken we voor eenmanszaken en voor grotere organisaties. Wil je alles in één hand, kijk dan bij <a href="/online-marketing-friesland/">online marketing in Friesland</a>, vanaf € 595 per maand.</p>
+        <p>Geen vast pakket dus. Bij de ene klant ligt de grootste kans in een beter Google Bedrijfsprofiel, bij de andere in een website die eindelijk laat zien wat het bedrijf kan. De uitvoering doen we zelf, met ons team van vier en een vaste groep freelancers die we al jaren kennen. Zo werken we voor eenmanszaken en voor grotere organisaties. Wil je alles in één hand, dan kan dat vanaf € 595 per maand met <a href="/online-marketing-uitbesteden/">online marketing uitbesteden</a>: één aanspreekpunt, één plan en elke maand één A4 met wat het opleverde.</p>
+        <p>Een paar dingen laten we bewust aan anderen. Advertenties op Facebook, Instagram, LinkedIn, TikTok of Microsoft doen we niet. Webshops bouwen of optimaliseren ook niet; Google Shopping voor een bestaande webshop wel. Wij richten ons op klanten die nu al zoeken naar wat jij doet: in Google, in je bedrijfsprofiel en steeds vaker in AI-assistenten.</p>
+
+        <h2 id="kanaal">Online marketing in Friesland: welk kanaal bij welk doel?</h2>
+        <p>Een bakker in Joure wil klanten binnen een paar kilometer. Een installateur in Heerenveen werkt in de halve provincie. Een jachthaven aan het Sneekermeer zoekt gasten in heel Nederland en Duitsland. Drie bedrijven, drie verschillende plannen. Dit is waar we meestal beginnen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Je wilt</th><th>Wat meestal het meest oplevert</th><th>Hoe snel</th></tr></thead>
+            <tbody>
+              <tr><td>Meer telefoontjes uit je eigen regio</td><td>Lokale SEO en een sterk Google Bedrijfsprofiel, vanaf € 295 per maand</td><td>Kleine winst vaak binnen een paar weken</td></tr>
+              <tr><td>Deze maand nog aanvragen voor een nieuwe dienst</td><td>Een gerichte campagne in Google Ads</td><td>Online na goedkeuring door Google, meestal binnen een werkdag</td></tr>
+              <tr><td>Op lange termijn minder afhankelijk zijn van advertenties</td><td>SEO en <a href="/linkbuilding/">linkbuilding</a>, met stijggarantie</td><td>Drie tot zes maanden</td></tr>
+              <tr><td>Genoemd worden als iemand ChatGPT om advies vraagt</td><td>GEO, vanaf € 495 per maand</td><td>Een paar maanden</td></tr>
+              <tr><td>Gasten of klanten vaker terug laten komen</td><td><a href="/leadgeneratie/e-mailmarketing/">E-mailmarketing</a>, vanaf € 295 per maand</td><td>Vanaf de eerste mailing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kies je voor zoekmachine adverteren, dan betaal je per klik en stopt het verkeer zodra je budget op is. SEO kost meer tijd, maar blijft werken. De meeste Friese mkb'ers hebben baat bij een mix: adverteren voor nu, SEO voor straks.</p>
+
+        <h2 id="maand">Zo ziet een maand online marketing eruit</h2>
+        <p>Wat doen we eigenlijk voor dat maandbedrag? Een voorbeeld van één maand voor een verzonnen installatiebedrijf in Heerenveen, dat vooral meer aanvragen voor warmtepompen wil.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kanaal</th><th>Wat we die maand doen</th></tr></thead>
+            <tbody>
+              <tr><td>SEO</td><td>Een nieuwe pagina over warmtepompen, met prijzen en vragen van klanten. Twee bestaande pagina's verbeterd.</td></tr>
+              <tr><td>Google Bedrijfsprofiel</td><td>Vier nieuwe foto's van klussen, één bericht, reacties op drie reviews.</td></tr>
+              <tr><td>Google Ads</td><td>Zoektermen nagekeken, tien woorden uitgesloten die geld kostten zonder aanvragen.</td></tr>
+              <tr><td>E-mail</td><td>Een mailing aan bestaande klanten over onderhoud voor de winter.</td></tr>
+              <tr><td>Rapport</td><td>Eén A4: hoeveel mensen belden, mailden en via welk kanaal.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Verzonnen voorbeeld. Wat er per maand gebeurt, hangt af van je doel en je markt.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Dit bedrijf geeft € 595 per maand uit aan ons werk en € 400 aan advertenties. Samen € 995. Dat levert in deze maand 14 aanvragen op, dus een aanvraag kost ongeveer € 71. Wordt een op de drie aanvragen een klant, dan kost een klant zo'n € 213. Is een klant gemiddeld € 1.000 waard, dan is het rendement duidelijk. Is een klant € 150 waard, dan moet het plan anders.</p>
+        </div>
+        <p>Zo zie je per kanaal wat een aanvraag kost. Dat meten kan zonder cookiemelding, met <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>. Een kanaal dat duur blijft, schrappen we.</p>
 
         <h2 id="resultaat">Wat dit elders opleverde</h2>
         <p>Onze cases komen niet uit Friesland. Ze hebben wel echte cijfers, en ze laten zien hoe we werken. Die aanpak is in Friesland niet anders.</p>
@@ -155,7 +202,7 @@ const schema = [{
         <p>Met 17.645 vestigingen is dit de grootste sector van de provincie. Wie een accountant of adviseur zoekt, vraagt dat steeds vaker eerst aan ChatGPT of Google AI. Wie daar genoemd wil worden, heeft een duidelijke online aanwezigheid nodig: dezelfde gegevens overal, heldere antwoorden op je site en vermeldingen op andere sites.</p>
         <div class="stap-kop"><Tekening naam="ster" maat={44} vertraging={450} /><h3>Winkels, horeca en ambachten</h3></div>
         <p>Handel en horeca zijn samen goed voor 15.775 vestigingen. In plaatsen als Sneek, Joure en Dokkum werkt lokaal gevonden worden het best. Een volledig Google Bedrijfsprofiel, echte foto's en reviews van klanten uit de buurt. Het is weinig werk en het levert vaak het meeste op. Reviews vragen kost niets, alleen een beetje discipline.</p>
-        <p class="muted klein">Sectorcijfers: CBS, Kerncijfers wijken en buurten 2024, opgeteld voor de 18 Friese gemeenten. Hotelgasten: CBS, 2025.</p>
+        <p class="muted klein">Sectorcijfers: <a href="https://www.cbs.nl/nl-nl/cijfers/detail/85984NED" rel="noopener">CBS, Kerncijfers wijken en buurten 2024</a>, opgeteld voor de 18 Friese gemeenten. Hotelgasten: <a href="https://www.cbs.nl/nl-nl/cijfers/detail/82061NED" rel="noopener">CBS, Hotels; gasten, overnachtingen, woonland, regio</a>, 2025.</p>
 
         <h2 id="strategie">Van koffie tot resultaat: zo werkt ons marketingbureau voor Friesland</h2>
         <ol>
@@ -218,7 +265,7 @@ const schema = [{
     links={[
       { label: 'Friesland', titel: 'Webdesign in Friesland', href: '/webdesign-friesland/', tekst: 'Een snelle website die Friese klanten overtuigt.', teken: 'scherm' },
       { label: 'Friesland', titel: 'SEO in Friesland', href: '/seo-friesland/', tekst: 'Beter vindbaar in de hele provincie.', teken: 'vergrootglas' },
-      { label: 'Regio', titel: 'Groningen', href: '/regio/groningen/', tekst: 'Onze diensten in de buurprovincie.' },
+      { label: 'Regio', titel: 'Online marketing in Groningen', href: '/online-marketing-groningen/', tekst: 'Onze diensten in de buurprovincie.' },
       { label: 'Overzicht', titel: 'Ons werkgebied', href: '/werkgebied/', tekst: 'Alle plaatsen in het Noorden op een rij.' },
     ]}
   />

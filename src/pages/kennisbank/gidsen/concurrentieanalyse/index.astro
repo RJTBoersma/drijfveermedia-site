@@ -51,6 +51,15 @@ const matrixCsv = '﻿' + [
 ].map((r) => r.map(csvCel).join(';')).join('\r\n');
 const matrixDownload = 'data:text/csv;charset=utf-8,' + encodeURIComponent(matrixCsv);
 
+const stapTekst = [
+  "Begin met een vraag, anders verzamel je alleen maar feitjes. Bijvoorbeeld: \"Waarom verliezen we offertes aan bedrijf B?\" of \"Kunnen we 10% duurder worden?\" of \"Waarom staan we niet in het kaartje van Google?\" Die vraag bepaalt welke concurrenten en welke punten je onderzoekt.",
+  "Meer is niet beter. Met vijf kun je diep gaan, met twintig blijf je aan de oppervlakte.",
+  "Bepaal vooraf op welke punten je iedereen beoordeelt. Dan vergelijk je appels met appels. Denk aan prijzen, aanbod, kwaliteit, service, garantie, website, vindbaarheid en reviews.",
+  "Werk per concurrent dezelfde lijst af. Noteer wat je ziet, niet wat je denkt. \"Geen prijzen op de site\" is een feit.",
+  "Geef iedereen per criterium een score van 1 tot 5, jezelf ook. Wees streng voor jezelf, en vraag een klant of collega om mee te kijken.",
+  "Kijk naar de matrix en schrijf drie lijstjes. Waar ben jij duidelijk beter? Waar loop je achter?",
+  "Een analyse zonder actie is een hobby. Kies één tot drie punten waarin je je gaat onderscheiden.",
+];
 const schema = [{
   '@type': 'Article',
   headline: 'Concurrentieanalyse maken: zo vind je je voorsprong',
@@ -74,7 +83,7 @@ const schema = [{
   step: [
     'Bepaal wat je wilt weten', 'Kies drie tot vijf concurrenten', 'Kies je criteria en hun gewicht', 'Verzamel de informatie',
     'Vul de concurrentiematrix in', 'Benoem sterke punten, zwakke punten en gaten', 'Kies je positionering en maak er acties van',
-  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, url: `${site.url}${url}#stappen` })),
+  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, text: stapTekst[i], url: `${site.url}${url}#stappen` })),
 }];
 ---
 <Base

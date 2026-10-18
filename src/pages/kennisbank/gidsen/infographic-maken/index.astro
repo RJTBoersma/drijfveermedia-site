@@ -44,6 +44,17 @@ const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
   checklist.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
   `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
 );
+const stapTekst = [
+  "Wat moet de lezer na het kijken weten of doen? En wie is die lezer? Een plaat voor vakgenoten mag vaktermen bevatten.",
+  "Een infographic met vijf boodschappen heeft er geen. Vat het verhaal samen in één zin. Die zin wordt meestal je titel.",
+  "Goede cijfers maken je plaat betrouwbaar en deelbaar. Er zijn drie soorten bronnen.",
+  "De vraag is niet welke grafiek mooi is, maar wat je wilt laten zien. Deze tabel helpt bij het kiezen.",
+  "Pak pen en papier voordat je een tool opent. Een schets kost vijf minuten en voorkomt uren schuiven.",
+  "Begin bij je huisstijl. Een infographic in je eigen kleuren herken je later terug, ook als iemand anders hem deelt.",
+  "Nu pas open je een programma. Welke tool past, lees je hieronder. Werk met een raster, zodat blokken netjes uitlijnen.",
+  "Laat iemand die het onderwerp niet kent tien seconden kijken. Vraag daarna wat de boodschap was.",
+  "Een infographic die alleen op je computer staat, levert niets op. Zet hem op een eigen pagina op je site, met uitleg erbij.",
+];
 const schema = [{
   '@type': 'Article',
   headline: 'Infographic maken: van losse cijfers naar één helder beeld',
@@ -70,7 +81,7 @@ const schema = [{
   step: [
     'Bepaal doel en doelgroep', 'Kies één boodschap', 'Verzamel data en bronnen', 'Kies de juiste grafiek', 'Schets de indeling op papier',
     'Kies kleuren, lettertype en pictogrammen', 'Bouw het ontwerp in een tool', 'Laat het controleren', 'Publiceer en deel',
-  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, url: `${site.url}${url}#stappen` })),
+  ].map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s, text: stapTekst[i], url: `${site.url}${url}#stappen` })),
 }];
 ---
 <Base
