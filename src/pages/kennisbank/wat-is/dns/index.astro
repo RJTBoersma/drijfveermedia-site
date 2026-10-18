@@ -8,6 +8,7 @@ import Tekening from '../../../../components/teken/Tekening.astro';
 import Scene from '../../../../components/scenes/kennisbank--wat-is--dns.astro';
 import { site, persoon } from '../../../../data/site';
 import { overgang } from '../../../../data/miniaturen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
 
 const url = '/kennisbank/wat-is/dns/';
 const datum = '2026-10-18';
@@ -134,6 +135,7 @@ const schema = [
       <p>Een subdomein is een naam vóór je domein, zoals www.jouwbedrijf.nl, offerte.jouwbedrijf.nl of mail.jouwbedrijf.nl. Je maakt het aan met een eigen A-record of een CNAME. Zo kan een afsprakenmodule van een externe leverancier gewoon onder jouw naam draaien, terwijl de rest van je site blijft waar hij staat.</p>
       <p>Twee dingen om te onthouden. Een CNAME mag niet naast andere records op dezelfde naam staan, en daarom zet je hem niet op het kale domein zelf. En bij MX geldt: het laagste prioriteitsgetal krijgt de mail eerst. Een tweede MX met een hoger getal is de reserve.</p>
 
+      <Tussenactie />
       <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="ttl">TTL, DNS-cache en propagatie</h2></div>
       <p>Weet je nog, die resolver die het antwoord een tijdje bewaart? Hoe lang, dat bepaal jij met de TTL: time to live. Die waarde staat bij elk record, in seconden. Een TTL van 3600 betekent: onthoud dit een uur, vraag het daarna opnieuw.</p>
       <p>Dat bewaren heet de DNS-cache. Het maakt internet snel, maar het verklaart ook waarom een wijziging niet overal tegelijk zichtbaar is. Elke resolver ter wereld houdt het oude antwoord vast tot zijn TTL is verlopen. Het moment waarop alle oude antwoorden zijn vervangen, noemen mensen propagatie. Vroeger hoorde je vaak "dat duurt 24 tot 48 uur". In werkelijkheid hangt het vooral af van de TTL die er vóór je wijziging stond.</p>
@@ -169,6 +171,7 @@ const schema = [
       </ol>
       <p>Hadden ze in plaats daarvan de nameservers naar partij B verhuisd, dan was het anders gelopen. Nieuwe nameservers beginnen vaak met een lege of standaardset records. Het MX-record naar Microsoft was dan verdwenen, en de hele ochtend was er geen mail binnengekomen. Juist die fout zien we het vaakst.</p>
 
+      <Tussenactie />
       <h2 id="fouten">Fouten die we vaak zien</h2>
       <ul>
         <li><strong>Het domein staat op naam van de webbouwer.</strong> Gaat die failliet of stopt hij, dan ben je je adres kwijt. Een domeinnaam hoort op jouw naam te staan, in een account waar jij bij kunt.</li>

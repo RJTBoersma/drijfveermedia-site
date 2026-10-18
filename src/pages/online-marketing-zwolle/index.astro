@@ -1,0 +1,161 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Scene from '../../components/scenes/online-marketing-zwolle.astro';
+import { site } from '../../data/site';
+
+const url = '/online-marketing-zwolle/';
+const schema = [{
+  '@type': 'Service',
+  name: 'Online marketing in Zwolle',
+  serviceType: 'Online marketing uitbesteden',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: [{ '@type': 'City', name: 'Zwolle' }, { '@type': 'AdministrativeArea', name: 'Overijssel' }],
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', price: 595, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+}];
+
+// CBS, Internettoegang en internetactiviteiten; persoonskenmerken (tabel 84888NED), 2025. Personen van 12 jaar en ouder.
+const leeftijden = [
+  { groep: '12 tot 25 jaar', social: '93%', mail: '93%', zoeken: '82%' },
+  { groep: '25 tot 35 jaar', social: '92%', mail: '98%', zoeken: '94%' },
+  { groep: '35 tot 45 jaar', social: '85%', mail: '99%', zoeken: '95%' },
+  { groep: '45 tot 55 jaar', social: '82%', mail: '99%', zoeken: '94%' },
+  { groep: '55 tot 65 jaar', social: '74%', mail: '96%', zoeken: '88%' },
+  { groep: '65 tot 75 jaar', social: '59%', mail: '94%', zoeken: '83%' },
+  { groep: '75 jaar of ouder', social: '31%', mail: '73%', zoeken: '60%' },
+];
+---
+<Base
+  title="Online marketing Zwolle: wat werkt in 2026 | Drijfveer Media"
+  description="Online marketing in Zwolle die past bij je doelgroep. SEO, Google Ads, e-mail en social media, gekozen op cijfers. Vanaf € 595 per maand, maandelijks opzegbaar."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Online marketing Zwolle', url }]}
+  schema={schema}
+>
+  <Hero kicker="Advies · Zwolle" titel="Online marketing in Zwolle: de kanalen die jouw klant echt gebruikt" prijs="vanaf € 595 per maand">
+    <p>Zwolle is jonger dan gemiddeld en telt duizenden studenten, gezinnen en zakelijke kopers. Elke groep zit op andere kanalen. Bij online marketing in Zwolle kiezen we op cijfers waar jouw klant zit, en daar zetten we je budget in.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Online marketing in Zwolle begint bij je doelgroep</h2>
+      <p>Veel bureaus beginnen bij hun eigen aanbod. Een pakket social media, een pakket Google Ads. Wij beginnen bij de vraag wie je klant is. In Zwolle maakt dat veel uit, want de stad is anders opgebouwd dan het land als geheel.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Leeftijd</th><th>Zwolle</th><th>Nederland</th></tr></thead>
+          <tbody>
+            <tr><td>0 tot 15 jaar</td><td>16,2%</td><td>15,0%</td></tr>
+            <tr><td>15 tot 25 jaar</td><td>13,1%</td><td>12,2%</td></tr>
+            <tr><td>25 tot 45 jaar</td><td><b>28,3%</b></td><td>25,8%</td></tr>
+            <tr><td>45 tot 65 jaar</td><td>25,0%</td><td>26,2%</td></tr>
+            <tr><td>65 jaar of ouder</td><td><b>17,3%</b></td><td>20,8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: CBS, Kerncijfers wijken en buurten 2025. Zwolle telde toen 133.810 inwoners.</p>
+      <p>Zwolle heeft naar verhouding meer kinderen, meer mensen tussen 25 en 45 en minder ouderen. In Stadshagen, de grootste wijk, is ruim een vijfde van de inwoners jonger dan 15. Daar komen de studenten bij. Het CBS telt in de gemeente 4.820 hbo-studenten, 3.800 mbo-studenten en 1.160 wo-studenten. Met Windesheim, Viaa, ArtEZ en het Deltion College is Zwolle een echte onderwijsstad.</p>
+      <p>Tegelijk is de stad niet overal jong. In de Aa-landen is ruim een kwart van de inwoners 65 of ouder. Een fysiotherapeut daar heeft een andere <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a> dan een sportschool in Stadshagen. Dan werkt ook een andere aanpak.</p>
+
+      <h2>Welk kanaal welke leeftijd bereikt</h2>
+      <p>Het CBS meet elk jaar wat Nederlanders online doen. De cijfers over 2025 laten goed zien waar je welke klant vindt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Leeftijd</th><th>Gebruikt sociale netwerken</th><th>Mailt</th><th>Zoekt online informatie over producten</th></tr></thead>
+          <tbody>
+            {leeftijden.map((l) => <tr><td><b>{l.groep}</b></td><td>{l.social}</td><td>{l.mail}</td><td>{l.zoeken}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: CBS, Internettoegang en internetactiviteiten; persoonskenmerken, 2025. Landelijke cijfers, personen van 12 jaar en ouder, afgerond.</p>
+      <p>Drie lessen voor ondernemers in Zwolle:</p>
+      <ul class="vink">
+        <li><strong>E-mail bereikt bijna iedereen.</strong> Tot 75 jaar mailt meer dan 9 op de 10 mensen. Een nieuwsbrief aan vaste klanten is dus voor bijna elke doelgroep zinvol.</li>
+        <li><strong>Social media wordt dunner boven de 55.</strong> Bij 65- tot 75-jarigen zit 59 procent op een sociaal netwerk, boven de 75 nog maar 31 procent. Verkoop je aan ouderen, dan zijn Google en e-mail betrouwbaarder.</li>
+        <li><strong>Zoeken doet bijna iedereen.</strong> Tussen 25 en 55 jaar zoekt meer dan 9 op de 10 online informatie over producten. Precies de grootste groep in Zwolle. Daarom staat vindbaarheid in Google bij ons bijna altijd bovenaan.</li>
+      </ul>
+
+      <h2>De kanalen, wat ze doen en wat ze kosten</h2>
+      <p>Online marketing is een verzamelnaam. Dit zijn de kanalen die wij inzetten, met onze vanaf-prijzen, exclusief btw.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kanaal</th><th>Wat het doet</th><th>Eerste effect</th><th>Vanaf</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/seo-zwolle/">SEO</a></td><td>Gevonden worden op wat klanten intypen</td><td>Na een paar maanden</td><td>€ 495 p/m</td></tr>
+            <tr><td><a href="/lokale-seo/">Lokale SEO</a></td><td>Bovenaan in het kaartje van Google</td><td>Vaak binnen weken</td><td>€ 295 p/m</td></tr>
+            <tr><td><a href="/online-adverteren/google-ads-bureau/">Google Ads</a></td><td>Direct bovenaan, je betaalt per klik</td><td>Binnen dagen</td><td>Naar budget</td></tr>
+            <tr><td><a href="/leadgeneratie/e-mailmarketing/">E-mailmarketing</a></td><td>Vaste klanten vaker laten terugkomen</td><td>Bij de eerste mailing</td><td>€ 295 p/m</td></tr>
+            <tr><td><a href="/social-media-beheer/">Social media beheer</a></td><td>Je kanalen actief en herkenbaar</td><td>Bouwt langzaam op</td><td>€ 395 p/m</td></tr>
+            <tr><td><a href="/tekstschrijver/contentmarketing/">Contentmarketing</a></td><td>Elke maand artikelen die vragen beantwoorden</td><td>Na een paar maanden</td><td>€ 495 p/m</td></tr>
+            <tr><td><a href="/generative-engine-optimization/">GEO</a></td><td>Genoemd worden door ChatGPT en Google AI</td><td>Na een paar maanden</td><td>€ 495 p/m</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Advertenties op social media, Microsoft Ads en influencers doen we niet. Liever een paar kanalen goed dan alles half. Wil je alles in één hand, met één maandbedrag? Dan is <a href="/online-marketing-uitbesteden/">online marketing uitbesteden</a> vanaf € 595 per maand de route.</p>
+
+      <h2>Drie Zwolse voorbeelden: waar begin je?</h2>
+      <p>Drie verzonnen bedrijven, drie keer een andere eerste stap. Zo denken we in het eerste gesprek mee over je strategie.</p>
+      <h3>Een kapsalon in Assendorp</h3>
+      <p>Klanten wonen in de buurt en boeken vaak op hun telefoon. Eerst het Google Bedrijfsprofiel op orde: foto's, behandelingen, openingstijden en reviews met een antwoord. Daarna een maandelijkse mail aan vaste klanten met een tip of een vrije plek. Instagram komt pas daarna.</p>
+      <h3>Een installateur op Marslanden</h3>
+      <p>Hij werkt in heel Zwolle, Kampen en Dalfsen, en wil meer aanvragen voor warmtepompen. Google Ads op een paar offertewoorden levert snel aanvragen op. Ondertussen bouwen we met SEO pagina's per dienst, zodat de klikkosten later omlaag kunnen.</p>
+      <h3>Een adviesbureau in de binnenstad</h3>
+      <p>Zakelijke kopers lezen eerst en bellen laat. Hier werken artikelen die echte vragen beantwoorden, met SEO eronder. E-mailmarketing houdt het contact warm tot de klant klaar is om te kiezen. Steeds vaker begint zo'n koper bij een AI-assistent, dus helpt ook GEO.</p>
+
+      <h2>Meten wat het oplevert: conversie en analytics</h2>
+      <p>Meer bezoekers is mooi. Meer aanvragen is beter. Het percentage bezoekers dat belt, mailt of een formulier invult, heet de conversie. Vaak zit daar de snelste winst.</p>
+      <div class="kader">
+        <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+        <p>Een website in Zwolle krijgt 1.500 bezoekers per maand. Eén procent vraagt een offerte aan: 15 aanvragen. Na een betere contactpagina en een belknop die altijd in beeld staat, stijgt dat naar twee procent. Dan zijn het er 30. Dat is een verdubbeling, met precies hetzelfde aantal bezoekers en zonder extra advertentiebudget.</p>
+      </div>
+      <p>Om dat te zien, moet je meten. Met <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a> vanaf € 395 weet je waar je aanvragen vandaan komen, zonder cookiemelding. En wil je de conversie zelf laten verbeteren, dan kan dat met <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>, ook vanaf € 395.</p>
+      <p>Elke maand krijg je een korte rapportage. Wat leverde het op, wat kostte het, wat werkte niet en wat doen we nu anders. Snap je hem niet zonder uitleg, dan hebben wij iets fout gedaan.</p>
+
+      <h2>Waarom geen marketingbureau in Zwolle zelf?</h2>
+      <p>Dat kan natuurlijk. Er zitten genoeg bureaus in de stad. We zijn eerlijk over waar wij zitten: in Assen, 76 kilometer verderop. Met de auto ben je er in ongeveer een uur, over de A28. Met de trein kan het ook, want tussen Assen en Zwolle rijdt elk half uur een rechtstreekse intercity.</p>
+      <p>Voor de kennismaking komen we graag naar je toe, of je komt langs aan de Lauwers. Daarna gaat het meeste werk via telefoon, mail en video. Je hebt één vast aanspreekpunt, {site.contactpersoon}, die je op werkdagen binnen 15 minuten terugbelt. Zwolle ligt in Overijssel, net buiten het Noorden, maar voor ons dichtbij.</p>
+      <p>Kies je toch voor een bureau in Zwolle, let dan vooral op wat er na de handtekening gebeurt. Een gelikte pitch zegt daar weinig over. Vraag naar een echte rapportage en naar een klant die al jaren blijft.</p>
+
+      <h2>Zo werken we samen</h2>
+    </div>
+    <ol class="stappen-rij">
+      <li><strong>Binnen 15 minuten gebeld</strong><p>Uit interesse, niet om je iets te verkopen.</p></li>
+      <li><strong>Vragen tot het klopt</strong><p>Wie is je klant, waar zit hij en wat wil jij bereiken?</p></li>
+      <li><strong>Kansen op tafel</strong><p>Telefonisch, bij ons in Assen of bij jou in Zwolle.</p></li>
+      <li><strong>Doelen afspreken</strong><p>Een lage start en targets waarop je ons kunt afrekenen.</p></li>
+      <li><strong>Eerst de grootste kans</strong><p>Daarna schaven we bij, maand na maand.</p></li>
+    </ol>
+    <div class="tekst" style="margin-top:32px">
+      <p>Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is. Lees de voorwaarden bij onze <a href="/garantie/">garantie</a>. Alleen een vraag of een second opinion? Een <a href="/consult/">consult</a> van een uur kan ook.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost online marketing in Zwolle?', a: 'Online marketing uitbesteden begint bij € 595 per maand. Losse kanalen kan ook: lokale SEO vanaf € 295, SEO vanaf € 495 en e-mailmarketing vanaf € 295 per maand. Bij Google Ads komt je advertentiebudget erbij. Alle prijzen zijn exclusief btw.' },
+      { v: 'Zitten jullie in Zwolle?', a: 'Nee, ons enige kantoor staat in Assen, ongeveer een uur rijden. Voor een kennismaking komen we naar je toe. Daarna werken we vooral via telefoon, mail en video.' },
+      { v: 'Welke kanalen raden jullie aan?', a: 'Dat hangt af van je doelgroep. Voor de meeste bedrijven in Zwolle begint het bij vindbaarheid in Google, omdat bijna iedereen tussen 25 en 55 online informatie over producten zoekt. Daarna kijken we naar e-mail, social media of advertenties.' },
+      { v: 'Doen jullie ook advertenties op Instagram of Facebook?', a: 'Nee. Social media beheer doen we wel, advertenties op social media niet. Microsoft Ads en influencers ook niet.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Google Ads levert binnen een paar dagen bezoekers op. Lokale SEO vaak binnen weken. SEO en content hebben meestal een paar maanden nodig. We spreken vooraf af wat je wanneer mag verwachten.' },
+      { v: 'Zit ik vast aan een contract?', a: 'Nee. Je zegt maandelijks op, tenzij we samen iets anders afspreken.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer in en rond Zwolle"
+    links={[
+      { label: 'Zwolle', titel: 'SEO in Zwolle', href: '/seo-zwolle/', tekst: 'Opvallen tussen ruim 18.000 bedrijven.', teken: 'vergrootglas' },
+      { label: 'Zwolle', titel: 'Webdesign in Zwolle', href: '/webdesign-zwolle/', tekst: 'Een site die opvalt in een drukke markt.', teken: 'scherm' },
+      { label: 'Dienst', titel: 'Online marketing uitbesteden', href: '/online-marketing-uitbesteden/', tekst: 'Alles in één hand, maandelijks opzegbaar.', teken: 'kompas' },
+      { label: 'Gids', titel: 'Marketingplan maken', href: '/kennisbank/gidsen/marketingplan-maken/', tekst: 'Zo zet je je keuzes zelf op papier.' },
+    ]}
+  />
+
+  <Actie titel="Waar zit jouw klant in Zwolle?" tekst={`Vertel ${site.contactpersoon} wie je klanten zijn en wat je nu doet. Hij belt binnen 15 minuten terug en zegt eerlijk welke kanalen hij zou kiezen.`} />
+</Base>

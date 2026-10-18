@@ -4,12 +4,13 @@ import { persoon } from '../../data/site';
 interface Props { slug: string; datum: string; nagekeken?: string } // datum als JJJJ-MM-DD
 const { slug, datum, nagekeken } = Astro.props;
 const p = persoon(slug);
+const profiel = p.slug === 'robert' ? '/over-ons/robert-boersma/' : `/over-ons/#${p.slug}`;
 const leesbaar = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <div class="auteur">
   <img src={`/img/team/${p.slug}-klein.webp`} width="56" height="56" alt={p.naam} loading="lazy" decoding="async" />
   <div>
-    <p class="naam">{p.naam} <span class="muted">· {p.rol}</span></p>
+    <p class="naam"><a href={profiel} rel="author">{p.naam}</a> <span class="muted">· {p.rol}</span></p>
     <p class="muted klein">Bijgewerkt op <time datetime={datum}>{leesbaar(datum)}</time>{nagekeken && <> · nagekeken door {persoon(nagekeken).naam}</>}</p>
   </div>
 </div>
@@ -19,4 +20,6 @@ const leesbaar = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('nl
   .auteur p { margin: 0; }
   .naam { font-weight: 800; }
   .naam span { font-weight: 500; }
+  .naam a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 3px; }
+  .naam a:hover { text-decoration-color: currentColor; }
 </style>

@@ -2,6 +2,7 @@
 import Logo from './Logo.astro';
 import Reach from './Reach.astro';
 import { perPijler } from '../data/diensten';
+import { site } from '../data/site';
 const kolommen = [
   { titel: 'Gevonden', uitleg: 'in Google', items: perPijler('Gevonden').filter((d) => d.pillar || ['Technische SEO en SEO-audit', 'Google Bedrijfsprofiel'].includes(d.naam)) },
   { titel: 'Genoemd', uitleg: 'door AI', items: perPijler('Genoemd') },
@@ -36,6 +37,7 @@ const pad = Astro.url.pathname;
         </li>
         <li><a href="/prijzen/" aria-current={pad.startsWith('/prijzen') ? 'page' : undefined}>Prijzen</a></li>
         <li><a href="/cases/" aria-current={pad.startsWith('/cases') ? 'page' : undefined}>Cases</a></li>
+        <li class="extra"><a href="/werkgebied/" aria-current={pad.startsWith('/werkgebied') || pad.startsWith('/regio') ? 'page' : undefined}>Werkgebied</a></li>
         <li><a href="/kennisbank/" aria-current={pad.startsWith('/kennisbank') ? 'page' : undefined}>Kennisbank</a></li>
         <li><a href="/over-ons/" aria-current={pad.startsWith('/over-ons') ? 'page' : undefined}>Over ons</a></li>
         <li><a href="/contact/" aria-current={pad.startsWith('/contact') ? 'page' : undefined}>Contact</a></li>
@@ -45,18 +47,26 @@ const pad = Astro.url.pathname;
       <Reach />
       <a class="btn btn-sm" href="/gratis-website-analyse/">Gratis scan</a>
     </div>
+    <a class="bel-icoon" href={site.telefoonLink} aria-label={`Bel ${site.contactpersoon}: ${site.telefoon}`}>
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </a>
     <details class="mobiel">
-      <summary aria-label="Menu openen"><span></span><span></span><span></span></summary>
+      <summary aria-label="Menu"><span></span><span></span><span></span></summary>
       <div class="mobiel-panel">
+        <div class="mobiel-acties">
+          <a class="btn" href="/gratis-website-analyse/">Gratis scan</a>
+          <a class="btn btn-ghost" href={site.telefoonLink}>Bel {site.contactpersoon}</a>
+        </div>
         {kolommen.map((k) => (
-          <div>
-            <p class="mega-kop">{k.titel}<span> {k.uitleg}</span></p>
+          <details class="pijler-menu">
+            <summary class="mega-kop">{k.titel}<span> {k.uitleg}</span></summary>
             <ul>{k.items.map((d) => <li><a href={d.url}>{d.naam}</a></li>)}</ul>
-          </div>
+          </details>
         ))}
         <ul class="los">
           <li><a href="/prijzen/">Prijzen</a></li>
           <li><a href="/cases/">Cases</a></li>
+          <li><a href="/werkgebied/">Werkgebied</a></li>
           <li><a href="/kennisbank/">Kennisbank</a></li>
           <li><a href="/over-ons/">Over ons</a></li>
           <li><a href="/contact/">Contact</a></li>
@@ -104,14 +114,32 @@ const pad = Astro.url.pathname;
   .mobiel summary::-webkit-details-marker { display: none; }
   .mobiel summary span { display: block; width: 22px; height: 2px; background: var(--ink); }
   .mobiel-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--panel); border-bottom: 1px solid var(--line); padding: 20px max(16px, env(safe-area-inset-left, 0px)) 24px; display: grid; gap: 18px; max-height: calc(100dvh - 72px); overflow: auto; }
-  .mobiel-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-  .mobiel-panel a { color: var(--ink); text-decoration: none; font-weight: 600; }
+  .mobiel-panel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .mobiel-panel a { color: var(--ink); text-decoration: none; font-weight: 600; display: block; padding-block: 10px; }
+  .mobiel-panel .btn { color: var(--on-orange); padding: 0.7em 1em; text-align: center; }
+  .mobiel-panel .btn-ghost { color: var(--ink); }
+  .mobiel-acties { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pijler-menu { border-bottom: 1px solid var(--line); }
+  .pijler-menu summary { list-style: none; cursor: pointer; padding: 10px 0; margin: 0; display: flex; align-items: baseline; gap: 6px; min-height: 44px; }
+  .pijler-menu summary::-webkit-details-marker { display: none; }
+  .pijler-menu summary::after { content: '+'; margin-left: auto; font-weight: 400; color: var(--muted); }
+  .pijler-menu[open] summary::after { content: '−'; }
+  .pijler-menu ul { padding: 0 0 10px 12px; }
+  .mobiel-panel :global(.reach) { white-space: normal; }
+  .mobiel[open] summary span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobiel[open] summary span:nth-child(2) { opacity: 0; }
+  .mobiel[open] summary span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobiel summary span { transition: transform 0.2s, opacity 0.2s; }
+  .bel-icoon { display: none; width: 44px; height: 44px; place-content: center; border-radius: 10px; color: var(--navy); border: 1.5px solid var(--line); margin-left: auto; }
+  @media (prefers-reduced-motion: reduce) { .mobiel summary span { transition: none; } }
   .los { border-top: 1px solid var(--line); padding-top: 14px !important; }
   @media (max-width: 1280px) { .acties :global(.reach .lbl), .acties :global(.reach .sep) { display: none; } }
   @media (max-width: 1060px) { .acties :global(.reach) { display: none; } }
+  @media (max-width: 1180px) { .hoofdmenu .extra { display: none; } }
   @media (max-width: 900px) {
     .hoofdmenu, .acties { display: none; }
-    .mobiel { display: block; }
+    .mobiel { display: block; margin-left: 4px; }
+    .bel-icoon { display: grid; }
     .woord { font-size: 1.1rem; }
   }
 </style>

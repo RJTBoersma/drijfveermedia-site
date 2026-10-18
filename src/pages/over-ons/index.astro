@@ -78,11 +78,12 @@ const schema = [{ '@type': 'AboutPage', name: 'Over Drijfveer Media', url: `${si
     <h2>Het team</h2>
     <div class="raster team">
       {team.map((p) => (
-        <div class="card persoon">
+        <div class="card persoon" id={p.slug}>
           <img src={`/img/team/${p.slug}-klein.webp`} width="88" height="88" alt="" loading="lazy" decoding="async" />
           <h3>{p.naam}</h3>
           <p class="rol">{p.rol}</p>
           <p>{p.kort}</p>
+          {p.slug === 'robert' && <p><a href="/over-ons/robert-boersma/">Meer over Robert</a></p>}
         </div>
       ))}
     </div>

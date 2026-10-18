@@ -2,6 +2,7 @@
 // Bovenste blok van een pagina (AIDA: attention). Links de belofte, rechts een getekend beeld.
 import { site } from '../../data/site';
 import { overgang } from '../../data/miniaturen';
+import { knopVoor } from '../../data/actie';
 interface Props {
   kicker: string; // bijvoorbeeld "Genoemd · GEO"
   titel: string; // de H1
@@ -11,7 +12,8 @@ interface Props {
   smal?: boolean; // zonder beeld
   eenmalig?: boolean; // eenmalige prijs in plaats van per maand
 }
-const { kicker, titel, prijs, knop = { tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }, bel = true, smal = false, eenmalig = false } = Astro.props;
+const { kicker, titel, prijs, knop: eigenKnop, bel = true, smal = false, eenmalig = false } = Astro.props;
+const knop = knopVoor(Astro.url.pathname, eigenKnop);
 const heeftBeeld = Astro.slots.has('beeld') && !smal;
 ---
 <section class:list={['wrap', 'hero', { 'met-beeld': heeftBeeld }]} data-aida="attention">

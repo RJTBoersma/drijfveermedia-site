@@ -1,12 +1,28 @@
 ---
 // Inhoudsopgave voor lange pagina's. Markeert waar je bent tijdens het lezen.
-interface Props { items: { id: string; titel: string }[]; leestijd?: number }
-const { items, leestijd } = Astro.props;
+// Op een smal scherm staat hij ingeklapt bovenaan de tekst; op een breed scherm loopt hij mee in de zijkolom,
+// met daaronder een kleine kaart met de vervolgstap die bij de pagina past.
+import { stapVoor } from '../../data/actie';
+import { site } from '../../data/site';
+interface Props { items: { id: string; titel: string }[]; leestijd?: number; actie?: boolean }
+const { items, leestijd, actie = true } = Astro.props;
+const stap = stapVoor(Astro.url.pathname);
+const dienstHier = stap.dienst && Astro.url.pathname.startsWith(stap.dienst.url);
 ---
-<nav class="inhoud card" aria-label="Op deze pagina">
-  <p class="kop">Op deze pagina{leestijd && <span class="muted"> · {leestijd} min. lezen</span>}</p>
-  <ol>{items.map((i) => <li><a href={`#${i.id}`} data-inhoud={i.id}>{i.titel}</a></li>)}</ol>
+<nav class="inhoud card" aria-label="Op deze pagina" data-inhoud-nav>
+  <details open data-inhoud-details>
+    <summary class="kop">Op deze pagina{leestijd && <span class="muted"> · {leestijd} min. lezen</span>}<span class="aantal muted"> ({items.length} onderdelen)</span></summary>
+    <ol>{items.map((i) => <li><a href={`#${i.id}`} data-inhoud={i.id}>{i.titel}</a></li>)}</ol>
+  </details>
 </nav>
+{actie && (
+  <dm-extra><div class="card mini-actie">
+    <img src="/img/team/thorgall-klein.webp" width="48" height="48" alt="" loading="lazy" decoding="async" />
+    <p><b>Liever dat wij het doen?</b> {stap.dienst && !dienstHier ? <>{stap.dienst.naam}: {stap.dienst.prijs}. </> : null}{stap.zin}</p>
+    <a class="btn btn-sm" href={stap.href}>{stap.knop}</a>
+    <a class="tel" href={site.telefoonLink}>of bel {site.telefoon}</a>
+  </div></dm-extra>
+)}
 <script>
   const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-inhoud]')];
   const doelen = links.map((a) => document.getElementById(a.dataset.inhoud!)).filter(Boolean) as HTMLElement[];
@@ -16,12 +32,40 @@ const { items, leestijd } = Astro.props;
     }, { rootMargin: '-20% 0px -70% 0px' });
     doelen.forEach((d) => io.observe(d));
   }
+  // Smal scherm: inhoudsopgave ingeklapt boven de eerste tussenkop van de tekst zetten, in plaats van helemaal onderaan.
+  const nav = document.querySelector<HTMLElement>('[data-inhoud-nav]');
+  const det = nav?.querySelector<HTMLDetailsElement>('[data-inhoud-details]');
+  const tekst = nav?.closest('.met-zijkolom')?.querySelector('article, .tekst');
+  const eersteKop = tekst?.querySelector('h2');
+  if (nav && det && eersteKop && matchMedia('(max-width: 960px)').matches) {
+    det.open = false;
+    nav.classList.add('inhoud-boven');
+    eersteKop.before(nav);
+    det.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => { det.open = false; }));
+  }
 </script>
 <style>
   .inhoud { padding: 20px 22px; }
-  .kop { font-weight: 800; margin: 0 0 10px; }
+  .kop { font-weight: 800; margin: 0 0 10px; list-style: none; cursor: default; }
+  .kop::-webkit-details-marker { display: none; }
+  .aantal { display: none; font-weight: 500; }
   ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
-  a { display: block; padding: 6px 10px; margin-left: -10px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 0.98rem; line-height: 1.35; border-left: 3px solid transparent; }
-  a:hover { color: var(--ink); background: var(--bg); }
-  a.hier { color: var(--ink); font-weight: 700; border-left-color: var(--orange); border-radius: 0 8px 8px 0; }
+  ol a { display: block; padding: 6px 10px; margin-left: -10px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 0.98rem; line-height: 1.35; border-left: 3px solid transparent; }
+  ol a:hover { color: var(--ink); background: var(--bg); }
+  ol a.hier { color: var(--ink); font-weight: 700; border-left-color: var(--orange); border-radius: 0 8px 8px 0; }
+  /* Ingeklapt bovenaan op een smal scherm */
+  .inhoud-boven { margin: 0 0 28px; padding: 4px 18px; }
+  .inhoud-boven .kop { cursor: pointer; margin: 0; padding: 12px 0; display: flex; flex-wrap: wrap; gap: 0 6px; align-items: baseline; min-height: 44px; }
+  .inhoud-boven .kop::after { content: '+'; margin-left: auto; font-weight: 400; font-size: 1.3rem; color: var(--muted); }
+  .inhoud-boven details[open] .kop::after { content: '−'; }
+  .inhoud-boven .aantal { display: inline; }
+  .inhoud-boven ol { padding-bottom: 12px; }
+  .inhoud-boven ol a { padding-block: 9px; }
+  .mini-actie { padding: 18px 20px; display: grid; gap: 10px; justify-items: start; }
+  .mini-actie img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: top; background: #e8eef4; }
+  .mini-actie p { margin: 0; font-size: 0.95rem; color: var(--muted); line-height: 1.45; }
+  .mini-actie p b { color: var(--ink); display: block; margin-bottom: 2px; }
+  .mini-actie .btn { white-space: normal; text-align: left; line-height: 1.25; }
+  .mini-actie .tel { font-size: 0.92rem; color: var(--ink); font-weight: 700; text-decoration: none; padding-block: 6px; }
+  @media (max-width: 960px) { .mini-actie { display: none; } }
 </style>

@@ -1,12 +1,14 @@
 ---
 // Afsluitend blok met Thorgall (AIDA: action).
 import { site } from '../../data/site';
+import { knopVoor } from '../../data/actie';
 interface Props { titel?: string; tekst?: string; knop?: { tekst: string; href: string } }
 const {
   titel = 'Benieuwd waar jouw grootste kans zit?',
   tekst = `${site.contactpersoon} belt je binnen 15 minuten terug en vraagt eerst wat jij wilt bereiken. Pas daarna praten we over geld.`,
-  knop = { tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' },
+  knop: eigenKnop,
 } = Astro.props;
+const knop = knopVoor(Astro.url.pathname, eigenKnop);
 ---
 <section class="wrap sectie" data-aida="action">
   <div class="card actie">

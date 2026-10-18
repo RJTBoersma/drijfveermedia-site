@@ -7,6 +7,7 @@ import Veer from '../components/teken/Veer.astro';
 import Plaatje from '../components/teken/Plaatje.astro';
 import TeamOpKantoor from '../components/beeld/TeamOpKantoor.astro';
 import { perOnderwerp } from '../data/tekeningen';
+import InDeRegio from '../components/pagina/InDeRegio.astro';
 
 const kolommen = [
   { titel: 'Gevonden', zin: 'Bovenaan in Google, ook in je eigen regio.', items: perPijler('Gevonden').filter((d) => d.pillar) },
@@ -38,6 +39,7 @@ const schema = [{
   title="Online marketingbureau voor ondernemers | Drijfveer Media"
   description="Online marketingbureau uit Assen: hoger in Google, genoemd door ChatGPT en een website die klanten oplevert. Maandelijks opzegbaar, snel teruggebeld."
   schema={schema}
+  alternatief={[{ lang: 'en', url: '/en/' }, { lang: 'x-default', url: '/' }]}
 >
   <section class="wrap hero" data-aida="attention">
     <div class="hero-tekst">
@@ -47,13 +49,22 @@ const schema = [{
     </div>
     <form class="card vraag" id="ask" action="/gratis-website-analyse/" method="get">
       <p class="zin">
-        Ik ben <label class="sr-only" for="vak">Je vak</label><input id="vak" name="vak" value="loodgieter" autocomplete="off" />
-        in <label class="sr-only" for="plaats">Je plaats</label><input id="plaats" name="plaats" value="Emmen" autocomplete="address-level2" />
+        Ik ben <label class="sr-only" for="vak">Je vak</label><input id="vak" name="vak" placeholder="loodgieter" autocomplete="off" />
+        in <label class="sr-only" for="plaats">Je plaats</label><input id="plaats" name="plaats" placeholder="Emmen" autocomplete="address-level2" />
       </p>
       <button class="btn" type="submit">Laat je site gratis nakijken</button>
       <p class="klein muted">Gratis. Je zit nergens aan vast. Op {site.kantoortijden} bellen we je binnen 15 minuten terug.</p>
       <p class="klein">Of bel {site.contactpersoon}: <a class="tel" href={site.telefoonLink}>{site.telefoon}</a></p>
     </form>
+  </section>
+  <section class="wrap strook" aria-labelledby="cases-kop">
+    <h2 id="cases-kop" class="sr-only">Wat het opleverde</h2>
+    <div class="cases">
+      <div class="card case kaart-link"><span class="getal">+47%</span><span class="wat"><a href="/cases/conflictbemiddeling/">meer bezoekers</a></span><span class="wie">Conflictbemiddeling.nl</span></div>
+      <div class="card case kaart-link"><span class="getal">#1</span><span class="wat"><a href="/cases/willemfikstt/">posities en 87% groei</a></span><span class="wie">Willemfikstt.nl</span></div>
+      <div class="card case kaart-link"><span class="getal">+32%</span><span class="wat"><a href="/cases/dakraamconcurrent/">meer bezoekers uit Google</a></span><span class="wie">Dakraamconcurrent.nl</span></div>
+    </div>
+    <p class="vertrouwd">Vertrouwd door <b>Kärcher</b>, <b>bol.com</b>, <b>Nyenrode</b>, <b>Conflictbemiddeling Nederland</b> en <b>Glaspunt</b>. Sinds 2011. <a href="/cases/">Bekijk de cases</a></p>
   </section>
   <p class="wrap cue" aria-hidden="true">↓ <span id="cue">Scroll en kijk hoe een loodgieter in Emmen aan klanten komt</span></p>
 
@@ -75,13 +86,14 @@ const schema = [{
         <span class="kicker">2 · Genoemd</span>
         <h2>Steeds vaker vraagt die klant het aan AI.</h2>
         <p>ChatGPT en Google AI noemen een paar namen. Wij zorgen dat de jouwe erbij staat, met een link naar je site.</p>
-        <p class="diensten-links"><a href="/generative-engine-optimization/">Genoemd worden door AI (GEO)</a></p>
+        <p class="diensten-links"><a href="/generative-engine-optimization/">Genoemd worden door AI (GEO)</a> · <a href="/generative-engine-optimization/#ai-test">Doe de AI-test (2 minuten)</a></p>
       </article>
       <article class="hoofdstuk">
         <span class="kicker">3 · Gekozen</span>
         <h2>Dan moet je site het werk doen.</h2>
         <p>Duidelijk, snel en overtuigend, zodat die bezoeker jou belt. Niet je concurrent.</p>
         <p class="diensten-links"><a href="/website-laten-maken/">Website</a> · <a href="/tekstschrijver/">Teksten</a> · <a href="/online-adverteren/">Adverteren</a> · <a href="/leadgeneratie/">Leadgeneratie</a></p>
+        <p><a class="btn" href="/gratis-website-analyse/">Waar sta jij? Laat je site gratis nakijken</a></p>
       </article>
     </div>
   </section>
@@ -97,6 +109,7 @@ const schema = [{
       <div class="card"><Tekening naam="team" vertraging={360} /><h3>Klanten blijven jaren</h3><p>Bijna niemand vertrekt. Dat zegt meer dan een gelikte pitch.</p><a href="/cases/">Bekijk de cases</a></div>
       <div class="card"><Tekening naam="telefoon" vertraging={480} /><h3>Binnen 15 minuten</h3><p>Op werkdagen tussen 8.00 en 17.00 uur bellen we je binnen 15 minuten terug. Uit interesse, niet om te verkopen.</p></div>
     </div>
+    <p class="case-uitleg">Achter die cijfers zit geen trucje. Bij Dakraam Concurrent, officieel VELUX-installatiepartner, kwam eerst een nieuwe website, daarna linkbuilding en daarna SEO. Bij Conflictbemiddeling Nederland combineerden we een nieuwe website met SEO, linkbuilding en Google Ads-campagnes. Steeds dezelfde volgorde: eerst de basis op orde, dan bouwen aan groei.</p>
   </section>
 
   <section class="wrap blok" aria-labelledby="diensten-kop">
@@ -140,21 +153,11 @@ const schema = [{
     </div>
   </section>
 
-  <section class="wrap blok" aria-labelledby="cases-kop">
-    <h2 id="cases-kop">Wat het opleverde</h2>
-    <div class="cases">
-      <a class="card case" href="/cases/conflictbemiddeling/"><span class="getal">+47%</span><span class="wat">meer bezoekers</span><span class="wie">Conflictbemiddeling.nl</span></a>
-      <a class="card case" href="/cases/willemfikstt/"><span class="getal">#1</span><span class="wat">posities en 87% groei</span><span class="wie">Willemfikstt.nl</span></a>
-      <a class="card case" href="/cases/dakraamconcurrent/"><span class="getal">+32%</span><span class="wat">meer bezoekers uit Google</span><span class="wie">Dakraamconcurrent.nl</span></a>
-    </div>
-    <p class="case-uitleg">Achter die cijfers zit geen trucje. Bij Dakraam Concurrent, officieel VELUX-installatiepartner, kwam eerst een nieuwe website, daarna linkbuilding en daarna SEO. Bij Conflictbemiddeling Nederland combineerden we een nieuwe website met SEO, linkbuilding en Google Ads-campagnes. Steeds dezelfde volgorde: eerst de basis op orde, dan bouwen aan groei.</p>
-    <p class="vertrouwd">Vertrouwd door <b>Kärcher</b>, <b>bol.com</b>, <b>Nyenrode</b>, <b>Conflictbemiddeling Nederland</b> en <b>Glaspunt</b>. Sinds 2011.</p>
-  </section>
 
   <section class="wrap blok twee" aria-label="Voor wie en wie we zijn">
     <div>
       <h2>Voor wie we werken</h2>
-      <p>Voor ondernemers in het mkb. Denk aan de installateur met drie busjes, het advocatenkantoor met twaalf mensen of de webshop die wil groeien zonder eigen marketingafdeling. Veel klanten komen uit Drenthe, Friesland en Groningen, maar net zo goed uit de rest van het land.</p>
+      <p>Voor ondernemers in het mkb. Denk aan de installateur met drie busjes, het advocatenkantoor met twaalf mensen of de webshop die wil groeien zonder eigen marketingafdeling. Veel klanten komen uit <a href="/regio/drenthe/">Drenthe</a>, <a href="/regio/friesland/">Friesland</a> en <a href="/regio/groningen/">Groningen</a>, maar net zo goed uit de rest van het land. Zit je in de buurt? Lees dan wat we doen voor <a href="/online-marketing-assen/">online marketing in Assen</a>.</p>
       <p>Wat onze klanten gemeen hebben: ze willen weten wat het oplevert. Daarom spreken we vooraf een doel af en laten we elke maand zien of we het halen. In gewone taal, zonder rapport van veertig pagina's.</p>
       <p>Je hebt geen groot budget nodig. Met een paar honderd euro per maand kun je bij ons serieus aan de slag, en meestal beginnen we met één kanaal. Wat een online marketingbureau je kan opleveren, hangt minder af van de omvang van je bedrijf dan van de vraag of je klanten online zoeken. Dat doen ze bijna altijd.</p>
     </div>
@@ -173,6 +176,8 @@ const schema = [{
       <figcaption>Hier zitten we: Lauwers 9 in Assen. Bel even van tevoren, dan staat de koffie klaar.</figcaption>
     </figure>
   </section>
+
+  <InDeRegio />
 
   <section class="wrap blok" aria-labelledby="verwacht-kop">
     <h2 id="verwacht-kop">Wat je van een online marketingbureau mag verwachten</h2>
@@ -289,7 +294,7 @@ const schema = [{
   .toneel { background: #e3ebf3; border-radius: 18px; aspect-ratio: 5 / 4; overflow: hidden; display: grid; place-items: center; }
   .toneel :global(svg) { width: 100%; height: 100%; }
   .geen-js { padding: 24px; text-align: center; }
-  .hoofdstuk { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 12px; max-width: 30em; }
+  .hoofdstuk { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; gap: 12px; max-width: 30em; }
   .hoofdstuk:last-child { min-height: 110vh; }
   .hoofdstuk h2 { font-size: var(--step-3); }
   .diensten-links { font-weight: 700; }
@@ -311,13 +316,16 @@ const schema = [{
   .pijler a:hover strong { text-decoration: underline; }
   .advies { margin-top: 24px; color: var(--muted); }
 
-  .cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
-  .case { padding: 24px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--ink); }
+  .strook { padding-block: 8px 24px; }
+  .cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+  .case .wat a { color: inherit; text-decoration: none; }
+  .case { padding: 18px 22px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--ink); }
   .case:hover { border-color: var(--navy); }
   .getal { font-size: 3rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
   .wat { font-weight: 700; }
   .wie { color: var(--muted); }
   .case-uitleg { margin-top: 20px; max-width: 66ch; }
+  .strook .getal { font-size: 2.2rem; }
   .vertrouwd { margin-top: 20px; color: var(--muted); }
   .vertrouwd b { color: var(--ink); }
 
@@ -361,10 +369,12 @@ const schema = [{
     .verhaal { grid-template-columns: minmax(0, 1fr); gap: 0; }
     .toneel-kolom { position: sticky; top: 72px; z-index: 5; background: var(--bg); }
     .toneel-plak { position: static; height: auto; padding-block: 10px; }
-    .hoofdstuk { min-height: 72vh; padding-block: 24px; }
+    .hoofdstuk { min-height: 60vh; padding-block: 24px; }
     .hoofdstuk:last-child { min-height: 90vh; }
     .hoofdstuk h2 { font-size: var(--step-2); }
-    .pijlers, .cases, .twee { grid-template-columns: minmax(0, 1fr); }
+    .pijlers, .twee { grid-template-columns: minmax(0, 1fr); }
+    .cases { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .case { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 14px 18px; }
     .contact { grid-template-columns: minmax(0, 1fr); }
   }
   .team-beeld { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: center; padding-block: 8px 40px; }

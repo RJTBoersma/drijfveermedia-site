@@ -1,0 +1,27 @@
+---
+// Links naar de plaatspagina's van één dienst (of van alle diensten), zodat ze vanaf de pijler bereikbaar zijn.
+import paginas from '../../../scripts/paginas.json';
+interface Props { titel?: string; intro?: string; soort?: 'seo' | 'webdesign' | 'online-marketing' | 'alles' }
+const { soort = 'alles', titel = 'In jouw regio', intro = 'Ons kantoor staat in Assen. Per plaats lees je wat we daar doen, wat de markt is en wat het kost.' } = Astro.props;
+const alle = (paginas as any[]).filter((p) => (p.type === 'plaats' || p.type === 'provincie') && !p.wachtOpInhoud);
+const kies = soort === 'alles'
+  ? alle.filter((p) => p.type === 'provincie' || /-assen\/$/.test(p.url) || ['/seo-groningen/', '/seo-leeuwarden/', '/seo-zwolle/', '/webdesign-zwolle/', '/online-marketing-groningen/', '/webdesign-emmen/'].includes(p.url))
+  : alle.filter((p) => p.url.startsWith(`/${soort}-`));
+const lijst = kies.sort((a, b) => (a.type === 'provincie' ? -1 : 0) - (b.type === 'provincie' ? -1 : 0) || a.naam.localeCompare(b.naam, 'nl'));
+---
+{lijst.length > 0 && (
+  <dm-extra><section class="wrap sectie regio-links" aria-labelledby={`regio-${soort}`}>
+    <h2 id={`regio-${soort}`}>{titel}</h2>
+    <p class="muted">{intro}</p>
+    <ul>
+      {lijst.map((p) => <li><a class="chip" href={p.url}>{p.naam}</a></li>)}
+      <li><a class="chip alle" href="/werkgebied/">Hele werkgebied</a></li>
+    </ul>
+  </section></dm-extra>
+)}
+<style>
+  .regio-links ul { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .regio-links .chip { text-decoration: none; padding: 10px 16px; font-size: 0.95rem; min-height: 44px; display: inline-flex; align-items: center; border: 1px solid var(--line); background: var(--panel); }
+  .regio-links .chip:hover { border-color: var(--navy); background: var(--navy); color: #fff; }
+  .regio-links .alle { font-weight: 800; }
+</style>

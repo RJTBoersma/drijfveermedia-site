@@ -1,7 +1,8 @@
 # Maakt public/.htaccess: elke oude URL van drijfveermedia.nl gaat met één 301 naar zijn nieuwe plek.
 # Invoer: scripts/oude-urls.txt (uit de oude sitemap) en de tabel "Oude blogs" in scripts/briefing/STRUCTUUR.md.
 import re, json, sys
-oud = [l.strip().replace('https://www.drijfveermedia.nl', '') for l in open('scripts/oude-urls.txt') if l.strip()] + ['/DM-algemenevoorwaarden.pdf', '/wp-content/uploads/Algemene-Voorwaarden-2.pdf']
+weg = ['/404-2/']  # bestaat niet meer en heeft geen opvolger: 410 Gone
+oud = [l.strip().replace('https://www.drijfveermedia.nl', '') for l in open('scripts/oude-urls.txt') if l.strip()] + ['/DM-algemenevoorwaarden.pdf', '/wp-content/uploads/Algemene-Voorwaarden-2.pdf', '/regio/']
 nieuw = {p['url'] for p in json.load(open('scripts/paginas.json'))}
 kaart = {}
 # 1. Blogs die in een gids opgaan (STRUCTUUR.md)
@@ -13,7 +14,7 @@ for rij in open('scripts/briefing/STRUCTUUR.md'):
             if u.startswith('/blog/' + slug): kaart[u] = m.group(1)
 # 2. Vaste toewijzingen
 vast = {
- '/blog/': '/kennisbank/', '/404-2/': '/', '/diensten/': '/prijzen/',
+ '/blog/': '/kennisbank/', '/diensten/': '/prijzen/', '/regio/': '/werkgebied/',
  '/blog/de-20-beste-online-marketingblogs/': '/kennisbank/de-20-beste-online-marketingblogs/',
  '/blog/geavanceerd-zoeken-met-google/': '/kennisbank/geavanceerd-zoeken-met-google/',
  '/blog/hoe-voorkom-je-een-daling-in-websiteverkeer/': '/kennisbank/hoe-voorkom-je-een-daling-in-websiteverkeer/',
@@ -103,7 +104,7 @@ vast = {
  '/seo-uitbesteden/': '/zoekmachine-optimalisatie/seo-uitbesteden/',
  '/website-toevoegen-aan-google/': '/kennisbank/gidsen/google-search-console/',
  '/over-ons/team/': '/over-ons/', '/privacy/': '/privacyverklaring/',
- '/ervaringsberoepen/': '/cases/',
+ '/ervaringsberoepen/': '/proeflab/',
  '/DM-algemenevoorwaarden.pdf': '/algemene-voorwaarden/',
  '/wp-content/uploads/Algemene-Voorwaarden-2.pdf': '/algemene-voorwaarden/',
  '/blog/5-stappen-om-google-analytics-avg-vriendelijk-in-te-stellen/': '/kennisbank/gidsen/google-analytics-4/',
@@ -113,16 +114,20 @@ vast = {
 }
 kaart.update(vast)
 for u in oud:
-    if u.startswith('/ervaringsberoepen/'): kaart.setdefault(u, '/cases/')
+    if u.startswith('/ervaringsberoepen/'): kaart.setdefault(u, '/proeflab/')
 regels, mis = [], []
 for u in oud:
+    if u in weg: continue
     doel = kaart.get(u)
     if doel is None:
         if u in nieuw: continue  # bestaat nog op dezelfde plek
         mis.append(u); continue
     if doel == u: continue
     if doel not in nieuw and doel != '/': mis.append(f'{u} -> {doel} (doel bestaat niet)'); continue
-    regels.append(f'RedirectMatch 301 ^{re.escape(u.rstrip("/")) if u != "/" else ""}/?$ {doel}')
+    patroon = re.escape(u.strip('/'))
+    regels.append(f'RewriteRule ^{patroon}/?$ https://www.drijfveermedia.nl{doel} [R=301,L,NC]')
+regels += [f"RewriteRule ^{re.escape(u.strip('/'))}/?$ - [G,L]" for u in weg]
 kop = open('scripts/htaccess-basis.txt').read() if __import__('os').path.exists('scripts/htaccess-basis.txt') else ''
-open('public/.htaccess', 'w').write(kop + '\n# Oude URL\'s van de vorige site (één stap, geen ketens)\n' + '\n'.join(sorted(regels)) + '\n')
+blok = "# Oude URL's van de vorige site: vóór de algemene regels, zodat elke variant (http, zonder www, zonder slash) in één stap goed uitkomt\n" + '\n'.join(sorted(regels)) + '\n'
+open('public/.htaccess', 'w').write(kop.replace('# @@OUDE-URLS@@\n', blok))
 print(len(regels), 'redirects;', 'zonder plek:' if mis else 'alles heeft een plek', *mis, sep='\n')

@@ -1,0 +1,301 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/seo-zwolle.astro';
+import { site } from '../../data/site';
+
+const url = '/seo-zwolle/';
+const schema = [{
+  '@type': 'Service',
+  name: 'SEO in Zwolle',
+  serviceType: 'Zoekmachine-optimalisatie',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: [{ '@type': 'City', name: 'Zwolle' }, { '@type': 'AdministrativeArea', name: 'Overijssel' }],
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+}];
+
+// CBS, Vestigingen van bedrijven; bedrijfstak, gemeente (tabel 81575NED). 2026 is een voorlopig cijfer.
+const sectoren = [
+  { naam: 'Specialistische zakelijke diensten', van: '2.285', naar: '4.075', groei: '+78%', seo: 'Kopers zoeken op kennis, vaak zonder plaatsnaam. Artikelen die hun vragen beantwoorden.' },
+  { naam: 'Gezondheids- en welzijnszorg', van: '1.415', naar: '2.475', groei: '+75%', seo: 'Patiënten zoeken dichtbij. De kaart, reviews en een pagina per behandeling.' },
+  { naam: 'Handel', van: '1.875', naar: '2.330', groei: '+24%', seo: 'Openingstijden en voorraad op de kaart, productgroepen op de site.' },
+  { naam: 'Onderwijs', van: '760', naar: '1.510', groei: '+99%', seo: 'Een pagina per cursus of training, met data en prijs.' },
+  { naam: 'Cultuur, sport en recreatie', van: '800', naar: '1.425', groei: '+78%', seo: 'Lokaal gevonden worden op activiteit en wijk.' },
+  { naam: 'Informatie en communicatie', van: '685', naar: '1.170', groei: '+71%', seo: 'Landelijke zoekwoorden, dus content en links tellen zwaar.' },
+  { naam: 'Bouw', van: '560', naar: '990', groei: '+77%', seo: 'Een servicegebied en projectpagina\'s uit de regio.' },
+  { naam: 'Horeca', van: '380', naar: '580', groei: '+53%', seo: 'Bijna alles gebeurt op de kaart: foto\'s, menu en reviews.' },
+];
+
+// CBS, Kerncijfers wijken en buurten 2025 (tabel 86165NED). Laatste kolom is ons advies.
+const wijken = [
+  { naam: 'Binnenstad', inw: '4.255', vest: '1.515', per: '2,8', advies: 'Een volle kaart. Reviews, foto\'s en kloppende openingstijden beslissen.' },
+  { naam: 'Marsweteringlanden (met Marslanden-Zuid)', inw: '1.235', vest: '1.100', per: '1,1', advies: 'Vooral bedrijven. Zakelijke kopers zoeken op wat je levert, niet op de wijk.' },
+  { naam: 'Assendorp', inw: '13.050', vest: '2.315', per: '5,6', advies: 'Wonen en werken door elkaar. Noem de wijk als je er echt zit.' },
+  { naam: 'Diezerpoort', inw: '10.930', vest: '1.530', per: '7,1', advies: 'Dicht bij het centrum, dus je concurreert met de binnenstad.' },
+  { naam: 'Stadshagen', inw: '28.565', vest: '2.775', per: '10,3', advies: 'De grootste wijk. Veel zoekopdrachten met "in de buurt".' },
+  { naam: 'Aa-landen', inw: '13.375', vest: '1.090', per: '12,3', advies: 'Ruim een kwart is 65 of ouder. Telefoonnummer groot in beeld.' },
+];
+---
+<Base
+  title="SEO Zwolle: hoger in Google vanaf € 495 | Drijfveer Media"
+  description="SEO in Zwolle voor ondernemers die klanten uit stad en regio willen. Zoekwoorden, techniek, content en lokale links. Vanaf € 495 per maand, met stijggarantie."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'SEO Zwolle', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · Zwolle" titel="SEO in Zwolle: opvallen tussen ruim 18.000 bedrijven" prijs="vanaf € 495 per maand">
+    <p>Zwolle telt volgens het CBS 60 procent meer bedrijven dan tien jaar geleden. Ze willen allemaal bovenaan in Google. SEO in Zwolle draait dus om keuzes: welke zoekwoorden, welke wijken, welke klanten. Wij zoeken het uit en bouwen het op, met stijggarantie.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>SEO in Zwolle: de concurrentie groeide in tien jaar met 60 procent</h2>
+      <p>Zwolle is de hoofdstad van Overijssel en een stad die blijft groeien. In inwoners, maar vooral in bedrijven. Begin 2016 telde het CBS in de gemeente 11.415 bedrijfsvestigingen. Begin 2026 waren het er 18.240. Dat zijn er bijna 7.000 bij, en een groot deel daarvan wil op dezelfde woorden gevonden worden als jij.</p>
+    </div>
+    <div class="getallen cijfers">
+      <div class="getal-kaart"><b>134.825</b><span>inwoners eind augustus 2026</span></div>
+      <div class="getal-kaart"><b>18.240</b><span>bedrijfsvestigingen begin 2026</span></div>
+      <div class="getal-kaart"><b>+60%</b><span>bedrijven erbij sinds 2016</span></div>
+      <div class="getal-kaart"><b>76 km</b><span>van ons kantoor in Assen</span></div>
+    </div>
+    <div class="tekst">
+      <p class="klein muted">Bronnen: CBS, Bevolkingsontwikkeling per regio per maand; CBS, Vestigingen van bedrijven per gemeente (2026 voorlopig). De afstand is de route over de weg van de Lauwers in Assen naar de Grote Markt in Zwolle.</p>
+      <p>Het aantal inwoners groeide veel minder hard: van 123.861 begin 2015 naar 134.825 nu, zo'n 9 procent. Er kwamen dus veel meer aanbieders bij dan klanten. Wie in Google niet opvalt, deelt een kleinere taart met meer concurrenten.</p>
+      <h3>Per sector: waar de strijd het hardst toenam</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Sector</th><th>2016</th><th>2026</th><th>Groei</th><th>Wat telt in Google (ons advies)</th></tr></thead>
+          <tbody>
+            {sectoren.map((s) => <tr><td><b>{s.naam}</b></td><td>{s.van}</td><td>{s.naar}</td><td>{s.groei}</td><td>{s.seo}</td></tr>)}
+            <tr><td><b>Alle sectoren</b></td><td>11.415</td><td>18.240</td><td>+60%</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: CBS, Vestigingen van bedrijven; bedrijfstak, gemeente Zwolle. Een selectie van de grootste sectoren. Afgeronde percentages.</p>
+      <p>De zakelijke dienstverlening is met ruim 4.000 vestigingen veruit de grootste groep: adviseurs, juristen, accountants en bureaus. Hun klanten zoeken anders dan iemand met een lekkende kraan. Ze typen een vraag, lezen, vergelijken en bellen pas als ze vertrouwen hebben. Voor hen is SEO vooral een kwestie van goede content.</p>
+      <p>De zorg en de bouw groeiden bijna net zo hard. Daar zoekt de klant juist dichtbij en snel. Dan wint wie op de kaart staat en een site heeft die op de telefoon in een paar seconden laat zien wat hij doet. Dezelfde stad, twee totaal verschillende manieren van zoeken.</p>
+
+      <h2>Per wijk een ander speelveld</h2>
+      <p>Google toont lokale resultaten op basis van drie dingen, schrijft het bedrijf zelf: relevantie, afstand en populariteit. Die afstand maakt dat een zoeker in Stadshagen andere bedrijven ziet dan iemand op de Grote Markt. Je concurrenten verschillen dus per wijk. Het CBS laat zien hoe druk het per wijk is.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wijk</th><th>Inwoners</th><th>Bedrijfs&shy;vestigingen</th><th>Inwoners per vestiging</th><th>Wat dat betekent</th></tr></thead>
+          <tbody>
+            {wijken.map((w) => <tr><td><b>{w.naam}</b></td><td>{w.inw}</td><td>{w.vest}</td><td>{w.per}</td><td>{w.advies}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: CBS, Kerncijfers wijken en buurten 2025, gemeente Zwolle. De laatste kolom is ons advies, geen CBS-cijfer.</p>
+      <p>Voor SEO in Zwolle betekent dat: hoe minder inwoners per bedrijf, hoe voller het kaartje. In de binnenstad komen op elk bedrijf nog geen drie inwoners. Daar strijd je met tientallen zaken op loopafstand, en win je met reviews, foto's en een profiel dat helemaal klopt. In Stadshagen en de Aa-landen wonen per bedrijf ruim tien mensen. Een bedrijf dat daar goed vindbaar is, heeft een grote groep klanten voor zich alleen.</p>
+      <p>Op Marslanden-Zuid en de andere bedrijventerreinen werkt het weer anders. Een inkoper zoekt zelden op "Marslanden". Hij zoekt op het onderdeel, de machine of de dienst die hij nodig heeft. Daar draait SEO om specialistische zoekwoorden en om pagina's die zijn vragen eerlijk beantwoorden.</p>
+
+      <h2>Je klanten komen ook uit Kampen, Dalfsen en Staphorst</h2>
+      <p>Zwolle is het centrum van een grotere regio. Voor wie in Hattem, Dalfsen of Genemuiden woont, is Zwolle de dichtstbijzijnde grote stad. En veel Zwolse bedrijven werken net zo goed in de dorpen eromheen. Ook daar groeide het aantal bedrijven flink.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Gemeente</th><th>Provincie</th><th>Vestigingen 2016</th><th>Vestigingen 2026</th><th>Groei</th></tr></thead>
+          <tbody>
+            <tr><td><b>Zwolle</b></td><td>Overijssel</td><td>11.415</td><td>18.240</td><td>+60%</td></tr>
+            <tr><td>Kampen</td><td>Overijssel</td><td>4.615</td><td>6.685</td><td>+45%</td></tr>
+            <tr><td>Dalfsen</td><td>Overijssel</td><td>2.810</td><td>3.950</td><td>+41%</td></tr>
+            <tr><td>Zwartewaterland</td><td>Overijssel</td><td>2.070</td><td>2.915</td><td>+41%</td></tr>
+            <tr><td>Staphorst</td><td>Overijssel</td><td>1.760</td><td>2.490</td><td>+41%</td></tr>
+            <tr><td>Hattem</td><td>Gelderland</td><td>1.085</td><td>1.615</td><td>+49%</td></tr>
+            <tr><td>Meppel</td><td>Drenthe</td><td>3.050</td><td>4.315</td><td>+41%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: CBS, Vestigingen van bedrijven; bedrijfstak, gemeente. 2026 is een voorlopig cijfer.</p>
+      <p>Zwolle groeide harder dan elke buurgemeente in de tabel. Voor een bedrijf in de stad betekent dat: in Zwolle zelf is het drukker, in de regio is vaak nog ruimte. Stel: een schilder uit Zwolle-Zuid werkt ook in Hattem en Heerde. Daar komt hij vaak makkelijker bovenaan dan in zijn eigen stad (verzonnen voorbeeld).</p>
+      <p>Zet die plaatsen dan wel duidelijk op je site en in je Google Bedrijfsprofiel. Google staat maximaal 20 servicegebieden toe, op plaats of postcode. Het hele gebied moet volgens Google binnen ongeveer twee uur rijden van je bedrijf liggen. Maak geen twintig bijna gelijke pagina's met alleen een andere plaatsnaam. Google noemt pagina's per stad of regio die bezoekers naar één plek sturen in zijn spamregels als voorbeeld van misbruik. Eén sterke pagina per dienst, met echte projecten uit de regio, werkt beter.</p>
+
+      <h2>Zo zoeken mensen in en rond Zwolle</h2>
+      <p>Bij het zoekwoordonderzoek kijken we welke soorten zoekopdrachten er voor jouw vak zijn. Dit zijn de vormen die je in een stad als Zwolle in bijna elke branche terugziet, met wat je nodig hebt om er te scoren.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekopdracht</th><th>Voorbeeld</th><th>Wat werkt</th></tr></thead>
+          <tbody>
+            <tr><td>Vak plus stad</td><td>"fysiotherapeut zwolle"</td><td>Een compleet Google Bedrijfsprofiel en een sterke dienstpagina</td></tr>
+            <tr><td>Vak plus wijk</td><td>"kapper stadshagen"</td><td>De wijk in gewone tekst op je site, als je er echt zit of werkt</td></tr>
+            <tr><td>Vak plus buurgemeente</td><td>"hovenier dalfsen"</td><td>Projecten uit die plaats en het servicegebied goed ingesteld</td></tr>
+            <tr><td>In de buurt</td><td>"tandarts in de buurt"</td><td>Een juist adres. Hier weegt afstand het zwaarst</td></tr>
+            <tr><td>Zonder plaatsnaam</td><td>"boekhouder voor zzp'ers"</td><td>Content die de vraag beter beantwoordt dan landelijke sites</td></tr>
+            <tr><td>Een vraag aan AI</td><td>"welk installatiebedrijf in Zwolle doet warmtepompen?"</td><td>Heldere pagina's en vermeldingen op andere sites, want daar haalt AI zijn antwoord vandaan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Die laatste regel wordt belangrijker. Steeds meer mensen stellen hun vraag aan ChatGPT of lezen eerst een AI-antwoord bovenaan Google. Werken aan die vindbaarheid heet GEO, generative engine optimization. Het bouwt op hetzelfde fundament als SEO: duidelijke pagina's, een goed profiel en een bedrijf waar andere sites over schrijven. Meer daarover lees je bij <a href="/generative-engine-optimization/">GEO</a>.</p>
+
+      <h2>Onze aanpak in zes onderdelen</h2>
+      <p>Bij SEO in Zwolle beginnen we niet overal tegelijk. Eerst wat het snelst verschil maakt, daarna de rest.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Zoekwoorden en concurrenten</h3></div>
+      <p>We zoeken uit hoe klanten in Zwolle naar jou zoeken, en wie er nu bovenaan staat. Per zoekwoord zie je het zoekvolume, je huidige positie en welke pagina erop moet scoren. Zo weet je vooraf waar we op mikken. Wil je het zelf proberen? Volg de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Technische SEO</h3></div>
+      <p>Laadt je site snel genoeg, kan Google alles lezen, werkt hij op de telefoon? Google gebruikt de mobiele versie van je site om pagina's te beoordelen. En het grootste stuk van een pagina hoort volgens Google binnen 2,5 seconde te staan. Een losse <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> kost vanaf € 395.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Content die vragen beantwoordt</h3></div>
+      <p>Een pagina per dienst, met wat je doet, voor wie, wat het kost en hoe het verloopt. Plus artikelen over de vragen die klanten echt stellen. Voor zakelijke dienstverleners in Zwolle is dit vaak het belangrijkste onderdeel. Laat je de teksten liever schrijven, dan kan dat via <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> vanaf € 75 per pagina.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>4. Lokale SEO en je Google Bedrijfsprofiel</h3></div>
+      <p>De juiste hoofdcategorie, je diensten, foto's, openingstijden en een vaste reviewlink. Je naam, adres en telefoonnummer overal precies hetzelfde. Daarmee win je het kaartje. Alles over deze aanpak lees je bij <a href="/lokale-seo/">lokale SEO</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>5. Linkbuilding uit Overijssel</h3></div>
+      <p>Google noemt het aantal sites dat naar je linkt als onderdeel van populariteit. Johan zoekt links die echt iets betekenen, liefst uit de regio: een ondernemersvereniging, een sportclub die je sponsort, een leverancier die je noemt. Geen linkpakketten. Hoe we dat aanpakken, staat bij <a href="/linkbuilding/">linkbuilding</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>6. Meten en bijsturen</h3></div>
+      <p>Elke maand zie je je rankings, je bezoekers uit Google en het aantal aanvragen. In gewone taal. Werkt iets niet, dan zeggen we dat en stoppen we ermee. Verspild werk schrappen levert soms meer op dan iets nieuws beginnen.</p>
+
+      <h2>Rekenhulp: wat levert een hogere plek op?</h2>
+      <p>Of SEO in Zwolle zich voor jou terugbetaalt, kun je uitrekenen. Vul je eigen cijfers in. Het zoekvolume vind je in een zoekwoordtool, de rest weet je uit je eigen administratie. De klikkansen zijn aannames: op de eerste plekken klikken veel meer mensen dan op plek acht of negen.</p>
+    </div>
+    <div class="card reken" data-seo-zwolle-reken>
+      <div class="reken-velden">
+        <label>Zoekopdrachten per maand<input type="number" name="volume" value="400" min="0" step="10" inputmode="numeric" /></label>
+        <label>Klikkans nu (%)<input type="number" name="nu" value="2" min="0" max="100" step="0.5" inputmode="decimal" /></label>
+        <label>Klikkans na stijgen (%)<input type="number" name="straks" value="12" min="0" max="100" step="0.5" inputmode="decimal" /></label>
+        <label>Bezoekers die een aanvraag doen (%)<input type="number" name="aanvraag" value="8" min="0" max="100" step="0.5" inputmode="decimal" /></label>
+        <label>Aanvragen die klant worden (%)<input type="number" name="klant" value="40" min="0" max="100" step="5" inputmode="decimal" /></label>
+        <label>Wat een klant je oplevert (€)<input type="number" name="waarde" value="800" min="0" step="50" inputmode="numeric" /></label>
+      </div>
+      <p class="reken-uitkomst" aria-live="polite">Nu: <b data-uit="nu">€ 205</b> per maand. Na stijgen: <b data-uit="straks">€ 1.229</b> per maand. Verschil: <b data-uit="verschil">€ 1.024</b> per maand.</p>
+      <p class="klein muted">De ingevulde waarden zijn een verzonnen voorbeeld: 400 zoekopdrachten, van 2 naar 12 procent klikken, 8 procent aanvragen, 40 procent klanten en € 800 per klant.</p>
+    </div>
+    <div class="tekst" style="margin-top:28px">
+      <p>Zet het verschil naast de prijs van SEO, vanaf € 495 per maand. Valt de som negatief uit, omdat er op jouw dienst weinig wordt gezocht, dan zeggen we dat eerlijk. Dan is een ander kanaal slimmer, of eerst je Google Bedrijfsprofiel. Wil je weten welke kanalen dan wel werken? Kijk bij <a href="/online-marketing-zwolle/">online marketing in Zwolle</a>.</p>
+
+      <h2>Een SEO bureau uit Assen: hoe dat werkt in Zwolle</h2>
+      <p>Eerlijk is eerlijk: we zitten niet in Zwolle. Ons enige kantoor staat aan de Lauwers in Assen. Over de weg is dat 76 kilometer, reken op ongeveer een uur rijden over de A28. Met de trein kan het ook: tussen Assen en Zwolle rijdt elk half uur een rechtstreekse intercity.</p>
+      <p>Wat dat in de praktijk betekent:</p>
+      <ul class="vink">
+        <li><strong>Het eerste gesprek kan bij jou.</strong> We komen naar je zaak in Zwolle, of je drinkt koffie bij ons in Assen. Telefonisch kan natuurlijk ook.</li>
+        <li><strong>Het werk zelf gebeurt achter een scherm.</strong> Zoekwoorden, techniek, teksten en links. Dat maakt geen verschil of we in de Diezerpoort zitten of in Assen.</li>
+        <li><strong>Google kijkt niet naar ons adres.</strong> Wel naar jouw site, jouw profiel en wie er naar jou linkt. Daar werken we aan.</li>
+        <li><strong>Je hebt één vast aanspreekpunt.</strong> {site.contactpersoon} belt je op werkdagen binnen 15 minuten terug.</li>
+      </ul>
+      <p>Wat we je niet beloven: dat we in de stad om de hoek zitten. Wil je een SEO bureau in Zwolle waar je zonder afspraak binnenloopt, dan zit je bij ons verkeerd. Wil je vooral resultaat en een eerlijk verhaal, dan is een uur rijden geen bezwaar.</p>
+
+      <h2>Wat jij doet en wat wij doen</h2>
+      <p>SEO werkt het best als het samenwerken is. Dit is de verdeling in de eerste maanden.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wanneer</th><th>Wat wij doen</th><th>Wat we van jou vragen</th></tr></thead>
+          <tbody>
+            <tr><td>Week 1</td><td>Nulmeting: rankings, techniek, profiel en de concurrenten in jouw wijk</td><td>Toegang tot je site, Search Console en je bedrijfsprofiel</td></tr>
+            <tr><td>Week 2 tot 4</td><td>Technische fouten herstellen, profiel op orde, reviewlink klaar</td><td>Vijf tevreden klanten om een review vragen</td></tr>
+            <tr><td>Maand 2</td><td>Dienstpagina's herschrijven of nieuw maken</td><td>Teksten nalezen, foto's van echte klussen aanleveren</td></tr>
+            <tr><td>Maand 3</td><td>Eerste links uit de regio, meten wat werkt, bijsturen</td><td>Laten weten welke aanvragen via Google binnenkwamen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Dat laatste is belangrijker dan het lijkt. Een telefoontje via Google zien wij niet altijd in de cijfers. Vraag nieuwe klanten dus hoe ze je vonden.</p>
+
+      <h2>Zes fouten die Zwolse bedrijven in Google tegenhouden</h2>
+      <ol>
+        <li><strong>Je eigen rankings checken vanaf kantoor.</strong> Google toont lokaal andere resultaten op andere plekken. Wie in Marslanden zoekt, ziet iets anders dan iemand in Stadshagen. Test vanaf meerdere plekken, of laat het meten.</li>
+        <li><strong>Alleen "Zwolle" op je site.</strong> Terwijl klanten ook zoeken op Stadshagen, Kampen of Hattem. Noem de plaatsen waar je werkt, met een voorbeeld.</li>
+        <li><strong>Een adres in Kampen en toch bovenaan in Zwolle willen.</strong> Op de kaart weegt afstand zwaar. In de gewone resultaten maak je wel kans, met een sterke pagina.</li>
+        <li><strong>Eén pagina "diensten" voor alles.</strong> Die scoort op geen enkele dienst goed. Elke dienst verdient een eigen pagina.</li>
+        <li><strong>Links kopen in pakketten.</strong> Goedkoop, maar het risico ligt bij jou. Wij weten uit ons <a href="/proeflab/">proeflab</a> hoe een penalty voelt.</li>
+        <li><strong>Niet meten welke aanvragen uit Google komen.</strong> Dan weet je na een jaar niet wat SEO heeft opgeleverd.</li>
+      </ol>
+
+      <h2>Waar je op let bij een SEO specialist in Zwolle</h2>
+      <p>Op de pagina's die half oktober 2026 bovenaan stonden voor "seo zwolle" en die we konden bekijken, stond geen enkele prijs. Vraag die dus zelf, en vraag meer dan dat. Vijf vragen voor je een offerte tekent:</p>
+      <ul>
+        <li><strong>Op welke zoekwoorden gaan we stijgen?</strong> Een goed bureau komt met een lijst en volumes, niet met "dat zien we later".</li>
+        <li><strong>Hoe meten we het?</strong> Rankings, bezoekers én aanvragen. Een score uit een tool is geen resultaat.</li>
+        <li><strong>Waar komen de links vandaan?</strong> Echte sites, liefst uit de regio. Geen pakket van honderd links.</li>
+        <li><strong>Wat als het niet werkt?</strong> Vraag naar een afspraak over doelen, en hoe lang je vastzit.</li>
+        <li><strong>Kun je in gewone woorden uitleggen wat je doet?</strong> Veel vakjargon verbergt vaak weinig inhoud.</li>
+      </ul>
+      <p>Twijfel je over een offerte die je al hebt? De gids <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte beoordelen</a> helpt je die te lezen. Wat een SEO-specialist precies doet, lees je in <a href="/kennisbank/gidsen/wat-doet-een-seo-specialist/">wat doet een SEO-specialist</a>.</p>
+
+      <h2>Wat kost SEO in Zwolle?</h2>
+      <p>Bij ons betaal je in Zwolle hetzelfde als in Assen. Dit zijn de vanaf-prijzen, exclusief btw. Maandelijks opzegbaar, tenzij we samen iets anders afspreken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Dienst</th><th>Vanaf</th><th>Past bij</th></tr></thead>
+          <tbody>
+            <tr><td>Lokale SEO</td><td>€ 295 per maand</td><td>Klanten uit de stad en de kaart in Google</td></tr>
+            <tr><td><a href="/zoekmachine-optimalisatie/">SEO</a></td><td>€ 495 per maand</td><td>Meer diensten, meer zoekwoorden, ook buiten Zwolle</td></tr>
+            <tr><td>GEO</td><td>€ 495 per maand</td><td>Genoemd worden in ChatGPT en AI-antwoorden</td></tr>
+            <tr><td>Linkbuilding</td><td>€ 395 per maand</td><td>Goede pagina's die nog autoriteit missen</td></tr>
+            <tr><td>Technische SEO-audit</td><td>€ 395 eenmalig</td><td>Weten wat er technisch mis is</td></tr>
+            <tr><td><a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel, Bing en Apple</a></td><td>€ 249 eenmalig</td><td>Een profiel dat in één keer goed staat</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Bij SEO en linkbuilding krijg je stijggarantie. We spreken samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals teksten nalezen of op tijd reageren. De details staan bij onze <a href="/garantie/">garantie</a>. Hoe de bedragen zijn opgebouwd, lees je in <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+
+      <p>Een nieuwe site nodig voordat je aan SEO begint? Kijk bij <a href="/webdesign-zwolle/">webdesign in Zwolle</a>. Alle plaatsen waar we werken, staan op de pagina <a href="/werkgebied/">werkgebied</a>.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Zitten jullie in Zwolle?', a: 'Nee. Ons enige kantoor staat aan de Lauwers in Assen, zo\'n uur rijden over de A28. Voor een kennismaking komen we graag naar je toe. Het werk zelf doen we vanaf ons kantoor, en je hebt één vast aanspreekpunt.' },
+      { v: 'Wat kost SEO in Zwolle?', a: 'Lokale SEO begint bij € 295 per maand, volledige SEO bij € 495 per maand. Een technische audit kost vanaf € 395 eenmalig. Alle prijzen zijn exclusief btw en maandelijks opzegbaar.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Op de kaart zie je soms binnen een paar weken verschil, zeker als je profiel eerst onvolledig was. Voor zoekwoorden met veel concurrenten in Zwolle moet je meestal rekenen op drie tot zes maanden.' },
+      { v: 'Is lokale SEO genoeg voor mijn bedrijf?', a: 'Als bijna al je klanten uit Zwolle en de dorpen eromheen komen, vaak wel. Wil je ook gevonden worden op vragen zonder plaatsnaam, of in de rest van het land, dan heb je volledige SEO nodig.' },
+      { v: 'Werken jullie ook voor bedrijven in Kampen, Dalfsen of Hattem?', a: 'Ja. We werken in de hele regio Zwolle, in het Noorden en daarbuiten. We zorgen dat op je site en in je profiel duidelijk staat welke plaatsen jij bedient.' },
+      { v: 'Moet ik ook iets met GEO?', a: 'Steeds meer klanten vragen eerst ChatGPT of lezen een AI-antwoord in Google. Goede SEO is daarvoor de basis. Of extra werk aan GEO voor jou zinvol is, hoor je na de gratis analyse.' },
+      { v: 'Kan ik eerst een offerte of scan krijgen?', a: 'Ja. Met de <a href="/gratis-website-analyse/">gratis website-analyse</a> zie je waar je nu staat en waar de snelste winst zit. Daarna krijg je een voorstel met een prijs die vooraf vaststaat.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer in en rond Zwolle"
+    links={[
+      { label: 'Zwolle', titel: 'Online marketing in Zwolle', href: '/online-marketing-zwolle/', tekst: 'De kanalen die jouw doelgroep echt gebruikt.', teken: 'megafoon' },
+      { label: 'Zwolle', titel: 'Webdesign in Zwolle', href: '/webdesign-zwolle/', tekst: 'Een site die opvalt in een drukke markt.', teken: 'scherm' },
+      { label: 'Regio', titel: 'SEO in Meppel', href: '/seo-meppel/', tekst: 'Gevonden worden tussen Drenthe en Overijssel.', teken: 'vergrootglas' },
+      { label: 'Dienst', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Bovenaan op de kaart van Google, Bing en Apple.', teken: 'pin' },
+    ]}
+  />
+
+  <Actie titel="Waar sta jij in Google in Zwolle?" tekst={`Laat je site gratis nakijken of bel ${site.contactpersoon}. Hij belt binnen 15 minuten terug en zegt eerlijk waar je grootste kans zit.`} />
+</Base>
+<script>
+  // Rekenhulp: rekent opnieuw bij elke wijziging. Zonder JavaScript blijft het voorbeeld met de standaardwaarden staan.
+  const blok = document.querySelector('[data-seo-zwolle-reken]');
+  if (blok) {
+    const euro = (n: number) => '€ ' + Math.round(n).toLocaleString('nl-NL');
+    const waarde = (naam: string) => {
+      const veld = blok.querySelector<HTMLInputElement>(`input[name="${naam}"]`);
+      const n = parseFloat((veld?.value ?? '0').replace(',', '.'));
+      return Number.isFinite(n) && n > 0 ? n : 0;
+    };
+    const reken = () => {
+      const rest = (waarde('aanvraag') / 100) * (waarde('klant') / 100) * waarde('waarde');
+      const nu = waarde('volume') * (waarde('nu') / 100) * rest;
+      const straks = waarde('volume') * (waarde('straks') / 100) * rest;
+      const zet = (sleutel: string, tekst: string) => { const el = blok.querySelector(`[data-uit="${sleutel}"]`); if (el) el.textContent = tekst; };
+      zet('nu', euro(nu));
+      zet('straks', euro(straks));
+      zet('verschil', euro(straks - nu));
+    };
+    blok.addEventListener('input', reken);
+    reken();
+  }
+</script>
+<style>
+  .cijfers { margin: 8px 0 12px; }
+  .cijfers .getal-kaart b { font-size: var(--step-2); }
+  .reken { max-width: 760px; margin: 8px auto 0; padding: clamp(18px, 3vw, 28px); }
+  .reken-velden { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px 16px; }
+  .reken-velden label { display: grid; grid-template-rows: 1fr auto; align-items: end; gap: 6px; font-weight: 700; font-size: 0.95rem; line-height: 1.3; color: var(--ink); }
+  .reken-velden input { width: 100%; box-sizing: border-box; font: inherit; font-weight: 600; padding: 10px 12px; border: 2px solid #d9e1ea; border-radius: 10px; background: #fff; color: var(--ink); }
+  .reken-velden input:focus { outline: none; border-color: #074663; }
+  .reken-uitkomst { margin: 20px 0 6px; padding: 14px 16px; border-radius: 12px; background: #fff4ec; font-size: var(--step-1); line-height: 1.5; }
+  .reken-uitkomst b { white-space: nowrap; }
+</style>

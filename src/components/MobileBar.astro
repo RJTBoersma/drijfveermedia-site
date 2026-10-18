@@ -1,21 +1,34 @@
 ---
 import { site } from '../data/site';
+import { stapVoor } from '../data/actie';
+const stap = stapVoor(Astro.url.pathname);
+const naarScan = Astro.url.pathname.startsWith('/gratis-website-analyse');
 ---
-<div class="mbar" data-mbar>
-  <a class="btn btn-ghost" href={site.telefoonLink}>Bellen</a>
-  <a class="btn" href="/gratis-website-analyse/">Gratis scan</a>
-</div>
+<nav class="mbar" data-mbar aria-label="Snel contact">
+  <a class="btn btn-ghost" href={site.telefoonLink} data-bel>Bellen</a>
+  <a class="btn" href={naarScan ? '#scan' : stap.href}>{naarScan ? 'Naar het formulier' : (stap.kort ?? 'Gratis scan')}</a>
+</nav>
 <script>
   const bar = document.querySelector('[data-mbar]');
-  const toon = () => bar?.classList.toggle('show', window.scrollY > window.innerHeight * 0.6);
+  const toon = () => bar?.classList.toggle('show', window.scrollY > 150);
   window.addEventListener('scroll', toon, { passive: true });
   toon();
+  // Buiten kantoortijd (werkdagen 8.00 tot 17.00 uur, Nederlandse tijd) heeft bellen geen zin: laat dan je nummer achter.
+  try {
+    const d = new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'short', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+    const dag = d.find((x) => x.type === 'weekday')?.value ?? '';
+    const uur = Number(d.find((x) => x.type === 'hour')?.value ?? 12);
+    const open = !['za', 'zo'].includes(dag.replace('.', '')) && uur >= 8 && uur < 17;
+    const bel = document.querySelector<HTMLAnchorElement>('[data-bel]');
+    if (!open && bel) { bel.textContent = 'Bel me terug'; bel.href = '/contact/#terugbellen'; }
+  } catch (e) {}
 </script>
 <style>
   .mbar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; gap: 10px; background: var(--panel); border-top: 1px solid var(--line);
     padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
     transform: translateY(110%); transition: transform 0.25s ease; }
   .mbar.show { transform: none; }
-  .mbar .btn { flex: 1; font-size: 1rem; padding: 0.75em; }
+  .mbar .btn { flex: 1; font-size: 1rem; padding: 0.75em; min-height: 48px; }
   @media (max-width: 900px) { .mbar { display: flex; } }
+  @media (prefers-reduced-motion: reduce) { .mbar { transition: none; } }
 </style>

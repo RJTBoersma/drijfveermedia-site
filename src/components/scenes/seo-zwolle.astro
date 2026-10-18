@@ -1,0 +1,87 @@
+---
+// Scène voor /seo-zwolle/: de Sassenpoort van Zwolle naast een zoekvenster met "loodgieter zwolle" en een stukje kaart. In de volledige versie schuift jouw bedrijf van plek drie naar plek één en valt er een pin op de kaart.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: de Sassenpoort van Zwolle naast een zoekvenster met de zoekopdracht loodgieter zwolle. Jouw bedrijf schuift van de derde naar de eerste plek en op de kaart eronder valt een oranje pin.'}>
+  <!-- Sassenpoort op de achtergrond -->
+  <g fill="#e3ebf2">
+    <path d="M44 214v-78h64v78z" />
+    <path d="M60 136v-22h32v22z" />
+    <path d="M58 114l18-34 18 34z" />
+    <path d="M34 214v-92h16v92z" />
+    <path d="M32 122l10-22 10 22z" />
+    <path d="M102 214v-92h16v92z" />
+    <path d="M100 122l10-22 10 22z" />
+  </g>
+  <path d="M76 80V66" stroke="#e3ebf2" stroke-width="3" stroke-linecap="round" />
+  <path d="M66 214v-24a10 10 0 0 1 20 0v24z" fill="#fff" />
+  <rect x="70" y="146" width="12" height="16" rx="6" fill="#fff" />
+  <path d="M10 214h460" stroke="#d9e1ea" stroke-width="2" />
+  <text x="76" y="236" text-anchor="middle" font-size="11" font-weight="700" class="zacht">Zwolle</text>
+
+  <!-- zoekvenster -->
+  <rect x="150" y="24" width="300" height="152" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="166" y="38" width="268" height="26" rx="13" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="l" cx="182" cy="50" r="5" />
+  <path class="l" d="M186 54l4 4" />
+  <text x="198" y="55" font-size="11" font-weight="700">loodgieter zwolle</text>
+  <!-- drie resultaten -->
+  <circle cx="178" cy="89" r="8" fill="#e8eef4" />
+  <rect x="194" y="82" width="118" height="7" rx="3.5" fill="#c9d3dd" />
+  <rect x="194" y="94" width="170" height="5" rx="2.5" fill="#e8eef4" />
+  <circle cx="178" cy="121" r="8" fill="#e8eef4" />
+  <rect x="194" y="114" width="96" height="7" rx="3.5" fill="#c9d3dd" />
+  <rect x="194" y="126" width="150" height="5" rx="2.5" fill="#e8eef4" />
+  <circle cx="178" cy="153" r="8" fill="#e8eef4" />
+  <rect x="194" y="146" width="132" height="7" rx="3.5" fill="#c9d3dd" />
+  <rect x="194" y="158" width="160" height="5" rx="2.5" fill="#e8eef4" />
+
+  <!-- stukje kaart -->
+  <rect x="250" y="186" width="200" height="56" rx="10" fill="#e9eef3" />
+  <path d="M250 228c40-10 70 6 110-6s60-20 90-12" stroke="#fff" stroke-width="7" fill="none" />
+  <path d="M318 186c4 20-6 38 6 56" stroke="#fff" stroke-width="5" fill="none" />
+  <path d="M282 204c0-6 5-10 9-10s9 4 9 10c0 7-9 14-9 14s-9-7-9-14z" fill="#8aa0b4" />
+  <circle cx="291" cy="204" r="3" fill="#fff" />
+  <path d="M410 212c0-6 5-10 9-10s9 4 9 10c0 7-9 14-9 14s-9-7-9-14z" fill="#8aa0b4" />
+  <circle cx="419" cy="212" r="3" fill="#fff" />
+
+  {!mini && (
+    <g>
+      <g class="seo-zwolle-jij">
+        <rect x="160" y="74" width="282" height="30" rx="8" fill="#fff" stroke="#ff6600" stroke-width="2.5" />
+        <circle cx="178" cy="89" r="9" fill="#ff6600" />
+        <path d="M178 94v-10M174 88l4-4 4 4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="194" y="87" font-size="11" font-weight="800">Jouw bedrijf · Zwolle</text>
+        <text x="194" y="99" font-size="8.5" class="zacht">Ook in Stadshagen en Kampen</text>
+      </g>
+      <circle class="seo-zwolle-ring" cx="358" cy="214" r="7" fill="none" stroke="#ff6600" stroke-width="2" />
+      <g class="seo-zwolle-pin">
+        <path d="M346 202c0-8 6-13 12-13s12 5 12 13c0 9-12 18-12 18s-12-9-12-18z" fill="#ff6600" />
+        <circle cx="358" cy="202" r="4" fill="#fff" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .seo-zwolle-ring { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .seo-zwolle-jij { opacity: 0; transform: translateY(64px); }
+  :global(.teken-js) .seo-zwolle-pin { opacity: 0; transform: translateY(-30px); }
+  :global(.teken-js) .seo-zwolle-ring { opacity: 0; }
+  .in-beeld .seo-zwolle-jij { animation: seo-zwolle-stijg 1.8s cubic-bezier(.6,.1,.3,1) 0.5s forwards; }
+  .in-beeld .seo-zwolle-pin { animation: seo-zwolle-val 0.6s cubic-bezier(.3,1.6,.5,1) 2.1s forwards; }
+  .in-beeld .seo-zwolle-ring { animation: seo-zwolle-golf 3.2s ease-out 2.7s infinite; }
+  @keyframes seo-zwolle-stijg {
+    0% { opacity: 0; transform: translateY(64px); }
+    25% { opacity: 1; transform: translateY(64px); }
+    100% { opacity: 1; transform: none; }
+  }
+  @keyframes seo-zwolle-val { to { opacity: 1; transform: none; } }
+  @keyframes seo-zwolle-golf {
+    0% { opacity: 0.9; transform: scale(1); }
+    70%, 100% { opacity: 0; transform: scale(3); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .seo-zwolle-jij, .in-beeld .seo-zwolle-pin, .in-beeld .seo-zwolle-ring { animation: none; opacity: 1; transform: none; }
+  }
+</style>

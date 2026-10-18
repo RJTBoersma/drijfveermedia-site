@@ -1,0 +1,90 @@
+---
+// Scène voor /online-marketing-zwolle/: de stervormige stadsgracht van Zwolle met de binnenstad erin. Vier kanalen (Google, kaart, e-mail, social) verbinden de stad met jouw telefoon. In de volledige versie lopen er stipjes van de kanalen naar de telefoon en verschijnt er een nieuwe aanvraag.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+// Stervormige gracht: acht bolwerken rond het midden.
+const cx = 118, cy = 146;
+const ster = (buiten: number, binnen: number) => Array.from({ length: 16 }, (_, i) => {
+  const r = i % 2 === 0 ? buiten : binnen;
+  const hoek = (Math.PI / 8) * i - Math.PI / 2;
+  return `${(cx + r * Math.cos(hoek)).toFixed(1)} ${(cy + r * Math.sin(hoek)).toFixed(1)}`;
+}).join(' L');
+const kanalen = [
+  { naam: 'Google', y: 72, k: 's1' },
+  { naam: 'Kaart', y: 116, k: 's2' },
+  { naam: 'E-mail', y: 160, k: 's3' },
+  { naam: 'Social', y: 204, k: 's4' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: de stervormige stadsgracht van Zwolle met de binnenstad. Vier kanalen, Google, de kaart, e-mail en social, leiden van de stad naar jouw telefoon, waar een nieuwe aanvraag binnenkomt.'}>
+  <!-- stadsgracht en binnenstad -->
+  <path d={`M${ster(78, 60)}Z`} fill="#dbe8f2" />
+  <path d={`M${ster(64, 49)}Z`} fill="#fff" stroke="#b9d0e2" stroke-width="2" />
+  <path d="M96 150v-16l10-9 10 9v16zM120 150v-22l9-8 9 8v22zM102 172v-12l8-7 8 7v12zM124 172v-14l9-8 9 8v14z" fill="#e8eef4" />
+  <path class="l" d="M96 150v-16l10-9 10 9v16M120 150v-22l9-8 9 8v22" />
+  <path d="M84 158h68" stroke="#d9e1ea" stroke-width="2" stroke-linecap="round" />
+  <text x={cx} y="248" text-anchor="middle" font-size="11" font-weight="700" class="zacht">Binnenstad Zwolle</text>
+
+  <!-- lijnen van de stad naar de kanalen en van de kanalen naar de telefoon -->
+  {kanalen.map((c) => (
+    <g>
+      <path d={`M196 ${cy}C214 ${cy} 214 ${c.y} 236 ${c.y}`} fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+      <path d={`M326 ${c.y}C350 ${c.y} 352 148 376 148`} fill="none" stroke="#d9e1ea" stroke-width="2" />
+    </g>
+  ))}
+  <!-- kanalen -->
+  {kanalen.map((c, i) => (
+    <g>
+      <rect x="236" y={c.y - 14} width="90" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <circle cx="252" cy={c.y} r="7" fill={i === 0 ? '#ff6600' : '#074663'} />
+      <text x="266" y={c.y + 4} font-size="11" font-weight="700">{c.naam}</text>
+    </g>
+  ))}
+  <!-- telefoon -->
+  <rect x="376" y="72" width="80" height="152" rx="14" fill="#10283f" />
+  <rect x="383" y="82" width="66" height="132" rx="8" fill="#fff" />
+  <rect x="391" y="92" width="26" height="5" rx="2.5" fill="#074663" />
+  <rect x="391" y="108" width="50" height="7" rx="3" fill="#10283f" />
+  <rect x="391" y="121" width="42" height="4" rx="2" fill="#d9e1ea" />
+  <rect class="v" x="391" y="132" width="50" height="34" rx="5" />
+  <rect x="391" y="180" width="50" height="16" rx="6" fill="#ff6600" />
+
+  {!mini && (
+    <g>
+      {kanalen.map((c) => (
+        <circle class={`stip ${c.k}`} cx="326" cy={c.y} r="4" fill="#ff6600" style={`--dy:${148 - c.y}px`} />
+      ))}
+      <g class="melding">
+        <rect x="318" y="18" width="146" height="32" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <circle cx="336" cy="34" r="9" fill="#1f8a5b" />
+        <path d="M331.5 34l3 3 5.5-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="352" y="38" font-size="11" font-weight="800">Nieuwe aanvraag</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .stip { opacity: 0; }
+  :global(.teken-js) .melding { opacity: 0; }
+  .in-beeld .stip { animation: online-marketing-zwolle-stip 4s ease-in-out infinite; }
+  .in-beeld .s1 { animation-delay: 0.6s; }
+  .in-beeld .s2 { animation-delay: 1.6s; }
+  .in-beeld .s3 { animation-delay: 2.6s; }
+  .in-beeld .s4 { animation-delay: 3.6s; }
+  .in-beeld .melding { animation: online-marketing-zwolle-melding 6s ease-in-out 1.4s infinite both; }
+  @keyframes online-marketing-zwolle-stip {
+    0% { opacity: 0; transform: none; }
+    10% { opacity: 1; transform: none; }
+    45% { opacity: 1; transform: translate(50px, var(--dy)); }
+    55%, 100% { opacity: 0; transform: translate(50px, var(--dy)); }
+  }
+  @keyframes online-marketing-zwolle-melding {
+    0% { opacity: 0; transform: translateY(8px); }
+    12%, 80% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .stip { animation: none; opacity: 0; }
+    .in-beeld .melding { animation: none; opacity: 1; }
+  }
+</style>

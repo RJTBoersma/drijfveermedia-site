@@ -1,0 +1,78 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import paginas from '../../../../scripts/paginas.json';
+import { site, persoon } from '../../../data/site';
+const p = persoon('robert');
+const url = `${site.url}/over-ons/robert-boersma/`;
+const schema = [{
+  '@type': 'ProfilePage',
+  name: 'Robert Boersma, eigenaar van Drijfveer Media',
+  url,
+  dateModified: '2026-10-18',
+  mainEntity: { '@id': `${url}#persoon` },
+  about: { '@id': `${url}#persoon` },
+}];
+// Alles wat Robert schreef: de gidsen en begrippen in de kennisbank.
+const geschreven = (paginas as any[]).filter((x) => x.type === 'gids' && !x.wachtOpInhoud).slice(0, 12);
+---
+<Base
+  title="Robert Boersma, eigenaar van Drijfveer Media in Assen"
+  description="Robert Boersma richtte Drijfveer Media in 2011 op. Daarvoor was hij general manager bij de grootste leadgenerator van de Benelux. Wie is hij?"
+  kruimels={[{ naam: 'Over ons', url: '/over-ons/' }, { naam: 'Robert Boersma', url: '/over-ons/robert-boersma/' }]}
+  schema={schema}
+  ogType="profile"
+>
+  <section class="wrap sectie profiel">
+    <img src="/img/team/robert.webp" width="300" height="300" alt="Robert Boersma, getekend portret" loading="eager" decoding="async" />
+    <div>
+      <p class="kicker">Over ons · Eigenaar</p>
+      <h1>Robert Boersma</h1>
+      <p class="lead">Robert Boersma is eigenaar en online marketeer van Drijfveer Media in Assen. Hij richtte het bureau in 2011 op, samen met Evelien Heerema, en doet sindsdien SEO, content en strategie voor ondernemers.</p>
+      <ul class="feiten">
+        <li><b>Rol</b> {p.rol}</li>
+        <li><b>Sinds</b> 2011 eigen bureau</li>
+        <li><b>Daarvoor</b> general manager bij de toen grootste leadgenerator van de Benelux</li>
+        <li><b>Vakgebied</b> SEO, linkbuilding, content, GEO en strategie</li>
+        <li><b>Kantoor</b> {site.straat}, {site.plaats}</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap sectie">
+    <div class="tekst">
+      <h2>Van leadgenerator naar eigen bureau</h2>
+      <p>Voordat hij Drijfveer Media begon, was Robert general manager bij wat toen de grootste leadgenerator van de Benelux was. Hij zag daar van dichtbij hoe je mensen online laat kiezen voor een bedrijf. Na een tijd was de rek eruit. "Ik vond het niet meer leuk. De uitdaging was weg."</p>
+      <p>In 2011 ging hij met Evelien Heerema twee weken op vakantie naar België. Na twee dagen wisten ze genoeg: ze wilden voor zichzelf beginnen. Op dag drie schreven ze Drijfveer Media in bij de Kamer van Koophandel. Het begon in Groningen met SEO en linkbuilding voor zzp'ers en kleine bedrijven. Inmiddels zit het bureau aan de Lauwers in Assen en werkt Robert met een team van vier.</p>
+
+      <h2>Hoe Robert werkt</h2>
+      <p>Robert begint bij elke klant met dezelfde vraag: wat moet je website opleveren? Pas als dat op papier staat, gaat hij aan de slag. Elke maand laat hij zien of het lukt, in een verslag dat je zonder marketeer kunt lezen.</p>
+      <p>Nieuwe technieken test hij eerst op eigen sites. In vijftien jaar zijn dat er meer dan honderd geworden, in allerlei beroepen. Wat daar werkt, gebruikt hij voor klanten. Wat niet werkt, heeft dan al een eigen site gekost en niet die van een klant. Meer daarover lees je bij <a href="/proeflab/">het proeflab</a>.</p>
+
+      <h2>Waar hij trots op is</h2>
+      <p>"Er gaat niets boven een persoonlijk compliment van een klant. Maar waar ik het meest trots op ben, is dat we geen wanbetalers hebben en dat klanten heel lang klant blijven. Dat zegt iets."</p>
+
+      <h2>Wat hem dwarszit</h2>
+      <p>"Het irriteert me dat er veel cowboys zijn die doen alsof ze verstand hebben van online marketing, maar alleen een handboek voor beginners hebben doorgebladerd. Ze zijn goed in sales en waardeloos in uitvoering. Dat schaadt het vertrouwen in de hele branche. Hoe vaak wij wel niet de puinhopen van andere 'marketeers' hebben moeten opruimen."</p>
+      <p>Daarom staat bij Drijfveer Media alles open op de site: de <a href="/prijzen/">prijzen</a>, de <a href="/werkwijze/">werkwijze</a> en de <a href="/garantie/">garantie</a>.</p>
+
+      <h2>Wat Robert schreef</h2>
+      <p>Robert schrijft en controleert de gidsen en begrippen in de <a href="/kennisbank/">kennisbank</a>. Een greep:</p>
+      <ul class="lijst-kolommen">
+        {geschreven.map((g) => <li><a href={g.url}>{g.naam}</a></li>)}
+      </ul>
+      <p><a href="/kennisbank/gidsen/">Alle gidsen</a> · <a href="/kennisbank/wat-is/">Alle begrippen</a></p>
+    </div>
+  </section>
+
+  <Actie titel="Wil je Robert of Thorgall spreken?" tekst={`Bel ${site.telefoon} of laat je nummer achter. ${site.contactpersoon} belt je binnen 15 minuten terug op werkdagen, en schakelt Robert in als dat nodig is.`} knop={{ tekst: 'Plan een kennismaking', href: '/contact/' }} />
+</Base>
+<style>
+  .profiel { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
+  .profiel img { width: 100%; height: auto; border-radius: var(--radius); background: #e8eef4; }
+  .profiel h1 { margin: 6px 0 12px; }
+  .feiten { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+  .feiten b { display: inline-block; min-width: 96px; color: var(--navy); }
+  .lijst-kolommen { columns: 2 260px; column-gap: 32px; }
+  @media (max-width: 640px) { .profiel { grid-template-columns: minmax(0, 1fr); } .profiel img { max-width: 200px; } }
+</style>

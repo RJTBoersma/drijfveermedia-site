@@ -35,7 +35,7 @@ function bestanden(dir) {
 }
 
 function tekstVan(html) {
-  const main = html.match(/<main[^>]*>([\s\S]*)<\/main>/)?.[1] ?? '';
+  const main = (html.match(/<main[^>]*>([\s\S]*)<\/main>/)?.[1] ?? '').replace(/<dm-extra>[\s\S]*?<\/dm-extra>/g, ' ');
   // Tekst in getekende scènes (svg) telt niet mee: dat zijn labels in een plaatje, geen lopende tekst.
   return main.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<svg[\s\S]*?<\/svg>/g, ' ')
     .replace(/<(h[1-6]|p|li|summary|blockquote|td|th|figcaption)[^>]*>/g, '\n')
@@ -56,7 +56,7 @@ const AIDA = ['attention', 'interest', 'desire', 'action'];
 function seoCheck(html, tekst, aantal, p) {
   const m = [];
   if (/<meta name="robots" content="noindex/.test(html)) return m; // niet in Google, dus geen SEO-eisen
-  const main = html.match(/<main[^>]*>([\s\S]*)<\/main>/)?.[1] ?? '';
+  const main = (html.match(/<main[^>]*>([\s\S]*)<\/main>/)?.[1] ?? '').replace(/<dm-extra>[\s\S]*?<\/dm-extra>/g, ' ');
   const titel = (html.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? '').replace(/&amp;/g, '&');
   const desc = (html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '').replace(/&amp;/g, '&');
   const h1 = tags(main, 'h1');

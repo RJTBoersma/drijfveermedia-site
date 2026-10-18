@@ -37,6 +37,8 @@ const personen = team.map((p) => ({
   image: `${site.url}/img/team/${p.slug}.webp`,
   url: p.slug === 'robert' ? `${site.url}/over-ons/robert-boersma/` : `${site.url}/over-ons/`,
   worksFor: { '@id': orgId },
+  description: p.kort,
+  ...(p.slug === 'robert' ? { knowsAbout: ['SEO', 'Linkbuilding', 'Contentmarketing', 'Generative engine optimization', 'Leadgeneratie', 'Online marketingstrategie'] } : {}),
   ...(site.profielen?.[p.slug]?.length ? { sameAs: site.profielen[p.slug] } : {}),
 }));
 
@@ -206,12 +208,12 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     <main id="inhoud">
       <slot />
       {bronnen.length > 0 && (
-        <section class="wrap sectie bronnen" aria-labelledby="bronnen-kop">
+        <dm-extra><section class="wrap sectie bronnen" aria-labelledby="bronnen-kop">
           <h2 id="bronnen-kop" class="bronnen-kop">Bronnen</h2>
           <ol>
             {bronnen.map((u) => { const b = bronNaam(u); return <li><a href={u} rel="noopener" target="_blank">{b.host}</a>{b.stuk && <span>: {b.stuk}</span>}</li>; })}
           </ol>
-        </section>
+        </section></dm-extra>
       )}
     </main>
     <Footer />

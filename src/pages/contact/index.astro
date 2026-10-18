@@ -29,21 +29,22 @@ const schema = [{ '@type': 'ContactPage', name: 'Contact met Drijfveer Media', u
         </div>
       </div>
 
-      <dl class="gegevens">
+      <dl class="gegevens na">
         <div><dt>Telefoon</dt><dd><a href={site.telefoonLink}>{site.telefoon}</a></dd></div>
         <div><dt>E-mail</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
         <div><dt>Adres</dt><dd>{site.straat}<br />{site.postcode} {site.plaats}<br /><a href={route} rel="noopener">Plan je route</a></dd></div>
         <div><dt>Bereikbaar</dt><dd>Maandag tot en met vrijdag<br />8.00 tot 17.00 uur</dd></div>
       </dl>
-      <RouteAssen />
-      <p class="muted">We zitten in een bedrijfsverzamelpand aan de Lauwers, tussen andere ondernemers. Je bent welkom, maar bel even van tevoren. Dan staat de koffie klaar en zit er iemand voor je.</p>
-      <img class="pand" src="/img/kantoor-assen-klein.webp" width="660" height="624" alt="Ons kantoorpand aan de Lauwers in Assen" loading="lazy" decoding="async" />
+      <div class="na"><RouteAssen /></div>
+      <p class="muted na">We zitten in een bedrijfsverzamelpand aan de Lauwers, tussen andere ondernemers. Je bent welkom, maar bel even van tevoren. Dan staat de koffie klaar en zit er iemand voor je.</p>
+      <img class="pand na" src="/img/kantoor-assen-klein.webp" width="660" height="624" alt="Ons kantoorpand aan de Lauwers in Assen" loading="lazy" decoding="async" />
     </div>
 
-    <div class="rechts">
+    <div class="rechts" id="terugbellen">
       <h2>Liever dat wij jou bellen?</h2>
       <p class="muted">Laat je nummer achter. Dan bellen we je binnen een kwartier, of de volgende werkdag voor 8.15 uur.</p>
-      <Aanvraagformulier soort="Contact" knop="Bel me terug" />
+      <p class="fout" role="alert" hidden data-fout>Er ging iets mis met versturen. Je gegevens zijn wel bewaard, maar bel voor de zekerheid even: <a href={site.telefoonLink}>{site.telefoon}</a>.</p>
+      <Aanvraagformulier soort="Contact" knop="Bel me terug" moment />
       <h2 class="waarvoor">Waarvoor kun je ons bellen?</h2>
       <ul class="vink">
         <li>Een vraag over je website, je vindbaarheid of je advertenties.</li>
@@ -55,7 +56,17 @@ const schema = [{ '@type': 'ContactPage', name: 'Contact met Drijfveer Media', u
     </div>
   </section>
 </Base>
+<script>
+  const fout = new URLSearchParams(location.search).get('fout');
+  const melding = document.querySelector<HTMLElement>('[data-fout]');
+  if (fout && melding) {
+    if (fout === 'gegevens') melding.firstChild!.textContent = 'Vul je telefoonnummer of e-mailadres in, dan kunnen we je bereiken. Of bel: ';
+    melding.hidden = false;
+  }
+</script>
 <style>
+  .fout { background: #fdecea; border: 1px solid #f5c2bd; color: #7a1d14; border-radius: 10px; padding: 12px 16px; font-weight: 600; }
+  .fout a { color: inherit; }
   .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; padding-block: 24px 64px; align-items: start; }
   h1 { margin: 10px 0 14px; }
   .lead { font-size: var(--step-1); line-height: 1.45; }
@@ -71,7 +82,7 @@ const schema = [{ '@type': 'ContactPage', name: 'Contact met Drijfveer Media', u
   dd a { color: var(--ink); }
   .rechts h2 { margin-bottom: 8px; }
   .waarvoor { margin-top: 40px !important; font-size: var(--step-1); }
-  @media (max-width: 900px) { .contact { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+  @media (max-width: 900px) { .contact { display: flex; flex-direction: column; gap: 0; } .links { display: contents; } .rechts { order: 2; margin-bottom: 32px; } .na { order: 3; } }
   @media (max-width: 420px) { .gegevens { grid-template-columns: minmax(0, 1fr); } }
   .pand { width: 100%; height: auto; border-radius: var(--radius); margin-top: 16px; display: block; }
 </style>
