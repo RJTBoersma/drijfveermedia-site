@@ -1,0 +1,182 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-analytics-4.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-analytics-4/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is Google Analytics 4?' },
+  { id: 'meetplan', titel: 'Eerst bepalen wat je wilt weten' },
+  { id: 'instellen', titel: 'Instellen in zes stappen' },
+  { id: 'tag-manager', titel: 'Google Tag Manager' },
+  { id: 'rapporten', titel: 'De rapporten die ertoe doen' },
+  { id: 'looker-studio', titel: 'Looker Studio' },
+  { id: 'privacy', titel: 'Privacy en de cookiemelding' },
+  { id: 'fouten', titel: 'Vijf fouten die we vaak zien' },
+  { id: 'hulp', titel: 'Zelf doen of laten inrichten?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google Analytics 4, Tag Manager en Looker Studio: zo meet je wat telt',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: ['Google Analytics 4', 'Google Tag Manager', 'Looker Studio'],
+  citation: [
+    'https://support.google.com/analytics/answer/2763052?hl=nl',
+    'https://support.google.com/analytics/answer/12195621?hl=nl',
+    'https://support.google.com/analytics/answer/7667196?hl=nl',
+    'https://www.autoriteitpersoonsgegevens.nl/themas/internet-slimme-apparaten/cookies',
+  ],
+}];
+---
+<Base
+  title="Google Analytics 4 instellen en gebruiken | Drijfveer Media"
+  description="Google Analytics 4 instellen zonder gedoe: property aanmaken, aanvragen meten met Google Tag Manager en je cijfers op één scherm in Looker Studio."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google Analytics 4', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Tracking en analytics" titel="Google Analytics 4, Tag Manager en Looker Studio: zo meet je wat telt" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Google Analytics 4 telt je bezoekers. Met Tag Manager meet je ook wie belt of een formulier invult. En in Looker Studio zet je dat op één scherm. Zo richt je het in, stap voor stap.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Google Analytics 4 (GA4) is de gratis meettool van Google en de opvolger van Universal Analytics.</li>
+            <li>Bepaal eerst welke vier of vijf acties tellen, zoals een formulier, een klik op je telefoonnummer of een mail.</li>
+            <li>Meet die acties via Tag Manager. Dan hoef je niet voor elke wijziging je webbouwer te bellen.</li>
+            <li>Zet je cijfers in Looker Studio op één scherm. Vijf getallen zeggen meer dan twintig grafieken.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is Google Analytics 4?</h2>
+        <p>Google Analytics 4 is de gratis tool van Google die verzamelt wat bezoekers op je website doen. Hoeveel mensen komen er, via welke weg, welke pagina's lezen ze en wie neemt contact op. Het is de opvolger van Universal Analytics, dat op 1 juli 2023 stopte met meten.</p>
+        <p>Wie Universal Analytics kende, moet even wennen. De oude versie draaide om pageviews en sessies. GA4 meet alles als een gebeurtenis: een paginaweergave, een scroll, een klik, een download. Een sessie bestaat nog wel, maar is niet meer het middelpunt. Dat maakt GA4 flexibeler en voor veel ondernemers in het begin moeilijker.</p>
+        <p>Twee andere verschillen. GA4 legt geen IP-adressen vast en slaat ze niet op, <a href="https://support.google.com/analytics/answer/2763052?hl=nl" rel="noopener">volgens Google zelf</a>. En GA4 gebruikt machine learning om gaten in je gegevens op te vullen, bijvoorbeeld als bezoekers geen toestemming geven voor cookies. Handig, maar het blijft een schatting.</p>
+
+        <h2 id="meetplan">Eerst bepalen wat je wilt weten</h2>
+        <p>De meeste sites die wij nakijken, hebben GA4 wel. Het telt bezoekers en daar blijft het bij. Terwijl een ondernemer niet wil weten hoeveel mensen langskwamen. Hij wil weten wie er belde, en via welke weg die persoon binnenkwam.</p>
+        <p>Begin daarom met een meetplan op één A4. Schrijf de vragen op die je elke maand beantwoord wilt zien:</p>
+        <ul class="vink">
+          <li>Hoeveel aanvragen kwamen er binnen, en via welk kanaal?</li>
+          <li>Welke pagina's lezen mensen voordat ze contact opnemen?</li>
+          <li>Hoeveel mensen tikken op mijn telefoonnummer of sturen een WhatsApp?</li>
+          <li>Wat kost een aanvraag uit mijn advertenties?</li>
+        </ul>
+        <p>Bij elke vraag hoort een actie op je site. Die acties heten in GA4 belangrijke gebeurtenissen. Tot 2024 noemde Google dat conversies. Meestal heb je er vier of vijf: formulier verzonden, klik op telefoonnummer, klik op e-mailadres, klik op WhatsApp en misschien een download van je prijslijst. Meer is zelden nodig.</p>
+
+        <h2 id="instellen">Google Analytics 4 instellen in zes stappen</h2>
+        <p>Reken op een uur tot een middag, afhankelijk van hoeveel je wilt meten. Houd je inloggegevens van je website bij de hand.</p>
+
+        <div class="stap-kop"><Tekening naam="huis" maat={48} /><h3>1. Maak een account en een property aan</h3></div>
+        <p>Ga naar analytics.google.com en log in met een zakelijk Google-account. Maak een account aan op naam van je bedrijf en daarbinnen een property voor je website. Kies de juiste tijdzone en valuta. Laat de property nooit aanmaken op het account van je webbouwer of een stagiair. Gaat die weg, dan ben je je gegevens kwijt.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>2. Voeg een webdatastream toe</h3></div>
+        <p>Een datastream is de bron waar de gegevens vandaan komen, in dit geval je website. Je krijgt een meet-ID die begint met G-. Laat de verbeterde meting aanstaan. Die meet vanzelf paginaweergaven, scrollen, uitgaande klikken, zoeken op je site en downloads.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>3. Zet de bewaartermijn op 14 maanden</h3></div>
+        <p>Standaard bewaart GA4 gegevens op gebruikersniveau maar twee maanden. Dan kun je in je eigen verkenningen dit jaar niet met vorig jaar vergelijken. Onder Beheer vind je bij de gegevensinstellingen de optie Bewaring van gegevens. Zet die instelling op <a href="https://support.google.com/analytics/answer/7667196?hl=nl" rel="noopener">14 maanden</a>. Het is de eerste instelling die we bij elke nieuwe klant aanpassen.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>4. Sluit je eigen bezoeken uit</h3></div>
+        <p>Jij en je collega's bezoeken je site vaker dan wie ook. Definieer onder de datastream je eigen IP-adres als intern verkeer en zet daarna het filter voor intern verkeer aan. Anders telt elke keer dat jij je eigen prijzen opzoekt als bezoek.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>5. Koppel Search Console en Google Ads</h3></div>
+        <p>Koppel <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>, dan zie je in GA4 op welke zoekwoorden mensen binnenkwamen. Adverteer je met <a href="/online-adverteren/google-ads-bureau/">Google Ads</a>, koppel dat account dan ook. Pas dan zie je welke campagne aanvragen oplevert.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>6. Test of alles binnenkomt</h3></div>
+        <p>Open je site, klik rond en kijk in het rapport Realtime of je jezelf ziet. Gebruik DebugView voor de details. Doe een proefaanvraag en bel een keer via je site. Pas als elke actie netjes binnenkomt, ben je klaar.</p>
+
+        <h2 id="tag-manager">Google Tag Manager: meten zonder je webbouwer</h2>
+        <p>Je kunt de GA4-code rechtstreeks op je site zetten. Wij raden Tag Manager aan. Dat is een gratis tool waarin je al je meetcodes op één plek beheert. Je plaatst één keer een stukje code op je site, daarna regel je alles in Tag Manager zelf.</p>
+        <p>Tag Manager werkt met drie bouwstenen:</p>
+        <ul>
+          <li><b>Tag:</b> wat er moet gebeuren. Bijvoorbeeld: stuur de gebeurtenis "telefoonklik" naar GA4.</li>
+          <li><b>Trigger:</b> wanneer dat gebeurt. Bijvoorbeeld: bij een klik op een link die begint met tel:.</li>
+          <li><b>Variabele:</b> extra informatie die meegaat, zoals op welke pagina de klik was.</li>
+        </ul>
+        <p>Met die drie meet je de acties uit je meetplan. Een klik op tel:, mailto: of een WhatsApp-link is in tien minuten ingesteld. Een formulier meet je het makkelijkst met een eigen bedankpagina: wie daar landt, heeft het formulier verstuurd. Gebruik altijd de voorbeeldmodus van Tag Manager voordat je iets publiceert. Dan zie je per klik welke tag afgaat.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld</p>
+          <p>Stel: een schilder in Hoogeveen ziet in GA4 vierhonderd bezoekers per maand en verder niets. Na het instellen van Tag Manager blijkt dat er elke maand zo'n twintig mensen op zijn telefoonnummer tikken, bijna allemaal vanaf de pagina over buitenschilderwerk. Zijn contactformulier levert twee aanvragen op. Hij weet nu welke pagina hij moet uitbreiden, en dat het formulier beter kan.</p>
+        </div>
+
+        <h2 id="rapporten">De rapporten die ertoe doen</h2>
+        <p>GA4 heeft tientallen rapporten. Voor een mkb-bedrijf zijn er vier genoeg.</p>
+        <ul>
+          <li><b>Verkeersacquisitie.</b> Via welk kanaal komen mensen binnen: organisch zoeken, direct, betaald, e-mail of verwijzing. Zet er de kolom met belangrijke gebeurtenissen naast. Dan zie je welk kanaal aanvragen levert, niet alleen bezoekers.</li>
+          <li><b>Pagina's en schermen.</b> Welke pagina's worden gelezen, en hoe lang.</li>
+          <li><b>Belangrijke gebeurtenissen.</b> Je aanvragen, kliks en downloads per dag of per maand.</li>
+          <li><b>Engagement.</b> GA4 noemt een sessie betrokken als die langer dan 10 seconden duurt, een belangrijke gebeurtenis heeft of minstens twee paginaweergaven telt. Dat <a href="https://support.google.com/analytics/answer/12195621?hl=nl" rel="noopener">staat in de uitleg van Google</a>. Het percentage betrokken sessies vervangt grotendeels de oude <a href="/kennisbank/wat-is/bounce-rate/">bounce rate</a>.</li>
+        </ul>
+        <p>Laat de rest gerust links liggen. Kijk één keer per maand, op een vaste dag, en vergelijk met dezelfde maand vorig jaar. Week op week zegt weinig.</p>
+
+        <h2 id="looker-studio">Looker Studio: één scherm voor je cijfers</h2>
+        <p>GA4 is gemaakt voor analisten. Looker Studio is er om cijfers te laten zien. Het is ook gratis, van Google, en koppelt in een paar klikken met GA4 en Search Console.</p>
+        <p>Bouw één pagina met vijf getallen: bezoekers, aanvragen, aanvragen per kanaal, de pagina's die aanvragen opleveren en, als je adverteert, wat een aanvraag kost. Zet bij elk getal de vergelijking met vorig jaar. Deel de link met je compagnon of je boekhouder. Een rapportage waar iemand uitleg bij nodig heeft, schiet zijn doel voorbij.</p>
+
+        <h2 id="privacy">Privacy en de cookiemelding</h2>
+        <p>GA4 plaatst cookies. Volgens de Nederlandse wetgeving mag je analytische cookies met weinig gevolgen voor de privacy zonder toestemming plaatsen, als je het vertelt in je privacyverklaring. Zo staat het bij de <a href="https://www.autoriteitpersoonsgegevens.nl/themas/internet-slimme-apparaten/cookies" rel="noopener">Autoriteit Persoonsgegevens</a>. Bij GA4 gaan de gegevens naar Google, en daar zijn de meningen over verdeeld. Koppel je Google Ads of gebruik je remarketing, dan heb je hoe dan ook toestemming nodig.</p>
+        <p>In de praktijk betekent GA4 dus meestal een cookiemelding, met Consent Mode, zodat Google zonder toestemming geen persoonlijke gegevens krijgt. Wil je geen cookiemelding? Dan kun je kiezen voor een tool die zonder cookies meet, zoals Plausible of Simple Analytics. Op onze eigen site doen we dat ook. Hoe je de privacykant regelt, lees je in de gids over <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</p>
+
+        <h2 id="fouten">Vijf fouten die we vaak zien</h2>
+        <ol>
+          <li><b>De code staat er twee keer op.</b> Via een plugin én via Tag Manager. Elke bezoeker telt dan dubbel.</li>
+          <li><b>Alleen bezoekers, geen aanvragen.</b> Zonder belangrijke gebeurtenissen weet je niet wat je site oplevert.</li>
+          <li><b>Bewaartermijn op twee maanden.</b> Na een jaar kun je niets vergelijken.</li>
+          <li><b>Het account staat op naam van een ander.</b> Een oud bureau, een neef, een ex-collega. Zorg dat jij eigenaar bent.</li>
+          <li><b>Rommelige campagnelinks.</b> Wie in mails en social posts geen of slordige <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a> gebruikt, ziet dat verkeer als direct of verwijzing binnenkomen.</li>
+        </ol>
+
+        <h2 id="hulp">Zelf doen of laten inrichten?</h2>
+        <p>Met deze gids kom je een heel eind. Een basisinrichting met vier gebeurtenissen kun je zelf. Wordt het ingewikkelder, met advertenties, een cookiemelding met Consent Mode of meerdere sites, dan scheelt hulp je veel uitzoekwerk.</p>
+        <p>Wij richten <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a> in vanaf € 395 eenmalig, exclusief btw. Daarvoor krijg je een meetplan, de inrichting in GA4 of een cookieloze tool, testen met echte aanvragen, een overzicht op één scherm en een korte uitleg. De accounts staan op jouw naam. Wil je daarna meer aanvragen uit dezelfde bezoekers halen, dan is <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> de logische volgende stap.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het inrichten?" intro="Wat je bij ons krijgt, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Is GA4 gratis?', a: 'Ja. GA4, Tag Manager en Looker Studio zijn gratis voor gewone websites. Alleen grote organisaties kiezen soms voor de betaalde versie, Analytics 360.' },
+      { v: 'Kan ik mijn oude gegevens uit Universal Analytics overzetten?', a: 'Nee. GA4 meet pas vanaf het moment dat je het instelt. Universal Analytics is gestopt en de oude rapporten zijn niet meer te openen. Je bouwt in GA4 dus een nieuwe historie op.' },
+      { v: 'Heb ik een cookiemelding nodig voor GA4?', a: 'Meestal wel, zeker als je Google Ads koppelt. Wie geen cookiemelding wil, kiest een tool die zonder cookies meet. Lees ook de gids over <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.' },
+      { v: 'Waarom zie ik in GA4 andere cijfers dan in Search Console?', a: 'Search Console telt klikken in Google, GA4 telt bezoeken op je site. Wie cookies weigert of snel wegklikt, ontbreekt in GA4. Kleine verschillen zijn normaal.' },
+      { v: 'Moet ik Google Tag Manager gebruiken?', a: 'Het hoeft niet, maar het maakt het makkelijker. Je beheert al je metingen op één plek en hoeft je website niet aan te passen voor elke nieuwe meting.' },
+      { v: 'Hoe vaak moet ik in GA4 kijken?', a: 'Eén keer per maand is genoeg voor de meeste bedrijven. Vergelijk met dezelfde maand vorig jaar en kijk vooral naar aanvragen per kanaal.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over meten"
+    links={[
+      { label: 'Dienst', titel: 'Tracking en analytics', href: '/leadgeneratie/tracking-en-analytics/', tekst: 'Wij richten het in, vanaf € 395 eenmalig.' },
+      { label: 'Gids', titel: 'UTM-codes maken en gebruiken', href: '/kennisbank/gidsen/utm-codes/', tekst: 'Zien welke mail, post of campagne werkt.' },
+      { label: 'Gids', titel: 'Google Search Console', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Wat er in Google gebeurt, vóór de klik.' },
+    ]}
+  />
+
+  <Actie titel="Weet jij waar je aanvragen vandaan komen?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt wat je nu meet en belt je met een eerlijk advies over wat beter kan.`} />
+</Base>

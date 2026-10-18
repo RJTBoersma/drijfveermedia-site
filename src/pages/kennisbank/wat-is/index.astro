@@ -1,0 +1,137 @@
+---
+import Base from '../../../layouts/Base.astro';
+import paginas from '../../../../scripts/paginas.json';
+import Plaatje from '../../../components/teken/Plaatje.astro';
+import Scene from '../../../components/scenes/kennisbank--wat-is.astro';
+import { overgang } from '../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/';
+// Korte omschrijving per begrip. Een begrip dat er nog niet in staat, krijgt alleen zijn naam.
+const kort: Record<string, string> = {
+  '/kennisbank/wat-is/404-pagina/': 'De foutpagina die je ziet als een adres niet bestaat.',
+  '/kennisbank/wat-is/alt-tekst/': 'De beschrijving van een afbeelding, voor Google en schermlezers.',
+  '/kennisbank/wat-is/anchortekst/': 'De klikbare woorden van een link.',
+  '/kennisbank/wat-is/bounce-rate/': 'Bezoekers die weggaan zonder iets te doen.',
+  '/kennisbank/wat-is/breadcrumbs/': 'Het kruimelpad dat laat zien waar je bent.',
+  '/kennisbank/wat-is/call-to-action/': 'De knop die zegt wat je bezoeker nu moet doen.',
+  '/kennisbank/wat-is/crawlbudget/': "Hoeveel pagina's Google op je site bekijkt.",
+  '/kennisbank/wat-is/domain-authority/': 'Een score voor de linkkracht van een domein.',
+  '/kennisbank/wat-is/duplicate-content/': 'Dezelfde tekst op meer dan één adres.',
+  '/kennisbank/wat-is/e-e-a-t/': 'Hoe Google ervaring, kennis en betrouwbaarheid weegt.',
+  '/kennisbank/wat-is/entiteiten/': 'Personen, bedrijven en plaatsen die Google herkent.',
+  '/kennisbank/wat-is/featured-snippet/': 'Het uitgelichte antwoord boven de gewone resultaten.',
+  '/kennisbank/wat-is/geo/': 'Zorgen dat AI-assistenten jouw bedrijf noemen.',
+  '/kennisbank/wat-is/sitelinks/': 'Extra links onder je resultaat in Google.',
+  '/kennisbank/wat-is/headings/': 'De koppen die je tekst houvast geven.',
+  '/kennisbank/wat-is/interne-links/': "Links tussen pagina's van je eigen site.",
+  '/kennisbank/wat-is/keyword-cannibalization/': "Twee eigen pagina's die om hetzelfde zoekwoord vechten.",
+  '/kennisbank/wat-is/link-juice/': 'De waarde die via een link wordt doorgegeven.',
+  '/kennisbank/wat-is/mixed-content/': 'Een veilige pagina die onveilige bestanden laadt.',
+  '/kennisbank/wat-is/passage-ranking/': 'Google die één stuk van je pagina beoordeelt.',
+  '/kennisbank/wat-is/redirect/': 'Een automatische doorverwijzing naar een ander adres.',
+  '/kennisbank/wat-is/schema-markup/': 'Code die Google vertelt wat er op je pagina staat.',
+  '/kennisbank/wat-is/semantisch-zoeken/': 'Zoeken op betekenis in plaats van op losse woorden.',
+  '/kennisbank/wat-is/sitemap/': "Een lijst van je pagina's voor zoekmachines.",
+  '/kennisbank/wat-is/title-tag/': 'De titel van je pagina in de zoekresultaten.',
+  '/kennisbank/wat-is/usp/': 'Wat jou onderscheidt van je concurrent.',
+  '/kennisbank/wat-is/seo-en-sea/': 'Gevonden worden tegenover adverteren in Google.',
+  '/kennisbank/wat-is/webp/': 'Een beeldformaat dat foto\'s kleiner maakt.',
+  '/kennisbank/wat-is/zoekintentie/': 'Wat iemand echt wil als hij iets zoekt.',
+  '/kennisbank/wat-is/funnel/': 'De route van eerste kennismaking tot betalende klant, als trechter.',
+  '/kennisbank/wat-is/marketing-automation/': 'Software die mails en opvolging vanzelf regelt na een trigger.',
+  '/kennisbank/wat-is/ux/': 'Hoe makkelijk en prettig je website werkt voor een bezoeker.',
+  '/kennisbank/wat-is/llm/': 'Het taalmodel achter ChatGPT, Gemini en Claude, in gewone taal.',
+  '/kennisbank/wat-is/sea/': 'Adverteren in zoekmachines zoals Google, je betaalt per klik.',
+  '/kennisbank/wat-is/cpc/': 'Wat je betaalt als iemand op je advertentie klikt.',
+  '/kennisbank/wat-is/ctr/': 'Hoeveel procent van wie je ziet, ook echt klikt.',
+  '/kennisbank/wat-is/roas/': 'De omzet die elke euro advertentiebudget oplevert.',
+  '/kennisbank/wat-is/google-tag-manager/': 'Gratis tool om alle meetcodes op je site te beheren.',
+  '/kennisbank/wat-is/copywriting/': 'Wervende tekst die de lezer laat bellen, klikken of kopen.',
+  '/kennisbank/wat-is/storytelling/': 'Je boodschap brengen met een held, een conflict en een afloop.',
+  '/kennisbank/wat-is/contentmarketing/': 'Nuttige content maken zodat klanten je vinden en vertrouwen.',
+  '/kennisbank/wat-is/doelgroep/': 'De groep klanten die je met je marketing wilt bereiken.',
+  '/kennisbank/wat-is/engagement/': 'Hoeveel mensen liken, reageren, delen of doorklikken op je content.',
+  '/kennisbank/wat-is/dns/': 'Het adresboek van internet dat je domeinnaam aan je server koppelt.',
+  '/kennisbank/wat-is/hosting/': 'De server waar je website en vaak ook je e-mail op draaien.',
+  '/kennisbank/wat-is/ssl-certificaat/': 'Het bewijs achter https dat de verbinding met je site versleutelt.',
+  '/kennisbank/wat-is/cms/': 'Software waarmee je zelf teksten en foto\'s op je site aanpast.',
+  '/kennisbank/wat-is/cookie/': 'Een klein bestandje waarmee een website je browser herkent.',
+};
+
+const begrippen = paginas
+  .filter((p: any) => p.type === 'begrip')
+  .sort((a: any, b: any) => a.naam.localeCompare(b.naam, 'nl'));
+const letterVan = (naam: string) => (/^[0-9]/.test(naam) ? '0-9' : naam[0].toUpperCase());
+const groepen = new Map<string, any[]>();
+for (const b of begrippen) {
+  const l = letterVan(b.naam);
+  groepen.set(l, [...(groepen.get(l) ?? []), b]);
+}
+const alfabet = ['0-9', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+const anker = (l: string) => `letter-${l.toLowerCase()}`;
+---
+<Base
+  title="Begrippen van A tot Z: marketing uitgelegd | Drijfveer Media"
+  description={`${begrippen.length} begrippen uit SEO, GEO, websites en online marketing, elk uitgelegd in één zin en daarna in gewone taal. Van 404-pagina tot zoekintentie.`}
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url }]}
+>
+  <section class="wrap kop">
+    <div>
+      <p class="kicker">Kennisbank · Begrippen</p>
+      <h1>Begrippen van A tot Z</h1>
+      <p class="lead">Wat is een anchortekst, waarom praat iedereen over GEO en wat doet een kruimelpad? Hier staan {begrippen.length} begrippen uit ons vak. Elk begrip begint met één zin die het uitlegt. Daarna lees je wat het in de praktijk betekent en wat je ermee moet.</p>
+    </div>
+    <div class="kop-beeld" style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+  </section>
+
+  <nav class="wrap letters" aria-label="Begrippen per letter">
+    <ul>
+      {alfabet.map((l) => (
+        <li>{groepen.has(l) ? <a href={`#${anker(l)}`}>{l}</a> : <span aria-hidden="true">{l}</span>}</li>
+      ))}
+    </ul>
+  </nav>
+
+  <section class="wrap sectie lijst">
+    {[...groepen.entries()].map(([l, lijst]) => (
+      <div class="groep">
+        <h2 id={anker(l)}>{l}</h2>
+        <ul class="kaarten">
+          {lijst.map((b: any) => (
+            <li>
+              <a href={b.url}>
+                <Plaatje href={b.url} onderwerp="boek" />
+                <span class="tx"><b>{b.naam}</b>{kort[b.url] && <span class="muted">{kort[b.url]}</span>}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+    <p class="muted slot">Zoek je iets dat er niet tussen staat? Kijk dan bij de <a href="/kennisbank/gidsen/">gidsen</a>, of <a href="/contact/">stel je vraag</a>. We leggen het je graag uit.</p>
+  </section>
+</Base>
+<style>
+  .kop { padding-block: 24px 8px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; }
+  h1 { margin: 10px 0 14px; }
+  .lead { font-size: var(--step-1); line-height: 1.45; max-width: 48ch; margin: 0; }
+  .letters { padding-block: 18px; background: var(--bg); }
+  @media (min-width: 861px) { .letters { position: sticky; top: 73px; z-index: 5; } }
+  .letters ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .letters a, .letters span { display: grid; place-items: center; min-width: 36px; height: 36px; padding: 0 8px; border-radius: 10px; font-weight: 800; font-size: 0.95rem; text-decoration: none; }
+  .letters a { background: var(--panel); border: 1px solid var(--line); color: var(--navy); }
+  .letters a:hover, .letters a:focus-visible { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .letters span { color: #b3c0cc; }
+  .lijst { padding-top: 24px; }
+  .groep { margin-bottom: 36px; }
+  .groep h2 { font-size: var(--step-2); color: var(--navy); margin-bottom: 14px; scroll-margin-top: 150px; }
+  .kaarten { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+  .kaarten a { display: grid; align-content: start; gap: 8px; height: 100%; padding: 16px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; }
+  .kaarten a:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .tx { display: grid; gap: 4px; }
+  .tx b { font-weight: 800; line-height: 1.3; }
+  .tx .muted { font-size: 0.95rem; line-height: 1.4; }
+  .slot { margin-top: 8px; }
+  @media (max-width: 860px) { .kop { grid-template-columns: minmax(0, 1fr); } .kop-beeld { max-width: 420px; } }
+  @media (prefers-reduced-motion: reduce) { .kaarten a { transition: none; } }
+</style>

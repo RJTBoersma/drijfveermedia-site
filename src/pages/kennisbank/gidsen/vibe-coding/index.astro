@@ -1,0 +1,330 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--vibe-coding.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/vibe-coding/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is vibe coding?' },
+  { id: 'herkomst', titel: 'Waar komt de term vandaan?' },
+  { id: 'verschil', titel: 'Vibe coding of programmeren met AI?' },
+  { id: 'hoe', titel: 'Hoe het werkt' },
+  { id: 'tools', titel: 'De tools en wat ze kosten' },
+  { id: 'website', titel: 'Een website maken met AI' },
+  { id: 'stappenplan', titel: 'Je eerste prototype in een middag' },
+  { id: 'prompts', titel: 'Prompts die werken' },
+  { id: 'misgaat', titel: 'Waar het misgaat' },
+  { id: 'checklist', titel: 'Checklist voor je live gaat' },
+  { id: 'kosten', titel: 'Wat het echt kost' },
+  { id: 'toepassingen', titel: 'Vijf toepassingen die wel werken' },
+  { id: 'overdragen', titel: 'Je prototype overdragen' },
+  { id: 'vergelijking', titel: 'Of toch iets anders?' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'wij', titel: 'Hoe wij AI gebruiken' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Vibe coding: kun je zo zelf een website maken?',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'Thing', name: 'Vibe coding', sameAs: 'https://en.wikipedia.org/wiki/Vibe_coding' },
+  citation: [
+    'https://en.wikipedia.org/wiki/Vibe_coding',
+    'https://docs.github.com/en/copilot/get-started/plans',
+    'https://claude.com/pricing',
+    'https://bolt.new/pricing',
+    'https://replit.com/pricing',
+  ],
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Vibe coding: kun je zo zelf een website maken?"
+  description="Wat is vibe coding, welke tools gebruik je en wat kosten ze? Eerlijk over wat het kan, waar het misgaat en hoe je het veilig doet, met stappenplan en checklist."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Vibe coding', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Website" titel="Vibe coding: kun je zo zelf een website maken?" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Bij vibe coding vertel je een AI in gewone taal wat je wilt, en de AI schrijft de code. Een website in een middag klinkt verleidelijk. Het werkt ook, tot op zekere hoogte. Hier lees je waar die grens ligt, welke tools er zijn, wat ze kosten en hoe je het veilig doet.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand 18 oktober 2026)</p>
+          <ul>
+            <li>Vibe coding is software laten schrijven door AI met opdrachten in gewone taal, vaak zonder de code zelf te lezen.</li>
+            <li>De term is van Andrej Karpathy, medeoprichter van OpenAI, uit februari 2025. Collins koos het tot woord van het jaar 2025.</li>
+            <li>Bekende tools: Lovable, Bolt en Replit in de browser, en Cursor, Claude en GitHub Copilot voor wie met code werkt. De meeste hebben een gratis versie. Betaald begint rond de $ 8 tot $ 25 per maand.</li>
+            <li>Prima voor een prototype. Voor een bedrijfssite met klantgegevens is controle door een ontwikkelaar nodig. Onderzoek laat zien dat AI-code vaker fouten en lekken bevat.</li>
+          </ul>
+        </div>
+        <p class="klein muted">Prijzen en functies van de tools komen van de sites van de makers zelf, geraadpleegd oktober 2026. AI-tools veranderen snel. Zie je een andere prijs op hun site, dan geldt die.</p>
+
+        <h2 id="wat-is">Wat is vibe coding?</h2>
+        <p>Vibe coding is een manier van programmeren waarbij je een AI vertelt wat je wilt bouwen en de AI de code schrijft. Je kijkt naar het resultaat, niet naar de code. Klopt iets niet, dan typ je een nieuwe opdracht. Zo bouw je stap voor stap een app of website zonder zelf te programmeren.</p>
+        <p>Een vibe coder is iemand die zo werkt. Dat kan een ontwikkelaar zijn die sneller wil werken, maar steeds vaker is het een ondernemer, marketeer of student die nooit heeft leren programmeren. De opdracht die je geeft heet een prompt. De AI erachter is een groot taalmodel, hetzelfde soort systeem dat ChatGPT, Claude en Gemini aandrijft.</p>
+        <p>Het kenmerk van vibe coding is niet dat AI meehelpt. Dat doen bijna alle programmeurs inmiddels. Het kenmerk is dat je de code accepteert zonder hem echt te lezen. Je stuurt op gevoel: werkt het, ziet het er goed uit? Dan door.</p>
+
+        <h2 id="herkomst">Waar komt de term vandaan?</h2>
+        <p>De term komt van Andrej Karpathy, medeoprichter van OpenAI en oud-hoofd AI bij Tesla. Volgens Wikipedia beschreef hij het in februari 2025 als een manier van werken waarbij je je volledig overgeeft aan de vibes en vergeet dat de code bestaat. Het woord sloeg aan. In maart 2025 zette woordenboek Merriam-Webster het op zijn lijst met trendwoorden. Collins koos het tot woord van het jaar 2025.</p>
+        <p>Karpathy bedoelde het voor wegwerpprojecten in het weekend. Al snel ging het verder. Volgens Wikipedia meldde startupfabriek Y Combinator in maart 2025 dat bij een kwart van de startups in zijn nieuwste lichting 95% van de code door AI was geschreven. In januari 2026 bleek zelfs Linus Torvalds, de maker van Linux, een klein hulpprogramma voor een hobbyproject te hebben gevibecodeerd.</p>
+        <p>Er kwam ook kritiek. AI-pionier Andrew Ng vond de term misleidend, omdat het lijkt alsof ontwikkelaars maar wat op gevoel doen. Inmiddels hoor je het woord vooral in twee betekenissen: liefdevol, voor snel iets in elkaar zetten, en spottend, voor slordige software die niemand begrijpt.</p>
+
+        <h2 id="verschil">Vibe coding of programmeren met AI-hulp?</h2>
+        <p>Dit onderscheid is belangrijk, want het bepaalt het risico. Beide gebruiken dezelfde tools. Het verschil zit in wie de code begrijpt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Vibe coding</th><th>Programmeren met AI-hulp</th></tr></thead>
+            <tbody>
+              <tr><td><b>Wie leest de code?</b></td><td>Niemand</td><td>De ontwikkelaar, regel voor regel</td></tr>
+              <tr><td><b>Hoe controleer je?</b></td><td>Kijken of het werkt</td><td>Testen, code review, beveiligingscontrole</td></tr>
+              <tr><td><b>Kennis nodig</b></td><td>Weinig</td><td>Veel</td></tr>
+              <tr><td><b>Snelheid</b></td><td>Heel snel</td><td>Snel</td></tr>
+              <tr><td><b>Geschikt voor</b></td><td>Prototypes, interne hulpjes, ideeën testen</td><td>Software die klanten en geld raakt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een ontwikkelaar die AI gebruikt, is dus nog geen vibe coder. Een ondernemer die met Lovable een klantportaal bouwt en de code nooit bekijkt, wel.</p>
+
+        <h2 id="hoe">Hoe werkt het in de praktijk?</h2>
+        <p>Je schrijft een prompt, zoals: "Maak een website voor een bakkerij in Assen met een pagina over ons brood en een bestelformulier." De AI maakt de bestanden. Je bekijkt het resultaat in je browser. Daarna stuur je bij: "Maak de knop groter", "Voeg openingstijden toe". Elke ronde duurt seconden tot minuten.</p>
+        <p>Het is een kringetje dat je steeds opnieuw doorloopt:</p>
+        <ol>
+          <li><b>Beschrijven.</b> Je zegt wat je wilt, voor wie en waarom.</li>
+          <li><b>Laten maken.</b> De AI schrijft code en laat het resultaat zien.</li>
+          <li><b>Bekijken.</b> Je klikt rond, test op je telefoon, probeert het formulier.</li>
+          <li><b>Bijsturen.</b> Je beschrijft wat er anders moet. Terug naar stap 2.</li>
+        </ol>
+        <p>Hoe meer je de AI vooraf vertelt, hoe minder rondjes je nodig hebt. Wie alleen "maak een website" typt, krijgt een algemene site en moet daarna alles terugdraaien.</p>
+        <h3>Context is belangrijker dan de perfecte prompt</h3>
+        <p>Mislukt een project, dan ligt het zelden aan één verkeerd woord in je opdracht. Meestal mist de AI achtergrond. Vertel daarom niet alleen wat je wilt zien, maar ook waarom. Welk probleem lost het op? Voor wie? Moet het samenwerken met iets wat je al hebt, zoals je boekhoudpakket of je huidige website? Welke regels gelden er, bijvoorbeeld rond privacy? Hoeveel mensen gaan het tegelijk gebruiken? Een AI die dat weet, maakt andere keuzes dan een AI die moet raden.</p>
+
+        <h2 id="tools">De tools op een rij, met prijzen</h2>
+        <p>Er zijn twee soorten tools. In de browser, waar je niets hoeft te installeren. En in je eigen omgeving, waar je met de echte bestanden werkt.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>Alles in de browser</h3></div>
+        <p>Lovable, Bolt en Replit werken volledig online. Je typt, de site verschijnt ernaast en met één klik staat hij op internet. Het makkelijkst voor beginners. Je zit wel vast aan hun platform, hun hosting en hun prijzen. Wil je later weg, dan moet je de code exporteren en zelf onderbrengen.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>In je eigen omgeving</h3></div>
+        <p>Cursor, GitHub Copilot en Claude (met Claude Code) werken met de code op je eigen computer. Je hebt meer controle en de bestanden zijn van jou. Maar je moet zelf regelen waar de site draait, hoe hij online komt en hoe je wijzigingen bijhoudt. Dat vraagt al snel de kennis van een ontwikkelaar.</p>
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>De grote AI-makers doen ook mee</h3></div>
+        <p>Google heeft Antigravity, een ontwikkelplatform waar AI-agents code schrijven, testen en online zetten. Beginnen kost volgens Google niets. Sinds 13 oktober 2026 zit het ook in de Gemini-app voor de Mac, voorlopig in het Engels en voor gebruikers van 18 jaar en ouder. OpenAI heeft Codex. Volgens de documentatie van OpenAI zit dat in alle ChatGPT-abonnementen, van de gratis versie tot Enterprise, met meer gebruik naarmate je meer betaalt. Wie al een abonnement op ChatGPT, Claude of Gemini heeft, kan dus vaak zonder extra kosten een eerste poging doen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Soort</th><th>Gratis versie</th><th>Betaald vanaf (per maand)</th></tr></thead>
+            <tbody>
+              <tr><td>Lovable</td><td>Browser</td><td>Ja, 5 bouwcredits per dag, tot 30 per maand</td><td>Abonnementen met meer credits</td></tr>
+              <tr><td>Bolt</td><td>Browser</td><td>Ja, 1 miljoen tokens per maand, met Bolt-logo op je site</td><td>$&nbsp;25 (Pro)</td></tr>
+              <tr><td>Replit</td><td>Browser</td><td>Ja</td><td>$&nbsp;20 (Core), $&nbsp;18 bij jaarbetaling</td></tr>
+              <tr><td>Cursor</td><td>Eigen omgeving</td><td>Ja, beperkt</td><td>$&nbsp;8 (alleen Grok-modellen), $&nbsp;30 voor meer</td></tr>
+              <tr><td>GitHub Copilot</td><td>Eigen omgeving</td><td>Ja</td><td>$&nbsp;10 (Pro), $&nbsp;19 per gebruiker (Business)</td></tr>
+              <tr><td>Claude</td><td>Beide</td><td>Ja, zonder Claude Code</td><td>$&nbsp;20 (Pro, met Claude Code), $&nbsp;17 bij jaarbetaling</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Prijzen in dollars, zoals de makers ze in oktober 2026 noemen. Bij de meeste komt er nog btw bij. Bijna alle tools werken met credits of tokens: hoe groter je project, hoe sneller je tegoed op is. Bolt schrijft bijvoorbeeld dat het meeste tokengebruik zit in het steeds opnieuw inlezen van je projectbestanden. Een groeiend project wordt dus per opdracht duurder. Lovable laat zien dat "maak de knop grijs" ongeveer een halve credit kost en "bouw een landingspagina met afbeeldingen" bijna twee.</p>
+
+        <h2 id="website">Kun je met vibe coding een website maken?</h2>
+        <p>Ja. Een eenvoudige site met een paar pagina's lukt een beginner in een middag. Dat is echt nieuw. Maar een site die er goed uitziet, is nog geen site die werkt voor je bedrijf. Na die eerste middag komen de vragen die de AI niet voor je stelt.</p>
+        <ul>
+          <li>Waar draait de site, en wie betaalt de hosting?</li>
+          <li>Komt het contactformulier echt in je mailbox aan, of in een spamfilter?</li>
+          <li>Wat gebeurt er met de gegevens die bezoekers invullen? Heb je een privacyverklaring?</li>
+          <li>Kan Google de pagina's lezen? Hebben ze titels, omschrijvingen en een logische opbouw?</li>
+          <li>Hoe pas je over een halfjaar een prijs aan, als je niet meer weet hoe de site in elkaar zit?</li>
+          <li>Wie werkt de onderdelen bij als er een beveiligingslek in wordt gevonden?</li>
+        </ul>
+        <p>Een websitebouwer zoals JouwWeb of Wix regelt die zaken voor je. Bouw je met vibe coding, dan ben je zelf de ontwikkelaar, ook als je dat niet wilt zijn. Lees ook <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a> en <a href="/kennisbank/gidsen/wix-squarespace-wordpress/">Wix, Squarespace of WordPress</a>.</p>
+
+        <h2 id="stappenplan">Stappenplan: je eerste prototype in een middag</h2>
+        <p>Wil je het proberen? Doe het dan zo. Dit stappenplan is voor een prototype: iets om een idee te testen of te laten zien, niet je echte bedrijfssite.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Schrijf eerst op papier wat het moet doen</h3></div>
+        <p>Eén A4. Voor wie is het, welke pagina's of schermen, wat moet een bezoeker kunnen doen? Hoe duidelijker dit is, hoe minder rondjes je straks draait.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>2. Kies één tool en blijf erbij</h3></div>
+        <p>Begin in de browser: Lovable, Bolt of Replit. Wissel niet halverwege, want elke tool bouwt anders.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Geef één uitgebreide eerste prompt</h3></div>
+        <p>Plak je A4 erin. Zeg erbij welke stijl je wilt en wat de AI níet moet doen, zoals "geen inlogsysteem" of "geen betalingen".</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>4. Bekijk het op je telefoon</h3></div>
+        <p>AI-sites zien er op een groot scherm vaak beter uit dan op een klein. De meeste bezoekers komen via hun telefoon.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>5. Werk in kleine stappen</h3></div>
+        <p>Eén wijziging per prompt. Dan zie je wat er veranderde, en kun je terug als het misgaat. Vraag de AI bij een fout eerst om uit te leggen wat er aan de hand is, en pas daarna om het te repareren.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>6. Bewaar tussenversies</h3></div>
+        <p>Gebruik de versiegeschiedenis van de tool, of zet de code in GitHub. Zo maakt een fout van de AI niet alles kapot.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>7. Laat iemand anders klikken</h3></div>
+        <p>Geef je prototype aan een klant of collega en kijk mee zonder iets te zeggen. Waar blijven ze hangen? Dat is je volgende prompt.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>8. Beslis: weggooien, doorbouwen of laten bouwen</h3></div>
+        <p>Een prototype heeft zijn werk gedaan als je weet of het idee deugt. Moet het echt live, met klantgegevens of betalingen? Laat het dan nakijken of opnieuw bouwen door een ontwikkelaar.</p>
+
+        <h2 id="prompts">Prompts die werken</h2>
+        <p>Een goede eerste prompt voor een vibe coding-tool heeft zes onderdelen: doel, doelgroep, pagina's, stijl, techniek en grenzen. Een voorbeeld (de bakkerij is verzonnen):</p>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeldprompt</p>
+          <p>"Bouw een website voor Bakkerij De Vries (voorbeeld) in Assen. Doel: klanten bestellen taarten voor zaterdag. Doelgroep: gezinnen uit Assen en omgeving, vooral op de telefoon. Pagina's: home, ons assortiment met prijzen, bestellen, contact met adres en openingstijden. Stijl: warm, rustig, veel wit, grote foto's, geen animaties. Techniek: het bestelformulier stuurt een mail naar de bakker, er wordt niets opgeslagen. Grenzen: geen inlogsysteem, geen betalingen, geen cookies voor tracking. Elke pagina krijgt een eigen paginatitel en omschrijving voor Google."</p>
+        </div>
+        <p>Handige vervolgprompts:</p>
+        <ul>
+          <li>"Leg in gewone taal uit hoe deze site is opgebouwd en waar de gegevens van het formulier naartoe gaan."</li>
+          <li>"Controleer de site op beveiligingsproblemen en noem ze zonder ze meteen aan te passen."</li>
+          <li>"Maak alle teksten korter. Maximaal twee zinnen per alinea."</li>
+          <li>"Wat zou een ervaren ontwikkelaar aan deze code verbeteren voordat hij live gaat?"</li>
+        </ul>
+
+        <h2 id="misgaat">Waar het misgaat</h2>
+        <p>De AI schrijft code die werkt. Of die code ook veilig en onderhoudbaar is, is een andere vraag. De voorbeelden zijn inmiddels bekend. Deze komen uit het overzicht op Wikipedia, met verwijzingen naar de oorspronkelijke onderzoeken.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat er gebeurde</th></tr></thead>
+            <tbody>
+              <tr><td>Mei 2025</td><td>170 van 1.645 onderzochte apps die met Lovable waren gebouwd, hadden een lek waardoor persoonsgegevens voor iedereen zichtbaar waren.</td></tr>
+              <tr><td>Juli 2025</td><td>De AI-assistent van Replit verwijderde een complete database bij een gebruiker, terwijl die expliciet had gezegd niets te veranderen.</td></tr>
+              <tr><td>Juli 2025</td><td>Onderzoeksgroep METR liet ervaren ontwikkelaars 246 taken doen. Met AI-tools waren ze 19% langzamer, terwijl ze zelf dachten 20% sneller te zijn.</td></tr>
+              <tr><td>Oktober 2025</td><td>Veracode zag dat taalmodellen in drie jaar veel beter werkende code schrijven, maar dat de beveiliging van die code nauwelijks vooruitging.</td></tr>
+              <tr><td>December 2025</td><td>CodeRabbit vergeleek 470 bijdragen op GitHub. Code die mede door AI was geschreven, had ongeveer 1,7 keer zoveel ernstige fouten en 2,74 keer zoveel beveiligingsproblemen.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het grootste risico is niet de fout zelf. Het is dat je hem niet ziet, omdat je de code niet leest. Een vibe coder die niet kan programmeren, kan ook niet controleren. En een lek in een site met klantgegevens is onder de AVG jouw verantwoordelijkheid, niet die van de AI.</p>
+        <p>Er is ook een langzamer probleem: onderhoud. Volgens het onderzoek van GitClear, ook genoemd op Wikipedia, kwam er tussen 2020 en 2024 veel meer gekopieerde code bij en werd er minder opgeruimd. Code die niemand begrijpt, wordt elk jaar lastiger aan te passen.</p>
+
+        <h2 id="checklist">Beveiliging: de checklist voor je live gaat</h2>
+        <p>Gaat je vibe coding-project toch online? Loop dan deze punten na, of laat een ontwikkelaar dat doen.</p>
+        <ul class="vink">
+          <li><b>Geen geheime sleutels in de code.</b> Wachtwoorden en API-sleutels horen niet in bestanden die de browser kan lezen. Plak ze ook nooit in een prompt.</li>
+          <li><b>Database dicht.</b> Kan een bezoeker alleen zijn eigen gegevens zien? Bij de Lovable-lekken ging juist dit mis.</li>
+          <li><b>Formulieren beschermd.</b> Een spamfilter of controle tegen robots, en een check op wat er wordt ingevuld.</li>
+          <li><b>Https aan.</b> Het slotje in de adresbalk. Zonder dat waarschuwt de browser je bezoekers.</li>
+          <li><b>Privacyverklaring en cookies.</b> Verplicht zodra je gegevens verzamelt. Zie onze gids over <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</li>
+          <li><b>Back-ups.</b> Waar staat een kopie als het misgaat, en hoe zet je die terug?</li>
+          <li><b>Updates.</b> Wie werkt de onderdelen bij als er een lek wordt gevonden?</li>
+          <li><b>Vindbaarheid.</b> Titels, omschrijvingen, koppen en een sitemap, zodat Google je site kan lezen.</li>
+        </ul>
+
+        <h2 id="kosten">Wat kost vibe coding echt?</h2>
+        <p>De tool is meestal het goedkoopste deel. De echte kosten zitten in je eigen tijd en in wat er daarna komt.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een zzp'er bouwt zijn eigen site met een browsertool van $ 25 per maand. Hij is er drie zaterdagen mee bezig, samen zo'n 20 uur. Na een maand werkt het formulier niet meer en kost uitzoeken nog 5 uur. Rekent hij zijn eigen tijd tegen € 50 per uur, dan zit hij na twee maanden op ruim € 1.250 aan tijd plus het abonnement. Daar komen hosting en een domeinnaam nog bij. Zonder dat iemand de beveiliging heeft bekeken.</p>
+        </div>
+        <p>Dat wil niet zeggen dat het nooit loont. Voor een prototype dat een idee test, is het spotgoedkoop vergeleken met een ontwikkelaar die er een week aan werkt. Het loont alleen niet als je er per se je hoofdwebsite mee wilt bouwen en onderhouden, terwijl je eigenlijk wilt ondernemen. Wat een website laten maken kost, lees je in <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
+
+        <h2 id="toepassingen">Vijf toepassingen in je bedrijf die wel werken</h2>
+        <p>Vibe coding is op zijn best bij kleine hulpmiddelen die alleen jij of je team gebruikt. Dan is een foutje niet erg en heb je het in een uur. Vijf voorbeelden:</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>Een rekenhulp voor offertes</h3></div>
+        <p>"Maak een pagina waar ik het aantal vierkante meters en het soort vloer invul, en die de prijs inclusief btw en de benodigde dagen uitrekent." Handig voor jezelf of je verkoper. Zet er geen klantgegevens in en controleer de uitkomst een paar keer met de hand.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>Een planbord voor je team</h3></div>
+        <p>Een eenvoudig overzicht van wie welke week waar werkt. Zolang het intern blijft en geen persoonsgegevens bevat, is dit prima te vibecoden.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>Een klikbaar ontwerp voor je webbouwer</h3></div>
+        <p>In plaats van een lange mail met wensen laat je een prototype zien. "Zo ongeveer wil ik het." Dat scheelt veel heen en weer, en je webbouwer begrijpt sneller wat je bedoelt.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>Een lijst opschonen of omzetten</h3></div>
+        <p>Een export uit je boekhoudpakket die je anders wilt indelen, dubbele adressen eruit, kolommen samenvoegen. Laat de AI een klein script schrijven. Werk altijd op een kopie van je bestand.</p>
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>Een idee testen bij klanten</h3></div>
+        <p>Een landingspagina voor een nieuwe dienst, om te zien of mensen erop klikken. Werkt het, dan laat je de echte versie goed bouwen. Hoe je een pagina maakt die aanvragen oplevert, lees je in <a href="/kennisbank/gidsen/landingspagina-maken/">een landingspagina maken</a>.</p>
+
+        <h2 id="overdragen">Je prototype overdragen aan een ontwikkelaar</h2>
+        <p>Heb je iets gebouwd dat moet blijven? Dan is de overdracht het moment waarop het goed of fout gaat. Zo maak je het een ontwikkelaar makkelijk, en scheelt het jou geld:</p>
+        <ol>
+          <li><b>Exporteer de code</b> of zet hem in GitHub, zodat de ontwikkelaar alles kan zien.</li>
+          <li><b>Schrijf op wat het moet doen</b>, in gewone taal. Je A4 van het begin is goud waard.</li>
+          <li><b>Noem wat niet werkt</b> of wat je niet vertrouwt. Eerlijk zijn bespaart zoekwerk.</li>
+          <li><b>Geef je prompts mee.</b> Die laten zien welke keuzes de AI voor je heeft gemaakt.</li>
+          <li><b>Vraag om een eerlijk oordeel:</b> verbeteren of opnieuw bouwen? Soms is opnieuw beginnen goedkoper dan repareren.</li>
+        </ol>
+
+        <h2 id="vergelijking">Vibe coding, websitebouwer of laten maken?</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Vibe coding</th><th>Websitebouwer</th><th>Laten maken</th></tr></thead>
+            <tbody>
+              <tr><td>Snelheid</td><td>Uren</td><td>Dagen</td><td>Dagen tot weken</td></tr>
+              <tr><td>Kennis nodig</td><td>Weinig om te starten, veel om te onderhouden</td><td>Weinig</td><td>Geen</td></tr>
+              <tr><td>Beveiliging</td><td>Jouw verantwoordelijkheid</td><td>Geregeld door het platform</td><td>Geregeld door de bouwer</td></tr>
+              <tr><td>Kosten</td><td>Abonnement op de tool, plus hosting en je eigen tijd</td><td>Maandabonnement bij het platform</td><td>Eenmalig, bij ons vanaf €&nbsp;250</td></tr>
+              <tr><td>Geschikt voor</td><td>Prototypes en interne tools</td><td>Een eenvoudige bedrijfssite</td><td>Een site die klanten moet opleveren</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Wanneer wel, wanneer niet</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Goed idee</th><th>Slecht idee</th></tr></thead>
+            <tbody>
+              <tr><td>Een klikbaar ontwerp om aan je klant of investeerder te laten zien</td><td>Een webshop of klantportaal met inlog en betalingen</td></tr>
+              <tr><td>Een rekenhulp of planner voor intern gebruik</td><td>Een site die persoonsgegevens opslaat</td></tr>
+              <tr><td>Een landingspagina om een idee te testen</td><td>Je hoofdwebsite waar je aanvragen van moet krijgen</td></tr>
+              <tr><td>Leren hoe software in elkaar zit</td><td>Iets dat jaren mee moet zonder dat iemand de code kent</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Te groot beginnen.</b> Een compleet klantportaal als eerste project. Begin met één pagina of één rekenhulp.</li>
+          <li><b>Twintig wijzigingen in één prompt.</b> Dan weet je niet meer wat er veranderde, en ook niet wat er kapotging.</li>
+          <li><b>Geheime sleutels in de chat plakken.</b> Wat in een prompt staat, kan in de code belanden die iedereen kan lezen.</li>
+          <li><b>Alleen op de computer testen.</b> Op een telefoon valt het vaak uit elkaar.</li>
+          <li><b>Geen back-up.</b> De AI kan in één stap iets weghalen wat uren werk was. Bij Replit ging zelfs een hele database verloren.</li>
+          <li><b>Denken dat het af is.</b> Een site moet onderhouden worden: updates, beveiliging, teksten. Ook als AI hem bouwde.</li>
+        </ul>
+
+        <h2 id="wij">Hoe wij AI gebruiken bij het bouwen</h2>
+        <p>We zijn er eerlijk over: Drijfveer Media gebruikt zelf AI, elke dag. Claude, ChatGPT, Gemini en Google AI Studio horen bij ons gereedschap. Onze <a href="/website-laten-maken/website-met-ai/">website met AI</a> bouwen we ook met hulp van AI. Daardoor kunnen we een site vanaf € 250 aanbieden.</p>
+        <p>Het verschil met vibe coding zit in de laatste stap. Wij maken de site met de hand af en controleren wat de AI heeft gemaakt: de opbouw, de snelheid, de formulieren, de vindbaarheid. Zo krijg je de snelheid van AI, zonder dat jij hoeft te begrijpen wat er onder de motorkap zit. Meer daarover lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
+        <p>Heb je zelf iets met AI gebouwd en wil je weten of het deugt? Vraag dan de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan. Wil je een site met een eigen ontwerp in WordPress, dan kun je een <a href="/website-laten-maken/">website laten maken</a> vanaf € 2.000.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Wikipedia, "Vibe coding" (met verwijzingen naar Karpathy, Merriam-Webster, Collins, Y Combinator, Lovable, Replit, METR, Veracode, CodeRabbit en GitClear). Prijzen: de prijspagina's van Bolt, Replit, Cursor, Lovable en Claude, en de documentatie van GitHub Copilot. Geraadpleegd oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={18} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever een site die gewoon werkt?" intro="Gebouwd met AI, afgemaakt en gecontroleerd door mensen. Met afspraken waar je ons op kunt afrekenen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent vibe coding?', a: 'Software laten schrijven door een AI met opdrachten in gewone taal, waarbij je naar het resultaat kijkt en niet naar de code. De term is van Andrej Karpathy, uit februari 2025.' },
+      { v: 'Wat is een vibe coder?', a: 'Iemand die op die manier bouwt. Dat kan een ontwikkelaar zijn die sneller wil werken, maar ook een ondernemer die zelf nooit heeft leren programmeren.' },
+      { v: 'Met welke tool kun je het best beginnen?', a: 'Voor beginners zijn Lovable, Bolt en Replit het makkelijkst, omdat alles in de browser gebeurt en ze een gratis versie hebben. Wie meer controle wil, kijkt naar Cursor, Claude of GitHub Copilot.' },
+      { v: 'Wat kost vibe coding?', a: 'De meeste tools hebben een gratis versie. Betaalde abonnementen beginnen volgens de makers rond de $ 8 tot $ 25 per maand, meestal plus btw. Daar komen hosting, een domeinnaam en vooral je eigen tijd bij.' },
+      { v: 'Is vibe coding veilig?', a: 'Niet vanzelf. Onderzoek van onder meer Veracode en CodeRabbit laat zien dat AI-code vaker beveiligingsfouten bevat. Laat een site die persoonsgegevens verwerkt altijd controleren door een ontwikkelaar.' },
+      { v: 'Kan ik met vibe coding een webshop bouwen?', a: 'Technisch kan het, maar we raden het af. Een webshop verwerkt betalingen en klantgegevens. Daar moet iemand de code en de beveiliging echt begrijpen.' },
+      { v: 'Wordt een webdesigner overbodig door AI?', a: 'Het werk verandert. Bouwen gaat sneller, maar weten wat een site moet doen, wat klanten overtuigt en wat veilig is, blijft vakwerk.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Website met AI laten maken', href: '/website-laten-maken/website-met-ai/', tekst: 'De snelheid van AI, gecontroleerd door mensen.' },
+      { label: 'Gids', titel: 'Zelf een website maken of laten maken?', href: '/kennisbank/gidsen/zelf-website-maken/', tekst: 'Wat het kost en wanneer laten maken slimmer is.' },
+      { label: 'Gids', titel: 'Wat is Claude?', href: '/kennisbank/gidsen/claude/', tekst: 'De AI-assistent waar veel ontwikkelaars mee werken.' },
+    ]}
+  />
+
+  <Actie titel="Zelf iets gebouwd met AI?" tekst={`Laat ${site.contactpersoon} meekijken. Hij belt je binnen 15 minuten terug en zegt eerlijk of je verder kunt, of beter opnieuw begint.`} />
+</Base>

@@ -1,0 +1,323 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--meta-description.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/meta-description/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een meta description?' },
+  { id: 'seo', titel: 'Telt hij mee voor SEO?' },
+  { id: 'lengte', titel: 'Hoe lang mag hij zijn?' },
+  { id: 'schrijven', titel: 'Schrijven in vijf stappen' },
+  { id: 'paginatype', titel: 'Per soort pagina' },
+  { id: 'voorbeelden', titel: 'Voorbeelden' },
+  { id: 'herschrijven', titel: 'Waarom Google hem vervangt' },
+  { id: 'sturen', titel: 'Zelf sturen wat Google toont' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'veel-paginas', titel: 'Veel pagina\'s? Zo kies je' },
+  { id: 'ai', titel: 'Schrijven met AI' },
+  { id: 'invullen', titel: 'Invullen en meten' },
+];
+const check = [
+  'De zoekterm of een natuurlijke variant staat vooraan.',
+  'Hij vat samen wat de lezer echt op de pagina vindt.',
+  'Er staat iets concreets in: een prijs, een termijn, een aantal of een plaats.',
+  'Er staat één reden om voor jou te kiezen.',
+  'Hij eindigt met een actie die past bij de zoekvraag.',
+  'Het belangrijkste staat in de eerste 120 tekens, het geheel blijft rond de 155.',
+  'Geen andere pagina op je site heeft dezelfde omschrijving.',
+  'Alles wat erin staat, klopt en staat ook op de pagina.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'De check voor elke meta description\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  check.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Meta description schrijven die klikt: lengte, tips en voorbeelden',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Meta description',
+  citation: [
+    'https://developers.google.com/search/docs/appearance/snippet',
+    'https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag',
+    'https://developers.google.com/search/blog/2009/09/google-does-not-use-keywords-meta-tag',
+    'https://developers.google.com/search/docs/fundamentals/using-gen-ai-content',
+    'https://ahrefs.com/blog/meta-description-study/',
+  ],
+}];
+---
+<Base
+  title="Meta description schrijven die klikt | Drijfveer Media"
+  description="Een meta description schrijven die opvalt: de juiste lengte, waar je zoekwoord hoort, voorbeelden per branche en waarom Google hem soms vervangt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Meta description', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Meta description schrijven die klikt: lengte, tips en voorbeelden">
+    <p>De meta description is het stukje tekst onder je titel in Google. Hij telt niet mee voor je positie. Wel voor de vraag of iemand op jou klikt of op je concurrent. Zo schrijf je er een die werkt, met voorbeelden per soort pagina en een check om te downloaden.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een meta description is een korte samenvatting van je pagina, bedoeld voor de zoekresultaten.</li>
+            <li>Google gebruikt hem niet voor je positie, wel als tekst onder je titel. Een goede omschrijving levert meer klikken op.</li>
+            <li>Mik op 120 tot 155 tekens. Zet het belangrijkste in de eerste 120.</li>
+            <li>Begin met de zoekterm, beloof iets concreets en geef een reden om te klikken.</li>
+            <li>Google vervangt hem vaak door een stuk uit je tekst. Schrijf hem toch, en maak je eerste alinea net zo sterk.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een meta description?</h2>
+        <p>Een meta description is een korte omschrijving van een webpagina die in de code staat. Google kan hem tonen onder de titel in de zoekresultaten. Bezoekers zien hem niet op de pagina zelf. In de code ziet hij er zo uit:</p>
+        <pre><code>&lt;meta name="description" content="Wat kost een dakkapel? Prijzen per meter, de doorlooptijd en een offerte binnen één werkdag."&gt;</code></pre>
+        <p>Samen met de titel en de URL vormt hij je visitekaartje in Google. De titel trekt de aandacht. De omschrijving moet de zoeker overtuigen dat hij bij jou vindt wat hij zoekt. Google noemt het zelf een soort pitch: een korte, relevante samenvatting van waar de pagina over gaat.</p>
+        <h3>Eén ding, veel namen</h3>
+        <p>Je komt verschillende woorden tegen voor ongeveer hetzelfde. Zo zit het:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Term</th><th>Wat het is</th></tr></thead>
+            <tbody>
+              <tr><td>Meta description, meta-description</td><td>De Engelse naam van de tag in je code</td></tr>
+              <tr><td>Meta omschrijving, meta-beschrijving</td><td>Dezelfde tag in het Nederlands. Yoast en andere plugins gebruiken deze woorden.</td></tr>
+              <tr><td>Snippet of fragment</td><td>De tekst die Google echt toont. Dat kan je omschrijving zijn, maar ook een stuk uit je pagina.</td></tr>
+              <tr><td>og:description</td><td>Een aparte tag voor als je link gedeeld wordt op social media of in een chat-app</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Heb je geen aparte og:description? Dan gebruiken veel platforms je meta description als tekst bij een gedeelde link. Dat staat ook in een onderzoek van Ahrefs uit 2020. Nog een reden om hem goed te schrijven.</p>
+
+        <h2 id="seo">Telt de meta description mee voor SEO?</h2>
+        <p>Nee, niet rechtstreeks. Google schreef het al in 2009 op zijn eigen blog: de description-tag wordt soms als snippet gebruikt, maar niet voor de rangschikking. Een zoekwoord erin stoppen tilt je dus geen plek omhoog.</p>
+        <p>Toch is hij geld waard. Stel dat je op plek 4 staat en je omschrijving is beter dan die van plek 2 en 3. Dan klikken meer mensen op jou. Meer klikken bij dezelfde positie is gewoon meer bezoekers, zonder extra werk. Woorden uit de zoekopdracht worden in het fragment vaak vetgedrukt. Dat valt op. Daarom hoort de zoekterm er wel in, alleen niet om de reden die veel mensen denken.</p>
+        <p>Hoeveel sites laten dit liggen? In het onderzoek van Ahrefs uit 2020 had 25,02 procent van de best scorende pagina's helemaal geen meta description. Die laten het volledig aan Google over. Dat gaat soms goed, maar je geeft een kans weg.</p>
+
+        <h2 id="lengte">Hoe lang mag een meta description zijn?</h2>
+        <p>Houd een meta description tussen de 120 en 155 tekens. Google zelf noemt geen maximum. Volgens Google is er geen limiet aan de lengte, maar kapt Google het fragment af als het nodig is, meestal zodat het past op de breedte van het scherm. Dat gaat dus op breedte in pixels, niet op het aantal tekens. Een W neemt meer ruimte in dan een i. Een tekst met veel brede letters wordt eerder afgekapt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Lengte</th><th>Wat er gebeurt</th><th>Advies</th></tr></thead>
+            <tbody>
+              <tr><td>Minder dan 70 tekens</td><td>Je laat ruimte liggen. Google vult soms zelf aan met tekst uit je pagina.</td><td>Te kort, voeg een belofte of reden toe</td></tr>
+              <tr><td>70 tot 120 tekens</td><td>Past bijna altijd volledig, ook op mobiel</td><td>Prima voor eenvoudige pagina's</td></tr>
+              <tr><td>120 tot 155 tekens</td><td>Genoeg ruimte voor zoekterm, belofte en actie</td><td>De beste keuze</td></tr>
+              <tr><td>Meer dan 160 tekens</td><td>Grote kans dat het einde wegvalt achter puntjes</td><td>Zet de kern vooraan, of kort in</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Op mobiel is de ruimte vaak kleiner dan op een groot scherm. Zet de kern daarom in de eerste 120 tekens. Wat daarna komt, is mooi meegenomen. De juiste lengte check je met een snippet-preview, zoals die in Yoast of Rank Math, of een losse tool online.</p>
+        <p>Een opvallend detail uit het onderzoek van Ahrefs: 40,61 procent van de onderzochte omschrijvingen was te lang. Toch maakte dat weinig uit voor de kans dat Google ze verving. Te lange teksten werden in 61,46 procent van de gevallen vervangen, de rest in 63,69 procent. De lengte is dus vooral belangrijk voor wat de lezer ziet, niet voor de vraag of Google hem gebruikt.</p>
+
+        <h2 id="schrijven">Zo schrijf je een meta description in vijf stappen</h2>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Begin bij de zoekvraag</h3></div>
+        <p>Wat typte iemand in Google voordat hij jouw resultaat zag? Zet het belangrijkste zoekwoord vooraan, of een variant die natuurlijk leest. Wie zoekt op "dakkapel plaatsen kosten" ziet dan meteen dat jouw pagina daarover gaat. In Search Console zie je per pagina op welke zoekopdrachten je al verschijnt. Kies de zoekopdracht met de meeste vertoningen.</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>2. Beloof iets concreets</h3></div>
+        <p>Vaag werkt niet. "Wij zijn uw specialist in dakkapellen" zegt niets. "Prijzen per meter, doorlooptijd en een offerte binnen één werkdag" zegt precies wat de zoeker krijgt. Getallen, prijzen en termijnen vallen op. Google zegt het zelf ook: een omschrijving hoeft niet uit hele zinnen te bestaan. Het is een goede plek om losse feiten bij elkaar te zetten, zoals een prijs of een openingstijd.</p>
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>3. Laat zien waarom jij</h3></div>
+        <p>Wat heb jij dat de andere negen resultaten niet hebben? Een vaste prijs, een garantie, al dertig jaar in de regio, binnen een dag ter plaatse. Kies er één. Een rijtje van vijf voordelen leest niemand. Kijk ook even wat je concurrenten in Google laten zien. Zegt iedereen "vakkundig en betrouwbaar", dan valt een concreet getal des te meer op.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>4. Sluit af met een actie</h3></div>
+        <p>Eindig met een korte zin die zegt wat de lezer kan doen: "Bekijk de prijzen", "Lees de vijf stappen", "Vraag een offerte aan". Kies een actie die past bij de zoekvraag. Iemand die informatie zoekt, wil nog geen offerte. Meer over zulke oproepen lees je bij <a href="/kennisbank/wat-is/call-to-action/">call to action</a>.</p>
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>5. Controleer lengte en herhaling</h3></div>
+        <p>Tel de tekens, lees hem hardop en vergelijk hem met je andere pagina's. Elke pagina krijgt een eigen omschrijving. Vijftig pagina's met dezelfde tekst helpen Google en de zoeker niet. Klopt alles wat je belooft ook op de pagina? Een belofte die de pagina niet waarmaakt, kost je de bezoeker binnen een paar seconden.</p>
+        <div class="kader">
+          <p class="kader-titel">De formule in één regel</p>
+          <p>Zoekterm en belofte, één reden om voor jou te kiezen, één actie. Bijvoorbeeld: "Dakkapel laten plaatsen in Assen? Vaste prijs per meter en binnen drie weken geplaatst. Bekijk de prijzen en vraag een offerte aan." Dat zijn 131 tekens.</p>
+        </div>
+
+        <h3>Van zwak naar sterk, stap voor stap</h3>
+        <p>Een verzonnen glaszetter in Zwolle heeft deze omschrijving op zijn pagina over HR++-glas: "Glaszetterij Van Dijk. Kwaliteit en service staan bij ons voorop." Zo pak je hem aan met de vijf stappen:</p>
+        <ol>
+          <li><b>Zoekvraag:</b> in Search Console ziet hij dat "hr++ glas laten plaatsen zwolle" de meeste vertoningen heeft.</li>
+          <li><b>Belofte:</b> op de pagina staat een prijs per m² en een plaatsing binnen twee weken.</li>
+          <li><b>Waarom jij:</b> hij plaatst in bestaande kozijnen, zonder breekwerk.</li>
+          <li><b>Actie:</b> wie dit zoekt, wil een prijs weten. Dus: bereken je prijs.</li>
+          <li><b>Controle:</b> lengte, en staat alles echt op de pagina?</li>
+        </ol>
+        <p>Het resultaat: "HR++ glas laten plaatsen in Zwolle? Prijs per m², in je bestaande kozijnen en binnen twee weken geplaatst. Bereken direct je prijs." Dat zijn 130 tekens, en elk woord doet iets.</p>
+
+        <h2 id="paginatype">Een meta omschrijving per soort pagina</h2>
+        <p>Niet elke pagina vraagt om dezelfde aanpak. Google adviseert zelf om op je homepage een omschrijving voor de hele site te gebruiken, en op alle andere pagina's een omschrijving van die ene pagina. Zo pak je het per soort pagina aan:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort pagina</th><th>Waar het om draait</th><th>Voorbeeld (verzonnen)</th></tr></thead>
+            <tbody>
+              <tr><td>Homepage</td><td>Wie je bent, wat je doet, waar</td><td>Installatiebedrijf in Meppel voor cv-ketels, warmtepompen en onderhoud. Al 25 jaar in de regio. Bel of plan online een afspraak.</td></tr>
+              <tr><td>Dienstpagina</td><td>De dienst, een prijs of termijn, een actie</td><td>Cv-ketel vervangen in Meppel en omgeving. Vaste prijs inclusief montage, binnen vijf werkdagen geplaatst. Vraag een offerte aan.</td></tr>
+              <tr><td>Plaatspagina</td><td>De plaats, wat je daar doet, hoe snel je er bent</td><td>Loodgieter nodig in Hoogeveen? Binnen twee uur ter plaatse bij lekkage, ook in het weekend. Vaste voorrijkosten. Bel direct.</td></tr>
+              <tr><td>Gids of blog</td><td>Wat de lezer leert, en hoeveel</td><td>Zo vervang je zelf een kraanleertje in tien minuten. Met de vijf onderdelen die je nodig hebt en foto's van elke stap.</td></tr>
+              <tr><td>Product</td><td>Merk, prijs, levertijd</td><td>Infraroodpaneel 600 watt, wit, voor kamers tot 15 m². Op voorraad, morgen in huis. Gratis retour binnen 30 dagen.</td></tr>
+              <tr><td>Contact</td><td>Hoe en wanneer je bereikbaar bent</td><td>Bel, mail of kom langs aan de Hoofdstraat in Meppel. Op werkdagen van 8.00 tot 17.00 uur, binnen een uur antwoord.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor artikelen noemt Google nog een tip: zet er de schrijver of de datum in als dat de lezer helpt. Bij producten mag het een rijtje feiten zijn, zoals prijs en merk, zolang het leesbaar blijft.</p>
+
+        <h2 id="voorbeelden">Voorbeelden: zwak en sterk naast elkaar</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Branche</th><th>Zwak</th><th>Sterk</th></tr></thead>
+            <tbody>
+              <tr><td>Loodgieter</td><td>Welkom bij Loodgietersbedrijf Jansen. Wij zijn uw partner voor al uw loodgieterswerk.</td><td>Lekkage of verstopping in Emmen? Binnen 2 uur een loodgieter aan de deur, ook in het weekend. Vaste voorrijkosten. Bel direct.</td></tr>
+              <tr><td>Hovenier</td><td>Hovenier, tuinonderhoud, tuinaanleg, bestrating, schutting, Assen, Drenthe.</td><td>Tuin laten aanleggen in Assen? Bekijk wat het kost per m², met foto's van tuinen in de buurt. Ontwerp en aanleg in één hand.</td></tr>
+              <tr><td>Boekhouder</td><td>Klik hier voor meer informatie over onze diensten.</td><td>Boekhouder voor zzp'ers in Groningen. Btw-aangifte en jaarrekening voor een vaste prijs per kwartaal. Plan een gratis kennismaking.</td></tr>
+              <tr><td>Fysiotherapeut</td><td>Fysiotherapie. Wij helpen u graag verder.</td><td>Fysiotherapeut in Leeuwarden, ook voor rugklachten en sportblessures. Vaak binnen twee dagen terecht, zonder verwijzing. Plan online.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeelden, de bedrijven bestaan niet.</p>
+        <p>Zie je het patroon? De sterke versies beginnen bij de vraag van de zoeker, noemen iets meetbaars en eindigen met een stap. De zwakke versies gaan over het bedrijf zelf, of zijn een opsomming van zoekwoorden.</p>
+        <h3>De voorbeelden van Google zelf</h3>
+        <p>Google laat in zijn documentatie ook zien wat beter kan. In het kort, vertaald naar het Nederlands:</p>
+        <ul>
+          <li><b>Een rij zoekwoorden</b> ("naaigaren, breiwol, naalden") is zwak. Beter: zeg wat de winkel verkoopt, wanneer hij open is en waar hij zit.</li>
+          <li><b>Dezelfde tekst bij elk nieuwsbericht</b> is zwak. Beter: een samenvatting van dat ene bericht.</li>
+          <li><b>Een sfeerverhaal</b> dat de pagina niet samenvat is zwak. Beter: zeg wat de lezer leert en hoe lang het duurt.</li>
+          <li><b>Twee woorden</b> zoals "vulpotlood" is te kort. Beter: specifiek en met details, zoals de kleuren en de verzendvoorwaarden.</li>
+        </ul>
+
+        <h2 id="herschrijven">Waarom Google je omschrijving soms vervangt</h2>
+        <p>Google kiest per zoekopdracht welk fragment het beste past. Volgens Google komt het fragment vooral uit de inhoud van de pagina. Google gebruikt de meta description als die de pagina beter beschrijft. Daardoor kan dezelfde pagina bij verschillende zoekopdrachten een ander fragment krijgen.</p>
+        <p>Ahrefs zocht in 2020 uit hoe vaak dat gebeurt, bij 20.000 zoekwoorden. Het resultaat:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat Ahrefs mat</th><th>Uitkomst</th></tr></thead>
+            <tbody>
+              <tr><td>Omschrijving niet overgenomen, alle zoekwoorden</td><td>62,78%</td></tr>
+              <tr><td>Bij korte, veelgezochte zoekwoorden</td><td>59,65%</td></tr>
+              <tr><td>Bij lange, specifieke zoekopdrachten</td><td>65,62%</td></tr>
+              <tr><td>Toppagina's zonder meta description</td><td>25,02%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bron: Ahrefs, "How Often Does Google Rewrite Meta Descriptions?", 2020. Gemeten op desktop.</p>
+        <p>Dat klinkt als een reden om het niet te doen. Het is eerder een reden om het slim te doen.</p>
+        <ul>
+          <li>Voor je belangrijkste zoekwoord, waar de meeste bezoekers vandaan komen, toont Google je eigen tekst vaker. Juist daar telt het.</li>
+          <li>Zorg dat je eerste alinea op de pagina zelf ook een goede samenvatting is. Pakt Google een stuk tekst, dan pakt het vaak dat.</li>
+          <li>Een omschrijving die echt over de pagina gaat, wordt vaker gebruikt dan een reclameregel die nergens op aansluit.</li>
+          <li>Een rij zoekwoorden wordt volgens Google minder vaak als fragment getoond. Schrijf dus gewone zinnen.</li>
+        </ul>
+
+        <h2 id="sturen">Zelf sturen wat Google toont</h2>
+        <p>Je kunt Google niet dwingen je omschrijving te gebruiken. Wel kun je grenzen aangeven. Google noemt drie manieren:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Instelling</th><th>Wat het doet</th><th>Wanneer gebruiken</th></tr></thead>
+            <tbody>
+              <tr><td>&lt;meta name="robots" content="nosnippet"&gt;</td><td>Geen tekstfragment voor deze pagina</td><td>Bijna nooit. Volgens Google wordt je inhoud dan ook niet gebruikt als directe bron voor AI Overviews en de AI-modus.</td></tr>
+              <tr><td>&lt;meta name="robots" content="max-snippet:120"&gt;</td><td>Het fragment wordt maximaal 120 tekens</td><td>Als je wilt voorkomen dat er lange stukken tekst in Google verschijnen</td></tr>
+              <tr><td>data-nosnippet op een &lt;div&gt;, &lt;span&gt; of &lt;section&gt;</td><td>Dat stuk tekst wordt niet als fragment gebruikt</td><td>Voor een cookiemelding, een disclaimer of een stuk dat uit zijn verband een verkeerd beeld geeft</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let op: max-snippet en nosnippet gelden volgens Google ook voor AI Overviews en de AI-modus. Wil je daar juist in verschijnen, gebruik ze dan niet zonder goede reden. Meer daarover bij <a href="/generative-engine-optimization/google-ai-overviews/">Google AI Overviews</a>.</p>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Geen omschrijving.</b> Dan bepaalt Google het helemaal zelf. Soms gaat dat goed, soms staat je cookiemelding in de zoekresultaten.</li>
+          <li><b>Overal dezelfde tekst.</b> Veel sites hebben op elke pagina de slogan van het bedrijf staan. Zo lijken je pagina's op elkaar. Google raadt een unieke omschrijving per pagina aan, in het Engels vaak "unique" genoemd.</li>
+          <li><b>Een rij zoekwoorden.</b> Google noemt dat zelf als voorbeeld van wat je niet moet doen. Het leest niet en overtuigt niemand.</li>
+          <li><b>Beloftes die de pagina niet waarmaakt.</b> Wie klikt op "gratis offerte" en dan een prijslijst zonder formulier vindt, is binnen vijf seconden weer weg.</li>
+          <li><b>Alles over jezelf.</b> "Wij zijn", "wij bieden", "wij hebben". Schrijf over wat de lezer krijgt.</li>
+          <li><b>Hoofdletters en tekens als versiering.</b> Een omschrijving vol hoofdletters of symbolen leest als reclame. Eén duidelijk getal valt meer op.</li>
+          <li><b>Een oude prijs of datum.</b> Een actie die al voorbij is, of een prijs van vorig jaar, kost vertrouwen. Zet het op je lijst als je prijzen wijzigt.</li>
+          <li><b>Een kopie van de titel.</b> De titel staat er al boven. Gebruik de omschrijving om iets toe te voegen.</li>
+        </ul>
+
+        <h2 id="veel-paginas">Veel pagina's? Zo kies je waar je begint</h2>
+        <p>Een site met tien pagina's doe je in een uur. Bij honderden pagina's moet je kiezen. Google zegt het zelf: geen tijd voor elke pagina, begin dan met je belangrijkste pagina's, zoals je homepage en je populairste pagina's. Ahrefs adviseert iets vergelijkbaars: begin bij pagina's die al bezoekers uit Google krijgen, pagina's die gemaakt zijn om gevonden te worden, en pagina's die vaak gedeeld worden.</p>
+        <p>Zo pak je het praktisch aan:</p>
+        <ol>
+          <li>Open in Search Console <b>Prestaties</b>, <b>Zoekresultaten</b> en kies het tabblad <b>Pagina's</b>.</li>
+          <li>Sorteer op vertoningen. De bovenste twintig zijn je eerste werk.</li>
+          <li>Kijk per pagina naar de CTR. Hoe lager, hoe meer er te winnen valt.</li>
+          <li>Schrijf voor die twintig pagina's een nieuwe titel en omschrijving.</li>
+          <li>Noteer de datum. Kijk na vier tot zes weken of de CTR gestegen is.</li>
+        </ol>
+        <p>Heb je een webshop of een site met duizenden vergelijkbare pagina's? Dan mag je omschrijvingen ook automatisch laten maken uit gegevens van de pagina, zoals merk, prijs en maat. Google noemt dat zelf een goede oplossing voor grote sites, zolang de teksten leesbaar en gevarieerd zijn.</p>
+
+        <h2 id="ai">Meta descriptions schrijven met AI</h2>
+        <p>Voor een site met veel pagina's scheelt een AI-assistent zoals ChatGPT, Claude of Gemini veel tijd. Geef de pagina, het zoekwoord en je doelgroep mee. Bijvoorbeeld:</p>
+        <pre><code>Schrijf drie meta descriptions van maximaal 150 tekens voor deze pagina. Begin met de zoekterm "[zoekterm]". Noem één concreet voordeel dat op de pagina staat. Eindig met een actie. Geen uitroeptekens, geen woorden die niet op de pagina staan.</code></pre>
+        <p>Kies de beste en schaaf hem bij. Google vraagt in zijn richtlijnen over AI-inhoud zelf om ook titels en omschrijvingen die met AI zijn gemaakt na te lopen op juistheid. Dat is terecht. Een AI-assistent belooft graag dingen die je niet doet, zoals "gratis" of "24 uur per dag bereikbaar". Controleer daarom elk feit, en of de toon past bij de rest van je site.</p>
+
+        <h2 id="invullen">Waar vul je hem in, en hoe weet je of hij werkt?</h2>
+        <p>Waar het veld zit, hangt af van je systeem. Google raadt zelf aan om in de hulppagina's van je systeem te zoeken naar het aanpassen van meta-tags.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Systeem</th><th>Waar je het vindt</th></tr></thead>
+            <tbody>
+              <tr><td>WordPress met Yoast of Rank Math</td><td>In het blok van de plugin onder of naast de editor, met een voorbeeld van hoe het in Google staat</td></tr>
+              <tr><td>WordPress zonder SEO-plugin</td><td>Standaard geen veld. Installeer een SEO-plugin of laat je webbouwer het regelen.</td></tr>
+              <tr><td>Wix, Squarespace, Shopify</td><td>Bij de SEO-instellingen van elke pagina of elk product</td></tr>
+              <tr><td>Een eigen gebouwde site</td><td>Je webbouwer zet hem in de &lt;head&gt; van elke pagina</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Of hij werkt, zie je in Search Console onder Prestaties. Zet de kolommen vertoningen en CTR aan en kies het tabblad Pagina's. Een pagina met veel vertoningen en weinig klikken is je eerste kandidaat. Pas de titel en de omschrijving aan en kijk na vier tot zes weken opnieuw. Vergelijk dan dezelfde periode van vier weken voor en na. Blijft de positie gelijk en stijgt de CTR, dan werkt je nieuwe tekst. Hoe je Search Console gebruikt, lees je in de gids over <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+        <p>Wil je zien welke tekst Google nu toont? Zoek op Google naar de zoekopdracht waar je op verschijnt. Of zoek naar site: gevolgd door het adres van je pagina. Houd er rekening mee dat het fragment per zoekopdracht kan verschillen.</p>
+        <div class="kader check-lijst">
+          <p class="kader-titel">De check voor elke meta description</p>
+          <ol>{check.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="meta-description-check.txt">Download de check</a>
+        </div>
+        <h3>Titel en omschrijving als duo</h3>
+        <p>De titel is minstens zo belangrijk. Hij staat bovenaan en is groter, dus de zoeker leest hem als eerste. Schrijf ze daarom samen: de titel noemt het onderwerp, de omschrijving geeft de reden om te klikken. Lees ook <a href="/kennisbank/wat-is/title-tag/">wat een title tag is</a>. En wil je de tekst van de pagina zelf verbeteren, lees dan de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>.</p>
+        <p>Een sterke omschrijving haalt meer uit de posities die je al hebt. Hogere posities komen van goede pagina's, techniek en links. Dat is het werk van <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>, en daar helpen we je graag bij.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={17} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je pagina's nalopen?" intro="We kijken niet alleen naar de omschrijving, maar naar alles wat bepaalt of je gevonden en gekozen wordt." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel tekens mag een meta description hebben?', a: 'Google noemt geen maximum, maar kapt af op schermbreedte. Mik op 120 tot 155 tekens en zet het belangrijkste in de eerste 120.' },
+      { v: 'Is de meta description een rankingfactor?', a: 'Nee. Google schreef in 2009 al dat de description-tag niet voor de rangschikking wordt gebruikt. Hij helpt wel om meer mensen te laten klikken op je resultaat.' },
+      { v: 'Waarom toont Google een andere tekst dan mijn omschrijving?', a: 'Google kiest per zoekopdracht het fragment dat het beste past. Vaak is dat een stuk uit je pagina. Volgens een onderzoek van Ahrefs (2020) gebeurt dat in ongeveer 63 procent van de gevallen.' },
+      { v: 'Moet elke pagina een eigen meta description hebben?', a: 'Ja, dat raadt Google aan. Geen tijd voor alles? Begin bij je homepage en je best bezochte pagina\'s.' },
+      { v: 'Wat is het verschil tussen een meta description en een snippet?', a: 'De meta description is de tekst die jij in de code zet. De snippet is wat Google echt toont. Dat kan jouw tekst zijn, of een stuk uit je pagina.' },
+      { v: 'Mag ik een meta description met AI laten schrijven?', a: 'Ja, maar lees elke tekst na. Controleer of de belofte klopt en of hij past bij de pagina. Google vraagt dat zelf ook.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Begrip', titel: 'Wat is een title tag?', href: '/kennisbank/wat-is/title-tag/', tekst: 'De blauwe regel boven je omschrijving.', teken: 'pen' },
+      { label: 'Gids', titel: 'SEO-teksten schrijven', href: '/kennisbank/gidsen/seo-teksten-schrijven/', tekst: 'Zo schrijf je de pagina die erbij hoort.' },
+      { label: 'Gids', titel: 'Google Search Console', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Zie welke pagina\'s klikken laten liggen.' },
+      { label: 'Pillar', titel: 'Zoekmachine-optimalisatie', href: '/zoekmachine-optimalisatie/', tekst: 'SEO vanaf € 495 per maand, maandelijks opzegbaar.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waarom mensen niet doorklikken?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je resultaten in Google en belt je met de pagina's waar de snelste winst zit.`} />
+</Base>
+<style>
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--chip); padding: 14px 16px; border-radius: 10px; font-size: 0.9rem; margin: 0 0 1.2em; }
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+</style>

@@ -1,0 +1,75 @@
+---
+// Scène voor /kennisbank/wat-is/cookie/: een website met een cookiemelding (weigeren en accepteren even groot)
+// en een voorraadpot met het opschrift Browser, waarin de site koekjes bewaart.
+// Als hij leeft: een cursor kiest een knop en een koekje valt steeds opnieuw rustig in de pot.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const stukjes = [[-5, -4], [4, -5], [0, 4], [6, 3]];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een website toont een cookiemelding met twee even grote knoppen, weigeren en accepteren. Ernaast staat een pot met het opschrift Browser, waarin de site koekjes bewaart.'}>
+  <!-- browser -->
+  <rect x="14" y="30" width="262" height="210" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M15 54v-12a11 11 0 0 1 11-11h238a11 11 0 0 1 11 11v12z" fill="#e8eef4" />
+  <circle cx="28" cy="42" r="3.5" fill="#d9e1ea" /><circle cx="40" cy="42" r="3.5" fill="#d9e1ea" /><circle cx="52" cy="42" r="3.5" fill="#d9e1ea" />
+  <rect class="v" x="28" y="66" width="234" height="46" rx="6" />
+  <rect x="28" y="122" width="150" height="8" rx="4" fill="#e8eef4" />
+  <rect x="28" y="136" width="190" height="7" rx="3.5" fill="#e8eef4" />
+
+  <!-- cookiemelding -->
+  <rect x="26" y="152" width="238" height="76" rx="10" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="40" y="174" font-size="11" font-weight="800">Mogen we iets onthouden?</text>
+  <rect x="40" y="194" width="100" height="24" rx="12" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="90" y="210" font-size="10.5" font-weight="800" text-anchor="middle">Weigeren</text>
+  <rect x="150" y="194" width="100" height="24" rx="12" fill="#074663" />
+  <text x="200" y="210" font-size="10.5" font-weight="800" text-anchor="middle" style="fill:#fff">Accepteren</text>
+
+  <!-- pot -->
+  <rect x="330" y="86" width="116" height="16" rx="6" fill="#074663" />
+  <path d="M338 102h100v10c10 6 14 16 14 28v76a14 14 0 0 1-14 14H338a14 14 0 0 1-14-14v-76c0-12 4-22 14-28z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <rect x="350" y="138" width="76" height="26" rx="6" fill="#e8eef4" />
+  <text x="388" y="155.5" font-size="11" font-weight="800" text-anchor="middle">Browser</text>
+  {[[356, 206], [392, 210], [372, 188], [416, 196]].map(([x, y]) => (
+    <g>
+      <circle cx={x} cy={y} r="13" fill="#e9b872" stroke="#b9823f" stroke-width="2" />
+      {stukjes.map(([dx, dy]) => <circle cx={x + dx} cy={y + dy} r="2" fill="#6b4423" />)}
+    </g>
+  ))}
+  <path class="a" d="M292 70C312 58 330 62 344 76" />
+
+  {!mini && (
+    <g>
+      <g class="cookie-koek">
+        <circle cx="388" cy="54" r="13" fill="#e9b872" stroke="#b9823f" stroke-width="2" />
+        {stukjes.map(([dx, dy]) => <circle cx={388 + dx} cy={54 + dy} r="2" fill="#6b4423" />)}
+      </g>
+      <g class="cookie-cursor">
+        <path d="M0 0l0 18 5-4.5 3.5 8 3.2-1.4-3.4-7.8 6.7-.5z" fill="#10283f" stroke="#fff" stroke-width="1.4" stroke-linejoin="round" transform="translate(214 206)" />
+      </g>
+      <rect class="cookie-ring" x="146" y="190" width="108" height="32" rx="16" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .cookie-koek, :global(.teken-js) .cookie-cursor, :global(.teken-js) .cookie-ring { opacity: 0; }
+  .in-beeld .cookie-cursor { animation: kennisbank--wat-is--cookie-cursor 6s ease-in-out 0.5s infinite; }
+  .in-beeld .cookie-ring { animation: kennisbank--wat-is--cookie-ring 6s ease-out 0.5s infinite; }
+  .in-beeld .cookie-koek { animation: kennisbank--wat-is--cookie-val 6s ease-in 0.5s infinite; }
+  @keyframes kennisbank--wat-is--cookie-cursor {
+    0% { opacity: 0; transform: translate(-70px, -60px); }
+    10% { opacity: 1; }
+    28% { transform: translate(0, 0); }
+    32% { transform: translate(0, 0) scale(0.9); }
+    36% { transform: translate(0, 0); }
+    70% { opacity: 1; transform: translate(0, 0); }
+    80%, 100% { opacity: 0; transform: translate(0, 0); }
+  }
+  @keyframes kennisbank--wat-is--cookie-ring { 0%, 30% { opacity: 0; } 36% { opacity: 1; } 56%, 100% { opacity: 0; } }
+  @keyframes kennisbank--wat-is--cookie-val {
+    0%, 36% { opacity: 0; transform: translateY(-16px); }
+    44% { opacity: 1; transform: translateY(0); }
+    52% { opacity: 1; transform: translateY(0); }
+    76% { opacity: 1; transform: translateY(116px); }
+    84%, 100% { opacity: 0; transform: translateY(118px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .cookie-cursor, .in-beeld .cookie-ring, .in-beeld .cookie-koek { animation: none; } }
+</style>

@@ -1,0 +1,56 @@
+---
+// Scène voor /online-adverteren/google-ads-bureau/: een zoektermenrapport waarin verspilde zoektermen worden doorgestreept, en een grafiek waarin de kosten per aanvraag dalen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const termen = [
+  { y: 82, tekst: 'cv-ketel vervangen', goed: true },
+  { y: 114, tekst: 'cv-ketel gratis', goed: false },
+  { y: 146, tekst: 'cv-ketel onderhoud', goed: true },
+  { y: 178, tekst: 'vacature monteur', goed: false },
+  { y: 210, tekst: 'ketel zelf repareren', goed: false },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een lijst met zoektermen waarin de zoektermen die geld kosten zonder iets op te leveren worden doorgestreept. Daarnaast een grafiek waarin de kosten per aanvraag dalen.'}>
+  <!-- zoektermen -->
+  <rect x="20" y="24" width="236" height="222" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="38" y="52" font-size="13" font-weight="800">Zoektermen</text>
+  <path class="l" d="M20 64h236" style="stroke:#d9e1ea" />
+  {termen.map((t) => (
+    <g>
+      <text x="38" y={t.y + 5} font-size="12.5" font-weight="600" class={t.goed ? undefined : 'zacht'}>{t.tekst}</text>
+      {t.goed ? (
+        <g><circle cx="230" cy={t.y} r="9" fill="#1f8a5b" /><path d={`M225.5 ${t.y}l3 3 6-6.5`} stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+      ) : (
+        <g><circle cx="230" cy={t.y} r="9" fill="#e8eef4" /><path d={`M226 ${t.y - 4}l8 8M234 ${t.y - 4}l-8 8`} stroke="#10283f" stroke-width="2" stroke-linecap="round" /></g>
+      )}
+    </g>
+  ))}
+  <!-- grafiek kosten per aanvraag -->
+  <rect x="272" y="24" width="188" height="222" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="290" y="52" font-size="12.5" font-weight="800">Kosten per aanvraag</text>
+  <path class="l" d="M290 220h152M290 220V80" style="stroke:#d9e1ea" />
+  <path class="l" d="M292 96L322 104L352 136L382 160L412 178L440 186" style="stroke:#c9d6e2" />
+  <circle class="o" cx="440" cy="186" r="5" />
+  <rect x="384" y="66" width="58" height="26" rx="13" fill="#e8eef4" />
+  <text x="413" y="84" text-anchor="middle" font-size="12.5" font-weight="900">lager</text>
+  {!mini && (
+    <g>
+      {termen.filter((t) => !t.goed).map((t, i) => (
+        <path class="streep" style={`--i:${i}`} d={`M34 ${t.y}h${t.tekst.length * 6.6 + 8}`} stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      ))}
+      <path class="lijn" d="M292 96L322 104L352 136L382 160L412 178L440 186" fill="none" stroke="#ff6600" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <circle class="puls" cx="440" cy="186" r="9" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    </g>
+  )}
+</svg>
+<style>
+  .streep, .lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .streep, :global(.teken-js) .lijn { stroke-dashoffset: 1; }
+  .in-beeld .streep { animation: online-adverteren--google-ads-bureau-trek 0.6s cubic-bezier(.6,.1,.3,1) calc(0.5s + var(--i) * 0.5s) forwards; }
+  .in-beeld .lijn { animation: online-adverteren--google-ads-bureau-trek 1.6s cubic-bezier(.6,.1,.3,1) 1.8s forwards; }
+  .puls { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .in-beeld .puls { animation: online-adverteren--google-ads-bureau-puls 3s ease-out 3.4s infinite; }
+  @keyframes online-adverteren--google-ads-bureau-trek { to { stroke-dashoffset: 0; } }
+  @keyframes online-adverteren--google-ads-bureau-puls { 0% { opacity: 0.9; transform: scale(0.6); } 70%, 100% { opacity: 0; transform: scale(2.2); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .streep, .in-beeld .lijn, .in-beeld .puls { animation: none; } }
+</style>

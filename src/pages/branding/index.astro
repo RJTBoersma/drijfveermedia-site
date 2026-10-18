@@ -1,0 +1,176 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+import Prijskaart from '../../components/pagina/Prijskaart.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Auteur from '../../components/pagina/Auteur.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/branding.astro';
+import { site } from '../../data/site';
+
+const url = '/branding/';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is branding?' },
+  { id: 'signalen', titel: 'Wanneer je eraan toe bent' },
+  { id: 'wat-doen', titel: 'Wat een branding bureau doet' },
+  { id: 'aanpak', titel: 'Zo werken we' },
+  { id: 'online', titel: 'Branding die online werkt' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'kiezen', titel: 'Een bureau kiezen' },
+  { id: 'zelf', titel: 'Wat je zelf kunt doen' },
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Branding: logo en huisstijl',
+  serviceType: 'Branding',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: [
+    { '@type': 'Offer', name: 'Logo laten maken', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'PriceSpecification', price: 495, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+    { '@type': 'Offer', name: 'Huisstijl laten maken', priceCurrency: 'EUR', price: 995, priceSpecification: { '@type': 'PriceSpecification', price: 995, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+  ],
+}];
+---
+<Base
+  title="Branding bureau voor logo en huisstijl | Drijfveer Media"
+  description="Branding bureau voor het mkb: een logo vanaf € 495 en een complete huisstijl vanaf € 995. Herkenbaar, nuchter en meteen klaar voor je website en Google."
+  kruimels={[{ naam: 'Branding', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Branding" titel="Branding bureau voor ondernemers die herkend willen worden" prijs="vanaf € 495" eenmalig>
+    <p>Een merk is wat klanten over je zeggen als jij er niet bij bent. Wij zorgen dat je logo, huisstijl en teksten daarbij helpen. Zonder dikke rapporten, wel met een doordacht ontwerp.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-17" nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <p>Branding is alles wat je doet om je bedrijf herkenbaar te maken en te laten onthouden: je naam, logo, kleuren, letters, toon en gedrag. Drijfveer Media is een online marketingbureau uit Assen dat ook logo's en huisstijlen maakt voor het mkb. Een logo kost vanaf € 495, een complete huisstijl vanaf € 995, exclusief btw. We ontwerpen alles zo dat het meteen werkt op je website, in Google en op je bedrijfsbus.</p>
+        </div>
+
+        <h2 id="wat-is">Wat is branding?</h2>
+        <p>Branding is het bewust vormgeven van het beeld dat mensen van je bedrijf hebben. Dat beeld heet je merk. Het zit niet op papier, maar in het hoofd van je klanten. Je logo en huisstijl zijn de zichtbare kant: het teken, de kleuren en de letters die steeds terugkomen. De onzichtbare kant is minstens zo groot. Hoe je de telefoon opneemt, hoe je offertes eruitzien, of je doet wat je belooft.</p>
+        <p>Hoe groot die onzichtbare kant is? Hoogleraar Cees van Riel schatte in zijn boek <i>Identiteit en imago</i> (2003) dat gedrag zo'n 90 procent van de identiteit van een bedrijf bepaalt. Vormgeving en communicatie zijn samen goed voor de overige 10 procent (via <a href="https://nl.wikipedia.org/wiki/Huisstijl" rel="noopener">Wikipedia</a>). Een mooi logo maakt een slechte service dus niet goed. Maar een rommelig logo kan een goede service wel tegenwerken. Wie er amateuristisch uitziet, moet harder werken om vertrouwen te winnen.</p>
+        <p>Grote bureaus beginnen vaak met een dik document over missie/visie en kernwaarden. Voor de meeste mkb'ers is één A4 genoeg. Voor wie werk je, wat beloof je, waarom kiezen klanten voor jou, en welke drie kernwaarden maak je elke dag waar? Meer over de basis lees je in de gids <a href="/kennisbank/gidsen/wat-is-branding/">wat is branding</a>.</p>
+
+        <h2 id="signalen">Wanneer je toe bent aan een nieuwe uitstraling</h2>
+        <p>Niet elk bedrijf heeft een nieuw logo nodig. Soms is opfrissen genoeg, soms is het zonde van het geld. Dit zijn de signalen dat het wel tijd is:</p>
+        <ul class="vink">
+          <li>Je logo is onleesbaar als het klein wordt, bijvoorbeeld als profielfoto of als icoontje in je browser.</li>
+          <li>Je visitekaartje, website en bus zien eruit alsof ze van drie verschillende bedrijven zijn.</li>
+          <li>Je hebt geen bronbestand van je logo, alleen een wazig plaatje.</li>
+          <li>Je bent gegroeid of van richting veranderd, en je uitstraling past niet meer bij je klanten.</li>
+          <li>Klanten halen je door elkaar met een concurrent.</li>
+          <li>Je schaamt je een beetje als je een offerte verstuurt.</li>
+        </ul>
+        <p>Herken je er één of twee? Dan is een opfrisbeurt vaak genoeg. Herken je er vier of meer, dan levert een nieuw logo en een vastgestelde huisstijl je waarschijnlijk meer op dan het kost.</p>
+
+        <h2 id="wat-doen">Wat een branding bureau voor je doet, en wat wij anders doen</h2>
+        <p>Een klassiek branding bureau begint met strategie. Workshops, interviews, een merkplatform, en pas na weken het eerste ontwerp. Bij een corporate met een eigen marketingafdeling is dat logisch. Zo werken veel bureaus die voor grote merken werken, of ze nu in Rotterdam, Den Haag of Groningen zitten.</p>
+        <p>Voor een installateur in Hoogeveen of een adviesbureau in Groningen is dat te veel. Je wilt een logo dat klopt, kleuren die overal hetzelfde zijn en een site die er zakelijk en modern uitziet. Snel, voor een vaste prijs, en zonder dat je drie middagen in workshops zit. Daar zijn wij voor.</p>
+        <p>Wij zijn een online marketingbureau. Dat is ons verschil met een studio die alleen ontwerpt. We kijken bij elk ontwerp ook naar de plek waar je klanten je het eerst zien: in Google, op je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>, op je telefoon. Een logo dat op een gevel prachtig is, maar als icoontje in Google een vlek wordt, werkt niet.</p>
+        <h3>Wat we niet doen</h3>
+        <p>We maken geen foto's of video's en doen geen animatie of employer branding. Een merkstrategie als los traject bieden we ook niet aan. Wel nemen we de belangrijkste keuzes mee in je logo en huisstijl. Heb je iets nodig wat wij niet doen? Dan zeggen we dat eerlijk, en denken we mee over wie het wel kan.</p>
+
+        <h2 id="aanpak">Zo werken we</h2>
+        <p>Of het nu om een logo gaat of een complete huisstijl, de stappen zijn dezelfde.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>1. We bellen en vragen door</h3></div>
+        <p>Binnen 15 minuten bellen we je terug. We vragen wat je doet, voor wie, en wat je klanten over je zeggen. Ook vragen we welke logo's je mooi vindt, en vooral waarom. Smaak is een begin, maar je klant beslist.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>2. Eén A4 met je merk</h3></div>
+        <p>We zetten op één pagina wie je bent, voor wie, je belangrijkste boodschap en je kernwaarden. Dat A4 bepaalt de richting van het ontwerp. Het voorkomt ook dat we straks kiezen op "ik vind blauw mooi".</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Ontwerp in een paar richtingen</h3></div>
+        <p>Je krijgt verschillende richtingen te zien, elk met een korte uitleg wat ze uitstralen. Geen losse plaatjes, maar het logo op een visitekaartje, je website en een telefoonscherm. Zo zie je meteen hoe het in het echt werkt.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>4. We testen het in de praktijk</h3></div>
+        <p>Werkt het logo heel klein? In zwart-wit? Op een donkere achtergrond, op een gevel, als profielfoto? Is de tekst leesbaar op een telefoon? Pas als het overal werkt, gaan we verder.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>5. Oplevering met alle bestanden en rechten</h3></div>
+        <p>Je krijgt alle bestanden die je nodig hebt, voor scherm en drukwerk. En de rechten zetten we zwart op wit op jouw naam. Hoe dat zit, lees je bij <a href="/branding/logo-laten-maken/">logo laten maken</a>.</p>
+
+        <h2 id="online">Branding die ook online werkt</h2>
+        <p>Een merk dat iedereen herkent, helpt ook je vindbaarheid. Google en AI-assistenten zoals ChatGPT moeten zeker weten wie je bent. Dat lukt alleen als je naam, logo en gegevens overal hetzelfde zijn. Staat er op je site "Bakkerij De Vries", op Facebook "De Vries Brood" en in je bedrijfsprofiel "Bakker de Vries Assen"? Dan zijn het voor een machine misschien drie bedrijven. Dat kost je vermeldingen.</p>
+        <p>Daarom leveren we bij elk ontwerp ook de online kant mee: een vierkante versie voor profielfoto's, een icoontje voor je browser en zoekresultaten, en vaste kleurcodes voor je website. Je merk communiceert dan overal dezelfde boodschap. Dat is de basis voor <a href="/generative-engine-optimization/">generative engine optimization</a>, het genoemd worden door AI.</p>
+
+        <h2 id="kosten">Wat kost branding?</h2>
+        <p>Bij Drijfveer Media zijn de prijzen vast en vooraf bekend, exclusief btw:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Vanaf</th><th>Wat je krijgt</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/branding/logo-laten-maken/">Logo</a></td><td>€ 495</td><td>Logo in alle varianten, bronbestanden en rechten</td></tr>
+              <tr><td><a href="/branding/huisstijl-laten-maken/">Huisstijl</a></td><td>€ 995</td><td>Logo plus kleuren, letters en toepassingen</td></tr>
+              <tr><td><a href="/tekstschrijver/">Teksten</a></td><td>€ 75 per pagina</td><td>Webteksten in de toon van je merk</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wil je je merk ook laten vastleggen als Benelux-merk? Dat regel je bij het Benelux-Bureau voor de Intellectuele Eigendom in Den Haag. Een inschrijving geldt tien jaar en kun je daarna steeds verlengen (<a href="https://nl.wikipedia.org/wiki/Merkenrecht_in_de_Benelux" rel="noopener">Wikipedia</a>). De kosten daarvan betaal je aan dat bureau, niet aan ons. Wil je ook een nieuwe site in je nieuwe stijl? Kijk dan bij <a href="/website-laten-maken/">website laten maken</a>.</p>
+
+        <h2 id="kiezen">Waar je op let bij het kiezen van een branding bureau</h2>
+        <p>Veel bureaus zijn beter in zichzelf verkopen dan in het werk voor hun klanten. Een mooi portfolio zegt iets over smaak. Het zegt weinig over hoe je samenwerkt en wat je na de handtekening krijgt. Stel daarom deze vragen:</p>
+        <ul class="vink">
+          <li>Vraagt het bureau naar je klanten, of alleen naar wat jij mooi vindt?</li>
+          <li>Laat het zien hoe het logo werkt in het klein en in zwart-wit?</li>
+          <li>Krijg je de bronbestanden, en worden de rechten schriftelijk aan jou overgedragen?</li>
+          <li>Hoeveel correctierondes zitten er in de prijs?</li>
+          <li>Denkt het bureau mee over je website en je vindbaarheid?</li>
+        </ul>
+        <p>Drijfveer Media bestaat sinds 2011. Die jarenlange ervaring zit vooral in online marketing: zorgen dat bedrijven gevonden, genoemd en gekozen worden. Daar komt onze kijk op branding vandaan. Een merk moet er goed uitzien, en het moet werken.</p>
+
+        <h2 id="zelf">Wat je vandaag zelf kunt doen</h2>
+        <p>Nog niet klaar voor een nieuw ontwerp? Met deze vier stappen maak je je merk vandaag al sterker.</p>
+        <ul class="vink">
+          <li>Schrijf je bedrijfsnaam overal precies hetzelfde: site, bedrijfsprofiel, social media, e-mail.</li>
+          <li>Kies twee of drie vaste kleuren en noteer de kleurcodes. Gebruik niets anders. De gids <a href="/kennisbank/gidsen/kleuren-in-marketing/">kleuren in marketing</a> helpt bij de keuze.</li>
+          <li>Zoek het origineel van je logo op. Geen bronbestand? Vraag het bij je vorige ontwerper op.</li>
+          <li>Beschrijf in één zin wat je doet en voor wie. Zet die zin bovenaan je website.</li>
+        </ul>
+        <p>Twijfel je of je het zelf kunt? In de gids <a href="/kennisbank/gidsen/logo-en-huisstijl/">logo en huisstijl: zelf maken of laten maken</a> zetten we de afwegingen op een rij.</p>
+      </article>
+
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+        <Prijskaart naam="Logo" prijs="€ 495" eenmalig punten={['Gesprek en één A4 met je merk', 'Ontwerp in een paar richtingen', 'Alle varianten en bronbestanden', 'Rechten schriftelijk op jouw naam']} />
+        <Prijskaart naam="Huisstijl" prijs="€ 995" eenmalig punten={['Logo inbegrepen', 'Vaste kleuren en lettertypes', 'Visitekaartje, briefpapier en e-mail', 'Kort en bruikbaar huisstijlboekje']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Verder
+    titel="Meer over logo en huisstijl"
+    links={[
+      { label: 'Dienst', titel: 'Logo laten maken', href: '/branding/logo-laten-maken/', tekst: 'Werkwijze en rechten, vanaf € 495.' },
+      { label: 'Dienst', titel: 'Huisstijl laten maken', href: '/branding/huisstijl-laten-maken/', tekst: 'Kleuren, letters en toepassingen, vanaf € 995.' },
+      { label: 'Gids', titel: 'Logo en huisstijl', href: '/kennisbank/gidsen/logo-en-huisstijl/', tekst: 'Zelf maken of laten maken?' },
+      { label: 'Gids', titel: 'Wat is branding?', href: '/kennisbank/gidsen/wat-is-branding/', tekst: 'Merk, doelgroep en USP.' },
+    ]}
+  />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen branding en een huisstijl?', a: 'Branding is het hele beeld dat klanten van je bedrijf hebben, inclusief hoe je werkt en communiceert. De huisstijl is het zichtbare deel: logo, kleuren, letters en hoe je die toepast.' },
+      { v: 'Heb ik als klein bedrijf echt branding nodig?', a: 'Je hebt altijd een merk, of je er nu aan werkt of niet. De vraag is of het je helpt. Een herkenbaar logo en vaste kleuren kosten weinig en maken je professioneler dan veel concurrenten.' },
+      { v: 'Hoe lang duurt het om een logo of huisstijl te laten maken?', a: 'Dat hangt vooral af van hoe snel je keuzes maakt. Na het eerste gesprek krijg je een planning. Een logo is sneller klaar dan een complete huisstijl met toepassingen.' },
+      { v: 'Kunnen jullie mijn bestaande logo opfrissen?', a: 'Ja. Vaak is dat slimmer dan helemaal opnieuw beginnen, zeker als klanten je logo al kennen. We maken het strakker, beter leesbaar en bruikbaar in alle formaten.' },
+      { v: 'Van wie is het logo als het af is?', a: 'Van jou. We dragen de rechten schriftelijk aan je over, zodat je het overal mag gebruiken en kunt laten registreren als merk. Meer daarover op de pagina <a href="/branding/logo-laten-maken/">logo laten maken</a>.' },
+      { v: 'Werken jullie alleen in Drenthe?', a: 'Nee. We zitten in Assen en werken veel in Drenthe, Groningen en Friesland, maar ook voor bedrijven in de rest van Nederland en daarbuiten. Een logo maken kan prima op afstand.' },
+    ]}
+  />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je project bij.' }]} extra="Voor specialistisch werk schakelen we vaste freelancers in die bovenop de nieuwste ontwikkelingen zitten. Jij houdt één aanspreekpunt." />
+
+  <Actie titel="Past je uitstraling nog bij je bedrijf?" tekst={`${site.contactpersoon} kijkt naar je logo, je website en je bedrijfsprofiel, en belt je met wat opvalt. Gratis, en je zit nergens aan vast.`} />
+</Base>

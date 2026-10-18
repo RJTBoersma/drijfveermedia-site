@@ -1,0 +1,197 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/webdesign-drenthe.astro';
+import { site } from '../../data/site';
+
+const url = '/webdesign-drenthe/';
+const schema = [{
+  '@type': 'Service',
+  name: 'Webdesign in Drenthe',
+  serviceType: 'Website laten maken',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Drenthe' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+}];
+
+// CBS, Vestigingen van bedrijven; bedrijfstak, regio. Provincie Drenthe, 1 januari 2026 (voorlopig).
+const sectoren = [
+  { sector: 'Specialistische zakelijke diensten', aantal: '10.730', site: 'Vertrouwen: wie ben je, wat heb je gedaan, wat kost een eerste gesprek. Artikelen die vragen beantwoorden.' },
+  { sector: 'Handel', aantal: '9.465', site: 'Producten of merken duidelijk in beeld, openingstijden, route. Voor groothandel: een snelle offerte-aanvraag.' },
+  { sector: 'Zorg en welzijn', aantal: '6.785', site: 'Rust en duidelijkheid. Wie werkt er, hoe maak je een afspraak, wat wordt vergoed.' },
+  { sector: 'Bouw', aantal: '6.025', site: 'Foto\'s van echte projecten, je werkgebied, een telefoonnummer dat je met één tik belt.' },
+  { sector: 'Landbouw', aantal: '3.785', site: 'Vaak een boerderijwinkel, zorgboerderij of loonwerk. Kort, eerlijk, met route en openingstijden.' },
+  { sector: 'Cultuur, sport en recreatie', aantal: '2.785', site: 'Gasten van ver. Beschikbaarheid, foto\'s, de omgeving en een Duitse versie van je belangrijkste pagina\'s.' },
+  { sector: 'Horeca', aantal: '2.140', site: 'Menukaart, reserveren en openingstijden bovenaan. Op de telefoon, want daar zoekt je gast.' },
+];
+---
+<Base
+  title="Webdesign Drenthe: websites vanaf € 250 | Drijfveer Media"
+  description="Webdesign in Drenthe voor ondernemers met een groot werkgebied. Een snelle WordPress-site of een site met AI, vanaf € 250. We komen vrijblijvend langs."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Drenthe', url: '/regio/drenthe/' }, { naam: 'Webdesign Drenthe', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Drenthe" titel="Webdesign in Drenthe voor bedrijven met een groot werkgebied" prijs="vanaf € 250" eenmalig>
+    <p>Drenthe is groot en rustig. Wie hier onderneemt, werkt vaak in een flinke straal, over gemeentegrenzen heen. Goed webdesign in Drenthe begint daarom met één vraag: waar zitten jouw klanten, en hoe vinden ze je?</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Een provincie van 2.680 vierkante kilometer</h2>
+      <p>Drenthe telde eind augustus 2026 volgens het CBS 508.822 inwoners, verdeeld over twaalf gemeenten en tientallen dorpen. Op een vierkante kilometer wonen hier gemiddeld 192 mensen. In heel Nederland zijn dat er 536. Dat betekent: grote afstanden en klanten die verspreid wonen. Een schilder uit Coevorden werkt net zo goed in Dalen, Schoonebeek en Sleen. Een installateur uit Beilen rijdt naar Westerbork, Wijster en Hooghalen.</p>
+      <p>Een website voor zo'n bedrijf moet dat hele gebied laten zien. Niet met veertig pagina's waarop alleen de plaatsnaam verschilt. Google noemt dat in zijn spamregels letterlijk als voorbeeld van misbruik, en een klant prikt er ook doorheen. Wel met een duidelijke werkgebiedpagina, foto's van echte klussen in de buurt en een site die op elke telefoon snel werkt.</p>
+
+      <h2>Wat een Drentse website anders doet</h2>
+    </div>
+    <div class="raster raster-2 drents">
+      <div class="card">
+        <Tekening naam="pin" />
+        <h3>Het gebied in beeld</h3>
+        <p>Een kaartje of lijst van de plaatsen waar je werkt, met per plaats een klus die je er deed. Zo ziet een klant uit Sleen meteen dat je ook bij hem komt.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="telefoon" vertraging={150} />
+        <h3>Bellen met één tik</h3>
+        <p>Veel klanten pakken liever de telefoon dan een formulier. Je nummer staat dus op elk scherm bovenaan, klikbaar.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="raket" vertraging={300} />
+        <h3>Licht en snel</h3>
+        <p>Je klant zoekt je op in de auto of op het erf, niet achter een groot scherm. Een technisch lichte site laadt ook als het bereik minder is.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="huis" vertraging={450} />
+        <h3>Ook voor gasten van buiten</h3>
+        <p>Heb je een camping, B&amp;B of restaurant? Dan zoeken je gasten vanuit de rest van het land en uit Duitsland. Een duidelijke route en een Duitse versie van je belangrijkste pagina's helpen dan.</p>
+      </div>
+    </div>
+    <div class="tekst">
+      <h2>Welke website past bij jouw branche?</h2>
+      <p>Het CBS telde begin 2026 in Drenthe 60.975 bedrijfsvestigingen. De provincie schrijft dat meer dan 95 procent daarvan mkb is. Elke branche heeft een andere klant, en dus een andere site nodig. Een overzicht van de grootste groepen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Branche</th><th>Vestigingen</th><th>Waar de site om draait</th></tr></thead>
+          <tbody>
+            {sectoren.map((s) => <tr><td><b>{s.sector}</b></td><td>{s.aantal}</td><td>{s.site}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron aantallen: CBS, vestigingen van bedrijven per bedrijfstak, provincie Drenthe, 1 januari 2026 (voorlopig). De laatste kolom is ons eigen advies.</p>
+      <p>Valt je bedrijf erbuiten? Bij webdesign in Drenthe geldt dan nog steeds dezelfde vraag: wat wil je klant weten voordat hij belt? Dat zetten we bovenaan. De rest komt daarna.</p>
+
+      <h2>Zo kies je een webdesigner in Drenthe</h2>
+      <p>Voordat je een opdracht geeft, loont het om deze vragen te stellen. Aan ons, en aan elke andere webdesigner die je overweegt.</p>
+      <ul class="vink">
+        <li>Staat de domeinnaam op jouw naam?</li>
+        <li>Krijg je alle inloggegevens, en ben je eigenaar van het ontwerp en de teksten?</li>
+        <li>Wat kost een wijziging na de oplevering, en wat kost onderhoud per jaar?</li>
+        <li>Is de site technisch klaar voor Google: snel, mobiel en met een logische opbouw?</li>
+        <li>Wie schrijft de teksten, en zitten de woorden in die je klanten intypen?</li>
+        <li>Kun je een site zien die ze eerder maakten, en die nu nog goed werkt?</li>
+      </ul>
+      <p>Een mooie site die niemand vindt, is een visitekaartje in een la. Een design dat er strak uitziet maar niet laat bellen, ook. Vraag dus altijd naar meer dan het plaatje.</p>
+      <h3>Offertes vergelijken</h3>
+      <p>Twee offertes van € 1.500 kunnen heel verschillend zijn. Leg ze naast elkaar op deze punten:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Punt</th><th>Waar je op let</th></tr></thead>
+          <tbody>
+            <tr><td><b>Aantal pagina's</b></td><td>Staat er een aantal, of "een website"? Extra pagina's kunnen later flink oplopen.</td></tr>
+            <tr><td><b>Teksten</b></td><td>Schrijven zij ze, of lever jij ze aan? Teksten zijn vaak het werk dat een project laat uitlopen.</td></tr>
+            <tr><td><b>Ontwerp</b></td><td>Een eigen ontwerp of een template? Allebei kan, als het maar duidelijk is.</td></tr>
+            <tr><td><b>Vindbaarheid</b></td><td>Zit de technische basis voor SEO erin, en worden oude pagina's doorverwezen?</td></tr>
+            <tr><td><b>Hosting en onderhoud</b></td><td>Wat kost het per jaar, en op wiens naam staat het?</td></tr>
+            <tr><td><b>Eigendom</b></td><td>Mag je met je site vertrekken, inclusief ontwerp, teksten en foto's?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Meer tips staan in onze gids over <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte beoordelen</a>.</p>
+
+      <h2>Rekenvoorbeeld: één site voor een werkgebied van dertig kilometer</h2>
+      <div class="kader">
+        <p class="kader-titel">Schildersbedrijf uit Coevorden (verzonnen voorbeeld)</p>
+        <p>Een schilder met drie man personeel werkt in Coevorden, Dalen, Schoonebeek, Sleen en de dorpen ertussen. Hij heeft nu een site van één pagina en krijgt bijna alles via via. Hij wil ook gevonden worden door mensen die hem nog niet kennen.</p>
+      </div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat het is</th><th>Vanaf</th></tr></thead>
+          <tbody>
+            <tr><td>Website met AI</td><td>Home, binnen- en buitenschilderwerk, over ons, contact</td><td>€ 250</td></tr>
+            <tr><td>Werkgebiedpagina</td><td>Eén pagina met de plaatsen en een klus per plaats, door ons geschreven</td><td>€ 75</td></tr>
+            <tr><td>Google Bedrijfsprofiel, Bing en Apple</td><td>Ingericht met servicegebied, foto's en reviewlink</td><td>€ 249</td></tr>
+            <tr><td>Onderhoud</td><td>Updates, back-ups en beveiliging</td><td>€ 39 per maand</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Samen € 574 eenmalig plus € 39 per maand, exclusief btw. In zijn Google Bedrijfsprofiel kan hij tot 20 plaatsen of postcodes als servicegebied opgeven, zolang die binnen zo'n twee uur rijden liggen. Dat zegt Google zelf. Zijn hele werkgebied past daar ruim in. Levert de nieuwe site twee extra klussen per jaar op, dan is hij terugverdiend. De bedragen zijn onze vanaf-prijzen; de rest van het voorbeeld is verzonnen.</p>
+
+      <h2>Webdesign in Drenthe: twee routes naar een nieuwe site</h2>
+      <p>Wil je snel en betaalbaar online, dan bouwen we een <a href="/website-laten-maken/website-met-ai/">website met AI</a> vanaf € 250 en maken die met de hand af. Heb je meer pagina's of eigen wensen, dan wordt het een ontwerp op maat in WordPress, vanaf € 2.000. Alles over beide routes lees je bij <a href="/website-laten-maken/">website laten maken</a>.</p>
+      <div class="raster raster-2 routes">
+        <div class="card">
+          <span class="kicker">Route 1</span>
+          <h3>Met AI, vanaf € 250</h3>
+          <ul class="vink">
+            <li>Vaak binnen twee weken online</li>
+            <li>Een handvol pagina's</li>
+            <li>Teksten en foto's zelf aan te passen</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="kicker">Route 2</span>
+          <h3>Maatwerk in WordPress, vanaf € 2.000</h3>
+          <ul class="vink">
+            <li>Meestal zes tot tien weken</li>
+            <li>Eigen ontwerp en eigen functies</li>
+            <li>Groeit mee met je bedrijf</li>
+          </ul>
+        </div>
+      </div>
+      <p>Nog geen <a href="/branding/logo-laten-maken/">logo</a> dat bij je bedrijf past? Dat kan erbij, vanaf € 495. Een volledige huisstijl begint bij € 995. Wil je de site niet zelf onderhouden, dan doen wij het <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud</a> vanaf € 39 per maand: updates, back-ups en beveiliging. Hosting regelen we niet zelf. Die sluit je af op je eigen naam, bij een partij naar keuze. Zo blijft alles van jou.</p>
+
+      <h2>Na de lancering: gevonden worden in je hele gebied</h2>
+      <p>Een nieuwe site staat er. Dan begint het gevonden worden, want webdesign in Drenthe stopt niet bij de oplevering. Google zegt dat lokale resultaten vooral draaien om relevantie, afstand en prominentie. In een uitgestrekte provincie telt die afstand zwaar. Een bedrijf in Westerbork staat in het kaartje niet snel bovenaan bij iemand in Emmen. Daarvoor heb je pagina's nodig die in de gewone zoekresultaten scoren. Dat is het werk van <a href="/lokale-seo/">lokale SEO</a>, vanaf € 295 per maand.</p>
+
+      <h2>We komen naar je toe</h2>
+      <p>Ons kantoor staat in Assen. Vanaf daar zijn we binnen een uur in elke hoek van Drenthe. Een eerste gesprek doen we bij jou op de zaak, bij ons aan de Lauwers of aan de telefoon. Vrijblijvend, en je hoort meteen wat het ongeveer kost.</p>
+      <p>Zit je in de stad zelf, kijk dan bij <a href="/webdesign-assen/">webdesign in Assen</a>. Benieuwd wat we in het gebied nog meer doen, van SEO tot Google Ads? Dat staat op de pagina over <a href="/regio/drenthe/">Drenthe</a>.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost webdesign in Drenthe?', a: 'Een site die we met AI bouwen begint bij € 250. Een ontwerp in WordPress begint bij € 2.000. Na een kort gesprek krijg je een vaste prijs, exclusief btw. Wie een totaalpakket zoekt: logo vanaf € 495 en onderhoud vanaf € 39 per maand.' },
+      { v: 'Komen jullie ook naar Emmen, Coevorden of Meppel?', a: 'Ja. We komen in heel Drenthe langs, en vanuit Assen is geen plaats verder dan een uur rijden. Liever telefonisch of online kan ook.' },
+      { v: 'Moet ik voor elke plaats in mijn werkgebied een pagina hebben?', a: 'Nee. Eén goede werkgebiedpagina met echte voorbeelden werkt beter dan tientallen bijna gelijke pagina\'s. Voor je grootste plaatsen kan een eigen pagina zinvol zijn, maar alleen als er echt iets anders op staat.' },
+      { v: 'Regelen jullie ook de hosting?', a: 'Nee. Hosting sluit je zelf af, op je eigen naam. Wij helpen je kiezen en zetten de site er voor je op. Zo hang je nooit aan ons vast.' },
+      { v: 'Kan ik mijn site zelf onderhouden?', a: 'Ja. Teksten en foto\'s pas je zelf aan. Technisch onderhoud, zoals updates en back-ups, kun je ook zelf doen. Liever niet? Dan doen wij het vanaf € 39 per maand.' },
+      { v: 'Bouwen jullie ook webshops?', a: 'Nee. We bouwen websites voor dienstverleners, vakmensen, winkels en bedrijven die aanvragen willen krijgen. Voor een webshop kun je beter bij een specialist terecht.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over je website"
+    links={[
+      { label: 'Pillar', titel: 'Website laten maken', href: '/website-laten-maken/', tekst: 'Twee routes, van € 250 tot maatwerk.' },
+      { label: 'Regio', titel: 'Webdesign in Emmen', href: '/webdesign-emmen/', tekst: 'Een site voor ondernemers in Zuidoost-Drenthe.' },
+      { label: 'Regio', titel: 'Webdesign in Hoogeveen', href: '/webdesign-hoogeveen/', tekst: 'Voor ondernemers langs de A28.' },
+      { label: 'Dienst', titel: 'Logo laten maken', href: '/branding/logo-laten-maken/', tekst: 'Een logo dat past bij je bedrijf, vanaf € 495.', teken: 'merk' },
+    ]}
+  />
+
+  <Actie titel="Een nieuwe site voor je bedrijf in Drenthe?" tekst={`Vertel ${site.contactpersoon} wat je zoekt. Hij belt je binnen 15 minuten terug, en we komen ook graag bij je langs.`} />
+</Base>
+<style>
+  .drents { margin: 8px 0 8px; }
+  .routes { margin: 8px 0 20px; }
+  .routes h3 { margin-top: 4px; }
+</style>

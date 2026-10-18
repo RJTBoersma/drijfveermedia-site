@@ -1,0 +1,435 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wat-doet-een-seo-specialist.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/wat-doet-een-seo-specialist/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'taken', titel: 'Wat een SEO-specialist doet' },
+  { id: 'niet', titel: 'Wat hij níet doet' },
+  { id: 'maand', titel: 'Een werkweek en een werkmaand' },
+  { id: 'tools', titel: 'De gereedschapskist' },
+  { id: 'mythes', titel: 'Mythes die je kunt negeren' },
+  { id: 'soorten', titel: 'Soorten specialisten' },
+  { id: 'vaardigheden', titel: 'Wat een goede specialist kan' },
+  { id: 'resultaat', titel: 'Wat het oplevert, en wanneer' },
+  { id: 'voorbeeld', titel: 'Een traject in de praktijk' },
+  { id: 'wie', titel: 'In dienst, freelancer of bureau' },
+  { id: 'salaris', titel: 'Wat verdient een SEO-specialist?' },
+  { id: 'worden', titel: 'Hoe word je SEO-specialist?' },
+  { id: 'wanneer', titel: 'Wanneer heb je er een nodig?' },
+  { id: 'zelf', titel: 'Wat je eerst zelf kunt doen' },
+  { id: 'vragen', titel: 'Tien vragen voor het eerste gesprek' },
+  { id: 'slecht', titel: 'Signalen om af te haken' },
+  { id: 'samenwerken', titel: 'Goed samenwerken' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'bij-ons', titel: 'Zo doen wij het' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat doet een SEO-specialist? Taken, tools, salaris en hoe je een goede kiest',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'SEO-specialist',
+  citation: [
+    'https://developers.google.com/search/docs/fundamentals/do-i-need-seo',
+    'https://developers.google.com/search/docs/fundamentals/third-party-seo',
+    'https://developers.google.com/search/blog/2026/10/seo-learning-paths',
+    'https://nl.talent.com/salary?job=seo+specialist',
+    'https://www.payscale.com/research/NL/Job=Search_Engine_Optimization_(SEO)_Specialist/Salary',
+  ],
+}];
+---
+<Base
+  title="Wat doet een SEO-specialist? | Drijfveer Media"
+  description="Wat doet een SEO-specialist precies? Zijn taken per week, tools, salaris, opleiding, wat het kost en tien vragen om een goede te herkennen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat doet een SEO-specialist?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Wat doet een SEO-specialist?" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een SEO-specialist zorgt dat je website beter gevonden wordt in Google, en tegenwoordig ook in AI-antwoorden. Maar wat doet zo iemand de hele maand? Wat verdient hij, wat kost hij, en hoe zie je het verschil tussen een vakman en een goede verkoper? Dat lees je hier.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een SEO-specialist verbetert de techniek, de inhoud en de autoriteit van je website, zodat je hoger komt in de gewone zoekresultaten.</li>
+            <li>Het werk bestaat uit analyse, zoekwoordonderzoek, technische SEO, on-page en content, linkbuilding en rapportage. Steeds vaker hoort vindbaarheid in AI-antwoorden erbij.</li>
+            <li>In loondienst verdient een SEO-specialist in Nederland zo'n € 36.000 tot € 37.500 bruto per jaar, volgens Talent.com en PayScale (2026).</li>
+            <li>Er is geen beschermde titel en geen vaste opleiding. Ervaring en eerlijke voorbeelden zeggen meer dan een diploma.</li>
+            <li>Een goede specialist stelt eerst vragen over je bedrijf. En hij belooft nooit plek 1.</li>
+          </ul>
+        </div>
+
+        <h2 id="taken">Wat doet een SEO-specialist precies?</h2>
+        <p>Een SEO-specialist zoekt uit waarom Google andere sites boven de jouwe zet, en lost dat op. SEO staat voor search engine optimization, zoekmachineoptimalisatie. Het gaat om de gewone, onbetaalde resultaten. Die heten ook organische resultaten. Voor een plek daar betaal je Google niets. Google zegt zelf dat adverteren geen invloed heeft op je plek in de gewone zoekresultaten.</p>
+        <p>Het werk valt in zeven delen uiteen. Een goede specialist doet ze niet allemaal even hard. Hij begint waar het snelst verschil te maken is.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>1. Analyse en strategie</h3></div>
+        <p>Waar sta je nu, wie staan er boven je en waarom? De specialist kijkt in Google Search Console naar je posities, vertoningen en klikken. Hij vergelijkt je site met de concurrentie: welke pagina's hebben zij die jij mist, en hoeveel sites linken naar hen? Daaruit volgt een strategie. Welke pagina's, welke zoekwoorden, in welke volgorde.</p>
+        <p>Wat je ervan merkt: een plan op één of twee A4'tjes. Geen rapport van tachtig pagina's met driehonderd "fouten". Goed werk begint bij de grootste kans, niet bij de langste lijst.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>2. Zoekwoordonderzoek</h3></div>
+        <p>Welke woorden typen je klanten, hoe vaak, en wat willen ze dan? Een installateur wil gevonden worden op "cv-ketel vervangen", niet op "duurzame warmteoplossingen". En wie zoekt op "cv-ketel vervangen kosten" wil iets anders dan wie zoekt op "cv-ketel maakt geluid". Dat verschil heet <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>. Zoekwoordonderzoek bepaalt welke pagina's je nodig hebt en wat erop moet. Wil je het zelf proberen, lees dan de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>3. Technische SEO</h3></div>
+        <p>Kan Google je site goed lezen? Laadt hij snel op een telefoon? Staan er dubbele pagina's, kapotte links, omleidingsketens of pagina's die per ongeluk niet in Google staan? Klopt je sitemap en je robots.txt? Bij technische SEO gaat het om de fundering. Dit is vaak in het begin veel werk, daarna vooral onderhoud. Bij een verhuizing naar een nieuwe website is het extra belangrijk. Daar gaat in één dag veel mis als niemand de oude adressen naar de nieuwe laat verwijzen.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. On-page en content</h3></div>
+        <p>On-page gaat over alles op de pagina zelf: titels, koppen, teksten, afbeeldingen, interne links en de <a href="/kennisbank/gidsen/meta-description/">meta description</a>. De specialist verbetert bestaande pagina's en bepaalt welke nieuwe er nodig zijn. Soms schrijft hij zelf. Vaak werkt hij met een tekstschrijver die het vak en de klant kent. De pagina moet de vraag van de zoeker beter beantwoorden dan de pagina van de concurrent. Met content bedoelen we dus geen blogjes om het bloggen. We bedoelen pagina's die klanten echt zoeken.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>5. Linkbuilding</h3></div>
+        <p>Backlinks van andere sites werken als aanbevelingen. Een link van je brancheorganisatie, een lokale krant of een leverancier zegt Google iets over je betrouwbaarheid. De specialist zoekt links die passen bij je vak of je regio. Hij houdt ook slechte links in de gaten. Dat is precies werk: één verkeerd linknetwerk kan je posities kosten. Meer daarover in de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>6. Meten en rapportage</h3></div>
+        <p>Wat leverde het werk op? Een goede rapportage laat posities zien, maar vooral organisch verkeer en aanvragen. En ze is te begrijpen zonder marketeer ernaast. Een rapport waar je uitleg bij nodig hebt, schiet zijn doel voorbij.</p>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>7. Vindbaar in AI-antwoorden</h3></div>
+        <p>Steeds meer mensen lezen eerst het antwoord van een AI: de AI Overviews bovenaan Google, ChatGPT of Gemini. Google noemt optimaliseren voor generatieve AI zelf als een van de diensten die SEO's leveren. De basis is dezelfde: goede pagina's, een duidelijke structuur en een betrouwbare naam. Wel komen er nieuwe dingen bij, zoals <a href="/generative-engine-optimization/structured-data/">gestructureerde gegevens</a> en vermeldingen op andere sites. Meer daarover bij <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+        <p>Google houdt het algoritme intussen niet stil. Een specialist volgt de grote updates en kijkt na elke update wat het met jouw site deed. Hij past de aanpak aan als dat nodig is, en laat hem ongemoeid als het goed gaat.</p>
+
+        <h2 id="niet">Wat een SEO-specialist níet doet</h2>
+        <p>Minstens zo handig om te weten. Dan weet je ook wat je van een ander nodig hebt.</p>
+        <ul>
+          <li><b>Hij bepaalt niet wat Google doet.</b> Hij vergroot je kansen. Een positie kan hij niet kopen of afdwingen.</li>
+          <li><b>Hij is geen adverteerder.</b> Advertenties in Google horen bij een SEA-specialist. Wel kan een SEO-specialist zeggen op welke woorden adverteren zinloos is, omdat je er al bovenaan staat.</li>
+          <li><b>Hij bouwt niet per se je website.</b> Hij zegt wat er moet veranderen. Vaak voert een webbouwer de grote aanpassingen uit.</li>
+          <li><b>Hij lost geen slechte service op.</b> Krijg je slechte reviews of neem je de telefoon niet op, dan helpen betere posities maar kort.</li>
+          <li><b>Hij levert geen klanten zonder jou.</b> Een bezoeker wordt pas een klant als je pagina overtuigt en je snel reageert. Daar helpt <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> bij.</li>
+        </ul>
+
+        <h2 id="maand">Een werkweek en een werkmaand</h2>
+        <p>Wat doet een SEO-specialist nou de hele dag? Minder dan je denkt met geheime trucs, en meer met lezen, meten en schrijven. Een gewone werkdag bestaat uit een mix van:</p>
+        <ul>
+          <li>Search Console en Analytics openen: zijn er dalingen, nieuwe fouten of verrassende stijgers?</li>
+          <li>Een pagina verbeteren: titel herschrijven, een tabel toevoegen, een vraag beantwoorden die de concurrent wel beantwoordt.</li>
+          <li>Een briefing schrijven voor een tekstschrijver of een opdracht voor de webbouwer.</li>
+          <li>Mailen met sites die mogelijk naar je willen linken.</li>
+          <li>Testen: werkt de nieuwe pagina, staat hij in Google, laadt hij snel?</li>
+        </ul>
+        <p>Bij een doorlopend traject ziet een maand er vaak zo uit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Week</th><th>Wat er gebeurt</th><th>Wat jij ervan ziet</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Meten: posities, verkeer en aanvragen van vorige maand. Nieuwe fouten in Search Console oplossen.</td><td>Een korte update als er iets opvalt</td></tr>
+              <tr><td>2</td><td>Bestaande pagina's verbeteren: titels, teksten, interne links.</td><td>Een vraag om informatie of foto's</td></tr>
+              <tr><td>3</td><td>Iets nieuws bouwen: een nieuwe pagina, een artikel, een paar goede links.</td><td>Een tekst om na te lezen</td></tr>
+              <tr><td>4</td><td>Rapport in gewone taal, en het plan voor de volgende maand.</td><td>Het maandrapport en een belafspraak</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let op wat er in week 4 staat. Een goede specialist vertelt ook wat níet werkte. En hij adviseert soms om ergens mee te stoppen. Verspild budget schrappen is soms meer waard dan iets nieuws beginnen.</p>
+
+        <h2 id="tools">De gereedschapskist: welke tools gebruikt een SEO-specialist?</h2>
+        <p>Tools zijn hulpmiddelen, geen oordeel. Een specialist die alleen een rapport uit een tool doorstuurt, doet zijn werk niet. Dit zijn de tools die je het vaakst tegenkomt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Van wie</th><th>Waarvoor</th><th>Kosten</th></tr></thead>
+            <tbody>
+              <tr><td>Google Search Console</td><td>Google</td><td>Posities, klikken, indexering en fouten, rechtstreeks van Google</td><td>Gratis</td></tr>
+              <tr><td>Google Analytics 4</td><td>Google</td><td>Wat bezoekers na de klik doen</td><td>Gratis</td></tr>
+              <tr><td>PageSpeed Insights</td><td>Google</td><td>Snelheid van één pagina testen</td><td>Gratis</td></tr>
+              <tr><td>Google Trends</td><td>Google</td><td>Zien wanneer en hoe vaak er op een onderwerp gezocht wordt</td><td>Gratis</td></tr>
+              <tr><td>Zoekwoordplanner</td><td>Google Ads</td><td>Zoekvolumes en ideeën voor zoekwoorden</td><td>Gratis met een Ads-account</td></tr>
+              <tr><td>SE Ranking, Semrush, Ahrefs</td><td>Externe makers</td><td>Posities volgen, concurrenten en backlinks onderzoeken</td><td>Abonnement</td></tr>
+              <tr><td>Screaming Frog</td><td>Externe maker</td><td>Een site doorzoeken op technische fouten</td><td>Gratis tot 500 URL's, daarna betaald</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wij werken zelf onder meer met SE Ranking. Maar Google is er in juni 2026 helder over geweest: tools van anderen hebben geen toegang tot de interne rankinggegevens van Google. Hun voorspellingen zijn hun eigen schatting. Google raadt iedereen aan om in elk geval Search Console te gebruiken, omdat die gegevens rechtstreeks uit Google Zoeken komen. Hoe je dat doet, lees je in de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+        <p>Wees dus kritisch als een "SEO-score van 63" het hoofdpunt van een rapport is. Zo'n score bestaat bij Google niet. Wat telt, is of je beter gevonden wordt op zoekwoorden die klanten opleveren.</p>
+
+        <h2 id="mythes">Mythes waar een goede specialist niet in meegaat</h2>
+        <p>Over SEO doen veel verhalen de ronde. Sommige waren ooit waar, andere nooit. Google zet de bekendste zelf op een rij in de SEO-startgids, onder het kopje over dingen waar je je niet op hoeft te richten. Hoor je een specialist een van deze punten als belangrijk werk verkopen, vraag dan door.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je hoort</th><th>Wat Google zegt</th></tr></thead>
+            <tbody>
+              <tr><td>"We vullen de meta keywords voor je in."</td><td>Google Zoeken gebruikt de meta keywords-tag niet.</td></tr>
+              <tr><td>"Je zoekwoord moet tien keer op de pagina."</td><td>Steeds dezelfde woorden herhalen is vermoeiend voor lezers en valt onder het spambeleid van Google.</td></tr>
+              <tr><td>"Je hebt een domeinnaam met je zoekwoord nodig."</td><td>Zoekwoorden in je domeinnaam of URL hebben voor je positie nauwelijks effect.</td></tr>
+              <tr><td>"Elke pagina moet minstens 1.000 woorden hebben."</td><td>Lengte alleen doet er niet toe. Er is geen magisch aantal woorden, minimum of maximum.</td></tr>
+              <tr><td>"Dubbele inhoud levert een straf op."</td><td>Dezelfde inhoud op twee URL's van je eigen site is niet efficiënt, maar geeft geen handmatige actie. Teksten van anderen kopiëren is iets anders.</td></tr>
+              <tr><td>"Je koppen staan in de verkeerde volgorde."</td><td>Voor Google maakt de volgorde van koppen niet uit. Er is ook geen ideaal aantal.</td></tr>
+              <tr><td>"E-E-A-T is een rankingfactor."</td><td>Nee, schrijft Google.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dat betekent niet dat deze dingen onzin zijn. Een logische opbouw met koppen helpt je lezer, en een uitgebreide pagina beantwoordt vaak meer vragen. Maar het zijn middelen, geen trucs. Een specialist die het verschil uitlegt, kent zijn vak.</p>
+
+        <h2 id="soorten">Soorten SEO-specialisten</h2>
+        <p>Het vak is breed geworden. Veel specialisten hebben een richting waar ze het sterkst in zijn. Dat is geen bezwaar, als je het maar weet.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Richting</th><th>Sterk in</th><th>Past bij</th></tr></thead>
+            <tbody>
+              <tr><td>Technisch</td><td>Snelheid, indexering, migraties, code</td><td>Grote sites, webshops, een verhuizing naar een nieuwe site</td></tr>
+              <tr><td>Content</td><td>Zoekwoorden, teksten, structuur van pagina's</td><td>Dienstverleners met veel uit te leggen</td></tr>
+              <tr><td>Lokaal</td><td>Google Bedrijfsprofiel, reviews, plaatspagina's</td><td>Installateurs, winkels, praktijken met een vast werkgebied</td></tr>
+              <tr><td>Linkbuilding</td><td>Autoriteit, contacten met andere sites</td><td>Sterke concurrentie, waar techniek en tekst al op orde zijn</td></tr>
+              <tr><td>GEO</td><td>Vindbaar in ChatGPT, Gemini en AI Overviews</td><td>Bedrijven waarvan klanten eerst een AI om advies vragen</td></tr>
+              <tr><td>Allround</td><td>Alles een beetje, de grote lijn</td><td>Het mkb met één aanspreekpunt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor een klein bedrijf werkt een allrounder vaak het best, met specialisten op de achtergrond. Zo werken wij ook: bij ons doet Johan Zwartenberg de linkbuilding, terwijl {site.contactpersoon} je vaste aanspreekpunt is. Werk je vooral in je eigen regio? Dan is <a href="/lokale-seo/">lokale SEO</a> vaak de beste start.</p>
+
+        <h2 id="vaardigheden">Wat maakt een goede SEO-specialist?</h2>
+        <p>Technische kennis is nodig, maar niet genoeg. Dit zijn de eigenschappen waar je op kunt letten:</p>
+        <ul class="vink">
+          <li><b>Kan cijfers lezen.</b> Ziet het verschil tussen een seizoensdip en een echt probleem.</li>
+          <li><b>Begrijpt genoeg van techniek.</b> HTML, omleidingen, sitemaps. Hij hoeft geen programmeur te zijn, maar moet een webbouwer wel kunnen uitleggen wat er moet gebeuren.</li>
+          <li><b>Kan schrijven, of herkent een goede tekst.</b> De meeste winst zit in pagina's die de vraag van de klant beter beantwoorden.</li>
+          <li><b>Denkt als een ondernemer.</b> Vraagt wat een klant je oplevert, niet alleen hoeveel bezoekers je hebt.</li>
+          <li><b>Legt het uit in gewone taal.</b> Vakjargon verbergt vaak gebrek aan inhoud. Wie niet helder kan uitleggen wat hij doet, begrijpt het misschien zelf niet.</li>
+          <li><b>Is eerlijk over wat niet werkt.</b> Een specialist die alleen successen meldt, vertelt niet het hele verhaal.</li>
+          <li><b>Blijft leren.</b> Zoekmachines veranderen elk jaar. Wie nog adviseert zoals in 2018, loopt achter.</li>
+        </ul>
+
+        <h2 id="resultaat">Wat levert het op, en wanneer?</h2>
+        <p>SEO is geen kraan die je opendraait. Reken bij een gewone mkb-site op drie tot zes maanden voor duidelijke groei. Bij weinig concurrentie gaat het soms sneller, in een drukke markt duurt het langer. Zo ziet het verloop er vaak uit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Periode</th><th>Wat er gebeurt</th><th>Wat je mag verwachten</th></tr></thead>
+            <tbody>
+              <tr><td>Maand 1 en 2</td><td>Analyse, technische fouten oplossen, snelle verbeteringen aan titels en bestaande pagina's</td><td>Soms al meer klikken op pagina's die al op pagina 1 stonden</td></tr>
+              <tr><td>Maand 3 tot 6</td><td>Nieuwe en betere pagina's, eerste links</td><td>Stijgende posities en meer organisch verkeer</td></tr>
+              <tr><td>Maand 6 tot 12</td><td>Uitbouwen wat werkt, autoriteit opbouwen</td><td>Meer aanvragen uit Google, die blijven komen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Spreek vooraf af waarop je de specialist afrekent. Dit zijn de cijfers die ertoe doen, en de cijfers die vooral mooi staan:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zegt veel</th><th>Zegt weinig</th></tr></thead>
+            <tbody>
+              <tr><td>Aanvragen en telefoontjes via Google</td><td>Het totaal aantal zoekwoorden in "de top 100"</td></tr>
+              <tr><td>Klikken op zoekwoorden zonder je bedrijfsnaam</td><td>Een score uit een tool</td></tr>
+              <tr><td>Posities op een vaste lijst zoekwoorden die geld opleveren</td><td>Posities op woorden waar niemand op zoekt</td></tr>
+              <tr><td>Organisch verkeer naar je dienstenpagina's</td><td>Het aantal gebouwde links</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een schildersbedrijf in Emmen krijgt 6 aanvragen per maand via Google. Een op de drie wordt een klus, met gemiddeld € 900 marge. Dat is € 1.800 marge per maand. Na een half jaar SEO zijn het 10 aanvragen per maand. Dan is de extra marge zo'n € 1.200 per maand, tegenover een SEO-budget van € 495. Klopt de som bij jou niet, omdat je marge laag is of je weinig klussen kunt aannemen? Dan is SEO misschien niet je eerste stap.</p>
+        </div>
+
+        <h2 id="voorbeeld">Een SEO-traject in de praktijk</h2>
+        <p>Hoe ziet het werk van een SEO-specialist eruit bij een gewoon bedrijf? Een voorbeeld, met een bedrijf dat niet bestaat. De stappen zijn zoals ze in de praktijk vaak gaan.</p>
+        <div class="kader">
+          <p class="kader-titel">Kozijnenbedrijf in Drachten (verzonnen voorbeeld)</p>
+          <p><b>De vraag.</b> Het bedrijf krijgt bijna al zijn aanvragen via mond-tot-mondreclame en een paar via Werkspot. Ze willen meer aanvragen voor kunststof kozijnen in Friesland, zonder voor elke lead te betalen.</p>
+          <p><b>Maand 1.</b> De specialist opent Search Console. De site krijgt 4.000 vertoningen per maand, maar bijna allemaal op de bedrijfsnaam. Alle diensten staan op één pagina. Er is geen pagina over prijzen, terwijl "kunststof kozijnen prijs" in de regio veel gezocht wordt. Een technische check vindt een oude testversie van de site die in Google staat.</p>
+          <p><b>Maand 2.</b> De testversie gaat achter een wachtwoord. Elke dienst krijgt een eigen pagina. Er komt een prijspagina met een rekenvoorbeeld per raam. Het Google Bedrijfsprofiel wordt aangevuld met foto's van eigen werk.</p>
+          <p><b>Maand 3 en 4.</b> Twee pagina's over de grootste vragen van klanten: subsidie en isolatiewaarde. Een paar links van de leverancier en een lokale ondernemersvereniging. De prijspagina staat inmiddels op positie 8.</p>
+          <p><b>Maand 5 en 6.</b> De prijspagina krijgt een betere titel en een tabel met prijzen per type raam. Hij stijgt naar positie 3. De specialist ziet in Search Console dat "kozijnen drachten" opkomt en schrijft daar een eigen pagina voor.</p>
+          <p><b>Het rapport na zes maanden.</b> Twee keer zoveel klikken uit Google op woorden zonder de bedrijfsnaam, en elke week een paar aanvragen via de site. Eén pagina over onderhoud leverde niets op. Die wordt samengevoegd met de dienstpagina.</p>
+        </div>
+        <p>Zie je wat er niet in staat? Geen geheime trucs, geen honderden links, geen dure tools als hoofdpunt. Het meeste werk is luisteren naar wat klanten vragen en betere pagina's maken. En de specialist meldt ook de pagina die niets opleverde.</p>
+
+        <h3>Na drie maanden: is je specialist goed bezig?</h3>
+        <p>Na een kwartaal mag je kritisch kijken. Dit zijn goede tekenen:</p>
+        <ul class="vink">
+          <li>Je weet wat er de afgelopen maanden aan je site is veranderd, en waarom.</li>
+          <li>De technische fouten uit de eerste analyse zijn opgelost.</li>
+          <li>Er zijn pagina's verbeterd of bijgekomen die passen bij wat je klanten zoeken.</li>
+          <li>Je ziet in Search Console meer vertoningen op zoekwoorden zonder je bedrijfsnaam.</li>
+          <li>Het rapport is te lezen zonder uitleg, en noemt ook wat niet werkte.</li>
+          <li>Je specialist heeft je minstens één keer iets gevraagd over je klanten.</li>
+        </ul>
+        <p>Herken je hier weinig van? Vraag dan om een gesprek. Een goede specialist legt uit waar het aan ligt en wat hij anders gaat doen.</p>
+
+        <h2 id="wie">SEO-specialist in dienst, freelancer of bureau?</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>In loondienst</th><th>Freelancer</th><th>Bureau</th></tr></thead>
+            <tbody>
+              <tr><td>Kosten</td><td>Een salaris (zie hieronder), plus werkgeverslasten, tools en opleiding</td><td>Uurtarief of vast bedrag per maand</td><td>Vast bedrag per maand of per project</td></tr>
+              <tr><td>Sterk in</td><td>Kent je bedrijf van binnen, altijd beschikbaar</td><td>Persoonlijk, één vast gezicht</td><td>Techniek, teksten en links onder één dak</td></tr>
+              <tr><td>Let op</td><td>Eén persoon kan niet alles. Wie houdt hem scherp?</td><td>Wat als hij ziek is of stopt?</td><td>Wie doet het werk echt, en zie je die persoon ooit?</td></tr>
+              <tr><td>Past bij</td><td>Grotere bedrijven met veel pagina's</td><td>Een afgebakende klus</td><td>Het mkb dat het uit handen wil geven</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Er is geen beste keuze. Voor een klein bedrijf is een eigen specialist in dienst meestal te duur voor het werk dat er is. Een freelancer of klein bureau met één vast aanspreekpunt werkt dan vaak het prettigst. Kijk vooral naar wat je krijgt voor je budget, en wie je aan de lijn krijgt als er iets is.</p>
+
+        <h2 id="salaris">Wat verdient een SEO-specialist?</h2>
+        <p>Er is geen cao voor SEO-specialisten. Salarissen lopen daarom uiteen per bedrijf, ervaring en regio. Twee salarissites geven deze cijfers voor Nederland:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bron</th><th>Midden</th><th>Onderkant</th><th>Bovenkant</th><th>Gebaseerd op</th></tr></thead>
+            <tbody>
+              <tr><td>Talent.com (2026)</td><td>€ 36.000 per jaar (mediaan)</td><td>€ 31.200 voor instapfuncties</td><td>€ 57.067 voor de meest ervaren</td><td>Salarisgegevens die Talent.com verzamelde</td></tr>
+              <tr><td>PayScale (2026)</td><td>€ 37.504 per jaar (gemiddeld basissalaris)</td><td>€ 25.000 (laagste 10%)</td><td>€ 58.000 (hoogste 10%)</td><td>28 salarisprofielen, voor het laatst bijgewerkt in november 2023</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bronnen: Talent.com, "Seo specialist: gemiddeld salaris in Nederland, 2026", en PayScale, "Search Engine Optimization (SEO) Specialist Salary in Netherlands in 2026". Opgevraagd op 18 oktober 2026. Bedragen bruto per jaar.</p>
+        <p>Omgerekend naar twaalf maanden is € 36.000 per jaar zo'n € 3.000 bruto per maand. Houd er rekening mee dat het om kleine en globale steekproeven gaat. Vooral het cijfer van PayScale rust op weinig profielen. Gebruik ze als richting, niet als loonschaal.</p>
+        <p>Wat je als ondernemer hieruit haalt: een eigen SEO-specialist in dienst kost meer dan alleen het salaris. Er komen werkgeverslasten, een laptop, tools en opleiding bij. En één persoon is zelden sterk in techniek, tekst én links tegelijk.</p>
+
+        <h2 id="worden">Hoe word je SEO-specialist?</h2>
+        <p>SEO-specialist is geen beschermde titel. Iedereen mag zich zo noemen. Er is ook geen vaste opleiding die je moet volgen. Veel specialisten komen uit marketing, communicatie, journalistiek of webontwikkeling. Wat ze delen, is dat ze het vak in de praktijk leerden.</p>
+        <p>Zo kun je het aanpakken:</p>
+        <ol>
+          <li><b>Leer de basis bij de bron.</b> Google heeft een gratis SEO-startgids. In oktober 2026 zette Google daarnaast twee leerroutes op YouTube: een voor de basis en een voor technische SEO.</li>
+          <li><b>Begin een eigen site.</b> Een hobbysite of een site voor iemand in je omgeving. Op een eigen site mag je fouten maken. Zo werken wij zelf ook: in ons <a href="/proeflab/">proeflab</a> testen we al jaren op meer dan 100 eigen sites voordat iets bij een klant komt.</li>
+          <li><b>Leer Search Console en Analytics echt kennen.</b> Daar komen de cijfers vandaan waar je later op wordt afgerekend.</li>
+          <li><b>Schrijf.</b> De meeste winst zit in betere pagina's. Wie zelf een goede tekst kan schrijven, is meer waard.</li>
+          <li><b>Zoek een plek om mee te kijken.</b> Een stage of werkervaringsplaats bij een bureau leert je in een paar maanden wat je alleen in jaren leert. Op onze pagina <a href="/werken-bij/">werken bij</a> staat wat wij bieden.</li>
+          <li><b>Blijf lezen.</b> De blog van Google Search Central meldt veranderingen als eerste.</li>
+        </ol>
+
+        <h2 id="wanneer">Wanneer heb je een SEO-specialist nodig?</h2>
+        <p>Niet altijd. Google zegt het zelf: een klein lokaal bedrijf kan veel van het werk zelf doen. Begin dan met de gids <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a>. Een specialist inhuren loont wel in deze gevallen:</p>
+        <ul class="vink">
+          <li>Je laat een nieuwe website bouwen. Hoe eerder er een specialist meekijkt, hoe beter. Dat adviseert ook Google.</li>
+          <li>Je bezoekers uit Google dalen en je weet niet waarom.</li>
+          <li>Je concurrenten staan structureel boven je, en je hebt het zelf al geprobeerd.</li>
+          <li>Je betaalt veel aan advertenties en wilt minder afhankelijk worden van Google Ads.</li>
+          <li>Je hebt simpelweg geen tijd, en elke maand die je wacht, pakt een ander je klanten.</li>
+        </ul>
+        <p>Het heeft weinig zin als je site nog niet af is, als je nieuwe aanvragen niet kunt bijbenen of als je binnen vier weken resultaat moet zien. Dan past adverteren beter. Het verschil lees je bij <a href="/kennisbank/wat-is/seo-en-sea/">SEO en SEA</a>. Een SEA-specialist beheert je advertenties, een SEO-specialist je plek in de gewone resultaten.</p>
+
+        <h2 id="zelf">Wat je eerst zelf kunt doen</h2>
+        <p>Voordat je iemand inhuurt, kun je in een middag veel zelf regelen. Dan besteedt de specialist zijn uren later aan het lastige werk.</p>
+        <ol>
+          <li>Zet <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> aan. Dan heeft je specialist straks gegevens om mee te werken.</li>
+          <li>Maak je <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> compleet, met foto's, openingstijden en diensten.</li>
+          <li>Geef elke dienst een eigen pagina, met de woorden die je klanten gebruiken.</li>
+          <li>Herschrijf de titels van je vijf belangrijkste pagina's. Dienst en plaats voorop.</li>
+          <li>Vraag tevreden klanten om een review.</li>
+          <li>Schrijf op welke vragen klanten aan de telefoon stellen. Dat zijn je beste onderwerpen.</li>
+        </ol>
+        <p>Een specialist die ziet dat dit al gedaan is, kan meteen door naar het werk dat echt kennis vraagt.</p>
+
+        <h2 id="vragen">Tien vragen voor het eerste gesprek</h2>
+        <p>Google geeft zelf een lijst met vragen om een SEO te interviewen. Wij hebben ze vertaald naar de praktijk van een ondernemer:</p>
+        <ol>
+          <li>Kun je voorbeelden laten zien van eerder werk, met resultaten?</li>
+          <li>Werk je volgens de richtlijnen van Google?</li>
+          <li>Welk resultaat verwacht je, en binnen welke tijd?</li>
+          <li>Hoe meet je of het werkt? Kijk je naar aanvragen of alleen naar posities?</li>
+          <li>Heb je ervaring in mijn branche?</li>
+          <li>Ken je mijn regio en mijn concurrenten?</li>
+          <li>Hoe lang doe je dit al?</li>
+          <li>Hoe vaak hebben we contact, en met wie?</li>
+          <li>Vertel je me welke wijzigingen je op mijn site doet, en waarom?</li>
+          <li>Kan ik maandelijks opzeggen?</li>
+        </ol>
+        <p>Let net zo goed op wat de specialist jou vraagt. Volgens Google hoort een goede SEO te vragen wat je bedrijf bijzonder maakt, wie je concurrenten zijn en hoe klanten je nu vinden. Doet hij dat? Goed teken. Gaat het gesprek alleen over zijn pakketten? Dan weet je genoeg. Bel ook een of twee van zijn klanten. Google raadt dat zelf aan.</p>
+
+        <h2 id="slecht">Signalen om af te haken</h2>
+        <ul>
+          <li><b>Hij garandeert plek 1.</b> Niemand bepaalt wat Google doet. Google waarschuwt hier zelf voor, net als voor wie een "speciale relatie" met Google claimt.</li>
+          <li><b>Hij mailt je ongevraagd</b> dat je site "niet in de zoekmachines staat". Google krijgt zulke mails zelf ook, schrijft Google.</li>
+          <li><b>Hij doet geheimzinnig</b> over wat hij precies doet.</li>
+          <li><b>Hij wil volledige rechten in je Search Console voor een audit.</b> Volgens Google is leesrechten genoeg in die fase.</li>
+          <li><b>Hij verkoopt honderden links voor weinig geld</b> of je site "aanmelden bij duizend zoekmachines".</li>
+          <li><b>Je moet naar hem linken.</b> Google zegt letterlijk dat dat nooit nodig hoort te zijn.</li>
+          <li><b>Zijn tool is "goedgekeurd door Google".</b> Google keurt geen tools van anderen goed.</li>
+          <li><b>Je zit vast aan een jaarcontract.</b> Een specialist die resultaat levert, hoeft je niet vast te houden.</li>
+        </ul>
+        <p>Onthoud ook dit: volgens Google ben je zelf verantwoordelijk voor wat iemand die je inhuurt op je site doet. Krijg je een straf door gekochte links of misleidende teksten, dan is het jouw site die zakt. Een gelikte pitch zegt weinig over wat er na de handtekening gebeurt. Vraag een bureau dat je alleen successen laat zien, gerust naar een klant waarbij het tegenviel. Het antwoord zegt veel.</p>
+
+        <h2 id="samenwerken">Zo haal je meer uit de samenwerking</h2>
+        <p>Een SEO-specialist kan veel, maar niet zonder jou. Dit heeft hij van je nodig:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Waarom</th><th>Tip</th></tr></thead>
+            <tbody>
+              <tr><td>Toegang tot Search Console</td><td>De gegevens van Google zelf</td><td>Geef een eigen gebruiker, met beperkte rechten bij een audit</td></tr>
+              <tr><td>Toegang tot Analytics</td><td>Zien wat bezoekers na de klik doen</td><td>Leesrechten zijn meestal genoeg</td></tr>
+              <tr><td>Toegang tot je website</td><td>Om pagina's aan te passen</td><td>Een eigen account, geen gedeeld wachtwoord</td></tr>
+              <tr><td>Kennis over je klanten</td><td>Welke vragen ze stellen, wat ze overtuigt</td><td>Een half uur bellen levert meer op dan een formulier</td></tr>
+              <tr><td>Snelle antwoorden</td><td>Een tekst die drie weken op goedkeuring wacht, levert drie weken niets op</td><td>Spreek af wie mag goedkeuren</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zorg dat alle accounts op naam van je eigen bedrijf staan. Stop je ooit met de specialist, dan trek je de toegang in en loopt alles door. Je gegevens blijven van jou.</p>
+
+        <h2 id="kosten">Wat kost een SEO-specialist inhuren?</h2>
+        <p>Dat hangt af van je markt, je doelen en de staat van je site. Hoe tarieven tot stand komen en wat je ervoor krijgt, lees je in de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>. Onze eigen prijzen, allemaal vanaf-prijzen en exclusief btw:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Vanaf</th><th>Voor wie</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/consult/">Consult</a></td><td>€ 85 per uur</td><td>Je wilt eerst sparren of een tweede mening</td></tr>
+              <tr><td><a href="/zoekmachine-optimalisatie/technische-seo/">Technische SEO-audit</a></td><td>€ 395 eenmalig</td><td>Je wilt weten wat er technisch mis is</td></tr>
+              <tr><td><a href="/lokale-seo/">Lokale SEO</a></td><td>€ 295 per maand</td><td>Je werkt vooral in je eigen regio</td></tr>
+              <tr><td><a href="/zoekmachine-optimalisatie/seo-uitbesteden/">SEO uitbesteden</a></td><td>€ 495 per maand</td><td>Je wilt het helemaal uit handen geven</td></tr>
+              <tr><td><a href="/linkbuilding/">Linkbuilding</a></td><td>€ 395 per maand</td><td>Je basis staat, je mist autoriteit</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Een SEO-voorstel beoordelen</h3>
+        <p>Ligt er een offerte op tafel? Dit hoort erin te staan:</p>
+        <ul class="vink">
+          <li>Een doel in jouw termen: aanvragen, telefoontjes of omzet, niet alleen posities.</li>
+          <li>Wat er de eerste drie maanden gebeurt, concreet per maand.</li>
+          <li>Wie het werk doet en wie je aanspreekpunt is.</li>
+          <li>Hoe en hoe vaak je een rapport krijgt.</li>
+          <li>Hoe je opzegt, en dat alle accounts en teksten van jou blijven.</li>
+        </ul>
+        <p>Ontbreekt dit, of is het voorstel vooral een lijst met "aantal links per maand" en "aantal zoekwoorden"? Stel dan vragen. Meer tips staan in de gids over <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte beoordelen</a>.</p>
+
+        <h2 id="bij-ons">Zo werken wij</h2>
+        <p>Je belt of vraagt de scan aan, en {site.contactpersoon} belt je op werkdagen binnen 15 minuten terug. Daarna vragen we door tot we weten wat je echt wilt. We bekijken je site en je concurrenten, en leggen je de mogelijkheden voor: aan de telefoon, bij ons in Assen of bij jou. Je hoort welke investering nodig is en welk doel we samen afspreken. Dan beginnen we waar het snelst verschil te maken is. Lees meer over <a href="/werkwijze/">onze werkwijze</a>.</p>
+        <p>SEO bij ons is maandelijks opzegbaar en heeft een stijggarantie. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Wat we op jouw site doen, hebben we eerst op onze eigen sites getest. Wil je eerst sparren? Een consult kost € 85 per uur.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={24} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Hoe weet je dat wij waarmaken wat we zeggen?" intro="De vraag die we het vaakst horen. Dit is ons antwoord." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een SEO-specialist en een online marketeer?', a: 'Een online marketeer overziet alle kanalen: zoeken, advertenties, e-mail en social media. Een SEO-specialist gaat diep op één kanaal: de gewone zoekresultaten. In een klein bedrijf is het vaak dezelfde persoon.' },
+      { v: 'Moet een SEO-specialist bij mij in de buurt zitten?', a: 'Nee, het meeste werk gebeurt online. Kennis van je regio helpt wel, zeker bij lokale SEO. Wij werken vanuit Assen en komen langs als dat handig is, of we werken op afstand.' },
+      { v: 'Is SEO-specialist een beschermde titel?', a: 'Nee. Iedereen mag zich zo noemen. Vraag daarom naar voorbeelden van eerder werk en praat met een klant van de specialist.' },
+      { v: 'Wat verdient een SEO-specialist?', a: 'Volgens Talent.com (2026) is het mediane salaris in Nederland € 36.000 bruto per jaar, van € 31.200 bij instap tot € 57.067 voor de meest ervaren. PayScale (2026) komt uit op gemiddeld € 37.504.' },
+      { v: 'Welke opleiding heb je nodig?', a: 'Er is geen verplichte opleiding. Veel specialisten komen uit marketing, communicatie of webontwikkeling en leerden het vak in de praktijk. De gratis SEO-startgids en de leerroutes van Google zijn een goede start.' },
+      { v: 'Wat heeft een specialist van mij nodig?', a: 'Toegang tot Google Search Console en je analytics, liefst met beperkte rechten. Toegang tot je website, kennis over je klanten en snelle antwoorden op vragen.' },
+      { v: 'Hoe lang duurt het voordat ik resultaat zie?', a: 'Reken op drie tot zes maanden voor duidelijke groei. Bij weinig concurrentie gaat het soms sneller. Lees ook <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe SEO werkt</a>.' },
+      { v: 'Wat is het verschil tussen een SEO- en een SEA-specialist?', a: 'Een SEO-specialist werkt aan je plek in de gewone zoekresultaten. Een SEA-specialist beheert advertenties, zoals <a href="/online-adverteren/google-ads-bureau/">Google Ads</a>.' },
+      { v: 'Kan een specialist ook zorgen dat ChatGPT mijn bedrijf noemt?', a: 'Een goede wel, want AI-zoekmachines bouwen voort op goed vindbare pagina\'s. Vraag wel of zijn advies past bij wat Google zelf over AI-zoekresultaten schrijft.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'SEO uitbesteden', href: '/zoekmachine-optimalisatie/seo-uitbesteden/', tekst: 'Vanaf € 495 per maand, maandelijks opzegbaar.' },
+      { label: 'Gids', titel: 'Wat kost SEO?', href: '/kennisbank/gidsen/wat-kost-seo/', tekst: 'Prijzen, tarieven en wat je ervoor krijgt.' },
+      { label: 'Gids', titel: 'Hoe werkt SEO?', href: '/kennisbank/gidsen/hoe-werkt-seo/', tekst: 'Uitleg voor ondernemers, zonder jargon.' },
+      { label: 'Gids', titel: 'Een offerte beoordelen', href: '/kennisbank/gidsen/offerte-beoordelen/', tekst: 'Zo lees je een SEO-voorstel kritisch.' },
+    ]}
+  />
+
+  <Actie titel="Wil je iemand die eerst luistert?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} belt je binnen 15 minuten terug, vraagt wat jij wilt bereiken en vertelt eerlijk wat er bij jouw site haalbaar is.`} />
+</Base>

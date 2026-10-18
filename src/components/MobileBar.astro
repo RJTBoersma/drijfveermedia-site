@@ -1,0 +1,21 @@
+---
+import { site } from '../data/site';
+---
+<div class="mbar" data-mbar>
+  <a class="btn btn-ghost" href={site.telefoonLink}>Bellen</a>
+  <a class="btn" href="/gratis-website-analyse/">Gratis scan</a>
+</div>
+<script>
+  const bar = document.querySelector('[data-mbar]');
+  const toon = () => bar?.classList.toggle('show', window.scrollY > window.innerHeight * 0.6);
+  window.addEventListener('scroll', toon, { passive: true });
+  toon();
+</script>
+<style>
+  .mbar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; gap: 10px; background: var(--panel); border-top: 1px solid var(--line);
+    padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+    transform: translateY(110%); transition: transform 0.25s ease; }
+  .mbar.show { transform: none; }
+  .mbar .btn { flex: 1; font-size: 1rem; padding: 0.75em; }
+  @media (max-width: 900px) { .mbar { display: flex; } }
+</style>

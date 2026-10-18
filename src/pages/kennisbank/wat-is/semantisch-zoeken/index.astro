@@ -1,0 +1,146 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--semantisch-zoeken.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/semantisch-zoeken/';
+const datum = '2026-10-18';
+const definitie = 'Semantisch zoeken is de manier waarop een zoekmachine de bedoeling achter een zoekopdracht probeert te begrijpen, in plaats van alleen te tellen welke woorden je intypt.';
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Semantisch zoeken',
+    alternateName: 'Semantic search',
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat is semantisch zoeken?',
+    inLanguage: 'nl-NL',
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    mainEntity: { '@id': `${site.url}${url}#begrip` },
+  },
+];
+---
+<Base
+  title="Wat is semantisch zoeken? Uitleg | Drijfveer Media"
+  description="Wat is semantisch zoeken? Google kijkt naar wat je bedoelt, niet alleen naar je woorden. Uitleg, voorbeelden en wat je er als ondernemer mee doet."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Semantisch zoeken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is semantisch zoeken?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Vroeger was Google een soort woordenteller. Stond het woord dat je zocht vaak genoeg op een pagina, dan maakte die pagina kans. Dat is al jaren voorbij. Google leest nu meer zoals een mens leest: wie zoekt hier, wat wil hij weten en welk antwoord helpt hem verder? Dat heet semantisch zoeken.</p>
+
+      <h2>Hoe semantisch zoeken werkt</h2>
+      <p>Semantiek is de leer van betekenis. Een semantische zoekmachine kijkt dus niet naar losse termen, maar naar de samenhang ertussen. Daarbij houdt Google rekening met de context: waar je bent, op welk apparaat je zoekt, wat je eerder zocht en welke woorden vaak samen voorkomen.</p>
+      <p>Dat is geen luxe. Volgens Google is elke dag zo'n 15 procent van alle zoekopdrachten compleet nieuw. Die kun je niet vooraf koppelen aan een lijst met pagina's. De zoekmachine moet de vraag dus echt begrijpen. Google schrijft het in zijn eigen handleiding voor beginners zo: de systemen snappen hoe een pagina bij veel zoekopdrachten past, ook als je de exacte woorden niet gebruikt.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2>Van woorden tellen naar betekenis</h2></div>
+      <p>Dat ging niet in één keer. Dit zijn de stappen die Google zelf beschrijft:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Jaar</th><th>Wat</th><th>Wat het deed</th></tr></thead>
+          <tbody>
+            <tr><td>2012</td><td>Knowledge Graph</td><td>Een database van dingen en hun verbanden: plaatsen, bedrijven, personen. Lees meer bij <a href="/kennisbank/wat-is/entiteiten/">entiteiten</a>.</td></tr>
+            <tr><td>2013</td><td>Hummingbird</td><td>Volgens Google een grote verbetering van het hele rankingsysteem, in augustus 2013.</td></tr>
+            <tr><td>2015</td><td>RankBrain</td><td>Het eerste deep-learningsysteem in Google Zoeken. Het koppelt woorden aan begrippen.</td></tr>
+            <tr><td>2018</td><td>Neural matching</td><td>Legt vagere vragen naast de begrippen in pagina's, zodat Google ruimer kan zoeken.</td></tr>
+            <tr><td>2019</td><td>BERT</td><td>Begrijpt hoe woorden in een zin elkaar kleuren, ook kleine woordjes als "naar" en "voor".</td></tr>
+            <tr><td>2021</td><td>MUM</td><td>Begrijpt en maakt taal. Google zegt dat het nog niet voor de gewone ranking wordt gebruikt, wel voor een paar specifieke toepassingen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Woorden zoeken tegenover betekenis zoeken</h2>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Op woorden</th><th>Op betekenis</th></tr></thead>
+          <tbody>
+            <tr><td>Wat telt</td><td>Staan de ingetypte woorden op de pagina?</td><td>Beantwoordt de pagina de vraag achter de woorden?</td></tr>
+            <tr><td>Synoniemen</td><td>Worden gemist</td><td>Worden begrepen: ketel, cv-ketel, verwarmingsketel</td></tr>
+            <tr><td>Kleine woordjes</td><td>Worden vaak genegeerd</td><td>Kunnen de hele vraag omdraaien</td></tr>
+            <tr><td>Tikfouten</td><td>Geven geen of rare resultaten</td><td>Worden herkend en verbeterd</td></tr>
+            <tr><td>Wat de schrijver doet</td><td>Zoekwoord zo vaak mogelijk herhalen</td><td>Het onderwerp volledig en helder uitleggen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Twee voorbeelden</h2></div>
+      <p><b>Uit Google zelf.</b> Toen Google BERT invoerde, gaf het dit voorbeeld: "2019 brazil traveler to usa need a visa". Vroeger kreeg je daarop resultaten over Amerikanen die naar Brazilië reizen. Het woordje "to" werd gemist. Met BERT snapt Google dat het om een Braziliaan gaat die naar de VS wil.</p>
+      <p><b>Uit de praktijk.</b> Stel: iemand in Assen ziet om tien uur 's avonds een natte plek op het plafond. Ze typt: "lekkage plafond, wie bel ik". Het woord loodgieter staat nergens in die zoekopdracht. Toch krijgt ze loodgieters en dakdekkers uit de buurt te zien, met telefoonnummer en openingstijden.</p>
+      <p>Google heeft de vraag vertaald. Lekkage plus plafond wijst op een leiding of het dak. "Wie bel ik" betekent: ik wil een vakman, liefst nu. En omdat ze in Assen is, krijgt ze bedrijven in de buurt. Een installateur met een goede pagina over lekkages, spoedhulp en zijn werkgebied wordt zo gevonden. Ook als hij nooit precies die woorden heeft gebruikt.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Wat moet je ermee als ondernemer?</h2></div>
+      <p>Vooral: stop met schrijven voor een teller. Een tekst die tien keer hetzelfde zoekwoord herhaalt, leest slecht. Google noemt overmatig herhalen zelfs in strijd met zijn regels. Dit werkt wel:</p>
+      <ul class="vink">
+        <li>Schrijf over een onderwerp, niet over één zoekwoord. Beantwoord ook de vragen eromheen: wat kost het, hoe lang duurt het, wanneer kun je terecht.</li>
+        <li>Gebruik de woorden van je klanten. Zeggen zij cv-ketel, verwarmingsketel of gewoon ketel? Dan mogen ze alle drie op je pagina staan.</li>
+        <li>Maak duidelijk wie je bent en waar je werkt. Naam, adres, werkgebied en diensten helpen Google je bedrijf te herkennen. Met <a href="/generative-engine-optimization/structured-data/">structured data</a> zet je dat er ook in code bij.</li>
+        <li>Geef elke vraag een eigen, duidelijke kop. Google kan losse stukken van een pagina beoordelen, lees daarover bij <a href="/kennisbank/wat-is/passage-ranking/">passage ranking</a>.</li>
+        <li>Link je pagina's logisch aan elkaar, zodat de samenhang tussen je diensten zichtbaar wordt.</li>
+      </ul>
+      <p>Een goede toets: zou een klant aan de telefoon dezelfde vragen stellen als die je pagina beantwoordt? Dan zit je goed. Wil je beter begrijpen wat mensen met een zoekopdracht willen, lees dan over <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>.</p>
+
+      <h2>Drie fouten die we vaak zien</h2>
+      <ul>
+        <li><b>Voor elke variant een eigen pagina.</b> "Dakkapel plaatsen", "dakkapel laten plaatsen" en "dakkapel installeren" verdienen één goede pagina, geen drie halve. Google snapt dat het om hetzelfde gaat. Meer pagina's laten elkaar alleen concurreren.</li>
+        <li><b>Nog steeds meta keywords invullen.</b> Volgens Google wordt die tag niet gebruikt. Zonde van je tijd.</li>
+        <li><b>Vaag blijven over wat je doet.</b> "Wij leveren kwaliteit" zegt een zoekmachine niets. "We plaatsen kunststof kozijnen in Drenthe, binnen zes weken" wel.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2>AI gaat nog een stap verder</h2></div>
+      <p>ChatGPT, Gemini en de AI-overzichten bovenaan Google werken bijna helemaal op betekenis. Ze proberen niet jouw zoekwoord te vinden, maar het beste antwoord op een vraag, en zetten daar een bron bij. Gebruikers krijgen zo sneller een antwoord. Sites die een onderwerp helder en volledig uitleggen, worden vaker als bron genoemd. Hoe je daar komt, lees je bij <a href="/generative-engine-optimization/">genoemd worden door AI</a>. Wie nu al leert denken vanuit de vraag van de klant, staat er straks beter voor.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a> of laat ons je <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> maken, vanaf € 75 per pagina. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen semantisch zoeken en zoeken op zoekwoorden?', a: 'Bij zoeken op zoekwoorden telt of de woorden op de pagina staan. Bij semantisch zoeken telt of de pagina de bedoeling achter de vraag beantwoordt, ook met andere woorden.' },
+      { v: 'Moet ik nog zoekwoorden gebruiken?', a: 'Ja. Zoekwoorden laten zien waar je pagina over gaat. Gebruik ze waar ze natuurlijk passen, en schrijf daaromheen over alles wat de lezer wil weten.' },
+      { v: 'Wat heeft BERT met semantisch zoeken te maken?', a: 'BERT is een taalmodel dat Google sinds 2019 gebruikt. Het kijkt naar de woorden voor en na elk woord, zodat Google snapt hoe een zin in elkaar zit. Volgens Google speelde het in 2022 al een rol bij bijna elke Engelse zoekopdracht.' },
+      { v: 'Werkt semantisch zoeken ook in het Nederlands?', a: 'Ja, het principe geldt voor elke taal. Google zei bij de start van BERT in 2019 al dat het die techniek naar meer talen zou brengen. Probeer het zelf: typ een vraag als gewone Nederlandse zin en kijk wat je terugkrijgt.' },
+    ]}
+  />
+
+  <Actie titel="Snapt Google waar jouw site over gaat?" tekst={`We kijken het gratis voor je na. ${site.contactpersoon} belt je met de drie punten die het meeste opleveren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

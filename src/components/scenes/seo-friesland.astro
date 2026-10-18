@@ -1,0 +1,72 @@
+---
+// Scène voor /seo-friesland/: een vlak Fries landschap met een vuurtoren, een molen en een zeilbootje. De lichtbundel van de vuurtoren zwaait over het land en zet jouw bedrijf in het zoekresultaat in het licht.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een vlak Fries landschap met een vuurtoren, een molen en een zeilbootje. De lichtbundel van de vuurtoren zwaait over Leeuwarden, Drachten en Heerenveen en zet jouw bedrijf bovenaan het zoekresultaat.'}>
+  {!mini && (
+    <path class="seo-friesland-bundel" d="M84 76L456 28V108z" fill="#ffd2b0" opacity="0.55" />
+  )}
+  <!-- land en water -->
+  <path d="M14 196h452v10H14z" fill="#d7e6d8" />
+  <path d="M14 206h452v34H14z" fill="#dbe8f2" />
+  <path class="l" d="M14 196H466M14 240H466" />
+  <path d="M60 222h30M300 230h40M390 226h34" stroke="#b9d0e2" stroke-width="3" stroke-linecap="round" />
+  <!-- vuurtoren -->
+  <path d="M38 196c12-14 78-14 90 0z" fill="#e8eef4" />
+  <path d="M66 196l8-108h20l8 108z" fill="#fff" />
+  <path class="l" d="M66 196l8-108h20l8 108M70 150h28M72 120h24" />
+  <path d="M70 150h28l-2 -30h-24z" fill="#ff6600" />
+  <rect x="72" y="66" width="24" height="22" rx="3" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <circle class="o" cx="84" cy="77" r="6" />
+  <path class="l" d="M68 66l16-14 16 14z" />
+  <!-- plaatsen -->
+  <g font-size="8.5" font-weight="700" text-anchor="middle">
+    <path d="M190 190c0-7 5-12 10-12s10 5 10 12c0 8-10 16-10 16s-10-8-10-16z" fill="#074663" />
+    <circle cx="200" cy="190" r="3.5" fill="#fff" />
+    <text x="200" y="172" class="zacht">Leeuwarden</text>
+    <path d="M258 190c0-7 5-12 10-12s10 5 10 12c0 8-10 16-10 16s-10-8-10-16z" fill="#074663" />
+    <circle cx="268" cy="190" r="3.5" fill="#fff" />
+    <text x="268" y="172" class="zacht">Drachten</text>
+    <path d="M326 190c0-7 5-12 10-12s10 5 10 12c0 8-10 16-10 16s-10-8-10-16z" fill="#074663" />
+    <circle cx="336" cy="190" r="3.5" fill="#fff" />
+    <text x="336" y="172" class="zacht">Heerenveen</text>
+  </g>
+  <!-- molen -->
+  <path d="M410 196l6-42h14l6 42z" fill="#fff" />
+  <path class="l" d="M410 196l6-42h14l6 42M414 154h18l-9-10z" />
+  <path class="l" d="M423 146l-22-22M423 146l22-22M423 146l-22 22M423 146l22 22" />
+  <!-- zeilbootje -->
+  <path d="M140 224h48l-7 9h-34z" fill="#074663" />
+  <path d="M162 224v-26l18 22h-18z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <!-- zoekveld -->
+  <rect x="236" y="22" width="220" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="l" cx="252" cy="35" r="5" />
+  <path class="l" d="M256 39l4 4" />
+  <text x="268" y="40" font-size="11" font-weight="700">hovenier leeuwarden</text>
+  {!mini && (
+    <g class="seo-friesland-kaart">
+      <rect x="236" y="56" width="220" height="34" rx="8" fill="#fff" stroke="#ff6600" stroke-width="2.5" />
+      <circle cx="252" cy="73" r="9" fill="#ff6600" />
+      <text x="252" y="77" text-anchor="middle" font-size="11" font-weight="900" style="fill:#fff">1</text>
+      <text x="268" y="70" font-size="11" font-weight="800">Jouw bedrijf · Leeuwarden</text>
+      <text x="268" y="83" font-size="8.5" class="zacht">Hovenier in heel Friesland</text>
+    </g>
+  )}
+</svg>
+<style>
+  .seo-friesland-bundel { transform-box: view-box; transform-origin: 84px 76px; }
+  :global(.teken-js) .seo-friesland-bundel { opacity: 0; }
+  :global(.teken-js) .seo-friesland-kaart { opacity: 0; }
+  .in-beeld .seo-friesland-bundel { animation: seo-friesland-zwaai 6s ease-in-out 0.4s infinite; }
+  .in-beeld .seo-friesland-kaart { animation: seo-friesland-kaart 0.7s cubic-bezier(.3,1.6,.5,1) 1.6s forwards; }
+  @keyframes seo-friesland-zwaai {
+    0% { opacity: 0; transform: rotate(14deg); }
+    15% { opacity: 0.55; }
+    50% { opacity: 0.55; transform: rotate(-4deg); }
+    85% { opacity: 0.55; }
+    100% { opacity: 0; transform: rotate(14deg); }
+  }
+  @keyframes seo-friesland-kaart { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .seo-friesland-bundel, .in-beeld .seo-friesland-kaart { animation: none; } }
+</style>

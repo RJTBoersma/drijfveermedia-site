@@ -1,0 +1,104 @@
+---
+// Scène voor /werkgebied/: getekende kaart van het Noorden. Vanuit Assen lopen lijnen naar de plaatsen
+// in Friesland, Groningen, Drenthe en Zwolle, en een stippellijn naar "heel Nederland en buitenland".
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const steden: [string, number, number, number, number, string?][] = [
+  // naam, x, y, label-x, label-y, anker
+  ['Groningen', 219.5, 83.4, 227, 87],
+  ['Leeuwarden', 110.4, 87.6, 117, 91],
+  ['Drachten', 152.9, 109.8, 160, 113],
+  ['Sneek', 90.7, 128, 84, 131, 'end'],
+  ['Joure', 110.6, 142.2, 104, 150, 'end'],
+  ['Heerenveen', 127.6, 144.5, 134, 148],
+  ['Emmen', 266.4, 185.8, 273, 189],
+  ['Hoogeveen', 206.6, 200.5, 213, 204],
+  ['Meppel', 166.5, 206.8, 160, 210, 'end'],
+  ['Veendam', 263.4, 110.1, 270, 113],
+  ['Stadskanaal', 273.9, 137.4, 274, 152, 'middle'],
+  ['Zwolle', 152.3, 250.2, 159, 254],
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekende kaart van Noord-Nederland. Vanuit ons kantoor in Assen lopen lijnen naar plaatsen in Friesland, Groningen, Drenthe en naar Zwolle, en een stippellijn naar de rest van Nederland en het buitenland.'}>
+  <!-- Waddeneilanden -->
+  <path d="M25 44C35 36 60 30 76 30C78 33 70 37 60 39C48 42 36 46 25 44Z" fill="#e3ebf2" stroke="#b9c8d6" stroke-width="1.5" />
+  <path d="M85 32C95 27 115 25 128 26C127 29 118 31 108 32C98 33 90 34 85 32Z" fill="#e3ebf2" stroke="#b9c8d6" stroke-width="1.5" />
+  <path d="M153 23C162 19 175 18 185 19C184 22 176 23 168 24C161 25 156 25 153 23Z" fill="#e3ebf2" stroke="#b9c8d6" stroke-width="1.5" />
+  <!-- Friesland, Groningen, Drenthe -->
+  <path d="M55.2 95.0C56.8 89.1 58.7 79.6 63.7 73.7C68.7 67.8 74.8 64.7 85.0 59.6C95.2 54.4 111.5 46.2 124.8 43.0C138.0 39.9 157.4 37.5 164.6 40.7C171.7 43.8 164.6 54.1 167.4 61.9C170.2 69.8 178.5 79.6 181.6 87.9C184.7 96.1 185.9 104.4 185.9 111.5C185.9 118.6 184.2 123.3 181.6 130.4C179.0 137.4 174.5 147.3 170.2 154.0C166.0 160.6 162.4 166.5 156.0 170.5C149.6 174.4 139.5 176.0 131.9 177.6C124.3 179.1 117.4 180.3 110.6 179.9C103.7 179.5 98.3 178.0 90.7 175.2C83.1 172.4 72.0 166.9 65.1 163.4C58.3 159.9 51.4 159.9 49.5 154.0C47.6 148.1 53.1 135.5 53.8 128.0C54.5 120.5 53.5 114.6 53.8 109.1C54.0 103.6 53.5 100.9 55.2 95.0Z" fill="#eaf0f5" stroke="#b9c8d6" stroke-width="2" stroke-linejoin="round" />
+  <path d="M167.4 40.7C173.3 35.6 190.6 33.6 202.9 31.2C215.2 28.9 230.6 25.7 241.2 26.5C251.9 27.3 260.9 30.8 266.8 36.0C272.7 41.1 271.5 50.9 276.8 57.2C282.0 63.5 292.6 67.8 298.1 73.7C303.5 79.6 307.3 83.2 309.4 92.6C311.5 102.0 313.2 117.8 310.8 130.4C308.5 142.9 299.0 161.4 295.2 168.1C291.4 174.8 291.0 174.0 288.1 170.5C285.3 166.9 282.2 154.7 278.2 146.9C274.1 139.0 269.4 130.0 264.0 123.3C258.5 116.6 251.7 112.7 245.5 106.8C239.4 100.9 233.0 91.0 227.0 87.9C221.1 84.7 215.2 87.1 210.0 87.9C204.8 88.7 199.8 88.7 195.8 92.6C191.8 96.5 188.2 112.3 185.9 111.5C183.5 110.7 184.7 96.1 181.6 87.9C178.5 79.6 169.8 69.8 167.4 61.9C165.0 54.1 161.5 45.8 167.4 40.7Z" fill="#dfe8f0" stroke="#b9c8d6" stroke-width="2" stroke-linejoin="round" />
+  <path d="M154.6 205.9C158.2 210.6 166.4 213.9 174.5 215.3C182.5 216.7 194.1 213.0 202.9 214.1C211.7 215.3 219.9 221.8 227.0 222.4C234.1 223.0 238.9 218.1 245.5 217.7C252.1 217.3 259.2 219.6 266.8 220.0C274.4 220.4 286.5 224.4 291.0 220.0C295.5 215.7 294.3 202.3 293.8 194.1C293.3 185.8 290.7 178.3 288.1 170.5C285.5 162.6 282.2 154.7 278.2 146.9C274.1 139.0 269.4 130.0 264.0 123.3C258.5 116.6 251.7 112.7 245.5 106.8C239.4 100.9 233.0 91.0 227.0 87.9C221.1 84.7 215.2 87.1 210.0 87.9C204.8 88.7 199.8 88.7 195.8 92.6C191.8 96.5 188.2 105.2 185.9 111.5C183.5 117.8 184.2 123.3 181.6 130.4C179.0 137.4 174.5 147.3 170.2 154.0C166.0 160.6 158.9 165.0 156.0 170.5C153.2 176.0 153.4 181.1 153.2 187.0C153.0 192.9 151.1 201.2 154.6 205.9Z" fill="#e6edf3" stroke="#b9c8d6" stroke-width="2" stroke-linejoin="round" />
+  {!mini && (
+    <g fill="none" stroke="#ff6600" stroke-width="1.8" stroke-linecap="round">
+        <path class="werkgebied-route" style="--i:0" pathLength="1" d="M219.1 136.7Q228.9 110.1 219.5 83.4" />
+        <path class="werkgebied-route" style="--i:1" pathLength="1" d="M219.1 136.7Q173.6 92.6 110.4 87.6" />
+        <path class="werkgebied-route" style="--i:2" pathLength="1" d="M219.1 136.7Q233.9 169.8 266.4 185.8" />
+        <path class="werkgebied-route" style="--i:3" pathLength="1" d="M219.1 136.7Q190.8 111.3 152.9 109.8" />
+        <path class="werkgebied-route" style="--i:4" pathLength="1" d="M219.1 136.7Q171.9 124.1 127.6 144.5" />
+        <path class="werkgebied-route" style="--i:5" pathLength="1" d="M219.1 136.7Q156.5 109.2 90.7 128" />
+        <path class="werkgebied-route" style="--i:6" pathLength="1" d="M219.1 136.7Q163.9 119.9 110.6 142.2" />
+        <path class="werkgebied-route" style="--i:7" pathLength="1" d="M219.1 136.7Q201.4 166.3 206.6 200.5" />
+        <path class="werkgebied-route" style="--i:8" pathLength="1" d="M219.1 136.7Q180.2 162.3 166.5 206.8" />
+        <path class="werkgebied-route" style="--i:9" pathLength="1" d="M219.1 136.7Q246.0 131.4 263.4 110.1" />
+        <path class="werkgebied-route" style="--i:10" pathLength="1" d="M219.1 136.7Q246.4 146.9 273.9 137.4" />
+        <path class="werkgebied-route" style="--i:11" pathLength="1" d="M219.1 136.7Q165.3 181.4 152.3 250.2" />
+      </g>
+  )}
+  <!-- provincienamen -->
+  <g font-size="9" font-weight="800" letter-spacing="2" fill="#8aa0b4">
+    <text class="zacht" x="108" y="168" text-anchor="middle" stroke="#eaf0f5" stroke-width="3" paint-order="stroke">FRIESLAND</text>
+    <text class="zacht" x="252" y="56" text-anchor="middle">GRONINGEN</text>
+    <text class="zacht" x="214" y="176" text-anchor="middle" stroke="#e6edf3" stroke-width="3" paint-order="stroke">DRENTHE</text>
+  </g>
+  <!-- plaatsen -->
+  {steden.map(([naam, x, y, lx, ly, anker]) => (
+    <g>
+      <circle cx={x} cy={y} r="4" fill="#074663" stroke="#fff" stroke-width="2" />
+      <text x={lx} y={ly} font-size="10" font-weight="700" text-anchor={anker ?? 'start'} stroke="#f4f7fa" stroke-width="3" paint-order="stroke">{naam}</text>
+    </g>
+  ))}
+  <!-- Assen, ons kantoor -->
+  <circle cx="219.1" cy="136.7" r="7.5" fill="#ff6600" stroke="#fff" stroke-width="3" />
+  <text x="211" y="127" text-anchor="end" font-size="12.5" font-weight="900" stroke="#f4f7fa" stroke-width="3" paint-order="stroke">Assen</text>
+  <!-- de rest van Nederland en het buitenland -->
+  <g transform="translate(340 72)">
+    <rect width="128" height="112" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <circle class="v" cx="64" cy="38" r="20" />
+    <circle class="l" cx="64" cy="38" r="20" />
+    <path class="l" d="M44 38h40M64 18c-9 10-9 30 0 40M64 18c9 10 9 30 0 40M48 27h32M48 49h32" />
+    <text x="64" y="80" text-anchor="middle" font-size="12" font-weight="800">Heel Nederland</text>
+    <text x="64" y="97" text-anchor="middle" font-size="11" class="zacht">en buitenland</text>
+  </g>
+  {!mini && (
+    <g>
+      <circle class="werkgebied-ring" cx="219.1" cy="136.7" r="8" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <path class="werkgebied-boog" d="M226 131C255 122 300 118 338 122" fill="none" stroke="#074663" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 7" />
+      <path class="werkgebied-pijl" d="M331 117l8 5-9 4" fill="none" stroke="#074663" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <g class="werkgebied-label" transform="translate(340 196)">
+        <rect width="128" height="30" rx="15" fill="#074663" />
+        <text x="64" y="20" text-anchor="middle" font-size="10.5" font-weight="800" style="fill:#fff">Langs of op afstand</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .werkgebied-route { stroke-dasharray: 1; opacity: 0.75; }
+  :global(.teken-js) .werkgebied-route { stroke-dashoffset: 1; }
+  .in-beeld .werkgebied-route { animation: werkgebied-route 0.9s cubic-bezier(.6,.1,.3,1) calc(0.4s + var(--i) * 0.12s) forwards; }
+  .werkgebied-ring { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .werkgebied-ring { opacity: 0; }
+  .in-beeld .werkgebied-ring { animation: werkgebied-ring 3.2s ease-out 1.2s infinite; }
+  :global(.teken-js) .werkgebied-boog, :global(.teken-js) .werkgebied-pijl, :global(.teken-js) .werkgebied-label { opacity: 0; }
+  .in-beeld .werkgebied-boog { animation: werkgebied-op 0.6s ease 2s forwards, werkgebied-stroom 1.6s linear 2s infinite; }
+  .in-beeld .werkgebied-pijl { animation: werkgebied-op 0.6s ease 2.2s forwards; }
+  .werkgebied-label { transform-box: fill-box; }
+  .in-beeld .werkgebied-label { animation: werkgebied-label 0.7s cubic-bezier(.3,1.6,.5,1) 2.6s forwards; }
+  @keyframes werkgebied-route { to { stroke-dashoffset: 0; } }
+  @keyframes werkgebied-ring { 0% { transform: scale(1); opacity: 0.9; } 70%, 100% { transform: scale(3.4); opacity: 0; } }
+  @keyframes werkgebied-op { to { opacity: 1; } }
+  @keyframes werkgebied-stroom { to { stroke-dashoffset: -20; } }
+  @keyframes werkgebied-label { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .werkgebied-route, .in-beeld .werkgebied-ring, .in-beeld .werkgebied-boog, .in-beeld .werkgebied-pijl, .in-beeld .werkgebied-label { animation: none; }
+  }
+</style>

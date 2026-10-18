@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/en.astro';
+import { site } from '../../data/site';
+
+const mail = `mailto:${site.email}?subject=${encodeURIComponent('Working with Drijfveer Media')}`;
+const telefoonInt = '+31 88 11 55 666';
+const stappen = [
+  ['We call you back', 'Within 15 minutes on Dutch working days. Out of interest, not to sell.'],
+  ['We ask questions', 'And keep asking until we know what you want. What you really want.'],
+  ['We present the options', 'By phone, online or in person at our office, in plain language.'],
+  ['We agree on targets', 'A modest investment and concrete targets you can hold us to.'],
+  ['We start where it counts', 'The biggest short-term gains first. Then we refine.'],
+];
+const schema = [{ '@type': 'WebPage', name: 'Working with Drijfveer Media', url: `${site.url}/en/`, inLanguage: 'en', about: { '@id': `${site.url}/#organisatie` } }];
+---
+<Base
+  lang="en"
+  title="Working with us: a Dutch marketing agency | Drijfveer Media"
+  description="Drijfveer Media is an online marketing agency in Assen, the Netherlands. We help foreign companies get found by Dutch customers in Google and AI assistants."
+  kruimels={[{ naam: 'English', url: '/en/' }]}
+  schema={schema}
+>
+  <div lang="en">
+    <Hero kicker="English" titel="Working with a Dutch online marketing agency" knop={{ tekst: 'Email us', href: mail }} bel={false}>
+      <p>Want Dutch customers to find you? We are an online marketing agency in Assen, in the north of the Netherlands. We work for clients all over the country, and for companies abroad.</p>
+      <p class="tel-regel">Or call <a href={site.telefoonLink}>{telefoonInt}</a></p>
+      <Scene slot="beeld" />
+    </Hero>
+
+    <section class="wrap sectie">
+      <div class="tekst">
+        <h2>Who we are</h2>
+        <p>Drijfveer Media was founded in 2011 by Robert Boersma and Evelien Heerema. Today we are a team of four, with a group of trusted freelancers around us. Our office is at {site.straat} in {site.plaats}, in a building full of hard-working entrepreneurs. Visitors are welcome.</p>
+        <p>The name? A drijfveer is what drives you. Talent without effort is nothing, and neither is knowledge you keep to yourself. It all starts with the right motivation.</p>
+        <p>Your first point of contact is Thorgall van Eeden. He picks up the phone, asks the questions and keeps track of your project.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>What we can do for you</h2></div>
+        <p>The question behind it is usually simple: how do we reach Dutch customers online? This is where we can help.</p>
+        <ul class="vink">
+          <li><b>SEO for the Dutch market.</b> Keyword research in Dutch, technical fixes and content that ranks in Google in the Netherlands.</li>
+          <li><b>Link building in the Netherlands.</b> Links from relevant Dutch websites. Read more on <a href="/linkbuilding/link-building-netherlands/">link building in the Netherlands</a>.</li>
+          <li><b>Generative engine optimization.</b> Getting mentioned when Dutch users ask ChatGPT, Gemini or Google AI for a recommendation.</li>
+          <li><b>Dutch content.</b> Website pages and articles written and checked by native speakers. Not a plain machine translation.</li>
+          <li><b>Websites, landing pages and Google Ads</b> aimed at Dutch customers.</li>
+        </ul>
+        <p>What we don't do: web shops, social advertising and video. We would rather say so up front. A German company? We also have a page in German about <a href="/linkbuilding/linkbuilding-niederlande/">Linkbuilding in den Niederlanden</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={52} /><h2>How we work</h2></div>
+        <p>Five steps, the same for every client. Wherever you are.</p>
+      </div>
+      <ol class="stappen-rij">
+        {stappen.map(([t, p]) => <li><strong>{t}</strong><p>{p}</p></li>)}
+      </ol>
+
+      <div class="tekst">
+        <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Prices and our guarantee</h2></div>
+        <p>Our prices are online. They are starting prices, excluding VAT. SEO starts at € 495 a month and link building at € 395 a month. Generative engine optimization starts at € 495 a month, and a website at € 250. You hear the exact price after one conversation, and then it's fixed.</p>
+        <p>Monthly services can be cancelled every month, unless we agree otherwise. You stay because it works, not because of a contract.</p>
+        <p>We agree on a goal together. If we miss it and it's down to us, we work an extra month for free. For SEO and link building we offer a ranking guarantee. The details are on our <a href="/garantie/">guarantee page</a> and the <a href="/prijzen/">price list</a>, both in Dutch.</p>
+
+        <h2>Language and practical matters</h2>
+        <p>We are happy to work with you in English, by email and by phone. The rest of this website is in Dutch. A browser translation will give you the gist.</p>
+        <p>Our office hours are Monday to Friday, 8.00 to 17.00, Amsterdam time. We use AI tools in our work, with a person checking everything that goes out. How we do that is explained (in Dutch) on <a href="/zo-werken-we-met-ai/">how we work with AI</a>.</p>
+      </div>
+    </section>
+
+    <section class="wrap sectie">
+      <div class="card contact">
+        <img class="gezicht" src="/img/team/thorgall-klein.webp" width="88" height="88" alt="Thorgall van Eeden of Drijfveer Media" loading="lazy" decoding="async" />
+        <div>
+          <h2>Let's talk</h2>
+          <p class="muted">Send us an email or give us a call. Thorgall gets back to you within 15 minutes on Dutch working days, and asks what you want to achieve before we talk about money.</p>
+        </div>
+        <div class="acties">
+          <a class="btn" href={mail}>Email us</a>
+          <span class="klein">Or call <a class="tel" href={site.telefoonLink}>{telefoonInt}</a></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>
+<style>
+  .tel-regel { color: var(--muted); font-size: 1rem; }
+  .tel-regel a { color: var(--ink); font-weight: 800; text-decoration: none; white-space: nowrap; }
+  .stappen-rij { margin: 8px 0 8px; }
+  .contact { padding: 28px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 20px 32px; align-items: center; }
+  .contact h2 { font-size: var(--step-2); }
+  .contact p { margin: 8px 0 0; }
+  .gezicht { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; }
+  .acties { display: grid; gap: 8px; justify-items: start; }
+  .tel { font-weight: 800; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  @media (max-width: 800px) { .contact { grid-template-columns: minmax(0, 1fr); } }
+</style>

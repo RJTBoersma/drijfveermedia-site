@@ -1,0 +1,315 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/generative-engine-optimization--vindbaar-in-chatgpt.astro';
+import { site } from '../../../data/site';
+
+const url = '/generative-engine-optimization/vindbaar-in-chatgpt/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'twee-routes', titel: 'Hoe ChatGPT kiest wie het noemt' },
+  { id: 'robots', titel: 'De robots van OpenAI' },
+  { id: 'bing', titel: 'Bing, Copilot en Google' },
+  { id: 'content', titel: 'Content die ChatGPT gebruikt' },
+  { id: 'vermeldingen', titel: 'Genoemd worden op andere sites' },
+  { id: 'stappenplan', titel: 'Stappenplan in acht stappen' },
+  { id: 'meten', titel: 'Zo meet je het' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: hovenier in Hoogeveen' },
+  { id: 'werkt-niet', titel: 'Wat niet werkt' },
+  { id: 'concurrent', titel: 'Waarom je concurrent wel?' },
+  { id: 'zelf-of-uitbesteden', titel: 'Zelf doen of uitbesteden' },
+  { id: 'wat-we-doen', titel: 'Wat we voor je doen' },
+];
+const robots = [
+  ['OAI-SearchBot', 'Zoekt pagina\'s voor de zoekfunctie van ChatGPT.', 'Altijd toelaten. Blokkeer je hem, dan verschijn je niet meer als bron in de zoekantwoorden.'],
+  ['GPTBot', 'Verzamelt tekst die gebruikt kan worden om nieuwe modellen te trainen.', 'Jouw keuze. Weren kost je volgens OpenAI geen plek in de zoekantwoorden.'],
+  ['ChatGPT-User', 'Bezoekt een pagina als een gebruiker daar in een gesprek om vraagt.', 'Niets aan doen. Volgens OpenAI gelden robots.txt-regels hier mogelijk niet.'],
+  ['OAI-AdsBot', 'Controleert de landingspagina van een advertentie in ChatGPT.', 'Alleen van belang als je adverteert. Komt alleen op ingediende advertentiepagina\'s.'],
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Vindbaar in ChatGPT',
+  serviceType: 'Generative engine optimization',
+  description: 'Zorgen dat ChatGPT en Bing je bedrijf kennen, vinden en noemen in hun antwoorden.',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Vindbaar in ChatGPT met je bedrijf | Drijfveer Media"
+  description="Vindbaar in ChatGPT worden? We zorgen dat ChatGPT en Bing je bedrijf vinden en noemen. Vanaf € 495 per maand, maandelijks opzegbaar en met garantie."
+  kruimels={[{ naam: 'GEO', url: '/generative-engine-optimization/' }, { naam: 'Vindbaar in ChatGPT', url }]}
+  schema={schema}
+>
+  <Hero kicker="Genoemd · ChatGPT" titel="Vindbaar in ChatGPT: zorg dat ChatGPT jouw bedrijf noemt" prijs="vanaf € 495 per maand">
+    <p>Je klanten vragen ChatGPT steeds vaker wie ze moeten bellen. ChatGPT zoekt het op, leest een paar websites en noemt een handvol namen. Wij zorgen dat de jouwe erbij staat.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Vindbaar in ChatGPT word je langs twee routes: wat het model al weet, en wat de zoekfunctie live opzoekt. Op de tweede route kun je binnen maanden iets veranderen.</li>
+            <li>Laat de zoekrobot van OpenAI, OAI-SearchBot, toe in je robots.txt. Controleer ook of je host of firewall hem niet stilletjes tegenhoudt.</li>
+            <li>Schrijf pagina's die een vraag letterlijk en concreet beantwoorden: wat, waar, voor wie en voor hoeveel.</li>
+            <li>Zorg dat andere sites je noemen. ChatGPT vertrouwt wat meerdere bronnen bevestigen.</li>
+            <li>Meet het met vaste vragen. Eén keer iets vragen zegt weinig.</li>
+          </ul>
+        </div>
+
+        <h2 id="twee-routes">Hoe ChatGPT bepaalt wie het noemt</h2>
+        <p>ChatGPT is de chatbot van OpenAI. Volgens OpenAI bereikt ChatGPT 1,2 miljard mensen per week (oktober 2026). Een deel van hen vraagt niet om een recept of een samenvatting, maar om een bedrijf. "Welke hovenier in Hoogeveen is goed?" "Wie plaatst een warmtepomp in Emmen?" Het antwoord komt uit twee plekken.</p>
+        <p><b>Wat het model al weet.</b> De AI-modellen achter ChatGPT zijn getraind op miljarden zinnen uit boeken, artikelen en websites, tot een bepaalde datum. Werd er voor die datum vaak en duidelijk over je bedrijf geschreven, dan kent ChatGPT je. Dat verandert pas als er een nieuw model komt. Je beïnvloedt het dus alleen op de lange termijn.</p>
+        <p><b>Wat het live opzoekt.</b> Sinds 31 oktober 2024 heeft ChatGPT een zoekfunctie. OpenAI omschreef die bij de lancering als snelle, actuele antwoorden met links naar bronnen op het web. Bij lokale, vergelijkende en actuele vragen zoekt ChatGPT dus zelf. Het leest een paar pagina's en zet de bronnen onder het antwoord.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Modelkennis</th><th>Zoekfunctie</th></tr></thead>
+            <tbody>
+              <tr><td><b>Waar het vandaan komt</b></td><td>Teksten van voor de trainingsdatum</td><td>Pagina's die ChatGPT nu leest</td></tr>
+              <tr><td><b>Wanneer het telt</b></td><td>Algemene vragen, merkvragen</td><td>Lokale, actuele en vergelijkende vragen</td></tr>
+              <tr><td><b>Hoe snel je het verandert</b></td><td>Pas bij een nieuw model</td><td>Weken tot maanden</td></tr>
+              <tr><td><b>Wat het meeste helpt</b></td><td>Vaak en overal hetzelfde genoemd worden</td><td>Toegang voor de robot, heldere pagina's, vermeldingen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor een ondernemer met klanten in de regio is de tweede route de kans. ChatGPT noemt je niet zomaar. Het noemt de bedrijven die het kan vinden, kan lezen en die door andere bronnen bevestigd worden. Aan alle drie kun je werken.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h2 id="robots">De robots van OpenAI, en welke je toelaat</h2></div>
+        <p>OpenAI gebruikt meerdere robots, elk met een eigen taak. Ze staan in de documentatie van OpenAI. Volgens OpenAI zijn de keuzes per robot los van elkaar. Je kunt de zoekrobot toelaten en de trainingsrobot weren.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Robot</th><th>Wat hij doet</th><th>Ons advies</th></tr></thead>
+            <tbody>
+              {robots.map(([naam, wat, advies]) => <tr><td><b>{naam}</b></td><td>{wat}</td><td>{advies}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p>Een robots.txt die wel meedoet in de zoekantwoorden van ChatGPT, maar je teksten niet beschikbaar stelt voor training, ziet er zo uit:</p>
+        <pre><code>User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /</code></pre>
+        <p class="muted klein">Voorbeeld van een robots.txt. Laat je GPTBot wel toe, dan kunnen je teksten ook in toekomstige modelkennis belanden.</p>
+        <p>Twee dingen gaan hier vaak mis. Ten eerste een regel die alle robots tegelijk buitensluit: <code>User-agent: *</code> met daaronder <code>Disallow: /</code>. Die staat soms nog in een site die ooit als testversie online kwam. Ten tweede je host, firewall of CDN. Sommige blokkeren onbekende robots standaard, zonder dat je er een melding van krijgt. OpenAI publiceert daarom de IP-adressen van zijn robots en vraagt die toe te laten.</p>
+        <p>Heb je iets aangepast? Volgens OpenAI duurt het ongeveer 24 uur voordat de zoeksystemen een gewijzigde robots.txt verwerken. Blokkeer je OAI-SearchBot, dan kan je site volgens OpenAI nog wel als losse navigatielink verschijnen. Als bron in een antwoord niet meer.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h2 id="bing">Bing, Copilot en Google: de andere zoekmachines</h2></div>
+        <p>OpenAI schreef bij de lancering van de zoekfunctie dat ChatGPT naast de eigen robot ook externe zoekmachines gebruikt, plus inhoud van partners. Welke zoekmachines dat zijn, staat er niet bij. Daarom zorgen we dat je in de grote zoekmachines goed staat. Dat kost weinig, en het helpt ook bij andere AI-tools.</p>
+        <p><b>Bing.</b> Bing en Copilot zijn allebei van Microsoft. Sinds februari 2026 laat Bing Webmaster Tools in het rapport AI Performance zien hoe vaak je pagina's als bron worden genoemd. Dat gaat over Copilot, de AI-samenvattingen in Bing en een aantal partners. In oktober 2026 kwam er een overzicht per onderwerp bij, nog als bèta. Microsoft raadt in dezelfde aankondiging IndexNow aan, zodat een gewijzigde pagina snel bekend is. En Bing Places, voor je adres en openingstijden.</p>
+        <p><b>Google.</b> Gemini en het AI-overzicht van Google halen hun bronnen uit de index van Google. Daar telt je gewone SEO. Hoe dat werkt, lees je bij <a href="/generative-engine-optimization/google-ai-overviews/">Google AI Overviews</a>.</p>
+        <p>Sta je goed in Google maar niet in Bing? Dat komt vaker voor dan je denkt. Twee indexen, dus twee keer controleren. Wie vindbaar in ChatGPT wil zijn, laat geen enkele grote zoekmachine liggen.</p>
+        <h3>Heb je een webshop?</h3>
+        <p>Dan speelt er nog iets. OpenAI bracht in november 2025 shopping research uit: ChatGPT helpt mensen producten te vergelijken en maakt er een persoonlijke koopgids van. Ook daar gelden dezelfde regels. Productpagina's met een duidelijke naam, prijs, voorraad en specificaties zijn makkelijker te gebruiken dan pagina's met alleen een foto en "nu bestellen". Adverteer je met je producten in Google, dan heb je die gegevens al in een productfeed staan. Lees meer bij <a href="/online-adverteren/google-shopping/">Google Shopping</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h2 id="content">Welke content ChatGPT graag gebruikt</h2></div>
+        <p>ChatGPT zoekt een antwoord op een vraag. Pagina's die die vraag direct en volledig beantwoorden, belanden vaker in het antwoord. Vaag geschreven pagina's slaat het over. Een verzonnen voorbeeld:</p>
+        <div class="voor-na">
+          <p><span class="label">Voor</span> "Wij zijn een betrouwbaar hoveniersbedrijf met jarenlange ervaring en oog voor detail."</p>
+          <p><span class="label oranje">Na</span> "Hoveniersbedrijf De Wit legt tuinen aan in Hoogeveen, Zuidwolde en Pesse. Een nieuwe tuin van 50 m² kost bij ons tussen € 4.000 en € 7.000, inclusief bestrating."</p>
+        </div>
+        <p>De tweede versie bevat feiten die ChatGPT kan overnemen: wat, waar, voor hoeveel. Dat is waardevolle content in de ogen van een taalmodel. Het helpt ook als je pagina gestructureerd is. Dit zijn de vuistregels die wij aanhouden:</p>
+        <ul class="vink">
+          <li><b>De vraag als kop, het antwoord eronder.</b> "Wat kost een nieuwe tuin?" met in de eerste zin het bedrag. Uitleg komt daarna.</li>
+          <li><b>Eén pagina per dienst.</b> Een pagina over tuinaanleg en een over schuttingen, niet alles op één pagina "Diensten".</li>
+          <li><b>Een eigen pagina per plaats waar je echt werkt,</b> met een eigen tekst. Een kopie met een andere plaatsnaam werkt niet.</li>
+          <li><b>Concrete feiten.</b> Prijzen, levertijden, werkgebied, merken waarmee je werkt. "Neem contact op voor de mogelijkheden" geeft niemand iets om te citeren.</li>
+          <li><b>Een tabel als je vergelijkt.</b> Bijvoorbeeld drie soorten bestrating naast elkaar, met prijs en onderhoud.</li>
+          <li><b>Een datum op de pagina.</b> Zo is te zien dat de informatie actueel is. Werk prijzen bij als ze veranderen.</li>
+          <li><b>Een over-ons-pagina met feiten.</b> Wie zit erachter, sinds wanneer, waar, voor wie werk je en wat doe je niet. Begin met drie zinnen die je bedrijf samenvatten.</li>
+        </ul>
+        <p>Je hoeft niet "voor AI" te schrijven. Google zegt in zijn gids van mei 2026 zelfs dat dat niet nodig is. Schrijf voor een klant die het snel wil weten. Dat is precies wat een chatbot ook zoekt. Hulp nodig bij de teksten? Dat doet onze <a href="/tekstschrijver/">tekstschrijver</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h2 id="vermeldingen">Genoemd worden buiten je eigen site</h2></div>
+        <p>ChatGPT vergelijkt bronnen. Staat jouw bedrijf alleen op je eigen site, dan is dat één stem. Staat het ook op een branchesite, in een regionaal nieuwsbericht en in een vergelijking, dan wordt het een feit. Zo vind je de bronnen die ertoe doen:</p>
+        <ol>
+          <li>Stel ChatGPT een vraag die je klanten stellen, zoals "beste hovenier in Hoogeveen".</li>
+          <li>Kijk welke websites onder het antwoord staan. Doe dat voor vijf tot tien vragen.</li>
+          <li>Zet de bronnen in een lijst en tel welke vaak terugkomen. Dat zijn je doelen.</li>
+          <li>Kijk per bron hoe je erop komt: een vermelding aanvragen, een artikel aanbieden, je profiel aanvullen.</li>
+        </ol>
+        <p>Voor een mkb'er in Drenthe, Friesland of Groningen zijn het vaak dezelfde soorten plekken:</p>
+        <ul>
+          <li>De website van je branchevereniging, met een ledenlijst of vakmannenzoeker.</li>
+          <li>Regionale nieuwssites en huis-aan-huisbladen die ook online staan.</li>
+          <li>Bedrijvengidsen en vergelijkingssites in je vak, met overal dezelfde naam, hetzelfde adres en hetzelfde telefoonnummer.</li>
+          <li>Reviews op je Google Bedrijfsprofiel, in de woorden van je klanten.</li>
+          <li>Partners en leveranciers die je op hun site noemen als dealer of installateur.</li>
+          <li>Lijstjes als "vijf goede hoveniers in Zuidwest-Drenthe" waar je concurrenten wel in staan.</li>
+        </ul>
+        <p>Dat lijkt op <a href="/linkbuilding/">linkbuilding</a>, met één verschil: een vermelding zonder link telt hier ook mee. Nepreviews en gekochte vermeldingen doen we niet. Google schrijft in zijn gids dat onechte vermeldingen verzamelen minder oplevert dan het lijkt. En AI-tools worden steeds beter in het herkennen ervan.</p>
+
+        <h2 id="stappenplan">Stappenplan: in acht stappen vindbaar in ChatGPT</h2>
+        <p>Dit is de volgorde waarin wij het aanpakken. De eerste drie stappen zijn techniek en kosten een middag. De rest is werk dat je maandelijks herhaalt.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={44} /><h3>1. Controleer je robots.txt</h3></div>
+        <p>Open jouwdomein.nl/robots.txt in je browser. Staat er een regel die OAI-SearchBot of alle robots tegelijk de toegang ontzegt? Haal die weg. Vraag je hostingpartij ook of de firewall of het CDN AI-robots tegenhoudt. Kijk daarna in de logbestanden van je server of OAI-SearchBot langskomt.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={44} /><h3>2. Zet je site in Bing Webmaster Tools</h3></div>
+        <p>Maak een gratis account aan. Heb je Google Search Console al, dan importeer je je site daaruit, met je sitemaps erbij. Controleer daarna of je belangrijkste pagina's echt in de index van Bing staan. Dat ze in Google staan, zegt daar niets over.</p>
+
+        <div class="stap-kop"><Tekening naam="raket" maat={44} /><h3>3. Zet IndexNow aan</h3></div>
+        <p>Met IndexNow geeft je site een seintje aan de deelnemende zoekmachines zodra een pagina nieuw, gewijzigd of verwijderd is. Veel websitesystemen hebben er een plug-in of instelling voor. Zonder seintje kan het lang duren voordat een wijziging wordt opgemerkt.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={44} /><h3>4. Maak je bedrijfsgegevens overal gelijk</h3></div>
+        <p>Vul je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> en Bing Places volledig in. Zelfde naam, zelfde adres, zelfde telefoonnummer als op je site en in de gidsen. Een oud adres in één gids maakt een taalmodel onzeker over welk adres klopt.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={44} /><h3>5. Herschrijf je belangrijkste dienstpagina</h3></div>
+        <p>Begin bij de dienst die het meeste oplevert. Zet de vraag in de kop en het antwoord in de eerste zin. Noem prijzen, werkgebied en doorlooptijd. Voeg een korte FAQ toe met de vragen die je aan de telefoon het vaakst hoort.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={44} /><h3>6. Schrijf een over-ons-pagina als feitenblad</h3></div>
+        <p>Geen wervende tekst, maar feiten. Opgericht in welk jaar, door wie, waar je zit, voor welke klanten en wat je niet doet. Die eerste alinea kan bijna letterlijk in een antwoord terechtkomen. Met <a href="/generative-engine-optimization/structured-data/">structured data</a> maak je dezelfde feiten ook voor machines leesbaar.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={44} /><h3>7. Werk elke maand aan twee of drie vermeldingen</h3></div>
+        <p>Neem de lijst met bronnen uit het vorige hoofdstuk. Pak er elke maand een paar op. Een vermelding bij je branchevereniging, een artikel in een regionaal blad, een plek in een vergelijking. Het gaat langzaam, maar het blijft staan.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={44} /><h3>8. Meet elke maand met dezelfde vragen</h3></div>
+        <p>Zonder meting weet je niet of het werkt. Hoe je dat doet, lees je hieronder.</p>
+
+        <h2 id="meten">Zo meet je of ChatGPT je noemt</h2>
+        <p>AI-antwoorden verschillen per keer. Stel dezelfde vraag twee keer en je krijgt vaak andere namen. En wat jij op je eigen scherm ziet, kan gekleurd zijn door je eerdere gesprekken. Daarom werken we zo:</p>
+        <ol>
+          <li><b>Kies tien tot twintig vaste vragen.</b> Keuzevragen ("welke hovenier in Hoogeveen raad je aan?"), probleemvragen ("mijn schutting is omgewaaid, wie kan dit snel maken?") en merkvragen ("wat weet je over Hoveniersbedrijf De Wit?").</li>
+          <li><b>Stel ze in een nieuw gesprek zonder geschiedenis,</b> bijvoorbeeld een tijdelijke chat.</li>
+          <li><b>Stel elke vraag drie keer.</b> Een naam die één keer opduikt, is toeval.</li>
+          <li><b>Noteer per antwoord:</b> genoemd of niet, wat er over je gezegd wordt, of het klopt en welke bronnen eronder staan.</li>
+          <li><b>Herhaal het elke maand</b> met precies dezelfde woorden, zodat je de cijfers kunt vergelijken.</li>
+        </ol>
+        <p>Zo ziet een meetblad eruit. Verzonnen cijfers, voor een hovenier:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vraag</th><th>Mei</th><th>Juli</th><th>September</th></tr></thead>
+            <tbody>
+              <tr><td>Welke hovenier in Hoogeveen raad je aan?</td><td>0 van 3</td><td>1 van 3</td><td>3 van 3</td></tr>
+              <tr><td>Wie legt een tuin aan in Zuidwolde?</td><td>0 van 3</td><td>0 van 3</td><td>2 van 3</td></tr>
+              <tr><td>Wat weet je over Hoveniersbedrijf De Wit?</td><td>oud adres</td><td>klopt</td><td>klopt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kijk daarnaast in je statistieken. In Google Analytics 4 open je Rapporten, dan Acquisitie en Verkeersacquisitie. Kies de dimensie Sessiebron. Staat chatgpt.com ertussen, dan klikten mensen vanuit ChatGPT door naar je site. Bing Webmaster Tools laat in AI Performance zien hoe vaak Copilot en Bing je als bron noemen.</p>
+        <p>Eerst zelf een snelle indruk? Doe dan <a href="/generative-engine-optimization/#ai-test">onze gratis AI-test</a>. Je vult je vak en plaats in, krijgt vijf vragen zoals klanten ze stellen en opent ze met één klik in ChatGPT. Wil je dat wij het grondiger doen, vraag dan de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a> aan.</p>
+
+        <h2 id="voorbeeld">Een voorbeeld: hovenier in Hoogeveen</h2>
+        <p class="muted klein">(Verzonnen voorbeeld, om te laten zien hoe zo'n traject loopt.)</p>
+        <p>Hoveniersbedrijf De Wit uit Hoogeveen werkt in Zuidwest-Drenthe. Vraagt iemand ChatGPT om een goede hovenier in Hoogeveen, dan komen er drie andere namen. De eigenaar staat er niet bij, terwijl hij al twintig jaar tuinen aanlegt.</p>
+        <p><b>Wat de analyse laat zien.</b> Zijn robots.txt is in orde, maar zijn hostingpakket heeft een botfilter dat OAI-SearchBot tegenhoudt. In Bing staan maar vier van zijn twaalf pagina's. Zijn site noemt alleen "Hoogeveen e.o.", geen dorpen en geen prijzen. En in twee bedrijvengidsen staat nog zijn oude adres.</p>
+        <p><b>Maand één.</b> Het botfilter laat de robots van OpenAI voortaan door. De site komt in Bing Webmaster Tools, IndexNow gaat aan, Bing Places wordt ingevuld en de gidsen krijgen het juiste adres.</p>
+        <p><b>Maand twee en drie.</b> Er komen pagina's voor tuinaanleg, bestrating en schuttingen, met prijsindicaties en de dorpen waar hij werkt. De over-ons-pagina krijgt feiten in plaats van "passie voor groen". Hij vraagt tevreden klanten om een review.</p>
+        <p><b>Maand vier tot zes.</b> Hij komt op de vakmannenpagina van zijn branchevereniging. Het lokale blad neemt hem op in een artikel over tuinen na een droge zomer. Bij de vaste vragen duikt zijn naam steeds vaker op.</p>
+        <p>Zo'n verloop is niet gegarandeerd. Bij weinig concurrentie gaat het sneller, in een drukke markt trager. Maar de volgorde klopt: eerst de techniek, dan de pagina's, dan de vermeldingen.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h2 id="werkt-niet">Wat niet werkt, en waar je geen geld aan uitgeeft</h2></div>
+        <p>Rond AI-vindbaarheid worden veel trucs verkocht. Deze kun je overslaan:</p>
+        <ul>
+          <li><b>Een llms.txt als oplossing.</b> OpenAI noemt het in zijn uitleg over robots niet als voorwaarde. Google zegt dat zijn zoekmachine zulke bestanden negeert. Het kan geen kwaad, maar verwacht er niets van.</li>
+          <li><b>Alle AI-robots uit voorzorg blokkeren.</b> Dan verdwijn je ook uit de zoekantwoorden. Kies per robot.</li>
+          <li><b>Zoekwoorden stapelen of verborgen tekst voor AI.</b> Een taalmodel leest de hele pagina. Opvulling maakt je tekst slechter, niet beter.</li>
+          <li><b>Honderden bijna gelijke pagina's.</b> Google noemt dat spam, en een chatbot heeft er ook niets aan.</li>
+          <li><b>Betalen voor een plek in het antwoord.</b> Dat kan niet. OpenAI toont wel advertenties, maar die staan apart, met een label. Volgens OpenAI blijft het antwoord zelf onafhankelijk. Meer daarover bij <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</li>
+          <li><b>Een bureau dat vermeldingen garandeert.</b> Niemand bepaalt wat ChatGPT antwoordt. Ook wij niet.</li>
+        </ul>
+
+        <h2 id="concurrent">Waarom noemt ChatGPT mijn concurrent wel en mij niet?</h2>
+        <p>Een vaste oorzaak is er niet. Je kunt wel vergelijken. Zoek de site van je concurrent op en loop deze zes vragen langs, eerst voor hem en dan voor jezelf:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vraag</th><th>Concurrent</th><th>Jij</th></tr></thead>
+            <tbody>
+              <tr><td>Mag OAI-SearchBot op de site?</td><td>ja / nee</td><td>ja / nee</td></tr>
+              <tr><td>Staan de belangrijkste pagina's in Bing én Google?</td><td>ja / nee</td><td>ja / nee</td></tr>
+              <tr><td>Is er een eigen pagina per dienst en per plaats?</td><td>ja / nee</td><td>ja / nee</td></tr>
+              <tr><td>Staat het antwoord letterlijk op de pagina, met prijs en werkgebied?</td><td>ja / nee</td><td>ja / nee</td></tr>
+              <tr><td>Wordt het bedrijf op andere sites genoemd, met overal dezelfde gegevens?</td><td>ja / nee</td><td>ja / nee</td></tr>
+              <tr><td>Zijn er recente reviews in eigen woorden van klanten?</td><td>ja / nee</td><td>ja / nee</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Waar je concurrent ja scoort en jij nee, zit je eerste klus. Meestal blijken het er twee of drie te zijn.</p>
+
+        <h2 id="zelf-of-uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>Veel van dit werk kun je zelf. Het kost vooral tijd, en een beetje lef om je eigen teksten kritisch te lezen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Zelf te doen?</th><th>Tijd</th></tr></thead>
+            <tbody>
+              <tr><td>Robots.txt en host controleren</td><td>Ja, met hulp van je hostingpartij</td><td>Een uur</td></tr>
+              <tr><td>Bing Webmaster Tools en IndexNow</td><td>Ja</td><td>Een tot twee uur</td></tr>
+              <tr><td>Bedrijfsprofielen en gidsen gelijktrekken</td><td>Ja</td><td>Een middag</td></tr>
+              <tr><td>Dienstpagina's herschrijven</td><td>Ja, als je graag schrijft</td><td>Een dag per pagina</td></tr>
+              <tr><td>Vermeldingen op andere sites</td><td>Deels, het netwerk maakt het verschil</td><td>Elke maand</td></tr>
+              <tr><td>Meten met vaste vragen</td><td>Ja, maar het is saai werk</td><td>Twee uur per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Geen tijd, of liever iemand die het bijhoudt? Dan nemen wij het over. Wil je eerst een uur sparren over wat je zelf kunt doen om vindbaar in ChatGPT te worden? Dat kan ook, in een <a href="/consult/">consult</a> van € 85 per uur.</p>
+
+        <h2 id="wat-we-doen">Wat we doen om je vindbaar in ChatGPT te maken</h2>
+        <p>Vanaf € 495 per maand, maandelijks opzegbaar. Daarvoor krijg je:</p>
+        <ul class="vink">
+          <li>Een nulmeting met vaste vragen, die we elke maand herhalen. Je ziet zwart op wit of je vaker genoemd wordt.</li>
+          <li>Bing Webmaster Tools, IndexNow en Bing Places op orde.</li>
+          <li>Controle van robots.txt, je host en je firewall, zodat OAI-SearchBot erbij kan.</li>
+          <li>Elke maand pagina's die beter antwoord geven, te beginnen bij je belangrijkste dienst.</li>
+          <li>Werk aan vermeldingen op de plekken die ChatGPT in jouw branche als bron gebruikt.</li>
+          <li>Een kort maandverslag dat je zonder uitleg begrijpt.</li>
+        </ul>
+        <p>Een vermelding beloven we niet. Wel spreken we samen een doel af dat we kunnen meten, bijvoorbeeld genoemd worden bij vijf van de tien vaste vragen. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>. Nieuwe technieken testen we eerst op onze eigen sites in het <a href="/proeflab/">proeflab</a>.</p>
+        <p>Wil je breder dan ChatGPT alleen, ook Gemini, Perplexity en het AI-overzicht van Google? Dan past <a href="/generative-engine-optimization/">generative engine optimization</a> beter. Twijfel je nog of het nodig is, begin dan met de gratis analyse. Dan weet je eerst of ChatGPT je nu al kent.</p>
+        <p class="klein muted">Bronnen, geraadpleegd oktober 2026: de documentatie van OpenAI over zijn robots, berichten van OpenAI over de zoekfunctie (oktober 2024), shopping research (november 2025) en advertenties (2026), Google Search Central (gids voor generatieve AI in Google Zoeken, mei 2026) en het Bing Webmaster-blog (AI Performance, februari en oktober 2026).</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={17} />
+        <Prijskaart naam="Vindbaar in ChatGPT" prijs="€ 495" eenheid="per maand" punten={['Maandelijkse meting met vaste vragen', 'Bing, IndexNow en Bing Places op orde', 'Robots van OpenAI toegelaten', 'Content en vermeldingen die ChatGPT gebruikt']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik betalen om in de antwoorden van ChatGPT te komen?', a: 'Nee. De gewone antwoorden zijn niet te koop. ChatGPT toont wel advertenties, apart en met een label. Volgens OpenAI blijft het antwoord daar los van. Lees meer bij <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.' },
+      { v: 'Ik sta hoog in Google. Ben ik dan ook vindbaar in ChatGPT?', a: 'Niet vanzelf. ChatGPT werkt met een eigen zoekrobot. Wordt die door je host of robots.txt tegengehouden, dan helpt een hoge plek in Google je daar niet. Goede SEO is wel een sterke basis: heldere pagina\'s en vermeldingen helpen in Google en in ChatGPT.' },
+      { v: 'Moet ik GPTBot blokkeren?', a: 'Dat mag, en het kost je volgens OpenAI geen plek in de zoekantwoorden van ChatGPT. Het betekent alleen dat je teksten niet worden gebruikt om nieuwe modellen te trainen. Laat OAI-SearchBot in elk geval toe.' },
+      { v: 'Hoe snel ben ik vindbaar in ChatGPT?', a: 'Een aangepaste robots.txt verwerkt OpenAI volgens eigen zeggen binnen ongeveer 24 uur. Nieuwe pagina\'s en vermeldingen hebben meer tijd nodig: reken op maanden, niet op weken. Modelkennis verandert pas met een nieuw model. Je ziet de voortgang elke maand in de meting.' },
+      { v: 'Hoe zie ik of OAI-SearchBot mijn site bezoekt?', a: 'Kijk in de logbestanden van je server of in de statistieken van je hosting naar de naam OAI-SearchBot. Zie je hem nergens, controleer dan je robots.txt en vraag je hostingpartij naar botfilters en firewalls.' },
+      { v: 'Helpt dit ook voor Microsoft Copilot en Gemini?', a: 'Ja. Bing Webmaster Tools laat zien hoe vaak Copilot je als bron noemt, dus werk aan Bing, Bing Places en IndexNow telt daar mee. Gemini en het AI-overzicht van Google gebruiken de index van Google. Heldere pagina\'s en vermeldingen helpen overal.' },
+      { v: 'Heb ik een llms.txt-bestand nodig?', a: 'Nee. Het kan geen kwaad, maar Google zegt dat zijn zoekmachine zulke bestanden negeert, en OpenAI noemt het niet als voorwaarde. Duidelijke pagina\'s en goede vermeldingen leveren meer op.' },
+      { v: 'ChatGPT zegt iets verkeerds over mijn bedrijf. Wat nu?', a: 'Je kunt OpenAI niet vragen een zin aan te passen. Zoek uit welke bron de fout bevat, zoals een gids met een oud adres, en laat die bron verbeteren. Zet de juiste informatie duidelijk op je eigen site.' },
+      { v: 'Wat kost het om vindbaar te worden in ChatGPT?', a: 'Zelf doen kost vooral tijd. Laat je het ons doen, dan begint het bij € 495 per maand, exclusief btw en maandelijks opzegbaar. De <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-vindbaarheidsanalyse</a> vooraf is gratis.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over genoemd worden"
+    links={[
+      { label: 'Pillar', titel: 'Generative engine optimization', href: '/generative-engine-optimization/', tekst: 'Genoemd door alle AI-assistenten.' },
+      { label: 'Gratis', titel: 'AI-vindbaarheidsanalyse', href: '/generative-engine-optimization/ai-vindbaarheidsanalyse/', tekst: 'Wat zegt ChatGPT nu over jou?' },
+      { label: 'Dienst', titel: 'Google AI Overviews', href: '/generative-engine-optimization/google-ai-overviews/', tekst: 'In het AI-overzicht bovenaan Google.' },
+      { label: 'Dienst', titel: 'Structured data', href: '/generative-engine-optimization/structured-data/', tekst: 'Je site leesbaar voor machines.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd of ChatGPT je al kent?" tekst={`${site.contactpersoon} stelt de vragen van jouw klanten aan ChatGPT en belt je met de uitkomst. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis analyse aan', href: '/gratis-website-analyse/' }} />
+</Base>
+<style>
+  pre { background: var(--ink); color: #fff; border-radius: var(--radius); padding: 16px 20px; overflow-x: auto; font-size: 0.92rem; line-height: 1.5; margin: 20px 0 6px; }
+  .voor-na { display: grid; gap: 10px; margin: 16px 0 20px; }
+  .voor-na p { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 18px; }
+  .label { display: inline-block; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 6px; background: var(--chip); margin-right: 8px; }
+  .label.oranje { background: var(--tint); color: var(--ink); }
+</style>

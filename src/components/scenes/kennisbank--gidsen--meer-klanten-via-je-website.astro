@@ -1,0 +1,85 @@
+---
+// Scène voor /kennisbank/gidsen/meer-klanten-via-je-website/: een website met vijf foutmarkeringen (kop, knop, formulier,
+// kaarten, menu) en ernaast een telefoon. Als hij leeft: de fouten worden een voor een groene vinkjes en op de telefoon
+// komt steeds een nieuwe aanvraag binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const fouten = [
+  { x: 200, y: 88 },
+  { x: 124, y: 136 },
+  { x: 306, y: 86 },
+  { x: 214, y: 186 },
+  { x: 302, y: 58 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een website met vijf fouten, gemarkeerd met oranje kruisjes bij de kop, de knop, het formulier, de kaarten en het menu. Ze veranderen een voor een in groene vinkjes, en op de telefoon ernaast komt een nieuwe aanvraag binnen.'}>
+  <!-- website -->
+  <rect x="20" y="28" width="304" height="218" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M20 48h304" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="34" cy="38" r="3.5" fill="#d9e1ea" /><circle cx="46" cy="38" r="3.5" fill="#d9e1ea" /><circle cx="58" cy="38" r="3.5" fill="#d9e1ea" />
+  <rect x="36" y="56" width="52" height="10" rx="5" fill="#074663" />
+  <rect x="216" y="58" width="22" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="244" y="58" width="22" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="272" y="58" width="22" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="36" y="86" width="160" height="12" rx="6" fill="#10283f" />
+  <rect class="v" x="36" y="106" width="166" height="7" rx="3.5" />
+  <rect class="v" x="36" y="118" width="124" height="7" rx="3.5" />
+  <rect class="o" x="36" y="136" width="86" height="22" rx="7" />
+  <rect x="50" y="145" width="58" height="4" rx="2" fill="#fff" />
+  <!-- formulier -->
+  <rect x="220" y="84" width="88" height="86" rx="8" fill="#f4f7fa" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="230" y="96" width="68" height="12" rx="4" fill="#fff" stroke="#d9e1ea" />
+  <rect x="230" y="114" width="68" height="12" rx="4" fill="#fff" stroke="#d9e1ea" />
+  <rect x="230" y="132" width="68" height="12" rx="4" fill="#fff" stroke="#d9e1ea" />
+  <rect x="230" y="150" width="40" height="12" rx="4" fill="#074663" />
+  <!-- kaarten -->
+  <rect x="36" y="186" width="84" height="46" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="130" y="186" width="84" height="46" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="224" y="186" width="84" height="46" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="46" y="198" width="50" height="7" rx="3.5" /><rect class="v" x="46" y="212" width="64" height="5" rx="2.5" />
+  <rect class="v" x="140" y="198" width="50" height="7" rx="3.5" /><rect class="v" x="140" y="212" width="64" height="5" rx="2.5" />
+  <rect class="v" x="234" y="198" width="50" height="7" rx="3.5" /><rect class="v" x="234" y="212" width="64" height="5" rx="2.5" />
+  <!-- foutmarkeringen -->
+  {fouten.map((f) => (
+    <g>
+      <circle cx={f.x} cy={f.y} r="9" fill="#ff6600" stroke="#fff" stroke-width="2" />
+      <path d={`M${f.x - 3.5} ${f.y - 3.5}l7 7M${f.x + 3.5} ${f.y - 3.5}l-7 7`} stroke="#fff" stroke-width="2.2" stroke-linecap="round" />
+    </g>
+  ))}
+
+  <!-- telefoon -->
+  <rect x="346" y="48" width="108" height="196" rx="18" fill="#10283f" />
+  <rect x="354" y="62" width="92" height="168" rx="10" fill="#fff" />
+  <rect x="384" y="54" width="32" height="4" rx="2" fill="#3b5468" />
+  <rect class="v" x="364" y="140" width="72" height="8" rx="4" />
+  <rect class="v" x="364" y="156" width="56" height="8" rx="4" />
+  <rect class="v" x="364" y="172" width="64" height="8" rx="4" />
+  <rect x="364" y="194" width="72" height="22" rx="7" fill="#074663" />
+  <text x="400" y="209" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">Bellen</text>
+
+  {!mini && (
+    <g>
+      {fouten.map((f, i) => (
+        <g class="goed" style={`--i:${i}`}>
+          <circle cx={f.x} cy={f.y} r="9.5" fill="#1f8a5b" stroke="#fff" stroke-width="2" />
+          <path d={`M${f.x - 4} ${f.y}l3 3 5.5-6`} fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <g class="melding">
+        <rect x="358" y="74" width="84" height="48" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <circle cx="371" cy="90" r="5" fill="#1f8a5b" />
+        <text x="381" y="94" font-size="10" font-weight="800">Nieuwe</text>
+        <text x="368" y="111" font-size="10" font-weight="800">aanvraag</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .goed { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .goed, :global(.teken-js) .melding { opacity: 0; }
+  .in-beeld .goed { animation: kennisbank-gidsen-meer-klanten-via-je-website-goed 0.45s cubic-bezier(.3,1.6,.5,1) calc(0.6s + var(--i) * 0.45s) forwards; }
+  .in-beeld .melding { animation: kennisbank-gidsen-meer-klanten-via-je-website-melding 5s ease-in-out 3s infinite both; }
+  @keyframes kennisbank-gidsen-meer-klanten-via-je-website-goed { from { opacity: 0; transform: scale(0.3) rotate(-40deg); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-meer-klanten-via-je-website-melding { 0% { opacity: 0; transform: translateY(-10px); } 12%, 75% { opacity: 1; transform: none; } 90%, 100% { opacity: 0; transform: translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .goed, .in-beeld .melding { animation: none; } }
+</style>

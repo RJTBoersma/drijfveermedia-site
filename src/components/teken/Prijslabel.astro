@@ -1,0 +1,27 @@
+---
+// Prijzen: een prijskaartje aan een touwtje dat zachtjes heen en weer zwaait, met munten ernaast.
+import Tekening from './Tekening.astro';
+---
+<figure class="prijslabel" aria-label="Getekend prijskaartje: vanaf 250 euro">
+  <svg class="scene kaartje" viewBox="0 0 260 260" data-teken>
+    <path class="l" pathLength="1" d="M130 10v40" />
+    <g class="zwaai">
+      <path class="o" d="M70 60h120l30 40-30 40H70a14 14 0 0 1-14-14V74a14 14 0 0 1 14-14z" style="fill:#fff" />
+      <path class="l" pathLength="1" d="M70 60h120l30 40-30 40H70a14 14 0 0 1-14-14V74a14 14 0 0 1 14-14z" />
+      <circle class="a" pathLength="1" cx="196" cy="100" r="7" />
+      <path class="l" pathLength="1" d="M203 100c20-10 0-50-73-50" />
+      <text x="128" y="94" text-anchor="middle" font-size="14" class="zacht">vanaf</text>
+      <text x="128" y="122" text-anchor="middle" font-size="30" font-weight="900">€ 250</text>
+    </g>
+  </svg>
+  <div class="naast"><Tekening naam="munten" maat={72} vertraging={600} /><Tekening naam="schild" maat={64} vertraging={900} /></div>
+</figure>
+<style>
+  .prijslabel { margin: 0; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 12px; max-width: 420px; }
+  .kaartje { max-width: 300px; }
+  .zwaai { transform-box: view-box; transform-origin: 130px 50px; }
+  :global(.in-beeld) .zwaai { animation: zwaai 4s ease-in-out 1s infinite; }
+  @keyframes zwaai { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+  .naast { display: grid; gap: 14px; justify-items: center; padding-bottom: 20px; }
+  @media (prefers-reduced-motion: reduce) { :global(.in-beeld) .zwaai { animation: none; } }
+</style>

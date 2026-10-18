@@ -1,0 +1,162 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--zoekwoordonderzoek.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/zoekwoordonderzoek/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is zoekwoordonderzoek?' },
+  { id: 'soorten', titel: 'Short tail, long tail en zoekintentie' },
+  { id: 'stappen', titel: 'Zoekwoorden vinden in zes stappen' },
+  { id: 'tools', titel: 'Gratis en betaalde tools' },
+  { id: 'kiezen', titel: 'Welke zoekwoorden kies je?' },
+  { id: 'ai', titel: 'Zoekwoorden en AI' },
+  { id: 'daarna', titel: 'En dan?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Zoekwoordonderzoek doen: zo vind je woorden die klanten opleveren',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Zoekwoordonderzoek doen in zes stappen | Drijfveer Media"
+  description="Zoekwoordonderzoek doen zonder dure tools? In zes stappen vind je de woorden die je klanten echt gebruiken, met gratis tools en een uitgewerkt voorbeeld."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Zoekwoordonderzoek', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Zoekwoordonderzoek doen: zo vind je woorden die klanten opleveren">
+    <p>Met zoekwoordonderzoek weet je welke woorden je klanten in Google typen, en welke pagina's je daarvoor nodig hebt. Dure tools zijn niet nodig. Een middag, een spreadsheet en deze gids wel.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Begin bij de woorden van je klanten, niet bij een tool.</li>
+            <li>Google zelf is je beste gratis bron: de suggesties, "Mensen vragen ook" en Search Console.</li>
+            <li>Kies niet het woord met het meeste volume, maar het woord met de beste kans op een klant.</li>
+            <li>Elk zoekwoord krijgt één eigen pagina. Twee pagina's op hetzelfde woord zitten elkaar in de weg.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is zoekwoordonderzoek?</h2>
+        <p>Zoekwoordonderzoek is uitzoeken welke woorden en zinnen je doelgroep in Google typt, hoe vaak dat gebeurt en wat ze dan willen vinden. Het is de basis van elke SEO-tekst en elke pagina die je maakt. Wie het overslaat, schrijft in zijn eigen woorden. En dat zijn zelden de woorden van de klant.</p>
+        <p>Een voorbeeld. Een kozijnenbedrijf noemt zijn dienst "renovatie van gevelelementen". Zijn klant typt "kozijnen vervangen kosten". De pagina kan nog zo goed zijn, Google koppelt hem niet aan die zoekvraag. Na een zoekwoordonderzoek weet je precies welke taal je doelgroep spreekt.</p>
+
+        <h2 id="soorten">Short tail, long tail en zoekintentie</h2>
+        <p>Zoekwoorden verschillen in lengte, en dat zegt veel over de zoeker. Een kort zoekwoord als "hovenier" heeft veel volume en veel concurrentie. Je weet niet eens of iemand een hovenier zoekt of wil worden. Long-tail zoekwoorden zijn langer en specifieker, zoals "hovenier voor tuinonderhoud in assen". Er wordt minder op gezocht, maar wie dat typt, weet wat hij wil.</p>
+        <p>Voor een mkb-bedrijf zit de winst bijna altijd in de long tail. Er is weinig concurrentie, en de zoeker staat dichter bij een aanvraag. Tien long-tail zoekwoorden met elk dertig zoekopdrachten leveren vaak meer klanten op dan één groot woord waar je nooit op de eerste pagina komt.</p>
+        <p>Let ook op de <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>: wat wil iemand met zijn zoekopdracht?</p>
+        <ul>
+          <li><b>Informatief.</b> "hoe snoei je een hortensia". Iemand wil iets weten. Daar past een gids of blog bij.</li>
+          <li><b>Vergelijkend.</b> "beste tuinontwerper drenthe" of "kunstgras of graszoden". Iemand twijfelt nog.</li>
+          <li><b>Transactioneel.</b> "hovenier offerte aanvragen". Iemand wil een klant worden. Hier hoort een dienstpagina.</li>
+          <li><b>Lokaal.</b> "hovenier assen" of "hovenier in de buurt". Google toont dan vaak de kaart. Dan telt je <a href="/lokale-seo/">lokale vindbaarheid</a> mee.</li>
+        </ul>
+
+        <h2 id="stappen">Zoekwoorden vinden in zes stappen</h2>
+        <p>Zet een spreadsheet klaar met vijf kolommen: zoekwoord, volume, intentie, concurrentie en pagina. Vul hem in deze volgorde.</p>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>1. Begin bij je klanten</h3></div>
+        <p>Schrijf op welke vragen je aan de telefoon krijgt. Lees je laatste twintig offerteaanvragen en mails terug. Welke woorden gebruiken klanten? Zeggen ze "dakkapel" of "dakopbouw", "airco" of "warmtepomp"? Vraag het ook je collega's aan de balie. Dit levert in een uur vaak dertig potentiële zoekwoorden op die geen tool je geeft.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>2. Kijk wat Google voorstelt</h3></div>
+        <p>Typ je belangrijkste woord in Google en kijk naar de suggesties die verschijnen. Typ daarna je woord met een spatie en een a, dan een b, enzovoort. Scroll naar "Mensen vragen ook" en naar de gerelateerde zoekopdrachten onderaan. Dit is precies wat je doelgroep zoekt, want Google haalt het uit echte zoekopdrachten.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>3. Zoek het volume op</h3></div>
+        <p>Hoe vaak wordt er per maand op gezocht? De Google Keyword Planner is gratis, met een Google Ads-account. Zonder lopende campagne zie je wel bandbreedtes, zoals 10 tot 100, in plaats van exacte getallen. Voor een eerste schifting is dat genoeg. Heb je al een site, open dan Search Console. Daar zie je op welke zoekwoorden je nu al wordt getoond, vaak op pagina twee of drie. Dat zijn je snelste kansen.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>4. Bekijk de concurrentie</h3></div>
+        <p>Zoek elk zoekwoord zelf op en bekijk de eerste tien resultaten. Staan er alleen grote landelijke merken en Wikipedia? Dan wordt het lastig. Staan er kleine bedrijven met dunne pagina's? Dan is dat je kans. Betaalde tools geven een score voor keyword difficulty, maar je eigen blik op de resultatenpagina zegt vaak meer.</p>
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>5. Bepaal de intentie</h3></div>
+        <p>De resultatenpagina verraadt wat Google denkt dat de zoeker wil. Zie je vooral blogs, dan wil men informatie. Zie je de kaart en bedrijven, dan zoekt men een dienst in de buurt. Schrijf de intentie in je spreadsheet. Een dienstpagina maken voor een informatief zoekwoord werkt zelden.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>6. Koppel elk zoekwoord aan één pagina</h3></div>
+        <p>Groepeer woorden die hetzelfde bedoelen, zoals "schutting plaatsen" en "schutting laten plaatsen". Die horen op één pagina. Geef elke groep een eigen pagina, bestaand of nieuw. Zo voorkom je dat twee van je eigen pagina's met elkaar concurreren. Dat heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>, en het kost je posities.</p>
+
+        <h2 id="tools">Welke tools gebruik je voor zoekwoordonderzoek?</h2>
+        <p>Voor een kleine site kom je met gratis tools een heel eind. Betaalde tools sparen vooral tijd en laten zien waar je concurrenten op scoren.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Kosten</th><th>Waar hij goed in is</th></tr></thead>
+            <tbody>
+              <tr><td>Google Keyword Planner</td><td>Gratis, Ads-account nodig</td><td>Volume en ideeën, rechtstreeks van Google</td></tr>
+              <tr><td>Google Search Console</td><td>Gratis</td><td>Zoekwoorden waarop je site nu al verschijnt</td></tr>
+              <tr><td>Google Trends</td><td>Gratis</td><td>Seizoenen en stijgende onderwerpen</td></tr>
+              <tr><td>AnswerThePublic</td><td>Beperkt gratis</td><td>Vragen rond een onderwerp</td></tr>
+              <tr><td>Semrush</td><td>Betaald</td><td>De Keyword Magic Tool, keyword difficulty en concurrenten</td></tr>
+              <tr><td>Ahrefs</td><td>Betaald</td><td>Concurrenten en backlinks</td></tr>
+              <tr><td>SE Ranking</td><td>Betaald</td><td>Zoekwoorden, posities en concurrenten in één</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wij werken zelf met SE Ranking. Een kanttekening bij alle tools: de cijfers voor Nederland zijn schattingen en ze verschillen per tool, soms flink. Gebruik het volume als richting, niet als waarheid. Een zoekwoord met "30" kan prima tien aanvragen per jaar opleveren.</p>
+
+        <h2 id="kiezen">Welke zoekwoorden kies je?</h2>
+        <p>Je kiest de zoekwoorden met de beste verhouding tussen relevantie, intentie en haalbaarheid. Volume komt pas daarna. Stel: een hovenier in Assen doet een zoekwoordonderzoek. Zijn lijstje ziet er zo uit.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekwoord</th><th>Volume</th><th>Intentie</th><th>Haalbaar?</th><th>Pagina</th></tr></thead>
+            <tbody>
+              <tr><td>hovenier</td><td>Hoog</td><td>Onduidelijk</td><td>Nee, landelijk</td><td>Geen</td></tr>
+              <tr><td>hovenier assen</td><td>Laag</td><td>Klant</td><td>Ja</td><td>Homepage</td></tr>
+              <tr><td>tuin laten aanleggen kosten</td><td>Gemiddeld</td><td>Vergelijken</td><td>Redelijk</td><td>Nieuwe gids</td></tr>
+              <tr><td>tuinonderhoud drenthe</td><td>Laag</td><td>Klant</td><td>Ja</td><td>Dienstpagina</td></tr>
+              <tr><td>beplantingsplan maken</td><td>Laag</td><td>Informatie</td><td>Ja</td><td>Blog met offerteknop</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld. Je eigen lijst ziet er per vak en regio anders uit.</p>
+        <p>"Hovenier" heeft het meeste volume, maar valt af. Het woord is te breed en de concurrentie is landelijk. De winst zit in de rijen eronder. Die woorden zijn kleiner, maar de zoeker woont in de buurt en wil iets laten doen.</p>
+
+        <h2 id="ai">Zoekwoorden vinden met hulp van AI</h2>
+        <p>AI-assistenten als ChatGPT, Claude en Gemini zijn goed in brainstormen. Vraag bijvoorbeeld: "Welke vragen stelt een huiseigenaar in Drenthe voordat hij een hovenier inhuurt? Geef er dertig, in spreektaal." Je krijgt in tien seconden een lijst waar je zelf een uur over doet. Ook voor het groeperen van een lange lijst is AI handig.</p>
+        <p>Vraag een AI-assistent nooit naar zoekvolumes. Die cijfers kent hij niet, dus hij verzint ze. Controleer elk idee in de Keyword Planner of Search Console. En houd er rekening mee dat mensen in een chatvenster langere vragen stellen dan in Google. Pagina's die zulke vragen helder beantwoorden, maken meer kans om in een AI-antwoord genoemd te worden. Meer daarover lees je bij <a href="/generative-engine-optimization/">GEO</a>.</p>
+
+        <h2 id="daarna">En dan?</h2>
+        <p>Een zoekwoordonderzoek is pas iets waard als je er iets mee doet. Pak de drie zoekwoorden met de beste kans en maak of verbeter de pagina's die erbij horen. Hoe je zo'n pagina schrijft, lees je in de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>. Meet na drie maanden in Search Console wat er veranderd is.</p>
+        <p>Liever dat iemand meekijkt? Zoekwoordonderzoek is bij ons het begin van elke opdracht in <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>. We kijken dan naar je vak, je regio en je concurrenten, en je krijgt een lijst die je zelf ook kunt lezen. Geen exportbestand met tweeduizend regels.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het onderzoek doen?" intro="We zoeken de woorden die klanten opleveren, niet de woorden die mooi staan in een rapport." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is zoekwoordonderzoek?', a: 'Uitzoeken welke woorden je doelgroep in Google typt, hoe vaak, en wat ze willen vinden. Met die kennis bepaal je welke pagina\'s je nodig hebt en welke woorden erin horen.' },
+      { v: 'Is de Google Keyword Planner gratis?', a: 'Ja. Je hebt wel een Google Ads-account nodig, maar je hoeft niet te adverteren. Zonder lopende campagne zie je bandbreedtes in plaats van exacte zoekvolumes.' },
+      { v: 'Hoeveel zoekwoorden heb ik nodig?', a: 'Eén hoofdzoekwoord per pagina, met een paar varianten. Voor een klein bedrijf is een lijst van twintig tot vijftig goede zoekwoorden een mooie start.' },
+      { v: 'Wat is een long-tail zoekwoord?', a: 'Een langer, specifiek zoekwoord van drie woorden of meer, zoals "tuinonderhoud drenthe prijs". Er wordt minder op gezocht, maar er is minder concurrentie en de zoeker weet beter wat hij wil.' },
+      { v: 'Hoe vaak moet ik zoekwoordonderzoek doen?', a: 'Doe het grondig bij de start of bij een nieuwe website. Kijk daarna elk jaar opnieuw, en elk kwartaal even in Search Console welke nieuwe zoekwoorden opduiken.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'SEO-teksten schrijven', href: '/kennisbank/gidsen/seo-teksten-schrijven/', tekst: 'Van zoekwoord naar pagina die gevonden wordt.' },
+      { label: 'Begrip', titel: 'Wat is zoekintentie?', href: '/kennisbank/wat-is/zoekintentie/', tekst: 'Waarom het "waarom" achter een zoekopdracht telt.', teken: 'kompas' },
+      { label: 'Pillar', titel: 'Zoekmachine-optimalisatie', href: '/zoekmachine-optimalisatie/', tekst: 'SEO vanaf € 495 per maand, met stijggarantie.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd op welke woorden jij kunt scoren?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site, je vak en je concurrenten, en belt je met de zoekwoorden waar je kans maakt.`} />
+</Base>

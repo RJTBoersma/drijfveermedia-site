@@ -1,0 +1,286 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--seo-en-sea.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/seo-en-sea/';
+const datum = '2026-10-18';
+const definitie = 'SEO is gevonden worden in de gewone, onbetaalde zoekresultaten van Google, terwijl je bij SEA betaalt voor een advertentie boven die resultaten.';
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'SEO en SEA',
+    alternateName: ['Verschil tussen SEO en SEA', 'SEO vs SEA'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat is het verschil tussen SEO en SEA?',
+    inLanguage: 'nl-NL',
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    mainEntity: { '@id': `${site.url}${url}#begrip` },
+  },
+];
+const hoofdstukken = [
+  { id: 'seo', titel: 'Wat is SEO?' },
+  { id: 'sea', titel: 'Wat is SEA?' },
+  { id: 'sem', titel: 'SEM: de verzamelnaam' },
+  { id: 'verschillen', titel: 'De belangrijkste verschillen' },
+  { id: 'kosten', titel: 'Wat kost wat?' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld over een jaar' },
+  { id: 'lokaal', titel: 'De kaart met bedrijven' },
+  { id: 'meten', titel: 'Meten wat het oplevert' },
+  { id: 'kiezen', titel: 'Wanneer kies je wat?' },
+  { id: 'samen', titel: 'Zo versterken ze elkaar' },
+  { id: 'ai', titel: 'SEO, SEA en AI-antwoorden' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'specialist', titel: 'Wie doet wat?' },
+];
+---
+<Base
+  title="Verschil tussen SEO en SEA: zo zit het | Drijfveer Media"
+  description="Wat is het verschil tussen SEO en SEA? Gratis gevonden worden of betalen per klik. Wat kost wat, wat werkt sneller en wanneer kies je welke?"
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'SEO en SEA', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Vindbaarheid</p>
+        <h1>Wat is het verschil tussen SEO en SEA?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Twee afkortingen, één letter verschil. Toch zijn SEO en SEA twee heel verschillende manieren om bovenaan Google te komen. Zoek maar eens op "dakdekker Groningen". Bovenaan staan een paar resultaten met het label Gesponsord. Dat is SEA. Daaronder volgen de gewone resultaten. Wie daar hoog staat, heeft zijn SEO op orde. In onderstaande afbeelding zie je hoe dat er schematisch uitziet.</p>
+
+      <figure class="serp">
+        <svg viewBox="0 0 640 360" role="img" aria-label="Schets van een zoekresultatenpagina: bovenaan twee advertenties met het label Gesponsord (SEA), daaronder een kaart met bedrijven en de gewone resultaten (SEO).">
+          <rect x="1" y="1" width="638" height="358" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+          <rect x="24" y="20" width="420" height="34" rx="17" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+          <text x="44" y="42" font-size="14" fill="#10283f">dakdekker groningen</text>
+          <circle cx="420" cy="37" r="7" fill="none" stroke="#074663" stroke-width="2" />
+          <path d="M425 42l6 6" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+          <g>
+            <rect x="24" y="72" width="420" height="52" rx="8" fill="#fff4ec" stroke="#ff6600" stroke-width="1.5" />
+            <text x="38" y="92" font-size="11" font-weight="700" fill="#ff6600">Gesponsord</text>
+            <rect x="38" y="100" width="220" height="9" rx="4" fill="#074663" />
+            <rect x="38" y="113" width="300" height="6" rx="3" fill="#d9e1ea" />
+            <rect x="24" y="132" width="420" height="52" rx="8" fill="#fff4ec" stroke="#ff6600" stroke-width="1.5" />
+            <text x="38" y="152" font-size="11" font-weight="700" fill="#ff6600">Gesponsord</text>
+            <rect x="38" y="160" width="190" height="9" rx="4" fill="#074663" />
+            <rect x="38" y="173" width="280" height="6" rx="3" fill="#d9e1ea" />
+          </g>
+          <rect x="24" y="194" width="420" height="58" rx="8" fill="#e8eef4" />
+          <circle cx="64" cy="223" r="8" fill="#074663" /><circle cx="140" cy="214" r="8" fill="#074663" /><circle cx="210" cy="232" r="8" fill="#074663" />
+          <text x="260" y="228" font-size="12" fill="#10283f">Kaart met bedrijven</text>
+          <g>
+            <rect x="38" y="266" width="230" height="9" rx="4" fill="#074663" />
+            <rect x="38" y="280" width="320" height="6" rx="3" fill="#d9e1ea" />
+            <rect x="38" y="304" width="200" height="9" rx="4" fill="#074663" />
+            <rect x="38" y="318" width="300" height="6" rx="3" fill="#d9e1ea" />
+            <rect x="38" y="338" width="180" height="9" rx="4" fill="#074663" />
+          </g>
+          <path d="M456 98h22M456 158h22M478 98v60" stroke="#ff6600" stroke-width="2" fill="none" />
+          <text x="488" y="124" font-size="20" font-weight="900" fill="#ff6600">SEA</text>
+          <text x="488" y="142" font-size="12" fill="#10283f">betaald per klik</text>
+          <path d="M456 223h22" stroke="#074663" stroke-width="2" />
+          <text x="488" y="221" font-size="14" font-weight="800" fill="#074663">Lokale SEO</text>
+          <text x="488" y="238" font-size="12" fill="#10283f">Bedrijfsprofiel</text>
+          <path d="M456 270h22M456 342h22M478 270v72" stroke="#074663" stroke-width="2" fill="none" />
+          <text x="488" y="304" font-size="20" font-weight="900" fill="#074663">SEO</text>
+          <text x="488" y="322" font-size="12" fill="#10283f">organisch, gratis</text>
+        </svg>
+        <figcaption class="muted klein">Schets van een zoekresultatenpagina. De volgorde en het aantal blokken verschillen per zoekopdracht.</figcaption>
+      </figure>
+
+      <Inhoud items={hoofdstukken} leestijd={14} />
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="seo">Wat is SEO?</h2></div>
+      <p>SEO staat voor Search Engine Optimization oftewel zoekmachine-optimalisatie. Je zorgt dat je website zo goed is dat Google hem graag laat zien in de organische zoekresultaten. Organisch betekent: niet betaald. Je kunt Google geen geld geven om hoger te komen. Google zegt dat zelf heel stellig: wie beweert dat het wel kan, heeft het mis.</p>
+      <p>SEO rust op drie poten:</p>
+      <ul>
+        <li><b>Techniek.</b> Google moet je pagina's kunnen vinden, lezen en opslaan. Een snelle, veilige site die goed werkt op een telefoon. Meer daarover bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>.</li>
+        <li><b>Inhoud.</b> Teksten die de vragen van je klanten beantwoorden, met relevante zoektermen in de woorden die zij zelf gebruiken.</li>
+        <li><b>Autoriteit.</b> Links en vermeldingen van andere sites die laten zien dat je te vertrouwen bent. Zie <a href="/linkbuilding/">linkbuilding</a>.</li>
+      </ul>
+      <h3>Hoe Google bepaalt wie organisch bovenaan staat</h3>
+      <p>Google werkt in drie stappen. Eerst vindt een programma, de crawler, je pagina's door links te volgen. Dan slaat Google ze op in de index. Pas daarna, bij elke zoekopdracht opnieuw, kiest Google welke pagina's het beste antwoord geven en in welke volgorde. Daarbij kijkt Google naar veel signalen tegelijk: past de pagina bij de vraag, is de informatie betrouwbaar, werkt de pagina goed op een telefoon. Over die betrouwbaarheid lees je meer bij <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a>.</p>
+      <p>Je betaalt niet per klik. Je betaalt met tijd en werk. Hoe lang het duurt? Volgens Google zie je sommige veranderingen binnen een paar uur, andere pas na maanden. In de praktijk zie je bij een nieuwe aanpak meestal na een paar maanden de eerste stijging.</p>
+
+      <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="sea">Wat is SEA?</h2></div>
+      <p>SEA staat voor Search Engine Advertising: adverteren in zoekmachines. In Nederland is dat bijna altijd Google Ads. Je kiest relevante zoektermen, schrijft een advertentie en biedt mee in een veiling. Je betaalt alleen als iemand klikt. Uitgebreider lees je dat bij het begrip <a href="/kennisbank/wat-is/sea/">SEA</a>.</p>
+      <p>Wie bovenaan komt, is niet alleen een kwestie van geld. Volgens Google bepalen zes dingen samen de positie van je advertentie:</p>
+      <ol>
+        <li>Je bod: wat je maximaal wilt betalen voor een klik.</li>
+        <li>De kwaliteit van je advertentie en je landingspagina.</li>
+        <li>De minimale drempels die Google stelt.</li>
+        <li>Hoe jouw advertentie zich verhoudt tot die van concurrenten.</li>
+        <li>De context van de zoekopdracht: locatie, apparaat, tijdstip.</li>
+        <li>Het verwachte effect van extra's zoals je telefoonnummer of links naar pagina's.</li>
+      </ol>
+      <p>Hoe goed je advertentie is, zie je aan de kwaliteitsscore: een cijfer van 1 tot 10 per zoekwoord. Google baseert dat op de verwachte klikfrequentie (<a href="/kennisbank/wat-is/ctr/">CTR</a>), hoe goed de advertentie bij de zoekopdracht past en hoe nuttig je landingspagina is. Een goede advertentie met een sterke pagina kan dus een duurdere concurrent verslaan.</p>
+      <p>En de prijs per klik, de <a href="/kennisbank/wat-is/cpc/">CPC</a>? Je betaalt volgens Google vaak minder dan je maximale bod: net genoeg om de adverteerder onder je te verslaan. Een sea-campagne kan vandaag starten en morgen bezoekers opleveren. Maar zet je hem uit, dan ben je ook meteen weer onzichtbaar.</p>
+
+      <h3>Soorten campagnes</h3>
+      <p>Niet elke Google Ads-campagne is SEA in strikte zin. SEA gaat over advertenties in de zoekresultaten. Dit zijn de campagnes die daar verschijnen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Campagne</th><th>Wat de zoeker ziet</th><th>Geschikt voor</th></tr></thead>
+          <tbody>
+            <tr><td>Zoeken</td><td>Tekstadvertenties met titel, tekst en links</td><td>Dienstverleners, mensen die al zoeken</td></tr>
+            <tr><td>Shopping</td><td>Producten met foto en prijs</td><td>Winkels met een productfeed</td></tr>
+            <tr><td>Performance Max</td><td>Advertenties op alle plekken van Google, ook in de zoekresultaten</td><td>Adverteerders met veel conversies</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Voor de meeste mkb'ers met een dienst is een zoekcampagne het begin. Je ziet precies op welke zoekwoorden je geld uitgeeft.</p>
+
+      <h2 id="sem">SEM: de verzamelnaam</h2>
+      <p>Je komt ook SEM tegen: search engine marketing. Dat is de paraplu voor allebei. SEO plus SEA is SEM. Sommige bureaus gebruiken SEM alleen voor adverteren, dus vraag bij een offerte even wat ermee bedoeld wordt.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="verschillen">De belangrijkste verschillen tussen SEO en SEA</h2></div>
+      <p>Op een rij:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>SEO</th><th>SEA</th></tr></thead>
+          <tbody>
+            <tr><td>Waar sta je?</td><td>Organische zoekresultaten</td><td>Betaalde zoekresultaten, boven of onder de gewone resultaten</td></tr>
+            <tr><td>Herkenbaar aan</td><td>Gewoon resultaat</td><td>Het label Gesponsord</td></tr>
+            <tr><td>Kosten</td><td>Werk aan je site, geen klikprijs</td><td>Een bedrag per klik, plus het beheer</td></tr>
+            <tr><td>Snelheid</td><td>Weken tot maanden</td><td>Dezelfde dag</td></tr>
+            <tr><td>Als je stopt</td><td>Posities zakken langzaam weg</td><td>Direct weg</td></tr>
+            <tr><td>Controle</td><td>Google bepaalt welke pagina en welke tekst</td><td>Jij bepaalt de tekst, de pagina, de uren en het gebied</td></tr>
+            <tr><td>Bereik</td><td>Ook de vele lange, specifieke vragen</td><td>De zoekwoorden waar je op biedt</td></tr>
+            <tr><td>Meetbaarheid</td><td>Via Search Console, minder precies per zoekwoord</td><td>Per klik, per zoekwoord, per euro</td></tr>
+            <tr><td>Bij ons</td><td>Vanaf € 495 per maand</td><td>Afhankelijk van je advertentiebudget</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het grootste verschil zit in de vorm van de investering. SEA is huur: zolang je betaalt, sta je er. SEO is bouwen: het duurt langer, maar wat je bouwt blijft een tijd staan.</p>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="kosten">Wat kost SEO en wat kost SEA?</h2></div>
+      <p>Bij SEO betaal je voor het werk. Bij ons begint <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a> vanaf € 495 per maand en <a href="/lokale-seo/">lokale SEO</a> vanaf € 295 per maand. Wat het in jouw geval kost, hangt af van je concurrentie en je doel. De gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a> zet alle tarieven op een rij.</p>
+      <p>Bij SEA betaal je twee dingen: je advertentiebudget, dat rechtstreeks naar Google gaat, en het beheer van de campagne. Hoeveel budget je nodig hebt, hangt af van de klikprijzen in jouw vak. Die lopen sterk uiteen. In de gids over een <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a> staan voorbeelden van klikprijzen per branche. Of het loont, reken je uit met je kosten per aanvraag en wat een klant je oplevert. Daarvoor is <a href="/kennisbank/wat-is/roas/">ROAS</a> een handige maat.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="rekenvoorbeeld">Rekenvoorbeeld: een jaar naast elkaar</h2></div>
+      <p>Een dakdekker wil meer aanvragen uit Google. Stel: een klik kost € 3. Van elke twintig mensen die klikken, vraagt er één een offerte aan. Dan kost een aanvraag via SEA € 60. Hieronder een vereenvoudigd jaar, met verzonnen cijfers, om te laten zien hoe de rekensom verschuift.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Periode</th><th>SEA: € 600 per maand</th><th>SEO: € 495 per maand</th></tr></thead>
+          <tbody>
+            <tr><td>Maand 1 tot 3</td><td>10 aanvragen per maand, vanaf week één</td><td>Nog weinig zichtbaar resultaat, de basis wordt gelegd</td></tr>
+            <tr><td>Maand 4 tot 6</td><td>10 aanvragen per maand, iets goedkoper door betere advertenties</td><td>Eerste posities op lange zoektermen, een paar aanvragen per maand</td></tr>
+            <tr><td>Maand 7 tot 12</td><td>10 aanvragen per maand</td><td>Meer posities op de top 10, het aantal aanvragen groeit</td></tr>
+            <tr><td>Na het jaar, als je stopt</td><td>Geen aanvragen meer</td><td>Posities blijven nog een tijd staan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Verzonnen cijfers. Het echte verloop hangt af van je vak, je regio, je site en je concurrenten.</p>
+      <p>Is een gemiddelde klus € 2.000 waard, dan is € 60 per aanvraag een prima deal. Maar elke maand opnieuw. Met SEO bouw je aan relevant verkeer dat blijft komen, ook als je een maand niets uitgeeft. De rekensom kantelt daardoor na verloop van tijd vaak in het voordeel van SEO. Vaak, niet altijd: in een vak met weinig zoekers en veel concurrenten kan adverteren de betere keus blijven.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2 id="lokaal">De kaart met bedrijven: een derde plek</h2></div>
+      <p>Zoek je op een dienst met een plaatsnaam, dan zie je vaak nog een blok: een kaart met een paar bedrijven, met sterren, openingstijden en een belknop. Dat is geen gewone SEO en geen SEA. Die plek verdien je met je Google Bedrijfsprofiel, je reviews en je afstand tot de zoeker. Het hoort bij <a href="/lokale-seo/">lokale SEO</a>.</p>
+      <p>Voor een loodgieter, kapper of garage is dit blok vaak het belangrijkste van de hele pagina. Wie daar staat, wordt gebeld zonder dat iemand zijn site bezoekt. Het kost geen klikgeld, wel aandacht: een volledig profiel, foto's, en elke review beantwoorden. Hoe je dat aanpakt, lees je in de gids over het <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>.</p>
+
+      <h2 id="meten">Hoe je meet wat het oplevert</h2>
+      <p>Bij SEA zie je in Google Ads per zoekwoord wat je uitgaf en wat het opleverde, mits je conversiemeting goed staat. Bij SEO kijk je in Google Search Console: op welke zoekopdrachten je verschijnt, hoe vaak er geklikt wordt en op welke positie je gemiddeld staat. Leg je dat naast je aanvragen, dan weet je wat welke route je oplevert. Weten waar je aanvragen vandaan komen, zonder cookiemelding? Dat regelen we bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="kiezen">Wanneer kies je wat?</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Jouw situatie</th><th>Ons advies</th></tr></thead>
+          <tbody>
+            <tr><td>Je hebt volgende maand klanten nodig</td><td>Begin met SEA. Dat is de snelste kraan die je open kunt draaien.</td></tr>
+            <tr><td>Je wilt een vaste stroom aanvragen met een vast budget</td><td>Investeer in SEO.</td></tr>
+            <tr><td>Je werkt vooral in je eigen regio</td><td>Begin bij lokale SEO en je Google Bedrijfsprofiel.</td></tr>
+            <tr><td>Je hebt een nieuwe site of een nieuw product</td><td>SEA om te starten en te testen, SEO ernaast opbouwen.</td></tr>
+            <tr><td>Je werk is seizoensgebonden</td><td>SEO als basis, SEA extra in de drukke maanden.</td></tr>
+            <tr><td>Je budget is klein</td><td>Eerst je Bedrijfsprofiel en je belangrijkste pagina's op orde. Dat kost geen klikgeld.</td></tr>
+            <tr><td>Je staat organisch al bovenaan</td><td>Test of advertenties op die zoekterm nog iets toevoegen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2 id="samen">Zo versterken SEO en SEA elkaar</h2></div>
+      <p>De meeste bedrijven doen het slimst met SEO en SEA naast elkaar. Advertenties voor de korte termijn, SEO voor de lange. Ze helpen elkaar op vijf manieren:</p>
+      <ul class="vink">
+        <li><b>Testen met advertenties.</b> Ontdekken welke zoektermen echt klanten opleveren kost met SEO maanden. Met een advertentie weet je het binnen weken. Die woorden gebruik je daarna in je SEO.</li>
+        <li><b>Twee plekken tegelijk.</b> Sta je met een advertentie én organisch op de eerste pagina, dan zie je er twee keer. Dat valt op.</li>
+        <li><b>Betere pagina's.</b> Een landingspagina die goed scoort bij de kwaliteitsscore, is meestal ook een goede pagina voor SEO. Andersom ook.</li>
+        <li><b>Gaten vullen.</b> Lukt het organisch nog niet op een belangrijk woord, adverteer dan tijdelijk tot je SEO zover is.</li>
+        <li><b>Geld besparen.</b> Sta je op een zoekterm organisch al bovenaan, test dan of de advertentie daarop nog iets toevoegt. Soms kan hij uit.</li>
+      </ul>
+      <p>Eén misverstand moet de wereld uit: adverteren maakt je organische positie niet beter. Google zegt dat het geen geld aanneemt om pagina's hoger te zetten. De twee systemen staan los van elkaar.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2 id="ai">SEO, SEA en AI-antwoorden</h2></div>
+      <p>Boven de resultaten staat steeds vaker een AI-overzicht. Volgens Google verschijnt dat alleen als het iets toevoegt, en daarom bij veel zoekopdrachten niet. Bij weetvragen zie je het vaker dan bij "dakdekker Groningen".</p>
+      <p>Voor SEO betekent het een nieuw doel: niet alleen een blauwe link zijn, maar ook de bron die de AI noemt. Google zegt dat daarvoor dezelfde basisregels gelden als voor gewone SEO. Lees hoe dat werkt bij <a href="/generative-engine-optimization/">genoemd worden door AI</a>. Ook voor adverteerders verandert er wat. Wat er bekend is over advertenties in ChatGPT, lees je op onze pagina over <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="fouten">Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><b>Adverteren naar je homepage.</b> Wie op "lekkage dak" klikt, wil een pagina over lekkages, niet je welkomstwoord. Dat kost je klikken en kwaliteitsscore.</li>
+        <li><b>Te breed adverteren.</b> Zonder uitsluitingszoekwoorden betaal je voor klikken van mensen die een vacature of een doe-het-zelftip zoeken.</li>
+        <li><b>SEO na drie maanden opgeven.</b> Net als het begint te lopen. Spreek vooraf af wanneer je wat mag verwachten.</li>
+        <li><b>Niet meten.</b> Zonder conversiemeting weet je bij SEA niet welke euro iets opleverde. En bij SEO niet welke pagina's aanvragen brengen.</li>
+        <li><b>Alles op één paard.</b> Alleen SEA maakt je afhankelijk van klikprijzen. Alleen SEO maakt je kwetsbaar bij een update. Een mix is gezonder.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="specialist">Wie doet wat?</h2></div>
+      <p>Een SEO-specialist werkt aan je site, je teksten en je links. Een SEA-specialist zet campagnes op, kiest zoekwoorden en biedingen en stuurt elke week bij. Het zijn verschillende vakken, al overlappen ze. Wat een SEO-specialist precies doet, lees je in de gids <a href="/kennisbank/gidsen/wat-doet-een-seo-specialist/">wat doet een SEO-specialist</a>.</p>
+      <p>Let bij allebei op dezelfde dingen. Iemand met jarenlange ervaring belooft je geen nummer 1-positie op dag één. Hij vertelt je ook waar je beter mee kunt stoppen. Wij vinden dat dat erbij hoort: verspild budget schrappen levert soms meer op dan een nieuwe campagne. Daarom werken we maandelijks opzegbaar en met <a href="/garantie/">garantie</a>.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/wat-is-google-ads/">Wat is Google Ads?</a> of bekijk onze aanpak voor <a href="/online-adverteren/google-ads-bureau/">Google Ads</a>. Wil je zelf aan de slag met SEO, begin dan bij <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe werkt SEO</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen SEO en SEA in één zin?', a: 'Bij SEO werk je aan je site om gratis hoger te komen in de gewone zoekresultaten. Bij SEA betaal je per klik voor een advertentie in de zoekresultaten.' },
+      { v: 'Wat is beter, SEO of SEA?', a: 'Dat hangt af van je doel. SEA werkt direct maar stopt zodra je stopt met betalen. SEO duurt langer maar blijft werken. De meeste bedrijven combineren ze.' },
+      { v: 'Helpt adverteren in Google mijn organische positie?', a: 'Nee. Google zegt dat het geen betaling aanneemt om pagina\'s hoger te zetten. Advertenties en organische resultaten staan los van elkaar.' },
+      { v: 'Hoe snel werkt SEO?', a: 'Volgens Google kunnen veranderingen binnen uren tot maanden effect hebben. Reken bij een nieuwe aanpak op een paar maanden voor de eerste duidelijke stijging.' },
+      { v: 'Wat kost SEA per maand?', a: 'Dat bepaal je zelf met je budget. Wat je nodig hebt, hangt af van de klikprijzen in je vak en hoeveel aanvragen je wilt. Daarbij komen de kosten voor het beheer.' },
+      { v: 'Kan ik SEO en SEA zelf doen?', a: 'Ja. Een zoekcampagne opzetten en je eigen site verbeteren kan iedereen leren. Het kost wel tijd, en fouten kosten bij SEA direct geld. Onze gidsen helpen je op weg. Wil je het uitbesteden, dan kan dat ook per maand opzegbaar.' },
+      { v: 'Hoe verdeel ik mijn budget over SEO en SEA?', a: 'Daar is geen vaste verhouding voor. Heb je snel aanvragen nodig, dan gaat er meer naar SEA. Wil je op lange termijn minder afhankelijk zijn van klikprijzen, dan schuif je geleidelijk naar SEO. Kijk elke maand wat een aanvraag via elke route kost.' },
+      { v: 'Wat is SEM?', a: 'Search engine marketing: de verzamelnaam voor SEO en SEA samen. Let op, sommige bureaus bedoelen er alleen adverteren mee.' },
+    ]}
+  />
+
+  <Actie titel="Twijfel je wat bij jou het meeste oplevert?" tekst={`We zoeken het gratis voor je uit. ${site.contactpersoon} belt je met een eerlijk advies, ook als dat minder uitgeven is.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 0 0 32px; }
+  .serp { margin: 8px 0 32px; }
+  .serp svg { width: 100%; height: auto; display: block; }
+  .serp figcaption { margin-top: 8px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

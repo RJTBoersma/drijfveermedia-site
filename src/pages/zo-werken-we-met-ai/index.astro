@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/zo-werken-we-met-ai.astro';
+import { site } from '../../data/site';
+
+const url = '/zo-werken-we-met-ai/';
+const tools = [
+  ['ChatGPT, Claude en Gemini', 'Meedenken, eerste versies van teksten en code, data ordenen. We gebruiken ze naast elkaar, omdat elk model iets anders goed kan.'],
+  ['Copilot, Perplexity en Grok', 'Snel onderzoek met bronnen erbij. En kijken hoe deze assistenten over bedrijven praten, ook over het jouwe.'],
+  ['Google AI Studio', 'Proberen wat de nieuwste modellen van Google kunnen, voordat ze in gewone producten zitten.'],
+  ['NotebookLM', 'Lange stukken doorgronden, zoals een onderzoeksrapport of al je bestaande teksten. Hij antwoordt alleen uit de bronnen die je hem geeft.'],
+  ['Whisk en Suno', 'Beeld en muziek. Vooral om ideeën snel zichtbaar of hoorbaar te maken.'],
+  ['SE Ranking', 'Zoekwoorden, posities en de AI-overzichten van Google meten. Hier staan onze metingen in.'],
+];
+const schema = [{ '@type': 'WebPage', name: 'Zo werken we met AI', url: `${site.url}${url}`, about: { '@id': `${site.url}/#organisatie` } }];
+---
+<Base
+  title="Zo werken we met AI | Drijfveer Media"
+  description="Welke AI-tools Drijfveer Media gebruikt en waarvoor, wat AI doet en wat mensen doen, en hoe we met jouw gegevens omgaan. Eerlijk en in gewone taal."
+  kruimels={[{ naam: 'Over ons', url: '/over-ons/' }, { naam: 'Zo werken we met AI', url }]}
+  schema={schema}
+>
+  <Hero kicker="Over ons" titel="Zo werken we met AI" knop={{ tekst: 'Stel je vraag', href: '/contact/' }}>
+    <p>We gebruiken AI elke dag. Het maakt ons sneller en scherper, en dat merk je aan de prijs. Maar een mens beslist, controleert en is verantwoordelijk.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Waarom we AI gebruiken</h2>
+      <p>We zijn met z'n vieren, met een vaste groep freelancers eromheen. AI neemt ons uren werk uit handen: onderzoek voorbereiden, een eerste opzet maken, lange lijsten ordenen. Die tijd gaat naar wat telt. Nadenken over jouw bedrijf, controleren of iets klopt en met je praten.</p>
+      <p>Er is nog een reden. We helpen klanten om genoemd te worden door ChatGPT, Gemini en Google AI. Dat lukt alleen als je die systemen van binnenuit kent. Wie er zelf niet elke dag mee werkt, kan er ook geen goed advies over geven.</p>
+
+      <h2>De tools die we echt gebruiken</h2>
+      <div class="tabel-scroll tools">
+        <table>
+          <thead><tr><th>Tool</th><th>Waarvoor</th></tr></thead>
+          <tbody>{tools.map(([t, w]) => <tr><td><b>{t}</b></td><td>{w}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p>Deze lijst verandert. Er komt bijna elke maand iets nieuws bij. Nieuwe tools en technieken proberen we eerst uit op onze eigen sites, in <a href="/proeflab/">ons proeflab</a>, voordat ze bij een klant in de buurt komen.</p>
+
+      <h2>Wat AI doet, en wat mensen doen</h2>
+    </div>
+    <div class="raster raster-2 wie">
+      <div class="card">
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>Dit laten we AI doen</h3></div>
+        <ul class="vink">
+          <li>Onderzoek voorbereiden en samenvatten</li>
+          <li>Eerste versies van teksten en code</li>
+          <li>Data ordenen en patronen zoeken</li>
+          <li>Varianten en ideeën bedenken</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Dit doen wij zelf</h3></div>
+        <ul class="vink">
+          <li>Uitzoeken wat jij echt wilt bereiken</li>
+          <li>Keuzes maken en prioriteiten stellen</li>
+          <li>Feiten, cijfers en bronnen controleren</li>
+          <li>Eindredactie, in gewone taal</li>
+          <li>Het contact met jou</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tekst">
+      <p>AI maakt fouten. Een taalmodel kan iets verzinnen dat heel overtuigend klinkt. Daarom gaat er niets live zonder dat een van ons het heeft nagekeken. Google vindt AI-hulp bij het schrijven prima, zolang de inhoud bezoekers echt helpt. Honderden pagina's laten maken om hoger te komen, noemt Google spam. Dat doen we dus niet.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={48} /><h2>Jouw gegevens en AI</h2></div>
+      <p>We zijn een online marketingbureau dat elke dag met AI werkt. Dat hoort bij hoe we werken, net als Search Console en een spreadsheet. Heb je liever niet dat er AI aan jouw project te pas komt? Zeg het gerust. Bij sommige diensten kunnen we dan zonder werken. Bij andere niet, omdat AI daar een vast onderdeel van het werk is. Dan zeggen we dat eerlijk vooraf. Liever dat, dan dat we je iets beloven wat we niet waarmaken.</p>
+      <p>Werk je met gevoelige gegevens, zoals klantbestanden of medische informatie? Noem het bij de start. Dan bespreken we samen wat wel en niet in een AI-tool hoort. Lees ook onze <a href="/privacyverklaring/">privacyverklaring</a>.</p>
+
+      <h2>Zelf aan de slag met AI?</h2>
+      <p>Veel ondernemers gebruiken ChatGPT al, maar halen er maar een fractie uit. In de gids <a href="/kennisbank/gidsen/chatgpt-voor-bedrijven/">ChatGPT gebruiken in je bedrijf</a> lees je hoe je het slimmer inzet. Wil je dat je team er echt mee leert werken, dan geven we ook <a href="/trainingen/">trainingen</a>. En wil je weten of AI jouw bedrijf al kent, kijk dan bij <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Actie titel="Een vraag over AI en jouw bedrijf?" tekst={`Bel of mail ${site.contactpersoon}. Hij belt je binnen 15 minuten terug en vertelt eerlijk wat AI voor jou kan doen, en wat niet.`} knop={{ tekst: 'Neem contact op', href: '/contact/' }} />
+</Base>
+<style>
+  .tools td:first-child { white-space: nowrap; }
+  @media (max-width: 640px) { .tools td:first-child { white-space: normal; } }
+  .wie { max-width: 820px; margin: 8px 0 28px; }
+  .wie .stap-kop { margin-bottom: 8px; }
+  .wie .vink { margin: 0; }
+</style>

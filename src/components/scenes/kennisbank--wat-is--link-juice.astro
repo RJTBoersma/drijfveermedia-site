@@ -1,0 +1,54 @@
+---
+// Scène voor /kennisbank/wat-is/link-juice/: een externe site is met een buis verbonden met de homepage, die via buizen twee dienstpagina's voedt. Een derde pagina hangt nergens aan.
+// Als hij leeft: druppels stromen rustig door de buizen en de twee aangesloten pagina's lopen vol; de losse pagina blijft leeg.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const paginas = [150, 240];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een externe website stuurt via een buis waarde naar de homepage, die het doorgeeft aan twee pagina\'s. Een pagina zonder links blijft leeg.'}>
+  <path d="M132 78H186M240 122V150M190 150H280M190 150V184M280 150V184" fill="none" stroke="#e8eef4" stroke-width="12" stroke-linecap="round" />
+  <path d="M132 78H186M240 122V150M190 150H280M190 150V184M280 150V184" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round" />
+
+  <rect x="24" y="46" width="110" height="64" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="38" y="60" width="50" height="7" rx="3.5" fill="#074663" />
+  <rect class="v" x="38" y="74" width="80" height="5" rx="2.5" />
+  <rect class="v" x="38" y="85" width="64" height="5" rx="2.5" />
+  <path d="M112 62l3 6 6 1-4.5 4 1 6-5.5-3-5.5 3 1-6-4.5-4 6-1z" fill="#ff6600" />
+
+  <rect x="186" y="36" width="108" height="86" rx="10" fill="#074663" />
+  <path d="M226 84v-14l14-10 14 10v14z" fill="none" stroke="#fff" stroke-width="2.5" stroke-linejoin="round" />
+  <rect x="210" y="96" width="60" height="6" rx="3" fill="#fff" opacity="0.5" />
+
+  {paginas.map((x) => (
+    <g>
+      <rect x={x} y="184" width="80" height="62" rx="9" fill="#fff" stroke="#074663" stroke-width="2" />
+      <rect x={x + 2} y="230" width="76" height="14" rx="7" fill="#ffd2b0" />
+      <rect x={x + 12} y="196" width="40" height="6" rx="3" fill="#074663" />
+    </g>
+  ))}
+  <rect x="352" y="184" width="80" height="62" rx="9" fill="#fff" stroke="#8aa0b4" stroke-width="2" stroke-dasharray="5 5" />
+  <rect x="364" y="196" width="40" height="6" rx="3" fill="#d9e1ea" />
+
+  {!mini && (
+    <g>
+      <circle class="sap sap1" cx="134" cy="78" r="4.5" fill="#ff6600" />
+      <circle class="sap sap2" cx="240" cy="122" r="4.5" fill="#ff6600" />
+      <circle class="sap sap3" cx="240" cy="122" r="4.5" fill="#ff6600" />
+      {paginas.map((x) => <rect class="sap-vul" x={x + 2} y="216" width="76" height="28" rx="7" fill="#ffd2b0" />)}
+    </g>
+  )}
+</svg>
+<style>
+  .sap-vul { transform-box: fill-box; transform-origin: center bottom; }
+  :global(.teken-js) .sap { opacity: 0; }
+  :global(.teken-js) .sap-vul { transform: scaleY(0.5); }
+  .in-beeld .sap1 { animation: kennisbank-wat-is-link-juice-in 3s linear 0.3s infinite; }
+  .in-beeld .sap2 { animation: kennisbank-wat-is-link-juice-links 3s linear 1.3s infinite; }
+  .in-beeld .sap3 { animation: kennisbank-wat-is-link-juice-rechts 3s linear 1.8s infinite; }
+  .in-beeld .sap-vul { animation: kennisbank-wat-is-link-juice-vul 3s ease-out 1.5s forwards; }
+  @keyframes kennisbank-wat-is-link-juice-in { 0% { opacity: 0; transform: translateX(0); } 10%, 80% { opacity: 1; } 100% { opacity: 0; transform: translateX(52px); } }
+  @keyframes kennisbank-wat-is-link-juice-links { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 30% { transform: translate(0, 28px); } 60% { transform: translate(-50px, 28px); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(-50px, 62px); } }
+  @keyframes kennisbank-wat-is-link-juice-rechts { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 30% { transform: translate(0, 28px); } 60% { transform: translate(40px, 28px); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(40px, 62px); } }
+  @keyframes kennisbank-wat-is-link-juice-vul { to { transform: scaleY(1); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .sap, .in-beeld .sap-vul { animation: none; } }
+</style>

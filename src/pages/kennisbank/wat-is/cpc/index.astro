@@ -1,0 +1,209 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--cpc.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/cpc/';
+const datum = '2026-10-18';
+const definitie = 'CPC (cost per click) is het bedrag dat je betaalt als iemand op je online advertentie klikt. In het Nederlands: kosten per klik.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Waar CPC voor staat' },
+  { id: 'soorten', titel: 'Drie soorten in Google Ads' },
+  { id: 'veiling', titel: 'Waarom je minder betaalt dan je bod' },
+  { id: 'branche', titel: 'Klikprijzen per branche' },
+  { id: 'factoren', titel: 'Wat de prijs bepaalt' },
+  { id: 'te-hoog', titel: 'Wanneer een klik te duur is' },
+  { id: 'afkortingen', titel: 'CPC, CPM, CPA en CPV' },
+  { id: 'omlaag', titel: 'De klikprijs omlaag krijgen' },
+];
+// Gemiddelde klikprijzen in Nederland, opgevraagd in SE Ranking op 18 oktober 2026 (zelfde tabel als in de gids Google Ads-campagne opzetten).
+const klikprijzen = [
+  ['hypotheekadviseur', '€ 8,15', '9.900'],
+  ['dakdekker', '€ 4,81', '9.900'],
+  ['boekhouder', '€ 3,80', '8.000'],
+  ['badkamer renovatie', '€ 3,41', '4.400'],
+  ['verhuisbedrijf', '€ 3,35', '5.400'],
+  ['elektricien', '€ 3,29', '10.800'],
+  ['kozijnen', '€ 2,57', '14.800'],
+  ['loodgieter', '€ 2,25', '18.100'],
+  ['schilder', '€ 1,73', '10.800'],
+  ['rijschool', '€ 1,42', '14.800'],
+  ['hovenier', '€ 0,88', '10.800'],
+  ['glazenwasser', '€ 0,56', '4.400'],
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'CPC (cost per click)',
+  alternateName: ['Kosten per klik', 'Cost per click'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is CPC? Kosten per klik uitgelegd | Drijfveer Media"
+  description="Wat is CPC? Kosten per klik in gewone taal: maximale, werkelijke en gemiddelde CPC, wat een klik per branche kost en hoe je de prijs omlaag krijgt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'CPC', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Online adverteren</p>
+        <h1>Wat is CPC?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Adverteer je in Google, dan betaal je niet voor het tonen van je advertentie. Je betaalt pas als iemand klikt. Wat die klik kost, heet de CPC. Het is het getal waar elke adverteerder naar kijkt, en het getal dat het vaakst verkeerd wordt begrepen. Want een dure klik kan prima zijn, en een goedkope klik kan weggegooid geld zijn.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={8} />
+
+      <div class="stap-kop" id="betekenis"><Tekening naam="boek" maat={52} /><h2>Waar staat CPC voor?</h2></div>
+      <p>CPC is de afkorting van cost per click. Je ziet het in Google Ads, maar ook bij advertenties op Facebook, Instagram en LinkedIn. Het rekenmodel erachter heet pay per click, of PPC: je betaalt per klik en niet per vertoning. Dat maakt adverteren in zoekmachines overzichtelijk. Wie je advertentie ziet en doorloopt, kost je niets.</p>
+      <p>De gemiddelde klikprijs reken je zo uit:</p>
+      <div class="kader formule">
+        <p><b>Gemiddelde CPC = totale advertentiekosten ÷ aantal klikken</b></p>
+        <p>Voorbeeld: je gaf deze maand € 450 uit en kreeg 180 klikken. Dan betaalde je gemiddeld € 2,50 per klik.</p>
+      </div>
+
+      <div class="stap-kop" id="soorten"><Tekening naam="munten" maat={52} /><h2>Drie soorten klikprijs in Google Ads</h2></div>
+      <p>In je account kom je de klikprijs in drie vormen tegen. Ze lijken op elkaar, maar betekenen iets anders.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Wat het is</th><th>Wie bepaalt het</th></tr></thead>
+          <tbody>
+            <tr><td><b>Maximale CPC</b></td><td>Het hoogste bedrag dat je voor één klik wilt betalen</td><td>Jij, of Google bij automatisch bieden</td></tr>
+            <tr><td><b>Werkelijke CPC</b></td><td>Wat je voor een bepaalde klik echt betaalt</td><td>De veiling</td></tr>
+            <tr><td><b>Gemiddelde CPC</b></td><td>Het gemiddelde van al je werkelijke klikprijzen over een periode</td><td>De optelsom van al je klikken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Volgens Google is je maximale bod het hoogste bedrag dat normaal gesproken in rekening wordt gebracht. Vaak betaal je minder, soms veel minder. Er zijn twee uitzonderingen: met een bodaanpassing of met automatisch bieden kan een klik boven je ingestelde maximum uitkomen. De gemiddelde CPC vind je als kolom bij je campagnes, advertentiegroepen en zoekwoorden.</p>
+
+      <div class="stap-kop" id="veiling"><Tekening naam="doel" maat={52} /><h2>Waarom je minder betaalt dan je bod</h2></div>
+      <p>Bij elke zoekopdracht houdt Google een veiling. Je plek hangt niet alleen af van je bod, maar ook van de kwaliteit van je advertentie en landingspagina, de context van de zoekopdracht en een paar andere factoren. Samen vormen ze je advertentierangschikking.</p>
+      <p>Daarna komt het prijskaartje. Google rekent volgens zijn eigen uitleg net genoeg om twee dingen te halen: de minimale drempel voor die advertentieplek, en de adverteerder direct onder je. Staat er niemand onder je die de drempel haalt, dan betaal je het minimum voor de drempel.</p>
+      <div class="kader">
+        <p class="kader-titel">Vereenvoudigd voorbeeld (verzonnen cijfers)</p>
+        <p>Drie dakdekkers bieden op "dakdekker Zwolle". Jij biedt maximaal € 3,00 en hebt een sterke advertentie met een goede pagina. Bedrijf A biedt € 3,50, maar zijn advertentie leidt naar de homepage. Bedrijf B biedt € 2,00. Jij komt bovenaan, ondanks het lagere bod. Je betaalt niet je volle € 3,00, maar net genoeg om Bedrijf A voor te blijven, zeg € 2,41.</p>
+      </div>
+      <p>Twee dingen om te onthouden. Ten eerste: een goede advertentie en pagina zijn letterlijk geld waard, omdat ze dezelfde plek goedkoper maken. Ten tweede: de plekken boven de zoekresultaten zijn duurder. Google zegt zelf dat de drempels daar hoger liggen, zodat de werkelijke klikprijs bovenaan vaak hoger is dan onderaan de pagina. Ook als er niemand direct onder je staat.</p>
+      <p>De kwaliteitsscore van 1 tot 10 in je account geeft een idee van hoe Google je advertenties beoordeelt. Meer over die score en de veiling lees je in <a href="/kennisbank/wat-is/sea/">Wat is SEA?</a></p>
+
+      <div class="stap-kop" id="branche"><Tekening naam="grafiek" maat={52} /><h2>Wat een klik kost per branche</h2></div>
+      <p>De verschillen per branche zijn groot. Dit zijn de gemiddelde klikprijzen in Nederland voor een aantal veelgezochte beroepen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekwoord</th><th>Gemiddelde klikprijs</th><th>Zoekvolume per maand</th></tr></thead>
+          <tbody>
+            {klikprijzen.map(([k, cpc, vol]) => <tr><td>{k}</td><td>{cpc}</td><td>{vol}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: SE Ranking, zoekwoorddatabase Nederland, opgevraagd op 18 oktober 2026. Een landelijk gemiddelde. Wat jij betaalt, hangt af van je regio, de concurrentie op dat moment en de kwaliteit van je advertentie.</p>
+      <p>Een klik op hypotheekadviseur kost bijna vijftien keer zoveel als een klik op glazenwasser. Logisch: een hypotheek levert een adviseur veel meer op dan een ruitenwasbeurt. De klikprijs volgt grofweg wat een klant waard is. Wil je weten wat een zoekwoord in jouw regio kost? Open de Zoekwoordplanner in Google Ads. Je krijgt per zoekwoord twee bedragen voor bovenaan de pagina, een lage en een hoge schatting. Daartussen ligt wat je ongeveer gaat betalen.</p>
+
+      <div class="stap-kop" id="factoren"><Tekening naam="tandwiel" maat={52} /><h2>Wat bepaalt de klikprijs?</h2></div>
+      <ul>
+        <li><b>Concurrentie.</b> Hoe meer adverteerders op hetzelfde zoekwoord bieden, hoe hoger de prijs. Daarom verschilt de klikprijs ook per regio.</li>
+        <li><b>De waarde van een klant in je branche.</b> Advocaten, hypotheekadviseurs en dakdekkers kunnen meer per klik betalen dan een glazenwasser.</li>
+        <li><b>Kwaliteit.</b> Een relevante advertentie met een goede landingspagina krijgt dezelfde plek voor minder geld.</li>
+        <li><b>De plek op de pagina.</b> Bovenaan staan is duurder dan onderaan.</li>
+        <li><b>Het moment en het apparaat.</b> Op drukke uren, in bepaalde plaatsen of op mobiel kan de veiling anders uitvallen.</li>
+        <li><b>Je biedstrategie.</b> Een strategie die op conversies stuurt, biedt hoger op zoekopdrachten met een grote kans op een klant, en lager op de rest.</li>
+      </ul>
+
+      <div class="stap-kop" id="te-hoog"><Tekening naam="lamp" maat={52} /><h2>Wanneer is een klik te duur?</h2></div>
+      <p>Een klik is niet duur of goedkoop. Hij is te duur als hij meer kost dan hij oplevert. Dat reken je terug vanaf je klant:</p>
+      <div class="kader formule">
+        <p><b>Hoogste klikprijs die loont = wat een aanvraag mag kosten × percentage bezoekers dat een aanvraag doet</b></p>
+      </div>
+      <p>Stel: een kozijnenbedrijf mag € 75 uitgeven per aanvraag. Van elke honderd bezoekers vragen er vier een offerte aan, 4 procent. Dan mag een klik maximaal € 75 × 0,04 = € 3,00 kosten. Betaal je gemiddeld € 2,57, zoals het landelijk gemiddelde voor kozijnen, dan zit je goed. Zakt het percentage naar 2 procent, dan is € 1,50 je grens en verlies je op elke klik geld. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Zie je het verband? Wie zijn landingspagina verbetert, mag meer per klik betalen en blijft toch winstgevend. Daarom kijk je nooit naar de klikprijs alleen. Kijk naar wat een aanvraag kost. In Google Ads heet dat de kosten per conversie, of de CPA.</p>
+
+      <div class="stap-kop" id="afkortingen"><Tekening naam="pen" maat={52} /><h2>CPC, CPM, CPA en CPV naast elkaar</h2></div>
+      <p>Er zijn meer manieren om voor online advertenties te betalen. De bekendste op een rij:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Afkorting</th><th>Voluit</th><th>Je betaalt voor</th><th>Gebruikt bij</th></tr></thead>
+          <tbody>
+            <tr><td>CPC</td><td>Cost per click</td><td>Een klik</td><td>Zoekadvertenties, Shopping</td></tr>
+            <tr><td>CPM</td><td>Cost per mille</td><td>Duizend vertoningen</td><td>Banners, video, naamsbekendheid</td></tr>
+            <tr><td>vCPM</td><td>Viewable cost per mille</td><td>Duizend vertoningen die echt in beeld waren</td><td>Display-campagnes</td></tr>
+            <tr><td>CPV</td><td>Cost per view</td><td>Een weergave van je video</td><td>Video op YouTube</td></tr>
+            <tr><td>CPA</td><td>Cost per action</td><td>Een conversie: aanvraag, aankoop</td><td>Als doel bij slim bieden</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>CPA is in Google Ads vooral een stuurgetal. Met de biedstrategie Doel-CPA geef je op wat een conversie gemiddeld mag kosten. Google stelt per veiling je bod zo in dat het daarop uitkomt. Je betaalt nog steeds per klik, maar Google stuurt op de prijs per aanvraag.</p>
+
+      <div class="stap-kop" id="omlaag"><Tekening naam="raket" maat={52} /><h2>Zeven manieren om je kosten per klik te verlagen</h2></div>
+      <ol>
+        <li><b>Maak kleine advertentiegroepen.</b> Eén thema per groep, met een advertentie die het zoekwoord letterlijk noemt.</li>
+        <li><b>Stuur naar een eigen landingspagina per dienst.</b> Niet naar de homepage. Lees hoe in de gids <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken</a>.</li>
+        <li><b>Kies specifiekere zoekwoorden.</b> "dakkapel plaatsen assen" heeft minder concurrentie dan "dakkapel", en de zoeker weet beter wat hij wil.</li>
+        <li><b>Sluit onzin uit.</b> Vul elke week je lijst met uitsluitingszoekwoorden aan uit het zoektermenrapport.</li>
+        <li><b>Voeg extra items toe.</b> Sitelinks, highlights en je telefoonnummer maken je advertentie groter. Dat telt mee in de veiling.</li>
+        <li><b>Beperk tijd en gebied.</b> Laat je advertenties alleen lopen waar en wanneer je klanten kunt helpen.</li>
+        <li><b>Stop wat niet werkt.</b> Een zoekwoord dat al maanden alleen geld kost, mag eruit. Vaak verbetert je gemiddelde klikprijs daar meteen van.</li>
+      </ol>
+      <p>Wat bewust niet in dit rijtje staat: blind je bod verlagen. Een te laag bod betekent minder vertoningen, of plekken onderaan waar weinig mensen kijken. Goedkoper is niet beter als er geen aanvragen meer uit komen.</p>
+
+      <h2>Biedstrategie en klikprijs</h2>
+      <p>Welke biedstrategie je kiest, bepaalt hoeveel invloed je zelf hebt op je klikprijs. Bij handmatige CPC zet je zelf per zoekwoord een maximum. Bij Klikken maximaliseren laat je Google bieden, maar je kunt een grens instellen voor het hoogste bod per klik. Doe dat bij een nieuwe campagne altijd. Bij Conversies maximaliseren en Doel-CPA laat je de klikprijs los en stuur je op de prijs per aanvraag.</p>
+      <p>Verbeterde CPC, een tussenvorm die je handmatige biedingen automatisch bijstelde, bestaat sinds maart 2025 niet meer voor zoek- en displaycampagnes. Kom je die term tegen in een oud advies, dan weet je dat het verouderd is. Het hele stappenplan voor budget en bieden vind je in de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Kijk ook naar de klikfrequentie in het begrip <a href="/kennisbank/wat-is/ctr/">CTR</a>, of naar het verschil tussen betaald en onbetaald gevonden worden in <a href="/kennisbank/wat-is/seo-en-sea/">SEO en SEA</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een goede CPC?', a: 'Een klikprijs is goed als een klik minder kost dan hij oplevert. Reken het terug: wat mag een aanvraag kosten, en hoeveel procent van je bezoekers doet een aanvraag? Vermenigvuldig die twee en je weet wat een klik maximaal mag kosten.' },
+      { v: 'Betaal ik altijd mijn maximale CPC?', a: 'Nee. Je betaalt net genoeg om de drempel en de adverteerder onder je te verslaan. Dat is vaak minder dan je maximum. Met automatisch bieden of een bodaanpassing kan een klik er wel boven uitkomen.' },
+      { v: 'Waarom is mijn klikprijs zo hoog?', a: 'Meestal door veel concurrentie, een zwakke advertentie of een landingspagina die niet aansluit. Kijk in je account naar de kwaliteitsscore per zoekwoord. Staat de ervaring op de landingspagina op lager dan gemiddeld, begin dan daar.' },
+      { v: 'Betaal ik ook voor klikken van concurrenten of bots?', a: 'Google probeert ongeldige klikken automatisch uit je rapporten en betalingen te filteren. Denk aan klikken van robots, de tweede klik van een dubbelklik en klikken die alleen je kosten willen opdrijven. Met de kolom Ongeldige klikken zie je hoeveel er zijn weggefilterd.' },
+      { v: 'Wat is het verschil tussen CPC en CPA?', a: 'CPC is wat je per klik betaalt. CPA is wat een conversie kost, zoals een offerteaanvraag. Voor je winst telt de CPA. Een hoge klikprijs is prima als genoeg van die klikken klant worden.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over adverteren"
+    links={[
+      { label: 'Begrip', titel: 'Wat is SEA?', href: '/kennisbank/wat-is/sea/', tekst: 'Zoekmachine adverteren in gewone taal.', teken: 'megafoon' },
+      { label: 'Begrip', titel: 'Wat is ROAS?', href: '/kennisbank/wat-is/roas/', tekst: 'Hoeveel omzet elke advertentie-euro oplevert.', teken: 'grafiek' },
+      { label: 'Gids', titel: 'Google Ads-check', href: '/kennisbank/gidsen/google-ads-check/', tekst: 'Tien punten om weglekkend budget te vinden.' },
+    ]}
+  />
+
+  <Actie titel="Betaal je te veel per klik?" tekst={`${site.contactpersoon} kijkt gratis met je mee naar je klikprijzen en wat een aanvraag je kost. Je hoort eerlijk wat we zouden schrappen en waar je meer uit kunt halen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .formule p:first-child { margin-top: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,166 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--backlinks.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/backlinks/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een backlink?' },
+  { id: 'waarom', titel: 'Waarom Google naar links kijkt' },
+  { id: 'waardevol', titel: 'Wat een link waardevol maakt' },
+  { id: 'lokaal', titel: 'Twaalf manieren voor lokale bedrijven' },
+  { id: 'vermijden', titel: 'Links die je moet vermijden' },
+  { id: 'controleren', titel: 'Je links controleren' },
+  { id: 'hoeveel', titel: 'Hoeveel heb je nodig?' },
+  { id: 'zelf-of-uitbesteden', titel: 'Zelf doen of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat zijn backlinks en hoe kom je eraan als lokaal bedrijf?',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Backlinks krijgen als lokaal bedrijf | Drijfveer Media"
+  description="Wat zijn backlinks en welke helpen je echt? Twaalf manieren om als lokaal bedrijf backlinks te krijgen, zonder trucs waarvoor Google je afstraft."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Backlinks', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Linkbuilding" titel="Wat zijn backlinks en hoe kom je eraan als lokaal bedrijf?">
+    <p>Backlinks zijn links van andere websites naar de jouwe. Google ziet ze als aanbevelingen. Voor een lokaal bedrijf liggen de beste links vaak om de hoek: bij je leveranciers, je vereniging en de krant uit de regio.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een backlink is een link op een externe website die naar jouw site wijst.</li>
+            <li>Eén link van een relevante, betrouwbare site is meer waard dan honderd links uit een linknetwerk.</li>
+            <li>Lokale bedrijven hebben een voordeel: echte relaties in de regio, en die leveren links op.</li>
+            <li>Links kopen of op grote schaal ruilen is tegen de regels van Google. Wij hebben dat zelf ooit op de harde manier geleerd.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een backlink?</h2>
+        <p>Een backlink is een link op een andere website die naar jouw website verwijst. Staat jouw bedrijf met een link op de site van je leverancier, dan heb je een backlink van die leverancier. In de code ziet zo'n link er zo uit:</p>
+        <pre><code>&lt;a href="https://www.jouwbedrijf.nl/"&gt;Installatiebedrijf in Assen&lt;/a&gt;</code></pre>
+        <p>De woorden waarop je klikt, heten de <a href="/kennisbank/wat-is/anchortekst/">ankertekst</a>. Google leest ankerteksten om te snappen waar de gelinkte pagina over gaat. Een link kan ook een label meekrijgen. Met rel="nofollow" zegt de site dat hij niet voor de link instaat. Met rel="sponsored" geeft hij aan dat er voor betaald is, en met rel="ugc" dat een bezoeker de link plaatste, bijvoorbeeld in een reactie. Zulke links tellen voor Google minder of niet mee.</p>
+
+        <h2 id="waarom">Waarom Google naar backlinks kijkt</h2>
+        <p>Google kijkt naar backlinks omdat een link van een andere site werkt als een aanbeveling. Dat idee zat al in het eerste algoritme van Google, PageRank: een pagina waar veel goede pagina's naar linken, is waarschijnlijk zelf ook goed. Links horen nog altijd bij de rankingfactoren. Ze zijn niet de enige, en goede inhoud en techniek tellen net zo goed mee.</p>
+        <p>Je ziet het terug in de resultaten. In een groot onderzoek van Backlinko naar 11,8 miljoen zoekresultaten had het nummer 1-resultaat gemiddeld 3,8 keer zoveel backlinks als de posities 2 tot 10. Dat is een samenhang, geen bewijs. Maar het patroon is duidelijk.</p>
+        <p>Ook voor AI-assistenten telt je naam op andere sites. Onderzoek van Ahrefs onder 75.000 merken liet zien dat vermeldingen van een merk op het web sterker samenhangen met zichtbaarheid in de AI-overzichten van Google dan het aantal verwijzende domeinen. Genoemd worden telt dus ook zonder link. Meer daarover lees je bij <a href="/generative-engine-optimization/">GEO</a>.</p>
+
+        <h2 id="waardevol">Wat maakt een backlink waardevol?</h2>
+        <p>Een backlink is waardevol als hij komt van een relevante, betrouwbare site, midden in de tekst staat en echte bezoekers kan opleveren. Bij links gaat kwaliteit boven kwantiteit. Let op deze vijf punten.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>Relevantie</h3></div>
+        <p>Een link van relevante websites in je vak of je regio weegt zwaarder dan een link van een willekeurige blog over reizen. Voor een installateur in Emmen is een link van een Drentse bouwvereniging goud waard.</p>
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>Autoriteit</h3></div>
+        <p>Sites met een hoge autoriteit, zoals een regionale krant of een gemeente, geven meer door. Tools drukken dat uit in een cijfer voor <a href="/kennisbank/wat-is/domain-authority/">domeinautoriteit</a>. Dat cijfer komt van de tool, niet van Google. Gebruik het als richting.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Plek op de pagina</h3></div>
+        <p>Een link midden in een artikel telt zwaarder dan een link in de footer die op elke pagina terugkomt.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>Natuurlijke ankerteksten</h3></div>
+        <p>Een mix van je bedrijfsnaam, je webadres en gewone woorden ziet er natuurlijk uit. Honderd links met exact "loodgieter assen" als linktekst niet.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Verschillende sites</h3></div>
+        <p>Tien links van tien verschillende sites zijn meer waard dan tien links van één site. Daarom kijken specialisten vooral naar het aantal verwijzende domeinen.</p>
+
+        <h2 id="lokaal">Backlinks krijgen als lokaal bedrijf: twaalf manieren</h2>
+        <p>Je hoeft geen landelijk merk te zijn om aan goede links te komen. Begin bij de mensen die je al kent. Daar is de kans op een ja het grootst.</p>
+        <h3>Bij je eigen netwerk</h3>
+        <ol>
+          <li><b>Leveranciers en fabrikanten.</b> Veel fabrikanten hebben een dealer- of installateurszoeker. Ben je erkend dealer of installatiepartner, vraag dan of je erop staat, met link.</li>
+          <li><b>Zakelijke klanten en partners.</b> Werk je vaak samen met een aannemer, architect of makelaar? Vraag of ze je op hun pagina met partners willen zetten.</li>
+          <li><b>Een aanbeveling voor je leverancier.</b> Schrijf een korte, eerlijke reactie over een product dat je gebruikt. Leveranciers plaatsen die graag, met je naam en een link.</li>
+          <li><b>Branchevereniging.</b> Ben je lid, kijk dan of het ledenoverzicht links bevat en of je profiel compleet is.</li>
+          <li><b>Ondernemersvereniging of bedrijvenpark.</b> Veel ondernemersverenigingen en bedrijfsverzamelpanden hebben een overzicht van hun leden.</li>
+        </ol>
+        <h3>In je regio</h3>
+        <ol start="6">
+          <li><b>Lokale sponsoring.</b> Sponsor je de voetbalclub of een evenement, dan sta je vaak op de sponsorpagina. Vraag om een link in plaats van alleen een logo.</li>
+          <li><b>Regionale media.</b> Een regionale nieuwssite of huis-aan-huisblad schrijft graag over een jubileum, een opvallend project of een nieuwe vestiging. Stuur een kort bericht met een foto.</li>
+          <li><b>Regionale platforms.</b> Denk aan sites van de gemeente over ondernemen, toeristische sites voor horeca en recreatie, en lokale bedrijvenoverzichten.</li>
+          <li><b>Een paar goede bedrijvengidsen.</b> Een handvol betrouwbare gidsen met je juiste naam, adres en telefoonnummer helpt, zeker naast een goed <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Honderd onbekende gidsen niet.</li>
+        </ol>
+        <h3>Met je eigen kennis</h3>
+        <ol start="10">
+          <li><b>Iets maken wat anderen willen delen.</b> Een eerlijke prijsgids, een rekenhulp of een checklist voor jouw vak. Sites linken naar iets wat hun lezers helpt.</li>
+          <li><b>Een gastbijdrage.</b> Schrijf een nuttig stuk voor een vakblad, een vakblog of de nieuwsbrief van je vereniging. Geen reclame, maar kennis.</li>
+          <li><b>Vermeldingen zonder link.</b> Stel een melding in bij Google Alerts op je bedrijfsnaam. Noemt een site je zonder link, mail de beheerder dan vriendelijk of hij de naam klikbaar wil maken.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Zo vraag je om een link</p>
+          <p>Houd het kort en persoonlijk. "We werken al jaren met jullie producten en staan graag in jullie overzicht van installateurs in Drenthe. Dit is onze website. Alvast bedankt." Geen standaardmail aan honderd adressen. Bel liever even, als je de persoon kent.</p>
+        </div>
+
+        <h2 id="vermijden">Welke backlinks moet je vermijden?</h2>
+        <p>Je moet links vermijden die alleen bestaan om Google te beïnvloeden. Google houdt daar al jaren rekening mee en kan je site ervoor afstraffen. Denk aan:</p>
+        <ul>
+          <li><b>Gekochte links zonder label.</b> Betaalde links zonder rel="sponsored" zijn tegen de regels.</li>
+          <li><b>Linknetwerken en linkfarms.</b> Sites die vooral bestaan om links te verkopen. Vaak herken je ze aan artikelen over alles door elkaar.</li>
+          <li><b>Linkruil op grote schaal.</b> Een wederzijdse link met een partner is prima. Een afspraak met tientallen sites om naar elkaar te linken niet.</li>
+          <li><b>Automatische aanmeldingen.</b> Diensten die je voor een paar tientjes in honderden gidsen zetten.</li>
+          <li><b>Links van irrelevante of buitenlandse spamsites.</b> Een Nederlandse kapper met links van Russische gokwebsites valt op.</li>
+          <li><b>Spam in reacties en op forums.</b> Je naam onder elk blogartikel met een link levert niets op, behalve een slechte naam.</li>
+        </ul>
+        <p>Dit weten we niet alleen uit de boekjes. In ons proeflab, inmiddels meer dan honderd eigen sites, namen we vroeger soms te veel risico. Een van onze eigen sites kreeg daardoor ooit een penalty van Google. Dat is precies waarom we nieuwe technieken eerst op onze eigen sites testen. Bij klanten blijven we ruim binnen de regels. Heb je zelf twijfelachtige links, dan kun je ze met de <a href="/linkbuilding/google-disavow-tool/">disavow-tool van Google</a> onschadelijk maken.</p>
+
+        <h2 id="controleren">Je backlinks controleren</h2>
+        <p>Gratis zie je je links in Google Search Console, onder Links. Daar staan de sites die het vaakst naar je linken en je meest gelinkte pagina's. Wil je meer weten, of je backlinkprofiel naast dat van een concurrent leggen? Dan heb je een betaalde tool nodig, zoals Semrush, Ahrefs of SE Ranking. Wij werken met SE Ranking. Let vooral op drie dingen: hoeveel verwijzende domeinen je hebt, of ze relevant zijn en of er rare uitschieters tussen zitten.</p>
+
+        <h2 id="hoeveel">Hoeveel backlinks heb je nodig?</h2>
+        <p>Je hebt er genoeg als je in de buurt komt van de sites die nu bovenaan staan voor jouw zoekwoord. Kijk naar de nummers 1 tot 3. Hebben die links van twintig verschillende sites en jij van drie, dan weet je hoeveel werk er ligt. Voor lokale zoekwoorden is dat vaak minder dan je denkt. Bouw rustig op, elke maand een paar. Honderd links in één week zien er voor Google niet natuurlijk uit.</p>
+
+        <h2 id="zelf-of-uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>De links uit je eigen netwerk kun je het best zelf vragen. Jij kent die mensen. Daarna wordt het lastiger: relevante sites vinden, beoordelen of ze te vertrouwen zijn, en ze benaderen met iets wat ze willen plaatsen. Dat is ons vak. Johan Zwartenberg is bij ons de linkbuilder. Hij zoekt de links die een site sterker maken, en laat de rest liggen.</p>
+        <p>Met <a href="/linkbuilding/">linkbuilding</a> vanaf € 395 per maand werken we elke maand aan je links, met technieken die eerst in ons proeflab zijn getest. Je krijgt een stijggarantie en het is maandelijks opzegbaar. Wil je het volledig uit handen geven, kijk dan bij <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij de links bouwen?" intro="Veilig, binnen de regels van Google, en met een doel waar je ons op mag aanspreken." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een backlink?', a: 'Een link op een andere website die naar jouw website verwijst. Google ziet zo\'n link als een aanbeveling, zeker als hij komt van een relevante en betrouwbare site.' },
+      { v: 'Zijn backlinks nog belangrijk voor SEO?', a: 'Ja. Links horen nog altijd bij de signalen waarmee Google pagina\'s rangschikt. Ze werken wel het best samen met goede inhoud en een technisch gezonde site.' },
+      { v: 'Mag ik backlinks kopen?', a: 'Betaalde links moeten volgens Google het label rel="sponsored" krijgen. Dan tellen ze niet mee voor je posities. Links kopen om hoger te komen is tegen de regels en kan een penalty opleveren.' },
+      { v: 'Hoe zie ik welke backlinks ik heb?', a: 'Gratis in Google Search Console, onder Links. Uitgebreider met betaalde tools zoals Semrush, Ahrefs of SE Ranking.' },
+      { v: 'Hoe snel helpen nieuwe backlinks?', a: 'Reken op enkele weken tot een paar maanden voordat je effect ziet in je posities. Google moet de link eerst vinden en meewegen.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Pillar', titel: 'Linkbuilding', href: '/linkbuilding/', tekst: 'Vanaf € 395 per maand, met stijggarantie.' },
+      { label: 'Begrip', titel: 'Wat is een ankertekst?', href: '/kennisbank/wat-is/anchortekst/', tekst: 'De woorden waarop je klikt, en waarom ze tellen.', teken: 'ketting' },
+      { label: 'Dienst', titel: 'Google disavow tool', href: '/linkbuilding/google-disavow-tool/', tekst: 'Slechte links onschadelijk maken.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd hoe sterk jouw links zijn?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} legt je links naast die van je concurrenten en belt je met een eerlijk beeld van wat er nodig is.`} />
+</Base>
+<style>
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--chip); padding: 14px 16px; border-radius: 10px; font-size: 0.9rem; margin: 0 0 1.2em; }
+</style>

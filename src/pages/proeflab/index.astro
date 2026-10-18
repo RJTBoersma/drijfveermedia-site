@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Veer from '../../components/teken/Veer.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/proeflab.astro';
+import { site } from '../../data/site';
+
+const bewijs = [
+  { teken: 'schild', titel: 'Met garantie', tekst: 'We spreken een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.', href: '/garantie/', meer: 'Zo werkt de garantie' },
+  { teken: 'raket', titel: '+47% organisch verkeer', tekst: 'Voor Conflictbemiddeling Nederland, met eerste posities op "mediation opleiding" en meer aanvragen.', href: '/cases/conflictbemiddeling/', meer: 'Lees de case' },
+  { teken: 'grafiek', titel: 'Nummer 1 op "dakraam plaatsen"', tekst: 'Dakraam Concurrent kreeg 32% meer bezoekers uit Google en meer aanvragen.', href: '/cases/dakraamconcurrent/', meer: 'Lees de case' },
+  { teken: 'kalender', titel: 'Klanten blijven jaren', tekst: 'Er is amper verloop. Niet door lange contracten, want alles is maandelijks opzegbaar.' },
+];
+const schema = [{ '@type': 'WebPage', name: 'Het proeflab van Drijfveer Media', url: `${site.url}/proeflab/`, about: { '@id': `${site.url}/#organisatie` } }];
+---
+<Base
+  title="Ons proeflab: eerst testen op eigen sites | Drijfveer Media"
+  description="Al 15 jaar testen we nieuwe technieken eerst op meer dan 100 eigen websites. Lees waarom, wat we leerden van een penalty en wat jij eraan hebt."
+  kruimels={[{ naam: 'Ons proeflab', url: '/proeflab/' }]}
+  schema={schema}
+>
+  <Hero kicker="Ons proeflab" titel="We testen alles eerst op onze eigen websites">
+    <p>Al 15 jaar hebben we meer dan honderd eigen websites, in allerlei beroepen. Daar proberen we nieuwe ideeën en technieken uit. Wat werkt, gebruiken we voor jou. Wat niet werkt, kost onze site en niet de jouwe.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Wat is het proeflab?</h2>
+      <p>Geen laboratorium met witte jassen. Het proeflab bestaat uit onze eigen websites. Al vijftien jaar bouwen en beheren we leadsites: sites rond één beroep, die bezoekers met een vraag in contact brengen met een vakman. Inmiddels zijn het er meer dan honderd, in heel verschillende vakgebieden.</p>
+      <p>Die sites moeten gevonden worden in Google en genoemd worden door AI, net als jouw site. Ze krijgen te maken met dezelfde updates, dezelfde concurrentie en dezelfde vragen van bezoekers. Verandert er iets, dan merken we het aan den lijve.</p>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2>Waarom we eerst zelf testen</h2></div>
+      <p>Over SEO en online marketing wordt veel beweerd. Elke week verschijnt er een nieuwe tip, een nieuwe tool of een nieuwe theorie over wat Google wil. Een deel klopt. Een deel klopte vroeger. En een deel heeft nooit gewerkt.</p>
+      <p>Je kunt zo'n tip uitproberen op de site van een klant. Dan gok je met andermans omzet. Wij proberen het liever eerst op een site van onszelf. Gaat het mis, dan is de schade voor ons.</p>
+      <blockquote>Wat werkt, gebruiken we voor jou. Wat niet werkt, heeft dan al onze eigen site gekost.</blockquote>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Het eerlijke verhaal: onze penalty</h2></div>
+      <p>We gaan er niet omheen. Vroeger namen we op onze eigen sites soms te veel risico. We gebruikten technieken die Google eigenlijk niet goed vindt. In het vak heet dat greyhat. Het werkte, een tijdje. Tot een van onze sites een penalty van Google kreeg. Zo'n straf betekent dat Google je site lager zet, of helemaal niet meer laat zien.</p>
+      <p>Dat was een dure les, en een goede. Het is precies de reden dat we eigen sites hebben: om grenzen te leren kennen voordat we met de website van een klant aan de slag gaan. Bij klanten blijven we ruim binnen de regels van Google, Bing en de AI-zoekmachines. Geen trucjes die vandaag werken en morgen je hele site kosten.</p>
+      <p>Is jouw site ooit geraakt door slechte links van een vorig bureau? Daar weten we dus het nodige van. Lees meer over de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a>.</p>
+
+      <h2>Wat voor vragen we er beantwoorden</h2>
+      <p>Namen en cijfers van onze eigen sites delen we niet, daarover hieronder meer. Wel kunnen we vertellen wat voor vragen we er onderzoeken. Bijvoorbeeld:</p>
+      <ul>
+        <li>Welke links helpen een site echt vooruit, en welke doen niets of kosten juist posities?</li>
+        <li>Hoe snel pakt Google een nieuwe pagina op, en wat versnelt dat?</li>
+        <li>Wat doet structured data met hoe een site in de zoekresultaten staat?</li>
+        <li>Wanneer noemen ChatGPT, Gemini en Perplexity een website?</li>
+        <li>Werkt een tekst die met hulp van AI is geschreven net zo goed als een tekst die helemaal met de hand is geschreven?</li>
+        <li>Welke opbouw van een pagina levert de meeste aanvragen op?</li>
+      </ul>
+
+      <h2>Hoe een goede test werkt</h2>
+      <p>Testen klinkt simpel: iets veranderen en kijken wat er gebeurt. Toch gaat het daar vaak mis. Google verandert zelf ook voortdurend iets, dus een stijging na een aanpassing hoeft niets te betekenen. Een goede test let op drie dingen.</p>
+      <ol>
+        <li><b>Eén ding tegelijk.</b> Verander je de titel, de tekst en de links in één keer, dan weet je niet wat werkte.</li>
+        <li><b>Vergelijken.</b> Een site waar je niets aan verandert, laat zien wat Google in dezelfde periode uit zichzelf deed.</li>
+        <li><b>Geduld.</b> Een verandering in Google heeft weken nodig. Wie na drie dagen conclusies trekt, meet vooral toeval.</li>
+      </ol>
+      <p>We meten met dezelfde tools die we voor klanten gebruiken, zoals Google Search Console en SE Ranking.</p>
+
+      <h2>Wat jij eraan hebt</h2>
+      <ul class="vink">
+        <li><b>Geen experimenten op jouw site.</b> Wat we bij jou doen, is eerst ergens anders getest.</li>
+        <li><b>Sneller resultaat.</b> We weten waar we moeten beginnen, dus we verspillen geen maanden aan wat niet werkt.</li>
+        <li><b>Eerlijk advies.</b> Komt iemand met een wondermiddel, dan kunnen we vaak vertellen of het werkt.</li>
+        <li><b>Een lagere prijs.</b> Minder proberen op kosten van de klant betekent minder uren op je factuur. Bekijk <a href="/prijzen/">onze prijzen</a>.</li>
+      </ul>
+
+      <h2>Waarom we geen namen en cijfers noemen</h2>
+      <p>Onze eigen sites staan in markten met echte concurrenten. Noemen we ze hier, dan weet iedereen welke sites van ons zijn. Dan kunnen we er niet meer rustig mee testen. Losse cijfers zonder context zeggen ook weinig.</p>
+      <p>Wat we wel laten zien: hoe het met onze eigen bedrijfssite gaat. In het <a href="/logboek/">logboek</a> houden we elke maand bij hoe drijfveermedia.nl groeit in Google. Ook als het tegenzit.</p>
+    </div>
+  </section>
+
+  <section class="wrap sectie" data-aida="desire">
+    <Veer />
+    <h2>Getest bij ons, bewezen bij klanten</h2>
+    <div class="raster">
+      {bewijs.map((b, i) => b.href ? (
+        <a class="card" href={b.href}><Tekening naam={b.teken} vertraging={i * 150} /><h3>{b.titel}</h3><p>{b.tekst}</p><span class="meer">{b.meer}</span></a>
+      ) : (
+        <div class="card"><Tekening naam={b.teken} vertraging={i * 150} /><h3>{b.titel}</h3><p>{b.tekst}</p></div>
+      ))}
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Testen jullie ook op mijn website?', a: 'Op jouw site gebruiken we alleen wat we al getest hebben. Wil je zelf iets nieuws uitproberen, dan bespreken we eerst de risico\'s.' },
+      { v: 'Doen jullie nog aan greyhat?', a: 'Bij klanten nooit. Daar blijven we ruim binnen de regels van zoekmachines en AI. Het risico van een test dragen we zelf, op onze eigen sites.' },
+      { v: 'Wat is een leadsite?', a: 'Een website rond één beroep, die bezoekers met een vraag in contact brengt met een vakman. Zo\'n site leeft van gevonden worden, en is daardoor een goede plek om te testen.' },
+      { v: 'Kan ik lezen wat jullie geleerd hebben?', a: 'Dat komt. In de kennisbank komt een deel met lessen uit het proeflab, zonder namen van sites. Tot die tijd vertellen we er graag over aan de telefoon.' },
+    ]}
+  />
+
+  <Actie titel="Wat zouden we op jouw site als eerste doen?" tekst={`${site.contactpersoon} belt je binnen 15 minuten terug en vertelt je waar volgens ons de grootste kans zit. Gratis, en je zit nergens aan vast.`} />
+</Base>

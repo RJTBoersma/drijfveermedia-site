@@ -1,0 +1,69 @@
+---
+// Scène voor /leadgeneratie/tracking-en-analytics/: telefoontjes, formulieren en chats komen samen in één overzicht dat laat zien waar de aanvragen vandaan komen. Zonder cookiemelding.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const bronnen = [
+  { y: 34, label: 'Bellen', lijn: 'M98 57L170 112' },
+  { y: 112, label: 'Formulier', lijn: 'M98 135H170' },
+  { y: 190, label: 'Chat', lijn: 'M98 213L170 158' },
+];
+const balken = [
+  { y: 74, label: 'Google', w: 150, kleur: '#ff6600' },
+  { y: 102, label: 'Google Maps', w: 112, kleur: '#074663' },
+  { y: 130, label: 'Advertenties', w: 64, kleur: '#074663' },
+  { y: 158, label: 'Nieuwsbrief', w: 38, kleur: '#074663' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: telefoontjes, formulieren en chats komen samen in één overzicht dat per bron laat zien waar de aanvragen vandaan komen, zonder cookiemelding.'}>
+  <!-- bronnen -->
+  {bronnen.map((b) => (
+    <g>
+      <rect x="26" y={b.y} width="72" height="46" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <path class="a" d={b.lijn} />
+      <text x="62" y={b.y + 60} text-anchor="middle" font-size="10" class="zacht">{b.label}</text>
+    </g>
+  ))}
+  <path class="l" transform="translate(45 40) scale(0.55)" vector-effect="non-scaling-stroke" d="M14 8l10 2 4 12-6 5c4 8 9 13 17 17l5-6 12 4 2 10c-2 4-6 6-10 6C26 58 6 38 6 16c0-4 2-7 8-8z" />
+  <path class="l" d="M48 122h28v26H48zM53 130h18M53 136h18M53 142h10" />
+  <path class="l" d="M48 202h28a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H60l-8 6v-6h-4a4 4 0 0 1-4-4v-12a4 4 0 0 1 4-4z" />
+  <!-- het overzicht -->
+  <rect x="170" y="24" width="290" height="222" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="190" y="54" font-size="14" font-weight="800">Aanvragen per bron</text>
+  {balken.map((b) => (
+    <g>
+      <text x="190" y={b.y + 13} font-size="11">{b.label}</text>
+      <rect class="v" x="282" y={b.y + 3} width="156" height="12" rx="6" />
+      <rect x="282" y={b.y + 3} width={b.w} height="12" rx="6" fill={b.kleur} />
+    </g>
+  ))}
+  <rect x="190" y="198" width="176" height="30" rx="15" fill="#e8eef4" />
+  <circle cx="208" cy="213" r="8" fill="#1f8a5b" />
+  <path d="M204 213l3 3 6-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="222" y="217" font-size="11" font-weight="800">Zonder cookiemelding</text>
+  {!mini && (
+    <g>
+      <circle class="lead lead-1" cx="98" cy="57" r="5" fill="#ff6600" />
+      <circle class="lead lead-2" cx="98" cy="135" r="5" fill="#ff6600" />
+      <circle class="lead lead-3" cx="98" cy="213" r="5" fill="#ff6600" />
+      <g class="plus">
+        <rect x="378" y="44" width="62" height="24" rx="12" fill="#ff6600" />
+        <text x="409" y="61" text-anchor="middle" font-size="12" font-weight="800" style="fill:#fff">+1</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .lead, .plus { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .lead, :global(.teken-js) .plus { opacity: 0; }
+  .in-beeld .lead-1 { animation: leadgeneratie--tracking-en-analytics-schuin-op 4.5s ease-in 0.4s infinite both; }
+  .in-beeld .lead-2 { animation: leadgeneratie--tracking-en-analytics-recht 4.5s ease-in 1.9s infinite both; }
+  .in-beeld .lead-3 { animation: leadgeneratie--tracking-en-analytics-schuin-af 4.5s ease-in 3.4s infinite both; }
+  .in-beeld .plus { animation: leadgeneratie--tracking-en-analytics-plus 1.5s ease-out 1.5s infinite both; }
+  @keyframes leadgeneratie--tracking-en-analytics-schuin-op { 0% { opacity: 0; transform: none; } 5% { opacity: 1; } 28% { opacity: 1; transform: translate(72px, 55px); } 34%, 100% { opacity: 0; transform: translate(72px, 55px); } }
+  @keyframes leadgeneratie--tracking-en-analytics-recht { 0% { opacity: 0; transform: none; } 5% { opacity: 1; } 28% { opacity: 1; transform: translate(72px, 0); } 34%, 100% { opacity: 0; transform: translate(72px, 0); } }
+  @keyframes leadgeneratie--tracking-en-analytics-schuin-af { 0% { opacity: 0; transform: none; } 5% { opacity: 1; } 28% { opacity: 1; transform: translate(72px, -55px); } 34%, 100% { opacity: 0; transform: translate(72px, -55px); } }
+  @keyframes leadgeneratie--tracking-en-analytics-plus { 0% { opacity: 0; transform: translateY(6px) scale(0.8); } 20%, 60% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .lead-1, .in-beeld .lead-2, .in-beeld .lead-3, .in-beeld .plus { animation: none; }
+  }
+</style>

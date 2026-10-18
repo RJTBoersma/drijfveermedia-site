@@ -1,0 +1,169 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--tone-of-voice.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/tone-of-voice/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is het precies?' },
+  { id: 'stem-en-toon', titel: 'Stem en toon' },
+  { id: 'bepalen', titel: 'Bepalen in zes stappen' },
+  { id: 'voorbeeld', titel: 'Eén boodschap, drie stemmen' },
+  { id: 'vastleggen', titel: 'Vastleggen en volhouden' },
+  { id: 'fouten', titel: 'Waar het vaak misgaat' },
+  { id: 'zelf-of-laten', titel: 'Zelf of laten schrijven?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Tone of voice bepalen: zo klinkt je bedrijf overal hetzelfde',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Tone of voice',
+}];
+---
+<Base
+  title="Tone of voice bepalen: stappenplan en voorbeelden"
+  description="Wat is een tone of voice en hoe bepaal je die voor je bedrijf? Een stappenplan met de vier keuzes, je of u, voorbeeldteksten en een handig format."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Tone of voice', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Teksten" titel="Tone of voice bepalen: zo klinkt je bedrijf overal hetzelfde" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Je tone of voice is de manier waarop je bedrijf praat en schrijft. Zeg je je of u, ben je droog of uitbundig, kort of uitgebreid? Hier lees je hoe je die keuzes maakt en vastlegt, met voorbeelden die je zo kunt gebruiken.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een tone of voice is de vaste schrijf- en spreekstijl van je bedrijf, in al je uitingen.</li>
+            <li>Je stem blijft altijd gelijk. Je toon past zich aan de situatie aan, zoals bij een klacht.</li>
+            <li>Je bepaalt hem met vier keuzes: serieus of grappig, formeel of informeel, respectvol of eigenwijs, enthousiast of feitelijk.</li>
+            <li>Leg alles vast op één pagina, met voorbeeldzinnen. Anders schrijft iedereen weer op zijn eigen manier.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is een tone of voice?</h2>
+        <p>Een tone of voice is de herkenbare manier waarop een bedrijf communiceert. Het gaat om woordkeuze, zinslengte, aanspreekvorm en gevoel. Je website, je offertes, je posts op social media en hoe je de telefoon opneemt: overal hoort dezelfde persoonlijkheid door te klinken.</p>
+        <p>Waarom dat ertoe doet? Mensen kopen bij bedrijven die ze vertrouwen. Vertrouwen groeit als iets voorspelbaar is. Als je website stijf formeel is, je Instagram vol grapjes staat en je offerte klinkt als een belastingbrief, weet een klant niet met wie hij te maken heeft. Een vaste stijl maakt je herkenbaar en bouwt aan je imago, ook als je logo niet in beeld is.</p>
+
+        <h2 id="stem-en-toon">Stem en toon: wat is het verschil?</h2>
+        <p>Je stem is wie je bent, en die verandert niet. Je toon is hoe je klinkt in een bepaalde situatie. Vergelijk het met jezelf: op een verjaardag en op een begrafenis ben je dezelfde persoon, maar je praat anders.</p>
+        <p>Een voorbeeld hiervan is een klacht. Een bedrijf met een vrolijke stem maakt in een klachtmail geen grapjes. Het blijft wel zichzelf: persoonlijk, kort en eerlijk. "Helaas is er bij je bestelling iets misgegaan. Dat had niet mogen gebeuren. Morgen staat er een nieuwe bij je voor de deur." Dezelfde stem, een serieuzere toon.</p>
+
+        <h2 id="bepalen">Je tone of voice bepalen in zes stappen</h2>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>1. Begin bij je merk</h3></div>
+        <p>Je tone of voice komt voort uit je merk. Welke waarden heb je, welke persoonlijkheid? Schrijf drie tot vijf woorden op die je bedrijf beschrijven, zoals nuchter, deskundig en warm. Heb je die nog niet, lees dan eerst <a href="/kennisbank/gidsen/wat-is-branding/">wat is branding</a>. Een stijl die niet past bij wie je echt bent, houd je niet vol.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>2. Luister naar je publiek</h3></div>
+        <p>Hoe praten je klanten zelf? Lees hun mails, hun reviews en de vragen die ze aan de telefoon stellen. Noteer de woorden die ze gebruiken. Een klant zoekt op "cv-ketel vervangen", niet op "warmteopwekker renoveren". Schrijf in hun taal, maar kopieer hun toon niet. Je bent de vakman, niet hun vriend van de voetbal.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>3. Zet de vier schuiven</h3></div>
+        <p>Het Amerikaanse onderzoeksbureau Nielsen Norman Group beschrijft vier schuiven waarmee je een toon kunt typeren. Kies per schuif waar jij staat, op een schaal van 1 tot 5:</p>
+        <ul>
+          <li><b>Grappig of serieus.</b> Mag er een knipoog in, of past dat niet bij je vak?</li>
+          <li><b>Informeel of formeel.</b> Spreektaal of nette schrijftaal?</li>
+          <li><b>Eigenwijs of respectvol.</b> Durf je stelling te nemen over je vakgebied, of blijf je voorzichtig?</li>
+          <li><b>Enthousiast of feitelijk.</b> Laat je emoties zien, of houd je het zakelijk?</li>
+        </ul>
+        <p>Een kinderopvang zit vaak op grappig, informeel en enthousiast. Een notaris op serieus, formeel en feitelijk. Daartussen is alles mogelijk. Er is geen goede of foute keuze, wel een passende.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Kies je of u</h3></div>
+        <p>De bekendste keuze in het Nederlands. Je klinkt dichtbij en modern, u klinkt beleefd en afstandelijker. Steeds meer bedrijven kiezen voor je, ook grote banken. Kies u als je doelgroep vooral ouderen zijn of als je vak om afstand vraagt, zoals uitvaartzorg. Twijfel je? Kies dan je, en schrijf beleefd. Wissel in elk geval nooit binnen één tekst.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>5. Maak een lijst met wel en niet</h3></div>
+        <p>Maak het concreet. Welke woorden gebruik je wel, welke nooit? Gebruik je Engelse termen? Uitroeptekens? Emoji's? Hoe lang is een zin gemiddeld? Hoe beter je dit vastlegt, hoe minder het afhangt van wie er toevallig schrijft.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={48} /><h3>6. Schrijf voorbeelden</h3></div>
+        <p>Regels zijn abstract. Voorbeelden werken beter. Schrijf vijf zinnen die precies klinken zoals jij wilt: een welkomstzin voor je site, een social post, een antwoord op een klacht, een offerte-inleiding en een voicemailbericht. Wie twijfelt, legt zijn tekst daarnaast.</p>
+
+        <h2 id="voorbeeld">Eén boodschap, drie stemmen</h2>
+        <p>Zo verschillend kan dezelfde boodschap klinken. Het is een verzonnen installatiebedrijf dat laat weten dat het in de bouwvak gewoon open is.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Stijl</th><th>Voorbeeldtekst</th></tr></thead>
+            <tbody>
+              <tr><td>Formeel en feitelijk</td><td>"Ook tijdens de bouwvakvakantie staan onze monteurs voor u klaar. Storingen worden binnen 24 uur verholpen."</td></tr>
+              <tr><td>Informeel en nuchter</td><td>"Bouwvak? Wij werken gewoon door. Storing? Bel ons, dan staan we binnen een dag bij je op de stoep."</td></tr>
+              <tr><td>Grappig en enthousiast</td><td>"Jij naar de camping, wij naar je cv-ketel. De hele zomer bereikbaar, ook als de rest van het land aan zee ligt."</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Geen van de drie is fout. De vraag is welke past bij jouw bedrijf en jouw klanten. En of je die stijl een jaar lang kunt volhouden, ook op een drukke maandagochtend.</p>
+
+        <h2 id="vastleggen">Vastleggen en volhouden</h2>
+        <p>Een schrijfstijl die alleen in jouw hoofd zit, verdwijnt zodra iemand anders gaat schrijven. Zet daarom alles op één pagina. Dit format kun je overnemen:</p>
+        <div class="kader">
+          <p class="kader-titel">Je schrijfwijzer op één pagina</p>
+          <ul>
+            <li><b>Wie we zijn:</b> drie tot vijf woorden die ons beschrijven.</li>
+            <li><b>Voor wie we schrijven:</b> onze klant in één zin.</li>
+            <li><b>De vier schuiven:</b> per schuif een score van 1 tot 5.</li>
+            <li><b>Aanspreekvorm:</b> je of u.</li>
+            <li><b>Wel:</b> vijf woorden en gewoontes die bij ons passen.</li>
+            <li><b>Niet:</b> vijf woorden en gewoontes die we nooit gebruiken.</li>
+            <li><b>Voorbeelden:</b> vijf zinnen in onze stijl, voor vijf situaties.</li>
+          </ul>
+        </div>
+        <p>Een voorbeeld uit eigen huis: voor de teksten op deze site hebben we zo'n schrijfwijzer. Daarin staat dat we je zeggen, nuchter schrijven, geen uitroeptekens gebruiken en korte en lange zinnen afwisselen. Er staat ook een lijst in met vage marketingwoorden die er nooit in mogen. Wie voor ons schrijft, mens of AI, krijgt die wijzer mee.</p>
+        <p>Geef het document aan iedereen die namens je bedrijf schrijft, ook aan freelancers en aan de collega die de socials doet. Lees elk kwartaal een paar teksten na. Wijkt de stijl af, stuur dan bij voordat het een gewoonte wordt.</p>
+
+        <h2 id="fouten">Waar het vaak misgaat</h2>
+        <ul class="vink">
+          <li><b>Een stijl die niet bij je past.</b> Wie stoer schrijft maar aan de telefoon voorzichtig is, valt door de mand.</li>
+          <li><b>Op elk kanaal een ander bedrijf.</b> Op social media mag je losser zijn, maar het moet herkenbaar dezelfde stem blijven.</li>
+          <li><b>Verstoppen achter vakjargon.</b> Moeilijke woorden klinken deskundig, maar vaak verbergen ze juist dat er weinig te zeggen is.</li>
+          <li><b>Alles in de wij-vorm.</b> "Wij zijn, wij doen, wij hebben." Draai het om en schrijf over wat de klant eraan heeft.</li>
+          <li><b>Te veel tegelijk willen.</b> Grappig én formeel én enthousiast én feitelijk gaat niet. Kies.</li>
+        </ul>
+
+        <h2 id="zelf-of-laten">Zelf schrijven of laten schrijven?</h2>
+        <p>Je toon bepalen kun je prima zelf, met dit stappenplan en een middag tijd. Het lastige is het volhouden, tekst na tekst. Een tekstschrijver die je stijl overneemt, scheelt je veel tijd en zorgt dat alles klinkt alsof één persoon het schreef.</p>
+        <p>Bij Drijfveer Media schrijven we teksten in de toon van jouw bedrijf. Een webtekst kost bij ons vanaf € 75 per pagina, exclusief btw. Lees meer bij <a href="/tekstschrijver/">tekstschrijver</a>. Wil je elke maand nieuwe artikelen in je eigen stem, kijk dan bij <a href="/tekstschrijver/contentmarketing/">contentmarketing</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij in jouw toon schrijven?" intro="Wat je van ons mag verwachten als we teksten voor je maken." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent tone of voice?', a: 'Letterlijk: de toon van je stem. In marketing is het de vaste manier waarop een bedrijf schrijft en praat, met eigen woordkeuze, aanspreekvorm en gevoel.' },
+      { v: 'Moet ik je of u gebruiken op mijn website?', a: 'Voor de meeste bedrijven werkt je het best: het klinkt dichtbij en is makkelijk te lezen. Kies u als je doelgroep vooral ouderen zijn of als je vak om afstand vraagt.' },
+      { v: 'Mag mijn toon verschillen per kanaal?', a: 'Je toon mag een beetje meebewegen, losser op social media en zakelijker in een offerte. Je stem blijft gelijk. Een klant moet op elk kanaal hetzelfde bedrijf herkennen.' },
+      { v: 'Hoe test ik of mijn schrijfstijl werkt?', a: 'Haal je logo en naam van een tekst en laat hem lezen door iemand die je bedrijf kent. Herkent hij jullie? Dan zit het goed. Kijk ook of reacties en aanvragen beter worden.' },
+      { v: 'Kan AI in mijn stijl schrijven?', a: 'Ja, als je AI een duidelijke schrijfwijzer en voorbeelden geeft. Laat een mens de tekst daarna altijd nalezen. AI valt snel terug op algemene zinnen die bij elk bedrijf passen.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Pillar', titel: 'Tekstschrijver', href: '/tekstschrijver/', tekst: 'Teksten in jouw toon, vanaf € 75 per pagina.' },
+      { label: 'Gids', titel: 'SEO-teksten schrijven, ook met AI', href: '/kennisbank/gidsen/seo-teksten-schrijven/', tekst: 'Teksten die gevonden worden en overtuigen.' },
+      { label: 'Gids', titel: 'Wat is branding?', href: '/kennisbank/gidsen/wat-is-branding/', tekst: 'Merk, doelgroep en USP uitgelegd.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd hoe je teksten nu overkomen?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je teksten, en belt je met een eerlijk beeld van wat beter kan.`} />
+</Base>

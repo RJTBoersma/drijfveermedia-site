@@ -1,0 +1,81 @@
+---
+// Scène voor /generative-engine-optimization/structured-data/: een webpagina, daaronder een blokje code,
+// en labels (naam, adres, prijs) die van de code naar een bedrijfskaart reizen die zich vult.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [
+  { y: 112, label: 'Adres', w: 64 },
+  { y: 142, label: 'Open', w: 72 },
+  { y: 172, label: 'Diensten', w: 50 },
+  { y: 202, label: 'Prijs', w: 44 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een webpagina met een blokje code. Labels als naam, adres en prijs reizen van de code naar een bedrijfskaart, die zich regel voor regel vult.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- Webpagina -->
+  <rect x="18" y="26" width="168" height="120" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M18 46h168" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="32" cy="36" r="3.5" fill="#d9e1ea" /><circle cx="44" cy="36" r="3.5" fill="#d9e1ea" /><circle cx="56" cy="36" r="3.5" fill="#d9e1ea" />
+  <rect x="32" y="58" width="96" height="10" rx="4" fill="#10283f" />
+  <rect class="v" x="32" y="76" width="138" height="7" rx="3.5" />
+  <rect class="v" x="32" y="90" width="120" height="7" rx="3.5" />
+  <rect class="v" x="32" y="104" width="130" height="7" rx="3.5" />
+  <rect x="32" y="120" width="54" height="14" rx="5" fill="#ff6600" />
+
+  <!-- Code -->
+  <rect x="18" y="158" width="168" height="90" rx="12" fill="#10283f" />
+  <g font-size="10" font-weight="700" font-family="ui-monospace, Menlo, monospace">
+    <text x="30" y="178" style="fill:#ffb27a">{'{'}</text>
+    <text x="40" y="194" style="fill:#c9d6e2">"@type": "Bedrijf",</text>
+    <text x="40" y="210" style="fill:#c9d6e2">"naam": "Jouw bedrijf",</text>
+    <text x="40" y="226" style="fill:#c9d6e2">"adres": "...",</text>
+    <text x="30" y="242" style="fill:#ffb27a">{'}'}</text>
+  </g>
+
+  <!-- Bedrijfskaart -->
+  <rect x="270" y="26" width="192" height="222" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="270" y="26" width="192" height="58" rx="14" fill="#e8eef4" />
+  <rect x="270" y="70" width="192" height="14" fill="#e8eef4" />
+  <text x="286" y="60" font-size="15" font-weight="900">Jouw bedrijf</text>
+  {rijen.map((r) => (
+    <g>
+      <text x="286" y={r.y + 4} font-size="10.5" font-weight="700" class="zacht">{r.label}</text>
+      <rect class="v" x="350" y={r.y - 4} width="96" height="8" rx="4" />
+    </g>
+  ))}
+
+  <!-- Verbinding -->
+  <path class="a" d="M186 200C226 200 230 140 270 140" stroke-dasharray="4 6" />
+
+  {!mini && (
+    <g>
+      {rijen.map((r, i) => <rect class="vul" style={`--i:${i}`} x="350" y={r.y - 4} width={r.w} height="8" rx="4" fill="#074663" />)}
+      {['naam', 'adres', 'prijs'].map((t, i) => (
+        <g class="label" style={`--i:${i};--y:${148 + i * 24}px`}>
+          <rect x="-26" y="-10" width="52" height="20" rx="10" fill="#ff6600" />
+          <text x="0" y="4" text-anchor="middle" font-size="10" font-weight="800" style="fill:#fff">{t}</text>
+        </g>
+      ))}
+      <rect class="cursor" x="138" y="217" width="6" height="12" fill="#ffb27a" />
+    </g>
+  )}
+</svg>
+<style>
+  .vul { transform-box: fill-box; transform-origin: left center; }
+  .label { transform: translate(228px, var(--y)); }
+  :global(.teken-js) .label { opacity: 0; }
+  :global(.teken-js) .vul { transform: scaleX(0); }
+  .in-beeld .vul { animation: generative-engine-optimization--structured-data-vul 0.6s ease-out forwards; animation-delay: calc(1.4s + var(--i) * 0.5s); }
+  .in-beeld .label { transform: none; offset-path: path('M186 200C226 200 230 140 270 140'); offset-rotate: 0deg; animation: generative-engine-optimization--structured-data-reis 4.5s ease-in-out infinite; animation-delay: calc(0.4s + var(--i) * 1.5s); }
+  .in-beeld .cursor { animation: generative-engine-optimization--structured-data-knipper 1s steps(1) infinite; }
+  @keyframes generative-engine-optimization--structured-data-vul { to { transform: none; } }
+  @keyframes generative-engine-optimization--structured-data-reis {
+    0% { offset-distance: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    30% { offset-distance: 100%; opacity: 1; }
+    38%, 100% { offset-distance: 100%; opacity: 0; }
+  }
+  @keyframes generative-engine-optimization--structured-data-knipper { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .vul, .in-beeld .label, .in-beeld .cursor { animation: none; }
+  }
+</style>

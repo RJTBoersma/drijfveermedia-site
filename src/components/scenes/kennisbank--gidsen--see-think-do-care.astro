@@ -1,0 +1,63 @@
+---
+// Scène voor /kennisbank/gidsen/see-think-do-care/: vier cirkels in elkaar (See, Think, Do, Care), van grote doelgroep naar vaste klant.
+// Als hij leeft: mensen (bolletjes) bewegen rustig van de buitenste ring naar het midden en het hart in Care klopt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const cx = 176, cy = 138;
+const labels = [
+  { t: 'See', s: 'iedereen die bij je past', y: 44, lx: 254, ly: 52 },
+  { t: 'Think', s: 'overweegt te kopen', y: 98, lx: 250, ly: 100 },
+  { t: 'Do', s: 'wil nu kopen', y: 152, lx: 230, ly: 146 },
+  { t: 'Care', s: 'is al klant', y: 206, lx: 196, ly: 150 },
+];
+const mensen = [
+  { x: 96, y: 74, dx: 70, dy: 54, d: 0 },
+  { x: 262, y: 186, dx: -76, dy: -42, d: 1.6 },
+  { x: 86, y: 196, dx: 78, dy: -50, d: 3.2 },
+  { x: 230, y: 48, dx: -44, dy: 78, d: 4.8 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: vier cirkels in elkaar. De buitenste is See, iedereen die bij je past. Daarbinnen Think, Do en in het midden Care, je vaste klanten, met een hart.'}>
+  <circle cx={cx} cy={cy} r="118" fill="#f4f7fa" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="v" cx={cx} cy={cy} r="84" />
+  <circle cx={cx} cy={cy} r="52" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <circle class="o" cx={cx} cy={cy} r="24" />
+  <g class="hart">
+    <path d={`M${cx} ${cy - 3}c-4-5-12-2-12 4 0 6 12 12 12 12s12-6 12-12c0-6-8-9-12-4z`} fill="#fff" />
+  </g>
+
+  <!-- labels -->
+  {labels.map((l) => (
+    <g>
+      <path d={`M${l.lx} ${l.ly}L318 ${l.y - 4}`} stroke="#d9e1ea" stroke-width="1.5" />
+      <circle cx={l.lx} cy={l.ly} r="3" fill="#074663" />
+      <text x="326" y={l.y} font-size="14" font-weight="900">{l.t}</text>
+      <text x="326" y={l.y + 17} font-size="11" class="zacht">{l.s}</text>
+    </g>
+  ))}
+
+  <!-- mensen in de buitenste ring -->
+  {mensen.map((m) => <circle cx={m.x} cy={m.y} r="5" fill="#8aa0b4" />)}
+
+  {!mini && (
+    <g>
+      {mensen.map((m) => (
+        <circle class="mens" style={`--dx:${m.dx}px;--dy:${m.dy}px;animation-delay:${m.d}s`} cx={m.x} cy={m.y} r="5" fill="#074663" />
+      ))}
+    </g>
+  )}
+</svg>
+<style>
+  .hart { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .mens { opacity: 0; }
+  .in-beeld .mens { animation: kennisbank-gidsen-see-think-do-care-naar-binnen 6.4s ease-in-out infinite; }
+  .in-beeld .hart { animation: kennisbank-gidsen-see-think-do-care-klop 3.2s ease-in-out 1s infinite; }
+  @keyframes kennisbank-gidsen-see-think-do-care-naar-binnen {
+    0% { opacity: 0; transform: translate(0, 0); }
+    10% { opacity: 1; }
+    70% { opacity: 1; transform: translate(var(--dx), var(--dy)); }
+    85%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)); }
+  }
+  @keyframes kennisbank-gidsen-see-think-do-care-klop { 0%, 70%, 100% { transform: scale(1); } 78% { transform: scale(1.25); } 86% { transform: scale(0.95); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .mens, .in-beeld .hart { animation: none; } }
+</style>

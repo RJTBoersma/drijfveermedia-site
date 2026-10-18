@@ -1,0 +1,84 @@
+---
+// Scène voor /kennisbank/wat-is/dns/: een browser vraagt aan het adresboek (nameserver) waar jouwbedrijf.nl woont,
+// krijgt het IP-adres terug en maakt daarna verbinding met de juiste server.
+// Als hij leeft: een vraagbolletje reist naar het adresboek, de regel met het A-record licht op, het antwoord springt terug
+// en de lijn naar de server tekent zichzelf, met een vinkje. Dat herhaalt zich rustig.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een browser vraagt aan het adresboek van internet waar jouwbedrijf.nl staat, krijgt het IP-adres terug en maakt verbinding met de juiste server.'}>
+  <!-- browser -->
+  <rect x="16" y="112" width="156" height="128" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M17 136v-12a11 11 0 0 1 11-11h132a11 11 0 0 1 11 11v12z" fill="#e8eef4" />
+  <circle cx="30" cy="124" r="3.5" fill="#d9e1ea" /><circle cx="42" cy="124" r="3.5" fill="#d9e1ea" /><circle cx="54" cy="124" r="3.5" fill="#d9e1ea" />
+  <rect x="28" y="146" width="132" height="22" rx="11" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="40" y="161.5" font-size="11.5" font-weight="800">jouwbedrijf.nl</text>
+  <rect x="28" y="180" width="86" height="8" rx="4" fill="#e8eef4" />
+  <rect x="28" y="196" width="120" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="28" y="210" width="70" height="7" rx="3.5" fill="#e8eef4" />
+
+  <!-- adresboek / nameserver -->
+  <rect x="176" y="18" width="128" height="132" rx="12" fill="#fff" stroke="#074663" stroke-width="2" />
+  <path d="M190 18v132" stroke="#d9e1ea" stroke-width="2" />
+  <text x="200" y="40" font-size="12" font-weight="800">Adresboek</text>
+  <text x="200" y="66" font-size="10" font-weight="800">A</text>
+  <text x="216" y="66" font-size="10" class="zacht">185.12.34.56</text>
+  <text x="200" y="88" font-size="10" font-weight="800">MX</text>
+  <text x="222" y="88" font-size="10" class="zacht">mail.provider</text>
+  <text x="200" y="110" font-size="10" font-weight="800">TXT</text>
+  <rect x="226" y="103" width="62" height="7" rx="3.5" fill="#e8eef4" />
+  <text x="200" y="132" font-size="10" font-weight="800">TTL</text>
+  <text x="226" y="132" font-size="10" class="zacht">3600</text>
+
+  <!-- server -->
+  <rect x="330" y="128" width="132" height="34" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="330" y="168" width="132" height="34" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="344" y="140" width="64" height="10" rx="5" />
+  <rect class="v" x="344" y="180" width="64" height="10" rx="5" />
+  <circle cx="440" cy="145" r="5" fill="#1f8a5b" /><circle cx="440" cy="185" r="5" fill="#1f8a5b" />
+  <text x="396" y="226" font-size="11" text-anchor="middle" class="zacht">185.12.34.56</text>
+
+  <!-- vaste routes -->
+  <path class="a" d="M118 112C126 78 146 66 172 62" stroke-dasharray="5 7" />
+  <path d="M306 84C348 88 384 102 396 124" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-dasharray="5 7" stroke-linecap="round" />
+  <path d="M174 186H326" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-linecap="round" />
+
+  {!mini && (
+    <g>
+      <rect class="dns-regel" x="194" y="54" width="104" height="17" rx="6" fill="#ff6600" fill-opacity="0.16" />
+      <g class="dns-vraag">
+        <circle cx="118" cy="112" r="11" fill="#ff6600" />
+        <text x="118" y="116.5" font-size="13" font-weight="800" text-anchor="middle" style="fill:#fff">?</text>
+      </g>
+      <g class="dns-antwoord">
+        <rect x="64" y="70" width="88" height="24" rx="12" fill="#074663" />
+        <text x="108" y="86" font-size="10.5" font-weight="800" text-anchor="middle" style="fill:#fff">185.12.34.56</text>
+      </g>
+      <path class="dns-lijn" d="M174 186H326" fill="none" stroke="#ff6600" stroke-width="4" stroke-linecap="round" pathLength="1" />
+      <g class="dns-vink"><circle cx="462" cy="128" r="11" fill="#1f8a5b" /><path d="M456.5 128l4 4 7-8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+    </g>
+  )}
+</svg>
+<style>
+  .dns-vink, .dns-antwoord { transform-box: fill-box; transform-origin: center; }
+  .dns-lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .dns-vraag, :global(.teken-js) .dns-antwoord, :global(.teken-js) .dns-vink, :global(.teken-js) .dns-regel { opacity: 0; }
+  :global(.teken-js) .dns-lijn { stroke-dashoffset: 1; }
+  .in-beeld .dns-vraag { animation: kennisbank--wat-is--dns-vraag 6s ease-in-out 0.5s infinite; }
+  .in-beeld .dns-regel { animation: kennisbank--wat-is--dns-regel 6s ease-in-out 0.5s infinite; }
+  .in-beeld .dns-antwoord { animation: kennisbank--wat-is--dns-antwoord 6s ease-out 0.5s infinite; }
+  .in-beeld .dns-lijn { animation: kennisbank--wat-is--dns-lijn 6s cubic-bezier(.6,.1,.3,1) 0.5s infinite; }
+  .in-beeld .dns-vink { animation: kennisbank--wat-is--dns-vink 6s ease-out 0.5s infinite; }
+  @keyframes kennisbank--wat-is--dns-vraag {
+    0% { opacity: 0; transform: translate(0, 0); }
+    6% { opacity: 1; }
+    16% { transform: translate(22px, -36px); }
+    26% { opacity: 1; transform: translate(62px, -50px); }
+    32%, 100% { opacity: 0; transform: translate(70px, -50px); }
+  }
+  @keyframes kennisbank--wat-is--dns-regel { 0%, 24% { opacity: 0; } 30%, 50% { opacity: 1; } 60%, 100% { opacity: 0; } }
+  @keyframes kennisbank--wat-is--dns-antwoord { 0%, 32% { opacity: 0; transform: scale(0.5); } 38%, 88% { opacity: 1; transform: none; } 96%, 100% { opacity: 0; transform: none; } }
+  @keyframes kennisbank--wat-is--dns-lijn { 0%, 44% { stroke-dashoffset: 1; opacity: 1; } 62%, 90% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+  @keyframes kennisbank--wat-is--dns-vink { 0%, 60% { opacity: 0; transform: scale(0.4); } 66%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .dns-vraag, .in-beeld .dns-regel, .in-beeld .dns-antwoord, .in-beeld .dns-lijn, .in-beeld .dns-vink { animation: none; } }
+</style>

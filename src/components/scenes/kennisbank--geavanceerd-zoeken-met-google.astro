@@ -1,0 +1,56 @@
+---
+// Scène voor /kennisbank/geavanceerd-zoeken-met-google/: een zoekbalk met een zoekoperator en een lange lijst resultaten eronder.
+// Als hij leeft: er verschijnt een tweede operator, de resultaten die niet passen vallen weg, de goede twee lichten op en de cursor knippert.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [104, 132, 160, 188, 216];
+const blijft = [1, 3];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een zoekbalk met de zoekoperatoren site en filetype. Van de lange lijst zoekresultaten blijven er twee over die precies passen.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- kaart -->
+  <rect x="40" y="22" width="400" height="230" rx="16" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <!-- zoekbalk -->
+  <rect x="60" y="42" width="360" height="40" rx="20" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <circle cx="84" cy="61" r="8" fill="none" stroke="#074663" stroke-width="2.5" />
+  <path d="M90 67l6 6" stroke="#074663" stroke-width="2.5" stroke-linecap="round" />
+  <rect x="104" y="50" width="104" height="24" rx="8" fill="#e8eef4" />
+  <text x="113" y="66" font-size="12" font-weight="800" fill="#074663">site:jouw.nl</text>
+
+  <!-- resultaten -->
+  {rijen.map((y, i) => (
+    <g class={blijft.includes(i) ? 'goed' : 'weg'}>
+      <rect x="60" y={y} width="360" height="22" rx="6" fill="#fff" />
+      <rect x="64" y={y + 2} width={130 + (i % 3) * 30} height="7" rx="3.5" fill={blijft.includes(i) ? '#074663' : '#c9d3dd'} />
+      <rect x="64" y={y + 13} width={220 - (i % 2) * 40} height="5" rx="2.5" fill="#e8eef4" />
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      <g class="chip2">
+        <rect x="214" y="50" width="104" height="24" rx="8" fill="#fff4ec" stroke="#ff6600" stroke-width="1.5" />
+        <text x="223" y="66" font-size="12" font-weight="800" fill="#10283f">filetype:pdf</text>
+      </g>
+      <rect class="cursor" x="326" y="52" width="2.5" height="20" rx="1" fill="#10283f" />
+      <g class="licht">
+        <rect x="56" y="128" width="368" height="30" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+        <rect x="56" y="184" width="368" height="30" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+        <circle cx="404" cy="143" r="9" fill="#1f8a5b" /><path d="M399.5 143l3 3 6-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="404" cy="199" r="9" fill="#1f8a5b" /><path d="M399.5 199l3 3 6-6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .chip2 { opacity: 0; }
+  .in-beeld .chip2 { animation: kennisbank-geavanceerd-zoeken-met-google-chip 0.5s cubic-bezier(.3,1.5,.5,1) 0.6s forwards; }
+  .in-beeld .weg { animation: kennisbank-geavanceerd-zoeken-met-google-weg 0.6s ease 1.3s forwards; }
+  :global(.teken-js) .licht { opacity: 0; }
+  .in-beeld .licht { animation: kennisbank-geavanceerd-zoeken-met-google-licht 4s ease-in-out 2s infinite both; }
+  .in-beeld .cursor { animation: kennisbank-geavanceerd-zoeken-met-google-knipper 1.1s steps(2, start) infinite; }
+  @keyframes kennisbank-geavanceerd-zoeken-met-google-chip { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-geavanceerd-zoeken-met-google-weg { to { opacity: 0.18; } }
+  @keyframes kennisbank-geavanceerd-zoeken-met-google-licht { 0% { opacity: 0; } 20%, 80% { opacity: 1; } 100% { opacity: 0.4; } }
+  @keyframes kennisbank-geavanceerd-zoeken-met-google-knipper { to { visibility: hidden; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .chip2, .in-beeld .weg, .in-beeld .licht, .in-beeld .cursor { animation: none; } }
+</style>

@@ -1,0 +1,215 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--copywriting.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/copywriting/';
+const datum = '2026-10-18';
+const definitie = 'Copywriting is het schrijven van wervende tekst met één doel: dat de lezer iets doet, zoals bellen, klikken, een offerte aanvragen of kopen.';
+const hoofdstukken = [
+  { id: 'herkomst', titel: 'Waar het woord vandaan komt' },
+  { id: 'verschil', titel: 'Copywriting, tekstschrijven en content' },
+  { id: 'copywriter', titel: 'Wat een copywriter doet' },
+  { id: 'soorten', titel: 'Soorten copywriting' },
+  { id: 'bouwstenen', titel: 'De bouwstenen van overtuigen' },
+  { id: 'formules', titel: 'AIDA, PAS en andere formules' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: voor en na' },
+  { id: 'fouten', titel: 'Zeven veelgemaakte fouten' },
+  { id: 'ai', titel: 'Copywriting en AI' },
+  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Copywriting',
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is copywriting? Uitleg en voorbeelden | Drijfveer Media"
+  description="Wat is copywriting? Wervende tekst die de lezer laat bellen, klikken of kopen. Met formules, een voorbeeld voor en na en de fouten die het meest kosten."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Copywriting', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Teksten</p>
+        <h1>Wat is copywriting?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <p>Wat is copywriting precies? Het is schrijven met een opdracht. Een gewone tekst legt uit. Copy wil dat je in beweging komt. Elke kop, elke zin en elke knop werkt naar dat ene moment toe: de lezer belt, vult het formulier in of klikt door naar de volgende stap.</p>
+        <p>Je komt het overal tegen. In een advertentie in Google, op de homepage van je loodgieter, in de onderwerpregel van een nieuwsbrief en op een knop met "Plan je proefles". Hieronder lees je hoe het werkt, welke soorten er zijn en hoe je zelf een betere tekst schrijft.</p>
+
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Copywriting is overtuigend schrijven met een meetbaar doel: een klik, een telefoontje, een aanvraag.</li>
+            <li>Het verschil met gewoon tekstschrijven zit in het doel, niet in de lengte.</li>
+            <li>Goede copy begint bij de lezer: zijn probleem, zijn woorden, zijn twijfels.</li>
+            <li>De bekendste formule is AIDA: aandacht, interesse, verlangen, actie.</li>
+            <li>AI helpt bij snelheid en varianten. De kennis van jouw klant moet van jou komen.</li>
+          </ul>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="herkomst">Waar het woord vandaan komt</h2></div>
+        <p>Het woord komt uit de reclamewereld. "Copy" is daar de tekst van een advertentie, naast het beeld. Een copywriter is volgens Wikipedia een tekstschrijver die zich toelegt op reclametekst en andere wervende teksten. Bij een reclamebureau bedenkt hij de campagne vaak samen met een art director: de een denkt in woorden, de ander in beeld.</p>
+        <p>Het vak is ouder dan internet. De formule die copywriters nog steeds gebruiken, AIDA, werd in 1925 voor het eerst gepubliceerd door E.K. Strong. Hij schreef het idee toe aan de Amerikaanse reclameman St. Elmo Lewis, eind negentiende eeuw. Wat toen voor krantenadvertenties werkte, werkt nu voor een landingspagina. Mensen zijn niet veranderd. De schermen wel.</p>
+        <p>Let op: copywriting heeft niets met copyright te maken. Dat is het auteursrecht. De namen lijken op elkaar, het vak is heel anders.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="verschil">Copywriting, tekstschrijven en content: het verschil</h2></div>
+        <p>In de praktijk lopen de termen door elkaar. Toch helpt het om het onderscheid te kennen. Het zegt hoe je een tekst beoordeelt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort tekst</th><th>Doel</th><th>Voorbeelden</th><th>Je meet het aan</th></tr></thead>
+            <tbody>
+              <tr><td>Copywriting</td><td>De lezer laten handelen</td><td>Advertenties, landingspagina's, knoppen, mailings</td><td>Klikken, aanvragen, verkopen</td></tr>
+              <tr><td>Contentschrijven</td><td>Informeren en vertrouwen opbouwen</td><td>Blogs, gidsen, kennisartikelen</td><td>Bezoekers, leestijd, terugkerende lezers</td></tr>
+              <tr><td>SEO-teksten</td><td>Gevonden worden én overtuigen</td><td>Dienstpagina's, plaatspagina's</td><td>Posities in Google, verkeer, aanvragen</td></tr>
+              <tr><td>Informatieve tekst</td><td>Neutraal uitleggen</td><td>Handleiding, patiëntenfolder, persbericht</td><td>Begrip, minder vragen aan de balie</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een goede dienstpagina is vaak alle drie tegelijk. Hij moet in Google staan, uitleggen wat je doet en de bezoeker over de streep trekken. Daarom schrijven we webteksten nooit alleen voor zoekmachines. Een tekst die bovenaan staat maar niemand overtuigt, levert niets op. Meer over vindbare teksten lees je in de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="copywriter">Wat een copywriter doet</h2></div>
+        <p>Een copywriter schrijft minder dan je denkt. Het grootste deel van het werk gebeurt vóór de eerste zin. Zo ziet het werk er bij een goede copywriter uit:</p>
+        <ol>
+          <li><b>Vragen stellen.</b> Wat verkoop je, aan wie, en waarom kiezen klanten nu voor jou? Wat vragen ze altijd aan de telefoon?</li>
+          <li><b>De doelgroep leren kennen.</b> Welke woorden gebruikt je klant zelf? Waar ligt hij wakker van? Een <a href="/kennisbank/gidsen/persona-maken/">persona</a> helpt om dat vast te leggen.</li>
+          <li><b>Eén doel kiezen.</b> Wat moet de lezer doen na het lezen? Bellen, mailen, een afspraak plannen? Eén pagina, één hoofdactie.</li>
+          <li><b>Kenmerken vertalen naar voordelen.</b> Niet wat jij doet, maar wat de klant eraan heeft.</li>
+          <li><b>Schrijven en schrappen.</b> De eerste versie is te lang. Altijd.</li>
+          <li><b>Testen en bijschaven.</b> Welke kop levert meer klikken op? Welke knop meer aanvragen? Meten wint van smaak.</li>
+        </ol>
+        <p>Een copywriter is dus net zo goed luisteraar als schrijver. Wie geen vragen stelt, schrijft over zichzelf.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="soorten">Soorten copywriting</h2></div>
+        <p>Elke plek vraagt om een andere aanpak. De lezer zit telkens in een andere situatie: hij zoekt, scrolt, vergelijkt of twijfelt.</p>
+        <h3>Webteksten</h3>
+        <p>Je homepage, dienstpagina's en over-ons-pagina. De bezoeker beslist in een paar seconden of hij blijft. Een sterke kop, een duidelijke belofte en een zichtbare knop maken hier het verschil.</p>
+        <h3>Advertentieteksten</h3>
+        <p>Kort en streng begrensd. Bij een responsieve zoekadvertentie in Google Ads mag een kop volgens Google maximaal 30 tekens tellen en een beschrijving 90. Je voert 3 tot 15 koppen en 2 tot 4 beschrijvingen in. Google combineert ze zelf. Elke kop moet dus los ook kloppen.</p>
+        <h3>SEO-teksten</h3>
+        <p>Teksten die gevonden willen worden én moeten overtuigen. Het zoekwoord staat in de titel en de eerste alinea, de opbouw volgt de vraag van de zoeker. Eerst helpen, dan verkopen.</p>
+        <h3>E-mail en nieuwsbrieven</h3>
+        <p>De onderwerpregel bepaalt of de mail opengaat. De eerste zin bepaalt of hij gelezen wordt. De knop bepaalt of er iets gebeurt.</p>
+        <h3>Microcopy</h3>
+        <p>Knopteksten, formulierlabels, foutmeldingen. Klein, maar "Verzenden" en "Stuur mij de offerte" voelen heel anders. Lees ook wat een goede <a href="/kennisbank/wat-is/call-to-action/">call to action</a> is.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="bouwstenen">De bouwstenen van overtuigen</h2></div>
+        <p>Je hoeft geen talent te zijn om betere copy te schrijven. De meeste winst zit in vijf bouwstenen.</p>
+        <h3>1. Koppen die beloven</h3>
+        <p>Veel mensen lezen alleen de koppen. Zorg dus dat die al iets vertellen. "Onze diensten" zegt niets. "Lekkage? Binnen vier uur een loodgieter bij je in Assen" wel. Een goede kop noemt het probleem of de uitkomst, het liefst met iets concreets erin: een getal, een plaats, een termijn.</p>
+        <h3>2. Voordelen in plaats van kenmerken</h3>
+        <p>Een kenmerk is wat je product is. Een voordeel is wat de klant ermee wint. Schrijf de voordelen op en zet het kenmerk erachter als bewijs.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kenmerk</th><th>Voordeel voor de klant</th></tr></thead>
+            <tbody>
+              <tr><td>HR++-glas</td><td>Een warmere woonkamer en een lagere stookrekening</td></tr>
+              <tr><td>Online agenda</td><td>Om tien uur 's avonds nog een afspraak maken</td></tr>
+              <tr><td>Twintig jaar ervaring</td><td>Iemand die de klus al honderd keer eerder deed</td></tr>
+              <tr><td>Maandelijks opzegbaar</td><td>Je zit nergens aan vast als het niet bevalt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>3. Bewijs</h3>
+        <p>Beloven kan iedereen. Laat zien dat het klopt: een review, een foto van echt werk, een cijfer, een garantie. Hoe groter de belofte, hoe meer bewijs je nodig hebt.</p>
+        <h3>4. Eén duidelijke volgende stap</h3>
+        <p>Sluit elk blok af met wat de lezer nu kan doen. Maak de drempel laag: "Bel Thorgall, binnen 15 minuten teruggebeld" werkt beter dan "Neem contact op". Te veel keuzes op één pagina zorgen voor minder conversie, niet meer.</p>
+        <h3>5. Een vaste toon</h3>
+        <p>Zeg je je of u? Ben je droog of uitbundig? Een vaste tone of voice maakt je herkenbaar en betrouwbaar. In de gids <a href="/kennisbank/gidsen/tone-of-voice/">tone of voice bepalen</a> leggen we stap voor stap uit hoe je die kiest en vastlegt.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="formules">AIDA, PAS en andere formules</h2></div>
+        <p>Formules zijn geen toverspreuken. Het zijn bouwtekeningen die voorkomen dat je een stap overslaat.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Formule</th><th>Stappen</th><th>Werkt goed voor</th></tr></thead>
+            <tbody>
+              <tr><td>AIDA</td><td>Attention, Interest, Desire, Action: aandacht, interesse, verlangen, actie</td><td>Dienstpagina's, landingspagina's, mailings</td></tr>
+              <tr><td>PAS</td><td>Problem, Agitate, Solve: probleem, pijn voelbaar maken, oplossing</td><td>Advertenties, korte posts</td></tr>
+              <tr><td>Voor, na, brug</td><td>Zo is het nu, zo kan het zijn, zo kom je daar</td><td>Cases, e-mails</td></tr>
+              <tr><td>Kenmerk, voordeel, bewijs</td><td>Wat het is, wat je eraan hebt, waarom je het kunt geloven</td><td>Productteksten, prijsblokken</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Onze eigen dienstpagina's zijn ook volgens AIDA opgebouwd. Bovenaan pakken we de aandacht met het probleem van de lezer. Daarna volgt de uitleg, dan het bewijs en onderaan één duidelijke vraag: zullen we even bellen?</p>
+        <p>Een verhaal werkt vaak nog sterker dan een formule. Mensen onthouden een klant die met een probleem zat beter dan een rijtje argumenten. Lees daarover meer bij <a href="/kennisbank/wat-is/storytelling/">storytelling</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="voorbeeld">Voorbeeld: dezelfde tekst, twee keer</h2></div>
+        <p>Een installatiebedrijf in Hoogeveen wil meer aanvragen voor warmtepompen. Dit stond er eerst op de homepage: <span class="muted">(Verzonnen voorbeeld.)</span></p>
+        <blockquote>Welkom bij Jansen Installatietechniek. Wij zijn een full-service installatiebedrijf met jarenlange ervaring. Wij leveren kwaliteit en service. Neem gerust contact met ons op.</blockquote>
+        <p>Wat is hier mis? Het gaat alleen over het bedrijf. "Kwaliteit en service" belooft iedereen. En "neem gerust contact op" vraagt niets concreets. Dezelfde ruimte, nu als copy:</p>
+        <blockquote>Een warmtepomp, zonder gedoe. We rekenen eerst uit wat je bespaart en of je huis er klaar voor is. Pas daarna maken we een offerte. Plan een gratis adviesgesprek bij je thuis, in Hoogeveen en omgeving.</blockquote>
+        <p>De kop noemt wat de klant wil. De tweede zin neemt een angst weg: dat hij iets koopt wat niet past. Het gesprek is gratis en bij hem thuis, de drempel is laag. En de laatste zin vertelt precies wat hij nu kan doen.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="fouten">Zeven veelgemaakte fouten</h2></div>
+        <ul class="vink">
+          <li><b>Beginnen met "wij".</b> Tel in je eigen tekst hoe vaak je "wij" schrijft en hoe vaak "je". Staat "wij" voor, draai het om.</li>
+          <li><b>Vakjargon.</b> Jij zegt "warmteopwekker", je klant zoekt "cv-ketel vervangen". Schrijf in zijn woorden.</li>
+          <li><b>Lege beloftes.</b> "Klantgericht", "betrouwbaar" en "kwaliteit" zegt elk bedrijf. Maak het concreet of laat het weg.</li>
+          <li><b>Geen of te veel knoppen.</b> Geen knop is een gemiste kans. Vijf verschillende knoppen maakt kiezen moeilijk.</li>
+          <li><b>Alles tegelijk willen zeggen.</b> Eén pagina, één boodschap. De rest kan op een andere pagina.</li>
+          <li><b>Lange lappen tekst.</b> Op een telefoon is een alinea van tien regels een muur. Gebruik korte alinea's en tussenkoppen.</li>
+          <li><b>Nooit meten.</b> Je weet pas of een tekst werkt als je ziet hoeveel aanvragen hij oplevert. Zet de meting aan voor je gaat schaven.</li>
+        </ul>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2 id="ai">Copywriting en AI</h2></div>
+        <p>ChatGPT en Claude schrijven in een paar seconden tien koppen. Dat is handig. Voor het bedenken van varianten om te testen, of voor een eerste opzet als je vastzit. Wij gebruiken AI-tools ook in ons eigen werk. Op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a> lees je welke tools we gebruiken en waar we ze niet voor inzetten.</p>
+        <p>Het zwakke punt: AI kent jouw klant niet. Het weet niet dat jouw klanten vooral bang zijn voor een rommelige bouwplaats. Of dat je als enige in de regio op zaterdag komt. Zonder die details krijg je een tekst die net zo klinkt als die van je concurrent.</p>
+        <p>Google beoordeelt een tekst niet op wie hem schreef, maar op of hij mensen echt helpt. In de eigen richtlijnen voor nuttige content vraagt Google of een tekst eerst voor mensen is gemaakt en niet om zoekmachines te bespelen. Wie AI vooral inzet om veel pagina's te maken die rankings moeten halen, loopt volgens Google tegen het spambeleid aan. Gebruik AI dus voor snelheid. Laat een mens de feiten checken en de tekst scherpstellen.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="uitbesteden">Zelf doen of uitbesteden?</h2></div>
+        <p>Je kunt prima zelf beginnen. Pak je belangrijkste pagina, vaak de dienst waar je het meest aan verdient. Herschrijf hem met de vijf bouwstenen hierboven. Vraag daarna een klant of hij hem wil lezen en vraag wat hij mist.</p>
+        <p>Uitbesteden loont als teksten direct geld kosten of opleveren. Bij advertenties betaal je voor elke klik, dus een zwakke tekst is duur. En bij een site met veel bezoekers maar weinig aanvragen ligt het vaak aan de tekst.</p>
+        <p>Bij Drijfveer Media kost een webpagina vanaf € 75, exclusief btw. Elke tekst begint met vragen aan jou en is geschreven voor je klant én voor Google. Lees meer bij <a href="/tekstschrijver/">tekstschrijver</a>. Wil je elke maand nieuwe artikelen die klanten trekken? Dan is <a href="/tekstschrijver/contentmarketing/">contentmarketing</a> de vaste vorm, vanaf € 495 per maand.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Meer weten?</p>
+          <p>Bepaal eerst voor wie je schrijft: lees <a href="/kennisbank/wat-is/doelgroep/">wat een doelgroep is</a> en hoe je een <a href="/kennisbank/gidsen/persona-maken/">persona maakt</a>. Leg je stijl vast met de gids <a href="/kennisbank/gidsen/tone-of-voice/">tone of voice</a>. Wil je meer aanvragen uit dezelfde bezoekers, kijk dan bij <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een copywriter en een tekstschrijver?', a: 'Een tekstschrijver schrijft allerlei teksten, ook neutrale zoals een handleiding. Een copywriter richt zich op wervende tekst die tot actie aanzet. In de praktijk doen veel tekstschrijvers allebei.' },
+      { v: 'Wat verdient een copywriter of wat kost copywriting?', a: 'Dat verschilt sterk per ervaring en soort tekst. Freelancers rekenen per uur, per woord of per pagina. Bij Drijfveer Media kost een webpagina vanaf € 75, exclusief btw. Je weet vooraf wat je betaalt.' },
+      { v: 'Is copywriting hetzelfde als copyright?', a: 'Nee. Copyright is het auteursrecht op een werk. Copywriting is het schrijven van wervende tekst. Alleen de woorden lijken op elkaar.' },
+      { v: 'Hoe leer je copywriting?', a: 'Door veel te lezen, veel te schrijven en te meten wat werkt. Begin met de formule AIDA en de vraag wat de lezer eraan heeft. Herschrijf daarna een bestaande pagina en vergelijk het aantal aanvragen voor en na.' },
+      { v: 'Kan AI copywriting overnemen?', a: 'AI schrijft snel varianten en eerste versies. Het kent jouw klanten, prijzen en verhalen niet. De beste teksten ontstaan als een mens de kennis en de keuzes levert en AI helpt met tempo.' },
+    ]}
+  />
+
+  <Actie titel="Overtuigt jouw website genoeg?" tekst={`We lezen je belangrijkste pagina gratis mee. ${site.contactpersoon} belt je met drie verbeteringen in de tekst die het snelst meer aanvragen opleveren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

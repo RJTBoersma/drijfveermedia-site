@@ -1,0 +1,98 @@
+---
+// Scène voor /kennisbank/wat-is/crawlbudget/: een kleine robot loopt de pagina's van een site af, linksboven loopt zijn budget leeg.
+// Rechts een stapel kalenderpagina's waar hij in kan blijven hangen. In de volledige versie krijgen bezochte pagina's een vinkje en wordt de stapel afgesloten.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const vinken = [[272, 62], [132, 146], [88, 208], [148, 208], [272, 146], [258, 208]];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kleine robot bezoekt de pagina\'s van een website een voor een, terwijl zijn budget leegloopt. Een stapel lege kalenderpagina\'s wordt afgesloten, zodat de robot daar geen tijd aan verspilt.'}>
+  <!-- het budget -->
+  <text x="20" y="30" font-size="11" font-weight="800" class="zacht">Budget</text>
+  <rect x="20" y="38" width="112" height="16" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="tank" x="23" y="41" width="106" height="10" rx="5" fill="#074663" />
+
+  <!-- de takken -->
+  <path class="l" d="M240 68v20M100 88h280M100 88v20M240 88v20M380 88v20M100 152v14M70 166h60M70 166v14M130 166v14M240 152v28M380 152v16" />
+
+  <!-- home -->
+  <rect x="200" y="22" width="80" height="46" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="l" d="M224 46l16-12 16 12M229 42v14h22V42" />
+
+  <!-- tweede laag -->
+  <rect x="60" y="108" width="80" height="44" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="72" y="120" width="44" height="7" rx="3.5" fill="#074663" />
+  <rect x="72" y="133" width="56" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="200" y="108" width="80" height="44" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="212" y="120" width="50" height="7" rx="3.5" fill="#074663" />
+  <rect x="212" y="133" width="40" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="340" y="108" width="80" height="44" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="352" y="120" width="38" height="7" rx="3.5" fill="#074663" />
+  <rect x="352" y="133" width="54" height="6" rx="3" fill="#d9e1ea" />
+
+  <!-- derde laag -->
+  <rect x="45" y="180" width="50" height="34" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="54" y="190" width="28" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="105" y="180" width="50" height="34" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="114" y="190" width="24" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="215" y="180" width="50" height="34" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="224" y="190" width="30" height="6" rx="3" fill="#d9e1ea" />
+
+  <!-- de kalenderstapel -->
+  <rect x="362" y="180" width="60" height="38" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="356" y="174" width="60" height="38" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="350" y="168" width="60" height="38" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="l" d="M360 180h40M360 188h40M370 180v20M380 180v20M390 180v20" stroke-width="1.5" />
+  <text x="350" y="240" font-size="11" font-weight="800" class="zacht">?datum=</text>
+
+  <!-- de robot -->
+  <g class="robot" transform="translate(280 22)">
+    <path d="M0-10v-6" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+    <circle cx="0" cy="-18" r="2.5" fill="#ff6600" />
+    <rect x="-12" y="-10" width="24" height="19" rx="6" fill="#074663" />
+    <circle cx="-4.5" cy="-1" r="2.3" fill="#fff" />
+    <circle cx="4.5" cy="-1" r="2.3" fill="#fff" />
+  </g>
+
+  {!mini && (
+    <g>
+      {vinken.map(([x, y], i) => (
+        <g class="vinkje" style={`animation-delay:${0.5 + i}s`}>
+          <circle cx={x} cy={y} r="7" fill="#1f8a5b" />
+          <path d={`M${x - 3} ${y}l2 2.5 4-4.5`} fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <g class="dicht">
+        <circle cx="430" cy="166" r="13" fill="#fff" stroke="#ff6600" stroke-width="3" />
+        <path d="M421 175l18-18" stroke="#ff6600" stroke-width="3" stroke-linecap="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .tank { transform-box: fill-box; transform-origin: left center; }
+  .vinkje, .dicht { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .vinkje, :global(.teken-js) .dicht { opacity: 0; }
+  .in-beeld .robot { animation: kennisbank-wat-is-crawlbudget-robot 8s ease-in-out 0.3s infinite; }
+  .in-beeld .tank { animation: kennisbank-wat-is-crawlbudget-tank 8s linear 0.3s infinite; }
+  .in-beeld .vinkje { animation: kennisbank-wat-is-crawlbudget-vink 0.4s cubic-bezier(.3,1.6,.5,1) forwards; }
+  .in-beeld .dicht { animation: kennisbank-wat-is-crawlbudget-vink 0.5s cubic-bezier(.3,1.6,.5,1) 2.2s forwards; }
+  @keyframes kennisbank-wat-is-crawlbudget-robot {
+    0%, 4% { transform: translate(280px, 22px); }
+    12%, 16% { transform: translate(140px, 108px); }
+    25%, 29% { transform: translate(95px, 180px); }
+    37%, 41% { transform: translate(155px, 180px); }
+    50%, 54% { transform: translate(280px, 108px); }
+    62%, 66% { transform: translate(265px, 180px); }
+    80%, 100% { transform: translate(280px, 22px); }
+  }
+  @keyframes kennisbank-wat-is-crawlbudget-tank {
+    0% { transform: scaleX(1); }
+    76% { transform: scaleX(.28); }
+    86%, 100% { transform: scaleX(1); }
+  }
+  @keyframes kennisbank-wat-is-crawlbudget-vink { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .robot, .in-beeld .tank { animation: none; }
+    .in-beeld .vinkje, .in-beeld .dicht { animation: none; opacity: 1; }
+  }
+</style>

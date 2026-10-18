@@ -1,0 +1,65 @@
+---
+// Scène voor /kennisbank/wat-is/geo/: links de drie letters G, E en O met hun betekenis, rechts een AI-antwoord waarin "Jouw bedrijf" staat.
+// In de volledige versie lichten de letters een voor een op en knippert een kader rond de naam in het antwoord.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const letters = [
+  { l: 'G', w: 'generative', y: 34 },
+  { l: 'E', w: 'engine', y: 106 },
+  { l: 'O', w: 'optimization', y: 178 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: de letters G, E en O met de woorden generative, engine en optimization. Ernaast een AI-antwoord op de vraag naar een installateur in Emmen, waarin jouw bedrijf genoemd wordt.'}>
+  <!-- de letters -->
+  {letters.map((x) => (
+    <g>
+      <rect x="20" y={x.y} width="58" height="58" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x="49" y={x.y + 41} font-size="34" font-weight="900" text-anchor="middle" style="fill:#ff6600">{x.l}</text>
+      <text x="88" y={x.y + 34} font-size="13" font-weight="800">{x.w}</text>
+    </g>
+  ))}
+
+  <!-- het antwoord -->
+  <rect x="236" y="34" width="224" height="202" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="270" y="48" width="176" height="26" rx="13" fill="#074663" />
+  <text x="283" y="65" font-size="11" font-weight="700" style="fill:#fff">Installateur in Emmen?</text>
+  <circle class="v" cx="258" cy="98" r="10" />
+  <path class="o" d="M258 91l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" />
+  <rect x="276" y="92" width="160" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="276" y="108" width="92" height="20" rx="6" fill="#ffe2cc" />
+  <text x="284" y="122" font-size="11" font-weight="800">Jouw bedrijf</text>
+  <rect x="374" y="114" width="62" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="276" y="138" width="140" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="276" y="158" width="18" height="7" rx="3.5" fill="#8aa0b4" />
+  <rect x="300" y="158" width="110" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="276" y="176" width="18" height="7" rx="3.5" fill="#8aa0b4" />
+  <rect x="300" y="176" width="124" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="276" y="200" width="70" height="18" rx="9" fill="#fff" stroke="#ff6600" stroke-width="1.5" />
+  <text x="284" y="212.5" font-size="9" font-weight="700">jouwsite.nl</text>
+
+  <!-- verbinding -->
+  <path class="a" d="M196 135C214 135 218 118 236 118" stroke-dasharray="4 5" />
+
+  {!mini && (
+    <g>
+      {letters.map((x, i) => (
+        <rect class="gloei" x="20" y={x.y} width="58" height="58" rx="10" fill="none" stroke="#ff6600" stroke-width="2.5" style={`animation-delay:${0.3 + i * 0.5}s`} />
+      ))}
+      <rect class="kader-knip" x="272" y="104" width="100" height="28" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+      <path class="fonkel" d="M446 40l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#ff6600" />
+    </g>
+  )}
+</svg>
+<style>
+  .gloei, .kader-knip, .fonkel { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .gloei, :global(.teken-js) .kader-knip { opacity: 0; }
+  .in-beeld .gloei { animation: kennisbank-wat-is-geo-gloei 6s ease-in-out infinite; }
+  .in-beeld .kader-knip { animation: kennisbank-wat-is-geo-knip 6s ease-in-out 1.6s infinite; }
+  .in-beeld .fonkel { animation: kennisbank-wat-is-geo-fonkel 4s ease-in-out 0.8s infinite; }
+  @keyframes kennisbank-wat-is-geo-gloei { 0% { opacity: 0; } 8%, 40% { opacity: 1; } 55%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-geo-knip { 0% { opacity: 0; transform: scale(1.15); } 10%, 60% { opacity: 1; transform: none; } 75%, 100% { opacity: 0; transform: none; } }
+  @keyframes kennisbank-wat-is-geo-fonkel { 0%, 100% { transform: scale(.6) rotate(0deg); opacity: .5; } 50% { transform: scale(1.1) rotate(45deg); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .gloei, .in-beeld .kader-knip, .in-beeld .fonkel { animation: none; }
+  }
+</style>

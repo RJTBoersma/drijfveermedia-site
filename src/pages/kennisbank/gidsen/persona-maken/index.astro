@@ -1,0 +1,312 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--persona-maken.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/persona-maken/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een persona?' },
+  { id: 'verschil', titel: 'Persona, buyer persona, doelgroep' },
+  { id: 'waarom', titel: 'Waarom je er een wilt' },
+  { id: 'onderdelen', titel: 'Wat erin staat' },
+  { id: 'stappen', titel: 'Zes stappen' },
+  { id: 'template', titel: 'Template om in te vullen' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: Ans' },
+  { id: 'voorbeeld-zakelijk', titel: 'Voorbeeld: Martin (zakelijk)' },
+  { id: 'negatief', titel: 'De negatieve persona' },
+  { id: 'gebruiken', titel: 'Zo gebruik je hem' },
+  { id: 'ai', titel: 'Persona maken met AI?' },
+  { id: 'valkuilen', titel: 'Valkuilen' },
+];
+const velden = [
+  ['Naam en leeftijd', 'Een gewone naam die past bij de leeftijd en de regio.'],
+  ['Wie', 'Woonplaats, gezin, werk of functie. Twee of drie zinnen.'],
+  ['Situatie', 'Wat speelt er op het moment dat hij jou nodig heeft?'],
+  ['Doelen', 'Wat wil hij bereiken? In zijn woorden, niet in de jouwe.'],
+  ['Frustraties', 'Waar loopt hij tegenaan? Wat ging er eerder mis?'],
+  ['Behoeften', 'Wat moet hij weten of voelen om te kiezen?'],
+  ['Gedrag', 'Waar zoekt hij, wie vraagt hij om raad, hoe neemt hij contact op?'],
+  ['Bezwaren', 'Waarom zou hij net niet voor jou kiezen?'],
+  ['Wie beslist mee', 'Partner, collega, directeur, inkoop?'],
+  ['Aanspreekvorm', 'Je of u? Kort en zakelijk, of uitgebreid en geruststellend?'],
+  ['Citaat', 'Eén zin die een klant letterlijk zo zei.'],
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Persona-template (één A4)\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  velden.map(([k, u]) => `${k}\n(${u})\n\n\n`).join('') +
+  'Gebaseerd op: ... interviews, ... aanvragen, ... reviews\nLaatst nagekeken op: ...\n'
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Persona maken: stappenplan met uitgewerkt voorbeeld',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Een persona of buyer persona maken voor je marketing',
+}];
+---
+<Base
+  title="Persona maken: stappenplan met voorbeeld | Drijfveer Media"
+  description="Een persona maken die je echt gebruikt? Zes stappen, interviewvragen, een template en twee uitgewerkte persona voorbeelden voor een klein bedrijf."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Persona maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Leadgeneratie" titel="Persona maken: stappenplan met uitgewerkt voorbeeld" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Wie voor iedereen schrijft, raakt niemand. Een persona maken lost dat op: je geeft je ideale klant een naam, een gezicht en een verhaal. Hier lees je hoe, met een template en twee voorbeelden die je kunt overnemen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een persona is een verzonnen persoon die je echte, beste klanten samenvat. Met naam, situatie, doelen en frustraties.</li>
+            <li>Baseer hem op gesprekken met klanten, niet op je onderbuik. Vijf interviews zijn genoeg om te beginnen.</li>
+            <li>De belangrijkste vragen: wat wil hij bereiken, waar loopt hij tegenaan en wat houdt hem tegen om te kiezen?</li>
+            <li>Houd hem op één A4. Verderop staat een template die je kunt downloaden.</li>
+            <li>Een persona werkt pas als je hem gebruikt: bij elke tekst, elke advertentie en elke pagina op je site.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een persona?</h2>
+        <p>Een persona is een uitgewerkt klantprofiel in de vorm van één persoon. Die persoon bestaat niet, maar alles wat je over hem opschrijft, komt uit echte gesprekken en echte cijfers. In plaats van "huiseigenaren tussen 55 en 70 jaar" schrijf je over Ans, die net met pensioen is en haar tuin niet meer zelf kan bijhouden.</p>
+        <p>Dat verschil lijkt klein, maar het verandert hoe je schrijft. Een doelgroep is een rij getallen. Een persona is iemand aan wie je een brief kunt schrijven.</p>
+
+        <h2 id="verschil">Persona, buyer persona, user persona en doelgroep</h2>
+        <p>De termen lopen in de praktijk door elkaar. Voor een klein bedrijf is het verschil vooral handig om te weten welke vragen je moet stellen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Term</th><th>Wat het beschrijft</th><th>Je gebruikt het voor</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/kennisbank/wat-is/doelgroep/">Doelgroep</a></td><td>Een groep met gedeelde kenmerken: leeftijd, regio, branche, grootte</td><td>Advertenties instellen, je markt afbakenen</td></tr>
+              <tr><td>Persona</td><td>Eén voorbeeldpersoon uit die doelgroep, met doelen en frustraties</td><td>Teksten, website, keuzes over kanalen</td></tr>
+              <tr><td>Buyer persona</td><td>De persona als koper: hoe hij zoekt, vergelijkt en beslist</td><td>Marketing en verkoop, je offerte, je opvolging</td></tr>
+              <tr><td>User persona</td><td>De persona als gebruiker van een product, website of app</td><td>Ontwerp en gebruiksgemak</td></tr>
+              <tr><td>Ideaal klantprofiel</td><td>Bij zakelijke klanten: het soort bedrijf dat het best bij je past</td><td>Kiezen welke bedrijven je benadert</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor de meeste mkb'ers is de buyer persona precies wat je nodig hebt. Je wilt weten waarom iemand voor jou kiest, niet alleen wie hij is. In zakelijke markten is de koper soms iemand anders dan de gebruiker. Dan maak je er twee, of je zet in één persona wie er meebeslist.</p>
+
+        <h2 id="waarom">Waarom je als ondernemer een persona wilt</h2>
+        <p>Grote bedrijven hebben marketingafdelingen die hun klanten onderzoeken. Jij hebt dat niet. Juist daarom helpt een persona. Het dwingt je om één keer goed na te denken, en daarna gaan veel keuzes vanzelf.</p>
+        <ul>
+          <li><b>Je teksten worden beter.</b> Je schrijft in de woorden van je klant, over zijn probleem, in plaats van over jezelf.</li>
+          <li><b>Je kiest de goede kanalen.</b> Zit je klant op Facebook, LinkedIn of nergens? Zoekt hij in Google of vraagt hij het aan de buren?</li>
+          <li><b>Je weet wat je moet weglaten.</b> Wat Ans niet interesseert, hoeft niet op je homepage.</li>
+          <li><b>Je kiest de juiste toon.</b> Spreek je haar aan met je of met u? Wil ze details of alleen de hoofdlijn?</li>
+          <li><b>Iedereen in je bedrijf spreekt dezelfde taal.</b> "Zou Ans dit snappen?" is een vraag die je monteur, je partner en je tekstschrijver allemaal kunnen beantwoorden.</li>
+        </ul>
+
+        <h2 id="onderdelen">Wat staat er in een persona?</h2>
+        <p>Er bestaan tientallen templates. De meeste bevatten te veel. Dit zijn de onderdelen die er voor een klein bedrijf echt toe doen:</p>
+        <ol>
+          <li><b>Naam en foto of tekening.</b> Een gewone naam die past bij de leeftijd en de regio.</li>
+          <li><b>Demografische gegevens.</b> Leeftijd, woonplaats, gezin, werk. Kort houden.</li>
+          <li><b>Situatie.</b> Wat speelt er op het moment dat hij jou nodig heeft?</li>
+          <li><b>Doelen.</b> Wat wil hij bereiken? Niet "een nieuwe website", maar "elke week twee nieuwe aanvragen".</li>
+          <li><b>Frustraties.</b> Waar loopt hij tegenaan? Wat heeft hij eerder geprobeerd?</li>
+          <li><b>Behoeften.</b> Wat heeft hij nodig om te kiezen? Zekerheid, snelheid, een vaste prijs?</li>
+          <li><b>Gedrag.</b> Waar zoekt hij informatie, wie vraagt hij om advies, hoe neemt hij contact op?</li>
+          <li><b>Bezwaren.</b> Waarom zou hij net niet bij jou kopen?</li>
+          <li><b>Een citaat.</b> Eén zin die hij letterlijk zo zei in een interview.</li>
+        </ol>
+
+        <h2 id="stappen">Een persona maken in zes stappen</h2>
+        <p>Een persona maken kost minder tijd dan je denkt. Reken op een dag werk, verdeeld over twee weken. De meeste tijd zit in de gesprekken.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>1. Kies je beste klanten</h3></div>
+        <p>Schrijf de tien klanten op van wie je er graag meer zou hebben. Niet de grootste, maar de leukste: ze betalen op tijd, waarderen je werk en raden je aan. Wat hebben ze gemeen? Daar begint je persona.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>2. Verzamel wat je al hebt</h3></div>
+        <p>Je weet meer dan je denkt. Het ligt alleen verspreid over je mailbox, je statistieken en je hoofd. Deze bronnen kosten niets:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bron</th><th>Wat je er leert</th></tr></thead>
+            <tbody>
+              <tr><td>Je laatste twintig aanvragen</td><td>De woorden die klanten gebruiken, en wat ze als eerste vragen</td></tr>
+              <tr><td>Google Search Console</td><td>Met welke zoekopdrachten mensen je site vinden</td></tr>
+              <tr><td>Google Analytics</td><td>Regio, apparaat (telefoon of computer) en welke pagina's ze lezen</td></tr>
+              <tr><td>Je reviews, en die van collega's</td><td>Wat mensen prijzen en waar ze over klagen</td></tr>
+              <tr><td>Je boekhouding</td><td>Welke klanten het meest opleveren en het langst blijven</td></tr>
+              <tr><td>Je monteur, assistent of verkoper</td><td>Wat klanten aan de keukentafel zeggen, en niet in de mail</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>3. Houd interviews</h3></div>
+        <p>Bel vijf van die beste klanten en vraag om een kwartier. Stel open vragen en laat stiltes vallen. Mensen vullen die vanzelf, vaak met het interessantste antwoord.</p>
+        <ul>
+          <li>Wat was er aan de hand toen je ons belde?</li>
+          <li>Wat had je al geprobeerd, en waarom werkte dat niet?</li>
+          <li>Hoe ben je gaan zoeken? Wie heb je om advies gevraagd?</li>
+          <li>Wie besliste er mee?</li>
+          <li>Waar twijfelde je over voordat je koos?</li>
+          <li>Wat zou je tegen een vriend zeggen die hetzelfde zoekt?</li>
+        </ul>
+        <p>Schrijf de antwoorden zo letterlijk mogelijk op. "Ik had geen zin in gedoe" is goud waard, "klant zoekt gemak" niet. Wil je het gesprek opnemen, vraag dan eerst toestemming. Vraag ook een of twee mensen die uiteindelijk níet voor je kozen. Hun antwoorden zijn vaak het leerzaamst.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>4. Zoek patronen</h3></div>
+        <p>Leg je aantekeningen naast elkaar. Welke frustraties hoor je drie keer of vaker? Welke woorden komen steeds terug? Dat zijn de bouwstenen van je persona. Wat maar één klant zei, laat je weg. Zie je twee heel verschillende groepen, bijvoorbeeld particulieren en bedrijven? Dan heb je twee persona's nodig.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>5. Schrijf hem op één A4</h3></div>
+        <p>Vul de onderdelen hierboven in. Houd het op één pagina. Een persona van tien pagina's leest niemand. Gebruik de template hieronder of maak er een eigen versie van in Word of Canva.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>6. Leg hem naast alles wat je maakt</h3></div>
+        <p>Hang hem op, stuur hem naar wie teksten voor je schrijft en leg hem naast je website. Hoe je hem dan gebruikt, lees je verderop.</p>
+
+        <h2 id="template">Een template om in te vullen</h2>
+        <p>Dit is een template van elf vakjes op één A4. Download hem als tekstbestand of neem hem over in je eigen document.</p>
+        <div class="kader">
+          <p class="kader-titel">Template persona (één A4)</p>
+          <div class="tabel-scroll">
+            <table class="persona">
+              <tbody>
+                {velden.map(([k, u]) => <tr><th scope="row">{k}</th><td>{u}</td></tr>)}
+              </tbody>
+            </table>
+          </div>
+          <a class="btn" href={download} download="persona-template.txt">Download de template</a>
+        </div>
+        <p>Zet onderaan waar de persona op gebaseerd is: hoeveel interviews, hoeveel aanvragen. En de datum. Dan weet je over een jaar of hij nog klopt.</p>
+
+        <h2 id="voorbeeld">Persona voorbeeld: Ans zoekt een hovenier</h2>
+        <p>Een volledig uitgewerkt voorbeeld voor een verzonnen hoveniersbedrijf in Drenthe. Ans bestaat niet, het bedrijf ook niet. Zo ziet een ingevulde persona eruit.</p>
+        <div class="kader persona">
+          <p class="kader-titel">Verzonnen voorbeeld: Ans, 63</p>
+          <div class="tabel-scroll">
+            <table>
+              <tbody>
+                <tr><th scope="row">Wie</th><td>Woont met haar man in een vrijstaande woning in Zuidlaren. Twee kinderen, wonen allebei in de Randstad. Werkte als doktersassistente, sinds vorig jaar met pensioen.</td></tr>
+                <tr><th scope="row">Situatie</th><td>De tuin is 600 vierkante meter. Haar man heeft last van zijn rug en het snoeien lukt niet meer. De tuin groeit dicht en dat stoort haar elke dag.</td></tr>
+                <tr><th scope="row">Doelen</th><td>Een tuin die er netjes bij ligt en weinig onderhoud vraagt. Ze wil er nog jaren van genieten, zonder elk weekend te wieden.</td></tr>
+                <tr><th scope="row">Frustraties</th><td>Een vorige hovenier kwam twee keer niet opdagen zonder te bellen. Offertes die ze niet begrijpt. Het gevoel dat ze te veel betaalt omdat ze er geen verstand van heeft.</td></tr>
+                <tr><th scope="row">Behoeften</th><td>Iemand die doet wat hij zegt en op tijd komt. Een duidelijke prijs vooraf. Liefst een vast gezicht.</td></tr>
+                <tr><th scope="row">Gedrag</th><td>Zoekt op haar tablet in Google ("hovenier Zuidlaren onderhoud"). Leest reviews grondig. Vraagt in de buurtapp wie ze kunnen aanraden. Belt liever dan dat ze een formulier invult.</td></tr>
+                <tr><th scope="row">Beslist mee</th><td>Haar man. Hij wil vooral weten wat het per jaar kost.</td></tr>
+                <tr><th scope="row">Aanspreekvorm</th><td>U. Rustig, duidelijk, zonder vakjargon.</td></tr>
+                <tr><th scope="row">Bezwaren</th><td>"Een onderhoudscontract klinkt als vastzitten." "Ze willen vast meteen de hele tuin omgooien."</td></tr>
+                <tr><th scope="row">Citaat</th><td>"Ik wil gewoon dat iemand komt wanneer hij zegt dat hij komt."</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h2 id="voorbeeld-zakelijk">Tweede voorbeeld: een zakelijke klant</h2>
+        <p>Verkoop je aan bedrijven, dan ziet een persona er iets anders uit. De functie en de mensen die meebeslissen worden belangrijker, hobby's en gezin minder. Dit voorbeeld hoort bij een verzonnen schoonmaakbedrijf in de stad Groningen.</p>
+        <div class="kader persona">
+          <p class="kader-titel">Verzonnen voorbeeld: Martin, 47</p>
+          <div class="tabel-scroll">
+            <table>
+              <tbody>
+                <tr><th scope="row">Wie</th><td>Facilitair manager bij een zorginstelling met vier locaties in Groningen en omgeving. Werkt er acht jaar.</td></tr>
+                <tr><th scope="row">Situatie</th><td>Het contract met de huidige schoonmaker loopt over vijf maanden af. Er kwamen klachten van de afdelingen, en zijn directeur vraagt of het goedkoper kan.</td></tr>
+                <tr><th scope="row">Doelen</th><td>Geen klachten meer op zijn bureau. Een partij die zelf problemen oplost, zonder dat hij erachteraan hoeft.</td></tr>
+                <tr><th scope="row">Frustraties</th><td>Steeds andere schoonmakers, een accountmanager die nooit terugbelt, facturen met posten die hij niet kan verklaren.</td></tr>
+                <tr><th scope="row">Behoeften</th><td>Een vast aanspreekpunt, heldere afspraken per locatie, een rapportage die hij zo kan doorsturen.</td></tr>
+                <tr><th scope="row">Gedrag</th><td>Zoekt op zijn laptop, vergelijkt drie partijen, vraagt referenties uit de zorg. Leest LinkedIn, maar reageert er niet.</td></tr>
+                <tr><th scope="row">Beslist mee</th><td>De directeur (budget) en inkoop (contract). Martin geeft advies, maar hij is niet de enige beslisser.</td></tr>
+                <tr><th scope="row">Bezwaren</th><td>"Wisselen kost me maanden gedoe." "Een kleine partij kan vier locaties niet aan."</td></tr>
+                <tr><th scope="row">Citaat</th><td>"Ik wil er gewoon niet meer aan hoeven denken."</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p>Wat dit schoonmaakbedrijf ervan leert: de website moet Martin helpen om het intern te verkopen. Een pagina over overstappen in vier stappen, een voorbeeldrapportage en referenties uit de zorg doen meer dan een mooie foto van een glimmende vloer.</p>
+
+        <h2 id="negatief">De negatieve persona: wie je niet wilt</h2>
+        <p>Een negatieve persona beschrijft de klant die je liever niet trekt. Bijvoorbeeld iemand die alleen op prijs kiest, vijf offertes opvraagt en na drie maanden vertrekt naar de goedkoopste. Of iemand buiten je werkgebied, voor wie je twee uur moet rijden.</p>
+        <p>Het nut: je ziet welke teksten en advertenties de verkeerde mensen aantrekken. "Goedkoopste hovenier van Drenthe" levert aanvragen op, maar niet van Ans. Met een vanaf-prijs en de zin "we werken in Zuidlaren, Haren en Tynaarlo" filter je al aan de voorkant. Minder aanvragen, betere aanvragen.</p>
+
+        <h2 id="gebruiken">Zo gebruik je de persona</h2>
+        <p>Met Ans op tafel kijkt de hovenier anders naar zijn eigen website. Dit zou hij veranderen:</p>
+        <ul class="vink">
+          <li><b>De kop op zijn homepage</b> wordt "Tuinonderhoud in Zuidlaren en omgeving, op vaste dagen" in plaats van "Groen is ons vak".</li>
+          <li><b>Zijn telefoonnummer</b> komt groot bovenaan, want Ans belt liever.</li>
+          <li><b>Op de pagina over onderhoud</b> staat een vanaf-prijs en de zin "maandelijks opzegbaar".</li>
+          <li><b>In de vragen</b> staat "Komen jullie altijd op de afgesproken dag?" met een eerlijk antwoord.</li>
+          <li><b>Reviews</b> van klanten in Zuidlaren en Haren krijgen een vaste plek, want Ans leest ze allemaal.</li>
+        </ul>
+        <p>De persona is ook het startpunt voor je <a href="/kennisbank/gidsen/customer-journey/">customer journey</a>: de weg die Ans aflegt van "de tuin groeit dicht" tot "ik raad hem aan in de buurtapp". Per fase stel je een andere vraag:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Fase</th><th>Wat Ans denkt</th><th>Wat de hovenier doet</th></tr></thead>
+            <tbody>
+              <tr><td>Probleem</td><td>"Het lukt ons niet meer."</td><td>Een artikel over tuinonderhoud als je ouder wordt</td></tr>
+              <tr><td>Zoeken</td><td>"Wie doet dit hier in de buurt?"</td><td>Een compleet Google Bedrijfsprofiel met reviews uit Zuidlaren</td></tr>
+              <tr><td>Vergelijken</td><td>"Wat kost het, en zijn ze betrouwbaar?"</td><td>Vanaf-prijs, foto's van eigen werk, een vast gezicht</td></tr>
+              <tr><td>Kiezen</td><td>"Ik bel ze even."</td><td>Nummer bovenaan, dezelfde dag terugbellen</td></tr>
+              <tr><td>Klant</td><td>"Komen ze echt op dinsdag?"</td><td>Een sms de dag ervoor, een vaste ploeg</td></tr>
+              <tr><td>Aanraden</td><td>"Die kan ik aanbevelen."</td><td>Na het eerste seizoen om een review vragen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="ai">Kun je een persona maken met AI?</h2>
+        <p>Ja en nee. Vraag je ChatGPT of Claude "maak een persona voor een hovenier", dan krijg je in tien seconden een keurig profiel. Het ziet er overtuigend uit. Maar het komt niet uit jouw klanten. Het is een gemiddelde van wat er op internet over hoveniers staat. Dan beschrijf je de klant van iedereen, en dus van niemand. Een persona maken zonder je eigen klanten te spreken, levert een mooi plaatje op en weinig inzicht.</p>
+        <p>Waar AI wel helpt: het ordenen van je aantekeningen. Plak de uitgeschreven interviews erin, zonder namen of andere persoonsgegevens, en vraag welke frustraties vaker terugkomen. Of laat een eerste versie van het A4 maken op basis van jouw notities, en verbeter die zelf. Wij gebruiken zelf ook AI-tools. Op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a> lees je welke en waarvoor.</p>
+
+        <h2 id="valkuilen">Valkuilen bij het maken van een persona</h2>
+        <ul>
+          <li><b>Hem verzinnen achter je bureau.</b> Dan beschrijf je de klant die je zou willen, niet de klant die je hebt.</li>
+          <li><b>Te veel persona's.</b> Begin met één, hooguit twee. Vijf persona's betekent dat je nog steeds voor iedereen schrijft.</li>
+          <li><b>Alleen getallen.</b> Leeftijd en inkomen zeggen weinig over waarom iemand koopt. De frustraties en bezwaren zijn het waardevolst.</li>
+          <li><b>Hobby's en lievelingsmerken.</b> Leuk om op te schrijven, maar zelden nuttig. Neem ze alleen op als ze iets zeggen over hoe iemand kiest.</li>
+          <li><b>Hem in een la leggen.</b> Een persona die niemand gebruikt, is een dag werk voor niets. Zet hem bovenaan je map met teksten.</li>
+          <li><b>Hem nooit meer bekijken.</b> Klanten veranderen. Kijk elk jaar of hij nog klopt.</li>
+        </ul>
+
+        <h2 id="aanvragen">Van persona naar meer aanvragen</h2>
+        <p>Na het persona maken begint het echte werk. Een goede persona is het begin van betere teksten, een betere website en advertenties die de juiste mensen bereiken. Bij <a href="/leadgeneratie/">leadgeneratie</a> beginnen we altijd met de vraag wie je ideale klant is. We vragen door tot we het weten, en bouwen pas daarna. Wil je weten of jouw website nu al aansluit bij je klant? Vraag dan de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij meedenken?" intro="Zo werken we, en daarom kun je erop vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een doelgroep en een persona?', a: 'Een doelgroep beschrijf je met kenmerken, zoals leeftijd en woonplaats. Een persona is één concreet persoon die die doelgroep samenvat, met doelen, frustraties en gedrag. Daardoor kun je je beter in hem verplaatsen.' },
+      { v: 'Hoeveel persona\'s heb ik nodig?', a: 'Voor een klein bedrijf meestal één of twee. Heb je twee heel verschillende klantgroepen, zoals particulieren en bedrijven, maak er dan voor elke groep één.' },
+      { v: 'Is er een gratis template voor een persona?', a: 'Ja, in deze gids staat een template van elf vakjes die je als tekstbestand kunt downloaden. Je hebt geen speciale software nodig.' },
+      { v: 'Hoeveel interviews heb ik nodig?', a: 'Vijf gesprekken van een kwartier zijn genoeg om te beginnen. Hoor je na vijf gesprekken nog steeds nieuwe dingen, voer er dan nog een paar.' },
+      { v: 'Mag ik een persona maken zonder interviews?', a: 'Het kan, maar dan beschrijf je vooral je eigen aannames. Begin dan met wat je weet en voer zo snel mogelijk een paar gesprekken om het te toetsen.' },
+      { v: 'Wat is een negatieve persona?', a: 'Een beschrijving van de klant die je liever niet hebt, bijvoorbeeld omdat hij alleen op prijs kiest. Handig om te weten wat je niet wilt aantrekken.' },
+      { v: 'Hoe vaak moet ik mijn persona bijwerken?', a: 'Kijk er één keer per jaar naar, en meteen als je merkt dat je aanvragen veranderen. Bijvoorbeeld als je een nieuwe dienst begint of in een nieuwe regio gaat werken.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Customer journey in kaart brengen', href: '/kennisbank/gidsen/customer-journey/', tekst: 'De weg die je persona aflegt.' },
+      { label: 'Gids', titel: 'Tone of voice bepalen', href: '/kennisbank/gidsen/tone-of-voice/', tekst: 'Schrijven in de taal van je klant.' },
+      { label: 'Pillar', titel: 'Leadgeneratie', href: '/leadgeneratie/', tekst: 'Van bezoeker naar aanvraag, met doelen.' },
+    ]}
+  />
+
+  <Actie titel="Spreekt je website je ideale klant aan?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site door de ogen van je klant en belt je met wat beter kan.`} />
+</Base>
+<style>
+  .persona th { width: 26%; font-weight: 800; color: var(--ink); }
+  .kader .btn { margin-top: 14px; }
+</style>

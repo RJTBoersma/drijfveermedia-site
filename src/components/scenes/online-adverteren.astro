@@ -1,0 +1,80 @@
+---
+// Scène voor /online-adverteren/: een zoekresultaat met bovenaan jouw advertentie en een telefoon met een AI-gesprek met een gesponsord kaartje. Een klik op de advertentie wordt een aanvraag, en de staafjes met aanvragen groeien.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const staven = [12, 16, 15, 20, 25, 30];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: bovenaan een zoekresultaat staat jouw advertentie, en op een telefoon staat een gesponsord kaartje onder het antwoord van een AI-assistent. Een klik op de advertentie wordt een aanvraag en het aantal aanvragen groeit.'}>
+  <!-- browser met zoekresultaten -->
+  <rect x="20" y="20" width="284" height="170" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="36" y="34" width="252" height="26" rx="13" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="l" cx="52" cy="47" r="5" />
+  <path class="l" d="M56 51l4 4" />
+  <text x="68" y="51.5" font-size="12" font-weight="700">dakkapel laten plaatsen</text>
+  <!-- de advertentie -->
+  <rect x="36" y="72" width="252" height="54" rx="10" fill="#fff4ec" stroke="#ff6600" stroke-width="2" />
+  <rect x="48" y="81" width="64" height="15" rx="7.5" fill="#fff" />
+  <text x="80" y="92" text-anchor="middle" font-size="9.5" font-weight="700" class="zacht">Gesponsord</text>
+  <text x="48" y="114" font-size="11.5" font-weight="800" style="fill:#074663">Jouw bedrijf: dakkapel in één dag</text>
+  <!-- gewone resultaten -->
+  <rect class="v" x="36" y="138" width="170" height="8" rx="4" />
+  <rect class="v" x="36" y="152" width="230" height="7" rx="3.5" />
+  <rect class="v" x="36" y="170" width="150" height="8" rx="4" />
+  <!-- telefoon met AI-gesprek -->
+  <rect x="330" y="20" width="128" height="232" rx="20" fill="#10283f" />
+  <rect x="338" y="30" width="112" height="212" rx="14" fill="#fff" />
+  <rect x="374" y="44" width="68" height="22" rx="10" fill="#074663" />
+  <rect x="382" y="52" width="50" height="6" rx="3" fill="#fff" />
+  <circle class="v" cx="352" cy="84" r="7" />
+  <rect class="v" x="364" y="78" width="78" height="6" rx="3" />
+  <rect class="v" x="364" y="90" width="66" height="6" rx="3" />
+  <rect class="v" x="364" y="102" width="72" height="6" rx="3" />
+  <rect x="346" y="122" width="96" height="62" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="354" y="130" width="52" height="12" rx="6" fill="#e8eef4" />
+  <text x="380" y="139" text-anchor="middle" font-size="7.5" font-weight="700" class="zacht">Gesponsord</text>
+  <rect x="354" y="150" width="80" height="7" rx="3.5" fill="#10283f" />
+  <rect class="o" x="354" y="164" width="40" height="12" rx="6" />
+  <!-- aanvragen -->
+  <rect x="20" y="202" width="284" height="50" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="36" y="232" font-size="12.5" font-weight="800">Aanvragen</text>
+  {staven.map((h, i) => (
+    <rect x={150 + i * 22} y={244 - h} width="14" height={h} rx="3" fill="#c9d6e2" />
+  ))}
+  {!mini && (
+    <g>
+      <rect class="staaf" x="282" y="206" width="14" height="38" rx="3" fill="#ff6600" />
+      <g class="cursor">
+        <path d="M0 0l0 22 6-6 5 11 4-2-5-11 8 0z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+      <circle class="tik" cx="210" cy="108" r="10" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="plus">
+        <rect x="240" y="178" width="36" height="20" rx="10" fill="#1f8a5b" />
+        <text x="258" y="192" text-anchor="middle" font-size="11.5" font-weight="900" style="fill:#fff">+1</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .staaf { transform-box: fill-box; transform-origin: bottom; }
+  :global(.teken-js) .staaf { transform: scaleY(0); }
+  .in-beeld .staaf { animation: online-adverteren-groei 0.8s cubic-bezier(.3,1.4,.5,1) 2.4s forwards; }
+  .cursor { transform: translate(214px, 104px); }
+  :global(.teken-js) .cursor { opacity: 0; }
+  .in-beeld .cursor { animation: online-adverteren-cursor 5s ease-in-out 1.6s infinite both; }
+  .tik { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .in-beeld .tik { animation: online-adverteren-tik 5s ease-out 1.6s infinite; }
+  :global(.teken-js) .plus { opacity: 0; }
+  .in-beeld .plus { animation: online-adverteren-plus 5s ease-in-out 1.6s infinite both; }
+  @keyframes online-adverteren-groei { to { transform: none; } }
+  @keyframes online-adverteren-cursor {
+    0% { opacity: 0; transform: translate(260px, 160px); }
+    12% { opacity: 1; }
+    35% { transform: translate(208px, 104px); }
+    40% { transform: translate(208px, 104px) scale(0.9); }
+    45%, 80% { opacity: 1; transform: translate(208px, 104px); }
+    100% { opacity: 0; transform: translate(208px, 104px); }
+  }
+  @keyframes online-adverteren-tik { 0%, 38% { opacity: 0; transform: scale(0.5); } 42% { opacity: 1; } 60%, 100% { opacity: 0; transform: scale(2.4); } }
+  @keyframes online-adverteren-plus { 0%, 50% { opacity: 0; transform: translateY(10px); } 60%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-8px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .staaf, .in-beeld .cursor, .in-beeld .tik, .in-beeld .plus { animation: none; } }
+</style>

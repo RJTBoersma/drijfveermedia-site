@@ -1,0 +1,158 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Scene from '../../../components/scenes/kennisbank--de-20-beste-online-marketingblogs.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/kennisbank/de-20-beste-online-marketingblogs/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'controle', titel: 'Zo hebben we gecontroleerd' },
+  { id: 'nederlands', titel: 'Nederlandse blogs' },
+  { id: 'seo', titel: 'SEO en zoekmachines' },
+  { id: 'ai', titel: 'AI en zoeken' },
+  { id: 'content', titel: 'Content, social en conversie' },
+  { id: 'bijhouden', titel: 'Bijhouden in een kwartier' },
+  { id: 'uit-de-lijst', titel: 'Wat eruit ging' },
+];
+
+type Blog = { naam: string; href: string; taal: string; laatst: string; tekst: string };
+const nederlands: Blog[] = [
+  { naam: 'Frankwatching', href: 'https://www.frankwatching.com/', taal: 'Nederlands', laatst: '17 okt.', tekst: 'Een van de bekendste Nederlandse kennisplatforms voor marketing en communicatie. Elke dag verschijnen er artikelen van experts uit het vak, van SEO tot social media en AI. Niet elk stuk is even diep, maar je leest wel wat Nederlandse marketeers bezighoudt. Neem de nieuwsbrief, dan krijg je de beste stukken vanzelf.' },
+  { naam: 'Emerce', href: 'https://www.emerce.nl/', taal: 'Nederlands', laatst: '13 okt.', tekst: 'Emerce schrijft over online business: e-commerce, marketing, tech en de bedrijven erachter. Handig om te zien welke trends Nederlandse bedrijven echt oppakken. Meer nieuws en achtergrond dan praktische handleidingen.' },
+  { naam: 'Marketingfacts', href: 'https://www.marketingfacts.nl/', taal: 'Nederlands', laatst: '16 okt.', tekst: 'Een platform waar marketeers uit de praktijk bloggen, met thema’s als AI, contentmarketing, search en conversie. Er is ook een eigen rubriek over GEO. Goed om je eigen kennis te toetsen aan wat collega’s ervaren.' },
+  { naam: 'Adformatie', href: 'https://www.adformatie.nl/', taal: 'Nederlands', laatst: '16 okt.', tekst: 'Hét vakblad voor marketing, media en reclame. Lees je hier, dan weet je welke campagnes en bureaus in Nederland de toon zetten. Een deel van de artikelen zit achter een abonnement. De dagelijkse nieuwsbrief is een prima start.' },
+];
+const seo: Blog[] = [
+  { naam: 'Search Engine Land', href: 'https://searchengineland.com/', taal: 'Engels', laatst: '16 okt.', tekst: 'Dagelijks nieuws en analyses over SEO, Google Ads en tegenwoordig ook adverteren in ChatGPT. Als er iets verandert in zoekmachines, staat het hier meestal dezelfde dag, met uitleg wat het betekent.' },
+  { naam: 'Search Engine Journal', href: 'https://www.searchenginejournal.com/', taal: 'Engels', laatst: '16 okt.', tekst: 'Vergelijkbaar met Search Engine Land, net iets meer handleidingen en uitgebreide gidsen. Fijn als je een onderwerp van begin tot eind wilt snappen, zoals structured data of lokale SEO.' },
+  { naam: 'Search Engine Roundtable', href: 'https://www.seroundtable.com/', taal: 'Engels', laatst: '16 okt.', tekst: 'Barry Schwartz schrijft hier al jaren elke werkdag korte berichten over wat SEO’ers zien en bespreken. Schommelen je posities ineens? Kijk dan hier als eerste of er een update loopt.' },
+  { naam: 'Google Search Central Blog', href: 'https://developers.google.com/search/blog', taal: 'Engels', laatst: '6 okt.', tekst: 'De officiële blog van Google Search. Hier kondigt Google core updates en nieuwe regels aan. Droog en technisch, maar het is de bron. Alles wat andere blogs over Google zeggen, check je hier.' },
+  { naam: 'Moz', href: 'https://moz.com/blog', taal: 'Engels', laatst: '15 okt.', tekst: 'Een van de oudste SEO-blogs, van het bedrijf achter de score <a href="/kennisbank/wat-is/domain-authority/">Domain Authority</a>. De artikelen leggen ingewikkelde onderwerpen rustig uit. Goed voor wie de basis wil begrijpen.' },
+  { naam: 'Ahrefs', href: 'https://ahrefs.com/blog/', taal: 'Engels', laatst: '16 okt.', tekst: 'Ahrefs onderzoekt veel met de eigen data: hoeveel pagina’s krijgen überhaupt verkeer, wat doen AI-antwoorden met klikken. Praktisch en eerlijk over wat werkt. Ze noemen hun eigen tool vaak, dat moet je voor lief nemen.' },
+  { naam: 'Semrush', href: 'https://www.semrush.com/blog/', taal: 'Engels', laatst: '11 sep.', tekst: 'Een brede blog over SEO, adverteren, content en social media. Sterk in stappenplannen en voorbeelden. Ook hier leidt veel naar de eigen tool, maar de uitleg zelf is goed.' },
+  { naam: 'Yoast', href: 'https://yoast.com/seo-blog/', taal: 'Engels', laatst: '13 okt.', tekst: 'Van de Nederlandse makers van de bekende SEO-plugin voor WordPress. Heldere artikelen over teksten, techniek en structuur, zonder dat je er een studie voor nodig hebt. Heb je een WordPress-site, dan is dit een logische plek om te beginnen.' },
+];
+const ai: Blog[] = [
+  { naam: 'Growth Memo', href: 'https://www.growth-memo.com/', taal: 'Engels', laatst: '16 okt.', tekst: 'De nieuwsbrief van Kevin Indig, met meer dan 29.000 abonnees. Hij zoekt met data uit hoe organische groei werkt en hoe AI-zoekmachines bronnen kiezen. Pittig leeswerk, maar je loopt er een stap mee voor.' },
+  { naam: 'SparkToro', href: 'https://sparktoro.com/blog', taal: 'Engels', laatst: '12 okt.', tekst: 'Het bedrijf van Rand Fishkin, ooit oprichter van Moz. Amanda Natividad en hij schrijven over zoekopdrachten zonder klik en over waar je doelgroep echt zit. Een goede tegenhanger van de blogs die alleen over Google gaan.' },
+];
+const content: Blog[] = [
+  { naam: 'HubSpot', href: 'https://blog.hubspot.com/marketing', taal: 'Engels', laatst: '16 okt.', tekst: 'Een enorme blog over marketing, sales en klantenservice, met veel gratis sjablonen. Voor bijna elke vraag staat er wel een artikel. Let op dat het Amerikaans is en vaak over grote teams gaat.' },
+  { naam: 'Content Marketing Institute', href: 'https://contentmarketinginstitute.com/', taal: 'Engels', laatst: '15 okt.', tekst: 'Alles over contentmarketing, van strategie tot meten. Bekend om het jaarlijkse onderzoek naar B2B-content. Lees dit als je wilt weten waarom content werkt, niet alleen hoe.' },
+  { naam: 'Social Media Examiner', href: 'https://www.socialmediaexaminer.com/', taal: 'Engels', laatst: '15 okt.', tekst: 'Praktische artikelen en een podcast over social media marketing. Ze testen nieuwe functies op Instagram, LinkedIn en TikTok snel en leggen stap voor stap uit hoe je ze gebruikt.' },
+  { naam: 'Crazy Egg', href: 'https://www.crazyegg.com/blog/', taal: 'Engels', laatst: '16 okt.', tekst: 'De blog van de maker van een heatmaptool. Gaat over conversie: knoppen, formulieren, landingspagina’s. Nuttig als je bezoekers hebt maar te weinig aanvragen.' },
+  { naam: 'MarTech', href: 'https://martech.org/', taal: 'Engels', laatst: '16 okt.', tekst: 'De opvolger van Marketing Land, uit dezelfde stal als Search Engine Land. Over marketingtechnologie, data, e-mail en automatisering. Vooral interessant als je met veel tools werkt en wilt weten hoe ze samenhangen.' },
+  { naam: 'Neil Patel', href: 'https://neilpatel.com/blog/', taal: 'Engels', laatst: '16 okt.', tekst: 'Een van de bekendste marketeers ter wereld, met een blog vol praktische tips. Lekker concreet, maar onthoud dat Patel ook een eigen bureau en een eigen tool verkoopt. Lees het als inspiratie, niet als wet.' },
+];
+const groepen = [nederlands, seo, ai, content];
+const alle = groepen.flat();
+
+const schema = [{
+  '@type': 'BlogPosting',
+  headline: 'De 20 beste online marketingblogs',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Online marketing blogs: de 20 beste | Drijfveer Media"
+  description="De 20 beste online marketing blogs, Nederlands en internationaal. Elke blog nagekeken in oktober 2026, met per blog waarom hij je tijd waard is."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'De 20 beste online marketingblogs', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Blog · Bijblijven" titel="De 20 beste online marketingblogs" knop={{ tekst: 'Naar de lijst', href: '#nederlands' }}>
+    <p>Online marketing verandert elke maand. Dit zijn de 20 online marketing blogs die wij aanraden. Op 17 oktober 2026 hebben we ze allemaal nagekeken: bestaan ze nog en schrijven ze nog?</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+
+        <p>Deze lijst staat al jaren op onze site en is de best bezochte pagina die we hebben. Reden genoeg om hem goed bij te houden. Want een lijst met blogs die niet meer bestaan, helpt niemand.</p>
+
+        <h2 id="controle">Zo hebben we de lijst gecontroleerd</h2>
+        <p>We hebben van elke blog de site en waar mogelijk de feed opgevraagd. Een blog bleef alleen staan als er in de weken ervoor nieuwe artikelen verschenen. Twee blogs uit de vorige versie haalden dat niet en een derde is opgegaan in een andere. Twee publiceren zo weinig dat we ze hebben ingeruild. Daarvoor kwamen er meer Nederlandse blogs in de plaats. Dit is de stand van 17 oktober 2026.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Blog</th><th>Taal</th><th>Laatste artikel</th></tr></thead>
+            <tbody>
+              {alle.map((b) => <tr><td>{b.naam}</td><td>{b.taal}</td><td>{b.laatst} 2026</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="nederlands">Nederlandse online marketing blogs</h2>
+        <p>Begin hier als je het liefst in je eigen taal leest. Deze vier geven samen een goed beeld van wat er in Nederland speelt.</p>
+        {nederlands.map((b) => <><h3><a href={b.href} rel="noopener" target="_blank">{b.naam}</a></h3><p set:html={b.tekst} /></>)}
+        <p>Wil je meer? MarketingTribune is gratis en heeft elke dag nieuws over merken en campagnes.</p>
+
+        <h2 id="seo">SEO en zoekmachines</h2>
+        <p>Voor wie gevonden wil worden in Google. Je hoeft ze niet allemaal te lezen: kies er twee en vul aan met de officiële blog van Google.</p>
+        {seo.map((b) => <><h3><a href={b.href} rel="noopener" target="_blank">{b.naam}</a></h3><p set:html={b.tekst} /></>)}
+
+        <h2 id="ai">AI en de toekomst van zoeken</h2>
+        <p>Steeds meer mensen stellen hun vraag aan ChatGPT of krijgen een AI-antwoord bovenaan Google. Deze twee schrijven daar het scherpst over. Wil je zelf eerst de basis, lees dan onze gids <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+        {ai.map((b) => <><h3><a href={b.href} rel="noopener" target="_blank">{b.naam}</a></h3><p set:html={b.tekst} /></>)}
+
+        <h2 id="content">Content, social media en conversie</h2>
+        <p>Gevonden worden is stap één. Daarna moet je bezoeker iets doen. Deze blogs gaan over wat je schrijft, waar je het deelt en hoe je er klanten mee binnenhaalt.</p>
+        {content.map((b) => <><h3><a href={b.href} rel="noopener" target="_blank">{b.naam}</a></h3><p set:html={b.tekst} /></>)}
+
+        <h2 id="bijhouden">Zo houd je het bij in een kwartier per week</h2>
+        <p>Twintig blogs lezen is een dagtaak. Dat hoeft ook niet. Zo pak je dat aan.</p>
+        <ol>
+          <li><b>Kies drie of vier blogs die bij je werk passen.</b> Een ondernemer met een WordPress-site heeft aan Yoast en Frankwatching genoeg. Doe je zelf SEO, neem dan Search Engine Roundtable erbij.</li>
+          <li><b>Zet ze in een feedlezer.</b> Met een gratis tool als Feedly of Inoreader zie je alle nieuwe artikelen op één plek, zonder twintig sites af te gaan.</li>
+          <li><b>Laat nieuwsbrieven in een eigen map vallen.</b> Een filter in je mail houdt je inbox schoon. Op vrijdag lees je de map in één keer.</li>
+          <li><b>Lees met één vraag in je hoofd.</b> Wat betekent dit voor mijn site of mijn klanten? Is het antwoord niets, dan sla je het over.</li>
+          <li><b>Ren niet achter elke trend aan.</b> De meeste nieuwtjes zijn over een half jaar vergeten. De basis, een goede site met goede teksten, blijft.</li>
+        </ol>
+        <p>Zoek je in die blogs iets specifieks terug? Met <a href="/kennisbank/geavanceerd-zoeken-met-google/">geavanceerd zoeken in Google</a> vind je het in seconden, bijvoorbeeld met <code>site:moz.com structured data</code>.</p>
+
+        <h2 id="uit-de-lijst">Wat er uit de lijst ging, en waarom</h2>
+        <ul>
+          <li><b>Search Engine Watch.</b> We vonden geen recente artikelen meer.</li>
+          <li><b>Convince and Convert.</b> De site was op 17 oktober 2026 niet bereikbaar.</li>
+          <li><b>Marketing Land.</b> Bestaat niet meer en is opgegaan in MarTech, die wel in de lijst staat.</li>
+          <li><b>Backlinko en Unbounce.</b> Ze bestaan nog, maar publiceren veel minder vaak. Backlinko valt inmiddels onder Semrush.</li>
+        </ul>
+        <p>En onze eigen blog? Die heet nu de <a href="/kennisbank/">kennisbank</a>, met gidsen voor ondernemers. In ons <a href="/logboek/">logboek</a> laten we bovendien open zien hoe onze eigen site het doet in Google, ook als het tegenvalt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Welke marketingblogs zijn Nederlandstalig?', a: 'Frankwatching, Emerce, Marketingfacts en Adformatie. MarketingTribune is ook een goede, gratis Nederlandse bron.' },
+      { v: 'Wat is de beste blog voor SEO-nieuws?', a: 'Search Engine Roundtable is het snelst, Search Engine Land geeft de meeste achtergrond. Officieel nieuws van Google staat op de Google Search Central Blog.' },
+      { v: 'Zijn deze blogs gratis?', a: 'Bijna allemaal. Adformatie heeft een deel achter een abonnement. Blogs van toolmakers zoals Ahrefs en Semrush zijn gratis, maar willen je ook hun tool verkopen.' },
+      { v: 'Mis je een blog in de lijst?', a: `Mail hem naar <a href="mailto:${site.email}">${site.email}</a>. Als hij goed is en nog actief, nemen we hem mee bij de volgende controle.` },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Blog', titel: 'Geavanceerd zoeken met Google', href: '/kennisbank/geavanceerd-zoeken-met-google/', tekst: 'Alle zoekoperatoren die nog werken.', teken: 'vergrootglas' },
+      { label: 'Gids', titel: 'Een bedrijfsblog beginnen', href: '/kennisbank/gidsen/bedrijfsblog-beginnen/', tekst: 'Zelf schrijven, zonder de bekende fouten.' },
+      { label: 'Dienst', titel: 'Contentmarketing', href: '/tekstschrijver/contentmarketing/', tekst: 'Liever dat wij je artikelen schrijven?' },
+    ]}
+  />
+
+  <Actie titel="Geen tijd om alles bij te houden?" tekst={`Dat hoeft ook niet, daar zijn wij voor. Vraag de gratis scan aan. ${site.contactpersoon} kijkt wat er op jouw site te halen valt en belt je met een eerlijk advies.`} />
+</Base>

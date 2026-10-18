@@ -1,0 +1,74 @@
+---
+// Scène voor /lokale-seo/reviews/: een kaartje met QR-code op de toonbank, een telefoon die hem scant, en een nieuwe review met een reactie van de eigenaar.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+
+// Ster met vijf punten rond (cx, cy)
+const ster = (cx: number, cy: number, r: number) => {
+  const p: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const hoek = -Math.PI / 2 + (i * Math.PI) / 5;
+    const straal = i % 2 ? r * 0.45 : r;
+    p.push(`${(cx + straal * Math.cos(hoek)).toFixed(1)} ${(cy + straal * Math.sin(hoek)).toFixed(1)}`);
+  }
+  return `M${p.join('L')}Z`;
+};
+// Een getekende QR-code (geen echte code): vaste blokjes plus drie hoekvierkanten
+const qx = 62, qy = 112, c = 8;
+const blokjes: [number, number][] = [];
+for (let y = 0; y < 11; y++) for (let x = 0; x < 11; x++) {
+  const inHoek = (x < 4 && y < 4) || (x > 6 && y < 4) || (x < 4 && y > 6);
+  if (!inHoek && (x * 31 + y * 17 + x * y * 7) % 5 < 2) blokjes.push([qx + x * c, qy + y * c]);
+}
+const hoeken = [[qx, qy], [qx + 8 * c, qy], [qx, qy + 8 * c]];
+const sterren = [0, 1, 2, 3, 4].map((i) => ster(352 + i * 22, 112, 8));
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kaartje met een QR-code op de toonbank, een telefoon die de code scant en een nieuwe Google-review met een reactie van de eigenaar.'}>
+  <rect x="16" y="226" width="448" height="12" rx="6" fill="#d9e1ea" />
+  <path d="M44 226L60 72h112l16 154z" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="116" y="96" font-size="13" font-weight="800" text-anchor="middle">Hoe was het?</text>
+  <text x="116" y="216" font-size="9" class="zacht" text-anchor="middle">Scan en schrijf een review</text>
+  {hoeken.map(([x, y]) => (<g><rect x={x} y={y} width="24" height="24" rx="3" fill="#10283f" /><rect x={x + 4} y={y + 4} width="16" height="16" rx="2" fill="#fff" /><rect x={x + 8} y={y + 8} width="8" height="8" rx="1" fill="#10283f" /></g>))}
+  {blokjes.map(([x, y]) => <rect x={x} y={y} width={c} height={c} fill="#10283f" />)}
+
+  <g transform="rotate(-8 246 150)">
+    <rect x="206" y="70" width="80" height="150" rx="14" fill="#10283f" />
+    <rect x="212" y="80" width="68" height="130" rx="8" fill="#fff" />
+    <rect x="220" y="92" width="52" height="8" rx="4" fill="#d9e1ea" />
+    <path d={ster(229, 122, 6)} fill="#ff6600" /><path d={ster(244, 122, 6)} fill="#ff6600" /><path d={ster(259, 122, 6)} fill="#ff6600" />
+    <rect x="220" y="140" width="52" height="40" rx="5" fill="#e8eef4" />
+    <rect x="220" y="188" width="52" height="14" rx="5" fill="#074663" />
+  </g>
+
+  <rect x="330" y="72" width="134" height="104" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="350" cy="90" r="9" fill="#e8eef4" />
+  <text x="366" y="94" font-size="11" font-weight="800">Anja (voorbeeld)</text>
+  {sterren.map((d) => <path d={d} fill="#e8eef4" />)}
+  <rect x="344" y="132" width="106" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="344" y="145" width="86" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="344" y="158" width="64" height="7" rx="3.5" fill="#e8eef4" />
+
+  {!mini && (
+    <g>
+      <g class="scanlicht"><rect x="58" y="110" width="96" height="3" rx="1.5" fill="#ff6600" /><rect x="58" y="113" width="96" height="14" fill="#ff6600" opacity=".12" /></g>
+      {sterren.map((d, i) => <path class="ster" d={d} fill="#ff6600" style={`--i:${i}`} />)}
+      <g class="reactie">
+        <path d="M354 184l8-10 8 10z" fill="#074663" /><rect x="338" y="184" width="126" height="36" rx="8" fill="#074663" />
+        <text x="348" y="199" font-size="10" font-weight="800" style="fill:#fff">Dank je wel, Anja.</text>
+        <text x="348" y="213" font-size="9" style="fill:#cfe0ea">Reactie van de eigenaar</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .ster { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .ster { opacity: 0; transform: scale(0.3); }
+  :global(.teken-js) .reactie, :global(.teken-js) .scanlicht { opacity: 0; }
+  .in-beeld .ster { animation: lokale-seo--reviews-ster 0.5s cubic-bezier(.3,1.7,.5,1) calc(1.2s + var(--i) * 0.22s) forwards; }
+  .in-beeld .scanlicht { animation: lokale-seo--reviews-scan 3.2s ease-in-out 0.3s infinite; }
+  .in-beeld .reactie { animation: lokale-seo--reviews-reactie 7s ease-in-out 2.6s infinite both; }
+  @keyframes lokale-seo--reviews-ster { to { opacity: 1; transform: none; } }
+  @keyframes lokale-seo--reviews-scan { 0% { opacity: 0; transform: translateY(0); } 10% { opacity: 1; } 85% { opacity: 1; transform: translateY(76px); } 100% { opacity: 0; transform: translateY(80px); } }
+  @keyframes lokale-seo--reviews-reactie { 0% { opacity: 0; transform: translateY(8px); } 10%, 82% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .ster, .in-beeld .scanlicht, .in-beeld .reactie { animation: none; } }
+</style>

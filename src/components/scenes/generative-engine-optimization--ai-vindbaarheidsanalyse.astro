@@ -1,0 +1,85 @@
+---
+// Scène voor /generative-engine-optimization/ai-vindbaarheidsanalyse/: een AI-antwoord wordt met een vergrootglas nagelopen,
+// en op een meetkaart verschijnt per AI-assistent of jouw bedrijf genoemd wordt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [
+  { naam: 'ChatGPT', y: 92, uitslag: 'ja' },
+  { naam: 'Gemini', y: 122, uitslag: 'nee' },
+  { naam: 'Copilot', y: 152, uitslag: 'ja' },
+  { naam: 'Perplexity', y: 182, uitslag: 'nee' },
+  { naam: 'Google AI', y: 212, uitslag: 'ja' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een AI-antwoord wordt met een vergrootglas nagekeken. Op een meetkaart verschijnt per AI-assistent een vinkje als jouw bedrijf genoemd wordt: drie van de vijf.'}>
+  <!-- Chatvenster met vraag en antwoord -->
+  <rect x="18" y="26" width="270" height="218" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="l" d="M18 54h270" style="stroke:#d9e1ea" />
+  <circle cx="36" cy="40" r="4" fill="#d9e1ea" /><circle cx="50" cy="40" r="4" fill="#d9e1ea" /><circle cx="64" cy="40" r="4" fill="#d9e1ea" />
+  <rect x="104" y="68" width="170" height="30" rx="14" fill="#074663" />
+  <text x="118" y="88" font-size="12" font-weight="700" style="fill:#fff">Wie raad je aan in Assen?</text>
+  <circle cx="42" cy="122" r="11" fill="#e8eef4" />
+  <path d="M42 115l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#074663" />
+  <rect class="v" x="62" y="114" width="196" height="9" rx="4.5" />
+  <rect x="62" y="132" width="92" height="16" rx="5" fill="#ffe2cc" />
+  <text x="68" y="144" font-size="11" font-weight="800">Jouw bedrijf</text>
+  <rect class="v" x="160" y="135" width="98" height="9" rx="4.5" />
+  <rect class="v" x="62" y="156" width="176" height="9" rx="4.5" />
+  <rect class="v" x="62" y="174" width="130" height="9" rx="4.5" />
+  <rect x="62" y="200" width="64" height="18" rx="9" fill="none" stroke="#ff6600" stroke-width="1.5" />
+  <rect x="132" y="200" width="56" height="18" rx="9" fill="none" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="194" y="200" width="60" height="18" rx="9" fill="none" stroke="#d9e1ea" stroke-width="1.5" />
+  <text x="70" y="213" font-size="9" font-weight="700">jouwsite.nl</text>
+
+  <!-- Meetkaart -->
+  <rect x="306" y="26" width="156" height="218" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="322" y="52" font-size="12" font-weight="800">Genoemd?</text>
+  <path class="l" d="M322 64h124" style="stroke:#d9e1ea;stroke-width:1.5" />
+  {rijen.map((r) => (
+    <g>
+      <text x="322" y={r.y + 4} font-size="11" font-weight="600">{r.naam}</text>
+      <circle cx="434" cy={r.y} r="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    </g>
+  ))}
+  <rect x="322" y="228" width="124" height="6" rx="3" fill="#e8eef4" />
+
+  {!mini && (
+    <g>
+      {rijen.map((r, i) => (
+        <g class="uitslag" style={`--i:${i}`}>
+          {r.uitslag === 'ja' ? (
+            <g><circle cx="434" cy={r.y} r="10" fill="#1f8a5b" /><path d={`M429 ${r.y}l3.5 3.5 6-7`} stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+          ) : (
+            <g><circle cx="434" cy={r.y} r="10" fill="#ff6600" /><path d={`M430 ${r.y - 4}l8 8M438 ${r.y - 4}l-8 8`} stroke="#fff" stroke-width="2.4" stroke-linecap="round" /></g>
+          )}
+        </g>
+      ))}
+      <rect class="score" x="322" y="228" width="74" height="6" rx="3" fill="#ff6600" />
+      <g class="loep">
+        <circle cx="0" cy="0" r="22" fill="rgb(255 255 255 / 0.35)" stroke="#10283f" stroke-width="4" />
+        <path d="M16 16l18 18" stroke="#10283f" stroke-width="7" stroke-linecap="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .uitslag { transform-box: fill-box; transform-origin: center; }
+  .score { transform-box: fill-box; transform-origin: left center; }
+  .loep { transform: translate(110px, 140px); }
+  :global(.teken-js) .uitslag { opacity: 0; transform: scale(0.3); }
+  :global(.teken-js) .score { transform: scaleX(0); }
+  .in-beeld .uitslag { animation: generative-engine-optimization--ai-vindbaarheidsanalyse-pop 0.45s cubic-bezier(.3,1.7,.5,1) forwards; animation-delay: calc(0.9s + var(--i) * 0.45s); }
+  .in-beeld .score { animation: generative-engine-optimization--ai-vindbaarheidsanalyse-vul 0.9s ease-out 3.4s forwards; }
+  .in-beeld .loep { animation: generative-engine-optimization--ai-vindbaarheidsanalyse-loep 6s ease-in-out 0.4s infinite; }
+  @keyframes generative-engine-optimization--ai-vindbaarheidsanalyse-pop { to { opacity: 1; transform: none; } }
+  @keyframes generative-engine-optimization--ai-vindbaarheidsanalyse-vul { to { transform: none; } }
+  @keyframes generative-engine-optimization--ai-vindbaarheidsanalyse-loep {
+    0%, 100% { transform: translate(110px, 140px); }
+    30% { transform: translate(200px, 120px); }
+    55% { transform: translate(230px, 166px); }
+    80% { transform: translate(96px, 178px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .uitslag, .in-beeld .score, .in-beeld .loep { animation: none; }
+  }
+</style>

@@ -1,0 +1,127 @@
+---
+import Base from '../../../layouts/Base.astro';
+import paginas from '../../../../scripts/paginas.json';
+import Plaatje from '../../../components/teken/Plaatje.astro';
+import Scene from '../../../components/scenes/kennisbank--gidsen.astro';
+import { perOnderwerp } from '../../../data/tekeningen';
+import { overgang, tekeningVoor } from '../../../data/miniaturen';
+
+const url = '/kennisbank/gidsen/';
+
+// Alle gidsen uit de structuur, plus de Google Ads-gids die onder /online-adverteren/ staat.
+const extra: Record<string, string> = { '/online-adverteren/google-ads-campagne-opzetten/': 'Online adverteren' };
+const gidsen = (paginas as any[])
+  .filter((p) => p.type === 'gids')
+  .map((p) => ({ ...p, onderwerp: p.onderwerp ?? extra[p.url] ?? 'Overig', naam: String(p.naam).replace(/\s*\(gids \+ dienst\)/, '') }));
+
+// Volgorde: Gevonden, Genoemd, Gekozen, Advies. Per onderwerp een korte intro.
+const pijlers: { naam: string; onderwerpen: { onderwerp: string; intro: string }[] }[] = [
+  { naam: 'Gevonden', onderwerpen: [
+    { onderwerp: 'SEO', intro: 'Hoger in Google, van zoekwoorden tot snelheid.' },
+    { onderwerp: 'Lokale SEO', intro: 'Bovenaan in je eigen regio en op Google Maps.' },
+    { onderwerp: 'Linkbuilding', intro: 'Links die je site sterker maken.' },
+  ] },
+  { naam: 'Genoemd', onderwerpen: [
+    { onderwerp: 'GEO', intro: 'Aanbevolen worden door ChatGPT, Gemini en andere AI.' },
+  ] },
+  { naam: 'Gekozen', onderwerpen: [
+    { onderwerp: 'Website', intro: 'Kiezen, bouwen, beveiligen en wat het kost.' },
+    { onderwerp: 'Tekstschrijver', intro: 'Teksten die gevonden en gelezen worden.' },
+    { onderwerp: 'Branding', intro: 'Je merk, logo en kleuren.' },
+    { onderwerp: 'Online adverteren', intro: 'Google Ads zonder weggegooid geld.' },
+    { onderwerp: 'Social media beheer', intro: 'Plannen en posten, ook met weinig tijd.' },
+    { onderwerp: 'Leadgeneratie', intro: 'Van bezoeker naar aanvraag.' },
+    { onderwerp: 'Tracking en analytics', intro: 'Meten wat werkt, binnen de privacyregels.' },
+  ] },
+  { naam: 'Advies', onderwerpen: [
+    { onderwerp: 'Online marketing uitbesteden', intro: 'Een plan dat je echt gebruikt.' },
+    { onderwerp: 'Consult', intro: 'Zien of een offerte klopt.' },
+    { onderwerp: 'Trainingen', intro: 'AI slim inzetten in je bedrijf.' },
+  ] },
+];
+// Een onderwerp dat hierboven ontbreekt, komt alsnog in beeld (zo blijft de lijst volledig).
+const bekend = new Set(pijlers.flatMap((p) => p.onderwerpen.map((o) => o.onderwerp)));
+const rest = [...new Set(gidsen.map((g) => g.onderwerp).filter((o) => !bekend.has(o)))];
+if (rest.length) pijlers.push({ naam: 'Meer', onderwerpen: rest.map((o) => ({ onderwerp: o, intro: '' })) });
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+<Base
+  title="Gidsen over online marketing | Drijfveer Media"
+  description="Alle gidsen van Drijfveer Media op een rij, per onderwerp: SEO, AI, websites, Google Ads, social media en leadgeneratie. Praktisch en in gewone taal."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url }]}
+>
+  <section class="wrap gids-kop">
+    <div class="gids-beeld" style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    <div class="gids-tekst">
+      <p class="kicker">Kennisbank</p>
+      <h1>Alle gidsen</h1>
+      <p class="lead">{gidsen.length} gidsen die je echt verder helpen, ook als je nooit klant wordt. Per onderwerp, in gewone taal.</p>
+      <label class="zoek" for="gids-zoek">
+        <span class="sr-only">Zoek in de gidsen</span>
+        <span aria-hidden="true">⌕</span>
+        <input id="gids-zoek" type="search" placeholder="Zoek, bijvoorbeeld: Google Ads of reviews" autocomplete="off" />
+      </label>
+    </div>
+  </section>
+
+  <section class="wrap sectie">
+    {pijlers.map((p) => (
+      <div class="pijler" data-groep>
+        <h2><span class="oranje">{p.naam}.</span></h2>
+        {p.onderwerpen.map((o) => {
+          const lijst = gidsen.filter((g) => g.onderwerp === o.onderwerp);
+          return lijst.length > 0 && (
+            <div class="onderwerp" data-groep id={`onderwerp-${slug(o.onderwerp)}`}>
+              <h3>{o.onderwerp}</h3>
+              {o.intro && <p class="muted">{o.intro}</p>}
+              <ul class="kaarten">
+                {lijst.map((g) => (
+                  <li data-item data-zoek={`${g.naam} ${g.onderwerp} ${g.zoekwoord ?? ''}`.toLowerCase()}>
+                    <a href={g.url}><Plaatje href={g.url} onderwerp={tekeningVoor(g.url, perOnderwerp[g.onderwerp] ?? 'boek')} /><b>{g.naam}</b></a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    ))}
+    <p class="leeg muted" hidden>Niets gevonden. <a href="/contact/">Stel je vraag</a> aan ons.</p>
+  </section>
+</Base>
+
+<script>
+  const veld = document.getElementById('gids-zoek') as HTMLInputElement | null;
+  const items = [...document.querySelectorAll<HTMLElement>('[data-item]')];
+  const groepen = [...document.querySelectorAll<HTMLElement>('[data-groep]')];
+  const leeg = document.querySelector<HTMLElement>('.leeg');
+  veld?.addEventListener('input', () => {
+    const q = veld.value.trim().toLowerCase();
+    let n = 0;
+    items.forEach((i) => { const ja = !q || (i.dataset.zoek ?? '').includes(q); i.hidden = !ja; if (ja) n++; });
+    groepen.forEach((g) => { g.hidden = ![...g.querySelectorAll<HTMLElement>('[data-item]')].some((i) => !i.hidden); });
+    if (leeg) leeg.hidden = n > 0;
+  });
+</script>
+
+<style>
+  .gids-kop { padding-block: 24px 8px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr); gap: 32px; align-items: center; }
+  .gids-tekst { order: -1; }
+  .gids-beeld { min-width: 0; }
+  h1 { margin: 10px 0 14px; }
+  .lead { font-size: var(--step-1); line-height: 1.45; max-width: 40ch; }
+  .zoek { display: flex; align-items: center; gap: 10px; margin-top: 22px; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 6px 16px; font-size: 1.3rem; color: var(--muted); max-width: 520px; }
+  .zoek:focus-within { border-color: var(--navy); box-shadow: 0 0 0 4px rgb(7 70 99 / 0.12); }
+  .zoek input { flex: 1; min-width: 0; border: 0; outline: 0; font: inherit; font-size: 1.1rem; padding: 10px 0; color: var(--ink); background: transparent; }
+  .pijler { margin-bottom: 40px; }
+  .pijler > h2 { margin-bottom: 8px; }
+  .oranje { color: var(--orange); }
+  .onderwerp { margin: 0 0 32px; }
+  .onderwerp h3 { margin: 0 0 4px; }
+  .onderwerp > p { margin: 0 0 14px; }
+  .kaarten { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+  .kaarten a { display: grid; align-content: start; gap: 8px; height: 100%; padding: 14px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--ink); transition: border-color 0.15s, transform 0.15s; }
+  .kaarten a:hover { border-color: var(--navy); transform: translateY(-2px); }
+  .kaarten b { font-weight: 700; line-height: 1.3; }
+  @media (max-width: 800px) { .gids-kop { grid-template-columns: minmax(0, 1fr); } .gids-beeld { max-width: 420px; } }
+</style>

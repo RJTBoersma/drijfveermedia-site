@@ -1,0 +1,190 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--alt-tekst.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/alt-tekst/';
+const definitie = 'Een alt-tekst is een korte, alternatieve tekst bij een afbeelding op je website, die beschrijft wat er te zien is voor wie de afbeelding niet kan zien: een schermlezer, een zoekmachine of een browser waarin de foto niet laadt.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Alt-tekst',
+  alternateName: ['Alt-attribuut', 'Alternatieve tekst'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+
+const codeFoto = `<img src="pannendak-assen.webp"
+     alt="Nieuw pannendak op een jaren-dertigwoning in Assen">`;
+
+const codeSoorten = `<img src="werkplaats.webp" alt="Monteur vervangt de remblokken van een bestelbus">
+
+<a href="/offerte/"><img src="knop-offerte.png" alt="Vraag een offerte aan"></a>
+
+<img src="golflijn.svg" alt="">`;
+
+const codeSvg = `<svg role="img" aria-labelledby="logo-naam">
+  <title id="logo-naam">Bakkerij De Vries, terug naar de homepage</title>
+  ...
+</svg>`;
+---
+<Base
+  title="Wat is een alt-tekst? Met voorbeelden | Drijfveer Media"
+  description="Wat is een alt-tekst? De korte beschrijving bij een afbeelding, voor schermlezers en Google. Met voorbeelden per soort afbeelding en hoe je hem toevoegt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Alt-tekst', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is een alt-tekst?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum="2026-10-18" />
+      <p>Je ziet hem zelf bijna nooit. Toch hoort bij elke foto op je site een stukje tekst dat zegt wat erop staat. In de code ziet dat er zo uit:</p>
+      <pre><code>{codeFoto}</code></pre>
+      <p>Het woord alt staat voor alternatief: tekst in plaats van beeld. De bezoeker die de foto ziet, merkt er niets van. Wie hem niet kan zien, krijgt de alt-tekst. Het kost per foto een halve minuut en het helpt drie groepen tegelijk.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Alt-tekst, alt-tag, title en bijschrift: wat is wat?</h2></div>
+      <p>Rond afbeeldingen zweven veel namen. Ze worden door elkaar gebruikt, maar ze doen niet hetzelfde:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Naam</th><th>Wat het is</th><th>Wie heeft er iets aan</th></tr></thead>
+          <tbody>
+            <tr><td>Alt-tekst of alt-attribuut</td><td>De tekst in <code>alt="..."</code> bij een afbeelding</td><td>Schermlezers, Google, iedereen bij wie de foto niet laadt</td></tr>
+            <tr><td>Alt-tag</td><td>Een veelgebruikte maar onjuiste naam voor hetzelfde. Alt is een attribuut, geen tag.</td><td>Niemand anders dan de alt-tekst</td></tr>
+            <tr><td>Title-attribuut</td><td>Het tekstje dat verschijnt als je met de muis stilhoudt</td><td>Weinig. Op een telefoon zie je het niet.</td></tr>
+            <tr><td>Bijschrift</td><td>Zichtbare tekst onder de foto, in de code vaak <code>figcaption</code></td><td>Iedereen die de pagina leest</td></tr>
+            <tr><td>Bestandsnaam</td><td>De naam van het bestand, zoals pannendak-assen.webp</td><td>Google, als lichte aanwijzing</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een bijschrift en een alt-tekst mogen naast elkaar bestaan. Zeg dan niet twee keer hetzelfde. Het bijschrift vertelt het verhaal, de alt beschrijft het beeld.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2>Voor wie is die tekst?</h2></div>
+      <p><strong>Mensen met een visuele beperking.</strong> Blinden en slechtzienden gebruiken vaak schermlezers, software die de pagina hardop voorleest. Komt die een foto tegen, dan leest hij de beschrijving voor. Zonder alt-tekst hoort de bezoeker niets, of een bestandsnaam als "IMG_4032". In de enquête van WebAIM onder screenreadergebruikers staan afbeeldingen zonder goede beschrijving al jaren in de lijst van grootste ergernissen.</p>
+      <p><strong>Zoekmachines.</strong> Google begrijpt foto's steeds beter, maar haalt de betekenis nog altijd voor een groot deel uit de tekst eromheen. De alternatieve tekst is daar een belangrijk deel van.</p>
+      <p><strong>Iedereen bij wie de foto niet laadt.</strong> Bij een trage verbinding, of in een mailprogramma dat afbeeldingen blokkeert, staat de tekst op de plek van de foto.</p>
+      <p>Hoe vaak het misgaat? WebAIM onderzoekt elk jaar de homepages van een miljoen grote websites. In 2026 had 53,1 procent minstens één afbeelding zonder alt. Van alle afbeeldingen miste 16,2 procent een alt-tekst. En van de afbeeldingen die er wel een hadden, was ruim een op de tien nietszeggend, zoals "image" of een bestandsnaam.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Wat zegt Google erover?</h2></div>
+      <p>Google is er in zijn richtlijnen voor afbeeldingen duidelijk over. De alt-tekst is het belangrijkste attribuut als het gaat om informatie over een afbeelding. Google combineert hem met beeldherkenning en met de tekst van de pagina om te snappen wat er op de foto staat. Drie dingen uit die richtlijnen die je moet weten:</p>
+      <ul class="vink">
+        <li><b>Beschrijf, en gebruik zoekwoorden alleen waar ze passen.</b> Een alt vol zoekwoorden noemt Google keyword stuffing. Dat geeft een slechte ervaring en kan je site als spam laten zien.</li>
+        <li><b>Is de afbeelding een link, dan telt de alt als linktekst.</b> Zo gebruikt Google hem als <a href="/kennisbank/wat-is/anchortekst/">anchortekst</a> voor de pagina waar de link heen gaat.</li>
+        <li><b>Zet de foto bij tekst die erover gaat.</b> Google haalt informatie uit de pagina en het bijschrift. Een korte, beschrijvende bestandsnaam geeft nog een kleine extra hint.</li>
+      </ul>
+      <p>Wil je weten of je afbeeldingen bezoekers opleveren? Open in Google Search Console het rapport Prestaties en zet het filter Zoektype op afbeeldingen. Dan zie je de klikken uit Google Afbeeldingen.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Goede en slechte voorbeelden</h2></div>
+      <p>Stel: een dakdekker uit Assen zet een foto van een net opgeleverd dak op zijn site. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <ul>
+        <li><strong>Leeg of "IMG_4032"</strong>: zegt niemand iets.</li>
+        <li><strong>"dakdekker assen dak dakdekker drenthe"</strong>: een rij zoekwoorden. Google ziet het als volproppen en een schermlezer maakt er onzin van.</li>
+        <li><strong>"Afbeelding van een dak"</strong>: dat het een afbeelding is, meldt de schermlezer al. En welk dak?</li>
+        <li><strong>"Nieuw pannendak op een jaren-dertigwoning in Assen"</strong>: dit is hem. Kort, concreet, en de plaats staat er vanzelf in.</li>
+      </ul>
+      <p>Context bepaalt de beste tekst. Dezelfde foto van een monteur kan op een vacaturepagina "Monteur Jelle aan het werk in onze werkplaats" heten. Op een pagina over onderhoud is "Monteur vervangt de remblokken van een bestelbus" beter. Vraag je steeds af waarom de foto op deze plek staat.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>Welke afbeelding krijgt welke tekst?</h2></div>
+      <p>Niet elke afbeelding heeft dezelfde aanpak nodig. Het W3C, dat de webstandaarden maakt, heeft er een beslisboom voor. In gewone taal komt die hierop neer:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort afbeelding</th><th>Voorbeeld</th><th>Wat zet je in de alt?</th></tr></thead>
+          <tbody>
+            <tr><td>Foto die iets vertelt</td><td>Een opgeleverd project</td><td>Een korte beschrijving van wat je ziet</td></tr>
+            <tr><td>Afbeelding als link of knop</td><td>Een plaatje "Offerte"</td><td>Waar de link heen gaat of wat de knop doet</td></tr>
+            <tr><td>Afbeelding met tekst erin</td><td>Een banner met openingstijden</td><td>Dezelfde tekst, letterlijk</td></tr>
+            <tr><td>Logo</td><td>Je logo linksboven</td><td>Je bedrijfsnaam, en bij een link naar home eventueel "naar de homepage"</td></tr>
+            <tr><td>Grafiek of infographic</td><td>Een staafdiagram met omzet</td><td>Een samenvatting in één zin. De cijfers zelf horen in de tekst of een tabel ernaast.</td></tr>
+            <tr><td>Puur decoratief</td><td>Een lijntje, een achtergrondpatroon</td><td>Niets: <code>alt=""</code></td></tr>
+            <tr><td>Sfeerbeeld zonder inhoud</td><td>Een stockfoto van een handdruk</td><td>Meestal niets: <code>alt=""</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Zo zien drie van die gevallen eruit in de code: een foto die iets vertelt, een afbeelding als link en een decoratief lijntje.</p>
+      <pre><code>{codeSoorten}</code></pre>
+      <p>Let op het verschil tussen een lege alt en geen alt. Met <code>alt=""</code> zeg je: sla dit over. Zonder alt-attribuut weet de schermlezer niet wat hij moet doen en leest hij soms de bestandsnaam voor. WebAIM geeft een handige toets: als je de afbeelding niet kon gebruiken, wat zou je dan op die plek zetten? Is het antwoord niets, dan hoef je ook niets te schrijven.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Zo schrijf je een goede alt-tekst</h2></div>
+      <p>Moeilijk is het niet. Je moet vooral durven beschrijven wat je ziet, in gewone woorden.</p>
+      <ul class="vink">
+        <li>Zeg wat er echt te zien is. Probeer de foto te omschrijven alsof je iemand aan de telefoon hebt.</li>
+        <li>Begin met het belangrijkste. Een schermlezer leest van voor naar achter.</li>
+        <li>Zeg niet "afbeelding van" of "foto van". Alleen als het soort beeld ertoe doet, zoals bij een schilderij of een schets.</li>
+        <li>Een zoekwoord mag als het past. Past het niet, dan hoef je het er ook niet in te wringen.</li>
+        <li>Staat er tekst in de afbeelding, zoals een openingstijd of een prijs? Neem die tekst over.</li>
+        <li>Herhaal niet wat er al in de tekst ernaast staat.</li>
+      </ul>
+      <h3>Hoe lang mag een alt-tekst zijn?</h3>
+      <p>Je leest vaak dat 125 tekens de grens is. Dat is geen regel uit een standaard. WebAIM adviseert zo kort als kan zonder dat er informatie verloren gaat: meestal een paar woorden, soms een korte zin of twee. Heeft een afbeelding meer uitleg nodig, zoals een grafiek met veel cijfers, dan zet je die uitleg in de gewone tekst op de pagina.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Alt-teksten toevoegen in WordPress en HTML</h2></div>
+      <h3>In WordPress</h3>
+      <p>Er zijn twee plekken, en het verschil doet ertoe. In de mediabibliotheek klik je op een afbeelding en vul je het veld voor de alternatieve tekst in. Dat wordt de standaardtekst, telkens als je de foto ergens toevoegt. In de blokeditor selecteer je het afbeeldingsblok en vul je de alt in bij de blokinstellingen rechts. Die tekst geldt dan alleen voor die ene pagina. Handig als dezelfde foto op twee pagina's een andere rol heeft. Nieuwere versies van WordPress hebben ook een optie om een afbeelding als decoratief te markeren.</p>
+      <p>Let op: een alt die je later in de mediabibliotheek aanpast, verandert niet vanzelf op pagina's waar de foto al stond. Die loop je apart na.</p>
+      <h3>In HTML en bij een eigen site</h3>
+      <p>Bij een site zonder CMS zet je de alt zelf in de code, zoals in de voorbeelden hierboven. Een logo of icoon als inline SVG heeft geen alt-attribuut. Google adviseert dan een title-element binnen de svg:</p>
+      <pre><code>{codeSvg}</code></pre>
+      <p>Op deze site keurt een controlescript elke pagina af waarop een afbeelding geen alt heeft. Dan vergeet je het niet meer.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Is een alt-tekst verplicht?</h2></div>
+      <p>Voor de overheid al langer. Overheidssites moeten voldoen aan de toegankelijkheidsrichtlijnen WCAG, en een tekstalternatief voor afbeeldingen is daarin een eis op het basisniveau A. Sinds 28 juni 2025 geldt ook de European Accessibility Act, Europese richtlijn 2019/882. Die vraagt van veel bedrijven dat hun digitale producten en diensten toegankelijk zijn, zoals webwinkels, bankdiensten, e-books en vervoersdiensten.</p>
+      <p>Er is een uitzondering. Micro-ondernemingen die diensten leveren zijn vrijgesteld: bedrijven met minder dan 10 werknemers en een jaaromzet of balanstotaal van hooguit 2 miljoen euro. Twijfel je of het voor jou geldt, kijk dan op DigiToegankelijk, de site van de overheid hierover. Maar ook als het niet moet: een alt-tekst kost bijna niets en levert je bezoekers en vindbaarheid op.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2>Mag AI het schrijven?</h2></div>
+      <p>Ja, en dat doen we zelf ook voor een eerste versie. AI ziet prima dat er een dak op de foto staat. Wat het niet weet: dat het jouw werk is, in Assen, met pannen die de klant zelf koos. Lees elke tekst daarom na en vul aan wat alleen jij weet. Een alt die klopt maar niets zegt, helpt niemand.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2>Wat moet je ermee als ondernemer?</h2></div>
+      <ol>
+        <li>Tel hoeveel afbeeldingen geen alt hebben. Een crawler als Screaming Frog laat het zien, gratis tot 500 URL's. Voor één pagina kan het ook met WAVE, de gratis online toets van WebAIM.</li>
+        <li>Begin bij je homepage en je dienstpagina's. Daar komen de meeste bezoekers.</li>
+        <li>Geef decoratieve plaatjes een lege alt en informatieve een korte beschrijving.</li>
+        <li>Spreek af dat niemand een foto uploadt zonder alt. In het geval van een team: maak het onderdeel van je controle voor publiceren.</li>
+        <li>Kijk na een paar maanden in Search Console of Google Afbeeldingen kliks oplevert.</li>
+      </ol>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Maak je foto's ook licht met <a href="/kennisbank/wat-is/webp/">WebP</a> en lees de gids <a href="/kennisbank/gidsen/website-sneller-maken/">Website sneller maken</a>. In een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> lopen we ook alle afbeeldingen na. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een alt-tekst en een alt-tag?', a: 'Er is geen verschil in wat ermee bedoeld wordt. Alt-tag is een veelgebruikte naam, maar technisch is alt een attribuut van de img-tag. Alt-tekst of alt-attribuut is dus de juiste naam.' },
+      { v: 'Moet elke afbeelding een alt-tekst hebben?', a: 'Elke afbeelding moet een alt-attribuut hebben. Bij informatieve afbeeldingen vul je een beschrijving in. Bij puur decoratieve laat je hem leeg, met alt="". Dan slaat een schermlezer de afbeelding over.' },
+      { v: 'Helpt een alt-tekst voor SEO?', a: 'Ja. Google noemt de alt-tekst de belangrijkste bron van informatie over een afbeelding. Het helpt in Google Afbeeldingen en het helpt Google je pagina te begrijpen. Een alt alleen zet je pagina niet bovenaan.' },
+      { v: 'Moet mijn zoekwoord in de alt-tekst?', a: 'Alleen als het vanzelf past bij wat er op de foto staat. Een rij zoekwoorden noemt Google keyword stuffing en dat kan je juist schaden.' },
+      { v: 'Wat zet ik als alt-tekst bij mijn logo?', a: 'Je bedrijfsnaam. Linkt het logo naar je homepage, dan mag je dat erbij zetten, bijvoorbeeld "Bakkerij De Vries, naar de homepage".' },
+      { v: 'Zijn alt-teksten ook nodig in een nieuwsbrief?', a: 'Ja. Sommige mailprogramma\'s laden afbeeldingen pas als de lezer dat toestaat. Tot die tijd ziet hij alleen de alt-tekst. Een goede alt houdt je mail dan toch leesbaar.' },
+    ]}
+  />
+
+  <Actie titel="Hoeveel foto's op jouw site zijn naamloos?" tekst={`We tellen het gratis voor je na, samen met andere technische punten. ${site.contactpersoon} belt je met wat het eerst moet.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; background: var(--ink); color: #e8eef4; border-radius: 10px; padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; margin: 0 0 1.4em; }
+  pre code { font-family: var(--mono); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,155 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/kennisbank--geavanceerd-zoeken-met-google.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/kennisbank/geavanceerd-zoeken-met-google/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'formulier', titel: 'Het formulier en de filters' },
+  { id: 'officieel', titel: 'Officiële zoekoperatoren' },
+  { id: 'onofficieel', titel: 'Werkt nog, niet officieel' },
+  { id: 'verdwenen', titel: 'Verdwenen operatoren' },
+  { id: 'eigen-site', titel: 'Handig voor je eigen site' },
+  { id: 'zonder-ai', titel: 'Zoeken zonder AI-antwoord' },
+  { id: 'scholar', titel: 'Google Scholar' },
+];
+const schema = [{
+  '@type': 'BlogPosting',
+  headline: 'Geavanceerd zoeken met Google: alle zoekoperatoren die nog werken',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Geavanceerd zoeken met Google: zoekoperatoren 2026"
+  description="Geavanceerd zoeken met Google: welke zoekoperatoren werken nog, welke zijn verdwenen en hoe gebruik je ze voor je eigen site? Met voorbeelden."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Geavanceerd zoeken met Google', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Blog · Zoeken" titel="Geavanceerd zoeken met Google" knop={{ tekst: 'Naar de operatoren', href: '#officieel' }}>
+    <p>Met een paar tekens in de zoekbalk vind je precies wat je zoekt. Hier staan de zoekoperatoren die in 2026 nog werken, welke Google heeft geschrapt, en hoe je ze inzet voor je eigen website.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Geavanceerd zoeken in Google kan via een formulier of met zoekoperatoren: korte commando's in de zoekbalk.</li>
+            <li>Officieel noemt Google acht operatoren, waaronder <code>site:</code>, <code>filetype:</code>, <code>before:</code> en <code>after:</code>.</li>
+            <li><code>cache:</code> en <code>related:</code> werken niet meer.</li>
+            <li>Zet nooit een spatie na de dubbele punt: <code>site:voorbeeld.nl</code>, niet <code>site: voorbeeld.nl</code>.</li>
+          </ul>
+        </div>
+
+        <p>Wie in marketing werkt, zoekt de hele dag. Naar concurrenten, naar bronnen, naar fouten op de eigen site. Met de gewone zoekbalk krijg je duizenden resultaten. Met geavanceerd zoeken in Google houd je er een handvol over, en dat zijn precies de goede. Wij gebruiken ze dagelijks.</p>
+
+        <h2 id="formulier">Geavanceerd zoeken via het formulier en de filters</h2>
+        <p>Wil je niets onthouden? Gebruik dan het formulier. Doe een zoekopdracht, klik onder het zoekvak op <b>Tools</b> en kies <b>Geavanceerd zoeken</b>. Op mobiel heet dat Zoektools. Je komt ook direct op de pagina via google.com/advanced_search.</p>
+        <p>In het formulier vul je velden in als "al deze woorden", "deze exacte woorden" en "geen van deze woorden". Daaronder kun je de zoekresultaten beperken tot een bepaalde taal, regio, site of bestandstype. Google maakt er zelf de juiste zoekopdracht van.</p>
+        <p>Na elke zoekopdracht staan er ook filters onder de zoekbalk: Afbeeldingen, Nieuws, Video's, Forums, Web. Via Tools kies je bovendien een periode, bijvoorbeeld alleen pagina's van het afgelopen jaar.</p>
+
+        <h2 id="officieel">De zoekoperatoren die Google officieel ondersteunt</h2>
+        <p>Google noemt in zijn hulppagina en zijn documentatie voor webmasters deze operatoren. Daar kun je op blijven rekenen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Operator</th><th>Wat hij doet</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td><code>"..."</code></td><td>Alleen deze exacte woorden in deze volgorde</td><td><code>"huis verkopen zonder makelaar"</code></td></tr>
+              <tr><td><code>-</code></td><td>Woord uitsluiten</td><td><code>jaguar snelheid -auto</code></td></tr>
+              <tr><td><code>site:</code></td><td>Alleen resultaten van één site of domein</td><td><code>site:rijksoverheid.nl btw</code></td></tr>
+              <tr><td><code>before:</code></td><td>Pagina's die voor een datum zijn bijgewerkt</td><td><code>core update before:2025-01-01</code></td></tr>
+              <tr><td><code>after:</code></td><td>Pagina's die na een datum zijn bijgewerkt</td><td><code>ai overviews after:2026-06-01</code></td></tr>
+              <tr><td><code>filetype:</code></td><td>Alleen een bepaald bestandstype</td><td><code>jaarverslag filetype:pdf</code></td></tr>
+              <tr><td><code>imagesize:</code></td><td>Afbeeldingen van een bepaalde maat (alleen bij Afbeeldingen)</td><td><code>imagesize:1200x630</code></td></tr>
+              <tr><td><code>src:</code></td><td>Pagina's die een bepaalde afbeelding gebruiken (alleen bij Afbeeldingen)</td><td><code>src:https://voorbeeld.nl/logo.png</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je mag ze combineren. <code>site:kvk.nl filetype:pdf after:2025-01-01</code> geeft de pdf's op de site van de KvK die na 1 januari 2025 zijn bijgewerkt.</p>
+
+        <h2 id="onofficieel">Operatoren die nog werken, maar niet officieel</h2>
+        <p>Deze staan niet in de officiële lijst. In de praktijk doen ze het meestal nog wel. Google kan ze alleen zonder aankondiging schrappen, zoals eerder met <code>cache:</code> gebeurde.</p>
+        <ul>
+          <li><code>OR</code> of <code>|</code>: het een of het ander. <code>lokale seo OR local seo</code>.</li>
+          <li><code>*</code>: een joker voor een onbekend woord. <code>"de beste * in Drenthe"</code>.</li>
+          <li><code>intitle:</code> en <code>allintitle:</code>: woorden in de paginatitel. <code>intitle:vacature online marketeer</code>.</li>
+          <li><code>inurl:</code> en <code>allinurl:</code>: woorden in het webadres. <code>inurl:blog seo</code>.</li>
+          <li><code>intext:</code>: woorden in de tekst van de pagina.</li>
+          <li><code>AROUND(3)</code>: twee woorden die hooguit drie woorden van elkaar staan. <code>dakkapel AROUND(3) prijs</code>.</li>
+          <li><code>..</code>: een bereik van getallen. <code>wasmachine €300..€500</code>.</li>
+          <li><code>define:</code>: de betekenis van een woord.</li>
+        </ul>
+
+        <h2 id="verdwenen">Deze zoekoperatoren zijn verdwenen</h2>
+        <p>Veel oude lijstjes op internet noemen ze nog. Ze werken niet meer, ook niet als je ze goed typt.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>cache: (weg sinds 2024)</h3></div>
+        <p>Hiermee zag je de versie van een pagina die Google had opgeslagen. Handig om te zien wat Google van je site las. In februari 2024 haalde Google de cache-links weg, in september 2024 verdween de operator uit de documentatie. De reden volgens Google: websites laden tegenwoordig betrouwbaar genoeg. Wil je zien hoe Google een pagina leest, gebruik dan de URL-inspectie in <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>related: (weg sinds 2023)</h3></div>
+        <p>Dit gaf sites die op een bepaald domein leken. Handig om concurrenten te vinden. Google schrapte hem in juli 2023 uit de documentatie omdat hij niet meer werkt. Zoek nu gewoon op je dienst en je plaats, en kijk wie er bovenaan staat.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Het plusteken</h3></div>
+        <p>Vroeger dwong je met <code>+woord</code> af dat een woord in elk resultaat stond. Dat werkt al jaren niet meer. Zet het woord tussen aanhalingstekens, dan doet Google hetzelfde.</p>
+
+        <h2 id="eigen-site">Zo gebruik je zoekoperatoren voor je eigen website</h2>
+        <p>Hier wordt het interessant voor ondernemers. Met een paar zoekopdrachten zie je dingen die je anders een dure tool zouden kosten. Vervang <code>jouwbedrijf.nl</code> door je eigen domein.</p>
+        <ol>
+          <li><b>Staat mijn site in Google?</b> <code>site:jouwbedrijf.nl</code> laat de pagina's zien die Google kent. Het aantal is een schatting. Zie je er veel minder dan je hebt, kijk dan in Search Console waarom.</li>
+          <li><b>Vergeten pdf's.</b> <code>site:jouwbedrijf.nl filetype:pdf</code> toont oude prijslijsten en folders die nog steeds te vinden zijn.</li>
+          <li><b>Wie noemt mij zonder link?</b> <code>"jouw bedrijfsnaam" -site:jouwbedrijf.nl</code> geeft sites die over je schrijven. Staat er geen link naar jou, vraag er dan vriendelijk om. Zo begint goede <a href="/linkbuilding/">linkbuilding</a> vaak.</li>
+          <li><b>Is mijn tekst gekopieerd?</b> Zet een unieke zin van je site tussen aanhalingstekens. Staat hij ook op een andere site, dan heb je <a href="/kennisbank/wat-is/duplicate-content/">duplicate content</a>.</li>
+          <li><b>Hoe groot is de concurrent?</b> <code>site:concurrent.nl</code> geeft een idee van het aantal pagina's. <code>site:concurrent.nl inurl:blog</code> laat zien hoeveel hij schrijft.</li>
+          <li><b>Plekken voor een gastartikel.</b> <code>intitle:"schrijf voor ons" marketing</code> geeft sites die gastbijdragen zoeken. Kies alleen sites die echt bij je vak passen.</li>
+        </ol>
+        <p>Een waarschuwing: zoekoperatoren zijn een snelle check, geen meetinstrument. Google zegt zelf dat de URL-inspectie in Search Console betrouwbaarder is.</p>
+        <p>Wil je zien op welke plek je staat? Zoek dan in een incognitovenster. Google past de zoekresultaten aan op je locatie en op wat je eerder zocht. Iemand in Groningen kan dus andere resultaten zien dan iemand in Assen. Voor een eerlijk beeld van je posities over langere tijd kijk je in Search Console naar de gemiddelde positie per zoekwoord.</p>
+
+        <h2 id="zonder-ai">Zoeken zonder AI-antwoord bovenaan</h2>
+        <p>Steeds vaker staat er een AI-antwoord boven de gewone links. Soms wil je juist de bronnen zelf zien. Klik dan na je zoekopdracht op het filter <b>Web</b>. Je krijgt alleen tekstlinks naar websites, zonder AI-blok. Sommige mensen typen <code>-ai</code> achter hun zoekopdracht. Dat sluit vooral het woord "ai" uit en werkt niet altijd.</p>
+        <p>Voor je eigen site is dat AI-blok trouwens geen bijzaak. Wie daarin genoemd wordt, krijgt aandacht. Lees hoe je daar komt op onze pagina over <a href="/generative-engine-optimization/google-ai-overviews/">Google AI Overviews</a>.</p>
+
+        <h2 id="scholar">Google Scholar: zoeken op auteur en bron</h2>
+        <p>Zoek je onderzoek of wetenschappelijke artikelen, gebruik dan Google Scholar. Ook daar is een formulier voor geavanceerd zoeken, achter het menu met de drie streepjes. Met "Artikelen weergeven die zijn geschreven door" zoek je op een auteur, met "gepubliceerd in" op een tijdschrift.</p>
+        <p>Liever typen? <code>author:"Jan Janssen"</code> zoekt op auteur, <code>source:"naam tijdschrift"</code> op bron. Ook <code>intitle:</code>, <code>filetype:</code> en <code>site:</code> werken in Scholar.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Waar vind ik geavanceerd zoeken in Google?', a: 'Doe een zoekopdracht, klik onder het zoekvak op Tools en kies Geavanceerd zoeken. Of ga direct naar google.com/advanced_search.' },
+      { v: 'Waarom werkt mijn zoekoperator niet?', a: 'Meestal staat er een spatie na de dubbele punt. Typ <code>site:voorbeeld.nl</code>, zonder spatie. Werkt het dan nog niet, dan is de operator misschien geschrapt, zoals cache: en related:.' },
+      { v: 'Hoe zoek ik alleen naar pdf-bestanden?', a: 'Zet <code>filetype:pdf</code> achter je zoekwoorden, bijvoorbeeld <code>energielabel filetype:pdf</code>.' },
+      { v: 'Hoe zoek ik binnen één website?', a: 'Typ <code>site:</code> met het domein ervoor, gevolgd door je zoekwoord. Bijvoorbeeld <code>site:belastingdienst.nl kilometervergoeding</code>.' },
+      { v: 'Is het aantal resultaten bij site: precies?', a: 'Nee, het is een schatting. Voor het echte aantal geïndexeerde pagina\'s kijk je in Google Search Console.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Google Search Console gebruiken', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Zie precies welke pagina\'s Google kent.' },
+      { label: 'Gids', titel: 'Wat zijn backlinks?', href: '/kennisbank/gidsen/backlinks/', tekst: 'En hoe je eraan komt als lokaal bedrijf.' },
+      { label: 'Blog', titel: 'Hoe voorkom je een daling in websiteverkeer?', href: '/kennisbank/hoe-voorkom-je-een-daling-in-websiteverkeer/', tekst: 'Oorzaken vinden en oplossen.', teken: 'grafiek' },
+    ]}
+  />
+
+  <Actie titel="Zelf zoeken of laten nakijken?" tekst={`Met deze operatoren kom je een heel eind. Wil je dat een vakman meekijkt, vraag dan de gratis scan aan. ${site.contactpersoon} belt je met wat hij vond.`} />
+</Base>

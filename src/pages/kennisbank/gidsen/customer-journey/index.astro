@@ -1,0 +1,175 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--customer-journey.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/customer-journey/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een customer journey?' },
+  { id: 'waarom', titel: 'Waarom ook voor het mkb' },
+  { id: 'fases', titel: 'De vijf fases' },
+  { id: 'stappen', titel: 'In kaart brengen in zes stappen' },
+  { id: 'voorbeeld', titel: 'Voorbeeld' },
+  { id: 'fouten', titel: 'Fouten die je voorkomt' },
+  { id: 'verbeteren', titel: 'Van kaart naar aanvragen' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Customer journey in kaart brengen: zo doe je dat als ondernemer',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Customer journey mapping voor kleine bedrijven',
+}];
+---
+<Base
+  title="Customer journey in kaart brengen | Drijfveer Media"
+  description="Wat is een customer journey en hoe breng je hem in kaart als ondernemer? De vijf fases, zes stappen, interviewvragen en een uitgewerkt voorbeeld."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Customer journey', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Leadgeneratie" titel="Customer journey in kaart brengen: zo doe je dat als ondernemer" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een customer journey is de weg die een klant aflegt, van de eerste vraag tot de tweede opdracht. Wie die weg kent, ziet waar klanten afhaken. Deze gids laat zien hoe je hem in een middag op papier zet.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>De klantreis loopt van oriënteren via vergelijken en kiezen naar de levering en daarna. Dat laatste deel vergeten de meeste ondernemers.</li>
+            <li>Een touchpoint is elk contactmoment: je site, een review, je bus op straat, de manier waarop je de telefoon opneemt.</li>
+            <li>Breng de echte reis in kaart, niet de reis die je zou willen. Dat doe je door met klanten te praten.</li>
+            <li>Eindig altijd met drie concrete verbeteringen. Een kaart in een la levert niets op.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een customer journey?</h2>
+        <p>De customer journey, of klantreis, is de reis die een klant aflegt voordat, terwijl en nadat hij iets bij je koopt. Het begint bij een behoefte: de cv-ketel maakt een raar geluid, of de website levert al maanden niets op. Daarna gaat iemand zoeken, vergelijken, twijfelen, kiezen. En na de aankoop gaat de reis gewoon door. Komt hij terug? Vertelt hij het door aan de buren?</p>
+        <p>Onderweg komt de klant je op allerlei plekken tegen. Dat zijn de touchpoints, of contactmomenten. Online, zoals je website, je Google Bedrijfsprofiel, een advertentie of berichten op sociale media. Maar ook offline: een flyer, je bedrijfsauto, een gesprek op een verjaardag, de factuur.</p>
+        <p>Een customer journey map is de tekening van die reis. Per fase zie je wat de klant doet, wat hij denkt en voelt, en waar hij jou tegenkomt.</p>
+
+        <h2 id="waarom">Waarom een klein bedrijf er ook iets aan heeft</h2>
+        <p>Customer journey mapping klinkt als iets voor grote bedrijven met een afdeling klantbeleving. Toch heeft juist een mkb'er er veel aan. Een customer journey biedt drie dingen die direct geld opleveren.</p>
+        <ul>
+          <li><b>Je ziet waar je klanten kwijtraakt.</b> Misschien vinden mensen je prima, maar haken ze af omdat je pas na twee dagen terugbelt.</li>
+          <li><b>Je besteedt je budget op de goede plek.</b> Meer advertenties helpen niet als het lek in de offertefase zit. Soms is ergens mee stoppen meer waard dan iets nieuws beginnen.</li>
+          <li><b>Je bouwt aan langdurige klantrelaties.</b> Een tevreden klant komt terug en neemt anderen mee. Die klanttevredenheid en klantloyaliteit ontstaan na de aankoop, in het deel van de reis waar bijna niemand naar kijkt.</li>
+        </ul>
+
+        <h2 id="fases">De vijf fases van de klantreis</h2>
+        <p>Er bestaan veel modellen. De meeste komen neer op deze vijf fases. De Engelse namen kom je vaak tegen, dus die staan erbij.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Oriënteren (awareness)</h3></div>
+        <p>De klant merkt dat hij iets nodig heeft. Hij weet nog niet precies wat, en zeker niet bij wie. Hij zoekt in Google, vraagt het aan ChatGPT of aan iemand in zijn omgeving. Hier win je met uitleg, niet met een verkooppraatje.</p>
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>2. Vergelijken (consideration)</h3></div>
+        <p>Nu weet hij wat hij wil en zoekt hij wie het kan leveren. Hij leest reviews, bekijkt prijzen, vraagt twee of drie offertes. Hier tellen bewijs, duidelijkheid en snelheid.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Kiezen en kopen (purchase)</h3></div>
+        <p>Het moment van de handtekening, de bestelling of de afspraak. Elke drempel hier kost klanten: een onduidelijke offerte, een lastig betaalproces, een vraag die niet beantwoord wordt.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>4. Gebruiken en ervaren (retention)</h3></div>
+        <p>De levering, de uitvoering, de nazorg. Komt je monteur op tijd? Is de factuur zoals afgesproken? Verkoop je producten, dan hoort ook een soepel retour hierbij. Hier ontstaat een positieve ervaring, of juist niet.</p>
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>5. Terugkomen en aanbevelen (loyalty)</h3></div>
+        <p>Een blije klant schrijft een review, komt terug voor onderhoud en noemt je naam als de buren iets zoeken. Dit is de goedkoopste marketing die er is. Toch doen de meeste bedrijven hier niets.</p>
+        <p>Een verwant model is <a href="/kennisbank/gidsen/see-think-do-care/">See-Think-Do-Care</a>. Dat deelt de reis in naar de intentie van je doelgroep, en is handig om je marketing per fase te plannen.</p>
+
+        <h2 id="stappen">Customer journey in kaart brengen in zes stappen</h2>
+        <p>Je hebt een groot vel papier nodig, een stapel post-its en een middag zonder telefoon. Doe het met een collega of je partner erbij. Twee mensen zien meer dan één.</p>
+
+        <h3>Stap 1. Kies één klantgroep</h3>
+        <p>Een particulier die een badkamer laat verbouwen, reist anders dan een aannemer die jou inhuurt als onderaannemer. Maak dus per klantgroep een eigen kaart. Weet je nog niet goed wie je ideale klant is? Begin dan met een <a href="/kennisbank/gidsen/persona-maken/">persona</a>.</p>
+
+        <h3>Stap 2. Verzamel wat je al weet</h3>
+        <p>Je hebt meer informatie dan je denkt. Lees de laatste twintig mails en aanvragen terug. Bekijk je reviews, ook de mindere. Kijk in Google Search Console op welke vragen mensen je site vinden. En kijk in je statistieken welke pagina's bezoekers bekijken voordat ze contact opnemen.</p>
+
+        <h3>Stap 3. Praat met vijf klanten</h3>
+        <p>Dit is de belangrijkste stap. Bel vijf recente klanten en vraag of je tien minuten mag stellen. Bijna iedereen zegt ja. Stel open vragen en luister vooral:</p>
+        <ul>
+          <li>Wat was de aanleiding om te gaan zoeken?</li>
+          <li>Waar heb je gezocht, en wie heb je om advies gevraagd?</li>
+          <li>Met wie heb je ons vergeleken?</li>
+          <li>Wat gaf uiteindelijk de doorslag?</li>
+          <li>Was er een moment waarop je bijna afhaakte?</li>
+          <li>Wat had beter gekund?</li>
+        </ul>
+
+        <h3>Stap 4. Vul de kaart per fase</h3>
+        <p>Zet de vijf fases naast elkaar bovenaan het vel. Maak daaronder rijen: wat doet de klant, wat denkt en voelt hij, welke touchpoints komt hij tegen. Vul het in met wat je hoorde, in de woorden van de klant.</p>
+
+        <h3>Stap 5. Identificeer de knelpunten</h3>
+        <p>Zoek de momenten van twijfel, wachten en stilte. Een klant die drie dagen niets hoort na zijn aanvraag. Een offerte vol vakjargon. Een monteur die niet laat weten dat hij later komt. Markeer ze met een rode post-it.</p>
+
+        <h3>Stap 6. Kies drie verbeteringen</h3>
+        <p>Niet tien, drie. Kies de knelpunten die de meeste klanten kosten en die je het snelst oplost. Schrijf erbij wie wat doet en wanneer. Kijk na drie maanden of het verschil maakt.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: de klantreis van een warmtepomp</h2>
+        <p>Een verzonnen voorbeeld van een installateur in Drenthe die warmtepompen plaatst. Zo kan een ingevulde kaart eruitzien.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Fase</th><th>Wat de klant doet en denkt</th><th>Touchpoints</th><th>Kans voor de installateur</th></tr></thead>
+            <tbody>
+              <tr><td>Oriënteren</td><td>"De gasrekening is weer omhoog. Is een warmtepomp iets voor ons huis?"</td><td>Google, een buurman, een AI-assistent</td><td>Een eerlijke gids: voor welk huis wel en niet</td></tr>
+              <tr><td>Vergelijken</td><td>"Wat kost het, welke subsidie krijg ik, wie is betrouwbaar?"</td><td>Reviews, prijzenpagina, offertes</td><td>Een rekenvoorbeeld met subsidie, binnen een dag terugbellen</td></tr>
+              <tr><td>Kiezen</td><td>"Ik snap de offerte niet helemaal. Wat zit er wel en niet bij?"</td><td>Offerte, telefoon, huisbezoek</td><td>Een offerte van één pagina in gewone taal</td></tr>
+              <tr><td>Gebruiken</td><td>"Hij maakt 's nachts geluid. Is dat normaal?"</td><td>Monteur, handleiding, mail</td><td>Na twee weken bellen of alles goed werkt</td></tr>
+              <tr><td>Terugkomen</td><td>"Ik ben er blij mee. Mijn zus wil er ook een."</td><td>Onderhoudsherinnering, reviewverzoek</td><td>Een reviewlink en een jaarlijkse onderhoudsafspraak</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zie je hoe de grootste kansen niet in meer advertenties zitten? Ze zitten in snel terugbellen, een begrijpelijke offerte en een telefoontje na de plaatsing.</p>
+
+        <h2 id="fouten">Fouten die je voorkomt</h2>
+        <ul>
+          <li><b>De ideale reis tekenen.</b> Je tekent hoe het zou moeten, niet hoe het gaat. Praat daarom met klanten.</li>
+          <li><b>Alle klanten op één kaart.</b> Dan wordt het een gemiddelde dat bij niemand past.</li>
+          <li><b>Alleen online kijken.</b> Voor veel lokale bedrijven loopt de helft van de reis via de telefoon, mond-tot-mond en je bus op straat.</li>
+          <li><b>Stoppen bij de aankoop.</b> Na de factuur begint het deel dat reviews en herhaalopdrachten oplevert.</li>
+          <li><b>De kaart in een la.</b> Hang hem op, en plan je drie verbeteringen in je agenda.</li>
+        </ul>
+
+        <h2 id="verbeteren">Van kaart naar meer aanvragen</h2>
+        <p>Veel knelpunten op je kaart los je zelf op. Een snellere reactie, een kortere offerte, een reviewverzoek na de klus. Andere zitten in je website en je online zichtbaarheid. Daar helpen we bij. Bij <a href="/leadgeneratie/">leadgeneratie</a> kijken we naar de hele reis, van de eerste zoekopdracht tot de aanvraag in je mailbox, en spreken we een doel af waar je ons op kunt afrekenen. Wil je eerst de website-kant verbeteren? Lees dan de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a>.</p>
+        <p>Benieuwd hoe jouw site het doet in de fases vergelijken en kiezen? Vraag de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij meedenken?" intro="Wat je van ons kunt verwachten, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een customer journey en een sales funnel?', a: 'Een sales funnel kijkt vanuit jou: hoeveel mensen gaan van stap naar stap. Een customer journey kijkt vanuit de klant: wat doet, denkt en voelt hij onderweg, ook na de aankoop.' },
+      { v: 'Wat is een touchpoint?', a: 'Elk moment waarop een klant met je bedrijf in aanraking komt. Je website, een review, een advertentie, maar ook je telefoontje, je factuur en je bus op straat.' },
+      { v: 'Hoe vaak moet ik mijn customer journey bijwerken?', a: 'Kijk er één keer per jaar opnieuw naar, en altijd als je een nieuwe dienst begint of als het aantal aanvragen duidelijk verandert.' },
+      { v: 'Heb ik speciale software nodig?', a: 'Nee. Een groot vel papier en post-its werken prima. Wil je het digitaal, dan volstaat een spreadsheet of een online whiteboard zoals Miro.' },
+      { v: 'Wat is het verschil met een persona?', a: 'Een persona beschrijft wie je klant is. De customer journey beschrijft de weg die die persoon aflegt. Je maakt eerst de persona, daarna de reis.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Persona maken', href: '/kennisbank/gidsen/persona-maken/', tekst: 'Met een uitgewerkt voorbeeld.' },
+      { label: 'Gids', titel: 'Het See-Think-Do-Care-model', href: '/kennisbank/gidsen/see-think-do-care/', tekst: 'Je marketing per fase plannen.' },
+      { label: 'Pillar', titel: 'Leadgeneratie', href: '/leadgeneratie/', tekst: 'Van bezoeker naar aanvraag, met doelen.' },
+    ]}
+  />
+
+  <Actie titel="Waar haken jouw klanten af?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site door de ogen van je klant en belt je met de drie grootste kansen.`} />
+</Base>

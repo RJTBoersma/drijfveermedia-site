@@ -1,0 +1,36 @@
+---
+// Het antwoord op "Hoe weet ik dat jullie waarmaken wat jullie zeggen?" (AIDA: desire).
+import Tekening from '../teken/Tekening.astro';
+import Veer from '../teken/Veer.astro';
+import Plaatje from '../teken/Plaatje.astro';
+interface Props { titel?: string; intro?: string; case?: boolean }
+const { titel = 'Hoe weet je dat wij waarmaken wat we zeggen?', intro, case: metCase = true } = Astro.props;
+---
+<section class="wrap sectie" data-aida="desire">
+  <Veer />
+  <h2>{titel}</h2>
+  {intro && <p class="sectie-intro">{intro}</p>}
+  <div class="raster bewijs">
+    <div class="card"><Tekening naam="schild" /><h3>Garantie</h3><p>We spreken samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p><a class="meer" href="/garantie/">Zo werkt de garantie</a></div>
+    <div class="card"><Tekening naam="kalender" vertraging={150} /><h3>Maandelijks opzegbaar</h3><p>Je blijft omdat het werkt. Niet omdat je vastzit aan een contract van een jaar.</p></div>
+    <div class="card"><Tekening naam="kolf" vertraging={300} /><h3>Eerst getest in ons proeflab</h3><p>We hebben al 15 jaar meer dan 100 eigen websites. Daar testen we elke techniek voordat jouw site ermee te maken krijgt.</p><a class="meer" href="/proeflab/">Over het proeflab</a></div>
+    <div class="card"><Tekening naam="telefoon" vertraging={450} /><h3>Binnen 15 minuten gebeld</h3><p>Op werkdagen tussen 8.00 en 17.00 uur bellen we je binnen een kwartier terug. Uit interesse, niet om te verkopen.</p></div>
+  </div>
+  {metCase && (
+    <a class="card case-strook" href="/cases/willemfikstt/">
+      <div class="mini"><Plaatje href="/cases/willemfikstt/" onderwerp="raket" /></div>
+      <span class="getal">+87%</span>
+      <span class="wat"><b>Willemfikstt.nl</b> kreeg 87% meer bezoekers uit Google en 60% meer aanvragen via de site.</span>
+      <span class="meer">Lees de case</span>
+    </a>
+  )}
+</section>
+<style>
+  .bewijs :global(.tekening) { margin-bottom: 4px; }
+  .case-strook { margin-top: 16px; padding: 20px 24px; display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: 8px 24px; align-items: center; }
+  .case-strook .mini { width: 150px; }
+  .case-strook .mini :global(.plaatje) { margin: 0; }
+  .case-strook .getal { font-size: var(--step-2); font-weight: 900; color: var(--orange); letter-spacing: -0.03em; }
+  .case-strook .meer { font-weight: 800; color: var(--navy); }
+  @media (max-width: 640px) { .case-strook { grid-template-columns: minmax(0, 1fr); } }
+</style>

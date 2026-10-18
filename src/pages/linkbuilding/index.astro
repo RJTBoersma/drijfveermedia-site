@@ -1,0 +1,324 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+import Prijskaart from '../../components/pagina/Prijskaart.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Auteur from '../../components/pagina/Auteur.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/linkbuilding.astro';
+import { site } from '../../data/site';
+
+const url = '/linkbuilding/';
+const hoofdstukken = [
+  { id: 'wat-is-linkbuilding', titel: 'Wat is linkbuilding?' },
+  { id: 'werkt-het-nog', titel: 'Werkt het nog in 2026?' },
+  { id: 'goede-link', titel: 'Wat maakt een link goed?' },
+  { id: 'foute-links', titel: 'Links die je laat liggen' },
+  { id: 'methodes', titel: 'Methodes vergeleken' },
+  { id: 'penalty', titel: 'Onze eigen penalty' },
+  { id: 'aanpak', titel: 'Zo bouwen we links' },
+  { id: 'lokaal', titel: 'Tien ideeën voor lokale links' },
+  { id: 'ai', titel: 'Links en AI-zichtbaarheid' },
+  { id: 'controleren', titel: 'Zelf je links controleren' },
+  { id: 'zelf-of-uitbesteden', titel: 'Zelf doen of uitbesteden?' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'bureau-kiezen', titel: 'Een bureau kiezen' },
+  { id: 'resultaten', titel: 'Wat het opleverde' },
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Linkbuilding',
+  serviceType: 'Linkbuilding',
+  description: 'Handmatige linkbuilding met links van relevante Nederlandse websites, eerst getest in het eigen proeflab van Drijfveer Media, met stijggarantie.',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 395, priceSpecification: { '@type': 'UnitPriceSpecification', price: 395, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Linkbuilding met stijggarantie | Drijfveer Media"
+  description="Linkbuilding met echte links van sites die bij je passen, eerst getest in ons eigen proeflab. Vanaf € 395 per maand, met stijggarantie en maandelijks opzegbaar."
+  kruimels={[{ naam: 'Linkbuilding', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · Linkbuilding" titel="Linkbuilding die je site sterker maakt, zonder trucs" prijs="vanaf € 395 per maand">
+    <p>Google en AI-assistenten vertrouwen sites waar andere goede sites naar verwijzen. Wij zorgen voor die links, één voor één en met de hand. Alles wat we doen, hebben we eerst op onze eigen sites getest.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-18" nagekeken="johan" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <p>Linkbuilding is het verzamelen van links op andere websites die naar jouw site verwijzen. Google ziet zo'n link als een aanbeveling. Hoe meer goede aanbevelingen van sites die over jouw vak gaan, hoe meer vertrouwen je site krijgt en hoe hoger je komt. Drijfveer Media bouwt die links met de hand, vanaf € 395 per maand. Johan Zwartenberg is onze linkbuilder. Elke techniek die hij gebruikt, hebben we eerst getest op onze eigen sites.</p>
+        </div>
+
+        <h2 id="wat-is-linkbuilding">Wat is linkbuilding?</h2>
+        <p>Linkbuilding is het werk om andere websites naar jouw website te laten linken. Zo'n link heet een backlink. Voor een bezoeker is het een weg naar jouw site. Voor Google is het een stem: iemand anders vindt jouw pagina de moeite waard.</p>
+        <p>Dat idee is zo oud als Google zelf. Larry Page en Sergey Brin bouwden hun zoekmachine eind jaren negentig rond PageRank. De gedachte: een pagina is belangrijk als belangrijke pagina's ernaar verwijzen. Google is sindsdien veel slimmer geworden en weegt honderden signalen. Links horen daar nog altijd bij.</p>
+        <h3>Externe en interne linkbuilding</h3>
+        <p>Bij externe linkbuilding gaat het om links vanaf andere sites. Daar draait deze pagina vooral om. Interne linkbuilding is het verbinden van je eigen pagina's. Denk aan een link vanuit je blog over lekkende dakgoten naar je pagina over dakgoten vervangen. Met zulke interne verwijzingen vertel je Google welke pagina's het belangrijkst zijn en hoe ze samenhangen. Het kost niets en je hebt het helemaal zelf in de hand. Meer daarover lees je bij <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</p>
+        <p>Naast externe links bestaan er ook vermeldingen zonder link. Je bedrijfsnaam in een krantenbericht, op een vergelijkingssite of in een forum. Google en vooral AI-assistenten nemen die steeds serieuzer. Daar komen we verderop op terug.</p>
+        <h3>Follow, nofollow en sponsored</h3>
+        <p>Niet elke link geeft evenveel door. Een gewone link telt volledig mee. Met <code>rel="nofollow"</code> zegt een site: dit is geen aanbeveling. Betaalde links horen het label <code>rel="sponsored"</code> te krijgen, links in reacties en forums <code>rel="ugc"</code>. Google ziet die labels als hint.</p>
+        <p>Een nofollow-link is dus niet waardeloos. Een link van een drukbezocht vakblad brengt bezoekers en naamsbekendheid, ook zonder dat hij waarde doorgeeft. En elk natuurlijk linkprofiel bevat een flink deel nofollow. Een profiel met alleen maar perfecte links valt juist op.</p>
+
+        <h2 id="werkt-het-nog">Werkt linkbuilding nog in 2026?</h2>
+        <p>Ja. Links zijn niet meer het enige wat telt, maar zonder links haal je in een markt met concurrentie zelden de eerste pagina. Twee grote onderzoeken laten zien hoe dat zit.</p>
+        <ul>
+          <li><b>Backlinko</b> analyseerde 11,8 miljoen zoekresultaten. Het eerste resultaat in Google had gemiddeld 3,8 keer zoveel backlinks als de posities 2 tot en met 10.</li>
+          <li><b>Ahrefs</b> onderzocht ongeveer 14 miljard pagina's. Daarvan krijgt 96,55 procent nul bezoekers uit Google. Van de ruim 20 miljoen pagina's zonder één verwijzende site haalde maar 1 op de 6.671 meer dan duizend bezoekers per maand. Die stonden bijna allemaal op sterke domeinen.</li>
+        </ul>
+        <p>Let op wat dit wel en niet zegt. Het zijn verbanden, geen bewijs dat links het enige zijn wat helpt. Ahrefs schrijft het zelf ook: zonder links kun je prima scoren op onderwerpen waar niemand op concurreert. Voor "loodgieter Assen" of "boekhouder Groningen" is dat zelden zo. Daar staan drie of vier bedrijven met een nette site. Dan geven links vaak de doorslag.</p>
+        <blockquote>Een goede site zonder links is als een goede winkel in een straat waar niemand komt.</blockquote>
+        <p>Linkbuilding werkt alleen als de basis klopt. Is je site traag, beantwoordt je pagina de vraag van de zoeker niet of zit er een fout in de indexering? Dan lekt het effect van elke link weg. Daarom kijken we eerst naar on-page SEO: de inhoud en techniek van je eigen site. Dat is het werk van onze <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>. Pas als dat staat, stoppen we tijd in links.</p>
+
+        <h2 id="goede-link">Wat maakt een link goed?</h2>
+        <p>Een goede link komt van een echte site die over jouw onderwerp gaat, met echte bezoekers, die je zelf ook aan een klant zou aanraden. Klinkt simpel. In de praktijk beoordeelt Johan elke link op zeven punten.</p>
+        <ol>
+          <li><b>Relevantie.</b> Een link van een bouwvakblad naar een dakdekker weegt zwaarder dan een link van een receptenblog. Google kijkt naar de site, de pagina en de tekst rond de link. Eén link van een site die zelf vertrouwd wordt in jouw vak, levert een hogere waardering op dan tien links van sites die niemand kent.</li>
+          <li><b>Een echte site met echte lezers.</b> Krijgt de site zelf bezoekers uit Google? Verschijnt er nieuwe inhoud? Een site die alleen bestaat om links te verkopen, herkent Google ook.</li>
+          <li><b>De plek op de pagina.</b> Een link midden in een artikel telt meer dan een link in de footer of zijbalk, die op elke pagina terugkomt.</li>
+          <li><b>De ankertekst.</b> Dat is de klikbare tekst. Een mix van je bedrijfsnaam, je webadres en gewone woorden is natuurlijk. Twintig keer exact "dakdekker Assen" valt op, en niet in de goede zin. Meer over de <a href="/kennisbank/wat-is/anchortekst/">anchortekst</a>.</li>
+          <li><b>Het aantal uitgaande links.</b> Een pagina met vijftig links naar willekeurige bedrijven verdeelt zijn waarde over vijftig adressen.</li>
+          <li><b>Taal en land.</b> Een Nederlandse site met honderden links van Russische of Indiase sites klopt niet. Voor een bedrijf in Drenthe zijn Nederlandse en liefst regionale bronnen het meest logisch.</li>
+          <li><b>Houdbaarheid.</b> Blijft de link staan? Een link die na een jaar verdwijnt, is weggegooid geld.</li>
+        </ol>
+        <h3>Hoe ziet een natuurlijke mix van ankerteksten eruit?</h3>
+        <p>Kijk naar de links van een bekend bedrijf dat er nooit bewust mee bezig is geweest. Je ziet dan vooral de bedrijfsnaam en het webadres. Daarna gewone woorden als "hun site" of "deze pagina". En hier en daar een omschrijving van wat ze doen, zoals "dakdekker in Assen". Precies die verhouding houdt Johan aan. Het zoekwoord zelf komt erin voor, maar nooit als hoofdmoot.</p>
+        <p>Tools als SE Ranking en Ahrefs geven elke site een score, zoals Domain Rating of <a href="/kennisbank/wat-is/domain-authority/">Domain Authority</a>. Handig om snel te filteren. Maar zo'n score is een schatting van een softwarebedrijf, geen cijfer van Google. Een kleine vakblog met een lage score kan voor jou meer waard zijn dan een grote site waar niemand uit je doelgroep komt. Daarom kijkt Johan altijd zelf.</p>
+        <h3>Twee links naast elkaar</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Sterke link</th><th>Zwakke link</th></tr></thead>
+            <tbody>
+              <tr><td><b>Bron</b></td><td>Vakblad voor installateurs</td><td>Algemene blog met veertig categorieën</td></tr>
+              <tr><td><b>Plek</b></td><td>In een artikel over warmtepompen</td><td>In een lijstje onderaan de pagina</td></tr>
+              <tr><td><b>Ankertekst</b></td><td>Installatiebedrijf Jansen</td><td>beste goedkope warmtepomp kopen</td></tr>
+              <tr><td><b>Lezers</b></td><td>Vakmensen en klanten uit de branche</td><td>Nauwelijks</td></tr>
+              <tr><td><b>Blijft hij staan?</b></td><td>Zo goed als zeker</td><td>Onzeker</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld. Installatiebedrijf Jansen bestaat niet.</p>
+
+        <h2 id="foute-links">Welke links je beter laat liggen</h2>
+        <p>Google is er duidelijk over. In de spamregels heet het linkspam: links maken met als belangrijkste doel de posities in de zoekresultaten te beïnvloeden. Als voorbeelden noemt Google onder meer:</p>
+        <ul>
+          <li>links kopen of verkopen voor posities, ook in ruil voor producten of diensten;</li>
+          <li>overdreven linkruil, oftewel "link jij naar mij, dan link ik naar jou";</li>
+          <li>links die met programma's automatisch worden gemaakt;</li>
+          <li>advertorials met links die waarde doorgeven, zonder label;</li>
+          <li>links die breed verspreid in footers en sjablonen van andere sites staan;</li>
+          <li>links uit bedrijvengidsen en bookmarksites van lage kwaliteit;</li>
+          <li>forumreacties met een link en zoekwoorden in de handtekening.</li>
+        </ul>
+        <p>Uit de praktijk komen er nog een paar bij. Blognetwerken, ook wel PBN's genoemd: tientallen sites van één eigenaar die alleen bestaan om naar elkaar en naar betalende klanten te linken. Pakketten met duizend links voor een paar tientjes. Links van sites in een andere taal of over iets heel anders. Gastblogs die alleen geschreven zijn om een link kwijt te kunnen. En reacties onder blogs met je zoekwoord als naam.</p>
+        <p>Google pakt dit op twee manieren aan. Meestal negeert het algoritme slechte links gewoon: je betaalt ervoor en ze doen niets. Dat systeem heet Penguin, kwam in 2012 en hoort sinds 2016 bij de kern van Google. Bij grovere gevallen volgt een handmatige maatregel. Dan krijg je een melding in Search Console en zakt je site weg, soms helemaal uit beeld.</p>
+        <p>Heb je oude links van een vorig bureau waar je geen goed gevoel bij hebt? Met de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a> vraag je Google om ze te negeren. Doe dat alleen als je zeker weet dat er iets mis is. Een disavow op de verkeerde links kost je ook goede links.</p>
+        <p>Betalen voor een vermelding mag overigens wel, als het eerlijk gebeurt. Google schrijft zelf dat betaalde links bij reclame en sponsoring horen, zolang ze het label sponsored of nofollow hebben. Wie een betaalde link koopt zonder dat label, gokt dat Google het niet merkt.</p>
+
+        <h2 id="methodes">Linkbuilding-methodes naast elkaar</h2>
+        <p>Er zijn veel manieren om aan links te komen. Ze verschillen in moeite, risico en wat ze opleveren. Dit is hoe we de bekendste beoordelen. Bij elke methode gaat het om kwaliteit, relevantie en of de link over een jaar nog staat.</p>
+        <div class="tabel-scroll tabel-breed">
+          <table>
+            <thead><tr><th>Methode</th><th>Hoe het werkt</th><th>Moeite</th><th>Risico</th><th>Doen wij het?</th></tr></thead>
+            <tbody>
+              <tr><td><b>Vermelding bij partners</b></td><td>Leveranciers, branche en vereniging zetten je op hun site</td><td>Laag</td><td>Geen</td><td>Ja</td></tr>
+              <tr><td><b>Gastartikel</b></td><td>Een inhoudelijk artikel op een vaksite, met je naam erbij</td><td>Hoog</td><td>Laag, als het artikel echt iets toevoegt</td><td>Ja</td></tr>
+              <tr><td><b>Iets maken wat het linken waard is</b></td><td>Een prijsoverzicht, rekenhulp of checklist op je eigen site</td><td>Hoog</td><td>Geen</td><td>Ja</td></tr>
+              <tr><td><b>Kapotte links vervangen</b></td><td>Een dode link op een andere site laten wijzen naar jouw pagina</td><td>Middel</td><td>Geen</td><td>Ja</td></tr>
+              <tr><td><b>Vermelding zonder link opvolgen</b></td><td>Vragen of er bij je naam een link kan</td><td>Laag</td><td>Geen</td><td>Ja</td></tr>
+              <tr><td><b>Linkruil</b></td><td>Jij linkt naar mij, ik naar jou</td><td>Laag</td><td>Hoog als het op grote schaal gebeurt</td><td>Nee</td></tr>
+              <tr><td><b>Linkpakketten en netwerken</b></td><td>Tientallen links van sites die vooral links verkopen</td><td>Geen</td><td>Hoog</td><td>Nee</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een effectieve linkbuilding strategie begint bijna altijd bovenaan de tabel. Daar zitten de links die je toch al verdient, maar nog niet hebt. Pas als die binnen zijn, gaan we de moeilijkere methodes in.</p>
+
+        <h2 id="penalty">Eerlijk: wij kregen zelf ooit een penalty</h2>
+        <p>Drijfveer Media heeft al vijftien jaar meer dan honderd eigen sites, in allerlei beroepen. Dat is ons <a href="/proeflab/">proeflab</a>. Op die sites hebben we vroeger wel eens te veel risico genomen. Technieken die Google eigenlijk niet goed vindt, greyhat heet dat in het vak. Een van onze eigen sites kreeg daardoor een penalty van Google.</p>
+        <p>Trots zijn we daar niet op. We hebben er wel veel van geleerd. Je ziet van dichtbij hoe snel een site wegzakt, hoe lang herstel duurt en welke trucs na een paar maanden niets meer opleveren. Die les leer je liever op een eigen site dan op die van een klant.</p>
+        <p>Zo werken we dus nu. Nieuwe ideeën testen we eerst op onze eigen sites. Pas als iets veilig blijkt en echt werkt, zetten we het in voor klanten. En bij klanten blijven we ruim binnen de regels van Google, Bing en de AI-assistenten. Niet net binnen de lijn. Ruim.</p>
+        <blockquote>We hebben de grens zelf opgezocht, op onze eigen sites. Juist daarom blijven we er bij klanten ver vandaan.</blockquote>
+
+        <h2 id="aanpak">Zo bouwen we links voor jouw bedrijf</h2>
+        <p>Effectieve linkbuilding draait niet om zoveel mogelijk links. Het is een plan: welke pagina's moeten sterker worden, welke sites passen daarbij en hoe krijg je daar een plek. Dat linkbuildingwerk doet Johan Zwartenberg, onze linkbuilder. Hij werkt in vijf stappen.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>1. We meten je linkprofiel en dat van je concurrenten</h3></div>
+        <p>We halen al je bestaande links op met SE Ranking. Hoeveel verschillende sites linken naar je, met welke ankerteksten, en naar welke pagina's? Hetzelfde doen we voor de drie of vier bedrijven die boven je staan. Het verschil laat zien waar het gat zit. Vaak heeft een concurrent in tien jaar een rustig opgebouwd linkprofiel: een paar branchesites, de lokale krant, wat leveranciers. Dat is in te halen.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>2. We kiezen de pagina's die moeten stijgen</h3></div>
+        <p>Niet je hele site hoeft omhoog. We kiezen de pagina's die geld opleveren: je belangrijkste dienst, je plaatspagina, je prijzen. Op die pagina's controleren we eerst de inhoud en de interne linkbuilding. Een externe link naar een pagina die zelf niet goed is, is zonde van het geld.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>3. Johan zoekt bronnen die bij je passen</h3></div>
+        <p>Johan maakt een lijst van sites waar jouw bedrijf logisch thuishoort. Branchesites en vakbladen. Leveranciers en fabrikanten met een overzicht van dealers of installateurs. Verenigingen, opleidingen en regionale nieuwssites. Vergelijkingssites waar klanten echt kijken. Elke site beoordeelt hij op de zeven punten van hierboven. Wat niet past, valt af, ook als de score in een tool hoog is. Samen met de doelpagina's uit stap 2 is dat je linkbuildingstrategie: een korte lijst, geen dik rapport. Je krijgt hem te zien voordat we beginnen.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. We maken iets wat het linken waard is</h3></div>
+        <p>Een redacteur linkt niet naar een folder. Hij linkt naar iets wat zijn lezers helpt. Een prijsoverzicht, een checklist, een eerlijk antwoord op een vraag die in de branche steeds terugkomt. Die waardevolle content zetten we op je eigen site of schrijven we als gastartikel. Altijd met naam en toenaam, zodat iedereen ziet wie het schreef. Zo bouw je ook aan je naam als vakman.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>5. We meten elke maand en vertellen wat het oplevert</h3></div>
+        <p>Elke maand krijg je een kort overzicht. Welke links erbij zijn gekomen, op welke sites, en wat je posities doen. In gewone taal. Een rapport waar je een marketeer naast nodig hebt om het te snappen, schiet zijn doel voorbij. Valt een bron tegen of levert iets niets op, dan zeggen we dat ook. En dan stoppen we ermee.</p>
+
+        <h3>Hoeveel links per maand?</h3>
+        <p>Dat hangt af van je markt. Een kapper in Veendam heeft genoeg aan een handvol goede lokale links. Een installateur die landelijk werkt, heeft er meer nodig. We spreken geen vast aantal af om een aantal te halen. Drie links die passen, doen meer dan dertig uit een pakket. Wel hoor je vooraf wat je ongeveer kunt verwachten, en waarom.</p>
+        <h3>Hoe lang duurt het voordat linkbuilding werkt?</h3>
+        <p>Reken op een paar maanden. Zo ziet een gewone start eruit:</p>
+        <ul>
+          <li><b>Maand 1.</b> Nulmeting, de keuze van de doelpagina's en de lijst met bronnen. De eerste berichten gaan de deur uit.</li>
+          <li><b>Maand 2 en 3.</b> De eerste links komen online. Google moet ze vinden en meewegen. In de posities zie je nog weinig.</li>
+          <li><b>Maand 3 tot 6.</b> Meestal komt er dan beweging. Pagina's die op plek 8 tot 20 stonden, schuiven het eerst op.</li>
+          <li><b>Daarna.</b> Doorbouwen in een rustig tempo. Een linkprofiel dat elke maand een beetje groeit, ziet er voor Google natuurlijker uit dan honderd links in één week.</li>
+        </ul>
+        <p>Wat gebeurt er als je stopt? De links die er staan, blijven meestal gewoon staan. Ze verliezen alleen langzaam terrein, want je concurrenten bouwen wel door. Hoe sneller je markt beweegt, hoe eerder je dat merkt.</p>
+
+        <p>Ben je een bedrijf uit het buitenland dat in Nederland gevonden wil worden? Dan doen we hetzelfde werk, met uitleg in het Engels of Duits. Kijk bij <a href="/linkbuilding/link-building-netherlands/">link building in the Netherlands</a> of bij <a href="/linkbuilding/linkbuilding-niederlande/">Linkbuilding in den Niederlanden</a>.</p>
+
+        <h2 id="lokaal">Tien ideeën voor links als lokaal bedrijf</h2>
+        <p>De meeste mkb'ers hebben meer linkkansen dan ze denken. Ze liggen alleen niet op internet te wachten. Deze tien kun je vaak binnen een paar weken regelen, zelf of met ons.</p>
+        <ol>
+          <li><b>Je leveranciers.</b> Veel fabrikanten hebben een lijst met dealers, installateurs of verkooppunten. Sta je daar niet op, vraag het dan.</li>
+          <li><b>Je brancheorganisatie.</b> Leden krijgen vaak een vermelding met link. Kijk of je profiel daar compleet is.</li>
+          <li><b>De ondernemersvereniging of het bedrijventerrein.</b> Veel verenigingen zetten hun leden met een link op de site.</li>
+          <li><b>Zakelijke klanten.</b> Een tevreden klant zet vaak best een korte aanbeveling met link op zijn partnerpagina. Wel echt gemeend, niet als ruil.</li>
+          <li><b>Regionaal nieuws.</b> Een nieuwe vestiging, een jubileum, een opvallend project. Daar schrijft een regionale nieuwssite soms over. Stuur een kort bericht met een goede foto.</li>
+          <li><b>Opleidingen.</b> Bied je stageplekken aan? Scholen in de regio zetten erkende leerbedrijven vaak op hun site.</li>
+          <li><b>Vermeldingen zonder link.</b> Zoek op je bedrijfsnaam of stel Google Alerts in. Staat je naam ergens zonder link, vraag dan vriendelijk of die erbij kan.</li>
+          <li><b>Kapotte links bij anderen.</b> Linkt een vakblog naar een pagina die niet meer bestaat, over iets waar jij een goede pagina over hebt? Meld het en bied jouw pagina aan.</li>
+          <li><b>Een gastartikel in een vakblad.</b> Schrijf over iets waar je echt verstand van hebt, zonder reclame. Eén goed artikel per kwartaal is genoeg.</li>
+          <li><b>Sponsoring.</b> De sportclub of het dorpsfeest dat je steunt, noemt je vaak op de site. Mooi meegenomen. Steun de club om de club, niet om de link. Dan maakt het ook niet uit of er sponsored bij staat.</li>
+        </ol>
+        <p>Een sterk linkprofiel voor een lokaal bedrijf ziet er dus heel gewoon uit. Het zijn de plekken waar je in het echte leven ook al bekend bent, maar dan online. Wil je meer voorbeelden, plus de soorten backlinks die je beter laat liggen? Die staan in de gids <a href="/kennisbank/gidsen/backlinks/">wat zijn backlinks en hoe kom je eraan als lokaal bedrijf</a>.</p>
+
+        <h2 id="ai">Links en AI-zichtbaarheid: waarom vermeldingen nu meetellen</h2>
+        <p>Steeds meer klanten stellen hun vraag eerst aan ChatGPT, Gemini of de AI-modus van Google. Die noemen een paar bedrijven. Welke? Vooral bedrijven die vaak en op goede plekken genoemd worden.</p>
+        <p>Ahrefs onderzocht 75.000 merken en keek wat samenhangt met genoemd worden in de AI Overviews van Google. Vermeldingen van de merknaam op het web hadden het sterkste verband (0,664). Het aantal backlinks scoorde een stuk lager (0,218), het aantal verwijzende domeinen 0,295. Ook dit is samenhang, geen oorzaak. Maar de richting is duidelijk.</p>
+        <p>Voor linkbuilding betekent dat twee dingen. De link blijft belangrijk, want AI-assistenten halen hun bronnen voor een groot deel uit de bovenste zoekresultaten van Google en Bing. En een vermelding op een sterke plek telt mee, ook als er geen link bij staat. Johan kijkt daarom niet alleen naar de link. Hij let er ook op hoe je bedrijf genoemd wordt: met de juiste naam, plaats en dienst, in een zin die klopt.</p>
+        <p>Wil je specifiek in AI-antwoorden genoemd worden, dan is <a href="/generative-engine-optimization/">generative engine optimization</a> de logische volgende stap. Linkbuilding en GEO versterken elkaar. Neem je allebei af, dan stemmen we het werk op elkaar af.</p>
+
+        <h2 id="controleren">Zelf je links controleren in Search Console</h2>
+        <p>Wil je weten hoe je er nu voor staat? Google Search Console heeft een gratis rapport Links. Zo gebruik je het:</p>
+        <ol>
+          <li>Open in Search Console het rapport <b>Links</b>.</li>
+          <li>Kijk onder <b>Externe links</b> bij <b>Sites met de meeste links naar jouw site</b>. Herken je de sites? Zitten er vreemde, anderstalige sites tussen?</li>
+          <li>Kijk bij <b>Meest gelinkte pagina's</b>. Zijn dat de pagina's die geld opleveren, of vooral je homepage?</li>
+          <li>Kijk bij <b>Tekst met de meeste links naar jouw pagina</b>. Staat daar vooral je bedrijfsnaam, dan is dat natuurlijk. Twintig keer hetzelfde zoekwoord is een waarschuwing.</li>
+          <li>Kijk onder <b>Interne links</b> welke pagina's je zelf het vaakst linkt. Je belangrijkste dienst hoort daar hoog te staan.</li>
+        </ol>
+        <p>Google zegt er zelf bij dat dit een steekproef is en geen volledige lijst. Het rapport laat ook niet zien of een link nofollow is. Voor een volledig beeld en de vergelijking met je concurrenten gebruiken we SE Ranking. Maar voor een eerste blik is dit genoeg.</p>
+        <h3>Wat Google zegt over goede links</h3>
+        <p>In zijn eigen richtlijnen geeft Google een paar praktische regels. Een link moet een gewone HTML-link zijn met een adres erin, anders kan Google hem vaak niet volgen. De klikbare tekst moet beschrijven waar de link naartoe gaat, kort en natuurlijk. "Klik hier" en "lees meer" zeggen niets. Een zin vol zoekwoorden is ook niet de bedoeling. Bij een afbeelding die als link dient, gebruikt Google de alt-tekst als ankertekst. Dat geldt voor links naar jou, en net zo goed voor je interne links.</p>
+
+        <h2 id="zelf-of-uitbesteden">Zelf linkbuilding doen of uitbesteden?</h2>
+        <p>Linkbuilding kun je prima zelf doen. Het kost vooral tijd. Reken voor één goede link op een paar uur: bronnen zoeken, de site beoordelen, een persoonlijk bericht schrijven, opvolgen en soms een artikel schrijven. Veel mails krijgen geen antwoord. Dat hoort erbij.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Kosten</th><th>Jouw tijd</th><th>Risico</th><th>Past bij</th></tr></thead>
+            <tbody>
+              <tr><td><b>Zelf doen</b></td><td>Alleen je tijd</td><td>Een paar uur per link</td><td>Klein, als je de regels kent</td><td>Lokale bedrijven met een netwerk en tijd</td></tr>
+              <tr><td><b>Links kopen</b></td><td>Van een paar euro tot ruim € 2.000 per link</td><td>Weinig</td><td>Wisselend, je weet vaak niet waar hij komt</td><td>Wie precies weet wat hij koopt</td></tr>
+              <tr><td><b>Uitbesteden</b></td><td>Bij ons vanaf € 395 per maand</td><td>Een halfuur per maand</td><td>Klein, als het bureau elke link laat zien</td><td>Wie wil groeien zonder er zelf naar om te kijken</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wil je het helemaal uit handen geven? Op de pagina <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a> staat precies wat je elke maand krijgt en wat we van jou nodig hebben.</p>
+
+        <h2 id="kosten">Wat linkbuilding kost</h2>
+        <p>Linkbuilding bij Drijfveer Media begint bij € 395 per maand, exclusief btw. Daarvoor krijg je:</p>
+        <ul class="vink">
+          <li>een nulmeting van je linkprofiel en dat van je belangrijkste concurrenten;</li>
+          <li>een plan met de pagina's die moeten stijgen;</li>
+          <li>elke maand nieuwe links en vermeldingen, met de hand gezocht door Johan;</li>
+          <li>de teksten die daarvoor nodig zijn;</li>
+          <li>een maandoverzicht met elke link, de site en de pagina, plus je posities;</li>
+          <li>advies over de interne links op je eigen site.</li>
+        </ul>
+        <p>Wat er in een maand precies gebeurt, hangt af van je markt en je doelen. In een drukke markt kan een hoger budget nodig zijn. Dat hoor je dan vooraf, met de reden erbij.</p>
+        <h3>Stijggarantie</h3>
+        <p>Bij linkbuilding geven we een stijggarantie. We spreken samen af welke zoekwoorden en pagina's moeten stijgen. Lukt dat niet en ligt het aan ons, dan werken we een maand gratis door. Er is één voorwaarde: jij doet wat nodig is en wat we vragen om het doel te halen. Denk aan een pagina die je zelf moet aanvullen, of toegang die we nodig hebben. Hoe dat precies werkt, lees je bij <a href="/garantie/">onze garantie</a>.</p>
+        <p>Je zit nergens aan vast. Linkbuilding is maandelijks opzegbaar, tenzij we samen iets anders afspreken. We willen dat je blijft omdat het werkt, niet omdat een contract je vasthoudt.</p>
+        <h3>Waarom niet goedkoper?</h3>
+        <p>Op Nederlandse linkshops zie je links vanaf een paar euro. Dat kan, omdat dan niemand kijkt of de link bij jou past. Meestal staat hij op een site die vooral bestaat om links te verkopen. Johan bekijkt elke bron met de hand en schrijft elk bericht zelf. Dat kost tijd, en die zit in de prijs. Voor het mkb blijft het betaalbaar, en je ziet precies waar je geld naartoe gaat.</p>
+
+        <h2 id="bureau-kiezen">Een linkbuildingbureau kiezen: zeven vragen</h2>
+        <p>Veel bureaus die linkbuilding aanbieden, zijn beter in zichzelf verkopen dan in klanten laten groeien. Een gelikte pitch zegt weinig over wat er na de handtekening gebeurt. Stel daarom deze vragen voordat je tekent. Ook aan ons.</p>
+        <ol>
+          <li><b>Krijg ik elke link te zien?</b> Met de site, de pagina en de ankertekst. Een bureau dat dat geheimhoudt, heeft daar een reden voor.</li>
+          <li><b>Hoe kiezen jullie de sites?</b> Vraag om voorbeelden. Gaat het antwoord alleen over Domain Authority, dan is dat te mager.</li>
+          <li><b>Wat beloven jullie?</b> Wie "nummer 1 in vier weken" belooft, weet niet waar hij het over heeft of neemt risico met jouw site.</li>
+          <li><b>Wat kost het, en waarom?</b> Serieuze linkbuilding voor een paar tientjes per maand bestaat niet.</li>
+          <li><b>Blijven de links staan als ik stop?</b> Links op een netwerk van het bureau zelf kunnen verdwijnen zodra je opzegt. Vraag het na.</li>
+          <li><b>Welke tools gebruiken jullie?</b> Programma's die automatisch artikelen herschrijven of links plaatsen, zijn een slecht teken.</li>
+          <li><b>Hoe ziet de rapportage eruit?</b> Vraag een voorbeeld. Je moet hem zonder uitleg kunnen lezen.</li>
+        </ol>
+        <p>Let ook op wat een bureau niet vertelt. Wie alleen successen rapporteert, vertelt je niet het hele verhaal. Je betaalt ook voor eerlijk advies over wat niet werkt. Soms is dat advies: stop met deze links, ze kosten meer dan ze opleveren.</p>
+
+        <h2 id="resultaten">Wat het opleverde voor twee klanten</h2>
+        <p>Bij deze twee klanten was linkbuilding een groot deel van het werk.</p>
+        <div class="getallen">
+          <div class="getal-kaart"><b>+32%</b><span>bezoekers uit Google voor Dakraam Concurrent</span></div>
+          <div class="getal-kaart"><b>#1</b><span>op "dakraam plaatsen"</span></div>
+          <div class="getal-kaart"><b>+47%</b><span>bezoekers uit Google voor Conflictbemiddeling Nederland</span></div>
+        </div>
+        <p>Dakraam Concurrent is officieel VELUX-installatiepartner. We bouwden eerst een nieuwe website, daarna kwam linkbuilding en daarna de rest van de SEO. Het resultaat: 32 procent meer bezoekers uit Google, een eerste plek op "dakraam plaatsen", meer autoriteit en meer aanvragen. Lees de <a href="/cases/dakraamconcurrent/">case van Dakraam Concurrent</a>.</p>
+        <p>Conflictbemiddeling Nederland geeft mediationopleidingen. Daar deden we een nieuwe website, SEO en linkbuilding, en Google Ads. Het organisch verkeer steeg met 47 procent, ze staan bovenaan op "mediation opleiding" en er komen meer aanvragen binnen. Meer in de <a href="/cases/conflictbemiddeling/">case van Conflictbemiddeling Nederland</a>.</p>
+
+        <h3>Bronnen</h3>
+        <ul class="klein">
+          <li>Google Search Central, <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">spamregels voor Google Zoeken</a>, onderdeel linkspam.</li>
+          <li>Google Search Central, <a href="https://developers.google.com/search/docs/crawling-indexing/links-crawlable?hl=nl" rel="noopener">best practices voor links</a>.</li>
+          <li>Search Console Help, <a href="https://support.google.com/webmasters/answer/9049606?hl=nl" rel="noopener">het rapport Links</a>.</li>
+          <li>Backlinko, <a href="https://backlinko.com/search-engine-ranking" rel="noopener">We analyzed 11.8 million Google search results</a>.</li>
+          <li>Ahrefs, <a href="https://ahrefs.com/blog/search-traffic-study/" rel="noopener">96.55% of content gets no traffic from Google</a>, december 2023.</li>
+          <li>Ahrefs, <a href="https://ahrefs.com/blog/ai-overview-brand-correlation/" rel="noopener">AI Overview brand visibility factors (75K brands studied)</a>, mei 2025.</li>
+        </ul>
+      </article>
+
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={22} />
+        <Prijskaart naam="Linkbuilding" prijs="€ 395" eenheid="per maand" punten={['Nulmeting van jouw links en die van concurrenten', 'Elke maand links met de hand gezocht', 'Elke link zichtbaar in je maandoverzicht', 'Stijggarantie']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost linkbuilding?', a: 'Bij Drijfveer Media begint linkbuilding bij € 395 per maand, exclusief btw. Daarvoor zoekt Johan elke maand nieuwe links met de hand en zie je in je maandoverzicht elke link terug. Het is maandelijks opzegbaar.' },
+      { v: 'Hoe snel zie je resultaat van linkbuilding?', a: 'Reken op een paar maanden. Google moet nieuwe links eerst vinden en meewegen. In een markt met weinig concurrentie gaat het sneller, in een drukke markt duurt het langer. Je ziet de ontwikkeling elke maand in je overzicht.' },
+      { v: 'Mag linkbuilding van Google?', a: 'Links verdienen en erom vragen mag. Links kopen of ruilen alleen om hoger te komen, mag niet. Een betaalde vermelding is in orde zolang de link het label sponsored of nofollow heeft.' },
+      { v: 'Wat is het verschil tussen interne en externe linkbuilding?', a: 'Externe linkbuilding gaat over links vanaf andere websites naar jouw site. Interne linkbuilding is het slim verbinden van je eigen pagina\'s, zodat Google ziet welke pagina\'s het belangrijkst zijn. Je hebt ze allebei nodig.' },
+      { v: 'Kan linkbuilding mijn site schaden?', a: 'Slechte links kunnen dat. Meestal negeert Google ze, bij grove gevallen volgt een handmatige maatregel. Met links van passende, echte sites loop je dat risico niet. Heb je oude, verdachte links? Lees dan meer over de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a>.' },
+      { v: 'Hoeveel backlinks heb ik nodig?', a: 'Dat hangt af van je concurrenten. We tellen hoeveel verschillende sites naar de bedrijven boven je linken, en wat voor sites dat zijn. Dat is je richtpunt. Voor een lokaal bedrijf gaat het meestal om tientallen goede sites, niet om duizenden links.' },
+      { v: 'Wat is een sterk linkprofiel?', a: 'Een profiel met links van veel verschillende, echte sites die passen bij je vak of je regio. Met vooral je bedrijfsnaam en webadres als klikbare tekst, en een mix van gewone en nofollow-links. Het groeit rustig, maand na maand. Honderd links van één site of één netwerk maken een profiel juist zwakker.' },
+      { v: 'Wat is het verschil tussen linkbuilding en SEO?', a: 'Linkbuilding is een onderdeel van SEO. SEO gaat over alles wat je hoger in Google brengt: techniek, inhoud, interne links en links van andere sites. Linkbuilding richt zich alleen op dat laatste. Zonder goede on-page SEO levert linkbuilding minder op, en zonder links blijft goede inhoud in een drukke markt vaak onder de vouw. Lees meer bij <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over links en vermeldingen"
+    links={[
+      { label: 'Dienst', titel: 'Linkbuilding uitbesteden', href: '/linkbuilding/linkbuilding-uitbesteden/', tekst: 'Elke maand nieuwe links, zonder omkijken. Vanaf € 395 per maand.' },
+      { label: 'Dienst', titel: 'Google disavow tool', href: '/linkbuilding/google-disavow-tool/', tekst: 'Slechte links onschadelijk maken.' },
+      { label: 'Gids', titel: 'Backlinks voor lokale bedrijven', href: '/kennisbank/gidsen/backlinks/', tekst: 'Wat backlinks zijn en hoe je eraan komt.' },
+      { label: 'English', titel: 'Link building Netherlands', href: '/linkbuilding/link-building-netherlands/', tekst: 'Voor buitenlandse bedrijven, in het Engels.', teken: 'ketting' },
+      { label: 'Deutsch', titel: 'Linkbuilding Niederlande', href: '/linkbuilding/linkbuilding-niederlande/', tekst: 'Voor Duitse bedrijven, in het Duits.', teken: 'ketting' },
+    ]}
+  />
+
+  <WieDoetHet wie={[{ slug: 'johan', taak: 'Zoekt de links die een site sterker maken, en laat de rest liggen.' }, { slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je project bij.' }]} />
+
+  <Actie titel="Benieuwd hoe sterk jouw links zijn?" tekst={`${site.contactpersoon} bekijkt je site en de links van je concurrenten, en belt je met wat hij ziet. Gratis, en je zit nergens aan vast.`} />
+</Base>
+<style>
+  .tabel-breed table { min-width: 640px; }
+</style>

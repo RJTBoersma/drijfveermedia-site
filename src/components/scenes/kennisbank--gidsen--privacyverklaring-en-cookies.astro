@@ -1,0 +1,62 @@
+---
+// Scène voor /kennisbank/gidsen/privacyverklaring-en-cookies/: een website met een eerlijke cookiemelding (weigeren en accepteren even groot) en ernaast een privacyverklaring met een checklist.
+// Als hij leeft: de vinkjes in de verklaring verschijnen één voor één en het schild ademt rustig.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 112, tekst: 'Wie we zijn' },
+  { y: 140, tekst: 'Welke gegevens' },
+  { y: 168, tekst: 'Hoe lang' },
+  { y: 196, tekst: 'Jouw rechten' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een website met een cookiemelding waarop weigeren en accepteren even groot zijn, en een privacyverklaring waarin de onderdelen worden afgevinkt.'}>
+  <!-- website -->
+  <rect x="24" y="30" width="232" height="206" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M36 30h208a12 12 0 0 1 12 12v8H24v-8a12 12 0 0 1 12-12z" fill="#e8eef4" />
+  <circle cx="38" cy="40" r="3.5" fill="#d9e1ea" /><circle cx="49" cy="40" r="3.5" fill="#d9e1ea" /><circle cx="60" cy="40" r="3.5" fill="#d9e1ea" />
+  <rect x="42" y="66" width="120" height="11" rx="5.5" fill="#10283f" />
+  <rect x="42" y="86" width="190" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="42" y="100" width="170" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="42" y="114" width="180" height="7" rx="3.5" fill="#e8eef4" />
+
+  <!-- cookiemelding -->
+  <rect x="36" y="146" width="208" height="78" rx="10" fill="#fff" stroke="#074663" stroke-width="2" />
+  <circle cx="56" cy="166" r="9" fill="#e8eef4" stroke="#074663" stroke-width="1.5" />
+  <circle cx="53" cy="163" r="1.6" fill="#074663" /><circle cx="59" cy="168" r="1.6" fill="#074663" /><circle cx="54" cy="170" r="1.2" fill="#074663" />
+  <rect x="74" y="160" width="150" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="74" y="171" width="110" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="48" y="190" width="88" height="24" rx="8" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="66" y="206" font-size="11" font-weight="800" style="fill:#074663">Weigeren</text>
+  <rect x="144" y="190" width="88" height="24" rx="8" fill="#074663" />
+  <text x="156" y="206" font-size="11" font-weight="800" style="fill:#fff">Accepteren</text>
+
+  <!-- privacyverklaring -->
+  <rect x="276" y="44" width="180" height="194" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M296 62l12-5 12 5v9c0 8-6 13-12 15-6-2-12-7-12-15z" fill="#e8eef4" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+  <text x="328" y="76" font-size="12" font-weight="900">Privacy</text>
+  {regels.map((r) => (
+    <g>
+      <rect x="294" y={r.y - 12} width="16" height="16" rx="4" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x="320" y={r.y} font-size="11">{r.tekst}</text>
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      <g class="schild"><path d="M296 62l12-5 12 5v9c0 8-6 13-12 15-6-2-12-7-12-15z" fill="none" stroke="#ff6600" stroke-width="2" stroke-linejoin="round" /></g>
+      {regels.map((r, i) => (
+        <path class="vink-p" d={`M297 ${r.y - 4}l4 4 7-8`} fill="none" stroke="#1f8a5b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style={`animation-delay:${0.6 + i * 0.35}s`} />
+      ))}
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .vink-p { opacity: 0; }
+  .in-beeld .vink-p { animation: kennisbank-gidsen-privacyverklaring-en-cookies-vink 0.4s ease-out forwards; }
+  .schild { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .schild { animation: kennisbank-gidsen-privacyverklaring-en-cookies-adem 4s ease-in-out 2s infinite; }
+  @keyframes kennisbank-gidsen-privacyverklaring-en-cookies-vink { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-privacyverklaring-en-cookies-adem { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 1; transform: scale(1.12); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vink-p, .in-beeld .schild { animation: none; } }
+</style>

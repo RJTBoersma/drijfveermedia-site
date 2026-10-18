@@ -1,0 +1,197 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/seo-meppel.astro';
+import { site } from '../../data/site';
+
+const url = '/seo-meppel/';
+const schema = [{
+  '@type': 'Service',
+  name: 'SEO in Meppel',
+  serviceType: 'Zoekmachineoptimalisatie',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: [{ '@type': 'City', name: 'Meppel' }, { '@type': 'AdministrativeArea', name: 'Drenthe' }],
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+}];
+
+// CBS, bevolking 1 januari 2015 en eind augustus 2026 (tabel 37230ned).
+const groei = [
+  { gemeente: 'Meppel', van: '32.799', naar: '36.843', pct: '+12,3%' },
+  { gemeente: 'Tynaarlo', van: '32.570', naar: '35.202', pct: '+8,1%' },
+  { gemeente: 'Assen', van: '67.165', naar: '70.852', pct: '+5,5%' },
+  { gemeente: 'Westerveld', van: '19.085', naar: '20.121', pct: '+5,4%' },
+  { gemeente: 'De Wolden', van: '23.661', naar: '24.732', pct: '+4,5%' },
+  { gemeente: 'Hoogeveen', van: '54.860', naar: '56.573', pct: '+3,1%' },
+  { gemeente: 'Emmen', van: '107.775', naar: '109.820', pct: '+1,9%' },
+];
+---
+<Base
+  title="SEO Meppel: gevonden in stad en regio | Drijfveer Media"
+  description="SEO in Meppel voor ondernemers in de stad en de omgeving. Beter vindbaar in Google, ook bij klanten uit Nijeveen, De Wolden en Staphorst. Met stijggarantie."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Drenthe', url: '/regio/drenthe/' }, { naam: 'SEO Meppel', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · Meppel" titel="SEO in Meppel: beter vindbaar in een stad die blijft groeien" prijs="vanaf € 495 per maand">
+    <p>Geen Drentse gemeente groeide sinds 2015 zo hard als Meppel. Elke nieuwe inwoner zoekt een kapper, een schilder of een fysio. Via Google. SEO in Meppel zorgt dat ze bij jou uitkomen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Meppel groeit harder dan de rest van Drenthe</h2>
+      <p>Begin 2015 woonden er volgens het CBS 32.799 mensen in de gemeente Meppel. Eind augustus 2026 waren dat er 36.843. Dat is ruim 12 procent erbij, meer dan in welke andere gemeente in Drenthe ook. Ter vergelijking:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Gemeente</th><th>Inwoners begin 2015</th><th>Inwoners eind aug. 2026</th><th>Groei</th></tr></thead>
+          <tbody>
+            {groei.map((g) => <tr><td><b>{g.gemeente}</b></td><td>{g.van}</td><td>{g.naar}</td><td>{g.pct}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron: CBS, Bevolkingsontwikkeling per regio per maand. Een selectie van de twaalf Drentse gemeenten.</p>
+      <p>Het aantal bedrijven groeide mee. Het CBS telde in Meppel in 2016 3.050 bedrijfsvestigingen, begin 2026 waren het er 4.315 (voorlopig cijfer). De grootste groep is opvallend: specialistische zakelijke dienstverlening, met 875 vestigingen. Daarna volgen handel (715) en zorg (515). Meer bedrijven betekent meer concurrentie in Google. Wie nu werk maakt van SEO in Meppel, heeft een voorsprong op wie wacht.</p>
+
+      <h2>Een stad op de grens van drie provincies</h2>
+      <p>Meppel ligt in de uiterste zuidwesthoek van Drenthe. De gemeente omschrijft haar ligging zelf als gunstig, in de regio Zwolle. Staphorst en Steenwijk horen al bij Overijssel, en over de A32 ben je zo in Friesland. Dat maakt Meppel een echte regiostad, met klanten uit een wijde omgeving.</p>
+      <p>Het betekent ook dat je concurrenten niet alleen in Meppel zitten. Wie in Nijeveen of Ruinerwold "dakdekker" intypt, krijgt net zo makkelijk een bedrijf uit Zwolle of Staphorst te zien als een uit Meppel. Google kijkt naar afstand, maar ook naar welk bedrijf het duidelijkst laat zien dat het daar werkt. Daar win je het.</p>
+      <p>Concreet: één sterke pagina per dienst waarop staat welk gebied je bedient. Meppel, Nijeveen, Rogat, de dorpen in De Wolden en Westerveld. Met echte voorbeelden van klussen in die omgeving, niet met twintig kopieën van dezelfde tekst met een andere plaatsnaam. Google noemt dat laatste in zijn spamregels als voorbeeld van misbruik: veel pagina's per stad die allemaal naar dezelfde plek leiden.</p>
+      <h3>Je werkgebied in cijfers</h3>
+      <p>De twee buurgemeenten aan de Drentse kant zijn geen kleintjes. Het CBS telde begin 2026 in De Wolden 3.855 bedrijfsvestigingen en in Westerveld 3.025. Samen zijn dat er meer dan in Meppel zelf. Werk je ook daar, zet die dorpen dan op je site en in je Google Bedrijfsprofiel. Volgens de provincie Drenthe groeide Zuidwest-Drenthe, waar Meppel bij hoort, tussen april 2024 en april 2025 met bijna 900 banen het hardst van de drie Drentse regio's.</p>
+
+      <h2>Nieuwe wijken, nieuwe klanten die nog niemand kennen</h2>
+      <p>Aan de noordwestkant bouwt de gemeente de duurzame uitbreidingswijk Nieuwveense Landen, met buurten als Broeklanden, Boshoven en Parkwonen. Begin 2027 start daar volgens de gemeente de bouw van twee basisscholen en een sporthal. Tussen de watertoren en de binnenstad verandert het oude bedrijventerrein Noordpoort in een woonwijk met circa 1.000 woningen.</p>
+      <p>Wie net verhuisd is, heeft geen buurman die een goede loodgieter weet. Die pakt zijn telefoon. Wie dan bovenaan staat, krijgt de klus, en vaak de jaren daarna ook.</p>
+      <p>Voor veel bedrijven in Meppel is dat de grootste kans van dit moment. Begin met een Google Bedrijfsprofiel dat compleet is, vraag elke tevreden klant om een review en noem de wijken waar je werkt op je site. Dat kost weinig en levert relatief snel iets op.</p>
+      <div class="kader">
+        <p class="kader-titel">Rekenvoorbeeld (verzonnen voorbeeld, verzonnen cijfers)</p>
+        <p>Een installateur uit Meppel kijkt naar Noordpoort. De gemeente plant daar circa 1.000 woningen. Stel dat één op de tien nieuwe huishoudens in het eerste jaar via Google een installateur zoekt. Dat zijn 100 zoekers. Stel dat de helft van hen een van de drie bedrijven in het kaartje belt, en dat jij daar tussen staat. Krijg jij een derde van die telefoontjes, dan zijn dat zo'n 17 klussen. Bij € 250 marge per klus is dat ruim € 4.000. Lokale SEO kost vanaf € 295 per maand, dus € 3.540 per jaar. En dat is alleen Noordpoort. De bestaande wijken en de dorpen komen er nog bij.</p>
+      </div>
+      <p>Alle aantallen in dit voorbeeld behalve de 1.000 woningen zijn bedacht. Ze laten zien hoe je de som maakt. Reken hem gerust na met je eigen cijfers, of laat ons het doen.</p>
+
+      <h2>SEO in Meppel verschilt per branche</h2>
+      <p>Niet elke ondernemer in Meppel zoekt dezelfde klant. Wij kijken per branche wat werkt.</p>
+    </div>
+    <div class="raster raster-2 meppel-soort">
+      <div class="card">
+        <Tekening naam="pin" />
+        <h3>Winkel en horeca in het centrum</h3>
+        <p>In de wijk Centrum telt het CBS ruim duizend bedrijfsvestigingen. Voor een winkel in de binnenstad telt vooral de kaart. Kloppende openingstijden, ook op de weekmarkt op donderdag en de foodmarkt op zaterdag op het Kerkplein. Foto's van je zaak, reviews, en een pagina die laat zien waarom je onderscheidend bent.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="tandwiel" vertraging={150} />
+        <h3>Zakelijk, op een bedrijventerrein</h3>
+        <p>Meppel heeft een rij bedrijventerreinen, van Blankenstein en Noord I tot de Oevers aan het Meppelerdiep. Zakelijke klanten zoeken specifieker en vaak zonder plaatsnaam. Een leverancier wordt gevonden op wat hij maakt, niet op "bedrijf Meppel".</p>
+      </div>
+      <div class="card">
+        <Tekening naam="team" vertraging={300} />
+        <h3>Zakelijke dienstverlening</h3>
+        <p>De grootste groep bedrijven in Meppel. Adviseurs, administratiekantoren en bureaus. Hun klanten vergelijken rustig en vragen steeds vaker eerst een AI-assistent om advies. Artikelen die echte vragen beantwoorden, maken je vindbaar in Google én in AI-antwoorden.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="huis" vertraging={450} />
+        <h3>Vakmensen aan huis</h3>
+        <p>Schilders, hoveniers, installateurs. Je werkt bij de klant thuis, in de nieuwe wijken en in de dorpen. Een servicegebied in je bedrijfsprofiel en een werkgebiedpagina met foto's van echte klussen doen hier het meeste.</p>
+      </div>
+    </div>
+    <div class="tekst">
+      <p>Bij de eerste en de laatste groep draait het om <a href="/lokale-seo/">lokale SEO</a>. Bij de andere twee om <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>, of search engine optimization, op de woorden die jouw klanten gebruiken. Veel bedrijven hebben een beetje van allebei nodig.</p>
+
+      <h2>Je Google Bedrijfsprofiel in Meppel goed instellen</h2>
+      <p>Google schrijft dat lokale resultaten vooral draaien om relevantie, afstand en prominentie. Prominentie hangt onder meer af van hoeveel sites naar je linken en hoeveel reviews je hebt. Zo pak je de basis aan:</p>
+      <ol>
+        <li><b>Kies je bedrijfstype.</b> Heb je een winkel of praktijk waar klanten komen? Dan toon je je adres. Kom je bij de klant thuis, dan stel je een servicegebied in.</li>
+        <li><b>Stel het servicegebied in.</b> Via Profiel bewerken, Locatie, Servicegebied. Google staat maximaal 20 gebieden toe, op hooguit zo'n twee uur rijden. Meppel, Nijeveen, Ruinerwold, Havelte en Staphorst passen daar ruim in.</li>
+        <li><b>Vul alles in.</b> Openingstijden, afwijkende tijden, diensten, foto's. Google zegt zelf dat complete profielen vaker worden getoond.</li>
+        <li><b>Vraag om reviews.</b> Met een reviewlink of QR-code op je factuur. Reageer op elke review, ook op de kritische.</li>
+        <li><b>Houd het bij.</b> Een nieuwe foto of een update per maand laat zien dat je zaak leeft.</li>
+      </ol>
+      <p>Wil je dit zelf doen, volg dan onze <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">gids over het Google Bedrijfsprofiel</a>. Laat je het liever doen, dan richten we je profiel bij Google, Bing en Apple in vanaf € 249.</p>
+
+      <h2>Zo verloopt een SEO-traject bij ons</h2>
+    </div>
+    <ol class="stappen-rij">
+      <li><strong>We bellen terug</strong><p>Binnen 15 minuten, op werkdagen. Uit interesse, niet om iets te verkopen.</p></li>
+      <li><strong>We vragen door</strong><p>Wat wil je echt? Meer klussen in de buurt, of zakelijke klanten uit heel het land?</p></li>
+      <li><strong>We leggen het voor</strong><p>Telefonisch, bij ons in Assen of bij jou in Meppel. Over de A28 zijn we er in zo'n veertig minuten.</p></li>
+      <li><strong>We spreken doelen af</strong><p>Een lage investering en targets waar je ons op kunt afrekenen.</p></li>
+      <li><strong>We beginnen bij de grootste kans</strong><p>Eerst wat snel verschil maakt. Daarna perfectioneren.</p></li>
+    </ol>
+    <div class="tekst" style="margin-top:40px">
+      <p>Bij SEO in Meppel heb je één vast aanspreekpunt, Thorgall, en korte lijnen met de mensen die het werk doen. Dat houdt ons betrokken bij je bedrijf, ook na jaren. We hebben voor ondernemers in heel Nederland gewerkt, en de meeste klanten blijven lang.</p>
+      <h3>Wat we in de eerste drie maanden doen</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wanneer</th><th>Wat</th><th>Wat jij merkt</th></tr></thead>
+          <tbody>
+            <tr><td>Week 1 tot 2</td><td>Nulmeting: posities, bedrijfsprofiel, techniek, concurrenten in Meppel en omgeving</td><td>Je krijgt een kort overzicht van waar je staat</td></tr>
+            <tr><td>Week 2 tot 4</td><td>Bedrijfsprofiel op orde, technische fouten eruit, reviewlink klaar</td><td>Vaak al meer weergaven in het kaartje</td></tr>
+            <tr><td>Maand 2</td><td>Dienstpagina's herschrijven of nieuw maken, met je werkgebied erin</td><td>Pagina's die je zelf ook beter vindt lezen</td></tr>
+            <tr><td>Maand 3</td><td>Eerste links uit de regio, meten wat werkt, bijsturen</td><td>De eerste posities verschuiven</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Dit is een gemiddeld beeld. Bij een site die technisch veel mist, duurt de eerste stap langer. Bij een bedrijf dat al een goed profiel heeft, gaan we sneller door naar de content.</p>
+
+      <h2>Social media of SEO?</h2>
+      <p>Die vraag krijgen we vaak. Social media kan je merk versterken. Mensen die je al kennen, zien je terug en onthouden je. Maar wie een dakdekker zoekt, zoekt in Google, niet op Instagram. Begin daarom bij je vindbaarheid. Daarna kun je kijken of social media een mooi extraatje is. Wil je het uitbesteden, dan doen we <a href="/social-media-beheer/">social media beheer</a> vanaf € 395 per maand. Adverteren op social media doen we niet.</p>
+
+      <h2>Vier fouten die SEO in Meppel in de weg zitten</h2>
+      <ul>
+        <li><b>Alleen "Meppel" op de site.</b> Terwijl je ook in Nijeveen, Havelte en Staphorst werkt. Noem die plaatsen, met een voorbeeld.</li>
+        <li><b>Geen aparte pagina per dienst.</b> Eén pagina "diensten" met tien opsommingen wordt op geen enkele dienst goed gevonden.</li>
+        <li><b>Een profiel zonder reviews.</b> Ook goede bedrijven vergeten erom te vragen. Twee reviews per maand maakt na een jaar al verschil.</li>
+        <li><b>Een trage site op mobiel.</b> Google wil dat het grootste deel van een pagina binnen 2,5 seconden staat. Veel sites halen dat niet door te zware foto's.</li>
+      </ul>
+
+      <h2>Wat SEO in Meppel kost</h2>
+      <p>SEO begint bij € 495 per maand, exclusief btw. Werk je vooral voor klanten in Meppel en omgeving, dan is lokale SEO vanaf € 295 per maand vaak genoeg. Allebei maandelijks opzegbaar, met stijggarantie: halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. De voorwaarden staan bij onze <a href="/garantie/">garantie</a>.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Dienst</th><th>Vanaf</th><th>Past bij</th></tr></thead>
+          <tbody>
+            <tr><td>Google Bedrijfsprofiel, Bing en Apple inrichten</td><td>€ 249 eenmalig</td><td>Wie eerst de basis wil leggen</td></tr>
+            <tr><td>Lokale SEO</td><td>€ 295 per maand</td><td>Winkel, horeca, vakman met klanten in de omgeving</td></tr>
+            <tr><td>SEO</td><td>€ 495 per maand</td><td>Bedrijf met meer diensten of klanten buiten de regio</td></tr>
+            <tr><td>Linkbuilding</td><td>€ 395 per maand</td><td>Wie al goede pagina's heeft maar autoriteit mist</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Bel gerust als je twijfelt welke bij je past. Of kijk eerst hoe we het aanpakken in onze eigen stad, bij <a href="/seo-assen/">SEO in Assen</a>, en wat we elders in <a href="/regio/drenthe/">Drenthe</a> doen.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Zitten jullie in Meppel?', a: 'Nee. Ons enige kantoor staat aan de Lauwers in Assen. Naar Meppel is het zo\'n veertig minuten rijden, dus we komen graag bij je langs. Veel werk regelen we telefonisch of online.' },
+      { v: 'Wat kost SEO in Meppel?', a: 'SEO begint bij € 495 per maand, lokale SEO bij € 295 per maand. Beide exclusief btw en maandelijks opzegbaar. Na een gratis analyse hoor je wat bij je past.' },
+      { v: 'Ik word gevonden in Meppel, maar niet in de omliggende dorpen. Hoe kan dat?', a: 'Google toont op de kaart vooral bedrijven dicht bij de zoeker. Buiten je eigen plaats win je het met pagina\'s die duidelijk laten zien waar je werkt, met echte voorbeelden, en met reviews van klanten uit die dorpen.' },
+      { v: 'Ik krijg concurrentie uit Zwolle. Kan ik daar tegenop?', a: 'Vaak wel. In het kaartje telt afstand zwaar mee, en daar sta je als bedrijf uit Meppel dichter bij je klant. In de gewone resultaten wint wie de beste pagina heeft voor die zoekopdracht. Daar maakt de grootte van je bedrijf minder uit dan je denkt.' },
+      { v: 'Moet ik ook iets met social media?', a: 'Het kan je merk versterken, maar het vervangt geen SEO. Begin bij je vindbaarheid in Google. Daarna kun je kijken of social media een mooi extraatje is.' },
+      { v: 'Hoe snel sta ik bovenaan?', a: 'Op de kaart kun je binnen een paar weken verschil zien als je profiel eerst onvolledig was. In de gewone zoekresultaten duurt het meestal een paar maanden, afhankelijk van je branche en je concurrenten.' },
+      { v: 'Werkt SEO ook voor een winkel?', a: 'Ja. Voor een winkel in het centrum draait het vooral om het kaartje, reviews en kloppende openingstijden. Verkoop je ook online, dan kijken we samen wat haalbaar is. Webshops bouwen doen we zelf niet.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer in de buurt van Meppel"
+    links={[
+      { label: 'Pillar', titel: 'Zoekmachine-optimalisatie', href: '/zoekmachine-optimalisatie/', tekst: 'Hoger in Google, met stijggarantie.' },
+      { label: 'Regio', titel: 'Webdesign in Hoogeveen', href: '/webdesign-hoogeveen/', tekst: 'Een nieuwe site voor ondernemers verderop langs de A28.' },
+      { label: 'Assen', titel: 'SEO in Assen', href: '/seo-assen/', tekst: 'Hoe we het aanpakken in onze eigen stad.' },
+      { label: 'Dienst', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Bovenaan in het kaartje, met reviews.', teken: 'pin' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waar je staat in Meppel?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} belt je binnen 15 minuten terug en vertelt eerlijk waar je grootste kans zit.`} />
+</Base>
+<style>
+  .meppel-soort { margin: 8px 0 8px; }
+</style>

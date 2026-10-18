@@ -1,0 +1,181 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--sitelinks.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/sitelinks/';
+const datum = '2026-10-18';
+const definitie = 'Sitelinks zijn de extra links naar pagina\'s van dezelfde website die Google soms onder een zoekresultaat toont, zodat je met één klik op de juiste pagina komt.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  '@id': `${site.url}${url}#begrip`,
+  name: 'Sitelinks',
+  alternateName: ['Google sitelinks', 'Sitelink'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'WebPage',
+  '@id': `${site.url}${url}#pagina`,
+  url: `${site.url}${url}`,
+  name: 'Wat zijn sitelinks?',
+  inLanguage: 'nl-NL',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  about: { '@id': `${site.url}${url}#begrip` },
+}];
+const resultaat = `Bakkerij De Vries | Ambachtelijke bakker in Assen
+www.bakkerijdevries.nl
+Brood, gebak en taarten op bestelling. Dagelijks vers ...
+
+   Taart bestellen          Assortiment
+   Openingstijden           Contact`;
+const noindex = `<meta name="robots" content="noindex">`;
+---
+<Base
+  title="Wat zijn sitelinks? Zo krijg je ze | Drijfveer Media"
+  description="Wat zijn sitelinks? De extra links onder je zoekresultaat. Lees waarom je ze niet zelf kunt instellen, en wat je wel doet om Google sitelinks te laten tonen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Sitelinks', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat zijn sitelinks?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Zoek op de naam van een bekend bedrijf en je ziet het vaak: onder het eerste resultaat staan nog een paar links, bijvoorbeeld naar Diensten, Prijzen of Contact. Dat zijn sitelinks. Ze worden bij sommige websites weergegeven en bij andere niet. Dat bepaalt Google, niet jij.</p>
+      <p>Google omschrijft ze zelf als links van hetzelfde domein die gegroepeerd onder een resultaat staan. De systemen van Google zoeken in de linkstructuur van je site naar snelkoppelingen die de zoeker tijd besparen. Hieronder lees je wanneer je ze krijgt, wat je eraan kunt doen en waarom ze in Google Ads heel anders werken.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2>Hoe ziet een resultaat met sitelinks eruit?</h2></div>
+      <p>Vereenvoudigd ziet het er ongeveer zo uit, voor een verzonnen bakker:</p>
+      <pre><code>{resultaat}</code></pre>
+      <p>Bovenaan de gewone titel, het adres en de omschrijving. Daaronder de sitelinks: elk een eigen klikbare link naar een diepere pagina. Soms staan ze in twee kolommen, soms als een rij losse links op één regel, op een telefoon soms als knoppen. Hoe ze eruitzien, verschilt per zoekopdracht en per apparaat.</p>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2>Waarom ze de moeite waard zijn</h2></div>
+      <ul class="vink">
+        <li>Sitelinks nemen ruimte in. Je resultaat wordt groter en duwt de rest omlaag.</li>
+        <li>Ze brengen gebruikers rechtstreeks vanuit Google naar diepere pagina's, zonder omweg via je homepage.</li>
+        <li>Ze tonen meteen wat je doet. Wie op je naam zoekt, ziet in één oogopslag je belangrijkste diensten.</li>
+        <li>Ze stralen iets uit. Een groot resultaat met sitelinks oogt als een gevestigd bedrijf.</li>
+      </ul>
+      <p>Meestal verschijnen ze bij zoekopdrachten op je bedrijfsnaam, en alleen als je daarop bovenaan staat. Niet iedereen ziet dezelfde sitelinks. Google kiest per zoekopdracht welke pagina's het nuttigst zijn. In de praktijk zijn dat vaak de pagina's die de meeste klikken krijgen.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Wanneer toont Google sitelinks?</h2></div>
+      <p>Google zegt het in zijn documentatie zonder omwegen: het toont sitelinks alleen als het denkt dat ze de zoeker helpen. Twee dingen moeten kloppen.</p>
+      <ol>
+        <li><strong>Je structuur moet het toelaten.</strong> Kunnen de systemen van Google in je site geen goede snelkoppelingen vinden, dan komen er geen.</li>
+        <li><strong>De zoekopdracht moet erom vragen.</strong> Vindt Google de sitelinks niet relevant voor wat iemand zoekt, dan blijven ze weg.</li>
+      </ol>
+      <p>Dat verklaart waarom je ze vooral ziet bij zoeken op een merk of bedrijfsnaam. Wie "Bakkerij De Vries" intypt, wil naar die bakker, en dan helpen snelkoppelingen. Wie "taart bestellen Assen" intypt, wil eerst kiezen tussen bakkers. Dan heeft één bakker met zes extra links weinig zin.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: iemand zoekt op "Bakkerij De Vries Assen", een verzonnen bakker. Bovenaan staat de website van de bakkerij. Daaronder vier sitelinks: Assortiment, Taart bestellen, Openingstijden en Contact. Wie een verjaardagstaart wil, klikt meteen op Taart bestellen. Eén klik minder, en precies op de goede plek.</p>
+      <p>Heet de pagina met taarten op de site "Onze heerlijke creaties voor elke gelegenheid", dan wordt het lastiger. Google moet dan raden wat er op die pagina staat. Een korte paginatitel als "Taart bestellen" doet het werk voor Google.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Hoe kom je aan Google sitelinks?</h2></div>
+      <p>Niet met een knop. Sitelinks worden niet toegewezen op aanvraag; Google maakt ze automatisch. Wat je wel kunt doen, is het Google makkelijk maken. Google noemt zelf vier dingen die helpen.</p>
+
+      <h3>Een duidelijke websitestructuur</h3>
+      <p>Een logisch menu met je belangrijkste pagina's, en links naar die pagina's vanaf andere pagina's die erbij horen. Een ingewikkelde structuur met tien niveaus maakt het Google moeilijk. Een goede maat: elke belangrijke pagina is binnen drie klikken vanaf de homepage te bereiken. <a href="/kennisbank/wat-is/breadcrumbs/">Breadcrumbs</a> helpen daarbij, voor bezoekers en voor Google.</p>
+
+      <h3>Korte, duidelijke titels en koppen</h3>
+      <p>Google wil dat de tekst van je paginatitel en je koppen informatief, relevant en kort is. "Prijzen" werkt beter dan "Welkom op onze pagina". Lees bij <a href="/kennisbank/wat-is/title-tag/">title tag</a> hoe je een goede titel schrijft.</p>
+
+      <h3>Interne links met een kloppende linktekst</h3>
+      <p>De tekst van een link naar een pagina moet kort zijn en passen bij die pagina. "Bekijk onze prijzen" naar je prijspagina is goed. "Klik hier" zegt niets. Meer daarover bij <a href="/kennisbank/wat-is/anchortekst/">anchortekst</a> en <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</p>
+
+      <h3>Geen herhaling</h3>
+      <p>Pagina's die bijna hetzelfde zeggen, maken de keuze lastig. Als Google twee pagina's ziet die allebei over "offerte aanvragen" gaan, welke moet het dan als snelkoppeling tonen? <a href="/kennisbank/wat-is/duplicate-content/">Dubbele inhoud</a> opruimen helpt dus ook hier.</p>
+
+      <h3>En de rest?</h3>
+      <p>Een xml-sitemap in Search Console helpt Google al je pagina's te vinden. Gestructureerde gegevens helpen Google je site beter te begrijpen. Allebei verstandig, maar Google noemt ze niet bij sitelinks en ze geven geen garantie. Lees er meer over bij <a href="/kennisbank/wat-is/sitemap/">sitemap</a> en <a href="/kennisbank/wat-is/schema-markup/">schema markup</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Een sitelink weghalen</h2></div>
+      <p>Staat er een sitelink die je niet wilt, zoals een oude actiepagina of je inlogpagina? Je kunt hem niet in een instelling uitzetten. Vroeger kon je in Search Console nog een sitelink wegdrukken, maar die mogelijkheid is al jaren weg. Google geeft twee opties: haal de pagina weg, of zet hem op noindex.</p>
+      <pre><code>{noindex}</code></pre>
+      <p>Die regel zet je in de head van de pagina. In WordPress doe je het met Yoast SEO of Rank Math, op het tabblad Geavanceerd. Let op: de pagina verdwijnt dan uit alle zoekresultaten, niet alleen uit de sitelinks. Doe dit dus alleen bij pagina's die in Google niets te zoeken hebben. Wil je liever een andere pagina als sitelink? Link er vaker en duidelijker naartoe vanuit je menu en je teksten.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Wat als je geen sitelinks krijgt?</h2></div>
+      <p>Wil je weten hoe het er bij jou voor staat? Zoek op je eigen bedrijfsnaam in een privévenster, zodat je eerdere zoekopdrachten niet meetellen. Geen sitelinks? Loop dan deze punten na:</p>
+      <ul>
+        <li><strong>Sta je echt bovenaan op je naam?</strong> Sitelinks horen bij het eerste resultaat. Staat een bedrijvengids of je Facebookpagina boven je site, dan krijg je ze niet.</li>
+        <li><strong>Deel je je naam met een ander?</strong> Dan weet Google niet welk bedrijf je bedoelt. Een plaatsnaam erbij helpt Google vaak om te kiezen.</li>
+        <li><strong>Is je site nieuw of klein?</strong> Met drie pagina's zijn er weinig snelkoppelingen te maken. Dat komt met de tijd.</li>
+        <li><strong>Is je menu helder?</strong> Een menu met vage namen of alleen een hamburgerknop zonder echte links maakt het lastig.</li>
+        <li><strong>Zoeken mensen al op je naam?</strong> Sitelinks verschijnen bij zoekopdrachten die naar jou vragen. Hoe bekender je naam, hoe vaker dat gebeurt.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2>Het zoekvak in de sitelinks is verdwenen</h2></div>
+      <p>Bij grote sites stond vroeger een klein zoekvak onder het resultaat, waarmee je direct op die site kon zoeken. Google heeft dat zoekvak per 21 november 2024 wereldwijd weggehaald, omdat het steeds minder werd gebruikt. De gewone sitelinks bleven bestaan. Staat er op je site nog code voor dat zoekvak, dan kan die weg. Het type gestructureerde gegevens dat erbij hoort, WebSite, gebruikt Google wel nog om de naam van je site te tonen.</p>
+
+      <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2>Sitelinks in Google Ads werken anders</h2></div>
+      <p>In Google Ads bestaan ook sitelinks. Die stel je wel zelf in, als extra links onder je advertentie. Je betaalt per klik, net als voor de advertentie zelf. Volgens de hulppagina's van Google Ads gelden deze regels:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Gewone sitelinks</th><th>Sitelinks in Google Ads</th></tr></thead>
+          <tbody>
+            <tr><td>Wie kiest ze?</td><td>Google, automatisch</td><td>Jij, en Google kiest welke er getoond worden</td></tr>
+            <tr><td>Kosten</td><td>Gratis</td><td>Je betaalt per klik</td></tr>
+            <tr><td>Aantal</td><td>Wisselt per zoekopdracht</td><td>Minstens 2 nodig; tot 6 op een computer en tot 8 op een telefoon</td></tr>
+            <tr><td>Tekst</td><td>Meestal de titel van de pagina</td><td>Zelf geschreven, maximaal 25 tekens, met optioneel twee regels uitleg</td></tr>
+            <tr><td>Weghalen</td><td>Pagina weghalen of op noindex</td><td>Gewoon uitzetten in je account</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Handig, maar een ander verhaal. Meer daarover lees je bij <a href="/online-adverteren/google-ads-bureau/">Google Ads</a>.</p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Zoek op je bedrijfsnaam in een privévenster en kijk wat er nu staat.</li>
+        <li>Geef je belangrijkste pagina's korte, duidelijke namen in het menu en in de titel.</li>
+        <li>Link vanaf je homepage naar de pagina's die je als sitelink wilt zien.</li>
+        <li>Ruim pagina's op die bijna hetzelfde zeggen.</li>
+        <li>Zet pagina's die niemand via Google hoeft te vinden op noindex.</li>
+        <li>Wacht. Sitelinks komen als Google je site goed begrijpt en mensen op je naam zoeken.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> of laat je structuur nakijken met <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>, vanaf € 395. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik zelf kiezen welke sitelinks Google toont?', a: 'Nee. Google kiest ze automatisch. Je kunt wel invloed uitoefenen met een helder menu, korte paginatitels en duidelijke interne links. Een ongewenste sitelink haal je weg door de pagina te verwijderen of op noindex te zetten.' },
+      { v: 'Waarom heeft mijn concurrent wel sitelinks en ik niet?', a: 'Vaak staat hij bovenaan op zijn naam, heeft hij een duidelijkere structuur of wordt er vaker op zijn naam gezocht. Sitelinks verschijnen alleen als Google ze nuttig vindt voor de zoekopdracht.' },
+      { v: 'Helpt een xml-sitemap om sitelinks te krijgen?', a: 'Hij helpt Google je pagina\'s te vinden, maar geeft geen garantie. Google noemt bij sitelinks vooral de structuur van je site, je titels en koppen en je interne links.' },
+      { v: 'Hoeveel sitelinks kan ik krijgen?', a: 'Bij gewone resultaten wisselt het per zoekopdracht en per apparaat. In Google Ads kun je ze zelf toevoegen: er zijn er minstens twee nodig, en een advertentie toont er tot zes op een computer en tot acht op een telefoon.' },
+    ]}
+  />
+
+  <Actie titel="Snapt Google de opbouw van jouw site?" tekst={`We kijken het gratis na. ${site.contactpersoon} belt je met de punten die het eerst moeten.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-wrap: normal; word-break: normal; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,29 @@
+---
+// Case: het erepodium voor "klusjesman Amsterdam", met een vlag die wappert op plek 1.
+interface Props { zoekwoord: string }
+const { zoekwoord } = Astro.props;
+---
+<figure class="podium card">
+  <svg class="scene" viewBox="0 0 360 240" data-teken role="img" aria-label={`Getekend podium: plek 1 voor ${zoekwoord}`}>
+    <g class="blok b2"><path class="v" d="M40 150h90v70H40z" /><path class="l" pathLength="1" d="M40 150h90v70H40z" /><text x="85" y="196" text-anchor="middle" font-weight="900" font-size="28" class="zacht">2</text></g>
+    <g class="blok b1"><path class="o" d="M135 110h90v110h-90z" /><path class="l" pathLength="1" d="M135 110h90v110h-90z" /><text x="180" y="176" text-anchor="middle" font-weight="900" font-size="38" fill="#10283f">1</text></g>
+    <g class="blok b3"><path class="v" d="M230 170h90v50h-90z" /><path class="l" pathLength="1" d="M230 170h90v50h-90z" /><text x="275" y="204" text-anchor="middle" font-weight="900" font-size="24" class="zacht">3</text></g>
+    <path class="l" pathLength="1" d="M180 110V30" />
+    <path class="vlag" d="M180 30h70l-12 14 12 14h-70z" fill="#074663" />
+    <path class="l" pathLength="1" d="M20 220h320" />
+  </svg>
+  <figcaption><b>Plek 1</b> voor "{zoekwoord}"</figcaption>
+</figure>
+<style>
+  .podium { margin: 0; padding: 18px; display: grid; gap: 6px; }
+  .blok { transform-box: fill-box; transform-origin: bottom; }
+  :global(.teken-js) .blok { transform: scaleY(0); transition: transform 0.7s cubic-bezier(.3,1.4,.5,1); }
+  :global(.teken-js) .b1 { transition-delay: 0.6s; } :global(.teken-js) .b3 { transition-delay: 0.3s; }
+  :global(.teken-js) :global(.in-beeld) .blok { transform: none; }
+  .vlag { transform-box: fill-box; transform-origin: left center; }
+  :global(.in-beeld) .vlag { animation: wapper 1.6s ease-in-out 1.4s infinite; }
+  @keyframes wapper { 50% { transform: skewY(-6deg) scaleX(0.94); } }
+  figcaption { text-align: center; color: var(--muted); }
+  figcaption b { color: var(--ink); }
+  @media (prefers-reduced-motion: reduce) { :global(.in-beeld) .vlag { animation: none; } }
+</style>

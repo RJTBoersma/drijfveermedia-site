@@ -1,0 +1,59 @@
+---
+// Getekende laptop en telefoon met dezelfde (verzonnen) website: werkt op elk scherm.
+interface Props { bedrijf: string; kop: string; label?: string }
+const { bedrijf, kop, label = 'Voorbeeld: dezelfde website op laptop en telefoon' } = Astro.props;
+---
+<figure class="schermen" aria-label={label}>
+  <div class="laptop">
+    <div class="scherm">
+      <div class="site">
+        <div class="nav"><b>{bedrijf}</b><i></i><i></i><i></i><span class="knopje">Bel ons</span></div>
+        <div class="held"><p class="h">{kop}</p><p class="l"></p><p class="l kort"></p><span class="knopje groot">Offerte in 1 minuut</span></div>
+        <div class="blokjes"><i></i><i></i><i></i></div>
+      </div>
+      <svg class="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2l7 19 3-8 8-3z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <span class="klikring" aria-hidden="true"></span>
+    </div>
+    <div class="voet"></div>
+  </div>
+  <div class="melding" aria-hidden="true"><b>✓</b> Nieuwe offerteaanvraag</div>
+  <div class="telefoon">
+    <div class="site">
+      <div class="nav"><b>{bedrijf}</b></div>
+      <div class="held"><p class="h">{kop}</p><p class="l"></p><span class="knopje groot">Offerte in 1 minuut</span></div>
+      <div class="blokjes"><i></i><i></i></div>
+    </div>
+  </div>
+  <figcaption class="klein muted">{label}</figcaption>
+</figure>
+<style>
+  .schermen { margin: 0; position: relative; padding-bottom: 64px; }
+  .laptop .scherm { background: #10283f; border-radius: 14px 14px 0 0; padding: 10px; position: relative; }
+  .cursor { position: absolute; width: 22px; height: 22px; left: 70%; top: 85%; animation: cursor 6s ease-in-out 0.8s infinite; }
+  @keyframes cursor { 0% { left: 75%; top: 88%; } 35%, 60% { left: 15%; top: 50%; } 100% { left: 75%; top: 88%; } }
+  .klikring { position: absolute; left: calc(15% + 4px); top: calc(50% + 4px); width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; border: 3px solid var(--orange); opacity: 0; animation: klik 6s ease-out 0.8s infinite; }
+  @keyframes klik { 0%, 37% { opacity: 0; transform: scale(0.3); } 40% { opacity: 1; } 55% { opacity: 0; transform: scale(1.8); } 100% { opacity: 0; } }
+  .melding { position: absolute; left: 22%; top: 42%; z-index: 2; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; font-weight: 800; font-size: 0.85rem; box-shadow: 0 16px 40px -18px rgb(7 70 99 / 0.5); animation: melding 6s ease-in-out 0.8s infinite; }
+  .melding b { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ok); color: #fff; margin-right: 6px; font-size: 0.75rem; }
+  @keyframes melding { 0%, 42% { opacity: 0; transform: translateY(10px) scale(0.95); } 48%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) { .cursor, .klikring, .melding { animation: none; } .klikring { display: none; } }
+  .voet { height: 14px; background: #c9d3dd; border-radius: 0 0 14px 14px; margin: 0 -4%; }
+  .site { background: #fff; border-radius: 6px; overflow: hidden; }
+  .nav { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 0.8rem; }
+  .nav b { margin-right: auto; color: var(--navy); }
+  .nav i { width: 34px; height: 6px; border-radius: 3px; background: var(--line); }
+  .knopje { background: var(--orange); color: var(--on-orange); font-weight: 800; font-size: 0.7rem; padding: 4px 8px; border-radius: 6px; }
+  .knopje.groot { display: inline-block; margin-top: 8px; font-size: 0.78rem; padding: 6px 10px; }
+  .held { padding: 18px 14px; background: linear-gradient(135deg, #eef3f7, #fff); }
+  .h { margin: 0 0 8px; font-weight: 900; font-size: 1.05rem; line-height: 1.15; color: var(--ink); max-width: 16ch; }
+  .l { height: 6px; border-radius: 3px; background: var(--line); margin: 0 0 6px; width: 80%; }
+  .l.kort { width: 55%; }
+  .blokjes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 14px 16px; }
+  .blokjes i { height: 42px; border-radius: 6px; background: var(--chip); }
+  .telefoon { position: absolute; right: -2%; bottom: 20px; width: 34%; background: #10283f; border-radius: 22px; padding: 8px; box-shadow: 0 20px 50px -20px rgb(7 70 99 / 0.6); animation: zweef 5s ease-in-out infinite; }
+  .telefoon .site { border-radius: 15px; }
+  .telefoon .h { font-size: 0.85rem; }
+  .telefoon .blokjes { grid-template-columns: 1fr 1fr; }
+  @keyframes zweef { 50% { transform: translateY(-8px); } }
+  figcaption { position: absolute; left: 0; bottom: 0; max-width: 58%; }
+</style>

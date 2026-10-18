@@ -1,0 +1,305 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--kleuren-in-marketing.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/kleuren-in-marketing/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-doen-kleuren', titel: 'Wat doen kleuren?' },
+  { id: 'onderzoek', titel: 'Wat het onderzoek zegt' },
+  { id: 'betekenis', titel: 'De betekenis per kleur' },
+  { id: 'per-kleur', titel: 'Elke kleur uitgelegd' },
+  { id: 'context', titel: 'Kleur hangt af van context' },
+  { id: 'branche', titel: 'Kleur per branche' },
+  { id: 'kiezen', titel: 'Zo kies je je merkkleuren' },
+  { id: 'voorbeeld', titel: 'Een palet als voorbeeld' },
+  { id: 'website', titel: 'Kleur op je website' },
+  { id: 'kleurenblind', titel: 'Rekening met kleurenblindheid' },
+  { id: 'codes', titel: 'Kleurcodes voor scherm en druk' },
+  { id: 'fouten', titel: 'Zes fouten met kleur' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Kleuren in marketing: wat betekenen ze en hoe kies je?',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Kleurenpsychologie',
+  citation: [
+    'https://www.w3.org/TR/WCAG22/',
+    'https://en.wikipedia.org/wiki/Color_psychology',
+    'https://en.wikipedia.org/wiki/Von_Restorff_effect',
+    'https://nl.wikipedia.org/wiki/Kleurenblindheid',
+  ],
+}];
+
+// Contrast volgens de formule van de WCAG-richtlijn, zodat de getallen in de tabel altijd kloppen.
+const lin = (c: number) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+const lum = (hex: string) => {
+  const [r, g, b] = [1, 3, 5].map((i) => lin(parseInt(hex.slice(i, i + 2), 16) / 255));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const contrast = (a: string, b: string) => {
+  const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p);
+  return (x + 0.05) / (y + 0.05);
+};
+const getal = (n: number) => n.toFixed(1).replace('.', ',');
+const tekstOp = (hex: string) => {
+  const wit = contrast(hex, '#ffffff');
+  const zwart = contrast(hex, '#000000');
+  return wit >= zwart ? `Witte tekst (${getal(wit)} : 1)` : `Zwarte tekst (${getal(zwart)} : 1)`;
+};
+
+const kleuren = [
+  { naam: 'Blauw', hex: '#1d5fa8', gevoel: 'Vertrouwen, rust, deskundig', zie: 'Banken, verzekeraars, zorg, IT', valkuil: 'Koel en afstandelijk, je valt niet op' },
+  { naam: 'Rood', hex: '#d62828', gevoel: 'Energie, urgentie, passie', zie: 'Supermarkten, fastfood, aanbiedingen', valkuil: 'Kan agressief of goedkoop overkomen' },
+  { naam: 'Oranje', hex: '#ff6600', gevoel: 'Vriendelijk, actief, betaalbaar', zie: 'Knoppen, acties, energiebedrijven', valkuil: 'Te veel oranje oogt druk' },
+  { naam: 'Geel', hex: '#f2c230', gevoel: 'Optimisme, aandacht, vrolijk', zie: 'Bouw, waarschuwingen, kinderen', valkuil: 'Slecht leesbaar op wit' },
+  { naam: 'Groen', hex: '#1f8a5b', gevoel: 'Natuur, gezond, groei', zie: 'Duurzaamheid, hoveniers, zorg', valkuil: 'Groen alleen maakt je niet duurzaam' },
+  { naam: 'Paars', hex: '#6a3d9a', gevoel: 'Luxe, creatief, bijzonder', zie: 'Beauty, wellness, opleidingen', valkuil: 'Kan zweverig worden' },
+  { naam: 'Roze', hex: '#d6457a', gevoel: 'Zacht, speels, zorgzaam', zie: 'Beauty, snoep, kinderproducten', valkuil: 'Kan te zoet of kinderachtig lijken' },
+  { naam: 'Bruin', hex: '#7b4a2a', gevoel: 'Aards, ambachtelijk, warm', zie: 'Koffie, hout, bakkers, leer', valkuil: 'Oogt snel ouderwets of dof' },
+  { naam: 'Zwart', hex: '#111111', gevoel: 'Stijl, kracht, exclusief', zie: 'Mode, auto\'s, premium merken', valkuil: 'Zwaar of somber zonder accent' },
+  { naam: 'Wit en grijs', hex: '#c9d3dd', gevoel: 'Rust, ruimte, neutraal', zie: 'Tech, architectuur, als achtergrond', valkuil: 'Saai zonder één sterke kleur' },
+];
+const palet = [
+  { rol: 'Hoofdkleur', naam: 'Bosgroen', hex: '#2f5d3a', aandeel: '30%' },
+  { rol: 'Accentkleur', naam: 'Zonnegeel', hex: '#f2b705', aandeel: '10%' },
+  { rol: 'Tekst', naam: 'Antraciet', hex: '#22272b', aandeel: 'Lopende tekst' },
+  { rol: 'Achtergrond', naam: 'Gebroken wit', hex: '#f7f5ef', aandeel: '60%' },
+];
+---
+<Base
+  title="Kleuren in marketing: betekenis en keuze | Drijfveer Media"
+  description="Kleuren in marketing: wat betekenen rood, blauw, groen en oranje, wat zegt het onderzoek en hoe kies je kleuren voor je merk en website? Met tabellen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Kleuren in marketing', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Branding" titel="Kleuren in marketing: wat betekenen ze en hoe kies je?" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Kleur is vaak het eerste wat iemand van je bedrijf ziet, nog voor je naam of je logo. Hier lees je wat kleuren oproepen, wat het onderzoek er echt over zegt, waar de bekende lijstjes tekortschieten en hoe je kleuren kiest die werken.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Kleuren roepen een emotie op en zorgen voor herkenning. Zo helpen ze je merk onthouden.</li>
+            <li>Een kleur heeft geen vaste betekenis. Onderzoek laat zien dat vooral telt of de kleur past bij wat je verkoopt.</li>
+            <li>Kies één hoofdkleur, één accentkleur en een paar rustige kleuren. Meer heb je niet nodig.</li>
+            <li>Op je website verkoopt contrast meer dan de kleur zelf. Gewone tekst heeft minstens 4,5 : 1 contrast nodig.</li>
+            <li>Ongeveer 1 op de 12 mannen is kleurenblind. Laat rood en groen nooit het enige verschil zijn.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-doen-kleuren">Wat doen kleuren in marketing?</h2>
+        <p>Kleuren in marketing doen twee dingen. Ze roepen een emotie op, en ze zorgen voor herkenning. Het eerste heet kleurenpsychologie: blauw voelt rustig, rood voelt dringend. Het tweede is gewoonte: wie jarenlang dezelfde kleur bij jouw bedrijf ziet, herkent je straks al voordat hij je naam leest.</p>
+        <p>Dat tweede effect wordt vaak onderschat. Denk aan een bus die je van ver ziet aankomen en meteen herkent, ook zonder de letters te kunnen lezen. Dat werkt alleen als je jaren dezelfde kleur gebruikt, overal. Kleur is dus net zo goed een kwestie van volhouden als van kiezen.</p>
+        <p>Voor een klein bedrijf is dat goed nieuws. Je hoeft geen miljoenen in reclame te steken om herkend te worden. Je moet wel consequent zijn: dezelfde kleur op je bus, je website, je offerte, je werkkleding en je Google Bedrijfsprofiel.</p>
+
+        <h2 id="onderzoek">Wat het onderzoek wel en niet zegt over kleurenpsychologie</h2>
+        <p>Over kleur gaan veel stellige beweringen rond. Rood verkoopt, blauw wekt vertrouwen, groen is duurzaam. Wat klopt daarvan? We hebben de bekendste onderzoeken opgezocht.</p>
+        <ul>
+          <li><b>Kleur telt mee in het eerste oordeel.</b> Een veelgeciteerd artikel van Satyendra Singh (2006, <i>Management Decision</i>) stelt dat mensen binnen 90 seconden een eerste oordeel vormen over een product, en dat 62 tot 90 procent daarvan op kleur is gebaseerd. Het is een breed getal. Lees het als: kleur doet ertoe, niet als exacte meting.</li>
+          <li><b>De kleur moet passen bij het product.</b> Bottomley en Doyle (2006) lieten mensen beoordelen welke logokleur bij een verzonnen bedrijf paste. Voor nuttige producten, die een probleem oplossen, vonden mensen functionele kleuren passend. Voor producten die over status of gevoel gaan, juist andere kleuren.</li>
+          <li><b>Kleur kleurt de persoonlijkheid van je merk.</b> Labrecque en Milne (2012) vonden verbanden tussen kleur en eigenschappen als oprecht, spannend, deskundig, verfijnd en stoer. Mensen wilden een product eerder kopen als de kleur paste bij de persoonlijkheid die het merk wilde uitstralen.</li>
+          <li><b>Er is geen kleur die iedereen aanspreekt.</b> Dat is de rode draad in het onderzoek naar kleur en marketing. Kleuren worden passend gevonden voor bepaalde producten, niet voor alles.</li>
+        </ul>
+        <p class="klein muted">Bronnen: het overzicht van kleurenonderzoek in marketing op Wikipedia (<i>Color psychology</i>), met verwijzingen naar Singh (2006), Bottomley en Doyle (2006) en Labrecque en Milne (2012).</p>
+        <p>De les voor jou: kies geen kleur omdat een lijstje zegt dat hij verkoopt. Kies een kleur die past bij wat je doet en bij hoe je gezien wilt worden. Dat is minder spannend, maar het klopt wel.</p>
+
+        <h2 id="betekenis">De betekenis van kleuren op een rij</h2>
+        <p>Dit is wat mensen in Nederland meestal bij een kleur voelen, waar je de kleur vaak ziet en waar je op moet letten. In de laatste kolom staat welke tekstkleur er het best op leesbaar is, met het contrast volgens de rekenregel van de WCAG-richtlijn. Gebruik de tabel als startpunt, niet als wet.</p>
+        <div class="tabel-scroll">
+          <table class="kleurtabel">
+            <thead><tr><th>Kleur</th><th>Roept op</th><th>Zie je vaak bij</th><th>Let op</th><th>Tekst erop</th></tr></thead>
+            <tbody>
+              {kleuren.map((k) => (
+                <tr><td><span class="staal" style={`background:${k.hex}`}></span>{k.naam}</td><td>{k.gevoel}</td><td>{k.zie}</td><td>{k.valkuil}</td><td>{tekstOp(k.hex)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>Blauw is de veilige keuze voor wie vertrouwen moet winnen, zoals een boekhouder of een installateur die bij mensen thuis komt. Juist daarom gebruiken veel concurrenten het ook. Rood vraagt om aandacht en wordt veel gebruikt voor aanbiedingen. Groen en geel stralen natuur en optimisme uit. Zwart en paars voelen exclusiever.</p>
+
+        <h2 id="per-kleur">Elke kleur uitgelegd</h2>
+        <p>De tabel geeft de grote lijn. Hieronder lees je per kleur hoe die in de praktijk werkt bij kleine bedrijven, en waar het misgaat. Zo gebruik je kleuren in marketing met verstand, en niet op gevoel alleen.</p>
+        <h3>Rood: energie en urgentie</h3>
+        <p>Rood springt eruit. Het voelt warm, snel en dringend. Daarom zie je het bij aanbiedingen, uitverkoop en eten. Voor een pizzeria of een slager werkt het goed. Voor een notaris of een psycholoog werkt het meestal tegen je: het voelt onrustig. Gebruik rood als je klant snel moet handelen, en zet het spaarzaam in als je rust wilt uitstralen.</p>
+        <h3>Blauw: vertrouwen en deskundigheid</h3>
+        <p>Blauw is de meest gekozen kleur bij banken, verzekeraars en IT-bedrijven. Het voelt betrouwbaar en zakelijk. Het nadeel: je valt niet op. In een branche waar iedereen blauw is, ben jij ook blauw. Een donkerblauw met een warme accentkleur, zoals oranje, geeft je de rust van blauw zonder te verdwijnen.</p>
+        <h3>Groen: natuur, gezondheid, groei</h3>
+        <p>Groen past bij hoveniers, zorg, voeding en alles wat met duurzaamheid te maken heeft. Donkergroen voelt degelijk, lichtgroen fris en jong. Let op: een groen logo maakt je bedrijf niet duurzaam. Klanten prikken daar doorheen als je verhaal het niet waarmaakt.</p>
+        <h3>Oranje: vriendelijk en actief</h3>
+        <p>Oranje is warm zonder de felheid van rood. Het voelt toegankelijk en betaalbaar. In Nederland heeft het een extra laag: Koningsdag en het voetbal. Oranje werkt sterk als accentkleur voor knoppen, juist omdat het op een rustige achtergrond meteen opvalt. Een hele site in oranje is te druk.</p>
+        <h3>Geel: optimisme en aandacht</h3>
+        <p>Geel is de kleur van waarschuwingsborden en bouwplaatsen. Het trekt de blik als geen ander. Op een wit scherm is het lastig: gele tekst op wit is bijna onleesbaar. Gebruik geel als vlak of achtergrond met donkere tekst erop, niet als tekstkleur.</p>
+        <h3>Paars en roze: bijzonder en zacht</h3>
+        <p>Paars voelt luxe en creatief. Je ziet het bij beauty, wellness en opleidingen. Roze voelt zacht, speels en zorgzaam. Beide kleuren onderscheiden je in branches waar weinig mensen ze kiezen. Te veel ervan en het wordt zweverig of te zoet.</p>
+        <h3>Bruin: ambachtelijk en warm</h3>
+        <p>Bruin hoort bij hout, koffie, brood en leer. Het straalt vakmanschap uit. Een timmerman of een koffiebranderij kan er goed mee uit de voeten. Combineer het met een frisse accentkleur, anders oogt het snel gedateerd.</p>
+        <h3>Zwart, wit en grijs: stijl en ruimte</h3>
+        <p>Zwart voelt chic en krachtig, denk aan mode en premium auto's. Wit en grijs geven rust en ruimte, en zijn vooral de achtergrond waar je andere kleuren op laat werken. Een zwart-wit huisstijl met één sterke accentkleur is tijdloos en goedkoop te drukken.</p>
+
+        <h2 id="context">Kleur hangt af van context</h2>
+        <p>De lijstjes met betekenissen kloppen in grote lijnen, maar ze missen het belangrijkste. Een kleur werkt niet los van wat je verkoopt. Rood bij een pizzeria voelt warm en hongerig. Rood bij een tandarts voelt als bloed. Hetzelfde rood, een heel ander gevoel.</p>
+        <p>Drie dingen bepalen hoe een kleur overkomt:</p>
+        <ul class="vink">
+          <li><b>Je product of dienst.</b> Past de kleur bij wat mensen van jouw vak verwachten, of juist bewust niet?</li>
+          <li><b>Je doelgroep.</b> Jongeren, ouderen, bedrijven en particulieren reageren anders. Wat een student fris vindt, vindt een notaris onrustig.</li>
+          <li><b>Cultuur.</b> Wit staat bij ons voor schoon en nieuw, in delen van Azië voor rouw. Oranje is in Nederland meteen nationaal, met Koningsdag en voetbal erbij.</li>
+        </ul>
+        <p>Kies je kleur dus niet op basis van een lijstje alleen. Vraag je af wat je klant moet voelen als hij je bus ziet, je site opent of je offerte leest. En of die kleur je helpt om je te onderscheiden van de concurrent in jouw regio.</p>
+
+        <h2 id="branche">Welke kleur past bij jouw branche?</h2>
+        <p>Bij kleuren in marketing draait het niet alleen om gevoel, maar ook om je plek tussen de concurrenten. Een handig startpunt: wat is de logische kleur in je vak, en waarmee val je op zonder vreemd te lijken? Dit is ons advies, gebaseerd op wat we in de praktijk zien werken. Kijk altijd eerst naar je eigen concurrenten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Branche</th><th>Logische keuze</th><th>Wil je opvallen, probeer</th></tr></thead>
+            <tbody>
+              <tr><td>Installateur, loodgieter</td><td>Blauw (water, vertrouwen)</td><td>Donkerblauw met oranje of geel accent</td></tr>
+              <tr><td>Hovenier, tuincentrum</td><td>Groen</td><td>Diep groen met een warm geel of terracotta</td></tr>
+              <tr><td>Bouw en aannemer</td><td>Geel, oranje of zwart</td><td>Antraciet met één felle kleur</td></tr>
+              <tr><td>Accountant, adviseur</td><td>Donkerblauw of grijs</td><td>Diepgroen of bordeauxrood als hoofdkleur</td></tr>
+              <tr><td>Zorg en welzijn</td><td>Lichtblauw of groen</td><td>Zacht paars of warm oranje</td></tr>
+              <tr><td>Horeca</td><td>Rood, oranje of bruin</td><td>Donkergroen of zwart met goud</td></tr>
+              <tr><td>Kapper, beauty</td><td>Roze, zwart of paars</td><td>Olijfgroen of zandkleur</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Opvallen is geen doel op zich. Een accountant in knalroze haalt de aandacht, maar misschien niet de klanten die hij wil. Kies een kleur die net anders is dan de rest, en die toch past bij wat je doet.</p>
+
+        <h2 id="kiezen">Zo kies je de kleuren voor je merk</h2>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Begin bij je merk</h3></div>
+        <p>Schrijf drie woorden op die mensen bij je bedrijf moeten voelen. Betrouwbaar en rustig? Snel en scherp? Warm en persoonlijk? Die woorden zijn je meetlat. Weet je ze nog niet, begin dan bij de gids <a href="/kennisbank/gidsen/wat-is-branding/">wat is branding</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>2. Bekijk je concurrenten</h3></div>
+        <p>Zet de logo's en websites van tien concurrenten naast elkaar. Zoek in Google op je dienst en je plaats, en kijk ook naar de kaartjes in Google Maps. Is iedereen blauw? Dan valt een warme kleur meteen op. Je wilt passen bij je vak, maar je wilt niet verdwijnen tussen de rest.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>3. Kies een hoofdkleur en een accentkleur</h3></div>
+        <p>De hoofdkleur draagt je merk: logo, bus, kopteksten. De accentkleur is voor wat moet opvallen, zoals een knop of een prijs. Vul aan met rustige kleuren voor achtergrond en tekst. Een bekende vuistregel uit het interieurontwerp is 60-30-10: zestig procent rustig, dertig procent hoofdkleur, tien procent accent.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>4. Leg de kleurcodes vast</h3></div>
+        <p>Een kleur is pas een merkkleur als hij overal precies hetzelfde is. Leg per kleur de HEX-code vast voor je website, RGB voor schermen en CMYK voor drukwerk. Gebruik je een drukker die met Pantone werkt, noteer die code dan ook. Gratis hulpmiddelen om een palet samen te stellen zijn Adobe Color en Coolors.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>5. Test op een telefoon, in de zon en in zwart-wit</h3></div>
+        <p>Een kleur ziet er op je eigen grote scherm anders uit dan op een telefoon buiten. Bekijk je kleuren op een mobiel, op papier en in zwart-wit. Lichtgrijze tekst die op kantoor chic oogt, is buiten onleesbaar. Werkt je logo ook in één kleur, bijvoorbeeld als stempel of op een factuur?</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>6. Vraag het een paar klanten</h3></div>
+        <p>Laat twee of drie varianten zien aan klanten die je vertrouwt. Vraag niet "wat vind je mooi", maar "welk bedrijf zou je bellen als je lekkage hebt" of "welk bedrijf lijkt het duurst". Dan meet je wat de kleur doet, niet wat iemand ervan vindt.</p>
+
+        <h2 id="voorbeeld">Een kleurenpalet als voorbeeld</h2>
+        <p>Verzonnen voorbeeld. Stel: Hoveniersbedrijf De Linde (voorbeeld) uit Roden wil vertrouwen uitstralen, maar niet verdwijnen tussen de vele groene concurrenten. Het kiest een diep groen als hoofdkleur en een zonnig geel als accent. Zo ziet het palet eruit.</p>
+        <div class="tabel-scroll">
+          <table class="kleurtabel">
+            <thead><tr><th>Rol</th><th>Kleur</th><th>HEX</th><th>Aandeel</th><th>Tekst erop</th></tr></thead>
+            <tbody>
+              {palet.map((p) => (
+                <tr><td>{p.rol}</td><td><span class="staal" style={`background:${p.hex}`}></span>{p.naam}</td><td>{p.hex}</td><td>{p.aandeel}</td><td>{tekstOp(p.hex)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p>De achtergrond is rustig gebroken wit. Het groen draagt het logo, de koppen en de bus. Het geel komt alleen terug op de belknop, het offerteformulier en de prijsstickers. Op het geel staat zwarte tekst, want witte tekst is daar niet leesbaar. Antraciet in plaats van puur zwart voor de lopende tekst oogt zachter en leest prettig.</p>
+
+        <h2 id="website">Kleur op je website: contrast verkoopt</h2>
+        <p>Je hebt vast gelezen dat een rode knop beter converteert dan een groene, of andersom. Allebei kan kloppen, op die ene site waar het getest is. Een knop werkt het best als hij de opvallendste plek op de pagina is. Het gaat dus om contrast met de rest, niet om de kleur zelf. In de psychologie heet dat het Von Restorff-effect, naar de Duitse onderzoeker Hedwig von Restorff. Zij liet in 1933 zien dat mensen het ene afwijkende item in een rij beter onthouden.</p>
+        <p>Op deze site zie je het zelf. De basis is donkerblauw en rustig. Oranje bewaren we zo veel mogelijk voor de knop. Zo hoeft een bezoeker nooit te zoeken waar hij moet klikken. Dat is goed voor je conversie: meer bezoekers die bellen, mailen of een formulier invullen.</p>
+        <p>Let ook op de leesbaarheid. De internationale richtlijn voor webtoegankelijkheid, <a href="https://www.w3.org/TR/WCAG22/" rel="noopener">WCAG 2.2</a> van het W3C, vraagt:</p>
+        <ul>
+          <li>een contrast van minstens <b>4,5 : 1</b> tussen gewone tekst en achtergrond;</li>
+          <li>minstens <b>3 : 1</b> voor grote tekst, zoals koppen;</li>
+          <li>minstens <b>3 : 1</b> voor knoppen, invoervelden en pictogrammen tegen hun omgeving.</li>
+        </ul>
+        <p>Een voorbeeld uit de tabel hierboven: wit op ons oranje haalt {getal(contrast('#ffffff', '#ff6600'))} : 1. Genoeg voor een grote knoptekst, te weinig voor een alinea. Met de gratis contrastcheck van WebAIM test je je eigen kleuren in een paar seconden. Slecht leesbare tekst kost je bezoekers, en dus aanvragen. Meer over het verhogen van je conversie lees je bij <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>.</p>
+
+        <h2 id="kleurenblind">Houd rekening met kleurenblindheid</h2>
+        <p>Rood-groenkleurenblindheid komt veel vaker voor dan mensen denken. Volgens Wikipedia heeft ongeveer 1 op de 12 mannen een erfelijke vorm van kleurenblindheid, tegenover 1 op de 250 vrouwen. Heb je honderd mannelijke klanten, dan zien er dus een stuk of acht jouw rode en groene vlakken anders dan jij.</p>
+        <p>Wat betekent dat in de praktijk?</p>
+        <ul class="vink">
+          <li>Laat kleur nooit het enige verschil zijn. Een rood foutbericht krijgt ook een tekst of een icoon.</li>
+          <li>Gebruik in grafieken en prijstabellen naast kleur ook labels of patronen.</li>
+          <li>Een groene en een rode knop naast elkaar, zoals "ja" en "nee", zijn voor een deel van je bezoekers bijna gelijk. Maak het verschil ook met tekst duidelijk.</li>
+          <li>Test je palet met een gratis simulator, die laat zien hoe iemand met kleurenblindheid je site ziet.</li>
+        </ul>
+
+        <h2 id="codes">De kleurcodes voor scherm en drukwerk</h2>
+        <p>Een kleur heeft meerdere codes, afhankelijk van waar hij terechtkomt. Wie ze niet vastlegt, krijgt drie net verschillende tinten op website, bus en visitekaartje.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Code</th><th>Waarvoor</th><th>Voorbeeld</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td><b>HEX</b></td><td>Website, e-mail, online</td><td>#ff6600</td><td>Zes tekens na een hekje</td></tr>
+              <tr><td><b>RGB</b></td><td>Schermen, presentaties, video</td><td>255, 102, 0</td><td>Rood, groen en blauw licht, elk van 0 tot 255</td></tr>
+              <tr><td><b>CMYK</b></td><td>Drukwerk: folders, visitekaartjes</td><td>Vier percentages voor cyaan, magenta, geel en zwart</td><td>Felle schermkleuren worden op papier vaak doffer</td></tr>
+              <tr><td><b>Pantone</b></td><td>Drukwerk met een vaste mengkleur, belettering, textiel</td><td>Een nummer uit het Pantone-systeem</td><td>Vraag je drukker welke code hij nodig heeft</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zet alle codes in één document, je huisstijlhandboek. Dan kan elke drukker, belettering of webbouwer er direct mee aan de slag.</p>
+
+        <h2 id="fouten">Zes fouten met kleur</h2>
+        <ol>
+          <li><b>Je lievelingskleur kiezen.</b> Jij hoeft er niet blij van te worden, je klant moet je herkennen en vertrouwen.</li>
+          <li><b>Te veel kleuren.</b> Vijf felle kleuren naast elkaar maken alles even belangrijk, en dus niets.</li>
+          <li><b>Overal een ander tintje.</b> Een beetje ander blauw op je bus, je site en je visitekaartje voelt als drie bedrijven. Gebruik vaste kleurcodes.</li>
+          <li><b>De accentkleur overal gebruiken.</b> Als alles oranje is, valt je knop niet meer op.</li>
+          <li><b>Lichte tekst op een lichte achtergrond.</b> Lichtgrijs op wit oogt modern, maar haalt het contrast niet. Je bezoeker haakt af zonder te zeggen waarom.</li>
+          <li><b>Elke paar jaar wisselen.</b> Herkenning bouw je op met tijd. Wie zijn kleur verandert, gooit die opgebouwde herkenning weg.</li>
+        </ol>
+
+        <div class="kader">
+          <p class="kader-titel">Hulp nodig bij je kleuren?</p>
+          <p>De betekenis van kleuren kennen is één ding, ze goed toepassen een tweede. Kleuren kiezen is onderdeel van een huisstijl. Bij een <a href="/branding/huisstijl-laten-maken/">huisstijl laten maken</a> krijg je een kleurenpalet met alle codes voor scherm en drukwerk, getest op een telefoon en in zwart-wit. Dat kost bij Drijfveer Media vanaf € 995, exclusief btw. Alleen een logo? Dat kan bij <a href="/branding/logo-laten-maken/">logo laten maken</a> vanaf € 495. Meer over onze aanpak lees je bij <a href="/branding/">branding</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={15} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij met je meekijken?" intro="Wat je van ons mag verwachten als we aan je huisstijl of je website werken." />
+
+  <Faq
+    vragen={[
+      { v: 'Welke kleur straalt het meeste vertrouwen uit?', a: 'In Nederland meestal blauw. Daarom kiezen veel banken, verzekeraars en zorgbedrijven ervoor. Vertrouwen komt uiteindelijk wel vooral uit wat je doet, niet uit je kleur.' },
+      { v: 'Welke kleur werkt het best voor een knop op je website?', a: 'De kleur die het meest afsteekt tegen de rest van je pagina. Op een blauwe site is dat vaak oranje, op een groene site vaak rood of donkerblauw. Gebruik die kleur verder spaarzaam, en zorg dat de knop minstens 3 : 1 contrast heeft met zijn omgeving.' },
+      { v: 'Klopt het dat 90 procent van de aankoopbeslissing om kleur draait?', a: 'Dat getal komt uit een artikel van Satyendra Singh uit 2006, dat 62 tot 90 procent noemt voor het eerste oordeel over een product. Het laat zien dat kleur meetelt, maar het is geen precieze meting voor jouw bedrijf.' },
+      { v: 'Hoeveel kleuren mag een huisstijl hebben?', a: 'Eén hoofdkleur, één accentkleur en twee of drie rustige kleuren voor tekst en achtergrond. Meer maakt je uitstraling onrustig en lastig vol te houden.' },
+      { v: 'Wat is het verschil tussen HEX, RGB en CMYK?', a: 'HEX en RGB zijn kleurcodes voor schermen, zoals je website. CMYK gebruikt een drukker. Leg ze alle drie vast in je huisstijl, dan ziet je kleur er overal hetzelfde uit.' },
+      { v: 'Moet ik rekening houden met kleurenblinde klanten?', a: 'Ja. Ongeveer 1 op de 12 mannen heeft een erfelijke vorm van kleurenblindheid, meestal voor rood en groen. Laat kleur daarom nooit het enige verschil zijn tussen twee knoppen of meldingen.' },
+      { v: 'Moet ik mijn kleuren aanpassen als ik een nieuwe website laat maken?', a: 'Alleen als ze echt niet werken, bijvoorbeeld door te weinig contrast. Bekende kleuren gooi je niet zomaar weg. Vaak is een iets donkerdere of lichtere tint genoeg.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Huisstijl laten maken', href: '/branding/huisstijl-laten-maken/', tekst: 'Kleuren, letters en toepassingen, vanaf € 995.' },
+      { label: 'Gids', titel: 'Logo en huisstijl: zelf maken of laten maken?', href: '/kennisbank/gidsen/logo-en-huisstijl/', tekst: 'Wat je zelf kunt, en wanneer een ontwerper loont.' },
+      { label: 'Gids', titel: 'Conversie van je website verhogen', href: '/kennisbank/gidsen/conversie-verhogen/', tekst: 'Meer aanvragen uit dezelfde bezoekers.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten of je site bezoekers laat klikken?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site, je knoppen en je vindbaarheid, en belt je met de punten die het meeste verschil maken.`} />
+</Base>
+<style>
+  .staal { display: inline-block; width: 14px; height: 14px; border-radius: 4px; margin-right: 8px; vertical-align: -2px; border: 1px solid rgba(0,0,0,.1); }
+</style>

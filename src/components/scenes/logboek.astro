@@ -1,0 +1,12 @@
+---
+// Scène voor /logboek/: de lijn van ons eigen verkeer uit Google, maand voor maand.
+import { getCollection } from 'astro:content';
+import Groeilijn from '../beeld/Groeilijn.astro';
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const items = (await getCollection('logboek')).sort((a, b) => a.data.maand.localeCompare(b.data.maand));
+const punten = new Map<string, number>();
+for (const i of items) { for (const [m, v] of i.data.historie ?? []) punten.set(m, v); punten.set(i.data.maand, i.data.verkeer); }
+const lijst = [...punten.entries()].sort((a, b) => a[0].localeCompare(b[0])).slice(-18) as [string, number][];
+---
+<Groeilijn punten={lijst} mini={mini} id={mini ? 'logboek-mini' : 'logboek'} label="Ons eigen verkeer uit Google per maand" />

@@ -1,0 +1,72 @@
+---
+// Scène voor /kennisbank/de-20-beste-online-marketingblogs/: een feedlezer met een lijst blogartikelen en een kop koffie ernaast.
+// Als hij leeft: elke blog krijgt een groen vinkje (gecontroleerd), er schuift steeds een nieuw artikel binnen en de koffie dampt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [92, 132, 172, 212];
+const kleuren = ['#074663', '#e8eef4', '#10283f', '#ffd2b0'];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een feedlezer met een lijst artikelen van marketingblogs. Elke blog krijgt een groen vinkje, er komt een nieuw artikel binnen en naast het scherm dampt een kop koffie.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- venster -->
+  <rect x="36" y="24" width="344" height="226" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M50 24h316a14 14 0 0 1 14 14v12H36V38a14 14 0 0 1 14-14z" fill="#e8eef4" />
+  <circle cx="54" cy="37" r="4" fill="#d9e1ea" /><circle cx="66" cy="37" r="4" fill="#d9e1ea" /><circle cx="78" cy="37" r="4" fill="#d9e1ea" />
+  <!-- feed-icoon -->
+  <g transform="translate(52 60)">
+    <circle cx="3" cy="13" r="3" fill="#ff6600" />
+    <path class="a" d="M0 6a8 8 0 0 1 8 8M0 0a14 14 0 0 1 14 14" fill="none" stroke-width="2.5" stroke-linecap="round" />
+  </g>
+  <rect x="76" y="64" width="110" height="9" rx="4.5" fill="#10283f" />
+  <rect x="300" y="60" width="64" height="18" rx="9" fill="#e8eef4" />
+  <rect x="310" y="66" width="44" height="6" rx="3" fill="#d9e1ea" />
+
+  <!-- artikelen -->
+  {rijen.map((y, i) => (
+    <g>
+      <path d={`M52 ${y + 32}h312`} stroke="#eef2f6" stroke-width="1.5" />
+      <rect x="52" y={y} width="28" height="28" rx="6" fill={kleuren[i]} />
+      <rect x="92" y={y + 4} width={150 - i * 14} height="8" rx="4" fill="#10283f" />
+      <rect x="92" y={y + 17} width={200 - i * 20} height="6" rx="3" fill="#d9e1ea" />
+    </g>
+  ))}
+
+  <!-- koffie -->
+  <path class="l" d="M404 188h44v30a16 16 0 0 1-16 16h-12a16 16 0 0 1-16-16z" fill="#fff" stroke-width="2.5" />
+  <path class="l" d="M448 196h6a8 8 0 0 1 0 16h-7" fill="none" stroke-width="2.5" />
+  <rect class="v" x="408" y="194" width="36" height="6" rx="3" />
+  <path d="M396 240h64" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round" />
+
+  {!mini && (
+    <g>
+      <g class="damp">
+        <path d="M418 176c-6-8 6-12 0-22" fill="none" stroke="#c9d3dd" stroke-width="2.5" stroke-linecap="round" />
+        <path d="M432 176c-6-8 6-12 0-22" fill="none" stroke="#c9d3dd" stroke-width="2.5" stroke-linecap="round" />
+      </g>
+      {rijen.map((y, i) => (
+        <g class="vink" style={`animation-delay:${0.6 + i * 0.25}s`}>
+          <circle cx="350" cy={y + 14} r="10" fill="#1f8a5b" />
+          <path d={`M345 ${y + 14}l3.5 3.5 6.5-7`} fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <g class="nieuw">
+        <rect x="236" y="56" width="128" height="30" rx="10" fill="#fff" stroke="#ff6600" stroke-width="2" />
+        <circle cx="252" cy="71" r="5" fill="#ff6600" />
+        <text x="264" y="76" font-size="13" font-weight="800">Nieuw</text>
+        <rect x="314" y="67" width="38" height="7" rx="3.5" fill="#d9e1ea" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .vink { opacity: 0; }
+  .in-beeld .vink { animation: kennisbank-de-20-beste-online-marketingblogs-vink 0.45s cubic-bezier(.3,1.6,.5,1) forwards; }
+  :global(.teken-js) .nieuw { opacity: 0; }
+  .in-beeld .nieuw { animation: kennisbank-de-20-beste-online-marketingblogs-nieuw 6s ease-in-out 2s infinite both; }
+  :global(.teken-js) .damp { opacity: 0; }
+  .in-beeld .damp { animation: kennisbank-de-20-beste-online-marketingblogs-damp 4s ease-in-out 0.5s infinite both; }
+  @keyframes kennisbank-de-20-beste-online-marketingblogs-vink { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-de-20-beste-online-marketingblogs-nieuw { 0% { opacity: 0; transform: translateY(-12px); } 12%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(4px); } }
+  @keyframes kennisbank-de-20-beste-online-marketingblogs-damp { 0% { opacity: 0; transform: translateY(6px); } 30%, 60% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vink, .in-beeld .nieuw, .in-beeld .damp { animation: none; } }
+</style>

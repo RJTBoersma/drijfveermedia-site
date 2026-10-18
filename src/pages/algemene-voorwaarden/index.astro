@@ -1,0 +1,89 @@
+---
+// De officiële algemene voorwaarden van Drijfveer Media (versie maart 2025, aangevuld oktober 2026).
+// De tekst staat in src/data/algemene-voorwaarden.json. Niet in Google (noindex): het is een juridisch document, geen pagina om op gevonden te worden.
+import Base from '../../layouts/Base.astro';
+import Scene from '../../components/scenes/algemene-voorwaarden.astro';
+import av from '../../data/algemene-voorwaarden.json';
+import { site } from '../../data/site';
+import { overgang } from '../../data/miniaturen';
+
+const url = '/algemene-voorwaarden/';
+const id = (nr: number) => `artikel-${nr}`;
+---
+<Base
+  title="Algemene voorwaarden | Drijfveer Media"
+  description="De algemene voorwaarden van Drijfveer Media: offerte, uitvoering, garantie, opzeggen, betalen, aansprakelijkheid, intellectueel eigendom en geschillen."
+  kruimels={[{ naam: 'Algemene voorwaarden', url }]}
+  noindex
+>
+  <section class="wrap jur-kop">
+    <div>
+      <p class="kicker">Juridisch</p>
+      <h1>Algemene voorwaarden</h1>
+      <p class="lead">De afspraken die gelden als je met ons samenwerkt. Liever eerst in gewone taal? Lees hoe <a href="/werkwijze/">we werken</a> en hoe <a href="/garantie/">onze garantie</a> werkt. Vragen over een artikel? Bel {site.contactpersoon} op <a href={site.telefoonLink}>{site.telefoon}</a>.</p>
+    </div>
+    <div class="kop-beeld" style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+  </section>
+
+  <section class="wrap sectie">
+    <div class="met-zijkolom">
+      <article class="tekst juridisch">
+        <p>{av.inleiding}</p>
+
+        <h2 id={id(1)}>1. Definities</h2>
+        <dl class="definities">
+          {av.definities.map((d) => (<><dt>{d.term}</dt><dd>{d.tekst}</dd></>))}
+        </dl>
+
+        {av.artikelen.filter((a) => a.nr > 1).map((a) => (
+          <>
+            <h2 id={id(a.nr)}>{a.nr}. {a.titel}</h2>
+            <ol class="leden">
+              {a.leden.map((l) => (
+                <li id={`artikel-${a.nr}-${l.nr}`}>
+                  <span class="nr">{a.nr}.{l.nr}</span>
+                  <div>
+                    {l.delen.map((d) => d.t === 'p' ? <p>{d.x}</p> : <ul>{(d.x as string[]).map((x) => <li>{x}</li>)}</ul>)}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </>
+        ))}
+
+        <p class="bijgewerkt">Versie {av.versie}. {site.naam}, {site.straat}, {site.postcode} {site.plaats}, KvK {site.kvk}.</p>
+      </article>
+
+      <aside class="zijkolom">
+        <nav class="card inhoud" aria-label="Artikelen">
+          <p class="kop">Artikelen</p>
+          <ol>{av.artikelen.map((a) => <li><a href={`#${id(a.nr)}`}>{a.titel}</a></li>)}</ol>
+        </nav>
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  .jur-kop { padding-block: 24px 8px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; }
+  h1 { margin: 10px 0 16px; }
+  .lead { font-size: var(--step-1); line-height: 1.45; max-width: 46ch; }
+  .kop-beeld { min-width: 0; }
+  .juridisch { font-size: 1rem; }
+  .juridisch h2 { font-size: 1.35rem; margin-top: 44px; }
+  .definities dt { font-weight: 800; margin-top: 14px; }
+  .definities dd { margin: 2px 0 0; }
+  .leden { list-style: none; padding-left: 0; margin: 0; }
+  .leden > li { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 4px; margin-bottom: 0.9em; scroll-margin-top: 100px; }
+  .leden > li::marker { content: none; }
+  .nr { font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; padding-top: 1px; }
+  .leden p { margin: 0 0 0.5em; }
+  .leden ul { margin: 0.2em 0 0.6em; padding-left: 1.1em; }
+  .leden ul li { margin-bottom: 0.25em; }
+  .inhoud { padding: 18px 20px; }
+  .inhoud .kop { font-weight: 800; margin: 0 0 8px; }
+  .inhoud ol { margin: 0; padding-left: 1.4em; font-size: 0.94rem; display: grid; gap: 3px; }
+  .inhoud a { color: var(--ink); text-decoration: none; }
+  .inhoud a:hover { text-decoration: underline; }
+  .bijgewerkt { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 860px) { .jur-kop { grid-template-columns: minmax(0, 1fr); } .kop-beeld { max-width: 420px; } }
+</style>

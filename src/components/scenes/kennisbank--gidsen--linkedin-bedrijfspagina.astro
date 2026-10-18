@@ -1,0 +1,74 @@
+---
+// Scène voor /kennisbank/gidsen/linkedin-bedrijfspagina/: een bedrijfspagina met omslagfoto, logo, slogan en volgknop, naast een checklist.
+// Als hij leeft: de checklist vinkt zich af, de balk loopt vol en er komen rustig nieuwe volgers bij.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const punten = ['Logo', 'Omslagfoto', 'Slogan', 'Over ons', 'Beheerders', 'Eerste bericht'];
+const puntY = (i: number) => 66 + i * 26;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een bedrijfspagina met omslagfoto, logo, slogan en een volgknop. Ernaast vinkt een checklist zich af en er komen nieuwe volgers bij.'}>
+  <!-- de pagina -->
+  <rect x="24" y="24" width="300" height="222" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M26 38a12 12 0 0 1 12-12h272a12 12 0 0 1 12 12v50H26z" fill="#e8eef4" />
+  <path class="l" d="M60 88l40-30 30 20 26-16 46 26" />
+  <path d="M232 88l34-24 30 18 26-12v18z" fill="#d9e1ea" />
+  <circle cx="276" cy="48" r="9" fill="#fff" />
+  <!-- logo -->
+  <rect x="44" y="64" width="68" height="68" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="56" y="76" width="44" height="44" rx="8" fill="#074663" />
+  <text x="78" y="105" font-size="18" font-weight="900" text-anchor="middle" style="fill:#fff">JB</text>
+  <circle cx="94" cy="110" r="3.5" fill="#ff6600" />
+  <!-- naam en slogan -->
+  <text x="44" y="160" font-size="17" font-weight="800">Jouw bedrijf</text>
+  <text x="44" y="179" font-size="11" class="zacht">Installatietechniek · Assen</text>
+  <rect x="44" y="188" width="190" height="7" rx="3.5" fill="#d9e1ea" />
+  <!-- volgen -->
+  <rect x="44" y="206" width="92" height="28" rx="14" fill="#074663" />
+  <text x="90" y="224" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">+ Volgen</text>
+  <rect x="148" y="206" width="84" height="28" rx="14" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="190" y="224" font-size="12" font-weight="800" text-anchor="middle">Website</text>
+  <text x="312" y="224" font-size="11" text-anchor="end" class="zacht">128 volgers</text>
+
+  <!-- checklist -->
+  <rect x="340" y="24" width="120" height="222" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="354" y="48" font-size="12" font-weight="800">Checklist</text>
+  {punten.map((p, i) => (
+    <g>
+      <rect x="354" y={puntY(i)} width="14" height="14" rx="4" fill="#fff" stroke="#c9d3dd" stroke-width="2" />
+      <text x="376" y={puntY(i) + 11} font-size="11">{p}</text>
+    </g>
+  ))}
+  <rect class="v" x="354" y="226" width="92" height="8" rx="4" />
+  <rect x="354" y="226" width="20" height="8" rx="4" fill="#074663" />
+
+  {!mini && (
+    <g>
+      {punten.map((_, i) => (
+        <g class="vink" style={`--i:${i}`}>
+          <rect x="354" y={puntY(i)} width="14" height="14" rx="4" fill="#1f8a5b" />
+          <path d={`M357.5 ${puntY(i) + 7}l3 3 5-6`} fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <rect class="balk" x="354" y="226" width="92" height="8" rx="4" fill="#074663" />
+      <g class="volger">
+        <rect x="236" y="100" width="78" height="26" rx="13" fill="#fff" stroke="#ff6600" stroke-width="2" />
+        <text x="275" y="117" font-size="11" font-weight="800" text-anchor="middle">+1 volger</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .vink, .balk, .volger { transform-box: fill-box; }
+  .vink { transform-origin: center; }
+  .balk { transform-origin: left center; }
+  :global(.teken-js) .vink { opacity: 0; }
+  :global(.teken-js) .balk { transform: scaleX(0.22); }
+  :global(.teken-js) .volger { opacity: 0; }
+  .in-beeld .vink { animation: kennisbank-gidsen-linkedin-bedrijfspagina-vink 0.4s cubic-bezier(.3,1.6,.5,1) calc(0.5s + var(--i) * 0.3s) forwards; }
+  .in-beeld .balk { animation: kennisbank-gidsen-linkedin-bedrijfspagina-balk 1.8s ease-in-out 0.5s forwards; }
+  .in-beeld .volger { animation: kennisbank-gidsen-linkedin-bedrijfspagina-volger 5s ease-in-out 2.6s infinite both; }
+  @keyframes kennisbank-gidsen-linkedin-bedrijfspagina-vink { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-linkedin-bedrijfspagina-balk { from { transform: scaleX(0.22); } to { transform: none; } }
+  @keyframes kennisbank-gidsen-linkedin-bedrijfspagina-volger { 0% { opacity: 0; transform: translateY(10px); } 15%, 70% { opacity: 1; transform: none; } 90%, 100% { opacity: 0; transform: translateY(-12px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vink, .in-beeld .balk, .in-beeld .volger { animation: none; } }
+</style>

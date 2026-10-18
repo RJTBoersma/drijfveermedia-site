@@ -1,0 +1,69 @@
+---
+// Scène voor /kennisbank/gidsen/wat-doet-een-seo-specialist/: het bureau van een SEO-specialist. Een laptop met het maandplan,
+// een klembord met een grafiek, een vergrootglas en een mok koffie.
+// Als hij leeft: de taken worden afgevinkt, de lijn op het klembord stijgt en het vergrootglas zoekt rustig heen en weer.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const taken = [
+  { y: 106, tekst: 'Techniek nalopen' },
+  { y: 132, tekst: 'Teksten verbeteren' },
+  { y: 158, tekst: 'Links opbouwen' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: de werkplek van een SEO-specialist met een laptop met het maandplan, een klembord met een stijgende grafiek, een vergrootglas en koffie.'} aria-hidden={mini ? 'true' : undefined}>
+  <path class="l" d="M24 224h432" />
+
+  <!-- koffie -->
+  <path d="M42 188h34v26a10 10 0 0 1-10 10H52a10 10 0 0 1-10-10z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <path class="l" d="M76 194h5a7 7 0 0 1 0 14h-5" />
+  <path d="M52 178c-4-6 4-8 0-14M64 178c-4-6 4-8 0-14" fill="none" stroke="#b9c8d6" stroke-width="2" stroke-linecap="round" />
+
+  <!-- laptop -->
+  <rect x="116" y="48" width="218" height="146" rx="10" fill="#10283f" />
+  <rect x="126" y="58" width="198" height="126" rx="5" fill="#fff" />
+  <path d="M98 194h254l16 22H82z" fill="#c9d3dd" />
+  <rect x="204" y="200" width="42" height="5" rx="2.5" fill="#aebccb" />
+  <text x="144" y="84" font-size="12.5" font-weight="800">Plan deze maand</text>
+  {taken.map((t) => (
+    <g>
+      <rect x="144" y={t.y - 9} width="15" height="15" rx="4" fill="#fff" stroke="#b9c8d6" stroke-width="2" />
+      <text x="168" y={t.y + 3} font-size="11.5">{t.tekst}</text>
+    </g>
+  ))}
+
+  <!-- klembord -->
+  <rect x="362" y="70" width="84" height="142" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="388" y="62" width="32" height="16" rx="5" fill="#074663" />
+  <text x="374" y="102" font-size="10" class="zacht">Bezoekers</text>
+  <path d="M374 194h60M374 194v-80" stroke="#d9e1ea" stroke-width="2" stroke-linecap="round" />
+  <rect x="380" y="172" width="9" height="22" rx="2" fill="#e8eef4" />
+  <rect x="394" y="164" width="9" height="30" rx="2" fill="#e8eef4" />
+  <rect x="408" y="150" width="9" height="44" rx="2" fill="#e8eef4" />
+  <rect x="422" y="134" width="9" height="60" rx="2" fill="#e8eef4" />
+
+  <!-- vergrootglas -->
+  <g class="glas">
+    <circle cx="300" cy="150" r="22" fill="#fff" fill-opacity="0.35" stroke="#074663" stroke-width="4" />
+    <path d="M316 166l20 20" stroke="#074663" stroke-width="7" stroke-linecap="round" />
+  </g>
+
+  {!mini && (
+    <g>
+      {taken.map((t, i) => (
+        <path class="vinkje" style={`--i:${i}`} d={`M147 ${t.y - 1}l4 4 7-8`} fill="none" stroke="#1f8a5b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      ))}
+      <path class="lijn" d="M384 166l14-10 14-12 14-18" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+    </g>
+  )}
+</svg>
+<style>
+  .vinkje, .lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .vinkje, :global(.teken-js) .lijn { stroke-dashoffset: 1; }
+  .in-beeld .vinkje { animation: kennisbank-gidsen-wat-doet-een-seo-specialist-teken 0.4s ease-out calc(0.7s + var(--i) * 0.5s) forwards; }
+  .in-beeld .lijn { animation: kennisbank-gidsen-wat-doet-een-seo-specialist-teken 1.2s cubic-bezier(.6,.1,.3,1) 2.2s forwards; }
+  .glas { transform-box: view-box; transform-origin: 336px 186px; }
+  .in-beeld .glas { animation: kennisbank-gidsen-wat-doet-een-seo-specialist-zoek 5s ease-in-out 1s infinite; }
+  @keyframes kennisbank-gidsen-wat-doet-een-seo-specialist-teken { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-gidsen-wat-doet-een-seo-specialist-zoek { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(-14deg); } 65% { transform: rotate(6deg); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vinkje, .in-beeld .lijn, .in-beeld .glas { animation: none; } }
+</style>

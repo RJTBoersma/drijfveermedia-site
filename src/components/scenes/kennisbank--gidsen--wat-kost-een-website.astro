@@ -1,0 +1,86 @@
+---
+// Scène voor /kennisbank/gidsen/wat-kost-een-website/: een website in aanbouw met ernaast een bonnetje.
+// De posten verschijnen een voor een, het totaal licht op en het prijskaartje schommelt rustig.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const posten = [
+  { y: 102, t: 'Ontwerp' },
+  { y: 124, t: 'Bouw' },
+  { y: 146, t: 'Teksten' },
+  { y: 168, t: 'Domeinnaam' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een website in aanbouw met ernaast een bonnetje waarop ontwerp, bouw, teksten en domeinnaam een voor een verschijnen, met onderaan het totaal.'}>
+  <!-- website in aanbouw -->
+  <rect x="22" y="34" width="250" height="196" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M22 58H272" stroke="#e8eef4" stroke-width="2" />
+  <circle cx="38" cy="46" r="4" fill="#d9e1ea" />
+  <circle cx="51" cy="46" r="4" fill="#d9e1ea" />
+  <circle cx="64" cy="46" r="4" fill="#d9e1ea" />
+  <rect x="40" y="74" width="62" height="9" rx="4.5" fill="#074663" />
+  <rect x="150" y="76" width="30" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="188" y="76" width="30" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="226" y="76" width="30" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="40" y="100" width="128" height="12" rx="5" fill="#10283f" />
+  <rect x="40" y="120" width="104" height="12" rx="5" fill="#10283f" />
+  <rect x="40" y="142" width="120" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="40" y="154" width="96" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="40" y="174" width="70" height="22" rx="8" fill="#ff6600" />
+  <rect class="v" x="184" y="98" width="72" height="98" rx="10" />
+  <path class="l" d="M196 178l16-22 12 14 9-10 13 18z" />
+  <circle cx="232" cy="122" r="7" fill="#fff" />
+  <rect x="40" y="208" width="216" height="8" rx="4" fill="#e8eef4" />
+
+  <!-- bonnetje -->
+  <path d="M300 40h150v190l-12.5 8-12.5-8-12.5 8-12.5-8-12.5 8-12.5-8-12.5 8-12.5-8-12.5 8-12.5-8-12.5 8-12.5-8z" fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+  <text x="316" y="68" font-size="12" font-weight="800">Jouw website</text>
+  <path d="M316 80H434" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="3 4" />
+  {posten.map((p, i) => (
+    <g class={mini ? undefined : `post post${i}`}>
+      <text x="316" y={p.y} font-size="10.5" font-weight="700" class="zacht">{p.t}</text>
+      <rect x="400" y={p.y - 8} width="34" height="8" rx="4" fill="#d9e1ea" />
+    </g>
+  ))}
+  <path d="M316 184H434" stroke="#10283f" stroke-width="2" />
+  <text x="316" y="202" font-size="10.5" font-weight="800" class="zacht">Totaal</text>
+  <text x="434" y="220" font-size="12" font-weight="900" text-anchor="end">€ 250 tot 2.000+</text>
+
+  <!-- prijskaartje -->
+  <g class={mini ? undefined : 'kaartje'}>
+    <path d="M440 22v18" stroke="#10283f" stroke-width="1.5" />
+    <path d="M424 40h32l0 26-16 12-16-12z" fill="#ff6600" />
+    <circle cx="440" cy="48" r="3.5" fill="#fff" />
+    <text x="440" y="66" font-size="11" font-weight="900" fill="#fff" text-anchor="middle" style="fill:#fff">€</text>
+  </g>
+
+  {!mini && (
+    <g>
+      <rect class="totaal" x="306" y="189" width="138" height="38" rx="6" fill="none" stroke="#ff6600" stroke-width="2" />
+      <g class="cursor">
+        <path d="M100 186l0 20 5-5 4 9 4-2-4-9h7z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .post, .totaal, .cursor, .kaartje { transform-box: fill-box; }
+  .kaartje { transform-origin: 50% 0; }
+  :global(.teken-js) .post { opacity: 0; }
+  :global(.teken-js) .totaal { opacity: 0; }
+  :global(.teken-js) .cursor { opacity: 0; transform: translate(60px, 30px); }
+  .in-beeld .post0 { animation: kennisbank-gidsen-wat-kost-een-website-post 0.5s ease-out 0.4s forwards; }
+  .in-beeld .post1 { animation: kennisbank-gidsen-wat-kost-een-website-post 0.5s ease-out 0.8s forwards; }
+  .in-beeld .post2 { animation: kennisbank-gidsen-wat-kost-een-website-post 0.5s ease-out 1.2s forwards; }
+  .in-beeld .post3 { animation: kennisbank-gidsen-wat-kost-een-website-post 0.5s ease-out 1.6s forwards; }
+  .in-beeld .totaal { animation: kennisbank-gidsen-wat-kost-een-website-totaal 4s ease-in-out 2.2s infinite; }
+  .in-beeld .cursor { animation: kennisbank-gidsen-wat-kost-een-website-cursor 1.4s cubic-bezier(.5,0,.3,1) 0.2s forwards; }
+  .in-beeld .kaartje { animation: kennisbank-gidsen-wat-kost-een-website-schommel 5s ease-in-out 1s infinite; }
+  @keyframes kennisbank-gidsen-wat-kost-een-website-post { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-wat-kost-een-website-totaal { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+  @keyframes kennisbank-gidsen-wat-kost-een-website-cursor { 0% { opacity: 0; transform: translate(60px, 30px); } 40% { opacity: 1; } 85% { opacity: 1; transform: none; } 100% { opacity: 1; transform: scale(0.92); } }
+  @keyframes kennisbank-gidsen-wat-kost-een-website-schommel { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .post0, .in-beeld .post1, .in-beeld .post2, .in-beeld .post3, .in-beeld .cursor { animation: none; opacity: 1; transform: none; }
+    .in-beeld .totaal, .in-beeld .kaartje { animation: none; opacity: 1; }
+  }
+</style>

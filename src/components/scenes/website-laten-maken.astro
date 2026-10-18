@@ -1,0 +1,77 @@
+---
+// Scène voor /website-laten-maken/: twee routes (snel met AI of maatwerk in WordPress) komen uit bij één website die aanvragen oplevert.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: twee routes, snel met AI en maatwerk in WordPress, komen uit bij dezelfde nieuwe website. Een bezoeker klikt op de belknop en er komt een aanvraag binnen.'}>
+  <!-- Route 1: snel met AI -->
+  <rect x="12" y="52" width="122" height="58" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="o" d="M34 66l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" />
+  <text x="52" y="78" font-size="13" font-weight="800">Snel met AI</text>
+  <text x="52" y="96" font-size="11.5" class="zacht">vanaf € 250</text>
+  <!-- Route 2: maatwerk -->
+  <rect x="12" y="160" width="122" height="58" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="l" d="M24 198l14-14 6 6-14 14h-6z" />
+  <path class="l" d="M36 186l6 6" />
+  <text x="52" y="186" font-size="13" font-weight="800">Maatwerk</text>
+  <text x="52" y="204" font-size="11.5" class="zacht">in WordPress</text>
+  <!-- Verbindingen naar de website -->
+  <path class="a" d="M134 81c18 0 14 34 30 34" />
+  <path class="a" d="M134 189c18 0 14-34 30-34" />
+  <!-- De website -->
+  <rect x="164" y="30" width="250" height="196" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M164 56h250" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="180" cy="43" r="4" fill="#d9e1ea" /><circle cx="192" cy="43" r="4" fill="#d9e1ea" /><circle cx="204" cy="43" r="4" fill="#d9e1ea" />
+  <rect class="v" x="222" y="37" width="150" height="12" rx="6" />
+  <rect x="180" y="68" width="56" height="8" rx="4" fill="#074663" />
+  <rect class="v" x="300" y="68" width="22" height="8" rx="4" /><rect class="v" x="328" y="68" width="22" height="8" rx="4" /><rect class="v" x="356" y="68" width="40" height="8" rx="4" />
+  <rect x="180" y="92" width="122" height="12" rx="4" fill="#10283f" />
+  <rect x="180" y="110" width="96" height="12" rx="4" fill="#10283f" />
+  <rect x="180" y="130" width="110" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="180" y="148" width="72" height="22" rx="7" fill="#ff6600" />
+  <text x="194" y="163" font-size="10.5" font-weight="800" style="fill:#fff">Bel ons</text>
+  <rect class="v" x="318" y="92" width="80" height="78" rx="9" />
+  <path class="l" d="M326 160l18-22 14 14 10-10 22 18" />
+  <circle class="o" cx="380" cy="110" r="7" />
+  <rect class="v" x="180" y="184" width="66" height="28" rx="6" /><rect class="v" x="256" y="184" width="66" height="28" rx="6" /><rect class="v" x="332" y="184" width="66" height="28" rx="6" />
+  {!mini && (
+    <g>
+      <path class="website-laten-maken-stroom" d="M134 81c18 0 14 34 30 34" />
+      <path class="website-laten-maken-stroom" d="M134 189c18 0 14-34 30-34" />
+      <g class="website-laten-maken-cursor">
+        <path d="M0 0l7 19 3-8 8-3z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+      <circle class="website-laten-maken-ring" cx="216" cy="159" r="14" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="website-laten-maken-melding">
+        <rect x="300" y="214" width="168" height="40" rx="12" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="322" cy="234" r="11" fill="#1f8a5b" />
+        <path d="M316 234l4 4 8-8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="340" y="238" font-size="12.5" font-weight="800">Nieuwe aanvraag</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .website-laten-maken-stroom { fill: none; stroke: #fff; stroke-width: 3; stroke-dasharray: 3 9; stroke-linecap: round; }
+  .website-laten-maken-cursor { transform: translate(430px, 150px); }
+  .website-laten-maken-ring { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .website-laten-maken-melding { opacity: 0; }
+  :global(.teken-js) .website-laten-maken-cursor { opacity: 0; }
+  .in-beeld .website-laten-maken-stroom { animation: website-laten-maken-stroom 1.6s linear infinite; }
+  .in-beeld .website-laten-maken-cursor { animation: website-laten-maken-cursor 6s ease-in-out 0.6s infinite both; }
+  .in-beeld .website-laten-maken-ring { animation: website-laten-maken-ring 6s ease-out 0.6s infinite both; }
+  .in-beeld .website-laten-maken-melding { animation: website-laten-maken-melding 6s ease-in-out 0.6s infinite both; }
+  @keyframes website-laten-maken-stroom { to { stroke-dashoffset: -24; } }
+  @keyframes website-laten-maken-cursor {
+    0% { opacity: 0; transform: translate(430px, 150px); }
+    10% { opacity: 1; }
+    38%, 55% { opacity: 1; transform: translate(214px, 156px); }
+    70% { opacity: 1; transform: translate(260px, 200px); }
+    85%, 100% { opacity: 0; transform: translate(430px, 150px); }
+  }
+  @keyframes website-laten-maken-ring { 0%, 38% { opacity: 0; transform: scale(0.3); } 42% { opacity: 1; } 56%, 100% { opacity: 0; transform: scale(1.7); } }
+  @keyframes website-laten-maken-melding { 0%, 44% { opacity: 0; transform: translateY(10px); } 52%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .website-laten-maken-stroom, .in-beeld .website-laten-maken-cursor, .in-beeld .website-laten-maken-ring, .in-beeld .website-laten-maken-melding { animation: none; }
+  }
+</style>

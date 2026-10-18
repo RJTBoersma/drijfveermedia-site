@@ -1,0 +1,67 @@
+---
+// Scène voor /kennisbank/gidsen/marketingplan-maken/: één A4 met het plan (nu, klant, doel, kanalen) naast een doelwit en een meter die van 4 naar 10 aanvragen loopt.
+// Als hij leeft: een pijl schiet in de roos en de meter loopt rustig steeds opnieuw vol.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 96, label: 'Nu', w: 70 },
+  { y: 128, label: 'Klant', w: 84 },
+  { y: 160, label: 'Doel', w: 60 },
+  { y: 192, label: 'Kanalen', w: 76 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een marketingplan op één A4 met nu, klant, doel en kanalen, naast een doelwit waar een pijl in de roos schiet en een meter die van vier naar tien aanvragen loopt.'}>
+  <!-- A4 -->
+  <path d="M40 24h150l26 26v198H40z" fill="#fff" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <path d="M190 24v26h26" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <text x="58" y="62" font-size="15" font-weight="900">Marketingplan</text>
+  <rect x="58" y="70" width="40" height="4" rx="2" fill="#ff6600" />
+  {regels.map((r) => (
+    <g>
+      <text x="58" y={r.y} font-size="10.5" font-weight="800" class="zacht">{r.label}</text>
+      <rect x="58" y={r.y + 7} width={r.w + 60} height="6" rx="3" fill="#e8eef4" />
+      <rect x="58" y={r.y + 17} width={r.w + 20} height="6" rx="3" fill="#e8eef4" />
+    </g>
+  ))}
+  <rect x="112" y="152" width="64" height="12" rx="6" fill="#ffe3cf" />
+  <text x="118" y="161.5" font-size="9" font-weight="800">10 per maand</text>
+
+  <!-- doelwit -->
+  <circle cx="330" cy="104" r="58" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="330" cy="104" r="42" fill="#e8eef4" />
+  <circle cx="330" cy="104" r="26" fill="#fff" stroke="#074663" stroke-width="2" />
+  <circle cx="330" cy="104" r="10" fill="#074663" />
+
+  <!-- meter -->
+  <rect x="252" y="196" width="196" height="48" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="266" y="214" font-size="10" class="zacht">Aanvragen per maand</text>
+  <rect x="266" y="223" width="140" height="10" rx="5" fill="#e8eef4" />
+  <rect x="266" y="223" width="56" height="10" rx="5" fill="#074663" />
+  <text x="414" y="232" font-size="11" font-weight="900">4</text>
+
+  {!mini && (
+    <g>
+      <g class="pijl">
+        <path d="M334 100l60-44" stroke="#10283f" stroke-width="3" stroke-linecap="round" />
+        <path d="M394 56l14-4-4 14M388 52l8 2M398 62l2 8" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="332" cy="102" r="3" fill="#ff6600" />
+      </g>
+      <rect class="vol" x="266" y="223" width="140" height="10" rx="5" fill="#ff6600" />
+      <g class="tien"><rect x="404" y="220" width="30" height="17" rx="8.5" fill="#1f8a5b" /><text x="412" y="232.5" font-size="11" font-weight="900" style="fill:#fff">10</text></g>
+    </g>
+  )}
+</svg>
+<style>
+  .pijl { transform-box: view-box; }
+  :global(.teken-js) .pijl { opacity: 0; }
+  .in-beeld .pijl { animation: kennisbank-gidsen-marketingplan-maken-schiet 0.6s cubic-bezier(.2,.9,.3,1.2) 0.6s forwards; }
+  .vol { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .vol { transform: scaleX(0.4); opacity: 0; }
+  .in-beeld .vol { animation: kennisbank-gidsen-marketingplan-maken-vol 6s ease-in-out 1.4s infinite; }
+  :global(.teken-js) .tien { opacity: 0; }
+  .in-beeld .tien { animation: kennisbank-gidsen-marketingplan-maken-tien 6s ease-in-out 1.4s infinite; }
+  @keyframes kennisbank-gidsen-marketingplan-maken-schiet { from { opacity: 0; transform: translate(60px, -44px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-marketingplan-maken-vol { 0% { opacity: 1; transform: scaleX(0.4); } 55%, 85% { opacity: 1; transform: scaleX(1); } 100% { opacity: 0; transform: scaleX(1); } }
+  @keyframes kennisbank-gidsen-marketingplan-maken-tien { 0%, 50% { opacity: 0; } 58%, 85% { opacity: 1; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .pijl, .in-beeld .vol, .in-beeld .tien { animation: none; } }
+</style>

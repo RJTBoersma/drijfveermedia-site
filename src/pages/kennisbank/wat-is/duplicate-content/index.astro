@@ -1,0 +1,256 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--duplicate-content.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/duplicate-content/';
+const datum = '2026-10-18';
+const definitie = 'Duplicate content is tekst die grotendeels hetzelfde op meer dan één webadres staat, op je eigen website of op die van een ander.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  '@id': `${site.url}${url}#begrip`,
+  name: 'Duplicate content',
+  alternateName: ['Dubbele content', 'Dubbele inhoud'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'WebPage',
+  '@id': `${site.url}${url}#pagina`,
+  url: `${site.url}${url}`,
+  name: 'Wat is duplicate content?',
+  inLanguage: 'nl-NL',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  about: { '@id': `${site.url}${url}#begrip` },
+}];
+const varianten = `http://bakkerijdevries.nl
+http://bakkerijdevries.nl/
+http://www.bakkerijdevries.nl
+http://www.bakkerijdevries.nl/
+https://bakkerijdevries.nl
+https://bakkerijdevries.nl/
+https://www.bakkerijdevries.nl
+https://www.bakkerijdevries.nl/index.php`;
+const canonical = `<head>
+  <title>Taart bestellen in Assen | Bakkerij De Vries</title>
+  <link rel="canonical" href="https://www.bakkerijdevries.nl/taart-bestellen/">
+</head>`;
+const noindex = `<meta name="robots" content="noindex, follow">`;
+const redirect = `# .htaccess (Apache): alles naar https en www, met een 301
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^bakkerijdevries\\.nl [NC]
+RewriteRule ^(.*)$ https://www.bakkerijdevries.nl/$1 [L,R=301]`;
+---
+<Base
+  title="Wat is duplicate content? Uitleg | Drijfveer Media"
+  description="Wat is duplicate content? Dezelfde tekst op meerdere adressen. Krijg je er straf voor, hoe ontstaat het en hoe los je het op met een redirect of canonical?"
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Duplicate content', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is duplicate content?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Google wil bij een zoekopdracht niet twee keer hetzelfde antwoord laten zien. Vindt het dezelfde tekst op meerdere plekken, dan moet het kiezen. Soms kiest Google een andere versie dan jij zou willen. En soms verdelen de versies elkaars kracht, zodat ze allemaal een stuk lager staan.</p>
+      <p>In het Nederlands heet het dubbele content of dubbele inhoud. Het klinkt als iets wat je alleen krijgt als je teksten kopieert. Maar de meeste duplicate content ontstaat vanzelf, door techniek. Hieronder lees je wat Google precies als dubbel ziet, of je er straf voor krijgt, hoe je het vindt en welke oplossing bij welke situatie past.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Wat telt als dubbel, en wat niet?</h2></div>
+      <p>Google kijkt niet naar elke zin apart. Het bepaalt per pagina wat de hoofdinhoud is: de tekst waar de pagina echt om draait. Lijkt die hoofdinhoud sterk op die van een andere pagina, dan stopt Google ze in één groep. Uit die groep kiest het één versie om te tonen. Dat proces heet canonicalisatie. De gekozen versie is de canonieke pagina.</p>
+      <p>Een menu, een footer of een blok met je openingstijden dat op elke pagina staat, telt dus niet. Een citaat van een paar zinnen ook niet. Het gaat om pagina's waarvan de kern grotendeels dezelfde is. Een vast percentage noemt Google nergens. Wie zegt dat 30 of 70 procent de grens is, gokt.</p>
+
+      <h3>Interne duplicate content</h3>
+      <p>Hier staat dezelfde inhoud op meerdere adressen binnen je eigen domein. Bijna altijd is het een bijwerking van je systeem: je <a href="/kennisbank/wat-is/cms/">CMS</a>, je webshop of je serverinstellingen. Je hebt het zelf zelden bewust gedaan. Google noemt het in zijn documentatie normaal, en geen overtreding van de spamregels.</p>
+
+      <h3>Externe duplicate content</h3>
+      <p>Hier staat jouw tekst ook op een andere website. Of jij hebt een tekst van een ander overgenomen. Denk aan productteksten van je leverancier, een persbericht dat op twintig nieuwssites staat, of een blog die je zelf op LinkedIn hebt herplaatst. Soms gebeurt het tegen je zin: iemand kopieert je pagina.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Krijg je er straf voor?</h2></div>
+      <p>Meestal niet. Dat is een hardnekkige mythe. Google schreef al in 2008 op zijn eigen blog dat een "duplicate content penalty", zoals de meeste mensen die bedoelen, niet bestaat. Een paar pagina's die op elkaar lijken, leveren geen straf op.</p>
+      <p>Het wordt pas anders als iemand bewust complete websites kopieert om bezoekers of zoekmachines te misleiden. Dat wordt als spam beschouwd. In de spamregels van Google heet het scraping: inhoud van andere sites overnemen, vaak automatisch, zonder er iets aan toe te voegen. Daarop kan een handmatige maatregel volgen. Dan zakt de site of verdwijnt hij helemaal uit Google.</p>
+      <p>Voor een gewone ondernemer is die straf dus geen zorg. Het echte nadeel is stiller, en daar gaat de rest van deze pagina over.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2>Wat gebeurt er dan wel?</h2></div>
+      <p>Google beschreef het proces zelf in drie stappen. Het zet dubbele adressen in één groep. Het kiest het adres dat het de beste versie vindt. En het telt de signalen van de hele groep, zoals inkomende links, bij dat ene adres op. In elke stap kan het voor jou misgaan:</p>
+      <ul>
+        <li><strong>De verkeerde versie wint.</strong> Google toont het adres met <code>?ref=nieuwsbrief</code> erachter, of de oude http-versie. Je ziet in je cijfers vreemde adressen opduiken.</li>
+        <li><strong>De kracht raakt verdeeld.</strong> Herkent Google niet alle kopieën, dan blijven links en andere signalen over twee of drie adressen verspreid. Elk adres krijgt dan een lagere positie dan één sterke pagina zou halen.</li>
+        <li><strong>Google verspilt tijd.</strong> De zoekmachine moet tien adressen bezoeken voordat hij weet dat ze hetzelfde zijn. Op een grote site gaat dat ten koste van nieuwe pagina's. Lees daarover meer bij <a href="/kennisbank/wat-is/crawlbudget/">crawlbudget</a>.</li>
+        <li><strong>Je metingen kloppen niet.</strong> Bezoekers en klikken lopen over meerdere adressen. Dan zie je niet meer welke pagina het echt goed doet.</li>
+      </ul>
+      <p>Bij externe kopieën speelt nog iets. Staat dezelfde tekst op jouw site en op een grote site met meer autoriteit, dan wint vaak die grote site. Ook als jij hem als eerste had. Google gaf daar zelf een voorbeeld van: een partnersite die precies dezelfde productinformatie toont als Amazon, komt daar bijna nooit boven. Waarom zou een zoeker de kopie willen zien?</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Hoe ontstaat duplicate content?</h2></div>
+      <p>Ook technische instellingen kunnen duplicate content veroorzaken, zonder dat je er zelf ooit iets dubbel hebt neergezet. Dit zijn de oorzaken die we het vaakst tegenkomen, met de oplossing die meestal past.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Oorzaak</th><th>Voorbeeld</th><th>Meestal de oplossing</th></tr></thead>
+          <tbody>
+            <tr><td>Http en https naast elkaar</td><td><code>http://</code> en <code>https://</code> tonen allebei de site</td><td>301-redirect naar https</td></tr>
+            <tr><td>Met en zonder www</td><td><code>jouwsite.nl</code> en <code>www.jouwsite.nl</code></td><td>301-redirect naar één versie</td></tr>
+            <tr><td>Slash aan het eind</td><td><code>/contact</code> en <code>/contact/</code></td><td>301-redirect naar één vorm</td></tr>
+            <tr><td>Codes achter het adres</td><td><code>?utm_source=facebook</code>, <code>?gclid=...</code>, <code>?ref=nieuwsbrief</code></td><td>Canonical naar het schone adres</td></tr>
+            <tr><td>Sorteren en filteren</td><td><code>?sorteer=prijs</code>, <code>?kleur=groen</code></td><td>Canonical, of noindex als de pagina niets toevoegt</td></tr>
+            <tr><td>Tag- en archiefpagina's</td><td>WordPress maakt per tag een pagina met dezelfde berichten</td><td>Noindex, of tags opruimen</td></tr>
+            <tr><td>Printversie of pdf</td><td>Dezelfde tekst als webpagina en als pdf</td><td>Canonical (voor een pdf via de server)</td></tr>
+            <tr><td>Testomgeving</td><td><code>test.jouwsite.nl</code> staat open voor Google</td><td>Afschermen met een wachtwoord</td></tr>
+            <tr><td>Plaatspagina's met dezelfde tekst</td><td>Twaalf pagina's waarin alleen de plaatsnaam wisselt</td><td>Samenvoegen of echt herschrijven</td></tr>
+            <tr><td>Teksten van je leverancier</td><td>Dezelfde productomschrijving als honderd andere winkels</td><td>Herschrijven, te beginnen bij de bestsellers</td></tr>
+            <tr><td>Twee landen, één taal</td><td>Een .nl- en een .be-site met dezelfde tekst</td><td>Hreflang plus canonical, of aanpassen per land</td></tr>
+            <tr><td>Gekopieerd door een ander</td><td>Je dienstpagina staat woord voor woord op een andere site</td><td>Eigenaar aanschrijven, daarna een verzoek bij Google</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Over de taal nog dit. Volgens Google zijn pagina's in verschillende talen geen duplicaten. Een Nederlandse en een Duitse pagina mogen dus gewoon naast elkaar bestaan. Pagina's in dezelfde taal voor verschillende landen zijn dat wel. Daar helpt een hreflang-tag Google kiezen welke versie bij welk land hoort.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2>Eén homepage, acht adressen</h2></div>
+      <p>Het klinkt overdreven, maar het komt vaak voor. Neem een verzonnen bakkerij. Als de server niet goed is ingesteld, toont hij dezelfde homepage op al deze adressen:</p>
+      <pre><code>{varianten}</code></pre>
+      <p>Voor jou is dat één pagina. Voor een zoekmachine zijn het acht pagina's met precies dezelfde inhoud. Krijgt de bakker links van de lokale krant, de voetbalclub en een trouwfotograaf, en linkt elk van hen naar een ander adres? Dan moet Google die drie links zelf bij elkaar zoeken. Meestal lukt dat. Niet altijd.</p>
+      <p>De oplossing is een paar regels op de server: elk adres stuurt met een 301-<a href="/kennisbank/wat-is/redirect/">redirect</a> door naar één vaste versie. Op een Apache-server, die je bij veel hostingpartijen tegenkomt, ziet dat er ongeveer zo uit:</p>
+      <pre><code>{redirect}</code></pre>
+      <p>Pas zo'n bestand niet zelf aan als je niet weet wat je doet. Eén verkeerd teken en je hele site is onbereikbaar. Laat het je webbouwer doen, of je <a href="/kennisbank/wat-is/hosting/">hostingpartij</a>. Zodra je site op https draait, zie je bovendien sneller of er nog onveilige onderdelen inladen. Dat heet <a href="/kennisbank/wat-is/mixed-content/">mixed content</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Een voorbeeld uit de praktijk</h2></div>
+      <p>Stel: een schildersbedrijf uit Drachten maakt twaalf pagina's, van "schilder Heerenveen" tot "schilder Sneek". De tekst is overal dezelfde, alleen de plaatsnaam wisselt. Google ziet twaalf pagina's die grotendeels dezelfde inhoud hebben en laat er hooguit een paar zien. De rest staat in de index, maar komt nergens.</p>
+      <p>Vier pagina's met echte lokale inhoud doen het vaak beter dan twaalf kopieën. Denk aan projecten in die plaats, de reistijd, de wijken waar ze werken en een foto van een klus om de hoek. De andere acht plaatsen krijgen een korte vermelding op een pagina over het werkgebied. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Op onze eigen site schrijven we elke plaatspagina daarom apart. Een controlescript keurt de site af als twee pagina's dezelfde titel of omschrijving hebben. Saai werk, maar het voorkomt dit probleem.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Zo spoor je duplicate content op</h2></div>
+      <p>Je hebt geen dure software nodig om te beginnen. Loop deze vijf stappen langs, in deze volgorde.</p>
+      <ol>
+        <li><strong>Zoek een zin op.</strong> Kopieer een zin van een belangrijke pagina en zoek ernaar in Google, tussen aanhalingstekens. Komt hij op andere sites terug, dan weet je genoeg.</li>
+        <li><strong>Typ je eigen adressen.</strong> Probeer je domein met en zonder www, met http en met https. Elke variant moet doorsturen naar dezelfde versie. Blijft er een staan, dan heb je de eerste oorzaak al te pakken.</li>
+        <li><strong>Kijk in Google Search Console.</strong> Ga naar Indexeren en dan Pagina's. Let op deze meldingen: "Dubbele pagina zonder door de gebruiker geselecteerde canonieke versie" en "Duplicaat, Google heeft een andere canonieke pagina gekozen dan de gebruiker". Met de URL-inspectie zie je per adres welke versie Google als canoniek heeft gekozen.</li>
+        <li><strong>Doe een site-zoekopdracht.</strong> Typ <code>site:jouwsite.nl</code> in Google. Zie je adressen met codes erachter, printversies of tagpagina's? Die horen er vaak niet in.</li>
+        <li><strong>Laat een crawler lopen.</strong> Die bezoekt je hele site zoals Google dat doet en zet alles wat dubbel is op een rij.</li>
+      </ol>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Tool</th><th>Wat je ermee vindt</th><th>Kosten</th></tr></thead>
+          <tbody>
+            <tr><td>Google Search Console</td><td>Welke adressen Google zelf als duplicaat ziet, en welke versie het kiest</td><td>Gratis</td></tr>
+            <tr><td>Google, met aanhalingstekens</td><td>Kopieën van je tekst op andere sites</td><td>Gratis</td></tr>
+            <tr><td>Screaming Frog SEO Spider</td><td>Exact dubbele pagina's, dubbele titels en omschrijvingen, canonicals</td><td>Gratis tot 500 adressen, daarboven £ 199 per jaar</td></tr>
+            <tr><td>Siteliner</td><td>Overlap tussen pagina's binnen je eigen site</td><td>Gratis scan</td></tr>
+            <tr><td>Copyscape</td><td>Sites die jouw tekst hebben overgenomen</td><td>Gratis zoeken, onbeperkt met de betaalde versie</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een waarschuwing bij de percentages uit zulke tools. Een hoge overlap kan ook komen door vaste blokken die op elke pagina staan, zoals een standaardtekst onder je diensten. Dat klinkt eng, maar zegt weinig. Kijk vooral naar de hoofdinhoud: lijkt de kern van twee pagina's op elkaar?</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Welke oplossing past bij jouw situatie?</h2></div>
+      <p>Begin altijd met één vraag: welk adres moet de hoofdpagina zijn? Daarna kies je hoe je de rest naar die pagina stuurt. Google noemt zelf drie signalen, van sterk naar zwak: een redirect, een canonical-tag en opname in je sitemap. Ze werken het best samen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Situatie</th><th>Oplossing</th><th>Wat er gebeurt</th></tr></thead>
+          <tbody>
+            <tr><td>De kopie hoeft niet te bestaan</td><td>301-redirect</td><td>Bezoekers en Google gaan automatisch naar de hoofdpagina</td></tr>
+            <tr><td>De kopie moet blijven, bijvoorbeeld een filter</td><td>Canonical-tag</td><td>De pagina blijft werken, Google telt de signalen op bij de hoofdpagina</td></tr>
+            <tr><td>De pagina heeft in Google niets te zoeken</td><td>Noindex</td><td>Google haalt de pagina uit de zoekresultaten</td></tr>
+            <tr><td>Twee pagina's over hetzelfde onderwerp</td><td>Samenvoegen en doorsturen</td><td>Eén sterke pagina in plaats van twee halve</td></tr>
+            <tr><td>Een tekst die ook elders staat</td><td>Herschrijven</td><td>Je pagina wordt een eigen pagina, met een eigen kans</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>De 301-redirect</h3>
+      <p>Het sterkste signaal. Gebruik het als een dubbele pagina geen functie meer heeft: een oude versie, een samengevoegde blog, de http-variant van je site. In WordPress regel je losse doorverwijzingen met een plugin als Redirection, of met de betaalde versie van Yoast SEO.</p>
+
+      <h3>De canonical-tag</h3>
+      <p>Een regel in de code waarmee je zegt: dit is het origineel. Google noemt het een sterk signaal, maar wel een hint en geen bevel. De tag staat in de head van de pagina en ziet er zo uit:</p>
+      <pre><code>{canonical}</code></pre>
+      <p>Google raadt aan om de tag ook op de hoofdpagina zelf te zetten, verwijzend naar zichzelf. Gebruik altijd het volledige adres, met https en domeinnaam. Werk je met Yoast SEO of Rank Math, dan zetten die de tag er standaard in. Per pagina pas je hem aan op het tabblad Geavanceerd, bij het veld voor de canonieke URL.</p>
+
+      <h3>Noindex</h3>
+      <p>Met noindex vraag je Google een pagina niet in de zoekresultaten op te nemen. Handig voor de resultaten van je eigen zoekfunctie, lege tagpagina's of een bedankpagina:</p>
+      <pre><code>{noindex}</code></pre>
+      <p>Gebruik het niet om tussen twee versies van dezelfde pagina te kiezen. Google raadt dat af, omdat de pagina dan helemaal uit beeld verdwijnt. Daar is de canonical voor.</p>
+
+      <h3>Herschrijven</h3>
+      <p>De duurste oplossing, en vaak de beste. Herschrijf leveranciersteksten, te beginnen bij je best verkopende producten of diensten. Dat is de moeite waard: je wint niet alleen in Google, je pagina overtuigt ook beter. Een herschreven tekst zegt waarvoor het product dient, voor wie het is en wat jij erbij doet.</p>
+
+      <h3>Alle signalen op één lijn</h3>
+      <p>Wat je ook kiest, zorg dat alles hetzelfde zegt. Link in je eigen menu en teksten naar het canonieke adres. Zet alleen canonieke adressen in je <a href="/kennisbank/wat-is/sitemap/">xml-sitemap</a>. Spreken de signalen elkaar tegen, dan gaat Google zelf kiezen.</p>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2>Veelgemaakte fouten bij het oplossen</h2></div>
+      <ul>
+        <li><strong>Kopieën blokkeren in robots.txt.</strong> Google ziet de pagina dan niet meer, dus ook je canonical niet. Het adres kan toch in de index blijven, zonder inhoud. Google raadt dit uitdrukkelijk af.</li>
+        <li><strong>Alles laten verwijzen naar de homepage.</strong> Een canonical moet naar een pagina wijzen die echt op de kopie lijkt. Lijkt hij er niet op, dan kiest Google hem nooit.</li>
+        <li><strong>Tegenstrijdige signalen.</strong> In de sitemap staat adres A, in de canonical adres B en je menu linkt naar adres C. Dan weet Google niet wat je wilt.</li>
+        <li><strong>Een relatief adres in de canonical.</strong> Google ondersteunt het, maar raadt het af. Bij een testomgeving die openstaat, gaat het dan mis.</li>
+        <li><strong>De verwijdertool gebruiken.</strong> Die tool in Search Console verbergt alle versies van een adres. Daarmee haal je ook je goede pagina weg.</li>
+        <li><strong>Noindex en canonical door elkaar.</strong> Een pagina met noindex die ook naar een andere pagina verwijst, geeft twee boodschappen tegelijk. Kies er één.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Als iemand anders je tekst kopieert</h2></div>
+      <p>Het overkomt veel ondernemers met een goede website. Een concurrent neemt je dienstpagina over, soms tot je bedrijfsnaam aan toe. Dat is in de eerste plaats geen SEO-probleem. Het is een kwestie van auteursrecht: je tekst is van jou.</p>
+      <ol>
+        <li>Maak een schermafdruk van de kopie, met datum.</li>
+        <li>Stuur de eigenaar een vriendelijk bericht met de vraag de tekst weg te halen. Dat werkt vaker dan je denkt.</li>
+        <li>Geen reactie? Meld het bij de partij die de site host.</li>
+        <li>Helpt dat ook niet, dan kun je bij Google een verwijderverzoek indienen op grond van auteursrecht.</li>
+      </ol>
+      <p>Herplaats je zelf een artikel op een andere site, bijvoorbeeld bij een vakblad? Vraag dan of zij een canonical naar jouw origineel zetten. Lukt dat niet, dan helpt een duidelijke link terug naar jouw pagina.</p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <p>Niet in paniek raken, wel opruimen. Dit is de volgorde die we zelf aanhouden, van snel en goedkoop naar meer werk:</p>
+      <ul class="vink">
+        <li>Zorg dat je site maar op één adres bereikbaar is: https, met of zonder www, en altijd dezelfde slash.</li>
+        <li>Controleer of elke pagina een canonical-tag heeft die naar zichzelf wijst.</li>
+        <li>Zet interne zoekresultaten en lege tagpagina's op noindex.</li>
+        <li>Twee pagina's over hetzelfde? Voeg ze samen en zet een redirect van de oude naar de nieuwe. Lees ook wat <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a> is, want daar lijkt het op.</li>
+        <li>Herschrijf leveranciersteksten, te beginnen bij wat het meeste oplevert.</li>
+        <li>Kijk elk kwartaal in Search Console of er nieuwe duplicaten bijkomen.</li>
+      </ul>
+      <p>Dit is ook precies wat we nalopen in een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a>, vanaf € 395. Je krijgt dan een lijst met wat er dubbel staat en welke oplossing bij elk adres past.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/hoe-werkt-seo/">Hoe werkt SEO?</a> of de gids over <a href="/kennisbank/gidsen/seo-vriendelijke-urls/">SEO-vriendelijke URL's</a>. Laat je liever unieke <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> schrijven, dat kan vanaf € 75 per pagina. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel procent van een tekst mag overeenkomen?', a: 'Google noemt geen percentage. Het kijkt of de hoofdinhoud van twee pagina\'s grotendeels dezelfde is. Een gedeeld menu, een footer of een citaat telt niet. Twee pagina\'s waarin alleen een plaatsnaam verschilt, tellen wel.' },
+      { v: 'Geeft Google een penalty voor duplicate content?', a: 'Nee, niet voor gewone dubbele pagina\'s op je eigen site. Google kiest dan één versie om te tonen. Alleen wie bewust teksten van anderen kopieert om zoekmachines te misleiden, loopt kans op een maatregel.' },
+      { v: 'Is een .nl- en een .be-site met dezelfde tekst dubbel?', a: 'Ja, als de tekst in dezelfde taal is. Gebruik dan hreflang om aan te geven welke versie bij welk land hoort, en een canonical. Beter nog: pas de teksten aan op de Vlaamse lezer.' },
+      { v: 'Mag ik mijn blog ook op LinkedIn of een andere site plaatsen?', a: 'Ja. Zet hem eerst op je eigen site en wacht tot Google hem heeft opgepikt. Vraag de andere site om een canonical naar jouw origineel, of zet er in elk geval een link naar terug.' },
+      { v: 'Hoe lang duurt het voordat Google mijn oplossing oppikt?', a: 'Google moet de pagina\'s eerst opnieuw bezoeken. Dat duurt dagen tot weken, afhankelijk van hoe vaak Google langskomt. Met de URL-inspectie in Search Console kun je om een nieuwe indexering vragen.' },
+      { v: 'Is een canonical hetzelfde als een redirect?', a: 'Nee. Bij een redirect gaat de bezoeker naar een ander adres. Bij een canonical blijft de pagina gewoon werken en vertel je alleen Google welke versie het origineel is.' },
+    ]}
+  />
+
+  <Actie titel="Staat er dubbele tekst op jouw site?" tekst={`We zoeken het gratis voor je uit. ${site.contactpersoon} belt je met wat er dubbel staat en wat je eraan doet.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-wrap: normal; word-break: normal; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

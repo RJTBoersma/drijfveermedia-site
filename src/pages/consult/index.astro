@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/consult.astro';
+import { site } from '../../data/site';
+
+const url = '/consult/';
+const schema = [{
+  '@type': 'Service',
+  name: 'Marketing advies (consult)',
+  serviceType: 'Marketingadvies',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 85, priceSpecification: { '@type': 'UnitPriceSpecification', price: 85, priceCurrency: 'EUR', unitText: 'HOUR', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Marketing advies in een consult van € 85 | Drijfveer Media"
+  description="Marketing advies zonder verkooppraatje: een uur sparren over je website, Google, advertenties of AI. Je gaat weg met drie concrete acties. € 85 per uur."
+  kruimels={[{ naam: 'Consult', url }]}
+  schema={schema}
+>
+  <Hero kicker="Advies · Consult" titel="Marketing advies: een uur sparren, zonder verkooppraatje" prijs="€ 85 per uur" eenmalig knop={{ tekst: 'Plan een consult', href: '/contact/' }}>
+    <p>Je zit met een vraag over je marketing en wilt een eerlijk antwoord van iemand die het vak kent. Geen offerte, geen traject. Gewoon een uur sparren, en je gaat weg met drie dingen die je morgen kunt doen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Waarvoor ondernemers een consult boeken</h2>
+      <p>Iedereen heeft een mening over je marketing. Je zwager, de buurman met een webshop, het bureau dat je vorige week belde. Wat je zoekt, is onafhankelijk marketing advies van iemand die er niets aan verdient als je ja zegt. Dit zijn vraagstukken die we vaak horen:</p>
+      <ul class="vink">
+        <li>Ik heb een offerte voor een nieuwe website of SEO. Is die reëel?</li>
+        <li>Moet ik Google Ads doen, of eerst werken aan mijn vindbaarheid?</li>
+        <li>Waarom komen er via mijn website bijna geen aanvragen binnen?</li>
+        <li>Help, mijn bezoekers uit Google zijn ineens gehalveerd. Wat is er gebeurd?</li>
+        <li>Hoe onderscheid ik me van de concurrent? Klopt mijn positionering nog?</li>
+        <li>Op welke socials moet ik zitten, en hoe vaak moet ik posten?</li>
+        <li>Wat moet ik met AI, en hoe word ik genoemd door ChatGPT?</li>
+        <li>Wil je even meelezen met de copy van mijn homepage?</li>
+      </ul>
+      <p>We werken voor ondernemingen in heel Nederland en ook internationaal. Een kapsalon in Assen of een bedrijf dat naar Duitsland exporteert: de vragen lijken vaak meer op elkaar dan je denkt.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={56} /><h2>Wat een consult is, en wat niet</h2></div>
+      <p>Een consult is sparren en advies. We luisteren, stellen vragen, kijken samen naar je site en je cijfers en zeggen eerlijk wat we zien. Ook als dat is: stop met die campagne, hij kost je alleen geld. Je betaalt ook voor eerlijk advies over wat niet werkt.</p>
+      <p>Een consult is geen marketingplan. We schrijven geen strategie van veertig pagina's en verkopen dat ook niet als losse dienst. Wil je zelf een plan op papier zetten? De gids <a href="/kennisbank/gidsen/marketingplan-maken/">marketingplan maken</a> helpt je op weg. Wij helpen je liever met de keuzes die het verschil maken.</p>
+      <p>Na een uur weet je wat de optimale volgorde is: wat je eerst doet, wat kan wachten en waar je mee stopt. Soms blijkt dat je het al heel goed doet. Dat mag je dan ook vieren.</p>
+
+      <div class="stap-kop"><Tekening naam="koffie" maat={56} /><h2>Zo gaat een consult</h2></div>
+      <ol>
+        <li><b>Je stuurt je vraag.</b> Bel ons of vul het formulier in. Hoe concreter de vraag, hoe meer je aan het uur hebt.</li>
+        <li><b>Wij bereiden ons voor.</b> We kijken naar je website, je vindbaarheid en eventueel de offerte die je kreeg.</li>
+        <li><b>Het gesprek.</b> Aan de telefoon, via een videogesprek of bij ons aan de {site.straat} in {site.plaats}, met koffie. Op locatie kan ook, in overleg.</li>
+        <li><b>Je gaat weg met drie acties.</b> Concreet en op volgorde, zodat je zelf aan de slag kunt.</li>
+      </ol>
+      <p>Daarna zit je nergens aan vast. Wil je dat wij het werk oppakken? Dan hoor je wat het kost. Wil je het zelf doen? Ook prima. Voor een creatief klusje of wat extra handen kun je later altijd een <a href="/online-marketing-uitbesteden/interim-marketeer/">interim-marketeer</a> inhuren.</p>
+
+      <h2>Wat een marketing consult kost</h2>
+      <p>Een consult kost € 85 per uur, exclusief btw. Eén uur is voor de meeste vragen genoeg. Gaat het om de creatie van een nieuwe site of een grotere verbouwing, dan plannen we soms een tweede uur.</p>
+      <p>Wil je alleen weten hoe je website ervoor staat? Begin dan met de <a href="/gratis-website-analyse/">gratis website-analyse</a>. Wil je je marketing helemaal kwijt? Kijk dan bij <a href="/online-marketing-uitbesteden/">online marketing uitbesteden</a>.</p>
+    </div>
+  </section>
+
+  <Bewijs titel="Waarom een uur met ons de moeite waard is" />
+
+  <Faq
+    vragen={[
+      { v: 'Is een consult hetzelfde als de gratis website-analyse?', a: 'Nee. Bij de gratis analyse kijken wij naar je site en bellen we je met de drie belangrijkste punten. Bij een consult staat jouw vraag centraal, een uur lang, en mag het over alles gaan.' },
+      { v: 'Moet ik na het consult klant worden?', a: 'Nee. Je betaalt het uur en dat is het. Veel ondernemers gaan daarna zelf aan de slag.' },
+      { v: 'Waar vindt het consult plaats?', a: 'Aan de telefoon, via video of bij ons op kantoor in Assen. Op locatie kan ook, in overleg.' },
+      { v: 'Kunnen jullie ook een marketingplan voor me schrijven?', a: 'Nee, dat bieden we niet als losse dienst aan. We helpen je in een consult wel met de keuzes die in zo\'n plan horen.' },
+    ]}
+  />
+
+  <Verder
+    titel="Liever meer dan een uur?"
+    links={[
+      { label: 'Pillar', titel: 'Online marketing uitbesteden', href: '/online-marketing-uitbesteden/', tekst: 'Alles in één hand, vanaf € 595 per maand.' },
+      { label: 'Dienst', titel: 'Interim-marketeer', href: '/online-marketing-uitbesteden/interim-marketeer/', tekst: 'Een marketeer op afroep, € 95 per uur.' },
+      { label: 'Gids', titel: 'Offerte beoordelen', href: '/kennisbank/gidsen/offerte-beoordelen/', tekst: 'Zelf een offerte voor een website of SEO nakijken.' },
+    ]}
+  />
+
+  <Actie titel="Zit je met een marketingvraag?" tekst={`Bel ${site.contactpersoon} of laat je nummer achter. Hij belt je binnen 15 minuten terug en plant het consult op een moment dat jou past.`} knop={{ tekst: 'Plan een consult', href: '/contact/' }} />
+</Base>

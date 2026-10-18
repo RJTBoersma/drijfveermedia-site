@@ -1,0 +1,71 @@
+---
+// Scène voor /kennisbank/wat-is/breadcrumbs/: bovenin een kruimelpad, daaronder een spoor van kruimels van een huisje naar een pagina.
+// In de volledige versie lichten de kruimels om de beurt op en schuift een markering langs de stappen van het kruimelpad.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kruimels = [[128, 205], [154, 200], [178, 189], [199, 177], [220, 171], [260, 187], [280, 195], [300, 199], [320, 198], [340, 192]];
+const stappen = [
+  { x: 36, w: 58, t: 'Home' },
+  { x: 116, w: 86, t: 'Diensten' },
+  { x: 224, w: 116, t: 'Warmtepomp' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: bovenin het kruimelpad Home, Diensten, Warmtepomp. Daaronder loopt een spoor van kruimels van een huisje naar de pagina waar je bent.'}>
+  <!-- het kruimelpad -->
+  <rect x="20" y="26" width="360" height="42" rx="21" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  {stappen.map((s, i) => (
+    <g>
+      <text x={s.x + s.w / 2} y="52" font-size="13" font-weight={i === 2 ? 900 : 700} text-anchor="middle" style={i === 2 ? 'fill:#10283f' : 'fill:#074663'}>{s.t}</text>
+      {i < 2 && <path class="l" d={`M${s.x + s.w + 8} 41l6 6-6 6`} stroke-width="2" />}
+    </g>
+  ))}
+  <path d="M42 57h46M128 57h62" stroke="#074663" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- het spoor -->
+  <path d="M100 196C160 230 200 150 240 176S320 210 360 180" fill="none" stroke="#e1e8ef" stroke-width="16" stroke-linecap="round" />
+  {kruimels.map(([x, y], i) => (
+    <circle class="kruimel" cx={x} cy={y} r={i % 2 ? 3.5 : 4.5} fill="#8aa0b4" style={`animation-delay:${i * 0.3}s`} />
+  ))}
+
+  <!-- huisje: home -->
+  <path class="l" d="M44 194l30-26 30 26" />
+  <path d="M52 188v32h44v-32" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <rect class="o" x="68" y="200" width="12" height="20" rx="2" />
+
+  <!-- wegwijzer halverwege -->
+  <path class="l" d="M240 176v-46" />
+  <path d="M240 132h34l8 8-8 8h-34z" fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+
+  <!-- de pagina waar je bent -->
+  <rect x="362" y="118" width="96" height="112" rx="10" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <rect x="376" y="134" width="56" height="8" rx="4" fill="#074663" />
+  <rect x="376" y="152" width="68" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="376" y="166" width="60" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="376" y="180" width="66" height="6" rx="3" fill="#d9e1ea" />
+  <rect class="o" x="376" y="200" width="44" height="16" rx="5" />
+
+  {!mini && (
+    <g>
+      {stappen.map((s, i) => (
+        <rect class="markeer" x={s.x - 4} y="34" width={s.w + 8} height="26" rx="13" fill="none" stroke="#ff6600" stroke-width="2" style={`animation-delay:${0.4 + i * 1.6}s`} />
+      ))}
+      <path class="vlag" d="M452 112v-30M452 82h18l-5 7 5 7h-18" fill="#ff6600" stroke="#ff6600" stroke-width="2" stroke-linejoin="round" />
+    </g>
+  )}
+</svg>
+<style>
+  .kruimel, .vlag { transform-box: fill-box; transform-origin: center; }
+  .vlag { transform-origin: left bottom; }
+  .markeer { opacity: 0; }
+  :global(.teken-js) .vlag { opacity: 0; }
+  .in-beeld .kruimel { animation: kennisbank-wat-is-breadcrumbs-kruimel 3s ease-in-out infinite; }
+  .in-beeld .markeer { animation: kennisbank-wat-is-breadcrumbs-markeer 4.8s ease-in-out infinite; }
+  .in-beeld .vlag { animation: kennisbank-wat-is-breadcrumbs-vlag 0.6s cubic-bezier(.3,1.6,.5,1) 3.6s forwards; }
+  @keyframes kennisbank-wat-is-breadcrumbs-kruimel { 0%, 100% { fill: #8aa0b4; transform: none; } 15% { fill: #ff6600; transform: scale(1.4); } 30% { fill: #8aa0b4; transform: none; } }
+  @keyframes kennisbank-wat-is-breadcrumbs-markeer { 0% { opacity: 0; } 6%, 28% { opacity: 1; } 36%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-breadcrumbs-vlag { from { opacity: 0; transform: scale(.3); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .kruimel, .in-beeld .markeer { animation: none; }
+    .in-beeld .vlag { animation: none; opacity: 1; }
+  }
+</style>

@@ -1,0 +1,263 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+import Prijskaart from '../../components/pagina/Prijskaart.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/seo-friesland.astro';
+import { site } from '../../data/site';
+
+const url = '/seo-friesland/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'provincie', titel: 'Friesland in cijfers' },
+  { id: 'plaatsnamen', titel: 'Zoeken op plaats, niet op gemeente' },
+  { id: 'lokaal', titel: 'Lokale vindbaarheid' },
+  { id: 'opbouw', titel: 'Eén site voor de hele provincie' },
+  { id: 'seizoen', titel: 'Toerisme: op tijd beginnen' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld: hovenier in het zuiden' },
+  { id: 'planning', titel: 'Het eerste half jaar' },
+  { id: 'taal', titel: 'Fries of Nederlands?' },
+  { id: 'kiezen', titel: 'Vijf vragen voor elk bureau' },
+  { id: 'voor-wie', titel: 'Voor wie het loont' },
+  { id: 'kosten', titel: 'Kosten en afspraken' },
+];
+// CBS, Kerncijfers wijken en buurten 2024 (inwoners per 1 januari 2024). Plaatsen uit de CBS-wijkindeling.
+const gemeenten: [string, string, number, number][] = [
+  ['Leeuwarden', 'Leeuwarden, Stiens, Grou', 128810, 15995],
+  ['Súdwest-Fryslân', 'Sneek, Bolsward, Makkum, IJlst', 90421, 12660],
+  ['Smallingerland', 'Drachten', 56661, 6270],
+  ['De Fryske Marren', 'Joure, Lemmer, Balk, Sloten', 51929, 7775],
+  ['Heerenveen', 'Heerenveen, Jubbega, Oranjewoud', 51787, 7015],
+  ['Waadhoeke', 'Franeker, St.-Annaparochie', 46911, 5740],
+  ['Noardeast-Fryslân', 'Dokkum, Kollum, Holwerd', 45866, 5585],
+  ['Tytsjerksteradiel', 'Burgum, Hurdegaryp', 32595, 3720],
+  ['Opsterland', 'Gorredijk, Ureterp, Beetsterzwaag', 30059, 3880],
+  ['Achtkarspelen', '', 28226, 3375],
+  ['Weststellingwerf', 'Wolvega, Noordwolde', 26487, 3500],
+  ['Ooststellingwerf', 'Oosterwolde, Appelscha', 25824, 3215],
+  ['Dantumadiel', '', 19135, 2045],
+  ['Harlingen', 'Harlingen, Midlum', 16229, 2030],
+  ['Terschelling', 'Waddeneiland', 4898, 1030],
+  ['Ameland', 'Waddeneiland', 3839, 715],
+  ['Vlieland', 'Waddeneiland', 1255, 295],
+  ['Schiermonnikoog', 'Waddeneiland', 972, 185],
+];
+const nl = (n: number) => n.toLocaleString('nl-NL');
+const plaatsen: [string, string?][] = [['Leeuwarden', '/seo-leeuwarden/'], ['Drachten', '/seo-drachten/'], ['Heerenveen', '/seo-heerenveen/'], ['Sneek'], ['Stiens'], ['Joure'], ['Harlingen'], ['Wolvega'], ['Dokkum'], ['Franeker']];
+const schema = [{
+  '@type': 'Service',
+  name: 'SEO in Friesland',
+  serviceType: 'Zoekmachineoptimalisatie',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Friesland' },
+  url: `${site.url}${url}`,
+  dateModified: datum,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="SEO Friesland: beter vindbaar in Google | Drijfveer Media"
+  description="SEO in Friesland voor ondernemers van Leeuwarden tot de Waddeneilanden. Beter vindbaar in Google en AI, met stijggarantie. Vanaf € 495 per maand."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Friesland', url: '/regio/friesland/' }, { naam: 'SEO Friesland', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · Friesland" titel="SEO in Friesland: gevonden van Leeuwarden tot de eilanden" prijs="vanaf € 495 per maand">
+    <p>Je klanten zitten in Leeuwarden, in een dorp als Stiens of op Terschelling. SEO in Friesland zorgt dat ze jou vinden, waar ze ook zoeken. Wij doen dat vanuit Assen, en komen graag naar je toe.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <p>SEO in Friesland gaat over een groot gebied met veel kleine kernen. Een bedrijf in Drachten heeft andere concurrenten dan een bedrijf in Dokkum, en een camping op Ameland zoekt andere gasten dan een accountant in Heerenveen. Op deze pagina zie je hoe de provincie in elkaar zit, hoe mensen er zoeken en hoe je één website zo opbouwt dat hij in je hele werkgebied beter vindbaar wordt.</p>
+
+        <h2 id="provincie">Waarom SEO in Friesland om een eigen aanpak vraagt</h2>
+        <p>Friesland telde begin 2024 volgens het CBS 661.904 inwoners en 85.030 bedrijfsvestigingen, verdeeld over 18 gemeenten. Die bedrijven zitten lang niet allemaal in de steden. Leeuwarden en Súdwest-Fryslân hebben samen een derde van alle vestigingen. De rest is verspreid over dorpen, kleine steden en vier bewoonde Waddeneilanden.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Gemeente</th><th>Onder meer</th><th>Inwoners</th><th>Vestigingen</th></tr></thead>
+            <tbody>
+              {gemeenten.map(([g, p, i, v]) => <tr><td>{g}</td><td>{p}</td><td>{nl(i)}</td><td>{nl(v)}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Bron: CBS, Kerncijfers wijken en buurten 2024. Plaatsnamen uit de CBS-indeling in wijken.</p>
+        <p>Wat leer je hieruit? Drie dingen.</p>
+        <ul>
+          <li><strong>De concurrentie is ongelijk verdeeld.</strong> In Leeuwarden strijden bijna 16.000 vestigingen om aandacht, in Ooststellingwerf ruim 3.000. Op "accountant Leeuwarden" heb je meer werk dan op "accountant Oosterwolde".</li>
+          <li><strong>Veel ondernemers werken op afstand van hun klant.</strong> Wie in Gorredijk zit en klanten in de hele Wouden heeft, moet laten zien welke plaatsen hij bedient. Anders ziet Google hem alleen als bedrijf uit Gorredijk.</li>
+          <li><strong>De eilanden zijn een wereld apart.</strong> Op Terschelling woonden begin 2024 4.898 mensen, maar er waren 1.030 vestigingen. Daar draait veel om gasten van buiten, die zoeken voordat ze de boot nemen.</li>
+        </ul>
+
+        <h2 id="plaatsnamen">Zoeken op plaats, niet op gemeente</h2>
+        <p>Veel Friese gemeenten zijn samengevoegd en dragen een naam die klanten nooit intypen. Niemand zoekt op "loodgieter Súdwest-Fryslân". Ze zoeken op "loodgieter Sneek" of "loodgieter Bolsward". Hetzelfde geldt voor De Fryske Marren (Joure, Lemmer, Balk), Waadhoeke (Franeker) en Noardeast-Fryslân (Dokkum, Kollum).</p>
+        <p>Voor je vindbaarheid betekent dat:</p>
+        <ol>
+          <li><strong>Noem de plaatsen, niet alleen de gemeente.</strong> In je teksten, je werkgebied en je bedrijfsprofiel.</li>
+          <li><strong>Kijk welke spelling je klanten gebruiken.</strong> Sommige plaatsen hebben officieel een Friese naam, zoals Grou en Earnewâld. Andere worden in twee talen geschreven. In Search Console zie je bij de zoekopdrachten welke variant bij jou binnenkomt.</li>
+          <li><strong>Gebruik je eigen adres zoals de post het kent.</strong> Overal dezelfde schrijfwijze, zodat Google je vermeldingen aan elkaar kan koppelen.</li>
+        </ol>
+        <p>Werk je op de lijn Leeuwarden-Sneek-Heerenveen, dan zijn dat drie markten met elk hun eigen zoekopdrachten. Behandel ze ook zo.</p>
+
+        <h2 id="lokaal">Lokale vindbaarheid in een provincie vol dorpen</h2>
+        <p>Bij een zoekopdracht als "hovenier" of "kapper" toont Google eerst bedrijven op de kaart. Volgens Google bepalen drie dingen wie daar staat: relevantie, afstand en prominentie. In een provincie met zoveel kleine kernen is de afstand tot je klant al snel groter dan de afstand tot je concurrent. Wat helpt:</p>
+        <ul class="vink">
+          <li>Een volledig Google Bedrijfsprofiel, met de juiste hoofdcategorie en echte foto's.</li>
+          <li>Een servicegebied als je bij klanten thuis komt. Google staat er maximaal 20 toe, op plaats of postcode, binnen ongeveer twee uur rijden van je bedrijf. Kies de plaatsen waar je echt werk wilt.</li>
+          <li>Dezelfde gegevens achter je bedrijfsnaam op elke plek: naam, adres en telefoonnummer, overal gelijk. Wat Google vindt op andere sites, telt mee.</li>
+          <li>Reviews van klanten uit de dorpen waar je werkt. Volgens Google helpen meer reviews en positieve beoordelingen je positie op de kaart.</li>
+          <li>Een pagina per dienst die laat zien in welke plaatsen je actief bent, met echte voorbeelden.</li>
+        </ul>
+        <p>Meer over dit deel van het werk lees je bij <a href="/lokale-seo/">lokale SEO</a>, vanaf € 295 per maand.</p>
+
+        <h2 id="opbouw">Een SEO-strategie voor heel Friesland: één site, slimme opbouw</h2>
+        <p>Veel ondernemers denken dat ze voor elke plaats een pagina moeten maken. "Schilder Drachten", "schilder Heerenveen", "schilder Sneek", met steeds dezelfde tekst en een andere plaatsnaam. Google noemt dat in zijn spamregels doorway abuse en waardeert het niet. Zo bouw je het beter op:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Laag</th><th>Wat erop staat</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td>Dienstpagina</td><td>Alles over één dienst, met prijs, werkwijze en vragen</td><td>/schilderwerk-buiten/</td></tr>
+              <tr><td>Werkgebied</td><td>Alle plaatsen waar je komt, met reistijd of voorrijkosten</td><td>/werkgebied/</td></tr>
+              <tr><td>Plaatspagina</td><td>Alleen waar je veel werk hebt en iets eigens kunt vertellen: projecten, klanten, lokale regels</td><td>/schilder-drachten/</td></tr>
+              <tr><td>Projecten</td><td>Echte klussen met plaatsnaam en foto's</td><td>/projecten/woonboerderij-gorredijk/</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">De adressen zijn een verzonnen voorbeeld.</p>
+        <p>Projecten met een plaatsnaam zijn het sterkste bewijs dat je ergens werkt. Ze helpen je in Google en overtuigen de bezoeker. Eén echte klus in Wolvega zegt meer dan tien keer "wij werken ook in Wolvega".</p>
+
+        <h2 id="seizoen">Toerisme: wie in mei begint, is te laat</h2>
+        <p>Friese hotels ontvingen in 2025 volgens het CBS 982.000 gasten, samen goed voor ruim 1,9 miljoen overnachtingen. Ruim 160.000 gasten kwamen uit het buitenland, van wie 76.000 uit Duitsland. En dan tellen campings, jachthavens en vakantiehuizen nog niet eens mee.</p>
+        <p>Gasten oriënteren zich lang van tevoren. Een nieuwe pagina staat zelden binnen een paar weken bovenaan. Daarom werkt een seizoensbedrijf met deze planning:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Periode</th><th>Wat je doet</th></tr></thead>
+            <tbody>
+              <tr><td>Oktober tot december</td><td>Techniek nakijken, pagina's van vorig jaar bijwerken, nieuwe pagina's schrijven.</td></tr>
+              <tr><td>Januari tot maart</td><td>Links en vermeldingen verzamelen, foto's vernieuwen, prijzen voor het nieuwe jaar erop.</td></tr>
+              <tr><td>April tot september</td><td>Reviews vragen bij elke gast, openingstijden bijhouden, meten wat werkt.</td></tr>
+              <tr><td>Na het seizoen</td><td>Search Console bekijken: welke pagina's trokken gasten, welke niet?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Komen er veel Duitse gasten? Dan loont een korte Duitse pagina met de belangrijkste informatie. Die laat je wel vertalen door iemand die de taal goed kent.</p>
+
+        <h2 id="rekenvoorbeeld">Rekenvoorbeeld: een hovenier die heel het zuiden bedient</h2>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: Hoveniersbedrijf De Haan in Heerenveen</p>
+          <p>De Haan werkt in Heerenveen, Joure, Gorredijk en Wolvega. Op de site staat één pagina "hovenier Friesland". Die scoort nergens, want niemand zoekt zo. Na het zoekwoordonderzoek ziet het plan er zo uit:</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th>Zoekopdracht</th><th>Zoekers per maand</th><th>Aanpak</th></tr></thead>
+              <tbody>
+                <tr><td>hovenier Heerenveen</td><td>90</td><td>Eigen pagina, met projecten in de stad</td></tr>
+                <tr><td>hovenier Joure</td><td>40</td><td>Eigen pagina, er zijn genoeg klussen om te laten zien</td></tr>
+                <tr><td>hovenier Gorredijk en Wolvega</td><td>samen 30</td><td>Op de werkgebiedpagina, met twee projecten</td></tr>
+                <tr><td>tuin onderhoud, bestrating, schutting plaatsen</td><td>samen 120 in de regio</td><td>Een dienstpagina per onderwerp</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Samen 280 zoekopdrachten per maand in plaats van bijna nul. Haalt De Haan daarvan 1 op de 10 naar zijn site, en belt 1 op de 15 bezoekers, dan zijn dat ongeveer twee aanvragen per maand. Voor een hovenier met klussen van een paar duizend euro is dat veel geld.</p>
+          <p class="muted klein">Bedrijf, zoekvolumes en percentages zijn verzonnen.</p>
+        </div>
+
+        <h2 id="planning">Wat een SEO-specialist het eerste half jaar doet</h2>
+        <p>Een SEO-strategie is pas iets waard als je weet wat er wanneer gebeurt. Zo ziet een voorbeeldplanning eruit voor een Fries bedrijf dat bij nul begint. We beginnen waar het snelst verschil zit, en dat kan per bedrijf anders zijn.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Maand</th><th>Wat er gebeurt</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Nulmeting en zoekwoordonderzoek per plaats. Google Bedrijfsprofiel volledig maken. Grootste technische fouten oplossen.</td></tr>
+              <tr><td>2</td><td>De twee of drie belangrijkste dienstpagina's herschrijven. Gegevens op andere sites gelijktrekken.</td></tr>
+              <tr><td>3</td><td>Werkgebiedpagina en eerste projecten met plaatsnaam. Een vaste manier om reviews te vragen.</td></tr>
+              <tr><td>4</td><td>De eerste links van regionale sites, leveranciers en verenigingen.</td></tr>
+              <tr><td>5</td><td>Pagina's die op plek 5 tot 15 staan verder verbeteren. Nieuwe vragen van klanten beantwoorden.</td></tr>
+              <tr><td>6</td><td>Terugkijken: welke zoekwoorden stegen, welke aanvragen kwamen er? Plan voor het volgende half jaar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Elke maand krijg je een kort rapport in gewone taal. Je hoeft dus niet te wachten tot maand zes om te zien of het werkt.</p>
+        <div class="stap-kop"><Tekening naam="kolf" maat={44} /><h3>Eerst bewezen, dan pas bij jou</h3></div>
+        <p>Elke techniek die we gebruiken, hebben we eerst bewezen op onze eigen sites. Al 15 jaar hebben we er meer dan 100, in allerlei beroepen. Daar mogen dingen misgaan, bij jou niet. Bij klanten blijven we ruim binnen de regels van Google. Alles over onze aanpak staat bij <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a> en in het <a href="/proeflab/">proeflab</a>.</p>
+
+        <h2 id="taal">Fries of Nederlands?</h2>
+        <p>Het Fries is in de provincie overal zichtbaar. De provincie en de gemeente Leeuwarden hebben hun websites ook in het Fries, en gemeenten als Súdwest-Fryslân en De Fryske Marren dragen een Friese naam. Toch zoekt het grootste deel van je klanten waarschijnlijk in het Nederlands. Zeker weten doe je het pas met je eigen cijfers uit Search Console.</p>
+        <p>Wij spreken zelf geen Fries, en dat zeggen we liever eerlijk. Je teksten schrijven we in het Nederlands. Wil je een Friese pagina, bijvoorbeeld omdat je klanten dat waarderen, laat die dan schrijven door iemand die de taal echt beheerst. Een stroeve vertaling kost meer vertrouwen dan hij oplevert.</p>
+
+        <h2 id="kiezen">SEO in Friesland uitbesteden: vijf vragen voor elk bureau</h2>
+        <p>Er zijn genoeg bureaus die SEO in Friesland aanbieden, in de provincie zelf en daarbuiten. Veel bureaus zijn beter in zichzelf verkopen dan in klanten laten groeien. Stel daarom deze vragen, ook aan ons, voordat je tekent.</p>
+        <ol>
+          <li><strong>Wat doen jullie de eerste drie maanden, concreet?</strong> Een goed antwoord noemt pagina's, techniek en links. Een vaag antwoord over "optimaliseren" zegt niets.</li>
+          <li><strong>Op welk doel mag ik jullie afrekenen?</strong> Posities op afgesproken zoekwoorden, of het aantal aanvragen. Niet alleen "meer verkeer".</li>
+          <li><strong>Hoe lang zit ik vast?</strong> Een bureau hoort te verdienen aan klanten die blijven omdat het werkt, niet aan een contract van een jaar.</li>
+          <li><strong>Waar komen de links vandaan?</strong> Vraag om voorbeelden. Gekochte links van sites zonder bezoekers kunnen je juist schade doen.</li>
+          <li><strong>Wat raden jullie af?</strong> Een bureau dat nooit zegt dat iets geen zin heeft, vertelt je niet het hele verhaal. Soms is stoppen met een kanaal het beste advies.</li>
+        </ol>
+        <p>Een rapport waar je een marketeer naast nodig hebt, schiet zijn doel voorbij. Vraag dus ook om een voorbeeld van een maandrapport. Begrijp je het zonder uitleg, dan zit je goed.</p>
+
+        <h2 id="voor-wie">Voor wie SEO wel en niet loont</h2>
+        <p>SEO is geen middel voor elk bedrijf. Eerlijk advies hoort erbij, dus hier is ons lijstje.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Loont meestal wel</th><th>Loont meestal niet, of pas later</th></tr></thead>
+            <tbody>
+              <tr><td>Vakmensen en dienstverleners met een vast werkgebied</td><td>Een bedrijf dat volgende week al klanten nodig heeft. Kijk dan eerst naar Google Ads.</td></tr>
+              <tr><td>Recreatiebedrijven die elk jaar nieuwe gasten zoeken</td><td>Een product waar niemand op zoekt, omdat het nieuw is</td></tr>
+              <tr><td>Bedrijven met klussen of klanten van honderden euro's of meer</td><td>Een bedrijf dat al vol zit en geen werk meer aankan</td></tr>
+              <tr><td>Wie ook over drie jaar nog zonder advertenties klanten wil</td><td>Wie geen tijd heeft om reviews te vragen of vragen te beantwoorden</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Twijfel je? In de gratis scan rekenen we het samen na. Valt de rekensom niet goed uit, dan hoor je dat ook.</p>
+
+        <h2 id="kosten">Wat het kost, en hoe we elkaar zien</h2>
+        <p>SEO begint bij € 495 per maand, lokale SEO bij € 295 per maand. Beide exclusief btw en maandelijks opzegbaar. Bij SEO krijg je stijggarantie: halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Wel moet jij doen wat nodig is, zoals reviews vragen en teksten op tijd nakijken.</p>
+        <p>Ons enige kantoor staat in Assen. Drachten ligt op zo'n 50 minuten rijden, Heerenveen en Leeuwarden op ongeveer een uur. Een afspraak bij jou op de zaak plannen we graag, of je komt naar de Lauwers. Je praat dan met een SEO-specialist, niet met een verkoper. En je hoeft niet lang te wachten: op werkdagen bellen we binnen 15 minuten terug.</p>
+        <p>Voor de grootste plaatsen hebben we een eigen pagina met wat daar speelt:</p>
+        <ul class="chips fries-plaatsen">
+          {plaatsen.map(([naam, href]) => <li>{href ? <a class="chip" href={href}>{naam}</a> : <span class="chip">{naam}</span>}</li>)}
+        </ul>
+        <p>Alles wat we in de provincie doen, van websites tot Google Ads, vind je op de pagina over <a href="/regio/friesland/">Friesland</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+        <Prijskaart naam="SEO in Friesland" prijs="€ 495" eenheid="per maand" punten={['Zoekwoordonderzoek per plaats', 'Techniek op orde', 'Dienst- en projectpagina\'s', 'Links uit de regio', 'Maandrapport in gewone taal', 'Stijggarantie']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost SEO in Friesland?', a: 'SEO begint bij € 495 per maand, lokale SEO bij € 295 per maand. Alles exclusief btw en maandelijks opzegbaar. Na de gratis scan hoor je wat er voor jouw bedrijf nodig is.' },
+      { v: 'Hebben jullie een kantoor in Friesland?', a: 'Nee. Ons enige kantoor staat aan de Lauwers 9 in Assen. Naar Drachten is het zo\'n 50 minuten rijden, naar Leeuwarden en Heerenveen ongeveer een uur. We komen langs, of regelen het telefonisch en online.' },
+      { v: 'Moet ik voor elke Friese plaats een pagina maken?', a: 'Nee. Maak een eigen pagina alleen voor plaatsen waar je veel werkt en iets eigens kunt laten zien. De rest zet je op een goede werkgebiedpagina, met projecten als bewijs.' },
+      { v: 'Schrijven jullie ook teksten in het Fries?', a: 'Nee, niemand van ons spreekt Fries. We schrijven in het Nederlands. Wil je een Friese versie, dan werk je het best met een Friese vertaler.' },
+      { v: 'Werkt SEO ook voor een bedrijf op de Waddeneilanden?', a: 'Ja. Gasten zoeken ruim van tevoren naar een plek om te slapen, te eten of te huren. Wie dan bovenaan staat, maakt de meeste kans. Begin wel op tijd, liefst in het najaar.' },
+      { v: 'Hoe snel zie ik hogere posities?', a: 'Op de kaart kun je binnen een paar weken verschil zien als je profiel eerst onvolledig was. In de gewone zoekresultaten duurt het meestal een paar maanden, afhankelijk van je branche en je plaats.' },
+      { v: 'Hoe lang moet ik wachten op resultaat van SEO in Friesland?', a: 'Je eerste rapport krijg je na een maand. Daarin zie je wat er gedaan is en wat er bewoog. Stijgingen op drukke zoekwoorden kosten meestal een paar maanden. In een dorp met weinig concurrentie gaat het vaak sneller dan in Leeuwarden.' },
+      { v: 'Wordt mijn bedrijf ook in ChatGPT en Google AI genoemd?', a: 'Goede SEO helpt daarbij, maar het is niet hetzelfde. Wil je weten wat AI nu over je zegt, vraag dan een <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-vindbaarheidsanalyse</a> aan.' },
+    ]}
+  />
+
+  <Verder
+    titel="SEO in de Friese steden"
+    links={[
+      { label: 'Friesland', titel: 'SEO in Leeuwarden', href: '/seo-leeuwarden/', tekst: 'Gevonden in de Friese hoofdstad.', teken: 'vergrootglas' },
+      { label: 'Friesland', titel: 'SEO in Drachten', href: '/seo-drachten/', tekst: 'Voor ondernemers in en rond Drachten.', teken: 'vergrootglas' },
+      { label: 'Friesland', titel: 'SEO in Heerenveen', href: '/seo-heerenveen/', tekst: 'Hoger in Google rond Heerenveen.', teken: 'vergrootglas' },
+      { label: 'Dienst', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Op de kaart van Google, Bing en Apple.', teken: 'pin' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd waar je staat in Friesland?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} belt je binnen 15 minuten terug en vertelt eerlijk waar je grootste kans zit.`} />
+</Base>
+<style>
+  .fries-plaatsen { margin: 4px 0 20px; padding-left: 0; }
+</style>

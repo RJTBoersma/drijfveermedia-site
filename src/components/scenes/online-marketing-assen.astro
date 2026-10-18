@@ -1,0 +1,68 @@
+---
+// Scène voor /online-marketing-assen/: het bedrijfsverzamelpand aan de Lauwers 9 met de deur open, en binnen een tafel met laptop en koffie. Er komt een aanvraag bij en de koffie dampt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: het pand aan de Lauwers 9 in Assen met de deur open. Ernaast een tafel met een laptop waarop een staafje aanvragen groeit, en een kop koffie die dampt.'}>
+  <!-- grond -->
+  <path class="l" d="M16 234H464" />
+  <!-- het pand -->
+  <path class="v" d="M34 60h228v14H34z" />
+  <rect x="42" y="74" width="212" height="160" fill="#fff" />
+  <path class="l" d="M42 234V74h212v160" />
+  <rect class="v" x="60" y="92" width="50" height="32" rx="4" />
+  <rect class="v" x="123" y="92" width="50" height="32" rx="4" />
+  <rect x="186" y="92" width="50" height="32" rx="4" fill="#ffe3cf" />
+  <rect class="v" x="60" y="138" width="50" height="32" rx="4" />
+  <rect class="v" x="123" y="138" width="50" height="32" rx="4" />
+  <rect class="v" x="186" y="138" width="50" height="32" rx="4" />
+  <!-- bordje en deur -->
+  <rect x="111" y="182" width="74" height="18" rx="5" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="148" y="195" text-anchor="middle" font-size="11" font-weight="800">Lauwers 9</text>
+  <rect x="126" y="204" width="44" height="30" fill="#e8eef4" />
+  <path d="M126 204h18v30h-18z" fill="#074663" />
+  <circle class="o" cx="139" cy="220" r="2.5" />
+  <!-- stoepbord -->
+  <path d="M196 234l8-36h32l8 36z" fill="#fff" />
+  <path class="l" d="M196 234l8-36h32l8 36M201 226h38" />
+  <text x="220" y="216" text-anchor="middle" font-size="8" font-weight="800">Welkom</text>
+  <!-- tafel -->
+  <path class="l" d="M286 202h164M300 202v32M436 202v32" />
+  <!-- laptop -->
+  <rect x="306" y="124" width="104" height="72" rx="7" fill="#10283f" />
+  <rect x="312" y="130" width="92" height="60" rx="3" fill="#fff" />
+  <text x="320" y="144" font-size="9" font-weight="800">Aanvragen</text>
+  <path d="M320 182h76" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="324" y="166" width="12" height="16" rx="2" fill="#d9e1ea" />
+  <rect x="342" y="160" width="12" height="22" rx="2" fill="#d9e1ea" />
+  <rect x="360" y="154" width="12" height="28" rx="2" fill="#8aa0b4" />
+  <path d="M298 196h120l-6 6H304z" fill="#c9d3dd" />
+  <!-- kop koffie -->
+  <path d="M424 180h22v10a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9z" fill="#fff" />
+  <path class="l" d="M424 180h22v10a9 9 0 0 1-9 9h-4a9 9 0 0 1-9-9zM446 184h3a4 4 0 0 1 0 8h-3" />
+  {!mini && (
+    <g>
+      <rect class="online-marketing-assen-staaf" x="378" y="146" width="12" height="36" rx="2" fill="#ff6600" />
+      <g class="online-marketing-assen-ballon">
+        <path d="M70 26h120a8 8 0 0 1 8 8v18a8 8 0 0 1-8 8h-52l-10 9-2-9H70a8 8 0 0 1-8-8V34a8 8 0 0 1 8-8z" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <text x="130" y="48" text-anchor="middle" font-size="12" font-weight="800">Kom gerust langs</text>
+      </g>
+      <path class="a online-marketing-assen-damp" d="M430 172c-3 -4 3 -7 0 -11M436 170c-3 -4 3 -7 0 -11M442 172c-3 -4 3 -7 0 -11" />
+    </g>
+  )}
+</svg>
+<style>
+  .online-marketing-assen-staaf { transform-box: fill-box; transform-origin: 50% 100%; }
+  :global(.teken-js) .online-marketing-assen-staaf { transform: scaleY(0); }
+  :global(.teken-js) .online-marketing-assen-ballon { opacity: 0; }
+  :global(.teken-js) .online-marketing-assen-damp { opacity: 0; }
+  .in-beeld .online-marketing-assen-staaf { animation: online-marketing-assen-groei 1s cubic-bezier(.3,1.4,.5,1) 0.6s forwards; }
+  .in-beeld .online-marketing-assen-ballon { animation: online-marketing-assen-ballon 0.6s cubic-bezier(.3,1.6,.5,1) 1.4s forwards; }
+  .in-beeld .online-marketing-assen-damp { animation: online-marketing-assen-damp 3.2s ease-in-out 1s infinite; }
+  @keyframes online-marketing-assen-groei { to { transform: scaleY(1); } }
+  @keyframes online-marketing-assen-ballon { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes online-marketing-assen-damp { 0% { opacity: 0; transform: translateY(4px); } 30%, 60% { opacity: 1; } 100% { opacity: 0; transform: translateY(-8px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .online-marketing-assen-staaf, .in-beeld .online-marketing-assen-ballon, .in-beeld .online-marketing-assen-damp { animation: none; }
+  }
+</style>

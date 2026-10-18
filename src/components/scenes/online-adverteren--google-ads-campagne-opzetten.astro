@@ -1,0 +1,65 @@
+---
+// Scène voor /online-adverteren/google-ads-campagne-opzetten/: een stappenplan dat stap voor stap wordt afgevinkt, een advertentie in opbouw met een tekenteller, en een schakelaar die de campagne aanzet.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const stappen = ['Meting', 'Campagnetype', 'Instellingen', 'Zoekwoorden', 'Advertenties', 'Landingspagina'];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een stappenplan voor een Google Ads-campagne wordt stap voor stap afgevinkt. Ernaast wordt een advertentie geschreven, met een teller voor het aantal tekens, en daarna gaat de campagne aan.'}>
+  <!-- stappenplan -->
+  <rect x="20" y="20" width="190" height="230" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="38" y="48" font-size="13" font-weight="800">Stappenplan</text>
+  {stappen.map((s, i) => (
+    <g>
+      <circle cx="46" cy={78 + i * 30} r="9" fill="#e8eef4" />
+      <text x="64" y={83 + i * 30} font-size="12.5" font-weight="600">{s}</text>
+    </g>
+  ))}
+  <!-- advertentie in opbouw -->
+  <rect x="228" y="20" width="232" height="138" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="244" y="34" width="70" height="16" rx="8" fill="#e8eef4" />
+  <text x="279" y="46" text-anchor="middle" font-size="10" font-weight="700" class="zacht">Gesponsord</text>
+  <text x="322" y="46" font-size="10.5" class="zacht">jouwbedrijf.nl</text>
+  <text x="244" y="76" font-size="13" font-weight="800" style="fill:#074663">CV-ketel vervangen in Emmen</text>
+  <rect class="v" x="244" y="90" width="200" height="8" rx="4" />
+  <rect class="v" x="244" y="106" width="170" height="8" rx="4" />
+  <rect class="v" x="244" y="130" width="54" height="12" rx="6" />
+  <rect class="v" x="306" y="130" width="54" height="12" rx="6" />
+  <rect class="v" x="368" y="130" width="54" height="12" rx="6" />
+  <!-- invoerveld met teller -->
+  <rect x="228" y="170" width="232" height="34" rx="9" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="242" y="192" font-size="10.5" font-weight="600">CV-ketel vervangen in Emmen</text>
+  <text x="446" y="192" text-anchor="end" font-size="11" font-weight="800" class="zacht">27/30</text>
+  <!-- schakelaar -->
+  <text x="228" y="238" font-size="12.5" font-weight="800">Campagne actief</text>
+  <rect class="baan" x="402" y="222" width="52" height="26" rx="13" fill="#d9e1ea" />
+  <circle class="knop" cx="415" cy="235" r="10" fill="#fff" />
+  {!mini && (
+    <g>
+      {stappen.map((s, i) => (
+        <g class="vinkje" style={`--i:${i}`}>
+          <circle cx="46" cy={78 + i * 30} r="9" fill="#1f8a5b" />
+          <path d={`M41.5 ${78 + i * 30}l3 3 6-6.5`} stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <rect class="caret" x="399" y="180" width="2" height="16" fill="#10283f" />
+      <rect class="baan-aan" x="402" y="222" width="52" height="26" rx="13" fill="#1f8a5b" />
+      <circle class="knop-aan" cx="441" cy="235" r="10" fill="#fff" />
+      <rect class="gloed" x="398" y="218" width="60" height="34" rx="17" fill="none" stroke="#1f8a5b" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .vinkje { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .vinkje { opacity: 0; transform: scale(0.4); }
+  .in-beeld .vinkje { animation: online-adverteren--google-ads-campagne-opzetten-vink 0.45s cubic-bezier(.3,1.7,.5,1) calc(0.5s + var(--i) * 0.45s) forwards; }
+  .in-beeld .caret { animation: online-adverteren--google-ads-campagne-opzetten-caret 1.1s steps(1) 0.5s infinite; }
+  :global(.teken-js) .baan-aan, :global(.teken-js) .knop-aan { opacity: 0; }
+  .in-beeld .baan-aan, .in-beeld .knop-aan { animation: online-adverteren--google-ads-campagne-opzetten-aan 0.5s ease 3.4s forwards; }
+  :global(.teken-js) .gloed { opacity: 0; }
+  .in-beeld .gloed { animation: online-adverteren--google-ads-campagne-opzetten-gloed 4s ease-in-out 4s infinite; }
+  @keyframes online-adverteren--google-ads-campagne-opzetten-vink { to { opacity: 1; transform: none; } }
+  @keyframes online-adverteren--google-ads-campagne-opzetten-caret { 50% { opacity: 0; } }
+  @keyframes online-adverteren--google-ads-campagne-opzetten-aan { to { opacity: 1; } }
+  @keyframes online-adverteren--google-ads-campagne-opzetten-gloed { 0%, 100% { opacity: 0; } 50% { opacity: 0.7; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vinkje, .in-beeld .caret, .in-beeld .baan-aan, .in-beeld .knop-aan, .in-beeld .gloed { animation: none; } }
+</style>

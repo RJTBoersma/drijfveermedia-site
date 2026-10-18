@@ -1,0 +1,223 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--google-tag-manager.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/google-tag-manager/';
+const datum = '2026-10-18';
+const definitie = 'Google Tag Manager (GTM) is een gratis tool waarmee je alle meetcodes van je website op één plek beheert, zonder telkens de code van je site aan te passen.';
+const hoofdstukken = [
+  { id: 'wat-doet-het', titel: 'Wat GTM doet' },
+  { id: 'bouwstenen', titel: 'Tags, triggers en variabelen' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een aanvraag meten' },
+  { id: 'datalaag', titel: 'De datalaag' },
+  { id: 'installeren', titel: 'Installeren in vijf stappen' },
+  { id: 'preview', titel: 'Testen en publiceren' },
+  { id: 'consent', titel: 'Consent mode' },
+  { id: 'kiezen', titel: 'GTM, Google-tag of plug-in' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Google Tag Manager',
+  alternateName: ['GTM', 'Tag Manager'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is Google Tag Manager? Zo werkt het | Drijfveer Media"
+  description="Wat is Google Tag Manager? Uitleg over tags, triggers, variabelen en de datalaag, met een voorbeeld, een installatieplan en consent mode."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Google Tag Manager', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Meten</p>
+        <h1>Wat is Google Tag Manager?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je wilt weten hoeveel mensen via je website een offerte aanvragen. Google Analytics wil daarvoor een stukje code op je site. Google Ads ook. De Meta-pixel ook, en misschien nog een tool voor LinkedIn. Al die codes moeten in je site, en elke keer moet je webbouwer erbij. Met GTM zet je één codefragment op je website en regel je de rest via een scherm in je browser. Hieronder lees je hoe dat werkt, met een voorbeeld dat je zo kunt nabouwen.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>GTM is gratis en komt van Google. Je beheert er de meetcodes van Google Analytics, Google Ads en andere diensten mee.</li>
+          <li>Een tag is een meetcode, een trigger bepaalt wanneer hij afgaat, een variabele levert gegevens aan.</li>
+          <li>Met de voorbeeldmodus test je alles voordat bezoekers er iets van merken.</li>
+          <li>Met consent mode houden je tags rekening met de keuze in je cookiemelding.</li>
+          <li>Zet het account op naam van je eigen bedrijf, niet op die van je bureau.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={9} />
+
+      <div class="stap-kop" id="wat-doet-het"><Tekening naam="tandwiel" maat={52} /><h2>Wat doet GTM precies?</h2></div>
+      <p>Google noemt het zelf een tagbeheersysteem. Een tag is een stukje code dat gegevens doorstuurt naar een dienst. Bijvoorbeeld: deze bezoeker heeft het formulier verstuurd. Zonder GTM staan al die tags los in de code van je website. Met GTM staat er één codefragment op je site, en alle tags zitten in een zogenoemde container. Volgens Google vervangt die container alle andere tags die met de hand in je site zijn gezet, van Google Ads en Google Analytics tot tags van andere partijen.</p>
+      <p>Het voordeel voor een ondernemer is vooral praktisch:</p>
+      <ul class="vink">
+        <li>Een nieuwe meting toevoegen kan zonder je webbouwer of een update van je website.</li>
+        <li>Alle meetcodes staan overzichtelijk bij elkaar, met namen die je zelf kiest.</li>
+        <li>Je test elke wijziging eerst, en elke gepubliceerde versie blijft bewaard.</li>
+        <li>Je regelt op één plek welke tags wachten op toestemming uit je cookiemelding.</li>
+      </ul>
+      <p>GTM is gratis. Voor grote organisaties bestaat er een betaalde versie, Tag Manager 360, met extra beheerfuncties. Voor een mkb'er is de gratis versie ruim voldoende.</p>
+
+      <div class="stap-kop" id="bouwstenen"><Tekening naam="boek" maat={52} /><h2>De bouwstenen: tags, triggers en variabelen</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat het is</th><th>Voorbeeld</th></tr></thead>
+          <tbody>
+            <tr><td><b>Account</b></td><td>Het hoogste niveau, één per bedrijf</td><td>Jouw bedrijfsnaam</td></tr>
+            <tr><td><b>Container</b></td><td>Alle tags, triggers en variabelen van één website</td><td>www.jouwbedrijf.nl</td></tr>
+            <tr><td><b>Tag</b></td><td>Een meetcode die gegevens naar een dienst stuurt</td><td>Conversie in Google Ads</td></tr>
+            <tr><td><b>Trigger</b></td><td>De regel die bepaalt wanneer een tag afgaat</td><td>Iemand komt op de bedankpagina</td></tr>
+            <tr><td><b>Variabele</b></td><td>Een gegeven dat een tag of trigger gebruikt</td><td>Het adres van de pagina, de tekst van een knop</td></tr>
+            <tr><td><b>Datalaag</b></td><td>Een lijstje gegevens dat je website klaarzet voor GTM</td><td>Welke dienst iemand aanvroeg</td></tr>
+            <tr><td><b>Versie</b></td><td>Een vastgelegde stand van je container na publiceren</td><td>Versie 12, met de nieuwe formuliermeting</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De kern zit in de samenwerking tussen tags en triggers. Volgens Google heeft elke tag minstens één trigger nodig. Een trigger reageert op gebeurtenissen op je site, zoals een paginaweergave, een klik op een knop of het verzenden van een formulier. Met een filter maak je hem precies: alleen als het paginapad /bedankt/ bevat, bijvoorbeeld.</p>
+      <p>Veel variabelen zitten er al in. Denk aan Pagina-URL, Paginapad, Klik-URL, Kliktekst en Formulier-ID. Die zet je met een vinkje aan.</p>
+
+      <div class="stap-kop" id="voorbeeld"><Tekening naam="doel" maat={52} /><h2>Een voorbeeld: een offerteaanvraag meten</h2></div>
+      <p>Stel: een schildersbedrijf in Leeuwarden wil weten hoeveel offerteaanvragen er uit Google Ads komen. Na het versturen van het formulier komt de bezoeker op de pagina /bedankt/. Zo richt je dat in:</p>
+      <ol>
+        <li><b>Trigger maken.</b> Kies een trigger op paginaweergave en laat hem alleen afgaan als het Paginapad /bedankt/ bevat. Noem hem "Paginaweergave bedankpagina".</li>
+        <li><b>Tag voor Google Analytics.</b> Maak een tag die de gebeurtenis generate_lead naar Google Analytics stuurt. Google raadt die naam zelf aan voor iemand die een formulier indient. Koppel de trigger eraan.</li>
+        <li><b>Tag voor Google Ads.</b> Maak een tag voor conversies bijhouden in Google Ads, met de conversie-ID en het label uit je advertentieaccount. Koppel dezelfde trigger.</li>
+        <li><b>Testen.</b> Open de voorbeeldmodus, vul het formulier in en kijk of beide tags afgaan op de bedankpagina, en nergens anders.</li>
+        <li><b>Publiceren.</b> Geef de versie een duidelijke naam, zoals "Offerteformulier meten", en publiceer.</li>
+      </ol>
+      <p class="klein muted">Verzonnen voorbeeld.</p>
+      <p>Vanaf dat moment zie je in Google Analytics en Google Ads hoeveel conversies er binnenkomen, en via welke campagne. Pas daarna weet je wat een aanvraag kost. In de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a> lees je waarom die meting er moet zijn voordat je de eerste euro uitgeeft.</p>
+
+      <div class="stap-kop" id="datalaag"><Tekening naam="scherm" maat={52} /><h2>De datalaag in gewone taal</h2></div>
+      <p>Soms is de pagina-URL niet genoeg. Je wilt ook weten welke dienst iemand aanvroeg, of hoeveel een bestelling waard was. Dan komt de datalaag in beeld, in het Engels dataLayer. Je website zet daarin gegevens klaar, en GTM pakt ze op. Een regel code die je website na het versturen van een formulier uitvoert, ziet er zo uit:</p>
+      <pre><code>window.dataLayer.push(&#123; event: 'offerte_verstuurd', dienst: 'buitenschilderwerk' &#125;);</code></pre>
+      <p>In GTM maak je dan een trigger op die aangepaste gebeurtenis en een variabele die het veld dienst uitleest. Zo zie je straks in je rapport niet alleen dat er een aanvraag was, maar ook waarvoor. Google raadt aan om bij zo'n regel altijd een gebeurtenisnaam mee te geven. Dan weet je zeker dat de gegevens klaarstaan op het moment dat je tag afgaat. Dit deel vraagt vaak even hulp van je webbouwer, omdat de code in je website zelf moet.</p>
+
+      <div class="stap-kop" id="installeren"><Tekening naam="raket" maat={52} /><h2>Tag Manager installeren in vijf stappen</h2></div>
+      <ol>
+        <li><b>Account maken.</b> Ga naar tagmanager.google.com, log in met een Google-account van je bedrijf en kies Account maken. Vul je bedrijfsnaam en het land in.</li>
+        <li><b>Container maken.</b> Gebruik als naam het adres van je website, bijvoorbeeld www.jouwbedrijf.nl, en kies het type Web. Je hebt één container per website nodig, niet per pagina.</li>
+        <li><b>Code plaatsen.</b> Je krijgt twee codeblokken met je container-ID, die begint met GTM. Het eerste plak je zo hoog mogelijk in de head van elke pagina, het tweede direct na de openingstag body.</li>
+        <li><b>Google-tag toevoegen.</b> Voeg in GTM de Google-tag toe met de tag-ID uit Google Analytics, die begint met G. Dan meet je de basis: bezoeken en paginaweergaven.</li>
+        <li><b>Testen en publiceren.</b> Controleer in de voorbeeldmodus of alles werkt en publiceer je eerste versie.</li>
+      </ol>
+      <p>Werk je met WordPress? Dan hoef je meestal niet in de code. Veel thema's en plug-ins hebben een veld voor je GTM-ID, of een plek voor code in de head. Kijk wel of je oude Analytics-code niet nog ergens in je thema staat. Anders meet je alles dubbel. Meer over de koppeling met Analytics lees je in de gids <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4, Tag Manager en Looker Studio</a>.</p>
+
+      <div class="stap-kop" id="preview"><Tekening naam="vergrootglas" maat={52} /><h2>Eerst testen, dan publiceren</h2></div>
+      <p>Niets in je container staat live voordat je rechtsboven op de knop drukt om te publiceren. Tot die tijd werk je in een werkruimte. Testen doe je met de voorbeeld- en foutopsporingsstand, in het Engels preview:</p>
+      <ol>
+        <li>Klik in je werkruimte rechtsboven op Voorbeeld. Tag Assistant opent in een nieuw tabblad.</li>
+        <li>Vul het adres van je website in en klik op Verbinding maken.</li>
+        <li>Je site opent in een nieuw venster, met rechtsonder de melding Gekoppeld.</li>
+        <li>Klik door je site en vul je formulier in. In Tag Assistant zie je per stap welke tags zijn afgegaan, en welke niet.</li>
+      </ol>
+      <p>Alleen jij ziet dit. Gewone bezoekers merken er niets van. Wil je dat een collega meekijkt, dan deel je het voorbeeld via een link.</p>
+      <p>Na publiceren legt GTM een versie vast. Onder het tabblad Versies vind je ze allemaal terug. Gaat er toch iets mis, dan zet je een eerdere versie terug.</p>
+
+      <div class="stap-kop" id="consent"><Tekening naam="schild" maat={52} /><h2>Consent mode: cookies en toestemming</h2></div>
+      <p>Voor tracking voor advertenties heb je toestemming van je bezoeker nodig. Die vraag je met een cookiemelding. Consent mode, in het Nederlands de toestemmingsmodus, geeft de keuze uit die melding door aan je Google-tags. Die passen hun gedrag daarop aan. Belangrijk: consent mode is zelf geen cookiemelding. Je hebt er altijd een melding bij nodig, bijvoorbeeld van een platform voor toestemmingsbeheer.</p>
+      <p>Google werkt met vier soorten toestemming:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Waar het over gaat</th></tr></thead>
+          <tbody>
+            <tr><td>ad_storage</td><td>Cookies voor advertenties</td></tr>
+            <tr><td>ad_user_data</td><td>Gebruikersgegevens voor advertenties naar Google sturen</td></tr>
+            <tr><td>ad_personalization</td><td>Gepersonaliseerde advertenties, zoals remarketing</td></tr>
+            <tr><td>analytics_storage</td><td>Cookies voor analyse, zoals de duur van een bezoek</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Er zijn twee manieren. Bij de standaardversie laden de tags pas na een keuze in de melding, en zonder toestemming gaat er niets naar Google. Bij de geavanceerde versie laden de tags meteen, maar sturen ze zonder toestemming alleen signalen zonder cookies. Google gebruikt die om conversies te schatten.</p>
+      <p>In GTM regel je het met drie onderdelen. De trigger Initialiseren van toestemming geven, die vóór alle andere tags afgaat. De instellingen voor toestemming per tag, onder Geavanceerde instellingen. En de pagina Toestemmingsoverzicht, die je aanzet via Beheerder, Containerinstellingen. Daar zie je in één lijst welke tag op welke toestemming wacht. Welke cookies je mag plaatsen, lees je in het begrip <a href="/kennisbank/wat-is/cookie/">cookie</a> en de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</p>
+
+      <div class="stap-kop" id="kiezen"><Tekening naam="kompas" maat={52} /><h2>GTM, de Google-tag of een plug-in?</h2></div>
+      <p>Je hebt niet altijd GTM nodig. Een overzicht:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Manier</th><th>Past bij</th><th>Nadeel</th></tr></thead>
+          <tbody>
+            <tr><td>Google-tag direct in je site</td><td>Alleen Google Analytics, zonder losse metingen</td><td>Elke nieuwe meting vraagt een aanpassing in je site</td></tr>
+            <tr><td>Plug-in van je website</td><td>Een eenvoudige WordPress-site met één of twee metingen</td><td>Beperkt in wat je kunt meten, afhankelijk van de plug-in</td></tr>
+            <tr><td>GTM</td><td>Wie adverteert, conversies meet of meerdere tools gebruikt</td><td>Je moet de opbouw even leren</td></tr>
+            <tr><td>Cookieloze tool zonder GTM</td><td>Wie niet adverteert en geen cookiemelding wil</td><td>Geen koppeling met Google Ads</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Adverteer je met Google Ads of op social media, dan is GTM bijna altijd de beste keuze. Je wilt dan je aanvragen kunnen terugkoppelen aan je campagnes. Voor diensten van andere partijen, zoals de Meta-pixel, gebruik je een sjabloon uit de communitygalerij van GTM of zet je de code in een eigen HTML-tag.</p>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="lamp" maat={52} /><h2>Zes veelgemaakte fouten</h2></div>
+      <ol>
+        <li><b>Dubbel meten.</b> De oude Analytics-code staat nog in je thema en GTM meet ook. Elk bezoek telt dan twee keer.</li>
+        <li><b>Het account staat bij het bureau.</b> Google adviseert zelf: laat je eigen bedrijf het account maken en voeg het bureau toe als gebruiker. Stop je met het bureau, dan houd je alles.</li>
+        <li><b>Maar één beheerder.</b> Valt die weg, dan kun je niet meer bij je tags. Google raadt aan minstens twee beheerders te hebben.</li>
+        <li><b>Publiceren zonder testen.</b> Een trigger die op elke pagina afgaat in plaats van alleen op de bedankpagina, telt elk bezoek als aanvraag.</li>
+        <li><b>Vage namen.</b> "Tag 7" en "Nieuwe trigger" zeggen over een jaar niemand iets. Gebruik namen als "GA4 - generate_lead - bedankpagina".</li>
+        <li><b>Tags die niet op toestemming wachten.</b> Advertentietags zonder instellingen voor toestemming kunnen gegevens versturen terwijl de bezoeker nee zei.</li>
+      </ol>
+
+      <h2>Zelf doen of laten inrichten?</h2>
+      <p>Een eenvoudige meting zet je met deze uitleg zelf neer. Wil je zeker weten dat alles klopt, inclusief cookiemelding en koppeling met Google Ads? Dan richten wij het in. Eerst bepalen we wat telt als succes, daarna installeren en testen we, en je krijgt één overzicht dat je zelf snapt. Dat kost eenmalig vanaf € 395, exclusief btw. Alles staat op jouw naam. Lees meer over <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Wat je met die metingen doet in je advertenties, lees je in <a href="/kennisbank/wat-is/sea/">Wat is SEA?</a> en <a href="/kennisbank/wat-is/roas/">Wat is ROAS?</a> Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is GTM gratis?', a: 'Ja. De gewone versie is gratis. Voor grote organisaties bestaat er een betaalde versie met extra beheerfuncties, maar die heb je als mkb\'er niet nodig.' },
+      { v: 'Vervangt GTM Google Analytics?', a: 'Nee. GTM meet zelf niets. Het plaatst en beheert de meetcodes. Google Analytics is de dienst die de gegevens verzamelt en laat zien.' },
+      { v: 'Heb ik een programmeur nodig?', a: 'Voor de installatie en eenvoudige metingen niet. Voor een datalaag met extra gegevens, zoals de waarde van een bestelling, heb je vaak wel even je webbouwer nodig.' },
+      { v: 'Moet ik een cookiemelding hebben als ik GTM gebruik?', a: 'GTM zelf vraagt daar niet om, maar de tags die je erin zet vaak wel. Voor tracking voor advertenties heb je toestemming nodig. Gebruik dan een cookiemelding met consent mode.' },
+      { v: 'Wie is eigenaar van de container?', a: 'Degene die het account maakt. Maak het daarom zelf aan, op naam van je bedrijf, en geef je bureau of webbouwer toegang als gebruiker.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over meten"
+    links={[
+      { label: 'Gids', titel: 'Google Analytics 4', href: '/kennisbank/gidsen/google-analytics-4/', tekst: 'GA4, Tag Manager en Looker Studio uitgelegd.' },
+      { label: 'Begrip', titel: 'Wat is ROAS?', href: '/kennisbank/wat-is/roas/', tekst: 'Hoeveel omzet elke advertentie-euro oplevert.', teken: 'grafiek' },
+      { label: 'Dienst', titel: 'Tracking en analytics', href: '/leadgeneratie/tracking-en-analytics/', tekst: 'Wij richten je meting in, vanaf € 395.' },
+    ]}
+  />
+
+  <Actie titel="Meet jouw website wat ertoe doet?" tekst={`We kijken gratis of je aanvragen, telefoontjes en advertenties goed gemeten worden. ${site.contactpersoon} belt je met wat er mist en wat het kost om het recht te zetten.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  pre { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; max-width: 100%; font-size: 0.9rem; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

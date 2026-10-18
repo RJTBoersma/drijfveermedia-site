@@ -1,0 +1,81 @@
+---
+// Scène voor /generative-engine-optimization/vindbaar-in-chatgpt/: ChatGPT zoekt live op het web,
+// vindt jouw site tussen de zoekresultaten en noemt je in het antwoord, met jouw site als bron.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: links een lijst met zoekresultaten waarin jouw site oplicht, rechts een chatvenster dat jouw bedrijf noemt met jouw site als bron.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- Zoekresultaten -->
+  <rect x="18" y="44" width="186" height="190" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="32" y="58" width="158" height="24" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="47" cy="70" r="5" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M51 74l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <rect class="v" x="62" y="66" width="90" height="8" rx="4" />
+  <g>
+    <rect class="v" x="32" y="96" width="120" height="8" rx="4" />
+    <rect x="32" y="108" width="70" height="6" rx="3" fill="#e8eef4" />
+  </g>
+  <rect x="26" y="124" width="170" height="38" rx="8" fill="#fff4ec" stroke="#ff6600" stroke-width="1.5" />
+  <rect x="34" y="132" width="110" height="8" rx="4" fill="#10283f" />
+  <text x="34" y="154" font-size="10" font-weight="700" style="fill:#074663">jouwsite.nl</text>
+  <g>
+    <rect class="v" x="32" y="176" width="130" height="8" rx="4" />
+    <rect x="32" y="188" width="80" height="6" rx="3" fill="#e8eef4" />
+  </g>
+  <g>
+    <rect class="v" x="32" y="206" width="104" height="8" rx="4" />
+    <rect x="32" y="218" width="64" height="6" rx="3" fill="#e8eef4" />
+  </g>
+
+  <!-- Chatvenster -->
+  <rect x="236" y="22" width="226" height="226" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="254" cy="38" r="4" fill="#d9e1ea" /><circle cx="268" cy="38" r="4" fill="#d9e1ea" /><circle cx="282" cy="38" r="4" fill="#d9e1ea" />
+  <path d="M236 52h226" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="262" y="64" width="186" height="28" rx="13" fill="#074663" />
+  <text x="278" y="83" font-size="11.5" font-weight="700" style="fill:#fff">Hovenier in Hoogeveen?</text>
+  <circle cx="258" cy="116" r="10" fill="#e8eef4" />
+  <path d="M258 109l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#074663" />
+  <rect class="v" x="276" y="108" width="168" height="8" rx="4" />
+  <rect x="276" y="124" width="90" height="16" rx="5" fill="#ffe2cc" />
+  <text x="282" y="136" font-size="10.5" font-weight="800">Jouw bedrijf</text>
+  <rect class="v" x="372" y="128" width="72" height="8" rx="4" />
+  <rect class="v" x="276" y="148" width="150" height="8" rx="4" />
+  <rect class="v" x="276" y="164" width="120" height="8" rx="4" />
+  <rect x="276" y="192" width="78" height="20" rx="10" fill="#fff" stroke="#ff6600" stroke-width="1.5" />
+  <text x="286" y="206" font-size="10" font-weight="700">jouwsite.nl</text>
+  <rect x="360" y="192" width="60" height="20" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+
+  {!mini && (
+    <g>
+      <path class="draad" d="M196 143C228 143 236 210 276 202" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-dasharray="6 6" stroke-linecap="round" />
+      <rect class="gloed" x="26" y="124" width="170" height="38" rx="8" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="denkt">
+        <circle cx="282" cy="230" r="3.5" fill="#8aa0b4" />
+        <circle cx="294" cy="230" r="3.5" fill="#8aa0b4" />
+        <circle cx="306" cy="230" r="3.5" fill="#8aa0b4" />
+      </g>
+      <g class="bron">
+        <rect x="276" y="192" width="78" height="20" rx="10" fill="#ff6600" />
+        <text x="286" y="206" font-size="10" font-weight="800" style="fill:#fff">jouwsite.nl</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .gloed, .bron { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .bron { opacity: 0; transform: scale(0.6); }
+  :global(.teken-js) .gloed { opacity: 0; }
+  .in-beeld .draad { animation: generative-engine-optimization--vindbaar-in-chatgpt-stroom 1.2s linear infinite; }
+  .in-beeld .gloed { animation: generative-engine-optimization--vindbaar-in-chatgpt-gloed 4s ease-in-out 0.6s infinite; }
+  .in-beeld .bron { animation: generative-engine-optimization--vindbaar-in-chatgpt-bron 0.5s cubic-bezier(.3,1.7,.5,1) 1.6s forwards; }
+  .in-beeld .denkt circle { animation: generative-engine-optimization--vindbaar-in-chatgpt-denkt 1.2s ease-in-out infinite; }
+  .in-beeld .denkt circle:nth-child(2) { animation-delay: 0.2s; }
+  .in-beeld .denkt circle:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes generative-engine-optimization--vindbaar-in-chatgpt-stroom { to { stroke-dashoffset: -24; } }
+  @keyframes generative-engine-optimization--vindbaar-in-chatgpt-gloed { 0%, 100% { opacity: 0; } 40%, 60% { opacity: 1; } }
+  @keyframes generative-engine-optimization--vindbaar-in-chatgpt-bron { to { opacity: 1; transform: none; } }
+  @keyframes generative-engine-optimization--vindbaar-in-chatgpt-denkt { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .draad, .in-beeld .gloed, .in-beeld .bron, .in-beeld .denkt circle { animation: none; }
+  }
+</style>

@@ -1,0 +1,199 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-bedrijfsprofiel.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-bedrijfsprofiel/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'nodig', titel: 'Wat je nodig hebt' },
+  { id: 'aanmaken', titel: 'Aanmaken in zes stappen' },
+  { id: 'claimen', titel: 'Bestaat je profiel al?' },
+  { id: 'verifieren', titel: 'Verifiëren' },
+  { id: 'optimaliseren', titel: 'Optimaliseren' },
+  { id: 'bijhouden', titel: 'Bijhouden' },
+  { id: 'fouten', titel: 'Zeven fouten' },
+  { id: 'zelf-of-laten', titel: 'Zelf doen of laten doen?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google Bedrijfsprofiel aanmaken, verifiëren en optimaliseren',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google Bedrijfsprofiel',
+}];
+---
+<Base
+  title="Google Bedrijfsprofiel (Google Mijn Bedrijf) aanmaken in 2026"
+  description="Google Bedrijfsprofiel, vroeger Google Mijn Bedrijf, aanmaken, verifiëren en optimaliseren in duidelijke stappen. Met de fouten die je profiel kosten."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google Bedrijfsprofiel', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Lokale SEO" titel="Google Bedrijfsprofiel aanmaken, verifiëren en optimaliseren" knop={{ tekst: 'Laat je profiel gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een Google Bedrijfsprofiel aanmaken is gratis en kost je ongeveer een uur. Daarna sta je op Google Maps en in het kaartje boven de gewone zoekresultaten. Deze gids neemt je mee van het eerste formulier tot een profiel dat klanten oplevert. Ken je het nog als Google Mijn Bedrijf? Dat is dezelfde dienst onder de oude naam.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Het profiel is gratis. Je maakt het aan via business.google.com met een Google-account.</li>
+            <li>Kies één hoofdcategorie die precies zegt wat je doet. Dat is de belangrijkste keuze van allemaal.</li>
+            <li>Pas na de verificatie ben je zichtbaar. Dat gaat met een video, telefoon, e-mail of een postkaart.</li>
+            <li>Daarna bepalen foto's, reviews en kloppende gegevens hoe vaak Google je laat zien.</li>
+          </ul>
+        </div>
+
+        <h2 id="nodig">Wat heb je nodig voordat je begint?</h2>
+        <p>Leg dit klaar, dan ben je in één keer klaar en hoef je niet halverwege te stoppen.</p>
+        <ul class="vink">
+          <li><b>Een Google-account.</b> Gebruik liever een zakelijk adres, zoals info@jouwbedrijf.nl, dan je privé Gmail. Dan kan een collega het later overnemen.</li>
+          <li><b>Je bedrijfsnaam</b>, precies zoals die op je gevel, je facturen en in het KvK-register staat.</li>
+          <li><b>Je adres</b>, of de plaatsen waar je bij klanten komt.</li>
+          <li><b>Een telefoonnummer dat je zelf opneemt.</b> Een keuzemenu krijgt de verificatiecode niet door.</li>
+          <li><b>Het adres van je website.</b></li>
+          <li><b>Vijf tot tien eigen foto's</b>: je gevel, je werkplaats of winkel, je team en je werk.</li>
+        </ul>
+
+        <h2 id="aanmaken">Google Bedrijfsprofiel aanmaken in zes stappen</h2>
+        <p>Google past de schermen geregeld aan, dus een knop kan net iets anders heten. De volgorde blijft hetzelfde.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Zoek je bedrijf op</h3></div>
+        <p>Ga naar business.google.com en log in. Typ je bedrijfsnaam. Verschijnt je bedrijf al in de lijst met suggesties? Dan bestaat er al een profiel en ga je naar <a href="#claimen">claimen</a>. Zie je niets, kies dan voor een nieuw profiel.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>2. Kies je hoofdcategorie</h3></div>
+        <p>Typ wat je doet en kies de categorie die het meest precies is. "Loodgieter" werkt beter dan "Aannemer" als je vooral lekkages verhelpt. Google raadt zelf aan zo weinig categorieën te kiezen als nodig is om je kernactiviteit te beschrijven. Twijfel je? Zoek op je vak en je plaats en kijk welke categorie onder de namen van de bovenste drie staat.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>3. Vul je adres of servicegebied in</h3></div>
+        <p>Ontvang je klanten op je eigen adres, met iemand aanwezig tijdens je openingstijden? Kies dan "Ja" en vul het volledige adres in. Een postbus mag niet. Kom je juist bij klanten thuis, zoals een schilder of hovenier? Kies "Nee" en geef je servicegebied op: plaatsen, postcodes of een regio. Je kunt er maximaal twintig opgeven. Google raadt aan niet verder te gaan dan twee uur rijden vanaf je bedrijf. Werk je vanuit huis zonder bezoek, dan blijft je huisadres verborgen.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>4. Geef je telefoonnummer en website op</h3></div>
+        <p>Gebruik het nummer dat ook op je website staat. Geen nummer van een callcenter, geen 0900-nummer dat bellers geld kost. Bij website vul je je homepage in, of de pagina van deze vestiging als je er meer hebt.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>5. Rond af en vraag de verificatie aan</h3></div>
+        <p>Controleer alles nog één keer voordat je op verifiëren klikt. Hoe die verificatie werkt, lees je <a href="#verifieren">verderop in deze gids</a>. Je kunt de verificatie ook uitstellen, maar zolang je niet bent geverifieerd, ziet niemand je profiel.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>6. Vul de rest van je profiel aan</h3></div>
+        <p>Google vraagt daarna om openingstijden, een beschrijving, diensten en foto's. Doe dat meteen. Een half ingevuld profiel verliest het van een concurrent die alles heeft ingevuld.</p>
+
+        <h2 id="claimen">Bestaat je profiel al? Zo claim je het</h2>
+        <p>Google maakt soms zelf een profiel aan, uit openbare gegevens of omdat een klant je bedrijf aan Maps heeft toegevoegd. Zo'n profiel claimen is zo gebeurd. Zoek op je bedrijfsnaam en plaats en klik op "Ben je de eigenaar van dit bedrijf?". Daarna volg je dezelfde verificatie.</p>
+        <p>Heeft iemand anders het profiel al geverifieerd? Dan vraag je het eigendom aan via dat profiel. De huidige eigenaar krijgt dan een verzoek. Dat komt vaker voor dan je denkt: het profiel staat op naam van een oud-medewerker of van de webbouwer van jaren terug.</p>
+        <div class="kader">
+          <p class="kader-titel">Twee tips die later veel gedoe schelen</p>
+          <ul>
+            <li>Maak nooit een tweede profiel voor hetzelfde bedrijf. Volgens Google kan je account dan worden opgeschort.</li>
+            <li>Voeg onder "Personen en toegang" een tweede eigenaar of beheerder toe. Valt er iemand uit, dan kom je er nog steeds in.</li>
+          </ul>
+        </div>
+
+        <h2 id="verifieren">Verifiëren: video, telefoon, e-mail of postkaart</h2>
+        <p>Met de verificatie bewijs je dat het bedrijf echt van jou is. De methode kies je niet zelf. Google bepaalt welke opties je krijgt, op basis van je soort bedrijf, je regio en wat er openbaar over je bekend is. Soms vraagt Google om meer dan één methode.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Methode</th><th>Hoe het werkt</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Video-opname</td><td>Je filmt in één doorlopende opname je locatie, je bedrijf en bewijs dat je het beheert.</td><td>Google raadt deze optie aan als je hem krijgt.</td></tr>
+              <tr><td>Live videogesprek</td><td>Een medewerker van Google kijkt via de camera mee.</td><td>Alleen tijdens je openingstijden en op locatie.</td></tr>
+              <tr><td>Telefoon of sms</td><td>Je krijgt een code die je invult.</td><td>Neem zelf op. Een keuzemenu werkt niet.</td></tr>
+              <tr><td>E-mail</td><td>Je klikt op een link in een mail van Google.</td><td>Het adres op het scherm moet je kunnen openen.</td></tr>
+              <tr><td>Postkaart</td><td>Google stuurt een brief met code naar je adres.</td><td>Kan dagen tot weken duren. Wijzig intussen niets.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Zo lukt de video in één keer</h3>
+        <p>De video-opname is voor de meeste ondernemers de snelste weg. Hij wordt wel vaak afgekeurd, omdat er te weinig op te zien is. Film in één shot, zonder te knippen:</p>
+        <ol>
+          <li>Buiten: een straatnaambord of je huisnummer, en je gevel met je naam erop.</li>
+          <li>Binnen: je werkplek, je producten of je gereedschap.</li>
+          <li>Bewijs dat je de baas bent: je opent de deur met je sleutel, je logt in op je kassa of je laat de belettering op je bus zien.</li>
+        </ol>
+        <p>Werk je aan huis zonder pand? Laat dan je bedrijfsbus, je gereedschap en iets met je bedrijfsnaam zien, zoals een factuur of je visitekaartje.</p>
+
+        <h2 id="optimaliseren">Je Google Bedrijfsprofiel optimaliseren: wat telt</h2>
+        <p>Google kiest wie er in het kaartje komt op drie dingen: hoe goed je past bij de zoekopdracht, hoe dichtbij je bent en hoe bekend je bedrijf is. Aan de afstand verander je niets. Aan de andere twee wel, en dat begint hier.</p>
+        <ul>
+          <li><b>Extra categorieën.</b> Doe je naast installaties ook airco's? Voeg die categorie toe. Niet meer dan je echt doet.</li>
+          <li><b>Beschrijving.</b> Je hebt 750 tekens. Vertel wat je doet, voor wie en in welke plaatsen. Google wil geen links, geen HTML en geen acties of prijzen in dit veld.</li>
+          <li><b>Openingstijden.</b> Vul ook afwijkende tijden in, zoals Koningsdag en de kerstdagen. Een klant die voor een dichte deur staat, schrijft geen vriendelijke review.</li>
+          <li><b>Diensten en producten.</b> Zet elke dienst apart, met een korte uitleg en waar het kan een vanaf-prijs.</li>
+          <li><b>Foto's.</b> Een logo, een omslagfoto, je gevel, je team en je werk. Echte foto's, geen stockbeelden. Zet er elke maand een paar nieuwe bij.</li>
+          <li><b>Kenmerken.</b> Rolstoeltoegankelijk, gratis parkeren, pinnen. Klein werk, en het helpt klanten kiezen.</li>
+          <li><b>Reviews.</b> Vraag elke tevreden klant om een review. Hoe je dat doet, staat in de gids over <a href="/kennisbank/gidsen/google-reviews/">Google reviews en een reviewlink maken</a>.</li>
+        </ul>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeld van een beschrijving (verzonnen bedrijf)</p>
+          <p>"Schildersbedrijf Mulder uit Assen schildert woningen en bedrijfspanden in Drenthe, binnen en buiten. We werken met vaste schilders, geven drie jaar garantie op buitenwerk en plannen je klus binnen twee weken in. Je krijgt vooraf een vaste prijs, zonder meerwerk achteraf."</p>
+        </div>
+        <p>Wil je weten hoeveel bezoekers via je profiel op je site komen? Zet een UTM-code achter de link naar je website. In de gids over <a href="/kennisbank/gidsen/utm-codes/">UTM-codes maken</a> lees je hoe.</p>
+
+        <h2 id="bijhouden">Bijhouden in tien minuten per week</h2>
+        <p>Een profiel is geen klus die je één keer doet. Google ziet of er iets gebeurt, en klanten ook.</p>
+        <ul>
+          <li><b>Berichten plaatsen.</b> Via Google Posts deel je een update, een aanbieding of een evenement. Eén bericht per week of twee weken is genoeg. Zet geen telefoonnummer in de tekst: dan kan Google het bericht weigeren.</li>
+          <li><b>Reviews beantwoorden.</b> Binnen een paar dagen, ook de korte.</li>
+          <li><b>Statistieken bekijken.</b> Onder "Prestaties" zie je hoe vaak mensen je vonden, belden of een route opvroegen. Zo zie je of je werk iets oplevert.</li>
+          <li><b>Wijzigingen controleren.</b> Iedereen kan een wijziging voorstellen, en Google past soms zelf iets aan. Kijk elke maand of je naam, openingstijden en telefoonnummer nog kloppen.</li>
+        </ul>
+
+        <h2 id="fouten">Zeven fouten die je profiel kosten</h2>
+        <ol>
+          <li><b>Zoekwoorden in je naam.</b> "Jansen Loodgieter Assen 24/7" in plaats van "Jansen Installatietechniek". Dat mag niet en kan tot een schorsing leiden.</li>
+          <li><b>Een postbus of flexplek als adres.</b> Google wil een plek waar je echt zit, of een servicegebied.</li>
+          <li><b>Twee profielen voor één bedrijf.</b> Ruim een dubbel profiel op in plaats van het te laten staan.</li>
+          <li><b>Een te brede hoofdcategorie.</b> "Bedrijf" of "Dienstverlener" vertelt Google niets.</li>
+          <li><b>Andere gegevens dan op je website.</b> Naam, adres en telefoonnummer moeten overal letterlijk hetzelfde zijn.</li>
+          <li><b>Niemand heeft nog toegang.</b> Leg vast wie eigenaar is, en zorg voor een tweede beheerder.</li>
+          <li><b>Reviews kopen of belonen.</b> Korting of een cadeautje in ruil voor een review is volgens Google verboden. Zulke reviews worden verwijderd.</li>
+        </ol>
+
+        <h2 id="zelf-of-laten">Zelf doen of laten doen?</h2>
+        <p>Met deze gids kun je het meeste zelf. Het profiel is gratis, en een uur werk levert vaak al meer op dan een maand adverteren. Laat het doen als je geen tijd hebt, als je profiel geschorst is, of als je concurrenten in het kaartje veel sterker staan.</p>
+        <p>Wij richten je profiel in als losse klus: Google Bedrijfsprofiel, Bing Places en Apple Business (voorheen Apple Business Connect), alle drie met dezelfde gegevens. Dat kost eenmalig vanaf € 249. Lees wat erbij zit op de pagina <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel laten optimaliseren</a>. Wil je dat wij het ook bijhouden, met berichten, foto's en reacties op reviews? Dan past <a href="/lokale-seo/">lokale SEO</a> beter, vanaf € 295 per maand.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het regelen?" intro="Wat je van ons mag verwachten als we je profiel inrichten of bijhouden." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost een Google Bedrijfsprofiel?', a: 'Niets. Het profiel is gratis, ook de berichten, foto\'s en statistieken. Je betaalt alleen als je iemand inhuurt om het in te richten of bij te houden.' },
+      { v: 'Hoe snel staat mijn profiel online?', a: 'Pas na de verificatie. Met een video of telefoon kan dat binnen een paar dagen. Met een postkaart duurt het langer.' },
+      { v: 'Kan ik een profiel maken zonder bedrijfspand?', a: 'Ja. Je kiest dan voor een servicegebied. Je adres is dan niet zichtbaar voor klanten. Je moet wel echt bij klanten langs gaan.' },
+      { v: 'Is Google Mijn Bedrijf hetzelfde?', a: 'Ja. Google Mijn Bedrijf is de oude naam. Google heeft de dienst omgedoopt tot Google Bedrijfsprofiel en beheer gaat nu vooral via Google Zoeken en Maps.' },
+      { v: 'Ik zie mijn profiel niet in Google. Hoe kan dat?', a: 'Log in en zoek op "mijn bedrijf". Staat het profiel er niet, dan is het niet geverifieerd of geschorst. Staat het er wel, dan scoort het nog niet hoog genoeg voor die zoekopdracht. Lees dan <a href="/kennisbank/gidsen/hoger-in-google/">hoe je hoger in Google komt</a>.' },
+      { v: 'Mag ik meerdere vestigingen toevoegen?', a: 'Ja, als er op elke vestiging tijdens de openingstijden iemand aanwezig is. Elke vestiging krijgt dan een eigen profiel met een eigen telefoonnummer.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Bedrijfsprofiel laten inrichten', href: '/lokale-seo/google-bedrijfsprofiel/', tekst: 'Met Bing Places en Apple erbij, eenmalig vanaf € 249.' },
+      { label: 'Gids', titel: 'Google reviews', href: '/kennisbank/gidsen/google-reviews/', tekst: 'Reageren, verwijderen en een reviewlink maken.' },
+      { label: 'Pillar', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Gevonden in je eigen regio, vanaf € 295 per maand.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waar je profiel punten laat liggen?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je profiel, je site en de drie bedrijven die nu in het kaartje staan. Daarna belt hij je, en weet je wat als eerste moet gebeuren.`} />
+</Base>

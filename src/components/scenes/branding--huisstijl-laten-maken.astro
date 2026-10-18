@@ -1,0 +1,79 @@
+---
+// Scène voor /branding/huisstijl-laten-maken/: briefpapier, visitekaartje, envelop, telefoon en kleurstalen in één stijl. Een kader springt van drager naar drager: overal hetzelfde.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const stalen = [
+  { x: 316, kleur: '#074663' },
+  { x: 354, kleur: '#10283f' },
+  { x: 392, kleur: '#ff6600' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: briefpapier, een visitekaartje, een envelop, een telefoon en kleurstalen, allemaal in dezelfde huisstijl. Een kader gaat van het een naar het ander en er verschijnt een vinkje: overal hetzelfde.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- briefpapier -->
+  <rect x="36" y="26" width="136" height="190" rx="6" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="58" cy="50" r="11" fill="#074663" />
+  <text x="56" y="56" text-anchor="middle" font-size="14" font-weight="900" style="fill:#fff">J</text>
+  <rect x="76" y="45" width="54" height="6" rx="3" fill="#10283f" />
+  <rect x="50" y="86" width="104" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="50" y="98" width="96" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="50" y="110" width="104" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="50" y="122" width="70" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="50" y="198" width="108" height="3" rx="1.5" fill="#074663" />
+  <!-- envelop -->
+  <rect x="150" y="170" width="150" height="76" rx="6" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M152 174l73 38 73-38" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <circle cx="170" cy="230" r="8" fill="#074663" />
+  <rect x="184" y="227" width="40" height="5" rx="2.5" fill="#10283f" />
+  <!-- visitekaartje -->
+  <g transform="rotate(-5 256 70)">
+    <rect x="194" y="34" width="124" height="72" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <circle cx="218" cy="60" r="11" fill="#074663" />
+    <text x="216" y="66" text-anchor="middle" font-size="14" font-weight="900" style="fill:#fff">J</text>
+    <rect x="236" y="55" width="62" height="6" rx="3" fill="#10283f" />
+    <rect x="236" y="67" width="40" height="5" rx="2.5" fill="#d9e1ea" />
+    <rect x="206" y="90" width="100" height="4" rx="2" fill="#074663" />
+  </g>
+  <!-- telefoon -->
+  <rect x="346" y="26" width="74" height="146" rx="13" fill="#10283f" />
+  <rect x="352" y="34" width="62" height="130" rx="8" fill="#fff" />
+  <path d="M352 42a8 8 0 0 1 8-8h46a8 8 0 0 1 8 8v16h-62z" fill="#074663" />
+  <circle cx="365" cy="47" r="6" fill="#fff" />
+  <rect x="360" y="70" width="44" height="7" rx="3.5" fill="#10283f" />
+  <rect x="360" y="83" width="38" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="360" y="94" width="42" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="360" y="140" width="46" height="14" rx="5" fill="#ff6600" />
+  <!-- kleurstalen en letter -->
+  {stalen.map((s) => (
+    <g>
+      <rect x={s.x} y="190" width="32" height="56" rx="5" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+      <rect x={s.x + 3} y="193" width="26" height="34" rx="3" fill={s.kleur} />
+      <rect x={s.x + 5} y="234" width="18" height="4" rx="2" fill="#d9e1ea" />
+    </g>
+  ))}
+  <rect x="430" y="190" width="40" height="56" rx="5" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <text x="450" y="226" text-anchor="middle" font-size="20" font-weight="800">Aa</text>
+  {!mini && (
+    <g>
+      <g fill="none" stroke="#ff6600" stroke-width="2.5" stroke-dasharray="6 5">
+        <rect class="huisstijl-kader" style="--i:0" x="28" y="18" width="152" height="206" rx="10" />
+        <rect class="huisstijl-kader" style="--i:1" x="186" y="22" width="140" height="94" rx="10" transform="rotate(-5 256 70)" />
+        <rect class="huisstijl-kader" style="--i:2" x="338" y="18" width="90" height="162" rx="16" />
+      </g>
+      <g class="huisstijl-vink">
+        <rect x="188" y="124" width="148" height="34" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+        <circle cx="206" cy="141" r="9" fill="#1f8a5b" />
+        <path d="M202 141l3 3.5 6-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="222" y="146" font-size="12.5" font-weight="800">Overal hetzelfde</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .huisstijl-kader, :global(.teken-js) .huisstijl-vink { opacity: 0; }
+  .huisstijl-vink { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .huisstijl-kader { animation: branding-huisstijl-kader 6s ease-in-out calc(0.6s + var(--i) * 2s) infinite; }
+  .in-beeld .huisstijl-vink { animation: branding-huisstijl-vink 0.5s cubic-bezier(.3,1.6,.5,1) 1.4s forwards; }
+  @keyframes branding-huisstijl-kader { 0% { opacity: 0; } 8%, 28% { opacity: 1; } 36%, 100% { opacity: 0; } }
+  @keyframes branding-huisstijl-vink { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .huisstijl-kader, .in-beeld .huisstijl-vink { animation: none; } }
+</style>

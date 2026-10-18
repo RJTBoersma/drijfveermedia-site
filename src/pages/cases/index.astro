@@ -1,0 +1,120 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Plaatje from '../../components/teken/Plaatje.astro';
+import Scene from '../../components/scenes/cases.astro';
+import { site } from '../../data/site';
+
+const url = '/cases/';
+const cases = [
+  {
+    href: '/cases/willemfikstt/',
+    naam: 'Willemfikstt.nl',
+    soort: 'Klusplatform',
+    getal: '+87%',
+    wat: 'bezoekers uit Google',
+    tekst: 'Nieuwe pagina\'s per klus en plaats, linkbuilding en betere teksten. Op 1 voor "klusjesman Amsterdam" en 60% meer aanvragen via de site.',
+    diensten: ['SEO', 'Linkbuilding', 'Teksten'],
+  },
+  {
+    href: '/cases/conflictbemiddeling/',
+    naam: 'Conflictbemiddeling.nl',
+    soort: 'Opleider voor mediators',
+    getal: '+47%',
+    wat: 'organisch verkeer',
+    tekst: 'Een nieuwe responsive website, SEO, linkbuilding en Google Ads. Eerste posities op "mediation opleiding" en meer aanvragen.',
+    diensten: ['Webdesign', 'SEO', 'Google Ads'],
+  },
+  {
+    href: '/cases/dakraamconcurrent/',
+    naam: 'Dakraamconcurrent.nl',
+    soort: 'VELUX-installatiepartner',
+    getal: '+32%',
+    wat: 'organisch verkeer',
+    tekst: 'Eerst een nieuwe website, dan linkbuilding, dan SEO. Nummer 1 op "dakraam plaatsen" en meer aanvragen.',
+    diensten: ['Webdesign', 'Linkbuilding', 'SEO'],
+  },
+];
+const namen = ['Kärcher', 'bol.com', 'Nyenrode', 'Conflictbemiddeling Nederland', 'Glaspunt'];
+const schema = [{
+  '@type': 'CollectionPage',
+  name: 'Cases van Drijfveer Media',
+  url: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: { '@id': `${site.url}/#organisatie` },
+  hasPart: cases.map((c) => ({ '@type': 'Article', headline: `Case ${c.naam}`, url: `${site.url}${c.href}` })),
+}];
+---
+<Base
+  title="Cases: wat ons werk opleverde | Drijfveer Media"
+  description="Drie cases met echte cijfers: meer bezoekers uit Google, eerste posities en meer aanvragen. Plus de namen die al jaren op Drijfveer Media vertrouwen."
+  kruimels={[{ naam: 'Cases', url }]}
+  schema={schema}
+>
+  <Hero kicker="Cases" titel="Wat ons werk opleverde, in echte cijfers">
+    <p>Beloven kan iedereen. Hier zie je wat er gebeurde bij drie klanten: meer bezoekers uit Google, de eerste plek op de woorden die ertoe doen en meer aanvragen. Geen opgepoetste grafieken.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <h2>Drie klanten, drie aanpakken</h2>
+    <p class="sectie-intro">Een klusplatform dat al goed stond. Een opleider voor mediators die wilde groeien. Een dakramenspecialist die eerst een nieuwe site nodig had. Elke case begon ergens anders, maar steeds op de plek waar het snelst verschil te maken was.</p>
+    <ul class="case-lijst">
+      {cases.map((c) => (
+        <li>
+          <a class="card case-kaart" href={c.href}>
+            <Plaatje href={c.href} onderwerp="raket" />
+            <span class="kicker">{c.soort}</span>
+            <h3>{c.naam}</h3>
+            <p class="getal"><b>{c.getal}</b> <span>{c.wat}</span></p>
+            <p class="muted">{c.tekst}</p>
+            <ul class="chips">{c.diensten.map((d) => <li><span class="chip">{d}</span></li>)}</ul>
+            <span class="meer">Lees de case</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="tekst onder">
+      <h2>Wat deze cases gemeen hebben</h2>
+      <p>Drie verschillende bedrijven, toch zie je hetzelfde patroon terug. Dat is geen toeval. Zo werken we bij elke klant.</p>
+      <ul class="vink">
+        <li><b>Eerst het doel, dan het werk.</b> We vragen wat de site moet opleveren. Meestal is dat geen bezoekers, maar aanvragen. Daar sturen we op.</li>
+        <li><b>Woorden van mensen die iets willen.</b> "Klusjesman Amsterdam", "mediation opleiding", "dakraam plaatsen". Wie zo zoekt, staat op het punt om te kiezen.</li>
+        <li><b>Links die autoriteit geven.</b> In alle drie de cases hoorde <a href="/linkbuilding/">linkbuilding</a> erbij. Goede pagina's alleen zijn vaak niet genoeg om bovenaan te komen.</li>
+        <li><b>De grootste kans eerst.</b> We beginnen waar je het snelst verschil merkt. Daarna schaven we bij. Lees hoe dat gaat in <a href="/werkwijze/">onze werkwijze</a>.</li>
+      </ul>
+
+      <h2>Waarom er geen periode bij de cijfers staat</h2>
+      <p>De cijfers zijn echt. Over welke periode ze precies gemeten zijn, hebben we niet meer zwart op wit. Dus noemen we die ook niet. Een bureau dat met grafieken strooit zonder te zeggen wat er gemeten is, vertelt je maar de helft van het verhaal.</p>
+      <p>Bij jou doen we het anders. We spreken vooraf een doel af dat je kunt meten, en je ziet zelf of we het halen. Lukt dat niet en ligt het aan ons? Dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
+
+      <h2>Namen die ons vertrouwen</h2>
+      <p>Naast deze drie werkten we voor bedrijven en organisaties van heel verschillende grootte. Een paar namen:</p>
+      <ul class="namen">
+        {namen.map((n) => <li>{n}</li>)}
+      </ul>
+      <p>Voor hen deden we werk in online marketing, tekstschrijven, leadgeneratie en linkbuilding. Grote namen, maar we pakken het niet anders aan dan voor een eenmanszaak. Eerst vragen wat je wilt bereiken. Dan beginnen waar de grootste kans zit.</p>
+      <p>Onze klanten komen uit het Noorden, uit de rest van Nederland en soms uit het buitenland. De meeste blijven jaren. Niet omdat ze vastzitten: alles is maandelijks opzegbaar. Ze blijven omdat het werkt.</p>
+    </div>
+  </section>
+
+  <Bewijs case={false} />
+
+  <Actie titel="Word jij onze volgende case?" />
+</Base>
+<style>
+  .case-lijst { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+  .case-kaart { height: 100%; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .case-kaart h3 { font-size: 1.25rem; margin: 0; }
+  .case-kaart p { margin: 0; }
+  .case-kaart .getal b { font-size: var(--step-2); font-weight: 900; color: var(--orange); letter-spacing: -0.03em; }
+  .case-kaart .getal span { color: var(--muted); }
+  .case-kaart .chips { margin-top: 4px; }
+  .case-kaart .meer { margin-top: auto; padding-top: 6px; font-weight: 800; color: var(--navy); }
+  .onder { margin-top: 56px; }
+  .namen { list-style: none; padding: 0; margin: 8px 0 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .namen li { margin: 0; padding: 12px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; font-weight: 800; font-size: 1.1rem; color: var(--navy); }
+</style>

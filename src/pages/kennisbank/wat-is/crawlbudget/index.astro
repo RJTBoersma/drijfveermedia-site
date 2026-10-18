@@ -1,0 +1,153 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--crawlbudget.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/crawlbudget/';
+const definitie = 'Crawlbudget is het aantal pagina\'s dat Googlebot in een bepaalde periode op je website wil en kan bekijken.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Crawlbudget',
+  alternateName: ['Crawl budget'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+
+const codeRobots = `User-agent: *
+Disallow: /boeken/kalender/`;
+---
+<Base
+  title="Wat is crawlbudget? Uitleg in gewone taal | Drijfveer Media"
+  description="Wat is crawlbudget? Het aantal pagina's dat Google op je site bekijkt. Wanneer het telt, wat het verspilt en hoe je het in Search Console nakijkt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Crawlbudget', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Technische SEO</p>
+        <h1>Wat is crawlbudget?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="thorgall" datum="2026-10-18" />
+      <h2>Hoe crawlen werkt</h2>
+      <p>Googlebot is een robot. Hij volgt links, haalt pagina's op en leest ze. Elke pagina die hij bezoekt, wordt gedownload en daarna beoordeeld. Pas dan beslist Google of de pagina in de index komt. Een pagina die nooit gecrawld wordt, kan dus ook nooit in de zoekresultaten staan. En niet elke gecrawlde pagina wordt opgenomen.</p>
+      <p>Het web is te groot om alles steeds opnieuw te bekijken. Daarom krijgt elke site een portie aandacht: het crawlbudget, of in het Engels crawl budget. Een pagina die vaak verandert en veel links krijgt, komt Googlebot meerdere keren langs. Een vergeten pagina diep in je site soms maandenlang niet.</p>
+      <p>Google rekent per hostnaam. Je hoofdsite op www en een subdomein als winkel.jouwbedrijf.nl hebben dus elk een eigen budget.</p>
+      <p>Nog twee dingen uit de documentatie van Google. De meeste bezoeken komen van de mobiele Googlebot, omdat Google vooral de mobiele versie van je site indexeert. En van een HTML-bestand leest Googlebot de eerste 2 MB. Wat daarna komt, telt niet mee. Voor een gewone pagina is dat ruim genoeg, maar een pagina vol ingeplakte code kan eraan komen.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Waar het crawlbudget van afhangt</h2></div>
+      <p>Google noemt in zijn eigen documentatie twee dingen. Samen bepalen ze het crawlbudget: de verzameling adressen die Google op jouw site kan en wil bekijken.</p>
+      <h3>Wat je server aankan</h3>
+      <p>Google wil je site niet overbelasten. Elke site begint daarom met dezelfde voorzichtige limiet. Reageert je server snel en stabiel, dan gaat die limiet omhoog. Wordt hij traag, of geeft hij serverfouten met een code in de 500, dan schroeft Google het terug.</p>
+      <h3>Hoeveel Google wil zien</h3>
+      <p>Dat hangt af van de grootte van je site, hoe vaak er iets verandert en hoe goed en gewild de pagina's zijn. Populaire adressen komen vaker aan de beurt. Waar je zelf de meeste invloed op hebt, is volgens Google het aantal adressen dat Google van je kent. Staan daar veel dubbele of nutteloze tussen, dan gaat er tijd verloren.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Moet jij je er zorgen over maken?</h2></div>
+      <p>Waarschijnlijk niet. Google schrijft zelf dat dit vooral speelt bij drie soorten sites:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort site</th><th>Grens volgens Google</th><th>Crawlbudget een punt?</th></tr></thead>
+          <tbody>
+            <tr><td>Grote site</td><td>Meer dan een miljoen pagina's die wekelijks veranderen</td><td>Ja</td></tr>
+            <tr><td>Middelgrote site met snel wisselende inhoud</td><td>Meer dan 10.000 pagina's die dagelijks veranderen</td><td>Ja</td></tr>
+            <tr><td>Site met veel "Gevonden - momenteel niet geïndexeerd"</td><td>Een groot deel van alle adressen in die status</td><td>Mogelijk</td></tr>
+            <tr><td>Bedrijfssite van een mkb'er</td><td>Tientallen tot een paar honderd pagina's</td><td>Nee</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Google noemt die getallen zelf een ruwe schatting, geen harde grens. Worden je nieuwe pagina's dezelfde dag gecrawld als je ze publiceert? Dan hoef je je volgens Google geen zorgen te maken. Een bedrijfssite met veertig pagina's wordt gewoon helemaal bekeken.</p>
+      <p>Krijg je voor zo'n site een offerte met een crawlbudget-analyse erin, vraag dan wat die je oplevert. Moeilijke woorden zijn geen werk.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Wat verspilt crawlbudget?</h2></div>
+      <ul>
+        <li><b>Dubbele pagina's.</b> Dezelfde inhoud onder meerdere adressen, bijvoorbeeld met en zonder parameters. Google crawlt ze allemaal.</li>
+        <li><b>Eindeloze adressen.</b> Filters, sorteringen en kalenders die steeds nieuwe URL's maken.</li>
+        <li><b>Soft 404's.</b> Een pagina die "niet gevonden" zegt maar code 200 geeft, blijft volgens Google gecrawld worden.</li>
+        <li><b>Lange ketens van doorverwijzingen.</b> Elke redirect is een extra stap. Google volgt er maximaal tien.</li>
+        <li><b>Een trage server.</b> Hoe langer elk antwoord duurt, hoe minder pagina's er in dezelfde tijd passen.</li>
+      </ul>
+      <p>Twee misverstanden. Een noindex-tag bespaart niets: Google moet de pagina eerst ophalen om de tag te zien. En de regel crawl-delay in robots.txt negeert Googlebot. Wat wel helpt bij een pagina die echt weg is: laat hem een 404 of 410 geven. Dat is voor Google een sterk signaal om hem niet meer op te vragen.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Verzonnen, maar het komt vaak voor. Een camping in Drenthe heeft een boekingskalender. Voor elke datum maakt de kalender een eigen adres, en met de knop "volgende maand" kun je eindeloos doorklikken. Googlebot volgt die links braaf, maand na maand, tot in 2040. Duizenden lege pagina's, terwijl de nieuwe pagina over de huifkartochten twee weken op een bezoek wacht.</p>
+      <p>Eén regel in robots.txt die de kalender afsluit, lost het op:</p>
+      <pre><code>{codeRobots}</code></pre>
+      <p>Blokkeer met robots.txt alleen wat Google nooit hoeft te zien. Een geblokkeerde pagina kan Google niet lezen, dus ook geen noindex of canonical op die pagina.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Zo bekijk je het in Search Console</h2></div>
+      <p>Google laat in Search Console precies zien hoe vaak Googlebot langskomt. Zo vind je het:</p>
+      <ol>
+        <li>Ga naar Instellingen, linksonder in het menu, en open het rapport Crawlstatistieken.</li>
+        <li>Bovenaan zie je drie grafieken: het totaal aantal crawlverzoeken, de totale downloadgrootte en de gemiddelde reactietijd van je server.</li>
+        <li>Daaronder staan de verzoeken uitgesplitst. Bij de crawlreacties zie je hoeveel er goed gingen (200), doorverwezen werden (301) of niet gevonden werden (404). Bij het crawldoel zie je of Google nieuwe adressen ontdekte of bekende pagina's vernieuwde.</li>
+        <li>Open daarna het rapport Pagina's onder Indexering. Kijk naar het aantal geïndexeerde pagina's en naar "Gevonden - momenteel niet geïndexeerd". Is die laatste groep groot, dan kiest Google bewust voor andere pagina's.</li>
+      </ol>
+      <p>Schiet de gemiddelde reactietijd omhoog of zie je veel serverfouten, dan ligt het eerder aan je hosting dan aan je pagina's.</p>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2>Hoe krijg je Google vaker langs?</h2></div>
+      <p>Je kunt het crawlbudget niet instellen. Je kunt Google wel redenen geven om vaker te komen, en het bezoek makkelijker maken:</p>
+      <ul class="vink">
+        <li><b>Werk pagina's echt bij.</b> Google komt vaker terug bij pagina's die regelmatig veranderen. Een nieuwe datum zonder nieuwe inhoud telt niet.</li>
+        <li><b>Zorg voor links.</b> Populaire adressen worden vaker gecrawld. Links van andere sites en vanaf je eigen sterke pagina's helpen.</li>
+        <li><b>Houd de lastmod in je sitemap eerlijk.</b> Google gebruikt die datum om te plannen wanneer een pagina opnieuw bekeken wordt.</li>
+        <li><b>Maak je server snel.</b> Een korte reactietijd laat de limiet stijgen. Ondersteunt je server de code 304 Not Modified, dan hoeft Google een ongewijzigde pagina niet opnieuw te downloaden.</li>
+      </ul>
+      <h3>Wil je het precies weten? Kijk in je serverlog</h3>
+      <p>Elke server houdt bij wie er langskomt. In dat log zie je per bezoek van Googlebot welk adres hij opvroeg en welke code hij kreeg. Zo zie je ook welke pagina's hij nooit bezoekt. Let op: niet alles wat zich Googlebot noemt, is het ook. Google legt uit hoe je een echt bezoek herkent, via een omgekeerde DNS-controle of de lijst met IP-adressen van Google.</p>
+
+      <h2>Wat je ermee moet</h2>
+      <p>Ook als crawlbudget voor jou geen probleem is, helpen deze punten. Ze maken je site sneller en schoner, voor Google en voor bezoekers:</p>
+      <ul class="vink">
+        <li>Herstel doodlopende links die op een 404 eindigen.</li>
+        <li>Link direct naar het eindadres in plaats van via een <a href="/kennisbank/wat-is/redirect/">redirect</a>, en voorkom ketens van doorverwijzingen.</li>
+        <li>Geef dubbele pagina's een canonical die naar de hoofdversie wijst. Lees meer bij <a href="/kennisbank/wat-is/duplicate-content/">duplicate content</a>.</li>
+        <li>Houd je <a href="/kennisbank/wat-is/sitemap/">sitemap</a> actueel, met alleen pagina's die je in Google wilt hebben.</li>
+        <li>Zorg voor een snelle server. Goedkope hosting die bij drukte haperen gaat, kost je ook bij Google.</li>
+      </ul>
+      <p>Je privacyverklaring en andere juridische pagina's worden minder vaak bezocht. Dat is prima. Bij elke scan gaat de aandacht naar wat ertoe doet.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer lezen</p>
+        <p>Hoe je Search Console instelt, lees je in de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console gebruiken</a>. Wil je dat iemand de techniek onder je site nakijkt, kijk dan bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>. Meer begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    titel="Veelgestelde vragen over crawlbudget"
+    vragen={[
+      { v: 'Is crawlbudget een rankingfactor?', a: 'Nee. Google schrijft dat vaker crawlen niet tot hogere posities leidt. Crawlen is nodig om in de resultaten te komen, maar het is geen signaal voor je ranking.' },
+      { v: 'Hoe krijg ik meer crawlbudget?', a: 'Volgens Google op twee manieren: zorg dat je server het aankan, en maak pagina\'s die populair, uniek en nuttig zijn. Google bepaalt het budget zelf. Je kunt het niet instellen.' },
+      { v: 'Telt elke URL mee, ook css en JavaScript?', a: 'Ja. Elk adres dat Googlebot ophaalt telt mee, ook bestanden die een pagina nodig heeft om te laden. Adressen die je in robots.txt blokkeert, tellen niet mee.' },
+      { v: 'Helpt nofollow om crawlbudget te sparen?', a: 'Nauwelijks. Een pagina met nofollow-links kan toch gecrawld worden als een andere pagina er gewoon naar linkt. Ruim liever de adressen zelf op.' },
+      { v: 'Moet ik me als kleine ondernemer druk maken over crawlbudget?', a: 'Bijna nooit. Bij een site van tientallen of honderden pagina\'s bekijkt Google alles. Een snelle site, een actuele sitemap en goede interne links zijn genoeg.' },
+    ]}
+  />
+
+  <Actie titel="Ziet Google al je pagina's?" tekst={`We kijken gratis hoe Google jouw site crawlt en wat er blijft liggen. ${site.contactpersoon} belt je met wat hij vond.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; background: var(--ink); color: #e8eef4; border-radius: 10px; padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; margin: 0 0 1.4em; }
+  pre code { font-family: var(--mono); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

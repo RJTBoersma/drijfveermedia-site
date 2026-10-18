@@ -1,0 +1,60 @@
+---
+// Scène voor /kennisbank/wat-is/404-pagina/: een browservenster met 404 en een zoekveld, en ernaast een wegwijzer die de verdwaalde bezoeker verder helpt.
+// Als hij leeft: een bezoeker loopt van de 404 naar de wegwijzer, en de borden lichten om de beurt op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const borden = [
+  { y: 74, t: 'Home', rechts: true },
+  { y: 118, t: 'Diensten', rechts: false },
+  { y: 162, t: 'Contact', rechts: true },
+];
+const bord = (y: number, rechts: boolean) => rechts
+  ? `M372 ${y}h82l14 15-14 15h-82z`
+  : `M368 ${y}h-82l-14 15 14 15h82z`;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een browservenster met de foutcode 404 en een zoekveld. Ernaast een wegwijzer met borden naar Home, Diensten en Contact, die de bezoeker verder helpt.'}>
+  <!-- venster -->
+  <rect x="24" y="30" width="236" height="210" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M25 56V42a11 11 0 0 1 11-11h212a11 11 0 0 1 11 11v14z" fill="#e8eef4" />
+  <circle cx="40" cy="44" r="4" fill="#d9e1ea" /><circle cx="52" cy="44" r="4" fill="#d9e1ea" /><circle cx="64" cy="44" r="4" fill="#d9e1ea" />
+  <text x="142" y="128" font-size="54" font-weight="800" text-anchor="middle" style="fill:#074663">404</text>
+  <rect x="82" y="142" width="120" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="54" y="168" width="176" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="212" cy="181" r="5.5" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M216 185l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <rect x="70" y="179" width="70" height="5" rx="2.5" fill="#e8eef4" />
+  <rect x="54" y="210" width="80" height="16" rx="8" fill="#e8eef4" />
+  <rect x="142" y="210" width="88" height="16" rx="8" fill="#e8eef4" />
+
+  <!-- wegwijzer -->
+  <path d="M370 60v188" stroke="#074663" stroke-width="6" stroke-linecap="round" />
+  <path d="M340 248h60" stroke="#d9e1ea" stroke-width="4" stroke-linecap="round" />
+  {borden.map((b) => (
+    <g>
+      <path d={bord(b.y, b.rechts)} fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+      <text x={b.rechts ? 412 : 328} y={b.y + 19.5} font-size="12" font-weight="800" text-anchor="middle">{b.t}</text>
+    </g>
+  ))}
+  <path d="M262 200c30 0 50 20 92 30" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-dasharray="4 6" stroke-linecap="round" />
+
+  {!mini && (
+    <g>
+      {borden.map((b, i) => <path class="licht" style={`--i:${i}`} d={bord(b.y, b.rechts)} fill="none" stroke="#ff6600" stroke-width="3" stroke-linejoin="round" />)}
+      <circle class="bezoeker" cx="262" cy="200" r="8" fill="#ff6600" />
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .licht, :global(.teken-js) .bezoeker { opacity: 0; }
+  .in-beeld .licht { animation: kennisbank--wat-is--404-pagina-licht 4.5s ease-in-out calc(1.2s + var(--i) * 1.5s) infinite; }
+  .in-beeld .bezoeker { animation: kennisbank--wat-is--404-pagina-loop 4.5s ease-in-out 0.3s infinite; }
+  @keyframes kennisbank--wat-is--404-pagina-licht { 0%, 100% { opacity: 0; } 15%, 30% { opacity: 1; } 45% { opacity: 0; } }
+  @keyframes kennisbank--wat-is--404-pagina-loop {
+    0% { opacity: 0; transform: translate(0, 0); }
+    10% { opacity: 1; }
+    30% { transform: translate(46px, 14px); }
+    50% { transform: translate(92px, 30px); opacity: 1; }
+    65%, 100% { transform: translate(92px, 30px); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .licht, .in-beeld .bezoeker { animation: none; } }
+</style>

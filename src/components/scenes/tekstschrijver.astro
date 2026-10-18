@@ -1,0 +1,59 @@
+---
+// Scène voor /tekstschrijver/: een vage kop op een webpagina wordt doorgestreept en vervangen door een heldere zin. Daarna komt er een aanvraag binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: op een webpagina wordt de vage kop "Wij zijn dé specialist" doorgestreept en vervangen door een heldere zin. Even later komt er een nieuwe aanvraag binnen.'}>
+  <!-- de webpagina -->
+  <rect x="28" y="26" width="300" height="218" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M28 56h300" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="46" cy="41" r="4" fill="#d9e1ea" /><circle cx="60" cy="41" r="4" fill="#d9e1ea" /><circle cx="74" cy="41" r="4" fill="#d9e1ea" />
+  <rect class="v" x="50" y="72" width="64" height="8" rx="4" />
+  <text x="50" y="110" font-size="19" font-weight="800">Wij zijn dé specialist</text>
+  <rect class="v" x="50" y="156" width="230" height="8" rx="4" />
+  <rect class="v" x="50" y="170" width="206" height="8" rx="4" />
+  <rect class="v" x="50" y="184" width="150" height="8" rx="4" />
+  <rect x="50" y="204" width="108" height="26" rx="8" fill="#ff6600" />
+  <text x="104" y="222" text-anchor="middle" font-size="12" font-weight="800" style="fill:#fff">Bel ons direct</text>
+  <!-- de pen -->
+  <g class="tekstschrijver-pen">
+    <g transform="translate(312 140) rotate(35)">
+      <path d="M0 0l-8-24h16z" fill="#10283f" />
+      <path d="M0 -6v-12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
+      <rect x="-10" y="-124" width="20" height="100" rx="5" fill="#074663" />
+      <rect x="-10" y="-50" width="20" height="7" fill="#ff6600" />
+      <path d="M6 -118v40" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".35" />
+    </g>
+  </g>
+  {!mini && (
+    <g>
+      <path class="tekstschrijver-streep" d="M46 104h236" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" pathLength="1" />
+      <text class="tekstschrijver-nieuw" x="50" y="138" font-size="15" font-weight="800">Morgen een monteur aan de deur</text>
+      <rect class="tekstschrijver-cursor" x="300" y="125" width="2.5" height="17" fill="#10283f" />
+      <g class="tekstschrijver-melding">
+        <rect x="310" y="196" width="160" height="40" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+        <circle cx="330" cy="216" r="10" fill="#1f8a5b" />
+        <path d="M325 216l4 4 7-8" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="347" y="221" font-size="13" font-weight="800">Nieuwe aanvraag</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .tekstschrijver-streep { stroke-dasharray: 1; }
+  :global(.teken-js) .tekstschrijver-streep { stroke-dashoffset: 1; }
+  :global(.teken-js) .tekstschrijver-nieuw { opacity: 0; }
+  :global(.teken-js) .tekstschrijver-melding { opacity: 0; }
+  .tekstschrijver-pen { transform-box: view-box; }
+  .in-beeld .tekstschrijver-streep { animation: tekstschrijver-streep 0.9s cubic-bezier(.6,.1,.3,1) 0.6s forwards; }
+  .in-beeld .tekstschrijver-nieuw { animation: tekstschrijver-nieuw 0.7s ease-out 1.5s forwards; }
+  .in-beeld .tekstschrijver-cursor { animation: tekstschrijver-knipper 1.1s steps(1) 2.2s infinite; }
+  .in-beeld .tekstschrijver-pen { animation: tekstschrijver-schrijf 4s ease-in-out 1s infinite; }
+  .in-beeld .tekstschrijver-melding { animation: tekstschrijver-melding 6s ease-in-out 2.6s infinite both; }
+  @keyframes tekstschrijver-streep { to { stroke-dashoffset: 0; } }
+  @keyframes tekstschrijver-nieuw { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes tekstschrijver-knipper { 50% { opacity: 0; } }
+  @keyframes tekstschrijver-schrijf { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(-6px, 3px); } 50% { transform: translate(-2px, -2px); } 75% { transform: translate(-8px, 2px); } }
+  @keyframes tekstschrijver-melding { 0% { opacity: 0; transform: translateY(10px); } 12%, 82% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-4px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .tekstschrijver-streep, .in-beeld .tekstschrijver-nieuw, .in-beeld .tekstschrijver-cursor, .in-beeld .tekstschrijver-pen, .in-beeld .tekstschrijver-melding { animation: none; } }
+</style>

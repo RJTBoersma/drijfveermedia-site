@@ -1,0 +1,302 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/zoekmachine-optimalisatie--technische-seo.astro';
+import { site } from '../../../data/site';
+
+const url = '/zoekmachine-optimalisatie/technische-seo/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is technische SEO?' },
+  { id: 'belangrijker', titel: 'Waarom het belangrijker is geworden' },
+  { id: 'signalen', titel: 'Signalen van een technisch probleem' },
+  { id: 'audit', titel: 'Wat er in de audit zit' },
+  { id: 'werkwijze', titel: 'Zo verloopt de audit' },
+  { id: 'rapport', titel: 'Wat je krijgt' },
+  { id: 'checklist', titel: 'Checklist in 15 punten' },
+  { id: 'fouten', titel: 'Fouten die vaak voorkomen' },
+  { id: 'wanneer', titel: 'Wanneer een audit zinvol is' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'na-de-audit', titel: 'Na de audit' },
+];
+const check = [
+  'Je site staat in Google Search Console en je hebt de sitemap ingediend.',
+  'Het rapport Pagina\'s in Search Console toont geen belangrijke pagina\'s onder "Niet geïndexeerd".',
+  'Je robots.txt blokkeert geen pagina\'s, CSS of scripts die Google nodig heeft.',
+  'Er staat nergens een vergeten noindex op een pagina die in Google moet.',
+  'Je site werkt op één adres: met of zonder www, altijd https. De andere varianten sturen door.',
+  'Oude adressen sturen met een 301 in één stap door naar de best passende nieuwe pagina.',
+  'Er zijn geen interne links naar pagina\'s die een 404 geven.',
+  'Elke belangrijke pagina is in hooguit drie klikken vanaf de homepage te bereiken.',
+  'Er zijn geen twee pagina\'s die op hetzelfde zoekwoord mikken.',
+  'Elke pagina heeft een eigen title, meta description en precies één H1.',
+  'In het Core Web Vitals-rapport staan je pagina\'s op mobiel op "Goed".',
+  'Foto\'s zijn verkleind, in WebP of AVIF, met breedte en hoogte in de code.',
+  'Je bedrijfsgegevens staan als structured data (JSON-LD) op de site, zonder fouten.',
+  'Er staat geen onveilige (http) inhoud op je https-pagina\'s.',
+  'De crawlers van zoekmachines en AI-diensten die je wilt toelaten, worden niet geblokkeerd.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Checklist technische SEO in 15 punten\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  check.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nHulp nodig? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Service',
+  name: 'Technische SEO-audit',
+  serviceType: 'Technische SEO',
+  description: 'Technische SEO-audit: indexering, snelheid en Core Web Vitals, structuur, redirects, duplicate content, structured data en AI-crawlers, met een rapport op volgorde van winst.',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 395, priceSpecification: { '@type': 'PriceSpecification', price: 395, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Technische SEO en SEO-audit | Drijfveer Media"
+  description="Technische SEO-audit vanaf € 395: we controleren snelheid, Core Web Vitals, indexering en structuur, en zetten elk verbeterpunt op volgorde van winst."
+  kruimels={[{ naam: 'SEO', url: '/zoekmachine-optimalisatie/' }, { naam: 'Technische SEO', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · SEO" titel="Technische SEO: eerst de fundering op orde" prijs="vanaf € 395" eenmalig>
+    <p>Een mooie site waar Google niet goed bij kan, staat nergens. Met onze audit zie je zwart op wit wat je posities kost en wat je als eerste moet oplossen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Technische SEO zorgt dat Google je site kan vinden, lezen en goed kan tonen. Teksten en links werken pas als die basis klopt.</li>
+            <li>In onze SEO-audit lopen we elf onderdelen na, van robots.txt en redirects tot Core Web Vitals en AI-crawlers.</li>
+            <li>Je krijgt geen stapel grafieken, maar een lijst op volgorde van winst. Per punt staat erbij wie het kan oplossen.</li>
+            <li>Een audit kost bij ons vanaf € 395, eenmalig en exclusief btw. Het rapport is van jou.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is technische SEO?</h2>
+        <p>Technische SEO is het deel van <a href="/zoekmachine-optimalisatie/">zoekmachine optimalisatie</a> dat zorgt dat Google je site kan vinden, lezen en goed kan tonen. Het gaat niet over je teksten, maar over het gebouw eromheen. Hoe snel laadt een pagina? Kunnen de crawlers van Google overal bij? Weet Google welke pagina de belangrijkste is?</p>
+        <p>SEO rust op drie poten: techniek, inhoud en autoriteit. Inhoud zijn je <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a>. Autoriteit komt vooral van links van andere sites, daar gaat <a href="/linkbuilding/">linkbuilding</a> over. Techniek is de poot waar de andere twee op staan. Is die scheef, dan helpt de beste tekst weinig.</p>
+        <h3>Van crawlen tot zoekresultaat</h3>
+        <p>Google beschrijft zelf drie stappen. Niet elke pagina komt door alle drie.</p>
+        <div class="drie-stappen">
+          <div><Tekening naam="scan" maat={52} /><b>1. Crawlen</b><span>Een programma van Google, Googlebot, volgt links en haalt je pagina's op. Tekst, maar ook foto's en video.</span></div>
+          <div><Tekening naam="boek" maat={52} vertraging={200} /><b>2. Indexeren</b><span>Google probeert te begrijpen waar de pagina over gaat, en bewaart hem in zijn grote index.</span></div>
+          <div><Tekening naam="vergrootglas" maat={52} vertraging={400} /><b>3. Tonen</b><span>Zoekt iemand iets, dan kiest Google uit die index de pagina's die het beste antwoord geven.</span></div>
+        </div>
+        <p>Technische SEO gaat vooral over de eerste twee stappen. Gaat daar iets mis, dan doe je bij de derde stap niet eens mee. Een pagina die niet in de index staat, kan op geen enkel zoekwoord gevonden worden.</p>
+
+        <h2 id="belangrijker">Waarom techniek belangrijker is geworden</h2>
+        <p>Vroeger was technische SEO vooral een klus voor grote webshops. Dat is de afgelopen jaren veranderd. Drie dingen kwamen erbij.</p>
+        <p><b>Gebruikservaring telt mee.</b> Sinds juni 2021 gebruikt Google de paginabeleving, met daarin de Core Web Vitals, in zijn rankingsystemen. Dat schreef Google zelf op zijn blog voor webmasters. In maart 2024 veranderde er een meting: Interaction to Next Paint verving First Input Delay, aldus web.dev van Google.</p>
+        <p><b>Google kijkt naar je telefoonversie.</b> Google indexeert de mobiele versie van je site, opgehaald met een crawler die zich voordoet als smartphone. Wat op mobiel ontbreekt, bestaat voor Google dus niet. Ook als het op de computer prima staat.</p>
+        <p><b>Er zijn nieuwe bezoekers.</b> Naast Googlebot lezen nu ook de crawlers van ChatGPT, Bing en andere AI-diensten je site. Een site die ze per ongeluk buitensluit, wordt in AI-antwoorden niet genoemd. Meer daarover lees je bij <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+        <p>Een site die langzaam laadt, heeft ook een directe invloed op je omzet. Bezoekers wachten niet. Ze gaan terug naar Google en klikken op de volgende. Een technisch geoptimaliseerde website is daarom niet alleen beter voor Google, maar ook voor het aantal mensen dat belt.</p>
+        <p>Wel eerlijk: Google zegt er zelf bij dat goede scores in Search Console geen garantie zijn voor de bovenste plek. Snelheid is één factor van vele. Een supersnelle site met een matige tekst wint het niet van een redelijk snelle site met het beste antwoord. Je techniek moet op orde zijn. Perfect hoeft niet.</p>
+
+        <h2 id="signalen">Signalen dat je site een technisch probleem heeft</h2>
+        <p>De meeste ondernemers merken een technisch probleem niet aan de techniek. Ze merken het aan de telefoon die stiller wordt. Herken je een van deze situaties, dan is een audit vaak de snelste weg naar het antwoord.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je merkt</th><th>Mogelijke oorzaak</th><th>Waar je het ziet</th></tr></thead>
+            <tbody>
+              <tr><td>Een nieuwe pagina staat na weken nog niet in Google</td><td>Noindex, blokkade in robots.txt of geen enkele link naar de pagina</td><td>URL-inspectie in Search Console</td></tr>
+              <tr><td>Bezoekers zakten weg na een nieuwe website</td><td>Oude adressen sturen niet door, of sturen allemaal naar de homepage</td><td>Search Console, rapport Pagina's</td></tr>
+              <tr><td>Je zoekt je eigen bedrijfsnaam en ziet een oude pagina</td><td>Twee versies van je site, of een verkeerde canonical</td><td>Google zelf en de URL-inspectie</td></tr>
+              <tr><td>Op je telefoon duurt het lang voor er iets staat</td><td>Zware foto's, trage hosting, te veel scripts</td><td>PageSpeed Insights</td></tr>
+              <tr><td>Twee van je pagina's wisselen elkaar af in Google</td><td>Ze mikken op hetzelfde zoekwoord</td><td>Search Console, rapport Prestaties</td></tr>
+              <tr><td>ChatGPT kent je bedrijf niet, terwijl je al jaren bestaat</td><td>AI-crawlers geblokkeerd door een plugin of firewall</td><td>Je robots.txt en de logbestanden van je server</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Een voorbeeld: de nieuwe website die bezoekers kostte</h3>
+        <p>Een hovenier in Roden laat een nieuwe website bouwen. Mooier, sneller, op een ander systeem. Twee maanden later belt er bijna niemand meer via Google. Wat is er gebeurd? De oude pagina's heetten /tuinaanleg.html en /bestrating.html. De nieuwe heten /diensten/tuinaanleg/ en /diensten/bestrating/. Niemand heeft de oude adressen doorgestuurd. Google kent de nieuwe pagina's nog niet goed, en de oude geven een 404. De links die andere sites in tien jaar naar de oude pagina's legden, lopen dood.</p>
+        <p>De oplossing is niet ingewikkeld: elke oude pagina met een 301 naar zijn nieuwe tegenhanger, de sitemap opnieuw indienen en de belangrijkste pagina's laten inspecteren. Het verschil zit erin dat iemand het ziet. Dat kost in een audit een uur. Zonder audit kost het maanden aan aanvragen.</p>
+        <p class="klein muted">Verzonnen voorbeeld.</p>
+        <p>Search Console is gratis en laat al veel zien. Hoe je het instelt en welke rapporten ertoe doen, staat in de gids <a href="/kennisbank/gidsen/google-search-console/">website aanmelden bij Google en Search Console gebruiken</a>. Is je verkeer al gedaald? Lees dan ook <a href="/kennisbank/hoe-voorkom-je-een-daling-in-websiteverkeer/">hoe je een daling in websiteverkeer voorkomt</a>.</p>
+
+        <h2 id="audit">Wat er in onze SEO-audit zit</h2>
+        <p>We lopen je site na met Google Search Console, PageSpeed Insights, SE Ranking en een crawler die elke pagina afgaat. Daarna kijken we met eigen ogen. Een tool vindt de fout, een mens beoordeelt of hij ertoe doet. Een tool met tweehonderd waarschuwingen zegt niet welke drie je echt geld kosten. Dat doen wij.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>1. Crawlen en indexeren</h3></div>
+        <p>Welke pagina's staan in Google en welke niet, en waarom? We vergelijken wat er op je site staat met wat Google kent. We controleren je robots.txt, je <a href="/kennisbank/wat-is/sitemap/">sitemap</a>, noindex-tags en statuscodes.</p>
+        <p>Een veelgemaakte denkfout: een pagina in robots.txt blokkeren om hem uit Google te houden. Google zegt zelf dat robots.txt daar niet voor is. Wil je een pagina uit de zoekresultaten, gebruik dan een noindex of zet er een wachtwoord op. Een geblokkeerde pagina kan namelijk toch in Google verschijnen als andere sites ernaar linken.</p>
+        <p>Voor een sitemap geldt een grens van 50.000 adressen of 50 MB per bestand, volgens Google. Voor een mkb-site is dat ruim genoeg. Het <a href="/kennisbank/wat-is/crawlbudget/">crawlbudget</a> speelt bij de meeste mkb-sites ook geen rol. Google noemt het vooral iets voor sites met meer dan een miljoen pagina's, of meer dan tienduizend pagina's die dagelijks veranderen.</p>
+
+        <div class="stap-kop"><Tekening naam="raket" maat={48} vertraging={100} /><h3>2. Snelheid en Core Web Vitals</h3></div>
+        <p>We meten per type pagina, op mobiel en desktop. Met de oorzaak erbij: zware foto's, trage hosting, te veel scripts of een thema dat alles tegelijk laadt. Google meet drie dingen. Dit zijn de grenzen die Google zelf als goed ziet:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Meting</th><th>Wat het betekent</th><th>Goed is</th><th>Vaak de oorzaak</th></tr></thead>
+            <tbody>
+              <tr><td><b>Largest Contentful Paint</b></td><td>Hoe snel het grootste stuk van de pagina in beeld staat</td><td>Binnen 2,5 seconde</td><td>Een grote foto of slider bovenaan</td></tr>
+              <tr><td><b>Interaction to Next Paint</b></td><td>Hoe snel de pagina reageert als je ergens op tikt</td><td>200 milliseconden of minder</td><td>Zware scripts, chatwidgets, trackers</td></tr>
+              <tr><td><b>Cumulative Layout Shift</b></td><td>Hoeveel de pagina verspringt tijdens het laden</td><td>0,1 of minder</td><td>Foto's en banners zonder vaste maat</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bron: web.dev van Google, de pagina over Web Vitals. Google meet bij het 75e percentiel: driekwart van de bezoeken moet binnen de grens blijven.</p>
+        <p>We kijken vooral naar de cijfers van echte bezoekers, uit het Core Web Vitals-rapport in Search Console. Een losse meting in PageSpeed Insights is een momentopname. Bij de Largest Contentful Paint is de boosdoener vaak één grote foto bovenaan de pagina. Wil je zelf aan de slag met snelheid? In de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a> staat het stap voor stap.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} vertraging={200} /><h3>3. Mobiel</h3></div>
+        <p>Werkt alles op een klein scherm? Zijn knoppen groot genoeg en is tekst leesbaar zonder in te zoomen? Staat dezelfde inhoud op mobiel als op de computer? Een uitklapmenu dat op mobiel de helft van je diensten verbergt, of een tabel die je niet kunt lezen, kost je meer dan je denkt. Google beoordeelt immers die mobiele versie.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} vertraging={300} /><h3>4. Structuur en interne links</h3></div>
+        <p>Hoe diep zitten je belangrijke pagina's? Klopt je interne linkstructuur, en zijn er pagina's waar geen enkele link naartoe gaat? Zulke weespagina's vindt Google moeilijk, en ze krijgen geen kracht van de rest van je site. We kijken ook naar je URL's, je menu en je <a href="/kennisbank/wat-is/breadcrumbs/">breadcrumbs</a>. Hoe pagina's elkaar versterken, lees je bij <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} vertraging={400} /><h3>5. Duplicate content en canonicals</h3></div>
+        <p>Dezelfde pagina op meerdere adressen. Met en zonder www, met http en https, met en zonder slash aan het eind, of met rare toevoegingen in de URL. Google weet dan niet welke telt, en verdeelt de waarde over alle versies. Met een canonical-tag wijs je de juiste versie aan. Meer over <a href="/kennisbank/wat-is/duplicate-content/">duplicate content</a>.</p>
+        <p>Hier hoort ook <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a> bij: twee eigen pagina's die met elkaar concurreren op hetzelfde zoekwoord. Dat is geen pure techniek, maar we zien het in dezelfde data. Dus nemen we het mee.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} vertraging={500} /><h3>6. Redirects en statuscodes</h3></div>
+        <p>Doorverwijzingen in een keten, links naar pagina's die niet meer bestaan, oude adressen van je vorige website. Een permanente verhuizing doe je met een 301 of 308, een tijdelijke met een 302. Google volgt standaard tot tien doorverwijzingen achter elkaar, maar elke extra stap kost tijd. Wij willen één stap, van oud naar nieuw. Wat een <a href="/kennisbank/wat-is/redirect/">redirect</a> precies is, lees je in de kennisbank.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} vertraging={600} /><h3>7. Structured data</h3></div>
+        <p>Code die zoekmachines vertelt wie je bent, wat je doet en waar. Denk aan je bedrijfsgegevens, je openingstijden, je diensten en je veelgestelde vragen. Google raadt daarvoor JSON-LD aan. We controleren of het er staat, of het klopt met de rest van je site en of er fouten in zitten. Wil je dit goed laten inrichten? Kijk bij <a href="/generative-engine-optimization/structured-data/">structured data en schema</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} vertraging={700} /><h3>8. Beveiliging</h3></div>
+        <p>Een geldig <a href="/kennisbank/wat-is/ssl-certificaat/">ssl-certificaat</a>, overal https en geen onveilige onderdelen op veilige pagina's. Dat laatste heet <a href="/kennisbank/wat-is/mixed-content/">mixed content</a>, en het zit vaak in één oude foto of een ingesloten formulier. Google noemt een veilige verbinding als een van de vragen bij een goede paginabeleving.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} vertraging={800} /><h3>9. JavaScript en rendering</h3></div>
+        <p>Google verwerkt JavaScript in een aparte stap, het renderen. Pagina's gaan daarvoor in een wachtrij. Staat je belangrijkste tekst pas op de pagina nadat een script is gedraaid, dan controleren we met de URL-inspectie wat Google echt te zien krijgt. Bij sites die met een zware paginabouwer zijn gemaakt, gaat hier vaker iets mis.</p>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={48} vertraging={900} /><h3>10. AI-crawlers</h3></div>
+        <p>Mogen de bots van ChatGPT, Bing en Perplexity je site lezen? Soms blokkeert een beveiligingsplugin of firewall ze zonder dat je het weet. Bij OpenAI zijn het twee aparte bots, volgens de eigen documentatie. OAI-SearchBot zorgt dat je in de zoekfunctie van ChatGPT kunt verschijnen. GPTBot verzamelt tekst om modellen te trainen. Je kunt de eerste toelaten en de tweede weigeren. En bij Google? Blokkeer je Google-Extended, dan heeft dat volgens Google geen invloed op je plek in de gewone zoekresultaten.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} vertraging={1000} /><h3>11. De basis per pagina</h3></div>
+        <p>Heeft elke pagina een eigen <a href="/kennisbank/wat-is/title-tag/">title</a>, een meta description en precies één H1? Hebben foto's een <a href="/kennisbank/wat-is/alt-tekst/">alt-tekst</a>? Kloppen je <a href="/kennisbank/wat-is/headings/">headings</a>? Dit grenst aan inhoud, maar een crawler vindt het in één ronde. Heb je een Duitse of Engelse versie van je site, dan controleren we ook of Google weet welke taal bij welk land hoort.</p>
+
+        <h2 id="werkwijze">Zo verloopt een technische SEO-audit bij ons</h2>
+        <p>Geen dik offertetraject. Zo ziet het eruit, van eerste telefoontje tot oplossing:</p>
+        <ol class="stappen">
+          <li><b>We bellen je binnen 15 minuten terug.</b> Op werkdagen tussen 8.00 en 17.00 uur. We vragen wat je merkt en wat je wilt bereiken. Een daling na een verhuizing vraagt om een andere aanpak dan een site die nooit goed vindbaar was.</li>
+          <li><b>Je geeft ons toegang.</b> Leestoegang tot Google Search Console is het belangrijkst. Heb je dat niet, dan helpen we je het in te stellen. Bij een verhuizing vragen we ook de lijst met oude adressen, als je die hebt.</li>
+          <li><b>We crawlen en meten.</b> Elke pagina gaat door de crawler. We halen de cijfers van echte bezoekers op en meten de belangrijkste pagina's los.</li>
+          <li><b>We beoordelen met eigen ogen.</b> Een melding over een te lange title op een privacypagina laten we liggen. Een noindex op je beste dienstpagina niet.</li>
+          <li><b>Je krijgt het rapport.</b> Kort, in gewone taal, op volgorde van winst.</li>
+          <li><b>We lopen het samen door.</b> Aan de telefoon, bij ons aan de Lauwers in Assen of bij jou op locatie. Je mag alles vragen.</li>
+          <li><b>Jij kiest wie het oplost.</b> Jij zelf, je eigen webbouwer of wij. Lossen wij het op, dan kijken we daarna in Search Console of Google de wijziging oppikt.</li>
+        </ol>
+        <p>We beginnen altijd bij de punten met de grootste kans op snel verschil. Daarna pas het fijnslijpen. Dat is onze vaste <a href="/werkwijze/">werkwijze</a>, ook bij techniek.</p>
+
+        <h2 id="rapport">Wat je krijgt: een rapport dat je zonder uitleg begrijpt</h2>
+        <p>Geen veertig pagina's met grafieken. Een rapportage waar je zelf uitleg bij nodig hebt, schiet zijn doel voorbij. Je krijgt een lijst met wat er mis is, gesorteerd op wat het je kost. Per punt staat erbij waarom het telt, hoeveel werk het is en wie het kan oplossen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat we vonden</th><th>Gevolg</th><th>Oplossing</th><th>Belang</th></tr></thead>
+            <tbody>
+              <tr><td>Foto bovenaan de homepage is 4 MB</td><td>Pagina staat pas na 5,8 seconde in beeld</td><td>Verkleinen en opslaan als WebP</td><td>Hoog</td></tr>
+              <tr><td>Oude dienstpagina's geven een 404</td><td>Links van andere sites lopen dood</td><td>Doorverwijzen naar de nieuwe pagina</td><td>Hoog</td></tr>
+              <tr><td>Noindex op de pagina "dakkapel plaatsen"</td><td>Pagina staat niet in Google</td><td>Noindex weghalen, opnieuw laten indexeren</td><td>Hoog</td></tr>
+              <tr><td>Twee pagina's over "dakkapel prijs"</td><td>Ze concurreren met elkaar</td><td>Samenvoegen tot één sterke pagina</td><td>Middel</td></tr>
+              <tr><td>Geen structured data</td><td>Google moet raden wie je bent</td><td>Bedrijfsgegevens als schema toevoegen</td><td>Middel</td></tr>
+              <tr><td>Privacypagina heeft geen meta description</td><td>Weinig, niemand zoekt erop</td><td>Laten liggen</td><td>Laag</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Uit een verzonnen voorbeeldrapport voor een bouwbedrijf.</p>
+        <p>Let op die laatste regel. Een goed rapport zegt ook wat je kunt laten liggen. Daar bespaar je net zo goed geld mee.</p>
+
+        <h2 id="checklist">Checklist: technische SEO in 15 punten</h2>
+        <p>Wil je eerst zelf kijken hoe je ervoor staat? Loop deze punten na. Alles wat je niet zeker weet, is een vraag voor de audit. Je kunt de lijst ook downloaden en afvinken.</p>
+        <div class="kader check-lijst">
+          <ol>{check.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="checklist-technische-seo.txt">Download de checklist</a>
+        </div>
+
+        <h2 id="fouten">Zes fouten die vaak voorkomen</h2>
+        <ul>
+          <li><b>De testversie weerde Google, en dat bleef zo.</b> Tijdens de bouw zet de webbouwer terecht "zoekmachines weren" aan. Na de lancering vergeet iemand het uit te zetten.</li>
+          <li><b>Alle oude pagina's sturen door naar de homepage.</b> Makkelijk ingesteld, maar Google raadt het af. Bij een verhuizing kan Google zo'n doorverwijzing zien als een soft 404, een pagina die eigenlijk niet bestaat.</li>
+          <li><b>Een SEO-plugin en het thema doen allebei hetzelfde.</b> Twee titles, twee canonicals of twee sitemaps die elkaar tegenspreken.</li>
+          <li><b>Een plugin voor elk klein ding.</b> Elke plugin laadt zijn eigen scripts. Twintig plugins voelen op een telefoon als stroop.</li>
+          <li><b>Filters en zoekpagina's in de index.</b> Elke combinatie van filters wordt een eigen pagina met bijna dezelfde inhoud.</li>
+          <li><b>Repareren op gevoel.</b> Een rode score in een tool oplossen die niets kost, terwijl de echte rem ergens anders zit.</li>
+        </ul>
+        <p>Draait je site op WordPress? Dan voorkom je veel van deze problemen met goed <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud van WordPress</a>, vanaf € 39 per maand.</p>
+
+        <h2 id="wanneer">Wanneer een SEO-audit zinvol is</h2>
+        <ul>
+          <li><b>Na een nieuwe website.</b> Bij een verhuizing gaan vaak doorverwijzingen mis. Hoe eerder je dat ziet, hoe minder posities je verliest.</li>
+          <li><b>Voor een nieuwe website.</b> Dan maken we eerst een lijst van je oude adressen en waar ze naartoe moeten. Dat is goedkoper dan achteraf repareren.</li>
+          <li><b>Als je bezoekers ineens dalen.</b> Een plotselinge daling heeft vaak een technische oorzaak.</li>
+          <li><b>Voordat je in teksten of links investeert.</b> Anders bouw je op een scheve fundering.</li>
+          <li><b>Als er al jaren niemand naar heeft gekeken.</b> Plugins, oude pagina's en losse aanpassingen stapelen zich op.</li>
+        </ul>
+
+        <h2 id="kosten">Wat technische SEO kost</h2>
+        <p>Een technische SEO-audit kost bij Drijfveer Media vanaf € 395, eenmalig en exclusief btw. Daarin zitten de crawl, de metingen, het rapport en de bespreking. Voor grote sites met duizenden pagina's is meer werk nodig. Dat hoor je vooraf, niet achteraf. Wat past bij jouw situatie?</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Jouw situatie</th><th>Wat past</th><th>Vanaf</th></tr></thead>
+            <tbody>
+              <tr><td>Je wilt weten wat er technisch mis is</td><td>Technische SEO-audit</td><td>€ 395 eenmalig</td></tr>
+              <tr><td>Je hebt één concrete vraag, bijvoorbeeld over een verhuizing</td><td><a href="/consult/">Consult</a></td><td>€ 85 per uur</td></tr>
+              <tr><td>Je wilt dat iemand alles bijhoudt, ook teksten en links</td><td><a href="/zoekmachine-optimalisatie/seo-uitbesteden/">SEO uitbesteden</a></td><td>€ 495 per maand</td></tr>
+              <tr><td>Alleen je bedrijfsgegevens als schema</td><td><a href="/generative-engine-optimization/structured-data/">Structured data</a></td><td>€ 295 eenmalig</td></tr>
+              <tr><td>WordPress up-to-date, veilig en snel houden</td><td><a href="/website-laten-maken/onderhoud-wordpress/">Onderhoud WordPress</a></td><td>€ 39 per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Alle prijzen zijn vanaf-prijzen, exclusief btw. Meer op de pagina <a href="/prijzen/">prijzen</a>.</p>
+        <p>Wil je weten hoe die bedragen zich verhouden tot wat andere bureaus vragen? In de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a> zetten we het op een rij.</p>
+
+        <h2 id="na-de-audit">Na de audit: zelf oplossen of door ons laten doen</h2>
+        <p>Het rapport is van jou. Je kunt het zelf oppakken of aan je eigen webbouwer geven. Wil je dat wij het oplossen, dan hoor je vooraf wat het kost. Wie <a href="/zoekmachine-optimalisatie/seo-uitbesteden/">SEO uitbesteedt</a> bij ons, krijgt de technische controle er elke maand bij. Dan geldt ook onze stijggarantie: we spreken een doel af, en halen we dat niet door ons, dan werken we een maand gratis door.</p>
+        <p>Een audit is het begin van een SEO-strategie, niet het einde. Een geoptimaliseerde website laadt sneller en werkt prettiger, en dat merk je ook in het aantal aanvragen. Daarom combineren we het vaak met <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>: meer bezoekers is mooi, meer bezoekers die bellen is beter.</p>
+        <p>Waarom durven we te zeggen wat werkt en wat niet? We hebben al 15 jaar meer dan honderd eigen sites in ons <a href="/proeflab/">proeflab</a>. Daar proberen we technieken eerst zelf uit. Ook de technieken die misgaan, zodat dat bij jou niet gebeurt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={16} />
+        <Prijskaart naam="Technische SEO-audit" prijs="€ 395" eenmalig punten={['Indexering, snelheid en Core Web Vitals', 'Structuur, redirects en duplicate content', 'Structured data en AI-crawlers', 'Rapport op volgorde van winst', 'Bespreking van de uitkomst']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost een technische SEO-audit?', a: 'Bij Drijfveer Media vanaf € 395, eenmalig en exclusief btw. Voor grote sites met duizenden pagina\'s is meer werk nodig. Dat hoor je vooraf.' },
+      { v: 'Wat is het verschil tussen technische SEO en een SEO-audit?', a: 'Technische SEO is het vakgebied: alles wat zorgt dat Google je site kan vinden en lezen. Een SEO-audit is de controle daarvan op één moment, met een lijst verbeterpunten. Na de audit begint het echte werk.' },
+      { v: 'Kan ik zelf een audit doen?', a: 'Voor een deel wel. Google Search Console en PageSpeed Insights zijn gratis en laten veel zien. Gebruik de checklist op deze pagina als start. De kunst is bepalen welke meldingen ertoe doen en welke niet.' },
+      { v: 'Hoe lang duurt het voor ik resultaat zie?', a: 'Dat hangt af van de fout. Een vergeten noindex weghalen kan snel effect hebben, zodra Google de pagina opnieuw bezoekt. Snelheid en structuur werken geleidelijk. Een audit garandeert geen posities, wel dat techniek je niet meer tegenhoudt.' },
+      { v: 'Werkt dit ook voor een WordPress-site?', a: 'Ja. Bij WordPress zitten de problemen vaak in zware thema\'s en te veel plugins. Sites op andere systemen kijken we net zo goed na.' },
+      { v: 'Hebben jullie toegang tot mijn website nodig?', a: 'Voor de audit niet. We hebben vooral leestoegang tot Google Search Console nodig. Pas als je wilt dat wij dingen oplossen, vragen we toegang tot je CMS of hosting.' },
+      { v: 'Lossen jullie de fouten ook op?', a: 'Als je dat wilt wel. Je krijgt dan vooraf een prijs. Je kunt het rapport ook aan je eigen webbouwer geven.' },
+      { v: 'Hoe vaak moet je een SEO-audit laten doen?', a: 'In elk geval na een nieuwe website en bij een plotselinge daling. Daarbuiten is eens per jaar voor de meeste mkb-sites genoeg. Wie SEO bij ons uitbesteedt, krijgt de technische controle elke maand.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over gevonden worden"
+    links={[
+      { label: 'Pillar', titel: 'Zoekmachine optimalisatie', href: '/zoekmachine-optimalisatie/', tekst: 'De hele aanpak, vanaf € 495 per maand.' },
+      { label: 'Dienst', titel: 'SEO-teksten', href: '/zoekmachine-optimalisatie/seo-teksten/', tekst: 'Teksten die gevonden worden en overtuigen.' },
+      { label: 'Gids', titel: 'Website sneller maken', href: '/kennisbank/gidsen/website-sneller-maken/', tekst: 'Core Web Vitals stap voor stap.' },
+      { label: 'Gids', titel: 'Google Search Console', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Je site aanmelden en de rapporten lezen.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat er technisch mis is?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en belt je met de grootste technische fout die hij ziet. Daarna beslis je of je de hele audit wilt.`} />
+</Base>
+<style>
+  .drie-stappen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 8px 0 22px; }
+  .drie-stappen div { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 16px; display: grid; justify-items: start; gap: 6px; align-content: start; }
+  .drie-stappen span { color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+  .stappen li { margin-bottom: 10px; }
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+  @media (max-width: 640px) { .drie-stappen { grid-template-columns: minmax(0, 1fr); } }
+</style>

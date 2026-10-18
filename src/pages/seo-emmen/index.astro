@@ -1,0 +1,187 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/seo-emmen.astro';
+import { site } from '../../data/site';
+
+const url = '/seo-emmen/';
+const schema = [{
+  '@type': 'Service',
+  name: 'SEO in Emmen',
+  serviceType: 'Zoekmachineoptimalisatie',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: [{ '@type': 'City', name: 'Emmen' }, { '@type': 'AdministrativeArea', name: 'Drenthe' }],
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 295, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 295, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+}];
+
+// CBS, Kerncijfers wijken en buurten 2025: inwoners en bedrijfsvestigingen per wijk.
+const kernen = [
+  { naam: 'Klazienaveen', inwoners: '11.970', vestigingen: '1.080' },
+  { naam: 'Rietlanden', inwoners: '9.010', vestigingen: '675' },
+  { naam: 'Bargeres', inwoners: '8.890', vestigingen: '645' },
+  { naam: 'Emmer-Compascuum', inwoners: '7.735', vestigingen: '725' },
+  { naam: 'Angelslo', inwoners: '7.730', vestigingen: '420' },
+  { naam: 'Emmerhout', inwoners: '7.050', vestigingen: '395' },
+  { naam: 'Emmermeer', inwoners: '6.000', vestigingen: '495' },
+  { naam: 'Emmen-Centrum', inwoners: '4.925', vestigingen: '815' },
+  { naam: 'Schoonebeek', inwoners: '4.900', vestigingen: '490' },
+  { naam: 'Erica', inwoners: '4.740', vestigingen: '540' },
+  { naam: 'Nieuw-Amsterdam', inwoners: '4.720', vestigingen: '475' },
+];
+---
+<Base
+  title="SEO Emmen: hoger in Google in je regio | Drijfveer Media"
+  description="SEO in Emmen voor bedrijven die gevonden willen worden in de stad, de wijken en de dorpen eromheen. Lokale SEO vanaf € 295 per maand, met stijggarantie."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Drenthe', url: '/regio/drenthe/' }, { naam: 'SEO Emmen', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · Emmen" titel="SEO in Emmen: bovenaan bij klanten uit de buurt" prijs="vanaf € 295 per maand">
+    <p>Wie in Emmen een loodgieter, kapper of boekhouder zoekt, kiest meestal uit de eerste paar namen in Google. Met SEO in Emmen zorgen wij dat jij daartussen staat, in de stad en in de dorpen eromheen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Zo wordt er in Emmen gezocht</h2>
+      <p>De gemeente Emmen is geen stad met één centrum. Het CBS deelt haar op in 27 wijken: de wijken van Emmen zelf en een hele rij dorpen. Samen goed voor 109.820 inwoners (CBS, eind augustus 2026). De wijken van de stad liggen op afstand van het centrum. Dat merk je in Google. Iemand in Bargeres zoekt op "fysiotherapeut Bargeres" of op "in de buurt", en krijgt dan een kaartje met drie bedrijven te zien. Wie niet in dat kaartje staat, wordt nauwelijks gezien.</p>
+      <p>De dorpen hebben elk hun eigen zoekverkeer. Klazienaveen heeft meer inwoners dan welke wijk van Emmen-stad ook. Goede SEO in Emmen begint daarom met de vraag: in welk deel van de regio Emmen wil jij gevonden worden, en op welke termen?</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wijk of dorp</th><th>Inwoners</th><th>Bedrijfsvestigingen</th></tr></thead>
+          <tbody>
+            {kernen.map((k) => <tr><td><b>{k.naam}</b></td><td>{k.inwoners}</td><td>{k.vestigingen}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron: CBS, Kerncijfers wijken en buurten 2025. De elf grootste wijken en dorpen van de gemeente.</p>
+      <p>Kijk naar de laatste kolom. In Klazienaveen zitten meer dan duizend bedrijven, in het centrum van Emmen 815. Dat zijn je concurrenten in Google. In de hele gemeente telde het CBS begin 2026 11.690 bedrijfsvestigingen, tegen 8.645 tien jaar eerder. De grootste groepen: handel (2.150), specialistische zakelijke diensten (1.685) en bouw (1.450). Elk jaar komen er dus meer bedrijven bij die om dezelfde potentiële klanten vragen.</p>
+
+      <h2>Drie soorten zoekopdrachten, drie aanpakken</h2>
+      <p>Niet elke zoekopdracht vraagt om hetzelfde werk. Wij delen ze in drie groepen in, omdat Google ze ook anders behandelt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekopdracht</th><th>Wat Google laat zien</th><th>Wat je nodig hebt</th></tr></thead>
+          <tbody>
+            <tr><td>"loodgieter in de buurt"</td><td>Vooral het kaartje met drie bedrijven, op basis van waar de zoeker is</td><td>Een compleet Google Bedrijfsprofiel, reviews en een adres of servicegebied in de buurt</td></tr>
+            <tr><td>"loodgieter Emmen" of "loodgieter Klazienaveen"</td><td>Kaartje plus gewone resultaten</td><td>Profiel én een sterke pagina die laat zien dat je daar werkt</td></tr>
+            <tr><td>"cv-ketel lekt onderkant"</td><td>Vooral gewone resultaten en soms een AI-antwoord</td><td>Pagina's met echte antwoorden, die laten zien dat je het vak kent</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De eerste groep win je met <a href="/lokale-seo/">lokale SEO</a>. De derde met content en <a href="/zoekmachine-optimalisatie/">SEO</a>. De middelste vraagt om allebei. De meeste bedrijven in Emmen en omstreken hebben een mix nodig. Welke verhouding, hangt af van je vak.</p>
+
+      <h2>Zo pakken we SEO in Emmen aan</h2>
+    </div>
+    <div class="tekst stappen">
+      <div class="stap-kop"><Tekening naam="vergrootglas" /><h3>1. Uitzoeken waar je klanten zoeken</h3></div>
+      <p>Met SE Ranking meten we welke termen potentiële klanten echt intypen, per wijk en per dorp. Sommige zoekwoorden lijken mooi maar leveren niets op. Die laten we liggen.</p>
+      <div class="stap-kop"><Tekening naam="pin" /><h3>2. Je bedrijfsprofiel op orde</h3></div>
+      <p>Het kaartje in Google draait om je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Juiste categorie, werkgebied, openingstijden, foto's en reviews. Hier valt vaak het snelst winst te halen.</p>
+      <div class="stap-kop"><Tekening naam="pen" /><h3>3. Pagina's die echt over je werkgebied gaan</h3></div>
+      <p>Geen tien kopieën waarin alleen de plaatsnaam verschilt. Google noemt dat in zijn spamregels letterlijk als voorbeeld: pagina's per stad of regio die bezoekers allemaal naar dezelfde plek sturen. Wel een pagina over je werk in Klazienaveen met een klus die je daar deed, of een pagina voor klanten uit Emmen en omstreken met de wijken die je bedient.</p>
+      <div class="stap-kop"><Tekening naam="ketting" /><h3>4. Links uit de eigen regio</h3></div>
+      <p>Een vermelding bij een sportclub, een leverancier of een regionale nieuwssite uit Zuidoost-Drenthe zegt Google meer dan honderd links van onbekende sites. Johan, onze linkbuilder, zoekt die links gericht op. Hoe dat werkt, lees je bij <a href="/linkbuilding/">linkbuilding</a>.</p>
+      <div class="stap-kop"><Tekening naam="tandwiel" /><h3>5. De techniek eronder</h3></div>
+      <p>Snelheid, mobiel gebruik en structured data, zodat Google en AI-assistenten precies snappen wie je bent en waar je werkt.</p>
+    </div>
+    <div class="tekst">
+      <h2>Je Google Bedrijfsprofiel in Emmen: vijf instellingen die tellen</h2>
+      <p>Google schrijft zelf dat lokale resultaten vooral draaien om relevantie, afstand en prominentie. Afstand kun je niet veranderen. De andere twee wel. Dit zijn de instellingen waar we bij bedrijven in de regio het vaakst iets aan verbeteren:</p>
+      <ol>
+        <li><b>De hoofdcategorie.</b> "Installatiebedrijf" en "Loodgieter" zijn voor Google twee verschillende dingen. Kies de categorie die past bij waar je het meest op gevonden wilt worden.</li>
+        <li><b>Het servicegebied.</b> Kom je bij de klant thuis? Dan stel je een servicegebied in via Profiel bewerken, Locatie, Servicegebied. Google staat maximaal 20 gebieden toe, op hooguit zo'n twee uur rijden. Voeg dus Emmen, Klazienaveen, Nieuw-Amsterdam en de andere dorpen waar je echt komt toe.</li>
+        <li><b>Openingstijden, ook de afwijkende.</b> Een profiel met kloppende tijden rond feestdagen voorkomt teleurgestelde klanten voor een dichte deur.</li>
+        <li><b>Foto's van echt werk.</b> Een badkamer in Angelslo of een dak in Schoonebeek zegt meer dan een logo.</li>
+        <li><b>Reviews met inhoud.</b> Vraag klanten om te vertellen wat je deed en waar. Reageer op elke review, ook de kritische. Hoe je dat aanpakt, staat in onze <a href="/kennisbank/gidsen/google-reviews/">gids over Google reviews</a>.</li>
+      </ol>
+      <p>Na het opslaan kan het volgens Google tot 48 uur duren voordat wijzigingen zichtbaar zijn. Zie je na een week niets, dan kijken we waar het hangt.</p>
+
+      <h2>Hoe zwaar is de concurrentie voor SEO in Emmen?</h2>
+      <p>Dat verschilt per vak. In de ene branche zijn in Emmen maar een handvol bedrijven serieus met hun site bezig, in de andere tientallen. Een schilder heeft een ander speelveld dan een advocaat op Businesspark Eigen Haard, waar de gemeente zakelijke dienstverleners als accountants, notarissen en advocaten bij elkaar zet. Daarom meten we eerst hoe jouw concurrenten ervoor staan, en focussen we op de plekken waar je met de minste moeite het meeste wint. Dat is het Pareto-principe: eerst de grote kansen, daarna perfectioneren.</p>
+      <h3>Zelf je concurrentie inschatten in tien minuten</h3>
+      <p>Dit kun je vandaag doen, zonder tools:</p>
+      <ol>
+        <li>Open een privévenster en zoek op je vak plus "Emmen". Doe hetzelfde met het dorp waar je zit.</li>
+        <li>Schrijf de drie bedrijven in het kaartje op. Tel hun reviews.</li>
+        <li>Klik op de eerste drie gewone resultaten. Is dat een echte bedrijfssite, of een vergelijkingssite of een gids?</li>
+        <li>Kijk of die sites een aparte pagina hebben voor de dienst die jij zoekt.</li>
+      </ol>
+      <p>Staan er vooral vergelijkingssites en hebben de bedrijven in het kaartje minder dan twintig reviews? Dan is er ruimte. Hebben ze er honderd en een pagina per dienst, dan wordt het een langer traject. Allebei kan, maar je wilt het vooraf weten.</p>
+
+      <h2>Rekenvoorbeeld: wat levert een plek in het kaartje op?</h2>
+      <div class="kader">
+        <p class="kader-titel">Cv-monteur uit Klazienaveen (verzonnen voorbeeld, verzonnen cijfers)</p>
+        <p>Stel: in de gemeente wordt elke maand 400 keer gezocht op cv-storingen en ketelonderhoud met een plaatsnaam of "in de buurt". Nu staat deze monteur op plek zeven en belt er vrijwel niemand. Na een half jaar lokale SEO staat hij in de top drie van het kaartje.</p>
+      </div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Nu</th><th>Na lokale SEO</th></tr></thead>
+          <tbody>
+            <tr><td>Zoekopdrachten per maand</td><td>400</td><td>400</td></tr>
+            <tr><td>Deel dat belt of de site bezoekt</td><td>1%</td><td>8%</td></tr>
+            <tr><td>Contacten per maand</td><td>4</td><td>32</td></tr>
+            <tr><td>Opdrachten (1 op de 3)</td><td>1</td><td>11</td></tr>
+            <tr><td>Marge (€ 120 per opdracht)</td><td>€ 120</td><td>€ 1.320</td></tr>
+            <tr><td>Kosten lokale SEO</td><td>€ 0</td><td>€ 295</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Alle getallen hierboven zijn bedacht om de som te laten zien. Je eigen cijfers kunnen hoger of lager uitvallen. Maar de vraag blijft dezelfde: hoeveel extra klussen heb je nodig om € 295 per maand terug te verdienen? Bij de meeste vakmensen zijn dat er maar een paar. Wat SEO in het algemeen kost, staat in onze gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+
+      <h2>Lokale SEO of gewone SEO?</h2>
+      <p>Werk je vooral in de stad en de dorpen eromheen, dan is lokale SEO vanaf € 295 per maand meestal genoeg. Dan draait het om het kaartje en zoekopdrachten met een plaatsnaam. Wil je ook buiten de regio gevonden worden, of op meer onderwerpen, dan past SEO vanaf € 495 per maand beter. Allebei maandelijks opzegbaar en met stijggarantie.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Lokale SEO</th><th>SEO</th></tr></thead>
+          <tbody>
+            <tr><td><b>Vanaf</b></td><td>€ 295 per maand</td><td>€ 495 per maand</td></tr>
+            <tr><td><b>Doel</b></td><td>Bovenaan in het kaartje en op plaatsnaam</td><td>Gevonden op je diensten, in de regio en daarbuiten</td></tr>
+            <tr><td><b>Werk</b></td><td>Profiel, reviews, werkgebiedpagina's, lokale vermeldingen</td><td>Zoekwoordonderzoek, nieuwe pagina's, techniek, links</td></tr>
+            <tr><td><b>Past bij</b></td><td>Kapper, installateur, fysio, winkel</td><td>Groothandel, maakbedrijf, dienstverlener met klanten in het hele land</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Bedrijven op Bargermeer, volgens de gemeente het grootste bedrijventerrein van Noord-Nederland, verkopen vaak aan klanten ver buiten Emmen. Voor hen is de plaatsnaam minder belangrijk dan de juiste vaktermen. Een kapper in Emmerhout zit precies andersom. Voor hem is SEO in Emmen vooral een zaak van het kaartje.</p>
+      <p>Je krijgt een transparante rapportage met de werkzaamheden en de posities die zijn veranderd. Zonder jargon, zodat je hem ook zonder ons ernaast begrijpt.</p>
+
+      <h2>Wat we niet beloven</h2>
+      <p>We geloven niet in een eerste plek binnen een week. Wie dat belooft, gebruikt trucs die Google vroeg of laat afstraft. We weten waar we het over hebben. Vroeger namen we met onze eigen sites soms te veel risico, en één ervan kreeg een penalty. Juist daarom testen we nieuwe technieken eerst in ons <a href="/proeflab/">proeflab</a>, en blijven we bij klanten ruim binnen de regels.</p>
+      <p>We noemen onszelf ook liever geen experts. We zijn een team uit Assen, zo'n veertig minuten rijden van Emmen, dat al sinds 2011 bedrijven hoger in Google zet. Voor de start komen we graag langs. Het meeste werk doen we op afstand. Bel gerust om te horen of dat voor jouw bedrijf ook kan.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost SEO in Emmen?', a: 'Lokale SEO begint bij € 295 per maand, uitgebreide SEO bij € 495 per maand. Beide zijn maandelijks opzegbaar en exclusief btw. Na een gratis analyse weet je welke van de twee bij je past.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Bij lokale zoekopdrachten zie je vaak binnen een paar maanden beweging. Hoe snel precies, hangt af van je vak en van wat je concurrenten doen. Een termijn beloven we niet. Wel spreken we samen een doel af.' },
+      { v: 'Kan ik in Emmen gevonden worden als mijn bedrijf in Klazienaveen zit?', a: 'In de gewone zoekresultaten wel, met goede pagina\'s over je werkgebied. In het kaartje van Google telt afstand zwaar mee. Daar sta je het sterkst rond je eigen vestiging. Een servicegebied helpt, maar maakt de afstand niet kleiner.' },
+      { v: 'Moet ik voor elk dorp een aparte pagina maken?', a: 'Nee. Google ziet een rij bijna gelijke plaatspagina\'s als spam. Maak alleen een eigen pagina voor een dorp als je er echt iets over te vertellen hebt, zoals een klus die je daar deed. De rest noem je op één goede werkgebiedpagina.' },
+      { v: 'Ik krijg ook Duitse klanten. Moet ik daar iets mee?', a: 'Als die klanten echt komen, is een Duitstalige pagina over je belangrijkste dienst vaak de moeite waard. Ga niet je hele site vertalen voordat je weet of er vraag is.' },
+      { v: 'Kan ik ook zelf aan de slag?', a: 'Zeker. Begin met je bedrijfsprofiel. In onze <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">gids over het Google Bedrijfsprofiel</a> staat stap voor stap hoe je dat goed inricht.' },
+      { v: 'Zitten jullie in Emmen?', a: 'Nee, ons kantoor staat in Assen. Voor een gesprek komen we graag naar Emmen. De meeste werkzaamheden voor SEO doen we op afstand.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer voor ondernemers in Emmen"
+    links={[
+      { label: 'Emmen', titel: 'Webdesign in Emmen', href: '/webdesign-emmen/', tekst: 'Een site die gebouwd is om gevonden en gebeld te worden.' },
+      { label: 'Emmen', titel: 'Online marketing in Emmen', href: '/online-marketing-emmen/', tekst: 'SEO, Google Ads en je website in één hand.' },
+      { label: 'Regio', titel: 'Drenthe', href: '/regio/drenthe/', tekst: 'Wat we doen in de rest van de provincie.' },
+      { label: 'Gids', titel: 'Google Bedrijfsprofiel', href: '/kennisbank/gidsen/google-bedrijfsprofiel/', tekst: 'Aanmaken, verifiëren en goed inrichten.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd waar je nu staat in Emmen?" tekst={`We kijken gratis hoe je bedrijf gevonden wordt in de stad en de dorpen. ${site.contactpersoon} belt je binnen 15 minuten terug met de eerste kansen.`} />
+</Base>
+<style>
+  .stappen { margin-bottom: 24px; }
+</style>

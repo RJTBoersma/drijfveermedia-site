@@ -1,0 +1,294 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--zoekintentie.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/zoekintentie/';
+const datum = '2026-10-18';
+const definitie = 'Zoekintentie is het doel achter een zoekopdracht: wat iemand eigenlijk wil bereiken als hij iets intypt in Google, zoals iets weten, een bepaalde site vinden, opties vergelijken of iets kopen.';
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Zoekintentie',
+    alternateName: ['Search intent', 'Zoekbedoeling'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat is zoekintentie?',
+    inLanguage: 'nl-NL',
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    mainEntity: { '@id': `${site.url}${url}#begrip` },
+  },
+];
+const hoofdstukken = [
+  { id: 'soorten', titel: 'De vier soorten' },
+  { id: 'google', titel: 'Hoe Google er zelf naar kijkt' },
+  { id: 'belang', titel: 'Waarom dit zo zwaar weegt' },
+  { id: 'herkennen', titel: 'Herkennen in vijf stappen' },
+  { id: 'signaalwoorden', titel: 'Signaalwoorden' },
+  { id: 'lokaal', titel: 'Lokale zoekintentie' },
+  { id: 'per-branche', titel: 'Welke intentie per bedrijf telt' },
+  { id: 'content', titel: 'Welk type content past' },
+  { id: 'klantreis', titel: 'Intentie en de klantreis' },
+  { id: 'klikprijs', titel: 'Intentie, zoekvolume en klikprijs' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een hovenier in Roden' },
+  { id: 'check', titel: 'Een bestaande pagina checken' },
+  { id: 'ai', titel: 'Zoekintentie en AI-antwoorden' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+---
+<Base
+  title="Wat is zoekintentie? De vier soorten | Drijfveer Media"
+  description="Wat is zoekintentie? Het doel achter een zoekopdracht. De vier soorten, hoe Google ernaar kijkt, hoe je ze herkent en welke content erbij past."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Zoekintentie', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is zoekintentie?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Wat is zoekintentie in de praktijk? Twee mensen typen bijna hetzelfde. De een zoekt "hoe lang gaat een dakkapel mee", de ander "dakkapel prijs Assen". De eerste wil iets weten. De tweede wil waarschijnlijk binnenkort een offerte. Google ziet dat verschil en laat ze allebei iets anders zien. In het Engels heet dit search intent. Wie het snapt, weet welke pagina hij moet maken. Wie het negeert, schrijft prima teksten die nooit gevonden worden.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={15} />
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="soorten">De vier soorten zoekintenties</h2></div>
+      <p>In de SEO-wereld deelt bijna iedereen zoekopdrachten in vier soorten in. Het is een hulpmiddel, geen wet. Maar het werkt.</p>
+      <p><strong>Informatieve zoekintentie.</strong> Iemand wil iets weten of begrijpen. "Wat kost een warmtepomp", "hoe werkt salderen". Bij een informatieve intentie horen uitleg, gidsen en antwoorden.</p>
+      <p><strong>Navigerende zoekintentie.</strong> Iemand wil naar een bepaalde site of pagina. "Rabobank inloggen", "gemeente Assen afvalkalender". Bij een navigerende intentie win je alleen als jij die site bent. Zoekt iemand op jouw bedrijfsnaam, dan moet jij bovenaan staan.</p>
+      <p><strong>Commerciële zoekintentie.</strong> Iemand oriënteert zich op een aankoop en vergelijkt. "Beste warmtepomp", "dakdekker Assen ervaringen". Bij een commerciële intentie werken vergelijkingen, cases, prijsoverzichten en reviews.</p>
+      <p><strong>Transactionele zoekintentie.</strong> Iemand is klaar om te handelen. "iPhone kopen", "loodgieter Emmen spoed", "offerte dakkapel". Bij een transactionele intentie wil de zoeker een prijs, een knop en een telefoonnummer.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Voorbeeld</th><th>Intentie</th><th>De zoeker wil</th><th>Wat werkt</th></tr></thead>
+          <tbody>
+            <tr><td>hoe werkt een warmtepomp</td><td>Informatief</td><td>Iets leren of begrijpen</td><td>Gids, uitleg, stappenplan</td></tr>
+            <tr><td>drijfveer media contact</td><td>Navigerend</td><td>Naar een bepaalde site</td><td>Een duidelijke homepage en contactpagina</td></tr>
+            <tr><td>beste warmtepomp 2026</td><td>Commercieel</td><td>Opties vergelijken</td><td>Vergelijking, review, cases, prijzen</td></tr>
+            <tr><td>iphone kopen</td><td>Transactioneel</td><td>Nu iets doen of kopen</td><td>Product- of dienstpagina met prijs en knop</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Veel zoekopdrachten passen in meer dan één hokje. "Warmtepomp Assen" kan iemand zijn die een installateur zoekt, maar ook iemand die wil weten of de gemeente subsidie geeft. Daarover straks meer.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="google">Hoe Google er zelf naar kijkt</h2></div>
+      <p>De vier soorten hierboven komen uit de SEO-praktijk. Google gebruikt in zijn eigen handleiding voor beoordelaars, de Search Quality Rater Guidelines van september 2025, een iets andere indeling. Die is de moeite waard, omdat hij laat zien hoe Google zelf denkt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Bij Google</th><th>Wat het betekent</th><th>Voorbeeld</th></tr></thead>
+          <tbody>
+            <tr><td>Know</td><td>Iets willen weten of een onderwerp verkennen</td><td>geschiedenis van Assen</td></tr>
+            <tr><td>Know Simple</td><td>Eén kort feit, past in een paar woorden</td><td>hoe hoog is de Martinitoren</td></tr>
+            <tr><td>Do</td><td>Iets bereiken of doen: kopen, downloaden, berekenen, aanvragen</td><td>parkeerboete betalen</td></tr>
+            <tr><td>Website</td><td>Een bepaalde site of pagina openen</td><td>mijn kvk inloggen</td></tr>
+            <tr><td>Visit-in-person</td><td>Iets in de buurt zoeken om naartoe te gaan</td><td>bakker in de buurt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Twee dingen vallen op. Google zegt er eerlijk bij dat de grens tussen Know en Do soms vaag is, en dat veel zoekopdrachten niet in één hokje passen. En Google heeft een aparte groep voor bezoek ter plaatse. Voor een winkel, een kapper of een garage is dat vaak de belangrijkste. Wie daarop wil scoren, begint bij <a href="/lokale-seo/">lokale SEO</a>.</p>
+      <h3>Meerdere betekenissen</h3>
+      <p>De handleiding gaat nog een stap verder. Veel zoekopdrachten hebben meer dan één betekenis. Google noemt als voorbeeld "apple": het merk of de vrucht. Voor elke betekenis kijkt een beoordelaar hoeveel mensen die bedoelen:</p>
+      <ul>
+        <li><b>Dominante betekenis:</b> wat de meeste mensen bedoelen.</li>
+        <li><b>Gangbare betekenis:</b> wat veel of sommige mensen bedoelen. Er kunnen er meerdere zijn.</li>
+        <li><b>Kleine betekenis:</b> wat een kleine groep bedoelt. Ook die kan een plek in de resultaten verdienen.</li>
+      </ul>
+      <p>Daarna beoordeelt de rater per resultaat hoe goed het de zoeker helpt, op een schaal van "Fails to Meet" tot "Fully Meets". Een pagina die alleen de kleine betekenis bedient, komt bij een brede zoekopdracht dus zelden ver. Dat verklaart waarom je soms niet scoort op een woord waar je toch "alles over geschreven" hebt.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="belang">Waarom dit zo zwaar weegt</h2></div>
+      <p>Google wil de zoeker zo snel mogelijk helpen. Past je pagina niet bij het doel, dan helpen goede teksten of sterke links weinig. Een dienstpagina scoort zelden op een weetvraag, en een blog zelden op "loodgieter Emmen".</p>
+      <p>Het omgekeerde is goed nieuws. Wie de intentie kent, weet welk type content hij moet maken. Eerst het doel, daarna pas de tekst. Dat scheelt een hoop schrijfwerk dat nergens toe leidt. En het helpt je bezoekers: wie vindt wat hij zocht, blijft langer en neemt eerder contact op.</p>
+      <h3>Hoe Google de intentie leert kennen</h3>
+      <p>Google moet de bedoeling vaak raden bij vragen die het nog nooit zag. Volgens Google is elke dag zo'n 15 procent van de zoekopdrachten nieuw. Daarom leunt Google op taalmodellen die snappen hoe woorden samen een vraag vormen. Sinds BERT in 2019 telt zelfs een klein woordje als "voor" of "naar" mee. En Google leert van wat mensen doen: welke soort pagina zoekers bij een vraag helpt, zie je terug in wat er bovenaan staat. Hoe dat technisch werkt, lees je bij <a href="/kennisbank/wat-is/semantisch-zoeken/">semantisch zoeken</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="herkennen">Zoekintentie herkennen in vijf stappen</h2></div>
+      <p>Je hebt geen dure tool nodig. Google laat zelf zien wat het denkt dat mensen willen. Neem vijf minuten per zoekwoord.</p>
+      <ol>
+        <li><b>Zoek het woord zelf op.</b> Liefst in een privévenster, zodat je eigen zoekgeschiedenis niet meetelt. Zoek op je telefoon als je klanten dat ook doen.</li>
+        <li><b>Kijk wat voor pagina's bovenaan staan.</b> Uitleg en gidsen? Dan is het informatief. Lijstjes en vergelijkingen? Commercieel. Dienstpagina's met prijzen en formulieren? Transactioneel.</li>
+        <li><b>Let op de extra blokken.</b> Een AI-overzicht of het blok met vragen die mensen ook stellen, wijst op een informatievraag. Een kaart met bedrijven wijst op bezoek ter plaatse. Advertenties met producten en prijzen wijzen op kopen.</li>
+        <li><b>Lees de titels.</b> Woorden als "wat is", "uitleg" en "zo werkt" tonen informatie. "Beste", "vergelijk" en "ervaringen" tonen vergelijken. "Prijs", "offerte" en "bestellen" tonen kopen.</li>
+        <li><b>Klik er twee of drie open.</b> Hoe lang zijn ze, hoe zijn ze opgebouwd, wat is de knop onderaan? Dat is de vorm waar je tegen concurreert.</li>
+      </ol>
+      <p>Een tool helpt als je honderden zoekwoorden hebt. SE Ranking, die wij zelf gebruiken, toont bij elk zoekwoord een inschatting van de intentie. Controleer die wel even in Google zelf. De gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a> laat zien hoe je dat aanpakt.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="signaalwoorden">Signaalwoorden per intentie</h2></div>
+      <p>De woorden in een zoekopdracht verraden vaak al het doel. Een handig lijstje voor als je zoekwoorden sorteert:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Intentie</th><th>Typische woorden</th></tr></thead>
+          <tbody>
+            <tr><td>Informatief</td><td>wat, hoe, waarom, wanneer, uitleg, betekenis, tips, verschil</td></tr>
+            <tr><td>Navigerend</td><td>een merk- of bedrijfsnaam, inloggen, contact, openingstijden, website</td></tr>
+            <tr><td>Commercieel</td><td>beste, vergelijken, review, ervaringen, top 10, alternatief, of</td></tr>
+            <tr><td>Transactioneel</td><td>kopen, prijs, offerte, bestellen, huren, aanvragen, spoed, korting</td></tr>
+            <tr><td>Lokaal</td><td>een plaatsnaam, in de buurt, dichtbij, route</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Let op: een plaatsnaam maakt een zoekopdracht vaak commercieel of transactioneel. "Kozijnen Meppel" is zelden iemand die wil weten hoe een kozijn werkt.</p>
+      <h3>Lange zoekopdrachten zeggen meer</h3>
+      <p>Hoe langer de zoekopdracht, hoe duidelijker de bedoeling. "Dakkapel" kan alles zijn: een foto, een prijs, een vergunning. "Dakkapel plaatsen prijs 3 meter Hoogeveen" laat weinig te raden over. Zulke lange zoekopdrachten heten longtail. Ze hebben elk weinig volume, maar samen zijn het er veel. En omdat de intentie zo helder is, levert een pagina die er precies op aansluit vaak meer aanvragen op dan een pagina die op het korte woord mikt.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2 id="lokaal">Lokale zoekintentie</h2></div>
+      <p>Een aparte groep verdient aandacht: mensen die iets in de buurt zoeken. Google noemt dat Visit-in-person. Denk aan "bakker in de buurt", "garage Assen" of "kapper open zondag". Bij zulke zoekopdrachten toont Google meestal een kaart met bedrijven boven de gewone resultaten.</p>
+      <p>Wat de zoeker dan wil, is kort: waar zit je, ben je nu open, wat vinden anderen ervan en hoe bel ik je. Een lange tekst helpt hier weinig. Dit wel:</p>
+      <ul class="vink">
+        <li>Een volledig ingericht <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>, met de juiste categorie en openingstijden.</li>
+        <li>Recente reviews, met een antwoord van jou eronder.</li>
+        <li>Op je site een pagina met je adres, werkgebied en een telefoonnummer dat je op mobiel met één tik belt.</li>
+        <li>Werk je ook buiten je eigen plaats, een pagina per gebied met echte informatie over dat gebied.</li>
+      </ul>
+      <p>Let op het verschil tussen "warmtepomp installateur" en "warmtepomp installateur Assen". Ook zonder plaatsnaam begrijpt Google vaak dat de zoeker iets in de buurt wil, en kijkt dan naar zijn locatie.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="per-branche">Welke intentie bij welk bedrijf het meeste telt</h2></div>
+      <p>Elke branche heeft zijn eigen mix. Een globale indeling, om te zien waar je moet beginnen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort bedrijf</th><th>Belangrijkste intentie</th><th>Begin met</th></tr></thead>
+          <tbody>
+            <tr><td>Loodgieter, slotenmaker, dakdekker</td><td>Transactioneel en lokaal, vaak met spoed</td><td>Dienstpagina's per klus, Bedrijfsprofiel, telefoon bovenaan</td></tr>
+            <tr><td>Winkel, kapper, garage</td><td>Lokaal (bezoek ter plaatse)</td><td>Bedrijfsprofiel, openingstijden, reviews</td></tr>
+            <tr><td>Advocaat, boekhouder, adviseur</td><td>Informatief, daarna commercieel</td><td>Gidsen die vragen beantwoorden, met een link naar de dienst</td></tr>
+            <tr><td>Installateur, aannemer</td><td>Commercieel: lang vergelijken voor een grote uitgave</td><td>Prijsindicaties, projecten, eerlijke vergelijkingen</td></tr>
+            <tr><td>Zakelijke dienstverlener</td><td>Commercieel en navigerend</td><td>Cases, een sterke over-ons-pagina, scoren op je eigen naam</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Dit is een vuistregel, geen wet. Kijk altijd in Google zelf wat er bij jouw zoekwoorden bovenaan staat.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="content">Welk type content bij welke intentie past</h2></div>
+      <p>Weet je de intentie, dan weet je welke soort content je moet maken. Dit is wat we zelf aanhouden.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Intentie</th><th>Soort pagina</th><th>Opbouw</th><th>Knop of volgende stap</th></tr></thead>
+          <tbody>
+            <tr><td>Informatief</td><td>Gids, uitleg, begrip</td><td>Direct antwoord bovenaan, daarna de diepte in</td><td>Verder lezen, nieuwsbrief, link naar de dienst</td></tr>
+            <tr><td>Navigerend</td><td>Homepage, contact, inlogpagina</td><td>Snel te vinden, geen omwegen</td><td>Bellen, route, inloggen</td></tr>
+            <tr><td>Commercieel</td><td>Vergelijking, case, prijspagina</td><td>Eerlijke afwegingen, cijfers, voorbeelden</td><td>Advies vragen, offerte, gratis scan</td></tr>
+            <tr><td>Transactioneel</td><td>Dienst- of landingspagina</td><td>Prijs, wat je krijgt, bewijs, één duidelijke knop</td><td>Bestellen, aanvragen, bellen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Zo kun je beter inspelen op wat de bezoeker op dat moment nodig heeft. Een lange uitleg op een spoedpagina werkt averechts. Een harde verkoopknop in een gids ook. Voor een pagina die één doel heeft, lees je de gids <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken</a>.</p>
+
+      <h3>De intentie zichtbaar maken in titel, opening en knop</h3>
+      <p>De zoeker beslist in een paar seconden of hij klikt en blijft. Laat dus al in de zoekresultaten zien dat je pagina past. Drie plekken doen het meeste werk: de <a href="/kennisbank/wat-is/title-tag/">title tag</a>, de <a href="/kennisbank/gidsen/meta-description/">meta description</a> en de eerste alinea.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Intentie</th><th>Voorbeeld van een titel</th><th>De eerste zin</th></tr></thead>
+          <tbody>
+            <tr><td>Informatief</td><td>Hoe lang gaat een dakkapel mee? Zo zit het</td><td>Hoe lang een dakkapel meegaat, hangt vooral af van drie dingen.</td></tr>
+            <tr><td>Commercieel</td><td>Kunststof of houten kozijnen: de eerlijke vergelijking</td><td>Twijfel je tussen kunststof en hout? Dit zijn de verschillen in prijs, onderhoud en uitstraling.</td></tr>
+            <tr><td>Transactioneel</td><td>Dakkapel laten plaatsen in Assen, prijs vanaf ...</td><td>We plaatsen je dakkapel binnen een dag. Vraag hier je offerte aan.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De voorbeelden zijn verzonnen, de opbouw niet. Bij een weetvraag begin je met het antwoord. Bij een vergelijking met de afweging. Bij een koopvraag met wat je krijgt en hoe je het regelt.</p>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2 id="klantreis">Intentie en de klantreis</h2></div>
+      <p>Zoekintentie loopt mee met de fasen die een klant doorloopt. Eerst merkt hij een probleem op, dan zoekt hij uitleg, dan vergelijkt hij en pas daarna koopt hij. Een huiseigenaar in Drenthe zoekt in januari "vochtige muur oorzaak", in februari "spouwmuurisolatie ervaringen" en in maart "spouwmuurisolatie offerte". Drie intenties, één klant.</p>
+      <p>Wie voor elke fase een pagina heeft, komt die klant drie keer tegen. Wie alleen een dienstpagina heeft, pas bij de laatste stap, als hij al twee concurrenten heeft gelezen. Meer over die fasen lees je in de gidsen over de <a href="/kennisbank/gidsen/customer-journey/">customer journey</a> en het <a href="/kennisbank/gidsen/see-think-do-care/">See-Think-Do-Care-model</a>, en bij het begrip <a href="/kennisbank/wat-is/funnel/">funnel</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="klikprijs">Intentie, zoekvolume en klikprijs</h2></div>
+      <p>Informatieve zoekwoorden hebben vaak veel zoekvolume. Transactionele zoekwoorden veel minder. Toch zijn die laatste meestal meer waard. Honderd mensen die "offerte dakkapel Assen" zoeken, leveren meer klussen op dan duizend die willen weten hoe een dakkapel werkt.</p>
+      <p>Dat zie je terug in de prijs per klik bij <a href="/kennisbank/wat-is/sea/">adverteren</a>. Volgens Google hangt wat je betaalt onder meer af van de concurrentie in de veiling. Op koopwoorden bieden meer bedrijven, dus die klikken zijn duurder. Adverteren op weetvragen lijkt goedkoop, maar levert zelden direct een klant op. Met SEO kun je die informatieve vragen wel goed pakken: daar betaal je niet per klik.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2 id="voorbeeld">Voorbeeld: een hovenier in Roden</h2></div>
+      <p>Een hovenier in Roden wil meer tuinaanleg in de regio. We zetten zijn zoekwoorden naast de intentie en de pagina die erbij hoort. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekwoord</th><th>Intentie</th><th>Pagina</th></tr></thead>
+          <tbody>
+            <tr><td>wat kost een nieuwe tuin per m2</td><td>Informatief</td><td>Gids met prijzen per soort tuin</td></tr>
+            <tr><td>onderhoudsvriendelijke tuin tips</td><td>Informatief</td><td>Gids met tien ideeën en foto's van eigen werk</td></tr>
+            <tr><td>hovenier of zelf aanleggen</td><td>Commercieel</td><td>Eerlijke vergelijking, met wanneer zelf doen slimmer is</td></tr>
+            <tr><td>hovenier Roden</td><td>Transactioneel en lokaal</td><td>Dienstpagina met werkgebied, prijzen, projecten en offerteknop</td></tr>
+            <tr><td>tuinaanleg Groningen offerte</td><td>Transactioneel</td><td>Dienstpagina tuinaanleg, met Groningen in het werkgebied</td></tr>
+            <tr><td>naam van het bedrijf</td><td>Navigerend</td><td>Homepage en Bedrijfsprofiel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Zo krijgt elke intentie één pagina. Geen twee pagina's die op hetzelfde woord concurreren, wat we <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a> noemen. En de gidsen linken door naar de dienstpagina, zodat wie klaar is om te kiezen met één klik bij de offerte is.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="check">Een bestaande pagina checken</h2></div>
+      <p>Scoort een pagina niet terwijl de tekst goed is? Loop dan deze vragen langs.</p>
+      <ul class="vink">
+        <li>Op welk zoekwoord wil deze pagina gevonden worden? Schrijf het op.</li>
+        <li>Wat staat er nu bovenaan Google op dat woord? Gidsen, dienstpagina's of vergelijkingen?</li>
+        <li>Is mijn pagina dezelfde soort? Zo niet, dan ligt daar het probleem.</li>
+        <li>Staat het antwoord op de vraag in de eerste alinea, of moet de lezer zoeken?</li>
+        <li>Past de knop bij de fase van de lezer?</li>
+        <li>Heb ik een andere pagina die op hetzelfde woord mikt?</li>
+      </ul>
+      <p>Bij een verkeerde soort helpt herschrijven zelden. Dan maak je een nieuwe pagina in de vorm die Google verwacht, en zet je de oude om of laat je hem een ander doel dienen.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2 id="ai">Zoekintentie en AI-antwoorden</h2></div>
+      <p>Informatieve vragen worden steeds vaker direct beantwoord door AI, in Google zelf of in ChatGPT. Google schrijft dat zijn AI-overzichten alleen verschijnen als ze iets toevoegen aan de gewone resultaten, en daarom vaak niet verschijnen. Bij een simpele weetvraag is de kans op zo'n overzicht groter dan bij "loodgieter Emmen spoed".</p>
+      <p>Voor jou betekent dat twee dingen. Bij informatieve zoekintentie wil je de bron zijn die de AI noemt, niet alleen een blauwe link. Schrijf daarom duidelijke antwoorden met eigen cijfers en voorbeelden. Bij transactionele en lokale zoekopdrachten blijft je eigen pagina en je Bedrijfsprofiel het belangrijkst. Hoe je in AI-antwoorden komt, lees je bij <a href="/generative-engine-optimization/">genoemd worden door AI</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="fouten">Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><b>Alleen naar zoekvolume kijken.</b> Het grootste zoekwoord is zelden het beste. Kijk eerst naar de intentie, daarna pas naar het volume.</li>
+        <li><b>Eén pagina voor alles.</b> Uitleg, vergelijking en offerte op één pagina. Dan past hij bij geen enkele zoekopdracht echt goed.</li>
+        <li><b>Denken vanuit jezelf.</b> Jij noemt het "renovatiedienst", je klant zoekt "badkamer verbouwen". Gebruik de woorden van de zoeker.</li>
+        <li><b>De zoekresultaten niet bekijken.</b> Wie niet even googelt voor hij schrijft, gokt. En gokt vaak mis.</li>
+        <li><b>Intentie als vaststaand zien.</b> Wat mensen bedoelen kan veranderen, door het seizoen, nieuws of een nieuw product. Kijk elk jaar opnieuw naar je belangrijkste woorden.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">Zoekwoordonderzoek doen</a>, waarin je per zoekwoord de intentie bepaalt. Of laat ons <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> schrijven die bij de vraag passen, vanaf € 75 per pagina. Hoe Google de betekenis van een vraag leest, staat bij <a href="/kennisbank/wat-is/semantisch-zoeken/">semantisch zoeken</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Welke soorten zoekintenties zijn er?', a: 'Meestal worden er vier genoemd: informatief (iets weten), navigerend (een bepaalde site vinden), commercieel (vergelijken) en transactioneel (kopen of aanvragen). Google gebruikt in zijn richtlijnen Know, Do, Website en Visit-in-person.' },
+      { v: 'Wat is het verschil tussen commerciële en transactionele intentie?', a: 'Bij commerciële intentie is iemand nog aan het vergelijken: beste, review, ervaringen. Bij transactionele intentie is de keuze bijna gemaakt en wil hij handelen: kopen, offerte, bestellen.' },
+      { v: 'Hoe weet ik welke intentie een zoekwoord heeft?', a: 'Zoek het op in Google en kijk wat er bovenaan staat. Gidsen wijzen op informatie, vergelijkingen op commercieel en dienstpagina\'s met prijzen op transactioneel. Tools als SE Ranking geven ook een inschatting.' },
+      { v: 'Kan een zoekwoord meer dan één intentie hebben?', a: 'Ja, vaak zelfs. Google noemt dat meerdere betekenissen: een dominante, gangbare en kleine. Richt je pagina op de betekenis die de meeste zoekers bedoelen, tenzij je bewust een kleinere groep wilt bedienen.' },
+      { v: 'Wat is navigerende zoekintentie?', a: 'Iemand wil naar een bepaalde website of pagina, zoals "rabobank inloggen". Op zulke zoekopdrachten scoor je eigenlijk alleen als jij die site bent. Zorg dus dat je op je eigen bedrijfsnaam bovenaan staat.' },
+      { v: 'Wat is een voorbeeld van transactionele zoekintentie?', a: 'Zoekopdrachten als "iphone kopen", "offerte dakkapel" of "loodgieter Emmen spoed". De zoeker weet wat hij wil en zoekt een plek om het te regelen. Een pagina met prijs, voorwaarden en een duidelijke knop past daar het best bij.' },
+      { v: 'Moet ik voor elke zoekintentie een aparte pagina maken?', a: 'Meestal wel. Een gids voor wie wil leren en een dienstpagina voor wie wil kopen. Link ze naar elkaar, zodat een lezer van de gids met één klik bij je aanbod is.' },
+      { v: 'Is zoekintentie belangrijker dan zoekwoorden?', a: 'Het hoort bij elkaar. Het zoekwoord vertelt wat iemand typt, de intentie wat hij wil. Kies eerst de intentie en het soort pagina, en verwerk daarna de zoekwoorden.' },
+    ]}
+  />
+
+  <Actie titel="Passen jouw pagina's bij wat je klant zoekt?" tekst={`We leggen je belangrijkste pagina's gratis naast de zoekresultaten. ${site.contactpersoon} belt je met wat er schuurt.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 0 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

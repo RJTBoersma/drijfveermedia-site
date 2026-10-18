@@ -1,0 +1,186 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-reviews.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-reviews/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Waarom reviews zo zwaar wegen' },
+  { id: 'reviewlink', titel: 'Een reviewlink en QR-code maken' },
+  { id: 'vragen', titel: 'Zo vraag je om een review' },
+  { id: 'reageren', titel: 'Reageren op reviews' },
+  { id: 'verwijderen', titel: 'Een review laten verwijderen' },
+  { id: 'website', titel: 'Reviews op je eigen website' },
+  { id: 'zelf-of-laten', titel: 'Zelf doen of laten doen?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google reviews: reageren, verwijderen en een reviewlink maken',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google reviews',
+  citation: [
+    'https://support.google.com/business/answer/16816815?hl=nl',
+    'https://support.google.com/business/answer/4596773?hl=nl',
+    'https://support.google.com/contributionpolicy/answer/7400114?hl=nl',
+  ],
+}];
+---
+<Base
+  title="Google reviews: reageren, verwijderen en reviewlink"
+  description="Google reviews vragen, beantwoorden en laten verwijderen. Zo maak je een reviewlink en QR-code, met voorbeeldteksten en wat Google niet toestaat."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google reviews', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Lokale SEO" titel="Google reviews: reageren, verwijderen en een reviewlink maken" knop={{ tekst: 'Laat je profiel gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Google reviews bepalen voor een groot deel of iemand jou belt of je concurrent. Ze tellen ook mee voor je plek op Google Maps. Hier lees je hoe je erom vraagt, hoe je reageert en wanneer een review echt weg kan.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Reviews staan naast je profiel op Google Maps en in Zoeken. Google telt het aantal en je score mee voor je positie.</li>
+            <li>Je reviewlink en QR-code haal je op een computer op, via "Reviews lezen" en "Meer reviews krijgen".</li>
+            <li>Een beloning geven voor een review is verboden. Alleen tevreden klanten vragen ook.</li>
+            <li>Verwijderen kan alleen als een review de regels van Google breekt. Onterecht is geen reden.</li>
+          </ul>
+        </div>
+
+        <h2 id="waarom">Waarom Google reviews zo zwaar wegen</h2>
+        <p>Reviews werken twee kanten op: bij klanten en bij Google zelf.</p>
+        <p>Een klant die op Maps zoekt, ziet eerst je sterrenbeoordeling en het aantal reviews. Daarna leest hij de nieuwste reviews, en vaak ook hoe jij daarop reageert. Een 4,6 met zestig reviews wint het meestal van een 5,0 met drie. Google schrijft zelf dat een mix van positieve en negatieve feedback vaak betrouwbaarder voelt.</p>
+        <p>Google gebruikt reviews ook om te bepalen wie er bovenaan het kaartje staat. In de eigen hulppagina's staat het letterlijk: met meer reviews en positieve beoordelingen kun je je positie in de lokale zoekresultaten verbeteren. Reviews zijn daarmee een van de weinige knoppen waar je zelf aan kunt draaien. Afstand kun je niet veranderen, het aantal tevreden klanten dat iets opschrijft wel.</p>
+        <p>Alleen Google-gebruikers met een account kunnen een review plaatsen. Dat hoeft geen Gmail-adres te zijn. Een klant kan ook een account maken met zijn eigen e-mailadres.</p>
+
+        <h2 id="reviewlink">Een reviewlink en QR-code maken</h2>
+        <p>Met een reviewlink komt je klant met één klik bij het venster waar hij sterren geeft en iets schrijft. Geen gezoek naar je bedrijf, geen verkeerd profiel. Zo maak je hem:</p>
+        <ol>
+          <li><b>Open je profiel op een computer.</b> De QR-code kun je volgens Google alleen in een computerbrowser maken, niet op je telefoon. Zoek ingelogd op je bedrijfsnaam, of typ "mijn bedrijf".</li>
+          <li><b>Klik op "Reviews lezen"</b> en daarna op <b>"Meer reviews krijgen"</b>.</li>
+          <li><b>Klik op "Kopiëren"</b> om de link te bewaren. Voor de QR-code klik je met de rechtermuisknop op de code en kies je "Afbeelding opslaan als".</li>
+        </ol>
+        <p>Zet de reviewlink daarna op plekken waar je klant toch al kijkt:</p>
+        <ul class="vink">
+          <li>In de bedankmail na een klus of bestelling.</li>
+          <li>Onder je factuur of op de kassabon.</li>
+          <li>In je e-mailhandtekening.</li>
+          <li>Aan het einde van een WhatsApp-gesprek.</li>
+          <li>Als QR-code op de toonbank, een kaartje bij de oplevering of een sticker in de bus.</li>
+        </ul>
+
+        <h2 id="vragen">Zo vraag je om een review</h2>
+        <p>De meeste tevreden klanten schrijven niets uit zichzelf. Niet uit onwil, maar omdat niemand het vraagt. Vragen is dus de helft van het werk. De andere helft is het goede moment.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>Kies het moment</h3></div>
+        <p>Vraag het als de klant net tevreden is: bij de oplevering, na een compliment aan de telefoon, de dag nadat het pakket binnen is. Twee maanden later is het gevoel weg.</p>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>Vraag het persoonlijk, stuur dan de link</h3></div>
+        <p>Een mondelinge vraag werkt beter dan een automatische mail. Zeg dat het je helpt, en stuur dezelfde dag de link. Herinner hooguit één keer.</p>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeldbericht (verzonnen)</p>
+          <p>"Hoi Anja, fijn dat de nieuwe cv-ketel weer draait. Zou je in een paar zinnen op Google willen vertellen hoe het ging? Daar hebben andere mensen in de buurt veel aan. Het kost je een minuut: [reviewlink]. Alvast bedankt, Peter van Installatiebedrijf De Vries."</p>
+        </div>
+        <h3>Wat Google niet toestaat</h3>
+        <p>Google is streng. Reviews moeten over een echte ervaring gaan, en het bedrijf mag de inhoud niet sturen. Dit mag dus niet:</p>
+        <ul>
+          <li>Korting, een cadeautje of een winactie in ruil voor een review.</li>
+          <li>Alleen tevreden klanten vragen en de rest overslaan.</li>
+          <li>Klanten onder druk zetten om ter plekke te schrijven, of voorschrijven wat erin moet.</li>
+          <li>Medewerkers een aantal reviews per maand laten halen.</li>
+          <li>Familie, personeel of bevriende ondernemers laten schrijven.</li>
+          <li>Reviews kopen, of een slechte review achterlaten bij een concurrent.</li>
+        </ul>
+        <p>Zulke reviews worden verwijderd, en je profiel kan beperkingen krijgen. Het risico is het nooit waard.</p>
+
+        <h2 id="reageren">Reageren op reviews: positief en negatief</h2>
+        <p>Je reacties zijn openbaar en worden gelezen door mensen die nog geen klant zijn. Laat je klanten reageren zonder dat jij iets terugzegt, dan lijkt het alsof er niemand thuis is.</p>
+        <h3>Op positieve beoordelingen</h3>
+        <p>Kort en persoonlijk. Noem de naam en de klus, en bedank. Gebruik niet elke keer dezelfde zin, want dat valt op. Google zegt zelf dat je niet iedereen openbaar hoeft te bedanken. Wij zouden het wel doen bij elke review met tekst. Een review met alleen sterren mag je laten liggen.</p>
+        <h3>Op een negatieve review</h3>
+        <ol>
+          <li><b>Wacht een uur</b>, maar reageer binnen een dag of twee.</li>
+          <li><b>Zoek uit wat er gebeurd is.</b> Wie was de klant, wat was de afspraak?</li>
+          <li><b>Erken wat er misging.</b> Geef fouten toe, maar neem geen schuld voor dingen waar je niets aan kon doen.</li>
+          <li><b>Deel geen privégegevens</b> en val de schrijver niet persoonlijk aan.</li>
+          <li><b>Haal het gesprek offline.</b> Geef een naam en een nummer om het op te lossen.</li>
+          <li><b>Opgelost?</b> Dan mag je vragen of de klant zijn review wil bijwerken. Zonder er iets tegenover te zetten.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Twee voorbeeldreacties (verzonnen)</p>
+          <p><b>Positief:</b> "Dank je wel, Anja. Mooi dat de ketel weer goed draait en dat Kees alles netjes achterliet. Tot de volgende onderhoudsbeurt."</p>
+          <p><b>Negatief:</b> "Vervelend dat we later kwamen dan afgesproken, Mark, en dat je daar niets over hoorde. Dat had beter gemoeten. Wil je Peter bellen op [jouw nummer]? Dan zoeken we samen een oplossing."</p>
+        </div>
+        <p>Een rustige reactie op kritiek laat lezers zien dat je klachten serieus neemt. Dat overtuigt soms meer dan tien lovende reviews.</p>
+
+        <h2 id="verwijderen">Kun je een Google review verwijderen?</h2>
+        <p>Nee, niet zelf. Je kunt een review wel melden, en Google haalt hem weg als hij het beleid schendt. Een review die je onterecht of oneerlijk vindt, blijft staan. Google zegt zelf dat het zich niet mengt in conflicten tussen bedrijven en klanten.</p>
+        <p>Google wil dat reviews gaan over plekken waar iemand echt is geweest. Een verzoek tot verwijdering heeft dus kans bij:</p>
+        <ul>
+          <li>een review van iemand die nooit klant was, of van een concurrent;</li>
+          <li>spam, of dezelfde review vanuit meerdere accounts;</li>
+          <li>grof taalgebruik, bedreigingen of haatdragende taal;</li>
+          <li>persoonlijke gegevens van jou of je medewerkers;</li>
+          <li>een review die over iets heel anders gaat dan je bedrijf.</li>
+        </ul>
+        <h3>Zo meld je een review</h3>
+        <ol>
+          <li>Open je bedrijfsprofiel en kies "Reviews lezen".</li>
+          <li>Klik bij de betreffende review op "Melden" en kies de reden, zoals spam of grof taalgebruik.</li>
+          <li>Verstuur de melding. De beoordeling duurt meestal een paar dagen.</li>
+          <li>Volg de status in de Tool voor reviewbeheer. Wordt je melding afgewezen, dan kun je daar eenmalig bezwaar maken, voor maximaal tien reviews tegelijk.</li>
+        </ol>
+        <p>Probeert iemand je af te persen met slechte reviews? Daar heeft Google een aparte meldroute voor. Gebruik die, en ga niet in op de eis.</p>
+        <p>Blijft een slechte review staan? Reageer er netjes op en zorg voor nieuwe reviews. Eén kritische review tussen dertig goede maakt je juist geloofwaardiger.</p>
+
+        <h2 id="website">Google reviews op je eigen website tonen</h2>
+        <p>Dat kan, met een plugin of widget die je reviews ophaalt en laat zien. Zet ze bij je contactformulier of offerteknop, waar mensen twijfelen. Eén ding om te weten: sterren in de zoekresultaten krijg je er niet mee. Google toont sinds 2019 geen sterren meer voor reviews die een bedrijf op zijn eigen site over zichzelf plaatst. Reviews op je Facebook-bedrijfspagina tellen evenmin mee voor Google Maps.</p>
+
+        <h2 id="zelf-of-laten">Zelf doen of laten doen?</h2>
+        <p>Reviews vragen en beantwoorden kun je prima zelf. Het kost een paar minuten per week. Het lastige is volhouden. Na drie drukke weken is het vragen erbij ingeschoten.</p>
+        <p>Bij <a href="/lokale-seo/reviews/">reviews en reputatie</a> regelen wij de reviewlink, de QR-code en een vaste manier van vragen die in je werkdag past. We reageren ook op reviews in jouw toon. Dat zit in <a href="/lokale-seo/">lokale SEO</a>, vanaf € 295 per maand. Staat je profiel zelf nog niet goed? Begin dan bij de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel aanmaken en optimaliseren</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het bijhouden?" intro="Wat je van ons mag verwachten als we je reviews en je profiel beheren." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel Google reviews heb ik nodig?', a: 'Er is geen magisch aantal. Kijk naar de drie bedrijven die nu in het kaartje staan voor jouw vak en plaats. Zit je daarboven, en komen er elke maand nieuwe bij, dan zit je goed.' },
+      { v: 'Waarom is een review verdwenen of nog niet zichtbaar?', a: 'Google controleert reviews eerst. Dat kan een paar dagen duren. Reviews die het filter als spam ziet, worden verwijderd en komen niet terug, ook niet als ze echt waren.' },
+      { v: 'Kan ik reviews op mijn profiel uitzetten?', a: 'Nee. Reviews horen bij een Bedrijfsprofiel. Alleen voor sommige categorieën, zoals scholen voor leerlingen van 6 tot 18 jaar, heeft Google ze zelf uitgezet.' },
+      { v: 'Kan ik zien wie een review heeft geschreven?', a: 'Je ziet alleen de naam van het Google-account. Herken je de schrijver niet als klant, zoek dan in je administratie. Was het nooit een klant, dan kun je de review melden.' },
+      { v: 'Mag ik een klant vragen een slechte review aan te passen?', a: 'Ja, als je het probleem echt hebt opgelost en je er niets tegenover zet. Een korting of cadeau in ruil voor een aangepaste review is verboden.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Reviews en reputatie', href: '/lokale-seo/reviews/', tekst: 'Reviewlink, QR-code en reageren, als onderdeel van lokale SEO.' },
+      { label: 'Gids', titel: 'Google Bedrijfsprofiel', href: '/kennisbank/gidsen/google-bedrijfsprofiel/', tekst: 'Aanmaken, verifiëren en optimaliseren.' },
+      { label: 'Pillar', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Gevonden in je eigen regio, vanaf € 295 per maand.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten hoe je profiel het doet tegen je concurrenten?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} vergelijkt je profiel en je reviews met de bedrijven die nu bovenaan staan, en belt je met de eerste drie dingen die je kunt doen.`} />
+</Base>

@@ -1,0 +1,96 @@
+---
+// Scène voor /webdesign-friesland/: een website van een (verzonnen) zeilverhuur op laptop en telefoon.
+// De blokken schuiven op hun plek, de laadtijdmeter slaat uit naar groen en de belknop wordt aangeklikt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kaarten = [32, 131, 230];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: de website van een verzonnen zeilverhuur in Friesland op een laptop en een telefoon. Een meter laat een snelle laadtijd zien en iemand klikt op de knop Bel direct.'}>
+  <!-- browservenster -->
+  <rect x="20" y="24" width="318" height="200" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M20 46H338" stroke="#d9e1ea" stroke-width="1.5" />
+  <circle cx="36" cy="35" r="3.5" fill="#d9e1ea" /><circle cx="48" cy="35" r="3.5" fill="#d9e1ea" /><circle cx="60" cy="35" r="3.5" fill="#d9e1ea" />
+  <rect x="80" y="28" width="170" height="14" rx="7" fill="#f4f7fa" />
+  <text x="92" y="38.5" font-size="8.5" class="zacht">zeilverhuur-voorbeeld.frl</text>
+  <!-- navigatie -->
+  <path class="o" d="M34 64l9-13v13z" />
+  <text x="48" y="63" font-size="9.5" font-weight="800">Zeilverhuur</text>
+  <rect x="246" y="57" width="18" height="4" rx="2" fill="#d9e1ea" /><rect x="270" y="57" width="18" height="4" rx="2" fill="#d9e1ea" /><rect x="294" y="57" width="26" height="4" rx="2" fill="#074663" />
+  <!-- kopbeeld met meer en boot -->
+  <rect x="32" y="72" width="294" height="86" rx="8" fill="#dbe6ef" />
+  <path d="M32 116c90-5 190 3 294-3v8H32z" fill="#d7e6d8" />
+  <g fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M160 140q8-3 16 0t16 0" /><path d="M210 150q8-3 16 0t16 0" /><path d="M292 146q6-3 12 0t12 0" /></g>
+  <path d="M232 138h46l-7 8h-32z" fill="#10283f" />
+  <path d="M256 136V98" stroke="#10283f" stroke-width="2" />
+  <path d="M258 101l20 35h-20z" fill="#fff" stroke="#074663" stroke-width="1.6" stroke-linejoin="round" />
+  <path d="M254 106l-17 30h17z" fill="#fff" stroke="#074663" stroke-width="1.6" stroke-linejoin="round" />
+  <text x="46" y="96" font-size="14" font-weight="900">Varen op de</text>
+  <text x="46" y="113" font-size="14" font-weight="900">Friese meren</text>
+  <rect x="46" y="124" width="72" height="21" rx="6" fill="#ff6600" />
+  <text x="82" y="138.5" text-anchor="middle" font-size="9.5" font-weight="800" style="fill:#fff">Bel direct</text>
+  <!-- inhoudsblokken -->
+  {kaarten.map((x, i) => (
+    <g class="webdesign-friesland-blok" style={`--i:${i}`}>
+      <rect x={x} y="166" width="94" height="46" rx="7" fill="#f4f7fa" stroke="#e8eef4" />
+      <circle cx={x + 14} cy="180" r="6" fill={i === 1 ? '#ffd2b0' : '#d9e1ea'} />
+      <rect x={x + 26} y="177" width="54" height="5" rx="2.5" fill="#10283f" opacity="0.8" />
+      <rect x={x + 10} y="192" width="72" height="4" rx="2" fill="#d9e1ea" />
+      <rect x={x + 10} y="200" width="52" height="4" rx="2" fill="#d9e1ea" />
+    </g>
+  ))}
+  <!-- telefoon -->
+  <rect x="350" y="62" width="90" height="172" rx="15" fill="#10283f" />
+  <rect x="356" y="72" width="78" height="152" rx="9" fill="#fff" />
+  <path class="o" d="M362 88l6-9v9z" />
+  <rect x="371" y="83" width="34" height="4" rx="2" fill="#10283f" />
+  <rect x="362" y="94" width="66" height="44" rx="5" fill="#dbe6ef" />
+  <path d="M378 130h24l-4 5h-16z" fill="#10283f" />
+  <path d="M390 129v-26" stroke="#10283f" stroke-width="1.5" />
+  <path d="M392 106l10 21h-10zM388 110l-8 17h8z" fill="#fff" stroke="#074663" stroke-width="1.2" stroke-linejoin="round" />
+  <rect x="362" y="146" width="52" height="6" rx="3" fill="#10283f" />
+  <rect x="362" y="156" width="40" height="6" rx="3" fill="#10283f" />
+  <rect x="362" y="170" width="46" height="15" rx="5" fill="#ff6600" />
+  <text x="385" y="181" text-anchor="middle" font-size="8" font-weight="800" style="fill:#fff">Bellen</text>
+  <rect x="362" y="194" width="66" height="4" rx="2" fill="#d9e1ea" /><rect x="362" y="202" width="50" height="4" rx="2" fill="#d9e1ea" />
+  <!-- laadtijd -->
+  <g>
+    <rect x="214" y="210" width="156" height="40" rx="20" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <path d="M222 238a14 14 0 0 1 14-14" fill="none" stroke="#ff6600" stroke-width="4" stroke-linecap="round" />
+    <path d="M236 224a14 14 0 0 1 14 14" fill="none" stroke="#1f8a5b" stroke-width="4" stroke-linecap="round" />
+    <g class="webdesign-friesland-naald" transform="rotate(52 236 238)">
+      <path d="M236 238v-12" stroke="#10283f" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+    <circle cx="236" cy="238" r="3" fill="#10283f" />
+    <text x="260" y="227" font-size="8.5" class="zacht">Laadtijd</text>
+    <text x="260" y="241" font-size="12" font-weight="900">1,2 seconde</text>
+  </g>
+  {!mini && (
+    <g>
+      <rect class="webdesign-friesland-ring" x="46" y="124" width="72" height="21" rx="6" fill="none" stroke="#ff6600" stroke-width="2" />
+      <g transform="translate(108 136)">
+        <g class="webdesign-friesland-cursor">
+          <path d="M0 0v17l4.5-4 3 7 3.5-1.5-3-6.8H14z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+        </g>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .webdesign-friesland-blok { transform-box: fill-box; }
+  :global(.teken-js) .webdesign-friesland-blok { opacity: 0; }
+  .in-beeld .webdesign-friesland-blok { animation: webdesign-friesland-blok 0.6s cubic-bezier(.3,1.4,.5,1) calc(0.3s + var(--i) * 0.15s) forwards; }
+  .webdesign-friesland-naald { transform-box: view-box; transform-origin: 236px 238px; transform: rotate(52deg); }
+  :global(.teken-js) .webdesign-friesland-naald { transform: rotate(-75deg); }
+  .in-beeld .webdesign-friesland-naald { animation: webdesign-friesland-naald 1.4s cubic-bezier(.3,1.5,.5,1) 0.9s forwards; }
+  .webdesign-friesland-ring { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .webdesign-friesland-ring, :global(.teken-js) .webdesign-friesland-cursor { opacity: 0; }
+  .in-beeld .webdesign-friesland-cursor { animation: webdesign-friesland-cursor 1s cubic-bezier(.4,0,.2,1) 1.6s forwards; }
+  .in-beeld .webdesign-friesland-ring { animation: webdesign-friesland-ring 3s ease-out 2.6s infinite; }
+  @keyframes webdesign-friesland-blok { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes webdesign-friesland-naald { from { transform: rotate(-75deg); } to { transform: rotate(52deg); } }
+  @keyframes webdesign-friesland-cursor { from { opacity: 0; transform: translate(40px, 30px); } 40% { opacity: 1; } to { opacity: 1; transform: none; } }
+  @keyframes webdesign-friesland-ring { 0% { opacity: 0.9; transform: scale(1); } 60%, 100% { opacity: 0; transform: scale(1.45); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .webdesign-friesland-blok, .in-beeld .webdesign-friesland-naald, .in-beeld .webdesign-friesland-cursor, .in-beeld .webdesign-friesland-ring { animation: none; }
+  }
+</style>

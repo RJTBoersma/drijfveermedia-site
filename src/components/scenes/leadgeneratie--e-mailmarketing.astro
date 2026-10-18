@@ -1,0 +1,73 @@
+---
+// Scène voor /leadgeneratie/e-mailmarketing/: na een aanvraag gaan er vanzelf drie opvolgmails de deur uit, op dag 0, 3 en 10. Aan het eind antwoordt de klant.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const mails = [
+  { x: 128, y: 30, dag: 'Dag 0', tekst: 'Bedankt', dot: 193 },
+  { x: 228, y: 184, dag: 'Dag 3', tekst: 'Nog vragen?', dot: 293 },
+  { x: 328, y: 30, dag: 'Dag 10', tekst: 'Even bellen?', dot: 393 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: na een aanvraag gaan er vanzelf drie e-mails de deur uit, op dag 0, dag 3 en dag 10. Aan het eind antwoordt de klant dat je mag bellen.'}>
+  <!-- de aanvraag -->
+  <rect x="10" y="98" width="114" height="74" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="34" cy="118" r="7" fill="#074663" />
+  <path d="M23 137c0-9 22-9 22 0z" fill="#074663" />
+  <text x="54" y="128" font-size="12" font-weight="800">Aanvraag</text>
+  <rect class="v" x="24" y="150" width="86" height="8" rx="4" />
+  <!-- de tijdlijn -->
+  <path class="l" d="M124 135H446" />
+  {mails.map((m, i) => (
+    <g>
+      <path d={i === 1 ? `M${m.dot} 135V184` : `M${m.dot} 80V135`} stroke="#d9e1ea" stroke-width="2" />
+      <rect x={m.x} y={m.y} width="130" height="50" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <path class="l" d={`M${m.x + 12} ${m.y + 14}h24v18h-24zM${m.x + 12} ${m.y + 14}l12 9 12-9`} />
+      <text x={m.x + 46} y={m.y + 22} font-size="10" class="zacht">{m.dag}</text>
+      <text x={m.x + 46} y={m.y + 38} font-size="12" font-weight="800">{m.tekst}</text>
+      <circle class:list={['o', 'stip']} cx={m.dot} cy="135" r="7" style={`--i:${i}`} />
+    </g>
+  ))}
+  <!-- het doel: een afspraak -->
+  <circle cx="452" cy="135" r="16" fill="#1f8a5b" />
+  <path d="M444 135l6 6 11-12" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="452" y="170" text-anchor="middle" font-size="11" font-weight="800">Afspraak</text>
+  {!mini && (
+    <g>
+      <g class="envelop">
+        <rect x="114" y="125" width="26" height="20" rx="3" fill="#ff6600" />
+        <path d="M114 127l13 10 13-10" stroke="#fff" stroke-width="2" fill="none" stroke-linejoin="round" />
+      </g>
+      <g class="antwoord">
+        <path d="M374 192h92a8 8 0 0 1 8 8v22a8 8 0 0 1-8 8h-70l-10 9v-9h-12a8 8 0 0 1-8-8v-22a8 8 0 0 1 8-8z" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <text x="420" y="216" text-anchor="middle" font-size="12" font-weight="800">Bel me maar</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .stip { transform-box: fill-box; transform-origin: center; }
+  .envelop, .antwoord { transform-box: fill-box; }
+  :global(.teken-js) .envelop, :global(.teken-js) .antwoord { opacity: 0; }
+  .in-beeld .envelop { animation: leadgeneratie--e-mailmarketing-envelop 7s cubic-bezier(.45,0,.4,1) 0.5s infinite both; }
+  .in-beeld .stip { animation: leadgeneratie--e-mailmarketing-stip 7s ease-out calc(0.5s + 1.1s + var(--i) * 1.5s) infinite both; }
+  .in-beeld .antwoord { animation: leadgeneratie--e-mailmarketing-antwoord 7s ease-in-out 0.5s infinite both; }
+  @keyframes leadgeneratie--e-mailmarketing-envelop {
+    0% { opacity: 0; transform: translateX(0); }
+    6% { opacity: 1; }
+    70% { opacity: 1; transform: translateX(320px); }
+    76%, 100% { opacity: 0; transform: translateX(320px); }
+  }
+  @keyframes leadgeneratie--e-mailmarketing-stip {
+    0% { transform: scale(1); }
+    4% { transform: scale(1.6); }
+    12%, 100% { transform: scale(1); }
+  }
+  @keyframes leadgeneratie--e-mailmarketing-antwoord {
+    0%, 70% { opacity: 0; transform: translateY(8px); }
+    76%, 94% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .envelop, .in-beeld .stip, .in-beeld .antwoord { animation: none; }
+  }
+</style>

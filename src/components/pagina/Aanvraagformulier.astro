@@ -1,0 +1,39 @@
+---
+// Formulier dat naar /api/aanvraag.php post (PHP-mail op Vimexx). Met honeypot en tijdcontrole tegen spam.
+interface Props { soort: string; knop?: string; vak?: boolean; website?: boolean; bericht?: boolean; bron?: string }
+const { soort, knop = 'Verstuur', vak = false, website = false, bericht = true, bron } = Astro.props;
+const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
+---
+<form class="formulier card aanvraag" method="post" action="/api/aanvraag.php" data-aanvraag>
+  <input type="hidden" name="soort" value={soort} />
+  <input type="hidden" name="pagina" value={Astro.url.pathname} />
+  <input type="hidden" name="t" value="" data-t />
+  {bron && <input type="hidden" name="bron" value={bron} />}
+  <div class="honing" aria-hidden="true"><label for={`${id}-extra`}>Laat dit veld leeg</label><input id={`${id}-extra`} name="website_extra" tabindex="-1" autocomplete="off" /></div>
+  {vak && (
+    <div class="veld-rij">
+      <div class="veld"><label for={`${id}-vak`}>Wat doe je?</label><input id={`${id}-vak`} name="vak" placeholder="Bijvoorbeeld: loodgieter" data-vul="vak" /></div>
+      <div class="veld"><label for={`${id}-plaats`}>Waar zit je?</label><input id={`${id}-plaats`} name="plaats" placeholder="Bijvoorbeeld: Emmen" autocomplete="address-level2" data-vul="plaats" /></div>
+    </div>
+  )}
+  {website && <div class="veld"><label for={`${id}-website`}>Je website</label><input id={`${id}-website`} name="website" type="text" inputmode="url" placeholder="jouwbedrijf.nl" /></div>}
+  <div class="veld-rij">
+    <div class="veld"><label for={`${id}-naam`}>Je naam</label><input id={`${id}-naam`} name="naam" autocomplete="name" required /></div>
+    <div class="veld"><label for={`${id}-tel`}>Telefoonnummer</label><input id={`${id}-tel`} name="telefoon" type="tel" autocomplete="tel" required /></div>
+  </div>
+  <div class="veld"><label for={`${id}-mail`}>E-mailadres <span class="muted">(mag leeg)</span></label><input id={`${id}-mail`} name="email" type="email" autocomplete="email" /></div>
+  {bericht && <div class="veld"><label for={`${id}-bericht`}>Je vraag <span class="muted">(mag leeg)</span></label><textarea id={`${id}-bericht`} name="bericht"></textarea></div>}
+  <button class="btn" type="submit">{knop}</button>
+  <p class="muted klein">We gebruiken je gegevens alleen om je terug te bellen. Lees de <a href="/privacyverklaring/">privacyverklaring</a>.</p>
+</form>
+<script>
+  document.querySelectorAll<HTMLInputElement>('[data-t]').forEach((i) => (i.value = String(Date.now())));
+  // Vak en plaats overnemen uit het formulier op de homepage (?vak=...&plaats=...)
+  const q = new URLSearchParams(location.search);
+  document.querySelectorAll<HTMLInputElement>('[data-vul]').forEach((i) => { const v = q.get(i.dataset.vul!); if (v) i.value = v.slice(0, 80); });
+</script>
+<style>
+  .aanvraag { padding: 26px; }
+  .aanvraag .btn { justify-self: start; }
+  .aanvraag p { margin: 0; }
+</style>

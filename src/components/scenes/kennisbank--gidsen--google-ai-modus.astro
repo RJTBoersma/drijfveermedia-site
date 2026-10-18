@@ -1,0 +1,81 @@
+---
+// Scène voor /kennisbank/gidsen/google-ai-modus/: een zoekpagina met het tabblad AI-modus. Eén vraag splitst zich in drie
+// deelvragen (query fan-out), die elk een bron ophalen, en samen één antwoord vormen waarin jouw bedrijf staat.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const deel = [
+  { y: 112, t: 'installateurs Emmen' },
+  { y: 148, t: 'kosten warmtepomp' },
+  { y: 184, t: 'ervaringen klanten' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: in het tabblad AI-modus wordt één vraag opgesplitst in drie deelvragen, die samen één antwoord vormen waarin jouw bedrijf genoemd wordt.'}>
+  <!-- venster met zoekbalk en tabbladen -->
+  <rect x="16" y="14" width="448" height="242" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="34" y="28" width="300" height="24" rx="12" />
+  <text x="48" y="44.5" font-size="10.5" font-weight="700">Warmtepomp laten plaatsen in Emmen?</text>
+  <text x="34" y="74" font-size="10.5" font-weight="700" class="zacht">Alles</text>
+  <text x="76" y="74" font-size="10.5" font-weight="700" class="zacht">Afbeeldingen</text>
+  <text x="160" y="74" font-size="10.5" font-weight="800">AI-modus</text>
+  <rect x="160" y="79" width="48" height="3" rx="1.5" fill="#ff6600" />
+  <path d="M34 86H446" stroke="#e8eef4" stroke-width="2" />
+
+  <!-- de vraag splitst zich in deelvragen -->
+  <circle cx="54" cy="148" r="14" fill="#074663" />
+  <text x="54" y="153.5" text-anchor="middle" font-size="16" font-weight="900" style="fill:#fff">?</text>
+  {deel.map((d) => (
+    <g>
+      <path d={`M68 148C92 148 96 ${d.y} 120 ${d.y}`} fill="none" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+      <rect x="122" y={d.y - 12} width="122" height="24" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+      <text x="132" y={d.y + 4} font-size="9.5" font-weight="700">{d.t}</text>
+      <path d={`M246 ${d.y}C270 ${d.y} 274 148 296 148`} fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+    </g>
+  ))}
+
+  <!-- het samengevoegde antwoord -->
+  <rect x="298" y="100" width="150" height="132" rx="12" fill="#fff" stroke="#074663" stroke-width="2" />
+  <rect x="312" y="114" width="122" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="312" y="128" width="78" height="17" rx="5" fill="#ffe2cc" />
+  <text x="318" y="140.5" font-size="10.5" font-weight="800">Jouw bedrijf</text>
+  <rect x="312" y="152" width="110" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="312" y="166" width="96" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="312" y="190" width="56" height="16" rx="8" fill="#fff" stroke="#ff6600" stroke-width="1.5" />
+  <rect x="374" y="190" width="56" height="16" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="320" y="196" width="40" height="4" rx="2" fill="#ffb98a" />
+  <rect x="382" y="196" width="40" height="4" rx="2" fill="#d9e1ea" />
+  <text x="312" y="224" font-size="9" font-weight="700" class="zacht">Vervolgvraag stellen...</text>
+
+  {!mini && (
+    <g>
+      {deel.map((d, i) => (
+        <circle class={`puls puls${i}`} cx="246" cy={d.y} r="3.5" fill="#ff6600" />
+      ))}
+      <g class="cursor">
+        <path d="M352 38l0 20 5-5 4 9 4-2-4-9h7z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+      <g class="vink">
+        <circle cx="440" cy="104" r="11" fill="#1f8a5b" />
+        <path d="M435 104l3.5 3.5 6-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .puls, .vink, .cursor { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .puls, :global(.teken-js) .vink { opacity: 0; }
+  :global(.teken-js) .cursor { opacity: 0; transform: translate(-60px, 20px); }
+  .in-beeld .cursor { animation: kennisbank-gidsen-google-ai-modus-cursor 1.6s cubic-bezier(.5,0,.3,1) 0.3s forwards; }
+  .in-beeld .puls0 { animation: kennisbank-gidsen-google-ai-modus-puls0 3.4s ease-in-out 2s infinite; }
+  .in-beeld .puls1 { animation: kennisbank-gidsen-google-ai-modus-puls1 3.4s ease-in-out 2.3s infinite; }
+  .in-beeld .puls2 { animation: kennisbank-gidsen-google-ai-modus-puls2 3.4s ease-in-out 2.6s infinite; }
+  .in-beeld .vink { animation: kennisbank-gidsen-google-ai-modus-vink 0.6s cubic-bezier(.3,1.7,.5,1) 3.2s forwards; }
+  @keyframes kennisbank-gidsen-google-ai-modus-cursor { 0% { opacity: 0; transform: translate(-60px, 20px); } 30% { opacity: 1; } 80% { opacity: 1; transform: translate(-170px, 32px); } 100% { opacity: 0; transform: translate(-170px, 32px); } }
+  @keyframes kennisbank-gidsen-google-ai-modus-puls0 { 0% { opacity: 0; transform: none; } 15% { opacity: 1; } 65% { opacity: 1; transform: translate(50px, 36px); } 80%, 100% { opacity: 0; transform: translate(50px, 36px); } }
+  @keyframes kennisbank-gidsen-google-ai-modus-puls1 { 0% { opacity: 0; transform: none; } 15% { opacity: 1; } 65% { opacity: 1; transform: translate(50px, 0); } 80%, 100% { opacity: 0; transform: translate(50px, 0); } }
+  @keyframes kennisbank-gidsen-google-ai-modus-puls2 { 0% { opacity: 0; transform: none; } 15% { opacity: 1; } 65% { opacity: 1; transform: translate(50px, -36px); } 80%, 100% { opacity: 0; transform: translate(50px, -36px); } }
+  @keyframes kennisbank-gidsen-google-ai-modus-vink { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .cursor, .in-beeld .puls0, .in-beeld .puls1, .in-beeld .puls2 { animation: none; }
+    .in-beeld .vink { animation: none; opacity: 1; }
+  }
+</style>

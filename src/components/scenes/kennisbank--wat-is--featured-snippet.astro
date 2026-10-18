@@ -1,0 +1,61 @@
+---
+// Scène voor /kennisbank/wat-is/featured-snippet/: bovenaan de zoekresultaten staat een antwoordbox op positie 0, met daaronder de gewone resultaten; een speaker leest het antwoord voor.
+// Als hij leeft: de regels in de antwoordbox lopen vol, het label 0 klopt rustig en er komen geluidsgolven uit de speaker.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 112, w: 200 },
+  { y: 126, w: 184 },
+  { y: 140, w: 120 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: bovenaan de zoekresultaten staat een antwoordbox op positie 0 met een kort antwoord en een link naar de bron. Een slimme speaker leest het antwoord voor.'}>
+  <rect x="28" y="16" width="300" height="238" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="44" y="30" width="268" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="60" y="48.5" font-size="11.5">hoe lang pizza in de oven</text>
+  <circle cx="294" cy="43" r="5.5" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M298 47l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+
+  <!-- antwoordbox -->
+  <rect x="44" y="70" width="268" height="104" rx="10" fill="#fff" stroke="#074663" stroke-width="2" />
+  <circle cx="44" cy="70" r="13" fill="#ff6600" />
+  <text x="44" y="75" font-size="13" font-weight="800" text-anchor="middle" style="fill:#fff">0</text>
+  <text x="64" y="96" font-size="15" font-weight="800">10 tot 15 minuten</text>
+  {regels.map((r) => <rect x="64" y={r.y} width={r.w} height="6" rx="3" fill="#d9e1ea" />)}
+  <rect x="64" y="154" width="90" height="8" rx="4" fill="#074663" opacity="0.8" />
+
+  <!-- gewone resultaten -->
+  <rect x="44" y="190" width="150" height="8" rx="4" fill="#10283f" opacity="0.5" />
+  <rect x="44" y="203" width="230" height="5" rx="2.5" fill="#e8eef4" />
+  <rect x="44" y="222" width="130" height="8" rx="4" fill="#10283f" opacity="0.5" />
+  <rect x="44" y="235" width="210" height="5" rx="2.5" fill="#e8eef4" />
+
+  <!-- speaker -->
+  <path d="M334 122h32" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+  <rect x="372" y="96" width="64" height="110" rx="26" fill="#074663" />
+  <rect x="382" y="110" width="44" height="6" rx="3" fill="#ff6600" />
+  <circle cx="404" cy="164" r="20" fill="none" stroke="#fff" stroke-width="2" opacity="0.5" />
+  <circle cx="404" cy="164" r="8" fill="#fff" opacity="0.5" />
+
+  {!mini && (
+    <g>
+      {regels.map((r, i) => <rect class="vul" style={`--i:${i}`} x="64" y={r.y} width={r.w} height="6" rx="3" fill="#10283f" opacity="0.7" />)}
+      <circle class="klop" cx="44" cy="70" r="13" fill="none" stroke="#ff6600" stroke-width="2" />
+      <path class="golf" style="--i:0" d="M446 136c8 8 8 20 0 28" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" />
+      <path class="golf" style="--i:1" d="M454 126c14 14 14 34 0 48" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+  )}
+</svg>
+<style>
+  .vul { transform-box: fill-box; transform-origin: left center; }
+  .klop { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .vul { transform: scaleX(0); }
+  :global(.teken-js) .klop, :global(.teken-js) .golf { opacity: 0; }
+  .in-beeld .vul { animation: kennisbank--wat-is--featured-snippet-vul 0.7s ease-out calc(0.5s + var(--i) * 0.45s) forwards; }
+  .in-beeld .klop { animation: kennisbank--wat-is--featured-snippet-klop 3s ease-out 2s infinite; }
+  .in-beeld .golf { animation: kennisbank--wat-is--featured-snippet-golf 2.4s ease-in-out calc(2s + var(--i) * 0.3s) infinite; }
+  @keyframes kennisbank--wat-is--featured-snippet-vul { to { transform: none; } }
+  @keyframes kennisbank--wat-is--featured-snippet-klop { 0% { opacity: 0.9; transform: scale(1); } 70%, 100% { opacity: 0; transform: scale(2.2); } }
+  @keyframes kennisbank--wat-is--featured-snippet-golf { 0%, 100% { opacity: 0; } 40%, 60% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vul, .in-beeld .klop, .in-beeld .golf { animation: none; } }
+</style>

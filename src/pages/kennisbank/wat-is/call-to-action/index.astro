@@ -1,0 +1,255 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--call-to-action.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/call-to-action/';
+const datum = '2026-10-18';
+const definitie = 'Een CTA is een knop of zin die je bezoeker vertelt wat hij nu moet doen, zoals "Vraag een offerte aan" of "Bel ons".';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Waarom elke pagina er een nodig heeft' },
+  { id: 'soorten', titel: 'Vijf soorten' },
+  { id: 'waar', titel: 'Waar je een CTA plaatst' },
+  { id: 'schrijven', titel: 'De tekst: acht regels' },
+  { id: 'ontwerp', titel: 'Het ontwerp van de knop' },
+  { id: 'voorbeelden', titel: 'Tien voorbeelden, zwak en sterk' },
+  { id: 'urgentie', titel: 'Urgentie: wat mag wel en niet' },
+  { id: 'fouten', titel: 'Zeven fouten' },
+  { id: 'meten', titel: 'Meten en testen' },
+  { id: 'na-de-klik', titel: 'Na de klik' },
+  { id: 'check', titel: 'Checklist voor je eigen site' },
+];
+const voorbeelden = [
+  ['Installateur', 'Verzenden', 'Plan een monteur in', 'Zegt wat er gebeurt, niet wat de knop technisch doet.'],
+  ['Kapsalon', 'Meer info', 'Kies een tijd die je past', 'De klant wil een afspraak, geen informatie.'],
+  ['Accountant', 'Neem contact op', 'Vraag een vaste prijs voor je jaarrekening', 'Concreet en het antwoord op de vraag waar de klant mee zit: wat kost het?'],
+  ['Hovenier', 'Klik hier', 'Bekijk tuinen die we aanlegden', 'Een tussenstap voor wie nog oriënteert. "Klik hier" zegt niets.'],
+  ['Fysiotherapeut', 'Afspraak', 'Plan je eerste afspraak', 'Een werkwoord in de gebiedende wijs en de drempel is helder: de eerste.'],
+  ['Rijschool', 'Aanmelden', 'Boek een gratis proefles', 'Lage drempel, en het woord gratis klopt.'],
+  ['Schilder', 'Offerte', 'Ontvang binnen twee dagen een offerte', 'Belofte over tijd, als je die echt nakomt.'],
+  ['Advocaat', 'Contact', 'Bel voor een eerste gesprek van 15 minuten', 'Maakt bellen kleiner en overzichtelijk.'],
+  ['Bakkerij', 'Bestellen', 'Bestel je taart voor zaterdag', 'Koppelt de knop aan een moment uit het leven van de klant.'],
+  ['Webwinkel in tuinmeubelen', 'Koop nu', 'Leg in je winkelwagen', 'Minder zwaar dan kopen. De beslissing komt later bij het afrekenen.'],
+];
+const check = [
+  'Elke pagina heeft één belangrijkste CTA, en je weet welke.',
+  'Die knop staat boven de vouw, ook op een telefoon.',
+  'Hij staat er nog een keer onderaan, na de uitleg.',
+  'De tekst begint met een werkwoord en zegt wat er daarna gebeurt.',
+  'De knop heeft een kleur die nergens anders op de pagina terugkomt.',
+  'Hij is groot genoeg voor een duim.',
+  'Onder de knop staat wat de klant geruststelt: gratis, vrijblijvend, reactietijd.',
+  'Een tweede actie, zoals bellen, is zichtbaar maar minder opvallend.',
+  'Het formulier achter de knop vraagt alleen wat je echt nodig hebt.',
+  'Klikken op de knop worden gemeten als gebeurtenis.',
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Call to action',
+  alternateName: ['CTA', 'Call-to-action'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is een call to action? Uitleg en tips',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Call to action',
+}];
+---
+<Base
+  title="Wat is een call to action? Uitleg en tips | Drijfveer Media"
+  description="Wat is een call to action? De knop of zin die je bezoeker vertelt wat hij nu moet doen. Lees hoe je een CTA schrijft die klikt, met voorbeelden."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Call to action', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Conversie</p>
+        <h1>Wat is een call to action?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>CTA is de afkorting van het Engelse call to action: een oproep tot actie. Je kent ze van knoppen op websites, maar ze staan overal. Onder een nieuwsbrief, in een advertentie in Google, op een flyer, op de achterkant van een bedrijfsbus. "Bel 0592 ..." is ook een CTA.</p>
+      <p>Hieronder lees je welke soorten er zijn, waar je ze neerzet, hoe je de tekst en de knop maakt en hoe je meet of het werkt. Met tien voorbeelden uit het mkb en een checklist voor je eigen site.</p>
+
+      <div class="inhoud-blok"><Inhoud items={hoofdstukken} leestijd={12} /></div>
+
+      <h2 id="waarom">Waarom elke pagina een call to action nodig heeft</h2>
+      <p>Een bezoeker die je tekst uit heeft en niet weet wat nu, is weg. Hij gaat terug naar Google en klikt op de volgende. Zo kun je klanten missen die eigenlijk al overtuigd waren. Ze waren alleen nog niet bij de stap waar ze iets konden doen.</p>
+      <p>Een goede CTA doet drie dingen. Hij vertelt wat de volgende stap is. Hij maakt die stap klein genoeg om te zetten. En hij laat zien wat de bezoeker ervoor terugkrijgt. Kijk maar onderaan deze pagina. Daar staat een blok met een knop, een telefoonnummer en wat er gebeurt als je het doet: iemand belt je met wat opvalt.</p>
+      <p>Het is ook een kwestie van eerlijkheid. Je weet als ondernemer precies wat een klant moet doen om geholpen te worden. De bezoeker weet dat niet. Een duidelijke knop is dus geen trucje, maar gewoon goede bewegwijzering.</p>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2 id="soorten">Vijf soorten CTA's</h2></div>
+      <p>Niet elke bezoeker is even ver. Iemand die net begint met zoeken, belt nog niet. Iemand die drie offertes vergelijkt, wil geen nieuwsbrief. Daarom heb je verschillende soorten nodig, elk voor een andere fase in de <a href="/kennisbank/wat-is/funnel/">funnel</a>.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Voorbeeld</th><th>Voor wie</th></tr></thead>
+          <tbody>
+            <tr><td><b>Hoofdactie</b></td><td>Vraag een offerte aan, bel ons, plan een afspraak</td><td>Wie klaar is om te kiezen. Hier doe je het voor.</td></tr>
+            <tr><td><b>Tussenstap</b></td><td>Bekijk de prijzen, lees de case, zie het werk</td><td>Wie nog vergelijkt en meer bewijs zoekt</td></tr>
+            <tr><td><b>Zachte actie</b></td><td>Download de checklist, schrijf je in voor de nieuwsbrief</td><td>Wie nog oriënteert en later misschien klant wordt</td></tr>
+            <tr><td><b>Terugkoppeling</b></td><td>Laat een review achter, deel je ervaring</td><td>Bestaande klanten, na afloop van een klus</td></tr>
+            <tr><td><b>Herhaalactie</b></td><td>Plan je volgende onderhoudsbeurt</td><td>Klanten die al eens kochten</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Kies per pagina één belangrijkste CTA. Daarnaast mag er een tweede, minder opvallende, zijn voor wie nog niet zover is. Twee knoppen van dezelfde kleur en grootte laten de bezoeker twijfelen, en wie twijfelt, doet niets.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2 id="waar">Waar je een CTA plaatst</h2></div>
+      <h3>Boven de vouw</h3>
+      <p>De vouw is de onderkant van het scherm voordat je gaat scrollen. Het woord komt uit de krantenwereld: wat boven de vouw van de krant stond, zag je in het rek. Zet je prominente CTA zo dat hij zichtbaar is zonder te scrollen. Let op: op een telefoon ligt de vouw veel hoger dan op een laptop. Kijk dus altijd op je eigen telefoon.</p>
+      <h3>Na de uitleg</h3>
+      <p>Wie helemaal naar beneden leest, is geïnteresseerd. Laat hem daar niet terug moeten scrollen. Herhaal je hoofdactie onderaan, na het laatste argument. Bij een lange pagina mag hij ook halverwege terugkomen, bijvoorbeeld na de prijzen.</p>
+      <h3>In de tekst</h3>
+      <p>Een link midden in een zin werkt goed als hij logisch volgt uit wat je net uitlegde. "Wil je weten wat dat voor jouw tuin kost? Bekijk de prijzen." Dat voelt als hulp, niet als verkoop.</p>
+      <h3>Op mobiel onderin het scherm</h3>
+      <p>Een balk die onderin blijft staan met bellen en je hoofdactie, is op een telefoon vaak de meest gebruikte knop van de hele site. Op deze site staat die balk er ook, met Bellen en Gratis scan.</p>
+      <h3>Buiten je website</h3>
+      <ul>
+        <li><b>E-mail:</b> één hoofdactie per mail. Een nieuwsbrief met acht knoppen krijgt minder klikken per knop.</li>
+        <li><b>Advertenties in Google:</b> eindig je tekst met wat de zoeker moet doen, en laat de pagina daarna precies dat aanbieden.</li>
+        <li><b>Social media:</b> zeg in je bericht wat je wilt. Reageren, de link openen of een bericht sturen.</li>
+        <li><b>Drukwerk en bus:</b> één actie, groot. Een telefoonnummer of een korte webadres. Een QR-code werkt alleen als iemand stilstaat.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="schrijven">Zo schrijf je een effectieve CTA: acht regels</h2></div>
+      <ol>
+        <li><b>Begin met een werkwoord in de gebiedende wijs.</b> Vraag, bel, plan, bereken, bekijk. Geen "Informatie" of "Offerte" als los zelfstandig naamwoord.</li>
+        <li><b>Zeg wat er daarna gebeurt.</b> "Ontvang je offerte binnen 24 uur" zegt meer dan "Verzenden". De bezoeker wil weten waar hij aan begint.</li>
+        <li><b>Houd het kort.</b> Twee tot zes woorden op de knop. De uitleg mag erboven of eronder staan.</li>
+        <li><b>Schrijf vanuit de klant.</b> "Plan je afspraak" in plaats van "Wij plannen graag". Sommige bedrijven testen de ik-vorm: "Ja, ik wil een proefles". Probeer het, en meet het.</li>
+        <li><b>Maak de stap klein.</b> "Bel voor een gesprek van 15 minuten" voelt kleiner dan "Neem contact op". Een kleine stap wordt eerder gezet.</li>
+        <li><b>Voeg eventueel een geruststelling toe.</b> Direct onder de knop: "gratis en vrijblijvend", "je zit nergens aan vast", "we bellen binnen een werkdag". Alleen als het klopt.</li>
+        <li><b>Laat de knop passen bij de pagina.</b> Op een pagina over dakgoten hoort geen knop "Vraag een offerte voor je badkamer aan".</li>
+        <li><b>Gebruik urgentie alleen als die echt is.</b> "Nog twee plekken in maart" mag, als het klopt. Meer daarover hieronder.</li>
+      </ol>
+      <p>Lees je CTA daarna los van de pagina. Snap je zonder context wat er gebeurt als je klikt? Dan zit het goed. Google geeft voor linkteksten hetzelfde advies: "klik hier" en "lees meer" zeggen te weinig. Meer over het schrijven van zulke teksten lees je bij <a href="/kennisbank/wat-is/copywriting/">copywriting</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="merk" maat={52} /><h2 id="ontwerp">Het ontwerp van de CTA-button</h2></div>
+      <p>Een goede tekst op een knop die niemand ziet, levert niets op. Dit zijn de regels voor de vorm:</p>
+      <ul class="vink">
+        <li><b>Een contrasterende kleur.</b> Kies een kleur die verder nergens op de pagina terugkomt. Op deze site is oranje voor knoppen. Daarbuiten gebruiken we die kleur zuinig, zodat je oog er vanzelf naartoe gaat.</li>
+        <li><b>Leesbaar.</b> Let op de kleuren van teksten en achtergrond op de knop. De richtlijnen voor toegankelijkheid (WCAG) vragen voor gewone tekst een contrast van minstens 4,5 staat tot 1.</li>
+        <li><b>Groot genoeg voor een duim.</b> WCAG noemt 24 bij 24 pixels als minimum voor iets waar je op tikt, en 44 bij 44 als betere maat. Een hoofdknop mag gerust groter.</li>
+        <li><b>Ruimte eromheen.</b> Witruimte maakt een knop zichtbaar. Een knop tussen drie andere elementen verdwijnt.</li>
+        <li><b>Het ziet eruit als een knop.</b> Een rechthoek met afgeronde hoeken en een duidelijke rand of vulling. Mensen klikken op wat ze herkennen.</li>
+        <li><b>Rangorde.</b> De belangrijkste CTA krijgt de vulling, de tweede actie een rand of een gewone link.</li>
+      </ul>
+      <p>Is er een kleur die het beste werkt? Nee. Rood, groen of oranje: het gaat om het contrast met de rest van je site. Een oranje knop op een oranje site valt niet op.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="voorbeelden">Tien voorbeelden van een call to action, zwak en sterk</h2></div>
+      <p>Zo zien de verbeteringen eruit bij gewone bedrijven. De sterke versies zijn bedacht als voorbeeld, niet overgenomen van echte sites.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Bedrijf en zwakke knop</th><th>Sterker</th><th>Waarom</th></tr></thead>
+          <tbody>
+            {voorbeelden.map(([b, z, s, w]) => <tr><td>{b}: <span class="muted">{z}</span></td><td><b>{s}</b></td><td>{w}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p>Een voorbeeld uitgewerkt. Een fysiotherapeut in Assen heeft onderaan zijn contactpagina een grijze knop met "Verzenden". Hij maakt er een oranje knop van, zet hem ook bovenaan de homepage en verandert de tekst in "Plan je eerste afspraak". Eronder zet hij: "Meestal nog deze week terecht". Wie nu de site opent, ziet in twee seconden wat hij kan doen en wat hij ervoor terugkrijgt. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="urgentie">Urgentie en schaarste: wat mag wel en wat niet</h2></div>
+      <p>Urgentie werkt. Wie denkt dat iets bijna op is, beslist sneller. Juist daarom zijn er regels. De Autoriteit Consument &amp; Markt (ACM) controleerde in 2023 duizenden webwinkels op aftelklokjes. In 41 gevallen was de aanbieding na afloop van de timer gewoon nog geldig, of startte er een nieuwe timer. Dat is misleiding, en de ACM sprak die winkels erop aan.</p>
+      <p>Een timer is volgens de ACM niet verboden. Maar de actie moet dan echt aflopen. Hetzelfde geldt voor "nog maar 2 op voorraad" en "vandaag 14 mensen bekeken dit". Klopt het niet, dan is het een trucje dat je klant tegen je keert zodra hij het doorheeft.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wel doen</th><th>Niet doen</th></tr></thead>
+          <tbody>
+            <tr><td>"Inschrijven kan tot 1 november", als de cursus op 1 november vol is</td><td>Een klokje dat elke dag opnieuw begint</td></tr>
+            <tr><td>"Nog drie plekken in de voorjaarsplanning", als dat zo is</td><td>"Bijna uitverkocht" bij een product dat altijd op voorraad is</td></tr>
+            <tr><td>"Bestel voor 15.00 uur, morgen in huis", als je het waarmaakt</td><td>Een korting die verloopt en meteen weer terugkomt</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="fouten">Zeven fouten die we vaak zien</h2></div>
+      <ol>
+        <li><b>Geen CTA op dienstpagina's.</b> De tekst eindigt en dan niets. Het formulier staat alleen op de contactpagina.</li>
+        <li><b>Te veel knoppen even groot.</b> Offerte, brochure, nieuwsbrief, chat en WhatsApp naast elkaar. De bezoeker kiest niets.</li>
+        <li><b>Een knop zonder belofte.</b> "Verzenden", "Submit" en "Klik hier" zeggen niet wat er gebeurt.</li>
+        <li><b>Een formulier van twaalf velden.</b> De knop is goed, maar daarachter wacht een vragenlijst. Vraag alleen wat je nodig hebt om terug te bellen.</li>
+        <li><b>Onzichtbaar op mobiel.</b> Op de laptop staat de knop netjes rechts, op een telefoon zakt hij helemaal naar beneden.</li>
+        <li><b>Valse haast.</b> Een timer die niet klopt. Je verliest vertrouwen en loopt een risico bij de ACM.</li>
+        <li><b>De belofte niet nakomen.</b> "We bellen binnen een uur" en dan pas de volgende dag. Dan had je het beter niet beloofd.</li>
+      </ol>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="meten">Meten en testen of je CTA meer conversies oplevert</h2></div>
+      <p>Of de nieuwe versie echt meer conversies oplevert, meet je. Kijk in je statistieken hoe vaak een bezoeker doorklikt op de knop, voor en na. Een effectieve CTA herken je aan de cijfers, niet aan het ontwerp.</p>
+      <ol>
+        <li>Meet de klik op je hoofdknop als gebeurtenis in Google Analytics 4. Meet ook het verzonden formulier en de klik op je telefoonnummer.</li>
+        <li>Reken het klikpercentage uit: klikken gedeeld door het aantal bezoekers van de pagina. Dat is de <a href="/kennisbank/wat-is/ctr/">CTR</a> van je knop.</li>
+        <li>Verander één ding tegelijk: de tekst, de plek of de kleur.</li>
+        <li>Vergelijk vier weken voor met vier weken na. Kijk ook naar het aantal aanvragen, niet alleen naar klikken.</li>
+      </ol>
+      <p>Een rekenvoorbeeld. Je dienstpagina krijgt 300 bezoekers per maand. Twee procent klikt op de knop, dat zijn 6 klikken. Gaat dat naar 9, dan is dat 50% meer. Maar met zulke kleine aantallen kan dat ook toeval zijn. <span class="muted">(Verzonnen cijfers.)</span></p>
+      <p>Daarom een eerlijk advies: een A/B-test van twee knopkleuren is iets voor sites met duizenden bezoekers per week. Met een paar honderd bezoekers per maand test je liever grote veranderingen. Een knop die er eerst niet was. Een formulier van vier velden in plaats van twaalf. Een belofte die er eerst niet stond. Dat zie je wel terug in je aanvragen.</p>
+
+      <div class="stap-kop"><Tekening naam="telefoon" maat={52} /><h2 id="na-de-klik">Na de klik: de stap die vaak vergeten wordt</h2></div>
+      <p>Veel ondernemers stoppen met nadenken bij de knop. Maar voor de bezoeker begint het dan pas. Wat ziet hij na het verzenden? En hoe snel hoort hij iets?</p>
+      <p>Een bedankpagina met alleen "Bedankt voor je bericht" is een gemiste kans. Zet erop wat er nu gebeurt en wanneer. "We bellen je vandaag nog, uiterlijk om 17.00 uur." Zet er een foto bij van wie er belt. Dan weet de klant dat er een mens aan de andere kant zit.</p>
+      <p>Daarna komt de echte test: de snelheid. Een aanvraag die drie dagen in een mailbox ligt, is vaak al bij een concurrent beland. Wij bellen zelf binnen 15 minuten terug op werkdagen. Niet om te verkopen, maar omdat iemand die net op een knop drukte, dan nog weet waarom.</p>
+      <p>Twee dingen om te regelen:</p>
+      <ul class="vink">
+        <li>Een melding op je telefoon bij elke nieuwe aanvraag, zodat je niet pas 's avonds je mail leest.</li>
+        <li>Een vaste afspraak wie belt als jij op een klus staat.</li>
+      </ul>
+      <p>Zo levert dezelfde knop ineens meer klanten op, zonder dat je er één letter aan veranderde.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="check">Checklist voor je eigen site</h2></div>
+      <p>Loop je drie belangrijkste pagina's langs op je telefoon. Kun je bij elk punt een vinkje zetten?</p>
+      <ul class="vink">
+        {check.map((c) => <li>{c}</li>)}
+      </ul>
+      <p>Houd rekening met het hele pad, niet alleen met de knop. Een sterke CTA met een traag formulier en een bedankpagina zonder uitleg levert minder op dan een gewone knop met een kort formulier en een snelle reactie. Hoe je dat hele pad verbetert, staat in de gids <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken</a>.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Lees ook</p>
+        <p>Meer over bezoekers laten kiezen voor jou lees je in de gids <a href="/kennisbank/gidsen/conversie-verhogen/">Conversie van je website verhogen</a>. Wat je naast de knop zet, staat bij <a href="/kennisbank/wat-is/usp/">USP</a>. Wil je dat wij je site nakijken en verbeteren, lees dan wat we doen aan <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>, vanaf € 395.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Waar staat CTA voor?', a: 'CTA staat voor call to action, Engels voor oproep tot actie. Het is de knop, link of zin die zegt wat de lezer nu moet doen.' },
+      { v: 'Hoeveel CTA\'s mag je op een pagina zetten?', a: 'Eén belangrijkste, die je op een lange pagina twee of drie keer herhaalt. Daarnaast hooguit één minder opvallende tweede actie, zoals bellen of de prijzen bekijken.' },
+      { v: 'Welke kleur moet een CTA-knop hebben?', a: 'Er is geen beste kleur. Kies een kleur die verder nergens op je pagina terugkomt en die genoeg contrast heeft met de tekst op de knop.' },
+      { v: 'Wat is het verschil tussen een CTA en een conversie?', a: 'De CTA is de oproep, de conversie is het resultaat. Een klik op de knop is een stap. Het verzonden formulier of het telefoontje is de conversie waar het om gaat.' },
+      { v: 'Moet een CTA altijd een knop zijn?', a: 'Nee. Een link in de tekst, een telefoonnummer of een zin onder een bericht op social media is ook een CTA. Een knop valt alleen het meest op.' },
+      { v: 'Mag ik een aftelklok gebruiken bij een actie?', a: 'Ja, als de actie echt afloopt als de tijd om is. De ACM sprak in 2023 webwinkels aan bij wie de aanbieding na afloop van de timer gewoon bleef staan.' },
+    ]}
+  />
+
+  <Actie titel="Weten jouw bezoekers wat ze moeten doen?" tekst={`We kijken gratis naar je site en die van je drie grootste concurrenten. ${site.contactpersoon} belt je met wat opvalt, ook over je knoppen en formulieren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .inhoud-blok { margin: 8px 0 40px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

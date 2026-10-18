@@ -1,0 +1,57 @@
+---
+// Scène voor /consult/: twee koppen koffie aan tafel, een klok die een uur loopt en een blocnote met drie acties. Vraag en antwoord wisselen elkaar af.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: twee koppen koffie aan tafel, een klok die een uur aftelt en een blocnote met drie acties. De ondernemer vraagt of hij moet adverteren, het antwoord is om bij Google Maps te beginnen.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- tafel -->
+  <path class="l" d="M20 225H460" />
+  <!-- klok: een uur -->
+  <circle cx="240" cy="64" r="36" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M240 32v6M240 90v6M208 64h6M266 64h6" stroke="#074663" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="240" cy="64" r="4" fill="#074663" />
+  <g transform="translate(240 64)"><path class="wijzer" d="M0 0V-24" stroke="#ff6600" stroke-width="3" stroke-linecap="round" /></g>
+  <text x="240" y="118" text-anchor="middle" font-size="11" font-weight="800">1 uur sparren</text>
+  <!-- blocnote met drie acties -->
+  <rect x="176" y="132" width="128" height="92" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M176 146h128" stroke="#d9e1ea" stroke-width="2" />
+  <text x="190" y="170" font-size="12" font-weight="900">1</text><rect class="v" x="204" y="162" width="84" height="8" rx="4" />
+  <text x="190" y="192" font-size="12" font-weight="900">2</text><rect class="v" x="204" y="184" width="70" height="8" rx="4" />
+  <text x="190" y="214" font-size="12" font-weight="900">3</text><rect class="v" x="204" y="206" width="78" height="8" rx="4" />
+  <!-- koffie links en rechts -->
+  <path class="v" d="M66 186h46v26a12 12 0 0 1-12 12H78a12 12 0 0 1-12-12z" />
+  <path class="l" d="M66 186h46v26a12 12 0 0 1-12 12H78a12 12 0 0 1-12-12zM112 194h5a7 7 0 0 1 0 14h-5" />
+  <path class="v" d="M366 186h46v26a12 12 0 0 1-12 12h-22a12 12 0 0 1-12-12z" />
+  <path class="l" d="M366 186h46v26a12 12 0 0 1-12 12h-22a12 12 0 0 1-12-12zM366 194h-5a7 7 0 0 0 0 14h5" />
+  {!mini && (
+    <g>
+      <path class="a stoom" d="M80 176c-4-5 4-8 0-13M96 176c-4-5 4-8 0-13" />
+      <path class="a stoom stoom-2" d="M382 176c-4-5 4-8 0-13M398 176c-4-5 4-8 0-13" />
+      <g class="vraag">
+        <path d="M30 44h132a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H76l-12 10V84H30a10 10 0 0 1-10-10V54a10 10 0 0 1 10-10z" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <text x="96" y="69" text-anchor="middle" font-size="12" font-weight="800">Moet ik adverteren?</text>
+      </g>
+      <g class="antwoord">
+        <path d="M318 44h132a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10h-34v10l-12-10h-86a10 10 0 0 1-10-10V54a10 10 0 0 1 10-10z" fill="#074663" />
+        <text x="384" y="69" text-anchor="middle" font-size="12" font-weight="800" style="fill:#fff">Begin bij Google Maps</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .wijzer { transform-box: fill-box; transform-origin: 50% 100%; }
+  .in-beeld .wijzer { animation: consult-wijzer 8s linear infinite; }
+  .vraag, .antwoord { transform-box: fill-box; transform-origin: bottom center; }
+  :global(.teken-js) .vraag, :global(.teken-js) .antwoord { opacity: 0; }
+  .in-beeld .vraag { animation: consult-vraag 6s ease-in-out 0.5s infinite both; }
+  .in-beeld .antwoord { animation: consult-antwoord 6s ease-in-out 0.5s infinite both; }
+  .in-beeld .stoom { animation: consult-stoom 3s ease-in-out infinite; }
+  .in-beeld .stoom-2 { animation-delay: 1.5s; }
+  @keyframes consult-wijzer { to { transform: rotate(360deg); } }
+  @keyframes consult-vraag { 0% { opacity: 0; transform: scale(0.8); } 8%, 45% { opacity: 1; transform: none; } 55%, 100% { opacity: 0; transform: none; } }
+  @keyframes consult-antwoord { 0%, 30% { opacity: 0; transform: scale(0.8); } 40%, 85% { opacity: 1; transform: none; } 95%, 100% { opacity: 0; transform: none; } }
+  @keyframes consult-stoom { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-4px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .wijzer, .in-beeld .vraag, .in-beeld .antwoord, .in-beeld .stoom { animation: none; }
+  }
+</style>

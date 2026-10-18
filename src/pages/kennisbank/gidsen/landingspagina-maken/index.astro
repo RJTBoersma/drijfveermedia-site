@@ -1,0 +1,467 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--landingspagina-maken.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/landingspagina-maken/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een landingspagina?' },
+  { id: 'soorten', titel: 'Soorten pagina\'s' },
+  { id: 'vooraf', titel: 'Drie vragen vooraf' },
+  { id: 'stappen', titel: 'Tien stappen' },
+  { id: 'opbouw', titel: 'De opbouw van boven naar beneden' },
+  { id: 'teksten', titel: 'De teksten' },
+  { id: 'ontwerp', titel: 'Ontwerp en beeld' },
+  { id: 'lengte', titel: 'Hoe lang?' },
+  { id: 'formulier', titel: 'Het formulier' },
+  { id: 'voorbeeld', titel: 'Uitgewerkt voorbeeld' },
+  { id: 'voorbeeld-download', titel: 'Tweede voorbeeld' },
+  { id: 'tools', titel: 'Waarmee bouw je hem?' },
+  { id: 'google', titel: 'Google Ads en SEO' },
+  { id: 'meten', titel: 'Meten en verbeteren' },
+  { id: 'opvolging', titel: 'Na de aanvraag' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'checklist', titel: 'Checklist' },
+  { id: 'zelf-of-laten', titel: 'Zelf maken of laten maken?' },
+];
+const check = [
+  'De pagina heeft één doel en één soort knop.',
+  'De kop gebruikt dezelfde woorden als de advertentie, mail of flyer.',
+  'Boven in beeld staan de kop, de belofte, de knop en je telefoonnummer.',
+  'Het menu en andere uitgangen zijn weg.',
+  'Er staat een prijs, vanaf-prijs of prijsindicatie op.',
+  'Er staat echt bewijs op: reviews, foto\'s van eigen werk of een case.',
+  'De drie tot vijf vragen die klanten altijd stellen, zijn beantwoord.',
+  'Het formulier vraagt alleen wat je nodig hebt om terug te bellen.',
+  'Onder de knop staat wat er na het versturen gebeurt.',
+  'De pagina laadt snel op een telefoon met mobiele data.',
+  'Kleuren, beeld en toon passen bij de advertentie of mail.',
+  'Er is een bedankpagina, en die wordt gemeten als conversie.',
+  'Klikken op je telefoonnummer worden ook gemeten.',
+  'Je weet of de pagina in Google moet komen of op noindex staat.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Checklist: landingspagina maken\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  check.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Landingspagina maken die converteert: stap voor stap',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Een landingspagina maken voor een advertentie, mailing of actie',
+}];
+---
+<Base
+  title="Landingspagina maken die converteert | Drijfveer Media"
+  description="Zelf een landingspagina maken? In tien stappen van kop tot formulier, met een uitgewerkt voorbeeld, tools met prijzen en de fouten die aanvragen kosten."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Landingspagina maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Leadgeneratie" titel="Landingspagina maken die converteert: stap voor stap" knop={{ tekst: 'Laat je pagina gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een landingspagina maken is geen hogere wiskunde. Het is vooral weglaten. Eén pagina, één doel, één knop. Deze gids loopt de opbouw met je door, met een voorbeeld dat je kunt namaken en een checklist om af te vinken.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een landingspagina heeft één doel en één knop. Geen menu, geen nieuws, geen zijpaden.</li>
+            <li>De kop sluit aan op waar de bezoeker vandaan komt: dezelfde woorden als in de advertentie of mail.</li>
+            <li>Volgorde van boven naar beneden: belofte, bewijs, prijs, twijfels, knop.</li>
+            <li>Schrijf eerst de tekst, kies daarna pas een ontwerp.</li>
+            <li>Bouw hem bij voorkeur op je eigen domein, en meet vanaf dag één hoeveel aanvragen hij oplevert.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een landingspagina, en wanneer heb je er een nodig?</h2>
+        <p>Een landingspagina is een webpagina waar een bezoeker op "landt" na een klik op een advertentie, een link in een mail of een QR-code op een flyer. De pagina heeft maar één taak: die bezoeker laten doen waarvoor hij kwam. Een offerte aanvragen, een afspraak maken, een gids downloaden.</p>
+        <p>Het verschil met je homepage is focus. Je homepage vertelt wie je bent en laat al je diensten zien. Dat is prima voor iemand die rondkijkt. Maar wie net klikte op "dakgoot laten reinigen", wil niet zoeken. Elke extra link is dan een uitgang.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Homepage</th><th>Dienstpagina</th><th>Landingspagina</th></tr></thead>
+            <tbody>
+              <tr><td><b>Doel</b></td><td>Iedereen de weg wijzen</td><td>Eén dienst uitleggen en verkopen</td><td>Eén actie laten doen</td></tr>
+              <tr><td><b>Bezoeker komt van</b></td><td>Overal</td><td>Vooral Google en je eigen menu</td><td>Een advertentie, mail, flyer of QR-code</td></tr>
+              <tr><td><b>Menu</b></td><td>Ja</td><td>Ja</td><td>Nee, of heel klein</td></tr>
+              <tr><td><b>Aantal knoppen</b></td><td>Meerdere</td><td>Eén hoofdknop, wat links</td><td>Eén, een paar keer herhaald</td></tr>
+              <tr><td><b>In Google</b></td><td>Ja</td><td>Ja</td><td>Mag, maar hoeft niet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een eigen pagina loont vooral in deze gevallen:</p>
+        <ul class="vink">
+          <li>Je adverteert in Google of op social media en wilt weten wat elke euro oplevert.</li>
+          <li>Je verstuurt een mailing of nieuwsbrief met één aanbod.</li>
+          <li>Je hebt een seizoensactie, een open dag of een workshop.</li>
+          <li>Je deelt flyers of staat op een beurs, met een QR-code naar een korte pagina.</li>
+        </ul>
+        <p>Heb je nog bijna geen bezoekers en adverteer je niet? Dan komt er ook niemand op je nieuwe pagina. Werk dan eerst aan je vindbaarheid, bijvoorbeeld met de gids <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a>.</p>
+
+        <h2 id="soorten">Soorten landingspagina's</h2>
+        <p>Niet elke pagina vraagt om hetzelfde. Hoe groter de stap voor de bezoeker, hoe meer uitleg en bewijs je nodig hebt. Dit zijn de soorten die je als mkb'er het vaakst maakt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort</th><th>Doel</th><th>Lengte</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td>Aanvraagpagina</td><td>Offerte of terugbelverzoek</td><td>Middel</td><td>Zonnepanelen laten plaatsen in Emmen</td></tr>
+              <tr><td>Afsprakenpagina</td><td>Direct een afspraak in je agenda</td><td>Kort</td><td>Gratis proefles bij een rijschool</td></tr>
+              <tr><td>Downloadpagina</td><td>E-mailadres in ruil voor iets nuttigs</td><td>Kort</td><td>Checklist "verbouwen zonder verrassingen"</td></tr>
+              <tr><td>Actiepagina</td><td>Aanmelden voor een actie of evenement</td><td>Kort</td><td>Open dag of voorjaarsactie</td></tr>
+              <tr><td>Verkooppagina</td><td>Direct kopen of boeken</td><td>Lang</td><td>Een workshop of cursus</td></tr>
+              <tr><td>Campagnepagina voor Google</td><td>Een advertentiegroep laten converteren</td><td>Middel</td><td>Lekkage dak reparatie Assen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De vuistregel: een gratis checklist past op één scherm. Een verbouwing van € 20.000 niet. Daar wil iemand eerst weten wie je bent, wat het kost en wat anderen ervan vonden.</p>
+
+        <h2 id="vooraf">Drie vragen die je van tevoren beantwoordt</h2>
+        <p>De meeste pagina's mislukken al voordat er een letter op staat. Schrijf daarom eerst deze drie antwoorden op, op een kladblok.</p>
+        <ol>
+          <li><b>Wat moet de bezoeker doen?</b> Eén actie. Bellen óf een formulier invullen óf een afspraak plannen. Kies.</li>
+          <li><b>Wie is die bezoeker?</b> Wat wil hij, waar twijfelt hij over, welke woorden gebruikt hij? Een uitgewerkte <a href="/kennisbank/gidsen/persona-maken/">persona</a> helpt hier enorm.</li>
+          <li><b>Waar komt hij vandaan?</b> Een Google-advertentie, een mailing, een flyer. De pagina moet afmaken wat daar begon.</li>
+        </ol>
+        <p>Die laatste vraag wordt vaak overgeslagen. Toch bepaalt hij hoeveel je moet uitleggen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bron</th><th>Wat de bezoeker al weet</th><th>Wat de pagina moet doen</th></tr></thead>
+            <tbody>
+              <tr><td>Google-advertentie</td><td>Alleen je advertentietekst</td><td>Bevestigen dat hij goed zit, en snel overtuigen</td></tr>
+              <tr><td>Nieuwsbrief</td><td>Jou, en het aanbod uit de mail</td><td>Kort houden, het aanbod afmaken</td></tr>
+              <tr><td>Social media</td><td>Eén beeld en een paar regels</td><td>Meer uitleg en bewijs, want hij zocht niet actief</td></tr>
+              <tr><td>Flyer of QR-code</td><td>Wat er op papier stond</td><td>Hetzelfde beeld herhalen, mobiel en snel</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="stappen">Een landingspagina maken in tien stappen</h2>
+        <p>Bij het landingspagina maken volg je de volgorde waarin een bezoeker zijn vragen stelt. Houd er rekening mee dat hij niet leest maar scant: kopjes, vetgedrukte woorden, knoppen.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>1. Een kop die aansluit op de klik</h3></div>
+        <p>Klikte iemand op een advertentie voor "dakgoot reinigen in Assen", dan staat precies dat in je kop. Herkenning in de eerste seconde houdt mensen vast. Wees niet grappig of vaag. "Wij gaan voor uw dak" zegt niets. "Dakgoot gereinigd in Assen, binnen een week" zegt alles. Grappig mag in je advertentie, als de pagina daarna maar duidelijk is.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>2. De belofte in één zin</h3></div>
+        <p>Onder de kop staat wat iemand krijgt en waarom bij jou. Kort, concreet, zonder vakjargon. Een krachtige belofte noemt een resultaat: "Geen overlopende goot meer deze winter, met foto's van voor en na." Kun je de belofte niet in één zin zeggen, dan is je aanbod nog niet scherp genoeg.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>3. Eén CTA, een paar keer herhaald</h3></div>
+        <p>De knop staat bovenaan in beeld, halverwege en onderaan. Altijd met dezelfde actie en dezelfde tekst. Schrijf op de knop wat iemand krijgt: "Plan je reiniging" in plaats van "Verstuur". Zet je telefoonnummer ernaast, klikbaar op mobiel. Meer over goede knoppen lees je bij <a href="/kennisbank/wat-is/call-to-action/">wat een call to action is</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>4. Bewijs dat je het kunt</h3></div>
+        <p>Een paar echte reviews, foto's van je eigen werk, het aantal jaren ervaring. Geen stockfoto van een lachende man met een helm. Bezoekers herkennen die direct, en dan geloven ze de rest ook minder. Een review werkt het best met een voornaam, een plaats en iets concreets: "Binnen een uur klaar, en de tuin netter achtergelaten dan ervoor."</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>5. Wat het kost</h3></div>
+        <p>Een vanaf-prijs of een voorbeeldprijs neemt de grootste twijfel weg. Wie moet raden, vraagt eerst een concurrent die wel een bedrag noemt. Zeg erbij wat er wel en niet bij de prijs zit. Dan voorkom je teleurstelling aan de telefoon.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>6. Twijfels wegnemen</h3></div>
+        <p>Drie tot vijf korte vragen en antwoorden. Welke? Die je klanten aan de telefoon stellen. Hoe snel kun je komen? Moet ik thuis zijn? Wat als het tegenvalt? Een garantie of een vrijblijvend eerste gesprek maakt de stap kleiner.</p>
+
+        <div class="stap-kop"><Tekening naam="mail" maat={48} /><h3>7. Een kort formulier</h3></div>
+        <p>Naam, telefoonnummer en een open vraag. Meer heb je niet nodig om terug te bellen. Lange formulieren kosten aanvragen. Verderop staat hoe je een formulier maakt dat ingevuld wordt.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>8. Snel, mobiel en herkenbaar</h3></div>
+        <p>Een groot deel van de mensen die op een advertentie klikken, zit op een telefoon. Test je pagina dus eerst zoals mobiele gebruikers hem zien: op een telefoon, met mobiele data. Zorg voor visuele consistentie: dezelfde kleuren, hetzelfde beeld en dezelfde toon als in de advertentie of mail. Dan voelt de klik als een logische volgende stap. Foto's zijn geoptimaliseerd voor het web, zodat de pagina binnen een paar seconden staat.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>9. Weg met de uitgangen</h3></div>
+        <p>Haal het menu weg, of maak het heel klein. Geen links naar je blog, je vacatures of je social media. Je logo mag blijven staan, maar laat het niet naar de homepage linken. Alleen het telefoonnummer, de knop en eventueel je privacyverklaring blijven over.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>10. Meten en een bedankpagina</h3></div>
+        <p>Na het versturen komt de bezoeker op een eigen bedankpagina. Zeg daar wie er contact opneemt en wanneer. Zo'n pagina is ook ideaal om te meten: elke weergave is een aanvraag. Tel ook klikken op je telefoonnummer. In de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a> lees je meer over meten en verbeteren.</p>
+
+        <h2 id="opbouw">De opbouw van boven naar beneden</h2>
+        <p>Zet de blokken in de volgorde waarin de bezoeker zijn vragen stelt. Eerst "ben ik hier goed?", dan "wat krijg ik?", dan "kan ik ze vertrouwen?" en pas daarna "hoe regel ik het?". Zo ziet dat eruit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Blok</th><th>Wat erin staat</th><th>Welke vraag het beantwoordt</th></tr></thead>
+            <tbody>
+              <tr><td>1. Bovenste scherm</td><td>Kop, belofte, knop, telefoonnummer, één foto</td><td>Ben ik hier goed, en wat moet ik doen?</td></tr>
+              <tr><td>2. Het probleem</td><td>Twee of drie zinnen over de situatie van de klant</td><td>Snappen ze mijn probleem?</td></tr>
+              <tr><td>3. Wat je krijgt</td><td>Drie tot vijf voordelen in een lijst</td><td>Wat levert het op?</td></tr>
+              <tr><td>4. Bewijs</td><td>Reviews, foto's, een korte case</td><td>Kunnen ze dit echt?</td></tr>
+              <tr><td>5. Hoe het werkt</td><td>Drie stappen, van aanvraag tot klaar</td><td>Wat moet ik doen, en wat doen zij?</td></tr>
+              <tr><td>6. Prijs</td><td>Vanaf-prijs of voorbeeld, wat erbij zit</td><td>Past het in mijn budget?</td></tr>
+              <tr><td>7. Vragen</td><td>Drie tot vijf korte vragen</td><td>En als ...?</td></tr>
+              <tr><td>8. Afsluiting</td><td>Formulier en knop, herhaald</td><td>Hoe regel ik het nu?</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Het eerste scherm op een telefoon</h3>
+        <p>Pak je telefoon en open de pagina. Wat zie je zonder te scrollen? Dat is het belangrijkste stuk van je hele pagina. Daar moet in elk geval dit staan:</p>
+        <ul class="vink">
+          <li>Een kop die de zoekopdracht of advertentie herhaalt</li>
+          <li>Eén zin met wat iemand krijgt</li>
+          <li>De knop, groot genoeg voor een duim</li>
+          <li>Je telefoonnummer, klikbaar</li>
+        </ul>
+        <p>Een grote foto bovenaan is mooi, maar duwt alles naar beneden. Op een telefoon is een kleinere foto naast of onder de kop vaak beter. Zet ook geen cookiemelding neer die het halve scherm bedekt. Dan is het eerste wat je bezoeker ziet een vraag die niets met zijn probleem te maken heeft.</p>
+        <p>Bij een kleine, goedkope dienst kun je blokken samenvoegen of weglaten. Bij een grote opdracht heb je ze allemaal nodig, en mag elk blok wat langer zijn. Het bovenste scherm is altijd het belangrijkst. Veel bezoekers komen nooit verder.</p>
+
+        <h2 id="teksten">Teksten die overtuigen</h2>
+        <p>Op een landingspagina telt elk woord. Er is geen ruimte voor een inleiding over je bedrijf. Drie regels helpen je op weg.</p>
+        <h3>Schrijf over jij, niet over wij</h3>
+        <p>De bezoeker wil weten wat hij eraan heeft. Vervang zinnen met "wij" zoveel mogelijk door zinnen met "jij" of "je".</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zo niet</th><th>Zo wel</th></tr></thead>
+            <tbody>
+              <tr><td>Wij zijn al 20 jaar specialist in zonwering.</td><td>Je krijgt zonwering die past, gemeten en geplaatst door iemand met 20 jaar ervaring.</td></tr>
+              <tr><td>Ons team staat voor u klaar.</td><td>Je belt en krijgt meteen iemand aan de lijn die het werk kent.</td></tr>
+              <tr><td>Wij leveren kwaliteit.</td><td>Je krijgt vijf jaar garantie op het werk.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeelden.</p>
+        <h3>Koppen die werken</h3>
+        <p>Een goede kop op een landingspagina noemt meestal drie dingen: wat, waar en een concreet voordeel. Een paar vormen die je zo kunt gebruiken:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vorm</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td>Dienst + plaats + termijn</td><td>Dakgoot gereinigd in Assen, binnen een week</td></tr>
+              <tr><td>Resultaat + zonder gedoe</td><td>Een nieuwe badkamer in tien werkdagen, zonder verrassingen achteraf</td></tr>
+              <tr><td>Vraag van de klant</td><td>Lekt je dak na de storm? Wij komen dezelfde week.</td></tr>
+              <tr><td>Gratis eerste stap</td><td>Je eerste rijles gratis, ook op zaterdag</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeelden.</p>
+        <h3>Knopteksten die zeggen wat er gebeurt</h3>
+        <p>"Versturen" en "Meer info" zeggen niets. Een goede knoptekst maakt de zin "Ik wil ..." af. Bijvoorbeeld: "Plan mijn gratis proefles", "Ontvang de checklist", "Vraag je prijs aan" of "Bel mij terug". Hoe kleiner de stap klinkt, hoe makkelijker iemand klikt.</p>
+        <h3>Benoem de bezwaren voordat de bezoeker het doet</h3>
+        <p>Elke klant heeft een "ja, maar". Te duur, te veel gedoe, geen tijd, eerder slecht ervaren. Schrijf die bezwaren op en beantwoord ze op de pagina. Een zin als "Je hoeft niet thuis te zijn, we werken buiten en sturen foto's" neemt een twijfel weg die anders nooit hardop gezegd wordt. Meer over overtuigend schrijven lees je bij <a href="/kennisbank/wat-is/copywriting/">copywriting</a>.</p>
+
+        <h2 id="ontwerp">Ontwerp: kleur, beeld en ruimte</h2>
+        <p>Een goede pagina ziet er rustig uit. Dat is geen toeval, het is een keuze. Een paar regels die bijna altijd werken:</p>
+        <ul>
+          <li><b>Eén hoofdkleur.</b> Gebruik je huisstijlkleur voor het geheel, en één opvallende kleur alleen voor de knop. Dan weet het oog waar het heen moet.</li>
+          <li><b>Eigen foto's.</b> Een foto van jou, je bus of je werk zegt meer dan een mooie stockfoto. Kijkt iemand op de foto, laat hem dan richting de kop of de knop kijken.</li>
+          <li><b>Witruimte.</b> Lucht rond de kop en de knop maakt ze sterker. Zoveel mogelijk op één scherm proppen werkt averechts.</li>
+          <li><b>Korte alinea's.</b> Op een telefoon is een alinea van vijf regels al een muur.</li>
+          <li><b>Knoppen voor duimen.</b> De toegankelijkheidsrichtlijn WCAG 2.2 vraagt minimaal 24 bij 24 pixels voor alles waarop je kunt tikken. Maak je hoofdknop ruim groter, over bijna de hele breedte van het scherm.</li>
+        </ul>
+        <p>Let ook op de elementen die je juist niet wilt: een slider die vanzelf draait, een video die automatisch start, een pop-up na drie seconden. Ze zijn leuk om te bouwen, maar ze leiden af van het enige wat telt.</p>
+
+        <h2 id="lengte">Hoe lang moet de pagina zijn?</h2>
+        <p>Er bestaat geen vaste lengte. De pagina moet lang genoeg zijn om de twijfels weg te nemen die bij die stap horen. Hoe groter de stap voor de bezoeker, hoe meer hij wil weten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je vraagt</th><th>Hoeveel uitleg</th><th>Welke blokken</th></tr></thead>
+            <tbody>
+              <tr><td>Een e-mailadres voor een gratis checklist</td><td>Weinig, één scherm</td><td>Kop, belofte, formulier</td></tr>
+              <tr><td>Een gratis proefles of kennismaking</td><td>Kort</td><td>Kop, belofte, bewijs, formulier</td></tr>
+              <tr><td>Een offerte voor een klus van een paar honderd euro</td><td>Middel</td><td>Alle blokken, kort gehouden</td></tr>
+              <tr><td>Een offerte voor een verbouwing of groot project</td><td>Veel</td><td>Alle blokken, met meer bewijs, uitleg over de werkwijze en meer vragen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Twijfel je? Laat iemand uit je doelgroep de pagina lezen en vraag welke vraag hij nog heeft. Is het antwoord "geen", dan is de pagina lang genoeg. Is het antwoord "wat kost het?", dan weet je wat er nog ontbreekt.</p>
+
+        <h2 id="formulier">Het formulier: zo wordt het ingevuld</h2>
+        <p>Formulieren zijn de plek waar de meeste bezoekers afhaken. Je hebt ze bijna al binnen, en dan stoppen ze toch. Dat is zonde want het is vaak makkelijk te verhelpen.</p>
+        <ul>
+          <li><b>Vraag zo weinig mogelijk.</b> Naam, telefoon of e-mail en een open vraag. Adres en budget vraag je later.</li>
+          <li><b>Zet de veldnaam boven het vak.</b> Niet in het vak, want die tekst verdwijnt zodra iemand typt.</li>
+          <li><b>Laat fouten direct zien.</b> Bij het veld zelf, in gewone taal: "Vul je telefoonnummer in, dan bellen we je terug."</li>
+          <li><b>Kies het juiste toetsenbord.</b> Een telefoonveld opent op mobiel dan meteen het cijferscherm.</li>
+          <li><b>Zeg wat er daarna gebeurt.</b> "Je hoort binnen een werkdag van ons" onder de knop neemt twijfel weg.</li>
+          <li><b>Link naar je privacyverklaring.</b> Je vraagt persoonsgegevens, dus de bezoeker moet kunnen lezen wat je ermee doet. Lees ook de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</li>
+        </ul>
+        <p>En een live chat? Die werkt alleen als er tijdens kantoortijden ook echt iemand zit om te antwoorden. Een chatvenster dat niemand beantwoordt, is erger dan geen chat. Een WhatsApp-knop is voor veel kleine bedrijven een prima middenweg. Mensen kennen hem, en jij antwoordt als je tijd hebt.</p>
+        <p>Last van spam via je formulier? Een verborgen extra veld dat alleen robots invullen, houdt veel rommel tegen. Dan hoeven je bezoekers geen puzzels met verkeerslichten op te lossen.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: zo ziet de tekst eruit</h2>
+        <p>Theorie is mooi, maar je hebt meer aan een voorbeeld. Hieronder de tekst voor een glazenwasser in Assen die ook dakgoten reinigt. Het bedrijf, de reviews en de prijs hebben we voor deze gids verzonnen. Neem de opbouw over en vul je eigen verhaal in.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: dakgoot reinigen in Assen</p>
+          <ul>
+            <li><b>Kop:</b> Dakgoot gereinigd in Assen, binnen een week</li>
+            <li><b>Belofte:</b> Geen overlopende goot deze winter. Je krijgt foto's van voor en na.</li>
+            <li><b>Knop:</b> Plan je reiniging, of bel 0592 00 00 00</li>
+            <li><b>Probleem:</b> Bladeren en mos verstoppen je goot. Bij de eerste flinke bui loopt het water langs je gevel. Dat zie je pas als het te laat is.</li>
+            <li><b>Wat je krijgt:</b> goten en afvoeren leeg en doorgespoeld, het vuil mee, foto's per kant van het huis, een seintje als we schade zien</li>
+            <li><b>Bewijs:</b> drie reviews met voornaam en wijk, vier foto's van eigen werk, "sinds 2009 in Assen"</li>
+            <li><b>Hoe het werkt:</b> je plant een dag, wij komen met een hoogwerker, je krijgt de foto's per mail</li>
+            <li><b>Prijs:</b> een rijtjeshuis vanaf € 65, inclusief afvoer van het vuil</li>
+            <li><b>Vragen:</b> Moet ik thuis zijn? Wat als het regent? Doen jullie ook de ramen?</li>
+            <li><b>Formulier:</b> naam, telefoonnummer, adres van de woning</li>
+            <li><b>Onder de knop:</b> We bellen je binnen een werkdag om een dag te prikken.</li>
+          </ul>
+        </div>
+        <p>Valt je iets op? Er staat geen woord over de geschiedenis van het bedrijf, geen nieuwsberichten en geen vacatures. Dat mag allemaal op de gewone website. Hier niet. Het adres staat wel in het formulier, omdat de glazenwasser zonder adres geen prijs kan geven. Een veld is alleen welkom als het de klant helpt.</p>
+
+        <h2 id="voorbeeld-download">Tweede voorbeeld: een korte downloadpagina</h2>
+        <p>Niet elke pagina hoeft lang te zijn. Een pagina waarop iemand iets gratis krijgt in ruil voor zijn e-mailadres, past vaak op één scherm. Ook dit voorbeeld is verzonnen: een boekhouder in Zwolle die ondernemers wil leren kennen voordat ze een boekhouder zoeken.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: checklist van een boekhouder</p>
+          <ul>
+            <li><b>Kop:</b> Je eerste btw-aangifte zonder stress</li>
+            <li><b>Belofte:</b> Een checklist van één A4, met de tien dingen die starters het vaakst vergeten.</li>
+            <li><b>Wat erin staat:</b> drie korte punten uit de checklist, zodat je ziet wat je krijgt</li>
+            <li><b>Bewijs:</b> "Opgesteld door een boekhouder met 15 jaar ervaring in Zwolle"</li>
+            <li><b>Formulier:</b> voornaam en e-mailadres</li>
+            <li><b>Knop:</b> Stuur mij de checklist</li>
+            <li><b>Onder de knop:</b> Je krijgt de checklist direct in je mail. Daarna af en toe een tip, uitschrijven kan altijd.</li>
+          </ul>
+        </div>
+        <p>Geen prijs, geen lange uitleg, geen vragenblok. De stap is klein, dus de pagina ook. Het echte werk gebeurt daarna: in een paar goede mails die laten zien dat deze boekhouder weet waar hij het over heeft. Hoe je dat opzet, lees je in de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a>.</p>
+        <p>Let op de belofte onder de knop. Wie een e-mailadres geeft voor een checklist, moet weten dat er meer mails komen. Dat is eerlijk, en het voorkomt klachten.</p>
+
+        <h2 id="tools">Waarmee bouw je een landingspagina?</h2>
+        <p>Je hebt geen programmeur nodig. Er zijn grofweg vier routes. Er zijn zoveel sjablonen dat het verleidelijk is om eerst het ontwerp te kiezen. Doe het andersom. Schrijf eerst de tekst, en zoek daarna een ontwerp dat erbij past.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Voorbeeld</th><th>Kosten</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td>In je eigen website</td><td>WordPress met de blokeditor</td><td>Alleen je tijd</td><td>Op je eigen domein en in je eigen statistieken. Zet het menu uit voor die pagina.</td></tr>
+              <tr><td>Losse paginabouwer</td><td>Unbounce</td><td>Vanaf $ 29 per maand</td><td>Het instapplan heeft 5 pagina's en een bezoekerslimiet van 500</td></tr>
+              <tr><td>Losse paginabouwer</td><td>Leadpages</td><td>Vanaf $ 29 per maand</td><td>Veel sjablonen, Engelstalig</td></tr>
+              <tr><td>Nederlandse alles-in-één</td><td>Plug&amp;Pay</td><td>Vanaf € 15 per maand bij jaarbetaling</td><td>Met betalingen erin. Een eigen domeinnaam pas vanaf het Premium-plan van € 59 per maand.</td></tr>
+              <tr><td>AI-sitebouwer</td><td>Diverse</td><td>Wisselend</td><td>Snel een eerste versie, maar controleer elke zin</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Prijzen volgens de prijspagina's van de makers, opgehaald in oktober 2026, bij maandelijkse betaling tenzij anders vermeld. Ze veranderen geregeld, kijk dus altijd even zelf.</p>
+        <h3>Zo maak je hem in je eigen WordPress-site</h3>
+        <ol>
+          <li>Maak via <b>Pagina's</b> een nieuwe pagina aan en geef hem een korte URL, bijvoorbeeld /dakgoot-reinigen-actie/.</li>
+          <li>Kijk of je thema een paginasjabloon zonder menu heeft. Zo niet, dan kan een paginabouwer of je webbouwer het menu voor die ene pagina verbergen.</li>
+          <li>Zet de blokken in de volgorde van de tabel hierboven.</li>
+          <li>Koppel het formulier aan een eigen bedankpagina.</li>
+          <li>Wil je de pagina niet in Google? Zet hem op noindex, bijvoorbeeld met de instelling per pagina in je SEO-plugin.</li>
+          <li>Test alles op je telefoon en vul het formulier zelf een keer in.</li>
+        </ol>
+        <p>Onze voorkeur gaat bijna altijd naar je eigen site. Dan staat de pagina op je eigen domein, telt hij mee in je eigen statistieken en betaal je geen abonnement per maand. Een losse bouwer is handig als je veel pagina's wilt testen of geen toegang hebt tot je eigen site. Let dan wel op: bij sommige tools staat de pagina op een subdomein van de tool, tenzij je meer betaalt.</p>
+        <p>En AI? Een AI-sitebouwer zet in een paar minuten iets neer dat er goed uitziet. Leuk om mee te beginnen. Maar AI verzint graag reviews, cijfers en beloftes die je niet kunt waarmaken. Lees elke zin na voordat je hem online zet. Wil je weten wat er met AI wel kan, lees dan de gids over <a href="/kennisbank/gidsen/vibe-coding/">vibe coding</a>.</p>
+
+        <h2 id="google">Je pagina in Google Ads en in Google zelf</h2>
+        <h3>Google Ads: de ervaring op de landingspagina</h3>
+        <p>Adverteer je in Google, dan telt je pagina mee in de kwaliteitsscore. Google geeft elk zoekwoord een score van 1 tot 10. Die is gebaseerd op drie onderdelen: de verwachte klikfrequentie, de advertentierelevantie en de ervaring op de landingspagina. Elk onderdeel krijgt het oordeel Hoger dan gemiddeld, Gemiddeld of Lager dan gemiddeld. Google vergelijkt je daarvoor met andere adverteerders op dezelfde zoekopdrachten in de afgelopen 90 dagen.</p>
+        <p>Je ziet het zo: ga in Google Ads naar <b>Campagnes</b>, dan <b>Zoekwoorden</b>. Klik rechtsboven op het icoon <b>Kolommen</b> en voeg uit het onderdeel Kwaliteitsscore de kolom "Erv. op landingspagina" toe. Staat die op Lager dan gemiddeld? Dan weet je waar je moet beginnen. Meestal sluit de pagina dan niet goed aan op het zoekwoord, of laadt hij traag. Hoe je de hele campagne opzet, lees je in de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>.</p>
+        <h3>Wel of niet in de zoekresultaten?</h3>
+        <p>Een pagina voor één advertentie of mailing hoeft niet in Google. Lijkt hij sterk op een andere pagina, dan kan hij die zelfs in de weg zitten. Zet hem dan op noindex. Let op: Google moet de pagina wel kunnen bezoeken om die noindex te zien. Blokkeer hem dus niet ook in je robots.txt, dat staat ook zo in de documentatie van Google.</p>
+        <p>Wil je juist wel gevonden worden op een zoekwoord? Dan maak je eigenlijk een dienstpagina: met meer uitleg, genoeg tekst om de vraag te beantwoorden en een plek in je menu. Hoe je zo'n tekst schrijft, staat in de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>.</p>
+
+        <h2 id="meten">Meten en verbeteren</h2>
+        <p>Een pagina is pas af als je weet wat hij oplevert. Reken het zo uit: aantal aanvragen gedeeld door aantal bezoekers op de pagina. Dat is je conversieratio. Komen je bezoekers uit Google Ads, reken dan ook uit wat een aanvraag kost.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een glazenwasser betaalt € 1,20 per klik en krijgt 300 klikken per maand: € 360. Daar komen 9 aanvragen uit, 3 procent. Een aanvraag kost hem dus € 40. Hij maakt het formulier korter en zet de prijs bovenaan. De maand erna krijgt hij 15 aanvragen uit hetzelfde budget. Nu kost een aanvraag € 24, terwijl hij geen euro meer uitgaf.</p>
+        </div>
+        <p>Verander één ding tegelijk en meet een paar weken voor en na. Anders weet je niet wat het verschil maakte. Wil je zien waar mensen op je pagina klikken en waar ze stoppen met scrollen? Dan is een tool met heatmaps handig, zoals Microsoft Clarity. Houd er wel rekening mee dat zo'n tool cookies plaatst, dus vraag toestemming. Meer over testen met weinig bezoekers lees je in de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a>.</p>
+
+        <h3>Wat verbeter je eerst?</h3>
+        <p>Levert de pagina minder op dan je hoopte? Pak de onderdelen dan in deze volgorde aan. Bovenaan staat wat meestal het meeste verschil maakt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Wat je probeert</th></tr></thead>
+            <tbody>
+              <tr><td>De kop</td><td>Precies de woorden uit de advertentie of zoekopdracht</td></tr>
+              <tr><td>De prijs</td><td>Een vanaf-prijs hoger op de pagina, met wat erbij zit</td></tr>
+              <tr><td>Het formulier</td><td>Minder velden, en onder de knop wat er daarna gebeurt</td></tr>
+              <tr><td>Het bewijs</td><td>Reviews en foto's dichter bij de knop</td></tr>
+              <tr><td>De knoptekst</td><td>Zeggen wat iemand krijgt in plaats van "Verstuur"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="opvolging">Na de aanvraag: opvolgen</h2>
+        <p>De pagina doet zijn werk tot de knop. Daarna ben jij aan de beurt. Een aanvraag die drie dagen blijft liggen, is vaak al naar een concurrent. Spreek daarom vooraf af wie de aanvragen oppakt en hoe snel.</p>
+        <ul>
+          <li><b>Een bevestiging per mail.</b> Direct, met wat er nu gebeurt en hoe iemand je kan bereiken.</li>
+          <li><b>Snel bellen.</b> Hoe eerder, hoe beter. De klant zit dan nog met zijn hoofd bij het probleem.</li>
+          <li><b>Vraag hoe hij je vond.</b> Zo weet je welke advertentie of mailing de aanvraag opleverde.</li>
+          <li><b>Houd bij wat het werd.</b> Een simpele lijst met aanvraag, gesprek en opdracht laat na een paar maanden zien wat de pagina echt oplevert.</li>
+        </ul>
+        <p>Wij bellen op werkdagen zelf binnen 15 minuten terug na een aanvraag. Dat is geen trucje, het is gewoon de vraag beantwoorden terwijl hij nog vers is.</p>
+
+        <h2 id="fouten">Fouten die we vaak zien</h2>
+        <ul>
+          <li><b>Het menu staat er nog.</b> Elke link naar "Over ons" of "Nieuws" is een uitgang.</li>
+          <li><b>Twee of drie aanbiedingen op één pagina.</b> Wie moet kiezen, kiest vaak niets.</li>
+          <li><b>De advertentie gaat naar de homepage.</b> De bezoeker moet dan zelf zoeken naar wat hem beloofd werd.</li>
+          <li><b>De kop sluit niet aan op de advertentie.</b> Andere woorden, andere prijs, ander beeld. De bezoeker twijfelt meteen of hij goed zit.</li>
+          <li><b>Elementen die afleiden.</b> Een slider, een pop-up na drie seconden, een video die vanzelf start.</li>
+          <li><b>Geen prijs.</b> Dan bel je met mensen die er bij het eerste bedrag vandoor gaan.</li>
+          <li><b>Geen telefoonnummer.</b> Juist op mobiel wil een deel van je bezoekers gewoon bellen.</li>
+          <li><b>Eén pagina voor alle campagnes.</b> Adverteer je voor twee diensten, maak dan twee pagina's.</li>
+          <li><b>Niet meten.</b> Dan weet je na drie maanden nog niet of de pagina zijn geld waard is.</li>
+        </ul>
+
+        <h2 id="checklist">Checklist: veertien punten voor je live gaat</h2>
+        <p>Loop deze punten na voordat je de pagina aan een advertentie of mailing koppelt. Je kunt de lijst ook downloaden en afvinken.</p>
+        <div class="kader check-lijst">
+          <ol>{check.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="checklist-landingspagina-maken.txt">Download de checklist</a>
+        </div>
+
+        <h2 id="zelf-of-laten">Zelf maken of laten maken?</h2>
+        <p>Met deze gids kun je zelf een effectieve landingspagina bouwen. Hoeveel tijd het landingspagina maken kost, hangt af van hoe goed je je klant al kent.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf maken</th><th>Laten maken</th></tr></thead>
+            <tbody>
+              <tr><td><b>Tijd</b></td><td>Reken op een dag voor tekst en ontwerp, plus een paar weken meten</td><td>Een gesprek en een keer nakijken</td></tr>
+              <tr><td><b>Kosten</b></td><td>Je eigen uren, eventueel een abonnement op een tool</td><td>Bij ons vanaf € 250</td></tr>
+              <tr><td><b>Sterk in</b></td><td>Je kent je klant en je vak</td><td>Opbouw, tekst, mobiel en meting in één keer goed</td></tr>
+              <tr><td><b>Valkuil</b></td><td>Te veel willen vertellen</td><td>Een bureau dat je klant niet kent</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Heb je die tijd niet, of wil je dat iemand meedenkt die dit vaker doet? Dan kun je een <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina laten maken</a>. Bij ons kost dat vanaf € 250, inclusief tekst, mobiel ontwerp, formulier en meting. Het past in onze aanpak van <a href="/leadgeneratie/">leadgeneratie</a>: van bezoeker naar aanvraag, met een doel waar je ons op afrekent.</p>
+        <p>Heb je al een pagina en twijfel je of hij goed werkt? Laat hem dan meenemen in de <a href="/gratis-website-analyse/">gratis website-analyse</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={22} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij hem bouwen?" intro="Wat je van ons kunt verwachten, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een landingspagina en een website?', a: 'Een website laat alles zien wat je doet. Een landingspagina gaat over één aanbod en heeft één knop. Hij hoort vaak bij een advertentie, mailing of actie.' },
+      { v: 'Moet een landingspagina in Google te vinden zijn?', a: 'Niet altijd. Een pagina voor een advertentie of mailing mag op noindex. Wil je wel gevonden worden, schrijf dan een volwaardige pagina over je dienst met genoeg uitleg.' },
+      { v: 'Hoe lang moet een landingspagina zijn?', a: 'Zo lang als nodig om de twijfels weg te nemen. Een eenvoudige dienst past op één scherm plus wat vragen. Een duurdere dienst vraagt meer uitleg en meer bewijs.' },
+      { v: 'Kan ik een landingspagina gratis maken?', a: 'Ja, in je eigen WordPress-site kost het alleen tijd. Losse tools hebben vaak een gratis proefperiode, daarna betaal je per maand.' },
+      { v: 'Hoeveel landingspagina\'s heb ik nodig?', a: 'Eén per aanbod of campagne. Adverteer je voor twee diensten, maak dan twee pagina\'s. Dan sluit elke kop precies aan op de advertentie.' },
+      { v: 'Moet het menu van een landingspagina af?', a: 'Meestal wel. Elke link in het menu is een uitgang. Laat je logo, je telefoonnummer en een link naar je privacyverklaring staan, en verder alleen de knop.' },
+      { v: 'Hoe weet ik of mijn landingspagina werkt?', a: 'Tel het aantal aanvragen en deel dat door het aantal bezoekers op de pagina. Adverteer je, reken dan ook uit wat een aanvraag kost. Vergelijk dat met wat een klant je oplevert.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Conversie verhogen', href: '/kennisbank/gidsen/conversie-verhogen/', tekst: 'Vijftien verbeteringen voor meer aanvragen.' },
+      { label: 'Gids', titel: 'Google Ads-campagne opzetten', href: '/online-adverteren/google-ads-campagne-opzetten/', tekst: 'Het stappenplan voor je eerste campagne.' },
+      { label: 'Gids', titel: 'Persona maken', href: '/kennisbank/gidsen/persona-maken/', tekst: 'Weet voor wie je de pagina schrijft.' },
+      { label: 'Dienst', titel: 'Landingspagina laten maken', href: '/leadgeneratie/landingspagina-laten-maken/', tekst: 'Eén pagina, één doel. Vanaf € 250.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten of je pagina aanvragen oplevert?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} bekijkt je pagina zoals een klant hem ziet en belt je met wat beter kan.`} />
+</Base>
+<style>
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+</style>

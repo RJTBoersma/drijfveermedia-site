@@ -1,0 +1,67 @@
+---
+// Scène voor /cases/dakraamconcurrent/: een huis met een dakraam in de zon, ernaast een lijstje zoekresultaten voor "dakraam plaatsen" waarin het oranje resultaat naar plek 1 klimt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een huis met een dakraam waar zonlicht door valt. Ernaast een lijst zoekresultaten voor dakraam plaatsen, waarin het oranje resultaat naar de eerste plek klimt.'}>
+  <path class="l" d="M16 240h448" />
+  <circle class="a" cx="66" cy="54" r="18" />
+  <path class="v" d="M40 150L160 66l120 84z" />
+  <path class="l" d="M32 156L160 66l128 90" />
+  <rect x="56" y="150" width="208" height="90" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <rect x="140" y="186" width="40" height="54" rx="3" fill="#e8eef4" stroke="#074663" stroke-width="2.5" />
+  <circle cx="171" cy="214" r="2.5" fill="#074663" />
+  <rect x="78" y="172" width="40" height="34" rx="3" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <path class="l" d="M98 172v34M78 189h40" />
+  <rect x="202" y="172" width="40" height="34" rx="3" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <path class="l" d="M222 172v34M202 189h40" />
+  <g transform="rotate(35 201 124)">
+    <rect x="181" y="111" width="40" height="26" rx="3" fill="#fff" stroke="#074663" stroke-width="2.5" />
+    <path class="l" d="M201 111v26" />
+  </g>
+  <rect x="316" y="40" width="148" height="184" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="328" y="54" width="124" height="24" rx="12" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="340" y="70" font-size="11" font-weight="700">dakraam plaatsen</text>
+  <text x="332" y="108" font-size="13" font-weight="900" class="zacht">1</text>
+  <rect class="v" x="350" y="98" width="96" height="8" rx="4" /><rect x="350" y="111" width="80" height="6" rx="3" fill="#eef2f6" />
+  <text x="332" y="148" font-size="13" font-weight="900" class="zacht">2</text>
+  <rect class="v" x="350" y="138" width="88" height="8" rx="4" /><rect x="350" y="151" width="72" height="6" rx="3" fill="#eef2f6" />
+  <text x="332" y="188" font-size="13" font-weight="900" class="zacht">3</text>
+  <rect class="v" x="350" y="178" width="92" height="8" rx="4" /><rect x="350" y="191" width="76" height="6" rx="3" fill="#eef2f6" />
+  {!mini && (
+    <g>
+      <g class="dkc-stralen">
+        <path class="a" d="M66 22v-10M66 96v-10M34 54h-10M108 54h-10M43 31l-7-7M96 84l-7-7M89 31l7-7M43 77l-7 7" />
+      </g>
+      <g class="dkc-licht">
+        <path d="M188 154l-14 14M200 154l-12 13M212 154l-10 12" stroke="#ffb27a" stroke-width="3" stroke-linecap="round" fill="none" />
+      </g>
+      <g class="dkc-top">
+        <rect x="322" y="90" width="136" height="34" rx="8" fill="#fff4ec" stroke="#ff6600" stroke-width="2" />
+        <text x="332" y="112" font-size="13" font-weight="900" fill="#10283f">1</text>
+        <rect x="350" y="98" width="96" height="8" rx="4" fill="#ff6600" />
+        <rect x="350" y="111" width="80" height="6" rx="3" fill="#ffd2b0" />
+      </g>
+      <g class="dkc-badge">
+        <rect x="330" y="232" width="122" height="30" rx="9" fill="#10283f" />
+        <text x="391" y="252" text-anchor="middle" font-size="13" font-weight="800" style="fill:#fff">+32% bezoekers</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .dkc-stralen { transform-origin: 66px 54px; }
+  .in-beeld .dkc-stralen { animation: dkc-draai 8s linear infinite; }
+  :global(.teken-js) .dkc-licht { opacity: 0; }
+  .in-beeld .dkc-licht { animation: dkc-licht 5s ease-in-out 0.8s infinite both; }
+  :global(.teken-js) .dkc-top { opacity: 0; transform: translateY(80px); }
+  .in-beeld .dkc-top { animation: dkc-omhoog 1.4s cubic-bezier(.5,0,.2,1) 0.6s forwards; }
+  .dkc-badge { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .dkc-badge { opacity: 0; transform: scale(0.6); }
+  .in-beeld .dkc-badge { animation: dkc-pop 0.6s cubic-bezier(.3,1.6,.5,1) 2.1s forwards; }
+  @keyframes dkc-draai { to { transform: rotate(360deg); } }
+  @keyframes dkc-licht { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+  @keyframes dkc-omhoog { 0% { opacity: 1; transform: translateY(80px); } 35% { transform: translateY(80px); } 100% { opacity: 1; transform: none; } }
+  @keyframes dkc-pop { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .dkc-stralen, .in-beeld .dkc-licht, .in-beeld .dkc-top, .in-beeld .dkc-badge { animation: none; } }
+</style>

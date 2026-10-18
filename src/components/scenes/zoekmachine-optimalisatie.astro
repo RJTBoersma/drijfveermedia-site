@@ -1,0 +1,89 @@
+---
+// Scène voor /zoekmachine-optimalisatie/: jouw bedrijf staat bovenaan in de zoekresultaten, een bezoeker klikt en er komt een aanvraag binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [146, 180, 214];
+const balken = [16, 26, 38, 54, 72];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: in de zoekresultaten staat jouw bedrijf op plek één. Een bezoeker klikt erop, er komt een nieuwe aanvraag binnen en het aantal aanvragen groeit.'}>
+  <!-- browservenster met zoekresultaten -->
+  <rect x="16" y="20" width="300" height="230" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="34" cy="36" r="4" fill="#d9e1ea" /><circle cx="46" cy="36" r="4" fill="#d9e1ea" /><circle cx="58" cy="36" r="4" fill="#d9e1ea" />
+  <rect x="34" y="50" width="264" height="30" rx="15" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="l" cx="52" cy="64" r="6" />
+  <path class="l" d="M56.5 68.5l5 5" />
+  <text x="70" y="70" font-size="13" font-weight="600">dakdekker assen</text>
+  <!-- plek 1: jouw bedrijf -->
+  <rect x="30" y="92" width="272" height="46" rx="10" fill="#fff4ec" stroke="#ffd2b0" stroke-width="2" />
+  <circle class="o" cx="50" cy="115" r="12" />
+  <text x="50" y="120" text-anchor="middle" font-size="13" font-weight="900" style="fill:#fff">1</text>
+  <text x="72" y="111" font-size="14" font-weight="800">Jouw bedrijf</text>
+  <rect x="72" y="119" width="150" height="7" rx="3.5" fill="#ffd2b0" />
+  <!-- de andere resultaten -->
+  {rijen.map((y, i) => (
+    <g>
+      <circle cx="50" cy={y + 12} r="10" fill="#e8eef4" />
+      <text x="50" y={y + 16} text-anchor="middle" font-size="11" font-weight="800" class="zacht">{i + 2}</text>
+      <rect x="72" y={y + 3} width={130 - i * 14} height="8" rx="4" fill="#c9d3dd" />
+      <rect x="72" y={y + 16} width={190 - i * 20} height="6" rx="3" fill="#e8eef4" />
+    </g>
+  ))}
+  <!-- kaart met aanvragen -->
+  <rect x="332" y="36" width="134" height="120" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="346" y="58" font-size="12" font-weight="800">Aanvragen</text>
+  {balken.map((h, i) => (
+    <rect x={348 + i * 22} y={142 - h} width="14" height={h} rx="3" class={i === balken.length - 1 ? 'o' : 'v'} />
+  ))}
+  <path class="l" d="M342 142h116" />
+  {!mini && (
+    <g>
+      <path class="trend" d="M355 116l22-10 22-12 22-16 22-18" fill="none" stroke="#074663" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 5" />
+      <g class="toast">
+        <rect x="328" y="172" width="144" height="46" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <circle cx="348" cy="195" r="10" fill="#1f8a5b" />
+        <path d="M343 195l4 4 7-8" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="364" y="192" font-size="11.5" font-weight="800">Nieuwe aanvraag</text>
+        <text x="364" y="207" font-size="10.5" class="zacht">via je website</text>
+      </g>
+      <circle class="rimpel" cx="246" cy="111" r="8" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <g class="cursor">
+        <path d="M0 0v20l5.5-5 4 9 3.5-1.6-4-8.6H16z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .trend { opacity: 1; }
+  .cursor { transform: translate(244px, 108px); }
+  .rimpel { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .trend { opacity: 0; }
+  :global(.teken-js) .toast { opacity: 0; }
+  :global(.teken-js) .cursor { opacity: 0; }
+  .in-beeld .trend { animation: zoekmachine-optimalisatie-trend 1.2s ease 1.6s both; }
+  .in-beeld .cursor { animation: zoekmachine-optimalisatie-cursor 6s ease-in-out 0.6s infinite both; }
+  .in-beeld .rimpel { animation: zoekmachine-optimalisatie-rimpel 6s ease-out 0.6s infinite both; }
+  .in-beeld .toast { animation: zoekmachine-optimalisatie-toast 6s ease-in-out 0.6s infinite both; }
+  @keyframes zoekmachine-optimalisatie-trend { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes zoekmachine-optimalisatie-cursor {
+    0% { opacity: 0; transform: translate(290px, 232px); }
+    10% { opacity: 1; }
+    38% { transform: translate(244px, 108px); }
+    42% { transform: translate(244px, 108px) scale(0.85); }
+    46% { transform: translate(244px, 108px); }
+    80% { opacity: 1; transform: translate(244px, 108px); }
+    92%, 100% { opacity: 0; transform: translate(244px, 108px); }
+  }
+  @keyframes zoekmachine-optimalisatie-rimpel {
+    0%, 41% { opacity: 0; transform: scale(0.5); }
+    43% { opacity: 1; transform: scale(0.8); }
+    60%, 100% { opacity: 0; transform: scale(3); }
+  }
+  @keyframes zoekmachine-optimalisatie-toast {
+    0%, 48% { opacity: 0; transform: translateY(10px); }
+    56%, 88% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: translateY(-4px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .trend, .in-beeld .cursor, .in-beeld .rimpel, .in-beeld .toast { animation: none; }
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+// Scène voor /tekstschrijver/contentmarketing/: een contentkalender die maand na maand volloopt met artikelen, en een lijn met bezoekers die meestijgt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const maanden = [
+  { naam: 'okt', x: 44, y: 86, vol: true },
+  { naam: 'nov', x: 104, y: 86, vol: true },
+  { naam: 'dec', x: 164, y: 86, vol: true },
+  { naam: 'jan', x: 44, y: 156, vol: false },
+  { naam: 'feb', x: 104, y: 156, vol: false },
+  { naam: 'mrt', x: 164, y: 156, vol: false },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een contentkalender waarin elke maand een nieuw artikel verschijnt, en een grafiek waarin het aantal bezoekers uit Google meestijgt.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- kalender -->
+  <rect x="30" y="34" width="200" height="206" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M30 46a12 12 0 0 1 12-12h176a12 12 0 0 1 12 12v18H30z" fill="#074663" />
+  <text x="46" y="55" font-size="13" font-weight="800" style="fill:#fff">Contentkalender</text>
+  <circle cx="70" cy="34" r="4" fill="#10283f" /><circle cx="190" cy="34" r="4" fill="#10283f" />
+  {maanden.map((m) => (
+    <g>
+      <rect x={m.x} y={m.y} width="52" height="62" rx="7" fill={m.vol ? '#e8eef4' : '#fff'} stroke="#d9e1ea" stroke-width="1.5" stroke-dasharray={m.vol ? undefined : '4 3'} />
+      <text x={m.x + 8} y={m.y + 15} font-size="10" font-weight="700" class="zacht">{m.naam}</text>
+      {m.vol && (
+        <g>
+          <rect x={m.x + 8} y={m.y + 24} width="36" height="5" rx="2.5" fill="#10283f" />
+          <rect x={m.x + 8} y={m.y + 34} width="30" height="4" rx="2" fill="#d9e1ea" />
+          <rect x={m.x + 8} y={m.y + 42} width="34" height="4" rx="2" fill="#d9e1ea" />
+          <rect x={m.x + 8} y={m.y + 50} width="22" height="4" rx="2" fill="#d9e1ea" />
+        </g>
+      )}
+    </g>
+  ))}
+  <!-- grafiek -->
+  <rect x="252" y="54" width="200" height="170" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="268" y="78" font-size="12" font-weight="800">Bezoekers uit Google</text>
+  <path d="M272 96v106h164" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-linecap="round" />
+  <path d="M272 176h164M272 150h164M272 124h164" stroke="#e8eef4" stroke-width="1.5" />
+  <path class="l" d="M276 192l30-6 28-4" />
+  {!mini && (
+    <g>
+      {maanden.filter((m) => !m.vol).map((m, i) => (
+        <g class="tekstschrijver-contentmarketing-nieuw" style={`--i:${i}`}>
+          <rect x={m.x} y={m.y} width="52" height="62" rx="7" fill="#e8eef4" stroke="#8aa0b4" stroke-width="1.5" />
+          <text x={m.x + 8} y={m.y + 15} font-size="10" font-weight="700" class="zacht">{m.naam}</text>
+          <rect x={m.x + 8} y={m.y + 24} width="36" height="5" rx="2.5" fill="#10283f" />
+          <rect x={m.x + 8} y={m.y + 34} width="30" height="4" rx="2" fill="#d9e1ea" />
+          <rect x={m.x + 8} y={m.y + 42} width="34" height="4" rx="2" fill="#d9e1ea" />
+          <rect x={m.x + 8} y={m.y + 50} width="22" height="4" rx="2" fill="#d9e1ea" />
+        </g>
+      ))}
+      <path class="tekstschrijver-contentmarketing-lijn" d="M334 182l26-14 24-8 24-22 22-26" fill="none" stroke="#ff6600" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <circle class="tekstschrijver-contentmarketing-punt" cx="430" cy="112" r="6" fill="#ff6600" />
+    </g>
+  )}
+</svg>
+<style>
+  .tekstschrijver-contentmarketing-lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .tekstschrijver-contentmarketing-lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .tekstschrijver-contentmarketing-nieuw, :global(.teken-js) .tekstschrijver-contentmarketing-punt { opacity: 0; }
+  .tekstschrijver-contentmarketing-nieuw { transform-box: fill-box; transform-origin: center; }
+  .tekstschrijver-contentmarketing-punt { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .tekstschrijver-contentmarketing-nieuw { animation: tekstschrijver-contentmarketing-nieuw 0.5s cubic-bezier(.3,1.6,.5,1) calc(0.6s + var(--i) * 0.7s) forwards; }
+  .in-beeld .tekstschrijver-contentmarketing-lijn { animation: tekstschrijver-contentmarketing-lijn 2.1s cubic-bezier(.5,.1,.3,1) 0.6s forwards; }
+  .in-beeld .tekstschrijver-contentmarketing-punt { animation: tekstschrijver-contentmarketing-verschijn 0.3s ease-out 2.7s forwards, tekstschrijver-contentmarketing-puls 3s ease-in-out 3s infinite; }
+  @keyframes tekstschrijver-contentmarketing-nieuw { from { opacity: 0; transform: translateY(-14px) scale(0.9); } to { opacity: 1; transform: none; } }
+  @keyframes tekstschrijver-contentmarketing-lijn { to { stroke-dashoffset: 0; } }
+  @keyframes tekstschrijver-contentmarketing-verschijn { to { opacity: 1; } }
+  @keyframes tekstschrijver-contentmarketing-puls { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.6); opacity: 0.55; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .tekstschrijver-contentmarketing-nieuw, .in-beeld .tekstschrijver-contentmarketing-lijn, .in-beeld .tekstschrijver-contentmarketing-punt { animation: none; } }
+</style>

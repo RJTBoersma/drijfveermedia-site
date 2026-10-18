@@ -1,0 +1,26 @@
+---
+// De drijfveer: een getekende veer die zich opwindt en dan losschiet. Het merkteken tussen twee delen van een pagina.
+const lussen = 7, x0 = 70, x1 = 190, r = 11, cy = 22;
+const stap = (x1 - x0) / lussen;
+let d = `M${x0} ${cy}`;
+for (let i = 0; i < lussen; i++) {
+  const x = x0 + i * stap;
+  d += ` C${(x + stap * 0.2).toFixed(1)} ${cy - r * 1.6} ${(x + stap * 1.45).toFixed(1)} ${cy - r * 1.6} ${(x + stap * 1.1).toFixed(1)} ${cy}`;
+  d += ` S${(x + stap * 0.55).toFixed(1)} ${cy + r * 1.3} ${(x + stap).toFixed(1)} ${cy}`;
+}
+---
+<div class="veer" aria-hidden="true">
+  <svg class="scene" viewBox="0 0 260 44" data-teken>
+    <path class="l" pathLength="1" d={`M8 ${cy} H${x0}`} />
+    <g class="spiraal"><path class="l" pathLength="1" d={d} /></g>
+    <path class="a" pathLength="1" d={`M${x1} ${cy} H244 M236 ${cy - 7} L245 ${cy} L236 ${cy + 7}`} />
+    <circle class="o" cx="8" cy={cy} r="5" />
+  </svg>
+</div>
+<style>
+  .veer { display: flex; justify-content: center; margin: 0 auto 28px; max-width: 260px; }
+  .spiraal { transform-box: fill-box; transform-origin: left center; }
+  :global(.in-beeld) .spiraal { animation: veer 1.4s cubic-bezier(.3,1.5,.5,1) 1.1s both; }
+  @keyframes veer { 0% { transform: scaleX(1); } 30% { transform: scaleX(0.55); } 100% { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) { :global(.in-beeld) .spiraal { animation: none; } }
+</style>

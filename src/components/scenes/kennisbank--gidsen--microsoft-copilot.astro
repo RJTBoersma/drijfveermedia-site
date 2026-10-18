@@ -1,0 +1,83 @@
+---
+// Scène voor /kennisbank/gidsen/microsoft-copilot/: een laptop met links een spreadsheet met grafiek en rechts een zijpaneel
+// met een AI-assistent die jouw bedrijf noemt. In de volledige versie tekent zich een trendlijn en typt de assistent.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const staven = [
+  { x: 74, h: 34 },
+  { x: 100, h: 52 },
+  { x: 126, h: 44 },
+  { x: 152, h: 70 },
+  { x: 178, h: 86 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een laptop met een spreadsheet en een zijpaneel waarin een AI-assistent een leverancier aanraadt: jouw bedrijf.'}>
+  <!-- laptop -->
+  <rect x="40" y="18" width="400" height="214" rx="14" fill="#10283f" />
+  <rect x="50" y="28" width="380" height="194" rx="6" fill="#fff" />
+  <path d="M20 232h440l-14 20H34z" fill="#c9d3dd" />
+  <rect x="210" y="232" width="60" height="6" rx="3" fill="#aab8c6" />
+
+  <!-- spreadsheet -->
+  <rect x="50" y="28" width="250" height="22" fill="#e8eef4" />
+  <rect x="62" y="35" width="60" height="8" rx="4" fill="#074663" />
+  <path d="M62 64h226M62 80h226M62 96h226M120 56v44M180 56v44M240 56v44" stroke="#e8eef4" stroke-width="2" />
+  <rect x="66" y="69" width="40" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="126" y="69" width="40" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="186" y="85" width="40" height="6" rx="3" fill="#d9e1ea" />
+  <path d="M66 206h140" stroke="#d9e1ea" stroke-width="2" />
+  {staven.map((s) => (
+    <rect x={s.x} y={206 - s.h} width="18" height={s.h} rx="3" fill="#074663" opacity=".8" />
+  ))}
+  <rect x="226" y="120" width="62" height="18" rx="6" fill="#e8eef4" />
+  <text x="234" y="132.5" font-size="9" font-weight="800">Omzet Q3</text>
+
+  <!-- zijpaneel met assistent -->
+  <rect x="300" y="28" width="130" height="194" fill="#f6f8fb" />
+  <path d="M300 28v194" stroke="#d9e1ea" stroke-width="2" />
+  <text x="312" y="46" font-size="10" font-weight="800" class="zacht">Assistent</text>
+  <rect x="320" y="56" width="100" height="40" rx="10" fill="#074663" />
+  <text x="328" y="72" font-size="9" font-weight="700" style="fill:#fff">Leverancier zonne-</text>
+  <text x="328" y="85" font-size="9" font-weight="700" style="fill:#fff">panelen in Zwolle?</text>
+  <rect x="310" y="106" width="104" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="310" y="118" width="80" height="17" rx="5" fill="#ffe2cc" />
+  <text x="316" y="130.5" font-size="9.5" font-weight="800">Jouw bedrijf</text>
+  <rect x="310" y="142" width="96" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="310" y="154" width="70" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="310" y="170" width="52" height="14" rx="7" fill="#fff" stroke="#ff6600" stroke-width="1.5" />
+  <rect x="318" y="175" width="36" height="4" rx="2" fill="#ffb98a" />
+  <rect x="368" y="170" width="46" height="14" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="310" y="196" width="110" height="18" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+
+  {!mini && (
+    <g>
+      <path class="lijn" d="M83 166L109 148L135 156L161 130L187 114" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <g class="label"><rect x="196" y="98" width="44" height="18" rx="9" fill="#1f8a5b" /><text x="206" y="110.5" font-size="9.5" font-weight="800" style="fill:#fff">Klaar</text></g>
+      <circle class="typ t0" cx="322" cy="205" r="2.5" fill="#074663" />
+      <circle class="typ t1" cx="330" cy="205" r="2.5" fill="#074663" />
+      <circle class="typ t2" cx="338" cy="205" r="2.5" fill="#074663" />
+      <rect class="markeer" x="307" y="115" width="86" height="23" rx="7" fill="none" stroke="#ff6600" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .lijn { stroke-dasharray: 1; }
+  .label { transform-box: fill-box; transform-origin: center; }
+  .markeer { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .label { opacity: 0; transform: scale(.5); }
+  :global(.teken-js) .markeer, :global(.teken-js) .typ { opacity: 0; }
+  .in-beeld .lijn { animation: kennisbank-gidsen-microsoft-copilot-lijn 1.3s cubic-bezier(.6,.1,.3,1) 0.4s forwards; }
+  .in-beeld .label { animation: kennisbank-gidsen-microsoft-copilot-label 0.5s cubic-bezier(.3,1.6,.5,1) 1.6s forwards; }
+  .in-beeld .typ { animation: kennisbank-gidsen-microsoft-copilot-typ 1.4s ease-in-out infinite; }
+  .in-beeld .t1 { animation-delay: 0.2s; } .in-beeld .t2 { animation-delay: 0.4s; }
+  .in-beeld .markeer { animation: kennisbank-gidsen-microsoft-copilot-markeer 4s ease-in-out 1.6s infinite; }
+  @keyframes kennisbank-gidsen-microsoft-copilot-lijn { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-gidsen-microsoft-copilot-label { to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-microsoft-copilot-typ { 0%, 100% { opacity: .2; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+  @keyframes kennisbank-gidsen-microsoft-copilot-markeer { 0%, 100% { opacity: 0; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.03); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .typ, .in-beeld .markeer { animation: none; }
+    .in-beeld .lijn, .in-beeld .label { animation: none; stroke-dashoffset: 0; opacity: 1; transform: none; }
+  }
+</style>

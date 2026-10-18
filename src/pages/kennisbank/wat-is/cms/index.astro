@@ -1,0 +1,243 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--cms.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/cms/';
+const datum = '2026-10-18';
+const definitie = 'Een CMS (contentmanagementsysteem) is software waarmee je zelf de teksten, pagina\'s en afbeeldingen van je website beheert, in een beheeromgeving in je browser en zonder te programmeren.';
+const hoofdstukken = [
+  { id: 'hoe-werkt-het', titel: 'Hoe het werkt' },
+  { id: 'beheeromgeving', titel: 'Wat je in de beheeromgeving doet' },
+  { id: 'thema-plugins', titel: 'Thema\'s en plugins' },
+  { id: 'systemen', titel: 'De bekendste systemen' },
+  { id: 'soorten', titel: 'Open source, websitebouwer of headless' },
+  { id: 'voor-en-nadelen', titel: 'Voor- en nadelen' },
+  { id: 'veilig', titel: 'Updates en beveiliging' },
+  { id: 'kiezen', titel: 'Welk systeem past bij jou?' },
+  { id: 'overstappen', titel: 'Overstappen' },
+  { id: 'wij', titel: 'Hoe wij het doen' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'CMS',
+    alternateName: ['Contentmanagementsysteem', 'Content management system'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is een CMS?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://w3techs.com/technologies/overview/content_management',
+      'https://wordpress.org/plugins/',
+      'https://wordpress.org/about/requirements/',
+      'https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is een CMS? Uitleg en voorbeelden | Drijfveer Media"
+  description="Wat is een CMS? Met een contentmanagementsysteem pas je zelf je website aan. Zo werkt het, wat WordPress, Wix en headless verschilt en hoe je kiest."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'CMS', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Website</p>
+        <h1>Wat is een CMS?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Vroeger belde je je webbouwer als er een openingstijd moest veranderen. Die opende een codebestand, paste een regel aan en stuurde een rekening. Met een CMS doe je dat zelf: inloggen, tekst aanpassen, op Bijwerken klikken. Klaar. CMS staat voor content management system, in het Nederlands contentmanagementsysteem. Content is alles wat op je site staat: teksten, foto's, video's, documenten.</p>
+      <p>Bijna elke website die je bezoekt, draait op zo'n systeem. Hieronder lees je hoe het werkt, welke soorten er zijn en hoe je kiest. En waar het in de praktijk misgaat.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={9} />
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="hoe-werkt-het">Hoe een content management systeem werkt</h2></div>
+      <p>Een CMS bestaat uit twee kanten. De achterkant is de beheeromgeving: een afgeschermd deel van je site waar je met een wachtwoord inlogt. Daar schrijf je teksten en zet je foto's klaar. De voorkant is wat bezoekers zien.</p>
+      <p>Daartussen zit het slimme deel. Je inhoud wordt los van de vormgeving bewaard, meestal in een database. Een thema bepaalt hoe die inhoud eruitziet: lettertype, kleuren, waar het menu staat. Vergelijk het met een recept en een kookboek. Het recept blijft hetzelfde, ook als het kookboek een nieuwe opmaak krijgt. Wil je je site een nieuw jasje geven, dan hoef je dus niet alle teksten opnieuw in te voeren.</p>
+      <p>Bij een bezoek haalt het systeem de juiste stukken uit de database en bouwt daar een pagina van. Daarom heeft een site met een CMS altijd <a href="/kennisbank/wat-is/hosting/">hosting</a> nodig die dat aankan, of een platform dat de hosting voor je regelt.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="beheeromgeving">Wat je in de beheeromgeving doet</h2></div>
+      <ul class="vink">
+        <li><strong>Pagina's maken en aanpassen</strong> met een editor die werkt als een tekstverwerker: kopjes, vet, lijstjes, links.</li>
+        <li><strong>Afbeeldingen uploaden</strong> naar een mediabibliotheek, met een <a href="/kennisbank/wat-is/alt-tekst/">alt-tekst</a> erbij voor Google en schermlezers.</li>
+        <li><strong>Blogberichten of nieuws plaatsen</strong>, met een datum en categorie. Je kunt ze ook vooruit inplannen.</li>
+        <li><strong>Het menu inrichten</strong>: welke pagina's waar staan.</li>
+        <li><strong>Gebruikers beheren.</strong> Elke collega krijgt een eigen account met een eigen rol. Een redacteur mag teksten aanpassen maar geen plugins installeren.</li>
+        <li><strong>Oude versies terugzetten.</strong> Veel systemen bewaren eerdere versies van een pagina. Een verkeerde wijziging draai je zo terug.</li>
+        <li><strong>SEO-instellingen</strong> per pagina invullen, zoals de <a href="/kennisbank/wat-is/title-tag/">title tag</a> en de meta description.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="thema-plugins">Thema's en plugins</h2></div>
+      <p>Een thema is de vormgeving. Je kiest er een uit een bibliotheek of laat er een op maat bouwen. Plugins, bij Joomla extensies genoemd, voegen functies toe: een contactformulier, een afsprakenmodule, een koppeling met je nieuwsbrief. Volgens WordPress.org zijn er voor WordPress alleen al ruim 76.000 gratis plugins.</p>
+      <p>Dat is de kracht en meteen de zwakke plek. Elke plugin is code van een andere maker, met zijn eigen updates en zijn eigen fouten. Beveiligingsbedrijf Patchstack telde in 2025 11.334 nieuwe lekken in het WordPress-ecosysteem. 91 procent zat in plugins, 9 procent in thema's. In WordPress zelf vonden ze er maar zes, en die waren niet ernstig. De les: niet het systeem is het risico, maar wat je erop stapelt.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="systemen">De bekendste systemen</h2></div>
+      <p>W3Techs meet welke systemen websites wereldwijd gebruiken. Dit zijn de cijfers van 18 oktober 2026:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Systeem</th><th>Soort</th><th>Aandeel van alle websites</th><th>Past bij</th></tr></thead>
+          <tbody>
+            <tr><td><b>WordPress</b></td><td>Open source, zelf hosten</td><td>39,6%</td><td>Bijna elke bedrijfssite, van vijf tot vijfhonderd pagina's</td></tr>
+            <tr><td><b>Shopify</b></td><td>Webwinkelplatform, abonnement</td><td>5,3%</td><td>Webwinkels</td></tr>
+            <tr><td><b>Wix</b></td><td>Websitebouwer, abonnement</td><td>4,2%</td><td>Wie zelf wil slepen en bouwen</td></tr>
+            <tr><td><b>Squarespace</b></td><td>Websitebouwer, abonnement</td><td>2,4%</td><td>Kleine sites waar uitstraling telt</td></tr>
+            <tr><td><b>Joomla</b></td><td>Open source, zelf hosten</td><td>1,1%</td><td>Sites met veel gebruikers en talen</td></tr>
+            <tr><td><b>Drupal</b></td><td>Open source, zelf hosten</td><td>0,6%</td><td>Grote, complexe sites met ontwikkelaars</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Bijna een derde van alle sites (32,1 procent) gebruikt geen systeem dat W3Techs herkent. Dat zijn onder meer zelfgebouwde sites en sites op nieuwere technieken. Van de sites mét een herkend systeem draait 58,4 procent op WordPress.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="soorten">Open source, websitebouwer of headless</h2></div>
+      <p>Grofweg zijn er drie smaken. Ze verschillen vooral in vrijheid en in wie het onderhoud doet.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Open source (WordPress, Joomla, Drupal)</th><th>Websitebouwer (Wix, Squarespace)</th><th>Headless</th></tr></thead>
+          <tbody>
+            <tr><td><b>Hosting</b></td><td>Zelf regelen</td><td>Inbegrepen</td><td>Inhoud en voorkant apart</td></tr>
+            <tr><td><b>Vrijheid</b></td><td>Groot, alles is aan te passen</td><td>Binnen de grenzen van het platform</td><td>Heel groot, maar alleen met een ontwikkelaar</td></tr>
+            <tr><td><b>Onderhoud</b></td><td>Jij of je webbouwer</td><td>Het platform</td><td>Een ontwikkelaar</td></tr>
+            <tr><td><b>Verhuizen</b></td><td>Kan altijd, de site is van jou</td><td>Lastig, je huurt</td><td>Kan, inhoud zit los</td></tr>
+            <tr><td><b>Kosten</b></td><td>Software gratis, wel hosting en onderhoud</td><td>Maandelijks abonnement</td><td>Vaak hoger door maatwerk</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een websitebouwer is een gehuurd, ingericht pand: snel en zorgeloos, maar je mag de muren niet verplaatsen. WordPress is een pand dat je bezit: je verbouwt wat je wilt, maar het onderhoud is voor jou.</p>
+      <p>Een headless CMS is de nieuwste smaak. Het systeem beheert alleen de inhoud en levert die via een koppeling aan een losse voorkant: een website, een app of een scherm in de winkel. Dat is snel en veilig, omdat bezoekers nooit bij de beheeromgeving in de buurt komen. Je hebt er wel een ontwikkelaar voor nodig. Voor een bedrijfssite met tien pagina's is het vaak meer dan nodig.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="voor-en-nadelen">Voor- en nadelen van een CMS</h2></div>
+      <div class="raster raster-2 lijsten">
+        <div class="card">
+          <p class="kader-titel">Voordelen</p>
+          <ul class="vink">
+            <li>Zelf teksten en foto's aanpassen, wanneer het jou uitkomt.</li>
+            <li>Vormgeving en inhoud zijn gescheiden.</li>
+            <li>Meerdere gebruikers met eigen rechten.</li>
+            <li>Uitbreiden met plugins in plaats van maatwerk.</li>
+            <li>Veel kennis en hulp te vinden, zeker bij WordPress.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="kader-titel">Nadelen</p>
+          <ul>
+            <li>Updates zijn nodig, elke maand.</li>
+            <li>Bekende systemen zijn een bekend doelwit voor hackers.</li>
+            <li>Te veel plugins maken een site traag en kwetsbaar.</li>
+            <li>Vrijheid betekent ook dat je dingen stuk kunt maken.</li>
+            <li>Een gratis thema ziet er al snel uit als duizend andere sites.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="veilig">Updates en beveiliging</h2></div>
+      <p>Een CMS is software, net als de apps op je telefoon. Die krijgt updates, vaak om een lek te dichten. Wie updates maanden laat liggen, staat open voor geautomatiseerde aanvallen die het hele internet afzoeken naar oude versies. Zo houd je het veilig:</p>
+      <ol>
+        <li>Maak een back-up voor elke grote update, en controleer af en toe of terugzetten echt werkt.</li>
+        <li>Zet automatische updates aan voor kleine beveiligingsupdates.</li>
+        <li>Verwijder plugins en thema's die je niet gebruikt. Uitgeschakeld is niet genoeg.</li>
+        <li>Kies plugins die recent zijn bijgewerkt en veel gebruikt worden.</li>
+        <li>Geef iedereen een eigen account, met alleen de rechten die hij nodig heeft, en zet tweestapsverificatie aan.</li>
+        <li>Houd de PHP-versie op je hosting actueel. Volgens WordPress.org is dat nu 8.3 of nieuwer.</li>
+      </ol>
+      <p>Is het toch misgegaan? Lees dan de gids <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt: wat nu?</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="kiezen">Welk systeem past bij jou? Vijf vragen</h2></div>
+      <ol>
+        <li><strong>Wie gaat de site bijhouden?</strong> Jijzelf, een collega of je webbouwer? Hoe minder technisch, hoe eenvoudiger de beheeromgeving moet zijn.</li>
+        <li><strong>Hoe vaak verandert er iets?</strong> Eens per jaar een openingstijd, of elke week een nieuw project of blog?</li>
+        <li><strong>Welke functies heb je nodig?</strong> Een afsprakenplanner, meerdere talen, een koppeling met je boekhouding?</li>
+        <li><strong>Wil je de site bezitten of huren?</strong> Bezitten betekent vrijheid en zelf onderhoud. Huren betekent gemak en afhankelijkheid.</li>
+        <li><strong>Wat mag het per jaar kosten?</strong> Reken naast de bouw ook hosting, licenties en onderhoud mee.</li>
+      </ol>
+      <div class="kader">
+        <p class="kader-titel">Voorbeeld</p>
+        <p>Een administratiekantoor in Leeuwarden met vijf medewerkers wil elke maand een nieuwsbericht over belastingzaken plaatsen. Twee collega's schrijven, de eigenaar keurt goed. Ze kiezen WordPress met een eenvoudig thema en vier plugins. De schrijvers krijgen de rol Auteur, de eigenaar is Beheerder. Plugins installeren kan alleen hij. Updates en back-ups besteden ze uit. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2 id="overstappen">Overstappen naar een ander systeem</h2></div>
+      <p>Van Wix naar WordPress, of van een verouderd systeem naar iets nieuws: het kan, maar het is meer dan teksten kopiëren. Dit is de volgorde die werkt:</p>
+      <ul>
+        <li>Maak een lijst van alle huidige adressen, met hoeveel bezoek elke pagina krijgt.</li>
+        <li>Zet de inhoud over: teksten, afbeeldingen, alt-teksten, titels en meta descriptions.</li>
+        <li>Verandert een adres, stel dan een 301-<a href="/kennisbank/wat-is/redirect/">redirect</a> in van oud naar nieuw. Anders raak je posities in Google kwijt.</li>
+        <li>Test formulieren, menu's en de mobiele weergave voordat je live gaat.</li>
+        <li>Meld de nieuwe <a href="/kennisbank/wat-is/sitemap/">sitemap</a> aan in Search Console en houd de weken daarna je bezoekcijfers in de gaten.</li>
+      </ul>
+
+      <h2>Helpt een CMS bij SEO?</h2>
+      <p>Een systeem zet je niet hoger in Google. Goede inhoud, een snelle site en links van andere sites doen dat. Wel maakt een goed ingericht CMS het makkelijker: je vult per pagina een titel en omschrijving in, adressen zijn leesbaar, een sitemap maakt zichzelf. In WordPress regel je dat met een SEO-plugin. Een slecht ingericht systeem werkt juist tegen: dubbele pagina's, trage thema's, rommelige adressen.</p>
+
+      <h2 id="wij">Hoe wij het doen</h2>
+      <p>Bij <a href="/website-laten-maken/">website laten maken</a> kun je kiezen uit twee routes. Een <a href="/website-laten-maken/website-met-ai/">website met AI</a> vanaf € 250 krijgt een eenvoudig beheerscherm om zelf teksten en foto's te wijzigen. Een maatwerk site in WordPress vanaf € 2.000 bouwen we in een systeem dat je zelf kunt bijhouden en uitbreiden. Onze eigen site draait op Astro, met een eigen beheeromgeving.</p>
+      <p>Wil je zelf geen updates doen? Met <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a> houden we updates, back-ups, beveiliging en snelheid bij, vanaf € 39 per maand.</p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Zoek uit op welk systeem je site nu draait, en wie de inlog van de hoofdbeheerder heeft. Dat hoor jij te zijn.</li>
+        <li>Log eens in en kijk of er updates klaarstaan. Een rij rode bolletjes is een waarschuwing.</li>
+        <li>Tel je plugins. Weet je bij een plugin niet waarvoor hij dient, zoek het dan uit voordat je hem weggooit.</li>
+        <li>Geef elke collega een eigen account in plaats van één gedeeld wachtwoord.</li>
+        <li>Kies bij een nieuwe site eerst op wie hem gaat bijhouden, dan pas op uiterlijk.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Twijfel je tussen een websitebouwer en WordPress? Lees de vergelijking <a href="/kennisbank/gidsen/wix-squarespace-wordpress/">Wix, Squarespace of WordPress</a> en de gids <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a>. Wat er verder bij een site komt kijken, staat bij <a href="/kennisbank/wat-is/ssl-certificaat/">SSL-certificaat</a> en <a href="/kennisbank/wat-is/dns/">DNS</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is WordPress gratis?', a: 'De software wel. Je betaalt voor hosting, een domeinnaam en eventueel een premium thema of plugins. En je moet het onderhoud doen of laten doen.' },
+      { v: 'Wat is het verschil tussen een CMS en een websitebouwer?', a: 'Een websitebouwer zoals Wix is ook een CMS, maar dan met hosting en onderhoud in één abonnement. Bij een open source systeem als WordPress regel je hosting zelf, en is de site helemaal van jou.' },
+      { v: 'Kan ik zonder technische kennis met een CMS werken?', a: 'Ja. Teksten en foto\'s aanpassen lukt iedereen die met een tekstverwerker overweg kan. Voor updates, nieuwe functies en het oplossen van problemen is wat meer kennis handig, of iemand die het voor je bijhoudt.' },
+      { v: 'Wat is een headless CMS?', a: 'Een systeem dat alleen de inhoud beheert en die via een koppeling aan een losse voorkant levert. Snel en veilig, maar je hebt een ontwikkelaar nodig. Voor de meeste mkb-sites is een gewoon systeem handiger.' },
+      { v: 'Hoeveel plugins mag ik gebruiken?', a: 'Er is geen vast getal. Het gaat om kwaliteit: elke plugin moet een duidelijke taak hebben, recent bijgewerkt zijn en goed onderhouden worden. Tien goede plugins zijn beter dan vier slechte.' },
+      { v: 'Moet ik mijn CMS zelf updaten?', a: 'Iemand moet het doen, en het liefst elke maand. Dat kun je zelf, of je besteedt het uit. Bij websitebouwers doet het platform het voor je.' },
+    ]}
+  />
+
+  <Actie titel="Draait jouw site nog veilig?" tekst={`We kijken gratis naar je website, je systeem en de snelheid. ${site.contactpersoon} belt je met de drie punten die het meeste opleveren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .lijsten { margin: 8px 0 24px; gap: 16px; }
+  .lijsten .card { padding: 20px 22px; }
+  .lijsten ul { margin-bottom: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

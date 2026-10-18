@@ -1,0 +1,72 @@
+---
+// Scène voor /kennisbank/gidsen/inhaakkalender/: een scheurkalender op 27 april 2027 met een vishaak die een datumkaartje vasthoudt.
+// Als hij leeft: losse inhaakmomenten verschijnen een voor een naast de kalender en de haak met Moederdag dobbert rustig op en neer.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kaartjes = [
+  { x: 28, y: 52, dag: '14 feb', wat: 'Valentijn' },
+  { x: 44, y: 120, dag: '28 mrt', wat: 'Pasen' },
+  { x: 28, y: 188, dag: '26 nov', wat: 'Black Friday' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een scheurkalender op 27 april 2027, Koningsdag. Ernaast verschijnen kaartjes voor Valentijnsdag, Pasen en Black Friday, en een vishaak houdt het kaartje van Moederdag vast.'}>
+  <!-- scheurkalender -->
+  <rect x="164" y="62" width="168" height="180" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M166 76a12 12 0 0 1 12-12h140a12 12 0 0 1 12 12v26H166z" fill="#074663" />
+  <circle cx="204" cy="64" r="6" fill="#fff" stroke="#10283f" stroke-width="2.5" />
+  <circle cx="292" cy="64" r="6" fill="#fff" stroke="#10283f" stroke-width="2.5" />
+  <text x="248" y="94" font-size="13" font-weight="800" text-anchor="middle" style="fill:#fff">april 2027</text>
+  <text x="248" y="176" font-size="62" font-weight="900" text-anchor="middle">27</text>
+  <text x="248" y="202" font-size="13" font-weight="800" text-anchor="middle">dinsdag</text>
+  <rect x="206" y="214" width="84" height="16" rx="8" fill="#fff4ec" />
+  <text x="248" y="226" font-size="11" font-weight="800" text-anchor="middle">Koningsdag</text>
+  <!-- afgescheurde randjes -->
+  <path d="M170 242l8-4 8 4 8-4 8 4 8-4 8 4 8-4 8 4 8-4 8 4 8-4 8 4 8-4 8 4 8-4 8 4 8-4 8 4 8-4" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+
+  <!-- losse inhaakmomenten (vaste plek) -->
+  {kaartjes.map((k) => (
+    <g>
+      <rect x={k.x} y={k.y} width="110" height="46" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect x={k.x + 10} y={k.y + 10} width="26" height="26" rx="6" class="v" />
+      <text x={k.x + 44} y={k.y + 21} font-size="11" font-weight="800">{k.dag}</text>
+      <text x={k.x + 44} y={k.y + 36} font-size="10" class="zacht">{k.wat}</text>
+    </g>
+  ))}
+  <path d="M42 70a6 6 0 0 1 6 0a6 6 0 0 1 6 0c2 4-6 10-6 10s-8-6-6-10z" fill="#ff6600" transform="translate(3 1)" />
+  <ellipse cx="67" cy="143" rx="7" ry="9" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M45 207h10l4 4-6 6-8-8z" fill="none" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+
+  <!-- vislijn met haak en kaartje -->
+  <g class="haak">
+    <path d="M402 0v96" stroke="#8aa0b4" stroke-width="2" />
+    <path class="a" d="M402 96v14a10 10 0 0 1-20 0v-6" />
+    <path d="M378 107l4-6 4 6" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    <rect x="340" y="128" width="104" height="62" rx="10" fill="#fff" stroke="#ff6600" stroke-width="2" />
+    <circle cx="392" cy="124" r="5" fill="#fff" stroke="#ff6600" stroke-width="2.5" />
+    <text x="356" y="158" font-size="13" font-weight="900">9 mei</text>
+    <text x="356" y="176" font-size="11">Moederdag</text>
+  </g>
+
+  {!mini && (
+    <g>
+      {[0, 1, 2].map((i) => (
+        <circle class="stip" style={`--i:${i}`} cx={kaartjes[i].x + 110} cy={kaartjes[i].y} r="6" fill="#ff6600" stroke="#fff" stroke-width="2" />
+      ))}
+      <g class="gepland">
+        <rect x="340" y="206" width="104" height="28" rx="14" fill="#1f8a5b" />
+        <text x="392" y="224" font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">In de planning</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .stip, .gepland { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .stip, :global(.teken-js) .gepland { opacity: 0; }
+  .in-beeld .haak { animation: kennisbank-gidsen-inhaakkalender-dobber 4.5s ease-in-out 1s infinite; }
+  .in-beeld .stip { animation: kennisbank-gidsen-inhaakkalender-stip 0.45s cubic-bezier(.3,1.6,.5,1) calc(0.5s + var(--i) * 0.35s) forwards; }
+  .in-beeld .gepland { animation: kennisbank-gidsen-inhaakkalender-gepland 6s ease-in-out 1.8s infinite both; }
+  @keyframes kennisbank-gidsen-inhaakkalender-dobber { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+  @keyframes kennisbank-gidsen-inhaakkalender-stip { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-inhaakkalender-gepland { 0% { opacity: 0; transform: translateY(6px); } 12%, 75% { opacity: 1; transform: none; } 90%, 100% { opacity: 0; transform: translateY(-4px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .haak, .in-beeld .stip, .in-beeld .gepland { animation: none; } }
+</style>

@@ -1,0 +1,168 @@
+---
+import Base from '../../layouts/Base.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+import Scene from '../../components/scenes/privacyverklaring.astro';
+import { site } from '../../data/site';
+import { overgang } from '../../data/miniaturen';
+
+const url = '/privacyverklaring/';
+const artikelen = [
+  { id: 'wie', titel: '1. Wie verantwoordelijk is' },
+  { id: 'gegevens', titel: '2. Welke gegevens we verwerken' },
+  { id: 'doel', titel: '3. Waarvoor en op welke grondslag' },
+  { id: 'formulier', titel: '4. Zo werkt ons formulier' },
+  { id: 'cookies', titel: '5. Cookies en statistieken' },
+  { id: 'delen', titel: '6. Met wie we gegevens delen' },
+  { id: 'bewaren', titel: '7. Hoe lang we gegevens bewaren' },
+  { id: 'beveiliging', titel: '8. Beveiliging' },
+  { id: 'rechten', titel: '9. Jouw rechten' },
+  { id: 'klachten', titel: '10. Klachten' },
+  { id: 'leeftijd', titel: '11. Leeftijd' },
+  { id: 'wijzigingen', titel: '12. Wijzigingen' },
+];
+const schema = [{
+  '@type': 'WebPage',
+  name: 'Privacyverklaring van Drijfveer Media',
+  url: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  dateModified: '2026-10-17',
+  publisher: { '@id': `${site.url}/#organisatie` },
+}];
+---
+<Base
+  title="Privacyverklaring | Drijfveer Media"
+  description="Welke gegevens Drijfveer Media verwerkt als je het formulier invult of belt, waarvoor, hoe lang en welke rechten je hebt. Zonder tracking-cookies."
+  kruimels={[{ naam: 'Privacyverklaring', url }]}
+  schema={schema}
+>
+  <section class="wrap jur-kop">
+    <div>
+      <p class="kicker">Juridisch</p>
+      <h1>Privacyverklaring</h1>
+      <p class="lead">Hier lees je wat we met je gegevens doen, waarom, en wat jij ervan mag vinden. De korte versie: we gebruiken ze om je te helpen. Niet om je te volgen.</p>
+    </div>
+    <div class="kop-beeld" style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+  </section>
+
+  <section class="wrap sectie">
+    <div class="met-zijkolom">
+      <article class="tekst juridisch">
+        <div class="kader kader-oranje">
+          <p class="kader-titel">In het kort</p>
+          <ul class="vink">
+            <li>We gebruiken je gegevens om contact met je op te nemen en je een passend voorstel te doen.</li>
+            <li>Deze site plaatst geen tracking-cookies. Daarom zie je ook geen cookiemelding.</li>
+            <li>We meten bezoek op een privacyvriendelijke manier, zonder cookies en zonder persoonsgegevens.</li>
+            <li>Je aanvraag komt per e-mail bij ons binnen, niet in een database op de website.</li>
+            <li>Je mag altijd vragen wat we van je hebben, en het laten aanpassen of verwijderen.</li>
+          </ul>
+        </div>
+
+        <h2 id="wie">1. Wie verantwoordelijk is</h2>
+        <ol class="leden">
+          <li>Drijfveer Media, {site.straat}, {site.postcode} {site.plaats}, is verantwoordelijk voor de verwerking van je persoonsgegevens zoals in deze verklaring staat. KvK-nummer {site.kvk}.</li>
+          <li>We verwerken je gegevens volgens de Algemene verordening gegevensbescherming (AVG).</li>
+          <li>Als je ons je gegevens toevertrouwt, vertrouw je erop dat we er goed mee omgaan. Andersom vertrouwen wij erop dat je ze naar waarheid invult.</li>
+          <li>Vragen over deze verklaring? Bel <a href={site.telefoonLink}>{site.telefoon}</a> of mail <a href={`mailto:${site.email}`}>{site.email}</a>.</li>
+        </ol>
+
+        <h2 id="gegevens">2. Welke gegevens we verwerken</h2>
+        <ol class="leden">
+          <li>Via het aanvraagformulier: je naam, je telefoonnummer, je e-mailadres, je website, je vak en je plaats, en je vraag als je die stelt. Welke velden verplicht zijn, zie je bij het formulier zelf.</li>
+          <li>Met je aanvraag gaan automatisch mee: het soort aanvraag, de pagina waarop je het formulier invulde en het tijdstip.</li>
+          <li>Bel of mail je ons, dan hebben we de gegevens die je ons daarbij zelf geeft. Bijvoorbeeld je naam, je nummer en je e-mailadres.</li>
+          <li>Word je klant, dan gebruiken we ook de gegevens die nodig zijn om de opdracht uit te voeren en te factureren.</li>
+        </ol>
+
+        <h2 id="doel">3. Waarvoor en op welke grondslag</h2>
+        <ol class="leden">
+          <li>We gebruiken je gegevens om je terug te bellen, je vraag te beantwoorden en je een passend voorstel of een offerte te sturen. Op werkdagen tussen 8.00 en 17.00 uur bellen we binnen 15 minuten terug.</li>
+          <li>We doen dat op grond van artikel 6, lid 1, onder b van de AVG: je vraagt ons zelf om contact, met het oog op een mogelijke overeenkomst. Daarnaast hebben we een gerechtvaardigd belang om je vraag te beantwoorden.</li>
+          <li>We sturen je geen nieuwsbrieven, enquêtes of andere aanbiedingen, tenzij je daar zelf mee hebt ingestemd.</li>
+        </ol>
+
+        <h2 id="formulier">4. Zo werkt ons formulier</h2>
+        <ol class="leden">
+          <li>Verstuur je het formulier, dan maakt onze website er een e-mail van. Die gaat naar {site.email}. Je gegevens komen niet in een database op de website terecht.</li>
+          <li>De website draait bij onze hostingpartij Vimexx. Op hun servers wordt je aanvraag als e-mail verstuurd.</li>
+          <li>Tegen spam gebruikt het formulier een verborgen veld en een tijdcontrole. Daar zijn geen cookies voor nodig.</li>
+        </ol>
+
+        <h2 id="cookies">5. Cookies en statistieken</h2>
+        <ol class="leden">
+          <li>Deze website plaatst geen tracking-cookies en geen advertentiecookies. Er zitten geen knoppen van sociale media in die meekijken, en we laden geen kaarten of video's van andere partijen. De lettertypen staan op onze eigen server. Daarom hoef je ook niets weg te klikken.</li>
+          <li>Om te zien hoe de site gebruikt wordt, gebruiken we privacyvriendelijke statistieken. Die werken zonder cookies en verzamelen geen persoonsgegevens. We zien hoeveel mensen een pagina bekijken, maar niet wie dat zijn.</li>
+          <li>Klik je op een link naar een andere site, zoals de routebeschrijving in Google Maps? Dan gelden daar de regels van die site.</li>
+        </ol>
+
+        <h2 id="delen">6. Met wie we gegevens delen</h2>
+        <ol class="leden">
+          <li>We delen je gegevens alleen met partijen die we nodig hebben om je te helpen, zoals onze hostingpartij. Of als de wet ons daartoe verplicht.</li>
+          <li>Voor ons werk voor klanten gebruiken we AI-tools. Hoe we daarmee omgaan en wat je daarin kunt kiezen, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</li>
+        </ol>
+
+        <h2 id="bewaren">7. Hoe lang we gegevens bewaren</h2>
+        <ol class="leden">
+          <li>We verzamelen je gegevens één keer, bewaren ze zo kort mogelijk en verwijderen ze daarna.</li>
+          <li>Word je klant, dan bewaren we wat nodig is zolang we voor je werken. En daarna zolang de wet ons verplicht om onze administratie te bewaren.</li>
+        </ol>
+
+        <h2 id="beveiliging">8. Beveiliging</h2>
+        <ol class="leden">
+          <li>We nemen passende maatregelen om je gegevens te beschermen tegen verlies en misbruik. De website werkt via een beveiligde verbinding (https).</li>
+        </ol>
+
+        <h2 id="rechten">9. Jouw rechten</h2>
+        <ol class="leden">
+          <li>Je mag je gegevens inzien, laten aanpassen als ze niet kloppen en laten verwijderen. Inzien kan zolang we ze nog niet hebben gewist.</li>
+          <li>Je kunt je ook beroepen op de andere rechten die de AVG je geeft.</li>
+          <li>Stuur je verzoek naar <a href={`mailto:${site.email}`}>{site.email}</a>. We kunnen je vragen je legitimatiebewijs te laten zien. Zo weten we zeker dat het om jouw gegevens gaat.</li>
+        </ol>
+
+        <h2 id="klachten">10. Klachten</h2>
+        <ol class="leden">
+          <li>Ben je niet tevreden over hoe we met je gegevens omgaan? Laat het ons weten, dan zoeken we samen een oplossing.</li>
+          <li>Je kunt ook een klacht indienen bij de nationale toezichthouder, de Autoriteit Persoonsgegevens.</li>
+        </ol>
+
+        <h2 id="leeftijd">11. Leeftijd</h2>
+        <ol class="leden">
+          <li>We kunnen niet zien hoe oud iemand is die ons gegevens stuurt. We gaan ervan uit dat je 16 jaar of ouder bent, of toestemming hebt van een ouder of voogd.</li>
+        </ol>
+
+        <h2 id="wijzigingen">12. Wijzigingen</h2>
+        <ol class="leden">
+          <li>We kunnen deze privacyverklaring aanpassen, bijvoorbeeld als de website verandert. Dat doen we zonder je daarover apart te berichten. Kijk er dus af en toe naar.</li>
+          <li>Lees ook onze <a href="/algemene-voorwaarden/">algemene voorwaarden</a> en onze <a href="/disclaimer/">disclaimer</a>.</li>
+        </ol>
+
+        <p class="bijgewerkt">Laatst bijgewerkt: 17 oktober 2026</p>
+      </article>
+
+      <aside class="zijkolom">
+        <Inhoud items={artikelen} />
+        <div class="card vraag">
+          <p class="kader-titel">Vraag over je gegevens?</p>
+          <p class="muted">Mail naar <a href={`mailto:${site.email}`}>{site.email}</a> of bel <a href={site.telefoonLink}>{site.telefoon}</a>. We helpen je graag.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  .jur-kop { padding-block: 24px 8px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; }
+  h1 { margin: 10px 0 16px; }
+  .lead { font-size: var(--step-1); line-height: 1.45; max-width: 44ch; }
+  .kop-beeld { min-width: 0; }
+  .juridisch .kader { margin-top: 0; }
+  .juridisch { counter-reset: art; }
+  .juridisch h2 { counter-increment: art; }
+  .leden { list-style: none; padding-left: 0; counter-reset: lid; }
+  .leden > li { counter-increment: lid; position: relative; padding-left: 46px; margin-bottom: 0.7em; }
+  .leden > li::before { content: counter(art) "." counter(lid); position: absolute; left: 0; top: 0; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
+  .vraag { padding: 20px 22px; }
+  .vraag p { margin: 0; }
+  .vraag .kader-titel { margin-bottom: 6px; }
+  .bijgewerkt { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 860px) { .jur-kop { grid-template-columns: minmax(0, 1fr); } .kop-beeld { max-width: 420px; } }
+</style>

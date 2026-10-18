@@ -1,0 +1,26 @@
+---
+// Voor en na als staven. Alleen echte percentages; de beginstand is steeds 100.
+interface Rij { naam: string; procent: number }
+interface Props { rijen: Rij[]; label?: string }
+const { rijen, label = 'Groei ten opzichte van de beginstand' } = Astro.props;
+const max = Math.max(...rijen.map((r) => 100 + r.procent));
+---
+<figure class="groei card" aria-label={label}>
+  {rijen.map((r) => (
+    <div class="rij">
+      <p class="naam">{r.naam}</p>
+      <div class="staaf voor" style={`--w:${(100 / max) * 100}%`}><span>Voor</span></div>
+      <div class="staaf na" style={`--w:${((100 + r.procent) / max) * 100}%`}><span>Na: +{r.procent}%</span></div>
+    </div>
+  ))}
+  <figcaption class="klein muted">{label}</figcaption>
+</figure>
+<style>
+  .groei { margin: 0; padding: 24px; display: grid; gap: 22px; box-shadow: 0 24px 60px -30px rgb(7 70 99 / 0.35); }
+  .naam { font-weight: 800; margin: 0 0 8px; }
+  .staaf { height: 34px; border-radius: 8px; width: var(--w); display: flex; align-items: center; padding: 0 12px; font-size: 0.88rem; font-weight: 700; margin-bottom: 6px; animation: groei 1s cubic-bezier(.2,.8,.2,1) both; transform-origin: left; }
+  .voor { background: var(--chip); color: var(--muted); }
+  .na { background: var(--orange); color: var(--on-orange); animation-delay: 0.25s; }
+  .staaf span { white-space: nowrap; }
+  @keyframes groei { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+</style>

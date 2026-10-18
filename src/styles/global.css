@@ -1,0 +1,123 @@
+/* Drijfveer Media: huisstijl
+   Navy is de hoofdkleur. Oranje alleen voor de primaire knop en één klein accent.
+   Contrast: navy tekst op oranje knop (vet, minimaal 19px) haalt WCAG AA voor grote tekst. */
+
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --ink: #10283f;
+  --navy: #074663;
+  --muted: #4f6377;
+  --line: #d9e1ea;
+  --chip: #e8eef4;
+  --tint: #fff4ec;
+  --orange: #ff6600;
+  --on-orange: #10283f;
+  --ok: #1f8a5b;
+
+  --font: 'Albert Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --step--1: clamp(0.88rem, 0.85rem + 0.1vw, 0.94rem);
+  --step-0: clamp(1.06rem, 1.02rem + 0.2vw, 1.15rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
+  --step-2: clamp(1.6rem, 1.35rem + 1.1vw, 2.25rem);
+  --step-3: clamp(2rem, 1.5rem + 2.2vw, 3.25rem);
+  --step-4: clamp(2.6rem, 1.6rem + 4.6vw, 5rem);
+
+  --radius: 14px;
+  --wrap: 1160px;
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 90px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--navy); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 6px; }
+
+h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+h1 { font-size: var(--step-3); font-weight: 900; }
+h2 { font-size: var(--step-2); font-weight: 900; }
+h3 { font-size: var(--step-1); font-weight: 800; }
+p { margin: 0 0 1em; }
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.prose { max-width: 66ch; }
+.muted { color: var(--muted); }
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  background: var(--orange);
+  color: var(--on-orange);
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.85em 1.25em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--line);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* Vloeiende overgang tussen pagina's in browsers die het kennen */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  @view-transition { navigation: none; }
+}
+
+/* Getekende teamportretten hebben een doorzichtige achtergrond */
+img[src^="/img/team/"] { background: #e8eef4; object-position: top; }

@@ -1,0 +1,407 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-gemini.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-gemini/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is Google Gemini?' },
+  { id: 'tijdlijn', titel: 'Van Bard tot 4 Argon' },
+  { id: 'modellen', titel: 'De modellen uitgelegd' },
+  { id: 'waar', titel: 'Waar je het tegenkomt' },
+  { id: 'kan', titel: 'Wat je ermee kunt' },
+  { id: 'kosten', titel: 'Abonnementen en prijzen' },
+  { id: 'zakelijk', titel: 'Zakelijke versies' },
+  { id: 'kiezen', titel: 'Welk abonnement past?' },
+  { id: 'stappen', titel: 'Aan de slag in 7 stappen' },
+  { id: 'prompts', titel: 'Tien prompts voor het mkb' },
+  { id: 'vergelijking', titel: 'Vergeleken met ChatGPT en Claude' },
+  { id: 'privacy', titel: 'Privacy en de AVG' },
+  { id: 'beperkingen', titel: 'Waar het misgaat' },
+  { id: 'genoemd', titel: 'Zo word je genoemd' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat is Google Gemini? De complete gids voor ondernemers',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI-assistent', operatingSystem: 'Web, Android, iOS, Windows, macOS' },
+  citation: [
+    'https://gemini.google/nl/subscriptions/',
+    'https://gemini.google/nl/release-notes/',
+    'https://gemini.google/nl/overview/',
+    'https://blog.google/innovation-and-ai/products/gemini-app/gemini-4-argon-availability/',
+    'https://support.google.com/gemini/answer/13594961?hl=nl',
+    'https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers',
+  ],
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Google Gemini: wat is het en wat kun je ermee?"
+  description="Wat is Google Gemini? De AI-assistent van Google uitgelegd: alle abonnementen en prijzen, wat je ermee kunt, privacy en een stappenplan voor je bedrijf."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google Gemini', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · GEO" titel="Wat is Google Gemini? De complete gids voor ondernemers" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Google Gemini is de AI-assistent van Google. Hij schrijft, zoekt, rekent, maakt beelden en zit in je telefoon, je mail en de zoekmachine. Hier lees je wat hij kan, wat elk abonnement kost, hoe je hem veilig inzet en hoe je bedrijf in zijn antwoorden komt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand 18 oktober 2026)</p>
+          <ul>
+            <li>Gemini is twee dingen: een chatbot (de app en gemini.google.com) en de familie AI-modellen van Google. Tot februari 2024 heette de chatbot Bard.</li>
+            <li>De basisversie is gratis. Google AI Plus kost € 4,99, AI Pro € 21,99 en AI Ultra vanaf € 99,99 per maand.</li>
+            <li>Het nieuwste model, Gemini 4 Argon, staat sinds 13 oktober 2026 in de app voor abonnees van AI Pro en Ultra.</li>
+            <li>Zakelijk gebruik je de assistent via Google Workspace of via Gemini Enterprise. Bij Gemini Enterprise gebruikt Google je gegevens niet om modellen te trainen.</li>
+            <li>De assistent haalt antwoorden uit de zoekindex van Google. Wie goed vindbaar is, wordt vaker genoemd.</li>
+          </ul>
+        </div>
+        <p class="klein muted">Alle prijzen, functies en data in deze gids komen van de sites van Google zelf: gemini.google, blog.google, support.google.com, workspace.google.com en developers.google.com. Geraadpleegd oktober 2026. Google past zijn aanbod vaak aan. Zie je iets anders in de app, dan geldt dat.</p>
+
+        <h2 id="wat-is">Wat is Google Gemini?</h2>
+        <p>Hoor je iemand over "Gemini" praten, dan kan hij twee dingen bedoelen. Daarom eerst die twee betekenissen uit elkaar.</p>
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>De chatbot</h3></div>
+        <p>De app is een AI-assistent waar je een vraag typt, inspreekt of een foto aan geeft. Je krijgt een antwoord in gewone taal. Hij werkt in de browser op gemini.google.com, als app op Android en iPhone, en sinds 2026 ook als programma op de Mac en op Windows. Google beschrijft hem zelf als "een interface voor een multimodale LLM". In gewone woorden: een chatvenster boven op een groot taalmodel dat met tekst, geluid en beeld overweg kan.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>De modellen</h3></div>
+        <p>Onder de motorkap draait een familie AI-modellen met dezelfde naam. Een ai-model is het rekenwerk dat de antwoorden maakt. Google brengt ze uit in maten: Flash-Lite en Flash zijn snel en zuinig, Pro denkt langer na, en sinds oktober 2026 is er 4 Argon voor de zwaarste taken. Dezelfde modellen zitten in de AI-overzichten van Google Zoeken, in Gmail, in Android en in de software van andere bedrijven.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>Hoe groot is het?</h3></div>
+        <p>In mei 2026 schreef Google dat elke maand meer dan 900 miljoen mensen in 230 landen en in meer dan 70 talen de app gebruiken. Een jaar eerder waren dat er volgens Google 400 miljoen. Het Nederlands wordt ondersteund, net als Nederland als land.</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>Hoe het werkt, in vier stappen</h3></div>
+        <p>Google legt op zijn eigen uitlegpagina uit dat zo'n taalmodel in fasen wordt gemaakt. Eerst leert het van enorme hoeveelheden openbare tekst en andere data. Daarna wordt het bijgeschaafd met voorbeelden van goede antwoorden. Bij jouw vraag voorspelt het welke woorden logisch volgen, en waar nodig zoekt het eerst in Google. Ten slotte beoordelen mensen een deel van de antwoorden, zodat het model beter wordt. Dat voorspellen verklaart meteen de zwakke plek: het model weet niet vanzelf wat waar is, alleen wat waarschijnlijk klinkt.</p>
+
+        <h2 id="tijdlijn">Van Bard naar Gemini: de tijdlijn</h2>
+        <p>Wie een oud artikel leest, komt de naam Bard nog tegen. Dit is wat er sindsdien gebeurde, voor zover het Nederland raakt. Alle data komen uit de berichten van Google zelf.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Datum</th><th>Wat er gebeurde</th></tr></thead>
+            <tbody>
+              <tr><td>Maart 2023</td><td>Google lanceert Bard als experiment.</td></tr>
+              <tr><td>13 juli 2023</td><td>Bard komt naar Nederland, ook in het Nederlands.</td></tr>
+              <tr><td>8 februari 2024</td><td>Bard krijgt een nieuwe naam. Er komt een betaalde versie, toen nog Advanced geheten.</td></tr>
+              <tr><td>5 juni 2024</td><td>De mobiele app komt naar Nederland.</td></tr>
+              <tr><td>21 november 2024</td><td>Live, het gesproken gesprek, spreekt Nederlands.</td></tr>
+              <tr><td>19 februari 2025</td><td>De assistent in Google Workspace werkt in het Nederlands.</td></tr>
+              <tr><td>14 maart 2025</td><td>Google maakt bekend dat de Google Assistent op telefoons plaatsmaakt voor de nieuwe assistent.</td></tr>
+              <tr><td>20 mei 2025</td><td>AI-overzichten in Google Zoeken komen in het Nederlands.</td></tr>
+              <tr><td>8 oktober 2025</td><td>De AI-modus in Google Zoeken komt naar Nederland.</td></tr>
+              <tr><td>5 november 2025</td><td>Hulp bij navigeren in Google Maps, ook in Nederland.</td></tr>
+              <tr><td>19 februari 2026</td><td>Model 3.1 Pro verschijnt in de app.</td></tr>
+              <tr><td>15 april 2026</td><td>De assistent komt als app naar de Mac.</td></tr>
+              <tr><td>19 mei 2026</td><td>Nieuw ontwerp, model 3.5 Flash, videomodel Omni en de agent Spark.</td></tr>
+              <tr><td>21 juli 2026</td><td>Model 3.6 Flash komt beschikbaar voor alle gebruikers.</td></tr>
+              <tr><td>10 september 2026</td><td>De assistent komt als app naar Windows.</td></tr>
+              <tr><td>30 september 2026</td><td>Skills komen in de chat. Ze gaan de Gems vervangen.</td></tr>
+              <tr><td>13 oktober 2026</td><td>Model 4 Argon komt in de app voor AI Pro en Ultra.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat opvalt: Nederland kreeg de meeste functies vrij snel na de Verenigde Staten. Sommige nieuwe dingen, zoals gekoppelde apps van andere bedrijven, werken nog vooral in het Engels in de VS.</p>
+
+        <h2 id="modellen">Welke modellen zitten erin?</h2>
+        <p>In de app kies je onder het invoerveld een model. Welke je ziet, hangt af van je abonnement. Volgens de abonnementenpagina van Google krijg je met de gratis versie het Flash-Lite-model, met AI Plus het Flash-model en met AI Pro en Ultra ook het Pro-model en 4 Argon.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Model</th><th>Waarvoor</th><th>Voor wie</th></tr></thead>
+            <tbody>
+              <tr><td>Flash-Lite</td><td>Snelle, eenvoudige vragen</td><td>Gratis</td></tr>
+              <tr><td>3.6 Flash</td><td>Dagelijks werk: documenten vergelijken, een prototype in Canvas</td><td>Volgens Google alle gebruikers van de app</td></tr>
+              <tr><td>3.1 Pro</td><td>Lastige vragen die redeneren vragen</td><td>Hogere limieten met AI Pro en Ultra</td></tr>
+              <tr><td>4 Argon</td><td>Complexe taken van begin tot eind, zoals een financieel rapport analyseren</td><td>AI Pro en Ultra</td></tr>
+              <tr><td>Nano Banana</td><td>Afbeeldingen maken en bewerken</td><td>Iedereen, met meer gebruik voor abonnees</td></tr>
+              <tr><td>Omni</td><td>Video's maken van tekst, foto's en video</td><td>Abonnees van 18 jaar en ouder</td></tr>
+              <tr><td>Lyria 3.5</td><td>Muziek maken</td><td>Volgens Google wereldwijd in de app</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een paar dingen om te weten over 4 Argon. Google noemt het een frontiermodel voor "deep work": programmeren, financiën, juridisch werk en beveiliging. Het model kan via de API tot 1 miljoen tokens aan invoer en uitvoer samen verwerken. Een token is een stukje van een woord. Voor de meeste ondernemers is 3.6 Flash ruim voldoende. Argon merk je pas bij lange, ingewikkelde opdrachten, zoals een jaarverslag van tachtig pagina's doorlichten.</p>
+
+        <h2 id="waar">Waar je Gemini tegenkomt</h2>
+        <p>Ook als je de app nooit opent, gebruik je het waarschijnlijk al. Google heeft het in bijna al zijn producten gestopt.</p>
+        <ul>
+          <li><b>De app op je telefoon.</b> Voor Android en iPhone. Op Android heeft de nieuwe assistent de oude Google Assistent vervangen. Je opent hem door vanuit een hoek te vegen, op sommige telefoons met de aan/uit-knop, of door "Hey Google" te zeggen.</li>
+          <li><b>De computer.</b> Op gemini.google.com in je browser. Of als app: op de Mac (macOS 15 of nieuwer) open je hem met Option + spatie, op Windows (10 of nieuwer) met Alt + spatie.</li>
+          <li><b>Google Workspace.</b> In Gmail, Documenten, Spreadsheets, Presentaties, Drive, Meet en Chat. Je opent hem met de knop rechtsboven en hij werkt in een zijpaneel naast je document.</li>
+          <li><b>Google Zoeken.</b> De AI Overviews (in het Nederlands AI-overzichten) en de <a href="/kennisbank/gidsen/google-ai-modus/">Google AI-modus</a> draaien op aangepaste modellen uit dezelfde familie. Abonnees van AI Pro en Ultra kunnen 4 Argon ook in de AI-modus gebruiken.</li>
+          <li><b>Google Maps.</b> Sinds november 2025 kun je tijdens het navigeren hardop vragen stellen, zoals een laadpaal langs je route zoeken.</li>
+          <li><b>Voor ontwikkelaars.</b> Via Google AI Studio, de API en Google Antigravity bouw je de modellen in je eigen software.</li>
+        </ul>
+        <p>Dat punt over Zoeken is voor ondernemers het belangrijkste. De assistent is niet zomaar een chatbot naast de zoekmachine. Hij wordt steeds meer de zoekmachine zelf. Daar komen we op terug bij <a href="#genoemd">zo word je genoemd</a>.</p>
+
+        <h2 id="kan">Wat kun je ermee? Alle functies op een rij</h2>
+        <p>De toepassingen zijn breed. Hieronder staat per functie wat het is en waar wij het als ondernemer voor zouden gebruiken.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Schrijven, samenvatten en vertalen</h3></div>
+        <p>De basis. Een offerte netter maken, een vacaturetekst opzetten, een boze mail van een klant rustig beantwoorden, een Duitse leverancier mailen. Hoe beter je opdracht, hoe beter het resultaat. Daarover meer bij de <a href="#prompts">prompts</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>Deep Research</h3></div>
+        <p>Je geeft een onderzoeksvraag en de assistent zoekt zelf een reeks bronnen af. Volgens Google kan hij daarbij honderden bronnen analyseren. Na een paar minuten krijg je een rapport met bronvermeldingen. Goed voor een eerste marktverkenning: "Welke subsidies bestaan er in 2026 voor verduurzaming van een bedrijfspand in Drenthe?" Loop de bronnen daarna zelf na.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>Live: praten in plaats van typen</h3></div>
+        <p>Je voert een gesprek hardop, alsof je iemand belt. Sinds mei 2026 zit Live in de gewone chat, dus je wisselt vrij tussen typen en praten. Je kunt ook je camera of scherm delen. Handig in de auto, of om een presentatie te oefenen.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>Afbeeldingen, video en muziek</h3></div>
+        <p>Met Nano Banana maak en bewerk je afbeeldingen. Met Omni maak je video's van een beschrijving, foto's of eigen beelden. Lyria 3.5 maakt muziek. Prima voor een snelle schets of een social post. Voor je huisstijl en je logo blijft een ontwerper beter: AI houdt zich slecht aan vaste kleuren en lettertypes.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>Bestanden en lange documenten</h3></div>
+        <p>Je uploadt pdf's, spreadsheets en foto's en stelt er vragen over. Met AI Pro kun je volgens Google tot 1.500 pagina's aan bestanden tegelijk meegeven, of tot 30.000 regels code. Denk aan een stapel klantenfeedback samenvatten in vijf punten.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>Canvas en Notebook</h3></div>
+        <p>Canvas is een werkvlak naast de chat waar je samen met de assistent een tekst of een eenvoudige webpagina maakt en aanpast. Notebook is een onderzoeks- en schrijfassistent die werkt met de bronnen die jij aanlevert. Met een abonnement krijg je er meer audio-overzichten en notebooks bij.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>Skills: vaste instructies opslaan</h3></div>
+        <p>Een skill is een opgeslagen set instructies, zoals "schrijf in onze huisstijl, je-vorm, geen uitroeptekens". De assistent voert hem automatisch uit als je vraag erbij past, en je kunt skills combineren. Sinds 30 september 2026 zitten ze in de chat. Volgens Google vervangen ze binnenkort de Gems, en worden bestaande Gems automatisch omgezet. Je vindt ze via het linkermenu onder Aanpassen.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>Gekoppelde apps en taken</h3></div>
+        <p>De assistent werkt samen met Gmail, Agenda, Drive, Keep en Maps. Sinds oktober 2026 kun je volgens Google ook meer dan veertig apps van andere bedrijven koppelen, maar de meeste werken voorlopig in het Engels in de VS. Abonnees van AI Pro en Ultra kunnen hem ook taken geven die hij op de achtergrond uitvoert, zelfs als je computer uit staat.</p>
+
+        <h2 id="kosten">Wat kost Google Gemini? Alle abonnementen</h2>
+        <p>Dit zijn de abonnementen voor persoonlijk gebruik zoals Google ze in oktober 2026 op de Nederlandse abonnementenpagina toont. Prijzen per maand, in euro's.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Abonnement</th><th>Prijs</th><th>Model</th><th>Gebruik</th><th>In Google-apps</th><th>Opslag</th></tr></thead>
+            <tbody>
+              <tr><td>Gratis</td><td>€&nbsp;0</td><td>Flash-Lite</td><td>Basis</td><td>Nee</td><td>15 GB</td></tr>
+              <tr><td>Google AI Plus</td><td>€&nbsp;4,99</td><td>Flash</td><td>2x zoveel als gratis</td><td>Onder andere Gmail en Vids</td><td>400 GB</td></tr>
+              <tr><td>Google AI Pro</td><td>€&nbsp;21,99</td><td>4 Argon, Pro en Flash</td><td>4x zoveel als gratis</td><td>Onder andere Gmail, Documenten en Vids</td><td>5 TB</td></tr>
+              <tr><td>Google AI Ultra</td><td>€&nbsp;99,99 of €&nbsp;219,99</td><td>4 Argon, Pro en Flash, hoogste toegang</td><td>5x of 20x zoveel als AI Pro</td><td>Hoogste limieten</td><td>Vanaf 20 TB</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat zit er nog meer in? Bij de gratis versie horen beeldgeneratie, Deep Research, Live, Canvas en Gems. AI Plus voegt videogeneratie toe. AI Pro geeft een contextvenster van 1 miljoen tokens, zodat je lange documenten in één keer kunt meegeven. AI Ultra geeft als eerste toegang tot nieuwe functies en bevat in een aantal landen een YouTube Premium-abonnement.</p>
+        <div class="kader">
+          <p class="kader-titel">Goed om te weten voor je afsluit</p>
+          <ul class="vink">
+            <li><b>Limieten per vijf uur.</b> Google rekent gebruik af op rekenkracht. Een zware vraag telt zwaarder dan een korte. Je limiet wordt elke vijf uur aangevuld, tot je weeklimiet op is. Daarna kun je AI-tegoed bijkopen.</li>
+            <li><b>18 jaar en ouder.</b> AI Pro en de assistent in Gmail en Documenten zijn alleen voor gebruikers van 18 jaar en ouder.</li>
+            <li><b>Persoonlijk account.</b> Voor AI Pro heb je volgens Google een persoonlijk Google-account nodig dat je zelf beheert. Een zakelijk Workspace-account werkt anders (zie hieronder).</li>
+            <li><b>Altijd opzegbaar.</b> Een gedeeltelijk verstreken maand krijg je niet terug, tenzij de wet dat vereist.</li>
+            <li><b>Studenten.</b> Studenten die in aanmerking komen, krijgen in meer dan 140 landen een jaar Google AI Plus zonder kosten. Volgens Google loopt dat aanbod tot 31 december 2026.</li>
+          </ul>
+        </div>
+
+        <h2 id="zakelijk">De zakelijke versies</h2>
+        <p>Voor een bedrijf zijn de persoonlijke abonnementen vaak niet de beste keus. Er zijn drie zakelijke routes.</p>
+        <div class="stap-kop"><Tekening naam="mail" maat={48} /><h3>Via Google Workspace</h3></div>
+        <p>Gebruik je Gmail met je eigen domeinnaam, dan zit je waarschijnlijk op Google Workspace. Sinds begin 2025 zit de assistent daarin zonder losse uitbreiding. Volgens de vergelijking op de site van Google Workspace verschilt per abonnement wat je krijgt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Functie</th><th>Business Starter</th><th>Standard, Plus en Enterprise</th></tr></thead>
+            <tbody>
+              <tr><td>Assistent in Gmail</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td>Assistent in Vids</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td>Assistent in Documenten, Spreadsheets en Presentaties</td><td>Nee</td><td>Ja</td></tr>
+              <tr><td>Assistent in Drive, Meet en Chat</td><td>Nee</td><td>Ja</td></tr>
+              <tr><td>De losse app</td><td>Basistoegang</td><td>Uitgebreide toegang</td></tr>
+              <tr><td>De krachtigste modellen</td><td>Nee</td><td>Ja</td></tr>
+              <tr><td>AI aanpassen met skills</td><td>Ja</td><td>Ja</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De prijzen van Workspace staan in dollars op de site en hangen af van het aantal gebruikers en de looptijd. Starter, Standard en Plus kun je voor maximaal 300 gebruikers afnemen.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Via Gemini Enterprise</h3></div>
+        <p>Gemini Enterprise is een aparte zakelijke versie. De Business-versie is volgens Google bedoeld voor kleine bedrijven en teams tot 300 personen, zonder IT-installatie, vanaf US$ 21 per licentie per maand. Je koppelt er ook Microsoft 365, HubSpot en Jira aan en bouwt agents zonder code. De Standard- en Plus-versie beginnen bij US$ 30 per licentie per maand en hebben strengere beveiliging. Google schrijft dat het je prompts en uitvoer bij deze versies niet gebruikt om modellen te trainen, je gegevens niet verkoopt en niet voor advertenties gebruikt.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>Via de API</h3></div>
+        <p>Wil je de modellen in je eigen software of website bouwen, dan gebruik je Google AI Studio of de API. Beginnen kost niets, maar dan wordt je content gebruikt om de producten van Google te verbeteren. Betaal je, dan krijg je hogere limieten. Voor 4 Argon rekent Google tot en met 30 november 2026 een introductieprijs van $ 2 per miljoen tokens invoer en $ 10 per miljoen tokens uitvoer. Daarna wordt dat $ 4 en $ 20.</p>
+
+        <h2 id="kiezen">Welk abonnement past bij jouw bedrijf?</h2>
+        <p>Het eerlijke antwoord: begin gratis en betaal pas als je merkt dat je tegen een grens aanloopt. Deze tabel helpt bij de keuze.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Jouw situatie</th><th>Ons advies</th></tr></thead>
+            <tbody>
+              <tr><td>Je wilt het eerst proberen</td><td>De gratis versie, met een eigen Google-account</td></tr>
+              <tr><td>Zzp'er, af en toe een tekst of mail, Gmail privé</td><td>Gratis of Google AI Plus (€&nbsp;4,99)</td></tr>
+              <tr><td>Je gebruikt het dagelijks voor teksten, offertes en analyses</td><td>Google AI Pro (€&nbsp;21,99)</td></tr>
+              <tr><td>Team op Google Workspace, met klantgegevens in de mail</td><td>De assistent binnen Workspace Business Standard of hoger</td></tr>
+              <tr><td>Team op Microsoft 365 dat toch deze assistent wil</td><td>Gemini Enterprise Business, of kijk eerst naar <a href="/kennisbank/gidsen/microsoft-copilot/">Microsoft Copilot</a></td></tr>
+              <tr><td>Je laat software bouwen die de modellen gebruikt</td><td>De API, met een betaald account</td></tr>
+              <tr><td>Je maakt veel video of programmeert de hele dag</td><td>Google AI Ultra, maar reken het eerst door</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een installatiebedrijf in Hoogeveen met zes mensen op kantoor. Iedereen besteedt elke dag zo'n twintig minuten aan mails en offerteteksten die AI sneller kan opzetten. Stel dat het de helft scheelt: tien minuten per persoon per dag. Dat is per persoon ruim drie uur per maand. Tegen een interne kostprijs van € 50 per uur is dat zo'n € 165 per persoon per maand aan tijd. Een abonnement van rond de € 20 per persoon verdient zich dan snel terug. Maar alleen als mensen het echt gebruiken en de teksten blijven nalezen. Meet het dus na drie maanden.</p>
+        </div>
+
+        <h2 id="stappen">Aan de slag: Gemini in je bedrijf in 7 stappen</h2>
+        <p>Dit is de volgorde die wij ondernemers aanraden. Reken op een middag voor stap 1 tot en met 5.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>1. Kies het juiste account</h3></div>
+        <p>Werk je met klantgegevens, gebruik dan een zakelijk Workspace-account en geen privé-Gmail. Zo valt het gebruik onder de afspraken die je organisatie met Google heeft, en kan een beheerder bepalen wat mag. Zonder Workspace? Maak dan een apart Google-account voor je bedrijf, los van je privéfoto's en privémail.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Zet je privacy-instellingen goed</h3></div>
+        <p>Open in de app je activiteit en kijk naar de instelling Activiteit bewaren. Staat die aan, dan bewaart Google je gesprekken en kan het ze gebruiken om zijn diensten en AI-modellen te verbeteren. Standaard worden ze na 18 maanden verwijderd. Je kunt dat volgens Google veranderen in 3 of 36 maanden. Meer daarover bij <a href="#privacy">privacy en de AVG</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>3. Kies drie taken die elke week terugkomen</h3></div>
+        <p>Begin niet met "alles met AI". Kies drie klusjes die elke week tijd kosten: offertes, antwoorden op veelgestelde vragen, notulen. Meet hoe lang ze nu duren. Dan weet je straks of het iets oplevert.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Schrijf een goede prompt</h3></div>
+        <p>Een prompt is de opdracht die je geeft. Geef wat je een nieuwe collega ook zou geven: wie je bent, wat er moet gebeuren, voor wie, in welke vorm en met welke toon. "Schrijf een tekst over ons bedrijf" levert iets algemeens op. "Schrijf drie zinnen voor onze over-ons-pagina, voor een installatiebedrijf met acht monteurs in Drenthe, nuchter van toon, je-vorm" levert iets bruikbaars op.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>5. Maak een skill voor je huisstijl</h3></div>
+        <p>Werkt een opdracht goed? Sla hem op als skill via Aanpassen in het linkermenu. Zet erin hoe je schrijft, welke woorden je wel en niet gebruikt en een voorbeeldtekst die je goed vindt. Dan hoef je dat niet elke keer te typen.</p>
+
+        <div class="stap-kop"><Tekening naam="mail" maat={48} /><h3>6. Koppel je mail en bestanden als dat helpt</h3></div>
+        <p>Met de koppeling kan de assistent je mails en documenten doorzoeken: "Zoek de laatste drie mails van leverancier X en zet de afspraken op een rij." Doe dit alleen met een account waarvan je de privacy-instellingen kent.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>7. Spreek af dat er altijd iemand naleest</h3></div>
+        <p>Elke tekst die naar een klant gaat, leest een mens eerst na. Elk cijfer, elke prijs en elke juridische bewering zoek je zelf na. Leg dat vast op één A4 voor je team. Dat is meteen een stap richting de AI-geletterdheid die de wet vraagt, zie hieronder.</p>
+
+        <h2 id="prompts">Tien prompts voor het mkb</h2>
+        <p>Kopieer ze, vul de stukken tussen haken in en pas aan. Ze werken ook in andere AI-assistenten.</p>
+        <div class="kader">
+          <p class="kader-titel">Om over te nemen</p>
+          <ol>
+            <li>"Hier is een mail van een klant die boos is over [probleem]. Schrijf een kort, eerlijk antwoord zonder excuses die als smoes klinken. Stel twee oplossingen voor."</li>
+            <li>"Lees deze offerte als een klant zonder vakkennis. Welke vijf zinnen zijn onduidelijk? Herschrijf ze in gewone taal."</li>
+            <li>"Maak van deze aantekeningen van ons overleg een verslag met besluiten, actiepunten en wie wat doet voor wanneer."</li>
+            <li>"Schrijf een vacaturetekst voor een [functie] bij een bedrijf met [aantal] mensen in [plaats]. Noem wat we bieden en vermijd clichés zoals 'dynamisch team'."</li>
+            <li>"Geef tien vragen die klanten stellen voordat ze een [dienst] kopen. Schrijf bij elke vraag een antwoord van maximaal drie zinnen."</li>
+            <li>"Vat deze klantreviews samen in drie sterke punten en drie verbeterpunten. Noem bij elk punt hoe vaak het voorkomt."</li>
+            <li>"Ik wil [onderwerp] uitzoeken. Maak met Deep Research een overzicht met bronnen. Zet onzekere punten apart."</li>
+            <li>"Bekijk deze spreadsheet met omzet per maand. Welke drie dingen vallen op? Maak er een grafiek van."</li>
+            <li>"Stel me tien vragen over mijn bedrijf, één voor één. Schrijf daarna een tekst van 200 woorden voor mijn over-ons-pagina."</li>
+            <li>"Wat weet je over [bedrijfsnaam] in [plaats]? Noem je bronnen." (Zo zie je wat AI over jou zegt.)</li>
+          </ol>
+        </div>
+
+        <h2 id="vergelijking">Gemini, ChatGPT of Claude?</h2>
+        <p>Ze kunnen alle drie schrijven, samenvatten en vragen beantwoorden. Het verschil zit in de prijs, de koppelingen en waar ze vandaan komen. Deze prijzen komen van de sites van de makers zelf, geraadpleegd oktober 2026.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Google</th><th>ChatGPT</th><th>Claude</th></tr></thead>
+            <tbody>
+              <tr><td><b>Maker</b></td><td>Google</td><td>OpenAI</td><td>Anthropic</td></tr>
+              <tr><td><b>Gratis versie</b></td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td><b>Instapabonnement</b></td><td>AI Plus, €&nbsp;4,99</td><td>Go, $&nbsp;8</td><td>Pro, $&nbsp;20 ($&nbsp;17 bij betaling per jaar)</td></tr>
+              <tr><td><b>Middenabonnement</b></td><td>AI Pro, €&nbsp;21,99</td><td>Plus, $&nbsp;20</td><td>Max, vanaf $&nbsp;100</td></tr>
+              <tr><td><b>Zakelijk</b></td><td>Via Workspace, of Gemini Enterprise vanaf US$&nbsp;21</td><td>Business, $&nbsp;20 per gebruiker (jaarlijks)</td><td>Team, $&nbsp;20 per gebruiker (jaarlijks)</td></tr>
+              <tr><td><b>Sterk in</b></td><td>Samenwerking met Gmail, Android, Maps en Google Zoeken</td><td>Breed inzetbaar, veel gebruikt</td><td>Schrijven en lange documenten</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Ons advies: kies de assistent die aansluit bij de software die je al gebruikt. Zit je bedrijf in Gmail en Google Drive, dan ligt de assistent van Google voor de hand. Werk je in Microsoft 365, kijk dan eerst naar Copilot. Probeer er gerust twee naast elkaar met dezelfde opdracht. Meer over de andere twee lees je in <a href="/kennisbank/gidsen/chatgpt-voor-bedrijven/">ChatGPT voor bedrijven</a> en <a href="/kennisbank/gidsen/claude/">wat is Claude</a>.</p>
+
+        <h2 id="privacy">Privacy en de AVG: wat gebeurt er met je gegevens?</h2>
+        <p>Dit is het deel dat de meeste gidsen overslaan. In de Privacy Hub van de apps legt Google uit hoe het met gesprekken omgaat. De belangrijkste punten:</p>
+        <ul>
+          <li><b>Activiteit bewaren aan:</b> je gesprekken, bestanden, foto's en gedeelde schermen worden opgeslagen. Google gebruikt ze om zijn diensten te leveren en te verbeteren, onder meer door generatieve AI-modellen te trainen.</li>
+          <li><b>Activiteit bewaren uit:</b> gesprekken blijven toch 72 uur in je account, onder meer om te kunnen reageren en voor de veiligheid.</li>
+          <li><b>Automatisch verwijderen:</b> standaard na 18 maanden. Je kunt kiezen voor 3 of 36 maanden, of niet automatisch verwijderen.</li>
+          <li><b>Menselijke beoordelaars:</b> een deel van de gesprekken wordt door mensen bekeken. Die gesprekken worden niet verwijderd als je je activiteit wist, maar maximaal 3 jaar bewaard.</li>
+        </ul>
+        <p>Google zegt het zelf heel duidelijk: voer geen vertrouwelijke informatie in die je niet door een beoordelaar wilt laten zien. Voor een ondernemer betekent dat: geen namen, adressen, BSN's of medische gegevens van klanten in een persoonlijk account. Dat is verwerking van persoonsgegevens onder de AVG. Haal namen eerst weg ("klant X uit Y"). Het resultaat is hetzelfde.</p>
+        <p>Bij Gemini Enterprise en de betaalde API gelden andere afspraken. Daar gebruikt Google je gegevens volgens eigen zeggen niet om modellen te trainen.</p>
+        <p>Er is ook een wettelijke kant. Volgens de <a href="https://www.autoriteitpersoonsgegevens.nl/themas/algoritmes-ai/ai-verordening" rel="noopener">Autoriteit Persoonsgegevens</a> moeten organisaties die AI-systemen gebruiken sinds 2 februari 2025 zorgen dat hun medewerkers AI-geletterd zijn. Ook als je "alleen" een chatbot gebruikt. Een korte <a href="/trainingen/">training</a> en een A4 met afspraken zijn een goed begin.</p>
+
+        <h2 id="beperkingen">Waar Gemini de mist in gaat</h2>
+        <p>Google noemt zelf zes bekende beperkingen van zijn assistent. In gewone woorden, met wat het voor jou betekent:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Beperking</th><th>Wat het betekent</th><th>Wat jij doet</th></tr></thead>
+            <tbody>
+              <tr><td>Nauwkeurigheid</td><td>Het kan overtuigend iets fouts zeggen, zelfs een boek of regel verzinnen</td><td>Cijfers, prijzen en wetten altijd nazoeken</td></tr>
+              <tr><td>Vooroordelen</td><td>De trainingsdata kleuren de antwoorden</td><td>Bij vacatures en klantteksten kritisch meelezen</td></tr>
+              <tr><td>Eén kant van het verhaal</td><td>Soms ontbreken andere standpunten</td><td>Vraag expliciet om voor- en tegenargumenten</td></tr>
+              <tr><td>Persona</td><td>Het lijkt soms een eigen mening of gevoel te hebben</td><td>Zie het als gereedschap, niet als adviseur</td></tr>
+              <tr><td>Te voorzichtig of te makkelijk</td><td>Weigert soms een normale vraag, beantwoordt soms een ongepaste</td><td>Herformuleer, of gebruik een andere tool</td></tr>
+              <tr><td>Kwetsbaar voor misleiding</td><td>Rare of sturende prompts kunnen het van de wijs brengen</td><td>Wees voorzichtig met taken die zelf mails versturen of bestellen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een voorbeeld uit de praktijk. Vraag om "de openingstijden van het gemeentehuis in Assen" en je krijgt een net antwoord. Klopt het? Vaak wel. Soms is het van vorig jaar. De assistent zegt dat er niet bij. Klik dus op de bron.</p>
+
+        <h2 id="genoemd">Zo word je genoemd in Gemini</h2>
+        <p>Nu de vraag die voor ondernemers het meest telt. Vraag de assistent om een goede loodgieter in Assen en je krijgt een paar namen. Waar komen die vandaan, en hoe kom jij in dat rijtje?</p>
+        <h3>Hoe de assistent kiest</h3>
+        <p>Google schrijft in de Privacy Hub dat sommige antwoorden gebaseerd zijn op zoekresultaten. Bij vragen over bedrijven zoekt de assistent dus in de index van Google en kan hij gegevens uit Google Maps gebruiken, zoals adres, openingstijden en reviews. Wat hij vindt, weegt hij af tegen wat hij al weet. Een bedrijf dat goed vindbaar is, een volledig Bedrijfsprofiel heeft en op meerdere plekken positief wordt genoemd, heeft een voorsprong.</p>
+        <h3>Het detail dat veel website-eigenaren missen</h3>
+        <p>In je robots.txt kun je Google-Extended blokkeren. Dat lijkt onschuldig: je zegt dan dat Google je teksten niet mag gebruiken om toekomstige modellen te trainen. Maar volgens de documentatie van Google regelt Google-Extended ook de "grounding" in de apps. Dat is het onderbouwen van antwoorden met content uit de zoekindex op het moment dat iemand een vraag stelt. Blokkeer je hem, dan kan dat je zichtbaarheid in die antwoorden kosten. Je posities in Google Zoeken veranderen er volgens Google niet door, en het is ook geen rankingsignaal.</p>
+        <p>Dit zijn de stappen, in de volgorde waarin wij ze aanpakken.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Vraag wat de assistent over je weet</h3></div>
+        <p>Stel de vragen die je klanten stellen: "Welke hovenier in Hoogeveen doet ook zakelijk onderhoud?" En vraag direct: "Wat weet je over [jouw bedrijf] in [jouw plaats]?" Klopt het niet of is het mager, dan weet je waar je moet beginnen. Doe dit op een paar verschillende dagen, want de antwoorden wisselen.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Controleer je robots.txt</h3></div>
+        <p>Kijk of Googlebot en Google-Extended je site mogen lezen. Twijfel je wat je ziet, vraag het je webbouwer. Dit is vijf minuten werk.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>3. Maak je Google Bedrijfsprofiel compleet</h3></div>
+        <p>Diensten, werkgebied, openingstijden, foto's, en reageer op elke review. Voor lokale vragen is dit vaak de belangrijkste bron. In de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> lees je hoe je het goed inricht.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Geef op je site de antwoorden</h3></div>
+        <p>Een AI-model neemt het liefst over wat helder en concreet is. Zet per dienst de feiten op een rij: wat het kost, hoe lang het duurt, waar je werkt. Liefst met eigen cijfers en een paar veelgestelde vragen. Algemene zinnen zoals "wij leveren kwaliteit" worden overgeslagen.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>5. Zorg voor vermeldingen elders</h3></div>
+        <p>Reviews, een branchevereniging, een vergelijkingssite, een artikel in de regionale krant. Hoe vaker je naam op betrouwbare plekken staat, hoe zekerder een AI-model is dat je bestaat en goed bent.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>6. Meet het elke maand</h3></div>
+        <p>Herhaal de vragen uit stap 1 elke maand en noteer of je genoemd wordt. Pas zo zie je of je werk effect heeft. Hoe je zo'n meting opzet, lees je in onze gids <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Te snel betalen.</b> Veel ondernemers sluiten AI Pro af en gebruiken het twee keer per week. De gratis versie had volstaan.</li>
+          <li><b>Klantgegevens in een privéaccount.</b> Handig, maar onder de AVG een risico. Gebruik een zakelijk account en haal namen weg.</li>
+          <li><b>Eén regel als opdracht.</b> De teleurstelling zit meestal in de prompt, niet in het model.</li>
+          <li><b>Teksten ongelezen plaatsen.</b> Een tekst die naar AI klinkt, overtuigt geen klant. Google beoordeelt een tekst op kwaliteit, niet op wie hem schreef. Maar een tekst die op duizend andere lijkt, valt nergens op.</li>
+          <li><b>Google-Extended blokkeren zonder te weten wat het doet.</b> Dan verdwijn je mogelijk uit de antwoorden van de app.</li>
+          <li><b>Niet meten.</b> Zonder nulmeting weet je na drie maanden niet of het tijd of zichtbaarheid opleverde.</li>
+        </ul>
+        <p>Wij gebruiken Gemini, ChatGPT, Claude en andere tools dagelijks, en we zijn er open over. Op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a> lees je waarvoor wel en waarvoor niet. Wil je dat wij zorgen dat je genoemd wordt? Op de pagina over <a href="/generative-engine-optimization/">generative engine optimization</a> lees je hoe we dat aanpakken, vanaf € 495 per maand en maandelijks opzegbaar.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Google: abonnementenpagina en release-opmerkingen op gemini.google, "Een overzicht van de Gemini-app", Privacy Hub van de apps en de helppagina over beschikbaarheid op support.google.com, berichten op blog.google (onder meer over 4 Argon in de app, 13 oktober 2026, en "De Gemini-app wordt actiever", 19 mei 2026), de vergelijking op workspace.google.com en de lijst met Google-crawlers op developers.google.com. Prijzen andere tools: learn.chatgpt.com (OpenAI) en claude.com (Anthropic). Wet: Autoriteit Persoonsgegevens. Allemaal geraadpleegd oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={24} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het regelen?" intro="Zo werken we als we jouw bedrijf zichtbaar maken in Google en in AI-antwoorden." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Google Gemini gratis?', a: 'Ja, de basisversie is gratis met een Google-account. Voor meer gebruik en zwaardere modellen betaal je € 4,99 (AI Plus), € 21,99 (AI Pro) of vanaf € 99,99 per maand (AI Ultra), volgens de Nederlandse abonnementenpagina van Google in oktober 2026.' },
+      { v: 'Is Bard hetzelfde als Gemini?', a: 'Ja. Google lanceerde de chatbot in maart 2023 als Bard en gaf hem op 8 februari 2024 zijn huidige naam.' },
+      { v: 'Werkt het in het Nederlands?', a: 'Ja. De app, het gesproken gesprek (Live) en de assistent in Google Workspace werken in het Nederlands. Sommige nieuwe functies, zoals gekoppelde apps van andere bedrijven, zijn eerst alleen in het Engels beschikbaar.' },
+      { v: 'Wat is 4 Argon?', a: 'Het nieuwste en zwaarste model van Google, sinds 13 oktober 2026 beschikbaar in de app voor abonnees van Google AI Pro en Ultra. Het is bedoeld voor complexe taken van begin tot eind, zoals lange analyses en programmeerwerk.' },
+      { v: 'Wat is het verschil met ChatGPT?', a: 'Beide zijn AI-chatbots die schrijven, samenvatten en vragen beantwoorden. De assistent van Google zit verweven met Gmail, Android, Maps en Google Zoeken. ChatGPT is van OpenAI. Voor je vindbaarheid telt dat de Google-assistent zoekt via Google. Lees ook hoe je <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar wordt in ChatGPT</a>.' },
+      { v: 'Mag ik klantgegevens erin zetten?', a: 'Niet in een persoonlijk account. Google waarschuwt zelf dat menselijke beoordelaars gesprekken kunnen zien. Gebruik voor werk de assistent binnen Google Workspace of Gemini Enterprise, en haal namen en contactgegevens weg waar het kan.' },
+      { v: 'Kan ik voorkomen dat Google mijn website hiervoor gebruikt?', a: 'Ja, door Google-Extended te blokkeren in je robots.txt. Volgens Google heeft dat geen invloed op je posities in Google Zoeken, maar je content wordt dan ook niet gebruikt om antwoorden in de apps te onderbouwen.' },
+      { v: 'Hoe kom ik als lokaal bedrijf in de antwoorden?', a: 'Begin bij een compleet Google Bedrijfsprofiel, een site die je diensten en werkgebied duidelijk noemt, en reviews. Laat je huidige stand gratis meten met de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-vindbaarheidsanalyse</a>.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over AI-assistenten"
+    links={[
+      { label: 'Gids', titel: 'Google AI-modus', href: '/kennisbank/gidsen/google-ai-modus/', tekst: 'Het tabblad in Google Zoeken dat op dezelfde modellen draait.' },
+      { label: 'Gids', titel: 'Wat is Claude?', href: '/kennisbank/gidsen/claude/', tekst: 'De AI-assistent van Anthropic, en hoe je erin genoemd wordt.' },
+      { label: 'Gids', titel: 'Microsoft Copilot', href: '/kennisbank/gidsen/microsoft-copilot/', tekst: 'De AI van Microsoft, uitgelegd voor ondernemers.' },
+    ]}
+  />
+
+  <Actie titel="Wat zegt AI nu over jouw bedrijf?" tekst={`${site.contactpersoon} stelt de vragen van jouw klanten aan Google Gemini en de andere AI-assistenten, en belt je met de uitkomst. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>

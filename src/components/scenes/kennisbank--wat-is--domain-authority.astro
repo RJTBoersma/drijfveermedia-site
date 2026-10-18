@@ -1,0 +1,62 @@
+---
+// Scène voor /kennisbank/wat-is/domain-authority/: een meter van 1 tot 100 met de score van jouw site, gevoed door links van andere sites.
+// Als hij leeft: links stromen rustig van drie sites naar de meter, en een oranje naald klimt van 20 naar 34.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const sites = [
+  { x: 16, y: 26, lx: 82, ly: 60 },
+  { x: 394, y: 26, lx: 398, ly: 60 },
+  { x: 394, y: 206, lx: 398, ly: 226 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een meter van 1 tot 100 met de score van jouw site. Drie andere sites linken naar je, en de naald klimt van 20 naar 34.'}>
+  <!-- verwijzende sites -->
+  {sites.map((s) => (
+    <g>
+      <path d={`M${s.lx} ${s.ly}L240 200`} stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 6" fill="none" />
+      <rect x={s.x} y={s.y} width="70" height="44" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect x={s.x + 10} y={s.y + 12} width="40" height="6" rx="3" fill="#10283f" opacity="0.7" />
+      <rect x={s.x + 10} y={s.y + 25} width="50" height="5" rx="2.5" fill="#d9e1ea" />
+    </g>
+  ))}
+
+  <!-- meter -->
+  <path d="M120 200A120 120 0 0 1 360 200" fill="none" stroke="#e8eef4" stroke-width="18" stroke-linecap="round" />
+  <path d="M120 200A120 120 0 0 1 142.9 129.5" fill="none" stroke="#074663" stroke-width="18" stroke-linecap="round" />
+  <text x="120" y="230" font-size="12" font-weight="800" text-anchor="middle" class="zacht">1</text>
+  <text x="360" y="230" font-size="12" font-weight="800" text-anchor="middle" class="zacht">100</text>
+  <path d="M240 200L167 147" stroke="#074663" stroke-width="5" stroke-linecap="round" />
+  <circle cx="240" cy="200" r="13" fill="#074663" />
+  <circle cx="240" cy="200" r="5" fill="#fff" />
+  <text x="240" y="244" font-size="13" font-weight="800" text-anchor="middle">Jouw site</text>
+
+  {!mini && (
+    <g>
+      <path class="boog" d="M142.9 129.5A120 120 0 0 1 182.2 94.8" fill="none" stroke="#ff6600" stroke-width="18" stroke-linecap="round" pathLength="1" />
+      <path class="naald" d="M240 200L167 147" stroke="#ff6600" stroke-width="5" stroke-linecap="round" />
+      <circle cx="240" cy="200" r="5" fill="#fff" />
+      {sites.map((s, i) => (
+        <circle class="link" style={`--i:${i};--dx:${240 - s.lx}px;--dy:${200 - s.ly}px`} cx={s.lx} cy={s.ly} r="5" fill="#ff6600" />
+      ))}
+    </g>
+  )}
+</svg>
+<style>
+  .boog { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .naald { transform-origin: 240px 200px; transform: rotate(25deg); }
+  :global(.teken-js) .boog { stroke-dashoffset: 1; }
+  :global(.teken-js) .naald { transform: rotate(0deg); }
+  :global(.teken-js) .link { opacity: 0; }
+  .in-beeld .boog { animation: kennisbank--wat-is--domain-authority-boog 1.6s ease-in-out 0.8s forwards; }
+  .in-beeld .naald { animation: kennisbank--wat-is--domain-authority-naald 1.6s ease-in-out 0.8s forwards; }
+  .in-beeld .link { animation: kennisbank--wat-is--domain-authority-link 3.6s ease-in calc(var(--i) * 1.2s) infinite; }
+  @keyframes kennisbank--wat-is--domain-authority-boog { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank--wat-is--domain-authority-naald { from { transform: rotate(0deg); } to { transform: rotate(25deg); } }
+  @keyframes kennisbank--wat-is--domain-authority-link {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 1; }
+    55% { transform: translate(var(--dx), var(--dy)); opacity: 1; }
+    65%, 100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .boog, .in-beeld .naald, .in-beeld .link { animation: none; } }
+</style>

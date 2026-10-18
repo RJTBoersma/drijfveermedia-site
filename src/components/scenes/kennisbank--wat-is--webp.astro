@@ -1,0 +1,49 @@
+---
+// Scène voor /kennisbank/wat-is/webp/: dezelfde foto twee keer, links als zware JPEG, rechts als lichte WebP.
+// Als hij leeft: het laadbalkje onder de JPEG kruipt, dat onder de WebP is in een tel vol en krijgt een vinkje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kaarten = [
+  { x: 36, label: 'JPEG', maat: '3 MB' },
+  { x: 276, label: 'WebP', maat: '200 kB' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: dezelfde foto als zwaar JPEG-bestand en als licht WebP-bestand. De WebP-versie laadt veel sneller.'}>
+  {kaarten.map((k) => (
+    <g>
+      <rect x={k.x} y="40" width="168" height="150" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect class="v" x={k.x + 12} y="52" width="144" height="96" rx="6" />
+      <circle class="o" cx={k.x + 124} cy="76" r="12" />
+      <path d={`M${k.x + 12} 148L${k.x + 56} 100L${k.x + 84} 126L${k.x + 112} 96L${k.x + 156} 140V148Z`} fill="#074663" />
+      <path d={`M${k.x + 84} 126L${k.x + 98} 112`} stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+      <text x={k.x + 12} y="174" font-size="13" font-weight="800">{k.label}</text>
+      <text x={k.x + 156} y="174" font-size="12" text-anchor="end" class="zacht">{k.maat}</text>
+      <rect x={k.x + 12} y="204" width="144" height="10" rx="5" fill="#e8eef4" />
+    </g>
+  ))}
+  <path class="a" d="M216 115h44M252 107l8 8-8 8" />
+
+  {!mini && (
+    <g>
+      <rect class="webp-traag" x="48" y="204" width="144" height="10" rx="5" fill="#074663" />
+      <rect class="webp-snel" x="288" y="204" width="144" height="10" rx="5" fill="#ff6600" />
+      <g class="webp-vink"><circle cx="454" cy="209" r="10" fill="#1f8a5b" /><path d="M449 209l3.5 3.5 6.5-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+      <g class="webp-chip"><rect x="206" y="72" width="64" height="24" rx="12" fill="#1f8a5b" /><text x="238" y="88.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">−93%</text></g>
+    </g>
+  )}
+</svg>
+<style>
+  .webp-traag, .webp-snel { transform-box: fill-box; transform-origin: left center; }
+  .webp-vink, .webp-chip { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .webp-traag, :global(.teken-js) .webp-snel { transform: scaleX(0); }
+  :global(.teken-js) .webp-vink, :global(.teken-js) .webp-chip { opacity: 0; }
+  .in-beeld .webp-traag { animation: kennisbank-wat-is-webp-traag 6s linear 0.6s infinite; }
+  .in-beeld .webp-snel { animation: kennisbank-wat-is-webp-snel 6s ease-out 0.6s infinite; }
+  .in-beeld .webp-vink { animation: kennisbank-wat-is-webp-vink 6s ease-out 0.6s infinite; }
+  .in-beeld .webp-chip { animation: kennisbank-wat-is-webp-pop 0.5s cubic-bezier(.3,1.6,.5,1) 1.4s forwards; }
+  @keyframes kennisbank-wat-is-webp-traag { 0% { transform: scaleX(0); } 90% { transform: scaleX(0.38); opacity: 1; } 100% { transform: scaleX(0.38); opacity: 0; } }
+  @keyframes kennisbank-wat-is-webp-snel { 0% { transform: scaleX(0); } 14%, 90% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+  @keyframes kennisbank-wat-is-webp-vink { 0%, 14% { opacity: 0; transform: scale(0.4); } 20%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-webp-pop { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .webp-traag, .in-beeld .webp-snel, .in-beeld .webp-vink, .in-beeld .webp-chip { animation: none; } }
+</style>

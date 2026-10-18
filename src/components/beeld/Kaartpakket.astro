@@ -1,0 +1,51 @@
+---
+// Getekend lokaal pakket van Google: kaartje met drie bedrijven. Het eerste is "jouw bedrijf".
+interface Props { zoekterm: string; jij: string; anderen: string[]; label?: string }
+const { zoekterm, jij, anderen, label = 'Voorbeeld van de kaartresultaten in Google' } = Astro.props;
+---
+<figure class="pakket card" aria-label={label}>
+  <div class="zoek"><span aria-hidden="true">⌕</span> {zoekterm}</div>
+  <svg class="kaart scene" viewBox="0 0 400 170" aria-hidden="true" data-teken>
+    <rect width="400" height="170" fill="#e9eef3" />
+    <path d="M0 120 C80 100 120 140 200 118 S320 80 400 96" stroke="#fff" stroke-width="14" fill="none" />
+    <path d="M150 0 C160 60 140 110 170 170" stroke="#fff" stroke-width="10" fill="none" />
+    <path d="M300 0 L280 170" stroke="#fff" stroke-width="7" fill="none" />
+    <path d="M0 40 L400 60" stroke="#fff" stroke-width="5" fill="none" />
+    <rect x="30" y="58" width="70" height="40" rx="6" fill="#d7e6d8" />
+    <rect x="320" y="110" width="60" height="44" rx="6" fill="#d7e6d8" />
+    <path class="a" pathLength="1" d="M10 160c60-6 110-20 150-30s50-6 64-10" style="stroke-width:4" />
+    <circle class="ring" cx="224" cy="118" r="10" fill="none" stroke="#ff6600" stroke-width="3" />
+    <g class="pin pin-1"><path d="M205 92c0-12 9-20 19-20s19 8 19 20c0 14-19 30-19 30s-19-16-19-30z" fill="#ff6600" /><circle cx="224" cy="92" r="7" fill="#fff" /></g>
+    <g class="pin pin-2"><path d="M96 70c0-9 7-15 14-15s14 6 14 15c0 10-14 22-14 22s-14-12-14-22z" fill="#8aa0b4" /><circle cx="110" cy="70" r="5" fill="#fff" /></g>
+    <g class="pin pin-3"><path d="M316 54c0-9 7-15 14-15s14 6 14 15c0 10-14 22-14 22s-14-12-14-22z" fill="#8aa0b4" /><circle cx="330" cy="54" r="5" fill="#fff" /></g>
+  </svg>
+  <ol class="lijst">
+    <li class="jij"><b>{jij}</b><span>Nu open · bellen · route · website</span></li>
+    {anderen.map((a) => <li><b>{a}</b><span>Geen website · weinig foto's</span></li>)}
+  </ol>
+  <figcaption class="klein muted">{label}</figcaption>
+</figure>
+<style>
+  .pakket { margin: 0; overflow: hidden; box-shadow: 0 24px 60px -30px rgb(7 70 99 / 0.45); }
+  .zoek { margin: 14px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.98rem; color: var(--ink); background: #fff; }
+  .zoek span { color: var(--muted); margin-right: 6px; }
+  .kaart { width: 100%; display: block; }
+  .pin { transform-box: fill-box; transform-origin: 50% 100%; }
+  .pin-1 { animation: val 0.7s cubic-bezier(.3,1.6,.6,1) 0.3s both; }
+  .pin-2 { animation: val 0.7s cubic-bezier(.3,1.6,.6,1) 0.7s both; }
+  .pin-3 { animation: val 0.7s cubic-bezier(.3,1.6,.6,1) 0.95s both; }
+  .ring { transform-box: fill-box; transform-origin: center; opacity: 0; }
+  :global(.in-beeld) .ring { animation: ring 2.2s ease-out 1.6s infinite; }
+  @keyframes ring { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(3); opacity: 0; } }
+  .lijst li.jij { animation: licht 1.2s ease 1.2s both; }
+  @keyframes licht { from { background: transparent; } 40% { background: var(--tint); } to { background: transparent; } }
+  @media (prefers-reduced-motion: reduce) { .pin, .lijst li.jij, :global(.in-beeld) .ring { animation: none; } }
+  @keyframes val { from { transform: translateY(-30px) scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
+  .lijst { list-style: none; margin: 0; padding: 6px 14px 12px; counter-reset: n; }
+  .lijst li { counter-increment: n; display: grid; gap: 2px; padding: 10px 0 10px 34px; border-bottom: 1px solid var(--line); position: relative; font-size: 0.95rem; }
+  .lijst li:last-child { border-bottom: 0; }
+  .lijst li::before { content: counter(n); position: absolute; left: 0; top: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--chip); display: grid; place-items: center; font-weight: 800; font-size: 0.8rem; }
+  .lijst li.jij::before { background: var(--orange); color: var(--on-orange); }
+  .lijst span { color: var(--muted); font-size: 0.85rem; }
+  figcaption { padding: 0 14px 12px; }
+</style>

@@ -1,0 +1,174 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import SeoRekenhulp from '../../../../components/beeld/SeoRekenhulp.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Muntenstapels from '../../../../components/teken/Muntenstapels.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/wat-kost-seo/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'gemiddeld', titel: 'Wat kost SEO gemiddeld?' },
+  { id: 'waarvoor', titel: 'Waar betaal je voor?' },
+  { id: 'prijs-bepalen', titel: 'Wat de prijs bepaalt' },
+  { id: 'vormen', titel: 'Uurtarief, maandbedrag of project' },
+  { id: 'bij-ons', titel: 'Wat SEO bij ons kost' },
+  { id: 'waard', titel: 'Is het de moeite waard?' },
+  { id: 'offerte', titel: 'Een slechte offerte herkennen' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat kost SEO? Prijzen, tarieven en wat je ervoor krijgt',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wat kost SEO? Prijzen en tarieven in 2026 | Drijfveer Media"
+  description="Wat kost SEO in 2026? Uurtarieven, maandbedragen en losse audits op een rij, met een rekenhulp. Plus waar je op let bij een SEO-offerte."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat kost SEO?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Wat kost SEO? Prijzen, tarieven en wat je ervoor krijgt" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>SEO kost in Nederland meestal tussen € 300 en € 3.500 per maand. Waar jij uitkomt, hangt af van je markt en je doelen. In deze gids zie je wat je voor je geld krijgt.</p>
+    <SeoRekenhulp slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een SEO-freelancer rekent meestal € 50 tot € 100 per uur, een bureau € 75 tot € 150.</li>
+            <li>Maandelijkse SEO kost bij de meeste bureaus € 500 tot € 3.500 per maand.</li>
+            <li>Een losse SEO-audit kost € 300 tot € 2.500, afhankelijk van de grootte van je site.</li>
+            <li>Bij Drijfveer Media begint lokale SEO bij € 295 en SEO bij € 495 per maand.</li>
+          </ul>
+        </div>
+
+        <h2 id="gemiddeld">Wat kost SEO gemiddeld?</h2>
+        <p>Er is geen vaste prijs voor SEO, zoals er ook geen vaste prijs is voor een verbouwing. Toch zie je in Nederland steeds dezelfde bandbreedtes terugkomen. We hebben de prijsoverzichten van verschillende bureaus en freelancers naast elkaar gelegd. Dit is wat je meestal betaalt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Gangbare prijs</th></tr></thead>
+            <tbody>
+              <tr><td>Uurtarief SEO-freelancer</td><td>€ 50 tot € 100 per uur</td></tr>
+              <tr><td>Uurtarief SEO-bureau</td><td>€ 75 tot € 150 per uur</td></tr>
+              <tr><td>Maandelijkse SEO voor het mkb</td><td>€ 500 tot € 3.500 per maand</td></tr>
+              <tr><td>Lokale SEO</td><td>€ 300 tot € 750 per maand</td></tr>
+              <tr><td>Eenmalige SEO-audit</td><td>€ 300 tot € 2.500</td></tr>
+              <tr><td>SEO-tekst per pagina</td><td>€ 75 tot € 250</td></tr>
+              <tr><td>Linkbuilding, per link</td><td>€ 75 tot € 500</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Grote webshops en internationale bedrijven betalen vaak fors meer, soms € 10.000 per maand of hoger. Voor een gemiddeld mkb-bedrijf zijn die bedragen niet nodig.</p>
+
+        <h2 id="waarvoor">SEO-kosten: waar betaal je eigenlijk voor?</h2>
+        <p>SEO is geen knop die iemand omzet. Het is werk, verdeeld over vijf onderdelen. Een goede offerte laat zien hoeveel tijd naar elk onderdeel gaat.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>Technische SEO</h3></div>
+        <p>Kan Google je site goed lezen? Laadt hij snel? Staan er geen kapotte links of dubbele pagina's in? <a href="/zoekmachine-optimalisatie/technische-seo/">Technische SEO</a> is vaak eenmalig veel werk en daarna onderhoud.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>Zoekwoordonderzoek</h3></div>
+        <p>Op welke zoekwoorden zoeken jouw klanten, hoe vaak en met welke bedoeling? Dit bepaalt welke pagina's je nodig hebt. Wie dit overslaat, optimaliseert op de verkeerde woorden.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Content</h3></div>
+        <p>Pagina's en teksten die antwoord geven op wat je klant zoekt. Vaak het grootste deel van het budget, en ook het deel dat het langst blijft werken.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>Linkbuilding</h3></div>
+        <p>Links van andere sites naar de jouwe bouwen autoriteit op. Goede links kosten tijd of geld. Goedkope links uit linknetwerken kosten je op den duur je posities.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>Rapportage en overleg</h3></div>
+        <p>Je wilt weten wat er gebeurt en wat het oplevert. Een korte maandelijkse rapportage in gewone taal hoort erbij. Een rapport van veertig pagina's is vooral duur.</p>
+
+        <h2 id="prijs-bepalen">Wat bepaalt de prijs van SEO?</h2>
+        <p>Twee bedrijven kunnen voor dezelfde dienst heel verschillende offertes krijgen. Dat komt door deze vijf dingen.</p>
+        <ol>
+          <li><b>Concurrentie.</b> Een advocaat in Amsterdam heeft meer concurrentie in Google dan een hovenier in Coevorden. Hoe meer concurrentie, hoe meer werk.</li>
+          <li><b>Lokaal of landelijk.</b> Lokaal gevonden worden is goedkoper dan landelijk. Daarom is <a href="/lokale-seo/">lokale SEO</a> een mooie start voor veel bedrijven.</li>
+          <li><b>Hoe groot je site is.</b> Tien pagina's optimaliseren is iets anders dan een webshop met duizend producten.</li>
+          <li><b>Waar je nu staat.</b> Een site met een goede basis heeft minder nodig dan een site die technisch rammelt.</li>
+          <li><b>Hoe snel je resultaat wilt.</b> Wie sneller wil groeien, zet meer in. SEO blijft wel een zaak van de lange termijn.</li>
+        </ol>
+        <p>Probeer het zelf met de rekenhulp bovenaan deze pagina. Die geeft een eerste indicatie op basis van onze eigen prijzen.</p>
+
+        <h2 id="vormen">Uurtarief, maandbedrag of project?</h2>
+        <p>Je komt drie manieren van afrekenen tegen.</p>
+        <ul>
+          <li><b>Uurtarief.</b> Je betaalt voor de uren die iemand maakt. Handig voor een vraag of een klein klusje. Lastig te begroten voor doorlopend werk.</li>
+          <li><b>Maandbedrag, ook wel retainer.</b> Elke maand een vast budget voor een vaste hoeveelheid werk. De meest gebruikte vorm, omdat SEO doorlopend werk is.</li>
+          <li><b>Project.</b> Een vaste prijs voor een afgebakende klus, zoals een audit of het herschrijven van tien pagina's.</li>
+        </ul>
+        <p>Let bij een maandbedrag op de looptijd. Veel bureaus vragen een contract van zes of twaalf maanden. Dat is niet nodig. Een bureau dat resultaat levert, hoeft je niet vast te houden.</p>
+
+        <h2 id="bij-ons">Wat kost SEO bij Drijfveer Media?</h2>
+        <p>Onze prijzen staan gewoon op de site. Het zijn vanaf-prijzen, exclusief btw, en alles is maandelijks opzegbaar.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Dienst</th><th>Vanaf</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/lokale-seo/">Lokale SEO</a>, inclusief reviews</td><td>€ 295 per maand</td></tr>
+              <tr><td><a href="/zoekmachine-optimalisatie/">SEO</a></td><td>€ 495 per maand</td></tr>
+              <tr><td><a href="/zoekmachine-optimalisatie/technische-seo/">Technische SEO en audit</a></td><td>€ 395 eenmalig</td></tr>
+              <tr><td><a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a></td><td>€ 75 per pagina</td></tr>
+              <tr><td><a href="/linkbuilding/">Linkbuilding</a></td><td>€ 395 per maand</td></tr>
+              <tr><td><a href="/consult/">Consult</a></td><td>€ 85 per uur</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dat is lager dan bij de meeste bureaus. Niet omdat we minder doen, maar omdat we anders werken. We gebruiken AI voor het rekenwerk en de eerste versies, zodat onze mensen hun tijd steken in wat echt telt. We testen technieken eerst op onze eigen sites, dus we verspillen geen tijd aan dingen die niet werken. En we hebben geen dure kantoorvilla, maar een plek in een bedrijfsverzamelpand in Assen.</p>
+
+        <h2 id="waard">Is SEO de moeite waard?</h2>
+        <p>Reken het simpel uit. Wat levert een nieuwe klant je gemiddeld op? Stel dat dat € 1.000 is. Levert SEO je twee extra klanten per maand op, dan verdien je € 495 per maand ruim terug. Bij een webshop reken je met je marge per bestelling.</p>
+        <Muntenstapels />
+        <p>Het verschil met adverteren: als je stopt met Google Ads, stoppen de bezoekers meteen. Bij SEO blijven ze nog lang komen. Je bouwt iets op wat blijft, zoals een pand dat je koopt in plaats van huurt. Het rendement groeit dus naarmate je langer bezig bent. De eerste maanden zie je vooral posities stijgen, daarna komen de aanvragen.</p>
+
+        <h2 id="offerte">Zo herken je een slechte SEO-offerte</h2>
+        <p>Er zijn goede bureaus en er zijn bureaus die vooral goed zijn in verkopen. Let op deze signalen.</p>
+        <ul>
+          <li><b>Een garantie op plek 1.</b> Niemand bepaalt wat Google doet. Wie dat belooft, neemt het niet zo nauw met de waarheid.</li>
+          <li><b>Geen idee waar het geld heen gaat.</b> Je hoort te weten welk werk er voor je budget wordt gedaan.</li>
+          <li><b>Een jaarcontract zonder uitweg.</b> Waarom zou je vastzitten als het niet werkt?</li>
+          <li><b>Honderden links voor weinig geld.</b> Dat zijn bijna altijd links uit netwerken. Google straft dat af, soms pas na een jaar.</li>
+          <li><b>Alleen maar vakjargon.</b> Wie het niet simpel kan uitleggen, snapt het zelf vaak niet goed.</li>
+        </ul>
+        <p>Twijfel je over een offerte die je al hebt? In de gids <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte voor een website of SEO beoordelen</a> lees je waar je op let. Of laat hem in een <a href="/consult/">consult</a> door ons bekijken.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het doen?" intro="Wat je bij ons krijgt voor je budget, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost SEO per maand?', a: 'Bij de meeste bureaus € 500 tot € 3.500 per maand voor een mkb-bedrijf. Bij Drijfveer Media begint SEO bij € 495 per maand en lokale SEO bij € 295.' },
+      { v: 'Kan ik SEO ook eenmalig laten doen?', a: 'Ja, voor afgebakend werk zoals een audit of het optimaliseren van een aantal pagina\'s. Voor blijvende groei in Google is doorlopend werk wel nodig.' },
+      { v: 'Hoe lang duurt het voordat SEO resultaat oplevert?', a: 'Reken op drie tot zes maanden voor duidelijke resultaten. Bij weinig concurrentie gaat het soms sneller. Lees ook <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe SEO werkt</a>.' },
+      { v: 'Is een freelancer goedkoper dan een bureau?', a: 'Per uur vaak wel. Een bureau heeft meestal meer specialismen in huis, zoals techniek, teksten en linkbuilding. Kijk vooral naar wat je krijgt voor je budget.' },
+      { v: 'Wat kost SEO voor een webshop?', a: 'Meer dan voor een dienstverlener, omdat er meer pagina\'s zijn. Webshop-SEO doen wij niet. Voor webshops helpen we wel met <a href="/online-adverteren/google-shopping/">Google Shopping</a>.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Hoe werkt SEO?', href: '/kennisbank/gidsen/hoe-werkt-seo/', tekst: 'Uitleg voor ondernemers, zonder jargon.' },
+      { label: 'Gids', titel: 'Wat doet een SEO-specialist?', href: '/kennisbank/gidsen/wat-doet-een-seo-specialist/', tekst: 'En wanneer heb je er een nodig?' },
+      { label: 'Dienst', titel: 'SEO uitbesteden', href: '/zoekmachine-optimalisatie/seo-uitbesteden/', tekst: 'Vanaf € 495 per maand, maandelijks opzegbaar.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat SEO jou oplevert?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je concurrenten, en belt je met een eerlijke inschatting van kosten en kansen.`} />
+</Base>

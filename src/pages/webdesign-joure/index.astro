@@ -1,0 +1,198 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/webdesign-joure.astro';
+import { site } from '../../data/site';
+
+const url = '/webdesign-joure/';
+const schema = [{
+  '@type': 'Service',
+  name: 'Webdesign in Joure',
+  serviceType: 'Website laten maken',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: [{ '@type': 'City', name: 'Joure' }, { '@type': 'AdministrativeArea', name: 'De Fryske Marren' }, { '@type': 'AdministrativeArea', name: 'Friesland' }],
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Webdesign Joure: nuchter en betaalbaar | Drijfveer Media"
+  description="Webdesign in Joure voor vakmensen en mkb'ers. Een website die laat zien waar je werkt, van Lemmer tot Sint Nicolaasga, en die van jou blijft. Vanaf € 250."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Friesland', url: '/regio/friesland/' }, { naam: 'Webdesign Joure', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Joure" titel="Webdesign in Joure: een nuchtere website die gewoon werkt" prijs="vanaf € 250" eenmalig>
+    <p>In Joure werken veel ondernemers die liever aan het werk zijn dan aan hun website. Voor hen maken we webdesign in Joure dat klopt, snel online staat en betaalbaar blijft. En de site is van jou, niet van ons.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Webdesign in Joure begint bij je werkgebied</h2>
+      <p>Joure is de grootste kern van de gemeente De Fryske Marren. Het CBS telt er 13.045 inwoners en 1.770 bedrijfsvestigingen. In de hele gemeente wonen 52.235 mensen. De gemeente zelf schrijft dat ze ruim 5.000 bedrijven rijk is, vooral uit het midden- en kleinbedrijf.</p>
+    </div>
+    <div class="getallen cijfers">
+      <div class="getal-kaart"><b>1.770</b><span>bedrijfsvestigingen in Joure</span></div>
+      <div class="getal-kaart"><b>455</b><span>daarvan in de zakelijke dienstverlening</span></div>
+      <div class="getal-kaart"><b>380</b><span>in handel en horeca</span></div>
+      <div class="getal-kaart"><b>190</b><span>zoekopdrachten per maand op "webdesign joure"</span></div>
+    </div>
+    <div class="tekst">
+      <p class="klein muted">Bronnen: CBS, Kerncijfers wijken en buurten 2025; gemeente De Fryske Marren, pagina Ondernemen. Het zoekvolume komt uit SE Ranking (oktober 2026).</p>
+      <p>Bij Joure komen de A6 en de A7 samen. Een installateur of aannemer uit Joure zit zo in Lemmer, Sneek of Heerenveen. Zijn klanten komen dus uit een veel groter gebied dan Joure alleen. Dat is meteen de belangrijkste les voor je website. Wie in Lemmer "loodgieter" zoekt, moet op jouw site kunnen zien dat je daar ook komt.</p>
+
+      <h2>Waar je klanten wonen</h2>
+      <p>De Fryske Marren telt tientallen dorpen. Voor je website is het handig om te weten hoe groot de kernen rond Joure zijn. Dit zijn de grootste, volgens het CBS:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kern (CBS-wijk)</th><th>Inwoners</th><th>Bedrijfsvestigingen</th></tr></thead>
+          <tbody>
+            <tr><td>Joure</td><td>13.045</td><td>1.770</td></tr>
+            <tr><td>Lemmer</td><td>10.340</td><td>1.545</td></tr>
+            <tr><td>Balk</td><td>4.455</td><td>505</td></tr>
+            <tr><td>Sint Nicolaasga</td><td>3.360</td><td>490</td></tr>
+            <tr><td>Oudehaske</td><td>1.870</td><td>215</td></tr>
+            <tr><td>Oudemirdum</td><td>1.380</td><td>215</td></tr>
+            <tr><td>Sintjohannesga</td><td>1.225</td><td>135</td></tr>
+            <tr><td>Langweer</td><td>1.050</td><td>190</td></tr>
+            <tr><td>Scharsterbrug</td><td>800</td><td>120</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: CBS, Kerncijfers wijken en buurten 2025, gemeente De Fryske Marren.</p>
+      <p>Werk je in een paar van die plaatsen, noem ze dan op je site. Kort, met een zin over wat je er doet of deed. Een lijst met dertig plaatsnamen onderaan de pagina helpt niemand. Een zin als "vorige maand vervingen we in Langweer een complete badkamer" wel.</p>
+
+      <h2>Waar in Joure je zit, en wat je site moet doen</h2>
+      <p>Ook binnen Joure verschilt het. Het CBS deelt de plaats op in buurten. Drie daarvan zijn voor ondernemers het belangrijkst:</p>
+    </div>
+    <div class="raster soorten">
+      <div class="card"><Tekening naam="huis" /><h3>Centrum</h3><p>335 vestigingen, waarvan 90 in handel en horeca. Je klant loopt langs of zoekt op zijn telefoon. Openingstijden, wat je verkoopt en waar je parkeert moeten in vijf seconden duidelijk zijn.</p></div>
+      <div class="card"><Tekening naam="tandwiel" vertraging={150} /><h3>Sewei en De Ekers</h3><p>285 vestigingen, met 100 in handel en horeca en 75 in nijverheid en energie. Hier zitten showrooms en bedrijven die aan andere bedrijven leveren. Laat zien wat je maakt, en maak een offerte aanvragen makkelijk.</p></div>
+      <div class="card"><Tekening naam="pin" vertraging={300} /><h3>Woudfennen</h3><p>170 vestigingen op een bedrijvenpark. Je klant is vaak een inkoper of aannemer van buiten Joure. Die wil projecten zien en snel weten of je kunt leveren.</p></div>
+    </div>
+    <div class="tekst">
+      <p class="klein muted" style="margin-top:16px">Bron: CBS, Kerncijfers wijken en buurten 2025, buurten van de wijk Joure.</p>
+      <p>De gemeente verkoopt nog grond in Joure. Op De Woudfennen III zijn volgens de gemeente nog een beperkt aantal bouwrijpe kavels. Voor De Ekers 3B liep de inschrijving tot 15 september 2026. Daar moet de voorkant van de gebouwen naar de A7 wijzen, en stelt de gemeente hoge eisen aan de uitstraling. Wie zo'n pand neerzet, wil een website die net zo verzorgd is.</p>
+      <p class="klein muted">Bron: gemeente De Fryske Marren, pagina Bedrijventerreinen.</p>
+
+      <h2>Webdesign in Joure: wat er minimaal op moet</h2>
+      <p>Een website hoeft niet groot te zijn. Wel compleet. Dit lijstje kun je gerust naast je huidige site leggen.</p>
+      <ol>
+        <li><strong>Je werkgebied.</strong> Noem de plaatsen waar je echt werkt: Joure, Lemmer, Balk, Sint Nicolaasga, Langweer. Kort, met een zin over wat je er doet.</li>
+        <li><strong>Je telefoon, bovenaan.</strong> Op een mobiel bel je met één tik. Veel klanten in de regio bellen liever dan dat ze een formulier invullen.</li>
+        <li><strong>Een info-adres op je eigen domeinnaam.</strong> Een mailadres als info@jouwbedrijf.nl wekt meer vertrouwen dan een gratis adres.</li>
+        <li><strong>Echte foto's.</strong> Van jou, je bus, je werk. Mooi hoeft niet, eerlijk wel.</li>
+        <li><strong>Hoe een offerte werkt.</strong> Of wat je ongeveer kost. Dat scheelt jou telefoontjes van mensen die toch te weinig budget hebben.</li>
+        <li><strong>Een link naar je Google Bedrijfsprofiel.</strong> Daar staan je reviews, en daar kijken mensen als eerste.</li>
+        <li><strong>Een snelle mobiele versie.</strong> Google beoordeelt je site op de versie voor de telefoon. Volgens Google moet het grootste deel van een pagina binnen 2,5 seconden in beeld staan.</li>
+      </ol>
+      <p>Zo past de website bij hoe klanten in deze regio zoeken. Online aanwezigheid gaat niet over de nieuwste trends. Het gaat erom dat iemand je vindt en belt.</p>
+
+      <h2>Wat is van jou, en wat van je webbouwer?</h2>
+      <p>Een vraag die bijna niemand stelt, tot het te laat is. Wie wil overstappen, merkt soms dat de domeinnaam op naam van de oude webbouwer staat. Of dat er geen kopie van de site bestaat. Dan begin je opnieuw.</p>
+      <p>Bij ons is dat anders, en dat houden we hoog in het vaandel. Je bent eigenaar van je site en alles wat erop staat. Je krijgt de inloggegevens, en wil je ooit weg, dan krijg je een kopie mee. Staat je domeinnaam nog op naam van een ander, dan helpen we je dat recht te zetten.</p>
+      <div class="kader">
+        <p class="kader-titel">Zo check je het zelf</p>
+        <ol>
+          <li>Zoek je .nl-domeinnaam op in de Whois van SIDN, de beheerder van .nl. Daar zie je wie de houder is.</li>
+          <li>Staat daar je bedrijfsnaam? Goed. Staat er de naam van je webbouwer of van een oud-medewerker? Laat dat aanpassen via je registrar, de partij waar je de domeinnaam hebt.</li>
+          <li>Wil je je domeinnaam verhuizen naar een andere partij, dan vraag je volgens SIDN een verhuistoken op bij je huidige registrar.</li>
+          <li>Vraag je huidige bouwer om een volledige kopie van je site en de inloggegevens van het beheer. Dat is een gewone vraag.</li>
+        </ol>
+      </div>
+      <p class="klein muted">Bron: SIDN, pagina Domeinnaam registreren.</p>
+
+      <h2>Snel en betaalbaar, of helemaal maatwerk</h2>
+      <p>Bij wie past een website met AI? Bij de meeste ondernemers in Joure met een paar diensten en een duidelijk werkgebied. Een <a href="/website-laten-maken/website-met-ai/">website met AI</a> kost vanaf € 250, wordt met de hand afgemaakt en staat binnen een paar weken online. Heb je meer pagina's of eigen wensen, dan bouwen we maatwerk in WordPress vanaf € 2.000. Beide routes staan uitgelegd bij <a href="/website-laten-maken/">website laten maken</a>.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Website met AI</th><th>Maatwerk in WordPress</th></tr></thead>
+          <tbody>
+            <tr><td>Vanaf</td><td>€ 250</td><td>€ 2.000</td></tr>
+            <tr><td>Online in</td><td>vaak binnen twee weken</td><td>meestal zes tot tien weken</td></tr>
+            <tr><td>Past bij</td><td>zzp'ers, vakmensen, kleine winkels</td><td>bedrijven met veel diensten of eigen functies</td></tr>
+            <tr><td>Zelf aanpassen</td><td>ja, teksten en foto's</td><td>ja, via een eenvoudig beheer</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Alle prijzen zijn vanaf-prijzen, exclusief btw.</p>
+
+      <h2>Rekenvoorbeeld: wanneer verdient je site zich terug?</h2>
+      <div class="kader">
+        <p class="kader-titel">Verzonnen voorbeeld, verzonnen cijfers</p>
+        <p>Een schildersbedrijf uit Joure laat een site met AI maken voor € 250 en neemt onderhoud voor € 39 per maand. Het eerste jaar kost dat samen € 718. Via de site komen gemiddeld drie aanvragen per maand binnen, waarvan één opdracht wordt. Een gemiddelde klus levert € 600 op na aftrek van verf en uren. Dan verdient de site zich in de tweede maand al terug. Ook als het maar de helft is, blijft er ruim geld over.</p>
+      </div>
+      <p>Waar het om draait: weet wat één nieuwe klant je oplevert. Dan weet je ook wat een site je mag kosten.</p>
+
+      <h2>Zelf beheren, of door ons</h2>
+      <p>Na de livegang kun je de site zelf beheren. Teksten en foto's pas je aan in een eenvoudig beheer. Liever niet? Dan doen wij de back-ups, updates en beveiliging met <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud vanaf € 39 per maand</a>. Dan loopt alles door, ook als jij op een dak staat. Gaat er iets mis, dan bel je ons. Op werkdagen bellen we binnen 15 minuten terug.</p>
+
+      <h2>Je oude site vervangen zonder je plek in Google te verliezen</h2>
+      <p>Heb je al een site die een beetje gevonden wordt, dan wil je die plek niet kwijt. Het gevaar zit in de adressen van je pagina's. Verandert /schilderwerk.html in /schilderwerk/, dan ziet Google een nieuwe pagina en is de oude weg. Zo voorkomen we dat:</p>
+      <ol>
+        <li>We maken een lijst van alle oude adressen, met de pagina's die nu bezoekers trekken bovenaan.</li>
+        <li>Elk oud adres krijgt een vaste doorverwijzing naar de nieuwe pagina. Google raadt hiervoor een permanente doorverwijzing aan, zoals een 301.</li>
+        <li>We verwijzen direct naar de eindbestemming, zonder een keten van doorverwijzingen. Ook dat is advies van Google.</li>
+        <li>Na de livegang kijken we in Search Console of Google de nieuwe pagina's oppikt.</li>
+        <li>We passen de link in je Google Bedrijfsprofiel en op andere sites aan.</li>
+      </ol>
+      <p>Volgens Google kosten 301-doorverwijzingen geen waarde van links. Doe je het goed, dan neem je je plek dus mee.</p>
+
+      <h2>Jouster Merke en de weekmarkt: zet het op je site</h2>
+      <p>De Jouster Merke is de jaarmarkt van Joure. De gemeente De Fryske Marren organiseert hem op de vierde donderdag van september, en schrijft dat het voor zover bekend de langst lopende jaarmarkt ter wereld is. Daarnaast is er elke week een weekmarkt in Joure.</p>
+      <p>Sta je op de markt of doe je mee met een actie in het centrum? Zet het dan weken van tevoren op je site en in je Google Bedrijfsprofiel. Met een eigen pagina of een bericht vinden bezoekers het voordat ze komen. Na afloop zet je er een paar foto's bij. Zo heb je meteen nieuw materiaal voor volgend jaar.</p>
+      <p class="klein muted">Bron: gemeente De Fryske Marren, pagina Markten en standplaatsen.</p>
+
+      <h2>Ondernemersverenigingen en een link naar je site</h2>
+      <p>De gemeente noemt de Ondernemersvereniging Skarsterlân en Winkeliersvereniging WIH Joure als verenigingen voor Joure. Nieuwe bedrijven in De Fryske Marren krijgen volgens de gemeente het eerste jaar lidmaatschap van de Ondernemers Vereniging Skarsterlân, de Vereniging van Bedrijven Lemsterland of het Ondernemersnetwerk Gaasterland aangeboden. Pak dat aan. Een vermelding met link op de site van je vereniging helpt je in Google, want volgens Google telt mee hoeveel websites naar je bedrijf linken.</p>
+      <p class="klein muted">Bron: gemeente De Fryske Marren, pagina Ondernemersverenigingen.</p>
+
+      <h2>Van kennismaken tot live</h2>
+    </div>
+    <ol class="stappen-rij">
+      <li><strong>Kennismaken</strong><p>We komen naar je toe in Joure, of je komt koffie drinken aan de Lauwers in Assen.</p></li>
+      <li><strong>Vaste prijs</strong><p>Je krijgt een voorstel met een vaste prijs, exclusief btw. Geen verrassingen achteraf.</p></li>
+      <li><strong>Bouwen</strong><p>We maken het ontwerp en de teksten. Je ziet alles voordat het online gaat.</p></li>
+      <li><strong>Live en overdragen</strong><p>De site gaat live op jouw domeinnaam. Je krijgt de inloggegevens en een korte uitleg.</p></li>
+    </ol>
+    <div class="tekst" style="margin-top:40px">
+      <h2>Van Assen naar Joure</h2>
+      <p>We komen uit Assen. Joure ligt zo'n 75 kilometer verderop, iets meer dan een uur rijden. Voor de kennismaking komen we naar je toe. Daarna werken we op afstand en bel je met {site.contactpersoon}. Wil je na de livegang ook hoger in Google, dan helpt <a href="/lokale-seo/">lokale SEO</a>. Kijk voor de buren ook bij <a href="/webdesign-sneek/">webdesign in Sneek</a> en <a href="/webdesign-heerenveen/">webdesign in Heerenveen</a>, of bij alles wat we in <a href="/regio/friesland/">Friesland</a> doen.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost webdesign in Joure?', a: 'Een website met AI kost vanaf € 250. Maatwerk in WordPress begint bij € 2.000. Je krijgt vooraf een vaste prijs, exclusief btw.' },
+      { v: 'Ik heb nog geen website. Waar begin ik?', a: 'Met een domeinnaam op je eigen naam en een Google Bedrijfsprofiel. Daarna volgt een compacte site met je diensten, je werkgebied en je telefoonnummer. Meer is in het begin vaak niet nodig.' },
+      { v: 'Kan ik mijn huidige domeinnaam houden?', a: 'Ja. Je nieuwe site komt gewoon op je bestaande domeinnaam. Oude pagina\'s sturen we door naar de nieuwe, zodat je je plek in Google houdt.' },
+      { v: 'Hoe weet ik of mijn domeinnaam op mijn naam staat?', a: 'Zoek hem op in de Whois van SIDN. Staat daar niet je eigen bedrijf als houder, vraag je registrar dan om dat aan te passen.' },
+      { v: 'Wie doet de back-ups en updates?', a: 'Dat kun je zelf doen, of aan ons overlaten met onderhoud vanaf € 39 per maand. Dan houden wij de site veilig en bij.' },
+      { v: 'Komen jullie naar Joure?', a: 'Ja, voor de kennismaking en als het nodig is ook later. Wil je liever naar ons, dan drink je koffie aan de Lauwers in Assen.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer in de buurt van Joure"
+    links={[
+      { label: 'Dienst', titel: 'Website laten maken', href: '/website-laten-maken/', tekst: 'Beide routes, de prijzen en wat erbij zit.', teken: 'scherm' },
+      { label: 'Sneek', titel: 'Webdesign in Sneek', href: '/webdesign-sneek/', tekst: 'Een website die het hoogseizoen aankan.', teken: 'scherm' },
+      { label: 'Heerenveen', titel: 'Webdesign in Heerenveen', href: '/webdesign-heerenveen/', tekst: 'Een site voor ondernemers aan de andere kant van de A7.', teken: 'scherm' },
+      { label: 'Regio', titel: 'Friesland', href: '/regio/friesland/', tekst: 'Al onze diensten in de provincie.' },
+    ]}
+  />
+
+  <Actie titel="Een site die gewoon werkt?" tekst={`Vertel ${site.contactpersoon} wat je doet en waar je werkt. Hij belt je binnen 15 minuten terug en zegt eerlijk welke route bij je past.`} />
+</Base>
+<style>
+  .soorten { margin-top: 8px; }
+  .cijfers { margin: 8px 0 12px; }
+  .cijfers .getal-kaart b { font-size: var(--step-2); }
+</style>

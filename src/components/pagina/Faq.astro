@@ -1,0 +1,33 @@
+---
+// Veelgestelde vragen, met FAQPage-schema voor Google en AI-assistenten.
+interface Vraag { v: string; a: string } // a mag eenvoudige HTML bevatten (links)
+interface Props { titel?: string; vragen: Vraag[] }
+const { titel = 'Veelgestelde vragen', vragen } = Astro.props;
+const schone = (html: string) => html.replace(/<[^>]+>/g, '');
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: vragen.map((q) => ({ '@type': 'Question', name: q.v, acceptedAnswer: { '@type': 'Answer', text: schone(q.a) } })),
+};
+---
+<section class="wrap sectie faq">
+  <h2>{titel}</h2>
+  <div class="vragen">
+    {vragen.map((q) => (
+      <details>
+        <summary>{q.v}</summary>
+        <p set:html={q.a} />
+      </details>
+    ))}
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</section>
+<style>
+  .vragen { margin-top: 20px; border-top: 1px solid var(--line); max-width: 820px; }
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 800; font-size: 1.12rem; padding: 18px 40px 18px 0; list-style: none; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 6px; top: 14px; font-size: 1.5rem; font-weight: 400; color: var(--muted); }
+  details[open] summary::after { content: '−'; }
+  details p { margin: 0 0 20px; color: var(--muted); max-width: 66ch; }
+</style>

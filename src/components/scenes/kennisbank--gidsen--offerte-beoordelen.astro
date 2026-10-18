@@ -1,0 +1,68 @@
+---
+// Scène voor /kennisbank/gidsen/offerte-beoordelen/: een offerte met regels, een totaalbedrag en een maandbedrag, naast een vergrootglas.
+// Als hij leeft: het vergrootglas glijdt rustig langs de regels, de goede regels krijgen een vinkje en bij het maandbedrag verschijnt een oranje vlaggetje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 92, t: 'Ontwerp en bouw', w: 70 },
+  { y: 120, t: 'Teksten', w: 52 },
+  { y: 148, t: 'Doorsturen oude URL\'s', w: 44 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een offerte voor een website met regels voor ontwerp, teksten en het doorsturen van oude URL\'s. Een vergrootglas loopt de regels na, er komen vinkjes bij en een oranje vlaggetje bij het verplichte maandbedrag.'}>
+  <!-- tweede offerte erachter -->
+  <rect x="104" y="30" width="230" height="226" rx="12" fill="#f4f7fa" stroke="#d9e1ea" stroke-width="2" transform="rotate(-4 219 143)" />
+  <!-- offerte -->
+  <rect x="96" y="22" width="230" height="230" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="116" y="52" font-size="15" font-weight="900">Offerte</text>
+  <text x="116" y="69" font-size="10.5" class="zacht">Nieuwe website · voorbeeld</text>
+  {regels.map((r) => (
+    <g>
+      <text x="116" y={r.y + 4} font-size="11.5">{r.t}</text>
+      <rect class="v" x={304 - r.w} y={r.y - 4} width={r.w - 18} height="8" rx="4" />
+      <path d={`M116 ${r.y + 14}h192`} stroke="#e8eef4" stroke-width="1.5" />
+    </g>
+  ))}
+  <text x="116" y="186" font-size="11.5">Hosting en onderhoud</text>
+  <text x="306" y="186" font-size="11.5" font-weight="800" text-anchor="end">€ 60 p/m</text>
+  <path d="M116 202h192" stroke="#10283f" stroke-width="2" />
+  <text x="116" y="226" font-size="13" font-weight="900">Totaal eenmalig</text>
+  <text x="306" y="226" font-size="15" font-weight="900" text-anchor="end">€ 1.800</text>
+
+  <!-- vergrootglas -->
+  <g class="loep">
+    <circle cx="384" cy="108" r="30" fill="#fff" fill-opacity="0.5" stroke="#074663" stroke-width="5" />
+    <path d="M405 130l26 26" stroke="#074663" stroke-width="9" stroke-linecap="round" />
+  </g>
+
+  {!mini && (
+    <g>
+      {regels.map((r, i) => (
+        <g class="vink" style={`animation-delay:${0.6 + i * 0.5}s`}>
+          <circle cx="342" cy={r.y} r="9" fill="#1f8a5b" />
+          <path d={`M337.5 ${r.y}l3 3 5.5-6`} stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <g class="vlag">
+        <path d="M336 194v-26" stroke="#10283f" stroke-width="2" stroke-linecap="round" />
+        <path d="M337 169h18l-5 6 5 6h-18z" fill="#ff6600" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .vlag { transform-box: fill-box; transform-origin: 0 100%; }
+  :global(.teken-js) .vink, :global(.teken-js) .vlag { opacity: 0; }
+  .in-beeld .loep { animation: kennisbank-gidsen-offerte-beoordelen-loep 7s ease-in-out 0.3s infinite; }
+  .in-beeld .vink { animation: kennisbank-gidsen-offerte-beoordelen-vink 0.45s ease-out forwards; }
+  .in-beeld .vlag { animation: kennisbank-gidsen-offerte-beoordelen-vlag 0.6s cubic-bezier(.3,1.6,.5,1) 2.3s forwards; }
+  @keyframes kennisbank-gidsen-offerte-beoordelen-loep {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-90px, -20px); }
+    50% { transform: translate(-70px, 40px); }
+    75% { transform: translate(-100px, 80px); }
+  }
+  @keyframes kennisbank-gidsen-offerte-beoordelen-vink { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-offerte-beoordelen-vlag { from { opacity: 0; transform: scaleY(0.2); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .loep, .in-beeld .vink, .in-beeld .vlag { animation: none; } }
+</style>

@@ -1,0 +1,184 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--entiteiten.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/entiteiten/';
+const datum = '2026-10-18';
+const definitie = 'In SEO zijn entiteiten de dingen waar Google kennis over opslaat, zoals personen, organisaties, plaatsen en begrippen, elk met een eigen identiteit en relaties met andere dingen.';
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Entiteiten',
+    alternateName: ['Entiteit', 'Entities'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat zijn entiteiten in SEO?',
+    inLanguage: 'nl-NL',
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('thorgall').naam, jobTitle: persoon('thorgall').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    mainEntity: { '@id': `${site.url}${url}#begrip` },
+  },
+];
+const voorbeeld = `{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Bakkerij De Vries",
+  "url": "https://www.voorbeeld.nl",
+  "telephone": "+31-591-000000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Voorbeeldstraat 1",
+    "addressLocality": "Emmen",
+    "addressCountry": "NL"
+  },
+  "sameAs": [
+    "https://www.facebook.com/voorbeeld",
+    "https://www.instagram.com/voorbeeld"
+  ]
+}`;
+---
+<Base
+  title="Wat zijn entiteiten in SEO? Uitleg | Drijfveer Media"
+  description="Wat zijn entiteiten in SEO? Personen, bedrijven, plaatsen en begrippen die Google herkent via de Knowledge Graph. Zo word jij er een, met voorbeelden."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Entiteiten', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO en GEO</p>
+        <h1>Wat zijn entiteiten in SEO?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="thorgall" datum={datum} />
+      <p>Wat zijn entiteiten voor Google? Dit artikel gaat over zoekmachines. Het woord entiteit heeft ook een betekenis in de filosofie (iets dat bestaat), in het recht en de boekhouding (een rechtspersoon of bedrijfsonderdeel) en in spirituele kringen. Daar gaat het hier niet over. Voor een zoekmachine is een entiteit een ding met een eigen identiteit: een persoon, een bedrijf, een plaats, een product of een begrip. Google weet wat het is en hoe het samenhangt met andere dingen.</p>
+
+      <h2>Dingen, geen woordjes</h2>
+      <p>Typ "assen" in Google. Bedoel je de hoofdstad van Drenthe, of de assen onder een aanhanger? Lang keek een zoekmachine vooral naar de letters. Sinds 2012 probeert Google te snappen welk ding je bedoelt. Dat jaar lanceerde Google de Knowledge Graph, met de slogan "things, not strings": dingen, geen reeksen letters.</p>
+      <p>De Knowledge Graph is een enorme database van entiteiten en hun relaties. Bij de start in mei 2012 bevatte hij volgens Google meer dan 500 miljoen objecten en 3,5 miljard feiten. In 2020 meldde Google 500 miljard feiten over 5 miljard entiteiten. Je ziet hem terug in het kennisvenster naast of tussen de zoekresultaten, met foto's, een korte uitleg en gegevens.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>Soorten entiteiten</h2></div>
+      <p>Bijna alles waar je een naam aan kunt geven, kan een entiteit zijn. De meest voorkomende soorten:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Voorbeeld</th><th>Wat Google erover kan weten</th></tr></thead>
+          <tbody>
+            <tr><td>Personen</td><td>Een schrijver, een artiest, een ondernemer</td><td>Geboortedatum, beroep, werk, familie</td></tr>
+            <tr><td>Organisaties</td><td>Een bedrijf, een club, een gemeente</td><td>Adres, oprichter, oprichtingsjaar, website, profielen</td></tr>
+            <tr><td>Plaatsen</td><td>Assen, het Drents-Friese Wold, een station</td><td>Ligging, provincie, inwoners, wat er te doen is</td></tr>
+            <tr><td>Begrippen</td><td>Warmtepomp, hypotheek, SEO</td><td>Wat het is, waar het bij hoort, verwante begrippen</td></tr>
+            <tr><td>Producten en werken</td><td>Een boek, een film, een automodel</td><td>Maker, verschijningsdatum, beoordelingen</td></tr>
+            <tr><td>Gebeurtenissen</td><td>Een festival, een wedstrijd</td><td>Datum, plaats, wie er optreedt of meedoet</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Entiteit of zoekwoord?</h2>
+      <p>Een zoekwoord is wat iemand intypt. Een entiteit is wat hij bedoelt. Eén entiteit kan veel zoekwoorden hebben, en één zoekwoord kan bij verschillende entiteiten horen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Zoekwoord</th><th>Entiteit</th></tr></thead>
+          <tbody>
+            <tr><td>Wat is het?</td><td>Een reeks letters</td><td>Een ding met een eigen identiteit</td></tr>
+            <tr><td>Voorbeeld</td><td>"assen", "tt assen", "hoofdstad drenthe"</td><td>De stad Assen, en apart daarvan het TT-circuit</td></tr>
+            <tr><td>Hoe Google het leest</td><td>Welke pagina's dezelfde woorden gebruiken</td><td>Welke pagina's over hetzelfde ding gaan, ook met andere woorden</td></tr>
+            <tr><td>Wat jij ermee doet</td><td>De woorden van je klant gebruiken</td><td>Duidelijk maken wie je bent, wat je doet en waar</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2>Relaties: hoe Google verbanden legt</h2></div>
+      <p>Een losse entiteit zegt weinig. De waarde zit in de relaties. Google schreef bij de start dat het "niet zomaar een catalogus" is, maar dat de verbanden tussen de dingen de sleutel vormen. Je kunt elke relatie lezen als een korte zin van drie delen: iets, een verband, iets anders.</p>
+      <ul>
+        <li>Drijfveer Media <b>is gevestigd in</b> Assen.</li>
+        <li>Assen <b>ligt in</b> Drenthe.</li>
+        <li>Robert Boersma <b>is oprichter van</b> Drijfveer Media.</li>
+        <li>Drijfveer Media <b>biedt aan</b> zoekmachine-optimalisatie.</li>
+      </ul>
+      <p>Uit zulke zinnen bouwt een zoekmachine een web van kennis. Daardoor snapt Google dat een vraag naar "seo bureau drenthe" over een bedrijf in Assen kan gaan, ook als het woord Drenthe nergens op de pagina staat. De context bepaalt de betekenis. Daarom heet dit ook <a href="/kennisbank/wat-is/semantisch-zoeken/">semantisch zoeken</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Hoe Google entiteiten herkent</h2></div>
+      <p>Google haalt zijn kennis uit honderden bronnen. Volgens Google zelf is Wikipedia een veelgebruikte bron, maar niet de enige. Bij de start noemde Google ook Freebase en het CIA World Factbook. Voor muziek, sport en tv gebruikt Google ook gegevens van partners met een licentie. Voor jouw bedrijf tellen vooral deze bronnen:</p>
+      <ul class="vink">
+        <li><b>Je eigen website:</b> de tekst, de over-ons-pagina en de structured data in de code.</li>
+        <li><b>Je Google Bedrijfsprofiel:</b> naam, adres, openingstijden, categorie en reviews.</li>
+        <li><b>Vermeldingen elders:</b> branchesites, de KvK, nieuwsberichten, sociale profielen.</li>
+        <li><b>Links:</b> welke sites naar je verwijzen en in welke context.</li>
+      </ul>
+      <p>Hoe vaker die verbanden op betrouwbare plekken op dezelfde manier staan, hoe zekerder Google is. Tegenstrijdige gegevens werken andersom. Dan weet Google niet welke versie klopt.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Het kennisvenster en je bedrijfsprofiel</h2></div>
+      <p>Het zichtbare bewijs dat Google je kent, is een kennisvenster: het blok met informatie over één ding. Volgens Google wordt dat blok automatisch gemaakt uit bronnen op het web. Wie het onderwerp is van een kennisvenster, kan het claimen en wijzigingen voorstellen.</p>
+      <p>Voor een lokaal bedrijf werkt het iets anders. Je Bedrijfsprofiel lijkt op een kennisvenster, maar is bedoeld voor bedrijven die klanten ontvangen of in een gebied werken. Dat profiel beheer je zelf. Voor de meeste mkb'ers is dat de snelste manier om als entiteit zichtbaar te worden. Hoe je het inricht, lees je in de gids over het <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Neem ons eigen bedrijf. Op elke pagina van deze site staat in de code een blokje structured data dat zegt: dit is Drijfveer Media, een organisatie aan de Lauwers in Assen, opgericht in 2011, met dit telefoonnummer. Op deze pagina staat er nog een bij: dat dit de uitleg is van het begrip entiteiten. Diezelfde gegevens horen overal gelijk te staan: in het bedrijfsprofiel, bij de KvK en in elke vermelding. Zo leg je de puzzel voor Google zo makkelijk mogelijk.</p>
+      <p>Vergelijk dat met een bakkerij die op haar site "Bakkerij De Vries" heet, in Google "Bakker de Vries Emmen" en bij de KvK een andere naam heeft, met twee telefoonnummers. Voor een mens is dat één bakkerij. Voor een zoekmachine misschien drie. Met <a href="/kennisbank/wat-is/schema-markup/">schema markup</a> kan die bakkerij in de code vastleggen wie ze is, en met <code>sameAs</code> naar haar profielen elders verwijzen. Een verzonnen voorbeeld:</p>
+      <pre><code>{voorbeeld}</code></pre>
+      <p>Google schrijft dat het de eigenschap <code>sameAs</code> algemeen kan gebruiken. Het is een manier om te zeggen: dit profiel en deze site gaan over hetzelfde ding.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2>Waarom het nu meer telt</h2></div>
+      <p>AI-assistenten zoals ChatGPT, Gemini en de AI-antwoorden van Google noemen bedrijven die ze herkennen. Ben jij een duidelijke entiteit met bekende relaties ("hovenier in Assen, gespecialiseerd in tuinontwerp"), dan is de kans groter dat je genoemd wordt. Een vermelding zonder link kan daarbij ook tellen, omdat het model je naam koppelt aan wat je doet. Dat is de kern van <a href="/generative-engine-optimization/">genoemd worden door AI</a>.</p>
+
+      <h2>Zo word je een herkenbare entiteit</h2>
+      <ul class="vink">
+        <li>Gebruik overal precies dezelfde bedrijfsnaam, hetzelfde adres en hetzelfde telefoonnummer.</li>
+        <li>Zet Organization- of LocalBusiness-markup op je site, met <code>sameAs</code>-links naar je profielen elders.</li>
+        <li>Maak een over-ons-pagina met echte mensen, hun rol en hun ervaring.</li>
+        <li>Schrijf over de begrippen rond je vak, en noem daarbij plaatsen, materialen en werkwijzen bij hun naam.</li>
+        <li>Richt je Google Bedrijfsprofiel volledig in en houd het actueel.</li>
+        <li>Zorg voor vermeldingen op sites die bij je vak en je regio passen.</li>
+        <li>Maak geen Wikipedia-pagina over je eigen bedrijf. Die wordt verwijderd als je niet echt bekend bent, en dat ben je als mkb'er meestal niet.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Lees ook</p>
+        <p>Hoe je gegevens in de code zet, lees je bij <a href="/generative-engine-optimization/structured-data/">structured data</a>. Waarom vertrouwen zo zwaar weegt, staat bij <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een entiteit in SEO?', a: 'Een ding met een eigen identiteit waar een zoekmachine kennis over heeft: een persoon, organisatie, plaats, product of begrip. Google slaat die kennis op in de Knowledge Graph.' },
+      { v: 'Wat is de Knowledge Graph?', a: 'De kennisbank van Google, gestart in mei 2012. Volgens Google bevatte hij in 2020 500 miljard feiten over 5 miljard entiteiten. Het kennisvenster in de zoekresultaten haalt zijn gegevens hieruit.' },
+      { v: 'Heb ik een Wikipedia-pagina nodig om een entiteit te zijn?', a: 'Nee. Wikipedia is een veelgebruikte bron, maar Google gebruikt er honderden. Voor een lokaal bedrijf zijn je website, je Bedrijfsprofiel en vermeldingen elders veel belangrijker.' },
+      { v: 'Helpt schema markup om als entiteit herkend te worden?', a: 'Het helpt Google om je gegevens zonder twijfel te lezen. Het werkt het best als dezelfde gegevens ook op je pagina, in je Bedrijfsprofiel en op andere sites staan.' },
+      { v: 'Hoe zie ik of Google mijn bedrijf als entiteit kent?', a: 'Zoek op je bedrijfsnaam. Verschijnt er een kennisvenster of je Bedrijfsprofiel met de juiste gegevens, dan herkent Google je. Vraag het ook eens aan ChatGPT of Gemini en kijk of het antwoord klopt.' },
+    ]}
+  />
+
+  <Actie titel="Weet Google wie jij bent?" tekst={`We kijken gratis hoe Google en AI-assistenten jouw bedrijf nu zien. ${site.contactpersoon} belt je met wat er ontbreekt.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

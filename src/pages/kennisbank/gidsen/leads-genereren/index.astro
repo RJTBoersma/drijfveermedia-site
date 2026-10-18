@@ -1,0 +1,323 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--leads-genereren.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/leads-genereren/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Lead, prospect, klant' },
+  { id: 'inbound-outbound', titel: 'Inbound en outbound' },
+  { id: 'regels', titel: 'Wat mag wel en niet' },
+  { id: 'stappenplan', titel: 'Het stappenplan in zes stappen' },
+  { id: 'kanalen', titel: 'Kanalen op een rij' },
+  { id: 'lokaal', titel: 'Leads in je eigen regio' },
+  { id: 'lokkertje', titel: 'Wat bied je aan?' },
+  { id: 'kwalificeren', titel: 'Welke lead eerst?' },
+  { id: 'opvolgen', titel: 'Opvolgen zonder te pushen' },
+  { id: 'samenwerken', titel: 'Marketing en sales samen' },
+  { id: 'meten', titel: 'Vijf getallen' },
+  { id: 'plan', titel: 'De eerste 90 dagen' },
+  { id: 'kopen', titel: 'Leads kopen?' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Leads genereren als mkb\'er: een stappenplan dat werkt',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Leadgeneratie',
+}];
+---
+<Base
+  title="Leads genereren: het stappenplan voor het mkb"
+  description="Leads genereren voor het mkb: welke kanalen werken, wat een lead mag kosten en hoe je opvolgt zodat een aanvraag klant wordt. Met stappenplan en rekensom."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Leads genereren', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Leadgeneratie" titel="Leads genereren als mkb'er: een stappenplan dat werkt" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Leads genereren is zorgen dat de juiste mensen hun hand opsteken: ze bellen, mailen of vragen een offerte aan. Als mkb'er heb je geen duizenden leads nodig, wel genoeg goede. Zo pak je dat aan, stap voor stap.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een lead is iemand die interesse toont en contactgegevens achterlaat. Een prospect is een lead die echt bij je past.</li>
+            <li>Begin bij je ideale klanten en reken uit wat één lead mag kosten. Dan kies je pas kanalen.</li>
+            <li>Kies twee kanalen en doe die goed, in plaats van tien half.</li>
+            <li>Bellen of mailen naar mensen die je niet kennen is aan regels gebonden, ook bij zzp'ers en eenmanszaken.</li>
+            <li>Een lead is pas iets waard als je hem opvolgt. Bel binnen het uur terug en spreek altijd een volgende stap af.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is een lead, en wat is een prospect?</h2>
+        <p>Een lead is een persoon of bedrijf die interesse toont in wat je doet en een manier achterlaat om contact op te nemen. Iemand die je offerteformulier invult, belt na het zien van je site of zijn e-mailadres achterlaat voor een prijslijst. Nog geen klant, wel een begin.</p>
+        <p>Niet elke lead is evenveel waard. Daarom maken we onderscheid:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort lead</th><th>Herken je aan</th><th>Wat je doet</th></tr></thead>
+            <tbody>
+              <tr><td>Koude lead</td><td>Downloadt iets of vraagt je nieuwsbrief aan, zoekt nog niets</td><td>Warm houden met nuttige informatie</td></tr>
+              <tr><td>Warme leads</td><td>Vergelijken en stellen een vraag; weten wat ze willen, alleen nog niet bij wie</td><td>Snel en persoonlijk antwoorden, een gesprek voorstellen</td></tr>
+              <tr><td>Hete lead</td><td>Vraagt een offerte aan of wil een afspraak</td><td>Dezelfde dag bellen, hier telt elk uur</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een prospect is een lead waarvan je weet dat hij past: het juiste soort klus, het juiste budget, binnen je werkgebied. Bij zakelijke klanten hoort daar een vierde vraag bij. Praat je met de beslisser, of met iemand die het moet voorleggen? Leads van beslissers zijn meer waard, ook al zijn het er minder. Tien echte prospects leveren meer op dan honderd losse namen.</p>
+
+        <h2 id="inbound-outbound">Inbound of outbound: wacht je of ga je zoeken?</h2>
+        <p>Er zijn twee manieren om aan leads te komen. Bij inbound zorg je dat klanten jou vinden. Bij outbound ga je zelf op ze af.</p>
+        <p><b>Inbound</b> is gevonden worden in Google en in AI-antwoorden, een goed Google Bedrijfsprofiel, artikelen die vragen van klanten beantwoorden, reviews. Het kost tijd om op te bouwen, maar de leads zijn warm: zij zochten jou. Wie over langere tijd laat zien dat hij zijn vak verstaat, bouwt een vorm van thought leadership op. Dat is minder chic dan het klinkt. Het betekent gewoon: jij bent degene die het helderst uitlegt hoe het zit. Een installateur die op zijn site eerlijk uitlegt wanneer een warmtepomp níet loont, wint vertrouwen dat geen advertentie kan kopen.</p>
+        <p><b>Outbound</b> is bellen, mailen, langsgaan, netwerken en LinkedIn-berichten sturen. Het gaat sneller en je kiest zelf wie je benadert. Het kost wel meer uren per lead, en de meeste mensen zitten niet op je te wachten.</p>
+        <p>Voor de meeste mkb'ers is inbound de basis en outbound een aanvulling voor een handvol droomklanten. Bij een mkb'er zit marketing/sales vaak in één persoon: jij. Dan is het fijn als de leads naar je toe komen.</p>
+
+        <h2 id="regels">Bellen en mailen naar onbekenden: wat mag wel en niet?</h2>
+        <p>Wie outbound wil werken, moet de regels kennen. De ACM is daar duidelijk over.</p>
+        <ul>
+          <li><b>Bellen om te verkopen.</b> Consumenten, en ook natuurlijke personen zoals een eenmanszaak, vof of maatschap, mag je volgens de ACM alleen bellen als ze daar toestemming voor gaven. Je moet dat per persoon kunnen bewijzen. Een uitzondering geldt voor mensen met wie je de afgelopen drie jaar een klantrelatie had, over een vergelijkbaar product of een vergelijkbare dienst.</li>
+          <li><b>Reclame per e-mail.</b> Volgens de ACM mag je wervende berichten alleen sturen naar ontvangers die vooraf toestemming gaven. Niet via een vooraf aangevinkt hokje. Bestaande klanten mag je wel mailen over producten of diensten die passen bij wat ze eerder kochten. In elk bericht staat een makkelijke manier om je af te melden.</li>
+          <li><b>Adressenlijsten.</b> De spamregels gelden ook voor wie meewerkt aan verzending, zoals een leverancier van adressenbestanden. Een gekochte lijst maakt het mailen dus niet ineens toegestaan.</li>
+        </ul>
+        <p>Let vooral op het eerste punt als je aan zzp'ers of kleine ondernemers verkoopt. Veel zzp'ers en kleine bedrijven hebben een eenmanszaak of vof. Voor hen gelden dus de regels voor natuurlijke personen, ook als je ze op hun zakelijke nummer belt. Twijfel je over jouw situatie, vraag het dan na bij een jurist of bij de ACM zelf.</p>
+
+        <h2 id="stappenplan">Leads genereren in zes stappen</h2>
+        <p>Leads genereren werkt het best in een vaste volgorde. Sla je de eerste stappen over, dan betaal je later voor bezoekers die niets opleveren.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>1. Beschrijf je ideale klanten</h3></div>
+        <p>Wie wil je meer van? Niet "iedereen met een huis", maar bijvoorbeeld: huiseigenaren in Drenthe met een woning uit de jaren zeventig die willen verduurzamen. Kijk naar je beste klanten van het afgelopen jaar. Wat hadden ze gemeen, waar kwamen ze vandaan, welke vraag stelden ze als eerste? Verkoop je aan bedrijven, schrijf dan ook op welke functie de beslissers hebben en wie er meebeslist. In de gids <a href="/kennisbank/gidsen/persona-maken/">persona maken</a> lees je hoe je dat opschrijft.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>2. Reken uit wat een lead mag kosten</h3></div>
+        <p>Zonder dit getal weet je nooit of een kanaal werkt. De som is simpel: wat verdien je aan een klant, en hoeveel leads heb je nodig voor één klant?</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen): een boekhouder in Zwolle</p>
+          <p>Een nieuwe klant blijft gemiddeld vier jaar en levert € 1.800 marge per jaar op: € 7.200 in totaal. Van de vijf leads wordt er één klant. Een lead mag dus tot € 1.440 kosten voordat hij verlies oplevert. Die boekhouder kan zich veel meer permitteren dan hij denkt. Een kapper met klanten van € 35 kan dat niet.</p>
+        </div>
+        <p>Reken daarna terug hoeveel leads je nodig hebt. Begin bij het aantal klanten dat je erbij wilt, en werk naar boven:</p>
+        <div class="kader">
+          <p class="kader-titel">Terugrekenen (verzonnen cijfers): een dakdekker in Emmen</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th>Stap</th><th>Getal</th><th>Hoe je eraan komt</th></tr></thead>
+              <tbody>
+                <tr><td>Nieuwe opdrachten per maand</td><td>6</td><td>Wat de ploeg erbij aankan</td></tr>
+                <tr><td>Offertes nodig</td><td>15</td><td>Twee op de vijf offertes worden opdracht</td></tr>
+                <tr><td>Leads nodig</td><td>25</td><td>Drie op de vijf leads leiden tot een offerte</td></tr>
+                <tr><td>Bezoekers nodig</td><td>ongeveer 830</td><td>Drie op de honderd bezoekers vragen iets aan</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Nu weet hij waar hij moet beginnen. Heeft hij 400 bezoekers per maand, dan kan hij aan twee knoppen draaien: meer bezoekers, of meer aanvragen uit dezelfde bezoekers. Dat tweede is bijna altijd goedkoper.</p>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>3. Zorg dat je website aanvragen aankan</h3></div>
+        <p>Veel ondernemers beginnen met adverteren terwijl hun website lekt. Dan betaal je voor bezoekers die weer vertrekken. Controleer drie dingen. Staat op elke pagina duidelijk wat de bezoeker moet doen? Is je telefoonnummer op mobiel met één tik te bellen? En heeft je formulier hooguit vier velden? In de gids <a href="/kennisbank/gidsen/meer-klanten-via-je-website/">meer klanten via je website</a> staan de negen grootste fouten op een rij.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>4. Kies twee kanalen, niet tien</h3></div>
+        <p>Elk kanaal vraagt aandacht. Wie tegelijk SEO, Google Ads, LinkedIn, Instagram, een nieuwsbrief en beurzen doet, doet ze allemaal half. Kies er twee die passen bij hoe jouw klanten zoeken. Een loodgieter kiest voor Google Maps en Google Ads, want mensen met lekkage zoeken nu. Een IT-bedrijf dat aan scholen levert, kiest eerder voor artikelen en persoonlijk contact met beslissers. Verderop staat een overzicht.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>5. Meet waar elke lead vandaan komt</h3></div>
+        <p>Vraag het bij elke aanvraag: hoe heeft u ons gevonden? En meet het op je site, met conversies in Google Analytics of een privacyvriendelijk alternatief. Na drie maanden weet je welk kanaal leads oplevert en welk kanaal alleen bezoekers. Hulp nodig? Zie <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>6. Volg op binnen het uur</h3></div>
+        <p>Een lead die je pas na drie dagen belt, heeft vaak al iemand anders gevonden. Wie een offerte aanvraagt, vraagt er meestal meer dan één aan. De eerste die belt en goede vragen stelt, heeft een voorsprong. Onderzoek in Harvard Business Review liet in 2011 al zien dat de meeste bedrijven veel te traag reageren op aanvragen via hun website. Wij bellen zelf binnen 15 minuten terug, op werkdagen tussen 8.00 en 17.00 uur. Uit interesse, niet om te verkopen. Die snelheid is een keuze, en jij kunt hem ook maken.</p>
+
+        <h2 id="kanalen">Kanalen op een rij</h2>
+        <p>Welk kanaal het best werkt om leads te genereren, hangt af van hoe jouw klanten zoeken. Dit overzicht helpt bij de keuze.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kanaal</th><th>Snelheid</th><th>Kosten</th><th>Werkt goed voor</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/lokale-seo/">Google Bedrijfsprofiel en lokale SEO</a></td><td>Weken</td><td>Laag</td><td>Lokale dienstverleners</td></tr>
+              <tr><td>SEO en artikelen</td><td>Maanden</td><td>Laag tot midden</td><td>Wie vragen beantwoordt die klanten googelen</td></tr>
+              <tr><td>Google Ads</td><td>Dagen</td><td>Midden tot hoog</td><td>Spoed en duidelijke zoekvraag</td></tr>
+              <tr><td>Nieuwsbrief en e-mail</td><td>Weken</td><td>Laag</td><td>Bestaande contacten warm houden</td></tr>
+              <tr><td>Telefoon/e-mail naar bedrijven</td><td>Dagen</td><td>Vooral tijd</td><td>Een korte lijst droomklanten (let op de regels)</td></tr>
+              <tr><td>Netwerken en doorverwijzingen</td><td>Wisselend</td><td>Vooral tijd</td><td>Vertrouwen opbouwen in je regio</td></tr>
+              <tr><td>Beurzen en evenementen</td><td>Wisselend</td><td>Midden tot hoog</td><td>Persoonlijk contact met veel klanten tegelijk</td></tr>
+              <tr><td>LinkedIn</td><td>Maanden</td><td>Vooral tijd</td><td>Zakelijke diensten</td></tr>
+              <tr><td><a href="/kennisbank/gidsen/werkspot-alternatieven/">Klusplatforms</a></td><td>Direct</td><td>Per lead</td><td>Vakmensen die snel werk nodig hebben</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Onderschat de doorverwijzing niet. Een tevreden klant die je naam noemt, levert de warmste lead die er is. Vraag er actief om, bijvoorbeeld als je een klus oplevert. "Kent u iemand die hier ook mee zit?" is een gewone vraag, geen verkooppraatje.</p>
+        <p>Kies je voor Google Ads, bedenk dan dat je per klik betaalt, ook als er niemand belt. Hoe je een campagne opzet die niet lekt, lees je in de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>.</p>
+
+        <h2 id="lokaal">Leads genereren in je eigen regio</h2>
+        <p>Werk je vooral in Drenthe, Groningen of Friesland, dan speelt afstand een grote rol. Mensen zoeken met een plaatsnaam erbij: "dakdekker Assen", "boekhouder Leeuwarden". Volgens Google draaien lokale zoekresultaten vooral om drie dingen: relevantie, afstand en bekendheid. Bij bekendheid kijkt Google onder meer naar reviews en naar hoeveel websites naar je bedrijf linken.</p>
+        <p>Dat betekent voor leadgeneratie in het mkb hier in het Noorden:</p>
+        <ul class="vink">
+          <li><b>Een volledig Google Bedrijfsprofiel</b> met de juiste categorie, openingstijden, foto's van je werk en reviews van klanten uit je regio. Zie de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>.</li>
+          <li><b>Pagina's voor de plaatsen waar je echt werkt</b>, met iets dat alleen over die plaats gaat. Niet dezelfde tekst met een andere plaatsnaam.</li>
+          <li><b>Lokale links en vermeldingen</b>: je sponsoring van de voetbalclub, de ondernemersvereniging in je gemeente, een leverancier die jou als installateur noemt.</li>
+          <li><b>Netwerk in het echt.</b> In kleinere kernen kennen ondernemers elkaar. Een ontbijtsessie of bedrijvenkring levert soms meer op dan een maand adverteren.</li>
+        </ul>
+
+        <h2 id="lokkertje">Wat bied je aan in ruil voor contactgegevens?</h2>
+        <p>Niet iedereen is klaar voor een offerte. Wie nog oriënteert, laat liever een e-mailadres achter voor iets nuttigs. Dat noemen marketeers een leadmagneet. Voor een mkb'er hoeft dat geen e-book van veertig pagina's te zijn.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je aanbiedt</th><th>Past bij</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td>Prijsindicatie</td><td>Vakmensen, installateurs</td><td>"Ontvang binnen een dag een indicatie voor je dakkapel"</td></tr>
+              <tr><td>Gratis inmeting of adviesgesprek</td><td>Klussen boven een paar duizend euro</td><td>"Plan een gratis inmeting in Drenthe"</td></tr>
+              <tr><td>Checklist</td><td>Dienstverleners met een lastig onderwerp</td><td>"De 12 vragen die je je boekhouder moet stellen"</td></tr>
+              <tr><td>Rekenhulp</td><td>Alles waar mensen eerst willen rekenen</td><td>"Wat kost een warmtepomp voor jouw huis?"</td></tr>
+              <tr><td>Terugbelverzoek</td><td>Wie liever niet zelf belt</td><td>"Laat je nummer achter, we bellen binnen het uur"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Vraag niet meer gegevens dan je nodig hebt. Voor een checklist is een e-mailadres genoeg. Wil je die mensen later een nieuwsbrief sturen, vraag dan apart en duidelijk om toestemming. Zie de regels hierboven.</p>
+
+        <h2 id="kwalificeren">Leads kwalificeren: welke lead volg je eerst op?</h2>
+        <p>Wie goed leads gaat genereren, krijgt een luxeprobleem. Komen er meer leads binnen dan je kunt bellen, dan moet je kiezen. Vier vragen helpen, en ze passen in elk eerste gesprek:</p>
+        <ol>
+          <li><b>Behoefte.</b> Heeft hij echt een probleem dat jij oplost?</li>
+          <li><b>Budget.</b> Past wat hij wil uitgeven bij wat het kost?</li>
+          <li><b>Beslisser.</b> Beslist hij zelf, of moet hij het voorleggen?</li>
+          <li><b>Termijn.</b> Wil hij nu, deze maand, of "ergens volgend jaar"?</li>
+        </ol>
+        <p>Je kunt er een simpele score van maken. Geef per vraag 0, 1 of 2 punten. Een lead met 7 of 8 punten bel je vandaag. Een lead met 3 punten krijgt een vriendelijke mail en een plek in je nieuwsbrief. Zo gaat je tijd naar de gesprekken die tellen, en vergeet je de rest niet.</p>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeld (verzonnen): twee aanvragen op maandagochtend</p>
+          <p>Aanvraag 1: een eigenaar van een bakkerij in Meppel wil voor de zomer een nieuwe winkelpui, heeft een budget genoemd en beslist zelf. Score 8, vandaag bellen. Aanvraag 2: een student vraagt naar prijzen voor een opdracht op school. Score 1, een korte mail met de prijslijst.</p>
+        </div>
+
+        <h2 id="opvolgen">Warme leads opvolgen zonder opdringerig te zijn</h2>
+        <p>Bij de opvolging gaat het vaak mis. Niet door onwil, maar omdat het druk is. Een paar regels helpen.</p>
+        <ul class="vink">
+          <li><b>Reageer op het kanaal van de klant.</b> Belde hij, bel terug. Mailde hij, mail terug en bied aan te bellen.</li>
+          <li><b>Vraag eerst, verkoop later.</b> Wat wil hij bereiken, wanneer, wat heeft hij al geprobeerd? Wie vragen stelt, hoeft minder te overtuigen.</li>
+          <li><b>Maak concrete afspraken.</b> Niet "ik stuur iets op", maar "u heeft de offerte donderdag, ik bel vrijdag om tien uur".</li>
+          <li><b>Houd een lijst bij.</b> Een spreadsheet met naam, datum, bron en volgende stap is genoeg. Duurdere software helpt pas als je die lijst al bijhoudt.</li>
+          <li><b>Laat niet-klaar niet vallen.</b> Wie nu nog niet wil, wil misschien over een half jaar. Een nieuwsbrief houdt je in beeld. Lees de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a>.</li>
+        </ul>
+        <p>Een vast schema voorkomt dat leads tussen wal en schip vallen. Zo kan het eruitzien:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat</th><th>Via</th></tr></thead>
+            <tbody>
+              <tr><td>Binnen het uur</td><td>Terugbellen, vragen stellen, volgende stap afspreken</td><td>Telefoon</td></tr>
+              <tr><td>Dezelfde dag</td><td>Korte mail met wat je besprak en wat er nu gebeurt</td><td>E-mail</td></tr>
+              <tr><td>Binnen drie werkdagen</td><td>De offerte, met een datum waarop je belt</td><td>E-mail</td></tr>
+              <tr><td>Op de afgesproken dag</td><td>Bellen: vragen over de offerte?</td><td>Telefoon</td></tr>
+              <tr><td>Na twee weken stilte</td><td>Eén vriendelijke vraag of het nog speelt</td><td>Telefoon of e-mail</td></tr>
+              <tr><td>Na drie maanden</td><td>Nuttige update of nieuwsbrief, als hij daar toestemming voor gaf</td><td>E-mail</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Combineer telefoon, e-mail en eventueel een appje, maar stop als iemand duidelijk nee zegt. Een nee is ook een antwoord. Schrijf op waarom, zodat je ervan leert.</p>
+
+        <h2 id="samenwerken">Marketing en sales: één lijst, één taal</h2>
+        <p>In een groter bedrijf is marketing een afdeling en sales een andere. Dan wijst de een naar de ander: "de leads zijn slecht", "ze bellen niet terug". In het mkb zijn het vaak twee mensen, of jij en je partner. Ook dan helpt het om drie dingen af te spreken.</p>
+        <ol>
+          <li><b>Wat een lead is.</b> Telt een nieuwsbriefinschrijving mee, of alleen een aanvraag? Schrijf het op.</li>
+          <li><b>Wie wanneer belt.</b> Wie de lead binnenkrijgt, belt binnen het uur, of zet hem door naar wie dat wel kan.</li>
+          <li><b>Eén lijst.</b> Alle leads in één overzicht, met per lead de bron, de status en de volgende stap. Elke week een kwartier samen doorlopen.</li>
+        </ol>
+        <p>Zo zie je na een paar maanden welke kanalen klant leads opleveren, en welke alleen maar namen. Leads genereren wordt dan iets wat je stuurt, niet iets wat je overkomt. Daar stuur je je budget op bij.</p>
+
+        <h2 id="meten">Vijf getallen die je elke maand bijhoudt</h2>
+        <p>Je hoeft geen dashboard met veertig grafieken. Deze vijf getallen vertellen je of leadgeneratie werkt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Getal</th><th>Zo bereken je het</th><th>Wat het je vertelt</th></tr></thead>
+            <tbody>
+              <tr><td>Aantal leads</td><td>Alle aanvragen, telefoontjes en mails van nieuwe mensen</td><td>Of er genoeg binnenkomt</td></tr>
+              <tr><td>Kosten per lead</td><td>Uitgaven aan een kanaal gedeeld door de leads uit dat kanaal</td><td>Welk kanaal het goedkoopst levert</td></tr>
+              <tr><td>Van lead naar klant</td><td>Nieuwe klanten gedeeld door leads</td><td>Of je opvolging en je prijs kloppen</td></tr>
+              <tr><td>Reactietijd</td><td>Tijd tussen aanvraag en eerste contact</td><td>Of je leads laat liggen</td></tr>
+              <tr><td>Waarde per klant</td><td>Marge per klant over de hele samenwerking</td><td>Hoeveel een lead mag kosten</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kijk ook welk kanaal welke klanten oplevert. Een kanaal met dure leads kan toch het beste zijn, als die leads vaker klant worden en langer blijven.</p>
+
+        <h2 id="plan">Een plan voor de eerste 90 dagen</h2>
+        <p>Leads genereren hoeft niet in één keer perfect. Dit is een haalbaar plan voor een mkb'er die er naast zijn gewone werk een paar uur per week in steekt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat je doet</th><th>Klaar als</th></tr></thead>
+            <tbody>
+              <tr><td>Week 1</td><td>Ideale klant beschrijven, uitrekenen wat een lead mag kosten</td><td>Je hebt één A4 en één getal</td></tr>
+              <tr><td>Week 2</td><td>Formulier inkorten, telefoonnummer zichtbaar, meting aanzetten</td><td>Een testaanvraag komt aan en wordt geteld</td></tr>
+              <tr><td>Week 3 en 4</td><td>Google Bedrijfsprofiel aanvullen, tien klanten om een review vragen</td><td>Profiel compleet, eerste nieuwe reviews</td></tr>
+              <tr><td>Maand 2</td><td>Tweede kanaal starten, bijvoorbeeld Google Ads met een klein budget of één artikel per week</td><td>Eerste leads uit het nieuwe kanaal</td></tr>
+              <tr><td>Maand 3</td><td>De vijf getallen naast elkaar leggen, schrappen wat niets doet</td><td>Je weet wat een klant je kost, per kanaal</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Na negentig dagen heb je geen vermoeden meer, maar cijfers. Daarmee kies je of je verder gaat, opschaalt of het uitbesteedt.</p>
+
+        <h2 id="kopen">Leads kopen: slim of niet?</h2>
+        <p>Je kunt leads ook kopen: via klusplatforms, offertesites of adressenlijsten. Dan hoef je niet zelf leads te genereren. Dat lijkt de kortste weg. Er zitten drie haken aan.</p>
+        <ol>
+          <li><b>Je deelt de lead.</b> Op veel platforms krijgen meerdere bedrijven dezelfde aanvraag. Dan wint meestal de goedkoopste.</li>
+          <li><b>Je betaalt ook voor niks.</b> Een lead die nooit opneemt of al gekozen heeft, kost even veel.</li>
+          <li><b>Je bouwt niets op.</b> Stop je met betalen, dan stopt de stroom. Je naam is niet bekender geworden.</li>
+        </ol>
+        <p>Gekochte adressenlijsten zijn nog lastiger. De mensen erop kennen je niet, en voor ongevraagde reclame per e-mail heb je toestemming nodig. Als tijdelijke aanvulling kan een platform prima werken, zolang je intussen aan je eigen kanalen bouwt.</p>
+
+        <h2 id="fouten">Veelgemaakte fouten bij leadgeneratie</h2>
+        <ul>
+          <li><b>Sturen op aantallen.</b> Honderd leads waarvan er twee klant worden, kosten meer tijd dan twintig waarvan er vijf klant worden.</li>
+          <li><b>Adverteren op een site die lekt.</b> Eerst het formulier en de telefoon op orde, dan pas betalen voor bezoekers.</li>
+          <li><b>Geen bron noteren.</b> Dan weet je na een jaar nog steeds niet welk kanaal werkt.</li>
+          <li><b>Alleen de hete leads bellen.</b> De warme leads van vandaag zijn de opdrachten van volgend kwartaal.</li>
+          <li><b>Te snel stoppen.</b> SEO en artikelen leveren pas na maanden op. Wie na zes weken stopt, heeft alleen kosten gemaakt.</li>
+          <li><b>Te lang doorgaan.</b> Andersom ook: een kanaal dat na drie maanden meten niets oplevert, mag weg. Verspild budget schrappen is soms meer waard dan een nieuwe campagne.</li>
+        </ul>
+
+        <h2 id="uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>Leads genereren is geen trucje, maar een vaste gewoonte. Een groot deel van dit stappenplan kun je zelf. Je ideale klant beschrijven, uitrekenen wat een lead mag kosten en sneller opvolgen kost vooral aandacht, geen geld.</p>
+        <p>Het technische deel is lastiger: een site die converteert, meten waar aanvragen vandaan komen, campagnes die niet lekken. Bij <a href="/leadgeneratie/">leadgeneratie</a> doen wij dat werk, vanaf € 495 per maand. We spreken vooraf af hoeveel aanvragen het moet opleveren, en daar mag je ons op afrekenen. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. We hebben al 15 jaar meer dan 100 eigen leadsites in verschillende beroepen. Daar testen we eerst wat werkt, voordat jouw site ermee te maken krijgt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={16} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij de leads binnenhalen?" intro="Wat je van ons mag verwachten, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel leads heb ik nodig?', a: 'Reken terug vanaf je doel. Wil je vier nieuwe klanten per maand en wordt één op de vijf leads klant, dan heb je twintig leads nodig. Liever twintig goede dan tweehonderd die nergens op uitlopen.' },
+      { v: 'Wat is het verschil tussen leadgeneratie en marketing?', a: 'Marketing is breder: ook naamsbekendheid en je merk. Leadgeneratie is het deel dat stuurt op aanvragen die je kunt opvolgen. Voor een mkb\'er is dat meestal het deel dat telt.' },
+      { v: 'Hoe snel levert leads genereren iets op?', a: 'Google Ads en een beter formulier binnen weken. Lokale SEO binnen een paar maanden. Artikelen en SEO duren langer, maar blijven daarna opleveren zonder dat je per klik betaalt.' },
+      { v: 'Werkt leadgeneratie ook voor B2B?', a: 'Ja. Het verschil zit in de lengte: er zijn meer mensen bij de beslissing betrokken en het duurt langer. Opvolging en vertrouwen opbouwen wegen dan nog zwaarder.' },
+      { v: 'Mag ik zomaar bedrijven bellen of mailen?', a: 'Niet altijd. Volgens de ACM mag je eenmanszaken, vof\'s en maatschappen alleen bellen om te verkopen als ze toestemming gaven. Voor reclame per e-mail is vooraf toestemming nodig, met een uitzondering voor bestaande klanten.' },
+      { v: 'Wat kost een lead?', a: 'Dat verschilt sterk per branche en kanaal. Reken liever uit wat een lead voor jou mag kosten: de waarde van een klant gedeeld door het aantal leads dat je nodig hebt voor één klant.' },
+      { v: 'Moet ik een CRM-systeem hebben?', a: 'Niet om te beginnen. Een gedeelde spreadsheet met de volgende stap per lead werkt prima. Een CRM wordt nuttig als je met meer mensen opvolgt of honderden leads per maand hebt.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Pillar', titel: 'Leadgeneratie', href: '/leadgeneratie/', tekst: 'Van bezoeker naar aanvraag, met doelen waar je ons op afrekent.' },
+      { label: 'Gids', titel: 'Meer klanten via je website', href: '/kennisbank/gidsen/meer-klanten-via-je-website/', tekst: 'De negen grootste fouten, en hoe je ze oplost.' },
+      { label: 'Dienst', titel: 'Conversie-optimalisatie', href: '/leadgeneratie/conversie-optimalisatie/', tekst: 'Meer aanvragen uit dezelfde bezoekers, vanaf € 395.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waar jouw leads blijven hangen?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site, je vindbaarheid en je formulier, en belt je met de plek waar de grootste winst zit.`} />
+</Base>

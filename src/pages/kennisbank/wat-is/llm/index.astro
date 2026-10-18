@@ -1,0 +1,236 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--llm.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/llm/';
+const definitie = 'Een LLM, of large language model, is een vorm van kunstmatige intelligentie die op enorme hoeveelheden tekst is getraind en daardoor zelf tekst schrijft, door telkens het meest waarschijnlijke volgende woord te voorspellen.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'LLM (large language model)',
+  alternateName: ['Large language model', 'Groot taalmodel', 'Taalmodel'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+  dateModified: '2026-10-18',
+}];
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Wat betekent LLM?' },
+  { id: 'werking', titel: 'Hoe het werkt' },
+  { id: 'voorbeeld', titel: 'Een zin afmaken: voorbeeld' },
+  { id: 'modellen', titel: 'Bekende modellen en makers' },
+  { id: 'geschiedenis', titel: 'Korte geschiedenis' },
+  { id: 'kan', titel: 'Wat het kan en wat niet' },
+  { id: 'hallucinaties', titel: 'Hallucinaties' },
+  { id: 'zoeken', titel: 'AI-zoekmachines' },
+  { id: 'prompt', titel: 'Een goede prompt' },
+  { id: 'privacy', titel: 'Privacy en eigen modellen' },
+  { id: 'bedrijf', titel: 'Wat het voor jou betekent' },
+];
+---
+<Base
+  title="Wat is een LLM? Uitleg in gewone taal | Drijfveer Media"
+  description="Wat is een LLM? Een large language model voorspelt telkens het volgende woord. Zo werken ChatGPT, Gemini en Claude, en dit betekent het voor je bedrijf."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'LLM', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · AI</p>
+        <h1>Wat is een LLM?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-18" />
+        <p>Wat is een LLM, en waarom hoor je die drie letters ineens overal? Elke keer dat je iets vraagt aan ChatGPT, Gemini of Claude, praat je met een LLM. Het is de motor onder de motorkap. De chat-app is de auto, het taalmodel is wat hem laat rijden.</p>
+        <p>Volgens Wikipedia ging ChatGPT op 30 november 2022 online. Sindsdien gebruiken veel mensen zo'n taalmodel voor mails, offertes en vragen die ze vroeger in Google typten. Hieronder lees je hoe het werkt, zonder wiskunde. En wat het betekent voor een ondernemer die gevonden wil worden.</p>
+
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>LLM staat voor large language model: een groot taalmodel.</li>
+            <li>Het model is getraind op enorme hoeveelheden tekst en voorspelt steeds het volgende stukje tekst.</li>
+            <li>Het rekent met tokens: stukjes woord van gemiddeld zo'n vier tekens.</li>
+            <li>Het weet niet wat waar is. Daarom verzint het soms dingen: hallucinaties.</li>
+            <li>AI-zoekmachines combineren een LLM met zoeken op internet en noemen dan bronnen. Daar wil je als bedrijf tussen staan.</li>
+          </ul>
+        </div>
+
+        <div class="stap-kop" id="betekenis"><Tekening naam="boek" maat={52} /><h2>Wat betekent LLM?</h2></div>
+        <p>De drie woorden zeggen eigenlijk alles.</p>
+        <ul>
+          <li><b>Large.</b> Groot, in twee opzichten. Het model is getraind op een gigantische berg tekst: boeken, websites, artikelen, code. En het bestaat zelf uit miljarden getallen, de parameters. Waar "groot" begint, is overigens niet vastgelegd. Wikipedia noemt dat woord vaag: er is geen grens in aantal parameters.</li>
+          <li><b>Language.</b> Taal. Het model werkt met tekst. Veel moderne modellen kunnen ook foto's, geluid of video lezen, maar de basis is taal.</li>
+          <li><b>Model.</b> Een rekenmodel. Een enorm ingewikkelde formule die tekst erin krijgt en tekst teruggeeft.</li>
+        </ul>
+        <p>In het Nederlands zeg je groot taalmodel, of gewoon taalmodel. Het is een onderdeel van kunstmatige intelligentie, maar niet alle AI is een taalmodel. De gezichtsherkenning op je telefoon is ook AI, en die schrijft geen zinnen.</p>
+
+        <div class="stap-kop" id="werking"><Tekening naam="tandwiel" maat={52} /><h2>Hoe werkt een large language model?</h2></div>
+        <p>Je hoeft geen programmeur te zijn om het principe te snappen. Het komt neer op vier dingen.</p>
+
+        <h3>1. Tekst wordt tokens</h3>
+        <p>Een taalmodel leest geen letters of hele woorden, maar tokens. Dat zijn stukjes tekst. Een kort woord is vaak één token, een lang woord wordt in stukken geknipt. Volgens de documentatie van Google is een token bij Gemini ongeveer vier tekens, en zijn honderd tokens zo'n zestig tot tachtig Engelse woorden. Nederlandse samenstellingen als "dakkapelplaatsing" worden meestal in meerdere stukjes opgedeeld.</p>
+        <p>Waarom moet je dat weten? Omdat de makers rekenen in tokens. Een abonnement of een koppeling via de API kost geld per miljoen tokens. En een model kan maar een beperkt aantal tokens tegelijk "onthouden" in een gesprek. Plak je een heel jaarverslag erin, dan kan het begin eruit vallen.</p>
+
+        <h3>2. Het volgende woord voorspellen</h3>
+        <p>Dit is de kern. Een taalmodel doet in de basis één ding: het voorspelt welk token er waarschijnlijk volgt. Dan het token daarna. En zo verder, tot het antwoord af is. Volgens Wikipedia zijn de meeste LLM's voor het bijschaven precies dat: voorspellers van het volgende token. Het lijkt op de woordsuggesties boven het toetsenbord van je telefoon, maar dan met een veel groter geheugen voor verbanden.</p>
+
+        <h3>3. Neurale netwerken en de transformer</h3>
+        <p>Hoe weet het model wat waarschijnlijk is? Dat zit in een neuraal netwerk: lagen van rekenknopen die met elkaar verbonden zijn, losjes geïnspireerd op hersencellen. Elke verbinding heeft een gewicht, een parameter. Bij de training worden die gewichten miljarden keren een klein beetje bijgesteld.</p>
+        <p>De doorbraak kwam in 2017. Onderzoekers van Google publiceerden toen het artikel "Attention Is All You Need" over de transformer. Die techniek kijkt naar alle woorden in een tekst tegelijk en weegt welke woorden bij elkaar horen. In "de bank stond aan het water" snapt het model daardoor dat het om een zitbank gaat en niet om je bank. De T in GPT staat voor transformer.</p>
+
+        <h3>4. Training in rondes</h3>
+        <p>Een taalmodel wordt grofweg in drie rondes gemaakt.</p>
+        <ul>
+          <li><b>Voortraining.</b> Het model leest een enorme hoeveelheid tekst en leert steeds het volgende stukje te voorspellen. Fout voorspeld? Dan worden de gewichten bijgesteld. Dat vraagt enorm veel rekenkracht.</li>
+          <li><b>Bijschaven.</b> Daarna oefent het op voorbeelden van goede vragen en antwoorden. Zo leert het een assistent te zijn in plaats van een tekstaanvuller.</li>
+          <li><b>Feedback van mensen.</b> Mensen beoordelen antwoorden, en het model leert welke beter zijn. Wikipedia noemt dat bij ChatGPT reinforcement learning from human feedback.</li>
+        </ul>
+        <p>Na de training staat de kennis van het model vast. Wat daarna gebeurt, weet het niet, tenzij het tijdens een gesprek op internet mag zoeken. Daarom kan een taalmodel zonder zoekfunctie verouderde informatie geven.</p>
+
+        <div class="stap-kop" id="voorbeeld"><Tekening naam="pen" maat={52} /><h2>Een voorbeeld: zo maakt een taalmodel een zin af</h2></div>
+        <p>Stel, je vraagt: "Wat kost een dakkapel?" Het model begint te schrijven: "Een dakkapel kost ..." Op dat moment rekent het voor duizenden mogelijke tokens uit hoe waarschijnlijk ze zijn. Bijvoorbeeld:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Mogelijk volgend woord</th><th>Kans</th><th>Waarom</th></tr></thead>
+            <tbody>
+              <tr><td>gemiddeld</td><td>52%</td><td>Komt in prijsteksten heel vaak na "kost"</td></tr>
+              <tr><td>tussen</td><td>31%</td><td>Prijzen worden vaak als bandbreedte gegeven</td></tr>
+              <tr><td>veel</td><td>9%</td><td>Kan, maar zegt de vrager weinig</td></tr>
+              <tr><td>blauw</td><td>0,001%</td><td>Past grammaticaal, maar slaat nergens op</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Verzonnen percentages, om het idee te laten zien.</p>
+        <p>Het model kiest meestal een van de bovenste opties. Niet altijd de allerbovenste: er zit bewust een beetje toeval in. Daardoor klinkt de tekst natuurlijker. En daardoor krijg je bij dezelfde vraag niet twee keer exact hetzelfde antwoord.</p>
+        <p>Let op wat er niet gebeurt. Het model zoekt niet op wat een dakkapel echt kost. Het maakt een zin die lijkt op duizenden zinnen die het eerder las. Is die kennis goed, dan is het antwoord goed. Is die kennis verouderd of dun, dan schrijft het net zo zelfverzekerd iets wat niet klopt.</p>
+
+        <div class="stap-kop" id="modellen"><Tekening naam="team" maat={52} /><h2>De bekende taalmodellen en hun makers</h2></div>
+        <p>Het woord ChatGPT wordt vaak gebruikt voor alles wat met AI-tekst te maken heeft. Maar er zijn meer makers. Een overzicht van wat je in Nederland het vaakst tegenkomt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Chat-app of dienst</th><th>Maker</th><th>Bijzonderheid</th></tr></thead>
+            <tbody>
+              <tr><td><b>ChatGPT</b></td><td>OpenAI (VS)</td><td>De bekendste. Draait op de GPT-modellen van OpenAI.</td></tr>
+              <tr><td><b>Gemini</b></td><td>Google</td><td>Zit ook in Google Zoeken, Gmail en Android.</td></tr>
+              <tr><td><b>Claude</b></td><td>Anthropic (VS)</td><td>Staat bekend om sterke teksten en het werken met lange documenten.</td></tr>
+              <tr><td><b>Copilot</b></td><td>Microsoft</td><td>Verweven met Windows, Office en de zoekmachine Bing.</td></tr>
+              <tr><td><b>Perplexity</b></td><td>Perplexity</td><td>Een AI-zoekmachine die modellen van onder meer OpenAI, Anthropic en Google gebruikt, naast een eigen model.</td></tr>
+              <tr><td><b>GPT-NL</b></td><td>TNO, NFI en SURF</td><td>Een Nederlands taalmodel voor zakelijk gebruik, getraind op rechtmatig verkregen data.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De modelnamen en versies veranderen elke paar maanden. Daarom noemen we hier geen versienummers. Meer over de grote drie lees je in onze gidsen over <a href="/kennisbank/gidsen/chatgpt-voor-bedrijven/">ChatGPT voor bedrijven</a>, <a href="/kennisbank/gidsen/google-gemini/">Google Gemini</a> en <a href="/kennisbank/gidsen/claude/">Claude</a>. De AI-zoekmachine bespreken we in de gids over <a href="/kennisbank/gidsen/perplexity/">Perplexity</a>.</p>
+
+        <div class="stap-kop" id="geschiedenis"><Tekening naam="kalender" maat={52} /><h2>Een korte geschiedenis van taalmodellen</h2></div>
+        <p>Taalmodellen zijn niet in 2022 uit de lucht komen vallen. Computers rekenen al decennia met de kans op woorden, bijvoorbeeld voor spellingcontrole en vertaalprogramma's. Lange tijd konden die modellen vooral teksten doorzoeken en indelen. Zelf schrijven deden ze nauwelijks.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Jaar</th><th>Wat er gebeurde</th><th>Bron</th></tr></thead>
+            <tbody>
+              <tr><td>2017</td><td>Onderzoekers van Google introduceren de transformer in "Attention Is All You Need"</td><td>arXiv, Wikipedia</td></tr>
+              <tr><td>2022</td><td>OpenAI zet ChatGPT online, op 30 november</td><td>Wikipedia</td></tr>
+              <tr><td>2025</td><td>Het artikel "Why Language Models Hallucinate" verklaart waarom modellen gokken</td><td>arXiv</td></tr>
+              <tr><td>2026</td><td>GPT-NL, het Nederlandse model van TNO, NFI en SURF, komt beschikbaar voor organisaties</td><td>gpt-nl.nl</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat in die jaren vooral groeide, is de schaal. Meer tekst, meer parameters, meer rekenkracht. En een groter contextvenster: de hoeveelheid tekst die een model tijdens één gesprek kan overzien. Waar de eerste chat-apps na een paar pagina's het begin van een gesprek vergaten, lezen moderne modellen een heel rapport in één keer. Hoe groot precies, verschilt per model en abonnement en verandert snel. Kijk daarvoor op de site van de maker.</p>
+
+        <div class="stap-kop" id="kan"><Tekening naam="lamp" maat={52} /><h2>Wat een taalmodel goed kan, en wat niet</h2></div>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Goed in</th><th>Minder goed in</th></tr></thead>
+            <tbody>
+              <tr><td>Een eerste versie van een tekst, mail of offerte schrijven</td><td>Feiten die het niet kan controleren, zoals jouw prijzen of openingstijden</td></tr>
+              <tr><td>Lange stukken samenvatten</td><td>Rekenen met veel stappen zonder rekenhulp</td></tr>
+              <tr><td>Vertalen en herschrijven in een andere toon</td><td>Nieuws van na de training, als het niet mag zoeken</td></tr>
+              <tr><td>Ideeën bedenken, opsommen, ordenen</td><td>Eigen ervaring: het heeft nooit een dakkapel geplaatst</td></tr>
+              <tr><td>Code schrijven en uitleggen</td><td>Zeggen dat het iets niet weet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die laatste is belangrijk. Een LLM is gemaakt om een vloeiend antwoord te geven. "Ik weet het niet" komt minder vaak uit de pen dan je zou willen.</p>
+
+        <div class="stap-kop" id="hallucinaties"><Tekening naam="schild" maat={52} /><h2>Hallucinaties: waarom een LLM soms iets verzint</h2></div>
+        <p>Een hallucinatie is een antwoord dat overtuigend klinkt maar niet klopt. Een bron die niet bestaat. Een wet die nooit is aangenomen. Een telefoonnummer van jouw bedrijf dat net een cijfer verschilt.</p>
+        <p>Onderzoekers van onder meer OpenAI verklaarden in september 2025 in het artikel "Why Language Models Hallucinate" waar dat vandaan komt. Kort gezegd: modellen worden getest zoals leerlingen met een meerkeuzetoets. Gokken levert dan meer punten op dan eerlijk zeggen dat je het niet weet. Dus leert het model gokken. Hun voorstel is de toetsen anders te scoren, zodat twijfel niet meer wordt afgestraft.</p>
+        <p>Wat betekent dat voor jou?</p>
+        <ul class="vink">
+          <li>Controleer elke feitelijke bewering, elk getal en elke bron voordat je iets publiceert of verstuurt.</li>
+          <li>Vraag het model om de bron erbij te zetten, en open die bron zelf.</li>
+          <li>Geef het model je eigen feiten mee in de prompt, zoals je prijslijst of werkwijze. Dan hoeft het minder te raden.</li>
+          <li>Vraag eens aan ChatGPT of Gemini wat ze over jouw bedrijf weten. Klopt het niet, dan ontbreekt er vaak duidelijke informatie op je eigen site.</li>
+        </ul>
+
+        <div class="stap-kop" id="zoeken"><Tekening naam="vergrootglas" maat={52} /><h2>Van chatbot naar zoekmachine: AI-zoekmachines</h2></div>
+        <p>Een los taalmodel kent alleen zijn trainingsdata. Daarom koppelen de makers het steeds vaker aan zoeken op internet. De vraag gaat eerst naar een zoekmachine, het model leest de gevonden pagina's en schrijft er een antwoord van, met bronnen erbij. In vaktaal heet dat retrieval-augmented generation, kortweg RAG.</p>
+        <p>Zo werken Perplexity, de zoekfunctie in ChatGPT en de AI-overzichten van Google. Google schrijft in zijn documentatie voor websitebeheerders dat AI Overviews en AI Mode vaak meerdere zoekopdrachten tegelijk uitvoeren over deelonderwerpen. Google noemt dat "query fan-out". Volgens Google zijn er geen extra technische eisen om als bron te verschijnen: je pagina moet in de index staan en een fragment mogen tonen. De gewone regels van goede SEO gelden ook hier.</p>
+        <p>Voor ondernemers verschuift er iets. Vroeger was de vraag: sta ik op plek één? Nu is de vraag ook: noemt het taalmodel mij als bron of als aanrader? Dat werk heet <a href="/generative-engine-optimization/">generative engine optimization</a>, of GEO. Het begrip zelf leggen we uit op de pagina <a href="/kennisbank/wat-is/geo/">wat is GEO</a>.</p>
+
+        <div class="stap-kop" id="prompt"><Tekening naam="klik" maat={52} /><h2>Een goede prompt schrijven</h2></div>
+        <p>Een prompt is de opdracht die je aan een taalmodel geeft. Hoe beter de opdracht, hoe minder het model hoeft te raden. Vergelijk:</p>
+        <ul>
+          <li><b>Zwak:</b> "Schrijf een tekst over dakkapellen."</li>
+          <li><b>Sterk:</b> "Je bent tekstschrijver voor een dakdekker in Emmen. Schrijf een tekst van 300 woorden voor huiseigenaren die twijfelen over een dakkapel. Gebruik je-vorm en korte zinnen. Noem deze drie voordelen: [jouw voordelen]. Verzin geen prijzen."</li>
+        </ul>
+        <p>Een sterke prompt heeft een rol, een doel, een lezer, een vorm en grenzen. Meer voorbeelden staan in de gids <a href="/kennisbank/gidsen/chatgpt-voor-bedrijven/">ChatGPT gebruiken in je bedrijf</a>.</p>
+
+        <div class="stap-kop" id="privacy"><Tekening naam="huis" maat={52} /><h2>Privacy, lokaal draaien en een Nederlands model</h2></div>
+        <p>Wat je in een chat-app typt, gaat naar de servers van de maker. Afhankelijk van je abonnement en instellingen kan die tekst ook gebruikt worden om modellen te verbeteren. Zet er dus geen klantgegevens, medische informatie of wachtwoorden in. Lees bij een zakelijk abonnement wat de maker met je gegevens doet.</p>
+        <p>Er zijn twee alternatieven. Je kunt een open taalmodel op je eigen computer of server draaien, zodat er niets het huis uit gaat. Dat vraagt wel een stevige computer en wat technische kennis. En er is GPT-NL, een Nederlands model van TNO, NFI en SURF. Volgens de makers is het getraind op data die rechtmatig is verkregen en bedoeld voor organisaties die met gevoelige informatie werken.</p>
+
+        <div class="stap-kop" id="bedrijf"><Tekening naam="doel" maat={52} /><h2>Wat betekent dit voor jouw bedrijf?</h2></div>
+        <p>Twee dingen, die los van elkaar staan.</p>
+        <p><b>Als gereedschap.</b> Een taalmodel kan je uren schelen bij mails, offertes, vacatureteksten en samenvattingen. Wij gebruiken zelf onder meer Claude, ChatGPT, Gemini en Perplexity, altijd met een mens die controleert. Hoe we dat doen, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
+        <p><b>Als plek waar klanten zoeken.</b> Steeds meer mensen vragen een AI-assistent om een aanrader. "Welke installateur in Drenthe heeft goede reviews?" Het taalmodel kiest dan uit wat het over bedrijven weet en vindt. Ben jij duidelijk te vinden, met heldere feiten op je site, goede reviews en vermeldingen op andere sites? Dan is de kans groter dat je genoemd wordt. Wil je weten wat AI nu over jouw bedrijf zegt, vraag dan een gratis <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-vindbaarheidsanalyse</a> aan.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Meer weten?</p>
+          <p>Lees de gids <a href="/kennisbank/gidsen/wat-is-geo/">Wat is GEO?</a> of de gids over <a href="/kennisbank/gidsen/google-ai-modus/">Google AI-modus</a>. Wil je dat ChatGPT je bedrijf noemt, kijk dan bij <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar in ChatGPT</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={11} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een LLM in simpele woorden?', a: 'Een computerprogramma dat zoveel tekst heeft gelezen dat het zelf zinnen kan maken. Het voorspelt steeds welk woord er waarschijnlijk volgt. ChatGPT, Gemini en Claude draaien op zo\'n model.' },
+      { v: 'Is ChatGPT een LLM?', a: 'ChatGPT is de chat-app. Daaronder draait een LLM van OpenAI, uit de GPT-familie. In de praktijk worden de woorden door elkaar gebruikt.' },
+      { v: 'Wat zijn tokens?', a: 'De stukjes tekst waarin een taalmodel rekent. Volgens Google is een token bij Gemini gemiddeld zo\'n vier tekens. Lange woorden worden in meerdere tokens geknipt.' },
+      { v: 'Kun je een LLM vertrouwen?', a: 'Als hulp bij schrijven en denken wel, als bron van feiten niet zonder controle. Een taalmodel kan overtuigend iets verzinnen. Controleer getallen, namen en bronnen altijd zelf.' },
+      { v: 'Wat is het verschil tussen AI en een LLM?', a: 'AI is de verzamelnaam voor computers die taken doen waar normaal menselijke intelligentie voor nodig is. Een LLM is één soort AI, gespecialiseerd in taal.' },
+      { v: 'Wat is het verschil tussen een open en een gesloten taalmodel?', a: 'Bij een gesloten model, zoals dat van ChatGPT, gebruik je het via de app of de servers van de maker. Een open model kun je downloaden en op je eigen computer of server draaien. Dat geeft meer controle over je gegevens, maar vraagt meer techniek.' },
+      { v: 'Hoe zorg ik dat een AI-zoekmachine mijn bedrijf noemt?', a: 'Zorg voor duidelijke feiten op je eigen site, een goed Google Bedrijfsprofiel, reviews en vermeldingen op andere betrouwbare sites. Dat heet <a href="/generative-engine-optimization/">generative engine optimization</a>.' },
+    ]}
+  />
+
+  <Actie titel="Wat zegt AI over jouw bedrijf?" tekst={`We vragen ChatGPT, Gemini en Perplexity wat ze over je weten en laten zien waar het misgaat. ${site.contactpersoon} belt je met de uitkomst.`} knop={{ tekst: 'Gratis AI-scan aanvragen', href: '/generative-engine-optimization/ai-vindbaarheidsanalyse/' }} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .stap-kop { scroll-margin-top: 96px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,57 @@
+---
+// Scène voor /kennisbank/wat-is/sitelinks/: een zoekresultaat van jouw bedrijf met vier sitelinks eronder; een cursor klikt rechtstreeks door naar Prijzen.
+// Als hij leeft: de sitelinks lichten na elkaar op, en de cursor beweegt in een rustige lus naar Prijzen en klikt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const tegels = [
+  { x: 92, y: 132, t: 'Diensten' },
+  { x: 260, y: 132, t: 'Prijzen' },
+  { x: 92, y: 186, t: 'Over ons' },
+  { x: 260, y: 186, t: 'Contact' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een zoekresultaat van jouw bedrijf met vier sitelinks eronder: Diensten, Prijzen, Over ons en Contact. Een cursor klikt rechtstreeks op Prijzen.'}>
+  <rect x="56" y="18" width="368" height="236" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <!-- zoekveld -->
+  <rect x="76" y="34" width="250" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="92" y="52.5" font-size="11.5">jouw bedrijf</text>
+  <circle cx="308" cy="47" r="5.5" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M312 51l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <!-- hoofdresultaat -->
+  <circle cx="84" cy="88" r="9" fill="#e8eef4" />
+  <text x="100" y="86" font-size="10" class="zacht">jouwbedrijf.nl</text>
+  <text x="76" y="108" font-size="15" font-weight="800" style="fill:#074663">Jouw bedrijf</text>
+  <rect x="180" y="99" width="140" height="7" rx="3.5" fill="#e8eef4" />
+  <!-- sitelinks -->
+  <path class="l" d="M76 124v104" stroke-width="2" />
+  {tegels.map((t) => (
+    <g>
+      <rect x={t.x} y={t.y} width="148" height="42" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x={t.x + 14} y={t.y + 20} font-size="12.5" font-weight="800" style="fill:#074663">{t.t}</text>
+      <rect x={t.x + 14} y={t.y + 27} width="96" height="5" rx="2.5" fill="#e8eef4" />
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      {tegels.map((t, i) => (
+        <rect class="licht" style={`--i:${i}`} x={t.x} y={t.y} width="148" height="42" rx="10" fill="none" stroke="#ff6600" stroke-width="2" />
+      ))}
+      <g class="cursor">
+        <circle class="tik" cx="352" cy="156" r="14" fill="none" stroke="#ff6600" stroke-width="2" />
+        <path d="M352 156l0 22 6-6 5 10 4-2-5-10 8-1z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .licht { opacity: 0; }
+  .in-beeld .licht { animation: kennisbank--wat-is--sitelinks-licht 1.2s ease-in-out calc(0.3s + var(--i) * 0.35s) both; }
+  .in-beeld .cursor { animation: kennisbank--wat-is--sitelinks-cursor 5s ease-in-out 1.8s infinite; }
+  .tik { transform-box: fill-box; transform-origin: center; opacity: 0; }
+  .in-beeld .tik { animation: kennisbank--wat-is--sitelinks-tik 5s ease-out 1.8s infinite; }
+  @keyframes kennisbank--wat-is--sitelinks-licht { 0% { opacity: 0; } 40% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes kennisbank--wat-is--sitelinks-cursor { 0%, 100% { transform: translate(60px, 60px); } 40%, 70% { transform: translate(0, 0); } }
+  @keyframes kennisbank--wat-is--sitelinks-tik { 0%, 44% { opacity: 0; transform: scale(0.4); } 48% { opacity: 1; } 62%, 100% { opacity: 0; transform: scale(1.6); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .licht, .in-beeld .cursor, .in-beeld .tik { animation: none; } }
+</style>

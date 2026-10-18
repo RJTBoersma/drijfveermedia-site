@@ -1,0 +1,64 @@
+---
+// Scène voor /webdesign-veendam/: een telefoon met jouw zaak in de zoekresultaten, een route door het groen naar de winkel, en een melding dat er een klant onderweg is.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const strepen = Array.from({ length: 8 }, (_, i) => i);
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: op een telefoon staat jouw zaak in Veendam met een routeknop. Een route loopt door het groen naar de winkel, en er verschijnt een melding dat er een klant onderweg is.'}>
+  <path class="l" d="M16 228h448" />
+  <!-- bord N33 -->
+  <path class="l" d="M44 228v-34" />
+  <rect x="24" y="176" width="40" height="20" rx="4" fill="#10283f" />
+  <text x="44" y="190" text-anchor="middle" font-size="11" font-weight="800" style="fill:#fff">N33</text>
+  <!-- bomen van de Parkstad -->
+  <circle class="v" cx="224" cy="168" r="24" />
+  <circle class="l" cx="224" cy="168" r="24" />
+  <path class="l" d="M224 192v36" />
+  <circle class="v" cx="266" cy="186" r="16" />
+  <circle class="l" cx="266" cy="186" r="16" />
+  <path class="l" d="M266 202v26" />
+  <!-- telefoon -->
+  <rect x="96" y="62" width="78" height="150" rx="14" fill="#10283f" />
+  <rect x="102" y="72" width="66" height="130" rx="8" fill="#fff" />
+  <rect x="106" y="78" width="58" height="40" rx="5" fill="#e9eef3" />
+  <path d="M106 104c18-6 34 4 58-2" stroke="#fff" stroke-width="4" fill="none" />
+  <path class="o" d="M129 96c0-5 3-8 7-8s7 3 7 8c0 6-7 12-7 12s-7-6-7-12z" />
+  <text x="106" y="134" font-size="10" font-weight="800">Jouw zaak</text>
+  <text x="106" y="147" font-size="8" class="zacht">Veendam</text>
+  <rect class="o" x="106" y="158" width="58" height="18" rx="6" />
+  <text x="135" y="171" text-anchor="middle" font-size="10" font-weight="800" style="fill:#fff">Route</text>
+  <!-- route -->
+  <path class="route" d="M174 167c44 0 46 48 92 50s58 1 104 1" fill="none" stroke="#ff6600" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="1 9" />
+  <!-- winkel -->
+  <rect class="v" x="300" y="96" width="150" height="132" />
+  <path class="l" d="M300 228V96h150v132" />
+  <rect x="318" y="104" width="114" height="22" rx="4" fill="#10283f" />
+  <text x="375" y="119" text-anchor="middle" font-size="12" font-weight="800" style="fill:#fff">Jouw zaak</text>
+  {strepen.map((i) => (
+    <rect x={303 + i * 18} y="132" width="18" height="16" fill={i % 2 ? '#fff' : '#074663'} />
+  ))}
+  <path class="l" d="M303 132h144v16H303z" />
+  <rect x="312" y="160" width="58" height="50" rx="3" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <rect x="320" y="176" width="40" height="16" rx="4" fill="#1f8a5b" />
+  <text x="340" y="188" text-anchor="middle" font-size="10" font-weight="800" style="fill:#fff">Open</text>
+  <rect x="384" y="160" width="40" height="68" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <circle cx="416" cy="196" r="3" fill="#074663" />
+  {!mini && (
+    <g transform="translate(316 50)">
+      <g class="melding">
+        <rect width="136" height="32" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <circle cx="18" cy="16" r="6" fill="#1f8a5b" />
+        <text x="30" y="21" font-size="12" font-weight="800">Klant onderweg</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .melding { transform-box: fill-box; transform-origin: center; }
+  [data-leeft].in-beeld .route { animation: webdesign-veendam-route 4s linear 0.6s infinite; }
+  :global(.teken-js) .melding { opacity: 0; }
+  .in-beeld .melding { animation: webdesign-veendam-melding 7s ease-in-out 1.8s infinite both; }
+  @keyframes webdesign-veendam-route { to { stroke-dashoffset: -40; } }
+  @keyframes webdesign-veendam-melding { 0% { opacity: 0; transform: translateY(8px); } 12%, 82% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-4px); } }
+  @media (prefers-reduced-motion: reduce) { [data-leeft].in-beeld .route, .in-beeld .melding { animation: none; } }
+</style>

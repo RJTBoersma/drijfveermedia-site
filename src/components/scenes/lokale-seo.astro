@@ -1,0 +1,75 @@
+---
+// Scène voor /lokale-seo/: een kaart van je werkgebied met jouw pin in het midden, en een telefoon waarop jij bovenaan de lokale resultaten staat.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kaart van je werkgebied met jouw bedrijf als oranje pin, en een telefoon waarop jouw bedrijf bovenaan de lokale zoekresultaten staat.'}>
+  <rect x="16" y="28" width="292" height="222" rx="16" fill="#e9eef3" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M18 170C90 150 140 190 210 164S280 130 306 140" stroke="#fff" stroke-width="12" fill="none" />
+  <path d="M118 30C126 90 104 160 132 248" stroke="#fff" stroke-width="9" fill="none" />
+  <path d="M18 92L306 108" stroke="#fff" stroke-width="6" fill="none" />
+  <path d="M236 30L220 248" stroke="#fff" stroke-width="6" fill="none" />
+  <rect x="34" y="40" width="64" height="40" rx="6" fill="#d7e6d8" />
+  <rect x="250" y="190" width="46" height="44" rx="6" fill="#d7e6d8" />
+  <rect x="252" y="40" width="40" height="26" rx="5" fill="#fff" opacity=".7" />
+  <rect x="146" y="200" width="56" height="32" rx="5" fill="#fff" opacity=".7" />
+  <circle cx="168" cy="134" r="70" fill="#ff6600" fill-opacity=".06" stroke="#ff6600" stroke-width="2" stroke-dasharray="6 6" />
+  <path class="l" d="M30 242v-14l10-8 10 8v14z" />
+  <g><path d="M52 142c0-7 5-12 12-12s12 5 12 12c0 9-12 19-12 19s-12-10-12-19z" fill="#8aa0b4" /><circle cx="64" cy="142" r="4" fill="#fff" /></g>
+  <g><path d="M250 70c0-7 5-12 12-12s12 5 12 12c0 9-12 19-12 19s-12-10-12-19z" fill="#8aa0b4" /><circle cx="262" cy="70" r="4" fill="#fff" /></g>
+  <g><path d="M150 113c0-11 8-19 18-19s18 8 18 19c0 13-18 29-18 29s-18-16-18-29z" fill="#ff6600" /><circle cx="168" cy="113" r="6" fill="#fff" /></g>
+  <rect x="182" y="146" width="88" height="22" rx="11" fill="#fff" stroke="#d9e1ea" />
+  <text x="192" y="161" font-size="11" font-weight="800">Jouw bedrijf</text>
+
+  <rect x="326" y="18" width="138" height="236" rx="20" fill="#10283f" />
+  <rect x="334" y="30" width="122" height="212" rx="12" fill="#fff" />
+  <rect x="342" y="40" width="106" height="22" rx="11" fill="none" stroke="#d9e1ea" stroke-width="1.5" />
+  <text x="352" y="55" font-size="10" class="zacht">schilder Meppel</text>
+  <rect x="342" y="70" width="106" height="56" rx="6" fill="#e9eef3" />
+  <path d="M342 106c30-8 50 6 106-4" stroke="#fff" stroke-width="5" fill="none" />
+  <circle cx="392" cy="96" r="5" fill="#ff6600" stroke="#fff" stroke-width="2" />
+  <circle cx="362" cy="84" r="3.5" fill="#8aa0b4" />
+  <circle cx="428" cy="116" r="3.5" fill="#8aa0b4" />
+  <rect x="342" y="136" width="106" height="32" rx="6" fill="#fff4ec" stroke="#ffd6b8" />
+  <circle cx="354" cy="152" r="7" fill="#ff6600" />
+  <text x="351" y="156" font-size="9" font-weight="800" fill="#fff" style="fill:#fff">1</text>
+  <text x="366" y="150" font-size="10" font-weight="800">Jouw bedrijf</text>
+  <text x="366" y="162" font-size="8" class="zacht">Nu open · route</text>
+  <rect x="342" y="174" width="106" height="28" rx="6" fill="#fff" stroke="#e8eef4" />
+  <circle cx="354" cy="188" r="7" fill="#e8eef4" />
+  <rect x="366" y="182" width="62" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="366" y="192" width="40" height="5" rx="2.5" fill="#e8eef4" />
+  <rect x="342" y="208" width="106" height="28" rx="6" fill="#fff" stroke="#e8eef4" />
+  <circle cx="354" cy="222" r="7" fill="#e8eef4" />
+  <rect x="366" y="216" width="54" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="366" y="226" width="34" height="5" rx="2.5" fill="#e8eef4" />
+
+  {!mini && (
+    <g>
+      <path class="route" d="M40 226C70 210 96 198 120 188S152 162 168 144" fill="none" stroke="#074663" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" pathLength="1" />
+      <circle class="ring" cx="168" cy="142" r="10" fill="none" stroke="#ff6600" stroke-width="3" />
+      <rect class="licht" x="342" y="136" width="106" height="32" rx="6" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <g class="melding">
+        <rect x="214" y="204" width="152" height="34" rx="10" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="232" cy="221" r="9" fill="#1f8a5b" />
+        <path d="M227.5 221l3 3 6-6.5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="248" y="225" font-size="12" font-weight="800">Iemand belt je</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .route { stroke-dashoffset: 0; }
+  :global(.teken-js) .route { stroke-dashoffset: 1; }
+  :global(.teken-js) .melding, :global(.teken-js) .licht, :global(.teken-js) .ring { opacity: 0; }
+  .ring, .licht { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .route { animation: lokale-seo-route 1.6s cubic-bezier(.6,.1,.3,1) 0.4s forwards; }
+  .in-beeld .ring { animation: lokale-seo-ring 3s ease-out 1.8s infinite; }
+  .in-beeld .licht { animation: lokale-seo-licht 1.4s ease 1.6s both; }
+  .in-beeld .melding { animation: lokale-seo-melding 6s ease-in-out 2.2s infinite both; }
+  @keyframes lokale-seo-route { to { stroke-dashoffset: 0; } }
+  @keyframes lokale-seo-ring { 0% { transform: scale(0.6); opacity: 0.9; } 70%, 100% { transform: scale(3.2); opacity: 0; } }
+  @keyframes lokale-seo-licht { 0% { opacity: 0; } 40% { opacity: 1; } 100% { opacity: 0.6; } }
+  @keyframes lokale-seo-melding { 0% { opacity: 0; transform: translateY(8px); } 12%, 80% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .route, .in-beeld .ring, .in-beeld .licht, .in-beeld .melding { animation: none; } }
+</style>

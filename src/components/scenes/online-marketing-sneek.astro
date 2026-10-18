@@ -1,0 +1,74 @@
+---
+// Scène voor /online-marketing-sneek/: Sneek als middelpunt met drie ringen eromheen (stad, regio, gasten) en de
+// plaatsen uit de Zuidwesthoek. In de volledige versie pulseert het bereik naar buiten, lichten de plaatsen op en
+// vraagt iemand uit Bolsward de route naar je winkel.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: Sneek in het midden met drie ringen eromheen tot Bolsward, Workum en Joure. Het bereik pulseert naar buiten en iemand uit Bolsward vraagt de route naar je winkel.'}>
+  <!-- Sneekermeer -->
+  <path d="M222 112c14-12 40-10 46 4s-10 28-28 26-30-18-18-30z" fill="#dbe8f0" />
+  <!-- ringen -->
+  <circle cx="190" cy="140" r="42" fill="#fff4ec" stroke="#ffc9a3" stroke-width="2" />
+  <circle cx="190" cy="140" r="82" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="6 6" />
+  <circle cx="190" cy="140" r="120" fill="none" stroke="#e8eef4" stroke-width="2" stroke-dasharray="6 6" />
+  <!-- wegen -->
+  <path d="M60 150c50-6 90-10 130-10s90 14 130 30" stroke="#c9d3dd" stroke-width="3" fill="none" stroke-linecap="round" />
+  <path d="M190 140c-4-30-10-60-18-84" stroke="#c9d3dd" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  <!-- plaatsen -->
+  <g font-size="11" font-weight="700">
+    <circle cx="150" cy="178" r="5" fill="#8aa0b4" /><text x="126" y="196">IJlst</text>
+    <circle cx="104" cy="124" r="5" fill="#8aa0b4" /><text x="78" y="114">Bolsward</text>
+    <circle cx="90" cy="196" r="5" fill="#8aa0b4" /><text x="66" y="216">Workum</text>
+    <circle cx="172" cy="62" r="5" fill="#8aa0b4" /><text x="182" y="58">Wommels</text>
+    <circle cx="296" cy="172" r="5" fill="#8aa0b4" /><text x="280" y="160">Joure</text>
+  </g>
+  <!-- Sneek -->
+  <path d="M176 128c0-9 6-15 14-15s14 6 14 15c0 11-14 23-14 23s-14-12-14-23z" fill="#ff6600" />
+  <circle cx="190" cy="128" r="5" fill="#fff" />
+  <text x="190" y="170" text-anchor="middle" font-size="13" font-weight="900">Sneek</text>
+  <!-- telefoon -->
+  <rect x="340" y="40" width="112" height="196" rx="18" fill="#10283f" />
+  <rect x="348" y="50" width="96" height="176" rx="12" fill="#fff" />
+  <text x="356" y="70" font-size="10" font-weight="800" fill="#074663" style="fill:#074663">Jouw winkel</text>
+  <rect x="356" y="78" width="80" height="44" rx="6" fill="#e8eef4" />
+  <rect x="356" y="130" width="64" height="7" rx="3" fill="#10283f" />
+  <rect x="356" y="143" width="80" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="356" y="160" width="38" height="20" rx="6" fill="#ff6600" />
+  <text x="375" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fff" style="fill:#fff">Route</text>
+  <rect x="398" y="160" width="38" height="20" rx="6" fill="none" stroke="#074663" stroke-width="2" />
+  <text x="417" y="174" text-anchor="middle" font-size="9.5" font-weight="800">Bel</text>
+  {!mini && (
+    <g>
+      <circle class="puls" cx="190" cy="140" r="42" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <circle class="licht l1" cx="150" cy="178" r="5" fill="#ff6600" />
+      <circle class="licht l2" cx="104" cy="124" r="5" fill="#ff6600" />
+      <circle class="licht l3" cx="172" cy="62" r="5" fill="#ff6600" />
+      <circle class="licht l4" cx="296" cy="172" r="5" fill="#ff6600" />
+      <circle class="licht l5" cx="90" cy="196" r="5" fill="#ff6600" />
+      <g class="route">
+        <rect x="300" y="196" width="164" height="40" rx="10" fill="#fff" stroke="#d9e1ea" />
+        <path d="M316 206c0-5 4-8 8-8s8 3 8 8c0 6-8 13-8 13s-8-7-8-13z" fill="#ff6600" />
+        <text x="340" y="213" font-size="11" font-weight="800">Route gevraagd</text>
+        <text x="340" y="227" font-size="9.5" class="zacht">vanuit Bolsward, 14 min</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .puls, .licht, .route { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .licht, :global(.teken-js) .route { opacity: 0; }
+  :global(.teken-js) .puls { opacity: 0; }
+  .in-beeld .puls { animation: online-marketing-sneek-puls 4s ease-out 0.4s infinite; }
+  .in-beeld .licht { animation: online-marketing-sneek-licht 0.5s ease forwards; }
+  .in-beeld .l1 { animation-delay: 0.6s; }
+  .in-beeld .l2 { animation-delay: 1s; }
+  .in-beeld .l3 { animation-delay: 1.3s; }
+  .in-beeld .l4 { animation-delay: 1.6s; }
+  .in-beeld .l5 { animation-delay: 1.9s; }
+  .in-beeld .route { animation: online-marketing-sneek-route 6s ease-in-out 2.2s infinite; }
+  @keyframes online-marketing-sneek-puls { 0% { opacity: 0.8; transform: scale(1); } 80%, 100% { opacity: 0; transform: scale(2.9); } }
+  @keyframes online-marketing-sneek-licht { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+  @keyframes online-marketing-sneek-route { 0% { opacity: 0; transform: translateY(8px); } 12%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .puls, .in-beeld .licht, .in-beeld .route { animation: none; } }
+</style>

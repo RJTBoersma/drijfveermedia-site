@@ -1,0 +1,302 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--offerte-beoordelen.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/offerte-beoordelen/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'vergelijkbaar', titel: 'Appels met appels' },
+  { id: 'aanvragen', titel: 'Offertes aanvragen: bij wie?' },
+  { id: 'type', titel: 'Welk type website?' },
+  { id: 'website', titel: 'Een websiteofferte in tien punten' },
+  { id: 'rekenen', titel: 'Reken drie jaar vooruit' },
+  { id: 'scorekaart', titel: 'De scorekaart' },
+  { id: 'seo', titel: 'Een offerte voor SEO' },
+  { id: 'rode-vlaggen', titel: 'Rode vlaggen' },
+  { id: 'vragen', titel: 'Vragen voor het bureau' },
+  { id: 'vastleggen', titel: 'Na je keuze: leg het vast' },
+  { id: 'meekijken', titel: 'Laat iemand meekijken' },
+];
+const briefing = [
+  'Wat moet de site opleveren? (bijvoorbeeld: tien aanvragen per maand)',
+  'Wie zijn je klanten, en waar wonen of werken ze?',
+  'Welk type website: simpel, met veel diensten, of met koppelingen?',
+  'Welke pagina\'s ongeveer, en welke gewenste functies?',
+  'Wat lever je zelf aan: teksten, foto\'s, logo?',
+  'Moet je huidige site blijven werken tot de nieuwe live staat?',
+  'Wanneer moet hij klaar zijn, en welk budget heb je in gedachten?',
+  'Wie is je contactpersoon, en wie beslist?',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Briefing voor een websiteofferte (één A4)\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  briefing.map((b, i) => `${i + 1}. ${b}\n\n\n`).join('') +
+  'Stuur deze briefing naar elke partij. Dan kun je de offertes eerlijk vergelijken.\n'
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Offerte website beoordelen: zo lees je een offerte voor een website of SEO',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Offertes voor een website of zoekmachineoptimalisatie beoordelen en vergelijken',
+}];
+---
+<Base
+  title="Offerte website beoordelen: checklist | Drijfveer Media"
+  description="Een offerte website beoordelen of een offerte voor SEO vergelijken? Met deze checklist zie je wat erin hoort, wat het echt kost en welke rode vlaggen je mijdt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Offerte beoordelen', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Advies" titel="Offerte website beoordelen: zo lees je een offerte voor een website of SEO" knop={{ tekst: 'Laat je offerte meelezen', href: '/consult/' }}>
+    <p>Drie offertes, drie bedragen, en ze lijken allemaal hetzelfde te beloven. Hoe kies je? Met deze checklist zie je in een kwartier wat er wel en niet in zit, en wat het over drie jaar echt kost.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een offerte voor een website beoordeel je pas eerlijk als iedereen op dezelfde vraag reageert. Stuur elke partij dezelfde korte briefing.</li>
+            <li>Kijk niet naar het bedrag vooraf, maar naar de totale kosten over drie jaar, inclusief maandelijkse kosten.</li>
+            <li>Zorg dat domein, hosting, website en teksten op jouw naam staan of van jou zijn. Dan kun je altijd weg.</li>
+            <li>Bij een offerte voor SEO wil je weten welk werk er elke maand gebeurt, hoe je resultaat meet en hoe snel je kunt opzeggen.</li>
+            <li>Twee of drie offertes is genoeg. Gebruik de scorekaart verderop om te kiezen.</li>
+          </ul>
+        </div>
+
+        <h2 id="vergelijkbaar">Eerst: vergelijk je wel appels met appels?</h2>
+        <p>Het grootste probleem bij website offertes is niet de prijs. Het is dat elk bureau iets anders heeft begroot. De ene webdesigner rekent met vijf pagina's en jij levert de teksten aan. De andere rekent met vijftien pagina's inclusief teksten en foto's. Dan zegt het prijsverschil niets.</p>
+        <p>Ga je offertes aanvragen? Stuur dan iedereen dezelfde korte briefing van één A4. Deze acht vragen zijn genoeg:</p>
+        <div class="kader check-lijst">
+          <p class="kader-titel">Briefing voor een websiteofferte</p>
+          <ol>{briefing.map((b) => <li>{b}</li>)}</ol>
+          <a class="btn" href={download} download="briefing-websiteofferte.txt">Download de briefing</a>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Zo kan dat eruitzien (verzonnen voorbeeld)</p>
+          <p>"Wij zijn een installatiebedrijf in Hoogeveen met zes monteurs. We willen meer aanvragen voor warmtepompen uit Drenthe, zo'n acht per maand. De site heeft ongeveer tien pagina's nodig: vijf diensten, over ons, werkgebied, vragen en contact. We willen een offerteformulier en een knop om te bellen. Teksten laten we liever schrijven, foto's van ons werk hebben we zelf. Onze oude site moet in de lucht blijven tot de nieuwe klaarstaat. Graag live in maart. Budget rond de € 3.000. Contact en beslissing: de eigenaar."</p>
+        </div>
+        <p>Met zo'n briefing krijg je offertes die je naast elkaar kunt leggen. En je merkt meteen wie doorvraagt. Een partij die belt met vragen over je klanten, heeft je briefing echt gelezen.</p>
+
+        <h2 id="aanvragen">Offertes aanvragen: bij wie en hoeveel?</h2>
+        <p>Twee of drie offertes is genoeg. Bij één heb je niets om mee te vergelijken. Bij vijf of meer kost het lezen en de gesprekken meer tijd dan het oplevert, en ga je vooral op prijs kiezen. Waar haal je ze vandaan?</p>
+        <ul>
+          <li><b>Via je netwerk.</b> Vraag ondernemers in je regio wie hun site maakte en of ze tevreden zijn. Kijk dan zelf naar die sites op je telefoon.</li>
+          <li><b>Via Google.</b> Zoek op "webdesign" plus je plaats. Bekijk het portfolio en of ze sites maakten voor bedrijven zoals het jouwe.</li>
+          <li><b>Via een offertesite.</b> Daar vul je één offerteformulier in. Je ontvangt dan voorstellen van een paar geselecteerde webdesigners. Handig als je niemand kent. Reken erop dat je gebeld wordt, en dat die partijen vaak betalen per aanvraag.</li>
+        </ul>
+        <p>Plan de aanvraag ruim. Een goede webdesigner heeft vaak een paar weken nodig voordat hij kan beginnen. Een offerte binnen een uur zonder één vraag aan jou is meestal een standaardpakket met jouw naam erop.</p>
+
+        <h2 id="type">Welk type website vraag je eigenlijk?</h2>
+        <p>Veel prijsverschillen ontstaan omdat de ene partij een ander type website in gedachten heeft dan de andere. Zet in je aanvraag welk type je zoekt, en controleer of de offerte daarover gaat.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Type website</th><th>Wat het is</th><th>Wat je in de offerte mag verwachten</th></tr></thead>
+            <tbody>
+              <tr><td>Simpele website</td><td>Drie tot vijf pagina's: wie je bent, wat je doet, contact</td><td>Een sjabloon, een formulier, mobiel goed leesbaar, korte doorlooptijd</td></tr>
+              <tr><td>Bedrijfssite met diensten</td><td>Een pagina per dienst, werkgebied, vragen, over ons</td><td>Paginastructuur, teksten of een tekstplan, basis voor vindbaarheid</td></tr>
+              <tr><td>Site die aanvragen moet opleveren</td><td>Gebouwd rond formulieren, bellen en landingspagina's</td><td>Meting van aanvragen, korte formulieren, snelheid, duidelijke knoppen</td></tr>
+              <tr><td>Site met koppelingen</td><td>Agenda, klantportaal, koppeling met boekhouding of CRM</td><td>Welke koppeling, wie het onderhoudt, wat het kost als de andere partij iets verandert</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een simpele website is niet slechter dan een grote. Voor een zzp'er die vooral via via werkt, is drie pagina's vaak genoeg. Maar vergelijk dan geen offerte voor drie pagina's met een offerte voor vijftien. Wil je weten wat erop moet? Lees <a href="/kennisbank/gidsen/website-zzp/">website voor zzp'ers</a>.</p>
+
+        <h2 id="website">Een offerte voor een website beoordelen in tien punten</h2>
+        <p>Leg elke offerte naast deze tien punten. Wat ontbreekt, vraag je na. Schriftelijk, zodat het later niet op "dat zat er toch niet bij" uitdraait.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Begrijpt hij wat je wilt bereiken?</h3></div>
+        <p>Een goede offerte begint bij jouw doel, niet bij de techniek. Staat er alleen "professionele website, responsive, inclusief SEO"? Dan is er niet geluisterd. Staat er iets over je klanten, je diensten en hoe bezoekers contact opnemen? Dan wel.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>2. Wat wordt er precies gemaakt?</h3></div>
+        <p>Het aantal pagina's, de functies, het aantal ontwerpvoorstellen en correctierondes. Een eigen ontwerp of een aangepast sjabloon? Beide kunnen prima, maar je wilt weten wat je koopt. Wordt "maatwerk" genoemd, vraag dan wat dat hier betekent: een eigen ontwerp in een bekend systeem, of zelf geschreven code?</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Wie schrijft de teksten?</h3></div>
+        <p>Teksten zijn het onderdeel dat het vaakst vergeten wordt, en het onderdeel dat het meeste bepaalt. "Content plaatsen" betekent meestal dat zij jouw teksten invoeren, niet dat ze ze schrijven. Moet jij alles aanleveren, reken dan op weken werk. Ook "contentmigratie" is zo'n woord: vaak wordt de oude tekst alleen gekopieerd, zonder hem te verbeteren.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>4. Waar komen de foto's vandaan?</h3></div>
+        <p>Eigen foto's van je werk overtuigen het meest. Gebruikt de webdesigner beeld van internet, vraag dan wie de rechten heeft. Volgens de KVK zit er automatisch auteursrecht op foto's, en een claim voor het gebruik zonder toestemming loopt al snel op tot honderden euro's per foto. Die claim komt bij jou terecht, niet bij het bureau.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>5. Van wie is de website straks?</h3></div>
+        <p>Je domeinnaam, het hostingaccount en de website horen op jouw naam te staan. Auteursrecht ontstaat volgens de KVK vanzelf bij de maker. Laat daarom vastleggen dat jij het ontwerp en de teksten mag blijven gebruiken en laten aanpassen, ook door een ander. Vraag ook in welk systeem de site gebouwd wordt. Kan een andere webdesigner ermee verder als het misgaat? Bij een eigen systeem van het bureau ben je daar vaak aan vast.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>6. Wordt hij gevonden?</h3></div>
+        <p>"SEO-vriendelijk" zegt weinig. Vraag concreet: krijgt elke pagina een eigen title en meta description? Laadt de site snel op een telefoon? En heel belangrijk bij een nieuwe site: worden je oude URL's doorgestuurd naar de nieuwe? Wie dat vergeet, kan in één klap zijn posities in Google kwijtraken. Google zelf noemt een nieuwe site een goed moment om iemand voor vindbaarheid in te schakelen: hoe eerder, hoe beter.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>7. Wat zijn de maandelijkse kosten?</h3></div>
+        <p>Hosting, onderhoud, licenties voor betaalde plug-ins, het domein. Sommige partijen rekenen een lage prijs vooraf en een maandbedrag dat nooit stopt. Zet alle terugkerende kosten op een rij, en vraag wat er gebeurt als je ermee wilt stoppen. Let op of bedragen met of zonder btw zijn. Zakelijke offertes noemen meestal bedragen zonder btw.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>8. Planning en meerwerk</h3></div>
+        <p>Wanneer is hij klaar, en wat moet jij wanneer aanleveren? Welk uurtarief geldt voor meerwerk, en wie geeft daar vooraf akkoord op? Wat je mag verwachten, staat liefst gewoon in de offerte. Vraag ook wat er gebeurt met de planning als jij later aanlevert. Dat is de meest voorkomende reden voor vertraging.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>9. Betaling en voorwaarden</h3></div>
+        <p>Hoeveel betaal je vooraf, en hoeveel bij oplevering? Een deel vooraf is normaal. Alles vooraf niet. Lees de algemene voorwaarden die bij de offerte horen, vooral de stukken over opzeggen, aansprakelijkheid en eigendom. Hoe lang is de offerte geldig?</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>10. Wat gebeurt er na de oplevering?</h3></div>
+        <p>Krijg je uitleg over het beheer? Worden fouten die na de lancering opduiken kosteloos opgelost, en hoe lang? Wie doet de updates? Een website is nooit af. Je wilt weten wie je belt als er iets stuk is. Meer over wat onderhoud inhoudt, lees je bij <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud WordPress</a>.</p>
+
+        <h2 id="rekenen">Reken drie jaar vooruit</h2>
+        <p>Een offerte met een laag bedrag kan over een paar jaar de duurste zijn. Zet eerst alle kosten in drie bakjes:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort kosten</th><th>Voorbeelden</th><th>Waar je op let</th></tr></thead>
+            <tbody>
+              <tr><td>Eenmalig</td><td>Ontwerp, bouw, teksten, foto's, overzetten van de oude site</td><td>Wat zit erin, en hoeveel correctierondes?</td></tr>
+              <tr><td>Terugkerend</td><td>Hosting, domein, onderhoud, licenties, SEO</td><td>Verplicht of los af te nemen? Opzegtermijn?</td></tr>
+              <tr><td>Op aanvraag</td><td>Extra pagina's, nieuwe functies, wijzigingen na oplevering</td><td>Uurtarief, en wie vooraf akkoord geeft</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Tel daarna eenmalig en terugkerend bij elkaar op over drie jaar:</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen bedragen)</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th></th><th>Offerte A</th><th>Offerte B</th></tr></thead>
+              <tbody>
+                <tr><td>Eenmalig</td><td>€ 1.800</td><td>€ 2.900</td></tr>
+                <tr><td>Per maand</td><td>€ 60 (verplicht pakket)</td><td>€ 25 (hosting op eigen naam)</td></tr>
+                <tr><td>Totaal na drie jaar</td><td>€ 3.960</td><td>€ 3.800</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Offerte A leek € 1.100 goedkoper. Na drie jaar is B goedkoper, en je zit nergens aan vast.</p>
+        </div>
+        <p>Wil je weten welke bedragen gangbaar zijn? In de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a> staan de prijzen op een rij.</p>
+
+        <h2 id="scorekaart">Kies met een scorekaart, niet op gevoel</h2>
+        <p>Na drie gesprekken weet je vaak niet meer wie wat zei. Een simpele scorekaart helpt. Bepaal eerst wat voor jou zwaar weegt, en geef elke offerte per punt een cijfer van 1 tot 5. Vermenigvuldig met het gewicht en tel op.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld scorekaart (verzonnen cijfers)</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th>Punt</th><th>Gewicht</th><th>Bureau A</th><th>Bureau B</th><th>Bureau C</th></tr></thead>
+              <tbody>
+                <tr><td>Begrijpt mijn doel</td><td>3</td><td>2</td><td>5</td><td>4</td></tr>
+                <tr><td>Teksten inbegrepen</td><td>2</td><td>1</td><td>4</td><td>5</td></tr>
+                <tr><td>Alles op mijn naam</td><td>3</td><td>2</td><td>5</td><td>5</td></tr>
+                <tr><td>Kosten over drie jaar</td><td>2</td><td>4</td><td>4</td><td>2</td></tr>
+                <tr><td>Planning en aanspreekpunt</td><td>1</td><td>4</td><td>3</td><td>4</td></tr>
+                <tr><td>Referenties uit mijn branche</td><td>1</td><td>3</td><td>4</td><td>2</td></tr>
+                <tr><td><b>Totaal</b></td><td></td><td><b>29</b></td><td><b>53</b></td><td><b>47</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Bureau A was het goedkoopst, maar scoort het laagst. Tussen B en C beslist een gesprek. Het gaat niet om het getal achter de komma. De kaart dwingt je om te benoemen wat je belangrijk vindt, voordat een gelikte presentatie dat voor je doet.</p>
+        </div>
+
+        <h2 id="seo">Een offerte voor SEO beoordelen</h2>
+        <p>Bij SEO is het nog lastiger, want je koopt geen ding maar werk dat je niet ziet. Een goede offerte voor SEO maakt dat werk zichtbaar. Een slechte offerte voor SEO verstopt het achter woorden als "optimalisatie" en "autoriteit". Leg hem naast deze tabel:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Vaag</th><th>Concreet</th></tr></thead>
+            <tbody>
+              <tr><td>Werk per maand</td><td>"Doorlopende optimalisatie"</td><td>Vier pagina's verbeteren, twee nieuwe artikelen, technische check</td></tr>
+              <tr><td>Startpunt</td><td>"Analyse van je site"</td><td>Nulmeting van posities, bezoekers en aanvragen, plus zoekwoordonderzoek</td></tr>
+              <tr><td>Doelen</td><td>"Hoger in Google"</td><td>Pagina 1 voor tien gekozen zoekwoorden, of 20% meer aanvragen uit Google</td></tr>
+              <tr><td>Links</td><td>"Linkbuilding inbegrepen"</td><td>Hoeveel, van wat voor sites, en of je ze kunt bekijken</td></tr>
+              <tr><td>Rapportage</td><td>"Maandelijks rapport"</td><td>Posities, bezoekers en aanvragen, plus wat er gedaan is, in gewone taal</td></tr>
+              <tr><td>Looptijd</td><td>"Minimaal 12 maanden"</td><td>Maandelijks opzegbaar, of een duidelijke reden voor een langere termijn</td></tr>
+              <tr><td>Toegang</td><td>Niet genoemd</td><td>Search Console, statistieken en teksten blijven van jou</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Google geeft zelf een paar nuttige tips voor wie iemand voor SEO zoekt. Vraag naar eerder werk en referenties, vraag hoe succes gemeten wordt en binnen welke tijd. Laat iemand voor een eerste analyse alleen meekijken in Search Console, nog zonder rechten om iets te wijzigen. En volgens Google kan niemand een eerste plek in Google garanderen. Wie dat wel belooft, laat je lopen.</p>
+        <p>Over de maandelijkse kosten: honderden links voor een paar tientjes komen bijna altijd uit netwerken die Google ziet als linkspam. Goedkoop SEO-werk kan je dus geld kosten in plaats van opleveren. Meer over wat redelijke bedragen zijn, lees je in <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>. Onze eigen <a href="/zoekmachine-optimalisatie/">SEO</a> begint bij € 495 per maand, maandelijks opzegbaar.</p>
+
+        <h3>Website en SEO in één offerte?</h3>
+        <p>Vaak krijg je een websiteofferte met een SEO-pakket erbij. Dat kan handig zijn: wie de site bouwt, weet hoe hij in elkaar zit. Beoordeel de twee delen wel apart. Het eenmalige deel lees je met de tien punten hierboven, het maandelijkse deel met de tabel in dit hoofdstuk. En vraag of je het SEO-deel los kunt opzeggen, zonder dat je site of je hosting in gevaar komt. Een offerte voor SEO die alleen samen met de hosting stopt, is een manier om je vast te houden.</p>
+
+        <h2 id="rode-vlaggen">Rode vlaggen in een offerte</h2>
+        <p>Een gelikte presentatie zegt weinig over wat er na de handtekening gebeurt. Wees op je hoede bij deze signalen:</p>
+        <ul>
+          <li>Een garantie op plek 1 in Google. Niemand bepaalt wat Google doet.</li>
+          <li>Eén totaalbedrag zonder uitsplitsing, en geen antwoord als je erom vraagt.</li>
+          <li>Je domein of hosting staat op naam van het bureau.</li>
+          <li>Een jaarcontract met stilzwijgende verlenging en een lange opzegtermijn.</li>
+          <li>Druk om snel te tekenen: "deze prijs geldt alleen tot vrijdag".</li>
+          <li>Geen aantallen: geen pagina's, geen correctierondes, geen opleverdatum.</li>
+          <li>Meerwerk zonder uurtarief of afspraak over wie vooraf akkoord geeft.</li>
+          <li>Geen referenties, of alleen voorbeelden die niets met jouw soort bedrijf te maken hebben.</li>
+          <li>Veel vakjargon en weinig concrete afspraken. Wie het niet simpel kan uitleggen, snapt het zelf vaak niet goed.</li>
+        </ul>
+        <p>Eén rode vlag hoeft geen reden te zijn om af te haken. Vraag het na. Hoe iemand op een kritische vraag reageert, vertelt je hoe de samenwerking straks gaat.</p>
+
+        <h2 id="vragen">Vragen die je het bureau stelt</h2>
+        <p>Stuur deze vragen mee, of stel ze in het gesprek. Hoe iemand antwoordt, zegt net zoveel als wat hij antwoordt.</p>
+        <ol>
+          <li>Wat heb je van mij nodig, en wanneer?</li>
+          <li>Wie werkt er aan mijn project, en wie is mijn aanspreekpunt?</li>
+          <li>Kan ik een paar klanten bellen voor wie je iets vergelijkbaars deed?</li>
+          <li>Wat kost het per maand na de oplevering, en wat zit daarbij?</li>
+          <li>Hoe meten we of het werkt, en wat gebeurt er als het tegenvalt?</li>
+          <li>Wat gebeurt er met mijn oude site en mijn posities in Google?</li>
+          <li>Wat als ik over een jaar naar een ander wil?</li>
+        </ol>
+        <p>Let ook op wat het bureau jou vraagt. Een partij die niets wil weten over je klanten, je concurrenten en hoe mensen je nu vinden, gaat een site bouwen die er goed uitziet. Of hij ook iets oplevert, is dan toeval.</p>
+
+        <h2 id="vastleggen">Na je keuze: leg het vast</h2>
+        <p>Je hebt gekozen. Voordat je tekent, loop je nog vijf dingen na:</p>
+        <ul class="vink">
+          <li><b>Alles wat mondeling is toegezegd, staat in de offerte.</b> "Dat doen we er wel bij" is na drie maanden vergeten.</li>
+          <li><b>Er is een planning met data</b>, ook voor wat jij moet aanleveren.</li>
+          <li><b>Jij krijgt de inloggegevens</b> van domein, hosting, website en statistieken, of een eigen account met volledige rechten.</li>
+          <li><b>Er staat een opleveringsmoment in</b> waarop je samen alles test: formulieren, knoppen, de site op je telefoon.</li>
+          <li><b>De oude site blijft in de lucht</b> tot de nieuwe staat, en de doorverwijzingen zijn getest.</li>
+        </ul>
+        <p>Bewaar de offerte, de voorwaarden en de mails waarin dingen zijn afgesproken in één map. Dan weet je over twee jaar nog wat er is afgesproken.</p>
+
+        <h2 id="meekijken">Laat iemand meekijken</h2>
+        <p>Twijfel je nog over een websiteofferte of een offerte voor SEO? Stuur ze op en loop ze in een <a href="/consult/">consult</a> met ons door. Dat kost € 85 per uur. We zeggen eerlijk wat er goed is, wat ontbreekt en welke vragen je nog moet stellen. Ook als je uiteindelijk voor een ander kiest. Wil je ook een voorstel van ons ter vergelijking? Onze vanaf-prijzen staan op de pagina <a href="/prijzen/">prijzen</a>. Een <a href="/website-laten-maken/">website laten maken</a> kan bij ons vanaf € 250. Of vraag eerst de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={14} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Waarom je ons kunt vragen om mee te kijken" intro="We verdienen liever aan klanten die blijven omdat het werkt. Dit is wat je van ons kunt verwachten." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel offertes moet ik aanvragen voor een website?', a: 'Twee of drie is genoeg. Meer maakt het vergelijken lastiger en kost je veel tijd aan gesprekken. Geef iedereen dezelfde briefing.' },
+      { v: 'Waarom verschillen offertes voor een website zo veel?', a: 'Omdat er vaak iets anders is begroot: meer of minder pagina\'s, wel of geen teksten, een sjabloon of een eigen ontwerp, en verschillende maandelijkse kosten.' },
+      { v: 'Is de goedkoopste offerte een slechte keuze?', a: 'Niet per se. Een eenvoudige site op een goed sjabloon kan prima passen. Reken wel de kosten over drie jaar uit en kijk wat er ontbreekt.' },
+      { v: 'Wat moet er minimaal in een websiteofferte staan?', a: 'Het aantal pagina\'s, de functies, wie teksten en foto\'s levert, het aantal correctierondes, de planning, de prijs met en zonder btw, de maandelijkse kosten en afspraken over eigendom en onderhoud.' },
+      { v: 'Mag ik vragen om een offerte aan te passen?', a: 'Ja. Een offerte is een voorstel. Vraag gerust om een onderdeel te schrappen of naar een tweede fase te schuiven. Een goede partij denkt mee over waar je kunt besparen zonder dat het doel eronder lijdt.' },
+      { v: 'Wat hoort er in een offerte voor SEO?', a: 'Welk werk er elke maand gebeurt, een nulmeting, concrete doelen, hoe er gerapporteerd wordt, waar links vandaan komen en hoe snel je kunt opzeggen.' },
+      { v: 'Kunnen jullie mijn offerte beoordelen?', a: 'Ja. In een <a href="/consult/">consult</a> van € 85 per uur lopen we je offertes samen door, ook als je niet voor ons kiest.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'De prijzen voor 2026 op een rij.' },
+      { label: 'Gids', titel: 'Wat kost SEO?', href: '/kennisbank/gidsen/wat-kost-seo/', tekst: 'Tarieven en wat je ervoor krijgt.', teken: 'munten' },
+      { label: 'Dienst', titel: 'Consult', href: '/consult/', tekst: 'Een uur sparren, € 85 per uur.' },
+    ]}
+  />
+
+  <Actie titel="Twijfel je over een offerte?" tekst={`Bel ${site.contactpersoon} of plan een consult. We lezen je offerte mee en zeggen eerlijk wat we ervan vinden.`} knop={{ tekst: 'Plan een consult', href: '/consult/' }} />
+</Base>
+<style>
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+</style>

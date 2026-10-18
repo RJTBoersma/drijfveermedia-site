@@ -1,0 +1,178 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-ads-check.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-ads-check/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'voor-je-begint', titel: 'Voor je begint' },
+  { id: 'punt-1', titel: '1. Van wie is het account?' },
+  { id: 'punt-2', titel: '2. Conversiemeting' },
+  { id: 'punt-3', titel: '3. Kosten per conversie' },
+  { id: 'punt-4', titel: '4. Het zoektermenrapport' },
+  { id: 'punt-5', titel: '5. Uitsluitingszoekwoorden' },
+  { id: 'punt-6', titel: '6. Zoektypen' },
+  { id: 'punt-7', titel: '7. Locatie en netwerken' },
+  { id: 'punt-8', titel: '8. Advertenties' },
+  { id: 'punt-9', titel: '9. De landingspagina' },
+  { id: 'punt-10', titel: '10. Budget en biedstrategie' },
+  { id: 'uitslag', titel: 'Je uitslag' },
+  { id: 'en-nu', titel: 'Zelf repareren of laten doen?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google Ads-check: wordt je geld goed besteed? 10 punten',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google Ads',
+  citation: [
+    'https://support.google.com/google-ads/answer/2472708?hl=nl',
+    'https://support.google.com/google-ads/answer/2453972?hl=nl',
+    'https://support.google.com/google-ads/answer/7478529?hl=nl',
+    'https://support.google.com/google-ads/answer/6167118?hl=nl',
+    'https://support.google.com/google-ads/answer/1722022?hl=nl',
+    'https://support.google.com/google-ads/answer/10279006?hl=nl',
+  ],
+}];
+---
+<Base
+  title="Google Ads check: wordt je geld goed besteed?"
+  description="Google Ads check in 10 punten: conversiemeting, zoektermen, uitsluitingen, locatie en biedstrategie. Zo zie je zelf of je advertentiegeld goed landt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google Ads-check', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Online adverteren" titel="Google Ads-check: wordt je geld goed besteed? 10 punten" knop={{ tekst: 'Laat je account gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Je betaalt elke maand voor Google Ads, maar weet je wat het oplevert? Met deze Google Ads-check loop je je account in een uur zelf na. Tien punten, op volgorde van belang.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Begin bij vier punten waar vaak geld weglekt: conversiemeting, het zoektermenrapport, uitsluitingen en de locatie-instelling.</li>
+            <li>Zonder betrouwbare conversiemeting is elke andere optimalisatie gokken.</li>
+            <li>Bereken vooraf wat één aanvraag mag kosten. Dan weet je meteen of een campagne verdient of kost.</li>
+            <li>Scoor je minder dan zes vinkjes? Repareer eerst, en verhoog pas daarna je budget.</li>
+          </ul>
+        </div>
+
+        <h2 id="voor-je-begint">Voor je begint</h2>
+        <p>Je hebt drie dingen nodig. Toegang tot je account, minstens met leesrechten. Een periode van de laatste 30 tot 90 dagen, zodat toevallige uitschieters niet de doorslag geven. En één getal uit je eigen administratie: hoeveel aanvragen kwamen er in die periode echt binnen via de site en de telefoon?</p>
+        <p>Pak een vel papier en zet bij elk punt van de Google Ads check ja of nee. Twijfel telt als nee.</p>
+
+        <h2 id="punten">De 10 punten van de Google Ads-check</h2>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3 id="punt-1">1. Is het account van jou?</h3></div>
+        <p>Klinkt vreemd, maar begin hier. Staat het account op naam van jouw bedrijf, met jouw betaalgegevens? Heb je zelf beheerdersrechten? Sommige bureaus zetten campagnes in hun eigen account. Stop je met dat bureau, dan raak je alle historie kwijt: welke zoekwoorden werkten, welke advertenties, wat een klant kostte. Een bureau hoort te verdienen aan klanten die blijven omdat het werkt, niet aan klanten die vastzitten.</p>
+        <p><b>Ja als:</b> jij eigenaar bent en het bureau via zijn beheeraccount toegang heeft, die je zelf kunt intrekken.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3 id="punt-2">2. Meet je conversies, en kloppen ze?</h3></div>
+        <p>Een conversie is wat je wilt dat een bezoeker doet: bellen, een formulier versturen, een offerte aanvragen. Open in je account het overzicht met conversies. Twee vragen. Staat elke manier waarop klanten contact opnemen erin, dus ook telefoontjes en klikken op je WhatsApp-knop? En tellen alleen echte aanvragen als primaire conversie, en niet een paginabezoek of drie minuten op de site?</p>
+        <p>Leg het aantal conversies van vorige maand naast het aantal aanvragen in je mailbox. Zegt Google Ads 40 en heb je er 12 gekregen, dan stuurt je biedstrategie op ruis. Hulp nodig bij het meten? Zie <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3 id="punt-3">3. Weet je wat een aanvraag mag kosten?</h3></div>
+        <p>Zonder grens weet je niet of een campagne goed loopt. Reken hem zo uit: wat levert een gemiddelde klant op aan marge, keer de kans dat een aanvraag klant wordt. Dat is wat een aanvraag maximaal mag kosten.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen): een dakdekker in Hoogeveen</p>
+          <p>Gemiddelde klus € 2.400, marge 30%: € 720 per klant. Eén op de vier aanvragen wordt klant. Een aanvraag mag dus maximaal € 180 kosten. Zie je in de kolom kosten per conversie € 95, dan verdient de campagne. Zie je € 260, dan niet.</p>
+        </div>
+        <p><b>Ja als:</b> je dat getal kent en de kosten per conversie van elke campagne eronder liggen.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3 id="punt-4">4. Kijk je in het zoektermenrapport?</h3></div>
+        <p>Dit is de belangrijkste pagina van je account, en de minst bekeken. Je zoekwoorden zijn wat jij opgeeft. Zoektermen zijn wat mensen echt intypten voordat ze op je advertentie klikten. Daar zit vaak het verschil tussen winst en verlies.</p>
+        <p>Open het rapport, kies de laatste 90 dagen en sorteer op kosten. Loop de eerste vijftig regels langs. Een installateur die adverteert op "cv-ketel" vindt er al snel "cv-ketel storing code" (doe-het-zelvers), "cv-ketel monteur vacature" en de naam van een concurrent. Elke klik kost geld en levert niets op.</p>
+        <p><b>Ja als:</b> iemand dit rapport minstens elke twee weken bekijkt.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3 id="punt-5">5. Heb je uitsluitingszoekwoorden?</h3></div>
+        <p>Met een uitsluitingszoekwoord zeg je tegen Google: bij deze woorden niet. Wat je vindt in punt 4, zet je hier. Begin met een lijst op accountniveau die voor bijna elke dienstverlener geldt: vacature, salaris, opleiding, cursus, zelf, gratis, tweedehands, handleiding.</p>
+        <p>Let op één addertje. Google past uitsluitingen niet toe op varianten. Sluit je "bloemen" uit, dan zie je geen advertentie bij "rode bloemen", maar wel bij "rode bloem". Zet meervoud en enkelvoud er dus allebei in.</p>
+        <p><b>Ja als:</b> er een lijst staat, en die de afgelopen maand nog is aangevuld.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3 id="punt-6">6. Staat alles op breed zoeken?</h3></div>
+        <p>Breed zoeken is het standaard zoektype. Je advertentie kan dan verschijnen bij alles wat Google gerelateerd vindt, ook zoekopdrachten zonder jouw woorden erin. Met een goede conversiemeting en een slimme biedstrategie kan dat werken, want Google leert dan wie aanvraagt. Zonder die meting is het een vrijbrief om je budget uit te geven.</p>
+        <p><b>Ja als:</b> je breed zoeken alleen gebruikt met betrouwbare conversies, en anders woordgroep of exact.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3 id="punt-7">7. Kloppen locatie en netwerken?</h3></div>
+        <p>Bij de locatie staat standaard "aanwezigheid of interesse". Dan zien ook mensen buiten je gebied je advertentie, als ze interesse tonen in je regio. Voor een webshop prima. Voor een schilder in Assen betaal je zo voor klikken uit Rotterdam. Kies voor een lokaal bedrijf "aanwezigheid": mensen die in je gebied zijn of er regelmatig komen.</p>
+        <p>Kijk in dezelfde instellingen naar de netwerken van je zoekcampagne. Staan zoekpartners en het Display-netwerk aan, dan verschijn je ook op honderden andere websites. Vergelijk in je rapport wat die klikken opleveren. Leveren ze niets op, zet ze dan uit.</p>
+        <p><b>Ja als:</b> de locatie-optie bewust gekozen is en elk netwerk zijn geld waard is.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3 id="punt-8">8. Passen advertenties bij de zoekopdracht?</h3></div>
+        <p>Elke advertentiegroep hoort over één onderwerp te gaan, met zoekwoorden en advertenties die daarbij passen. Zit "dakkapel", "dakraam" en "dakgoot repareren" in één groep met één advertentie, dan past die advertentie bij geen van drieën goed. Dat zie je terug in een lage klikfrequentie en een lage kwaliteitsscore.</p>
+        <p>Zet de kolom kwaliteitsscore aan. Die loopt van 1 tot 10 en laat per zoekwoord zien hoe je advertentie en landingspagina het doen tegen die van anderen. Kijk ook of je advertentie-extensies gebruikt, in Google Ads nu componenten genoemd: sitelinks, je telefoonnummer, je adres. Ze maken je advertentie groter en geven mensen meer redenen om te klikken.</p>
+        <p><b>Ja als:</b> elke advertentiegroep één thema heeft en de meeste zoekwoorden een 6 of hoger scoren.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3 id="punt-9">9. Landt de klik op de juiste pagina?</h3></div>
+        <p>Klik zelf op je advertentie, op je telefoon. Kom je op de homepage, terwijl je zocht naar "dakgoot repareren"? Dan moet de bezoeker zelf gaan zoeken, en dat doet hij niet. Een goede landingspagina herhaalt waar hij naar zocht, laat je telefoonnummer zien zonder te scrollen en heeft een formulier van hooguit vier velden. Hij laadt binnen een paar seconden, ook op een trage verbinding.</p>
+        <p>Meer hierover in de gids <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken die converteert</a>.</p>
+        <p><b>Ja als:</b> elke campagne naar een pagina gaat die over precies dat onderwerp gaat.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3 id="punt-10">10. Passen budget en biedstrategie bij je data?</h3></div>
+        <p>Kijk eerst of een campagne "beperkt door budget" is. Is dat zo, terwijl er in punt 4 nog klikken weglekken? Dan heb je geen groter budget nodig, maar een schoner account.</p>
+        <p>Kijk dan naar de biedstrategie. "Aantal conversies maximaliseren" en "Doel-CPA" sturen op aanvragen, maar hebben genoeg betrouwbare conversies nodig om van te leren. Google rekent op een leerfase van 7 tot 14 dagen. Wie elke paar dagen iets aanpast, zet die leerfase steeds opnieuw in gang.</p>
+        <p>Kijk als laatste bij aanbevelingen of "automatisch toepassen" aanstaat. Dan voert Google zelf wijzigingen door in je account. In de wijzigingsgeschiedenis zie je wat er is veranderd en door wie.</p>
+        <p><b>Ja als:</b> je biedstrategie past bij het aantal conversies en je weet wie wat verandert.</p>
+
+        <h2 id="uitslag">Zo lees je je uitslag</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vinkjes</th><th>Wat het betekent</th></tr></thead>
+            <tbody>
+              <tr><td>9 of 10</td><td>Je account staat er goed voor. Bekijk elke maand punt 4 en 5, dan blijft dat zo.</td></tr>
+              <tr><td>6 tot 8</td><td>Er lekt geld weg. Begin bij het laagste nummer met een nee: de volgorde is niet toevallig.</td></tr>
+              <tr><td>5 of minder</td><td>Verhoog je budget niet. Zet eerst punt 1 tot en met 5 recht. Overweeg de campagnes zolang terug te schroeven.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een nee bij punt 2 weegt het zwaarst. Zonder conversiemeting kun je de rest niet beoordelen, want je weet niet wat werkt. Begin bij een nieuw account dus altijd daar.</p>
+
+        <h2 id="en-nu">Zelf repareren of laten doen?</h2>
+        <p>Uitsluitingen toevoegen en de locatie aanpassen kun je zelf, in een middag. Conversiemeting goed inrichten en campagnes opnieuw indelen is lastiger. Dat kost wat uren en wat ervaring.</p>
+        <p>Begin je liever opnieuw? Lees dan hoe je <a href="/online-adverteren/google-ads-campagne-opzetten/">een Google Ads-campagne opzet</a> zonder deze fouten. Wil je dat iemand meekijkt, plan dan een <a href="/consult/">consult</a> van € 85 per uur. Of kies voor <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a>. Dan spreken we vooraf af wat een aanvraag mag kosten. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={11} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je account nalopen?" intro="Wat je van ons mag verwachten als we je advertenties overnemen." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe vaak moet ik mijn Google Ads-account controleren?', a: 'Het zoektermenrapport en je uitsluitingen elke twee weken. De hele check van deze pagina eens per kwartaal, en altijd na een grote wijziging aan je website.' },
+      { v: 'Wat is een goede klikfrequentie?', a: 'Dat verschilt per branche en per zoekwoord. Belangrijker is de trend en de vergelijking tussen je eigen advertentiegroepen. Een groep die ver onder de rest zit, heeft meestal advertenties die niet passen bij de zoekwoorden.' },
+      { v: 'Mijn bureau stuurt alleen een rapport met klikken en vertoningen. Is dat genoeg?', a: 'Nee. Klikken en vertoningen zeggen niets over aanvragen en omzet. Vraag om kosten per conversie en het aantal echte aanvragen. Een rapportage waar je uitleg bij nodig hebt, schiet zijn doel voorbij.' },
+      { v: 'Moet ik de aanbevelingen van Google opvolgen?', a: 'Niet blind. Sommige zijn nuttig, zoals ontbrekende sitelinks. Andere vragen vooral om meer budget of bredere zoekwoorden. Beoordeel elke aanbeveling op je eigen doel: levert dit meer aanvragen op tegen een acceptabele prijs?' },
+      { v: 'Kan ik deze check ook laten doen?', a: 'Ja. Vraag de <a href="/gratis-website-analyse/">gratis scan</a> aan en zet erbij dat het om Google Ads gaat. We bellen je terug en spreken af hoe we meekijken. Leestoegang tot je account is daarvoor genoeg.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Wat is Google Ads?', href: '/kennisbank/gidsen/wat-is-google-ads/', tekst: 'Uitleg, kosten en voorbeelden voor wie net begint.' },
+      { label: 'Dienst', titel: 'Google Ads uitbesteden', href: '/online-adverteren/google-ads-bureau/', tekst: 'Campagnes opzetten en beheren, met doelen waar je ons op afrekent.' },
+      { label: 'Gids', titel: 'Landingspagina maken', href: '/kennisbank/gidsen/landingspagina-maken/', tekst: 'Een pagina die van een klik een aanvraag maakt.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waar jouw budget weglekt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt hoe je advertenties en landingspagina's ervoor staan, en belt je met de eerste dingen die je kunt verbeteren.`} />
+</Base>

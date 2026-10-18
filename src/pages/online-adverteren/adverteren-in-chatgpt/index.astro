@@ -1,0 +1,235 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/online-adverteren--adverteren-in-chatgpt.astro';
+import { site } from '../../../data/site';
+
+const url = '/online-adverteren/adverteren-in-chatgpt/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'bekend', titel: 'Wat er echt bekend is' },
+  { id: 'eruit', titel: 'Hoe een advertentie eruitziet' },
+  { id: 'wie', titel: 'Wie ze ziet, en wie niet' },
+  { id: 'werkt', titel: 'Hoe het werkt' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'meten', titel: 'Meten wat het oplevert' },
+  { id: 'vergelijking', titel: 'ChatGPT Ads of Google Ads?' },
+  { id: 'organisch', titel: 'Adverteren of genoemd worden?' },
+  { id: 'aanpak', titel: 'Zo pakken wij het aan' },
+];
+const tijdlijn = [
+  ['16 januari 2026', 'OpenAI kondigt aan advertenties te gaan testen bij volwassen gebruikers van de gratis versie en ChatGPT Go in de Verenigde Staten.'],
+  ['Februari 2026', 'De eerste test begint in de Verenigde Staten.'],
+  ['5 mei 2026', 'Een eigen Ads Manager in bèta, en bieden per klik naast bieden per duizend vertoningen.'],
+  ['18 augustus 2026', 'OpenAI kondigt uitbreiding aan naar 31 Europese landen, waaronder Nederland. In het begin alleen via OpenAI en partners.'],
+  ['31 augustus 2026', 'De Ads Manager staat open voor zelf inkopen in die 31 Europese landen.'],
+  ['23 september 2026', 'Uitbreiding naar Zuidoost-Azië en Taiwan. Daarmee in meer dan 60 landen.'],
+  ['5 oktober 2026', 'Een nieuwe advertentievorm met beeld, eerst als test in de Verenigde Staten, en meer manieren om resultaat te meten.'],
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Adverteren in ChatGPT (ChatGPT Ads)',
+  serviceType: 'Online adverteren',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', description: 'Prijs afhankelijk van het advertentiebudget, exclusief btw. Maandelijks opzegbaar.' },
+}];
+---
+<Base
+  title="Adverteren in ChatGPT: zo werkt het | Drijfveer Media"
+  description="Adverteren in ChatGPT kan sinds eind augustus 2026 ook in Nederland. Wat er echt bekend is over ChatGPT Ads, wie ze ziet en wat ze kosten."
+  kruimels={[{ naam: 'Online adverteren', url: '/online-adverteren/' }, { naam: 'Adverteren in ChatGPT', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Online adverteren" titel="Adverteren in ChatGPT: de nieuwe advertentieplek, nuchter bekeken">
+    <p>Sinds eind augustus 2026 kunnen bedrijven ook in Nederland adverteren in ChatGPT. Een nieuw kanaal, met nog weinig adverteerders. Dit is wat er echt bekend is, en hoe je bepaalt of het iets voor jou is.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Adverteren in ChatGPT kan in Nederland sinds eind augustus 2026. Sinds 31 augustus koop je de advertenties zelf in via de Ads Manager van OpenAI.</li>
+            <li>De advertenties verschijnen onder het antwoord, met een duidelijk label. Volgens OpenAI hebben ze geen invloed op het antwoord zelf.</li>
+            <li>Alleen wie de gratis versie of ChatGPT Go gebruikt, ziet ze.</li>
+            <li>Je betaalt per klik of per duizend vertoningen, via een veiling. Gemiddelde klikprijzen voor Nederland zijn er nog niet.</li>
+          </ul>
+        </div>
+
+        <h2 id="bekend">Wat er nu echt bekend is</h2>
+        <p>Over ChatGPT Ads wordt veel geroepen. Wij houden het bij wat OpenAI zelf publiceert. De tijdlijn van de afgelopen maanden:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat</th></tr></thead>
+            <tbody>
+              {tijdlijn.map(([wanneer, wat]) => <tr><td><b>{wanneer}</b></td><td>{wat}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p>Het gaat snel. Volgens OpenAI hebben inmiddels tienduizenden marketeers in ChatGPT geadverteerd, en bereikt ChatGPT 1,2 miljard mensen per week. Voor Nederlandse adverteerders is het kanaal nog jong. Dat is een kans en een risico tegelijk.</p>
+
+        <h2 id="eruit">Zo ziet een advertentie in ChatGPT eruit</h2>
+        <p>Iemand vraagt welke tuinset past op een klein balkon. ChatGPT geeft eerst gewoon antwoord. Daaronder kan een kaartje verschijnen met een label dat het om een advertentie gaat. Een korte kop, een regel tekst, vaak een afbeelding en een link naar de site van de adverteerder.</p>
+        <p>De ruimte is klein. Volgens de documentatie van OpenAI mag de kop 3 tot 50 tekens lang zijn en de tekst hooguit 100 tekens. Je moet dus in één zin zeggen wat je biedt. Voordat je advertentie draait, keurt OpenAI je merk en je advertentie. Daarbij bezoekt een eigen robot, OAI-AdsBot, je landingspagina om te controleren of die aan de regels voldoet.</p>
+        <p>OpenAI belooft daarbij vijf dingen:</p>
+        <ul class="vink">
+          <li>Advertenties staan altijd los van het antwoord en zijn duidelijk als reclame te herkennen.</li>
+          <li>Een adverteerder kan het antwoord niet kopen of sturen.</li>
+          <li>Adverteerders krijgen geen toegang tot gesprekken, en OpenAI verkoopt geen gegevens aan adverteerders.</li>
+          <li>Gebruikers kunnen persoonlijke advertenties uitzetten en een advertentie wegklikken.</li>
+          <li>Er is altijd een betaalde versie zonder advertenties.</li>
+        </ul>
+        <p>In oktober 2026 kondigde OpenAI een nieuwe vorm aan: advertenties met beeld, tijdens het maken van afbeeldingen. Die wordt eerst in de Verenigde Staten getest.</p>
+
+        <h2 id="wie">Wie de advertenties ziet, en wie niet</h2>
+        <p>Niet iedereen krijgt reclame. Alleen gebruikers van de gratis versie en van ChatGPT Go. Wie betaalt voor Plus, Pro of Enterprise, ziet geen advertenties.</p>
+        <p>Bij de start beloofde OpenAI geen advertenties te tonen aan wie jonger is dan 18 of daarvoor wordt gehouden. Ook bij gevoelige onderwerpen zoals gezondheid, mentale gezondheid en politiek blijven ze weg. Daarnaast beoordeelt OpenAI volgens eigen zeggen per gesprek of reclame gepast is. Werk je in de zorg? Dan is dit kanaal voorlopig waarschijnlijk niets voor jou.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h2 id="werkt">Hoe adverteren in ChatGPT werkt</h2></div>
+        <p>Je maakt een account aan via de Ads Manager van OpenAI en vult je bedrijfsgegevens in. De opbouw lijkt op Google Ads: een account met campagnes, daarin advertentiegroepen, daarin advertenties. Het grote verschil zit in hoe je bepaalt wanneer je advertentie verschijnt.</p>
+        <h3>Geen zoekwoorden, maar context</h3>
+        <p>In Google adverteer je op zoekwoorden. In ChatGPT telt het gesprek. Je geeft per advertentiegroep wel hints mee: korte omschrijvingen van wanneer je product of dienst nuttig is. OpenAI zegt er uitdrukkelijk bij dat dit geen zoekwoorden met exacte match zijn. Een vage hint als "schoenen" helpt weinig. "Lichte trailschoenen voor rotsig terrein" helpt wel. Voor een installateur zou dat iets zijn als "cv-ketel vervangen in een rijtjeshuis".</p>
+        <h3>Waar en bij wie</h3>
+        <ul>
+          <li><b>Locatie.</b> Op land, regio of marktgebied. Een installateur kan zich dus tot zijn eigen regio beperken, als die regio in de lijst van OpenAI staat.</li>
+          <li><b>Platform.</b> De app op iPhone of Android, of ChatGPT in de browser.</li>
+          <li><b>Eigen doelgroepen.</b> Een klantenlijst uploaden kan, maar je hebt minstens 25.000 gekoppelde gebruikers nodig. Voor de meeste mkb'ers is dat te groot.</li>
+        </ul>
+        <h3>Voor webshops: een productfeed</h3>
+        <p>Heb je een webshop, dan kun je een productcatalogus aanleveren, net als bij Google Shopping. Let op: campagnes met een productfeed kun je volgens OpenAI alleen per land richten, niet per regio. Hoe je een goede feed opbouwt, lees je bij <a href="/online-adverteren/google-shopping/">Google Shopping</a>.</p>
+        <p>Bepaalde functies zijn nog niet voor iedereen. Uitsluitende zinnen, zodat je advertentie niet bij ongewenste gesprekken verschijnt, krijgen alleen adverteerders die daarvoor in aanmerking komen.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h2 id="kosten">Wat ChatGPT Ads kosten</h2></div>
+        <p>Er is geen vaste prijs. Net als bij <a href="/online-adverteren/google-ads-bureau/">Google Ads</a> werk je met een veiling. Wie er verschijnt, hangt af van je bod, van hoe goed je advertentie past bij het gesprek en van je landingspagina. Je stelt zelf een budget in, per dag of voor de hele looptijd. Het minimale dagbudget hangt volgens OpenAI af van de valuta van je account.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Biedstrategie</th><th>Wat het doet</th><th>Je betaalt per</th></tr></thead>
+            <tbody>
+              <tr><td><b>Vast bod</b></td><td>Je bepaalt zelf het bod en past het aan</td><td>Klik of duizend vertoningen</td></tr>
+              <tr><td><b>Maximaal aantal klikken</b></td><td>OpenAI past het bod aan om zoveel mogelijk klikken uit je dagbudget te halen</td><td>Klik</td></tr>
+              <tr><td><b>Maximaal aantal conversies</b></td><td>OpenAI stuurt op een actie op je site, zoals een aanvraag of aankoop</td><td>Klik</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een eerlijk getal over wat een klik in Nederland kost, kan nog niemand je geven. Daarvoor is het kanaal te nieuw. Wantrouw een bureau dat dat wel doet. Wel kun je vooraf uitrekenen wat een klik je <em>mag</em> kosten.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een webshop verkoopt een tuinset van € 600 met € 180 marge. Hij wil per verkoop hooguit € 60 aan advertenties uitgeven. Koopt één op de vijftig bezoekers, dan mag een klik maximaal € 1,20 kosten. Met dat getal start je met een vast bod, en je ziet na een paar weken of het klopt.</p>
+        </div>
+        <p>Ter vergelijking: in Google Ads kost een klik op "dakdekker" gemiddeld € 4,81 en op "hovenier" € 0,88 (SE Ranking, Nederland, oktober 2026). Meer klikprijzen staan in ons <a href="/online-adverteren/google-ads-campagne-opzetten/">stappenplan voor een Google Ads-campagne</a>. Wie vroeg instapt in ChatGPT, concurreert met minder adverteerders. In een veiling betekent minder concurrentie meestal een lagere prijs. Hoe langer je wacht, hoe voller het wordt.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h2 id="meten">Meten wat het oplevert</h2></div>
+        <p>Zonder meting weet je na een maand niet of je geld hebt verdiend of verloren. OpenAI biedt drie manieren om conversies te meten:</p>
+        <ul>
+          <li><b>De pixel.</b> Een stukje code op je site dat aanvragen of aankopen doorgeeft.</li>
+          <li><b>De Conversions API.</b> Hetzelfde, maar rechtstreeks vanaf je server. Betrouwbaarder, wel meer werk.</li>
+          <li><b>Een image tag.</b> Voor sites waar je geen JavaScript kunt toevoegen.</li>
+        </ul>
+        <p>Standaard telt OpenAI een conversie mee tot 30 dagen na een klik en 1 dag na een vertoning. Adverteerders krijgen alleen samengevoegde cijfers, geen gegevens over losse gesprekken. Zet daarnaast <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a> achter je links, zodat je in Google Analytics ziet wat bezoekers uit ChatGPT op je site doen.</p>
+        <p>De eerste resultaten die OpenAI deelt, komen van grote merken in de Verenigde Staten. Zo zou WeightWatchers volgens meetpartner DV Rockerbox een 15,3 procent lagere kosten per klant hebben gehad dan via zoekadvertenties. Interessant, maar voor een installatiebedrijf in Drenthe zegt het weinig. Je eigen cijfers zijn de enige die tellen.</p>
+
+        <h2 id="vergelijking">ChatGPT Ads of Google Ads?</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>ChatGPT Ads</th><th>Google Ads</th></tr></thead>
+            <tbody>
+              <tr><td><b>Wanneer je verschijnt</b></td><td>Op basis van het gesprek en je hints</td><td>Op basis van zoekwoorden</td></tr>
+              <tr><td><b>Wat de klant doet</b></td><td>Vergelijkt en oriënteert, vaak met veel uitleg</td><td>Zoekt gericht, vaak klaar om te kopen</td></tr>
+              <tr><td><b>Klikprijzen bekend?</b></td><td>Nog niet voor Nederland</td><td>Ja, per zoekwoord</td></tr>
+              <tr><td><b>Regio kiezen</b></td><td>Land, regio of marktgebied</td><td>Land, provincie, plaats of een straal rond je adres</td></tr>
+              <tr><td><b>Wie het ziet</b></td><td>Gebruikers van de gratis versie en Go</td><td>Iedereen die zoekt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Ons advies voor de meeste mkb'ers: begin bij Google, waar mensen al zoeken. Draait dat goed en heb je budget over, test dan ChatGPT ernaast. Verkoop je producten die mensen eerst uitgebreid vergelijken, zoals meubels, software of opleidingen, dan kan ChatGPT eerder interessant zijn.</p>
+
+        <h2 id="organisch">Adverteren of genoemd worden?</h2>
+        <p>In ChatGPT ben je op twee manieren zichtbaar. Betaald, met een advertentie onder het antwoord. Of organisch, doordat ChatGPT jouw bedrijf zelf noemt. Die twee systemen staan helemaal los van elkaar. Een advertentie levert je geen extra vermeldingen in de antwoorden op.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>ChatGPT Ads</th><th>Genoemd worden</th></tr></thead>
+            <tbody>
+              <tr><td><b>Waar</b></td><td>Onder het antwoord, met label</td><td>In het antwoord zelf</td></tr>
+              <tr><td><b>Snelheid</b></td><td>Direct na goedkeuring</td><td>Bouwt op in maanden</td></tr>
+              <tr><td><b>Kosten</b></td><td>Advertentiebudget, zolang je adverteert</td><td>Werk aan je site en vermeldingen, dat blijft</td></tr>
+              <tr><td><b>Gevoel bij de lezer</b></td><td>Herkenbaar als reclame</td><td>Voelt als advies</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Betaalde zichtbaarheid is snel. Genoemd worden houdt langer stand en voelt als advies. Wij zien adverteren in ChatGPT daarom als aanvulling, naast traditionele SEO en <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar worden in ChatGPT</a>. Niet als vervanging.</p>
+
+        <h2 id="aanpak">Zo pakken wij het aan</h2>
+        <p>Het kanaal is nieuw. Voor iedereen, ook voor ons. Wie zegt dat hij jaren ervaring heeft met ChatGPT Ads, vertelt je iets wat niet kan. Wat we wel meebrengen: kennis van adverteren in zoekmachines en van hoe AI-assistenten antwoorden kiezen. Plus de gewoonte om alles te meten.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={44} /><h3>1. Kijken of het past</h3></div>
+        <p>We stellen de vragen van jouw klanten aan ChatGPT. Gaan er gesprekken over jouw vak, waarin een advertentie logisch is? Valt je branche niet onder de onderwerpen waar OpenAI geen reclame toont? Zo niet, dan zeggen we dat gewoon.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={44} /><h3>2. De meting regelen</h3></div>
+        <p>Voordat er een euro uitgaat, zetten we de pixel of de Conversions API op je site en testen we die met een echte aanvraag. Zo weet je welke klik een aanvraag of verkoop werd.</p>
+        <div class="stap-kop"><Tekening naam="kolf" maat={44} /><h3>3. Klein beginnen</h3></div>
+        <p>Een beperkt budget, een paar advertenties met scherpe hints en één duidelijk doel. Bijvoorbeeld tien aanvragen tegen een vooraf afgesproken prijs per aanvraag.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={44} /><h3>4. Opschalen of stoppen</h3></div>
+        <p>Werkt het, dan gaat er meer budget naartoe. Werkt het niet, dan stoppen we ermee. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
+
+        <h2>Wat nog niemand weet</h2>
+        <p>Hoe vaak mensen in Nederland op zo'n advertentie klikken, is nog onduidelijk. En of een klik uit een gesprek vaker een klant oplevert dan een klik uit Google. OpenAI kondigde meer advertentievormen en meetmogelijkheden aan. Verandert er iets wezenlijks, dan passen we deze pagina aan. Hoe dit kanaal past naast Google Ads en Shopping, lees je bij <a href="/online-adverteren/">online adverteren</a>.</p>
+        <p class="klein muted">Bronnen, geraadpleegd oktober 2026: berichten van OpenAI over advertenties (16 januari, 5 mei, 18 en 31 augustus, 23 september en 5 oktober 2026), de advertentiedocumentatie voor ontwikkelaars van OpenAI en de documentatie van OpenAI over zijn robots. Klikprijzen Google Ads: SE Ranking, oktober 2026.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+        <div class="card prijs-eigen">
+          <p class="kicker">ChatGPT Ads</p>
+          <p class="prijs-kop">Prijs afhankelijk van je advertentiebudget</p>
+          <p class="muted klein">Exclusief btw. Maandelijks opzegbaar.</p>
+          <ul class="vink">
+            <li>Check of jouw vak erin past</li>
+            <li>Meting op je eigen site</li>
+            <li>Proefcampagne met één doel</li>
+            <li>Elke maand een helder verslag</li>
+          </ul>
+          <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik in Nederland al adverteren in ChatGPT?', a: 'Ja. OpenAI kondigde op 18 augustus 2026 de uitbreiding naar 31 Europese landen aan, waaronder Nederland. Sinds 31 augustus koop je de advertenties daar zelf in via de Ads Manager van OpenAI.' },
+      { v: 'Wat kost adverteren in ChatGPT?', a: 'Er is geen vast tarief. Je biedt in een veiling, per klik of per duizend vertoningen, en stelt zelf een budget in. Wat ons beheer kost, hangt af van dat budget. Dat hoor je na een kort gesprek.' },
+      { v: 'Kan ik kiezen bij welke vragen mijn advertentie verschijnt?', a: 'Niet precies. Je geeft hints mee over wanneer je product nuttig is, maar dat zijn geen zoekwoorden. ChatGPT bepaalt op basis van het gesprek of je advertentie past.' },
+      { v: 'Ziet iedereen de advertenties?', a: 'Nee. Alleen gebruikers van de gratis versie en ChatGPT Go. Plus, Pro en Enterprise zijn reclamevrij. Minderjarigen krijgen geen advertenties, en bij gevoelige onderwerpen zoals gezondheid en politiek verschijnen ze niet.' },
+      { v: 'Krijgt de adverteerder mijn gesprekken te zien?', a: 'Nee. Volgens OpenAI blijven gesprekken privé en krijgen adverteerders alleen samengevoegde cijfers, zoals klikken en conversies.' },
+      { v: 'Is dit hetzelfde als vindbaar worden in ChatGPT?', a: 'Nee. Adverteren is betaalde ruimte onder het antwoord. Genoemd worden in het antwoord zelf is organisch werk. Lees meer bij <a href="/generative-engine-optimization/">generative engine optimization</a>.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over adverteren en AI"
+    links={[
+      { label: 'Pillar', titel: 'Online adverteren', href: '/online-adverteren/', tekst: 'Adverteren waar je klant al zoekt.' },
+      { label: 'Dienst', titel: 'Vindbaar in ChatGPT', href: '/generative-engine-optimization/vindbaar-in-chatgpt/', tekst: 'Genoemd worden in het antwoord zelf.' },
+      { label: 'Dienst', titel: 'Google Ads', href: '/online-adverteren/google-ads-bureau/', tekst: 'Campagnes opzetten en beheren.' },
+    ]}
+  />
+
+  <Actie titel="Past adverteren in ChatGPT bij jouw bedrijf?" tekst={`${site.contactpersoon} kijkt of jouw klanten hun vragen in ChatGPT stellen en belt je met een eerlijk antwoord. Ook als dat antwoord nee is.`} />
+</Base>
+<style>
+  .prijs-eigen { padding: 24px; }
+  .prijs-kop { font-size: var(--step-1); font-weight: 900; line-height: 1.2; letter-spacing: -0.02em; margin: 8px 0 6px; }
+  .prijs-eigen .vink { margin-top: 18px; }
+  .prijs-eigen .btn { width: 100%; }
+</style>

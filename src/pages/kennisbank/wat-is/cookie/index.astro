@@ -1,0 +1,208 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--cookie.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/cookie/';
+const datum = '2026-10-18';
+const definitie = 'Een cookie is een klein tekstbestandje dat een website via je browser op je computer of telefoon bewaart, zodat de site je bij de volgende klik of het volgende bezoek herkent.';
+const hoofdstukken = [
+  { id: 'hoe-werkt-het', titel: 'Hoe het werkt' },
+  { id: 'opbouw', titel: 'Wat er in staat' },
+  { id: 'doel', titel: 'Soorten naar doel' },
+  { id: 'afzender', titel: 'First-party en third-party' },
+  { id: 'tracking', titel: 'Tracking en je privacy' },
+  { id: 'regels', titel: 'De regels in het kort' },
+  { id: 'verwijderen', titel: 'Bekijken en verwijderen' },
+  { id: 'eigen-site', titel: 'Je eigen website' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Cookie',
+    alternateName: ['Cookies', 'Internetcookie', 'HTTP-cookie'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is een cookie?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.autoriteitpersoonsgegevens.nl/themas/internet-slimme-apparaten/cookies',
+      'https://nl.wikipedia.org/wiki/Cookie_(internet)',
+      'https://developer.chrome.com/blog/cookie-max-age-expires',
+      'https://webkit.org/tracking-prevention/',
+      'https://privacysandbox.com/news/update-on-plans-for-privacy-sandbox-technologies/',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is een cookie? Soorten en regels | Drijfveer Media"
+  description="Wat is een cookie? Een klein bestandje in je browser dat je herkent. Welke soorten er zijn, wanneer een site toestemming nodig heeft en hoe je ze wist."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Cookie', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Privacy</p>
+        <h1>Wat is een cookie?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je legt een product in een winkelmandje, klikt door naar een andere pagina en het product ligt er nog. Je logt in en hoeft dat niet bij elke klik opnieuw te doen. Dat werkt dankzij een paar regels tekst die de site in je browser heeft achtergelaten. Dezelfde techniek zorgt er ook voor dat je een advertentie voor schoenen blijft zien, op sites die niets met schoenen te maken hebben.</p>
+      <p>Hieronder lees je hoe het werkt, welke soorten er zijn en hoe je ze bekijkt of wist. En wat het betekent voor je eigen website.</p>
+      <div class="kader">
+        <p class="kader-titel">Geen juridisch advies</p>
+        <p>Wij zijn online marketeers, geen juristen. Deze pagina legt de techniek uit en noemt de regels in grote lijnen, zoals de Autoriteit Persoonsgegevens ze beschrijft. Wat er voor jouw site moet, lees je in de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring, cookies en algemene voorwaarden</a>. Twijfel je over jouw situatie, vraag het dan aan een jurist.</p>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={8} />
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="hoe-werkt-het">Hoe een cookie werkt</h2></div>
+      <p>Het web is van zichzelf vergeetachtig. Elke klik is voor de server een nieuw verzoek van een onbekende. Hij weet niet dat jij dezelfde bezoeker bent als tien seconden geleden. Een cookie lost dat op:</p>
+      <ol>
+        <li>Je opent een pagina. De server stuurt die pagina terug, plus een korte opdracht: bewaar dit, bijvoorbeeld "mandje=48213".</li>
+        <li>Je browser slaat dat op, bij de naam van de site.</li>
+        <li>Bij elke volgende klik op dezelfde site stuurt je browser het automatisch mee.</li>
+        <li>De server leest het en weet: dit is mandje 48213, met twee producten erin.</li>
+      </ol>
+      <p>Het idee is oud. Volgens Wikipedia zat het al in Netscape 1.0, uit 1994. Een site kan alleen zijn eigen bestandjes lezen, niet die van andere sites. En het is geen programma: het kan niets installeren en geen virus verspreiden. Het is gewoon een briefje met een nummer.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="opbouw">Wat staat er in zo'n bestandje?</h2></div>
+      <p>Meestal minder dan je denkt. Vaak alleen een naam en een willekeurige code. De informatie over jou staat dan op de server, gekoppeld aan die code. Elk exemplaar heeft een paar vaste onderdelen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat het betekent</th><th>Voorbeeld</th></tr></thead>
+          <tbody>
+            <tr><td><b>Naam en waarde</b></td><td>Wat er onthouden wordt</td><td>taal=nl</td></tr>
+            <tr><td><b>Domein</b></td><td>Welke site het mag lezen</td><td>jouwbedrijf.nl</td></tr>
+            <tr><td><b>Verloopdatum</b></td><td>Hoe lang het blijft staan. Zonder datum verdwijnt het als je de browser sluit</td><td>Over 30 dagen</td></tr>
+            <tr><td><b>Secure</b></td><td>Alleen meesturen over een beveiligde verbinding</td><td>Aan</td></tr>
+            <tr><td><b>HttpOnly</b></td><td>Scripts op de pagina kunnen het niet uitlezen</td><td>Aan</td></tr>
+            <tr><td><b>SameSite</b></td><td>Of het ook wordt meegestuurd vanaf andere sites</td><td>Lax</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Hoe lang mag het blijven staan? Chrome kapt sinds versie 104, augustus 2022, elke verloopdatum af op maximaal 400 dagen. Vraagt een site om tien jaar, dan wordt het toch iets meer dan een jaar.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="doel">Soorten cookies naar doel</h2></div>
+      <p>De Autoriteit Persoonsgegevens deelt ze in drie groepen in. Die indeling bepaalt ook of een site om toestemming moet vragen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Wat doet het?</th><th>Voorbeeld</th><th>Toestemming nodig?</th></tr></thead>
+          <tbody>
+            <tr><td><b>Functioneel</b></td><td>Laat de site werken</td><td>Winkelmandje, inlog, taalkeuze</td><td>Nee, wel vermelden</td></tr>
+            <tr><td><b>Beperkt analytisch</b></td><td>Telt bezoekers en populaire pagina's, met weinig gevolgen voor je privacy</td><td>Bezoekersstatistieken</td><td>Nee, als de gevolgen voor de privacy klein zijn</td></tr>
+            <tr><td><b>Overig, zoals tracking</b></td><td>Volgt je gedrag, ook op andere sites</td><td>Advertentienetwerken, social media-knoppen</td><td>Ja, altijd vooraf</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Functionele cookies zorgen dus dat je winkelmandje gevuld blijft en je ingelogd blijft. Analytische cookies helpen de eigenaar zijn site te verbeteren. Het verschil tussen "beperkt analytisch" en "overig" zit in hoeveel er over jou wordt verzameld en met wie het wordt gedeeld. Een statistiekentool die gegevens doorgeeft aan een advertentiebedrijf, valt al snel in de laatste groep.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="afzender">First-party en third-party: wie plaatst het?</h2></div>
+      <p>Een first-party cookie komt van de site die je bezoekt. Een third-party cookie komt van een andere partij die op die site meekijkt: een advertentienetwerk, een ingesloten video, een like-knop. Die derde partij zit op duizenden sites tegelijk en herkent je overal.</p>
+      <p>Browsers gaan daar verschillend mee om. Safari blokkeert volgens de makers standaard alle third-party cookies, zonder uitzonderingen. Google wilde ze in Chrome eerst afschaffen, maar besloot in 2025 om gebruikers zelf de keuze te laten. In Chrome werken ze dus nog, tenzij je ze uitzet.</p>
+      <p>Het andere onderscheid is de looptijd. Een sessiecookie verdwijnt als je de browser sluit. Een blijvende cookie houdt een vaste datum aan, van een dag tot ruim een jaar.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="tracking">Tracking en je privacy</h2></div>
+      <p>Trackingcookies zijn de reden dat het onderwerp zo gevoelig ligt. De Autoriteit Persoonsgegevens legt uit hoe het werkt: ze houden bij waarop je klikt, hoe lang je pagina's bekijkt en welke onderwerpen je interesseren. Dat gebeurt niet op één site, maar op alle sites waar dezelfde partij meekijkt. Zo ontstaat een profiel van je interesses, je gezinssituatie of zelfs je politieke voorkeur. Advertentiebedrijven gebruiken dat om je gerichte reclame te tonen.</p>
+      <p>Moderne trackers gebruiken trouwens niet alleen cookies. Ook pixels, opslag in de browser en het herkennen van je apparaat aan instellingen tellen mee. De regels gaan daarom niet alleen over het bestandje zelf, maar ook over vergelijkbare volgsoftware.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="regels">De regels in het kort</h2></div>
+      <p>In Nederland gelden twee wetten. De Telecommunicatiewet, artikel 11.7a, regelt wanneer je iets op het apparaat van een bezoeker mag zetten. Die regel heet in de volksmond de cookiewet en geldt sinds juni 2012. Worden er persoonsgegevens verwerkt, dan geldt ook de AVG. De Autoriteit Persoonsgegevens houdt toezicht.</p>
+      <p>Volgens de AP is er geen geldige toestemming als:</p>
+      <ul>
+        <li>de site ervan uitgaat dat je akkoord bent omdat je verder scrolt of swipet;</li>
+        <li>je niets hebt gedaan, ook niet als je ze niet in je browser had geblokkeerd;</li>
+        <li>vakjes in een diepere laag van de cookiemelding al zijn aangevinkt;</li>
+        <li>je de site niet normaal kunt gebruiken als je weigert. Zo'n cookiewall mag niet.</li>
+      </ul>
+      <p>Wat dat precies betekent voor jouw cookiemelding en je privacyverklaring, lees je in onze <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">gids over privacyverklaring en cookies</a>. Ook de site van de <a href="https://www.autoriteitpersoonsgegevens.nl/themas/internet-slimme-apparaten/cookies" rel="noopener">Autoriteit Persoonsgegevens</a> is helder geschreven.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="verwijderen">Cookies bekijken en verwijderen</h2></div>
+      <p>Wil je weten wat een site bij je heeft achtergelaten, of wil je schoon schip maken?</p>
+      <ul class="vink">
+        <li><strong>Voor één site:</strong> klik op het icoon links van het webadres. Daar zie je wat de site heeft opgeslagen en kun je het wissen.</li>
+        <li><strong>Alles in één keer:</strong> druk in Chrome, Edge of Firefox op Ctrl+Shift+Delete en kies wat je wilt wissen. Op een Mac vind je het in de privacy-instellingen van je browser.</li>
+        <li><strong>Precies zien wat er staat:</strong> druk op F12 en open in Chrome het tabblad Application. Onder Storage zie je per site naam, waarde en verloopdatum.</li>
+        <li><strong>Blokkeren:</strong> in de privacy-instellingen van elke browser kun je third-party cookies uitzetten.</li>
+      </ul>
+      <p>Wat merk je daarna? Je bent overal uitgelogd, winkelmandjes zijn leeg en sites vragen opnieuw om toestemming. Advertenties worden minder persoonlijk. Je ziet er niet minder van, alleen minder gerichte.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="eigen-site">En je eigen website?</h2></div>
+      <p>Veel ondernemers denken dat hun site niets plaatst, omdat ze er zelf nooit iets voor hebben ingesteld. Toch komen ze bijna altijd ergens vandaan. Een ingesloten YouTube-video, een kaartje van Google Maps, een pixel van Facebook, een chatknop, een statistiektool. Elk van die onderdelen kan iets in de browser van je bezoeker zetten.</p>
+      <div class="kader">
+        <p class="kader-titel">Voorbeeld</p>
+        <p>Een bakkerij in Assen heeft een eenvoudige site, zonder webwinkel. De eigenaar denkt dat er niets wordt geplaatst. Bij een controle met F12 blijken er toch elf te staan: van een ingesloten video, de kaart op de contactpagina en een pixel die een vorige webbouwer ooit voor een campagne had toegevoegd. Die campagne liep al twee jaar niet meer. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      </div>
+      <p>Drie vragen om je eigen site langs te lopen:</p>
+      <ol>
+        <li><strong>Wat plaatst mijn site nu echt?</strong> Kijk met F12 op een paar pagina's, in een privévenster.</li>
+        <li><strong>Heb ik het allemaal nodig?</strong> Een pixel van een oude campagne of een widget die niemand gebruikt, kan weg. Een video kan vaak in een privacyvriendelijke modus.</li>
+        <li><strong>Wat zegt de gids?</strong> Of je een cookiemelding nodig hebt, hangt af van wat er overblijft. Dat lees je in de <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">gids</a>.</li>
+      </ol>
+      <p>Zelf hebben we gekozen voor de eenvoudigste route. Deze site plaatst geen tracking- en geen advertentiecookies, en meet bezoek met privacyvriendelijke statistieken die zonder cookies werken. Daarom zie je hier geen cookiemelding. Hoe dat zit, staat in onze <a href="/privacyverklaring/">privacyverklaring</a>. Wil je weten waar je aanvragen vandaan komen zonder je bezoekers lastig te vallen? Kijk dan bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>, vanaf € 395.</p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Weet wat je site plaatst. Controleer het na elke nieuwe plugin, video of tool.</li>
+        <li>Haal weg wat niets meer oplevert. Minder volgsoftware is minder gedoe.</li>
+        <li>Laat je cookiemelding en je privacyverklaring passen bij wat er echt gebeurt.</li>
+        <li>Meet je bezoek? Kijk of het ook zonder trackingcookies kan. Vaak kan dat prima.</li>
+        <li>Twijfel je over de regels, vraag het een jurist. Wij helpen met de techniek.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4, Tag Manager en Looker Studio</a> en het begrip <a href="/kennisbank/wat-is/google-tag-manager/">Google Tag Manager</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Zijn cookies gevaarlijk?', a: 'Het bestandje zelf niet. Het is tekst, geen programma, en kan geen virus verspreiden. Het risico zit in wat er met de verzamelde gegevens gebeurt, vooral bij trackingcookies van andere partijen.' },
+      { v: 'Moet ik ze accepteren?', a: 'Nee. Volgens de Autoriteit Persoonsgegevens moet je een site normaal kunnen gebruiken als je trackingcookies weigert. Functionele cookies zijn nodig om de site te laten werken en daar wordt meestal niet om gevraagd.' },
+      { v: 'Wat gebeurt er als ik alles wis?', a: 'Je bent overal uitgelogd, winkelmandjes zijn leeg en sites vragen opnieuw om toestemming. Verder werkt alles gewoon.' },
+      { v: 'Hoe lang blijft een cookie staan?', a: 'Een sessiecookie verdwijnt als je de browser sluit. Een blijvende staat er tot de verloopdatum. In Chrome is dat sinds augustus 2022 maximaal 400 dagen.' },
+      { v: 'Heeft mijn website een cookiemelding nodig?', a: 'Dat hangt af van wat je site plaatst. Alleen functionele en beperkt analytische cookies? Dan vaak niet, wel vermelden. Tracking of advertenties? Dan wel. De details staan in onze gids over privacyverklaring en cookies. Bij twijfel: vraag een jurist.' },
+      { v: 'Waarom heeft deze site geen cookiemelding?', a: 'Omdat we geen tracking- of advertentiecookies plaatsen en ons bezoek meten zonder cookies. Er valt dan niets weg te klikken.' },
+    ]}
+  />
+
+  <Actie titel="Wat plaatst jouw site eigenlijk?" tekst={`We kijken gratis welke tools en volgsoftware er op je site draaien. ${site.contactpersoon} belt je met wat er gevonden is en wat weg kan.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

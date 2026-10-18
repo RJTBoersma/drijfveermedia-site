@@ -1,0 +1,51 @@
+---
+// Scène voor /kennisbank/wat-is/keyword-cannibalization/: twee pagina's van dezelfde site trekken aan één touw, met de beker voor plek 1 in het midden.
+// Als hij leeft: het touw schuift heen en weer en de posities boven de pagina's wisselen steeds om, zoals bij kannibalisatie in Google.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const paginas = [40, 328];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: twee pagina\'s van dezelfde website trekken aan één touw om de eerste plek, en hun posities wisselen steeds.'}>
+  <path class="l" d="M24 238h432" />
+  <g class="kannibaal-touw">
+    <path d="M110 162C170 170 310 170 370 162" fill="none" stroke="#10283f" stroke-width="3" stroke-linecap="round" />
+    <path d="M226 122h28v14a14 14 0 0 1-28 0z" fill="#ff6600" />
+    <path d="M226 126h-6a6 6 0 0 0 6 10M254 126h6a6 6 0 0 1-6 10" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    <path d="M240 150v12M230 166h20" stroke="#ff6600" stroke-width="3" stroke-linecap="round" />
+    <text x="240" y="135" font-size="11" font-weight="900" text-anchor="middle" style="fill:#fff">1</text>
+  </g>
+  {paginas.map((x) => (
+    <g>
+      <rect x={x} y="88" width="112" height="140" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect x={x + 14} y="104" width="60" height="8" rx="4" fill="#074663" />
+      <rect class="v" x={x + 14} y="122" width="84" height="5" rx="2.5" />
+      <rect class="v" x={x + 14} y="133" width="70" height="5" rx="2.5" />
+      <rect class="v" x={x + 14} y="144" width="80" height="5" rx="2.5" />
+      <rect x={x + 14} y="196" width="50" height="16" rx="8" fill="#e8eef4" />
+    </g>
+  ))}
+  <path class="a" d="M60 248h-20m6-6l-6 6 6 6M420 248h20m-6-6l6 6-6 6" />
+
+
+  <circle cx="96" cy="64" r="16" fill="#074663" />
+  <text x="96" y="69" font-size="13" font-weight="900" text-anchor="middle" style="fill:#fff">4</text>
+  <circle cx="384" cy="64" r="16" fill="#074663" />
+  <text x="384" y="69" font-size="13" font-weight="900" text-anchor="middle" style="fill:#fff">9</text>
+
+  {!mini && (
+    <g class="kannibaal-wissel">
+      <circle cx="96" cy="64" r="16" fill="#8aa0b4" />
+      <text x="96" y="69" font-size="13" font-weight="900" text-anchor="middle" style="fill:#fff">9</text>
+      <circle cx="384" cy="64" r="16" fill="#8aa0b4" />
+      <text x="384" y="69" font-size="13" font-weight="900" text-anchor="middle" style="fill:#fff">4</text>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .kannibaal-wissel { opacity: 0; }
+  .in-beeld .kannibaal-touw { animation: kennisbank-wat-is-keyword-cannibalization-trek 4s ease-in-out 0.6s infinite; }
+  .in-beeld .kannibaal-wissel { animation: kennisbank-wat-is-keyword-cannibalization-wissel 4s ease-in-out 0.6s infinite; }
+  @keyframes kennisbank-wat-is-keyword-cannibalization-trek { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-16px); } 75% { transform: translateX(16px); } }
+  @keyframes kennisbank-wat-is-keyword-cannibalization-wissel { 0%, 40% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .kannibaal-touw, .in-beeld .kannibaal-wissel { animation: none; } }
+</style>

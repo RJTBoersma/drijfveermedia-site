@@ -1,0 +1,44 @@
+---
+// Lijngrafiek van het verkeer uit Google, getekend als scène. Gebruikt in het logboek.
+// mini: alleen de lijn, zonder labels en beweging (miniatuur op kaarten).
+interface Props { punten: [string, number][]; mini?: boolean; label?: string; id: string }
+const { punten, mini = false, label = 'Verkeer uit Google per maand', id } = Astro.props;
+const W = 480, H = 270, L = 40, R = 452, T = 34, B = 220;
+const max = Math.max(...punten.map((p) => p[1])) * 1.1;
+const x = (i: number) => L + (i * (R - L)) / Math.max(1, punten.length - 1);
+const y = (v: number) => B - (v / max) * (B - T);
+const d = punten.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(p[1]).toFixed(1)}`).join(' ');
+const vlak = `${d} L${R} ${B} L${L} ${B} Z`;
+const laatste = punten[punten.length - 1];
+const maandNaam = (m: string) => new Date(m + '-15').toLocaleDateString('nl-NL', { month: 'short', year: '2-digit' });
+const stappen = [0, 0.5, 1].map((f) => Math.round((max / 1.1) * f / 50) * 50);
+---
+<svg class="scene groeilijn" viewBox={`0 0 ${W} ${H}`} data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : `${label}: van ${punten[0][1]} in ${maandNaam(punten[0][0])} naar ${laatste[1]} in ${maandNaam(laatste[0])}.`}>
+  <defs><linearGradient id={`${id}-vlak`} x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff6600" stop-opacity=".22" /><stop offset="1" stop-color="#ff6600" stop-opacity="0" /></linearGradient></defs>
+  <rect x="8" y="8" width="464" height="254" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  {stappen.map((s) => <path d={`M${L} ${y(s)}H${R}`} stroke="#e8eef4" stroke-width="1.5" />)}
+  <path d={vlak} fill={`url(#${id}-vlak)`} />
+  <path class="lijn" d={d} fill="none" stroke="#074663" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" pathLength="1" />
+  <circle cx={x(punten.length - 1)} cy={y(laatste[1])} r="6" fill="#ff6600" stroke="#fff" stroke-width="2.5" />
+  {!mini && (
+    <g class="labels">
+      {stappen.map((s) => <text x={L - 6} y={y(s) + 4} text-anchor="end" font-size="10" class="zacht">{s}</text>)}
+      <text x={L} y={B + 20} font-size="11" class="zacht">{maandNaam(punten[0][0])}</text>
+      <text x={R} y={B + 20} font-size="11" text-anchor="end" class="zacht">{maandNaam(laatste[0])}</text>
+      <g class="ballon"><rect x={x(punten.length - 1) - 112} y={y(laatste[1]) - 46} width="104" height="30" rx="8" fill="#10283f" /><text x={x(punten.length - 1) - 60} y={y(laatste[1]) - 26} text-anchor="middle" font-size="12" font-weight="800" style="fill:#fff">Nu: {laatste[1]}</text></g>
+      <circle class="puls" cx={x(punten.length - 1)} cy={y(laatste[1])} r="6" fill="none" stroke="#ff6600" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .groeilijn[data-leeft] .lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .ballon { opacity: 0; }
+  .in-beeld .lijn { animation: groeilijn-teken 1.8s cubic-bezier(.6,.1,.3,1) 0.2s forwards; }
+  .in-beeld .ballon { animation: groeilijn-in 0.5s ease 1.9s both; }
+  .in-beeld .puls { animation: groeilijn-puls 2.4s ease-out 2s infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes groeilijn-teken { to { stroke-dashoffset: 0; } }
+  @keyframes groeilijn-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes groeilijn-puls { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(3); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .lijn, .in-beeld .ballon, .in-beeld .puls { animation: none; } }
+</style>

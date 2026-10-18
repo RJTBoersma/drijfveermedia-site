@@ -1,0 +1,78 @@
+---
+// Scène voor /kennisbank/gidsen/backlinks/: drie websites uit de regio linken naar jouw website, die daardoor in de zoekresultaten naar boven schuift.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: de site van een vakvereniging, een lokale krant en een leverancier linken naar jouw website. Daardoor schuift jouw bedrijf in de zoekresultaten naar plek 1.'}>
+  <!-- drie verwijzende sites -->
+  <g>
+    <rect x="22" y="32" width="122" height="48" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <rect x="22" y="32" width="122" height="12" rx="6" fill="#e8eef4" />
+    <text x="34" y="62" font-size="11" font-weight="700">Vakvereniging</text>
+    <rect x="34" y="68" width="70" height="5" rx="2.5" fill="#d9e1ea" />
+  </g>
+  <g>
+    <rect x="22" y="112" width="122" height="48" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <rect x="22" y="112" width="122" height="12" rx="6" fill="#e8eef4" />
+    <text x="34" y="142" font-size="11" font-weight="700">Lokale krant</text>
+    <rect x="34" y="148" width="84" height="5" rx="2.5" fill="#d9e1ea" />
+  </g>
+  <g>
+    <rect x="22" y="192" width="122" height="48" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <rect x="22" y="192" width="122" height="12" rx="6" fill="#e8eef4" />
+    <text x="34" y="222" font-size="11" font-weight="700">Leverancier</text>
+    <rect x="34" y="228" width="60" height="5" rx="2.5" fill="#d9e1ea" />
+  </g>
+
+  <!-- verbindingen -->
+  <path d="M144 56C178 56 170 112 200 114M144 136C170 136 176 138 200 138M144 216C178 216 170 164 200 162" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-dasharray="4 5" />
+
+  <!-- jouw site -->
+  <rect x="200" y="90" width="130" height="96" rx="12" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <path class="l" d="M222 128l14-12 14 12M226 125v14h20v-14" />
+  <text x="258" y="125" font-size="11" font-weight="800">Jouw</text>
+  <text x="258" y="139" font-size="11" font-weight="800">bedrijf</text>
+  <rect x="218" y="154" width="94" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="218" y="166" width="66" height="6" rx="3" fill="#d9e1ea" />
+
+  <!-- zoekresultaten -->
+  <rect x="352" y="52" width="114" height="164" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text class="zacht" x="364" y="72" font-size="10">Zoekresultaten</text>
+  <text x="364" y="99" font-size="11" font-weight="800">1</text>
+  <rect x="380" y="91" width="74" height="10" rx="5" fill="#e8eef4" />
+  <text x="364" y="133" font-size="11" font-weight="800">2</text>
+  <rect x="380" y="125" width="74" height="10" rx="5" fill="#e8eef4" />
+  <text x="364" y="167" font-size="11" font-weight="800">3</text>
+  <rect x="380" y="159" width="74" height="10" rx="5" fill="#e8eef4" />
+  <text x="364" y="201" font-size="11" font-weight="800">4</text>
+  <rect x="380" y="193" width="74" height="10" rx="5" fill="#e8eef4" />
+
+  {!mini && (
+    <g>
+      <path class="link link-1" d="M144 56C178 56 170 112 200 114" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" pathLength="1" />
+      <path class="link link-2" d="M144 136C170 136 176 138 200 138" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" pathLength="1" />
+      <path class="link link-3" d="M144 216C178 216 170 164 200 162" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" pathLength="1" />
+      <path class="stroom" d="M144 56C178 56 170 112 200 114M144 136C170 136 176 138 200 138M144 216C178 216 170 164 200 162" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-dasharray="6 40" />
+      <g class="stijger">
+        <rect x="376" y="86" width="82" height="20" rx="10" fill="#fff4ec" stroke="#ff6600" stroke-width="2" />
+        <text x="386" y="100" font-size="10" font-weight="800">Jouw bedrijf</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .link { stroke-dasharray: 1; }
+  .stijger { transform-box: fill-box; }
+  :global(.teken-js) .link { stroke-dashoffset: 1; }
+  :global(.teken-js) .stroom { opacity: 0; }
+  :global(.teken-js) .stijger { opacity: 0; transform: translateY(102px); }
+  .in-beeld .link-1 { animation: kennisbank--gidsen--backlinks-trek 0.8s cubic-bezier(.6,.1,.3,1) 0.4s forwards; }
+  .in-beeld .link-2 { animation: kennisbank--gidsen--backlinks-trek 0.8s cubic-bezier(.6,.1,.3,1) 0.8s forwards; }
+  .in-beeld .link-3 { animation: kennisbank--gidsen--backlinks-trek 0.8s cubic-bezier(.6,.1,.3,1) 1.2s forwards; }
+  .in-beeld .stijger { animation: kennisbank--gidsen--backlinks-stijg 2.4s cubic-bezier(.5,0,.3,1) 1.4s forwards; }
+  .in-beeld .stroom { animation: kennisbank--gidsen--backlinks-stroom 3.2s linear 2.2s infinite; }
+  @keyframes kennisbank--gidsen--backlinks-trek { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank--gidsen--backlinks-stijg { 0% { opacity: 0; transform: translateY(102px); } 15% { opacity: 1; transform: translateY(102px); } 45% { transform: translateY(68px); } 70% { transform: translateY(34px); } 100% { opacity: 1; transform: none; } }
+  @keyframes kennisbank--gidsen--backlinks-stroom { 0% { opacity: 0.9; stroke-dashoffset: 46; } 100% { opacity: 0.9; stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .link-1, .in-beeld .link-2, .in-beeld .link-3, .in-beeld .stijger, .in-beeld .stroom { animation: none; } }
+</style>

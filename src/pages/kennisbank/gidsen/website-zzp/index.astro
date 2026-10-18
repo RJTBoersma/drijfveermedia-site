@@ -1,0 +1,172 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--website-zzp.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/website-zzp/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'nodig', titel: 'Heb je een website nodig?' },
+  { id: 'wat-erop', titel: 'Wat moet erop?' },
+  { id: 'verplicht', titel: 'Wat is wettelijk verplicht?' },
+  { id: 'paginas', titel: 'Welke pagina\'s heb je nodig?' },
+  { id: 'routes', titel: 'Zelf maken, abonnement of laten maken' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'gevonden', titel: 'Zo vinden klanten je' },
+  { id: 'fouten', titel: 'Vijf fouten die klanten kosten' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Website voor zzp\'ers: wat moet erop?',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'Thing', name: 'Website voor zzp\'ers' },
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Website voor zzp'ers: wat moet erop? | Drijfveer Media"
+  description="Een website voor zzp'ers: welke pagina's je nodig hebt, wat wettelijk verplicht is, wat het kost en hoe klanten je vinden. Met een checklist."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Website voor zzp\'ers', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Website" titel="Website voor zzp'ers: wat moet erop?" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een goede website voor zzp'ers hoeft niet groot te zijn. Vijf pagina's, een duidelijke belofte en een knop om te bellen. Hier lees je wat erop moet, wat verplicht is en wat het kost.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Begin met één zin bovenaan: wat je doet, voor wie en waar.</li>
+            <li>Vijf pagina's zijn genoeg: home, diensten, werk, over jou en contact.</li>
+            <li>Je naam, adres, e-mail, KvK-nummer en btw-id moeten op je site staan. Dat staat in de wet.</li>
+            <li>Zelf bouwen kan vanaf zo'n € 10 per maand. Bij ons kost een website vanaf € 250, exclusief btw.</li>
+          </ul>
+        </div>
+
+        <h2 id="nodig">Heb je als zzp'er een website nodig?</h2>
+        <p>Meestal wel. Ook als je je klanten via via krijgt. Iemand hoort je naam op een verjaardag en zoekt je op. Vindt hij niets, of een lege Facebookpagina uit 2019, dan belt hij de volgende. Een website is de plek waar je laat zien dat je bestaat en dat je het vak beheerst.</p>
+        <p>Er zijn uitzonderingen. Werk je alleen via een bemiddelaar of een platform, en zit je agenda vol, dan volstaat een eenvoudig profiel. Maar wie zelf klanten wil vinden, heeft een eigen site nodig. Een profiel op een platform is van het platform. Je eigen domeinnaam is van jou.</p>
+
+        <h2 id="wat-erop">Wat moet er op een website voor zzp'ers?</h2>
+        <p>Een bezoeker beslist in een paar seconden of hij blijft. Hij wil drie dingen weten: kan deze persoon mij helpen, is hij te vertrouwen, en hoe neem ik contact op. Alles op je site moet een van die vragen beantwoorden.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>Een kop die zegt wat je doet</h3></div>
+        <p>Niet "Welkom op mijn website", maar "Schilder in Hoogeveen, binnen en buiten". Wat je doet, voor wie en waar. Daaronder één of twee zinnen over wat de klant eraan heeft.</p>
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>Je diensten, in de taal van je klant</h3></div>
+        <p>Schrijf op wat je klant zoekt, niet hoe jij het noemt. Een klant zoekt "badkamer betegelen", niet "tegelwerkzaamheden sanitaire ruimtes". Geef elke hoofddienst een eigen alinea of pagina. Noem een prijsindicatie als dat kan. Dat scheelt je telefoontjes van mensen die toch te weinig budget hebben.</p>
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>Bewijs: werk, reviews en namen</h3></div>
+        <p>Foto's van echt werk, een paar korte reviews met naam en plaats, logo's van opdrachtgevers als je die mag tonen. Dit is wat een professionele uitstraling geeft, meer dan een duur ontwerp.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Over jou, met een echte foto</h3></div>
+        <p>Klanten huren een persoon in. Laat zien wie dat is. Een foto met je gezicht erop, je ervaring en waarom je dit werk doet. Houd het kort en persoonlijk.</p>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>Contact zonder drempel</h3></div>
+        <p>Je telefoonnummer bovenaan, aanklikbaar op de telefoon. Een kort formulier met hooguit vier velden. Een WhatsApp-knop als je dat prettig vindt. En zeg erbij hoe snel je reageert.</p>
+
+        <h2 id="verplicht">Wat is wettelijk verplicht?</h2>
+        <p>Veel zzp'ers weten het niet, maar artikel 3:15d van het Burgerlijk Wetboek zegt welke gegevens op je site moeten staan. Ze moeten makkelijk te vinden zijn, bijvoorbeeld onderaan elke pagina.</p>
+        <ul class="vink">
+          <li>Je naam of handelsnaam en het adres van je vestiging.</li>
+          <li>Een e-mailadres, plus een manier om snel contact op te nemen.</li>
+          <li>Je inschrijvingsnummer bij de KvK.</li>
+          <li>Je btw-identificatienummer, als je btw-plichtig bent. Niet je omzetbelastingnummer.</li>
+          <li>Prijzen duidelijk met of zonder btw.</li>
+        </ul>
+        <p>Werk je vanuit huis en wil je je woonadres niet op internet? Overleg dat met de KvK. Verzamel je gegevens via een formulier, dan heb je daarnaast een privacyverklaring nodig. Hoe je dat regelt, lees je in de gids over <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</p>
+
+        <h2 id="paginas">Welke pagina's heb je nodig?</h2>
+        <p>Begin met vijf. Meer mag later, als je weet waar bezoekers naar zoeken.</p>
+        <ol>
+          <li><b>Home.</b> Je belofte, je diensten in het kort, een paar reviews en een belknop.</li>
+          <li><b>Diensten.</b> Eén pagina per hoofddienst, of één pagina met duidelijke blokken.</li>
+          <li><b>Werk of projecten.</b> Foto's met een korte uitleg: wat was de vraag, wat heb je gedaan.</li>
+          <li><b>Over mij.</b> Wie je bent, hoe je werkt, waar je werkt.</li>
+          <li><b>Contact.</b> Telefoon, e-mail, formulier, werkgebied en je bedrijfsgegevens.</li>
+        </ol>
+        <p>Een onepager, alles op één lange pagina, kan ook. Handig om snel te starten. Het nadeel: Google heeft dan maar één pagina om je mee te vinden. Wie op meerdere diensten gevonden wil worden, is met losse pagina's beter af.</p>
+
+        <h2 id="routes">Zelf maken, een abonnement of laten maken?</h2>
+        <p>Er zijn grofweg drie routes. Geen ervan is altijd de logische keuze. Het hangt af van je tijd, je budget en hoe belangrijk de site voor je omzet is.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Kosten</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Zelf bouwen met tools waarmee je slepend een site maakt, zoals JouwWeb of Wix</td><td>€ 5 tot € 40 per maand</td><td>Je doet alles zelf: lay-out, teksten, foto's</td></tr>
+              <tr><td>Websiteabonnement, inclusief hosting en onderhoud</td><td>vanaf zo'n € 15 per maand</td><td>Stop je, dan is je site vaak weg</td></tr>
+              <tr><td>Laten maken door een webdesigner</td><td>€ 500 tot € 2.500 eenmalig</td><td>Plus domeinnaam en hosting/onderhoud</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zelf bouwen is voordelig, maar reken je uren mee. Twintig uur aan een site werken is twintig uur niet factureren. Een abonnement voelt goedkoop, maar je betaalt zolang je ondernemer bent en de site is niet echt van jou. Laten maken kost eenmalig meer, maar je hebt sneller iets dat werkt. Twijfel je? Lees dan <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a>.</p>
+
+        <h2 id="kosten">Wat kost een website voor een zzp'er?</h2>
+        <p>De kosten laag houden kan prima. Bij een freelancer betaal je voor een eenvoudige site meestal € 500 tot € 2.000. Een goedkope website van € 300 via een kennis kan werken, zolang iemand hem bijhoudt. Daarna komen de jaarlijkse kosten: een domeinnaam van zo'n € 10 tot € 20 en hosting met onderhoud.</p>
+        <p>Bij Drijfveer Media kun je kiezen. Een <a href="/website-laten-maken/website-met-ai/">website met AI</a>, met de hand afgemaakt, kost vanaf € 250. Die staat er vaak binnen twee weken. Wil je een eigen ontwerp, dan begint een maatwerk website in WordPress bij € 2.000. Lees meer over <a href="/website-laten-maken/">een website laten maken</a>. Laat je de teksten schrijven, dan betaal je € 75 per pagina. Je betaalt het één keer, en de site is van jou. Meer rekenvoorbeelden vind je in <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
+        <p>Goed om te weten: een website is een bedrijfskost. Bespreek met je boekhouder hoe je hem verwerkt.</p>
+
+        <h2 id="gevonden">Zo vinden klanten je</h2>
+        <p>Een site zonder bezoekers is een visitekaartje in een la. Voor de meeste zzp'ers komen de eerste bezoekers uit de buurt. Begin daarom lokaal.</p>
+        <ul>
+          <li><b>Maak een Google Bedrijfsprofiel aan.</b> Gratis, en je staat op de kaart. Hoe dat werkt, lees je in de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>.</li>
+          <li><b>Noem je plaats en je werkgebied.</b> In je koppen en teksten, niet alleen in de footer.</li>
+          <li><b>Vraag elke tevreden klant om een review.</b> Stuur een directe link, dan is het in een minuut gedaan.</li>
+          <li><b>Kies een duidelijke domeinnaam.</b> Kort, makkelijk te spellen. Tips vind je in <a href="/kennisbank/gidsen/domeinnaam-kiezen/">domeinnaam kiezen</a>.</li>
+        </ul>
+        <p>Wil je meer dan dat, dan helpt <a href="/lokale-seo/">lokale SEO</a>. Dat is vooral zinvol als je werkgebied veel concurrentie heeft.</p>
+
+        <h2 id="fouten">Vijf fouten die klanten kosten</h2>
+        <ol>
+          <li><b>Te veel over jezelf.</b> "Ik ben", "ik doe", "mijn passie". Schrijf over wat de klant krijgt.</li>
+          <li><b>Geen prijsindicatie.</b> Mensen haken af als ze geen idee hebben. Een vanaf-prijs is genoeg.</li>
+          <li><b>Een verstopt telefoonnummer.</b> Op de telefoon moet bellen met één tik kunnen.</li>
+          <li><b>Een site die niet bij de tijd is.</b> Een laatste nieuwsbericht uit 2021 wekt de indruk dat je gestopt bent.</li>
+          <li><b>Teksten schrijven zonder zoekwoorden.</b> Gebruik de woorden die je klant intypt. Hulp nodig? Een <a href="/tekstschrijver/">tekstschrijver</a> doet het in een paar uur.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Burgerlijk Wetboek boek 3, artikel 15d (wetten.overheid.nl). Prijzen van JouwWeb (jouwweb.nl/prijzen) en marktprijzen uit onze gids over websitekosten, stand oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je site maken?" intro="Een vaste prijs vooraf, een site die van jou is, en iemand die de telefoon opneemt." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost een website voor een zzp\'er?', a: 'Zelf bouwen kost € 5 tot € 40 per maand. Laten maken kost bij een freelancer meestal € 500 tot € 2.000. Bij ons begint een website bij € 250, exclusief btw.' },
+      { v: 'Moet mijn KvK-nummer op mijn website?', a: 'Ja. Volgens artikel 3:15d van het Burgerlijk Wetboek moeten je naam, vestigingsadres, e-mailadres, KvK-nummer en btw-id op je site staan.' },
+      { v: 'Is een onepager genoeg voor een zzp\'er?', a: 'Om te starten wel. Wil je op meerdere diensten of plaatsen gevonden worden, dan werken losse pagina\'s beter.' },
+      { v: 'Moet ik mijn woonadres op mijn site zetten?', a: 'De wet vraagt om het adres van je vestiging. Werk je vanuit huis en wil je dat liever niet, vraag dan bij de KvK, de instantie die het handelsregister bijhoudt, wat in jouw situatie kan.' },
+      { v: 'Kan ik mijn site later zelf aanpassen?', a: 'Bij een site die wij maken wel. Je krijgt een eenvoudig beheerscherm voor teksten en foto\'s. Voor grotere wijzigingen kun je bij ons terecht.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Website met AI laten maken', href: '/website-laten-maken/website-met-ai/', tekst: 'Snel online, vanaf € 250.' },
+      { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'Prijzen uit de markt en onze eigen prijzen.' },
+      { label: 'Gids', titel: 'Google Bedrijfsprofiel', href: '/kennisbank/gidsen/google-bedrijfsprofiel/', tekst: 'Gratis op de kaart bij klanten uit de buurt.' },
+    ]}
+  />
+
+  <Actie titel="Zullen we even meekijken?" tekst={`Stuur je site of je plannen naar ${site.contactpersoon}. Hij belt je binnen 15 minuten terug met een eerlijk advies, ook als dat advies is dat je het zelf kunt.`} />
+</Base>

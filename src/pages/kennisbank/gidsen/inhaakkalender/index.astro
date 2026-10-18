@@ -1,0 +1,394 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--inhaakkalender.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/inhaakkalender/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat is inhaken?' },
+  { id: 'feestdagen', titel: 'Feestdagen en lange weekenden' },
+  { id: 'vakanties', titel: 'Schoolvakanties 2027' },
+  { id: 'tips', titel: 'Zo haak je goed in' },
+  { id: 'kalender', titel: 'De kalender per maand' },
+  { id: 'groot', titel: 'De grote momenten' },
+  { id: 'branche', titel: 'Momenten per branche' },
+  { id: 'noorden', titel: 'Momenten in het Noorden' },
+  { id: 'niet', titel: 'Wanneer je niet inhaakt' },
+  { id: 'bericht', titel: 'Een inhaakbericht in 20 minuten' },
+  { id: 'planning', titel: 'Van kalender naar planning' },
+];
+
+// De weekdag en het weeknummer rekenen we uit de datum zelf uit, zodat die altijd kloppen.
+const maandNamen = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+const dagNamen = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+const lees = (iso: string) => {
+  const d = new Date(iso + 'T12:00:00Z');
+  return `${dagNamen[d.getUTCDay()]} ${d.getUTCDate()} ${maandNamen[d.getUTCMonth()]}`;
+};
+// ISO-weeknummer, zoals in Nederlandse agenda's
+const week = (iso: string) => {
+  const d = new Date(iso + 'T12:00:00Z');
+  const dag = (d.getUTCDay() + 6) % 7;
+  d.setUTCDate(d.getUTCDate() - dag + 3);
+  const jan4 = new Date(Date.UTC(d.getUTCFullYear(), 0, 4, 12));
+  const dag4 = (jan4.getUTCDay() + 6) % 7;
+  jan4.setUTCDate(jan4.getUTCDate() - dag4 + 3);
+  return 1 + Math.round((d.getTime() - jan4.getTime()) / (7 * 86400000));
+};
+interface Moment { d: string; tot?: string; wat: string; idee?: string }
+const kalender: { maand: string; id: string; momenten: Moment[] }[] = [
+  { maand: 'Januari', id: 'januari', momenten: [
+    { d: '2027-01-01', wat: 'Nieuwjaarsdag', idee: 'Bedank klanten voor het afgelopen jaar, deel je openingstijden' },
+    { d: '2027-01-16', wat: 'Nationale Tulpendag', idee: 'Bloemisten, tuincentra: start van het tulpenseizoen' },
+    { d: '2027-01-18', wat: 'Blue Monday', idee: 'Een marketingverzinsel, dus hooguit met een knipoog' },
+    { d: '2027-01-18', wat: 'Martin Luther King Day (Verenigde Staten)', idee: 'Alleen relevant met Amerikaanse klanten of collega\'s' },
+    { d: '2027-01-24', wat: 'Internationale Dag van het Onderwijs', idee: 'Opleiders, rijscholen, bijlesinstituten' },
+    { d: '2027-01-26', wat: 'Internationale Dag van Schone Energie', idee: 'Installateurs van zonnepanelen en warmtepompen' },
+    { d: '2027-01-28', wat: 'Gedichtendag', idee: 'Een rijmpje over je vak, of een gedicht van een klant' },
+  ] },
+  { maand: 'Februari', id: 'februari', momenten: [
+    { d: '2027-02-07', tot: '2027-02-09', wat: 'Carnaval', idee: 'Vooral in het zuiden; aangepaste openingstijden' },
+    { d: '2027-02-10', wat: 'Aswoensdag', idee: 'Einde van carnaval, begin van de vastentijd' },
+    { d: '2027-02-13', wat: 'Wereld Radio Dag', idee: 'Je favoriete lokale zender noemen' },
+    { d: '2027-02-14', wat: 'Valentijnsdag', idee: 'Horeca, bloemen, cadeaus, kappers' },
+    { d: '2027-02-20', wat: 'Werelddag van de Sociale Rechtvaardigheid', idee: 'Alleen als je er echt iets mee doet, zoals een leerwerkplek' },
+    { d: '2027-02-20', tot: '2027-02-28', wat: 'Voorjaarsvakantie regio Noord en Midden', idee: 'Regio Zuid: 13 tot en met 21 februari' },
+    { d: '2027-02-21', wat: 'Internationale Dag van de Moedertaal', idee: 'Een Fries of Drents woord uit je vak uitgelegd' },
+  ] },
+  { maand: 'Maart', id: 'maart', momenten: [
+    { d: '2027-03-01', wat: 'Complimentendag', idee: 'Deel een compliment van een klant' },
+    { d: '2027-03-05', wat: 'Employee Appreciation Day', idee: 'Zet je personeel in het zonnetje' },
+    { d: '2027-03-08', wat: 'Internationale Vrouwendag', idee: 'De vakvrouwen in je bedrijf' },
+    { d: '2027-03-20', wat: 'Begin van de lente', idee: 'Voorjaarsklussen, tuin, schoonmaak' },
+    { d: '2027-03-20', wat: 'Internationale Dag van het Geluk', idee: 'Waar word jij blij van in je werk?' },
+    { d: '2027-03-21', wat: 'Internationale Dag van de Bossen', idee: 'Hoveniers, houtbewerkers, timmerbedrijven' },
+    { d: '2027-03-22', wat: 'Wereldwaterdag', idee: 'Installateurs en loodgieters: drie tips om water te besparen' },
+    { d: '2027-03-26', wat: 'Goede Vrijdag', idee: 'Laat weten of je open bent' },
+    { d: '2027-03-28', wat: 'Eerste Paasdag, en de zomertijd gaat in', idee: 'Paasbrunch, openingstijden rond Pasen' },
+    { d: '2027-03-29', wat: 'Tweede Paasdag', idee: 'Meubel- en tuincentra: koopdag' },
+    { d: '2027-03-30', wat: 'Internationale Dag van Nul Afval', idee: 'Hoe jij restmateriaal hergebruikt' },
+  ] },
+  { maand: 'April', id: 'april', momenten: [
+    { d: '2027-04-01', wat: '1 april', idee: 'Een grap, als die bij je merk past' },
+    { d: '2027-04-07', wat: 'Wereldgezondheidsdag', idee: 'Fysiotherapie, sportscholen, zorg' },
+    { d: '2027-04-11', wat: 'Wereld Parkinson Dag', idee: 'Voor zorg en fysiotherapie' },
+    { d: '2027-04-22', wat: 'Dag van de Aarde', idee: 'Wat je doet aan duurzaamheid, met echte cijfers' },
+    { d: '2027-04-23', wat: 'Wereldboekendag', idee: 'Een vakboek dat je collega\'s aanraden' },
+    { d: '2027-04-24', tot: '2027-05-02', wat: 'Meivakantie, alle regio\'s', idee: 'Sommige scholen een week langer, tot en met 9 mei' },
+    { d: '2027-04-26', wat: 'Werelddag van de Intellectuele Eigendom', idee: 'Ontwerpers en makers: waarom je je merk vastlegt' },
+    { d: '2027-04-27', wat: 'Koningsdag', idee: 'Oranje, openingstijden, vrijmarkt' },
+    { d: '2027-04-28', wat: 'Werelddag voor Veiligheid en Gezondheid op het Werk', idee: 'Bouw en installatie: hoe jullie veilig werken' },
+    { d: '2027-04-30', wat: 'Internationale Jazzdag', idee: 'Horeca met livemuziek' },
+  ] },
+  { maand: 'Mei', id: 'mei', momenten: [
+    { d: '2027-05-04', wat: 'Nationale Dodenherdenking', idee: 'Niet inhaken met reclame' },
+    { d: '2027-05-05', wat: 'Bevrijdingsdag', idee: 'Alleen als het echt bij je past' },
+    { d: '2027-05-06', wat: 'Hemelvaartsdag', idee: 'Openingstijden en lang weekend' },
+    { d: '2027-05-08', wat: 'Nationale Molendag', idee: 'Molens in de buurt, uitje' },
+    { d: '2027-05-09', wat: 'Moederdag', idee: 'Cadeaus, bloemen, brunch, verwennen' },
+    { d: '2027-05-09', wat: 'Europadag', idee: 'Klanten of leveranciers over de grens' },
+    { d: '2027-05-12', wat: 'Internationale Dag van de Verpleging', idee: 'Voor de zorg' },
+    { d: '2027-05-15', wat: 'Internationale Dag van het Gezin', idee: 'Familiebedrijven: drie generaties in beeld' },
+    { d: '2027-05-16', wat: 'Eerste Pinksterdag' },
+    { d: '2027-05-17', wat: 'Tweede Pinksterdag', idee: 'Openingstijden delen' },
+    { d: '2027-05-20', wat: 'Wereldbijendag', idee: 'Hoveniers en tuincentra: bijvriendelijke planten' },
+    { d: '2027-05-21', wat: 'Internationale Dag van de Thee', idee: 'Lunchroom, koffiebar, winkel' },
+  ] },
+  { maand: 'Juni', id: 'juni', momenten: [
+    { d: '2027-06-03', wat: 'Wereldfietsdag', idee: 'Fietsenzaken, en wie met de fiets naar het werk komt' },
+    { d: '2027-06-05', wat: 'Wereldmilieudag', idee: 'Duurzame keuzes in je werk' },
+    { d: '2027-06-08', wat: 'Wereldoceanendag', idee: 'Watersport, visrestaurants' },
+    { d: '2027-06-14', wat: 'Wereldbloeddonordag', idee: 'Collega\'s die donor zijn' },
+    { d: '2027-06-20', wat: 'Vaderdag', idee: 'Cadeaus, gereedschap, barbecue' },
+    { d: '2027-06-21', wat: 'Begin van de zomer', idee: 'Zomeraanbod of zomersluiting' },
+    { d: '2027-06-21', wat: 'Internationale Dag van Yoga', idee: 'Sportscholen, fysiotherapie' },
+    { d: '2027-06-26', wat: 'Veteranendag', idee: 'Alleen met een eigen band, zoals een collega die veteraan is' },
+    { d: '2027-06-27', wat: 'Werelddag van het mkb', idee: 'Vertel waarom je ooit voor jezelf begon' },
+  ] },
+  { maand: 'Juli', id: 'juli', momenten: [
+    { d: '2027-07-10', tot: '2027-08-22', wat: 'Zomervakantie regio Noord', idee: 'Midden vanaf 17 juli, Zuid vanaf 24 juli' },
+    { d: '2027-07-11', wat: 'Wereldpaardendag', idee: 'Maneges, hoefsmeden, ruitersport' },
+    { d: '2027-07-15', wat: 'Werelddag van de Vakvaardigheden voor Jongeren', idee: 'Je leerlingen en stagiairs in beeld' },
+    { d: '2027-07-17', wat: 'Wereld Emoji Dag', idee: 'Je vak uitgelegd in emoji' },
+    { d: '2027-07-18', wat: 'Nelson Mandela Dag', idee: 'Vrijwilligerswerk van je team' },
+    { d: '2027-07-30', wat: 'Internationale Dag van de Vriendschap', idee: 'Collega\'s die vrienden werden' },
+  ] },
+  { maand: 'Augustus', id: 'augustus', momenten: [
+    { d: '2027-08-12', wat: 'Internationale Dag van de Jeugd', idee: 'Bijbaantjes, je jongste medewerker' },
+    { d: '2027-08-23', wat: 'Eerste schooldag regio Noord', idee: 'Weer aan de slag, nieuwe planning' },
+    { d: '2027-08-28', wat: 'Gronings Ontzet', idee: 'Voor ondernemers in de stad Groningen' },
+    { d: '2027-08-30', wat: 'Eerste schooldag regio Midden', idee: 'Regio Zuid begint op 6 september' },
+  ] },
+  { maand: 'September', id: 'september', momenten: [
+    { d: '2027-09-05', wat: 'Internationale Dag van de Liefdadigheid', idee: 'Het goede doel dat je steunt' },
+    { d: '2027-09-08', wat: 'Internationale Dag van de Geletterdheid', idee: 'Schrijf je teksten eens in eenvoudige taal' },
+    { d: '2027-09-11', tot: '2027-09-12', wat: 'Open Monumentendag', idee: 'Zit je in een monument? Zet de deur open' },
+    { d: '2027-09-21', wat: 'Prinsjesdag', idee: 'Boekhouders: wat de plannen betekenen voor ondernemers' },
+    { d: '2027-09-21', wat: 'Wereld Alzheimer Dag', idee: 'Voor zorg en mantelzorg' },
+    { d: '2027-09-23', wat: 'Begin van de herfst', idee: 'Najaarsonderhoud, herfstaanbod' },
+    { d: '2027-09-27', wat: 'Werelddag van het Toerisme', idee: 'Campings, B&B\'s, horeca in de regio' },
+    { d: '2027-09-29', wat: 'Wereld Hart Dag', idee: 'Voor sport en gezondheid' },
+    { d: '2027-09-29', wat: 'Internationale Dag tegen Voedselverspilling', idee: 'Horeca en bakkers: wat je met restjes doet' },
+  ] },
+  { maand: 'Oktober', id: 'oktober', momenten: [
+    { d: '2027-10-01', wat: 'Internationale Dag van de Koffie', idee: 'Nodig klanten uit voor koffie' },
+    { d: '2027-10-01', wat: 'Internationale Dag van de Ouderen', idee: 'Je trouwste klanten, of je oudste collega' },
+    { d: '2027-10-04', wat: 'Dierendag', idee: 'Het kantoordier of de bedrijfshond' },
+    { d: '2027-10-05', wat: 'Dag van de Leraar', idee: 'Wie leerde jou het vak?' },
+    { d: '2027-10-09', wat: 'Wereldpostdag', idee: 'Webwinkels en drukkers: hoe een pakket bij je klant komt' },
+    { d: '2027-10-10', wat: 'Werelddag van de Geestelijke Gezondheid', idee: 'Hoe je zorgt voor rust in je team' },
+    { d: '2027-10-16', tot: '2027-10-24', wat: 'Herfstvakantie regio Noord en Midden', idee: 'Zuid: 23 tot en met 31 oktober' },
+    { d: '2027-10-16', wat: 'Wereldvoedseldag', idee: 'Restaurants en boeren uit de streek' },
+    { d: '2027-10-31', wat: 'Halloween, en de wintertijd gaat in', idee: 'Klok een uur terug, verlichting, inbraakpreventie' },
+  ] },
+  { maand: 'November', id: 'november', momenten: [
+    { d: '2027-11-01', wat: 'Start van Movember', idee: 'Snorren voor de gezondheid van mannen' },
+    { d: '2027-11-10', wat: 'Dag van de Mantelzorg', idee: 'Voor zorg en welzijn' },
+    { d: '2027-11-11', wat: 'Sint Maarten', idee: 'Lampionnen, snoep aan de deur' },
+    { d: '2027-11-14', wat: 'Wereld Diabetes Dag', idee: 'Apotheek, diëtist, sportschool' },
+    { d: '2027-11-19', wat: 'Dag van de Ondernemer', idee: 'Bedank een ondernemer die jou hielp' },
+    { d: '2027-11-19', wat: 'Wereldtoiletdag', idee: 'Loodgieters en badkamerspecialisten, met een knipoog' },
+    { d: '2027-11-20', wat: 'Internationale Dag van het Kind', idee: 'Kinderopvang, speelgoed, kinderkapper' },
+    { d: '2027-11-26', wat: 'Black Friday', idee: 'Alleen met een echte aanbieding' },
+    { d: '2027-11-29', wat: 'Cyber Monday', idee: 'Voor online verkopers' },
+  ] },
+  { maand: 'December', id: 'december', momenten: [
+    { d: '2027-12-03', wat: 'Internationale Dag van Mensen met een Beperking', idee: 'Hoe toegankelijk is je zaak?' },
+    { d: '2027-12-05', wat: 'Pakjesavond', idee: 'Sinterklaasgedicht over je bedrijf' },
+    { d: '2027-12-05', wat: 'Internationale Dag van de Vrijwilliger', idee: 'De club die je sponsort' },
+    { d: '2027-12-22', wat: 'Begin van de winter', idee: 'Winterklaar maken, korte dagen' },
+    { d: '2027-12-25', wat: 'Eerste Kerstdag, begin kerstvakantie', idee: 'Kerstgroet en openingstijden' },
+    { d: '2027-12-26', wat: 'Tweede Kerstdag' },
+    { d: '2027-12-31', wat: 'Oudejaarsdag', idee: 'Terugblik op 2027' },
+  ] },
+];
+const toon = (m: Moment) => (m.tot ? `${lees(m.d)} t/m ${lees(m.tot)}` : lees(m.d));
+const aantal = kalender.reduce((s, m) => s + m.momenten.length, 0);
+
+const schema = [{
+  '@type': 'Article',
+  headline: 'Inhaakkalender 2027: alle inhaakmomenten per maand',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  citation: [
+    'https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027',
+    'https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2027-2028',
+    'https://www.un.org/en/observances/list-days-weeks',
+  ],
+}];
+---
+<Base
+  title="Inhaakkalender 2027: alle inhaakmomenten per maand"
+  description="Inhaakkalender 2027 met feestdagen, themadagen en schoolvakanties per maand, met nagekeken data en weeknummers. Plus tips om als klein bedrijf goed in te haken."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Inhaakkalender 2027', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Social media" titel="Inhaakkalender 2027: alle inhaakmomenten per maand" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Pasen valt in 2027 al op 28 maart, Moederdag en Europadag vallen samen. In deze inhaakkalender 2027 staan {aantal} momenten per maand, met nagekeken data, het weeknummer en een idee per moment.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Belangrijke data in 2027: Pasen 28 maart, Koningsdag dinsdag 27 april, Moederdag 9 mei, Vaderdag 20 juni, Black Friday 26 november.</li>
+            <li>Lange weekenden en brugdagen: Pasen, Koningsdag (maandag 26 april is een brugdag), Hemelvaart (vrijdag 7 mei) en Pinksteren. Kerst valt in het weekend.</li>
+            <li>Het Noorden heeft in 2027 als eerste zomervakantie: van 10 juli tot en met 22 augustus.</li>
+            <li>Haak alleen in op momenten die bij je vak passen. Vijf goede inhakers per jaar zijn meer waard dan vijftig geforceerde.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat is inhaken, en wanneer werkt het?</h2>
+        <p>Inhaken is een bericht maken dat aansluit bij iets waar iedereen het al over heeft. Een feestdag, het weer, een themadag, de eerste schooldag. Je lift mee op aandacht die er toch al is. Dat werkt, want mensen zijn op zo'n dag al met het onderwerp bezig.</p>
+        <p>Het werkt alleen als het klopt. Stel jezelf drie vragen voordat je inhaakt:</p>
+        <ol>
+          <li><b>Past het bij wat ik doe?</b> Een hovenier op Dag van de Aarde: logisch. Een accountant op Wereld Emoji Dag: lastig, tenzij hij er iets slims mee doet.</li>
+          <li><b>Voeg ik iets toe?</b> "Fijne Koningsdag" posten honderdduizend bedrijven. Je openingstijden op Koningsdag, of een foto van je team in het oranje, zegt meer.</li>
+          <li><b>Is het niet ongepast?</b> Bij herdenkingen en verdrietige onderwerpen past geen reclame.</li>
+        </ol>
+        <p>Hoe we de data nakeken: feestdagen en schoolvakanties komen van de Rijksoverheid. Internationale dagen staan op de lijst van de Verenigde Naties. Andere themadagen hebben we gecontroleerd bij de organisator of op Wikipedia, inclusief de regel waarop ze vallen, zoals "de derde zaterdag van januari". Weekdagen en weeknummers rekent deze pagina zelf uit de datum uit. Dagen waarvan we de datum voor 2027 niet konden bevestigen, staan er niet in.</p>
+
+        <h2 id="feestdagen">Feestdagen en lange weekenden in 2027</h2>
+        <p>Dit zijn de officiële feestdagen van 2027 volgens de Rijksoverheid. Let op: een feestdag is niet vanzelf een vrije dag. Volgens de Rijksoverheid is er geen wet die dat regelt; het staat in je cao of arbeidsovereenkomst.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Feestdag</th><th>Datum</th><th>Week</th><th>Wat het betekent voor je planning</th></tr></thead>
+            <tbody>
+              <tr><td>Nieuwjaarsdag</td><td>{lees('2027-01-01')}</td><td>{week('2027-01-01')}</td><td>Lang weekend van vrijdag tot en met zondag</td></tr>
+              <tr><td>Goede Vrijdag</td><td>{lees('2027-03-26')}</td><td>{week('2027-03-26')}</td><td>Niet overal vrij; laat weten of je open bent</td></tr>
+              <tr><td>Pasen</td><td>{lees('2027-03-28')} en {lees('2027-03-29')}</td><td>{week('2027-03-28')} en {week('2027-03-29')}</td><td>Lang weekend, valt samen met de start van de zomertijd</td></tr>
+              <tr><td>Koningsdag</td><td>{lees('2027-04-27')}</td><td>{week('2027-04-27')}</td><td>Op een dinsdag, dus maandag 26 april is een brugdag</td></tr>
+              <tr><td>Bevrijdingsdag</td><td>{lees('2027-05-05')}</td><td>{week('2027-05-05')}</td><td>Vrij volgens sommige cao's; midden in de week</td></tr>
+              <tr><td>Hemelvaartsdag</td><td>{lees('2027-05-06')}</td><td>{week('2027-05-06')}</td><td>Vrijdag 7 mei is een brugdag, veel mensen hebben een lang weekend</td></tr>
+              <tr><td>Pinksteren</td><td>{lees('2027-05-16')} en {lees('2027-05-17')}</td><td>{week('2027-05-16')} en {week('2027-05-17')}</td><td>Lang weekend</td></tr>
+              <tr><td>Kerstmis</td><td>{lees('2027-12-25')} en {lees('2027-12-26')}</td><td>{week('2027-12-25')}</td><td>Valt in het weekend, dus geen extra vrije dag in de week</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat dit voor jou betekent: rond Koningsdag en Hemelvaart zijn veel klanten een paar dagen weg. Dat zijn goede momenten voor een bericht over je openingstijden, en slechte momenten voor een grote actie. Een handig weetje voor je administratie: valt een betalingstermijn op een zaterdag, zondag of officiële feestdag, dan wordt die volgens de Rijksoverheid verlengd tot de eerstvolgende werkdag.</p>
+
+        <h2 id="vakanties">Schoolvakanties 2027 per regio</h2>
+        <p>Schoolvakanties bepalen wanneer gezinnen weg zijn, wanneer ze thuis klussen en wanneer je personeel vrij wil. Dit zijn de data van de Rijksoverheid. De voorjaars- en herfstvakantie zijn adviesdata: scholen mogen daar zelf van afwijken.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vakantie</th><th>Regio Noord</th><th>Regio Midden</th><th>Regio Zuid</th></tr></thead>
+            <tbody>
+              <tr><td>Kerstvakantie 2026-2027</td><td>t/m 3 januari</td><td>t/m 3 januari</td><td>t/m 3 januari</td></tr>
+              <tr><td>Voorjaarsvakantie</td><td>20 t/m 28 februari</td><td>20 t/m 28 februari</td><td>13 t/m 21 februari</td></tr>
+              <tr><td>Meivakantie</td><td>24 april t/m 2 mei</td><td>24 april t/m 2 mei</td><td>24 april t/m 2 mei</td></tr>
+              <tr><td>Zomervakantie</td><td>10 juli t/m 22 augustus</td><td>17 juli t/m 29 augustus</td><td>24 juli t/m 5 september</td></tr>
+              <tr><td>Herfstvakantie</td><td>16 t/m 24 oktober</td><td>16 t/m 24 oktober</td><td>23 t/m 31 oktober</td></tr>
+              <tr><td>Kerstvakantie 2027-2028</td><td>25 december t/m 9 januari</td><td>25 december t/m 9 januari</td><td>25 december t/m 9 januari</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Twee dingen vallen op. Scholen mogen de meivakantie met een week verlengen; het advies daarvoor is 1 tot en met 9 mei. En in regio Zuid valt de voorjaarsvakantie in 2027 niet samen met carnaval, meldt de Rijksoverheid. Sommige scholen in het zuiden schuiven daarom misschien op. Drenthe, Groningen en Friesland vallen in regio Noord.</p>
+
+        <h2 id="tips">Vijf manieren om goed in te haken</h2>
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>Maak het praktisch</h3></div>
+        <p>Rond feestdagen willen mensen vooral weten of je open bent. Een duidelijk bericht met je openingstijden rond Pasen, Hemelvaart en de kerst wordt gewaardeerd en gedeeld. Zet dezelfde tijden ook in je Google Bedrijfsprofiel, anders klopt het ene niet met het andere.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Laat je mensen zien</h3></div>
+        <p>Dag van de Leraar, Employee Appreciation Day, Internationale Vrouwendag: allemaal kansen om je collega's in beeld te brengen. Dat werkt beter dan een gekochte afbeelding met een tekst erop.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Geef je vak een draai</h3></div>
+        <p>Een installateur op Wereldwaterdag met drie tips om water te besparen. Een bakker op Gedichtendag met een rijmpje bij het brood. Een loodgieter op Wereldtoiletdag, met een knipoog. Hoe dichter bij je vak, hoe beter.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>Wees op tijd</h3></div>
+        <p>Een Moederdagactie op de dag zelf is te laat. Wie wil dat mensen bij hem kopen, begint een week tot tien dagen eerder. Een bericht op de dag zelf is dan de herinnering.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>Kies, en laat de rest liggen</h3></div>
+        <p>Er zijn honderden themadagen. Je hoeft er geen tien per maand te doen. Kies er per maand één of twee die echt passen. De rest laat je aan anderen.</p>
+
+        <h2 id="kalender">De inhaakkalender 2027 per maand</h2>
+        <p>Dit zijn de inhaakmomenten die voor ondernemers in Nederland het meest bruikbaar zijn, met het weeknummer erbij. Let op: 1 januari 2027 valt volgens de Nederlandse telling nog in week 53 van 2026. Bij elk moment staat een idee. Themadagen worden soms verplaatst door de organisatie erachter. Check bij een grote actie dus even de officiële site.</p>
+        {kalender.map((m) => (
+          <>
+            <h3 id={m.id}>Inhaakmomenten {m.maand.toLowerCase()} 2027</h3>
+            <div class="tabel-scroll">
+              <table>
+                <thead><tr><th>Week</th><th>Datum</th><th>Inhaakmoment</th><th>Idee voor je bedrijf</th></tr></thead>
+                <tbody>
+                  {m.momenten.map((x) => <tr><td>{week(x.d)}</td><td>{toon(x)}</td><td><b>{x.wat}</b></td><td>{x.idee ?? ''}</td></tr>)}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ))}
+        <p>De datum van de landelijke intocht van Sinterklaas wordt later bekendgemaakt. Die vind je daarom niet in deze kalender.</p>
+
+        <h2 id="groot">De grote inhaakmomenten van 2027 voor ondernemers</h2>
+        <p>Deze momenten leveren voor veel branches echt omzet op. Zet ze nu al in je agenda.</p>
+        <ul>
+          <li><b>Valentijnsdag, zondag 14 februari.</b> Valt op een zondag. Horeca kan een heel weekend vullen, bloemisten en winkels moeten op vrijdag en zaterdag scoren.</li>
+          <li><b>Pasen, 28 maart.</b> Vroeg dit jaar. Paasbrunch, paasbloemen en de eerste tuinklussen vallen in hetzelfde weekend als het ingaan van de zomertijd.</li>
+          <li><b>Koningsdag, dinsdag 27 april.</b> Midden in de meivakantie, op een doordeweekse dag, met een brugdag ervoor. Deel je openingstijden op tijd.</li>
+          <li><b>Moederdag, 9 mei, en Vaderdag, 20 juni.</b> Begin een week tot tien dagen eerder met cadeau-ideeën.</li>
+          <li><b>De zomervakantie.</b> In het Noorden van 10 juli tot en met 22 augustus. Zomersluiting, vakantieplanning en de terug-naar-schoolperiode zijn goede onderwerpen.</li>
+          <li><b>Dag van de Ondernemer, vrijdag 19 november.</b> MKB-Nederland organiseert deze dag elk jaar op de derde vrijdag van november. Een mooie aanleiding om een ondernemer te bedanken die jou verder hielp.</li>
+          <li><b>Black Friday, 26 november.</b> Doe alleen mee met een echte aanbieding. Een nep-korting doet meer kwaad dan goed.</li>
+          <li><b>Sinterklaas en kerst.</b> Pakjesavond valt op zondag 5 december, kerst op zaterdag en zondag. Plan je kerstgroet en je openingstijden ruim vooruit.</li>
+        </ul>
+
+        <h2 id="branche">Inhaakmomenten per branche</h2>
+        <p>Geen zin om de hele inhaakkalender 2027 door te lopen? Dit zijn per branche de momenten die we zelf als eerste zouden kiezen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Branche</th><th>Kies deze momenten</th></tr></thead>
+            <tbody>
+              <tr><td><b>Installateur, loodgieter</b></td><td>Internationale Dag van Schone Energie, Wereldwaterdag, begin van de herfst (cv-onderhoud), wintertijd, Wereldtoiletdag</td></tr>
+              <tr><td><b>Bouw, aannemer, schilder</b></td><td>Begin van de lente, Werelddag voor Veiligheid op het Werk, Werelddag van de Vakvaardigheden voor Jongeren, begin van de herfst</td></tr>
+              <tr><td><b>Hovenier, tuincentrum</b></td><td>Nationale Tulpendag, Internationale Dag van de Bossen, Tweede Paasdag, Wereldbijendag, begin van de zomer</td></tr>
+              <tr><td><b>Horeca</b></td><td>Valentijnsdag, Pasen, Moederdag, Internationale Dag van de Koffie, Dag tegen Voedselverspilling, kerst</td></tr>
+              <tr><td><b>Winkel</b></td><td>Valentijnsdag, Moederdag, Vaderdag, Sint Maarten, Black Friday, Pakjesavond</td></tr>
+              <tr><td><b>Zorg en welzijn</b></td><td>Wereldgezondheidsdag, Dag van de Verpleging, Wereld Alzheimer Dag, Dag van de Mantelzorg, Wereld Diabetes Dag</td></tr>
+              <tr><td><b>Zakelijke dienstverlener</b></td><td>Employee Appreciation Day, Werelddag van het mkb, Prinsjesdag, Dag van de Ondernemer, Oudejaarsdag</td></tr>
+              <tr><td><b>Recreatie en toerisme</b></td><td>Meivakantie, Nationale Molendag, zomervakantie per regio, Werelddag van het Toerisme, herfstvakantie</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="noorden">Inhaakmomenten in het Noorden</h2>
+        <p>Voor ondernemers in Groningen, Friesland en Drenthe zijn er een paar momenten die landelijke kalenders vaak overslaan.</p>
+        <ul>
+          <li><b>Gronings Ontzet, 28 augustus.</b> Stad en ommeland vieren dat Groningen in 1672 het beleg door de bisschop van Münster doorstond. Er is kermis en vuurwerk. In 2027 valt de dag op een zaterdag, dus horeca en winkels kunnen het hele weekend meepakken.</li>
+          <li><b>Sint Maarten, 11 november.</b> In grote delen van het Noorden gaan kinderen met lampionnen langs de deuren. Een mooi moment voor een winkel om snoep uit te delen en dat te laten zien.</li>
+          <li><b>Internationale Dag van de Moedertaal, 21 februari.</b> Voor Friese ondernemers een vanzelfsprekend moment. Een Fries woord uit je vak, met uitleg, wordt in de regio graag gedeeld.</li>
+          <li><b>Schoolvakanties regio Noord.</b> Het Noorden heeft in 2027 als eerste zomervakantie. Wie klanten in de hele regio heeft, plant zijn zomerberichten daarop.</li>
+          <li><b>Nationale Molendag, 8 mei.</b> Het Noorden staat vol molens. Een mooi uitje om naar te verwijzen als je in de buurt van een molen zit.</li>
+        </ul>
+
+        <h2 id="niet">Wanneer je beter niet inhaakt</h2>
+        <p>Niet elk moment in de kalender is een marketingkans. Op Nationale Dodenherdenking op 4 mei, met twee minuten stilte om acht uur 's avonds, past geen reclame. Hetzelfde geldt voor dagen rond ziekte of rampen, tenzij je bedrijf er direct mee te maken heeft en iets nuttigs te zeggen heeft. Een zorginstelling op Wereld Alzheimer Dag: prima. Een autobedrijf: niet doen.</p>
+        <p>Pas ook op met dagen die vooral als verkooptruc bestaan. Blue Monday is volgens Wikipedia als marketingstunt bedacht, zonder wetenschappelijke basis. Wie er een korting aan hangt, valt weg tussen honderd anderen. Dagen die tot discussie leiden, laten we bewust weg. Een mening over gevoelige onderwerpen kost je eerder klanten dan dat ze erbij komen.</p>
+
+        <h2 id="bericht">Zo maak je een inhaakbericht in 20 minuten</h2>
+        <p>Een goed inhaakbericht hoeft geen ontwerpbureau te kosten. Met deze vijf stappen heb je er in twintig minuten een klaar.</p>
+        <ol>
+          <li><b>Kies de koppeling met je vak (5 minuten).</b> Schrijf in één zin wat het moment met jouw werk te maken heeft. Lukt dat niet, sla het moment dan over.</li>
+          <li><b>Maak een eigen foto (5 minuten).</b> Je werkplaats, je team, je product. Echte beelden werken beter dan een plaatje van internet. Gebruik nooit zomaar foto's van anderen.</li>
+          <li><b>Schrijf drie zinnen (5 minuten).</b> Wat is het moment, wat heeft jouw klant eraan, wat kan hij doen. Liever kort en echt dan lang en algemeen.</li>
+          <li><b>Voeg één actie toe (2 minuten).</b> Een link naar je openingstijden, je agenda of een pagina op je site. Niet vijf links, maar één.</li>
+          <li><b>Plan het in (3 minuten).</b> Zet het klaar voor de dag zelf of een paar dagen ervoor. Hoe laat je het best plaatst, lees je in de gids over de <a href="/kennisbank/gidsen/beste-tijden-om-te-posten/">beste tijd om te posten</a>.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeld (verzonnen): een installateur in Assen op Wereldwaterdag</p>
+          <p><i>"Vandaag is het Wereldwaterdag. Een druppelende kraan verspilt dag en nacht water. Monteur Jan (voorbeeld) laat in dit filmpje zien hoe je in vijf minuten een nieuw kraanleertje plaatst. Lukt het niet? Bel ons, dan komen we langs."</i></p>
+          <p>Kort, nuttig, met een echte foto of video en één duidelijke volgende stap.</p>
+        </div>
+
+        <h2 id="planning">Van kalender naar planning</h2>
+        <p>Een inhaakkalender werkt pas als hij in je planning terechtkomt. Zo doe je dat:</p>
+        <ol>
+          <li>Loop de kalender nu één keer door en kies per maand één of twee momenten. Gebruik de tabel per branche als je weinig tijd hebt.</li>
+          <li>Zet de grote momenten een kwartaal vooruit in je agenda, met een herinnering twee weken van tevoren. Gebruik daarbij het weeknummer, dat praat makkelijk met leveranciers en personeel.</li>
+          <li>Vul de kleine momenten een maand vooruit in, samen met je andere berichten. Hoe dat werkt, lees je in de gids over <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a>.</li>
+          <li>Snel inhaken op iets wat vandaag speelt? Dat gaat vaak het best met een story. Zie de gids over <a href="/kennisbank/gidsen/instagram-stories/">Instagram Stories</a>.</li>
+        </ol>
+        <p>Geen tijd om het zelf bij te houden? Bij <a href="/social-media-beheer/">social media beheer</a> houden wij de inhaakmomenten voor je in de gaten. We kiezen alleen de momenten die bij je bedrijf passen en maken er berichten van in jouw toon. Dat kan vanaf € 395 per maand.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={16} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je inhaakmomenten bijhouden?" intro="Wat je van ons kunt verwachten, en waarom je dat kunt nagaan." case={false} />
+
+  <Faq
+    vragen={[
+      { v: 'Wanneer is Pasen in 2027?', a: 'Eerste Paasdag is zondag 28 maart 2027, Tweede Paasdag maandag 29 maart. Goede Vrijdag valt op 26 maart. In hetzelfde weekend gaat de zomertijd in.' },
+      { v: 'Op welke dag valt Koningsdag in 2027?', a: 'Op dinsdag 27 april 2027. Dat is midden in de meivakantie, die voor alle regio\'s loopt van 24 april tot en met 2 mei. Maandag 26 april is voor veel mensen een brugdag.' },
+      { v: 'Wanneer zijn Hemelvaart en Pinksteren in 2027?', a: 'Hemelvaartsdag is donderdag 6 mei 2027. Pinksteren valt op zondag 16 en maandag 17 mei.' },
+      { v: 'Wanneer zijn Moederdag en Vaderdag in 2027?', a: 'Moederdag is zondag 9 mei 2027, Vaderdag zondag 20 juni 2027.' },
+      { v: 'Wanneer is Black Friday in 2027?', a: 'Op vrijdag 26 november 2027. Cyber Monday is maandag 29 november.' },
+      { v: 'Wanneer is de zomervakantie in 2027?', a: 'Regio Noord heeft vakantie van 10 juli tot en met 22 augustus, regio Midden van 17 juli tot en met 29 augustus en regio Zuid van 24 juli tot en met 5 september.' },
+      { v: 'Wanneer gaan de zomertijd en wintertijd in 2027 in?', a: 'De zomertijd begint op zondag 28 maart 2027, de laatste zondag van maart. De wintertijd begint op zondag 31 oktober 2027, de laatste zondag van oktober.' },
+      { v: 'Hoeveel inhaakmomenten moet ik gebruiken?', a: 'Eén of twee per maand is genoeg voor de meeste kleine bedrijven. Kies alleen momenten die echt bij je vak passen.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Social media planning', href: '/kennisbank/gidsen/social-media-planning/', tekst: 'Zo zet je de kalender om in een planning.' },
+      { label: 'Gids', titel: 'Instagram Stories', href: '/kennisbank/gidsen/instagram-stories/', tekst: 'Snel inhaken met een story en een sticker.' },
+      { label: 'Dienst', titel: 'Social media beheer', href: '/social-media-beheer/', tekst: 'Wij houden de momenten bij. Vanaf € 395 per maand.' },
+    ]}
+  />
+
+  <Actie titel="Wil je het hele jaar zichtbaar zijn?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je kanalen, en belt je met een eerlijk advies over wat het meeste oplevert.`} />
+</Base>

@@ -1,0 +1,184 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--claude.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/claude/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is Claude?' },
+  { id: 'modellen', titel: 'De modellen' },
+  { id: 'kan', titel: 'Wat Claude voor je doet' },
+  { id: 'verschil', titel: 'Claude of ChatGPT?' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'genoemd', titel: 'Genoemd worden door Claude' },
+  { id: 'verstandig', titel: 'Verstandig gebruiken' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat is Claude? Zo werkt de assistent van Anthropic',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI-assistent', author: { '@type': 'Organization', name: 'Anthropic' } },
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wat is Claude? Uitleg over Claude AI | Drijfveer Media"
+  description="Wat is Claude? Zo werkt de assistent van Anthropic: wat hij kan, wat Claude Code is, wat het kost en hoe je als bedrijf genoemd wordt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat is Claude?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · GEO" titel="Wat is Claude? Zo werkt de assistent van Anthropic" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Wat is Claude? Een AI-assistent die schrijft, lange documenten leest en zelfstandig taken uitvoert, tot software bouwen aan toe. Hier lees je wat Claude AI kan, wat het kost en hoe je ervoor zorgt dat hij jouw bedrijf kent.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand oktober 2026)</p>
+          <ul>
+            <li>Claude is een AI-chatbot en een familie van taalmodellen van het Amerikaanse bedrijf Anthropic. Hij kwam uit in maart 2023.</li>
+            <li>De nieuwste modellen zijn Opus 5.5, Sonnet 5.5 en Haiku 5.5, uitgebracht in september en oktober 2026.</li>
+            <li>Gratis te gebruiken. Pro kost $ 20 per maand, Max vanaf $ 100 per maand, exclusief btw.</li>
+            <li>Claude zoekt ook live op internet. Wie zijn site toegankelijk houdt voor de bots van Anthropic, kan in die antwoorden opduiken.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is Claude?</h2>
+        <p>Claude is een AI-assistent, net als ChatGPT en Gemini. Je stelt een vraag of geeft een opdracht in gewone taal, en hij antwoordt. Hij werkt in de browser op claude.ai, als app op je computer en op je telefoon.</p>
+        <p>Achter de chatbot zit een taalmodel: software die getraind is op enorme hoeveelheden tekst en daardoor taal begrijpt en zelf kan schrijven. Dat model is gemaakt door Anthropic, een bedrijf uit San Francisco dat in 2021 werd opgericht door onder anderen Dario en Daniela Amodei. Een deel van de oprichters werkte eerder bij OpenAI, de maker van ChatGPT.</p>
+        <p>Claude begon in maart 2023, eerst alleen voor een selecte groep gebruikers. De naam is volgens Wikipedia een verwijzing naar Claude Shannon, de wiskundige die de basis legde voor de informatietheorie. Wat Anthropic anders doet, is de manier van trainen. Het model leert zich te gedragen volgens een uitgeschreven set principes, een soort grondwet. In de versie van 2026 telt die volgens Wikipedia zo'n 23.000 woorden.</p>
+        <p>Voor ondernemers is vooral dit relevant: Claude staat bekend om sterke teksten en om het werken met lange documenten en complexe taken. Wij gebruiken hem dagelijks, naast ChatGPT, Gemini en andere tools.</p>
+
+        <h2 id="modellen">De modellen van Claude</h2>
+        <p>Claude is geen enkel model, maar een familie. Ze heten naar hun formaat:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Model</th><th>Nieuwste versie</th><th>Waarvoor</th></tr></thead>
+            <tbody>
+              <tr><td>Haiku</td><td>Haiku 5.5 (7 oktober 2026)</td><td>Klein en snel, voor eenvoudige taken in grote aantallen</td></tr>
+              <tr><td>Sonnet</td><td>Sonnet 5.5 (28 september 2026)</td><td>Het werkpaard voor dagelijks gebruik</td></tr>
+              <tr><td>Opus</td><td>Opus 5.5 (22 september 2026)</td><td>Het zwaarste model voor complexe opdrachten</td></tr>
+              <tr><td>Fable</td><td>Fable 5.1 (1 september 2026)</td><td>Een publieke versie van het nog krachtigere Mythos, met extra beveiliging</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het topmodel Mythos is alleen beschikbaar voor een klein aantal organisaties. Voor gewoon gebruik maakt de keuze tussen modellen minder uit dan je denkt. Een goede opdracht doet meer dan het zwaarste model.</p>
+
+        <h2 id="kan">Welke taken voert Claude uit?</h2>
+        <p>Wat begon als chatbot is in de loop van 2025 en 2026 uitgegroeid tot een assistent die zelf werk uitvoert. De belangrijkste onderdelen, zoals Anthropic ze nu aanbiedt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Wat het doet</th></tr></thead>
+            <tbody>
+              <tr><td>Chat</td><td>Vragen stellen, teksten schrijven, documenten laten lezen en samenvatten, op het web zoeken</td></tr>
+              <tr><td>Claude Code</td><td>Claude schrijft, test en verbetert software. Begon in 2025 als programma voor ontwikkelaars</td></tr>
+              <tr><td>Cowork</td><td>Taken op je eigen computer uitvoeren, zoals bestanden ordenen of een rapport maken uit een map met stukken</td></tr>
+              <tr><td>Claude in Chrome</td><td>Websites bezoeken, klikken en formulieren invullen in je browser</td></tr>
+              <tr><td>Design, Docs en Slides</td><td>Ontwerpen, documenten en presentaties maken vanuit een opdracht</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je kunt Claude ook koppelen aan je eigen gereedschap. Denk aan Google Drive, Gmail en Microsoft 365. Dan kan hij een workflow overnemen die je anders met de hand doet: mails doorlezen, een samenvatting maken, een concept-antwoord klaarzetten.</p>
+        <p>Enkele voorbeelden uit de praktijk van een mkb-bedrijf:</p>
+        <ul>
+          <li><b>Teksten schrijven.</b> Een eerste versie van een dienstpagina, een nieuwsbrief of een vacature. Geef context mee: voor wie, welke toon, welke feiten.</li>
+          <li><b>Lange stukken lezen.</b> Een aanbesteding van 120 pagina's samenvatten, of drie offertes naast elkaar leggen.</li>
+          <li><b>Complexe vragen uitzoeken.</b> "Wat verandert er aan de btw-regels voor mijn branche?" En daarna altijd zelf de bron nalezen.</li>
+          <li><b>Een kleine tool bouwen.</b> Met Claude Code laten veel mensen zonder programmeerkennis een rekenhulp of een eenvoudige website bouwen. Dat heet <a href="/kennisbank/gidsen/vibe-coding/">vibe coding</a>.</li>
+        </ul>
+
+        <h2 id="verschil">Claude of ChatGPT?</h2>
+        <p>Een vraag die we vaak krijgen. Eerlijk antwoord: voor de meeste dagelijkse taken doen ze niet veel voor elkaar onder. De verschillen zitten in de details.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>ChatGPT</th><th>Claude</th></tr></thead>
+            <tbody>
+              <tr><td><b>Maker</b></td><td>OpenAI</td><td>Anthropic</td></tr>
+              <tr><td><b>Bekendheid</b></td><td>Veruit het grootst</td><td>Kleiner publiek, populair bij professionals en ontwikkelaars</td></tr>
+              <tr><td><b>Sterk in</b></td><td>Breed inzetbaar, beeld en spraak</td><td>Schrijfstijl, lange documenten, programmeren</td></tr>
+              <tr><td><b>Gratis versie</b></td><td>Ja</td><td>Ja</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Ons advies: probeer dezelfde opdracht in beide en kijk welk antwoord je het minst hoeft te herschrijven. Wil je ChatGPT beter inzetten in je bedrijf, lees dan ook onze gids <a href="/kennisbank/gidsen/chatgpt-voor-bedrijven/">ChatGPT voor bedrijven</a>.</p>
+
+        <h2 id="kosten">Wat kost Claude?</h2>
+        <p>De prijzen op de site van Anthropic staan in dollars en zijn exclusief btw.</p>
+        <ul>
+          <li><b>Free, $ 0.</b> Chatten op web, computer en telefoon, zoeken op internet, bestanden maken, apps koppelen.</li>
+          <li><b>Pro, $ 20 per maand</b> (of $ 17 per maand bij een jaarabonnement). Meer gebruik, meer modellen, Claude Code, Claude in Chrome en Microsoft 365.</li>
+          <li><b>Max, vanaf $ 100 per maand.</b> Vijf of twintig keer zoveel gebruik als Pro, voor wie de hele dag met Claude werkt.</li>
+          <li><b>Team en Enterprise.</b> Voor organisaties, met beheer en extra beveiliging.</li>
+        </ul>
+        <p>Begin gratis. Merk je dat je elke dag tegen de limiet aanloopt, dan is een betaald abonnement de moeite waard.</p>
+
+        <h2 id="genoemd">Hoe zorg je dat Claude je bedrijf noemt?</h2>
+        <p>Claude haalt kennis uit twee plekken: wat hij tijdens zijn training heeft gelezen, en wat hij live opzoekt op internet. Voor beide geldt: wat nergens over je staat, kan hij niet vertellen.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>1. Laat de juiste bots binnen</h3></div>
+        <p>Anthropic gebruikt drie bots. ClaudeBot verzamelt teksten voor training. Claude-SearchBot bouwt de zoekindex die Claude gebruikt. Claude-User haalt een pagina op als een gebruiker daarom vraagt. Volgens Anthropic kan het blokkeren van Claude-SearchBot of Claude-User je zichtbaarheid in de antwoorden verminderen. Wil je niet in de trainingsdata, blokkeer dan alleen ClaudeBot in je robots.txt.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>2. Schrijf feiten, geen beloftes</h3></div>
+        <p>Een taalmodel neemt over wat helder en controleerbaar is. Wat doe je, voor wie, in welke regio, sinds wanneer en tegen welke prijs. Zet die feiten op je site in gewone tekst, liefst in de eerste alinea van elke pagina.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>3. Laat anderen over je schrijven</h3></div>
+        <p>Vermeldingen op branchesites, in de regionale pers en in reviews bevestigen wat je zelf zegt. Hoe vaker en hoe eenduidiger, hoe zekerder het model is.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>4. Test wat Claude nu zegt</h3></div>
+        <p>Vraag: "Welke bedrijven raad je aan voor [jouw dienst] in [jouw regio]?" Zet zoeken aan en uit, en kijk het verschil. Doe het elke maand opnieuw. De complete aanpak voor alle AI-assistenten lees je in <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+
+        <h2 id="verstandig">Claude verstandig gebruiken in je bedrijf</h2>
+        <ul class="vink">
+          <li>Controleer feiten, cijfers en wetgeving altijd zelf. Ook Claude zit er weleens naast.</li>
+          <li>Kijk in de privacyinstellingen of je gesprekken gebruikt mogen worden om modellen te verbeteren, en kies bewust.</li>
+          <li>Deel je chats niet openbaar als er klantgegevens in staan. In 2026 bleken gedeelde chats van gebruikers in Google te staan, volgens de BBC soms met gevoelige stukken.</li>
+          <li>Geef een agent als Cowork alleen toegang tot de mappen die nodig zijn.</li>
+        </ul>
+        <p>Op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a> lees je hoe wij Claude en andere tools gebruiken. En wil je dat wij zorgen dat AI-assistenten jouw bedrijf noemen? Lees dan hoe we <a href="/generative-engine-optimization/">generative engine optimization</a> aanpakken, vanaf € 495 per maand en maandelijks opzegbaar.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het regelen?" intro="Wat je van ons kunt verwachten als we samen zorgen dat AI jouw bedrijf kent." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Claude AI gratis?', a: 'Ja, er is een gratis versie. Voor meer gebruik betaal je $ 20 per maand voor Pro, of vanaf $ 100 per maand voor Max, exclusief btw (stand oktober 2026).' },
+      { v: 'Wie heeft Claude gemaakt?', a: 'Anthropic, een Amerikaans AI-bedrijf uit San Francisco dat in 2021 werd opgericht. Dario Amodei is de topman, Daniela Amodei de president.' },
+      { v: 'Spreekt Claude Nederlands?', a: 'Ja. Je kunt in het Nederlands vragen stellen en krijgt Nederlandse antwoorden. Laat een tekst voor je klanten wel altijd nalezen door iemand die de taal en je vak kent.' },
+      { v: 'Wat is Claude Code?', a: 'Een programma waarmee Claude zelfstandig software schrijft, test en aanpast. Het kwam uit in februari 2025 en is inbegrepen bij het Pro-abonnement.' },
+      { v: 'Kan ik voorkomen dat Claude mijn website gebruikt?', a: 'Ja, via je robots.txt. Blokkeer ClaudeBot als je niet in de trainingsdata wilt. Laat Claude-SearchBot en Claude-User toe als je wel in de antwoorden wilt verschijnen.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over AI-assistenten"
+    links={[
+      { label: 'Gids', titel: 'Wat is Perplexity?', href: '/kennisbank/gidsen/perplexity/', tekst: 'De AI-zoekmachine die altijd zijn bronnen noemt.' },
+      { label: 'Gids', titel: 'ChatGPT voor bedrijven', href: '/kennisbank/gidsen/chatgpt-voor-bedrijven/', tekst: 'Zo zet je ChatGPT slim in, zonder gedoe.' },
+      { label: 'Dienst', titel: 'AI-vindbaarheidsanalyse', href: '/generative-engine-optimization/ai-vindbaarheidsanalyse/', tekst: 'Wat zeggen AI-assistenten nu over jouw bedrijf?' },
+    ]}
+  />
+
+  <Actie titel="Weet AI wie jij bent?" tekst={`${site.contactpersoon} vraagt Claude, ChatGPT en Gemini naar jouw bedrijf en belt je met de uitkomst. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>

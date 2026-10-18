@@ -1,0 +1,27 @@
+---
+// Inhoudsopgave voor lange pagina's. Markeert waar je bent tijdens het lezen.
+interface Props { items: { id: string; titel: string }[]; leestijd?: number }
+const { items, leestijd } = Astro.props;
+---
+<nav class="inhoud card" aria-label="Op deze pagina">
+  <p class="kop">Op deze pagina{leestijd && <span class="muted"> · {leestijd} min. lezen</span>}</p>
+  <ol>{items.map((i) => <li><a href={`#${i.id}`} data-inhoud={i.id}>{i.titel}</a></li>)}</ol>
+</nav>
+<script>
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-inhoud]')];
+  const doelen = links.map((a) => document.getElementById(a.dataset.inhoud!)).filter(Boolean) as HTMLElement[];
+  if ('IntersectionObserver' in window && doelen.length) {
+    const io = new IntersectionObserver((e) => {
+      e.forEach((x) => { if (x.isIntersecting) links.forEach((a) => a.classList.toggle('hier', a.dataset.inhoud === x.target.id)); });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    doelen.forEach((d) => io.observe(d));
+  }
+</script>
+<style>
+  .inhoud { padding: 20px 22px; }
+  .kop { font-weight: 800; margin: 0 0 10px; }
+  ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+  a { display: block; padding: 6px 10px; margin-left: -10px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 0.98rem; line-height: 1.35; border-left: 3px solid transparent; }
+  a:hover { color: var(--ink); background: var(--bg); }
+  a.hier { color: var(--ink); font-weight: 700; border-left-color: var(--orange); border-radius: 0 8px 8px 0; }
+</style>

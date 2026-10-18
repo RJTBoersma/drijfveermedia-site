@@ -1,0 +1,253 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--marketing-automation.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/marketing-automation/';
+const definitie = 'Marketing automation is software die marketingtaken vanzelf uitvoert, zoals een mail versturen of een lead doorzetten naar verkoop, op het moment dat een klant iets doet of na een vaste tijd.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Marketing automation',
+  alternateName: ['Marketingautomatisering', 'Automatische opvolging'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+  dateModified: '2026-10-18',
+}];
+const hoofdstukken = [
+  { id: 'werking', titel: 'Hoe het werkt' },
+  { id: 'voorbeeld', titel: 'Een voorbeeld, stap voor stap' },
+  { id: 'nurturing', titel: 'Lead nurturing' },
+  { id: 'scoring', titel: 'Lead scoring' },
+  { id: 'workflows', titel: 'Zes workflows voor het mkb' },
+  { id: 'tools', titel: 'Tools vergeleken' },
+  { id: 'kosten', titel: 'Wat kost het?' },
+  { id: 'nodig', titel: 'Wat je nodig hebt' },
+  { id: 'beginnen', titel: 'Zo begin je klein' },
+  { id: 'regels', titel: 'De regels' },
+  { id: 'niet', titel: 'Wanneer je beter niet automatiseert' },
+  { id: 'ai', titel: 'En AI dan?' },
+];
+---
+<Base
+  title="Wat is marketing automation? Uitleg en voorbeelden"
+  description="Wat is marketing automation? Software die mails en opvolging vanzelf regelt na een trigger. Met voorbeelden, lead scoring, tools en de regels."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Marketing automation', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · E-mailmarketing</p>
+        <h1>Wat is marketing automation?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-18" />
+        <p>Wat is marketing automation, en heb je er als klein bedrijf iets aan? Het idee is simpel. Je bedenkt één keer wat er moet gebeuren als een klant iets doet. Daarna voert de software dat uit, elke keer weer, ook als jij op een dak staat of op vakantie bent.</p>
+        <p>Een offerte gaat de deur uit, en drie dagen later krijgt de klant vanzelf een mail met de vraag of alles duidelijk is. Iemand schrijft zich in voor je tips, en krijgt de week erna een tweede mail met een voorbeeld van je werk. Dat is marketing automation. Geen robot die je klanten belt, wel een systeem dat zorgt dat er niets blijft liggen.</p>
+
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Marketing automation werkt met triggers (iets gebeurt) en workflows (wat er daarna volgt).</li>
+            <li>De bekendste vorm is e-mail, maar het kan ook om sms, taken voor je team of een update in je CRM gaan.</li>
+            <li>Lead nurturing houdt leads warm, lead scoring laat zien wie je het eerst moet bellen.</li>
+            <li>Tools als Mailchimp, MailerLite, Brevo en HubSpot kunnen het allemaal, in verschillende mate.</li>
+            <li>Begin met één of twee workflows. Een grote opzet die niemand bijhoudt, levert niets op.</li>
+          </ul>
+        </div>
+
+        <div class="stap-kop" id="werking"><Tekening naam="tandwiel" maat={52} /><h2>Hoe marketing automation werkt: triggers, workflows en segmentatie</h2></div>
+        <p>Een nieuwsbrief stuur je naar iedereen tegelijk. Marketing automation stuurt één persoon een bericht, op het moment dat het bij hem past. Dat gebeurt in vier stappen.</p>
+
+        <h3>1. Gegevens verzamelen</h3>
+        <p>Het begint bij wat je weet over een contact. Een naam en e-mailadres uit een formulier. De dienst waar iemand om vroeg. De datum van de laatste klus. Hoe meer je weet, hoe gerichter je kunt mailen. Die gegevens staan vaak in een CRM: een klantsysteem waarin je contacten, offertes en afspraken bijhoudt.</p>
+
+        <h3>2. Segmentatie</h3>
+        <p>Daarna verdeel je contacten in groepen. Particulier of zakelijk. Klant of nog geen klant. Interesse in zonnepanelen of in een warmtepomp. Die segmentatie zorgt dat iemand alleen mails krijgt die over hem gaan.</p>
+
+        <h3>3. Triggers</h3>
+        <p>Een trigger is het startsein. Iemand vult een formulier in, opent een mail, klikt op een link, krijgt een offerte, of is jarig. Ook een datum kan een trigger zijn: twaalf maanden na de installatie van een cv-ketel.</p>
+
+        <h3>4. Workflows</h3>
+        <p>De workflow is wat er na de trigger gebeurt. Wacht drie dagen. Stuur mail A. Is mail A geopend? Stuur dan mail B. Niet geopend? Maak een taak aan om te bellen. In de meeste tools bouw je dat met blokjes en pijlen, zoals in de tekening bovenaan deze pagina.</p>
+
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Begrip</th><th>Wat het is</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td><b>Trigger</b></td><td>De gebeurtenis die een workflow start</td><td>Offerteformulier verstuurd</td></tr>
+              <tr><td><b>Workflow</b></td><td>De reeks stappen die volgt</td><td>Bevestiging, na 3 dagen opvolgmail, na 7 dagen belherinnering</td></tr>
+              <tr><td><b>Segment</b></td><td>Een groep contacten met iets gemeen</td><td>Klanten met een warmtepomp ouder dan een jaar</td></tr>
+              <tr><td><b>Personalisatie</b></td><td>Een mail aanpassen aan de ontvanger</td><td>De dienst en woonplaats van de klant in de tekst</td></tr>
+              <tr><td><b>Lead nurturing</b></td><td>Leads warm houden tot ze klaar zijn</td><td>Vier tipmails in vier weken na een download</td></tr>
+              <tr><td><b>Lead scoring</b></td><td>Punten geven voor interesse</td><td>+20 voor een bezoek aan de prijspagina</td></tr>
+              <tr><td><b>CRM</b></td><td>Het klantsysteem waar alles samenkomt</td><td>Contact, offertes, afspraken en notities</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Marketing automation hoort bij inbound marketing: klanten trekken met nuttige inhoud in plaats van ze ongevraagd te benaderen. Je site en je artikelen brengen de leads binnen. De automatisering zorgt dat je ze niet kwijtraakt. Zie het als het middenstuk van je <a href="/kennisbank/wat-is/funnel/">funnel</a>.</p>
+
+        <div class="stap-kop" id="voorbeeld"><Tekening naam="mail" maat={52} /><h2>Een voorbeeld uit de praktijk, stap voor stap</h2></div>
+        <p>Stel: een dakdekker in Meppel verstuurt elke maand zo'n twintig offertes voor dakkapellen. Zo ziet een eenvoudige workflow eruit. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+        <ol>
+          <li><b>Trigger:</b> de offerte wordt verstuurd en de status in het CRM springt op "offerte".</li>
+          <li><b>Direct:</b> een korte mail met de offerte, een foto van een vergelijkbare dakkapel en het mobiele nummer van de eigenaar.</li>
+          <li><b>Na drie dagen:</b> "Zijn er nog vragen over de offerte?" Met een link om een belmoment te kiezen.</li>
+          <li><b>Vraag in de workflow:</b> is die mail geopend of is er geklikt? Ja: na vier dagen een mail met drie veelgestelde vragen over vergunningen. Nee: een taak voor de eigenaar om even te bellen.</li>
+          <li><b>Na veertien dagen zonder reactie:</b> een laatste, persoonlijke mail. "Ik wil je niet blijven lastigvallen. Mag ik de offerte sluiten?"</li>
+          <li><b>Zodra de klant tekent:</b> de workflow stopt vanzelf en het contact gaat naar een reeks voor nieuwe klanten.</li>
+        </ol>
+        <p>Die laatste stap is belangrijk. Niets is zo slordig als een klant die al getekend heeft en toch een herinnering krijgt.</p>
+
+        <div class="stap-kop" id="nurturing"><Tekening naam="magneet" maat={52} /><h2>Lead nurturing: leads warm houden</h2></div>
+        <p>Niet iedereen die je gegevens achterlaat, wil nu kopen. Iemand downloadt in februari je checklist voor een nieuwe badkamer, maar gaat pas in september verbouwen. Lead nurturing betekent: die persoon in de tussentijd nuttige informatie geven, zodat hij aan jou denkt als het zover is.</p>
+        <p>Een goede nurturing-reeks geeft vooral. Een tip over materialen. Een voorbeeld van een project. Een eerlijk stuk over wat een badkamer kost. Pas na een paar mails komt het aanbod. Dat werkt omdat het past bij de klantreis: eerst oriënteren, dan vergelijken, dan kiezen. Hoe die reis eruitziet, lees je in de gids <a href="/kennisbank/gidsen/customer-journey/">customer journey in kaart brengen</a>.</p>
+
+        <div class="stap-kop" id="scoring"><Tekening naam="ster" maat={52} /><h2>Lead scoring: wie bel je eerst?</h2></div>
+        <p>Heb je veel leads, dan is de vraag: wie is er klaar voor een telefoontje? Lead scoring geeft punten voor gedrag en kenmerken. Boven een bepaalde score krijgt de verkoper een seintje. Een voorbeeld van een puntentabel:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat de lead doet of is</th><th>Punten</th></tr></thead>
+            <tbody>
+              <tr><td>Vult het contactformulier in</td><td>+30</td></tr>
+              <tr><td>Bekijkt de prijspagina</td><td>+20</td></tr>
+              <tr><td>Klikt op een link in een mail</td><td>+10</td></tr>
+              <tr><td>Woont in je werkgebied</td><td>+10</td></tr>
+              <tr><td>Opent een mail</td><td>+2</td></tr>
+              <tr><td>Drie maanden geen enkele reactie</td><td>−15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Verzonnen voorbeeld. Bepaal je eigen punten op basis van wat jouw klanten echt deden voordat ze tekenden.</p>
+        <p>Geef weinig punten voor het openen van een mail. Sommige mailprogramma's laden plaatjes vooraf, waardoor een mail als geopend telt terwijl niemand hem las. Kliks en bezoeken aan je site zeggen meer. Lead scoring is vooral nuttig bij tientallen leads per week. Bel je er drie per week, dan weet je zelf ook wel wie warm is.</p>
+
+        <div class="stap-kop" id="workflows"><Tekening naam="kalender" maat={52} /><h2>Zes workflows die bij een klein bedrijf passen</h2></div>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Workflow</th><th>Trigger</th><th>Wat er gebeurt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Welkom</b></td><td>Inschrijving via je site</td><td>Een bedankmail, daarna twee of drie mails met je beste tips en werk</td></tr>
+              <tr><td><b>Offerte-opvolging</b></td><td>Offerte verstuurd</td><td>Opvolgmail na een paar dagen, belherinnering bij geen reactie</td></tr>
+              <tr><td><b>Afspraakherinnering</b></td><td>Afspraak ingepland</td><td>Een dag van tevoren een mail of sms met tijd en adres</td></tr>
+              <tr><td><b>Reviewverzoek</b></td><td>Klus afgerond</td><td>Na een paar dagen een vraag om een review, met directe link</td></tr>
+              <tr><td><b>Onderhoud</b></td><td>Datum: een jaar na levering</td><td>"Tijd voor de jaarlijkse controle?" met een link om te plannen</td></tr>
+              <tr><td><b>Terugwinnen</b></td><td>Lang niets afgenomen</td><td>Een persoonlijke mail om te vragen hoe het gaat</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Begin met de workflow die het dichtst bij geld zit. Voor de meeste dienstverleners is dat de offerte-opvolging. Voor bedrijven met vaste klanten vaak de onderhoudsherinnering.</p>
+
+        <div class="stap-kop" id="tools"><Tekening naam="scherm" maat={52} /><h2>Marketing automation tools vergeleken</h2></div>
+        <p>Er zijn honderden tools. Voor een Nederlands mkb-bedrijf kom je meestal bij deze uit. We noemen bewust geen prijzen: die veranderen vaak en hangen af van het aantal contacten. Kijk altijd op de site van de maker.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Sterk in</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td><b>Mailchimp</b></td><td>Nieuwsbrieven en eenvoudige automatiseringen</td><td>Het onderdeel heet sinds juni 2025 Marketing Automation Flows (eerder Customer Journey Builder). Gratis basisplan bij minder dan 250 contacten. Wat Flows kan, verschilt per plan.</td></tr>
+              <tr><td><b>MailerLite</b></td><td>Eenvoud, voor kleine lijsten</td><td>Ook in het gratis plan zitten automatiseringen, landingspagina's en formulieren.</td></tr>
+              <tr><td><b>Brevo</b></td><td>E-mail en sms in één</td><td>Workflows met meerdere stappen zitten in het Standard-plan. Contact scoring, hun naam voor lead scoring, pas in Professional.</td></tr>
+              <tr><td><b>HubSpot</b></td><td>Alles in één, met CRM</td><td>Workflows draaien op de gegevens in het eigen CRM. Lead scoring en klantreizen horen bij Marketing Hub.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Bron: de prijs- en productpagina's van Mailchimp, MailerLite, Brevo en HubSpot, bekeken in oktober 2026.</p>
+        <p>Werk je al met een boekhoudpakket, planningstool of CRM? Kijk dan eerst wat daar al in zit. Veel pakketten kunnen al automatische mails of herinneringen sturen. Een tweede systeem ernaast betekent dubbele gegevens en dubbel werk.</p>
+
+        <div class="stap-kop" id="kosten"><Tekening naam="munten" maat={52} /><h2>Wat kost het?</h2></div>
+        <p>De software is vaak het kleinste deel. Een kleine lijst kan bij sommige tools gratis. Bij duizenden contacten of uitgebreide functies betaal je per maand, en bij de grote alles-in-één pakketten loopt dat flink op. De echte kosten zitten in tijd: de workflow bedenken, de mails schrijven, alles testen en het daarna bijhouden.</p>
+        <p>Reken daarom andersom. Wat levert één extra opdracht op? Stel: een installateur in Emmen verstuurt dertig offertes per maand en krijgt er acht van terug. Een gemiddelde opdracht levert € 1.800 op. Als een opvolgmail elke maand één twijfelaar over de streep trekt, is dat € 1.800 extra omzet per maand. Dat betaalt een flinke tool en de tijd om hem in te richten. <span class="muted">(Verzonnen cijfers. Maak de som met je eigen aantallen.)</span></p>
+
+        <div class="stap-kop" id="nodig"><Tekening naam="lamp" maat={52} /><h2>Wat heb je nodig voordat je begint?</h2></div>
+        <p>De meeste projecten lopen niet vast op de software, maar op wat ervoor nodig is. Loop deze vier punten na voordat je een tool kiest.</p>
+        <ul class="vink">
+          <li><b>Een schone lijst.</b> Dubbele contacten, oude adressen en klanten zonder toestemming eruit. Een workflow is zo goed als de gegevens die erin gaan.</li>
+          <li><b>Inhoud per fase.</b> Een workflow zonder goede mails is een lege pijpleiding. Zorg voor een paar tips, voorbeelden van je werk en antwoorden op vragen die klanten echt stellen.</li>
+          <li><b>Eén eigenaar.</b> Iemand in je bedrijf die de workflows bijhoudt, de reacties leest en aanpast wat niet werkt. Zonder eigenaar staat een workflow over twee jaar nog precies zo, met een oude prijs erin.</li>
+          <li><b>Een afspraak over het moment van bellen.</b> Wanneer is een lead warm genoeg voor een telefoontje, en wie belt? Leg dat vast, ook als je met z'n tweeën bent.</li>
+        </ul>
+        <p>Klinkt dat als veel? Begin dan met de inhoud. Wie zijn drie beste opvolgmails op papier heeft, kan ze desnoods eerst met de hand versturen. Werkt het, dan automatiseer je het daarna.</p>
+
+        <div class="stap-kop" id="beginnen"><Tekening naam="raket" maat={52} /><h2>Zo begin je klein: een stappenplan</h2></div>
+        <ol>
+          <li><b>Kies één moment waarop nu iets blijft liggen.</b> Offertes zonder antwoord, nieuwe inschrijvers die nooit iets horen, klanten die je na de klus uit het oog verliest.</li>
+          <li><b>Schrijf de mails eerst op papier.</b> Wat wil je zeggen, wanneer, en wat moet de klant doen? Eén doel per mail.</li>
+          <li><b>Kies een tool die past bij je lijst.</b> Kijk of je huidige systemen het al kunnen. Zet het account op je eigen naam.</li>
+          <li><b>Stel je domein goed in.</b> Met SPF, DKIM en DMARC landen je mails in de inbox en niet in de spam.</li>
+          <li><b>Bouw de workflow en test hem met je eigen adres.</b> Loop elke tak door, ook de nee-tak.</li>
+          <li><b>Kijk na een maand naar de cijfers.</b> Niet naar opens, maar naar antwoorden, belafspraken en opdrachten. Wat niets doet, gaat eruit.</li>
+        </ol>
+        <p>Liever eerst de basis van e-mail onder de knie? Lees de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a>. Hoe automatische opvolging per mail er voor een klein bedrijf uitziet, lees je bij <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing</a>.</p>
+
+        <div class="stap-kop" id="regels"><Tekening naam="schild" maat={52} /><h2>De regels: toestemming, AVG en cookies</h2></div>
+        <ul>
+          <li><b>Toestemming voor e-mail.</b> Nieuwe contacten mag je alleen mailen als ze daar toestemming voor gaven. Bestaande klanten mag je mailen over vergelijkbare diensten, als ze zich in elke mail kunnen afmelden.</li>
+          <li><b>Gedrag op je site volgen.</b> Wil je een workflow starten omdat iemand je prijspagina bekeek, dan volg je bezoekers met trackingcookies. Daarvoor moet je volgens de Autoriteit Persoonsgegevens eerst toestemming vragen. Meer daarover bij het begrip <a href="/kennisbank/wat-is/cookie/">cookie</a>.</li>
+          <li><b>Eerlijk zijn over wat je doet.</b> Vertel in je privacyverklaring dat je contactgegevens gebruikt voor automatische mails en, als je dat doet, voor lead scoring. Hoe je die verklaring opstelt, lees je in de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</li>
+          <li><b>Geen gekochte lijsten.</b> Ze leveren klachten op en je domein belandt er snel mee in de spam.</li>
+        </ul>
+
+        <div class="stap-kop" id="niet"><Tekening naam="koffie" maat={52} /><h2>Wanneer je beter niet automatiseert</h2></div>
+        <p>Automatisering kan ook afstand scheppen. Een klant die een keuken van € 15.000 overweegt, wil geen reeks van acht mails. Die wil iemand spreken. Een paar vuistregels:</p>
+        <ul class="vink">
+          <li>Automatiseer het onthouden, niet het contact. Een herinnering om te bellen is vaak beter dan een vijfde mail.</li>
+          <li>Schrijf zoals je praat, met een echte naam als afzender. "Noreply" nodigt niet uit tot antwoorden.</li>
+          <li>Klachten en twijfels horen bij een mens, nooit in een workflow.</li>
+          <li>Stop een workflow die niets oplevert. Ook als het veel werk was om hem te bouwen.</li>
+        </ul>
+        <p>Bureaus adviseren te weinig om ergens mee te stoppen. Verspilde moeite schrappen is soms meer waard dan een nieuwe reeks.</p>
+
+        <div class="stap-kop" id="ai"><Tekening naam="ai" maat={52} /><h2>Marketing automation en AI: wat is het verschil?</h2></div>
+        <p>Klassieke marketing automation werkt met regels die jij bedenkt: als dit, dan dat. Er zit geen intelligentie in, alleen discipline. Steeds meer tools voegen er AI aan toe. Brevo noemt op zijn prijspagina bijvoorbeeld een AI-tekstschrijver voor onderwerpregels en een functie die per contact het beste verzendmoment kiest.</p>
+        <p>Handig, maar het blijft gereedschap. De AI schrijft een eerste versie, jij controleert of het klopt en klinkt zoals jij. Een AI-chatbot die zelfstandig met je klanten praat, is iets anders dan marketing automation. Wat een taalmodel is en waar het de mist in gaat, lees je bij het begrip <a href="/kennisbank/wat-is/llm/">LLM</a>.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Meer weten?</p>
+          <p>Lees de gids <a href="/kennisbank/gidsen/leads-genereren/">leads genereren als mkb'er</a> of bekijk hoe <a href="/leadgeneratie/">leadgeneratie</a> bij ons werkt. Een goede <a href="/kennisbank/wat-is/call-to-action/">call to action</a> in je mails maakt het verschil tussen gelezen en gebeld. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is marketing automation in het kort?', a: 'Software die marketingtaken vanzelf uitvoert na een trigger. Bijvoorbeeld een opvolgmail drie dagen na een offerte. Je stelt het één keer in, daarna loopt het.' },
+      { v: 'Is marketing automation hetzelfde als e-mailmarketing?', a: 'Niet helemaal. E-mailmarketing is de verzamelnaam voor marketing per mail, inclusief nieuwsbrieven. Marketing automation is het deel dat vanzelf gaat, op basis van wat een klant doet. Het kan ook om sms, taken of updates in je CRM gaan.' },
+      { v: 'Wat is het verschil tussen lead nurturing en lead scoring?', a: 'Lead nurturing houdt leads warm met nuttige berichten. Lead scoring geeft punten voor interesse, zodat je ziet wie klaar is voor een gesprek. Het eerste voedt, het tweede meet.' },
+      { v: 'Is marketing automation iets voor een klein bedrijf?', a: 'Ja, als je het klein houdt. Eén workflow voor offertes of een reviewverzoek na de klus levert vaak al meer op dan een uitgebreid systeem dat niemand bijhoudt.' },
+      { v: 'Welke tool is het beste?', a: 'Dat hangt af van je lijst en je systemen. Voor een kleine lijst volstaan MailerLite, Mailchimp of Brevo vaak. HubSpot past beter als je een volledig CRM wilt. Kijk eerst wat je huidige software al kan.' },
+      { v: 'Hoe lang duurt het om marketing automation op te zetten?', a: 'Een eenvoudige workflow met drie mails staat er in een dag of twee, inclusief schrijven en testen. Het instellen van je domein tegen spam en het opschonen van je lijst kosten soms meer tijd dan de workflow zelf.' },
+      { v: 'Mag ik iedereen in mijn adresboek automatisch mailen?', a: 'Nee. Nieuwe contacten hebben toestemming nodig. Bestaande klanten mag je mailen over vergelijkbare diensten, met een afmeldlink in elke mail.' },
+    ]}
+  />
+
+  <Actie titel="Hoeveel aanvragen blijven bij jou liggen?" tekst={`We kijken gratis naar je site en je formulieren. ${site.contactpersoon} belt je met de plekken waar je nu aanvragen laat liggen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .stap-kop { scroll-margin-top: 96px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

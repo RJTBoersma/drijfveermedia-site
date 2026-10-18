@@ -1,0 +1,68 @@
+---
+// Scène voor /kennisbank/wat-is/semantisch-zoeken/: een zoekopdracht zonder het woord loodgieter wordt vertaald naar betekenissen, en daaruit komt het juiste resultaat.
+// Als hij leeft: oranje lijnen lopen van de zoekopdracht via de betekenissen naar het resultaat, de cursor knippert en het resultaat licht rustig op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const bollen = [
+  { x: 16, y: 104, w: 104, t: 'vakman nodig' },
+  { x: 128, y: 132, w: 56, t: 'nu' },
+  { x: 150, y: 186, w: 104, t: 'in de buurt' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: iemand zoekt op lekkage plafond, wie bel ik. Google vertaalt dat naar vakman nodig, nu en in de buurt, en toont een loodgieter in de buurt.'}>
+  <!-- zoekveld -->
+  <rect x="16" y="26" width="250" height="42" rx="21" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="36" y="52" font-size="12">lekkage plafond, wie bel ik?</text>
+  <circle cx="242" cy="45" r="7" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M247 50l6 6" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+
+  <!-- verbindingen -->
+  <path d="M68 68v36M156 68v64M202 68v118" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+  <path d="M120 119c70 0 110 -2 168 0M184 147c40 0 70 0 104 2M254 201c18 0 28 -6 34 -12" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+
+  <!-- betekenissen -->
+  {bollen.map((b) => (
+    <g>
+      <rect x={b.x} y={b.y} width={b.w} height="30" rx="15" fill="#e8eef4" />
+      <text x={b.x + b.w / 2} y={b.y + 19.5} font-size="12" font-weight="800" text-anchor="middle">{b.t}</text>
+    </g>
+  ))}
+
+  <!-- resultaat -->
+  <rect x="288" y="84" width="176" height="142" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="312" cy="112" r="11" fill="#ff6600" />
+  <text x="312" y="116.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">1</text>
+  <text x="330" y="109" font-size="12.5" font-weight="800">Loodgieter</text>
+  <text x="330" y="124" font-size="11" class="zacht">in de buurt</text>
+  <rect x="304" y="140" width="142" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="304" y="154" width="118" height="7" rx="3.5" fill="#e8eef4" />
+  <path class="l" d="M310 186c0-8 6-13 12-13s12 5 12 13c0 9-12 20-12 20s-12-11-12-20z" />
+  <circle cx="322" cy="186" r="3.5" fill="#074663" />
+  <rect x="344" y="180" width="102" height="24" rx="12" fill="#e8eef4" />
+  <text x="395" y="196" font-size="11" font-weight="800" text-anchor="middle">Nu bellen</text>
+
+  {!mini && (
+    <g>
+      <rect class="cursor" x="188" y="37" width="2" height="18" fill="#10283f" />
+      <path class="spoor" style="--i:0" d="M68 68v36" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <path class="spoor" style="--i:1" d="M156 68v64" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <path class="spoor" style="--i:2" d="M202 68v118" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <path class="spoor" style="--i:3" d="M120 119c70 0 110 -2 168 0" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <path class="spoor" style="--i:4" d="M184 147c40 0 70 0 104 2" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <path class="spoor" style="--i:5" d="M254 201c18 0 28 -6 34 -12" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <rect class="gloed" x="284" y="80" width="184" height="150" rx="16" fill="none" stroke="#ff6600" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .spoor { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  :global(.teken-js) .spoor { stroke-dashoffset: 1; }
+  :global(.teken-js) .gloed { opacity: 0; }
+  .in-beeld .spoor { animation: kennisbank--wat-is--semantisch-zoeken-spoor 0.7s ease-out calc(0.4s + var(--i) * 0.3s) forwards; }
+  .in-beeld .cursor { animation: kennisbank--wat-is--semantisch-zoeken-knipper 1.1s steps(1) infinite; }
+  .in-beeld .gloed { animation: kennisbank--wat-is--semantisch-zoeken-gloed 4.5s ease-in-out 2.4s infinite; }
+  @keyframes kennisbank--wat-is--semantisch-zoeken-spoor { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank--wat-is--semantisch-zoeken-knipper { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @keyframes kennisbank--wat-is--semantisch-zoeken-gloed { 0%, 100% { opacity: 0; } 50% { opacity: 0.85; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .spoor, .in-beeld .cursor, .in-beeld .gloed { animation: none; } }
+</style>

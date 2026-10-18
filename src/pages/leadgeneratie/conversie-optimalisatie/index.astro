@@ -1,0 +1,248 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/leadgeneratie--conversie-optimalisatie.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/leadgeneratie/conversie-optimalisatie/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat conversie-optimalisatie is' },
+  { id: 'hard-zacht', titel: 'Harde en zachte conversies' },
+  { id: 'afhaken', titel: 'Waar bezoekers afhaken' },
+  { id: 'checklist', titel: 'De checklist in 15 punten' },
+  { id: 'tools', titel: 'Welke tools je nodig hebt' },
+  { id: 'aanpak', titel: 'Zo pakken we het aan' },
+  { id: 'ab-testen', titel: 'A/B-testen: wanneer wel' },
+  { id: 'prijs', titel: 'Wat je krijgt voor € 395' },
+];
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${site.url}${url}#dienst`,
+    name: 'Conversie-optimalisatie',
+    serviceType: 'Conversion rate optimization',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: { '@type': 'Country', name: 'Nederland' },
+    url: `${site.url}${url}`,
+    offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 395, priceSpecification: { '@type': 'PriceSpecification', price: 395, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Conversie-optimalisatie: meer aanvragen uit dezelfde bezoekers',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}${url}#dienst` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  },
+];
+---
+<Base
+  title="Conversie-optimalisatie: meer aanvragen | Drijfveer Media"
+  description="Conversie-optimalisatie voor je website: we zoeken uit waar bezoekers afhaken en wat ze laat bellen. Eenmalig vanaf € 395, met concrete verbeterpunten."
+  kruimels={[{ naam: 'Leadgeneratie', url: '/leadgeneratie/' }, { naam: 'Conversie-optimalisatie', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Leadgeneratie" titel="Conversie-optimalisatie: meer aanvragen uit dezelfde bezoekers" prijs="vanaf € 395" eenmalig>
+    <p>Er komen genoeg mensen op je site, maar de telefoon blijft stil. Wij zoeken uit waar ze afhaken en wat ze wel laat bellen of mailen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Conversie-optimalisatie zorgt dat meer bezoekers bellen, mailen of een offerte aanvragen.</li>
+            <li>Het helpt meteen bij al je bezoekers, ook die je al hebt. Daarom is het vaak de goedkoopste winst.</li>
+            <li>Voor het mkb werkt drempels weghalen beter dan A/B-testen. Daar is meestal te weinig verkeer voor.</li>
+            <li>Gratis tools brengen je een heel eind: Search Console, PageSpeed Insights en een goede meting.</li>
+            <li>Ons onderzoek kost eenmalig vanaf € 395. Je krijgt concrete verbeterpunten op volgorde.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is conversie-optimalisatie?</h2>
+        <p>Conversie-optimalisatie is het verbeteren van je website, zodat een groter deel van je bezoekers de gewenste actie uitvoert. Voor een dienstverlener is dat bijna altijd hetzelfde: bellen, mailen of een offerte aanvragen. In het Engels heet het conversion rate optimization, kortweg CRO.</p>
+        <p>Het verschil met meer bezoekers halen is simpel. SEO en Google Ads zorgen dat er meer mensen binnenkomen. Dit werk zorgt dat er minder weglopen. Dat is vaak de goedkoopste winst die er is, want het helpt meteen bij al je bezoekers. Ook bij de bezoekers waarvoor je al betaalt.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen)</p>
+          <p>Een installateur in Hoogeveen heeft 800 bezoekers per maand. Eén procent vraagt een offerte aan, dat zijn 8 aanvragen. Lukt het om dat naar twee procent te krijgen, dan worden het er 16. Zonder één euro extra aan advertenties. Wordt één op de drie aanvragen een klus van € 1.500, dan is dat zo'n € 4.000 omzet per maand erbij.</p>
+        </div>
+        <h3>Zo bereken je je conversion rate</h3>
+        <p>Deel het aantal aanvragen door het aantal bezoekers en vermenigvuldig met 100. Twaalf aanvragen uit 600 bezoekers is 2 procent. Dat getal heet je conversiepercentage, of in het Engels je conversion rate.</p>
+        <p>Reken het ook per pagina uit. Een site met 2 procent gemiddeld kan een dienstpagina hebben die 5 procent haalt en een andere die op 0,3 procent blijft hangen. Die tweede is je eerste kans. Een goed conversiepercentage voor iedereen bestaat niet. Wie zoekt op "loodgieter spoed" belt sneller dan iemand die zich oriënteert op een verbouwing. Vergelijk dus vooral met jezelf.</p>
+        <h3>Meer bezoekers kopen of meer uit je bezoekers halen?</h3>
+        <p>Stel, je betaalt € 300 per maand aan advertenties voor 300 bezoekers, en 1 procent vraagt iets aan. Dat zijn 3 aanvragen, à € 100 per stuk. Wil je er 6, dan kun je het budget verdubbelen naar € 600. Of je zorgt dat 2 procent van dezelfde bezoekers iets aanvraagt. Dan kost een aanvraag nog € 50. Allebei verzonnen cijfers, maar de som klopt altijd: een betere site maakt elke bezoeker goedkoper.</p>
+
+        <h2 id="hard-zacht">Harde en zachte conversies</h2>
+        <p>Niet elke bezoeker is meteen klaar om te bellen. Daarom kijken we naar twee soorten acties.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Harde conversie</th><th>Zachte conversie</th></tr></thead>
+            <tbody>
+              <tr><td><b>Wat</b></td><td>Een actie die direct werk kan opleveren</td><td>Een actie die interesse laat zien</td></tr>
+              <tr><td><b>Voorbeelden</b></td><td>Offerteaanvraag, telefoontje, ingevuld contactformulier, geboekte afspraak</td><td>Prijspagina bekeken, checklist gedownload, nieuwsbrief, klik op WhatsApp</td></tr>
+              <tr><td><b>Waar je hem voor gebruikt</b></td><td>Om te bepalen of het werkt</td><td>Om te zien waar mensen in de buurt komen</td></tr>
+              <tr><td><b>Valkuil</b></td><td>Te weinig om snel van te leren</td><td>Veel, maar niet alles leidt tot werk</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Harde conversies leveren direct werk op. Zachte conversies zijn vaak de stap ervoor. Wie je nieuwsbrief leest, belt later eerder dan iemand die je site nooit meer ziet. We meten ze dus allebei. Maar of het werkt, lees je af aan de harde. Hoe je die meting inricht, staat bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+        <h2 id="afhaken">Waar bezoekers afhaken</h2>
+        <p>Dit zijn de drempels die we het vaakst tegenkomen bij websites van ondernemers:</p>
+        <ul class="vink">
+          <li>Binnen vijf seconden is niet duidelijk wat je doet, voor wie en waar.</li>
+          <li>Je telefoonnummer staat alleen onderaan de contactpagina.</li>
+          <li>Het formulier vraagt acht velden, terwijl je er drie nodig hebt.</li>
+          <li>Nergens staat wat het ongeveer kost. Dus vraagt de bezoeker eerst een concurrent.</li>
+          <li>Op een telefoon laadt de site traag, of verspringt de knop net als je wilt tikken.</li>
+          <li>Er is geen bewijs: geen foto's van echt werk, geen namen, geen garantie.</li>
+          <li>Na het versturen gebeurt er niets. Geen bevestiging, en geen idee wanneer je reageert.</li>
+        </ul>
+        <p>Geen van deze punten is moeilijk op te lossen. Het lastige is weten welke op jouw site het meest kost. Daar is onderzoek voor.</p>
+        <h3>De test van vijf seconden</h3>
+        <p>Vraag iemand die je bedrijf niet kent om je homepage vijf seconden te bekijken op zijn telefoon. Leg hem daarna weg en stel drie vragen. Wat doet dit bedrijf? Voor wie? Wat moet je doen als je het wilt? Kan hij één van de drie niet beantwoorden, dan weet je waar je begint. Het kost niets en levert vaak meer op dan een dag naar grafieken kijken.</p>
+
+        <h2 id="checklist">Checklist conversie-optimalisatie: 15 punten</h2>
+        <p>Loop je eigen site na met deze lijst. Doe het op je telefoon, want daar komen de meeste bezoekers binnen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Check</th></tr></thead>
+            <tbody>
+              <tr><td><b>Bovenaan</b></td><td>1. De kop zegt wat je doet en voor wie, zonder jargon.</td></tr>
+              <tr><td></td><td>2. Je telefoonnummer is met één tik te bellen.</td></tr>
+              <tr><td></td><td>3. Er is één duidelijke knop met een werkwoord: "Vraag een offerte aan".</td></tr>
+              <tr><td><b>Vertrouwen</b></td><td>4. Echte foto's van je werk, je team of je bus.</td></tr>
+              <tr><td></td><td>5. Reviews of namen van klanten, met toestemming.</td></tr>
+              <tr><td></td><td>6. Een prijsindicatie of een vanaf-prijs.</td></tr>
+              <tr><td></td><td>7. Je adres, je KvK-nummer en hoe snel je reageert.</td></tr>
+              <tr><td><b>Formulier</b></td><td>8. Niet meer dan drie of vier velden.</td></tr>
+              <tr><td></td><td>9. Foutmeldingen zeggen wat er mis is, en je ingevulde tekst blijft staan.</td></tr>
+              <tr><td></td><td>10. Na het versturen volgt een bedankpagina met wat er nu gebeurt.</td></tr>
+              <tr><td><b>Snelheid</b></td><td>11. Het grootste element staat er binnen 2,5 seconden. Google noemt dat de LCP.</td></tr>
+              <tr><td></td><td>12. Niets verspringt tijdens het laden. Volgens Google is een CLS van 0,1 of lager goed.</td></tr>
+              <tr><td></td><td>13. Een tik reageert binnen 200 milliseconden: de INP.</td></tr>
+              <tr><td><b>Pagina's</b></td><td>14. Elke dienst heeft een eigen pagina met een eigen knop.</td></tr>
+              <tr><td></td><td>15. Bezoekers uit een advertentie komen op een pagina over precies die advertentie.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De grenswaarden bij 11 tot en met 13 zijn de <a href="https://web.dev/articles/vitals" rel="noopener">Core Web Vitals van Google</a>. Je meet ze gratis met PageSpeed Insights. Hoe je een trage site sneller maakt, lees je in de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>. Hoe een goede bedankpagina eruitziet, staat in de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a>.</p>
+
+        <h3>Zo klinkt het verschil: voor en na</h3>
+        <p>Veel winst zit in een paar woorden. Deze voorbeelden zijn verzonnen, maar we zien ze in deze vorm bijna elke week.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Waar</th><th>Voor</th><th>Na</th></tr></thead>
+            <tbody>
+              <tr><td>Kop op de homepage</td><td>Welkom bij Bouwbedrijf Jansen</td><td>Aanbouw of dakkapel in Zuid-Drenthe, binnen 6 weken geplaatst</td></tr>
+              <tr><td>Knop</td><td>Verzenden</td><td>Stuur mij een offerte</td></tr>
+              <tr><td>Formulier</td><td>Naam, adres, postcode, plaats, telefoon, mail, onderwerp, bericht</td><td>Naam, telefoon of mail, en wat je wilt laten doen</td></tr>
+              <tr><td>Onder de knop</td><td>Niets</td><td>We bellen je binnen één werkdag terug. Geen verplichtingen.</td></tr>
+              <tr><td>Prijs</td><td>Prijs op aanvraag</td><td>Een vanaf-prijs per dienst, met wat erbij zit en wat de prijs hoger maakt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Beloof bij de regel onder de knop alleen wat je ook waarmaakt. Een bezoeker die een prijsindicatie ziet, weet of hij in de buurt zit. Wie "prijs op aanvraag" leest, vraagt vaak eerst een concurrent die wel iets noemt.</p>
+
+        <h2 id="tools">CRO-tools: wat heb je echt nodig?</h2>
+        <p>Er zijn honderden CRO-tools. Voor de meeste sites in het mkb heb je er een paar nodig, en die zijn vaak gratis.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Wat je ermee ziet</th><th>Kosten</th></tr></thead>
+            <tbody>
+              <tr><td><b>Google Search Console</b></td><td>Op welke zoekwoorden mensen binnenkomen en op welke pagina</td><td>Gratis</td></tr>
+              <tr><td><b>Analytics</b> (GA4, Plausible)</td><td>Hoeveel bezoekers per pagina een aanvraag doen</td><td>Gratis tot een klein maandbedrag</td></tr>
+              <tr><td><b>PageSpeed Insights</b></td><td>Hoe snel je pagina's zijn, met de Core Web Vitals</td><td>Gratis</td></tr>
+              <tr><td><b>Microsoft Clarity</b></td><td>Heatmaps en session recordings: waar mensen klikken en scrollen</td><td>Gratis, volgens Microsoft zonder verkeerslimiet</td></tr>
+              <tr><td><b>Hotjar</b></td><td>Heatmaps, opnames en korte enquêtes op je site</td><td>Gratis versie, betaald voor meer</td></tr>
+              <tr><td><b>Testing tools</b> (VWO, Optimizely)</td><td>A/B-testen: twee versies van een pagina tegen elkaar</td><td>Betaald, pas zinvol bij veel verkeer</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Twee dingen om te weten. Google Optimize, ooit de gratis testtool van Google, is volgens <a href="https://support.google.com/optimize/answer/12979939?hl=nl" rel="noopener">Google</a> sinds 30 september 2023 niet meer beschikbaar. En session recordings gebruiken cookies. Microsoft schrijft in de <a href="https://learn.microsoft.com/en-us/clarity/faq" rel="noopener">veelgestelde vragen over Clarity</a> dat bezoekers in de Europese Economische Ruimte eerst toestemming moeten geven. Zonder toestemming werken onder meer de opnames niet goed. Wil je geen cookiemelding op je site, dan zijn opnames dus geen optie.</p>
+
+        <h2 id="aanpak">Zo pakken we conversie-optimalisatie aan</h2>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>1. We meten de huidige situatie</h3></div>
+        <p>Hoeveel bezoekers komen er, op welke pagina's landen ze en hoeveel mensen bellen of mailen? Dat lezen we af in je analytics en in Google Search Console. Worden telefoonkliks en formulieren nog niet gemeten, dan regelen we dat eerst. Zonder nulmeting weet je achteraf niet wat iets opleverde.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>2. We kijken als je klant</h3></div>
+        <p>We lopen je site door zoals een klant dat doet. Op een telefoon, met haast, met één vraag in het hoofd. Waar twijfelen we, waar zoeken we, waar geven we op? Waar het kan, kijken we ook naar heatmaps en session recordings: anonieme opnames van hoe echte bezoekers scrollen en klikken. Die zetten we alleen in als het AVG-proof kan, dus met toestemming van je bezoekers.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>3. We zetten de drempels op volgorde</h3></div>
+        <p>Elke drempel krijgt twee scores: hoeveel hij je waarschijnlijk kost, en hoeveel werk het oplossen is. Zo krijg je concrete verbeterpunten op volgorde. Bovenaan staat wat snel kan en veel oplevert. Eerst de 20 procent van het werk die het meeste verschil maakt, zoals in <a href="/werkwijze/">onze werkwijze</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. We verbeteren</h3></div>
+        <p>We herschrijven koppen en knoppen, korten formulieren in, zetten je telefoonnummer waar mensen het zoeken en voegen bewijs toe. Moet een pagina helemaal anders, dan maken we er een <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina met één doel</a> van. Heb je een eigen webbouwer? Dan krijgt die precies te horen wat er moet veranderen.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>5. We meten na</h3></div>
+        <p>Na vier tot acht weken leggen we de cijfers naast de nulmeting. Wat werkt, blijft staan. Wat niets doet, draaien we terug. Zo zie je zwart op wit of een bezoeker nu vaker de actie onderneemt die je wilt.</p>
+
+        <h2 id="ab-testen">A/B-testen: wanneer wel en wanneer niet</h2>
+        <p>Grote webshops testen elke wijziging. De helft van de bezoekers ziet versie A, de andere helft versie B. Voor de meeste sites in het mkb is dat zonde van het geld. Met een paar honderd bezoekers per maand duurt het maanden voordat zo'n test iets betrouwbaars zegt. Hoe lang precies, laat deze rekensom zien.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Je pagina converteert nu 2%. Je wilt kunnen zien:</th><th>Bezoekers nodig per versie</th><th>Bij 1.000 bezoekers per maand duurt de test</th></tr></thead>
+            <tbody>
+              <tr><td>Een stijging naar 2,5% (een kwart meer)</td><td>ongeveer 13.800</td><td>ruim 2 jaar</td></tr>
+              <tr><td>Een stijging naar 3% (de helft meer)</td><td>ongeveer 3.800</td><td>ongeveer 8 maanden</td></tr>
+              <tr><td>Een stijging naar 4% (een verdubbeling)</td><td>ongeveer 1.100</td><td>ruim 2 maanden</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We rekenden met de gangbare formule voor twee percentages, met 95 procent betrouwbaarheid en 80 procent kans om een echt verschil te vinden. De conclusie is eenvoudig. Met mkb-verkeer kun je alleen grote verschillen testen. Kleine dingen, zoals de kleur van een knop, kun je beter gewoon goed doen dan testen.</p>
+        <p>Wij beginnen daarom pas met A/B-testen vanaf ongeveer duizend bezoekers per maand op één pagina, en dan alleen voor grote wijzigingen. Daaronder werken we met wat wel klopt: bekende drempels weghalen en goed nameten. Nieuwe ideeën proberen we eerst uit op de meer dan 100 eigen sites in ons <a href="/proeflab/">proeflab</a>, niet op die van jou.</p>
+
+        <h2 id="prijs">Wat je krijgt voor € 395</h2>
+        <p>Voor € 395 eenmalig, exclusief btw, onderzoeken we je homepage, je contactpagina en je drie best bezochte dienstpagina's. Je krijgt een overzicht met verbeterpunten op volgorde, met per punt wat er moet gebeuren. Dat lopen we samen door, aan de telefoon of bij ons aan de Lauwers in Assen. Wil je dat wij de verbeteringen doorvoeren, dan hoor je vooraf wat dat kost.</p>
+        <p>Liever doorlopend verbeteren? Dat zit standaard in <a href="/leadgeneratie/">leadgeneratie</a>, vanaf € 495 per maand. Dan werken we ook aan meer bezoekers, en spreken we een doel af waar je ons op afrekent. Eerst zelf aan de slag? De gids <a href="/kennisbank/gidsen/meer-klanten-via-je-website/">meer klanten via je website</a> zet de negen grootste fouten op een rij.</p>
+        <h3>Wanneer we het afraden</h3>
+        <p>Komen er minder dan een paar honderd bezoekers per maand op je site? Dan valt er weinig te meten en weinig te winnen. Begin dan met gevonden worden, via <a href="/zoekmachine-optimalisatie/">SEO</a> of je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. En is je site echt verouderd, dan is een nieuwe vaak goedkoper dan oplappen. Dat zeggen we je dan eerlijk.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+        <Prijskaart naam="Conversie-optimalisatie" prijs="€ 395" eenmalig punten={['Nulmeting van je aanvragen', 'Onderzoek van vijf belangrijke pagina\'s', 'Verbeterpunten op volgorde van opbrengst', 'Bespreking aan de telefoon of in Assen']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is conversie-optimalisatie?', a: 'Het verbeteren van je website zodat een groter deel van je bezoekers belt, mailt of een offerte aanvraagt. In het Engels heet het conversion rate optimization, of CRO.' },
+      { v: 'Wat is een goed conversiepercentage?', a: 'Daar is geen eerlijk getal voor. Het hangt af van je branche, je prijs en waar je bezoekers vandaan komen. Wie zoekt op "loodgieter spoed" belt sneller dan iemand die zich oriënteert op een verbouwing. Vergelijk dus vooral met jezelf: je nulmeting is het ijkpunt.' },
+      { v: 'Hoe bereken ik mijn conversieratio?', a: 'Deel het aantal aanvragen door het aantal bezoekers en vermenigvuldig met 100. Twaalf aanvragen uit 600 bezoekers is 2 procent.' },
+      { v: 'Wat is het verschil tussen een harde en een zachte conversie?', a: 'Een harde conversie levert direct werk op, zoals een offerteaanvraag of een telefoontje. Een zachte conversie laat interesse zien, zoals een download of een bezoek aan je prijspagina.' },
+      { v: 'Heb ik genoeg bezoekers voor conversie-optimalisatie?', a: 'Vanaf een paar honderd bezoekers per maand loont het. Je doet dan geen A/B-testen, maar haalt bekende drempels weg en meet over een langere periode. Komt er bijna niemand op je site, dan is <a href="/zoekmachine-optimalisatie/">SEO</a> eerst de betere stap.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Een korter formulier of een zichtbaar telefoonnummer merk je vaak binnen een paar weken. Hoe zeker je het weet, hangt af van je aantal bezoekers. Met weinig verkeer heb je meer weken nodig om toeval uit te sluiten.' },
+      { v: 'Kunnen jullie de verbeteringen ook doorvoeren?', a: 'Ja. Na het onderzoek hoor je per punt wat het doorvoeren kost. Heb je een eigen webbouwer, dan kan die ook met ons overzicht aan de slag.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over meer aanvragen"
+    links={[
+      { label: 'Pillar', titel: 'Leadgeneratie', href: '/leadgeneratie/', tekst: 'Van bezoeker naar aanvraag, vanaf € 495 per maand.' },
+      { label: 'Dienst', titel: 'Landingspagina laten maken', href: '/leadgeneratie/landingspagina-laten-maken/', tekst: 'Eén pagina, één doel, vanaf € 250.' },
+      { label: 'Dienst', titel: 'Tracking en analytics', href: '/leadgeneratie/tracking-en-analytics/', tekst: 'Weten waar je aanvragen vandaan komen.' },
+      { label: 'Gids', titel: 'Conversie verhogen', href: '/kennisbank/gidsen/conversie-verhogen/', tekst: 'Zelf aan de slag met je website.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd waar jouw bezoekers afhaken?" />
+</Base>

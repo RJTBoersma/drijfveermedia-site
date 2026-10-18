@@ -1,0 +1,250 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--marketingplan-maken.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/marketingplan-maken/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat is een marketingplan?' },
+  { id: 'kort', titel: 'Waarom kort beter werkt' },
+  { id: 'stappen', titel: 'In zeven stappen' },
+  { id: 'swot', titel: 'SWOT-analyse in een kwartier' },
+  { id: 'voorbeeld', titel: 'Een ingevuld voorbeeld' },
+  { id: 'kwartalen', titel: 'Het jaar in kwartalen' },
+  { id: 'meten', titel: 'Je maandelijkse halfuur' },
+  { id: 'sjabloon', titel: 'Sjabloon op één A4' },
+  { id: 'valkuilen', titel: 'Vijf valkuilen' },
+  { id: 'hulp', titel: 'Zelf doen of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Marketingplan maken: in zeven stappen, met voorbeeld',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Marketingplan',
+  citation: ['https://www.kvk.nl/marketing/klanten-werven-dankzij-je-marketingplan/', 'https://nl.wikipedia.org/wiki/Marketingmix', 'https://nl.wikipedia.org/wiki/SMART-principe'],
+}];
+---
+<Base
+  title="Marketingplan maken: 7 stappen en een voorbeeld"
+  description="Een marketingplan maken dat je echt gebruikt: zeven stappen, een ingevuld voorbeeld voor een installateur en een sjabloon op één A4. Zonder dik rapport."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Marketingplan maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Online marketing uitbesteden" titel="Marketingplan maken: in zeven stappen, met voorbeeld" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een goed marketingplan past op één A4. Je weet waar je staat, wie je klant is, wat je wilt bereiken en wat je daarvoor doet. Een marketingplan maken kost je een middag. Hieronder lees je hoe, met een ingevuld voorbeeld om van te lenen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een marketingplan beschrijft waar je staat, wie je klant is, je doel, je kanalen, je budget en je planning.</li>
+            <li>Maak je doel SMART, bijvoorbeeld: van vier naar tien aanvragen per maand binnen zes maanden.</li>
+            <li>Kies twee of drie kanalen met de meeste potentie. Liever een paar dingen goed dan alles half.</li>
+            <li>Kijk elke maand een halfuur naar je cijfers en stop met wat niet werkt.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat is een marketingplan?</h2>
+        <p>Een marketingplan is je antwoord op drie vragen. Waar sta je nu? Waar wil je over een jaar staan? En wat ga je doen om daar te komen? Het beschrijft wie je klant is, wat je die klant belooft, via welke kanalen je hem bereikt, wat dat mag kosten en hoe je weet of het werkt.</p>
+        <p>Het verschil met een marketingstrategie: de strategie is de koers, het plan is de route. "We willen de bekendste installateur voor warmtepompen in de Kop van Drenthe worden" is strategie. "Elke maand twee klantverhalen op de site, een nieuwsbrief per kwartaal en lokale SEO voor vijf plaatsnamen" is het plan. Een ondernemingsplan is weer groter: dat gaat ook over financiering, personeel en organisatie. Het marketingplan is daar een onderdeel van.</p>
+
+        <h2 id="kort">Waarom kort beter werkt dan dik</h2>
+        <p>De meeste ondernemers die ons bellen, hebben geen marketingplan. De rest heeft er een van veertig pagina's, gemaakt door een bureau, en sinds de presentatie niet meer opengeslagen. Beide werken niet.</p>
+        <p>Een plan is bedoeld om keuzes te maken. Welke klant wel, welke niet. Welk kanaal eerst, welk later. Wat je wilt bereiken, en hoe je weet of het lukt. Dat past op één A4. Hang het naast je bureau. Een plan dat je elke maand ziet, gebruik je ook. Een goede marketingstrategie hoeft geen boekwerk te zijn.</p>
+        <p>Plan wel tijd in om het uit te voeren. In een artikel van KVK adviseert een marketeer om na het maken van je plan minstens vier uur per week voor marketing te reserveren: je website bijwerken, teksten schrijven, foto's maken en resultaten bekijken. Een plan zonder uren in je agenda blijft een voornemen.</p>
+
+        <h2 id="stappen">Een marketingplan maken in zeven stappen</h2>
+        <p>Om een marketingplan te maken, heb je geen bureau nodig. Wel je cijfers: omzet, aantal klanten, aanvragen per maand en waar die vandaan komen. Weet je dat laatste niet? Dan is dat meteen je eerste actiepunt.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Beschrijf waar je nu staat</h3></div>
+        <p>Begin eerlijk. Hoeveel aanvragen krijg je per maand, en via welke weg: Google, Google Maps, via via, advertenties? Wat levert een gemiddelde klant op? Wat heb je vorig jaar aan marketing gedaan, en wat leverde het op? Schrijf het op in vijf regels. Geen mooie praat, alleen wat je weet.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>2. Kies je klant</h3></div>
+        <p>De grootste valkuil: denken dat iedereen je klant is. Beschrijf de klant die je het liefst hebt. Wat voor bedrijf of persoon, waar woont hij, waar loopt hij tegenaan en wat zoekt hij in Google? Hoe concreter, hoe makkelijker de rest wordt. Wil je dit grondig doen, lees dan hoe je een <a href="/kennisbank/gidsen/persona-maken/">persona maakt</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>3. Bekijk je concurrenten en je onderscheid</h3></div>
+        <p>Zoek in Google op je dienst en je plaats, zoals je klant dat doet. Wie staat er bovenaan, op Google Maps en in de advertenties? Wat beloven ze, wat kost het? Schrijf daarna in één zin op waarom een klant voor jou kiest. Dat is je <a href="/kennisbank/wat-is/usp/">USP</a>. Kijk ook kort naar de buitenwereld. Economische ontwikkelingen, nieuwe regels of een krappe arbeidsmarkt kunnen je plan sterk beïnvloeden.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>4. Stel een SMART doel</h3></div>
+        <p>"Meer klanten" is geen doel. Een goed doel voldoet aan vijf eisen:</p>
+        <ul class="chips smart">
+          <li class="chip">Specifiek</li>
+          <li class="chip">Meetbaar</li>
+          <li class="chip">Acceptabel</li>
+          <li class="chip">Realistisch</li>
+          <li class="chip">Tijdsgebonden</li>
+        </ul>
+        <p>Bijvoorbeeld: "Binnen zes maanden van gemiddeld vier naar tien aanvragen per maand via de website, gemeten in Google Analytics." Dat is specifiek, je kunt het meten, het team staat erachter, het is haalbaar en er staat een datum bij. Eén hoofddoel is genoeg. Hooguit twee.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>5. Kies je marketingmix en je kanalen</h3></div>
+        <p>De klassieke marketingmix kent vier P's: product, prijs, plaats en promotie. Voor de meeste mkb-bedrijven liggen de eerste drie al vast. Het plan gaat dan vooral over promotie: via welke kanalen bereik je je klant?</p>
+        <p>Lever je diensten, dan helpt de uitgebreide versie van Booms en Bitner (1981). Die voegt drie P's toe: people (de mensen die het werk doen), process (hoe het werk verloopt) en physical evidence (wat de klant ziet en vasthoudt, zoals je bus, je offerte en je website). Voor een installateur of een kapper zijn die drie vaak het echte onderscheid.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>P</th><th>De vraag</th><th>Ingevuld voor een installateur (verzonnen)</th></tr></thead>
+            <tbody>
+              <tr><td>Product</td><td>Wat los je op?</td><td>Warmtepomp en cv, met onderhoud erbij</td></tr>
+              <tr><td>Prijs</td><td>Wat kost het, en hoe leg je dat uit?</td><td>Vaste prijs per type woning, betaling na oplevering</td></tr>
+              <tr><td>Plaats</td><td>Waar en hoe koopt de klant?</td><td>Aan huis in Assen en 30 kilometer rondom</td></tr>
+              <tr><td>Promotie</td><td>Hoe hoort de klant van je?</td><td>Google, Google Maps, klantverhalen, nieuwsbrief</td></tr>
+              <tr><td>People</td><td>Wie staat er bij de klant in de woonkamer?</td><td>Eigen monteurs, geen onderaannemers</td></tr>
+              <tr><td>Process</td><td>Hoe verloopt het van eerste contact tot oplevering?</td><td>Binnen een week adviesgesprek, binnen drie dagen een offerte</td></tr>
+              <tr><td>Physical evidence</td><td>Wat ziet en voelt de klant?</td><td>Schone bus, nette offerte, foto's van eigen werk</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Daarna kies je de kanalen. Neem er twee of drie, met de meeste potentie voor jouw klant. Een loodgieter heeft meer aan <a href="/lokale-seo/">lokale SEO</a> dan aan LinkedIn. Een adviesbureau voor bedrijven juist andersom. Verkoop je producten, dan kan een marktplaats als bol.com een kanaal zijn naast je eigen site. Schrijf per kanaal op welk resultaat je verwacht, dan kun je het later toetsen. Begin waar je het snelst verschil maakt. Vaak levert twintig procent van het werk tachtig procent van het resultaat. Het <a href="/kennisbank/gidsen/see-think-do-care/">See-Think-Do-Care-model</a> helpt je kiezen welk kanaal welke fase van de klant bedient.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>6. Bepaal je budget</h3></div>
+        <p>Reken terug vanaf wat een klant oplevert. Stel: een gemiddelde opdracht levert € 750 brutowinst op en je wilt zes klanten per maand erbij. Mag een nieuwe klant je een derde van die winst kosten, dan heb je € 250 per klant en € 1.500 per maand te besteden. Dat getal komt in je financieel plan. Tel je eigen uren mee. Een middag per week zelf aan je website werken kost ook geld.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>7. Plan en meet</h3></div>
+        <p>Zet per kwartaal op papier wat je doet. Niet per dag, dat houdt niemand vol. Bepaal per kanaal één getal waar je naar kijkt, zoals aanvragen uit Google of opens van je nieuwsbrief. Kijk elke maand een halfuur, op een vaste dag. Zorg dat je meting klopt, anders stuur je op gevoel. In de gids over <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a> lees je hoe je dat inricht.</p>
+        <p>En durf te stoppen. Levert een kanaal na drie maanden niets op, schrap het dan en steek dat geld in wat wel werkt. Bureaus adviseren dat te weinig.</p>
+
+        <h2 id="swot">Een SWOT-analyse in een kwartier</h2>
+        <p>Wie een marketingplan wil maken, komt al snel de SWOT-analyse tegen. Die maakt stap 1 en 3 makkelijker. Je zet vier lijstjes naast elkaar: je sterktes en zwaktes (binnen je bedrijf), en de kansen en bedreigingen (daarbuiten). Houd het bij drie punten per vak. Meer is opvulling.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Helpt je</th><th>Houdt je tegen</th></tr></thead>
+            <tbody>
+              <tr><td><b>Binnen je bedrijf</b></td><td><b>Sterktes:</b> eigen monteurs, veel tevreden klanten via via, snel ter plaatse</td><td><b>Zwaktes:</b> oude website, geen meting, weinig reviews in Google</td></tr>
+              <tr><td><b>Buiten je bedrijf</b></td><td><b>Kansen:</b> veel woningen uit de jaren 70 tot 90 in de regio, mensen zoeken online naar prijzen</td><td><b>Bedreigingen:</b> grote landelijke partijen adverteren in Google, krappe arbeidsmarkt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld voor het installatiebedrijf hieronder.</p>
+        <p>Het nuttige deel komt daarna. Leg de vakken tegen elkaar aan; in het vak heet dat een confrontatiematrix. Welke sterkte past bij welke kans? Hier: eigen monteurs en tevreden klanten (sterk) passen bij mensen die online naar prijzen zoeken (kans). Dus: zet klantverhalen en een eerlijke prijsindicatie op de site. Welke zwakte maakt een bedreiging gevaarlijk? Weinig reviews terwijl landelijke partijen adverteren. Dus: vraag elke tevreden klant om een review. Zo komen je acties niet uit de lucht vallen.</p>
+
+        <h2 id="voorbeeld">Marketingplan met voorbeeld: een installateur</h2>
+        <p>Dit is een verzonnen voorbeeld. Stel: een installatiebedrijf in Assen met acht mensen, dat meer warmtepompen wil plaatsen. Zo ziet zijn plan eruit, op één A4.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Ingevuld</th></tr></thead>
+            <tbody>
+              <tr><td><b>Nu</b></td><td>Vier aanvragen per maand, vooral via via. Website van vijf jaar oud, geen meting. Gemiddelde opdracht € 9.000.</td></tr>
+              <tr><td><b>Klant</b></td><td>Huiseigenaren in Assen en omgeving, 40 tot 65 jaar, met een woning uit de jaren 70 tot 90. Ze zoeken op "warmtepomp laten installeren" en willen weten wat het kost.</td></tr>
+              <tr><td><b>Onderscheid</b></td><td>Eigen monteurs, binnen een week een adviesgesprek aan huis, en een eerlijke berekening van wat je bespaart.</td></tr>
+              <tr><td><b>Doel</b></td><td>Binnen zes maanden tien aanvragen per maand voor warmtepompen, gemeten via de website.</td></tr>
+              <tr><td><b>Kanalen</b></td><td>Lokale SEO en het Google Bedrijfsprofiel, een sterke warmtepomppagina met prijsindicatie, een nieuwsbrief aan bestaande klanten.</td></tr>
+              <tr><td><b>Budget</b></td><td>€ 750 per maand, plus twee uur per week van de eigenaar voor foto's en reviews.</td></tr>
+              <tr><td><b>Planning</b></td><td>Kwartaal 1: meting en website. Kwartaal 2: lokale SEO en reviews. Daarna uitbouwen wat werkt.</td></tr>
+              <tr><td><b>Meten</b></td><td>Elke eerste maandag: aanvragen per kanaal en de verwachte omzet uit lopende offertes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zie wat er niet in staat. Geen TikTok, geen beurs, geen advertentie in de krant. Dat zijn geen slechte kanalen, maar ze passen niet bij deze klant en dit doel. Kiezen is ook weglaten.</p>
+
+        <h2 id="kwartalen">Het jaar in kwartalen</h2>
+        <p>Een marketingplan maken is één ding, het uitvoeren een tweede. Zo zet de installateur uit het voorbeeld zijn plan om in werk. Per kwartaal één hoofdklus, zodat het naast het gewone werk te doen is.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kwartaal</th><th>Hoofdklus</th><th>Klaar als</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Meting op orde, website vernieuwen met een warmtepomppagina en prijsindicatie</td><td>Elke aanvraag is te herleiden naar het kanaal waar hij vandaan komt</td></tr>
+              <tr><td>2</td><td>Google Bedrijfsprofiel en lokale SEO, na elke klus om een review vragen</td><td>Profiel compleet, twintig nieuwe reviews</td></tr>
+              <tr><td>3</td><td>Elke maand twee klantverhalen met foto's, eerste nieuwsbrief aan bestaande klanten</td><td>Zes verhalen online, nieuwsbrief verstuurd</td></tr>
+              <tr><td>4</td><td>Terugkijken, schrappen wat niet werkt, het plan voor volgend jaar</td><td>Nieuw plan op één A4</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zie je dat er in kwartaal 1 nog niets gebeurt aan zichtbaarheid? Dat is bewust. Zonder meting weet je in kwartaal 4 niet wat het heeft opgeleverd.</p>
+
+        <h2 id="meten">Je maandelijkse halfuur</h2>
+        <p>Een plan leeft alleen als je ernaar kijkt. Zet een vaste afspraak met jezelf in je agenda, bijvoorbeeld elke eerste maandag van de maand. Kijk dan naar deze vijf getallen en schrijf ze in één tabel onder elkaar.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Getal</th><th>Waarom</th><th>Waar je het vindt</th></tr></thead>
+            <tbody>
+              <tr><td>Aanvragen per kanaal</td><td>Het belangrijkste getal: werkt je plan?</td><td>Google Analytics, je mailbox, je telefoonlijst</td></tr>
+              <tr><td>Bezoekers op je belangrijkste pagina's</td><td>Komen er mensen op de pagina's die verkopen?</td><td>Google Analytics</td></tr>
+              <tr><td>Kosten per aanvraag</td><td>Wat betaal je per kanaal voor één aanvraag?</td><td>Je uitgaven gedeeld door het aantal aanvragen</td></tr>
+              <tr><td>Offertes gewonnen</td><td>Leveren de aanvragen ook klanten op?</td><td>Je offertelijst of boekhouding</td></tr>
+              <tr><td>Nieuwe reviews</td><td>Bouw je aan vertrouwen?</td><td>Je Google Bedrijfsprofiel</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Na drie maanden zie je patronen. Na zes maanden weet je of je doel haalbaar is. Is een getal een half jaar lang niet in beweging gekomen, dan is dat geen pech. Dan werkt dat onderdeel van het plan niet.</p>
+
+        <h2 id="sjabloon">Sjabloon op één A4</h2>
+        <p>Neem deze acht vragen over en beantwoord ze in een paar zinnen per vraag. Beschrijf het zo dat een nieuwe collega het snapt.</p>
+        <ol>
+          <li>Hoeveel aanvragen en klanten heb ik nu, en waar komen ze vandaan?</li>
+          <li>Wie is mijn ideale klant, en wat zoekt hij?</li>
+          <li>Waarom kiest een klant voor mij en niet voor de buren?</li>
+          <li>Wat wil ik over zes maanden bereikt hebben, in één getal?</li>
+          <li>Welke twee of drie kanalen zet ik in, en waarom die?</li>
+          <li>Wat mag het kosten, in geld en in uren?</li>
+          <li>Wat doe ik per kwartaal?</li>
+          <li>Naar welk getal kijk ik elke maand, en wanneer stop ik met iets?</li>
+        </ol>
+        <p>Is alles op papier gezet? Dan heb je meer dan de meeste bedrijven. Een plan dat is opgeschreven, kun je bespreken, bijsturen en afvinken.</p>
+
+        <h2 id="valkuilen">Vijf valkuilen</h2>
+        <ul>
+          <li><b>Iedereen is je klant.</b> Dan spreek je niemand echt aan.</li>
+          <li><b>Te veel kanalen tegelijk.</b> Overal een beetje is nergens goed. Begin met twee.</li>
+          <li><b>Geen getal.</b> Zonder meetbaar doel weet je over een half jaar niet of het gelukt is.</li>
+          <li><b>Het plan verdwijnt in een la.</b> Plan elke maand een halfuur in je agenda, en houd je eraan.</li>
+          <li><b>Nooit stoppen.</b> Wat niet werkt, kost elke maand opnieuw geld. Schrappen is ook een keuze.</li>
+        </ul>
+
+        <h2 id="hulp">Zelf doen of uitbesteden?</h2>
+        <p>Eerlijk is eerlijk: wij maken geen marketingplannen als los product. Een dik rapport dat in een la verdwijnt, helpt je niet. Als je je <a href="/online-marketing-uitbesteden/">online marketing uitbesteedt</a> bij ons, bepalen we de koers samen in het eerste gesprek. We vragen door tot we weten wat je echt wilt, leggen de mogelijkheden voor en spreken doelen af waar je ons op kunt afrekenen. Die koers zit daarna in het werk van elke maand. Dat begint bij € 595 per maand en is maandelijks opzegbaar.</p>
+        <p>Heb je zelf een plan gemaakt en wil je dat iemand er kritisch naar kijkt? Boek dan een <a href="/consult/">consult</a> van € 85 per uur. In een uur hoor je wat sterk is, wat ontbreekt en waar je beter mee kunt stoppen.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het uitvoeren?" intro="Wat je bij ons krijgt als je je marketing uitbesteedt, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Heb je een marketingplan voorbeeld voor een klein bedrijf?', a: 'Ja, op deze pagina staat een ingevuld marketingplan van een verzonnen installateur in Assen, met SWOT-analyse, planning per kwartaal en de getallen om elke maand te bekijken. Neem de opbouw over en vul je eigen gegevens in.' },
+      { v: 'Wat staat er in een marketingplan?', a: 'Waar je nu staat, wie je klant is, waarin je je onderscheidt, je doel, je kanalen, je budget, je planning en hoe je meet. Voor een mkb-bedrijf past dat op één A4.' },
+      { v: 'Kan ik zelf een marketingplan maken zonder marketingkennis?', a: 'Ja. Je kent je klanten en je bedrijf beter dan wie ook. Met de acht vragen uit het sjabloon kom je een heel eind. Laat het daarna eventueel door iemand van buiten kritisch bekijken.' },
+      { v: 'Hoe lang moet een marketingplan zijn?', a: 'Zo kort als kan. Eén A4 is genoeg voor de meeste bedrijven. Een lang plan schrijf je één keer, een kort plan gebruik je elke maand.' },
+      { v: 'Wat is het verschil met een ondernemingsplan?', a: 'Een ondernemingsplan gaat over je hele bedrijf, ook over financiering en organisatie. Het marketingplan is daar een onderdeel van en gaat over hoe je klanten bereikt en binnenhaalt.' },
+      { v: 'Hoeveel budget heb ik nodig voor marketing?', a: 'Daar is geen vaste regel voor. Reken terug vanaf wat een klant je oplevert en hoeveel klanten je erbij wilt. Dan weet je wat een nieuwe klant mag kosten.' },
+      { v: 'Hoe vaak pas ik mijn marketingplan aan?', a: 'Kijk elke maand naar je cijfers en stuur bij waar nodig. Herschrijf het plan één keer per jaar, of eerder als er veel verandert in je bedrijf of markt.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder met je plan"
+    links={[
+      { label: 'Dienst', titel: 'Online marketing uitbesteden', href: '/online-marketing-uitbesteden/', tekst: 'Alles in één hand, vanaf € 595 per maand.' },
+      { label: 'Gids', titel: 'Persona maken', href: '/kennisbank/gidsen/persona-maken/', tekst: 'Je ideale klant op papier, met voorbeeld.' },
+      { label: 'Gids', titel: 'Het See-Think-Do-Care-model', href: '/kennisbank/gidsen/see-think-do-care/', tekst: 'Het juiste kanaal voor elke fase.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waar jouw grootste kans zit?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je concurrenten, en belt je met de eerste drie dingen die we zouden doen.`} />
+</Base>
+
+<style>
+  .smart { margin: 0 0 1em; }
+</style>

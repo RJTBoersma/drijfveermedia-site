@@ -1,0 +1,174 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/kennisbank--hoe-voorkom-je-een-daling-in-websiteverkeer.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/kennisbank/hoe-voorkom-je-een-daling-in-websiteverkeer/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'echt', titel: 'Is het echt een daling?' },
+  { id: 'search-console', titel: 'De oorzaak vinden' },
+  { id: 'oorzaken', titel: 'De negen oorzaken' },
+  { id: 'ons-verkeer', titel: 'Ons eigen verkeer daalde ook' },
+  { id: 'voorkomen', titel: 'Zo voorkom je het' },
+];
+const schema = [{
+  '@type': 'BlogPosting',
+  headline: 'Hoe voorkom je een daling in websiteverkeer?',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Daling in websiteverkeer: oorzaken en oplossingen"
+  description="Een daling in websiteverkeer heeft bijna altijd een vindbare oorzaak. Zo spoor je hem op, van technische fouten en core updates tot AI Overviews."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Daling in websiteverkeer', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Blog · SEO" titel="Hoe voorkom je een daling in websiteverkeer?" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Ineens minder bezoekers? Een daling in websiteverkeer heeft bijna altijd een oorzaak die je kunt vinden. Zo spoor je hem op en voorkom je de volgende. Met onze eigen daling als voorbeeld.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Vergelijk eerst met dezelfde periode vorig jaar. Veel dalingen zijn gewoon seizoen.</li>
+            <li>In Google Search Console zie je of je minder vaak getoond wordt of minder vaak aangeklikt.</li>
+            <li>Minder klikken bij gelijke vertoningen wijst vaak op AI Overviews. Volgens Ahrefs kost zo'n AI-antwoord de nummer 1 gemiddeld 58% van de klikken.</li>
+            <li>Plots bijna nul? Dan is het vrijwel altijd een technische fout.</li>
+          </ul>
+        </div>
+
+        <p>Je opent je statistieken en schrikt. Waar eerst honderd mensen per week kwamen, zijn het er nu zestig. Paniek is begrijpelijk, maar niet nodig. Een daling in websiteverkeer volgt bijna altijd een herkenbaar patroon. Wie dat patroon leest, weet waar hij moet zoeken.</p>
+
+        <h2 id="echt">Eerst: is het wel een echte daling?</h2>
+        <p>Voordat je iets aanpast, check je drie dingen.</p>
+        <ol>
+          <li><b>Seizoen.</b> Vergelijk met dezelfde maand vorig jaar, niet met vorige maand. Een hovenier heeft in december minder bezoekers dan in april. Dat is geen probleem, dat is de winter.</li>
+          <li><b>Meetfouten.</b> Is de code van <a href="/leadgeneratie/tracking-en-analytics/">Google Analytics</a> na een websitewijziging verdwenen? Is er een nieuwe cookiemelding? Dan meet je minder, terwijl er evenveel mensen komen.</li>
+          <li><b>Welk kanaal.</b> Kijk in Analytics of het om organisch verkeer gaat, dus bezoekers uit zoekmachines. Daalt alleen het verkeer van social media of een nieuwsbrief, dan zoek je de oorzaak daar.</li>
+        </ol>
+
+        <h2 id="search-console">De oorzaak vinden in Google Search Console</h2>
+        <p>Gaat het om minder bezoekers uit Google, open dan <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>. Ga naar <b>Prestaties</b>, kies een periode van drie maanden en vergelijk die met dezelfde periode een jaar eerder. Zet klikken, vertoningen en gemiddelde positie aan. Kijk daarna bij <b>Pagina's</b> en <b>Zoekopdrachten</b> waar het verlies zit.</p>
+        <p>Het patroon vertelt je waar je moet zoeken.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je ziet</th><th>Waarschijnlijke oorzaak</th></tr></thead>
+            <tbody>
+              <tr><td>Plots bijna nul</td><td>Technische fout: noindex, robots.txt, site offline</td></tr>
+              <tr><td>Een paar pagina's zijn hun verkeer kwijt</td><td>Verwijderde pagina, foute redirect, indexering</td></tr>
+              <tr><td>Hele site zakt in posities, rond een vaste datum</td><td>Core update of andere algoritme-update</td></tr>
+              <tr><td>Vertoningen gelijk, klikken omlaag</td><td>AI Overviews of andere blokken boven je resultaat</td></tr>
+              <tr><td>Langzaam omlaag over maanden</td><td>Concurrenten, verouderde teksten, verloren backlinks</td></tr>
+              <tr><td>Elk jaar rond dezelfde tijd</td><td>Seizoen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="oorzaken">De negen meest voorkomende oorzaken, en wat je eraan doet</h2>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>1. Technische fouten</h3></div>
+        <p>De klassieker. Met één regel in het bestand robots.txt sluit je Google van je hele site uit. Een vinkje "zoekmachines ontmoedigen" in WordPress doet hetzelfde. Dit gebeurt vaak als een nieuwe site live gaat en de instellingen van de testomgeving meekomen. Check robots.txt, zoek in de broncode naar <code>noindex</code> en bekijk het rapport Pagina's onder Indexering in Search Console.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>2. Redirects die niet kloppen</h3></div>
+        <p>Nieuwe website, nieuwe adressen? Dan moet elk oud adres met een 301-<a href="/kennisbank/wat-is/redirect/">redirect</a> naar de beste nieuwe pagina wijzen. Vergeet je dat, dan belanden bezoekers en Google op een foutpagina en verlies je de posities die de oude pagina had opgebouwd. Maak voor elke verhuizing een lijst: oud adres, nieuw adres. Wij doen dat zelf ook voor de ruim honderd oude blogs van onze eigen site.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>3. Problemen met indexering</h3></div>
+        <p>Soms staat een pagina gewoon niet meer in Google. Door een fout, door dubbele inhoud of omdat Google hem niet waardevol genoeg vindt. In Search Console zie je per pagina waarom hij niet is opgenomen. Los de reden op en vraag daarna opnieuw indexering aan via de URL-inspectie.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>4. Een core update of andere algoritme-update</h3></div>
+        <p>Google past zijn algoritme een paar keer per jaar flink aan. In 2026 waren er tot nu toe een core update in maart en een in mei, plus spamupdates in juni, augustus en september. Je ziet ze allemaal op het Google Search Status Dashboard. Valt je daling samen met zo'n datum, dan weet je genoeg. Er is geen snelle reparatie. Google zegt zelf: maak je pagina's beter dan die van anderen, voor mensen. Vaak zie je het effect pas bij een volgende update.</p>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>5. AI Overviews: Google geeft zelf het antwoord</h3></div>
+        <p>Bij steeds meer zoekopdrachten staat er een AI-antwoord bovenaan. De zoeker heeft zijn antwoord en klikt niet meer door. Dat is geen gevoel, het is gemeten. Pew Research Center volgde in 2025 het zoekgedrag van 900 Amerikanen. Met een AI-samenvatting klikten ze in 8% van de zoekopdrachten op een gewone link, zonder samenvatting in 15%. Ahrefs vergeleek 300.000 zoekwoorden en zag dat de nummer 1 met een AI Overview erboven 58% minder klikken krijgt.</p>
+        <p>Je herkent het in Search Console: je posities blijven gelijk, je vertoningen ook, maar de klikken zakken. Vooral bij uitlegvragen zoals "wat is" en "hoe werkt". Terugdraaien kun je dit niet. Je kunt wel zorgen dat jij de bron bent die in dat AI-antwoord genoemd wordt. Daarover gaat <a href="/generative-engine-optimization/google-ai-overviews/">vindbaar worden in Google AI Overviews</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>6. Concurrenten die beter zijn geworden</h3></div>
+        <p>Jij stond stil, de concurrent niet. Zoek op je belangrijkste zoekwoorden en kijk wie er nu boven je staat. Wat bieden die pagina's dat de jouwe niet heeft? Meer uitleg, prijzen, voorbeelden, een betere structuur? Daar ligt je huiswerk.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>7. Verouderde teksten</h3></div>
+        <p>Een artikel uit 2021 over "de trends van dit jaar" wint het niet van een artikel van vorige maand. Mensen zoeken ook met andere woorden dan vroeger. Werk je belangrijkste pagina's minstens eens per jaar bij, met actuele cijfers en een nieuwe datum. Kijk in Search Console naar welke zoekopdrachten nu vertoningen geven, en verwerk die.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>8. Verloren backlinks</h3></div>
+        <p>Links van andere sites tellen zwaar mee in Google. Haalt een site met een sterke link naar jou die pagina weg, dan kan je pagina zakken. Controleer in Search Console onder Links wie er naar je linkt. Is een waardevolle link verdwenen, mail de beheerder dan. Lees ook <a href="/kennisbank/gidsen/backlinks/">hoe je aan nieuwe backlinks komt</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>9. Seizoen en nieuws</h3></div>
+        <p>Een ijssalon heeft in augustus meer bezoekers dan in januari. Een artikel over de Black Friday-regels piekt elk najaar. Een tijdelijke piek door nieuws zakt weer in. Dat is geen daling, dat is de normale golf. Vergelijk daarom altijd jaar op jaar.</p>
+
+        <h2 id="ons-verkeer">Ons eigen verkeer daalde ook: dit zagen we</h2>
+        <p>Eerlijk is eerlijk: we schrijven dit niet alleen uit de theorie. Volgens de schattingen van SE Ranking ging drijfveermedia.nl van bijna duizend bezoekers uit Google in februari 2026 naar 245 in oktober.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Maand (2026)</th><th>Bezoekers uit Google</th></tr></thead>
+            <tbody>
+              <tr><td>Februari</td><td>987</td></tr>
+              <tr><td>April</td><td>892</td></tr>
+              <tr><td>Mei</td><td>537</td></tr>
+              <tr><td>Augustus</td><td>274</td></tr>
+              <tr><td>Oktober</td><td>245</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat we zien, met de lijst van hierboven ernaast:</p>
+        <ul>
+          <li><b>De grote stap viel in mei.</b> Van 892 naar 537 bezoekers, in dezelfde periode als de core update van 21 mei. Bewijzen kunnen we het niet, maar het patroon past.</li>
+          <li><b>Ons verkeer kwam van uitlegvragen.</b> Denk aan wat semantisch zoeken is of welke marketingblogs goed zijn. Juist daar geeft Google nu vaak zelf het antwoord. Ook de klikken via AI Overviews zakten, van naar schatting 125 naar 27 per maand.</li>
+          <li><b>We hielden de site niet bij.</b> Oude artikelen verouderden en de dienstpagina's waren dun. Dat is punt 6 en 7, en dat is onze eigen schuld.</li>
+        </ul>
+        <p>De belangrijkste les zat ergens anders. Ook met duizend bezoekers kwamen er geen aanvragen binnen. Het verkeer zat op pagina's die geen klanten opleveren. Een daling in websiteverkeer is dus niet altijd een daling in omzet. Kijk eerst welke pagina's verkeer verliezen, en of dat de pagina's zijn die je geld opleveren. Alle cijfers en wat we eraan doen staan in onze <a href="/logboek/nulmeting-oktober-2026/">nulmeting van oktober 2026</a>.</p>
+
+        <h2 id="voorkomen">Zo voorkom je een daling in websiteverkeer</h2>
+        <p>Helemaal voorkomen kan niet, Google verandert te vaak. Wel kun je zorgen dat je het snel ziet en dat één klap je niet onderuit haalt.</p>
+        <ul class="vink">
+          <li>Koppel Google Search Console en zet de e-mailmeldingen aan. Dan hoor je het als Google fouten vindt.</li>
+          <li>Kijk elke maand tien minuten naar je prestaties, jaar op jaar.</li>
+          <li>Gebruik bij elke nieuwe website een checklist: redirects, robots.txt, noindex, Analytics.</li>
+          <li>Werk je tien belangrijkste pagina's elk jaar bij.</li>
+          <li>Leun niet op één soort verkeer. Zorg naast uitlegartikelen voor sterke dienstpagina's, een goed <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> en vermeldingen in AI-antwoorden.</li>
+          <li>Houd je backlinks in de gaten en bouw er rustig nieuwe bij.</li>
+          <li>Meet aanvragen, niet alleen bezoekers. Daar gaat het uiteindelijk om.</li>
+        </ul>
+        <p>Kom je er zelf niet uit? Een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> brengt in een keer alle fouten boven water.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Waarom heb ik ineens minder bezoekers?', a: 'De meest voorkomende oorzaken zijn een technische fout, een core update van Google, AI Overviews die klikken wegnemen, of gewoon het seizoen. In Google Search Console zie je welke het is.' },
+      { v: 'Hoe lang duurt herstel na een core update?', a: 'Vaak tot de volgende core update, dus enkele maanden. Snelle trucs bestaan niet. Betere pagina\'s maken is de enige weg.' },
+      { v: 'Kost AI Overviews mij bezoekers?', a: 'Bij uitlegvragen vaak wel. Onderzoek van Ahrefs laat zien dat de nummer 1 gemiddeld 58% minder klikken krijgt als er een AI Overview boven staat. Bij zoekopdrachten naar een dienst in je regio is het effect kleiner.' },
+      { v: 'Is minder verkeer altijd slecht?', a: 'Nee. Verlies je bezoekers op pagina\'s die nooit klanten opleverden, dan merk je daar in je omzet weinig van. Kijk naar aanvragen en verkopen, niet alleen naar bezoekers.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Logboek', titel: 'Nulmeting oktober 2026', href: '/logboek/nulmeting-oktober-2026/', tekst: 'Onze eigen cijfers, ook als ze tegenvallen.', teken: 'grafiek' },
+      { label: 'Gids', titel: 'Google Search Console gebruiken', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Je site aanmelden en de rapporten lezen.' },
+      { label: 'Dienst', titel: 'Technische SEO en audit', href: '/zoekmachine-optimalisatie/technische-seo/', tekst: 'Alle fouten op een rij, vanaf € 395 eenmalig.' },
+    ]}
+  />
+
+  <Actie titel="Zakt jouw verkeer en weet je niet waarom?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt waar het lek zit en belt je met wat hij vond. Eerlijk, ook als het aan Google ligt en niet aan je site.`} />
+</Base>

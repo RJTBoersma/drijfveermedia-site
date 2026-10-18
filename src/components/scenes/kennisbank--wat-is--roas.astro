@@ -1,0 +1,49 @@
+---
+// Scène voor /kennisbank/wat-is/roas/: twee staven naast elkaar, advertentiekosten en omzet, met een stippellijn voor het break-evenpunt.
+// Rechts de uitkomst: ROAS 5, oftewel 500%. Als hij leeft: er vallen munten in de omzetstaaf en de uitkomst licht op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een staaf van 200 euro advertentiekosten naast een staaf van 1.000 euro omzet. Dat is een ROAS van 5, of 500 procent. Een stippellijn laat zien waar je quitte speelt.'}>
+  <rect x="22" y="24" width="276" height="222" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M44 210h232" stroke="#d9e1ea" stroke-width="2" />
+  <!-- kosten -->
+  <rect x="70" y="180" width="64" height="30" rx="6" fill="#074663" />
+  <text x="102" y="170" font-size="13" font-weight="800" text-anchor="middle">€ 200</text>
+  <text x="102" y="230" font-size="11" font-weight="700" text-anchor="middle" class="zacht">Kosten</text>
+  <!-- omzet -->
+  <rect x="186" y="62" width="64" height="148" rx="6" fill="#ff6600" />
+  <path d="M196 92h44M196 122h44M196 152h44M196 182h44" stroke="#fff" stroke-width="2" opacity="0.35" />
+  <text x="218" y="52" font-size="13" font-weight="800" text-anchor="middle">€ 1.000</text>
+  <text x="218" y="230" font-size="11" font-weight="700" text-anchor="middle" class="zacht">Omzet</text>
+  <!-- break-even bij 40% marge: 500 omzet -->
+  <path d="M44 136h232" stroke="#10283f" stroke-width="1.6" stroke-dasharray="5 5" />
+  <text x="48" y="128" font-size="10" font-weight="800" class="zacht">quitte bij 40% marge</text>
+
+  <rect x="318" y="62" width="140" height="146" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="388" y="90" font-size="12" font-weight="800" text-anchor="middle" class="zacht">ROAS</text>
+  <text x="388" y="132" font-size="34" font-weight="800" text-anchor="middle">5</text>
+  <text x="388" y="158" font-size="12" font-weight="700" text-anchor="middle" class="zacht">1.000 ÷ 200</text>
+  <rect x="346" y="168" width="84" height="26" rx="13" fill="#1f8a5b" />
+  <text x="388" y="185.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">500%</text>
+
+  {!mini && (
+    <g>
+      <g class="roas-munt roas-m1"><circle cx="218" cy="20" r="9" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" /><text x="218" y="24" font-size="10" font-weight="800" text-anchor="middle">€</text></g>
+      <g class="roas-munt roas-m2"><circle cx="218" cy="20" r="9" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" /><text x="218" y="24" font-size="10" font-weight="800" text-anchor="middle">€</text></g>
+      <g class="roas-munt roas-m3"><circle cx="218" cy="20" r="9" fill="#ffd2b0" stroke="#ff6600" stroke-width="2" /><text x="218" y="24" font-size="10" font-weight="800" text-anchor="middle">€</text></g>
+      <rect class="roas-gloed" x="334" y="100" width="108" height="44" rx="10" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    </g>
+  )}
+</svg>
+<style>
+  .roas-gloed { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .roas-munt, :global(.teken-js) .roas-gloed { opacity: 0; }
+  .in-beeld .roas-munt { animation: kennisbank--wat-is--roas-munt 3.6s ease-in infinite; }
+  .in-beeld .roas-m2 { animation-delay: 1.2s; }
+  .in-beeld .roas-m3 { animation-delay: 2.4s; }
+  .in-beeld .roas-gloed { animation: kennisbank--wat-is--roas-gloed 3.6s ease-in-out 0.8s infinite; }
+  @keyframes kennisbank--wat-is--roas-munt { 0% { opacity: 0; transform: translateY(-6px); } 12% { opacity: 1; } 36% { opacity: 1; transform: translateY(46px); } 44%, 100% { opacity: 0; transform: translateY(52px); } }
+  @keyframes kennisbank--wat-is--roas-gloed { 0%, 60% { opacity: 0; transform: scale(1.08); } 70%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .roas-munt, .in-beeld .roas-gloed { animation: none; } }
+</style>

@@ -1,0 +1,77 @@
+---
+// Scène voor /kennisbank/gidsen/perplexity/: een AI-zoekmachine met bovenin bronkaartjes en daaronder een antwoord met
+// genummerde bronvermeldingen. Bron 1 is jouw site. In de volledige versie lopen lijnen van de citaten naar de bronnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const bronnen = [
+  { x: 36, t: 'jouwsite.nl', eigen: true },
+  { x: 142, t: 'vakblad' },
+  { x: 248, t: 'gemeente' },
+  { x: 354, t: 'forum' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een AI-zoekmachine toont vier bronnen en een antwoord met genummerde bronvermeldingen. De eerste bron is jouw website.'}>
+  <rect x="20" y="12" width="440" height="246" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="40" y="28" width="400" height="26" rx="13" />
+  <text x="56" y="45" font-size="11" font-weight="700">Wat kost een dakkapel in Groningen?</text>
+  <circle cx="424" cy="41" r="8" fill="#074663" />
+  <path d="M420 41h8m-3-3l3 3-3 3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+
+  <text x="40" y="76" font-size="10" font-weight="800" class="zacht">Bronnen</text>
+  {bronnen.map((b, i) => (
+    <g>
+      <rect x={b.x} y="84" width="96" height="44" rx="8" fill="#fff" stroke={b.eigen ? '#ff6600' : '#d9e1ea'} stroke-width={b.eigen ? 2 : 1.5} />
+      <circle cx={b.x + 14} cy="98" r="6" fill={b.eigen ? '#ff6600' : '#e8eef4'} />
+      <text x={b.x + 14} y="101.5" text-anchor="middle" font-size="8.5" font-weight="900" style={b.eigen ? 'fill:#fff' : undefined}>{i + 1}</text>
+      <text x={b.x + 26} y="101.5" font-size="9" font-weight="700">{b.t}</text>
+      <rect x={b.x + 10} y="112" width="72" height="5" rx="2.5" fill="#d9e1ea" />
+    </g>
+  ))}
+
+  <!-- het antwoord met citaten -->
+  <rect x="40" y="148" width="250" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="296" y="144" width="16" height="15" rx="4" fill="#ffe2cc" />
+  <text x="300.5" y="155" font-size="9" font-weight="900">1</text>
+  <rect x="40" y="168" width="196" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="242" y="164" width="16" height="15" rx="4" fill="#e8eef4" />
+  <text x="246.5" y="175" font-size="9" font-weight="900">2</text>
+  <rect x="40" y="188" width="226" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="272" y="184" width="16" height="15" rx="4" fill="#ffe2cc" />
+  <text x="276.5" y="195" font-size="9" font-weight="900">1</text>
+  <rect x="40" y="208" width="150" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="196" y="204" width="16" height="15" rx="4" fill="#e8eef4" />
+  <text x="200.5" y="215" font-size="9" font-weight="900">3</text>
+  <rect x="40" y="228" width="120" height="16" rx="8" fill="#e8eef4" />
+  <text x="50" y="239.5" font-size="9" font-weight="700" class="zacht">Vervolgvraag...</text>
+
+  {!mini && (
+    <g>
+      <path class="draad d1" d="M304 144C304 132 90 140 84 130" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" pathLength="1" />
+      <path class="draad d2" d="M272 191C190 196 110 172 92 130" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" pathLength="1" />
+      <rect class="gloed" x="32" y="80" width="104" height="52" rx="11" fill="none" stroke="#ff6600" stroke-width="2" />
+      <g class="teller">
+        <rect x="336" y="200" width="104" height="40" rx="10" fill="#fff" stroke="#1f8a5b" stroke-width="2" />
+        <text x="350" y="217" font-size="9" font-weight="700" class="zacht">Jouw site</text>
+        <text x="350" y="232" font-size="11" font-weight="900">2x geciteerd</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .draad { stroke-dasharray: 1; }
+  .gloed, .teller { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .draad { stroke-dashoffset: 1; }
+  :global(.teken-js) .gloed, :global(.teken-js) .teller { opacity: 0; }
+  :global(.teken-js) .teller { transform: translateY(8px); }
+  .in-beeld .d1 { animation: kennisbank-gidsen-perplexity-draad 1.2s cubic-bezier(.6,.1,.3,1) 0.5s forwards; }
+  .in-beeld .d2 { animation: kennisbank-gidsen-perplexity-draad 1.2s cubic-bezier(.6,.1,.3,1) 1.1s forwards; }
+  .in-beeld .teller { animation: kennisbank-gidsen-perplexity-teller 0.6s cubic-bezier(.3,1.6,.5,1) 2.2s forwards; }
+  .in-beeld .gloed { animation: kennisbank-gidsen-perplexity-gloed 3.6s ease-in-out 2s infinite; }
+  @keyframes kennisbank-gidsen-perplexity-draad { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-gidsen-perplexity-teller { to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-perplexity-gloed { 0%, 100% { opacity: 0; transform: scale(.97); } 50% { opacity: .8; transform: scale(1.02); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .d1, .in-beeld .d2, .in-beeld .gloed { animation: none; }
+    .in-beeld .teller { animation: none; opacity: 1; transform: none; }
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+// Scène voor /webdesign-leeuwarden/: naast de scheve Oldehove staat een browservenster met een waterpas erop.
+// De blokken van de website vallen recht op hun plek: scheef mag de toren, je site niet.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: naast de scheve Oldehove in Leeuwarden staat een website met een waterpas erop. De blokken van de site vallen kaarsrecht op hun plek.'}>
+  <!-- grond -->
+  <path class="l" d="M24 232H456" />
+  <!-- de Oldehove, licht scheef -->
+  <g transform="rotate(-5 96 232)">
+    <path class="v" d="M62 232V92h68v140z" />
+    <path class="l" d="M62 232V92h68v140M56 92h80M58 84h76v8M62 76h68v8" />
+    <path class="l" d="M84 132a12 12 0 0 1 24 0v20H84zM84 186a12 12 0 0 1 24 0v22H84z" />
+    <path class="l" d="M70 112h10M112 112h10M70 166h10M112 166h10" />
+  </g>
+  <text x="96" y="256" text-anchor="middle" font-size="12" font-weight="700" class="zacht">Oldehove</text>
+  <!-- browservenster -->
+  <rect x="176" y="64" width="268" height="160" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M176 88h268" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="192" cy="76" r="4" fill="#d9e1ea" /><circle cx="205" cy="76" r="4" fill="#d9e1ea" /><circle cx="218" cy="76" r="4" fill="#d9e1ea" />
+  <rect x="236" y="71" width="120" height="10" rx="5" fill="#e8eef4" />
+  <!-- skelet van de pagina -->
+  <rect x="194" y="102" width="232" height="54" rx="8" fill="#e8eef4" />
+  <rect x="194" y="168" width="70" height="40" rx="6" fill="#e8eef4" />
+  <rect x="275" y="168" width="70" height="40" rx="6" fill="#e8eef4" />
+  <rect x="356" y="168" width="70" height="40" rx="6" fill="#e8eef4" />
+  <!-- waterpas op het venster -->
+  <rect x="250" y="40" width="124" height="20" rx="6" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <rect x="294" y="44" width="36" height="12" rx="6" fill="#e8f5ee" stroke="#1f8a5b" stroke-width="1.5" />
+  <path d="M306 44v12M318 44v12" stroke="#1f8a5b" stroke-width="1.5" />
+  {!mini && (
+    <g>
+      <g class="bel-schuif"><circle class="bel" cx="312" cy="50" r="4.5" fill="#1f8a5b" /></g>
+      <g class="blok b1"><rect x="194" y="102" width="232" height="54" rx="8" fill="#074663" /><rect x="208" y="114" width="120" height="10" rx="4" fill="#fff" /><rect x="208" y="130" width="80" height="7" rx="3" fill="#9fc0d3" /><rect x="352" y="128" width="60" height="18" rx="6" fill="#ff6600" /></g>
+      <g class="blok b2"><rect x="194" y="168" width="70" height="40" rx="6" fill="#fff" stroke="#074663" stroke-width="2" /><circle cx="212" cy="184" r="7" fill="#e8eef4" /><rect x="204" y="196" width="50" height="5" rx="2.5" fill="#d9e1ea" /></g>
+      <g class="blok b3"><rect x="275" y="168" width="70" height="40" rx="6" fill="#fff" stroke="#074663" stroke-width="2" /><circle cx="293" cy="184" r="7" fill="#e8eef4" /><rect x="285" y="196" width="50" height="5" rx="2.5" fill="#d9e1ea" /></g>
+      <g class="blok b4"><rect x="356" y="168" width="70" height="40" rx="6" fill="#fff" stroke="#074663" stroke-width="2" /><circle cx="374" cy="184" r="7" fill="#e8eef4" /><rect x="366" y="196" width="50" height="5" rx="2.5" fill="#d9e1ea" /></g>
+      <g class="kaartje"><rect x="330" y="226" width="130" height="30" rx="9" fill="#fff" stroke="#d9e1ea" /><circle cx="347" cy="241" r="8" fill="#1f8a5b" /><path d="M343 241l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" /><text x="362" y="246" font-size="12" font-weight="800">Kaarsrecht</text></g>
+    </g>
+  )}
+</svg>
+<style>
+  .blok, .bel, .bel-schuif, .kaartje { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .blok { opacity: 0; transform: translateY(-18px) rotate(-6deg); }
+  :global(.teken-js) .bel-schuif { transform: translateX(-26px); }
+  :global(.teken-js) .kaartje { opacity: 0; }
+  .in-beeld .blok { animation: webdesign-leeuwarden-recht 0.8s cubic-bezier(.3,1.5,.5,1) forwards; }
+  .in-beeld .b1 { animation-delay: 0.3s; }
+  .in-beeld .b2 { animation-delay: 0.7s; }
+  .in-beeld .b3 { animation-delay: 0.85s; }
+  .in-beeld .b4 { animation-delay: 1s; }
+  .in-beeld .bel-schuif { animation: webdesign-leeuwarden-schuif 1.2s cubic-bezier(.4,1.4,.5,1) 0.4s forwards; }
+  .in-beeld .bel { animation: webdesign-leeuwarden-wiebel 4s ease-in-out 1.8s infinite; }
+  .in-beeld .kaartje { animation: webdesign-leeuwarden-kaartje 6s ease-in-out 1.8s infinite; }
+  @keyframes webdesign-leeuwarden-recht { to { opacity: 1; transform: none; } }
+  @keyframes webdesign-leeuwarden-schuif { to { transform: none; } }
+  @keyframes webdesign-leeuwarden-wiebel { 0%, 100% { transform: none; } 30% { transform: translateX(-2px); } 60% { transform: translateX(2px); } }
+  @keyframes webdesign-leeuwarden-kaartje { 0% { opacity: 0; transform: translateY(8px); } 12%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .blok, .in-beeld .bel-schuif, .in-beeld .bel, .in-beeld .kaartje { animation: none; } }
+</style>

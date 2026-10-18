@@ -1,0 +1,347 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/online-adverteren--google-ads-campagne-opzetten.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/online-adverteren/google-ads-campagne-opzetten/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'voor-je-begint', titel: 'Voor je begint: drie vragen' },
+  { id: 'account', titel: '1. Account in expertmodus' },
+  { id: 'meting', titel: '2. Conversiemeting' },
+  { id: 'campagnetype', titel: '3. Het campagnetype' },
+  { id: 'zoekwoorden', titel: '4. Zoekwoordonderzoek' },
+  { id: 'structuur', titel: '5. Advertentiegroepen' },
+  { id: 'instellingen', titel: '6. De instellingen' },
+  { id: 'budget', titel: '7. Budget en biedstrategie' },
+  { id: 'advertenties', titel: '8. Advertenties schrijven' },
+  { id: 'landingspagina', titel: '9. Landingspagina en kwaliteitsscore' },
+  { id: 'bijsturen', titel: '10. De eerste 90 dagen' },
+  { id: 'check', titel: 'De 10-puntencheck' },
+  { id: 'laten-doen', titel: 'Of laat het ons doen' },
+];
+const check = [
+  'Conversiemeting werkt en is getest met een echte aanvraag.',
+  'In een zoekcampagne staan het Display-netwerk en de zoekpartners uit.',
+  'Locatieoptie staat op "aanwezigheid", niet op "aanwezigheid of interesse".',
+  'Er staat een lijst met uitsluitingszoekwoorden op het account.',
+  'Elke advertentiegroep heeft één thema en een eigen landingspagina.',
+  'Elke advertentiegroep heeft een advertentie met minstens tien verschillende koppen.',
+  'Sitelinks, highlights en je telefoonnummer zijn toegevoegd.',
+  'Biedstrategie en dagbudget passen bij je doel, met een maximale klikprijs zolang er nog geen conversies zijn.',
+  'De advertentieplanning past bij de uren waarop je de telefoon opneemt.',
+  'Je weet wat een aanvraag maximaal mag kosten en je kijkt elke week in het zoektermenrapport.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'De 10-puntencheck voor een nieuwe Google Ads-campagne\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  check.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+// Gemiddelde klikprijzen en zoekvolumes in Nederland, opgevraagd in SE Ranking op 18 oktober 2026.
+const klikprijzen = [
+  ['hypotheekadviseur', '€ 8,15', '9.900'],
+  ['dakdekker', '€ 4,81', '9.900'],
+  ['boekhouder', '€ 3,80', '8.000'],
+  ['badkamer renovatie', '€ 3,41', '4.400'],
+  ['verhuisbedrijf', '€ 3,35', '5.400'],
+  ['elektricien', '€ 3,29', '10.800'],
+  ['kozijnen', '€ 2,57', '14.800'],
+  ['loodgieter', '€ 2,25', '18.100'],
+  ['schilder', '€ 1,73', '10.800'],
+  ['rijschool', '€ 1,42', '14.800'],
+  ['hovenier', '€ 0,88', '10.800'],
+  ['glazenwasser', '€ 0,56', '4.400'],
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google Ads-campagne opzetten: het complete stappenplan',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Google Ads-campagne opzetten: stappenplan | Drijfveer Media"
+  description="Een Google Ads-campagne opzetten in tien stappen: meting, zoekwoorden, instellingen, budget, advertenties en bijsturen. Met klikprijzen en een check."
+  kruimels={[{ naam: 'Online adverteren', url: '/online-adverteren/' }, { naam: 'Campagne opzetten', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Online adverteren" titel="Google Ads-campagne opzetten: het complete stappenplan">
+    <p>Een eerste campagne staat er in een middag. Een campagne die aanvragen oplevert tegen een prijs die je kunt betalen, vraagt iets meer. Dit is ons stappenplan in tien stappen, met de instellingen die er echt toe doen en echte klikprijzen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een Google Ads-campagne opzetten doe je in tien stappen: account, meting, campagnetype, zoekwoorden, advertentiegroepen, instellingen, budget, advertenties, landingspagina en bijsturen.</li>
+            <li>Verkoop je diensten, begin dan met een zoekcampagne. Heb je een webshop, begin dan met Shopping.</li>
+            <li>Zet de conversiemeting aan voordat je de eerste euro uitgeeft.</li>
+            <li>Een klik kost in Nederland gemiddeld van ruim 50 cent tot ruim € 8, afhankelijk van je branche.</li>
+            <li>Reken op een week of vier voordat je weet wat een aanvraag je kost, en op drie maanden voor een campagne die stabiel loopt.</li>
+          </ul>
+        </div>
+
+        <h2 id="voor-je-begint">Voor je begint: drie vragen</h2>
+        <p>De meeste campagnes gaan niet mis in Google Ads. Ze gaan mis omdat niemand vooraf heeft bedacht wat ze moeten opleveren. Beantwoord daarom eerst deze drie vragen.</p>
+        <ol>
+          <li><b>Wat moet het opleveren?</b> Zo concreet mogelijk. Niet "meer zichtbaarheid", maar "tien offerteaanvragen per maand voor dakkapellen".</li>
+          <li><b>Wat mag een aanvraag kosten?</b> Reken het terug vanaf je marge. Daarover zo meer.</li>
+          <li><b>Waar komt de bezoeker terecht?</b> Op een pagina over precies die dienst, met een telefoonnummer en een kort formulier. Niet op je homepage.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een dakkapel levert gemiddeld € 1.200 marge op. Je wilt er hooguit een kwart van uitgeven aan werving: € 300 per klant. Eén op de vier aanvragen wordt een opdracht. Dan mag een aanvraag maximaal € 75 kosten. Dat getal is je kompas voor alles wat volgt.</p>
+        </div>
+        <p>Kun je die som niet maken, omdat je niet weet hoeveel aanvragen een opdracht worden? Schrijf dan een maand lang op hoeveel offertes je uitbrengt en hoeveel er doorgaan. Zonder dat getal weet je na een maand adverteren niet of je geld hebt verdiend of verloren.</p>
+
+        <h2 id="account">Stap 1: maak een account in expertmodus</h2>
+        <p>Ga naar ads.google.com en log in met een Google-account van je bedrijf. Google leidt je meteen naar een slimme campagne. Dat is een versimpelde campagne waarin je weinig zelf bepaalt. Klik onderaan op de link om over te schakelen naar de expertmodus. Dan houd je de controle.</p>
+        <ul>
+          <li><b>Tijdzone en valuta.</b> Kies Amsterdam en de euro. Na het aanmaken kun je deze twee niet meer wijzigen.</li>
+          <li><b>Betalen.</b> Vul je bedrijfsgegevens en btw-nummer in, en kies automatische betalingen.</li>
+          <li><b>Verificatie.</b> Google vraagt adverteerders om te bewijzen wie ze zijn. Houd je KvK-gegevens bij de hand.</li>
+        </ul>
+        <p>Koppel het nieuwe Google Ads-account meteen aan je andere Google-diensten. Dat doe je onder Hulpmiddelen, bij Gekoppelde accounts.</p>
+        <ul>
+          <li><b>Google Analytics 4.</b> Dan zie je in Analytics wat bezoekers uit je advertenties op je site doen, en haal je conversies op.</li>
+          <li><b>Google Search Console.</b> Dan zie je naast elkaar waar je betaald en onbetaald gevonden wordt.</li>
+          <li><b>Google Bedrijfsprofiel.</b> Dan kan je adres onder je advertentie verschijnen.</li>
+        </ul>
+        <p>Laat het account altijd op naam van je eigen bedrijf staan. Werk je later met een bureau, dan geef je dat bureau toegang via Beheerder, Standaard of Alleen lezen. Het account blijft van jou, met alle gegevens die erin zitten. Stop je met het bureau, dan trek je de toegang in en loopt alles door.</p>
+
+        <h2 id="meting">Stap 2: stel conversiemeting in, vóór de eerste klik</h2>
+        <p>Een conversie is een actie die voor jou geld waard is. Het verzenden van een formulier, een telefoontje, een bestelling. Zonder meting weet je niet welke zoekwoorden klanten opleveren en welke alleen geld kosten. En de slimme biedstrategieën van Google hebben deze gegevens nodig om te kunnen werken.</p>
+        <p>Je hebt drie manieren:</p>
+        <ul>
+          <li><b>De Google tag op je site.</b> Een stukje code in de kop van je website. Eenvoudig als je maar één of twee conversies meet.</li>
+          <li><b>Via Google Tag Manager.</b> Je beheert al je meetcodes op één plek. Onze voorkeur, omdat je later dingen kunt aanpassen zonder je site aan te raken.</li>
+          <li><b>Importeren uit Google Analytics 4.</b> Meet je al formulieren of bestellingen in GA4? Dan haal je die conversies zo naar Google Ads.</li>
+        </ul>
+        <p>Zet ook verbeterde conversies aan. Daarmee meet Google ook conversies van mensen die je cookies weigeren, op basis van versleutelde gegevens uit je formulier. En adverteer je in Europa, dan vraagt Google sinds maart 2024 om de toestemmingsmodus versie 2. Die zorgt dat je cookiemelding en Google Ads goed samenwerken.</p>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={44} /><h3>Telefoontjes meten</h3></div>
+        <p>Veel klanten van een installateur of advocaat bellen liever dan dat ze een formulier invullen. Tel die telefoontjes mee, anders lijkt je campagne slechter dan hij is. Met een oproepitem staat je nummer in de advertentie en telt Google een gesprek als conversie als het lang genoeg duurt. Die minimale duur stel je zelf in, standaard is het 60 seconden. Belt iemand het nummer op je website, dan kun je dat ook meten, met een stukje extra code.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={44} /><h3>Primair of secundair</h3></div>
+        <p>Geef bij elke conversie aan of hij primair of secundair is. Op primaire conversies stuurt Google de biedingen. Maak daar alleen de acties van die echt geld waard zijn: een offerteaanvraag, een telefoontje van een minuut, een bestelling. Een klik op je e-mailadres of een bezoek aan de contactpagina zet je op secundair. Die zie je wel in je rapporten, maar Google gaat er niet voor bieden.</p>
+        <p>Test alles voordat je live gaat. Vul je eigen formulier in en kijk of de conversie binnenkomt. Meer over meten lees je in de gids over <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4 en Tag Manager</a>.</p>
+
+        <h2 id="campagnetype">Stap 3: kies het juiste campagnetype</h2>
+        <p>Het campagnetype bepaalt waar je advertenties verschijnen. Dit zijn de opties:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Campagnetype</th><th>Waar je advertentie verschijnt</th><th>Geschikt voor</th></tr></thead>
+            <tbody>
+              <tr><td><b>Zoeken</b></td><td>Tekstadvertenties in de zoekresultaten</td><td>Diensten, mensen die al zoeken</td></tr>
+              <tr><td><b>Shopping</b></td><td>Productadvertenties met foto en prijs</td><td>Webshops</td></tr>
+              <tr><td><b>Performance Max</b></td><td>Alle kanalen van Google in één campagne</td><td>Webshops en adverteerders met veel conversies</td></tr>
+              <tr><td><b>Display-campagne</b></td><td>Banners op sites en apps in het Google Display-netwerk</td><td>Naamsbekendheid, mensen opnieuw benaderen</td></tr>
+              <tr><td><b>Demand Gen en Video</b></td><td>Beeld en video op YouTube, Discover en Gmail</td><td>Merk en bereik</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor de meeste mkb'ers is de keuze simpel. Verkoop je diensten, dan begin je met Zoeken. Heb je een webshop, dan begin je met <a href="/online-adverteren/google-shopping/">Google Shopping</a>. Een display campagne levert veel vertoningen op, maar zelden aanvragen. Bewaar die voor later, als je weet wat werkt.</p>
+        <p>Waarom niet meteen Performance Max? Die campagne kiest zelf waar je advertentie verschijnt: in de zoekresultaten, op YouTube, in Gmail, op Maps en als banner. Google optimaliseert dat met zijn eigen modellen, en dat werkt goed als het systeem genoeg conversies ziet om van te leren. Met een paar aanvragen per maand is dat niet zo. Dan gaat een groot deel van je budget naar plekken waar je weinig aan hebt, en je ziet maar beperkt waar het geld heen gaat.</p>
+        <p>Meerdere campagnes maak je pas als je budget of werkgebied echt verschilt. Twee uitzonderingen zijn het overwegen waard. Een aparte campagne voor je eigen bedrijfsnaam is goedkoop en voorkomt dat een concurrent bovenaan staat als iemand jou zoekt. En werk je in twee regio's met elk een eigen budget, bijvoorbeeld Drenthe en Friesland, dan geeft een campagne per regio je meer grip.</p>
+
+        <h2 id="zoekwoorden">Stap 4: doe zoekwoordonderzoek</h2>
+        <p>Open de Zoekwoordplanner via Hulpmiddelen. Vul je diensten of de website van een concurrent in en je krijgt zoekwoorden met zoekvolume en twee bedragen: het bod voor bovenaan de pagina, laag bereik en hoog bereik. Daartussen ligt wat je ongeveer per klik betaalt.</p>
+        <p>Kies woorden met koopintentie. "cv-ketel vervangen emmen" is iemand die wil bellen. "hoe werkt een cv-ketel" is iemand die iets wil leren. Woorden als kosten, prijs, laten, offerte, in de buurt of een plaatsnaam wijzen bijna altijd op iemand die iets wil kopen. Zulke zoekwoorden hebben minder volume, maar elke klik is meer waard.</p>
+        <h3>Wat een klik kost in jouw branche</h3>
+        <p>Om je een idee te geven: dit zijn de gemiddelde klikprijzen in Nederland voor een paar veelgezochte beroepen. Ze komen uit de zoekwoorddatabase van SE Ranking, die we op 18 oktober 2026 hebben opgevraagd.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekwoord</th><th>Gemiddelde klikprijs</th><th>Zoekvolume per maand</th></tr></thead>
+            <tbody>
+              {klikprijzen.map(([k, cpc, vol]) => <tr><td>{k}</td><td>{cpc}</td><td>{vol}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bron: SE Ranking, zoekwoorddatabase Nederland, oktober 2026. Een gemiddelde over het hele land. Wat jij betaalt, hangt af van je regio, de concurrentie op dat moment en je kwaliteitsscore.</p>
+        <p>Twee dingen vallen op. De bedragen lopen ver uiteen: een klik op hypotheekadviseur kost bijna vijftien keer zoveel als een klik op glazenwasser. En een duur zoekwoord is niet per se slecht. Een hypotheek levert ook veel meer op dan een keer de ramen wassen. Het gaat er alleen om of de klikprijs past bij wat een aanvraag mag kosten.</p>
+        <h3>Zoekwoordtypes</h3>
+        <p>Met het zoekwoordtype bepaal je hoe ruim Google je zoekwoord mag opvatten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekwoordtype</th><th>Zo schrijf je het</th><th>Wanneer</th></tr></thead>
+            <tbody>
+              <tr><td>Exact</td><td>[cv-ketel vervangen]</td><td>Zoekopdrachten met dezelfde betekenis. Veel controle.</td></tr>
+              <tr><td>Woordgroep</td><td>"cv-ketel vervangen"</td><td>Zoekopdrachten die deze betekenis bevatten. Een goede start.</td></tr>
+              <tr><td>Breed</td><td>cv-ketel vervangen</td><td>Alles wat Google verwant vindt. Alleen met goede meting en slim bieden.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Begin met woordgroep en exact. Breed zoeken kan later prima werken, als Google genoeg conversies heeft gezien om te weten wat bij jou past. Zonder die gegevens betaal je voor veel klikken die er weinig mee te maken hebben.</p>
+
+        <h2 id="structuur">Stap 5: bouw je advertentiegroepen</h2>
+        <p>Een campagne bestaat uit advertentiegroepen. Elke groep krijgt één thema met vijf tot vijftien zoekwoorden, een eigen advertentie en een eigen landingspagina. Hoe beter zoekwoord, advertentie en pagina op elkaar aansluiten, hoe beter je advertentierelevantie en hoe lager meestal je klikprijs. Een verzonnen installateur in Emmen zou het zo kunnen doen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Advertentiegroep</th><th>Voorbeelden van zoekwoorden</th><th>Landingspagina</th></tr></thead>
+            <tbody>
+              <tr><td>CV-ketel vervangen</td><td>cv-ketel vervangen, nieuwe cv-ketel emmen</td><td>/cv-ketel-vervangen/</td></tr>
+              <tr><td>CV-ketel onderhoud</td><td>cv-ketel onderhoud, ketel onderhoudsbeurt</td><td>/onderhoud/</td></tr>
+              <tr><td>Warmtepomp</td><td>warmtepomp laten plaatsen, hybride warmtepomp</td><td>/warmtepomp/</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zet meteen uitsluitingszoekwoorden op je account. Denk aan gratis, vacature, salaris, cursus, opleiding, zelf, handleiding en tweedehands. Elke klik op zo'n woord is weggegooid geld. Maak er een lijst van onder Hulpmiddelen, bij Gedeelde bibliotheek. Die lijst koppel je aan al je campagnes, en je vult hem elke week aan.</p>
+        <p>Komen twee groepen op dezelfde zoekopdracht uit? Sluit het zoekwoord van de ene groep dan uit in de andere. Anders concurreer je met jezelf en weet je niet welke advertentie het werk doet.</p>
+
+        <h2 id="instellingen">Stap 6: de instellingen die het verschil maken</h2>
+        <p>Hier gaat het meeste geld verloren, omdat de standaardinstellingen van Google vooral goed zijn voor Google. Loop ze een voor een na.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={44} /><h3>Netwerken</h3></div>
+        <p>In een nieuwe zoekcampagne staan de zoekpartners en het Display-netwerk standaard aan. Zet ze allebei uit. Anders verschijnt je tekstadvertentie ook als banner op allerlei sites, voor mensen die helemaal niet zoeken.</p>
+        <div class="stap-kop"><Tekening naam="pin" maat={44} /><h3>Locaties</h3></div>
+        <p>Kies je werkgebied: een land, provincie, plaats of een straal rond je adres. Open daarna de locatieopties en kies "aanwezigheid". De standaard is "aanwezigheid of interesse". Dan kan iemand in Spanje die over Assen leest, ook je advertentie zien.</p>
+        <p>Werk je vanuit één plaats, kies dan een straal die past bij hoe ver je wilt rijden. Een loodgieter in Assen heeft weinig aan een klik uit Maastricht. Na een paar weken zie je onder Locaties welke plaatsen aanvragen opleveren. Daar kun je je bod omhoog zetten met een bodaanpassing, en in plaatsen die alleen geld kosten omlaag.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={44} /><h3>Planning en talen</h3></div>
+        <p>Laat je advertenties alleen lopen op uren dat je bereikbaar bent, als je vooral op telefoontjes draait. Kies bij talen Nederlands en Engels. Veel Nederlanders gebruiken Google in het Engels.</p>
+        <div class="stap-kop"><Tekening naam="lamp" maat={44} /><h3>Automatische uitbreidingen</h3></div>
+        <p>Zie je de optie AI Max of automatisch gemaakte items? Daarmee breidt Google zelf je zoektermen en teksten uit. Laat dat bij een eerste campagne uit, tot je weet wat werkt. Kijk ook bij Aanbevelingen in je account. Google stelt daar regelmatig voor om automatisch wijzigingen door te voeren. Zet dat automatisch toepassen uit. Een aanbeveling is een voorstel, geen opdracht.</p>
+
+        <h2 id="budget">Stap 7: kies je budget en biedstrategie</h2>
+        <p>Je stelt een dagbudget in. Op drukke dagen mag Google tot twee keer dat bedrag uitgeven. Per maand betaal je nooit meer dan 30,4 keer je dagbudget.</p>
+        <p>Hoeveel heb je nodig? Reken het terug. Stel dat een klik € 2,50 kost en dat één op de twintig bezoekers een aanvraag doet. Dan kost een aanvraag € 50. Wil je er tien per maand, dan heb je zo'n € 500 nodig, een dagbudget van ongeveer € 16. Lager dan dat? Dan duurt het maanden voordat je genoeg gegevens hebt om goede Google Ads-campagnes van slechte te onderscheiden. Een handige ondergrens: een dagbudget waarmee je minstens tien klikken per dag kunt betalen.</p>
+        <p>Met de biedstrategie vertel je Google wat je wilt bereiken. Dit zijn de belangrijkste:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Biedstrategie</th><th>Wat Google doet</th><th>Wanneer gebruiken</th></tr></thead>
+            <tbody>
+              <tr><td>Klikken maximaliseren</td><td>Zoveel mogelijk klikken binnen je budget</td><td>De start, zolang er nog geen conversies zijn. Altijd met een maximale klikprijs.</td></tr>
+              <tr><td>Conversies maximaliseren</td><td>Zoveel mogelijk conversies binnen je budget</td><td>Als je meting goed werkt en je de eerste aanvragen binnen hebt</td></tr>
+              <tr><td>Conversies maximaliseren met doel-CPA</td><td>Conversies tegen een gemiddelde prijs die jij opgeeft</td><td>Vanaf een stuk of dertig conversies per maand</td></tr>
+              <tr><td>Conversiewaarde maximaliseren met doel-ROAS</td><td>Zoveel mogelijk omzet per uitgegeven euro</td><td>Webshops die de waarde van elke bestelling meten</td></tr>
+              <tr><td>Handmatige CPC</td><td>Jij bepaalt per zoekwoord wat een klik mag kosten</td><td>Wie veel tijd heeft en alles zelf wil sturen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je doel-CPA haal je uit de rekensom van de drie vragen. Zet hem niet meteen op het scherpste bedrag. Begin iets ruimer dan wat een aanvraag nu kost en schroef hem in stappen terug. Te streng ingesteld, en Google doet bijna niet meer mee in de veiling.</p>
+
+        <h2 id="advertenties">Stap 8: advertenties die aangeklikt worden</h2>
+        <p>In een zoekcampagne schrijf je responsieve advertenties. Je levert losse koppen en beschrijvingen aan en Google test welke combinaties het beste werken. Dit zijn de maten:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Aantal</th><th>Max tekens</th></tr></thead>
+            <tbody>
+              <tr><td>Kop</td><td>3 tot 15</td><td>30</td></tr>
+              <tr><td>Beschrijving</td><td>2 tot 4</td><td>90</td></tr>
+              <tr><td>Weergavepad</td><td>2 velden</td><td>15 per veld</td></tr>
+              <tr><td>Sitelink</td><td>minstens 4</td><td>25, plus 2 regels van 35</td></tr>
+              <tr><td>Highlight</td><td>minstens 4</td><td>25</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Schrijf minstens tien koppen die elk iets anders zeggen. Een paar met het zoekwoord, een paar met een voordeel, een paar met een prijs of een belofte, en één met een duidelijke oproep. Voor de installateur: "CV-ketel vervangen in Emmen", "Binnen 24 uur een monteur", "Vaste prijs vooraf" en "Vraag een offerte aan".</p>
+        <p>Bij de beschrijvingen heb je meer ruimte. Gebruik die om twijfel weg te nemen. Bijvoorbeeld: "Nieuwe cv-ketel inclusief montage en afvoer van de oude. Vaste prijs vooraf, ook op zaterdag." En: "Al 20 jaar installateur in Emmen en omgeving. Bel of vraag online een offerte aan." Verzonnen voorbeelden, maar zo zie je het idee: iets concreets, iets dat vertrouwen geeft en een volgende stap.</p>
+        <p>Google geeft elke advertentie een advertentiesterkte, van Slecht tot Uitstekend. Die zegt iets over hoe gevarieerd je koppen zijn, niet over hoeveel aanvragen de advertentie oplevert. Mik op Goed. Een kop vastzetten op positie 1 kan, bijvoorbeeld als een kop altijd je dienst en plaatsnaam moet noemen. Doe dat spaarzaam, want elke vastgezette kop verlaagt het aantal combinaties dat Google kan testen.</p>
+        <p>Voeg ook de extra onderdelen toe die Google items noemt: sitelinks naar je belangrijkste pagina's, highlights zoals "geen voorrijkosten", je telefoonnummer en je adres via je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Je advertentie wordt er groter van en dat levert meer klikken op.</p>
+
+        <h2 id="landingspagina">Stap 9: een landingspagina die converteert</h2>
+        <p>Google beoordeelt elk zoekwoord met een kwaliteitsscore van 1 tot 10. Die hangt af van drie onderdelen, die je per zoekwoord terugziet als je de kolommen aanzet:</p>
+        <ul>
+          <li><b>Verwachte CTR.</b> Hoe vaak er naar verwachting op je advertentie wordt geklikt.</li>
+          <li><b>Advertentierelevantie.</b> Hoe goed je advertentie past bij wat iemand zocht.</li>
+          <li><b>Ervaring op de bestemmingspagina.</b> Hoe nuttig en snel de pagina is waar de bezoeker landt.</li>
+        </ul>
+        <p>Elk onderdeel krijgt het oordeel bovengemiddeld, gemiddeld of ondergemiddeld. Google noemt de score zelf een diagnosehulpmiddel: het getal telt niet mee in de veiling, de onderdelen erachter wel. Verbeter je die, dan krijg je meestal een betere positie voor dezelfde klikprijs. Staat de bestemmingspagina op ondergemiddeld, dan weet je waar je moet beginnen.</p>
+        <p>Een goede landingspagina herhaalt de zoekopdracht in de kop. Hij noemt een prijs of prijsindicatie, laat zien waarom mensen je vertrouwen en heeft een telefoonnummer en een kort formulier boven de vouw. Vraag in dat formulier alleen wat je echt nodig hebt: naam, telefoonnummer en een vraag is vaak genoeg. En de pagina laadt snel op een telefoon, want daar komen de meeste klikken vandaan. Meer daarover in de gids <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken die converteert</a>.</p>
+
+        <h2 id="bijsturen">Stap 10: de eerste 90 dagen meten en bijsturen</h2>
+        <p>Na het live zetten begint het echte werk. Zo pak je de eerste maand aan:</p>
+        <ul>
+          <li><b>Dag 1 en 2.</b> Zijn je advertenties goedgekeurd? Komen er vertoningen binnen? Werkt de meting?</li>
+          <li><b>Elke week.</b> Open het zoektermenrapport. Daarin zie je waar mensen echt op zochten. Zet onzin direct bij je uitsluitingen.</li>
+          <li><b>Week 2 tot 4.</b> Kijk per advertentiegroep wat een conversie kost. Geef groepen die goed lopen meer ruimte, en pak groepen aan die alleen geld kosten.</li>
+          <li><b>Na 30 dagen.</b> Vergelijk de kosten per aanvraag met het getal uit je rekensom. Zit je eronder, schaal dan op. Zit je erboven, zoek dan eerst de oorzaak.</li>
+        </ul>
+        <p>In maand twee en drie schuif je van klikken naar conversies. Heb je de eerste aanvragen binnen, stap dan over op Conversies maximaliseren. Test nieuwe koppen tegen je beste advertentie. Met Experimenten in Google Ads kun je een wijziging eerst op de helft van je verkeer proberen, voordat je hem overal doorvoert.</p>
+        <p>Verander niet alles tegelijk. Een slimme biedstrategie heeft na elke grote wijziging een week of twee nodig om te leren.</p>
+        <h3>De kolommen die je moet zien</h3>
+        <p>Het standaardoverzicht van Google laat vooral klikken en kosten zien. Voeg via Kolommen deze cijfers toe: conversies, kosten per conversie, conversiepercentage, vertoningsaandeel in zoeken, en het vertoningsaandeel dat je verliest door budget en door rangschikking. Die laatste twee vertellen je of je meer aanvragen kunt halen met meer budget, of dat je eerst aan je advertenties en pagina's moet werken.</p>
+        <p>Wil je weten tegen wie je opbiedt? Open dan Veilinginzichten. Daar zie je welke andere adverteerders op dezelfde zoekopdrachten verschijnen, hoe vaak, en hoe vaak zij boven jou staan.</p>
+        <h3>Als het niet loopt</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je ziet</th><th>Meestal de oorzaak</th><th>Wat je doet</th></tr></thead>
+            <tbody>
+              <tr><td>Bijna geen vertoningen</td><td>Advertentie afgekeurd, zoekwoord met te weinig zoekvolume, of een te lage maximale klikprijs</td><td>Status nakijken, zoekwoorden verbreden, bod verhogen</td></tr>
+              <tr><td>Budget elke dag voor de middag op</td><td>Budget te laag voor het aantal zoekwoorden</td><td>Minder zoekwoorden, kleiner gebied of meer budget</td></tr>
+              <tr><td>Veel klikken, geen aanvragen</td><td>Verkeerde zoektermen, zwakke landingspagina of kapotte meting</td><td>Zoektermenrapport, uitsluitingen, meting testen, pagina verbeteren</td></tr>
+              <tr><td>Klikprijs veel hoger dan verwacht</td><td>Lage kwaliteitsscore of veel concurrentie</td><td>Advertentie en pagina beter laten aansluiten, nauwere advertentiegroepen</td></tr>
+              <tr><td>Aanvragen, maar niet het soort klant dat je wilt</td><td>Zoekwoorden te breed, geen prijs in de advertentie</td><td>Zoekwoorden scherper, prijsindicatie in de advertentie</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="check">De 10-puntencheck voor je live gaat</h2>
+        <p>Loop deze punten na voordat je op publiceren drukt. Je kunt de lijst ook downloaden en afvinken.</p>
+        <div class="kader check-lijst">
+          <ol>{check.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="google-ads-10-puntencheck.txt">Download de check</a>
+        </div>
+        <p>Draait je campagne al een tijd? Gebruik dan de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check voor bestaande accounts</a>. Die laat zien waar je budget nu weglekt. Wil je eerst weten hoe het systeem in elkaar zit, lees dan <a href="/kennisbank/gidsen/wat-is-google-ads/">wat Google Ads is</a>.</p>
+
+        <h2 id="laten-doen">Of laat je Google Ads-campagne opzetten door ons</h2>
+        <p>Geen tijd of zin om dit zelf uit te zoeken? Dan zetten wij de campagne voor je op, met precies dit stappenplan. We beginnen bij de drie vragen bovenaan, regelen de meting en bouwen de campagne. Daarna sturen we elke week bij, tot het afgesproken doel gehaald wordt.</p>
+        <p>Wat het kost, hangt af van je advertentiebudget. Na een kort gesprek hoor je welk budget past bij je doel en wat ons werk daarvan kost. Maandelijks opzegbaar, met <a href="/garantie/">garantie</a>. Het account staat op jouw naam, dus je zit nergens aan vast. Meer over onze aanpak lees je bij <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a> en op de pagina over <a href="/online-adverteren/">online adverteren</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={20} />
+        <div class="card prijs-eigen">
+          <p class="kicker">Wij zetten hem op</p>
+          <p class="prijs-kop">Prijs afhankelijk van je advertentiebudget</p>
+          <p class="muted klein">Exclusief btw. Maandelijks opzegbaar.</p>
+          <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij hem opzetten?" intro="Wat je bij ons krijgt voor je budget, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel kost een Google Ads-campagne per maand?', a: 'Dat bepaal je zelf met je dagbudget. Hoeveel je nodig hebt, hangt af van de klikprijzen in je branche en hoeveel aanvragen je wilt. In Nederland kost een klik gemiddeld van ruim € 0,50 tot ruim € 8. De Zoekwoordplanner geeft een eerste indicatie voor jouw zoekwoorden.' },
+      { v: 'Hoe lang duurt een Google Ads-campagne opzetten?', a: 'Een eenvoudige zoekcampagne staat er in een dag. De meting en een goede landingspagina kosten vaak meer tijd dan de campagne zelf.' },
+      { v: 'Zoekcampagne of Performance Max?', a: 'Voor dienstverleners meestal eerst een zoekcampagne: je ziet precies waar je geld heen gaat. Performance Max werkt beter als je al veel conversies hebt, zoals bij een webshop.' },
+      { v: 'Ik krijg klikken maar geen aanvragen. Hoe kan dat?', a: 'Kijk eerst in het zoektermenrapport of de klikken wel van de juiste mensen komen. Is dat zo, dan ligt het vaak aan de landingspagina. Ook een kapotte conversiemeting komt vaak voor.' },
+      { v: 'Moet ik adverteren op mijn eigen bedrijfsnaam?', a: 'Vaak wel, in een aparte campagne. Het kost weinig per klik en voorkomt dat een concurrent bovenaan staat als iemand jou zoekt.' },
+      { v: 'Wanneer weet ik of Google Ads voor mij werkt?', a: 'Na een week of vier zie je wat een aanvraag kost. Na een maand of drie loopt een campagne meestal stabiel. Vergelijk de kosten per aanvraag met wat een aanvraag volgens je eigen rekensom mag kosten.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Google Ads-check', href: '/kennisbank/gidsen/google-ads-check/', tekst: 'Tien punten voor een bestaand account.' },
+      { label: 'Gids', titel: 'Wat is Google Ads?', href: '/kennisbank/gidsen/wat-is-google-ads/', tekst: 'Uitleg, kosten en voorbeelden.' },
+      { label: 'Dienst', titel: 'Google Ads uitbesteden', href: '/online-adverteren/google-ads-bureau/', tekst: 'Wij zetten op en sturen bij.' },
+      { label: 'Gids', titel: 'Landingspagina maken', href: '/kennisbank/gidsen/landingspagina-maken/', tekst: 'Een pagina die van klikken klanten maakt.' },
+    ]}
+  />
+
+  <Actie titel="Zullen wij je eerste campagne opzetten?" tekst={`${site.contactpersoon} belt je binnen 15 minuten terug en rekent met je uit wat een aanvraag mag kosten. Daarna weet je of Google Ads voor jou loont.`} />
+</Base>
+<style>
+  .prijs-eigen { padding: 22px; }
+  .prijs-kop { font-size: 1.2rem; font-weight: 900; line-height: 1.25; margin: 6px 0 6px; }
+  .prijs-eigen .btn { width: 100%; margin-top: 8px; }
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+</style>

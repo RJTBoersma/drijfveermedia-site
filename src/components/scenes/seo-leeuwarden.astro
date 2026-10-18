@@ -1,0 +1,58 @@
+---
+// Scène voor /seo-leeuwarden/: een kaartje van Leeuwarden met de singel om de binnenstad, en ernaast de zoekresultaten.
+// De bovenste plek is nog leeg; in de volledige versie schuift "Jouw bedrijf" daar van onderen in.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kaart van Leeuwarden met de singel om de binnenstad. Naast de kaart staan zoekresultaten, en jouw bedrijf schuift omhoog naar de eerste plek.'}>
+  <!-- kaart -->
+  <rect x="24" y="40" width="176" height="196" rx="14" fill="#e9eef3" />
+  <path d="M24 170c40-10 70 12 110-2s50-16 66-12" stroke="#fff" stroke-width="10" fill="none" />
+  <path d="M96 40c6 50-8 120 10 196" stroke="#fff" stroke-width="7" fill="none" />
+  <path d="M24 92h176" stroke="#fff" stroke-width="5" fill="none" />
+  <rect x="140" y="190" width="44" height="30" rx="6" fill="#d7e6d8" />
+  <rect x="36" y="56" width="40" height="26" rx="6" fill="#d7e6d8" />
+  <!-- singel om de binnenstad -->
+  <path d="M84 108l26-14 30 8 16 26-8 30-28 14-30-6-14-26z" fill="#f4f7fa" stroke="#9fc0d3" stroke-width="6" stroke-linejoin="round" />
+  <path class="l" d="M98 128h40M118 110v48" style="stroke-width:2" />
+  <g><path d="M104 118c0-9 7-15 14-15s14 6 14 15c0 10-14 22-14 22s-14-12-14-22z" fill="#ff6600" /><circle cx="118" cy="118" r="5" fill="#fff" /></g>
+  <path d="M46 196c0-7 5-12 11-12s11 5 11 12c0 8-11 17-11 17s-11-9-11-17z" fill="#8aa0b4" />
+  <path d="M162 70c0-7 5-12 11-12s11 5 11 12c0 8-11 17-11 17s-11-9-11-17z" fill="#8aa0b4" />
+  <text x="112" y="228" text-anchor="middle" font-size="12" font-weight="700" class="zacht">Leeuwarden</text>
+  <!-- zoekveld -->
+  <rect x="216" y="40" width="240" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="234" cy="53" r="6" fill="none" stroke="#074663" stroke-width="2" /><path d="M238.5 57.5l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <text x="250" y="58" font-size="12" font-weight="600">loodgieter leeuwarden</text>
+  <!-- plek 1: nog leeg -->
+  <rect x="216" y="82" width="240" height="36" rx="9" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="5 5" />
+  <!-- plek 2 tot 4 -->
+  <g>
+    <rect x="216" y="128" width="240" height="36" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <circle cx="236" cy="146" r="9" fill="#e8eef4" /><rect x="254" y="139" width="120" height="7" rx="3.5" fill="#c9d3dd" /><rect x="254" y="150" width="160" height="5" rx="2.5" fill="#e8eef4" />
+    <rect x="216" y="174" width="240" height="36" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <circle cx="236" cy="192" r="9" fill="#e8eef4" /><rect x="254" y="185" width="104" height="7" rx="3.5" fill="#c9d3dd" /><rect x="254" y="196" width="150" height="5" rx="2.5" fill="#e8eef4" />
+    <rect x="216" y="220" width="240" height="36" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <circle cx="236" cy="238" r="9" fill="#e8eef4" /><rect x="254" y="231" width="130" height="7" rx="3.5" fill="#c9d3dd" /><rect x="254" y="242" width="140" height="5" rx="2.5" fill="#e8eef4" />
+  </g>
+  {!mini && (
+    <g>
+      <circle class="ring" cx="118" cy="138" r="10" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="stijger">
+        <rect x="216" y="82" width="240" height="36" rx="9" fill="#fff" stroke="#ff6600" stroke-width="2.5" />
+        <circle cx="236" cy="100" r="10" fill="#074663" /><text x="236" y="104.5" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" style="fill:#fff">1</text>
+        <text x="254" y="98" font-size="12.5" font-weight="800">Jouw bedrijf</text>
+        <text x="254" y="111" font-size="10" class="zacht">Leeuwarden · nu open · bellen</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .stijger, .ring { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .stijger { opacity: 0; transform: translateY(150px); }
+  :global(.teken-js) .ring { opacity: 0; }
+  .in-beeld .stijger { animation: seo-leeuwarden-stijg 1.6s cubic-bezier(.5,0,.2,1) 0.5s forwards; }
+  .in-beeld .ring { animation: seo-leeuwarden-ring 3s ease-out 2.1s infinite; }
+  @keyframes seo-leeuwarden-stijg { 0% { opacity: 0; transform: translateY(150px); } 20% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+  @keyframes seo-leeuwarden-ring { 0% { opacity: 0.9; transform: scale(0.6); } 70%, 100% { opacity: 0; transform: scale(3); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .stijger, .in-beeld .ring { animation: none; } }
+</style>

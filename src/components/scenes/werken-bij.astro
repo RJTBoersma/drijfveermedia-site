@@ -1,0 +1,53 @@
+---
+// Scène voor /werken-bij/: een bureau met laptop, een rugzak en een dampende mok koffie. Op het scherm staat een welkom klaar.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een bureau met een laptop, een rugzak en een dampende mok koffie. Op het scherm verschijnt een welkom.'}>
+  <!-- bureau -->
+  <rect x="50" y="196" width="380" height="12" rx="6" fill="#d9e1ea" />
+  <path class="l" d="M74 208v50M406 208v50" />
+  <!-- laptop -->
+  <rect x="168" y="90" width="150" height="100" rx="10" fill="#10283f" />
+  <rect x="176" y="98" width="134" height="84" rx="5" fill="#fff" />
+  <path d="M150 196l12-8h162l12 8z" fill="#8aa0b4" />
+  <rect x="188" y="110" width="58" height="8" rx="4" fill="#074663" />
+  <rect x="188" y="126" width="104" height="6" rx="3" fill="#e8eef4" />
+  <rect x="188" y="138" width="88" height="6" rx="3" fill="#e8eef4" />
+  <rect x="188" y="156" width="52" height="16" rx="5" fill="#ff6600" />
+  <!-- rugzak -->
+  <path class="v" d="M84 196v-56a22 22 0 0 1 22-22h12a22 22 0 0 1 22 22v56z" />
+  <path class="l" d="M84 196v-56a22 22 0 0 1 22-22h12a22 22 0 0 1 22 22v56zM100 118v-6a12 12 0 0 1 24 0v6M94 160h36v22H94z" />
+  <!-- briefje -->
+  <rect x="222" y="40" width="70" height="40" rx="6" fill="#fff4ec" stroke="#ffd6b8" stroke-width="2" />
+  <text x="257" y="65" text-anchor="middle" font-size="13" font-weight="800">Welkom</text>
+  <!-- mok -->
+  <path class="v" d="M352 160h34v30a6 6 0 0 1-6 6h-22a6 6 0 0 1-6-6z" style="fill:#fff" />
+  <path class="l" d="M352 160h34v30a6 6 0 0 1-6 6h-22a6 6 0 0 1-6-6zM386 168h6a8 8 0 0 1 0 16h-6" />
+  <path class="a" d="M352 170h34" />
+  {!mini && (
+    <g>
+      <path class="werken-bij-damp" d="M362 150c-4-6 4-10 0-16M376 150c-4-6 4-10 0-16" fill="none" stroke="#8aa0b4" stroke-width="2.5" stroke-linecap="round" />
+      <g class="werken-bij-ballon">
+        <path d="M352 58h70a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10h-46l-12 12v-12h-12a10 10 0 0 1-10-10V68a10 10 0 0 1 10-10z" fill="#074663" />
+        <text x="387" y="85" text-anchor="middle" font-size="16" font-weight="900" style="fill:#fff">Moi</text>
+      </g>
+      <g class="werken-bij-cursor"><path d="M214 160l0 22 6-6 5 10 5-2-5-10h8z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" /></g>
+    </g>
+  )}
+</svg>
+<style>
+  .werken-bij-ballon { transform-box: fill-box; transform-origin: 20% 100%; }
+  :global(.teken-js) .werken-bij-ballon { opacity: 0; transform: scale(0.5); }
+  :global(.teken-js) .werken-bij-damp { opacity: 0; }
+  :global(.teken-js) .werken-bij-cursor { opacity: 0; transform: translate(40px, 30px); }
+  .in-beeld .werken-bij-cursor { animation: werken-bij-cursor 0.9s cubic-bezier(.3,1,.5,1) 0.4s forwards; }
+  .in-beeld .werken-bij-ballon { animation: werken-bij-ballon 0.5s cubic-bezier(.3,1.6,.5,1) 1.3s forwards; }
+  .in-beeld .werken-bij-damp { animation: werken-bij-damp 3.2s ease-in-out 0.6s infinite; }
+  @keyframes werken-bij-cursor { to { opacity: 1; transform: none; } }
+  @keyframes werken-bij-ballon { to { opacity: 1; transform: none; } }
+  @keyframes werken-bij-damp { 0% { opacity: 0; transform: translateY(6px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-8px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .werken-bij-cursor, .in-beeld .werken-bij-ballon, .in-beeld .werken-bij-damp { animation: none; opacity: 1; transform: none; }
+  }
+</style>

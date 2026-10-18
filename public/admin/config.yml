@@ -1,0 +1,58 @@
+# Beheerscherm van drijfveermedia.nl (Sveltia CMS).
+# Inloggen: met je GitHub-account ("Sign in with GitHub" of met een persoonlijk toegangstoken).
+backend:
+  name: github
+  repo: DRIJFVEER-ACCOUNT/drijfveermedia # vul hier de GitHub-gebruiker/organisatie en repositorynaam in
+  branch: main
+  commit_messages:
+    create: "Nieuw: {{collection}} {{slug}}"
+    update: "Bijgewerkt: {{collection}} {{slug}}"
+    delete: "Verwijderd: {{collection}} {{slug}}"
+
+locale: nl
+site_url: https://www.drijfveermedia.nl
+display_url: https://www.drijfveermedia.nl
+logo_url: /favicon.svg
+media_folder: public/img/uploads
+public_folder: /img/uploads
+
+collections:
+  - name: logboek
+    label: Logboek
+    label_singular: Maand
+    description: Elke maand hoe onze eigen site scoort. Cijfers uit SE Ranking (Concurrentieonderzoek, Google Zoeken, Nederland).
+    folder: src/content/logboek
+    create: true
+    slug: "{{fields.maand}}"
+    summary: "{{maand}} · {{titel}}"
+    sortable_fields: [maand, datum]
+    fields:
+      - { name: titel, label: Titel, widget: string, hint: "Bijvoorbeeld: Logboek november 2026: de eerste maand na de lancering" }
+      - { name: beschrijving, label: "Omschrijving voor Google (120 tot 160 tekens)", widget: text }
+      - { name: maand, label: "Maand van de meting (JJJJ-MM)", widget: string, pattern: ['^\d{4}-\d{2}$', 'Schrijf als 2026-11'] }
+      - { name: datum, label: Publicatiedatum, widget: datetime, time_format: false, format: "YYYY-MM-DD" }
+      - { name: verkeer, label: "Bezoekers uit Google per maand (SE Ranking, organisch verkeer)", widget: number, value_type: int }
+      - { name: zoekwoorden, label: "Zoekwoorden in de top 100", widget: number, value_type: int }
+      - { name: top10, label: "Zoekwoorden in de top 10 (top 1-5 plus 6-10)", widget: number, value_type: int }
+      - { name: aanvragen, label: "Aanvragen via de site deze maand", widget: number, value_type: int, required: false }
+      - { name: domainTrust, label: "Domain Trust", widget: number, value_type: int, required: false }
+      - { name: body, label: "Tekst (minstens 400 woorden: wat deden we, wat leverde het op, wat doen we volgende maand)", widget: markdown }
+
+  - name: instellingen
+    label: Bedrijfsgegevens
+    files:
+      - name: bedrijf
+        label: Bedrijfsgegevens
+        file: src/data/bedrijf.json
+        fields:
+          - { name: naam, label: Bedrijfsnaam, widget: string }
+          - { name: telefoon, label: Telefoonnummer, widget: string }
+          - { name: email, label: E-mailadres, widget: string }
+          - { name: straat, label: Straat en huisnummer, widget: string }
+          - { name: postcode, label: Postcode, widget: string }
+          - { name: plaats, label: Plaats, widget: string }
+          - { name: provincie, label: Provincie, widget: string }
+          - { name: kvk, label: KvK-nummer, widget: string }
+          - { name: contactpersoon, label: "Contactpersoon (voornaam)", widget: string }
+          - { name: kantoortijden, label: Kantoortijden, widget: string }
+          - { name: belofte, label: Terugbelbelofte, widget: string }

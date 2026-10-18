@@ -1,0 +1,75 @@
+---
+// Scène voor /kennisbank/gidsen/landingspagina-maken/: een pagina zonder menu (doorgestreept), met kop, belofte, bewijs, prijs en één knop.
+// Ernaast een checklist. Als hij leeft: de vinkjes verschijnen één voor één en een cursor tikt rustig op de knop.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const items = ['Eén doel', 'Kop = advertentie', 'Echt bewijs', 'Prijs erbij', 'Eén knop'];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een landingspagina zonder menu, met een kop, een belofte, reviews, een prijs en één oranje knop. Ernaast een checklist die wordt afgevinkt.'}>
+  <!-- de pagina -->
+  <rect x="50" y="18" width="196" height="236" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="66" y="28" width="44" height="10" rx="5" />
+  <path d="M212 28h16M212 33h16M212 38h16" stroke="#8aa0b4" stroke-width="2.2" stroke-linecap="round" />
+  <path class="a" d="M209 42l22-17" />
+  <rect x="66" y="56" width="150" height="13" rx="6" fill="#10283f" />
+  <rect x="66" y="74" width="108" height="13" rx="6" fill="#10283f" />
+  <rect class="v" x="66" y="98" width="160" height="7" rx="3.5" />
+  <rect class="v" x="66" y="110" width="128" height="7" rx="3.5" />
+  <rect x="66" y="128" width="164" height="34" rx="8" fill="#f4f7fa" stroke="#d9e1ea" stroke-width="1.5" />
+  {[0, 1, 2, 3, 4].map((i) => (
+    <path d={`M${84 + i * 15} 137l2 4.2 4.6.6-3.3 3.2.8 4.6-4.1-2.2-4.1 2.2.8-4.6-3.3-3.2 4.6-.6z`} fill="#ff6600" />
+  ))}
+  <rect class="v" x="160" y="139" width="58" height="6" rx="3" />
+  <rect class="v" x="160" y="150" width="40" height="6" rx="3" />
+  <rect x="66" y="172" width="86" height="22" rx="11" fill="#e8eef4" />
+  <text x="109" y="187" font-size="11" font-weight="800" text-anchor="middle">vanaf € 65</text>
+  <rect class="o" x="66" y="206" width="164" height="32" rx="9" />
+  <text x="136" y="226" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">Plan je reiniging</text>
+
+  <!-- de checklist -->
+  <rect x="272" y="34" width="188" height="206" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="290" y="62" font-size="13" font-weight="800">Checklist</text>
+  {items.map((t, i) => (
+    <g>
+      <rect x="290" y={78 + i * 30} width="16" height="16" rx="4" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x="316" y={91 + i * 30} font-size="12">{t}</text>
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      {items.map((_, i) => (
+        <path class="vinkje" style={`animation-delay:${0.5 + i * 0.35}s`} d={`M293 ${86 + i * 30}l4 4 7-8`} fill="none" stroke="#1f8a5b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+      ))}
+      <circle class="rimpel" cx="208" cy="222" r="12" fill="none" stroke="#fff" stroke-width="2" />
+      <g class="cursor">
+        <path d="M208 216v20l5.5-5 4 9 3.6-1.6-4-8.8h7.4z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .cursor, .rimpel { transform-box: fill-box; transform-origin: 0 0; }
+  .rimpel { transform-origin: center; }
+  :global(.teken-js) .vinkje { opacity: 0; }
+  :global(.teken-js) .rimpel { opacity: 0; }
+  .in-beeld .vinkje { animation: kennisbank-gidsen-landingspagina-maken-vink 0.4s ease-out forwards; }
+  .in-beeld .cursor { animation: kennisbank-gidsen-landingspagina-maken-tik 4s ease-in-out 2.4s infinite; }
+  .in-beeld .rimpel { animation: kennisbank-gidsen-landingspagina-maken-rimpel 4s ease-out 2.4s infinite; }
+  @keyframes kennisbank-gidsen-landingspagina-maken-vink { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-landingspagina-maken-tik {
+    0%, 30%, 100% { transform: translate(14px, 12px); }
+    45% { transform: translate(0, 0); }
+    50% { transform: translate(0, 0) scale(0.9); }
+    56% { transform: translate(0, 0); }
+  }
+  @keyframes kennisbank-gidsen-landingspagina-maken-rimpel {
+    0%, 49% { opacity: 0; transform: scale(0.4); }
+    52% { opacity: 0.9; }
+    75%, 100% { opacity: 0; transform: scale(2); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .vinkje, .in-beeld .cursor, .in-beeld .rimpel { animation: none; }
+    .in-beeld .vinkje { opacity: 1; }
+  }
+</style>

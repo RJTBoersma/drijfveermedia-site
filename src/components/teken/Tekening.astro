@@ -1,0 +1,19 @@
+---
+// Eén lijntekening uit de tekenset. Tekent zichzelf zodra hij in beeld komt.
+import { tekeningen } from '../../data/tekeningen';
+interface Props { naam: string; maat?: number; label?: string; class?: string; vertraging?: number }
+const { naam, maat = 56, label, class: klasse, vertraging = 0 } = Astro.props;
+const inhoud = tekeningen[naam] ?? tekeningen.lamp;
+---
+<svg
+  class:list={['tekening', klasse]}
+  viewBox="0 0 64 64"
+  width={maat}
+  height={maat}
+  data-teken
+  style={vertraging ? `--start:${vertraging}ms` : undefined}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  set:html={inhoud}
+/>

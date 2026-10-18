@@ -1,0 +1,110 @@
+---
+// Sitemap voor mensen: alle pagina's op één plek, automatisch uit scripts/paginas.json.
+// Voor zoekmachines is er daarnaast /sitemap-index.xml.
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import paginas from '../../../scripts/paginas.json';
+import { site } from '../../data/site';
+
+type P = { url: string; naam: string; type: string; wachtOpInhoud?: boolean };
+const alle = (paginas as P[]).filter((p) => !p.wachtOpInhoud && p.type !== 'systeem' && p.url !== '/sitemap/');
+const schoon = (n: string) => n.replace(/\s*\((pillar|overzicht|gids \+ dienst)\)\s*/gi, '').trim();
+const opNaam = (a: P, b: P) => schoon(a.naam).localeCompare(schoon(b.naam), 'nl');
+const van = (...types: string[]) => alle.filter((p) => types.includes(p.type));
+
+// Diensten: elke pillar met de pagina's die eronder vallen
+const pillars = van('pillar', 'hub').filter((p) => p.url !== '/werkgebied/');
+const diensten = pillars.map((p) => ({ p, sub: alle.filter((s) => s.url !== p.url && s.url.startsWith(p.url) && !['plaats', 'provincie'].includes(s.type)) }));
+const vast = ['/', '/prijzen/', '/gratis-website-analyse/', '/consult/', '/garantie/', '/werkwijze/', '/over-ons/', '/proeflab/', '/zo-werken-we-met-ai/', '/werken-bij/', '/contact/', '/en/'].map((u) => alle.find((p) => p.url === u)).filter(Boolean) as P[];
+const logboek = (await getCollection('logboek')).sort((a, b) => b.data.maand.localeCompare(a.data.maand));
+const groepen: { titel: string; id: string; items: P[] }[] = [
+  { titel: 'Werkgebied', id: 'werkgebied', items: [...van('hub').filter((p) => p.url === '/werkgebied/'), ...van('provincie').sort(opNaam), ...van('plaats').sort(opNaam)] },
+  { titel: 'Cases', id: 'cases', items: [alle.find((p) => p.url === '/cases/')!, ...van('case').sort(opNaam)] },
+  { titel: 'Gidsen', id: 'gidsen', items: [alle.find((p) => p.url === '/kennisbank/gidsen/')!, ...van('gids').filter((p) => p.url.startsWith('/kennisbank/')).sort(opNaam)] },
+  { titel: 'Begrippen', id: 'begrippen', items: [alle.find((p) => p.url === '/kennisbank/wat-is/')!, ...van('begrip').sort(opNaam)] },
+  { titel: 'Blogs', id: 'blogs', items: van('blog').sort(opNaam) },
+  { titel: 'Juridisch', id: 'juridisch', items: van('juridisch') },
+];
+const klein = groepen.filter((g) => ['cases', 'blogs', 'juridisch'].includes(g.id));
+const groot = groepen.filter((g) => ['werkgebied', 'gidsen', 'begrippen'].includes(g.id));
+const totaal = new Set([...alle.map((p) => p.url), ...logboek.map((l) => `/logboek/${l.id}/`), '/sitemap/']).size;
+---
+<Base
+  title="Sitemap: alle pagina's op een rij | Drijfveer Media"
+  description="Alle pagina's van Drijfveer Media op één plek: diensten, werkgebied, cases, het logboek, gidsen, begrippen en blogs. Zo vind je snel wat je zoekt."
+  kruimels={[{ naam: 'Sitemap', url: '/sitemap/' }]}
+>
+  <section class="wrap sectie sitemap">
+    <p class="kicker">Sitemap</p>
+    <h1>Alle pagina's op een rij</h1>
+    <p class="lead muted">{totaal} pagina's, van diensten tot begrippen. Zoek je iets en vind je het niet? Bel <a href={site.telefoonLink}>{site.telefoon}</a> of kijk in de <a href="/kennisbank/">kennisbank</a>.</p>
+    <nav class="sprong" aria-label="Spring naar">
+      <a href="#vast">Algemeen</a><a href="#cases">Cases</a><a href="#logboek">Logboek</a><a href="#diensten">Diensten</a><a href="#werkgebied">Werkgebied</a><a href="#gidsen">Gidsen</a><a href="#begrippen">Begrippen</a><a href="#blogs">Blogs</a><a href="#juridisch">Juridisch</a>
+    </nav>
+
+    <div class="blokken">
+      <section class="blok" id="vast">
+        <h2>Algemeen</h2>
+        <ul>{vast.map((p) => <li><a href={p.url}>{p.url === '/' ? 'Home' : schoon(p.naam)}</a></li>)}</ul>
+      </section>
+      <div class="stapel">
+        {klein.slice(0, 2).map((g) => (
+          <section class="blok" id={g.id}><h2>{g.titel}</h2><ul>{g.items.map((p) => <li><a href={p.url}>{schoon(p.naam)}</a></li>)}</ul></section>
+        ))}
+      </div>
+      <div class="stapel">
+        {klein.slice(2).map((g) => (
+          <section class="blok" id={g.id}><h2>{g.titel}</h2><ul>{g.items.map((p) => <li><a href={p.url}>{schoon(p.naam)}</a></li>)}</ul></section>
+        ))}
+        <section class="blok" id="logboek">
+          <h2>Logboek</h2>
+          <ul>
+            <li><a href="/logboek/">Zo scoren we zelf</a></li>
+            {logboek.map((l) => <li><a href={`/logboek/${l.id}/`}>{l.data.titel}</a></li>)}
+          </ul>
+        </section>
+      </div>
+
+      <section class="blok breed" id="diensten">
+        <h2>Diensten</h2>
+        <div class="diensten">
+          {diensten.map(({ p, sub }) => (
+            <div>
+              <h3><a href={p.url}>{schoon(p.naam)}</a></h3>
+              {sub.length > 0 && <ul>{sub.map((s) => <li><a href={s.url}>{schoon(s.naam)}</a></li>)}</ul>}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {groot.map((g) => (
+        <section class="blok breed" id={g.id}>
+          <h2>{g.titel}</h2>
+          <ul class="kolommen">{g.items.map((p) => <li><a href={p.url}>{schoon(p.naam)}</a></li>)}</ul>
+        </section>
+      ))}
+    </div>
+    <p class="klein muted voet">Voor zoekmachines staat er ook een <a href="/sitemap-index.xml">XML-sitemap</a>, die bij elke wijziging vanzelf wordt bijgewerkt.</p>
+  </section>
+</Base>
+<style>
+  .sitemap h1 { margin: 8px 0 12px; }
+  .lead { max-width: 60ch; font-size: var(--step-1); }
+  .sprong { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 36px; }
+  .sprong a { background: var(--chip); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 0.92rem; padding: 6px 14px; border-radius: 999px; }
+  .sprong a:hover { background: var(--navy); color: #fff; }
+  .blokken { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 20px; align-items: start; }
+  .blok { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; scroll-margin-top: 100px; }
+  .blok.breed { grid-column: 1 / -1; }
+  .stapel { display: grid; gap: 20px; align-content: start; }
+  .blok h2 { font-size: 1.3rem; margin: 0 0 12px; }
+  .blok h3 { font-size: 1.02rem; margin: 0 0 6px; }
+  .blok ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: 0.98rem; }
+  .blok ul.kolommen { display: block; columns: 3 240px; column-gap: 28px; }
+  .blok ul.kolommen li { break-inside: avoid; margin-bottom: 6px; }
+  .blok a { color: var(--ink); text-decoration-color: var(--line); }
+  .blok a:hover { color: var(--navy); text-decoration-color: var(--orange); }
+  .diensten { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 22px 28px; }
+  .diensten ul { font-size: 0.94rem; }
+  .voet { margin-top: 28px; }
+</style>

@@ -1,0 +1,317 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--schema-markup.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/schema-markup/';
+const datum = '2026-10-18';
+const definitie = 'Schema markup is een stuk code op je pagina dat zoekmachines in vaste termen vertelt wat er staat, zoals je bedrijfsnaam, je openingstijden, een prijs of de datum van een evenement.';
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Schema markup',
+    alternateName: ['Structured data', 'Gestructureerde gegevens', 'Schema.org-markup'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat is schema markup?',
+    inLanguage: 'nl-NL',
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    mainEntity: { '@id': `${site.url}${url}#begrip` },
+  },
+];
+const kort = `{
+  "@type": "Bakery",
+  "name": "Bakkerij De Vries",
+  "areaServed": "Emmen",
+  "openingHours": "Mo-Sa 07:00-17:00"
+}`;
+const microdata = `<div itemscope itemtype="https://schema.org/Bakery">
+  <h1 itemprop="name">Bakkerij De Vries</h1>
+  <p>Open: <span itemprop="openingHours" content="Mo-Sa 07:00-17:00">
+    maandag tot en met zaterdag, 7.00 tot 17.00 uur</span></p>
+</div>`;
+const volledig = `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": "Installatiebedrijf Jansen",
+  "url": "https://www.voorbeeld.nl/",
+  "telephone": "+31-591-000000",
+  "image": "https://www.voorbeeld.nl/img/bus.jpg",
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Voorbeeldweg 12",
+    "postalCode": "7800 AA",
+    "addressLocality": "Emmen",
+    "addressCountry": "NL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 52.78512,
+    "longitude": 6.89763
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "08:00",
+    "closes": "17:00"
+  }],
+  "areaServed": ["Emmen", "Coevorden", "Klazienaveen"],
+  "sameAs": ["https://www.facebook.com/voorbeeld"]
+}
+</script>`;
+const hoofdstukken = [
+  { id: 'hoe', titel: 'Hoe het werkt' },
+  { id: 'namen', titel: 'Eén ding, veel namen' },
+  { id: 'formaten', titel: 'JSON-LD, Microdata en RDFa' },
+  { id: 'oplevert', titel: 'Wat het oplevert, en wat niet' },
+  { id: 'soorten', titel: 'De types die Google toont' },
+  { id: 'per-bedrijf', titel: 'Welke markup bij jouw bedrijf past' },
+  { id: 'voorbeeld', titel: 'Een volledig voorbeeld' },
+  { id: 'stappen', titel: 'Toevoegen in zes stappen' },
+  { id: 'hulpmiddelen', titel: 'WordPress, plugins en generators' },
+  { id: 'testen', titel: 'Testen en controleren' },
+  { id: 'regels', titel: 'De regels van Google' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'veranderd', titel: 'Wat er veranderde' },
+  { id: 'ai', titel: 'Schema markup en AI' },
+];
+---
+<Base
+  title="Wat is schema markup? Uitleg met voorbeeld | Drijfveer Media"
+  description="Wat is schema markup? Een stuk code dat Google vertelt wat er op je pagina staat. Wat het oplevert, welke soorten er zijn en hoe je het toevoegt en test."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Schema markup', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Technische SEO</p>
+        <h1>Wat is schema markup?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Wat is schema markup, en heb jij het nodig? Het is een onzichtbaar label in de code van je website. Een bezoeker ziet het niet, een zoekmachine leest het als een formulier dat al is ingevuld. Hieronder lees je hoe het werkt, wat het wel en niet oplevert, welke soort bij jouw bedrijf past en hoe je het stap voor stap toevoegt en test.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={15} />
+
+      <h2 id="hoe">Hoe schema markup werkt</h2>
+      <p>Jij ziet "Lauwers 9, Assen" en weet meteen dat het een adres is. Een zoekmachine moet dat afleiden uit de tekst. Met de markup hoeft hij niet te raden: je zegt het gewoon. Dit is een bedrijf, dit is het adres, dit zijn de openingstijden.</p>
+      <p>Google zegt het zelf zo: met gestructureerde gegevens geef je expliciete aanwijzingen over de betekenis van een pagina. Op een receptpagina zijn dat bijvoorbeeld de ingrediënten, de bereidingstijd en het aantal calorieën. Google gebruikt die gegevens om de pagina te begrijpen, en ook om kennis te verzamelen over de wereld: over personen, boeken en bedrijven.</p>
+      <p>Een verzonnen voorbeeld voor een bakkerij in Emmen, in de kortste vorm:</p>
+      <pre><code>{kort}</code></pre>
+      <p>Elk regeltje is een eigenschap met een waarde. Het woord achter <code>@type</code> zegt wat voor ding het is. Daaronder volgen de eigenschappen die bij dat type horen.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="namen">Eén ding, veel namen</h2></div>
+      <p>Je hoort er verschillende namen voor: structured data, gestructureerde gegevens, gestructureerde data, schema markup of schema.org-markup. Het idee is steeds hetzelfde. Strikt genomen is structured data de algemene term en is Schema.org de woordenlijst die je ervoor gebruikt.</p>
+      <p>Die woordenlijst bestaat sinds 2011. Hij is opgezet door Google, Microsoft, Yahoo en Yandex en wordt nu door een open gemeenschap bijgehouden. Volgens Schema.org telt de woordenlijst nu 826 types en 1.540 eigenschappen. Volgens Schema.org gebruikten in 2024 meer dan 45 miljoen domeinen deze markup. Er bestaan dus honderden schema markups, van Product en Event tot Recipe en LocalBusiness. Je hebt er als ondernemer maar een paar van nodig.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="formaten">JSON-LD, Microdata en RDFa</h2></div>
+      <p>Je kunt markup op drie manieren in je pagina zetten. Google ondersteunt ze alle drie en zegt dat ze even goed werken, zolang ze kloppen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Formaat</th><th>Waar het staat</th><th>Voor wie</th></tr></thead>
+          <tbody>
+            <tr><td>JSON-LD</td><td>Een los blok in de code, los van de zichtbare tekst</td><td>Bijna iedereen. Google raadt dit formaat aan.</td></tr>
+            <tr><td>Microdata</td><td>Als extra kenmerken in de HTML van de zichtbare tekst</td><td>Oudere sites en sommige thema's</td></tr>
+            <tr><td>RDFa</td><td>Ook als kenmerken in de HTML</td><td>Vooral in systemen die met gekoppelde data werken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Waarom JSON-LD? Omdat het los staat van je opmaak. Verander je de vormgeving van je site, dan blijft de markup heel. Ter vergelijking ziet hetzelfde in Microdata er zo uit:</p>
+      <pre><code>{microdata}</code></pre>
+      <p>Dat werkt ook, maar het is makkelijker om iets kapot te maken als je later een tekst aanpast.</p>
+
+      <div class="stap-kop"><Tekening naam="ster" maat={52} /><h2 id="oplevert">Wat het oplevert, en wat niet</h2></div>
+      <p>Google kan je resultaat uitbreiden met aanvullende informatie. Dat heten rich snippets, of in het Nederlands van Google: uitgebreide resultaten. Denk aan een prijs, een bereidingstijd, de data van evenementen of het kruimelpad boven je titel. Zo'n resultaat valt meer op dan de rest.</p>
+      <p>Google noemt zelf een paar voorbeelden van sites die het meten. Rotten Tomatoes zag een 25 procent hogere klikratio op pagina's met structured data. Nestlé mat 82 procent meer klikken op pagina's die als uitgebreid resultaat verschenen. Dat zijn grote sites; voor een lokale bakker liggen de getallen anders. Maar het principe is hetzelfde: wie opvalt, krijgt de klik.</p>
+      <p>Wel een paar kanttekeningen:</p>
+      <ul>
+        <li><b>Geen garantie.</b> Google bepaalt zelf of het iets laat zien, ook als je code klopt. Dat hangt af van de zoeker, zijn locatie en zijn apparaat.</li>
+        <li><b>Geen snelweg naar boven.</b> Markup zet je niet vanzelf hoger. Google beschrijft het als een manier om je pagina beter te begrijpen en uitgebreide resultaten mogelijk te maken.</li>
+        <li><b>Niet elk type geeft een zichtbaar effect.</b> Sommige markup helpt alleen achter de schermen.</li>
+      </ul>
+      <p>Wat de markup biedt, is zekerheid: een zoekmachine of AI-assistent weet precies wie je bent en wat je aanbiedt. Daarover lees je meer bij <a href="/kennisbank/wat-is/entiteiten/">entiteiten</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="soorten">De types die Google toont</h2></div>
+      <p>Schema.org heeft honderden types, maar Google gebruikt er maar een deel voor uitgebreide resultaten. Dit zijn de belangrijkste uit de lijst die Google zelf bijhoudt (oktober 2026):</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Type</th><th>Wat je in Google ziet</th><th>Nuttig voor</th></tr></thead>
+          <tbody>
+            <tr><td>Organization</td><td>Logo, naam en gegevens in het kennisvenster</td><td>Elk bedrijf</td></tr>
+            <tr><td>Local business</td><td>Bedrijfsgegevens met openingstijden en route</td><td>Bedrijven met een adres of werkgebied</td></tr>
+            <tr><td>Breadcrumb</td><td>Het kruimelpad in plaats van de kale URL</td><td>Elke site met meer dan een paar pagina's</td></tr>
+            <tr><td>Article</td><td>Titel, datum en grotere afbeelding bij artikelen</td><td>Blogs, nieuws, gidsen</td></tr>
+            <tr><td>Product</td><td>Prijs, voorraad en beoordelingen</td><td>Winkels die producten verkopen</td></tr>
+            <tr><td>Event</td><td>Een lijst met evenementen, met datum en plaats</td><td>Organisatoren van evenementen, cursussen, workshops</td></tr>
+            <tr><td>Recipe</td><td>Foto, bereidingstijd en beoordeling</td><td>Foodblogs, bakkers, restaurants</td></tr>
+            <tr><td>Video</td><td>Videobeeld met afspeelknop en duur</td><td>Wie eigen video's op zijn site heeft</td></tr>
+            <tr><td>Job posting</td><td>Vacature in de zoekfunctie voor banen</td><td>Werkgevers met vacatures</td></tr>
+            <tr><td>Review snippet</td><td>Sterren onder het resultaat</td><td>Sites die reviews over producten of andere bedrijven verzamelen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="per-bedrijf">Welke markup bij jouw bedrijf past</h2></div>
+      <p>Je hoeft niet alles te doen. Voor de meeste mkb'ers is dit genoeg:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort bedrijf</th><th>Begin met</th><th>Daarna eventueel</th></tr></thead>
+          <tbody>
+            <tr><td>Installateur, aannemer, dakdekker</td><td>LocalBusiness (of een specifiek subtype) op home en contact</td><td>Breadcrumb, Service op dienstpagina's</td></tr>
+            <tr><td>Winkel of horeca met een adres</td><td>LocalBusiness met openingstijden</td><td>Menu, Event voor activiteiten</td></tr>
+            <tr><td>Adviseur, advocaat, accountant</td><td>Organization en Person voor de mensen</td><td>Article voor kennisartikelen</td></tr>
+            <tr><td>Opleider of organisator</td><td>Organization</td><td>Event voor elke cursusdatum</td></tr>
+            <tr><td>Webwinkel</td><td>Organization en Product</td><td>Review snippet voor productreviews</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Kies altijd het meest specifieke type dat past. Google raadt dat zelf aan. Een loodgieter is beter af met <code>Plumber</code> dan met het algemene <code>LocalBusiness</code>, en een bakker met <code>Bakery</code>.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2 id="voorbeeld">Een volledig voorbeeld voor een lokaal bedrijf</h2></div>
+      <p>Zo ziet de markup eruit voor een installateur in Emmen. Volgens Google zijn naam en adres verplicht. De rest is aanbevolen: hoe vollediger, hoe beter, zolang alles klopt. <span class="muted">(Verzonnen bedrijf en gegevens.)</span></p>
+      <pre><code>{volledig}</code></pre>
+      <p>Een paar dingen om op te letten. De coördinaten moeten volgens Google op minstens vijf decimalen nauwkeurig zijn. De openingstijden schrijf je als dagen met een begin- en eindtijd. Met <code>sameAs</code> verwijs je naar je profielen elders, zodat Google ziet dat het om hetzelfde bedrijf gaat. En alles wat hier staat, moet ook zichtbaar op je site staan.</p>
+
+      <h3>Meer dan één ding op een pagina</h3>
+      <p>Een pagina gaat vaak over meerdere dingen tegelijk. Een receptpagina heeft een recept, een video en een kruimelpad. Google schrijft dat je die allemaal mag markeren. Je kunt ze in elkaar nesten, bijvoorbeeld de video binnen het recept, of los naast elkaar zetten. Google begrijpt beide. Hoe meer van de zichtbare inhoud gemarkeerd is, hoe vollediger het beeld dat een zoekmachine van je pagina krijgt.</p>
+      <h3>Personen en auteurs</h3>
+      <p>Ook mensen kun je markeren, met het type <code>Person</code>. Denk aan de eigenaar op je over-ons-pagina of de schrijver van een artikel. Bij een artikel zet je de schrijver als <code>author</code>, met een link naar zijn profielpagina. Zo kan een zoekmachine de tekst koppelen aan een echte persoon met ervaring. Dat sluit aan bij wat Google <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a> noemt. Zet er alleen in wat ook op de pagina staat: naam, functie, eventueel een foto.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="stappen">Schema markup toevoegen in zes stappen</h2></div>
+      <ol>
+        <li><b>Kies je type.</b> Gebruik de tabel hierboven. Begin met je bedrijfsgegevens op de homepage of de contactpagina.</li>
+        <li><b>Verzamel de gegevens.</b> Precies dezelfde naam, hetzelfde adres en telefoonnummer als in je Google Bedrijfsprofiel en bij de KvK.</li>
+        <li><b>Schrijf of genereer de code.</b> Met de hand, met een plugin of met een markup generator.</li>
+        <li><b>Test de code</b> met de Test voor uitgebreide resultaten van Google, voordat hij live gaat.</li>
+        <li><b>Zet hem op de pagina.</b> Het JSON-LD-blok mag in de kop of in de body van de pagina staan.</li>
+        <li><b>Controleer na een paar weken</b> in Search Console of Google de markup heeft gevonden en of er fouten zijn.</li>
+      </ol>
+      <p>Google waarschuwt dat het even duurt. Het kan dagen duren voordat een nieuwe pagina gevonden en gelezen wordt. Heb je haast, vraag dan via de URL-inspectie in Search Console om de pagina opnieuw te bekijken. Hoe die tool werkt, staat in de gids over <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="hulpmiddelen">Met WordPress, een plugin of een generator</h2></div>
+      <p>Je hoeft geen programmeur te zijn. Google zegt het zelf: werk je met een CMS als WordPress of Wix, dan is een plugin vaak makkelijker dan zelf code schrijven.</p>
+      <ul>
+        <li><b>WordPress:</b> SEO-plugins als Yoast SEO en Rank Math zetten een basis van markup op je site, zoals je organisatie en het kruimelpad. Vul hun instellingen wel volledig in.</li>
+        <li><b>Andere systemen:</b> zoek in de handleiding van je CMS naar "structured data" of "schema". Veel systemen hebben een eigen instelling of uitbreiding.</li>
+        <li><b>Een markup generator:</b> een gratis website waar je velden invult en kant-en-klare JSON-LD terugkrijgt. Een bekende is de Schema Markup Generator van TechnicalSEO.com. Plak de uitkomst in je pagina.</li>
+        <li><b>Met de hand:</b> voor wie zijn eigen site bouwt. Dat geeft de meeste controle. Deze site doet het zo.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="testen">Testen en controleren</h2></div>
+      <p>Er zijn twee gratis testen. Gebruik ze allebei.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Test</th><th>Wat hij controleert</th><th>Wanneer</th></tr></thead>
+          <tbody>
+            <tr><td>Test voor uitgebreide resultaten (Google)</td><td>Of je markup in aanmerking komt voor een uitgebreid resultaat in Google, met een voorbeeld</td><td>Voor elke nieuwe of gewijzigde pagina</td></tr>
+            <tr><td>Schema Markup Validator (Schema.org)</td><td>Of je markup klopt volgens de woordenlijst van Schema.org, ook voor types die Google niet toont</td><td>Bij twijfel over de opbouw</td></tr>
+            <tr><td>Search Console, onder Optimalisaties</td><td>Per type hoeveel geldige en ongeldige items Google op je hele site vond</td><td>Elke maand</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Zo zie je of een site al markup heeft</h3>
+      <p>Benieuwd wat er nu op je eigen site staat, of bij een concurrent? Dat kan in een minuut:</p>
+      <ol>
+        <li>Open de Test voor uitgebreide resultaten en vul de URL van de pagina in.</li>
+        <li>Kies voor de test met de smartphone-crawler. Google kijkt eerst naar de mobiele versie van je site.</li>
+        <li>Bekijk welke items Google vond en of er fouten of waarschuwingen bij staan.</li>
+        <li>Wil je de ruwe code zien? Open de broncode van de pagina in je browser en zoek op <code>application/ld+json</code>.</li>
+      </ol>
+      <p>Vind je niets, terwijl je een plugin hebt? Kijk dan of die plugin goed is ingesteld, of dat een ander onderdeel hem uitschakelt.</p>
+      <p>Een fout moet je oplossen, anders telt het item niet mee. Een waarschuwing mag blijven staan. Volgens Google maakt het oplossen ervan je gegevens wel beter.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="regels">De regels van Google</h2></div>
+      <p>Google heeft algemene richtlijnen voor gestructureerde gegevens. Houd je je er niet aan, dan krijg je geen uitgebreid resultaat. Bij misbruik kan er een handmatige maatregel volgen. Dan verlies je de uitgebreide resultaten, maar volgens Google niet je positie. De belangrijkste regels:</p>
+      <ul class="vink">
+        <li>Markeer alleen wat ook zichtbaar op de pagina staat. Relevante informatie die bezoekers niet zien, hoort er niet in, ook als hij klopt.</li>
+        <li>Zet de markup op de pagina waar hij over gaat, niet op een lege pagina die alleen code bevat.</li>
+        <li>Houd de gegevens actueel. Een evenement dat voorbij is, toont Google niet meer.</li>
+        <li>Geen nepreviews en geen misleidende gegevens.</li>
+        <li>Vul alle verplichte eigenschappen in. Liever minder aanbevolen velden die kloppen, dan veel velden die half kloppen.</li>
+        <li>Blokkeer de pagina niet voor Google met robots.txt of noindex.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="fouten">Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><b>Je eigen reviews als sterren markeren.</b> Google toont reviewsterren voor een lokaal bedrijf alleen op sites die reviews over andere bedrijven verzamelen. Je eigen Google-reviews op je eigen site markeren levert dus geen sterren op.</li>
+        <li><b>Gegevens die niet overeenkomen.</b> Een ander telefoonnummer in de markup dan op de pagina of in je Bedrijfsprofiel. Dat zaait twijfel in plaats van zekerheid.</li>
+        <li><b>Twee plugins tegelijk.</b> Een thema en een SEO-plugin die allebei markup toevoegen, geven dubbele of tegenstrijdige gegevens.</li>
+        <li><b>Te algemeen type.</b> <code>Thing</code> of <code>Organization</code> waar <code>Dentist</code> of <code>Electrician</code> past.</li>
+        <li><b>Vergeten na een verhuizing.</b> Nieuw adres op de site, oud adres in de code.</li>
+        <li><b>Denken dat markup een truc is.</b> Het is een vertaling van wat er al staat. Een zwakke pagina wordt er niet sterk van.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="veranderd">Wat er de laatste jaren veranderde</h2></div>
+      <p>Google past regelmatig aan welke markup zichtbaar wordt. Twee voorbeelden die veel sites raakten:</p>
+      <ul>
+        <li><b>Augustus 2023:</b> de uitklapbare veelgestelde vragen (FAQ) toont Google sindsdien alleen nog bij bekende overheids- en zorgsites. How-to-resultaten verdwenen in september 2023 helemaal. Google zei erbij: markup die niet gebruikt wordt, kan geen kwaad.</li>
+        <li><b>Juni 2025:</b> Google kondigde aan te stoppen met onder meer Course Info, Claim Review, Estimated Salary, Learning Video, Special Announcement en Vehicle Listing. Volgens Google werden ze weinig gebruikt en voegden ze weinig toe.</li>
+      </ul>
+      <p>De les: zet markup niet neer voor één opvallend effect in Google. Zet hem neer omdat hij beschrijft wat er op je pagina staat. Dan blijft hij nuttig, ook als Google iets anders gaat tonen.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2 id="ai">Schema markup en AI-zoekmachines</h2></div>
+      <p>Heb je speciale markup nodig om in AI-antwoorden te komen? Volgens Google niet. Voor de AI-overzichten en de AI-modus gelden dezelfde basisregels als voor de gewone zoekresultaten. Er is geen speciale schema.org-markup nodig, schrijft Google. Wel noemt Google als goede gewoonte dat je gestructureerde gegevens overeenkomen met de zichtbare tekst.</p>
+      <p>Dat past bij hoe wij erover denken. Markup maakt je gegevens ondubbelzinnig: dit is de naam, dit is het adres, dit is de dienst. Elke machine die je pagina leest, heeft daar baat bij. Maar het is een aanvulling op een goede pagina, geen vervanging. Meer hierover lees je bij <a href="/generative-engine-optimization/">genoemd worden door AI</a>.</p>
+
+      <h2>Een voorbeeld: deze pagina</h2>
+      <p>Deze pagina heeft het zelf. In de code staat dat dit de uitleg is van een begrip, met de definitie die je bovenaan leest, wie hem schreef en wanneer hij voor het laatst is bijgewerkt. Op elke pagina van deze site staat ook wie we zijn: Drijfveer Media, Lauwers 9 in Assen, open op werkdagen van 8.00 tot 17.00 uur. Het kruimelpad bovenaan is gemarkeerd. En de veelgestelde vragen hieronder hebben hun eigen markup, ook al toont Google die niet meer als uitklapblok. Zo kan elke zoekmachine ze toch zonder twijfel lezen.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Liever laten regelen?</p>
+        <p>Wil je dat wij het voor je regelen, kijk dan bij <a href="/generative-engine-optimization/structured-data/">structured data</a>, vanaf € 295. Ook het kruimelpad kun je markeren, lees daarvoor <a href="/kennisbank/wat-is/breadcrumbs/">breadcrumbs</a>. De rest van de techniek onder je site komt aan bod bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is schema markup hetzelfde als structured data?', a: 'In de praktijk wel. Structured data, of gestructureerde gegevens, is de algemene term. Schema.org is de woordenlijst die je daarvoor gebruikt. Schema markup is de code die je met die woordenlijst schrijft.' },
+      { v: 'Kom ik hoger in Google met schema markup?', a: 'Niet direct. Markup helpt Google je pagina te begrijpen en kan een uitgebreid resultaat opleveren, zoals een prijs of evenementdatum. Dat kan meer klikken geven, maar markup op zich zet je niet hoger.' },
+      { v: 'Welk formaat moet ik gebruiken?', a: 'JSON-LD. Google ondersteunt ook Microdata en RDFa, maar raadt JSON-LD aan omdat het los staat van je opmaak en minder snel kapotgaat.' },
+      { v: 'Waar zet ik de JSON-LD-code?', a: 'In een script-blok in de kop of de body van de pagina waar de gegevens over gaan. Google kan het ook lezen als het met JavaScript wordt toegevoegd.' },
+      { v: 'Hoe test ik of mijn markup werkt?', a: 'Met de Test voor uitgebreide resultaten van Google en de Schema Markup Validator van Schema.org. Na livegang zie je in Search Console onder Optimalisaties per type of Google fouten vond.' },
+      { v: 'Wat kost het om schema markup te laten maken?', a: 'Doe je het zelf met een plugin of generator, dan kost het alleen tijd. Laat je het ons doen, dan begint het bij € 295 voor het inrichten van structured data op je site.' },
+      { v: 'Heeft FAQ-markup nog zin?', a: 'Google toont de uitklapbare vragen sinds augustus 2023 alleen nog bij bekende overheids- en zorgsites. De markup kan geen kwaad en maakt je vragen leesbaar voor zoekmachines, maar verwacht er geen zichtbaar effect van.' },
+      { v: 'Heb ik schema markup nodig voor AI-zoekmachines?', a: 'Volgens Google is er geen speciale markup nodig voor de AI-overzichten en de AI-modus. Markup die klopt met je zichtbare tekst helpt wel om je gegevens zonder twijfel over te brengen.' },
+    ]}
+  />
+
+  <Actie titel="Staat jouw bedrijf goed in de code?" tekst={`We kijken gratis welke gegevens Google nu over jouw bedrijf kan lezen, en wat er mist. ${site.contactpersoon} belt je met de uitkomst.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 0 0 32px; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,228 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-ai-modus.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-ai-modus/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is de AI-modus?' },
+  { id: 'tijdlijn', titel: 'Wat er sinds oktober 2025 veranderde' },
+  { id: 'verschil', titel: 'Het verschil met AI-overzichten' },
+  { id: 'hoe-werkt', titel: 'Hoe hij een antwoord maakt' },
+  { id: 'gevolgen', titel: 'Wat het betekent voor je vindbaarheid' },
+  { id: 'genoemd', titel: 'Zo word je erin genoemd' },
+  { id: 'zelf-gebruiken', titel: 'De AI-modus zelf gebruiken' },
+  { id: 'uitzetten', titel: 'Kun je hem uitzetten?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google AI-modus: wat is het en wat betekent het voor je vindbaarheid?',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'Thing', name: 'Google AI Mode' },
+  citation: [
+    'https://support.google.com/websearch/answer/16011537?hl=nl',
+    'https://developers.google.com/search/docs/appearance/ai-features',
+    'https://blog.google/intl/nl-nl/product/zoeken-kijken/de-ai-modus-komt-naar-google-zoeken-in-nederland/',
+  ],
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Google AI-modus: wat is het en wat doe je ermee?"
+  description="De Google AI-modus uitgelegd: hoe het tabblad werkt, wat er sinds oktober 2025 veranderde, het verschil met AI-overzichten en hoe je bedrijf erin genoemd wordt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google AI-modus', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · GEO" titel="Google AI-modus: wat is het en wat betekent het voor je vindbaarheid?" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Sinds oktober 2025 heeft Google Zoeken in Nederland een AI-modus. Je voert er een gesprek in plaats van een zoekopdracht. Hier lees je hoe de Google AI-modus werkt, wat er sindsdien veranderde en hoe je zorgt dat jouw bedrijf in de antwoorden staat.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand 18 oktober 2026)</p>
+          <ul>
+            <li>De Google AI-modus (in het Engels AI Mode) is een apart tabblad in Google Zoeken waar je vragen stelt en een geschreven antwoord met links krijgt.</li>
+            <li>Google begon de uitrol in Nederland op 8 oktober 2025, ook in het Nederlands.</li>
+            <li>Hij splitst je vraag in deelvragen en zoekt die tegelijkertijd op. Daardoor kan ook een pagina die niet bovenaan staat, als bron opduiken.</li>
+            <li>In mei 2026 schreef Google dat de AI-modus meer dan 1 miljard gebruikers per maand heeft.</li>
+            <li>Er zijn geen extra technische eisen. Een pagina die in Google staat met een tekstfragment, kan erin worden opgenomen.</li>
+          </ul>
+        </div>
+        <p class="klein muted">Alles in deze gids komt van Google zelf: het Helpcentrum van Google Zoeken, de documentatie voor website-eigenaren op developers.google.com en de berichten op blog.google. Geraadpleegd oktober 2026.</p>
+
+        <h2 id="wat-is">Wat is de Google AI-modus?</h2>
+        <p>Typ een vraag in Google en kijk naar de tabbladen onder de zoekbalk. Naast Alles en Afbeeldingen staat er een tabblad AI-modus. Klik je erop, dan verdwijnt de bekende lijst met resultaten. In plaats daarvan schrijft Google een antwoord, met links naar de sites waar de informatie vandaan komt. Onderaan staat een balk voor je vervolgvragen.</p>
+        <p>Het voelt meer als een chatbot dan als een zoekmachine. Je kunt doorvragen ("en wat kost dat ongeveer?") zonder opnieuw te beginnen. Google noemt het zelf zijn krachtigste AI-zoekfunctie.</p>
+        <h3>Zo open je hem</h3>
+        <ul>
+          <li>via google.com/ai;</li>
+          <li>via het tabblad AI-modus na een gewone zoekopdracht;</li>
+          <li>via de knop AI-modus in de Google-app op je telefoon;</li>
+          <li>door een vervolgvraag te stellen onder een AI-overzicht. Dat kan sinds januari 2026.</li>
+        </ul>
+        <h3>Zo stel je je vraag</h3>
+        <p>Volgens de helppagina van Google kun je je vraag typen of inspreken. Je kunt ook een of meer foto's toevoegen, een pdf of ander bestand uploaden (ook uit Drive), of de link van een webpagina plakken. In Chrome voeg je zelfs open tabbladen toe. Met Zoeken Live open je in de Google-app een gesproken gesprek, eventueel met je camera erbij.</p>
+        <h3>Welk model erachter zit</h3>
+        <p>Achter de schermen draait Gemini, het AI-model van Google. Sinds mei 2026 is volgens Google 3.5 Flash het standaardmodel. In het menu heet dat "Snel". Abonnees van Google AI Pro en Ultra kunnen sinds 13 oktober 2026 ook 4 Argon kiezen. Let op: zware modellen in de AI-modus komen per land en taal beschikbaar. Op de helppagina van Google staat Nederland in oktober 2026 nog niet bij de landen voor Gemini 3 Pro in de AI-modus. Meer over die modellen lees je in onze gids over <a href="/kennisbank/gidsen/google-gemini/">Google Gemini</a>.</p>
+
+        <h2 id="tijdlijn">Wat er sinds oktober 2025 veranderde</h2>
+        <p>De AI-modus is niet af. Google sleutelt er elke paar maanden aan. Dit zijn de stappen die voor Nederland tellen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Datum</th><th>Wat er veranderde</th></tr></thead>
+            <tbody>
+              <tr><td>20 mei 2025</td><td>AI-overzichten komen in het Nederlands.</td></tr>
+              <tr><td>8 oktober 2025</td><td>De AI-modus wordt uitgerold in 35 nieuwe talen, waaronder het Nederlands, en in bijna 50 nieuwe landen, waaronder Nederland. Daarmee is hij in meer dan 200 landen beschikbaar.</td></tr>
+              <tr><td>27 januari 2026</td><td>Gemini 3 wordt het standaardmodel voor AI-overzichten. Vanuit een AI-overzicht stel je direct een vervolgvraag in de AI-modus.</td></tr>
+              <tr><td>26 maart 2026</td><td>Zoeken Live wordt wereldwijd uitgerold: praten met Zoeken, met je stem en je camera.</td></tr>
+              <tr><td>6 mei 2026</td><td>Meer links in de antwoorden, naast de tekst waar ze bij horen. Op desktop zie je een voorbeeld als je over een link beweegt.</td></tr>
+              <tr><td>19 mei 2026</td><td>Een nieuw AI-zoekvak in alle landen waar de AI-modus werkt. Model 3.5 Flash wordt de standaard.</td></tr>
+              <tr><td>13 oktober 2026</td><td>4 Argon in de AI-modus voor abonnees van AI Pro en Ultra.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij de uitrol schreef Google dat vroege gebruikers vragen stellen die twee tot drie keer zo lang zijn als traditionele zoekopdrachten. Dat zie je terug: mensen typen geen trefwoorden meer, maar hele situaties.</p>
+
+        <h2 id="verschil">Het verschil met AI-overzichten</h2>
+        <p>De twee worden vaak door elkaar gehaald. Het zijn verschillende functies, met elk een eigen plek op de pagina.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>AI-overzichten</th><th>AI-modus</th></tr></thead>
+            <tbody>
+              <tr><td><b>Waar</b></td><td>Bovenaan de gewone zoekresultaten</td><td>Een apart tabblad, over de hele pagina</td></tr>
+              <tr><td><b>Wanneer</b></td><td>Alleen als Google denkt dat het iets toevoegt</td><td>Als jij erop klikt of doorvraagt</td></tr>
+              <tr><td><b>Doorvragen</b></td><td>Via een vervolgvraag, die opent in de AI-modus</td><td>Ja, als een gesprek</td></tr>
+              <tr><td><b>Lengte</b></td><td>Kort, de kern</td><td>Uitgebreid, met vergelijkingen en tabellen</td></tr>
+              <tr><td><b>Uitzetten</b></td><td>Niet mogelijk, wel het filter Web</td><td>Niet nodig, je opent hem zelf</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>In het Engels heten de AI-overzichten AI Overviews. Google schrijft zelf dat de twee functies verschillende modellen en technieken kunnen gebruiken. Ze tonen dus niet altijd dezelfde bronnen. Daarom loont het om in beide te kijken of je genoemd wordt. Over het blok bovenaan de traditionele resultaten lees je meer op onze pagina over <a href="/generative-engine-optimization/google-ai-overviews/">Google AI Overviews</a>.</p>
+
+        <h2 id="hoe-werkt">Hoe de AI-modus een antwoord maakt</h2>
+        <p>Het belangrijkste trucje heet query fan-out. Google noemt het in het Nederlands query-uitbreiding. De AI-modus knipt je vraag in subonderwerpen en zoekt elk stukje tegelijkertijd op, in meerdere gegevensbronnen. Daarna voegt hij de resultaten samen tot één antwoord.</p>
+        <p>Een verzonnen voorbeeld. Iemand vraagt: "Ik wil een warmtepomp in mijn huis in Emmen. Wie kan dat doen en wat kost het?" Daar maakt de AI-modus onder meer deze zoekopdrachten van:</p>
+        <ul>
+          <li>installateurs warmtepomp Emmen;</li>
+          <li>kosten warmtepomp plaatsen;</li>
+          <li>ervaringen met installateurs in Drenthe.</li>
+        </ul>
+        <p>Voor elk van die deelvragen zoekt hij de beste bronnen. Dat verandert de spelregels. Je hoeft niet op nummer 1 te staan voor de hele vraag. Als jouw pagina de duidelijkste uitleg geeft over wat een warmtepomp kost, kun je als bron worden opgenomen voor dat ene stukje. En staat je bedrijf ook op de lijst met installateurs, dan word je twee keer zichtbaar.</p>
+        <p>De bronnen komen uit de gewone zoekindex van Google. Google zegt zelf dat de AI-modus geworteld is in dezelfde kwaliteits- en rankingsystemen als de gewone resultaten. Heeft Google weinig vertrouwen in een AI-antwoord, dan toont hij gewoon een rijtje links.</p>
+        <h3>Hoe de links eruitzien</h3>
+        <p>Sinds mei 2026 laat Google meer links zien, direct naast de zin waar ze bij horen. Aan het eind van veel antwoorden staan suggesties om dieper te lezen. Ervaringen uit forums en social media krijgen een voorbeeld met de naam van de community. En heb je een nieuwsabonnement gekoppeld, dan krijgen links naar die krant een label. Voor website-eigenaren betekent dat: een pagina die één deelvraag goed beantwoordt, heeft meer kans op een eigen link.</p>
+
+        <h2 id="gevolgen">Wat het betekent voor je vindbaarheid</h2>
+        <p>Vier dingen veranderen.</p>
+        <p><b>Minder klikken op simpele vragen.</b> Wie alleen wil weten wat iets kost, leest het antwoord en is klaar. Informatieve pagina's krijgen daardoor minder bezoekers. Voor dienstverleners valt het vaak mee, want wie een vakman zoekt, wil uiteindelijk toch iemand bellen.</p>
+        <p><b>Genoemd worden wordt de nieuwe positie 1.</b> In een antwoord staan drie of vier namen. Sta je er niet tussen, dan besta je niet voor die zoeker. Er is geen tweede pagina.</p>
+        <p><b>De bezoekers die wel klikken, zijn vaak beter.</b> Google schrijft dat mensen die doorklikken vanaf pagina's met AI-overzichten meer tijd op de site doorbrengen. Dat is de uitspraak van Google zelf. Meet het op je eigen site na.</p>
+        <p><b>Meten wordt lastiger.</b> Google telt klikken uit de AI-modus mee in Search Console, bij het zoektype Web. Je ziet ze dus niet apart. Wie je naam leest en je later rechtstreeks belt, zie je helemaal niet terug.</p>
+        <p>De traditionele SERP, de pagina met zoekresultaten, verdwijnt niet. Veel mensen zoeken de komende tijd nog gewoon zoals ze gewend zijn. Maar met meer dan een miljard gebruikers per maand is de AI-modus geen experiment meer.</p>
+
+        <h2 id="genoemd">Zo word je genoemd in de Google AI-modus</h2>
+        <p>Google is er duidelijk over: er zijn geen speciale eisen. Je hoeft geen nieuwe bestanden te maken, geen AI-tekstbestanden en geen speciale structured data. Een pagina moet geïndexeerd zijn en met een tekstfragment in Google mogen verschijnen. Daarna gelden de gewone regels. Dit is wat in de praktijk het verschil maakt.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>1. Zorg dat Google je pagina's kan lezen</h3></div>
+        <p>Controleer in <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> of je belangrijkste pagina's geïndexeerd zijn. Kijk of je robots.txt, je hosting en een eventuele CDN zoals Cloudflare Googlebot niet tegenhouden. Zet belangrijke informatie in gewone tekst, niet alleen in een plaatje of een pdf. Een site die laat laadt of in elkaar zakt op een telefoon, heeft het lastig. Dit is <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>, en het blijft de basis.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>2. Beantwoord de deelvragen</h3></div>
+        <p>Denk na over hoe jouw klant zijn vraag opknipt. Wat kost het? Hoe lang duurt het? In welke plaatsen werk je? Wat moet de klant zelf regelen? Geef op elke dienstpagina het antwoord, met getallen. Een pagina met een helder gestructureerd blok vragen en antwoorden wordt makkelijker opgepikt dan een lap tekst.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>3. Link je pagina's aan elkaar</h3></div>
+        <p>Google noemt het zelf: maak je content makkelijk vindbaar via interne links. Een prijspagina waar niets naartoe linkt, wordt slecht gevonden. Link vanaf je dienstpagina's naar je uitleg, en terug.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>4. Houd je bedrijfsprofiel actueel</h3></div>
+        <p>Ook dat staat in de uitleg van Google over AI-functies: zorg dat je Bedrijfsprofiel klopt, en je Merchant Center als je producten verkoopt. Openingstijden, diensten, werkgebied, foto's en reviews. In de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> lees je hoe je dat stap voor stap doet.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>5. Laat je code kloppen met je tekst</h3></div>
+        <p>Gebruik je structured data, zoals de gegevens van je bedrijf in code? Prima, maar Google vraagt dat die precies overeenkomt met wat er zichtbaar op de pagina staat. Een openingstijd die in de code anders is dan op de pagina, kost vertrouwen.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>6. Bouw aan je naam buiten je eigen site</h3></div>
+        <p>Een AI-antwoord over "goede installateurs" leunt op reviews, vergelijkingssites, artikelen en steeds vaker op forums. Hoe vaker anderen positief en eenduidig over je schrijven, hoe groter de kans dat je genoemd wordt.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>7. Test het elke maand</h3></div>
+        <p>Stel tien vragen die jouw klanten stellen in de AI-modus. Noteer of je genoemd wordt en welke sites als bron staan. Herhaal dat elke maand. Hoe je zo'n meting opzet, staat in onze gids <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Checklist voor je dienstpagina</p>
+          <ul class="vink">
+            <li>De pagina staat in de index (controleer in Search Console).</li>
+            <li>Prijs of prijsrange staat in gewone tekst.</li>
+            <li>Werkgebied staat erop, met plaatsnamen.</li>
+            <li>Er staan minstens vijf echte vragen met korte antwoorden op.</li>
+            <li>De pagina laadt snel op een telefoon.</li>
+            <li>Structured data, als je die gebruikt, klopt met de zichtbare tekst.</li>
+            <li>Er linken minstens twee andere pagina's van je site naartoe.</li>
+          </ul>
+        </div>
+
+        <h2 id="zelf-gebruiken">De AI-modus zelf gebruiken als ondernemer</h2>
+        <p>De AI-modus is ook gewoon handig. Een paar manieren om hem in te zetten:</p>
+        <ul class="vink">
+          <li><b>Kijk hoe Google je ziet.</b> Vraag: "Wat weet je over [jouw bedrijf] in [jouw plaats]?" Klopt het niet, dan weet je waar je moet beginnen.</li>
+          <li><b>Vergelijk leveranciers.</b> "Welke boekhoudpakketten zijn geschikt voor een bedrijf met vijf medewerkers, en wat kosten ze? Maak een tabel." Je krijgt een vergelijking met bronnen die je kunt nalopen.</li>
+          <li><b>Bekijk je concurrent.</b> Plak de link van een concurrent en vraag wat zijn sterke punten zijn volgens zijn eigen site.</li>
+          <li><b>Laat een pdf uitleggen.</b> Upload een lastige brief of regeling en vraag: "Wat moet ik hiermee doen, in vijf punten?"</li>
+          <li><b>Stel vervolgvragen.</b> Het gesprek onthoudt de context, dus je kunt doorgraven zonder alles opnieuw uit te leggen.</li>
+        </ul>
+        <p>Controleer belangrijke informatie altijd zelf. Google waarschuwt er ook voor: de AI-modus zit er weleens naast en kan context missen. Klik op de bronnen, en upload geen vertrouwelijke stukken van klanten.</p>
+
+        <h2 id="uitzetten">Kun je de AI-modus uitzetten?</h2>
+        <p><b>Als gebruiker</b> hoef je de AI-modus niet uit te zetten: hij opent als jij erop klikt of doorvraagt. De AI-overzichten bovenaan kun je volgens Google niet uitschakelen. Ze zijn een kernfunctie, net als kennisvensters. Wel kun je na een zoekopdracht kiezen voor het filter Web. Dan zie je alleen de klassieke lijst met links. Wil je de AI-modus niet laten leren van je eerdere zoekopdrachten, zet dan je zoekgeschiedenis uit. Je kunt de AI-modus dan nog gewoon gebruiken.</p>
+        <p><b>Als website-eigenaar</b> bepaal je met de gewone instructies voor Googlebot wat Google van je pagina's toont: nosnippet, data-nosnippet, max-snippet of noindex. Dat raden we bijna nooit aan. Je verdwijnt dan ook grotendeels uit de gewone zoekresultaten, en je concurrent neemt je plek in het antwoord graag over. Google-Extended blokkeren helpt hier niet: dat regelt de Gemini-apps, niet Google Zoeken.</p>
+        <p>Wil je weten hoe je er nu voor staat? Op de pagina over <a href="/generative-engine-optimization/">generative engine optimization</a> lees je hoe wij bedrijven in AI-antwoorden krijgen. Dat begint bij € 495 per maand en is maandelijks opzegbaar.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Google: helppagina's "AI-gestuurde reacties krijgen met de AI-modus" en "AI-overzichten in Google Zoeken" op support.google.com, "AI features and your website" op developers.google.com, en de berichten op blog.google "De AI-modus komt naar Google Zoeken in Nederland" (8 oktober 2025), "Stel elke vraag met de nieuwe intuïtieve ervaring in Zoeken" (27 januari 2026), "Zoeken Live nu wereldwijd beschikbaar" (26 maart 2026), "5 nieuwe manieren om het web te verkennen" (6 mei 2026) en "Een nieuw tijdperk voor AI in Zoeken" (19 mei 2026). Allemaal geraadpleegd oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={13} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het regelen?" intro="Wat je van ons kunt verwachten als we samen werken aan je zichtbaarheid in Google en AI." />
+
+  <Faq
+    vragen={[
+      { v: 'Is de Google AI-modus gratis?', a: 'Ja, hij hoort bij Google Zoeken. Met een betaald Google AI-abonnement (Pro of Ultra) krijg je volgens Google toegang tot zwaardere modellen, zoals 4 Argon.' },
+      { v: 'Sinds wanneer is de AI-modus in Nederland?', a: 'Google begon op 8 oktober 2025 met de uitrol in Nederland, samen met bijna 50 andere nieuwe landen en 35 nieuwe talen. Hij werkt ook in het Nederlands.' },
+      { v: 'Wat is het verschil tussen de AI-modus en Gemini?', a: 'Gemini is de losse AI-assistent van Google, met een eigen app. De AI-modus zit in Google Zoeken en is gericht op zoeken met links naar bronnen. Beide draaien op modellen uit de Gemini-familie.' },
+      { v: 'Kan ik AI-overzichten uitzetten?', a: 'Nee. Google noemt ze een kernfunctie van Zoeken. Wel kun je na een zoekopdracht het filter Web kiezen. Dan zie je alleen links, zonder AI-overzicht.' },
+      { v: 'Zie ik bezoekers uit de AI-modus in Search Console?', a: 'Ja, maar niet apart. Google telt ze mee in het prestatierapport bij het zoektype Web, samen met de gewone resultaten.' },
+      { v: 'Heb ik een llms.txt of speciale code nodig?', a: 'Nee. Google schrijft dat je geen nieuwe machineleesbare bestanden, AI-tekstbestanden of speciale structured data nodig hebt om in AI-overzichten of de AI-modus te verschijnen.' },
+      { v: 'Moet ik mijn website aanpassen voor de AI-modus?', a: 'Er zijn geen speciale eisen. Een site die technisch in orde is en vragen helder beantwoordt, maakt de meeste kans. Laat het nakijken met de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a>.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over AI en zoeken"
+    links={[
+      { label: 'Gids', titel: 'Wat is GEO?', href: '/kennisbank/gidsen/wat-is-geo/', tekst: 'Zo word je genoemd door ChatGPT en Google AI.' },
+      { label: 'Gids', titel: 'Wat is Google Gemini?', href: '/kennisbank/gidsen/google-gemini/', tekst: 'Het model achter de AI-modus, met alle abonnementen.' },
+      { label: 'Dienst', titel: 'Google AI Overviews', href: '/generative-engine-optimization/google-ai-overviews/', tekst: 'In het AI-overzicht bovenaan Google komen.' },
+    ]}
+  />
+
+  <Actie titel="Sta jij in het antwoord van Google?" tekst={`${site.contactpersoon} stelt de vragen van jouw klanten in de AI-modus en belt je met wat hij ziet. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>

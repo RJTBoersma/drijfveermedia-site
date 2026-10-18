@@ -1,0 +1,205 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--nieuwsbrief-maken.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/nieuwsbrief-maken/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Begin bij het waarom' },
+  { id: 'lijst', titel: 'Je mailinglijst opbouwen' },
+  { id: 'tool', titel: 'Welke tool kies je?' },
+  { id: 'opbouw', titel: 'Zo ziet een goede nieuwsbrief eruit' },
+  { id: 'onderwerpregel', titel: 'Onderwerpregel en afzender' },
+  { id: 'meten', titel: 'Meten wat het oplevert' },
+  { id: 'spam', titel: 'Uit de spamfolder blijven' },
+  { id: 'tips', titel: 'Zes tips voor morgen' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Nieuwsbrief maken: stappenplan en e-mailmarketing tips',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Nieuwsbrief',
+  citation: ['https://laposta.nl/', 'https://www.mailerlite.com/pricing', 'https://www.brevo.com/pricing/'],
+}];
+---
+<Base
+  title="Nieuwsbrief maken: stappenplan en tips | Drijfveer Media"
+  description="Een nieuwsbrief maken die gelezen wordt: van mailinglijst en tool tot onderwerpregel, verzendmoment en de regels van de AVG. Met e-mailmarketing tips."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Nieuwsbrief maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · E-mailmarketing" titel="Nieuwsbrief maken: stappenplan en e-mailmarketing tips" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een nieuwsbrief maken is zo gedaan. Een nieuwsbrief maken die mensen openen, lezen en waar ze op reageren, vraagt meer. Hier lees je hoe je het aanpakt, van de eerste abonnee tot het meten van wat het oplevert.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een nieuwsbrief werkt als hij de lezer iets oplevert: een tip, een antwoord of een voordeel. Nieuws over jezelf is bijzaak.</li>
+            <li>Mail alleen mensen die toestemming gaven, en zet in elke mail een afmeldlink.</li>
+            <li>Voor een kleine lijst zijn er goede gratis tools, zoals Laposta, MailerLite en Brevo.</li>
+            <li>Kijk vooral naar kliks en reacties. De openratio zegt door privacy-instellingen steeds minder.</li>
+          </ul>
+        </div>
+
+        <h2 id="waarom">Nieuwsbrief maken: begin bij het waarom</h2>
+        <p>Voordat je een nieuwsbrief gaat maken, beantwoord je één vraag: wat moet hij opleveren? Herhaalaankopen van bestaande klanten? Aanvragen voor een dienst? Dat mensen je niet vergeten tot ze je nodig hebben? Het antwoord bepaalt wat je schrijft, hoe vaak je mailt en wat je meet.</p>
+        <p>Stel daarna de vraag van de lezer: waarom zou ik dit openen? Een nieuwsbrief met "nieuws uit ons bedrijf" leest bijna niemand. Een nieuwsbrief met een tip die iemand meteen kan gebruiken, wel. Een verzonnen voorbeeld: een hovenier die elk seizoen mailt wat je nu in de tuin moet doen, blijft in beeld. Als het tijd is voor een nieuwe schutting, weten zijn abonnees wie ze bellen.</p>
+        <p>Een nieuwsbrief is één vorm van <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing</a>. De andere vorm is automatische opvolging: mails die vanzelf vertrekken na een aanvraag of een offerte. Deze gids gaat over de nieuwsbrief.</p>
+
+        <h2 id="lijst">Je mailinglijst opbouwen, en wat de wet zegt</h2>
+        <p>Zonder abonnees geen nieuwsbrief. De beste adressen zijn van mensen die je al kennen. Zo bouw je je mailinglijst op:</p>
+        <ul class="vink">
+          <li><b>Een inschrijfformulier op je site.</b> Onder elk artikel, in de footer en op je contactpagina. Vraag alleen een e-mailadres, en hooguit een voornaam.</li>
+          <li><b>Een vinkje bij je offerte- of contactformulier.</b> Niet vooraf aangevinkt.</li>
+          <li><b>Iets waardevols in ruil.</b> Een checklist, een prijsoverzicht of een handige gids als download.</li>
+          <li><b>Aan de balie of op locatie.</b> Een QR-code op de bon, de factuur of een kaartje bij een bezorging.</li>
+        </ul>
+        <p>Koop nooit een adressenlijst. Het mag in de regel niet, en je komt er snel mee in de spamfolder terecht.</p>
+        <div class="kader">
+          <p class="kader-titel">De regels in gewone taal</p>
+          <ul>
+            <li>Je hebt vooraf toestemming nodig om reclame of een nieuwsbrief te mailen. Dat heet opt-in.</li>
+            <li>Bestaande klanten mag je wel mailen over vergelijkbare producten of diensten, als ze zich steeds kunnen afmelden.</li>
+            <li>In elke mail staat wie de afzender is en kan de ontvanger zich met één klik uitschrijven.</li>
+            <li>Onder de AVG moet je kunnen aantonen dat iemand zich zelf heeft aangemeld. Een bevestigingsmail na aanmelding (dubbele opt-in) regelt dat netjes.</li>
+            <li>Vermeld in je privacyverklaring wat je met de adressen doet. Meer daarover in de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</li>
+          </ul>
+          <p class="klein muted">Dit is geen juridisch advies. Twijfel je over je eigen situatie, vraag het dan na bij een jurist.</p>
+        </div>
+
+        <h2 id="tool">Welke tool kies je?</h2>
+        <p>Mail je nieuwsbrief nooit vanuit Outlook of Gmail met alle adressen in de bcc. Dat oogt amateuristisch, je hebt geen statistieken, en je mail komt eerder in de spam. Gebruik een nieuwsbrieftool. Dit zijn de bekendste, met de gratis versie zoals die in oktober 2026 op hun eigen sites stond:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Gratis versie</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td>Laposta</td><td>Tot 2.000 relaties en 12.000 mails per maand</td><td>Nederlands, data in Nederland, met Laposta-logo in de gratis versie</td></tr>
+              <tr><td>MailerLite</td><td>Tot 250 abonnees en 2.500 mails per maand</td><td>Overzichtelijk, met formulieren en automatische mails</td></tr>
+              <tr><td>Brevo</td><td>Tot 300 mails per dag</td><td>Ook geschikt voor sms en automatische opvolging</td></tr>
+              <tr><td>Mailchimp</td><td>Beperkte gratis basisversie</td><td>Veel mogelijkheden, Engelstalig, prijzen lopen op bij een grotere lijst</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor de meeste kleine bedrijven in Nederland is Laposta een logische start. Let bij elke tool op drie dingen: staat het account op jouw naam, kun je je lijst altijd exporteren, en werkt het samen met je website?</p>
+
+        <h2 id="opbouw">Zo ziet een goede nieuwsbrief eruit</h2>
+        <p>Een goede nieuwsbrief is kort en heeft één hoofddoel. Elke tool heeft kant-en-klare templates. Kies een eenvoudige, in je eigen kleuren, en houd die vast. Deze opbouw werkt bijna altijd:</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>1. Een herkenbare kop</h3></div>
+        <p>Je logo en de naam van de nieuwsbrief. Klein houden, want op een telefoon is de bovenkant kostbaar.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>2. Het hoofdonderwerp</h3></div>
+        <p>Eén tip, één artikel of één aanbod, met een korte inleiding van drie of vier zinnen en een duidelijke knop. Een blog dat je toch al schreef, is hier perfect voor. Hoe je dat opzet, lees je in de gids <a href="/kennisbank/gidsen/bedrijfsblog-beginnen/">een bedrijfsblog beginnen</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>3. Twee of drie kleinere items</h3></div>
+        <p>Een vraag van een klant met het antwoord, een seizoenstip of een korte mededeling. Elk item in een paar zinnen met een link.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>4. Een persoonlijke afsluiting</h3></div>
+        <p>Een naam en een foto van iemand uit je bedrijf, en een uitnodiging om te reageren of te bellen. Mensen antwoorden op een persoon, niet op een logo.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>5. De voet</h3></div>
+        <p>Je bedrijfsgegevens, waarom iemand deze mail krijgt en de link om zich uit te schrijven. Maak die link gewoon vindbaar. Wie zich niet kan afmelden, klikt op "spam", en dat is erger.</p>
+
+        <p>Veel lezers openen je mail op een telefoon. Test elke nieuwsbrief daarom eerst op je eigen mobiel. Kleine letters, brede foto's en knoppen die je met je duim niet raakt, kosten je kliks.</p>
+
+        <h2 id="onderwerpregel">Onderwerpregel en afzender: daar beslist de lezer</h2>
+        <p>In de inbox ziet iemand drie dingen: wie de afzender is, de onderwerpregel en de eerste regel tekst. Op basis daarvan beslist hij in een seconde of hij opent.</p>
+        <ul>
+          <li><b>Afzender.</b> Gebruik een naam die mensen kennen, bijvoorbeeld "Anna van Bakkerij De Vries". Geen "noreply" of "info".</li>
+          <li><b>Onderwerpregel.</b> Kort, concreet en eerlijk. Hooguit zo'n veertig tekens, anders valt de rest weg op een telefoon.</li>
+          <li><b>Voorbeeldtekst.</b> De eerste regel na de onderwerpregel. Laat hem aanvullen wat de onderwerpregel belooft.</li>
+        </ul>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zwak</th><th>Sterker</th></tr></thead>
+            <tbody>
+              <tr><td>Nieuwsbrief oktober</td><td>Zo kom je zonder bevroren leidingen de winter door</td></tr>
+              <tr><td>Nieuws van Bouwbedrijf Jansen</td><td>Wat een dakkapel echt kost in 2026</td></tr>
+              <tr><td>GRATIS ACTIE, MIS DIT NIET</td><td>Gratis ketelcheck voor abonnees, tot 1 december</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Over het beste verzendmoment bestaan veel lijstjes. Ze spreken elkaar tegen, omdat elke doelgroep anders is. Voor zakelijke lezers wordt vaak dinsdag tot en met donderdag in de ochtend aangeraden. Particulieren lezen ook 's avonds en in het weekend. Kies een verzendmoment, houd het een paar maanden vast en test daarna een ander moment. Je eigen cijfers zijn het enige lijstje dat telt.</p>
+
+        <h2 id="meten">Meten wat het oplevert</h2>
+        <p>Elke tool laat na verzending cijfers zien. Dit zijn de belangrijkste:</p>
+        <ul>
+          <li><b>Openratio.</b> Het deel van de ontvangers dat de mail opende. Sinds Apple Mail plaatjes vooraf laadt, telt een mail vaak als geopend terwijl niemand hem las. Gebruik dit cijfer alleen om nieuwsbrieven met elkaar te vergelijken.</li>
+          <li><b>Klikratio.</b> Het deel dat op een link klikte. Dit zegt veel meer over of je inhoud aansloeg.</li>
+          <li><b>Afmeldingen.</b> Een paar per verzending is normaal. Schiet het omhoog na één bepaalde mail, kijk dan wat daar anders was.</li>
+          <li><b>Reacties en aanvragen.</b> Uiteindelijk het enige wat telt. Tel hoeveel mensen antwoorden, bellen of iets aanvragen na een nieuwsbrief.</li>
+        </ul>
+        <p>Durf ook te stoppen. Levert je nieuwsbrief na een jaar niets op, dan is het eerlijke advies: verander de aanpak of steek die tijd in iets anders. Schrappen wat niet werkt, is soms meer waard dan iets nieuws beginnen.</p>
+
+        <h2 id="spam">Uit de spamfolder blijven</h2>
+        <p>De beste nieuwsbrief helpt niets als hij in de spam belandt. Dit zijn de grootste oorzaken, en wat je eraan doet:</p>
+        <ul class="vink">
+          <li><b>Je domein is niet ingesteld.</b> Met SPF, DKIM en DMARC bewijs je dat jij de echte afzender bent. Je nieuwsbrieftool legt uit wat je moet instellen, en je hostingpartij kan helpen.</li>
+          <li><b>Verouderde adressen.</b> Een lijst veroudert elk jaar. Haal adressen die niet meer bestaan of al een jaar niets openen eruit.</li>
+          <li><b>Spamachtige onderwerpregels.</b> Hoofdletters, uitroeptekens en woorden als "gratis" en "winnen" achter elkaar doen het slecht.</li>
+          <li><b>Eén groot plaatje.</b> Een nieuwsbrief die alleen uit een afbeelding bestaat, wantrouwen spamfilters. Gebruik echte tekst.</li>
+          <li><b>Een verstopte afmeldlink.</b> Wie niet kan afmelden, meldt je als spam.</li>
+        </ul>
+
+        <h2 id="tips">Zes e-mailmarketing tips die je morgen kunt toepassen</h2>
+        <ol>
+          <li>Stuur een welkomstmail direct na aanmelding. Die wordt beter gelezen dan elke nieuwsbrief daarna.</li>
+          <li>Mail liever één keer per maand iets goeds dan elke week iets halfs.</li>
+          <li>Schrijf zoals je praat, in de toon van je bedrijf. Lees daarvoor de gids <a href="/kennisbank/gidsen/tone-of-voice/">tone of voice</a>.</li>
+          <li>Verdeel je lijst als dat kan, bijvoorbeeld in particulier en zakelijk. Dan ontvangt iedereen wat bij hem past.</li>
+          <li>Stel aan het eind een vraag. Antwoorden leveren gesprekken op, en mailprogramma's zien een antwoord als een goed teken.</li>
+          <li>Leg je planning vast voor een heel jaar, met een onderwerp per maand. Dan blijf je niet hangen bij een leeg scherm.</li>
+        </ol>
+
+        <h2 id="uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>Een nieuwsbrief zelf maken kost je met een goed sjabloon twee tot vier uur per keer. Dat is goed te doen als je het leuk vindt en het in je agenda zet. Wil je het liever uit handen geven, inclusief automatische opvolging van je aanvragen en offertes? Bij Drijfveer Media kost <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing</a> vanaf € 295 per maand, exclusief btw en maandelijks opzegbaar. Het hoort bij onze aanpak voor <a href="/leadgeneratie/">leadgeneratie</a>: van bezoeker naar aanvraag.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je nieuwsbrief verzorgen?" intro="Wat je van ons mag verwachten als we je e-mailmarketing doen." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe vaak moet ik een nieuwsbrief versturen?', a: 'Voor de meeste mkb-bedrijven is eens per maand een goed ritme. Vaker mag, als je elke keer iets nuttigs te melden hebt. Minder dan eens per kwartaal is te weinig: dan vergeten mensen dat ze zich hebben aangemeld.' },
+      { v: 'Kan ik gratis een nieuwsbrief maken?', a: 'Ja. Laposta is gratis tot 2.000 relaties, MailerLite tot 250 abonnees en Brevo tot 300 mails per dag. Voor een beginnende lijst is dat ruim genoeg.' },
+      { v: 'Wat is een goede openratio?', a: 'Dat verschilt per branche en per lijst, en door de privacy-instellingen van Apple Mail is het cijfer minder betrouwbaar geworden. Vergelijk vooral je eigen nieuwsbrieven met elkaar en kijk naar de klikratio.' },
+      { v: 'Mag ik mijn klanten zomaar een nieuwsbrief sturen?', a: 'Bestaande klanten mag je mailen over vergelijkbare producten of diensten, mits ze zich bij elke mail kunnen afmelden. Voor alle anderen heb je vooraf toestemming nodig.' },
+      { v: 'Hoe lang moet een nieuwsbrief zijn?', a: 'Kort genoeg om op een telefoon in een minuut door te lezen. Eén hoofdonderwerp en twee of drie kleine items is meestal genoeg. Wie meer wil lezen, klikt door naar je site.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'E-mailmarketing en automatisering', href: '/leadgeneratie/e-mailmarketing/', tekst: 'Nieuwsbrieven en opvolging, vanaf € 295 per maand.' },
+      { label: 'Gids', titel: 'Een bedrijfsblog beginnen', href: '/kennisbank/gidsen/bedrijfsblog-beginnen/', tekst: 'Inhoud voor je nieuwsbrief, en bezoekers uit Google.' },
+      { label: 'Gids', titel: 'Leads genereren als mkb\'er', href: '/kennisbank/gidsen/leads-genereren/', tekst: 'Van bezoeker naar aanvraag.' },
+    ]}
+  />
+
+  <Actie titel="Wil je meer halen uit de klanten die je al hebt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je opvolging, en belt je met de kansen die je nu laat liggen.`} />
+</Base>

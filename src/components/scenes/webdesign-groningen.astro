@@ -1,0 +1,77 @@
+---
+// Scène voor /webdesign-groningen/: een nieuwe website tussen de Groningse gevels en de Martinitoren. Een bezoeker klikt op "Bel direct" en er komt een aanvraag binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: tussen de Groningse gevels en de Martinitoren staat een nieuwe website. Een bezoeker klikt op Bel direct en er komt een aanvraag binnen.'}>
+  <!-- grond -->
+  <path class="l" d="M16 232h448" />
+  <!-- gevels links -->
+  <path class="v" d="M22 232v-48l12-12 12 12v48z" />
+  <path class="l" d="M22 232v-48l12-12 12 12v48z" />
+  <path class="v" d="M48 232v-38l10-10 10 10v38z" />
+  <path class="l" d="M48 232v-38l10-10 10 10v38z" />
+  <path class="l" d="M30 196h8v10h-8zM30 214h8v10h-8zM54 204h8v10h-8z" />
+  <!-- Martinitoren -->
+  <path class="v" d="M76 232v-82h32v82zM81 150v-38h22v38zM86 112v-28h12v28z" />
+  <path class="l" d="M76 232v-82h32v82zM81 150v-38h22v38zM86 112v-28h12v28zM86 84l6-22 6 22M92 62v-12" />
+  <circle class="o" cx="92" cy="48" r="3" />
+  <path class="l" d="M88 224v-16a4 4 0 0 1 8 0v16M86 186v-12a3 3 0 0 1 6 0v12M94 186v-12a3 3 0 0 1 6 0v12M89 140v-12a3 3 0 0 1 6 0v12M90 104v-8a2 2 0 0 1 4 0v8" />
+  <!-- boom -->
+  <circle class="v" cx="130" cy="204" r="14" />
+  <circle class="l" cx="130" cy="204" r="14" />
+  <path class="l" d="M130 218v14" />
+  <!-- gevels rechts -->
+  <path class="v" d="M412 232v-56l14-14 14 14v56z" />
+  <path class="l" d="M412 232v-56l14-14 14 14v56z" />
+  <path class="v" d="M442 232v-70l10-10h4l10 10v70z" />
+  <path class="l" d="M442 232v-70l10-10h4l10 10v70z" />
+  <path class="l" d="M420 186h12v12h-12zM450 176h12v12h-12zM450 200h12v12h-12z" />
+  <!-- de nieuwe website -->
+  <rect x="150" y="46" width="250" height="170" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M150 70h250" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="166" cy="58" r="4" fill="#d9e1ea" /><circle cx="178" cy="58" r="4" fill="#d9e1ea" /><circle cx="190" cy="58" r="4" fill="#d9e1ea" />
+  <rect x="206" y="51" width="150" height="14" rx="7" fill="#e8eef4" />
+  <text x="216" y="62" font-size="9" class="zacht">jouwbedrijf.nl</text>
+  <rect x="166" y="82" width="40" height="8" rx="4" fill="#074663" />
+  <rect x="304" y="84" width="16" height="5" rx="2.5" fill="#d9e1ea" /><rect x="326" y="84" width="16" height="5" rx="2.5" fill="#d9e1ea" /><rect x="348" y="84" width="16" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="166" y="104" width="118" height="12" rx="4" fill="#10283f" />
+  <rect x="166" y="122" width="88" height="12" rx="4" fill="#10283f" />
+  <rect x="166" y="144" width="110" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="166" y="156" width="94" height="6" rx="3" fill="#d9e1ea" />
+  <rect class="o" x="166" y="174" width="78" height="24" rx="8" />
+  <text x="205" y="190" text-anchor="middle" font-size="11" font-weight="800" style="fill:#fff">Bel direct</text>
+  <rect class="v" x="296" y="100" width="88" height="98" rx="8" />
+  <path d="M304 190l22-28 16 18 12-12 22 22z" fill="#d9e1ea" />
+  <circle cx="362" cy="122" r="8" fill="#fff" />
+  {!mini && (
+    <g>
+      <circle class="ring" cx="205" cy="186" r="18" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g transform="translate(238 192)">
+        <g class="cursor">
+          <path d="M0 0v20l5-5 5 10 4-2-5-10h7z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+        </g>
+      </g>
+      <g transform="translate(296 16)">
+        <g class="melding">
+          <rect width="156" height="34" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+          <circle cx="18" cy="17" r="6" fill="#1f8a5b" />
+          <text x="32" y="22" font-size="12" font-weight="800">Nieuwe aanvraag</text>
+        </g>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .cursor, .ring, .melding { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .cursor { opacity: 0; }
+  :global(.teken-js) .ring { opacity: 0; }
+  :global(.teken-js) .melding { opacity: 0; }
+  .in-beeld .cursor { animation: webdesign-groningen-cursor 1.6s cubic-bezier(.5,0,.2,1) 0.5s both; }
+  .in-beeld .ring { animation: webdesign-groningen-ring 0.9s ease-out 2.1s both; }
+  .in-beeld .melding { animation: webdesign-groningen-melding 6s ease-in-out 2.6s infinite both; }
+  @keyframes webdesign-groningen-cursor { 0% { opacity: 0; transform: translate(190px, 60px); } 20% { opacity: 1; } 85% { transform: none; } 92% { transform: scale(0.85); } 100% { opacity: 1; transform: none; } }
+  @keyframes webdesign-groningen-ring { 0% { opacity: 0.9; transform: scale(0.6); } 100% { opacity: 0; transform: scale(1.5); } }
+  @keyframes webdesign-groningen-melding { 0% { opacity: 0; transform: translateY(8px); } 12%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-4px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .cursor, .in-beeld .ring, .in-beeld .melding { animation: none; } }
+</style>

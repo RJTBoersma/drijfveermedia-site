@@ -1,0 +1,200 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--headings.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/headings/';
+const definitie = 'Headings zijn de koppen in de HTML van een webpagina, van h1 tot en met h6, die laten zien hoe de inhoud is opgebouwd: wat de hoofdtitel is, wat de hoofdstukken zijn en wat de paragrafen.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Headings',
+  alternateName: ['Koppen', 'Heading tags'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+
+const codeGoed = `<h1>Dakkapel laten plaatsen in Assen</h1>
+<p>Meer ruimte op zolder, binnen twee dagen geplaatst.</p>
+
+<h2>Wat kost een dakkapel?</h2>
+<h3>Prijs per meter</h3>
+<h3>Heb je een vergunning nodig?</h3>
+
+<h2>Hoe lang duurt het plaatsen?</h2>`;
+
+const codeFout = `<div class="grote-tekst">Dakkapel laten plaatsen</div>
+<p><strong>Wat kost een dakkapel?</strong></p>
+<h4>Prijs per meter</h4>
+<h2>Bel ons vandaag nog</h2>`;
+
+const codeConsole = `document.querySelectorAll('h1, h2, h3, h4, h5, h6')
+  .forEach(h => console.log(h.tagName, h.textContent.trim()));`;
+---
+<Base
+  title="Wat zijn headings? H1, H2 en H3 uitgelegd | Drijfveer Media"
+  description="Wat zijn headings? De koppen h1 tot h6 die je pagina structuur geven. Met codevoorbeeld, de vaakste fouten en een controle in drie minuten."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Headings', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Teksten</p>
+        <h1>Wat zijn headings?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum="2026-10-18" />
+      <p>Denk aan een boek. Er is een titel op de kaft, daarbinnen hoofdstukken, en in elk hoofdstuk paragrafen. Op een webpagina werkt het net zo. Alleen zie je de structuur niet aan de buitenkant. Die zit in de code, in de headings. Het woord is gewoon Engels voor koppen. Je hoort ook kopjes, tussenkoppen of heading tags.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Van h1 tot h6: zo werkt de hiërarchie</h2></div>
+      <p>Er zijn zes niveaus. De h1 is de titel van de pagina. Daar is er één van. De h2's zijn de hoofdstukken, de h3's de paragrafen daarbinnen. Een lager niveau hoort altijd bij het niveau erboven. Zo ziet de opbouw van een pagina eruit, met een verzonnen voorbeeld:</p>
+      <ul class="opbouw card">
+        <li><b>h1</b> Dakkapel laten plaatsen in Assen</li>
+        <li class="n2"><b>h2</b> Wat kost een dakkapel?</li>
+        <li class="n3"><b>h3</b> Prijs per meter</li>
+        <li class="n3"><b>h3</b> Heb je een vergunning nodig?</li>
+        <li class="n2"><b>h2</b> Hoe lang duurt het plaatsen?</li>
+        <li class="n2"><b>h2</b> Veelgestelde vragen</li>
+      </ul>
+      <p>Een lezer ziet hier in drie seconden waar hij moet zijn. Google ook. Meer dan h3 heb je zelden nodig:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Niveau</th><th>Waarvoor</th><th>Hoeveel per pagina</th></tr></thead>
+          <tbody>
+            <tr><td>h1</td><td>De titel: waar gaat deze pagina over?</td><td>Eén</td></tr>
+            <tr><td>h2</td><td>De hoofdstukken van de inhoud</td><td>Zoveel als je onderwerpen hebt, vaak 4 tot 10</td></tr>
+            <tr><td>h3</td><td>Een onderdeel binnen een h2</td><td>Alleen waar een hoofdstuk echt uit stukken bestaat</td></tr>
+            <tr><td>h4</td><td>Een onderdeel binnen een h3</td><td>Zelden, bij lange handleidingen</td></tr>
+            <tr><td>h5 en h6</td><td>Nog dieper</td><td>Op een bedrijfssite bijna nooit</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Zo zien headings eruit in de html</h2></div>
+      <p>Elke kop staat tussen een openingstag en een sluittag. Het cijfer zegt welk niveau het is. Het verzonnen voorbeeld van hierboven ziet er in de code zo uit:</p>
+      <pre><code>{codeGoed}</code></pre>
+      <p>En zo gaat het vaak mis. Bij de eerste regel heeft de bouwer de titel groot gemaakt met een stijl, maar het is geen kop. De tweede is vette tekst in een alinea. Daarna volgt een h4 zonder h2 of h3 erboven, en de enige h2 is een belkreet.</p>
+      <pre><code>{codeFout}</code></pre>
+      <p>Op het scherm kunnen beide versies hetzelfde ogen. Voor een zoekmachine of screenreader is de tweede een rommeltje. Grootte en kleur regel je met CSS. Het niveau van een kop gaat over structuur, niet over uiterlijk.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Waarom koppen ertoe doen</h2></div>
+      <h3>Voor je lezers: leesbaarheid</h3>
+      <p>De meeste bezoekers lezen niet, ze scannen. Ze laten hun ogen over de tussenkoppen gaan tot ze het stuk vinden dat bij hun vraag past. Een goede tussenkop vangt ze op. Zonder koppen is het een muur van tekst.</p>
+      <h3>Voor zoekmachines en AI</h3>
+      <p>Google gebruikt koppen om te snappen waar een pagina en elk stuk ervan over gaat. Volgens de eigen documentatie van Google is de h1 ook een van de bronnen voor de blauwe titel in de zoekresultaten. Staan er meerdere koppen even groot en prominent op de pagina, dan weet Google niet goed welke de hoofdtitel is. AI-zoekmachines halen hun antwoorden vaak uit één blok onder een duidelijke kop. Een kop met de vraag en het antwoord er direct onder laat zich dus goed citeren.</p>
+      <p>Wel zegt Google dat de volgorde van je koppen voor de zoekmachine niet uitmaakt. Een ideaal aantal is er ook niet.</p>
+      <h3>Voor toegankelijkheid: de screenreader</h3>
+      <p>Wie blind of slechtziend is, gebruikt vaak een screenreader die de pagina voorleest. Met één toets spring je dan van kop naar kop. In de enquête van WebAIM onder 1.539 screenreadergebruikers (2024) zei 71,6 procent dat ze op een lange pagina eerst via de koppen zoeken. Bijna 89 procent vond de niveaus daarbij nuttig. Zonder echte headings is je pagina voor die bezoeker één lange lap tekst. Hier telt de volgorde dus wel, en dat is meteen de beste reden om hem goed te doen.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Heading of title tag: wat is het verschil?</h2></div>
+      <p>Deze twee worden vaak verward. De h1 staat op de pagina zelf. De <a href="/kennisbank/wat-is/title-tag/">title tag</a>, de paginatitel, zie je in Google en op het tabblad van je browser.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Vraag</th><th>h1</th><th>Title tag</th></tr></thead>
+          <tbody>
+            <tr><td>Waar zie je hem?</td><td>Bovenaan de pagina</td><td>In Google en op het tabblad</td></tr>
+            <tr><td>Waar in de code?</td><td>In de body</td><td>In de head</td></tr>
+            <tr><td>Doel</td><td>De bezoeker laten zien dat hij goed zit</td><td>De zoeker overhalen om te klikken</td></tr>
+            <tr><td>Lengte</td><td>Te lezen in één oogopslag</td><td>Liefst onder de 60 tekens, anders kapt Google vaak af</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Ze mogen op elkaar lijken, maar hoeven niet gelijk te zijn.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Vijf fouten die we vaak tegenkomen</h2></div>
+      <p>Dat het vaak misgaat, is geen gevoel. WebAIM onderzoekt elk jaar de homepages van een miljoen grote websites. In 2026 had 18,1 procent meer dan één h1, sloeg 41,8 procent een niveau over en had 7,5 procent helemaal geen koppen. Bij mkb-sites zien we dezelfde fouten:</p>
+      <ol>
+        <li><b>Het logo of "Welkom" als h1.</b> Dan zegt je belangrijkste kop niets over wat je doet en waar.</li>
+        <li><b>Koppen kiezen om hoe ze eruitzien.</b> Een h4 omdat die kleiner is, een h2 voor een opvallende belknop. Het niveau hoort bij de inhoud.</li>
+        <li><b>Vette tekst als kopje.</b> Het oogt als een tussenkop, maar voor de code is het een gewone alinea.</li>
+        <li><b>Niveaus overslaan.</b> Van h2 meteen naar h4. Een screenreadergebruiker vraagt zich dan af wat hij gemist heeft.</li>
+        <li><b>Het zoekwoord in elke kop proppen.</b> Eén keer in de h1 en waar het natuurlijk past in een h2 is genoeg. Wie het overal herhaalt, schrijft voor een robot.</li>
+      </ol>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Zo schrijf je goede koppen</h2></div>
+      <ul class="vink">
+        <li>Schrijf koppen als de vragen die klanten je aan de telefoon stellen. "Wat kost een dakkapel?" werkt beter dan "Tarieven".</li>
+        <li>Zorg dat elke kop los te lezen is. Lees alleen je koppen achter elkaar: snap je dan wat er op de pagina staat?</li>
+        <li>Houd ze kort. Eén regel op een telefoon is een mooie maat.</li>
+        <li>Wees concreet in plaats van grappig. Een woordspeling is leuk, maar niemand zoekt erop.</li>
+        <li>Zet het zoekwoord in de h1, en daarna alleen waar het vanzelf past.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2>Een voorbeeld: van lap tekst naar heldere koppen</h2></div>
+      <p>Stel: een installateur in Hoogeveen heeft een pagina over warmtepompen. Bovenaan staat in grote letters "Welkom op onze website" als h1. Daaronder 900 woorden tekst, met hier en daar een vetgedrukte regel. De enige h2 zit in de footer: "Contact". <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Na het herschrijven ziet de opbouw er zo uit:</p>
+      <ul class="opbouw card">
+        <li><b>h1</b> Warmtepomp laten installeren in Hoogeveen</li>
+        <li class="n2"><b>h2</b> Welke warmtepomp past bij jouw huis?</li>
+        <li class="n3"><b>h3</b> Hybride warmtepomp</li>
+        <li class="n3"><b>h3</b> Volledig elektrische warmtepomp</li>
+        <li class="n2"><b>h2</b> Wat kost een warmtepomp?</li>
+        <li class="n2"><b>h2</b> Zo verloopt de installatie</li>
+        <li class="n2"><b>h2</b> Veelgestelde vragen</li>
+      </ul>
+      <p>Dezelfde tekst, alleen andere koppen. Wie de prijs zoekt, scrolt meteen naar het goede stuk. Google ziet direct dat het om warmtepompen in Hoogeveen gaat.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Zo controleer je de headings op je eigen site</h2></div>
+      <p>Je hebt geen dure tool nodig. Kies één van deze drie manieren:</p>
+      <ol>
+        <li><b>Via de paginabron.</b> Klik met rechts op de pagina en kies Paginabron weergeven, of druk op Ctrl+U. Zoek met Ctrl+F op "&lt;h" en loop de treffers langs.</li>
+        <li><b>Met een browserextensie.</b> HeadingsMap, gratis voor Chrome en Firefox, laat alle koppen als boom zien. Een overgeslagen niveau valt dan direct op.</li>
+        <li><b>Met de console.</b> Druk op F12, kies het tabblad Console, plak de regel hieronder en druk op Enter. Je krijgt een lijst van alle koppen met hun niveau.</li>
+      </ol>
+      <pre><code>{codeConsole}</code></pre>
+      <p>Let op drie dingen. Staat er precies één h1 die zegt wat je doet en waar? Lopen de niveaus af zonder sprongen? Vertellen de koppen samen het verhaal van de pagina? Voor een hele site in één keer gebruik je een crawler als Screaming Frog.</p>
+      <p>Aanpassen doe je in de editor van je website. In de meeste systemen kies je bij een kopblok zelf het niveau, van H1 tot H6. Legt je thema de koppen vast, dan is het werk voor je webbouwer.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2>Wat moet je ermee als ondernemer?</h2></div>
+      <p>Begin bij je vijf belangrijkste pagina's: de homepage en je diensten. Controleer de koppen, herschrijf ze als klantvragen en kijk of de h1 klopt. Een uurtje werk. Lezers vinden sneller wat ze zoeken, Google begrijpt je beter en je site werkt ook met een screenreader.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a> of laat een <a href="/tekstschrijver/">tekstschrijver</a> je pagina's opbouwen, vanaf € 75 per pagina. Bij een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> lopen we de koppen van je hele site na. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    titel="Veelgestelde vragen over headings"
+    vragen={[
+      { v: 'Mag een pagina meer dan één h1 hebben?', a: 'De HTML-standaard staat het toe, maar het is geen goede gewoonte. Eén h1 die zegt waar de pagina over gaat, is voor lezers, screenreaders en Google het duidelijkst.' },
+      { v: 'Zijn headings een rankingfactor?', a: 'Ze helpen Google om je pagina te begrijpen, en de h1 kan je titel in de zoekresultaten bepalen. Een kop alleen zet je niet bovenaan. Goede inhoud met een heldere opbouw doet dat wel.' },
+      { v: 'Mag ik van h2 naar h4 springen?', a: 'Liever niet. Google maakt het volgens eigen zeggen niet uit, maar voor screenreadergebruikers is het verwarrend. Terugspringen mag wel: na een h4 kan gewoon een nieuwe h2 volgen.' },
+      { v: 'Hoe lang mag een kop zijn?', a: 'Er is geen vaste grens. Houd een h1 of h2 bij voorkeur op één regel op een telefoon. Een kop is een wegwijzer, geen alinea.' },
+      { v: 'Wat is het verschil tussen een tussenkop en een heading?', a: 'Een tussenkop is wat je ziet. Een heading is hoe die kop in de code is vastgelegd, met een h2 of h3. Een vetgedrukte regel ziet eruit als een tussenkop, maar is geen heading.' },
+    ]}
+  />
+
+  <Actie titel="Kloppen de koppen op jouw site?" tekst={`We kijken het gratis na. ${site.contactpersoon} belt je met de pagina's die het eerst aandacht nodig hebben.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .opbouw { list-style: none; padding: 18px 22px; margin: 8px 0 24px; }
+  .opbouw li { margin: 6px 0; }
+  .opbouw b { display: inline-block; min-width: 34px; margin-right: 8px; padding: 1px 6px; border-radius: 6px; background: var(--navy); color: #fff; font-size: 0.8rem; text-align: center; }
+  .opbouw li:first-child b { background: var(--orange); }
+  .opbouw .n2 { padding-left: 24px; }
+  .opbouw .n3 { padding-left: 48px; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; background: var(--ink); color: #e8eef4; border-radius: 10px; padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; margin: 0 0 1.4em; }
+  pre code { font-family: var(--mono); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

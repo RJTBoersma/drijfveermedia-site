@@ -1,0 +1,273 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--ssl-certificaat.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/ssl-certificaat/';
+const datum = '2026-10-18';
+const definitie = 'Een SSL-certificaat is een digitaal bewijs op je server dat laat zien dat je website echt bij jouw domein hoort, en dat zorgt voor een versleutelde verbinding (https) tussen de browser van je bezoeker en je site.';
+const hoofdstukken = [
+  { id: 'namen', titel: 'SSL, TLS en https' },
+  { id: 'wat-doet-het', titel: 'Wat een certificaat doet' },
+  { id: 'handdruk', titel: 'Zo ontstaat de beveiligde verbinding' },
+  { id: 'uitgever', titel: 'Wie geeft certificaten uit?' },
+  { id: 'soorten', titel: 'Soorten certificaten' },
+  { id: 'gratis', titel: 'Gratis of betaald?' },
+  { id: 'waarom', titel: 'Waarom je niet zonder kunt' },
+  { id: 'slotje', titel: 'Wat het slotje niet zegt' },
+  { id: 'vervaldatum', titel: 'De vervaldatum wordt korter' },
+  { id: 'fouten', titel: 'Foutmeldingen en oplossingen' },
+  { id: 'instellen', titel: 'Instellen in WordPress' },
+  { id: 'valkuilen', titel: 'Fouten die we vaak tegenkomen' },
+  { id: 'ondernemer', titel: 'Wat moet je ermee?' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'SSL-certificaat',
+    alternateName: ['TLS-certificaat', 'SSL/TLS-certificaat'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is een SSL-certificaat?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.rfc-editor.org/info/rfc8446',
+      'https://www.rfc-editor.org/info/rfc7568',
+      'https://letsencrypt.org/about/',
+      'https://letsencrypt.org/2025/12/02/from-90-to-45',
+      'https://github.com/cabforum/servercert/blob/main/docs/BR.md',
+      'https://developers.google.com/search/blog/2014/08/https-as-ranking-signal',
+      'https://blog.chromium.org/2023/05/an-update-on-lock-icon.html',
+      'https://security.googleblog.com/2025/10/https-by-default.html',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is een SSL-certificaat? Uitleg en tips | Drijfveer Media"
+  description="Wat is een SSL-certificaat? Het zorgt voor https en een versleutelde verbinding. Zo werkt het, welke soort je nodig hebt en waarom gratis vaak genoeg is."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'SSL-certificaat', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is een SSL-certificaat?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Staat er https voor je webadres? Dan heeft je site een certificaat. Staat er "Niet beveiligd", dan niet, of klopt er iets niet. Voor je bezoeker is dat het verschil tussen een gesloten envelop en een ansichtkaart. Iedereen die onderweg meekijkt, kan een ansichtkaart lezen.</p>
+      <p>Hieronder lees je hoe het werkt, welke soorten er zijn, waarom gratis voor de meeste bedrijven genoeg is en wat er verandert nu certificaten steeds korter geldig zijn. Met een stappenplan voor WordPress en een tabel met foutmeldingen.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={12} />
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="namen">SSL, TLS en https: drie namen, één idee</h2></div>
+      <p>SSL staat voor Secure Sockets Layer. Het was de eerste techniek om verkeer tussen browser en server te versleutelen, uit de tijd van Netscape. De opvolger heet TLS, Transport Layer Security. SSL zelf is allang met pensioen: versie 3.0 werd in juni 2015 officieel afgeschreven in RFC 7568. De huidige standaard is TLS 1.3, vastgelegd in augustus 2018.</p>
+      <p>Toch zegt iedereen nog SSL. Ook wij, ook de hostingpartijen. Een "SSL-certificaat" is dus in werkelijkheid een TLS-certificaat. Https is het resultaat: http, de taal van het web, maar dan over een versleutelde verbinding. De s staat voor secure.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="wat-doet-het">Wat een certificaat precies doet</h2></div>
+      <p>Een certificaat heeft twee taken. De eerste is versleutelen: alles wat tussen browser en server heen en weer gaat, wordt onleesbaar gemaakt voor anderen. Wachtwoorden, formulieren, betaalgegevens. De tweede is de identiteit bewijzen: de bezoeker weet zeker dat hij met de server van jouwbedrijf.nl praat, en niet met een nagemaakte.</p>
+      <p>In het certificaat zelf staat onder meer:</p>
+      <ul>
+        <li>Voor welke domeinnaam of namen het geldt, bijvoorbeeld jouwbedrijf.nl en www.jouwbedrijf.nl.</li>
+        <li>Wie het heeft uitgegeven: de certificaatautoriteit.</li>
+        <li>Vanaf wanneer het geldig is, en de vervaldatum.</li>
+        <li>Een publieke sleutel, waarmee de versleuteling begint.</li>
+        <li>Een digitale handtekening van de uitgever, zodat niemand het kan namaken.</li>
+        <li>Bij duurdere typen: de naam van het bedrijf achter de site.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="handdruk">Zo ontstaat de versleutelde verbinding</h2></div>
+      <p>Voordat er ook maar één letter van je pagina wordt verstuurd, doen browser en server een korte kennismaking. Die heet de handshake en duurt een fractie van een seconde:</p>
+      <ol>
+        <li>De browser meldt zich bij de server en zegt welke versies en versleutelingen hij kent.</li>
+        <li>De server antwoordt met zijn keuze en stuurt zijn certificaat mee.</li>
+        <li>De browser controleert drie dingen: is het getekend door een uitgever die hij vertrouwt, past de naam bij het adres in de adresbalk, en is de vervaldatum nog niet verstreken?</li>
+        <li>Klopt alles, dan spreken ze samen een geheime sleutel af die alleen voor dit bezoek geldt.</li>
+        <li>Vanaf dat moment gaat alles versleuteld over de lijn.</li>
+      </ol>
+      <p>Faalt één controle bij stap 3, dan stopt de browser en toont hij een waarschuwing. Daarover verderop meer.</p>
+      <h3>Wat ziet een meekijker dan nog?</h3>
+      <p>Minder dan je denkt, maar niet niets. Iemand op hetzelfde wifi-netwerk, of je internetprovider, ziet nog steeds met welke domeinnaam je verbinding maakt en hoeveel data er heen en weer gaat. Welke pagina je bekijkt, wat je in een formulier typt en wat de server terugstuurt, blijft verborgen. Een bezoeker die jouwbedrijf.nl/offerte invult, laat dus alleen zien dat hij op jouwbedrijf.nl was. Niet wat hij vroeg.</p>
+      <h3>Ook je e-mail gebruikt TLS</h3>
+      <p>Niet alleen websites versleutelen. Mailservers die berichten aan elkaar doorgeven, gebruiken dezelfde techniek, via een uitbreiding die STARTTLS heet. Ondersteunt jouw mailserver dat niet, dan gaat een offerte of een factuur onversleuteld over internet. Bij grote maildiensten staat het standaard aan. De gratis test op internet.nl controleert het voor je eigen domein, samen met andere mailinstellingen.</p>
+      <h3>Kan één certificaat op meerdere servers?</h3>
+      <p>Ja. Draait je site op twee servers achter elkaar, of bij een partij die je site over meerdere locaties verspreidt, dan kan hetzelfde certificaat op elk van die machines staan. Het nadeel: de geheime sleutel staat dan ook op meer plekken. Bij automatische certificaten maakt elke server vaak gewoon zijn eigen exemplaar aan.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="uitgever">Wie geeft certificaten uit?</h2></div>
+      <p>Dat doet een certificaatautoriteit, in het Engels certificate authority of CA. Browsers en besturingssystemen hebben een lijst met autoriteiten die ze vertrouwen. Een certificaat van een partij die niet op die lijst staat, levert een foutmelding op. De regels waar die autoriteiten zich aan moeten houden, staan in de Baseline Requirements van het CA/Browser Forum, een overleg van uitgevers en browsermakers.</p>
+      <p>De bekendste is Let's Encrypt, een non-profit die certificaten gratis en volledig automatisch uitgeeft. Volgens eigen zeggen kan iedereen met een domeinnaam er zonder kosten een krijgen, en worden alle uitgegeven certificaten openbaar vastgelegd. Bijna alle hostingpartijen hebben het ingebouwd. Daarnaast zijn er commerciële uitgevers, zoals DigiCert en Sectigo, die ook duurdere typen leveren.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="soorten">Soorten certificaten</h2></div>
+      <p>Het verschil tussen de soorten zit niet in de sterkte van de versleuteling. Die is bij alle typen gelijk. Het verschil zit in hoe grondig de uitgever controleert wie je bent.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Type</th><th>Wat wordt gecontroleerd</th><th>Hoe snel</th><th>Past bij</th></tr></thead>
+          <tbody>
+            <tr><td><b>DV</b> (domeinvalidatie)</td><td>Alleen of je het domein beheert</td><td>Minuten, automatisch</td><td>Vrijwel elke mkb-site</td></tr>
+            <tr><td><b>OV</b> (organisatievalidatie)</td><td>Domein plus het bestaan van je bedrijf</td><td>Een paar dagen</td><td>Organisaties die hun naam in het certificaat willen</td></tr>
+            <tr><td><b>EV</b> (uitgebreide validatie)</td><td>Grondige controle van bedrijf en bevoegdheden</td><td>Dagen tot weken</td><td>Banken, grote webwinkels, overheid</td></tr>
+            <tr><td><b>Wildcard</b></td><td>Geldt voor alle subdomeinen, zoals *.jouwbedrijf.nl</td><td>Afhankelijk van type</td><td>Sites met veel subdomeinen</td></tr>
+            <tr><td><b>Multidomein</b></td><td>Eén certificaat voor meerdere domeinnamen</td><td>Afhankelijk van type</td><td>Bedrijven met meerdere merken of landen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Hoe werkt domeinvalidatie? Je bewijst dat je het domein beheert. Dat kan door een speciaal bestandje op je website te zetten, of door een TXT-record in de <a href="/kennisbank/wat-is/dns/">DNS</a> van je domein. Bij de meeste hostingpartijen gaat dat automatisch, zonder dat je er iets van merkt. Wil je bepalen wie er voor je domein mag uitgeven, dan zet je een CAA-record in je DNS.</p>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="gratis">Gratis of betaald?</h2></div>
+      <p>Een gratis certificaat van Let's Encrypt versleutelt net zo sterk als een betaald. Voor een bedrijfssite met een contactformulier, een blog en een paar diensten is het dus ruim voldoende. Het verlengt zichzelf, mits je hostingpartij dat goed heeft ingericht.</p>
+      <p>Wanneer betaal je wel? Als je je bedrijfsnaam in het certificaat wilt (OV of EV), als een klant of aanbesteding erom vraagt, of als je garanties en support van de uitgever wilt. Ter indicatie: bij de Nederlandse verkoper sslcertificaten.nl begint een DV-certificaat bij € 29, OV bij € 113 en EV bij € 260, exclusief btw (prijzen oktober 2026).</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Gratis (Let's Encrypt)</th><th>Betaald (OV of EV)</th></tr></thead>
+          <tbody>
+            <tr><td><b>Sterkte versleuteling</b></td><td>Gelijk</td><td>Gelijk</td></tr>
+            <tr><td><b>Controle</b></td><td>Alleen het domein</td><td>Ook je bedrijf</td></tr>
+            <tr><td><b>Bedrijfsnaam in het certificaat</b></td><td>Nee</td><td>Ja</td></tr>
+            <tr><td><b>Verlengen</b></td><td>Automatisch, via je hostingpartij</td><td>Vaak met de hand of via de verkoper</td></tr>
+            <tr><td><b>Support en garantie</b></td><td>Forum en documentatie</td><td>Bij de uitgever of verkoper</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Wat je niet moet doen: betalen voor een certificaat omdat je hostingpartij het "veiliger" noemt, terwijl je site alleen een contactformulier heeft. Vraag gewoon wat je extra krijgt.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="waarom">Waarom je niet zonder kunt</h2></div>
+      <ul class="vink">
+        <li><strong>Privacy van je bezoekers.</strong> Namen, telefoonnummers en berichten uit je formulier gaan zonder versleuteling leesbaar over de lijn. Op een openbaar wifi-netwerk kan dan iemand meelezen. De AVG vraagt dat je persoonsgegevens goed beschermt.</li>
+        <li><strong>Waarschuwingen in de browser.</strong> Chrome zet "Niet beveiligd" naast een site zonder https. Google kondigde aan dat Chrome vanaf versie 154, in oktober 2026, standaard toestemming vraagt voordat het een openbare site zonder https opent. Een bezoeker die dat ziet, klikt vaak weg.</li>
+        <li><strong>Google.</strong> Sinds augustus 2014 gebruikt Google https als signaal in de ranking. Volgens Google zelf een licht signaal. Het tilt je niet naar boven, maar zonder https begin je wel met een achterstand.</li>
+        <li><strong>Moderne techniek.</strong> Veel browserfuncties werken alleen op een beveiligde verbinding, zoals locatie opvragen of meldingen sturen.</li>
+      </ul>
+      <p>Hoe normaal https inmiddels is, blijkt uit de cijfers van Google: in Chrome op Windows ging in 2023 al meer dan 95 procent van de bezochte pagina's over https. In 2013 ondersteunde maar 14 procent van de miljoen meest bezochte sites het.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="slotje">Het hangslotje zegt niet dat een site te vertrouwen is</h2></div>
+      <p>Jarenlang stond er een hangslotje in de adresbalk bij een beveiligde verbinding. Veel mensen lazen dat als: deze site is betrouwbaar. Dat klopt niet. Het slotje zegt alleen dat de verbinding versleuteld is. Een oplichter kan net zo makkelijk een gratis certificaat krijgen voor zijn nepsite.</p>
+      <p>Google onderzocht het in 2021: maar 11 procent van de deelnemers begreep wat het slotje precies betekende. Bijna alle phishingsites gebruiken https en tonen dus ook een slot. Daarom verving Chrome het slotje in september 2023, vanaf versie 117, door een neutraal instellingen-icoon. Andere browsers tonen vaak nog wel een slot. De les voor je klanten blijft hetzelfde: kijk ook naar het adres zelf.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="vervaldatum">De vervaldatum wordt steeds korter</h2></div>
+      <p>Een certificaat is maar een beperkte tijd geldig. Hoe korter, hoe kleiner de schade als een sleutel ooit uitlekt. Het CA/Browser Forum heeft daarom vastgelegd dat de maximale looptijd stap voor stap omlaag gaat:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Uitgegeven vanaf</th><th>Maximaal geldig</th></tr></thead>
+          <tbody>
+            <tr><td>Vóór 15 maart 2026</td><td>398 dagen</td></tr>
+            <tr><td>15 maart 2026</td><td>200 dagen</td></tr>
+            <tr><td>15 maart 2027</td><td>100 dagen</td></tr>
+            <tr><td>15 maart 2029</td><td>47 dagen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Let's Encrypt gaat zelfs verder. Hun certificaten zijn nu 90 dagen geldig. Vanaf 10 februari 2027 wordt dat standaard 64 dagen en vanaf 16 februari 2028 nog 45 dagen.</p>
+      <p>De conclusie is simpel: met de hand verlengen is voorbij. Wie nu nog elk jaar een certificaat koopt en zelf installeert, moet dat straks elke paar weken doen. Zorg dat je hostingpartij automatisch verlengt, en dat er iemand een melding krijgt als dat misgaat.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="fouten">Foutmeldingen en wat je eraan doet</h2></div>
+      <p>Zie je een rood scherm in plaats van je site? De foutcode in Chrome vertelt meestal precies wat er mis is:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wat je ziet</th><th>Oorzaak</th><th>Oplossing</th></tr></thead>
+          <tbody>
+            <tr><td>NET::ERR_CERT_DATE_INVALID</td><td>Het certificaat is verlopen, of de klok van de computer staat verkeerd</td><td>Laat de hostingpartij verlengen en controleer de automatische verlenging</td></tr>
+            <tr><td>NET::ERR_CERT_COMMON_NAME_INVALID</td><td>De naam klopt niet, bijvoorbeeld wel voor www maar niet zonder</td><td>Vraag een certificaat aan voor beide namen</td></tr>
+            <tr><td>NET::ERR_CERT_AUTHORITY_INVALID</td><td>De uitgever wordt niet vertrouwd, vaak een zelfgemaakt certificaat</td><td>Vervang het door een certificaat van een erkende uitgever, zoals Let's Encrypt</td></tr>
+            <tr><td>"Niet beveiligd" terwijl je wel https hebt</td><td>Mixed content: onderdelen laden nog via http</td><td>Vervang de oude http-adressen, zie <a href="/kennisbank/wat-is/mixed-content/">mixed content</a></td></tr>
+            <tr><td>Site werkt wel via https, maar http blijft open</td><td>Geen doorverwijzing</td><td>Stel een 301-<a href="/kennisbank/wat-is/redirect/">redirect</a> in van http naar https</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="instellen">SSL instellen in WordPress: het stappenplan</h2></div>
+      <ol>
+        <li><strong>Zet het certificaat aan</strong> in het controlepaneel van je hostingpartij. Meestal heet dat SSL of Let's Encrypt en is het één schakelaar.</li>
+        <li><strong>Test of https werkt.</strong> Open https://jouwbedrijf.nl in een privévenster.</li>
+        <li><strong>Pas de adressen aan.</strong> Ga in WordPress naar Instellingen › Algemeen en zet bij WordPress-adres (URL) en Siteadres (URL) https in plaats van http.</li>
+        <li><strong>Stuur alles door.</strong> Zorg dat elk http-adres met een 301 doorverwijst naar de https-versie. Je hostingpartij of een regel in het .htaccess-bestand regelt dat.</li>
+        <li><strong>Ruim oude links op.</strong> Vervang in de database de http-links naar je eigen site door https. Maak eerst een back-up.</li>
+        <li><strong>Controleer Google.</strong> Kijk in <a href="/kennisbank/gidsen/google-search-console/">Search Console</a> of de https-versie wordt gezien. Een domeinproperty dekt beide versies.</li>
+        <li><strong>Check de verlenging.</strong> Noteer de vervaldatum en controleer na die datum of het nieuwe certificaat er staat.</li>
+      </ol>
+      <div class="kader">
+        <p class="kader-titel">Voorbeeld: zaterdagochtend, en de site is rood</p>
+        <p>Een kapsalon in Emmen krijgt op zaterdagochtend telefoontjes. Klanten zien een waarschuwing in plaats van de afsprakenpagina. Het certificaat is in de nacht verlopen. Het was jaren geleden met de hand geïnstalleerd en de herinneringsmail ging naar een oud adres. De oplossing duurt tien minuten: het gratis certificaat van de hostingpartij aanzetten, met automatische verlenging. De gemiste afspraken van die ochtend krijg je niet terug. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      </div>
+
+      <h3>Daarna: HSTS</h3>
+      <p>Werkt alles een paar weken goed, dan kun je nog een stap zetten. Met HSTS geeft je server de browser een instructie mee: kom hier voortaan alleen nog via https, ook als iemand http typt. Zo kan niemand een bezoeker onderweg terugzetten naar een onbeveiligde versie. Zet het pas aan als je zeker weet dat alles op https draait, ook je subdomeinen. Een browser onthoudt de instructie namelijk een hele tijd, en terugdraaien gaat dan niet meer met een druk op de knop.</p>
+
+      <h2 id="valkuilen">Fouten die we vaak tegenkomen</h2>
+      <ul>
+        <li><strong>Alleen www heeft een certificaat.</strong> Wie jouwbedrijf.nl zonder www typt, krijgt een foutmelding.</li>
+        <li><strong>De verlengmail gaat naar een oud adres.</strong> Van een vertrokken medewerker, of van de webbouwer van toen.</li>
+        <li><strong>Dubbel betalen.</strong> Een los gekocht certificaat, terwijl de hostingpartij er al gratis een levert.</li>
+        <li><strong>Een kettinkje van doorverwijzingen.</strong> Van http naar www, dan naar https, dan nog eens. Eén stap rechtstreeks naar het eindadres is sneller en netter.</li>
+        <li><strong>Subdomeinen vergeten.</strong> De site is beveiligd, maar offerte.jouwbedrijf.nl of de webmail niet.</li>
+        <li><strong>Formulieren die naar een http-adres versturen.</strong> De pagina is veilig, de inzending niet. De browser waarschuwt dan alsnog.</li>
+        <li><strong>Denken dat het slotje genoeg is.</strong> Updates, sterke wachtwoorden en back-ups blijven gewoon nodig.</li>
+      </ul>
+
+      <h2 id="ondernemer">Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Open je site met http:// ervoor. Kom je automatisch op https uit? Goed. Zo niet, regel een doorverwijzing.</li>
+        <li>Klik op het icoon links van je webadres en bekijk het certificaat: voor welke namen het geldt en wanneer het verloopt.</li>
+        <li>Vraag je hostingpartij of het automatisch verlengt, en naar welk adres meldingen gaan.</li>
+        <li>Doe de gratis test op internet.nl. Die controleert je https-instellingen en laat zien wat er beter kan.</li>
+        <li>Kies gratis, tenzij je een duidelijke reden hebt om te betalen.</li>
+      </ul>
+      <p>Hosting en certificaten verkopen we zelf niet. Wel lopen we https, doorverwijzingen en mixed content na in een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a>. En met <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a> houden we updates, back-ups en beveiliging bij, zodat een verlopen certificaat niet pas op zaterdagochtend opvalt.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees wat <a href="/kennisbank/wat-is/hosting/">hosting</a> is en hoe een <a href="/kennisbank/wat-is/cms/">CMS</a> werkt. Is je site al eens overgenomen, kijk dan bij <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt: wat nu?</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Heb ik een SSL-certificaat nodig als ik niets verkoop?', a: 'Ja. Ook een contactformulier verstuurt persoonsgegevens. Zonder certificaat toont Chrome "Niet beveiligd" en vraagt de browser straks zelfs toestemming voordat hij je site opent. Een gratis certificaat is genoeg.' },
+      { v: 'Is een gratis certificaat minder veilig?', a: 'Nee. De versleuteling is precies even sterk. Een betaald certificaat controleert alleen grondiger wie er achter de site zit, en levert soms extra support of garanties.' },
+      { v: 'Wat is het verschil tussen SSL en TLS?', a: 'TLS is de opvolger van SSL. SSL zelf wordt al jaren niet meer gebruikt, maar de naam is blijven hangen. Een SSL-certificaat is dus eigenlijk een TLS-certificaat.' },
+      { v: 'Hoe lang is een certificaat geldig?', a: 'Sinds 15 maart 2026 maximaal 200 dagen, vanaf maart 2027 maximaal 100 dagen en vanaf maart 2029 maximaal 47 dagen. Certificaten van Let\'s Encrypt gelden nu 90 dagen. Automatisch verlengen is daarom de norm.' },
+      { v: 'Wat gebeurt er als mijn certificaat verloopt?', a: 'Bezoekers krijgen een waarschuwingsscherm en de meesten haken af. Formulieren en betalingen werken vaak niet meer. Zet automatische verlenging aan en laat meldingen naar een adres gaan dat iemand leest.' },
+      { v: 'Maakt https mijn site veilig tegen hackers?', a: 'Nee. Het beveiligt alleen de verbinding. Een site met verouderde plugins of zwakke wachtwoorden kan met https net zo goed gehackt worden. Updates en back-ups blijven nodig.' },
+      { v: 'Kan ik zelf zien of een site een geldig certificaat heeft?', a: 'Ja. Klik op het icoon links van het webadres en bekijk de informatie over de verbinding. Daar zie je voor welke naam het certificaat geldt, wie het uitgaf en wanneer het verloopt.' },
+    ]}
+  />
+
+  <Actie titel="Staat jouw https goed?" tekst={`We kijken gratis naar je certificaat, doorverwijzingen en onveilige onderdelen. ${site.contactpersoon} belt je met wat er gevonden is.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .tekst td:first-child { overflow-wrap: anywhere; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

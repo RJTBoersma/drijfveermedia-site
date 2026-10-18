@@ -1,0 +1,69 @@
+---
+// Scène voor /kennisbank/wat-is/interne-links/: een dienstpagina in het midden, verbonden met vijf pagina's eromheen.
+// Rechts hangt een losse pagina. In de volledige versie lopen er stipjes over de links en wordt de losse pagina aangesloten.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+// middelpunten van de pagina's rondom
+const rond = [[86, 50], [240, 34], [394, 50], [86, 220], [300, 236]];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een dienstpagina in het midden is met links verbonden aan vijf pagina\'s eromheen. Een losse pagina zonder links wordt alsnog aangesloten.'}>
+  <!-- links tussen de pagina's -->
+  <path class="l" d={rond.map(([x, y]) => `M240 135L${x} ${y}`).join('')} />
+  <path d="M86 50L86 220M240 34L394 50M86 220L300 236" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- pagina's rondom -->
+  {rond.map(([x, y]) => (
+    <g>
+      <rect x={x - 32} y={y - 20} width="64" height="40" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect x={x - 22} y={y - 9} width="30" height="6" rx="3" fill="#074663" />
+      <rect x={x - 22} y={y + 3} width="42" height="5" rx="2.5" fill="#d9e1ea" />
+    </g>
+  ))}
+
+  <!-- de dienstpagina -->
+  <rect x="188" y="103" width="104" height="64" rx="10" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <text x="204" y="128" font-size="13" font-weight="900">Dienst</text>
+  <rect x="204" y="138" width="64" height="6" rx="3" fill="#d9e1ea" />
+  <rect class="o" x="204" y="150" width="40" height="10" rx="4" />
+
+  <!-- de losse pagina -->
+  <rect x="404" y="134" width="64" height="40" rx="8" fill="#fff" stroke="#8aa0b4" stroke-width="2" stroke-dasharray="5 4" />
+  <rect x="414" y="145" width="30" height="6" rx="3" fill="#8aa0b4" />
+  <rect x="414" y="157" width="40" height="5" rx="2.5" fill="#d9e1ea" />
+
+  {!mini && (
+    <g>
+      <path class="aansluit" d="M292 140L404 152" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <g class="los-vink">
+        <circle cx="462" cy="134" r="8" fill="#1f8a5b" />
+        <path d="M458.5 134l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+      {rond.map(([x, y], i) => (
+        <circle class="stip" cx="240" cy="135" r="4.5" fill="#ff6600" style={`--dx:${x - 240}px;--dy:${y - 135}px;animation-delay:${0.4 + i * 0.7}s`} />
+      ))}
+    </g>
+  )}
+</svg>
+<style>
+  .aansluit { stroke-dasharray: 1; }
+  .los-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .aansluit { stroke-dashoffset: 1; }
+  .stip { opacity: 0; }
+  :global(.teken-js) .los-vink { opacity: 0; }
+  .in-beeld .aansluit { animation: kennisbank-wat-is-interne-links-lijn 1s cubic-bezier(.6,.1,.3,1) 1.2s forwards; }
+  .in-beeld .los-vink { animation: kennisbank-wat-is-interne-links-vink 0.5s cubic-bezier(.3,1.6,.5,1) 2.1s forwards; }
+  .in-beeld .stip { animation: kennisbank-wat-is-interne-links-stip 3.5s ease-in-out infinite; }
+  @keyframes kennisbank-wat-is-interne-links-lijn { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-wat-is-interne-links-vink { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-wat-is-interne-links-stip {
+    0% { opacity: 0; transform: none; }
+    10% { opacity: 1; }
+    55% { opacity: 1; transform: translate(var(--dx), var(--dy)); }
+    65%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .aansluit { animation: none; stroke-dashoffset: 0; }
+    .in-beeld .los-vink { animation: none; opacity: 1; }
+    .in-beeld .stip { animation: none; opacity: 0; }
+  }
+</style>

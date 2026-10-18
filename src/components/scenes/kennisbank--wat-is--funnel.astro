@@ -1,0 +1,87 @@
+---
+// Scène voor /kennisbank/wat-is/funnel/: een trechter in drie lagen (awareness, overweging, conversie) met links de fases en rechts de aantallen.
+// Als hij leeft: bolletjes vallen van boven in de trechter. De meeste vallen onderweg af, één komt er onderaan uit en wordt klant.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const lagen = [
+  { d: 'M126 46H354L318 102H162Z', vul: '#e8eef4', label: 'Awareness', kort: 'TOFU', aantal: '1.000', y: 78 },
+  { d: 'M166 108H314L286 158H194Z', vul: '#d9e1ea', label: 'Overweging', kort: 'MOFU', aantal: '120', y: 137 },
+  { d: 'M198 164H282L262 206H218Z', vul: '#074663', label: 'Conversie', kort: 'BOFU', aantal: '30', y: 189 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een trechter in drie lagen, awareness, overweging en conversie. Bovenin komen duizend bezoekers binnen, onderaan blijven dertig aanvragen over die klant worden.'}>
+  {lagen.map((l, i) => (
+    <g>
+      <path d={l.d} fill={l.vul} stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+      <text x="20" y={l.y} font-size="13" font-weight="800">{l.label}</text>
+      <text x="20" y={l.y + 15} font-size="11" class="zacht">{l.kort}</text>
+      <path d={`M104 ${l.y - 4}H${[132, 172, 204][i]}`} stroke="#d9e1ea" stroke-width="2" stroke-dasharray="3 4" />
+      <rect x="384" y={l.y - 17} width="76" height="26" rx="13" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x="422" y={l.y + 0.5} font-size="12.5" font-weight="800" text-anchor="middle">{l.aantal}</text>
+      <path d={`M${[350, 310, 280][i]} ${l.y - 4}H380`} stroke="#d9e1ea" stroke-width="2" stroke-dasharray="3 4" />
+    </g>
+  ))}
+  <text x="240" y="193" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">aanvraag</text>
+  <path d="M232 206V222H248V206" fill="#074663" />
+  <g>
+    <rect x="198" y="230" width="84" height="28" rx="14" fill="#fff" stroke="#1f8a5b" stroke-width="2" />
+    <circle cx="214" cy="244" r="7" fill="#1f8a5b" />
+    <path d="M210.5 244l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="250" y="248.5" font-size="12" font-weight="800" text-anchor="middle">klant</text>
+  </g>
+  <circle class="o" cx="196" cy="28" r="5" />
+  <circle cx="240" cy="22" r="5" fill="#074663" />
+  <circle class="o" cx="286" cy="30" r="5" />
+
+  {!mini && (
+    <g>
+      <circle class="funnel-bol funnel-bol-door" cx="240" cy="20" r="6" fill="#ff6600" />
+      <circle class="funnel-bol funnel-bol-af1" cx="170" cy="20" r="5.5" fill="#074663" />
+      <circle class="funnel-bol funnel-bol-af2" cx="300" cy="20" r="5.5" fill="#074663" />
+      <circle class="funnel-bol funnel-bol-af3" cx="214" cy="20" r="5.5" fill="#ff6600" />
+      <g class="funnel-plus">
+        <rect x="290" y="226" width="58" height="24" rx="12" fill="#1f8a5b" />
+        <text x="319" y="242.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">+1</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .funnel-bol, .funnel-plus { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .funnel-bol, :global(.teken-js) .funnel-plus { opacity: 0; }
+  .in-beeld .funnel-bol-door { animation: kennisbank-wat-is-funnel-door 6s ease-in 0.4s infinite; }
+  .in-beeld .funnel-bol-af1 { animation: kennisbank-wat-is-funnel-af1 6s ease-in 0.4s infinite; }
+  .in-beeld .funnel-bol-af2 { animation: kennisbank-wat-is-funnel-af2 6s ease-in 0.9s infinite; }
+  .in-beeld .funnel-bol-af3 { animation: kennisbank-wat-is-funnel-af3 6s ease-in 1.4s infinite; }
+  .in-beeld .funnel-plus { animation: kennisbank-wat-is-funnel-plus 6s ease-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-funnel-door {
+    0% { opacity: 0; transform: translateY(0); }
+    6% { opacity: 1; }
+    55% { opacity: 1; transform: translateY(196px); }
+    62%, 100% { opacity: 0; transform: translateY(210px); }
+  }
+  @keyframes kennisbank-wat-is-funnel-af1 {
+    0% { opacity: 0; transform: translate(0, 0); }
+    6% { opacity: 1; }
+    24% { opacity: 1; transform: translate(0, 48px); }
+    40%, 100% { opacity: 0; transform: translate(-46px, 70px); }
+  }
+  @keyframes kennisbank-wat-is-funnel-af2 {
+    0% { opacity: 0; transform: translate(0, 0); }
+    6% { opacity: 1; }
+    30% { opacity: 1; transform: translate(-14px, 110px); }
+    46%, 100% { opacity: 0; transform: translate(40px, 128px); }
+  }
+  @keyframes kennisbank-wat-is-funnel-af3 {
+    0% { opacity: 0; transform: translate(0, 0); }
+    6% { opacity: 1; }
+    34% { opacity: 1; transform: translate(14px, 116px); }
+    50%, 100% { opacity: 0; transform: translate(-36px, 132px); }
+  }
+  @keyframes kennisbank-wat-is-funnel-plus {
+    0%, 56% { opacity: 0; transform: translateY(8px) scale(0.6); }
+    62%, 90% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .funnel-bol, .in-beeld .funnel-plus { animation: none; } }
+</style>

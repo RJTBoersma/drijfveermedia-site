@@ -1,0 +1,19 @@
+---
+export interface Kruimel { naam: string; url: string }
+const { items = [] } = Astro.props as { items: Kruimel[] };
+---
+{items.length > 0 && (
+  <nav class="wrap kruimels" aria-label="Kruimelpad">
+    <ol>
+      <li><a href="/">Home</a></li>
+      {items.map((k, i) => (
+        <li>{i === items.length - 1 ? <span aria-current="page">{k.naam}</span> : <a href={k.url}>{k.naam}</a>}</li>
+      ))}
+    </ol>
+  </nav>
+)}
+<style>
+  .kruimels ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 18px 0 0; margin: 0; font-size: 0.92rem; color: var(--muted); }
+  .kruimels li + li::before { content: '›'; margin-right: 6px; }
+  .kruimels a { color: var(--muted); }
+</style>

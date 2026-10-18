@@ -1,0 +1,227 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--zelf-website-maken.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/zelf-website-maken/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'kan-dat', titel: 'Kun je het zelf?' },
+  { id: 'stappen', titel: 'In 7 stappen online' },
+  { id: 'platform', titel: 'Welke websitebouwer?' },
+  { id: 'bouwer-of-wordpress', titel: 'Websitebouwer of WordPress' },
+  { id: 'wordpress', titel: 'Zo begin je in WordPress' },
+  { id: 'ai', titel: 'Met AI een site maken' },
+  { id: 'kosten', titel: 'Wat zelf maken echt kost' },
+  { id: 'fouten', titel: 'Fouten van beginners' },
+  { id: 'checklist', titel: 'Checklist voor livegang' },
+  { id: 'laten-maken', titel: 'Wanneer laten maken slimmer is' },
+  { id: 'middenweg', titel: 'De middenweg' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Zelf een website maken of laten maken?',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'Thing', name: 'Zelf een website maken' },
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Zelf een website maken of laten maken? | Drijfveer Media"
+  description="Zelf een website maken? Zo doe je dat in 7 stappen, dit kost het echt en zo weet je wanneer laten maken slimmer is. Eerlijk advies van een webbouwer."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Zelf een website maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Website" titel="Zelf een website maken of laten maken?" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Zelf een website maken kan prima, ook zonder technische kennis. Het kost je wel tijd. Hier lees je hoe je het aanpakt, wat het echt kost en wanneer je het beter kunt laten doen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand oktober 2026)</p>
+          <ul>
+            <li>Met een websitebouwer zoals JouwWeb, Wix of Squarespace sta je met een paar avonden werk online.</li>
+            <li>Reken op € 5,50 tot € 20 per maand aan abonnement, plus je eigen uren.</li>
+            <li>WordPress geeft meer vrijheid, maar vraagt meer kennis en onderhoud.</li>
+            <li>Laten maken is slimmer als je site veel aanvragen moet opleveren of je tijd duur is.</li>
+          </ul>
+        </div>
+
+        <h2 id="kan-dat">Kun je zelf een website maken?</h2>
+        <p>Ja. Een website bouwen vroeg ooit kennis van HTML en CSS. Nu sleep je blokken op hun plek en kies je een kleur. Een eenvoudige site staat er zo. De vraag is dus niet of het kan, maar of het verstandig is.</p>
+        <p>Dat hangt af van drie dingen. Hoeveel tijd heb je? Hoe belangrijk is de site voor je omzet? En vind je het leuk? Wie er plezier in heeft en een paar avonden vrij kan maken, komt een heel eind. Wie er tegenop ziet, blijft hangen bij een halve site die nooit af komt.</p>
+
+        <h2 id="stappen">Zo maak je zelf een website in 7 stappen</h2>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Bepaal wat de site moet doen</h3></div>
+        <p>Wil je dat mensen bellen, een offerte aanvragen of een afspraak maken? Schrijf het op. Bepaal daarna welke pagina's je nodig hebt. Voor de meeste kleine bedrijven zijn dat er vijf: home, diensten, werk, over ons en contact. Teken ze op papier, met per pagina de vraag die hij beantwoordt.</p>
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>2. Kies en registreer een domeinnaam</h3></div>
+        <p>Kort, makkelijk te spellen, liefst op .nl. Een .nl-domeinnaam kost na het eerste jaar zo'n € 7 tot € 26 per jaar. Zorg dat hij op jouw naam staat, niet op die van de bouwer. Meer tips in de gids <a href="/kennisbank/gidsen/domeinnaam-kiezen/">domeinnaam kiezen</a>.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>3. Kies een websitebouwer of WordPress</h3></div>
+        <p>Een websitebouwer regelt hosting, beveiliging en updates voor je. WordPress is gratis software, maar je regelt zelf de hosting en het onderhoud. Hieronder vergelijken we de opties.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>4. Kies een template of thema</h3></div>
+        <p>Kies op opbouw, niet op kleur. Past de indeling bij jouw pagina's? Staat er ruimte voor een telefoonnummer bovenaan? Kleuren en lettertypes pas je daarna aan op je logo. Kies een thema dat er zonder jouw foto's al rustig uitziet.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>5. Schrijf de teksten en kies afbeeldingen</h3></div>
+        <p>Dit kost de meeste tijd. Schrijf per pagina eerst de kop: wat doe je, voor wie, waar. Daarna de rest, in de woorden die je klant gebruikt. Gebruik eigen foto's van je werk en je team. Maak ze kleiner voordat je ze uploadt, liefst onder de 300 kB per foto. Gebruik nooit zomaar een plaatje van internet: zonder licentie riskeer je een claim.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>6. Regel mobiel, snelheid, ssl en vindbaarheid</h3></div>
+        <p>Bekijk elke pagina op je telefoon. Daar komen de meeste bezoekers binnen. Controleer of het slotje in de adresbalk staat: dat is het SSL-certificaat. Geef elke pagina een eigen titel en een korte omschrijving. Zo begint je vindbaarheid in Google. Hoe je een trage site sneller krijgt, lees je in <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+        <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3>7. Zet hem live en houd hem bij</h3></div>
+        <p>Meld je site aan bij Google Search Console en maak een Google Bedrijfsprofiel aan. Plan daarna elke maand een half uur onderhoud: updates, een nieuwe foto, een review erbij. Een site die stilstaat, zakt langzaam weg.</p>
+
+        <h2 id="platform">Welke websitebouwer kies je?</h2>
+        <p>Dit zijn de bekendste opties voor een kleine bedrijfssite. Prijzen per maand, zoals de aanbieders ze op 18 oktober 2026 noemden.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Platform</th><th>Vanaf</th><th>Goed voor</th></tr></thead>
+            <tbody>
+              <tr><td>JouwWeb</td><td>€ 5,50 (Lite), € 10 (Pro), € 20 (Business), excl. btw bij jaarbetaling</td><td>Nederlandse bouwer, eenvoudig, Nederlandse hulp</td></tr>
+              <tr><td>Wix</td><td>zie wix.com voor de actuele prijs</td><td>Veel templates, veel vrijheid in de opmaak</td></tr>
+              <tr><td>Squarespace</td><td>$ 19 (Basic, bij jaarbetaling), $ 25 per maand los</td><td>Strakke, beeldende ontwerpen</td></tr>
+              <tr><td>WordPress</td><td>gratis software, hosting bij Hostnet vanaf € 9,99 (WP Lite, excl. btw)</td><td>Groei, maatwerk, duizenden plugins</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let op instapprijzen. Veel aanbieders rekenen het eerste jaar minder en daarna het normale tarief. Squarespace noemt in de openbare lijst alleen dollarprijzen. De actuele prijs van Wix check je op de site zelf. Kijk dus altijd naar de prijs na de actie, in je eigen valuta. Twijfel je tussen de grote drie? In de gids <a href="/kennisbank/gidsen/wix-squarespace-wordpress/">Wix, Squarespace of WordPress</a> zetten we ze naast elkaar.</p>
+
+        <h2 id="bouwer-of-wordpress">Websitebouwer of WordPress: de verschillen</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Websitebouwer</th><th>WordPress</th></tr></thead>
+            <tbody>
+              <tr><td>Hosting en ssl</td><td>Zit in het abonnement</td><td>Regel je zelf bij een hostingpartij</td></tr>
+              <tr><td>Updates en beveiliging</td><td>Doet de aanbieder</td><td>Doe je zelf, of je besteedt het uit</td></tr>
+              <tr><td>Vrijheid</td><td>Binnen de grenzen van het platform</td><td>Bijna onbeperkt, met plugins</td></tr>
+              <tr><td>Leercurve</td><td>Een paar uur</td><td>Een paar dagen</td></tr>
+              <tr><td>Verhuizen</td><td>Meestal opnieuw bouwen</td><td>Mee te nemen naar elke host</td></tr>
+              <tr><td>Risico</td><td>Je zit vast aan het platform</td><td>Zonder onderhoud wordt je site gehackt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Kort gezegd: een websitebouwer is een huurhuis met een huismeester. WordPress is een eigen huis. Meer vrijheid, maar de dakgoot maak je zelf schoon. Laat je dat onderhoud liggen, dan lees je vroeg of laat de gids <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt</a>.</p>
+
+        <h2 id="wordpress">Zo begin je in WordPress, met de echte menunamen</h2>
+        <p>Kies je voor WordPress, dan installeer je het meestal met één klik in het beheerpaneel van je hostingpartij. Daarna stel je dit in, in het Nederlandse dashboard.</p>
+        <ol>
+          <li><b>Instellingen, Algemeen.</b> Vul de Site titel en de Slogan in. Zet de taal op Nederlands en de tijdzone goed.</li>
+          <li><b>Instellingen, Permalinks.</b> Kies Berichtnaam. Dan krijgen je pagina's leesbare adressen, zoals /dakgoot-vervangen/.</li>
+          <li><b>Weergave, Thema's.</b> Kies een licht thema met goede beoordelingen en recente updates.</li>
+          <li><b>Pagina's.</b> Maak je vijf pagina's aan. Ga daarna naar Instellingen, Lezen en kies bij Je homepage toont voor Een statische pagina.</li>
+          <li><b>Plugins, Plugin toevoegen.</b> Installeer alleen wat je echt nodig hebt: een plugin voor formulieren, een SEO-plugin en een back-upplugin. Hoe minder plugins, hoe minder onderhoud.</li>
+          <li><b>Plugins, Geïnstalleerde plugins.</b> Klik bij elke plugin op Auto-updates inschakelen.</li>
+          <li><b>Instellingen, Lezen.</b> Haal vlak voor de livegang het vinkje weg bij Zoekmachines ontmoedigen om deze site te indexeren. Dat vinkje vergeten is een klassieker.</li>
+        </ol>
+
+        <h2 id="ai">Met AI een website maken</h2>
+        <p>Bijna elke websitebouwer heeft nu een AI-knop. Je typt wat voor bedrijf je hebt en krijgt in een minuut een site met teksten en plaatjes. Handig als begin. Maar de teksten zijn algemeen en lijken op die van je concurrent, die dezelfde knop gebruikte. Lees ze daarom kritisch na en vul ze aan met wat alleen jij weet: je werkgebied, je prijzen, je manier van werken.</p>
+        <p>Een stap verder is een site laten bouwen door een AI-assistent die code schrijft. Dat heet vibe coding. Het kan indrukwekkend snel, maar je krijgt ook code die je zelf niet begrijpt. In de gids <a href="/kennisbank/gidsen/vibe-coding/">vibe coding</a> lees je waar dat goed gaat en waar het misgaat.</p>
+
+        <h2 id="kosten">Wat kost zelf een website maken echt?</h2>
+        <p>Het abonnement is het kleinste deel. De grootste post is je tijd. Onze inschatting voor een eerste site van vijf pagina's: 20 tot 40 uur, vooral aan teksten en foto's. Reken het eens om naar je eigen uurtarief.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld: een hovenier die zelf bouwt (verzonnen voorbeeld)</p>
+          <p>Abonnement € 10 per maand, dus € 120 per jaar. Domeinnaam inbegrepen in het eerste jaar. Hij besteedt 30 uur aan de site. Bij een uurtarief van € 45 is dat € 1.350 aan uren die hij niet in tuinen stak. Totaal in jaar één: bijna € 1.500. Een gemaakte site van € 250 tot € 550 was hier voordeliger geweest.</p>
+        </div>
+        <h3>Waar gaan die uren naartoe?</h3>
+        <p>Zo verdelen de 20 tot 40 uur zich bij een eerste site van vijf pagina's. Het is onze eigen inschatting, voor iemand die nog nooit een site heeft gebouwd.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Stap</th><th>Tijd</th></tr></thead>
+            <tbody>
+              <tr><td>Plan maken en pagina's bepalen</td><td>2 tot 3 uur</td></tr>
+              <tr><td>Domein, platform en thema kiezen en instellen</td><td>3 tot 6 uur</td></tr>
+              <tr><td>Teksten schrijven</td><td>8 tot 15 uur</td></tr>
+              <tr><td>Foto's maken, kiezen en verkleinen</td><td>3 tot 8 uur</td></tr>
+              <tr><td>Opmaak, mobiel testen en vindbaarheid</td><td>3 tot 6 uur</td></tr>
+              <tr><td>Livegang en aanmelden bij Google</td><td>1 tot 2 uur</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dat rekenvoorbeeld werkt niet voor iedereen. Heb je in de wintermaanden tijd over, of ben je net gestart zonder opdrachten, dan kosten je uren minder. Dan is zelf bouwen een goede keuze. Wil je alle kosten op een rij, ook die van laten maken? Lees dan <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website laten maken</a>.</p>
+
+        <h2 id="fouten">Zes fouten die beginners maken</h2>
+        <ul>
+          <li><b>Beginnen met het ontwerp.</b> Eerst de teksten, dan het thema. Andersom pas je je verhaal aan op een plaatje.</li>
+          <li><b>Te veel pagina's.</b> Twintig halve pagina's zijn slechter dan vijf goede.</li>
+          <li><b>Geen telefoonnummer bovenaan.</b> Op mobiel wil een klant met één tik kunnen bellen.</li>
+          <li><b>Foto's van 5 MB uploaden.</b> Je site wordt traag, en dat merk je pas op een telefoon.</li>
+          <li><b>Het domein op naam van iemand anders.</b> Bijvoorbeeld van de neef die even hielp. Wil je later iets veranderen, dan ben je van hem afhankelijk.</li>
+          <li><b>Geen onderhoud plannen.</b> Een site zonder updates en nieuwe inhoud zakt weg, en bij WordPress loop je risico.</li>
+        </ul>
+
+        <h2 id="checklist">Checklist voordat je live gaat</h2>
+        <ul class="vink">
+          <li>Elke pagina heeft een eigen titel en omschrijving.</li>
+          <li>Je telefoonnummer en e-mailadres staan op elke pagina en werken op mobiel.</li>
+          <li>Het contactformulier komt aan. Test het met een echt bericht.</li>
+          <li>Het slotje staat in de adresbalk, op elke pagina.</li>
+          <li>Alle afbeeldingen zijn verkleind en hebben een korte beschrijving.</li>
+          <li>Er staat een privacyverklaring op. Zie de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</li>
+          <li>Je hebt de site op je eigen telefoon doorgeklikt.</li>
+          <li>De site is aangemeld bij Google Search Console.</li>
+          <li>Domein, hosting en account staan op jouw naam.</li>
+        </ul>
+        <p>Werk je als zzp'er? Lees dan ook wat er op een <a href="/kennisbank/gidsen/website-zzp/">website voor zzp'ers</a> moet staan.</p>
+
+        <h2 id="laten-maken">Wanneer laten maken slimmer is</h2>
+        <ul>
+          <li><b>Je site moet aanvragen opleveren.</b> Een site die verkoopt, vraagt om kennis van teksten, opbouw en vindbaarheid.</li>
+          <li><b>Je hebt meer dan tien pagina's nodig,</b> of functies zoals een boekingssysteem of koppeling met je planning.</li>
+          <li><b>Je wilt op meerdere plaatsen of diensten gevonden worden.</b> Dan is de structuur van je site het halve werk.</li>
+          <li><b>Je hebt het al een keer geprobeerd</b> en de site staat al maanden half af.</li>
+          <li><b>Je tijd is meer waard dan het verschil in prijs.</b></li>
+        </ul>
+
+        <h2 id="middenweg">De middenweg: laten bouwen en zelf bijhouden</h2>
+        <p>Zelf maken en laten maken zijn geen strikte keuzes. Er zit een middenweg tussen. Bij Drijfveer Media bouwen we een <a href="/website-laten-maken/website-met-ai/">website met AI</a> en maken we hem met de hand af, vanaf € 250. Hij staat er vaak binnen twee weken. Daarna pas je zelf teksten en foto's aan in een eenvoudig beheerscherm. Je krijgt de snelheid van een websitebouwer, met de kennis van een bureau erbij. Hosting regel je zelf, op je eigen naam, zodat de site echt van jou is.</p>
+        <p>Heb je al zelf een site gebouwd? Laat hem dan nakijken met onze <a href="/gratis-website-analyse/">gratis website-analyse</a>. We vertellen je eerlijk wat goed is en wat beter kan. Wil je een site die echt van jou is, in WordPress, dan kun je ook een <a href="/website-laten-maken/">website laten maken</a> vanaf € 2.000.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Prijspagina's van JouwWeb (jouwweb.nl/prijzen), Squarespace (squarespace.com/pricing), Hostnet (WordPress-hosting) en de .nl-domeinprijzen van STRATO, JouwWeb en Versio, geraadpleegd op 18 oktober 2026. Menunamen uit de Nederlandse vertaling van WordPress.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Toch liever laten maken?" intro="Een vaste prijs vooraf, een site die van jou is, en afspraken waar je ons op kunt afrekenen." />
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik gratis een website maken?', a: 'Ja, maar dan staat er reclame op en krijg je geen eigen domeinnaam. Voor een bedrijf werkt dat niet. Reken op minimaal € 5,50 tot € 10 per maand.' },
+      { v: 'Wat is de makkelijkste websitebouwer?', a: 'Voor beginners zijn JouwWeb en Wix het eenvoudigst. JouwWeb heeft als voordeel dat de hulp in het Nederlands is.' },
+      { v: 'Hoe lang duurt het om zelf een website te maken?', a: 'Een eenvoudige site van vijf pagina\'s kost de meeste mensen 20 tot 40 uur. De teksten kosten de meeste tijd.' },
+      { v: 'Heb ik hosting nodig als ik zelf een website maak?', a: 'Bij een websitebouwer zit hosting in het abonnement. Bij WordPress regel je het zelf bij een hostingpartij, vanaf zo\'n € 10 per maand voor een WordPress-pakket.' },
+      { v: 'Kan ik mijn zelfgebouwde site later laten verbeteren?', a: 'Ja. Een webbouwer kan je site verbeteren of overzetten. Bij een websitebouwer zoals Wix moet hij vaak opnieuw worden gebouwd, omdat je hem niet kunt verhuizen.' },
+      { v: 'Is WordPress moeilijk?', a: 'De basis leer je in een paar dagen. Het onderhoud is het lastige deel: updates, back-ups en beveiliging. Laat je dat liggen, dan loop je risico.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Website met AI laten maken', href: '/website-laten-maken/website-met-ai/', tekst: 'Snel online zonder het zelf te doen, vanaf € 250.' },
+      { label: 'Gids', titel: 'Vibe coding', href: '/kennisbank/gidsen/vibe-coding/', tekst: 'Kun je met AI zelf een website bouwen?' },
+      { label: 'Gids', titel: 'Website voor zzp\'ers', href: '/kennisbank/gidsen/website-zzp/', tekst: 'Wat er op je site moet, en wat wettelijk verplicht is.' },
+    ]}
+  />
+
+  <Actie titel="Zelf begonnen en vastgelopen?" tekst={`Geen probleem. ${site.contactpersoon} belt je binnen 15 minuten terug en kijkt mee. Soms is een uurtje hulp genoeg, soms is laten bouwen goedkoper.`} />
+</Base>

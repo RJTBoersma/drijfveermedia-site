@@ -1,0 +1,50 @@
+---
+// Scène voor /disclaimer/: een webpagina met een info-teken. Een vergrootglas leest de regels na en er verschijnt een label "onder voorbehoud".
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [96, 120, 144, 168, 192];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een webpagina met een info-teken. Een vergrootglas leest de regels na en er verschijnt een label met onder voorbehoud.'}>
+  <path class="l" d="M24 246h432" />
+  <rect x="60" y="28" width="300" height="208" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="l" d="M60 54h300" />
+  <circle cx="78" cy="41" r="4" fill="#d9e1ea" /><circle cx="90" cy="41" r="4" fill="#d9e1ea" /><circle cx="102" cy="41" r="4" fill="#d9e1ea" />
+  <rect x="84" y="68" width="130" height="12" rx="6" fill="#10283f" />
+  {regels.map((y, i) => (
+    <rect class="v" x="84" y={y} width={[220, 190, 236, 170, 206][i]} height="8" rx="4" />
+  ))}
+  <circle cx="408" cy="80" r="34" fill="#e8eef4" stroke="#074663" stroke-width="2.5" />
+  <circle cx="408" cy="64" r="4.5" fill="#074663" />
+  <path d="M408 76v24" stroke="#074663" stroke-width="7" stroke-linecap="round" />
+  <path class="l" d="M408 114v118" />
+  {!mini && (
+    <g>
+      <g class="dsc-glas">
+        <circle cx="120" cy="120" r="24" fill="rgba(255,255,255,.35)" stroke="#074663" stroke-width="4" />
+        <path d="M137 137l20 20" stroke="#074663" stroke-width="7" stroke-linecap="round" />
+      </g>
+      <g class="dsc-label">
+        <rect x="236" y="204" width="150" height="32" rx="10" fill="#fff4ec" stroke="#ff6600" stroke-width="2" />
+        <text x="311" y="225" text-anchor="middle" font-size="13" font-weight="800">onder voorbehoud</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .dsc-glas { opacity: 0; }
+  .in-beeld .dsc-glas { animation: disclaimer-lees 6s ease-in-out 0.6s infinite both; }
+  .dsc-label { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .dsc-label { opacity: 0; transform: scale(0.6); }
+  .in-beeld .dsc-label { animation: disclaimer-pop 0.6s cubic-bezier(.3,1.6,.5,1) 1.8s forwards; }
+  @keyframes disclaimer-lees {
+    0% { opacity: 0; transform: translate(0, -20px); }
+    10% { opacity: 1; transform: translate(0, -20px); }
+    30% { transform: translate(160px, -10px); }
+    50% { transform: translate(20px, 30px); }
+    70% { transform: translate(170px, 50px); }
+    90% { opacity: 1; transform: translate(40px, 70px); }
+    100% { opacity: 0; transform: translate(40px, 70px); }
+  }
+  @keyframes disclaimer-pop { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .dsc-glas, .in-beeld .dsc-label { animation: none; } }
+</style>

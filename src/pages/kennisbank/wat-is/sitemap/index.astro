@@ -1,0 +1,202 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--sitemap.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/sitemap/';
+const definitie = 'Een sitemap is een overzicht van alle pagina\'s op je website, meestal een bestand dat zoekmachines als Google vertelt welke pagina\'s er zijn en wanneer ze voor het laatst zijn bijgewerkt.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Sitemap',
+  alternateName: ['XML-sitemap', 'Sitemap.xml'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+
+const codeXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.jouwbedrijf.nl/tuinaanleg/</loc>
+    <lastmod>2026-10-12</lastmod>
+  </url>
+  <url>
+    <loc>https://www.jouwbedrijf.nl/contact/</loc>
+    <lastmod>2026-03-02</lastmod>
+  </url>
+</urlset>`;
+
+const codeRobots = `Sitemap: https://www.jouwbedrijf.nl/sitemap.xml`;
+---
+<Base
+  title="Wat is een sitemap? En heb je hem nodig? | Drijfveer Media"
+  description="Wat is een sitemap? Een lijst van je pagina's voor Google. Met een voorbeeld in XML, waar je hem vindt, hoe je hem maakt en indient in Search Console."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Sitemap', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is een sitemap?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum="2026-10-18" />
+      <p>Zie het als de inhoudsopgave van een boek. Google kan je site ook zonder inhoudsopgave doorbladeren, door links te volgen. Maar met een inhoudsopgave gaat het sneller en mist het minder. Vooral bij een nieuwe site, of een site met honderden pagina's.</p>
+      <p>Goed nieuws vooraf: als je met een content management systeem als WordPress of Wix werkt, heb je er waarschijnlijk al een. Hieronder lees je hoe je dat controleert, wat erin hoort en hoe je hem bij Google aanmeldt.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>Twee soorten sitemaps: XML en HTML</h2></div>
+      <p><strong>De XML-variant</strong> is voor zoekmachines. Het is een bestand met een lijst adressen, vaak met de datum waarop elke pagina voor het laatst veranderde. Bezoekers zien het nooit. Als SEO'ers erover praten, bedoelen ze bijna altijd deze.</p>
+      <p><strong>De HTML-variant</strong> is een gewone pagina voor bezoekers, met links naar alle onderdelen van je site. Vaak staat er een link naar in de footer. Handig om te navigeren op een grote site.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Vraag</th><th>XML-sitemap</th><th>HTML-sitemap</th></tr></thead>
+          <tbody>
+            <tr><td>Voor wie?</td><td>Zoekmachines</td><td>Bezoekers</td></tr>
+            <tr><td>Hoe ziet het eruit?</td><td>Een bestand vol code</td><td>Een gewone pagina met links</td></tr>
+            <tr><td>Waar staat het?</td><td>Meestal op /sitemap.xml of een vergelijkbaar adres</td><td>Vaak gelinkt in de footer</td></tr>
+            <tr><td>Nodig?</td><td>Bijna altijd handig, en meestal automatisch</td><td>Alleen bij grote sites met veel onderdelen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Naast XML accepteert Google nog twee vormen: een RSS- of Atom-feed, zoals een blog die vaak al heeft, en een simpel tekstbestand met één adres per regel. Voor de meeste sites is XML de logische keuze.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Zo ziet een XML-sitemap eruit</h2></div>
+      <p>Open er gerust eens een. Het ziet er technisch uit, maar het principe is simpel. Per pagina staat er een url-blok met het adres en de datum van de laatste wijziging. Er kan meer in, zoals afbeeldingen, video's en taalversies van een pagina, maar voor een gewone bedrijfssite is dit genoeg. Een verzonnen voorbeeld met twee pagina's:</p>
+      <pre><code>{codeXml}</code></pre>
+      <p>Een paar spelregels uit het sitemapprotocol en de richtlijnen van Google:</p>
+      <ul class="vink">
+        <li>Gebruik volledige adressen, met https en je domeinnaam ervoor. Geen losse paden als /contact/.</li>
+        <li>Het bestand moet in UTF-8 zijn opgeslagen. Elke goede generator doet dat vanzelf.</li>
+        <li>Zet het bij voorkeur in de hoofdmap van je site. Dan geldt het voor alle pagina's.</li>
+        <li>Eén bestand mag maximaal 50.000 adressen bevatten en ongecomprimeerd 50 MB groot zijn.</li>
+        <li>De volgorde van de adressen maakt niet uit.</li>
+      </ul>
+      <p>Heb je meer adressen, of wil je ze per soort bijhouden, zoals pagina's en blogs apart? Dan verdeel je ze over meerdere bestanden met een index erboven. Die index is niets anders dan een lijst met de adressen van de losse bestanden. Je meldt dan alleen de index aan.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Heb je een sitemap nodig?</h2></div>
+      <p>Google is daar eerlijk over. Zijn al je pagina's goed gelinkt, dan vindt Google ze meestal ook zonder. Toch raadt Google er in de meeste gevallen een aan. Dit is de afweging die Google zelf maakt:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Je hebt er veel aan als</th><th>Je kunt zonder als</th></tr></thead>
+          <tbody>
+            <tr><td>Je site groot is en niet elke pagina via een link te bereiken is</td><td>Je site klein is: ongeveer 500 pagina's of minder</td></tr>
+            <tr><td>Je site nieuw is en nog weinig links van andere sites heeft</td><td>Elke pagina vanaf de homepage via links te vinden is</td></tr>
+            <tr><td>Je veel video's of afbeeldingen hebt die in Google moeten komen</td><td>Je weinig beeld hebt dat apart gevonden moet worden</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Ons advies voor een mkb-site: heb er gewoon een. Het kost niets als je systeem hem maakt, en een nieuwe pagina wordt sneller gevonden.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Wat doet het bestand wel en niet?</h2></div>
+      <p>Het helpt Google je pagina's te vinden en sneller te indexeren. Een garantie is het niet, zegt Google er zelf bij. Een pagina die dun of dubbel is, komt er zo ook niet in. Het bestand is een uitnodiging, geen bevel.</p>
+      <p>Drie dingen die veel mensen niet weten:</p>
+      <ul>
+        <li><b>Google negeert priority en changefreq.</b> Veel plug-ins vullen die velden nog in. Het maakt niets uit.</li>
+        <li><b>De datum telt alleen als hij klopt.</b> Google gebruikt lastmod alleen als die steeds betrouwbaar is. Een wijziging aan de tekst, de gestructureerde data of de links telt. Een nieuw jaartal onderaan in de footer niet. Een plug-in die elke dag alle datums op vandaag zet, maakt het veld waardeloos.</li>
+        <li><b>Je stuurt mee welke versie de hoofdversie is.</b> Staat dezelfde inhoud onder twee adressen, zet dan alleen je voorkeursadres erin. Google laat in de zoekresultaten meestal de canonieke versie zien, en het bestand helpt Google die te kiezen.</li>
+        <li><b>Pingen werkt niet meer.</b> Vroeger kon je Google met een simpel webadres laten weten dat er iets veranderd was. Google heeft dat in 2023 stopgezet. Aanmelden gaat nu via Search Console of je robots.txt.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2>Waar vind je de sitemap van een website?</h2></div>
+      <p>Probeer deze adressen achter je domeinnaam:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Adres</th><th>Gemaakt door</th></tr></thead>
+          <tbody>
+            <tr><td><code>/sitemap.xml</code></td><td>Veel systemen en losse generators</td></tr>
+            <tr><td><code>/wp-sitemap.xml</code></td><td>WordPress zelf, sinds versie 5.5</td></tr>
+            <tr><td><code>/sitemap_index.xml</code></td><td>De SEO-plugin Yoast SEO</td></tr>
+            <tr><td><code>/sitemap-index.xml</code></td><td>Onder andere Astro, waarmee deze site gebouwd is</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Niets gevonden? Open dan <code>jouwdomein.nl/robots.txt</code>. Daar staat het adres vaak onderaan, op een regel als deze:</p>
+      <pre><code>{codeRobots}</code></pre>
+      <p>Heb je Search Console, dan zie je onder Sitemaps welke er zijn ingediend. Een HTML-sitemap voor bezoekers vind je meestal via een link in de footer.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Zo maak je er een</h2></div>
+      <h3>WordPress</h3>
+      <p>Sinds versie 5.5 maakt WordPress er zelf een, op /wp-sitemap.xml, met maximaal 2.000 adressen per bestand. WordPress zet het adres ook in je robots.txt. Gebruik je een SEO-plugin als Yoast SEO of Rank Math, dan neemt die het over met een eigen versie. In Yoast SEO zet je hem aan onder Settings, Site features, met de schakelaar XML sitemaps. Soorten content die je op noindex zet, laat Yoast er vanzelf uit.</p>
+      <h3>Wix, Squarespace en andere bouwers</h3>
+      <p>Volgens Google maken systemen als Wix, Squarespace en Blogger er meestal automatisch een. Je hoeft dan niets te doen. Het adres vind je in de hulppagina's van je bouwer.</p>
+      <h3>Een eigen gebouwde site</h3>
+      <p>Voor een paar tientallen pagina's kun je een bestand met de hand maken in een teksteditor. Daarboven wordt het onderhoud te veel en laat je de software hem maken. Zo werkt het op deze site: bij elke wijziging bouwt de site een nieuwe /sitemap-index.xml. Bedankpagina's en de foutpagina staan er bewust niet in. En voor bezoekers is er een gewone <a href="/sitemap/">sitemap-pagina</a>, gelinkt in de footer.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Indienen in Google Search Console</h2></div>
+      <p>Aanmelden is in een paar minuten gebeurd. Je hebt eigenaarsrechten voor de property nodig.</p>
+      <ol>
+        <li>Log in bij <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> en kies je website.</li>
+        <li>Klik in het menu aan de linkerkant op Sitemaps, onder Indexering.</li>
+        <li>Plak het adres in het vak Een nieuwe sitemap toevoegen en klik op Sturen.</li>
+        <li>Kijk na een paar dagen naar de status. Geslaagd betekent dat Google het bestand kon lezen. Kan niet ophalen of Bevat fouten betekent werk aan de winkel.</li>
+        <li>Klik op de regel voor de details. Je ziet hoeveel adressen Google erin vond.</li>
+      </ol>
+      <p>Google haalt het bestand meteen na het indienen op. Daarna komt Google er regelmatig op terug, los van het gewone crawlen van je site. Haal je een ingediend bestand later weg uit het rapport, dan vergeet Google de adressen daarin niet. Wil je dat Google een pagina niet meer bezoekt, dan regel je dat met robots.txt of door de pagina te verwijderen.</p>
+      <p>Geen eigenaarsrechten? Zet dan de regel met het adres in je robots.txt, zoals hierboven. Ook andere zoekmachines vinden hem daar. Let op: het rapport toont alleen wat je zelf in Search Console hebt ingediend, niet wat Google via robots.txt vond.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Fouten die we vaak zien</h2></div>
+      <ul>
+        <li><b>Adressen die niet in Google horen.</b> <a href="/kennisbank/wat-is/redirect/">Doorverwijzingen</a>, foutpagina's en pagina's op noindex. Dat geeft tegenstrijdige signalen.</li>
+        <li><b>De verkeerde versie.</b> Adressen met http terwijl je site op https draait, of zonder www terwijl je site met www werkt. Zet alleen de versie erin die je in Google wilt zien.</li>
+        <li><b>Dubbele pagina's.</b> Kies per inhoud één adres, de canonieke versie, en zet alleen die erin.</li>
+        <li><b>Geblokkeerd voor Google.</b> Een bestand achter een wachtwoord, of adressen die je in robots.txt hebt afgesloten.</li>
+        <li><b>Een oude, vergeten versie.</b> Na een overstap naar een andere plugin staat de oude nog ingediend en geeft fouten.</li>
+        <li><b>Adressen van je testomgeving.</b> Een testdomein dat per ongeluk mee is gekomen.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: een hovenier uit Zuidlaren lanceert een nieuwe site met vijftien pagina's. Nog geen andere site linkt ernaar, dus Google komt er niet vanzelf langs. Hij controleert of /wp-sitemap.xml werkt en meldt het bestand aan via Search Console. Binnen een paar dagen ziet hij in het rapport dat Google de pagina's heeft gevonden. Daarna moet de inhoud het werk doen. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Wat moet je ermee als ondernemer?</h2></div>
+      <ul class="vink">
+        <li>Zoek de jouwe, met de adressen uit de tabel hierboven.</li>
+        <li>Open hem en kijk of je belangrijkste pagina's erin staan. En of er niets in staat wat er niet hoort.</li>
+        <li>Dien hem in bij Search Console als dat nog niet gebeurd is.</li>
+        <li>Kijk een paar keer per jaar in het rapport Sitemaps. Staan er fouten, of veel minder gevonden pagina's dan je hebt? Dan klopt er iets niet.</li>
+        <li>Na een nieuwe website of een andere plugin: controleer opnieuw.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/google-search-console/">Website aanmelden bij Google</a>, of laat ons alles nalopen met een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a>. Bij grote sites speelt ook het <a href="/kennisbank/wat-is/crawlbudget/">crawlbudget</a> mee. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een XML- en een HTML-sitemap?', a: 'Een XML-sitemap is een bestand voor zoekmachines met een lijst van je adressen. Een HTML-sitemap is een gewone pagina voor bezoekers met links naar alle onderdelen van je site.' },
+      { v: 'Moet ik mijn sitemap opnieuw indienen na elke wijziging?', a: 'Nee. Google haalt een ingediend bestand zelf regelmatig opnieuw op. Alleen na grote veranderingen kun je hem opnieuw indienen om het te versnellen.' },
+      { v: 'Zorgt een sitemap ervoor dat al mijn pagina\'s in Google komen?', a: 'Nee. Het bestand helpt Google je pagina\'s te vinden, maar Google beslist zelf wat het opneemt. Dunne of dubbele pagina\'s komen er zo ook niet in.' },
+      { v: 'Hoeveel pagina\'s mogen er in een sitemap?', a: 'Maximaal 50.000 adressen per bestand, en ongecomprimeerd hooguit 50 MB. Heb je er meer, dan verdeel je ze over meerdere bestanden met een sitemapindex.' },
+      { v: 'Heb ik een sitemap nodig voor een kleine website?', a: 'Volgens Google kun je bij ongeveer 500 pagina\'s of minder, die allemaal goed gelinkt zijn, zonder. Maakt je systeem er vanzelf een, laat hem dan gewoon staan. Het helpt nieuwe pagina\'s sneller gevonden te worden.' },
+      { v: 'Moet ik priority en changefreq invullen?', a: 'Nee. Google negeert beide velden. Zorg liever dat de datum van de laatste wijziging klopt.' },
+    ]}
+  />
+
+  <Actie titel="Ziet Google al je pagina's?" tekst={`We kijken gratis welke pagina's in Google staan en welke niet. ${site.contactpersoon} belt je met wat er mis is.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; background: var(--ink); color: #e8eef4; border-radius: 10px; padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; margin: 0 0 1.4em; }
+  pre code { font-family: var(--mono); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

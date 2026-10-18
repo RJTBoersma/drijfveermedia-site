@@ -1,0 +1,147 @@
+---
+import '@fontsource-variable/albert-sans';
+import '../styles/global.css';
+import '../styles/pagina.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import Breadcrumbs, { type Kruimel } from '../components/Breadcrumbs.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string; // komt in <title> en og:title
+  description: string;
+  kruimels?: Kruimel[];
+  noindex?: boolean;
+  schema?: Record<string, unknown>[]; // extra JSON-LD voor deze pagina
+  ogType?: string;
+  lang?: 'nl' | 'en' | 'de'; // taal van de pagina (standaard Nederlands)
+  alternatief?: { lang: string; url: string }[]; // hreflang-verwijzingen naar dezelfde pagina in andere talen
+  ogImage?: string; // pad naar een eigen deelafbeelding van 1200 x 630
+}
+
+const { title, description, kruimels = [], noindex = false, schema = [], ogType = 'website', ogImage = '/og-drijfveer-media.jpg', lang = 'nl', alternatief = [] } = Astro.props;
+const locale = { nl: 'nl_NL', en: 'en_GB', de: 'de_DE' }[lang];
+const ogImageUrl = new URL(ogImage, site.url).href;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const orgId = `${site.url}/#organisatie`;
+
+const basis = [
+  {
+    '@type': ['Organization', 'ProfessionalService'],
+    '@id': orgId,
+    name: site.naam,
+    url: `${site.url}/`,
+    logo: `${site.url}/icon-512.png`,
+    image: ogImageUrl,
+    telephone: '+31881155666',
+    email: site.email,
+    foundingDate: String(site.opgericht),
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: site.straat,
+      postalCode: site.postcode,
+      addressLocality: site.plaats,
+      addressRegion: site.provincie,
+      addressCountry: site.land,
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '17:00',
+    },
+    areaServed: [{ '@type': 'Country', name: 'Nederland' }, 'Drenthe', 'Friesland', 'Groningen'],
+    priceRange: '€€',
+  },
+  { '@type': 'WebSite', '@id': `${site.url}/#website`, url: `${site.url}/`, name: site.naam, inLanguage: 'nl-NL', publisher: { '@id': orgId } },
+];
+
+const kruimelSchema = kruimels.length
+  ? [{
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ naam: 'Home', url: '/' }, ...kruimels].map((k, i) => ({ '@type': 'ListItem', position: i + 1, name: k.naam, item: new URL(k.url, site.url).href })),
+    }]
+  : [];
+
+const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruimelSchema, ...schema] };
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#074663" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale} />
+    {alternatief.map((a) => <link rel="alternate" hreflang={a.lang} href={new URL(a.url, site.url).href} />)}
+    <meta property="og:site_name" content={site.naam} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Drijfveer Media: Gevonden. Genoemd. Gekozen." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="author" href="/humans.txt" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonld)} />
+    <script is:inline>
+      // Tekeningen pas verbergen als we ze ook weer kunnen laten verschijnen.
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('teken-js');
+    </script>
+    <script is:inline>
+      // De titel van het tabblad verandert als je wegklikt. Een kleine knipoog.
+      (function () {
+        var t = document.title;
+        document.addEventListener('visibilitychange', function () {
+          document.title = document.hidden ? 'Pssst. Kom je nog terug?' : t;
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="sr-only" href="#inhoud">Direct naar de inhoud</a>
+    <Header />
+    <Breadcrumbs items={kruimels} />
+    <main id="inhoud">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar />
+    <script is:inline>
+      // Laat elke tekening zichzelf tekenen zodra hij voor een kwart in beeld is.
+      (function () {
+        if (!document.documentElement.classList.contains('teken-js')) return;
+        var els = document.querySelectorAll('[data-teken],[data-leeft]');
+        var io = new IntersectionObserver(function (items) {
+          items.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-beeld'); io.unobserve(e.target); } });
+        }, { threshold: 0.25 });
+        els.forEach(function (el) { io.observe(el); });
+        // Bij afdrukken staat alles er meteen.
+        addEventListener('beforeprint', function () { els.forEach(function (el) { el.classList.add('in-beeld'); }); });
+      })();
+    </script>
+    <script is:inline>
+      console.log('%cMoi!', 'font-size:20px;font-weight:800;color:#ff6600', '\nJij kijkt ook graag onder de motorkap. Wij zoeken af en toe mensen zoals jij: https://www.drijfveermedia.nl/werken-bij/');
+    </script>
+    <script is:inline>
+      // Bezoekersteller zonder cookies en zonder persoonsgegevens (zie /privacyverklaring/ en /api/teller-lib.php)
+      (function () {
+        try {
+          if (location.hostname !== 'www.drijfveermedia.nl' || navigator.doNotTrack === '1' || navigator.globalPrivacyControl) return;
+          navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: location.pathname, r: document.referrer }));
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

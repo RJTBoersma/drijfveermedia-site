@@ -1,0 +1,79 @@
+---
+// Scène voor /kennisbank/gidsen/wat-is-geo/: links tien blauwe links, rechts één AI-antwoord waarin "Jouw bedrijf" genoemd wordt.
+// In de volledige versie stromen bronnen van de lijst naar het antwoord en verschijnt een badge "Genoemd".
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const resultaten = [88, 116, 144, 172, 200];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: links een lijst met zoekresultaten, rechts één AI-antwoord waarin jouw bedrijf met naam genoemd wordt.'}>
+  <text x="20" y="28" font-size="12" font-weight="800" class="zacht">Tien links</text>
+  <text x="252" y="28" font-size="12" font-weight="800" class="zacht">Eén antwoord</text>
+
+  <!-- links: een gewone resultatenlijst -->
+  <rect x="20" y="40" width="180" height="190" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="34" y="54" width="152" height="20" rx="10" />
+  <circle cx="171" cy="63" r="4.5" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M174.5 66.5l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  {resultaten.map((y, i) => (
+    <g>
+      <rect x="34" y={y} width={[96, 82, 104, 74, 90][i]} height="7" rx="3.5" fill="#074663" opacity=".7" />
+      <rect x="34" y={y + 11} width={[140, 128, 146, 120, 134][i]} height="6" rx="3" fill="#d9e1ea" />
+    </g>
+  ))}
+
+  <!-- verbindingen: wat de AI uit de lijst haalt -->
+  <path d="M200 92L248 110M200 148L248 116M200 204L248 122" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round" />
+
+  <!-- rechts: het antwoord -->
+  <rect x="250" y="40" width="210" height="190" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="286" y="52" width="150" height="26" rx="13" fill="#074663" />
+  <text x="298" y="69" font-size="10.5" font-weight="700" style="fill:#fff">Goede hovenier in Assen?</text>
+  <circle class="v" cx="272" cy="100" r="10" />
+  <circle class="o" cx="267" cy="100" r="2" /><circle class="o" cx="272" cy="100" r="2" /><circle class="o" cx="277" cy="100" r="2" />
+  <rect x="290" y="94" width="150" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="290" y="108" width="82" height="17" rx="5" fill="#ffe2cc" />
+  <text x="296" y="120.5" font-size="10.5" font-weight="800">Jouw bedrijf</text>
+  <rect x="378" y="113" width="62" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="290" y="132" width="124" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="290" y="146" width="140" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="290" y="166" width="66" height="18" rx="9" fill="#fff" stroke="#ff6600" stroke-width="1.5" />
+  <text x="297" y="178.5" font-size="8.5" font-weight="700">jouwsite.nl</text>
+  <rect x="362" y="166" width="38" height="18" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="406" y="166" width="38" height="18" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="370" y="173" width="22" height="4" rx="2" fill="#d9e1ea" />
+  <rect x="414" y="173" width="22" height="4" rx="2" fill="#d9e1ea" />
+
+  {!mini && (
+    <g>
+      <circle class="stip stip1" cx="200" cy="92" r="4" fill="#ff6600" />
+      <circle class="stip stip2" cx="200" cy="148" r="4" fill="#ff6600" />
+      <circle class="stip stip3" cx="200" cy="204" r="4" fill="#ff6600" />
+      <circle class="fonkel" cx="450" cy="50" r="6" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <g class="badge">
+        <rect x="318" y="198" width="124" height="26" rx="13" fill="#fff" stroke="#1f8a5b" stroke-width="2" />
+        <circle cx="334" cy="211" r="8" fill="#1f8a5b" />
+        <path d="M330 211l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="348" y="215" font-size="11" font-weight="800">Genoemd</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .stip, .fonkel, .badge { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .stip { opacity: 0; }
+  :global(.teken-js) .badge { opacity: 0; transform: translateY(8px) scale(.9); }
+  .in-beeld .stip1 { animation: kennisbank-gidsen-wat-is-geo-s1 3.6s ease-in-out 0.4s infinite; }
+  .in-beeld .stip2 { animation: kennisbank-gidsen-wat-is-geo-s2 3.6s ease-in-out 0.9s infinite; }
+  .in-beeld .stip3 { animation: kennisbank-gidsen-wat-is-geo-s3 3.6s ease-in-out 1.4s infinite; }
+  .in-beeld .badge { animation: kennisbank-gidsen-wat-is-geo-badge 0.6s cubic-bezier(.3,1.6,.5,1) 1.8s forwards; }
+  .in-beeld .fonkel { animation: kennisbank-gidsen-wat-is-geo-fonkel 4s ease-in-out 1s infinite; }
+  @keyframes kennisbank-gidsen-wat-is-geo-s1 { 0% { opacity: 0; transform: none; } 15% { opacity: 1; } 60% { opacity: 1; transform: translate(48px, 18px); } 75%, 100% { opacity: 0; transform: translate(48px, 18px); } }
+  @keyframes kennisbank-gidsen-wat-is-geo-s2 { 0% { opacity: 0; transform: none; } 15% { opacity: 1; } 60% { opacity: 1; transform: translate(48px, -32px); } 75%, 100% { opacity: 0; transform: translate(48px, -32px); } }
+  @keyframes kennisbank-gidsen-wat-is-geo-s3 { 0% { opacity: 0; transform: none; } 15% { opacity: 1; } 60% { opacity: 1; transform: translate(48px, -82px); } 75%, 100% { opacity: 0; transform: translate(48px, -82px); } }
+  @keyframes kennisbank-gidsen-wat-is-geo-badge { to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-wat-is-geo-fonkel { 0%, 100% { transform: scale(.6) rotate(0deg); opacity: .5; } 50% { transform: scale(1.1) rotate(45deg); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .stip1, .in-beeld .stip2, .in-beeld .stip3, .in-beeld .fonkel { animation: none; }
+    .in-beeld .badge { animation: none; opacity: 1; transform: none; }
+  }
+</style>

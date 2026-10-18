@@ -1,0 +1,220 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+import Prijskaart from '../../components/pagina/Prijskaart.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Auteur from '../../components/pagina/Auteur.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/lokale-seo.astro';
+import { site } from '../../data/site';
+
+const url = '/lokale-seo/';
+const hoofdstukken = [
+  { id: 'wat-is-lokale-seo', titel: 'Wat is lokale SEO?' },
+  { id: 'hoe-google-kiest', titel: 'Hoe Google kiest wie op de kaart komt' },
+  { id: 'voor-wie', titel: 'Voor wie het werkt (en voor wie niet)' },
+  { id: 'aanpak', titel: 'Onze aanpak in zes onderdelen' },
+  { id: 'voorbeeld', titel: 'Een voorbeeld uit de praktijk' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'ai', titel: 'Lokaal gevonden worden in AI-antwoorden' },
+  { id: 'zelf-doen', titel: 'Wat je vandaag zelf kunt doen' },
+  { id: 'kosten', titel: 'Wat lokale SEO kost' },
+  { id: 'eerlijk', titel: 'Hoe snel het gaat en wat we beloven' },
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Lokale SEO',
+  serviceType: 'Lokale zoekmachineoptimalisatie',
+  description: 'Gevonden worden in je eigen regio en op Google Maps, inclusief Google Bedrijfsprofiel, Bing Places, Apple Business Connect en reviews.',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 295, priceSpecification: { '@type': 'UnitPriceSpecification', price: 295, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Lokale SEO: gevonden in je eigen regio | Drijfveer Media"
+  description="Lokale SEO voor het mkb: hoger in Google Maps en de lokale zoekresultaten, inclusief reviews. Vanaf € 295 per maand en maandelijks opzegbaar."
+  kruimels={[{ naam: 'Lokale SEO', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · Lokale SEO" titel="Lokale SEO: gevonden door klanten in je eigen regio" prijs="vanaf € 295 per maand">
+    <p>Iemand in jouw plaats zoekt precies wat jij doet. Google laat drie bedrijven op de kaart zien. Wij zorgen dat jij er een van bent.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-17" nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <p>Lokale SEO zorgt dat klanten in jouw regio je vinden op het moment dat ze zoeken. Op Google Maps, in het kaartje bovenaan Google en in de gewone resultaten daaronder. Het draait om vier dingen: een goed ingericht bedrijfsprofiel, gegevens die overal kloppen, pagina's die echt over jouw werkgebied gaan en reviews van echte klanten. Bij ons kost het vanaf € 295 per maand, reviews inbegrepen.</p>
+        </div>
+
+        <h2 id="wat-is-lokale-seo">Wat is lokale SEO?</h2>
+        <p>Typ "fysiotherapeut Assen" of "dakdekker in de buurt" in Google. Bovenaan zie je een kaartje met drie bedrijven, het zogeheten local pack. Daaronder komen pas de gewone zoekresultaten. Op een telefoon vult dat kaartje vaak het hele eerste scherm.</p>
+        <p>Lokale SEO is al het werk dat ervoor zorgt dat jouw bedrijf daar staat. In het kaartje, op Google Maps en in de lokale zoekresultaten eronder. Het is een tak van gewone <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>, met één verschil: de plek van de zoeker telt mee. Wie in Emmen zoekt, krijgt andere bedrijven te zien dan wie dezelfde vraag in Zwolle stelt.</p>
+        <p>Lokale zoekopdrachten zijn bijna altijd koopklaar. Niemand zoekt "loodgieter Hoogeveen" voor de lol. Er lekt iets, en er moet vandaag iemand komen. Wie dan bovenaan staat, krijgt het telefoontje. Wie op plek acht staat, hoort er nooit van.</p>
+        <h3>Twee plekken om gevonden te worden</h3>
+        <ul>
+          <li><b>Het kaartje en Google Maps.</b> Hier bepaalt vooral je Google Bedrijfsprofiel of je meedoet. Mensen bellen direct, vragen een route of openen je website.</li>
+          <li><b>De gewone resultaten onder de kaart.</b> Hier tellen je website, je lokale pagina's en de links naar je site. Wie op beide plekken staat, is twee keer zichtbaar.</li>
+        </ul>
+        <p>En dan zijn er nog Bing, Apple Kaarten en de AI-assistenten. Die gebruiken grotendeels dezelfde gegevens. Daarover verderop meer.</p>
+
+        <h2 id="hoe-google-kiest">Hoe Google kiest wie op de kaart komt</h2>
+        <p>Google zegt het in zijn eigen helpcentrum vrij open. Lokale resultaten zijn vooral gebaseerd op drie dingen: relevantie, afstand en bekendheid. Google noemt dat laatste prominentie.</p>
+        <div class="drie-factoren">
+          <div><Tekening naam="doel" maat={52} /><b>Relevantie</b><span>Past jouw bedrijf bij wat iemand zoekt? Dat leest Google uit je profiel, je categorie en je website.</span></div>
+          <div><Tekening naam="pin" maat={52} vertraging={200} /><b>Afstand</b><span>Hoe ver zit je van de zoeker? Hier kan niemand iets aan veranderen. Ook wij niet.</span></div>
+          <div><Tekening naam="ster" maat={52} vertraging={400} /><b>Bekendheid</b><span>Hoe bekend en gewaardeerd ben je? Reviews, links en vermeldingen op andere sites tellen mee.</span></div>
+        </div>
+        <p>Over bekendheid is Google opvallend concreet. Volgens Google telt onder meer mee hoeveel websites naar je bedrijf linken en hoeveel reviews je hebt. Meer reviews en positieve beoordelingen kunnen je positie verbeteren. Dat is dus geen gok van marketeers, dat staat er gewoon.</p>
+        <p>Wat je ook niet kunt: een plek kopen. Advertenties op de kaart bestaan, maar die staan los van de gewone lokale resultaten. Een bureau dat belooft je "via een contact bij Google" bovenaan te zetten, kun je beter niet bellen.</p>
+
+        <h2 id="voor-wie">Voor wie lokale SEO het meeste oplevert</h2>
+        <p>Het werkt voor elk bedrijf dat klanten uit een bepaald gebied haalt. In de praktijk zien we drie soorten.</p>
+        <ul>
+          <li><b>Je hebt een adres waar klanten komen.</b> Een praktijk, winkel, showroom, garage of kantoor. Klanten zoeken je op de kaart en willen een route.</li>
+          <li><b>Je komt bij klanten thuis.</b> Installateurs, schilders, hoveniers, glazenwassers. Je hebt geen winkel, wel een servicegebied. Dan stellen we dat gebied in en verbergen we desgewenst je huisadres.</li>
+          <li><b>Je hebt meerdere vestigingen.</b> Dan heeft elke vestiging een eigen profiel en een eigen pagina nodig, met eigen gegevens, eigen foto's en eigen reviews.</li>
+        </ul>
+        <p>Voor wie werkt het niet? Als je klanten uit heel Nederland komen en niemand een plaatsnaam intypt, heb je meer aan gewone SEO of <a href="/linkbuilding/">linkbuilding</a>. Een softwarebedrijf dat alleen online verkoopt, wint weinig met een kaartje. Dat zeggen we je dan ook. Liever één eerlijk advies dan een jaar budget dat niets oplevert.</p>
+
+        <h2 id="aanpak">Onze aanpak in zes onderdelen</h2>
+        <p>We beginnen nooit overal tegelijk. Eerst kijken we waar de grootste winst zit, dan pakken we dat op. Bij de meeste bedrijven is dat het profiel en de gegevens. Daarna komt de rest.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>1. Je Google Bedrijfsprofiel, plus Bing en Apple</h3></div>
+        <p>Het Google Bedrijfsprofiel is het hart van je vindbaarheid op de kaart. We kiezen de juiste hoofdcategorie, want dat is de zwaarste keuze in je hele profiel. We vullen je diensten in, je openingstijden, je servicegebied en een beschrijving die vertelt wat je doet en waar. Daarna zetten we dezelfde gegevens op Bing Places en Apple Business (voorheen Apple Business Connect). Wie een iPhone gebruikt, ziet namelijk niet Google Maps maar Apple Kaarten. Hoe we dat precies doen, lees je bij <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel laten optimaliseren</a>.</p>
+        <p>Een profiel is geen eenmalig klusje. Elke maand plaatsen we een paar posts en zetten we actuele foto's van je werk online. Een profiel dat leeft, laat Google en klanten zien dat je bedrijf bestaat en bezig is.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>2. Overal dezelfde gegevens</h3></div>
+        <p>Google vergelijkt je gegevens met wat er op andere plekken over je staat. Je website, je profiel, de KvK, bedrijvengidsen, brancheverenigingen. Staat er overal hetzelfde, dan weet Google zeker wie je bent. Kleine verschillen maken zoekmachines onzeker. En onzekerheid kost plekken.</p>
+        <p>In het vak heet dit NAP: naam, adres en telefoonnummer. Zo ziet een verzonnen voorbeeld eruit van wat we vaak tegenkomen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Waar</th><th>Naam</th><th>Adres</th><th>Telefoon</th></tr></thead>
+            <tbody>
+              <tr><td>Website</td><td>Schildersbedrijf De Vries</td><td>Kerkweg 12</td><td>Vast nummer</td></tr>
+              <tr><td>Google Bedrijfsprofiel</td><td>De Vries Schilders Meppel</td><td>Kerkweg 12</td><td>Mobiel nummer</td></tr>
+              <tr><td>Oude bedrijvengids</td><td>Schildersbedrijf De Vries</td><td>Stationsweg 3</td><td>Oud vast nummer</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld. Drie bronnen, drie verschillende verhalen. Voor Google zijn dit misschien drie bedrijven.</p>
+        <p>We zoeken al je lokale vermeldingen op, zetten ze recht en vullen aan waar je nog ontbreekt. Denk aan de grote bedrijvengidsen, je branchevereniging en regionale sites. Dat werk is saai. Het helpt wel.</p>
+
+        <div class="stap-kop"><Tekening naam="huis" maat={48} /><h3>3. Lokale landingspagina's die echt over je regio gaan</h3></div>
+        <p>Werk je in Assen, Beilen en Hoogeveen? Dan kan een eigen pagina per plaats helpen. Maar alleen als elke pagina iets eigens te vertellen heeft. Twintig pagina's met dezelfde tekst en een andere plaatsnaam erin, ziet Google meteen. Die pagina's doen niets, of ze trekken je hele site omlaag.</p>
+        <p>Een goede lokale landingspagina laat zien dat je er echt werkt. Lokale cases van klussen in die plaats, de wijken waar je vaak komt, hoe snel je er bent en foto's van werk in de buurt. Dat is lokale content die een concurrent niet kan kopiëren. Onze <a href="/tekstschrijver/">tekstschrijvers</a> maken die pagina's samen met jou, met jouw verhalen.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>4. Reviews van echte klanten</h3></div>
+        <p>Reviews doen twee dingen tegelijk. Ze tellen mee voor je plek op de kaart, en ze overtuigen de klant die twijfelt tussen jou en de buurman. Bij ons hoort daarom een vaste aanpak voor reviews. Je krijgt een korte reviewlink en een QR-code, een paar voorbeeldteksten om klanten te vragen en wij reageren op elke nieuwe review. Ook op de vervelende. Alles over die aanpak staat op de pagina <a href="/lokale-seo/reviews/">meer Google reviews</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>5. Links en vermeldingen uit de buurt</h3></div>
+        <p>Een link van de site van je voetbalclub, de lokale ondernemersvereniging of een regionaal nieuwsmedium zegt Google: dit bedrijf hoort hier. Lokale links zijn vaak makkelijker te krijgen dan je denkt. Je sponsort al een team, je levert aan een bedrijf in de buurt, je doet mee aan een braderie. We zoeken die kansen op en zorgen dat ze een link opleveren. Voor zwaardere concurrentie zetten we gewone <a href="/linkbuilding/">linkbuilding</a> in.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>6. De techniek erachter</h3></div>
+        <p>Op je website zetten we <a href="/generative-engine-optimization/structured-data/">structured data</a> van het type LocalBusiness. Dat is een stukje code dat zoekmachines precies vertelt wie je bent, waar je zit, wanneer je open bent en welk gebied je bedient. We zetten je adres en telefoonnummer in de footer, als gewone tekst en niet in een plaatje. En we zorgen dat je site snel laadt op een telefoon, want daar komen de meeste lokale zoekers vandaan.</p>
+
+        <h2 id="voorbeeld">Een voorbeeld uit de praktijk</h2>
+        <p>Stel: een schildersbedrijf in Meppel, met vier mensen in dienst. Ze werken in Meppel, Steenwijk en Hoogeveen. Bij de nulmeting staan ze op "schilder Meppel" op plek zes van de kaart. Op "schilder Steenwijk" staan ze nergens.</p>
+        <p>Wat we zien: het profiel heeft als hoofdcategorie "Aannemer", er staan vier oude foto's in en het telefoonnummer verschilt van dat op de website. Er zijn negen reviews, de laatste is van anderhalf jaar geleden.</p>
+        <p>Dan is de volgorde duidelijk. Eerst de categorie naar "Schilder", de gegevens gelijktrekken en twintig actuele foto's erin. Dat kost een middag en levert vaak binnen een paar weken al verschil op. Daarna een vaste routine voor reviews na elke klus. Dan pas een pagina over schilderwerk in Steenwijk, met drie klussen die ze daar deden. En elke maand meten we hoe ze ervoor staan op de kaart, vanaf verschillende punten in hun werkgebied.</p>
+        <p class="klein muted">Verzonnen voorbeeld. Zo ziet het begin van een traject er bij ons meestal uit.</p>
+
+        <h2 id="fouten">Fouten die we vaak zien</h2>
+        <p>Veel ondernemers doen hun best en maken het daarmee juist erger. Dit zijn de missers die we het vaakst tegenkomen.</p>
+        <ul>
+          <li><b>Een zoekwoord in de bedrijfsnaam.</b> "Jansen Loodgieter Spoed Assen 24/7" mag niet van Google. Het werkt soms even, tot iemand het meldt en je profiel wordt geschorst.</li>
+          <li><b>Een adres dat niet echt is.</b> Een postbus of een virtueel kantoor als bezoekadres staat Google niet toe. Werk je vanuit huis en komen klanten niet langs? Kies dan een servicegebied.</li>
+          <li><b>Plaatspagina's van de kopieermachine.</b> Liever drie sterke lokale pagina's dan dertig lege.</li>
+          <li><b>Reviews kopen of ruilen.</b> Google haalt ze weg en kan je profiel beperken. Bovendien lezen klanten nepreviews er zo uit.</li>
+          <li><b>Een profiel dat niemand beheert.</b> Een vraag van een klant die maanden onbeantwoord blijft. Openingstijden van voor de verbouwing. Het kost klanten, en je merkt het niet eens.</li>
+        </ul>
+        <p>Waarom we dit zo stellig zeggen? In ons <a href="/proeflab/">proeflab</a> hebben we al vijftien jaar meer dan honderd eigen sites. Daar hebben we vroeger ook wel eens te veel risico genomen. Eén van die sites kreeg een penalty. We weten dus uit eigen ervaring waar de grens ligt, en bij klanten blijven we daar ruim vandaan.</p>
+
+        <h2 id="ai">Lokaal gevonden worden in AI-antwoorden</h2>
+        <p>Steeds meer mensen vragen het aan ChatGPT, Gemini of Copilot. "Welke schilder in Meppel kan nog voor de zomer komen?" Die assistenten halen hun lokale kennis grotendeels uit dezelfde bronnen: kaartgegevens, bedrijfsprofielen, reviews en sites die over je schrijven. Bing Places speelt daarbij een grotere rol dan veel mensen denken.</p>
+        <p>Wie lokaal beter gevonden wordt in Google, maakt dus ook meer kans om door AI genoemd te worden. Wie verder wil, leest meer over <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+
+        <h2 id="zelf-doen">Wat je vandaag zelf kunt doen</h2>
+        <p>Je hoeft niet op ons te wachten. Deze lijst kost je samen een middag.</p>
+        <ul class="vink">
+          <li>Zoek je eigen dienst plus plaatsnaam op je telefoon, buiten je eigen netwerk. Kijk wie er in het kaartje staat.</li>
+          <li>Claim je Google Bedrijfsprofiel en laat het verifiëren, als dat nog niet is gebeurd.</li>
+          <li>Controleer je hoofdcategorie. Kijk welke categorie de nummer één in jouw plaats gebruikt.</li>
+          <li>Zet tien actuele foto's van je werk, je team en je pand in je profiel.</li>
+          <li>Leg je naam, adres en telefoonnummer naast elkaar op je website, je profiel en de KvK. Zijn ze letterlijk gelijk?</li>
+          <li>Maak je reviewlink aan en stuur hem naar vijf tevreden klanten van de afgelopen maand.</li>
+          <li>Reageer op alle reviews die nog geen antwoord hebben.</li>
+          <li>Meld je bedrijf aan bij Bing Places en Apple Business Connect.</li>
+        </ul>
+        <p>Een uitgebreid stappenplan staat in de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel aanmaken, verifiëren en optimaliseren</a>.</p>
+
+        <h2 id="kosten">Wat lokale SEO kost</h2>
+        <p>Lokale SEO begint bij € 295 per maand, exclusief btw. Daarvoor krijg je:</p>
+        <ul>
+          <li>het inrichten en bijhouden van je Google Bedrijfsprofiel, Bing Places en Apple Business Connect;</li>
+          <li>elke maand nieuwe posts en actuele foto's in je profiel;</li>
+          <li>de complete reviewaanpak: reviewlink, QR-code, voorbeeldteksten en reacties op elke review;</li>
+          <li>het rechtzetten en aanvullen van je lokale vermeldingen;</li>
+          <li>een maandelijkse meting van je lokale vindbaarheid: je plek op de kaart, op meerdere punten in je werkgebied;</li>
+          <li>een kort maandverslag dat je zonder uitleg begrijpt.</li>
+        </ul>
+        <p>Lokale landingspagina's en linkbuilding komen erbij als dat nodig is. Dat bespreken we vooraf, met een vaste prijs. Heb je meerdere vestigingen? Dan maken we een voorstel per vestiging.</p>
+        <p>Wil je alleen je profiel één keer goed laten inrichten en daarna zelf verder? Dat kan ook, eenmalig vanaf € 249. En zoek je naast lokaal ook landelijke posities, dan is <a href="/zoekmachine-optimalisatie/">SEO</a> vanaf € 495 per maand de betere keuze. Die twee stemmen we dan op elkaar af.</p>
+
+        <h2 id="eerlijk">Hoe snel het gaat en wat we beloven</h2>
+        <p>Kleine aanpassingen, zoals een betere categorie of gelijke gegevens, zie je vaak binnen een paar weken terug. Reviews en lokale links werken geleidelijk. Reken bij flinke concurrentie op drie tot zes maanden voordat je echt stevig staat.</p>
+        <p>Wat we niet beloven: dat je overal in je werkgebied nummer één wordt. Wie tien kilometer verderop zit, wint het op afstand in zijn eigen dorp vaak van jou. Dat is geen falen, zo werkt de kaart. Wat we wel doen is samen een meetbaar doel afspreken. Bijvoorbeeld een plek in de top drie van de kaart in je eigen plaats, op je drie belangrijkste zoekwoorden. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>. Voorwaarde is wel dat jij doet wat nodig is, zoals klanten om een review vragen.</p>
+        <blockquote>Een bureau verdient zijn geld aan klanten die blijven omdat het werkt. Daarom is alles bij ons maandelijks opzegbaar.</blockquote>
+      </article>
+
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={13} />
+        <Prijskaart naam="Lokale SEO" prijs="€ 295" eenheid="per maand" punten={['Google, Bing en Apple bijgehouden', 'Posts en actuele foto\'s', 'Reviews: link, QR-code en reacties', 'Maandelijkse meting op de kaart']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Verder
+    titel="Meer over lokaal gevonden worden"
+    links={[
+      { label: 'Dienst', titel: 'Google Bedrijfsprofiel, Bing en Apple', href: '/lokale-seo/google-bedrijfsprofiel/', tekst: 'Alle drie de kaarten goed ingericht, eenmalig vanaf € 249.' },
+      { label: 'Dienst', titel: 'Meer Google reviews', href: '/lokale-seo/reviews/', tekst: 'Reviewlink, QR-code en goed reageren.' },
+      { label: 'Gids', titel: 'Google Bedrijfsprofiel aanmaken', href: '/kennisbank/gidsen/google-bedrijfsprofiel/', tekst: 'Aanmaken, verifiëren en optimaliseren, stap voor stap.' },
+      { label: 'Regio', titel: 'Online marketing in Drenthe', href: '/regio/drenthe/', tekst: 'Wat we doen voor ondernemers in de provincie.' },
+    ]}
+  />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen lokale SEO en gewone SEO?', a: 'Gewone SEO gaat over je plek in de zoekresultaten, waar je ook zoekt. Lokale SEO richt zich op zoekopdrachten met een plaats erin of een zoeker in de buurt, en dus ook op het kaartje en Google Maps. De basis is hetzelfde: een goede website. Daar komen je bedrijfsprofiel, je lokale vermeldingen en reviews bij.' },
+      { v: 'Kan ik lokaal gevonden worden zonder winkel of kantoor?', a: 'Ja. Kom je bij klanten thuis, dan maak je een profiel met een servicegebied. Je huisadres is dan niet zichtbaar. Je wordt dan getoond aan zoekers in de plaatsen die je bedient.' },
+      { v: 'Waarom sta ik wel bovenaan als ik zelf zoek, maar mijn klant niet?', a: 'Google kijkt naar waar de zoeker is en naar wat hij eerder zocht. Vanaf je eigen kantoor sta je dus vaak hoger dan vanaf de andere kant van de stad. Daarom meten wij je positie vanaf meerdere punten in je werkgebied.' },
+      { v: 'Hoeveel reviews heb ik nodig?', a: 'Daar is geen vast getal voor. Kijk naar de bedrijven die nu bovenaan staan in jouw plaats. Zorg dat je in de buurt komt van hun aantal, en dat er elke maand nieuwe bijkomen. Een recente review weegt voor klanten zwaarder dan een van drie jaar geleden.' },
+      { v: 'Heeft een plaatspagina op mijn website zin?', a: 'Alleen als je in die plaats echt werkt en er iets eigens over kunt vertellen. Denk aan klussen die je er deed, wijken waar je komt en hoe snel je er bent. Een kopie met een andere plaatsnaam erin heeft geen zin.' },
+      { v: 'Kan ik lokale SEO ook combineren met Google Ads?', a: 'Ja, dat kan prima. Advertenties op de kaart staan los van de gewone lokale resultaten. Ads geven je direct zichtbaarheid. Een plek in de gewone lokale resultaten blijft ook als je stopt met adverteren.' },
+      { v: 'Is lokale SEO maandelijks opzegbaar?', a: 'Ja, tenzij we samen iets anders afspreken. We willen dat je blijft omdat het werkt, niet omdat je vastzit.' },
+    ]}
+  />
+
+  <WieDoetHet wie={[{ slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }, { slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je project bij.' }]} />
+
+  <Actie titel="Benieuwd waar jij nu staat op de kaart?" tekst={`${site.contactpersoon} zoekt op jouw diensten in jouw plaats en belt je binnen 15 minuten terug met wat hij ziet. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }} />
+</Base>
+<style>
+  .drie-factoren { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 8px 0 22px; }
+  .drie-factoren div { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 16px; display: grid; justify-items: start; gap: 6px; align-content: start; }
+  .drie-factoren span { color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
+  @media (max-width: 640px) { .drie-factoren { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,53 @@
+---
+// Bovenste blok van een pagina (AIDA: attention). Links de belofte, rechts een getekend beeld.
+import { site } from '../../data/site';
+import { overgang } from '../../data/miniaturen';
+interface Props {
+  kicker: string; // bijvoorbeeld "Genoemd · GEO"
+  titel: string; // de H1
+  prijs?: string; // "vanaf € 495 per maand"
+  knop?: { tekst: string; href: string };
+  bel?: boolean;
+  smal?: boolean; // zonder beeld
+  eenmalig?: boolean; // eenmalige prijs in plaats van per maand
+}
+const { kicker, titel, prijs, knop = { tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }, bel = true, smal = false, eenmalig = false } = Astro.props;
+const heeftBeeld = Astro.slots.has('beeld') && !smal;
+---
+<section class:list={['wrap', 'hero', { 'met-beeld': heeftBeeld }]} data-aida="attention">
+  <div class="hero-tekst">
+    <p class="kicker">{kicker}</p>
+    <h1>{titel}</h1>
+    <div class="lead"><slot /></div>
+    <div class="hero-acties">
+      <a class="btn" href={knop.href}>{knop.tekst}</a>
+      {bel && <span class="bel">of bel {site.contactpersoon}: <a href={site.telefoonLink}>{site.telefoon}</a></span>}
+    </div>
+    {prijs && (
+      <ul class="hero-feiten">
+        <li><b>{prijs}</b> excl. btw</li>
+        <li>{eenmalig ? 'Eenmalig, geen abonnement' : 'Maandelijks opzegbaar'}</li>
+        {!eenmalig && <li><a href="/garantie/">Met garantie</a></li>}
+      </ul>
+    )}
+  </div>
+  {heeftBeeld && <div class="hero-beeld stippen" style={`view-transition-name:${overgang(Astro.url.pathname)}`}><slot name="beeld" /></div>}
+</section>
+<style>
+  .hero { padding-block: 28px clamp(8px, 2vw, 24px); display: grid; gap: 40px; }
+  .hero.met-beeld { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: center; }
+  .hero h1 { margin: 10px 0 18px; max-width: 18ch; }
+  .lead { font-size: var(--step-1); line-height: 1.45; color: var(--ink); max-width: 40ch; }
+  .lead :global(p) { margin: 0 0 0.6em; }
+  .hero-acties { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 24px; }
+  .bel { color: var(--muted); }
+  .bel a { color: var(--ink); font-weight: 800; text-decoration: none; white-space: nowrap; }
+  .hero-feiten { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 0.98rem; }
+  .hero-feiten li { position: relative; padding-left: 16px; }
+  .hero-feiten li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+  .hero-feiten b { color: var(--ink); }
+  .hero-beeld { min-width: 0; }
+  @media (max-width: 900px) {
+    .hero.met-beeld { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

@@ -1,0 +1,234 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Schermen from '../../components/beeld/Schermen.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+
+import { site } from '../../data/site';
+
+const url = '/webdesign-assen/';
+const schema = [{
+  '@type': 'Service',
+  name: 'Webdesign in Assen',
+  serviceType: 'Website laten maken',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: [{ '@type': 'City', name: 'Assen' }, { '@type': 'AdministrativeArea', name: 'Drenthe' }],
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+}];
+
+// CBS, Kerncijfers wijken en buurten 2025 (inwoners op 1 januari 2025, bedrijfsvestigingen).
+const wijken = [
+  { wijk: 'Marsdijk', inwoners: '11.910', vestigingen: '1.585', tip: 'Veel bedrijven aan huis en rond het winkelcentrum. Zorg dat je in het kaartje staat bij "in de buurt".' },
+  { wijk: 'Kloosterveen', inwoners: '11.720', vestigingen: '1.020', tip: 'Jonge gezinnen die alles op hun telefoon regelen. Online een afspraak maken moet in twee tikken kunnen.' },
+  { wijk: 'Assen-Oost', inwoners: '9.185', vestigingen: '680', tip: 'Woonwijk met veel dienstverleners. Laat zien dat je dichtbij zit, met adres en route.' },
+  { wijk: 'Noorderpark', inwoners: '8.490', vestigingen: '565', tip: 'Klanten zoeken soms op de naam van de wijk. Noem de wijken waar je werkt gewoon in je tekst.' },
+  { wijk: 'Centrum', inwoners: '7.275', vestigingen: '1.335', tip: 'Winkels, horeca en kantoren dicht op elkaar. Openingstijden, foto\'s en een duidelijke knop wegen het zwaarst.' },
+  { wijk: 'Peelo', inwoners: '6.375', vestigingen: '550', tip: 'Vlak bij Messchenveld en Peelerpark. Zakelijke klanten willen eerst je referenties zien.' },
+];
+---
+<Base
+  title="Webdesign Assen: website laten maken | Drijfveer Media"
+  description="Webdesign in Assen door een bureau uit Assen. Een snelle, vindbare website die klanten oplevert, vanaf € 250. Kom langs aan de Lauwers of bel ons."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Drenthe', url: '/regio/drenthe/' }, { naam: 'Webdesign Assen', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Assen" titel="Webdesign in Assen: een website die klanten oplevert" prijs="vanaf € 250" eenmalig>
+    <p>Assen is onze thuisstad. Ons kantoor staat aan de {site.straat}, dus voor webdesign in Assen kun je gewoon even langskomen. We bouwen sites die er goed uitzien, snel laden en gevonden worden.</p>
+    <Schermen slot="beeld" bedrijf="Hovenier Bos" kop="Een tuin waar je elk seizoen van geniet" label="Verzonnen voorbeeld van een website op laptop en telefoon" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Webdesign uit Assen, voor ondernemers in Assen</h2>
+      <p>Sinds 2011 maken we websites voor ondernemers in heel Nederland. Ons kantoor staat in een bedrijfsverzamelpand aan de Lauwers in Assen, tussen andere ondernemers. Voor klanten uit de stad en de dorpen eromheen, zoals Rolde, Vries, Smilde en Beilen, is dat handig. Even aan tafel zitten is zo geregeld. Je loopt binnen, je ziet wie er aan je site werkt en je rijdt weer naar huis.</p>
+      <p>Dat scheelt meer dan reistijd. Een website laten maken gaat over jouw bedrijf, je klanten en je wensen. Dat leg je makkelijker uit met een kop koffie dan in een mail. En moet er later iets veranderen, dan weet je precies bij wie je moet zijn.</p>
+
+      <h2>Assen in cijfers: voor wie bouw je je site?</h2>
+      <p>Assen telde eind augustus 2026 volgens het CBS 70.852 inwoners. Begin 2015 waren dat er nog 67.165. Het aantal bedrijfsvestigingen groeide harder: van 5.160 in 2016 naar 7.225 begin 2026 (CBS, voorlopige cijfers). De grootste groepen zijn specialistische zakelijke dienstverlening (1.340), handel (1.200) en zorg (965). Meer bedrijven betekent ook meer concurrenten die online om dezelfde klant vragen.</p>
+      <p>Die bedrijven zitten niet overal even dicht op elkaar. Per wijk ziet het er zo uit:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wijk</th><th>Inwoners</th><th>Vestigingen</th><th>Wat je website hier nodig heeft</th></tr></thead>
+          <tbody>
+            {wijken.map((w) => (
+              <tr><td><b>{w.wijk}</b></td><td>{w.inwoners}</td><td>{w.vestigingen}</td><td>{w.tip}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron: CBS, Kerncijfers wijken en buurten 2025. De tips in de laatste kolom zijn ons eigen advies.</p>
+      <p>Voor webdesign in Assen betekent dat: bouw je site voor de klant in jouw deel van de stad, niet voor een gemiddelde bezoeker.</p>
+      <p>De werkgelegenheid groeit mee. Volgens de provincie Drenthe had Assen op 1 april 2025 44.650 banen, 680 meer dan een jaar eerder. Nergens in Drenthe kwamen er meer banen bij. Er komen dus mensen bij die de stad nog niet kennen. Die zoeken een tandarts, een kapper of een installateur in Google.</p>
+
+      <h2>Welke website past bij jouw plek in Assen?</h2>
+      <p>Een winkel in de binnenstad heeft een andere site nodig dan een bedrijf op een bedrijventerrein. De gemeente geeft bedrijfskavels uit op onder meer Messchenveld, Peelerpark, Groene Dijk en het Werklandschap Assen Zuid. Op kantorenpark Lauwers en het Stadsbedrijvenpark zijn geen kavels meer vrij. Vier situaties die we vaak tegenkomen:</p>
+    </div>
+    <div class="raster raster-2 plekken">
+      <div class="card">
+        <Tekening naam="pin" />
+        <span class="kicker">Binnenstad</span>
+        <h3>Winkel of horeca</h3>
+        <p>Je klant staat al in de stad en zoekt op zijn telefoon. Hij wil weten of je open bent, waar je zit en wat je verkoopt. Een korte site met grote knoppen, echte foto's en een kaartje werkt hier beter dan tien pagina's tekst.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="huis" vertraging={150} />
+        <span class="kicker">Kloosterveen, Marsdijk, Groene Dijk</span>
+        <h3>Zzp'er of bedrijf aan huis</h3>
+        <p>Je hebt geen etalage, dus je website is je etalage. Laat zien wie je bent, wat je kost en waar je werkt. Op Groene Dijk combineer je volgens de gemeente wonen en werken. Een site die vertrouwen geeft, telt dan dubbel.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="tandwiel" vertraging={300} />
+        <span class="kicker">Messchenveld, Peelerpark, Schepersmaat</span>
+        <h3>Zakelijke leverancier</h3>
+        <p>Je klant is een inkoper of een aannemer. Die wil specificaties, referenties en snel een offerte. Een overzichtelijke opbouw per dienst of product en een kort aanvraagformulier leveren hier het meeste op.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="team" vertraging={450} />
+        <span class="kicker">Zuidoost Assen</span>
+        <h3>Zorg en dienstverlening</h3>
+        <p>De gemeente noemt zorg, overheid en energie als de sectoren in Zuidoost. Voor een praktijk telt rust en duidelijkheid: wie werkt er, hoe maak je een afspraak, wat vergoedt de verzekering. Dat moet je zonder zoeken vinden.</p>
+      </div>
+    </div>
+    <div class="tekst">
+      <h2>Twee manieren om je website te laten maken</h2>
+      <p>Niet elk bedrijf heeft dezelfde site nodig. Daarom werken we met twee routes.</p>
+    </div>
+    <div class="raster raster-2 routes">
+      <div class="card">
+        <Tekening naam="raket" />
+        <span class="kicker">Snel en betaalbaar</span>
+        <h3>Website gebouwd met AI</h3>
+        <p>Vanaf € 250. Wij bouwen je site met hulp van AI en maken hem daarna met de hand af. Ideaal voor zzp'ers en kleine bedrijven die snel online willen met een site die klopt.</p>
+        <a class="meer" href="/website-laten-maken/website-met-ai/">Meer over een website met AI</a>
+      </div>
+      <div class="card">
+        <Tekening naam="merk" vertraging={200} />
+        <span class="kicker">Maatwerk</span>
+        <h3>Website in WordPress</h3>
+        <p>Vanaf € 2.000. Een ontwerp dat helemaal bij je bedrijf past, geen standaard template. Voor bedrijven met meer pagina's, eigen wensen of een site die je zelf wilt kunnen uitbreiden.</p>
+        <a class="meer" href="/website-laten-maken/">Meer over website laten maken</a>
+      </div>
+    </div>
+    <div class="tekst">
+      <p>Twijfel je welke route past? Deze vergelijking helpt bij de keuze. Bij webdesign in Assen kun je ook langskomen om voorbeelden van allebei te bekijken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Website met AI</th><th>Maatwerk in WordPress</th></tr></thead>
+          <tbody>
+            <tr><td><b>Prijs</b></td><td>Vanaf € 250</td><td>Vanaf € 2.000</td></tr>
+            <tr><td><b>Doorlooptijd</b></td><td>Vaak binnen twee weken</td><td>Meestal zes tot tien weken</td></tr>
+            <tr><td><b>Ontwerp</b></td><td>Strak en zakelijk, op een vaste opbouw</td><td>Een eigen ontwerp, afgestemd op je doelgroep</td></tr>
+            <tr><td><b>Pagina's</b></td><td>Een handvol: home, diensten, over ons, contact</td><td>Zoveel als nodig, ook met eigen functies</td></tr>
+            <tr><td><b>Zelf aanpassen</b></td><td>Teksten en foto's, via een eenvoudig scherm</td><td>Alles, in het bekende WordPress</td></tr>
+            <tr><td><b>Past bij</b></td><td>Zzp'er, starter, klein bedrijf met een duidelijk aanbod</td><td>Bedrijf met meer diensten, een eigen huisstijl of groeiplannen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Heb je nog geen logo? Een <a href="/branding/logo-laten-maken/">logo laten maken</a> kan erbij, vanaf € 495. Teksten schrijven we vanaf € 75 per pagina. Wil je precies weten waar de kosten van een website in zitten, lees dan onze gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
+
+      <h2>Wat elke website van ons heeft</h2>
+    </div>
+    <div class="raster heeft">
+      <div class="card"><Tekening naam="scherm" /><h3>Werkt op elke telefoon</h3><p>De meeste bezoekers komen mobiel binnen. We ontwerpen eerst voor het kleine scherm.</p></div>
+      <div class="card"><Tekening naam="raket" vertraging={120} /><h3>Laadt snel</h3><p>Een trage site kost bezoekers en posities in Google.</p></div>
+      <div class="card"><Tekening naam="vergrootglas" vertraging={240} /><h3>Vindbaar vanaf dag één</h3><p>De technische basis voor SEO zit erin, net als je Google Bedrijfsprofiel als je dat wilt.</p></div>
+      <div class="card"><Tekening naam="pen" vertraging={360} /><h3>Teksten die verkopen</h3><p>Geschreven voor jouw doelgroep, in gewone taal, met de woorden waarop klanten zoeken.</p></div>
+      <div class="card"><Tekening naam="telefoon" vertraging={480} /><h3>Contact zonder drempel</h3><p>Bellen, mailen of een offerte aanvragen kan vanaf elke pagina.</p></div>
+      <div class="card"><Tekening naam="schild" vertraging={600} /><h3>Van jou</h3><p>Je bent eigenaar van je site en je content. Wil je ooit weg, dan neem je alles mee.</p></div>
+    </div>
+    <div class="tekst" style="margin-top:40px">
+      <p>Over die snelheid: Google meet die met drie Core Web Vitals. Het grootste blok van een pagina moet binnen 2,5 seconden staan. Een tik of klik moet binnen 200 milliseconden reageren. En de pagina mag tijdens het laden nauwelijks verspringen, met een score onder 0,1. Wij testen elke site op die drie punten voordat hij live gaat.</p>
+
+      <h2>Rekenvoorbeeld: wanneer verdient je website zich terug?</h2>
+      <p>Goed webdesign in Assen is een investering. Reken hem dus door, net als een nieuwe bus of machine. Een verzonnen voorbeeld met verzonnen cijfers:</p>
+      <div class="kader">
+        <p class="kader-titel">Hovenier uit Kloosterveen (verzonnen voorbeeld)</p>
+        <p>Een gemiddelde tuinklus levert € 1.800 omzet op, waarvan € 540 marge. Van elke vier aanvragen via de site wordt er één een opdracht. Het onderhoud van de site laat hij aan ons, voor € 39 per maand.</p>
+      </div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Website met AI</th><th>Maatwerk in WordPress</th></tr></thead>
+          <tbody>
+            <tr><td>Bouw</td><td>€ 250</td><td>€ 2.000</td></tr>
+            <tr><td>Onderhoud eerste jaar (12 × € 39)</td><td>€ 468</td><td>€ 468</td></tr>
+            <tr><td><b>Kosten eerste jaar</b></td><td><b>€ 718</b></td><td><b>€ 2.468</b></td></tr>
+            <tr><td>Opdrachten nodig om quitte te spelen (€ 540 marge per stuk)</td><td>2</td><td>5</td></tr>
+            <tr><td>Aanvragen nodig (1 op de 4 wordt een opdracht)</td><td>8 per jaar</td><td>20 per jaar</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Bij maatwerk heeft deze hovenier dus minder dan twee aanvragen per maand nodig om zijn site in het eerste jaar terug te verdienen. Alles daarboven is winst. Met een site die op "hovenier Assen" gevonden wordt, is dat haalbaar. Met een site die niemand vindt, niet. Daarom kijken we bij elke offerte eerst naar het doel en pas daarna naar het ontwerp. Alle bedragen zijn exclusief btw.</p>
+
+      <h2>Zo verloopt het</h2>
+    </div>
+    <ol class="stappen-rij">
+      <li><strong>Kennismaken</strong><p>We bellen, of je drinkt koffie bij ons aan de Lauwers. Wat wil je bereiken, en voor wie?</p></li>
+      <li><strong>Voorstel</strong><p>Je krijgt een offerte met een vaste prijs. Geen verrassingen achteraf.</p></li>
+      <li><strong>Ontwerp en teksten</strong><p>Je ziet het ontwerp voordat we bouwen en past aan wat je wilt.</p></li>
+      <li><strong>Bouwen en testen</strong><p>Op laptop, tablet en telefoon. Pas als alles werkt, gaat hij live.</p></li>
+      <li><strong>Live, en daarna</strong><p>Zelf bijhouden, of het onderhoud aan ons laten vanaf € 39 per maand.</p></li>
+    </ol>
+    <div class="tekst" style="margin-top:40px">
+      <h3>Wat je zelf klaarzet</h3>
+      <p>Hoe beter je dit voorbereidt, hoe sneller je site live staat. Dit vragen we bij de start:</p>
+      <ul class="vink">
+        <li>Je logo, het liefst als SVG of als groot PNG-bestand.</li>
+        <li>Een lijstje van je diensten, met wat ze ongeveer kosten.</li>
+        <li>Foto's van jezelf, je team, je werk of je zaak. Echte foto's doen het beter dan stockfoto's.</li>
+        <li>De inloggegevens van je domeinnaam, of de naam die je wilt registreren.</li>
+        <li>Een hostingpakket op je eigen naam. Hosting regelen we niet zelf, wel helpen we je kiezen.</li>
+        <li>Twee of drie sites die je mooi vindt, en waarom.</li>
+      </ul>
+
+      <h2>Vijf fouten die we vaak zien bij webdesign in Assen en omgeving</h2>
+      <p>Bij een <a href="/gratis-website-analyse/">gratis website-analyse</a> kijken we met een frisse blik naar je site. Deze vijf punten komen we bij mkb'ers vaak tegen:</p>
+      <ol>
+        <li><b>Het telefoonnummer staat alleen op de contactpagina.</b> Op een telefoon moet je met één tik kunnen bellen, vanaf elke pagina.</li>
+        <li><b>Geen plaatsnaam in de tekst.</b> Google en je klant moeten kunnen lezen dat je in Assen werkt. Noem je stad, je wijk en de dorpen waar je komt.</li>
+        <li><b>Een template dat op tien andere sites staat.</b> Niets mis met een goede basis, maar met dezelfde stockfoto's als je concurrent val je niet op.</li>
+        <li><b>Te zware foto's.</b> Een foto van 5 MB maakt een pagina op mobiel traag. Wij zetten beelden om naar kleine, scherpe bestanden.</li>
+        <li><b>Niemand houdt hem bij.</b> Verouderde plug-ins zijn een open deur voor hackers. Plan het onderhoud, of laat het ons doen.</li>
+      </ol>
+
+      <h2>Na de lancering: gevonden worden in Assen</h2>
+      <p>Een mooie website is pas het begin. Wie in Assen zoekt op jouw dienst, moet jou ook vinden. Google zegt zelf dat lokale resultaten vooral draaien om drie dingen: relevantie, afstand en bekendheid. Relevantie regel je met goede teksten en een compleet <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Afstand bepaalt de zoeker. Bekendheid bouw je op met reviews en met andere sites die naar je linken.</p>
+      <p>Daarom bieden we na de oplevering <a href="/seo-assen/">SEO in Assen</a> aan, en zetten we je bedrijf goed op de kaart van Google, Bing en Apple. Het inrichten van die drie kaarten kost eenmalig vanaf € 249. Lokale SEO, met reviews en elke maand verbeteringen, begint bij € 295 per maand. Dan staat er niet alleen een site, maar komen er ook bezoekers die bellen.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost webdesign in Assen?', a: 'Een website die we met AI bouwen begint bij € 250. Een maatwerk website in WordPress begint bij € 2.000. Na een kort gesprek krijg je een offerte met een vaste prijs. Alle prijzen zijn exclusief btw.' },
+      { v: 'Hoe lang duurt het om een website te laten maken?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerk website duurt meestal zes tot tien weken, afhankelijk van het aantal pagina\'s en hoe snel de teksten en foto\'s klaar zijn.' },
+      { v: 'Kan ik langskomen voor een gesprek?', a: `Ja, graag zelfs. Ons kantoor staat aan de ${site.straat} in Assen. Bel even van tevoren, dan staat de koffie klaar en zit de juiste persoon aan tafel.` },
+      { v: 'Kan ik de website zelf aanpassen?', a: 'Ja. Je krijgt een eenvoudig beheerscherm en een korte uitleg. Teksten en foto\'s aanpassen kun je zelf. Voor grotere wijzigingen kun je bij ons terecht.' },
+      { v: 'Regelen jullie ook de hosting?', a: 'Nee. Hosting sluit je zelf af, op je eigen naam. Wij helpen je kiezen en zetten de site er voor je op. Zo hang je nooit aan ons vast.' },
+      { v: 'Ik heb al een site. Raak ik mijn plek in Google kwijt als ik vernieuw?', a: 'Niet als het goed gebeurt. We sturen elke oude pagina met een doorverwijzing naar de nieuwe. Zo neemt Google je opgebouwde posities mee. Dat plannen we voordat er iets live gaat.' },
+      { v: 'Werken jullie ook buiten Assen?', a: 'Zeker. We werken voor ondernemers in heel Drenthe en de rest van Nederland. Kijk ook eens bij <a href="/webdesign-drenthe/">webdesign in Drenthe</a>.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer in en rond Assen"
+    links={[
+      { label: 'Assen', titel: 'SEO in Assen', href: '/seo-assen/', tekst: 'Hoger in Google bij klanten uit de buurt.' },
+      { label: 'Assen', titel: 'Online marketing in Assen', href: '/online-marketing-assen/', tekst: 'Alles in één hand, bij een bureau om de hoek.' },
+      { label: 'Regio', titel: 'Drenthe', href: '/regio/drenthe/', tekst: 'Al onze diensten in de provincie.' },
+      { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'Alle kosten op een rij, van bouw tot onderhoud.' },
+    ]}
+  />
+
+  <Actie titel="Zin in koffie aan de Lauwers?" tekst={`Vertel ${site.contactpersoon} wat voor website je zoekt. Hij belt je binnen 15 minuten terug, of je komt gewoon langs in Assen.`} />
+</Base>
+<style>
+  .routes { margin: 8px 0 8px; }
+  .heeft { margin-top: 8px; }
+  .plekken { margin: 8px 0 32px; }
+</style>

@@ -1,0 +1,78 @@
+---
+// Scène voor /kennisbank/wat-is/schema-markup/: links een blokje code met het type, de naam en de openingstijden van een bakkerij.
+// Rechts het zoekresultaat dat Google daarmee kan tonen. In de volledige versie loopt een markering langs de code en springen de extra's in het resultaat.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 88, k: '"@type"', v: '"Bakery"' },
+  { y: 116, k: '"name"', v: '"De Vries"' },
+  { y: 144, k: '"closes"', v: '"17:00"' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: links een blokje code dat zegt dat dit een bakkerij is, met naam en sluitingstijd. Rechts het zoekresultaat met extra regels, zoals de openingstijden.'}>
+  <!-- de code -->
+  <rect x="20" y="40" width="190" height="180" rx="12" fill="#10283f" />
+  <text x="36" y="66" font-size="16" font-weight="800" style="fill:#ff6600" font-family="ui-monospace, Menlo, Consolas, monospace">{'{'}</text>
+  {regels.map((r) => (
+    <g font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" font-weight="700">
+      <text x="48" y={r.y} style="fill:#8fc1dc">{r.k}</text>
+      <text x="120" y={r.y} style="fill:#ffffff">{r.v}</text>
+    </g>
+  ))}
+  <text x="36" y="180" font-size="16" font-weight="800" style="fill:#ff6600" font-family="ui-monospace, Menlo, Consolas, monospace">{'}'}</text>
+  <rect x="36" y="196" width="80" height="6" rx="3" fill="#2b4a63" />
+
+  <!-- de pijl -->
+  <path class="a" d="M216 130h26" />
+  <path class="a" d="M234 122l9 8-9 8" />
+
+  <!-- het zoekresultaat -->
+  <rect x="252" y="52" width="210" height="160" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="v" cx="272" cy="74" r="9" />
+  <rect x="288" y="70" width="90" height="7" rx="3.5" fill="#d9e1ea" />
+  <text x="266" y="106" font-size="14" font-weight="900" style="fill:#074663">Bakkerij De Vries</text>
+  <rect x="266" y="116" width="176" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="266" y="128" width="150" height="6" rx="3" fill="#d9e1ea" />
+  <g class="extra extra1">
+    <rect x="266" y="146" width="106" height="22" rx="11" fill="#e8f4ee" />
+    <circle cx="279" cy="157" r="4" fill="#1f8a5b" />
+    <text x="289" y="161" font-size="10.5" font-weight="800">Open tot 17:00</text>
+  </g>
+  <g class="extra extra2">
+    <rect x="378" y="146" width="70" height="22" rx="11" fill="#e8eef4" />
+    <text x="388" y="161" font-size="10.5" font-weight="800">Bakkerij</text>
+  </g>
+  <g class="extra extra3">
+    <rect x="266" y="176" width="70" height="22" rx="11" fill="#e8eef4" />
+    <text x="278" y="191" font-size="10.5" font-weight="800">Emmen</text>
+  </g>
+
+  {!mini && (
+    <g>
+      <rect class="scan" x="40" y="74" width="158" height="22" rx="5" fill="#ff6600" fill-opacity=".22" />
+      <path class="fonkel" d="M452 46l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#ff6600" />
+    </g>
+  )}
+</svg>
+<style>
+  .extra, .fonkel { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .scene[data-leeft] .extra { opacity: 0; }
+  .in-beeld .extra { animation: kennisbank-wat-is-schema-markup-extra 0.5s cubic-bezier(.3,1.6,.5,1) forwards; }
+  .in-beeld .extra1 { animation-delay: 0.9s; }
+  .in-beeld .extra2 { animation-delay: 1.8s; }
+  .in-beeld .extra3 { animation-delay: 2.7s; }
+  .in-beeld .scan { animation: kennisbank-wat-is-schema-markup-scan 4.2s ease-in-out 0.3s infinite; }
+  .in-beeld .fonkel { animation: kennisbank-wat-is-schema-markup-fonkel 4s ease-in-out 1s infinite; }
+  @keyframes kennisbank-wat-is-schema-markup-extra { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-wat-is-schema-markup-scan {
+    0%, 8% { transform: translateY(0); opacity: 1; }
+    30%, 38% { transform: translateY(28px); }
+    60%, 80% { transform: translateY(56px); opacity: 1; }
+    92%, 100% { transform: translateY(56px); opacity: 0; }
+  }
+  @keyframes kennisbank-wat-is-schema-markup-fonkel { 0%, 100% { transform: scale(.6) rotate(0deg); opacity: .5; } 50% { transform: scale(1.1) rotate(45deg); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .scan, .in-beeld .fonkel { animation: none; }
+    .in-beeld .extra { animation: none; opacity: 1; }
+  }
+</style>

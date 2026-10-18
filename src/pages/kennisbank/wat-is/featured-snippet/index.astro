@@ -1,0 +1,274 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--featured-snippet.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/featured-snippet/';
+const datum = '2026-10-18';
+const definitie = 'Een featured snippet is een kort antwoord dat Google in een box boven de gewone zoekresultaten toont, overgenomen van één website en met een link naar die bron.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  '@id': `${site.url}${url}#begrip`,
+  name: 'Featured snippet',
+  alternateName: ['Uitgelicht fragment', 'Uitgelichte samenvatting', 'Positie 0', 'Answer box'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'WebPage',
+  '@id': `${site.url}${url}#pagina`,
+  url: `${site.url}${url}`,
+  name: 'Wat is een featured snippet?',
+  inLanguage: 'nl-NL',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  about: { '@id': `${site.url}${url}#begrip` },
+}];
+const blok = `Wat kost een warmtepomp?
+-------------------------------------------------
+Een hybride warmtepomp kost inclusief installatie
+meestal tussen de ... en ... euro. Een volledig
+elektrische warmtepomp is duurder, omdat ...
+
+Installatiebedrijf Voorbeeld | Emmen
+www.installateurvoorbeeld.nl > warmtepomp-kosten
+-------------------------------------------------
+1. Installatiebedrijf Voorbeeld ...  (gewoon resultaat)
+2. ...`;
+const opbouw = `<h2>Wat kost een warmtepomp?</h2>
+<p>Een hybride warmtepomp kost inclusief installatie meestal
+tussen de ... en ... euro. Een volledig elektrische is duurder.</p>
+
+<h3>Prijzen per type</h3>
+<table>
+  <tr><th>Type</th><th>Prijs inclusief installatie</th></tr>
+  <tr><td>Hybride</td><td>...</td></tr>
+  <tr><td>Volledig elektrisch</td><td>...</td></tr>
+</table>`;
+const nosnippet = `<meta name="robots" content="nosnippet">
+<meta name="robots" content="max-snippet:50">
+<p>Openbaar deel. <span data-nosnippet>Dit deel komt niet in een fragment.</span></p>`;
+---
+<Base
+  title="Wat is een featured snippet (positie 0)? | Drijfveer Media"
+  description="Wat is een featured snippet? Het antwoordblok bovenaan Google, ook wel positie 0. Welke soorten er zijn en hoe je jouw tekst erin krijgt, met voorbeeld."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Featured snippet', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is een featured snippet?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je typt een vraag en het antwoord staat er al, nog voor het eerste resultaat. Het blok dat dan bovenaan Google verschijnt, heet in de vakwereld positie 0, omdat het boven plek 1 staat. In de Nederlandse hulppagina's noemt Google het een uitgelichte samenvatting; je leest ook wel uitgelicht fragment. In het Engels hoor je ook wel answer boxes.</p>
+      <p>Het antwoord is altijd een stukje tekst van een bestaande website. Waar haalt Google het vandaan? Uit de pagina die volgens het algoritme de vraag het best beantwoordt. De link naar die pagina staat eronder. Ook spraakassistenten lezen bij voice search vaak dit antwoord voor, met de naam van de bron erbij.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Waar komt de naam vandaan?</h2></div>
+      <p>Bij een gewoon zoekresultaat staat eerst de titel, dan het adres en daaronder een korte omschrijving. Die omschrijving heet in het vak een snippet. Bij dit antwoordblok draait Google de volgorde om: de omschrijving komt eerst en krijgt de hoofdrol. Het snippet wordt uitgelicht, featured in het Engels. Zo legde Google het zelf uit in een blog uit 2018. Daarin staat ook dat de eerste featured snippets in januari 2014 verschenen.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2>Hoe ziet het eruit?</h2></div>
+      <p>Vereenvoudigd en met verzonnen namen ziet een uitgelicht antwoord er ongeveer zo uit:</p>
+      <pre><code>{blok}</code></pre>
+      <p>Bovenaan de beknopte tekst, soms met een afbeelding ernaast. Daaronder de naam en het adres van de bron. Klikt iemand op het antwoord, dan brengt Google hem volgens de eigen documentatie direct naar het stuk van de pagina waar het antwoord staat. De browser scrolt er vanzelf naartoe, zonder dat jij daar iets voor hoeft te doen.</p>
+
+      <div class="stap-kop"><Tekening naam="ster" maat={52} /><h2>Soorten featured snippets</h2></div>
+      <p>Google kiest de vorm die het best past bij de vraag. Dit zijn de soorten die je het vaakst ziet:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Typische vraag</th><th>Wat je ziet</th><th>Wat jouw pagina nodig heeft</th></tr></thead>
+          <tbody>
+            <tr><td>Alinea</td><td>Wat is, waarom, wie</td><td>Een paar beknopte zinnen</td><td>Een kop met de vraag en direct een kort, feitelijk antwoord</td></tr>
+            <tr><td>Genummerde lijst</td><td>Hoe doe je, stappenplan</td><td>Stappen met nummers</td><td>Een echte genummerde lijst, of stappen als tussenkoppen</td></tr>
+            <tr><td>Opsomming</td><td>Welke, soorten, tips</td><td>Een lijst met bolletjes</td><td>Een echte opsomming in de code</td></tr>
+            <tr><td>Tabel</td><td>Prijzen, maten, vergelijking</td><td>Een kleine tabel</td><td>Een echte tabel met duidelijke kolomnamen</td></tr>
+            <tr><td>Video</td><td>Hoe doe je iets met je handen</td><td>Een fragment uit een video, op het juiste moment</td><td>Een video met duidelijke stappen of hoofdstukken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een alinea komt het meest voor. Bij een lijst of tabel bouwt Google het blok soms zelf op uit stukjes tekst op je pagina, bijvoorbeeld uit je tussenkoppen. Maar hoe duidelijker je het in de code aanbiedt, hoe makkelijker het voor Google is.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Waar verschijnt hij?</h2></div>
+      <p>Volgens de hulppagina van Google op drie plekken:</p>
+      <ul>
+        <li>bovenaan de zoekresultaten;</li>
+        <li>in het blok Mensen vragen ook, als je een vraag openklapt;</li>
+        <li>naast het kennispaneel, de informatie aan de rechterkant van de pagina.</li>
+      </ul>
+      <p>Meestal is er één box, soms meer. Google schrijft dat de antwoorden vooral handig zijn als je een telefoon gebruikt of tegen je apparaat praat. Daar werkt een lijst met tien blauwe links minder goed.</p>
+      <p>Bij voice search leest een spraakassistent het antwoord hardop voor. Volgens Google noemt de assistent daarbij de bronpagina, en zet hij een link in de bijbehorende app. Wie een vraag hardop stelt, hoort dus jouw antwoord en jouw naam. Er is maar één antwoord, geen lijstje om uit te kiezen.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2>Wat levert het op?</h2></div>
+      <p>Zichtbaarheid, in elk geval. Je naam staat bovenaan, als de partij die het weet. Of het ook klikken oplevert, hangt af van de vraag. Google zelf zegt dat featured snippets bezoekers naar de bron sturen. Maar sommige zoekers hebben genoeg aan het antwoord en klikken niet door.</p>
+      <p>De bekendste cijfers komen van Ahrefs, een maker van SEO-software. Die onderzocht in 2017 Amerikaanse zoekopdrachten:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Uitkomst</th><th>Cijfer</th></tr></thead>
+          <tbody>
+            <tr><td>Zoekopdrachten met een featured snippet</td><td>Ongeveer 12 procent</td></tr>
+            <tr><td>Klikken op het antwoordblok zelf</td><td>Gemiddeld 8,6 procent</td></tr>
+            <tr><td>Klikken op het gewone resultaat eronder</td><td>Gemiddeld 19,6 procent</td></tr>
+            <tr><td>Klikken op plek 1 als er geen antwoordblok is</td><td>Gemiddeld 26 procent</td></tr>
+            <tr><td>Antwoordblokken die van een pagina uit de top 10 komen</td><td>99,58 procent</td></tr>
+            <tr><td>Antwoordblokken van de pagina die ook op plek 1 staat</td><td>30,9 procent</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Neem die cijfers met een korrel zout. Ze zijn oud, Amerikaans en van voor de AI-overzichten. Ahrefs zegt er zelf bij dat het gemiddelden zijn die per zoekwoord sterk verschillen. De les die overeind blijft: je moet al op de eerste pagina staan, maar niet per se op plek 1.</p>
+      <p>Nog iets wat veel mensen niet weten. Google schrijft in zijn uitleg over rankingsystemen dat een pagina die het antwoordblok krijgt, niet nog een keer verderop op de eerste pagina staat. Je ruilt dus je gewone plek in voor positie 0. Meestal is dat winst. Bij een vraag waarop mensen genoeg hebben aan het korte antwoord, kan het je klikken kosten.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Hoe kiest Google het fragment?</h2></div>
+      <p>Je kunt een pagina niet zelf aanmelden of markeren. Google zegt dat letterlijk in zijn documentatie: de systemen bepalen of een pagina een goed antwoord is op een zoekopdracht, en tillen hem dan naar boven. Wel weten we een paar dingen:</p>
+      <ul>
+        <li><strong>Hoe goed beantwoordt het de vraag?</strong> Google kiest op basis van hoe goed een stuk tekst de vraag beantwoordt en hoe nuttig het is.</li>
+        <li><strong>Taalbegrip.</strong> Sinds 2019 gebruikt Google het taalmodel BERT ook voor deze antwoordblokken, om beter te snappen wat een vraag bedoelt.</li>
+        <li><strong>Betrouwbaarheid.</strong> Bij twijfel over de kwaliteit of bij gevoelige onderwerpen laat Google het blok liever weg. Er gelden extra regels, bijvoorbeeld voor medische inhoud.</li>
+        <li><strong>Bijna-antwoorden.</strong> Soms toont Google een antwoord op een iets andere vraag, als het geen beter antwoord heeft. Dat gaf Google zelf toe, met een voorbeeld over hoe de Romeinen 's nachts de tijd wisten.</li>
+      </ul>
+      <p>Het systeem kijkt naar losse stukken van een pagina, niet alleen naar de pagina als geheel. Dat hangt samen met <a href="/kennisbank/wat-is/passage-ranking/">passage ranking</a>, waarmee Google losse passages beoordeelt.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Zo vergroot je de kans: stap voor stap</h2></div>
+      <ol>
+        <li><strong>Kies vragen waar al een antwoordblok staat.</strong> Zoek op je onderwerp en kijk wat Google laat zien. Staat er al een box, dan weet je dat Google bij die vraag een kort antwoord wil.</li>
+        <li><strong>Zoek de vragen die klanten stellen.</strong> In Search Console zie je zoekvragen die met wat, hoe of waarom beginnen. In Google zelf helpt het blok Mensen vragen ook.</li>
+        <li><strong>Sta eerst op de eerste pagina.</strong> Zonder plek in de top 10 geen uitgelicht fragment. Werk dus eerst aan je positie.</li>
+        <li><strong>Zet de vraag als kop.</strong> Gebruik de woorden van je klant in een <a href="/kennisbank/wat-is/headings/">H2 of H3</a>, bijvoorbeeld "Wat kost een warmtepomp?".</li>
+        <li><strong>Geef direct eronder het antwoord.</strong> In één tot drie zinnen. Begin bij een definitie met "Een warmtepomp is ...". Geen aanloop, geen reclame.</li>
+        <li><strong>Gebruik de vorm die past.</strong> Stappen in een genummerde lijst. Prijzen in een tabel. Geen losse regels met streepjes.</li>
+        <li><strong>Geef daarna de diepgang.</strong> Het korte antwoord haalt de zoeker binnen, de uitleg eronder overtuigt hem.</li>
+        <li><strong>Houd het actueel.</strong> Een jaartal of prijs die niet meer klopt, verliest het blok aan een concurrent die wel bijwerkt.</li>
+      </ol>
+      <p>In de code ziet een goed opgebouwd stuk er zo uit:</p>
+      <pre><code>{opbouw}</code></pre>
+      <p>Geen trucs, gewoon heldere HTML: een kop met de vraag, een alinea met het antwoord en een echte tabel. Precies wat ook voor bezoekers prettig leest.</p>
+
+      <h3>Hoe zie je of het gelukt is?</h3>
+      <p>Zoek je vraag op in een privévenster, zodat je eerdere zoekopdrachten niet meetellen. Het antwoordblok kan per apparaat, per plaats en per dag verschillen. Kijk dus ook eens op je telefoon. Houd een lijstje bij van je tien belangrijkste vragen en loop het elke maand na. Zo zie je wanneer je het blok wint, en ook wanneer een concurrent het overneemt.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Van zwak naar sterk antwoord</h2></div>
+      <p>Het verschil zit vaak in de eerste regels onder de kop. Twee verzonnen voorbeelden, een alinea en een lijst:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Vraag</th><th>Zwak antwoord</th><th>Sterk antwoord</th></tr></thead>
+          <tbody>
+            <tr><td>Wat is een hybride warmtepomp?</td><td>"Steeds meer mensen kiezen voor duurzaam. Bij ons kun je terecht voor advies op maat en een vrijblijvende offerte."</td><td>"Een hybride warmtepomp is een warmtepomp die samenwerkt met je cv-ketel. De warmtepomp doet het meeste werk, de ketel springt bij als het hard vriest."</td></tr>
+            <tr><td>Hoe ontlucht je een radiator?</td><td>Eén lange alinea waarin de stappen door elkaar staan, tussen tips en een verhaal over de winter.</td><td>Een genummerde lijst: verwarming uit, ontluchtingssleutel op het ventiel, doek eronder, draaien tot er water komt, dichtdraaien, waterdruk van de ketel controleren.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het sterke antwoord noemt het onderwerp, geeft meteen de kern en is ook los te lezen. Dat is wat een zoeker in een box wil zien.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>Kansen voor een lokaal bedrijf</h2></div>
+      <p>Denk niet dat antwoordblokken alleen voor grote kennissites zijn. Elke vakman krijgt vragen die hij elke week aan de telefoon beantwoordt. Juist die vragen typen mensen ook in Google. Een paar voorbeelden van vragen waar vaak een kort antwoord bij hoort:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Vak</th><th>Vraag die klanten googelen</th><th>Vorm die past</th></tr></thead>
+          <tbody>
+            <tr><td>Installateur</td><td>Hoe vaak moet een cv-ketel een onderhoudsbeurt krijgen?</td><td>Alinea</td></tr>
+            <tr><td>Hovenier</td><td>Wanneer snoei je een beukenhaag?</td><td>Alinea of tabel per maand</td></tr>
+            <tr><td>Boekhouder</td><td>Welke kosten mag een zzp'er aftrekken?</td><td>Opsomming</td></tr>
+            <tr><td>Schilder</td><td>Hoe lang moet verf drogen voor de tweede laag?</td><td>Tabel per soort verf</td></tr>
+            <tr><td>Fietsenmaker</td><td>Hoe plak je een fietsband?</td><td>Genummerde lijst</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Voorbeeldvragen ter illustratie. Kijk zelf in Google of er bij jouw vragen een antwoordblok staat.</p>
+      <p>Schrijf het antwoord zoals je het aan de telefoon zou geven: kort, concreet, met de uitzondering die ertoe doet. Daarmee laat je meteen zien dat je weet waar je het over hebt.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: een installateur in Emmen heeft een pagina over de kosten van een warmtepomp. Daarop staat de kop "Wat kost een warmtepomp?" en direct daaronder twee zinnen met een prijsrange. Daarna volgt een tabel met prijzen per type. Wordt die vraag aan Google gesteld, dan ziet de zoeker zijn antwoord bovenaan, met zijn naam erbij. Dat lukt alleen als de pagina al op de eerste pagina stond: Google kiest bijna altijd uit de bovenste resultaten. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Het mooie voor zo'n installateur: iemand die naar prijzen zoekt, is vaak al aan het oriënteren op een aankoop. Ziet hij een betrouwbaar antwoord van een bedrijf om de hoek, dan is de stap naar een offerte klein.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Wil je juist niet in de box?</h2></div>
+      <p>Dat kan. Sommige bedrijven willen dat mensen doorklikken in plaats van het antwoord in Google te lezen. Google geeft daarvoor drie knoppen:</p>
+      <pre><code>{nosnippet}</code></pre>
+      <ul>
+        <li><strong>nosnippet</strong> haalt alle fragmenten weg, ook de gewone omschrijving onder je resultaat.</li>
+        <li><strong>max-snippet</strong> beperkt de lengte. Hoe korter, hoe kleiner de kans op een antwoordblok, maar Google geeft geen garantie.</li>
+        <li><strong>data-nosnippet</strong> zet je op een stukje tekst dat nergens als fragment mag verschijnen.</li>
+      </ul>
+      <p>Wij raden het een lokale ondernemer zelden aan. De zichtbaarheid weegt meestal zwaarder dan een paar gemiste klikken.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Niet te verwarren met</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat het is</th><th>Bron</th></tr></thead>
+          <tbody>
+            <tr><td>Featured snippet</td><td>Een kort antwoord bovenaan, uit één pagina</td><td>Tekst op een website</td></tr>
+            <tr><td>Rich snippet</td><td>Een gewoon resultaat met extra's, zoals een prijs of datum</td><td><a href="/kennisbank/wat-is/schema-markup/">Schema markup</a> op je pagina</td></tr>
+            <tr><td>Kennispaneel</td><td>Een blok met feiten over een bedrijf, persoon of plaats</td><td>De kennisbank van Google</td></tr>
+            <tr><td>AI-overzicht</td><td>Een samenvatting uit meerdere bronnen</td><td>Een taalmodel dat meerdere pagina's leest</td></tr>
+            <tr><td>Mensen vragen ook</td><td>Uitklapbare vragen met elk een kort antwoord</td><td>Ook featured snippets, uit verschillende pagina's</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2>Wat verandert er door AI?</h2></div>
+      <p>Bij steeds meer vragen staat er nu een AI-overzicht boven alles. Dat is een samenvatting uit meerdere bronnen, waar het uitgelichte fragment één bron citeert. Maar de techniek erachter lijkt op elkaar: Google zoekt een helder, beknopt antwoord op een duidelijke vraag. Wat je doet voor positie 0, helpt dus ook om in <a href="/generative-engine-optimization/google-ai-overviews/">Google AI Overviews</a> genoemd te worden. En in ChatGPT of Perplexity, die ook graag losse, heldere alinea's citeren. Meer daarover lees je bij <a href="/kennisbank/wat-is/geo/">GEO</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2>Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><strong>Een lange aanloop.</strong> Drie alinea's over je bedrijf voordat het antwoord komt.</li>
+        <li><strong>Het antwoord in een plaatje.</strong> Een prijstabel als afbeelding kan Google niet als tabel overnemen.</li>
+        <li><strong>Nep-lijsten.</strong> Regels met streepjes of losse enters in plaats van een echte lijst in de code.</li>
+        <li><strong>Mikken op vragen zonder box.</strong> Bij "loodgieter Assen" wil niemand een definitie. Daar zie je een kaart met bedrijven.</li>
+        <li><strong>Een mening als definitie.</strong> "De beste warmtepomp is die van ons" wordt nooit een uitgelicht antwoord.</li>
+        <li><strong>Vergeten wat er na de klik komt.</strong> Wie doorklikt, wil meer dan het korte antwoord. Geef hem dat, en een volgende stap.</li>
+      </ul>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Zoek de vragen die klanten stellen. In Search Console zie je zoekvragen die met wat, hoe of waarom beginnen, en in Google het blok "Mensen vragen ook".</li>
+        <li>Zet de vraag als kop op je pagina en geef direct eronder het antwoord in één tot drie zinnen. Daarna mag de uitleg komen.</li>
+        <li>Gebruik echte lijsten en tabellen in de code, geen losse regels met streepjes.</li>
+        <li>Werk eerst aan je positie. Zonder plek op de eerste pagina geen uitgelicht fragment.</li>
+        <li>Kijk elk half jaar of je antwoorden nog kloppen: prijzen, jaartallen, regels.</li>
+      </ul>
+      <p>Eén kanttekening. Sommige zoekers hebben genoeg aan het antwoord en klikken niet door. Voor een simpele vraag is dat jammer. Voor een lokaal bedrijf weegt de zichtbaarheid meestal zwaarder: jouw naam staat bovenaan, als de partij die het weet. Goede <a href="/kennisbank/wat-is/headings/">koppen</a> zijn hier het halve werk.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a> of laat ons <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> schrijven die vragen direct beantwoorden, vanaf € 75 per pagina. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik zelf een featured snippet aanmaken?', a: 'Nee. Google kiest zelf welke pagina het antwoord levert. Je vergroot de kans met een duidelijke vraag als kop, een kort antwoord direct eronder en een plek op de eerste pagina.' },
+      { v: 'Moet ik op plek 1 staan om in het antwoordblok te komen?', a: 'Nee, maar wel op de eerste pagina. Volgens onderzoek van Ahrefs komt bijna elk antwoordblok uit de top 10, en maar ongeveer een derde van de pagina op plek 1.' },
+      { v: 'Hoe lang moet het antwoord zijn?', a: 'Kort. Eén tot drie zinnen voor een alinea, een handvol stappen voor een lijst. Google kapt lange stukken af. Geef de uitleg eronder.' },
+      { v: 'Verlies ik mijn gewone plek als ik het antwoordblok krijg?', a: 'Ja. Volgens Google staat een pagina die het antwoordblok krijgt niet nog eens verderop op de eerste pagina. Meestal is dat winst, omdat je bovenaan staat.' },
+      { v: 'Wat is het verschil met een rich snippet?', a: 'Een rich snippet is een gewoon resultaat met extra informatie, zoals sterren of een prijs, op basis van schema markup. Een featured snippet is een los antwoordblok boven de resultaten.' },
+      { v: 'Kan ik voorkomen dat mijn tekst in de box komt?', a: 'Ja. Met nosnippet verdwijnen alle fragmenten van je pagina. Met max-snippet beperk je de lengte, en met data-nosnippet sluit je een stuk tekst uit.' },
+    ]}
+  />
+
+  <Actie titel="Op welke vragen kun jij bovenaan komen?" tekst={`We zoeken het gratis voor je uit. ${site.contactpersoon} belt je met de vragen waar jouw kans het grootst is.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-wrap: normal; word-break: normal; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

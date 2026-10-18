@@ -1,0 +1,55 @@
+---
+// Scène voor /privacyverklaring/: een aanvraagformulier, een envelop die alleen naar onze inbox gaat, een schild met slot en een koekje met een streep erdoor (geen tracking-cookies).
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een ingevuld formulier wordt een envelop die rechtstreeks naar onze inbox gaat. Een schild met slot krijgt een vinkje en een koekje is doorgestreept: geen tracking-cookies.'}>
+  <path class="l" d="M16 246h448" />
+  <rect x="28" y="40" width="150" height="180" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="44" y="66" font-size="10" class="zacht">Naam</text>
+  <rect x="44" y="72" width="118" height="20" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="52" y="79" width="60" height="6" rx="3" />
+  <text x="44" y="112" font-size="10" class="zacht">Telefoon</text>
+  <rect x="44" y="118" width="118" height="20" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="52" y="125" width="74" height="6" rx="3" />
+  <text x="44" y="158" font-size="10" class="zacht">E-mail</text>
+  <rect x="44" y="164" width="118" height="20" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="44" y="194" width="70" height="16" rx="5" fill="#ff6600" />
+  <rect x="330" y="96" width="124" height="82" rx="10" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <path class="l" d="M330 146h34l8 12h40l8-12h34" />
+  <text x="392" y="124" text-anchor="middle" font-size="12" font-weight="800">Onze inbox</text>
+  <path class="a" d="M196 136h112" stroke-dasharray="2 8" />
+  <path d="M230 182l34-14 34 14v26c0 18-14 30-34 38-20-8-34-20-34-38z" fill="#e8eef4" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <rect x="252" y="200" width="24" height="18" rx="3" fill="#074663" />
+  <path class="l" d="M256 200v-6a8 8 0 0 1 16 0v6" />
+  <circle cx="404" cy="222" r="18" fill="#f3e2c9" stroke="#074663" stroke-width="2.5" />
+  <circle cx="398" cy="216" r="2.5" fill="#074663" /><circle cx="410" cy="226" r="2.5" fill="#074663" /><circle cx="400" cy="229" r="2" fill="#074663" />
+  <path d="M388 238l32-32" stroke="#ff6600" stroke-width="4" stroke-linecap="round" />
+  {!mini && (
+    <g>
+      <g class="pv-envelop">
+        <rect x="190" y="122" width="40" height="28" rx="4" fill="#fff" stroke="#074663" stroke-width="2.5" />
+        <path d="M190 124l20 14 20-14" stroke="#074663" stroke-width="2.5" fill="none" stroke-linejoin="round" />
+      </g>
+      <g class="pv-vink">
+        <circle cx="284" cy="190" r="10" fill="#1f8a5b" />
+        <path d="M279 190l4 4 7-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .pv-envelop { opacity: 0; }
+  .in-beeld .pv-envelop { animation: privacyverklaring-vlieg 5s ease-in-out 0.6s infinite both; }
+  .pv-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .pv-vink { opacity: 0; transform: scale(0.4); }
+  .in-beeld .pv-vink { animation: privacyverklaring-pop 0.5s cubic-bezier(.3,1.7,.5,1) 1.6s forwards; }
+  @keyframes privacyverklaring-vlieg {
+    0% { opacity: 0; transform: translate(0, 0); }
+    10% { opacity: 1; transform: translate(0, 0); }
+    60% { opacity: 1; transform: translate(162px, 0); }
+    75%, 100% { opacity: 0; transform: translate(162px, 12px) scale(0.9); }
+  }
+  @keyframes privacyverklaring-pop { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .pv-envelop, .in-beeld .pv-vink { animation: none; } }
+</style>

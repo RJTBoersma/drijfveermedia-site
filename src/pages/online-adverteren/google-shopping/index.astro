@@ -1,0 +1,307 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/online-adverteren--google-shopping.astro';
+import { site } from '../../../data/site';
+
+const url = '/online-adverteren/google-shopping/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat Google Shopping is' },
+  { id: 'gratis', titel: 'Gratis vermeldingen' },
+  { id: 'css', titel: 'In Nederland via een CSS' },
+  { id: 'nodig', titel: 'Wat je nodig hebt' },
+  { id: 'stappenplan', titel: 'Stappenplan' },
+  { id: 'feed', titel: 'De feed: hier win je het' },
+  { id: 'afkeuringen', titel: 'Afkeuringen oplossen' },
+  { id: 'campagnetype', titel: 'Shopping of Performance Max' },
+  { id: 'structuur', titel: 'Productgroepen op marge' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'eerste-maanden', titel: 'De eerste 90 dagen' },
+  { id: 'ai', titel: 'Je feed en AI' },
+  { id: 'werkwijze', titel: 'Zo werken we' },
+];
+const kenmerken = [
+  ['ID [id]', 'Altijd', 'Een vaste, unieke code per product. Verander hem niet, anders begint Google opnieuw met leren.'],
+  ['Titel [title]', 'Altijd', 'Maximaal 150 tekens. Het belangrijkste in de eerste 70, want meer ziet een klant vaak niet.'],
+  ['Beschrijving [description]', 'Altijd', 'Maximaal 5.000 tekens. Volgens Google de kern in de eerste 160 tot 500 tekens. Geen prijs, verzending of winkelnaam.'],
+  ['Link [link]', 'Altijd', 'De productlink naar de pagina waar je precies dit product kunt kopen.'],
+  ['Afbeeldingslink [image_link]', 'Altijd', 'Een scherpe foto zonder tekst, watermerk of logo eroverheen.'],
+  ['Beschikbaarheid [availability]', 'Altijd', 'Op voorraad, niet op voorraad, pre-order. Gelijk aan je webshop.'],
+  ['Prijs [price]', 'Altijd', 'Precies dezelfde prijs als op de productpagina.'],
+  ['Merk [brand]', 'Bij nieuwe producten', 'Verplicht voor alle nieuwe producten, behalve films, boeken en muziek.'],
+  ['GTIN [gtin]', 'Als het product er een heeft', 'Het Global Trade Item Number onder de streepjescode. In Europa meestal de EAN van 13 cijfers.'],
+  ['MPN [mpn]', 'Als er geen GTIN is', 'Het manufacturer part number van de fabrikant, maximaal 70 tekens.'],
+  ['Staat [condition]', 'Bij gebruikt of refurbished', 'Nieuw, gebruikt of refurbished.'],
+  ['Aangepast label 0-4', 'Optioneel', 'Je eigen labels, zoals marge, bestseller of seizoen. Handig om op te sturen.'],
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Google Shopping-campagnes voor bestaande webshops',
+  serviceType: 'Online adverteren',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', description: 'Prijs afhankelijk van het advertentiebudget, exclusief btw. Maandelijks opzegbaar.' },
+}];
+---
+<Base
+  title="Google Shopping adverteren voor je webshop | Drijfveer Media"
+  description="Google Shopping adverteren voor je bestaande webshop: Merchant Center, een sterke productfeed en campagnes die sturen op marge. Prijs naar advertentiebudget."
+  kruimels={[{ naam: 'Online adverteren', url: '/online-adverteren/' }, { naam: 'Google Shopping', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Online adverteren" titel="Google Shopping adverteren: je producten bovenaan Google, met foto en prijs">
+    <p>Iemand zoekt "wandelschoenen heren" en ziet bovenaan een rij producten met foto, prijs en winkelnaam. Daar wil je met je webshop tussen staan. Wij zetten de campagnes op en houden ze winstgevend.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje">
+          <p class="kader-titel">Voor webshops die al draaien</p>
+          <p>We bouwen zelf geen webshops en doen geen webshop-SEO. Heb je een webshop die werkt? Dan zorgen wij met Google Shopping adverteren dat je producten gezien worden, en dat elke euro aan advertenties iets oplevert. Wil je het zelf doen, dan staat hieronder het hele stappenplan.</p>
+        </div>
+
+        <h2 id="wat-is-het">Wat is Google Shopping?</h2>
+        <p>Een Shopping-advertentie laat het product zelf zien: een foto, de producttitel, de prijs en de naam van je winkel. Je ziet ze bij de gewone zoekresultaten in Google. Wie zo'n advertentie aanklikt, weet al wat hij krijgt en wat het kost. Google noemt dat zelf een beter gekwalificeerde klik. Die bezoeker is al verder in zijn aankoop dan iemand die op een tekstadvertentie klikt.</p>
+        <p>Het grote verschil met tekstadvertenties: je kiest geen zoekwoorden. Google kijkt in je productgegevens in Merchant Center en bepaalt zelf bij welke zoekopdracht een product past. Je betaalt per klik, via een veiling. Wat je productgegevens zeggen, bepaalt dus of je überhaupt meedoet.</p>
+        <p>Een Shopping-advertentie en een tekstadvertentie van dezelfde winkel kunnen volgens Google tegelijk verschijnen. Bij één zoekopdracht sta je dan twee keer in beeld. Google mag je advertenties daarbij aanvullen met informatie van je landingspagina, je foto's en je feed, soms met tekst die de AI van Google maakt. Wil je dat niet, dan kun je je via Google afmelden.</p>
+
+        <h2 id="gratis">De gratis kant: productvermeldingen</h2>
+        <p>Via Merchant Center kunnen je producten ook gratis verschijnen. Google noemt dat gratis vermeldingen. Ze kunnen volgens Google opduiken in Google Zoeken, Maps, Gemini, YouTube, Afbeeldingen, Lens en het tabblad Shopping. Bij een nieuw Merchant Center-account staat dit standaard aan.</p>
+        <p>Een gratis vermelding levert minder op dan een advertentie bovenaan, maar het kost niets. Zet het dus in elk geval aan. Controleren doe je in Merchant Center: in het menu links onder Marketing kies je Marketingmethoden. Op de kaart Gratis vermeldingen zie je de status.</p>
+
+        <h2 id="css">In Nederland adverteer je via een CSS</h2>
+        <p>Dit weten veel webshops niet. In Nederland en een aantal andere Europese landen lopen Shopping-advertenties via een prijsvergelijkingsdienst, een CSS. Volgens Google kunnen alleen CSS'en Shopping-advertenties plaatsen. Google Shopping is er zelf ook een. Je mag ook een andere CSS kiezen, of meerdere tegelijk.</p>
+        <p>Wat merk je ervan? Onder je advertentie staat een link "Door" met de naam van de CSS. De CSS betaalt Google voor de klikken en rekent zelf met jou af. Google Shopping doet dat meestal per klik. Sommige andere CSS'en beheren je feed en campagnes voor je, andere geven je alleen de tools. Voor de meeste mkb-webshops is Google Shopping als CSS prima. Het is wel goed om te weten dat er keuze is.</p>
+
+        <h2 id="nodig">Wat je nodig hebt om te beginnen</h2>
+        <ol>
+          <li><b>Een webshop die werkt.</b> Productpagina's met prijs, beschrijving, foto en voorraad, en een duidelijke afrekenpagina.</li>
+          <li><b>Een Google Merchant Center-account.</b> Je productcatalogus bij Google. Hier verifieer je je website en vul je je verzend- en retourvoorwaarden in.</li>
+          <li><b>Een shopping feed.</b> Een bestand of koppeling met al je producten en hun kenmerken.</li>
+          <li><b>Een Google Ads-account.</b> Gekoppeld aan Merchant Center, zodat je producten als advertentie kunnen verschijnen.</li>
+          <li><b>Conversiemeting met omzet.</b> Zodat je per product ziet wat het oplevert.</li>
+        </ol>
+        <p>Drie dingen om vooraf te weten. Voor Nederland zijn verzendkosten verplicht: in de instellingen of via het kenmerk verzending. Het land dat je bij het aanmaken kiest, kun je later niet meer wijzigen. En met één Google-account maak je één Merchant Center-account.</p>
+
+        <h2 id="stappenplan">Stappenplan: Merchant Center en feed opzetten</h2>
+        <div class="stap-kop"><Tekening naam="team" maat={44} /><h3>1. Maak het account aan</h3></div>
+        <p>Ga naar Google Merchant Center en log in met een Google-account van je bedrijf. Vul je bedrijfsgegevens in en kies waar je verkoopt: online, in een winkel of allebei. Kies het juiste land, dat ligt daarna vast.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={44} /><h3>2. Verifieer je website</h3></div>
+        <p>Merchant Center vraagt je te bewijzen dat de webshop van jou is. Volg de stappen die Merchant Center je geeft. Zonder verificatie kunnen je producten niet live.</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={44} /><h3>3. Stel verzending en retour in</h3></div>
+        <p>Vul je verzendkosten en levertijden in, en je retourbeleid. Volgens Google kan een zichtbaar retourbeleid de doorslag geven bij een aankoop. Zet het ook op je eigen site.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={44} /><h3>4. De feed opzetten</h3></div>
+        <p>Dat kan op drie manieren. Google haalt je producten automatisch van je site. Of je koppelt je webshopsysteem, zoals Shopify, met een officiële koppeling. Of je levert zelf een bestand aan, bijvoorbeeld uit een plug-in van je webshop. Voor de meeste webshops is een koppeling of plug-in het handigst: prijzen en voorraad lopen dan vanzelf mee.</p>
+        <div class="stap-kop"><Tekening naam="scan" maat={44} /><h3>5. Los de meldingen op</h3></div>
+        <p>Open Producten en kijk op het tabblad Vereist aandacht. Daar zie je per product wat er mis is. Begin bij de producten die het meeste verkopen.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={44} /><h3>6. Koppel Google Ads en start de campagne</h3></div>
+        <p>Koppel Merchant Center aan je Google Ads-account. Daarna maak je een Shopping-campagne of een Performance Max-campagne. Welke je kiest, lees je verderop.</p>
+
+        <h2 id="feed">De feed: hier win je het</h2>
+        <p>Bij Shopping-campagnes is de feed belangrijker dan het bod. Een slimme biedstrategie redt geen rommelige productgegevens. Dit zijn de kenmerken die Google vraagt, met wat wij erbij letten:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kenmerk</th><th>Verplicht</th><th>Waar je op let</th></tr></thead>
+            <tbody>
+              {kenmerken.map(([k, v, w]) => <tr><td><b>{k}</b></td><td>{v}</td><td>{w}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bron: productgegevensspecificatie van Google Merchant Center, geraadpleegd oktober 2026.</p>
+        <p>Zo ziet één productregel in een feed eruit. Een verzonnen merk:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>ID</th><th>Titel</th><th>Prijs</th><th>Beschrijving</th><th>GTIN</th></tr></thead>
+            <tbody>
+              <tr><td>BS-TR-44-BR</td><td>Bergstap Trail heren wandelschoen, waterdicht, bruin, maat 44</td><td>89,95 EUR</td><td>Lichte wandelschoen met waterdichte voering en stevige zool, voor bos en heide. Leer en textiel.</td><td>8712345678906</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>De titel</h3>
+        <p>"Wandelschoen" zegt Google weinig. "Bergstap Trail heren wandelschoen, waterdicht, bruin, maat 44" zegt alles. De tweede titel komt bij veel meer zoekopdrachten in beeld, en bij de juiste. Google raadt aan alle 150 tekens te gebruiken en het belangrijkste vooraan te zetten. Gebruik geen hoofdletters om iets te benadrukken en geen rare tekens. Een volgorde die per soort product goed werkt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort product</th><th>Volgorde</th><th>Voorbeeld (verzonnen)</th></tr></thead>
+            <tbody>
+              <tr><td>Kleding en schoenen</td><td>Merk, soort, voor wie, kenmerk, kleur, maat</td><td>Bergstap Trail heren wandelschoen, waterdicht, bruin, maat 44</td></tr>
+              <tr><td>Elektronica</td><td>Merk, model, belangrijkste specificatie, kleur</td><td>Lumo X2 draadloze koptelefoon, 30 uur accu, zwart</td></tr>
+              <tr><td>Onderdelen</td><td>Merk, onderdeel, past op, nummer</td><td>Kraanwerk thermostaatpatroon voor douchekraan, 1/2 inch</td></tr>
+              <tr><td>Huis en tuin</td><td>Merk, product, materiaal, maat, kleur</td><td>Tuinhof loungeset 4-delig, aluminium, antraciet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>De beschrijving</h3>
+        <p>Schrijf een volledige beschrijving: waarvoor het is, waarvan het gemaakt is, wat erbij zit, voor wie het geschikt is. Zet de kern in de eerste zinnen. Prijs, verzending, actiedata en je winkelnaam horen er volgens Google niet in. Die hebben hun eigen kenmerken.</p>
+        <h3>De foto</h3>
+        <p>Een scherpe foto van het product zelf, zonder tekst, watermerk of logo eroverheen. Let op: vanaf 31 januari 2027 moeten alle productafbeeldingen minimaal 500 bij 500 pixels zijn. Google raadt zelf ongeveer 1500 bij 1500 pixels aan.</p>
+        <h3>Titels en teksten met AI</h3>
+        <p>Laat je titels of beschrijvingen door AI schrijven? Dat mag, maar Google vraagt dat je het aangeeft. Daarvoor zijn de kenmerken gestructureerde titel en gestructureerde beschrijving. Controleer zulke teksten altijd op fouten. Een verkeerde maat of kleur kost je retouren.</p>
+
+        <h2 id="afkeuringen">Afkeuringen en meldingen oplossen</h2>
+        <p>Staan er producten op afgekeurd in Merchant Center? Dan beginnen we daar. Een product dat niet live staat, verkoopt niets, hoe goed de campagne ook is. Dit zijn de meldingen die we het vaakst zien:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Probleem</th><th>Oorzaak</th><th>Oplossing</th></tr></thead>
+            <tbody>
+              <tr><td>Prijs komt niet overeen</td><td>Een actieprijs op de site, de oude prijs in de feed</td><td>Feed vaker laten bijwerken, actieprijs in uitverkoopprijs zetten</td></tr>
+              <tr><td>Ontbrekende GTIN</td><td>Merkproduct zonder EAN in de feed</td><td>EAN van de leverancier opvragen en toevoegen</td></tr>
+              <tr><td>Afbeelding afgekeurd</td><td>Tekst, logo of watermerk op de foto</td><td>Een schone productfoto gebruiken</td></tr>
+              <tr><td>Verzendkosten ontbreken</td><td>Geen verzendinstellingen voor Nederland</td><td>Verzending instellen in Merchant Center</td></tr>
+              <tr><td>Product niet beschikbaar</td><td>Voorraad in de feed loopt achter</td><td>Koppeling met je voorraad, of vaker bijwerken</td></tr>
+              <tr><td>Landingspagina werkt niet</td><td>Product verwijderd of URL veranderd</td><td>Productlink bijwerken of product uit de feed halen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="campagnetype">Standaard Shopping of Performance Max?</h2>
+        <p>Google duwt je richting Performance Max. Dat zijn geautomatiseerde campagnes die je producten laten zien op Zoeken, YouTube, Display, Discover, Gmail en Maps. Krachtig, maar je ziet minder goed welke zoekopdracht een verkoop opleverde.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Shopping-campagne</th><th>Performance Max</th></tr></thead>
+            <tbody>
+              <tr><td><b>Waar je verschijnt</b></td><td>Zoeken, en zoekpartners als je dat aanzet</td><td>Alle kanalen van Google</td></tr>
+              <tr><td><b>Inzicht in zoektermen</b></td><td>Uitgebreid</td><td>Beperkter</td></tr>
+              <tr><td><b>Zelf bijsturen</b></td><td>Per productgroep, met uitsluitingen</td><td>Vooral via doelen, signalen en je feed</td></tr>
+              <tr><td><b>Past bij</b></td><td>Starten, leren, kleinere budgetten</td><td>Webshops met veel conversies om van te leren</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Ons advies: begin overzichtelijk. Leer eerst welke specifieke producten verkopen en tegen welke kosten. Geef de winnaars daarna meer ruimte, eventueel in Performance Max. Hoe de campagnetypes van Google zich verder tot elkaar verhouden, lees je in het <a href="/online-adverteren/google-ads-campagne-opzetten/">stappenplan voor een Google Ads-campagne</a>.</p>
+
+        <h2 id="structuur">Productgroepen op marge, niet op categorie</h2>
+        <p>De meeste webshops delen hun campagne in zoals hun menu: schoenen, jassen, sokken. Logisch, maar je stuurt dan niet op wat het oplevert. Een jas met 50 procent marge krijgt hetzelfde bod als een jas met 15 procent. Met aangepaste labels in je feed kan het slimmer:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Label</th><th>Welke producten</th><th>Wat je doet</th></tr></thead>
+            <tbody>
+              <tr><td>marge-hoog</td><td>Meer dan 40 procent marge</td><td>Hoger bod, meer budget</td></tr>
+              <tr><td>marge-midden</td><td>20 tot 40 procent marge</td><td>Normaal bod, goed in de gaten houden</td></tr>
+              <tr><td>marge-laag</td><td>Minder dan 20 procent marge</td><td>Laag bod of uitsluiten</td></tr>
+              <tr><td>bestseller</td><td>Je twintig best verkochte producten</td><td>Apart, zodat ze altijd budget hebben</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen indeling. De grenzen hangen af van je eigen marges.</p>
+
+        <h2 id="kosten">Wat Google Shopping adverteren kost, en wat het moet opleveren</h2>
+        <p>Je betaalt per klik en stelt zelf een dagbudget in. De prijs per klik hangt af van je product en je concurrenten. Belangrijker dan de klikprijs is wat er na de klik gebeurt. Reken het altijd terug naar je marge.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een wandelschoen kost € 90 en levert € 36 marge op. Een klik kost € 0,45 en één op de vijftig bezoekers koopt. Dan kost een verkoop € 22,50 aan advertenties. Je houdt € 13,50 over. Stijgt de klikprijs naar € 0,75, dan kost elke verkoop € 37,50 en lever je geld in.</p>
+        </div>
+        <p>Een handig getal is je break-even <a href="/kennisbank/wat-is/roas/">ROAS</a>: de omzet die elke advertentie-euro minimaal moet opleveren. Je rekent het uit door 1 te delen door je margepercentage. Bij 40 procent marge is dat 1 gedeeld door 0,4, dus 2,5. Elke euro aan advertenties moet dan minstens € 2,50 omzet opleveren, anders verlies je geld. In Google Ads stel je dat in als doel-ROAS van 250 procent.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Marge</th><th>Break-even ROAS</th><th>Omzet per advertentie-euro</th></tr></thead>
+            <tbody>
+              <tr><td>20%</td><td>500%</td><td>€ 5,00</td></tr>
+              <tr><td>30%</td><td>333%</td><td>€ 3,33</td></tr>
+              <tr><td>40%</td><td>250%</td><td>€ 2,50</td></tr>
+              <tr><td>50%</td><td>200%</td><td>€ 2,00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Daarom sturen we op rendement en niet op zoveel mogelijk klikken. Producten met weinig marge krijgen een lager bod of gaan eruit. Stoppen met wat niet werkt, levert vaak meer op dan een nieuwe campagne.</p>
+        <p>Wat je bij ons betaalt, hangt af van je advertentiebudget. Na een kort gesprek hoor je welk budget past bij je doel en wat ons beheer daarvan kost. Maandelijks opzegbaar, met <a href="/garantie/">garantie</a>: halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door.</p>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Een rommelige feed.</b> Vage titels, ontbrekende GTIN's, foto's met tekst. Dan worden producten afgekeurd of komen ze bij de verkeerde zoekopdrachten.</li>
+          <li><b>Geen meting met omzet.</b> Dan weet je niet welke producten verkopen en welke alleen klikken kosten.</li>
+          <li><b>Meteen alles in Performance Max.</b> Zonder te weten wat werkt, geef je de controle uit handen.</li>
+          <li><b>Alle producten hetzelfde bod.</b> Een product met lage marge kost je dan geld bij elke verkoop.</li>
+          <li><b>Te snel oordelen.</b> Na een week zegt een campagne nog weinig. Geef hem een paar weken.</li>
+          <li><b>Zwakke productpagina's.</b> Een trage pagina of onduidelijke levertijd en je betaalt voor bezoekers die niet kopen.</li>
+        </ul>
+
+        <h2 id="eerste-maanden">Wat je in de eerste 90 dagen kunt verwachten</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Periode</th><th>Wat er gebeurt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Week 1 en 2</b></td><td>Feed opschonen, afkeuringen oplossen, meting testen, campagne live.</td></tr>
+              <tr><td><b>Week 3 tot 6</b></td><td>Eerste verkopen. Zoektermen uitsluiten die niets met je producten te maken hebben.</td></tr>
+              <tr><td><b>Maand 2 en 3</b></td><td>Je ziet welke producten renderen. Budget gaat naar de winnaars, verliezers krijgen een lager bod of gaan eruit.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Daarna is het doorlopend werk: feed schoon houden, nieuwe producten toevoegen, seizoenen voorbereiden. Shopping is geen knop die je één keer aanzet.</p>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h2 id="ai">Je feed werkt ook voor AI</h2></div>
+        <p>Een goede feed doet meer dan advertenties vullen. Google schrijft in zijn gids voor generatieve AI dat antwoorden in Google ook productinformatie kunnen tonen, en dat Merchant Center helpt om daar zichtbaar te zijn. Ook OpenAI werkt met productfeeds: voor advertenties in ChatGPT kun je een catalogus aanleveren. Wie zijn productgegevens één keer goed op orde heeft, kan ze op meer plekken gebruiken. Meer daarover bij <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</p>
+
+        <h2 id="werkwijze">Zo werken we</h2>
+        <ul class="vink">
+          <li>We lopen je Merchant Center en feed na en lossen afkeuringen op.</li>
+          <li>We regelen de conversiemeting met omzetwaarde, zodat je per product ziet wat het oplevert.</li>
+          <li>We bouwen de campagne en verdelen je producten in groepen op marge en prestaties.</li>
+          <li>Elke week kijken we naar zoektermen, budget en producten die geld kosten zonder te verkopen.</li>
+          <li>Elke maand krijg je een kort verslag in gewone taal.</li>
+        </ul>
+        <p>Shopping is een van de kanalen binnen <a href="/online-adverteren/">online adverteren</a>. Voor tekstadvertenties op zoekwoorden zie je de pagina over <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a>. Wil je eerst laten nakijken hoe je account ervoor staat? Gebruik dan de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a>.</p>
+        <p class="klein muted">Bronnen, geraadpleegd oktober 2026: Google Merchant Center Help (productgegevensspecificatie, titel, beschrijving, afbeelding, GTIN, MPN, gratis vermeldingen, services voor prijsvergelijking, aan de slag), Google Ads Help (Shopping-advertenties, Performance Max), Google Search Central (gids voor generatieve AI) en de advertentiedocumentatie van OpenAI.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={16} />
+        <div class="card prijs-eigen">
+          <p class="kicker">Shopping-campagnes</p>
+          <p class="prijs-kop">Prijs afhankelijk van je advertentiebudget</p>
+          <p class="muted klein">Exclusief btw. Maandelijks opzegbaar.</p>
+          <ul class="vink">
+            <li>Merchant Center en feed op orde</li>
+            <li>Meting met omzet per product</li>
+            <li>Sturen op marge, niet op klikken</li>
+            <li>Elke maand een helder verslag</li>
+          </ul>
+          <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost adverteren in Google Shopping?', a: 'Je betaalt per klik en bepaalt zelf je dagbudget. Wat een klik kost, verschilt per product en per markt. Reken terug vanaf je marge: bij 40 procent marge moet elke advertentie-euro minstens € 2,50 omzet opleveren. Wat ons beheer kost, hangt af van je advertentiebudget.' },
+      { v: 'Kan ik gratis in Google Shopping staan?', a: 'Ja. Met een Merchant Center-account kunnen je producten gratis verschijnen, onder meer op het tabblad Shopping, in Afbeeldingen en in Maps. Bij een nieuw account staat dat standaard aan. Bovenaan de zoekresultaten staan is wel betaald.' },
+      { v: 'Waarom keurt Google mijn producten af?', a: 'Meestal door een ontbrekende GTIN, een prijs of voorraad die niet gelijk is aan je site, of een foto met tekst erop. In Merchant Center zie je onder Producten, op het tabblad Vereist aandacht, per product wat er mis is.' },
+      { v: 'Wat is een CSS, en heb ik er een nodig?', a: 'Een prijsvergelijkingsdienst. In Nederland lopen Shopping-advertenties altijd via een CSS. Google Shopping is er zelf een. Je kunt die gebruiken of een andere kiezen, ook meerdere tegelijk.' },
+      { v: 'Mijn producten hebben geen EAN. Kan ik dan adverteren?', a: 'Ja. Verkoop je een eigen merk of maak je de producten zelf, dan hoeft er geen GTIN in je feed. Vul dan het merk en het MPN in, als je dat hebt.' },
+      { v: 'Wat is het verschil tussen een GTIN en een MPN?', a: 'De GTIN is het nummer onder de streepjescode, in Europa meestal een EAN van 13 cijfers. Het MPN is het onderdeelnummer dat de fabrikant zelf gebruikt. Heeft een product een GTIN, vul die dan altijd in. Het MPN is volgens Google alleen verplicht als er geen GTIN is.' },
+      { v: 'Mag ik mijn producttitels door AI laten schrijven?', a: 'Ja, maar Google vraagt dat je het aangeeft, via de kenmerken gestructureerde titel en gestructureerde beschrijving. Lees elke tekst na: een verkeerde maat of kleur in de titel levert afkeuringen en retouren op.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Zodra je feed is goedgekeurd en de campagne loopt, kunnen je producten verschijnen. De eerste verkopen komen vaak in de eerste weken. Na twee tot drie maanden weet je welke producten renderen.' },
+      { v: 'Bouwen jullie ook mijn webshop?', a: 'Nee. We bouwen geen webshops en doen geen webshop-SEO. We helpen webshops die al draaien met Shopping-campagnes.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over online adverteren"
+    links={[
+      { label: 'Pillar', titel: 'Online adverteren', href: '/online-adverteren/', tekst: 'Adverteren waar je klant al zoekt.' },
+      { label: 'Dienst', titel: 'Google Ads uitbesteden', href: '/online-adverteren/google-ads-bureau/', tekst: 'Zoekcampagnes opzetten en beheren.' },
+      { label: 'Gids', titel: 'Google Ads-check', href: '/kennisbank/gidsen/google-ads-check/', tekst: 'Tien punten: wordt je geld goed besteed?' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd wat Shopping jouw webshop oplevert?" tekst={`${site.contactpersoon} kijkt naar je feed en je marges, en belt je met een eerlijke inschatting. Ook als het advies is om het nog niet te doen.`} />
+</Base>
+<style>
+  .prijs-eigen { padding: 24px; }
+  .prijs-kop { font-size: var(--step-1); font-weight: 900; line-height: 1.2; letter-spacing: -0.02em; margin: 8px 0 6px; }
+  .prijs-eigen .vink { margin-top: 18px; }
+  .prijs-eigen .btn { width: 100%; }
+</style>

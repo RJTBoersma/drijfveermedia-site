@@ -1,0 +1,89 @@
+---
+// Scène voor /leadgeneratie/landingspagina-laten-maken/: een advertentie en een nieuwsbrief leiden naar één pagina zonder menu, met één knop. De cursor klikt, er komt een aanvraag binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een advertentie en een nieuwsbrief sturen bezoekers naar één landingspagina met één oranje knop. Een bezoeker klikt en er komt een nieuwe aanvraag binnen.'}>
+  <!-- bron 1: advertentie -->
+  <rect x="18" y="44" width="150" height="74" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="30" y="56" width="62" height="16" rx="8" fill="#e8eef4" />
+  <text x="61" y="68" text-anchor="middle" font-size="10" font-weight="800">Advertentie</text>
+  <rect x="30" y="82" width="120" height="9" rx="4" fill="#10283f" />
+  <rect class="v" x="30" y="98" width="92" height="8" rx="4" />
+  <!-- bron 2: nieuwsbrief -->
+  <rect x="18" y="146" width="150" height="74" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="l" d="M32 162h40v28H32zM32 162l20 15 20-15" />
+  <text x="82" y="181" font-size="11" font-weight="800">Nieuwsbrief</text>
+  <rect class="v" x="32" y="200" width="118" height="8" rx="4" />
+  <!-- verbindingen naar de pagina -->
+  <path class="a stroom" d="M168 81C196 81 198 112 222 112" />
+  <path class="a stroom" d="M168 183C196 183 198 152 222 152" />
+  <!-- de landingspagina: geen menu, één doel -->
+  <rect x="222" y="22" width="238" height="226" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M222 50h238" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="238" cy="36" r="4" fill="#d9e1ea" /><circle cx="250" cy="36" r="4" fill="#d9e1ea" /><circle cx="262" cy="36" r="4" fill="#d9e1ea" />
+  <rect x="240" y="64" width="168" height="13" rx="4" fill="#10283f" />
+  <rect class="v" x="240" y="84" width="130" height="8" rx="4" />
+  <g>
+    <circle cx="246" cy="110" r="6" fill="#1f8a5b" /><path d="M243 110l2 2 4-4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <rect class="v" x="258" y="106" width="110" height="8" rx="4" />
+    <circle cx="246" cy="128" r="6" fill="#1f8a5b" /><path d="M243 128l2 2 4-4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <rect class="v" x="258" y="124" width="94" height="8" rx="4" />
+  </g>
+  <rect x="240" y="146" width="96" height="22" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="344" y="146" width="96" height="22" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" />
+  <text x="248" y="161" font-size="10" class="zacht">Naam</text>
+  <text x="352" y="161" font-size="10" class="zacht">Telefoon</text>
+  <rect class="knop" x="240" y="180" width="200" height="32" rx="8" fill="#ff6600" />
+  <text x="340" y="201" text-anchor="middle" font-size="13" font-weight="800" style="fill:#fff">Vraag een offerte aan</text>
+  <text x="340" y="232" text-anchor="middle" font-size="10" class="zacht">Eén pagina, één doel</text>
+  {!mini && (
+    <g>
+      <circle class="ring" cx="424" cy="203" r="10" fill="none" stroke="#074663" stroke-width="3" />
+      <g transform="translate(424 203)">
+        <g class="cursor">
+          <path d="M0 0v22l6-6 5 10 4-2-5-10h8z" fill="#10283f" stroke="#fff" stroke-width="2" stroke-linejoin="round" />
+        </g>
+      </g>
+      <g class="melding">
+        <rect x="30" y="228" width="168" height="34" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <circle cx="50" cy="245" r="9" fill="#1f8a5b" />
+        <path d="M45 245l3 3 7-7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="66" y="250" font-size="13" font-weight="800">Nieuwe aanvraag</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .stroom { stroke-dasharray: 6 7; }
+  .in-beeld .stroom { animation: leadgeneratie--landingspagina-laten-maken-stroom 1.6s linear infinite; }
+  .cursor, .melding, .ring { transform-box: fill-box; }
+  .ring { transform-origin: center; opacity: 0; }
+  :global(.teken-js) .cursor { opacity: 0; }
+  :global(.teken-js) .melding { opacity: 0; }
+  .in-beeld .cursor { animation: leadgeneratie--landingspagina-laten-maken-cursor 5s cubic-bezier(.5,0,.3,1) 0.6s infinite both; }
+  .in-beeld .ring { animation: leadgeneratie--landingspagina-laten-maken-ring 5s ease-out 0.6s infinite both; }
+  .in-beeld .melding { animation: leadgeneratie--landingspagina-laten-maken-melding 5s ease-in-out 0.6s infinite both; }
+  @keyframes leadgeneratie--landingspagina-laten-maken-stroom { to { stroke-dashoffset: -26; } }
+  @keyframes leadgeneratie--landingspagina-laten-maken-cursor {
+    0% { opacity: 0; transform: translate(20px, -110px); }
+    10% { opacity: 1; }
+    34% { transform: translate(0, 0) scale(1); }
+    40% { transform: translate(0, 0) scale(0.82); }
+    46%, 80% { opacity: 1; transform: translate(0, 0) scale(1); }
+    92%, 100% { opacity: 0; transform: translate(0, 0); }
+  }
+  @keyframes leadgeneratie--landingspagina-laten-maken-ring {
+    0%, 38% { opacity: 0; transform: scale(0.4); }
+    42% { opacity: 1; }
+    60%, 100% { opacity: 0; transform: scale(2.4); }
+  }
+  @keyframes leadgeneratie--landingspagina-laten-maken-melding {
+    0%, 46% { opacity: 0; transform: translateY(10px); }
+    54%, 86% { opacity: 1; transform: none; }
+    96%, 100% { opacity: 0; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .stroom, .in-beeld .cursor, .in-beeld .ring, .in-beeld .melding { animation: none; }
+  }
+</style>

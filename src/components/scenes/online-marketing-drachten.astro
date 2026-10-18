@@ -1,0 +1,63 @@
+---
+// Scène voor /online-marketing-drachten/: een mengpaneel met vier schuifknoppen (SEO, Ads, Social, Mail). Eén hand stelt ze bij; ernaast stijgt de lijn met aanvragen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een mengpaneel met schuifknoppen voor SEO, advertenties, social media en e-mail. De knoppen worden bijgesteld en de lijn met aanvragen ernaast stijgt.'}>
+  <!-- mengpaneel -->
+  <rect x="28" y="42" width="270" height="196" rx="16" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="48" y="70" font-size="13" font-weight="800">Jouw marketing</text>
+  <circle class="o" cx="272" cy="65" r="5" />
+  <g>
+    <rect x="73" y="92" width="6" height="104" rx="3" fill="#e8eef4" />
+    <rect x="133" y="92" width="6" height="104" rx="3" fill="#e8eef4" />
+    <rect x="193" y="92" width="6" height="104" rx="3" fill="#e8eef4" />
+    <rect x="253" y="92" width="6" height="104" rx="3" fill="#e8eef4" />
+  </g>
+  <path class="l" d="M60 144h4M120 144h4M180 144h4M240 144h4M88 144h4M148 144h4M208 144h4M268 144h4" style="stroke-width:1.5" />
+  <g class="omd-knop omd-knop-seo"><rect x="62" y="108" width="28" height="16" rx="5" fill="#074663" /><path d="M68 116h16" stroke="#fff" stroke-width="2" /></g>
+  <g class="omd-knop omd-knop-ads"><rect x="122" y="128" width="28" height="16" rx="5" fill="#ff6600" /><path d="M128 136h16" stroke="#fff" stroke-width="2" /></g>
+  <g class="omd-knop omd-knop-social"><rect x="182" y="160" width="28" height="16" rx="5" fill="#074663" /><path d="M188 168h16" stroke="#fff" stroke-width="2" /></g>
+  <g class="omd-knop omd-knop-mail"><rect x="242" y="146" width="28" height="16" rx="5" fill="#074663" /><path d="M248 154h16" stroke="#fff" stroke-width="2" /></g>
+  <g font-size="11" font-weight="800" text-anchor="middle">
+    <text x="76" y="220">SEO</text>
+    <text x="136" y="220">Ads</text>
+    <text x="196" y="220">Social</text>
+    <text x="256" y="220">Mail</text>
+  </g>
+  <!-- grafiek aanvragen -->
+  <rect x="318" y="42" width="140" height="122" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="332" y="66" font-size="12" font-weight="800">Aanvragen</text>
+  <path d="M332 146H446" stroke="#d9e1ea" stroke-width="1.5" />
+  <path d="M334 138L360 132L386 136L412 122L440 112" fill="none" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- kaartje: verspilling eruit -->
+  <rect x="318" y="178" width="140" height="44" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="340" cy="200" r="9" fill="#1f8a5b" />
+  <path d="M335.5 200l3 3 5.5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="356" y="198" font-size="10.5" font-weight="800">Verspilling</text>
+  <text x="356" y="211" font-size="10.5" font-weight="800">eruit</text>
+  {!mini && (
+    <g>
+      <path class="omd-lijn" d="M334 138L360 128L386 120L412 98L440 80" fill="none" stroke="#ff6600" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <circle class="omd-punt" cx="440" cy="80" r="5" fill="#ff6600" />
+    </g>
+  )}
+</svg>
+<style>
+  .omd-lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .omd-lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .omd-punt { opacity: 0; }
+  .in-beeld .omd-lijn { animation: online-marketing-drachten-lijn 1.6s cubic-bezier(.6,.1,.3,1) 0.9s forwards; }
+  .in-beeld .omd-punt { transform-box: fill-box; transform-origin: center; animation: online-marketing-drachten-punt 2.4s ease-in-out 2.5s infinite both; }
+  .in-beeld .omd-knop-seo { animation: online-marketing-drachten-op 6s ease-in-out 0.4s infinite; }
+  .in-beeld .omd-knop-ads { animation: online-marketing-drachten-neer 6s ease-in-out 0.4s infinite; }
+  .in-beeld .omd-knop-social { animation: online-marketing-drachten-neer 6s ease-in-out 1.2s infinite; }
+  @keyframes online-marketing-drachten-lijn { to { stroke-dashoffset: 0; } }
+  @keyframes online-marketing-drachten-punt { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.6); } }
+  @keyframes online-marketing-drachten-op { 0%, 100% { transform: translateY(0); } 40%, 70% { transform: translateY(-12px); } }
+  @keyframes online-marketing-drachten-neer { 0%, 100% { transform: translateY(0); } 40%, 70% { transform: translateY(18px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .omd-lijn { animation: none; stroke-dashoffset: 0; }
+    .in-beeld .omd-punt, .in-beeld .omd-knop-seo, .in-beeld .omd-knop-ads, .in-beeld .omd-knop-social { animation: none; }
+  }
+</style>

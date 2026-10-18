@@ -1,0 +1,55 @@
+---
+// Het team aan het werk op kantoor: de getekende portretten (zwart-wit) achter één lange tafel.
+import { team } from '../../data/site';
+interface Props { klein?: boolean }
+const { klein = false } = Astro.props;
+const volgorde = ['thorgall', 'robert', 'evelien', 'johan'];
+const mensen = volgorde.map((s) => team.find((p) => p.slug === s)!).filter(Boolean);
+const xs = [55, 270, 485, 700];
+---
+<figure class:list={['team-kantoor', { klein }]}>
+  <svg viewBox="0 0 960 500" role="img" aria-label={`Het team van Drijfveer Media aan tafel op kantoor in Assen: ${mensen.map((p) => p.naam.split(' ')[0]).join(', ')}`}>
+    <rect width="960" height="500" class="tk-achter" />
+    <g class="tk-l">
+      <rect x="640" y="40" width="250" height="140" rx="8" class="tk-vlak" />
+      <path d="M668 156 H866 M668 156 V62" />
+      <rect x="70" y="44" width="200" height="92" rx="4" class="tk-wit" />
+      <path d="M380 0 v44 M368 44 h24 l-6 14 h-12 Z M560 0 v44 M548 44 h24 l-6 14 h-12 Z" />
+      <path d="M918 470 v-44 h28 v44 Z M932 426 q-30 -40 -14 -96 M932 426 q6 -60 30 -100 M932 426 q-6 -50 8 -120" />
+    </g>
+    <path class="tk-a" d="M670 150 C716 146 736 128 764 120 S820 90 864 70" />
+    <circle cx="864" cy="70" r="5" class="tk-punt" />
+    <text x="88" y="76" class="tk-tekst">Gevonden.</text>
+    <text x="88" y="100" class="tk-tekst">Genoemd.</text>
+    <text x="88" y="124" class="tk-tekst tk-oranje">Gekozen.</text>
+    {mensen.map((p, i) => (
+      <image href={`/img/team/${p.slug}.webp`} x={xs[i]} y="140" width="230" height="230" preserveAspectRatio="xMidYMax meet" />
+    ))}
+    <rect x="40" y="370" width="880" height="18" rx="4" class="tk-l tk-wit" />
+    <path class="tk-l" d="M72 388 V480 M888 388 V480" />
+    {xs.map((x) => (
+      <g>
+        <path class="tk-l tk-vlak" d={`M${x + 62} 370 L${x + 70} 334 H${x + 160} L${x + 168} 370 Z`} />
+        <path class="tk-a" d={`M${x + 107} 354 l6 6 l10 -12`} />
+      </g>
+    ))}
+    <g class="tk-l"><path class="tk-vlak" d="M262 348 h20 v20 a6 6 0 0 1 -6 6 h-8 a6 6 0 0 1 -6 -6 Z" /><path d="M282 354 a6 6 0 0 1 0 12" /></g>
+    <path class="tk-a" d="M267 338 q4 -6 0 -12 M276 338 q4 -6 0 -12" />
+    {mensen.map((p, i) => (
+      <text x={xs[i] + 115} y="418" text-anchor="middle" class="tk-naam">{p.naam.split(' ')[0]}</text>
+    ))}
+  </svg>
+</figure>
+<style>
+  .team-kantoor { margin: 0; }
+  .team-kantoor svg { display: block; width: 100%; height: auto; }
+  .tk-achter { fill: var(--bg, #f6f7f9); }
+  .tk-l { fill: none; stroke: var(--navy); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .tk-a { fill: none; stroke: var(--orange); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .tk-punt { fill: var(--orange); }
+  .tk-vlak { fill: #e8eef4; }
+  .tk-wit { fill: #fff; }
+  .tk-tekst { font: 800 19px var(--font, 'Albert Sans', sans-serif); fill: var(--ink); }
+  .tk-oranje { fill: var(--orange); }
+  .tk-naam { font: 700 15px var(--font, 'Albert Sans', sans-serif); fill: var(--ink); }
+</style>

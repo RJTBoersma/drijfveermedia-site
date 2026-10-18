@@ -1,0 +1,61 @@
+---
+// Scène voor /webdesign-sneek/: de Waterpoort aan het water, een zeilboot die voorbij vaart en een telefoon met een
+// (verzonnen) verhuurwebsite. In de volledige versie vaart de boot en komt er een reservering binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: de Waterpoort van Sneek aan het water, een zeilboot die voorbij vaart en een telefoon met een website waarop een reservering binnenkomt.'}>
+  <!-- de Waterpoort -->
+  <path class="v" d="M40 196V112h26v84zM134 196V112h26v84zM66 196v-62h68v62z" />
+  <path class="l" d="M40 196V112h26v84M134 196V112h26v84M66 134h68M66 196v-62M134 196v-62" />
+  <path class="l" d="M36 112l17-34 17 34M130 112l17-34 17 34M62 134l38-26 38 26" />
+  <path class="l" d="M80 196v-26a20 20 0 0 1 40 0v26" />
+  <path class="l" d="M48 128h10M142 128h10M48 150h10M142 150h10M92 124h16" />
+  <text x="100" y="250" text-anchor="middle" font-size="12" font-weight="700" class="zacht">Waterpoort</text>
+  <!-- water -->
+  <path d="M24 196H312" stroke="#9fc0d3" stroke-width="3" stroke-linecap="round" />
+  <path d="M40 212c12-5 24 5 36 0s24 5 36 0M150 220c12-5 24 5 36 0s24 5 36 0M232 208c12-5 24 5 36 0" stroke="#c9dbe6" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  <!-- telefoon met verhuursite -->
+  <rect x="332" y="34" width="112" height="210" rx="18" fill="#10283f" />
+  <rect x="340" y="44" width="96" height="190" rx="12" fill="#fff" />
+  <text x="348" y="64" font-size="10" font-weight="800" fill="#074663" style="fill:#074663">Bootverhuur</text>
+  <rect x="348" y="72" width="80" height="50" rx="6" fill="#e8eef4" />
+  <path d="M362 112l14-26 12 26zM360 114h32" stroke="#074663" stroke-width="2" fill="none" stroke-linejoin="round" />
+  <rect x="348" y="132" width="70" height="7" rx="3" fill="#10283f" />
+  <rect x="348" y="145" width="80" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="348" y="155" width="60" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="348" y="170" width="80" height="22" rx="6" fill="#ff6600" />
+  <text x="388" y="185" text-anchor="middle" font-size="10" font-weight="800" fill="#fff" style="fill:#fff">Reserveer</text>
+  <g fill="#e8eef4"><rect x="348" y="202" width="24" height="22" rx="4" /><rect x="376" y="202" width="24" height="22" rx="4" /><rect x="404" y="202" width="24" height="22" rx="4" /></g>
+  {!mini && (
+    <g>
+      <g class="vaart">
+        <g class="dobber">
+          <path d="M196 186h76l-12 14h-54z" fill="#074663" />
+          <path d="M232 184V110l34 70z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+          <path d="M228 184V122l-26 58z" fill="#ff6600" />
+          <path d="M232 110v-8l10 4z" fill="#ff6600" />
+        </g>
+      </g>
+      <g class="boeking">
+        <rect x="176" y="34" width="146" height="34" rx="10" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="194" cy="51" r="9" fill="#1f8a5b" />
+        <path d="M189.5 51l3 3 5.5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+        <text x="210" y="49" font-size="11" font-weight="800">Boot gereserveerd</text>
+        <text x="210" y="61" font-size="9.5" class="zacht">zaterdag, 10.00 uur</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .vaart, .dobber, .boeking { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .vaart { opacity: 0; transform: translateX(-60px); }
+  :global(.teken-js) .boeking { opacity: 0; }
+  .in-beeld .vaart { animation: webdesign-sneek-vaar 1.8s cubic-bezier(.3,.8,.4,1) 0.3s forwards; }
+  .in-beeld .dobber { animation: webdesign-sneek-dobber 4s ease-in-out 2s infinite; }
+  .in-beeld .boeking { animation: webdesign-sneek-boeking 6s ease-in-out 2s infinite; }
+  @keyframes webdesign-sneek-vaar { to { opacity: 1; transform: none; } }
+  @keyframes webdesign-sneek-dobber { 0%, 100% { transform: none; } 50% { transform: translateY(-4px) rotate(-2deg); } }
+  @keyframes webdesign-sneek-boeking { 0% { opacity: 0; transform: translateY(8px); } 12%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vaart, .in-beeld .dobber, .in-beeld .boeking { animation: none; } }
+</style>

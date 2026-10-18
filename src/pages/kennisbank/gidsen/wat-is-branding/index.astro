@@ -1,0 +1,175 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wat-is-branding.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/wat-is-branding/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is-branding', titel: 'Wat is branding?' },
+  { id: 'verschil', titel: 'Merk, logo en huisstijl' },
+  { id: 'waarom', titel: 'Waarom het ook voor jou telt' },
+  { id: 'stappen', titel: 'Je merk bouwen in zes stappen' },
+  { id: 'consistent', titel: 'Overal hetzelfde verhaal' },
+  { id: 'fouten', titel: 'Vijf fouten die we vaak zien' },
+  { id: 'zelf-of-laten', titel: 'Zelf doen of laten doen?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat is branding? Merk, doelgroep en USP uitgelegd',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Branding',
+}];
+---
+<Base
+  title="Wat is branding? Merk, doelgroep en USP | Drijfveer Media"
+  description="Wat is branding, en wat heb je eraan als mkb'er? Het verschil tussen merk, logo en huisstijl, plus een stappenplan om zelf een sterk merk te bouwen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat is branding?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Branding" titel="Wat is branding? Merk, doelgroep en USP uitgelegd" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Branding is alles wat je doet om klanten een vast beeld en gevoel bij je bedrijf te geven. Een logo hoort erbij, maar het begint bij drie vragen: voor wie ben je er, waarin ben je anders en waar sta je voor?</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Je merk is het beeld dat klanten van je hebben. Branding is het werk om dat beeld te sturen.</li>
+            <li>Een logo en huisstijl zijn de buitenkant. De kern is je doelgroep, je USP en je waarden.</li>
+            <li>Ook een bedrijf met twee mensen heeft een merk, of het wil of niet.</li>
+            <li>Sterke branding draait om herhaling: overal hetzelfde verhaal, dezelfde stem en hetzelfde gezicht.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-branding">Wat is branding?</h2>
+        <p>Branding is het werk dat je doet om klanten een bepaald beeld van je bedrijf te geven, en dat beeld vast te houden. Dat beeld is je merk. Een merk heeft twee kanten: wat jij wilt uitstralen en wat de klant er werkelijk van vindt. Goede branding maakt het verschil tussen die twee zo klein mogelijk.</p>
+        <p>Wat de klant vindt, is de optelsom van alles wat hij van je ziet, hoort en meemaakt. Je website, je offerte, de bus voor de deur, de manier waarop je de telefoon opneemt. Een logo is daar maar één onderdeel van.</p>
+        <p>Het woord komt van brandmerken. Een boer brandde zijn teken in de huid van zijn vee, zodat iedereen wist van wie het dier was. Een merk zegt nog steeds: dit is van ons, en hier kun je op rekenen. Alleen bepaal je tegenwoordig niet meer met een heet ijzer wat mensen van je vinden.</p>
+        <p>De uitspraak die vaak aan Amazon-oprichter Jeff Bezos wordt toegeschreven, vat het goed samen: je merk is wat mensen over je zeggen als jij niet in de kamer bent. Je kunt die perceptie niet afdwingen. Je kunt haar wel sturen, door elke keer hetzelfde te laten zien en waar te maken wat je belooft.</p>
+
+        <h2 id="verschil">Merk, logo en huisstijl: wat is het verschil?</h2>
+        <p>Deze woorden lopen in gesprekken vaak door elkaar. Dat geeft verwarring, want wie een logo laat maken, denkt soms dat zijn merk dan ook klaar is. Zo verhouden ze zich tot elkaar.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Begrip</th><th>Wat het is</th></tr></thead>
+            <tbody>
+              <tr><td>Merk (brand)</td><td>Het beeld en gevoel dat mensen bij je bedrijf hebben</td></tr>
+              <tr><td>Merkidentiteit</td><td>Wie je wilt zijn: doelgroep, belofte, merkwaarden en persoonlijkheid</td></tr>
+              <tr><td>Visuele identiteit</td><td>Hoe je eruitziet: logo, kleuren, lettertypes, beeldstijl</td></tr>
+              <tr><td>Huisstijl</td><td>De vaste regels om die visuele identiteit overal gelijk toe te passen</td></tr>
+              <tr><td>Branding</td><td>Al het werk om merkidentiteit en merkbeeld dichter bij elkaar te brengen</td></tr>
+              <tr><td>Marketing</td><td>Het merk onder de aandacht brengen bij de juiste mensen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Simpel gezegd: marketing zorgt dat mensen je leren kennen, branding zorgt dat ze je onthouden en je kiezen. Een <a href="/branding/logo-laten-maken/">logo laten maken</a> is dus een onderdeel van branding, niet het hele verhaal.</p>
+
+        <h2 id="waarom">Waarom branding ook voor een klein bedrijf telt</h2>
+        <p>Veel ondernemers denken bij branding aan Coca-Cola of Apple. Te groot, te duur, niets voor een installatiebedrijf in Hoogeveen. Toch heb je al een merk zodra je eerste klant over je vertelt. De vraag is alleen of je zelf bepaalt wat er dan gezegd wordt.</p>
+        <p>Een sterk merk levert ook een klein bedrijf vier dingen op:</p>
+        <ul class="vink">
+          <li><b>Je wordt herkend.</b> Wie je naam drie keer heeft gezien, op een bus, in Google en op een bord langs het sportveld, belt sneller dan iemand die je niet kent.</li>
+          <li><b>Je hoeft niet de goedkoopste te zijn.</b> Klanten betalen meer aan een bedrijf dat ze vertrouwen en snappen.</li>
+          <li><b>Je trekt de juiste klanten.</b> Wie helder is over voor wie hij werkt, krijgt minder aanvragen die toch niet passen.</li>
+          <li><b>Mensen praten makkelijker over je.</b> Een duidelijk verhaal is makkelijk door te vertellen. Een vaag verhaal niet.</li>
+        </ul>
+        <p>Er komt een vijfde bij. AI-assistenten zoals ChatGPT en Gemini beschrijven bedrijven op basis van wat er online over ze staat. Zegt je site iets anders dan je profiel en je vermeldingen, dan krijgt ook de AI geen helder beeld. Hoe dat werkt, lees je in de gids <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+
+        <h2 id="stappen">Je merk bouwen in zes stappen</h2>
+        <p>Een merk bouwen begint bij inhoud, niet bij vormgeving. Werk deze stappen in deze volgorde af. Pak er een middag voor, met een vel papier en liefst iemand die je kritische vragen durft te stellen.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>1. Waarom besta je?</h3></div>
+        <p>Schrijf in één of twee zinnen op waarom je dit werk doet, los van geld verdienen. Dat klinkt soft, maar het geeft richting aan alles daarna. Een voorbeeld uit eigen huis: Drijfveer Media heet zo omdat talent zonder inzet niets oplevert, en kennis die je niet deelt ook niet. Die gedachte zie je terug in deze kennisbank, waarin we ons vak gewoon weggeven.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>2. Voor wie ben je er?</h3></div>
+        <p>Iedereen is geen doelgroep. Beschrijf je ideale klant zo concreet mogelijk: wat voor bedrijf of persoon, waar, met welk probleem en welk budget. Hoe scherper je dit hebt, hoe makkelijker de rest wordt. Een uitgewerkt voorbeeld vind je in de gids <a href="/kennisbank/gidsen/persona-maken/">persona maken</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>3. Waarin ben je anders?</h3></div>
+        <p>Dit is je <a href="/kennisbank/wat-is/usp/">USP</a>, je unieke verkoopargument. De test is simpel: kan je concurrent precies dezelfde zin op zijn site zetten? Dan is het geen USP. "Wij leveren kwaliteit" zegt iedereen. "Storing voor 12.00 uur gemeld, dezelfde dag een monteur aan de deur" zegt bijna niemand. Dat laatste is een verzonnen voorbeeld, maar zo concreet moet het worden.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>4. Waar sta je voor?</h3></div>
+        <p>Kies drie tot vijf merkwaarden. Niet "betrouwbaar" en "klantgericht", want die vinkt iedereen aan. Kies waarden waar je ook iets voor laat. Bij ons zijn dat bijvoorbeeld nuchterheid en eerlijkheid: we zeggen het ook als iets geen zin heeft. Maak elke waarde toetsbaar met de vraag: wat doen we wel, en wat doen we nooit?</p>
+        <p>Geef je merk daarna een persoonlijkheid. Als je bedrijf een persoon was, hoe zou die praten, wat zou hij dragen, hoe zou hij een klacht oplossen? Een merk is dynamisch: het groeit mee met je bedrijf. De kern verandert niet elk jaar.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>5. Hoe zie je eruit?</h3></div>
+        <p>Nu pas komt de visuele identiteit: logo, kleuren, lettertype en beeldstijl. Die moeten passen bij wat je in stap 1 tot en met 4 hebt bedacht. Een advocatenkantoor in felroze werkt alleen als dat bewust is gekozen. Of je het logo zelf maakt of laat maken, lees je in de gids <a href="/kennisbank/gidsen/logo-en-huisstijl/">logo en huisstijl</a>. Over de werking van kleur gaat de gids <a href="/kennisbank/gidsen/kleuren-in-marketing/">kleuren in marketing</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={48} /><h3>6. Hoe klink je?</h3></div>
+        <p>Je merk praat via je website, je mails, je offertes en de telefoon. Zeg je je of u? Ben je droog of grappig? Leg dat vast, zodat het niet afhangt van wie er toevallig schrijft. Hoe je dat aanpakt, staat in de gids over <a href="/kennisbank/gidsen/tone-of-voice/">tone of voice</a>.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Leg het vast in een brand book</p>
+          <p>Zet de uitkomst van deze zes stappen op papier. Grote merken noemen dat een brand book of huisstijlhandboek. Voor een mkb-bedrijf zijn twee of drie pagina's genoeg: waarom, voor wie, USP, waarden, logo en kleuren, en vijf voorbeeldzinnen in je eigen toon. Geef het aan iedereen die namens je bedrijf iets maakt, ook aan de drukker en de webbouwer.</p>
+        </div>
+
+        <h2 id="consistent">Sterke branding is overal hetzelfde verhaal</h2>
+        <p>Sterke branding herken je aan herhaling. Een klant ziet je misschien tien keer voordat hij belt. Elke keer moet hij hetzelfde bedrijf herkennen. Loop deze lijst eens na:</p>
+        <ul class="vink">
+          <li>Staan je naam, adres en telefoonnummer overal precies hetzelfde, van website tot Google Bedrijfsprofiel?</li>
+          <li>Gebruik je op website, offerte, factuur en bus hetzelfde logo en dezelfde kleuren?</li>
+          <li>Beschrijf je je bedrijf overal in dezelfde woorden, ook op LinkedIn en in bedrijvengidsen?</li>
+          <li>Neemt iedereen de telefoon op dezelfde manier op?</li>
+          <li>Klopt wat je belooft met wat de klant meemaakt, tot en met de nazorg?</li>
+        </ul>
+        <p>Dat laatste punt weegt het zwaarst. Het gevoel dat je merk oproept, ontstaat vooral bij wat je doet. Een strakke huisstijl helpt niets als je niet terugbelt. Andersom vergeeft een klant je een gedateerd logo makkelijk als je altijd doet wat je zegt.</p>
+
+        <h2 id="fouten">Vijf fouten die we vaak zien</h2>
+        <ol>
+          <li><b>Beginnen met het logo.</b> Zonder doelgroep en USP is een logo een gok. Het ziet er mooi uit, maar het zegt niets.</li>
+          <li><b>Voor iedereen willen zijn.</b> Wie iedereen wil aanspreken, valt bij niemand op.</li>
+          <li><b>Waarden die niets kosten.</b> "Betrouwbaar, persoonlijk, kwaliteit" past op elk bedrijf in Nederland.</li>
+          <li><b>Elk jaar iets nieuws.</b> Jij bent je huisstijl na een jaar zat, je klant heeft hem net leren herkennen. Herkenbaarheid groeit door geduld.</li>
+          <li><b>Het verhaal alleen in je hoofd.</b> Staat het nergens op papier, dan vertelt elke medewerker en elke freelancer zijn eigen versie.</li>
+        </ol>
+
+        <h2 id="zelf-of-laten">Zelf doen of laten doen?</h2>
+        <p>Stap 1 tot en met 4 kun je prima zelf. Niemand kent je bedrijf beter dan jij. Het helpt wel als iemand van buiten doorvraagt, omdat je zelf snel blijft hangen in algemene termen. Voor stap 5 heb je meestal een ontwerper nodig, zeker als je logo jaren mee moet.</p>
+        <p>Wil je hulp? Bij <a href="/branding/">branding bij Drijfveer Media</a> beginnen we met vragen stellen, net zo lang tot we weten wat je echt wilt. Pas daarna gaan we ontwerpen. Een logo kost bij ons vanaf € 495, een complete <a href="/branding/huisstijl-laten-maken/">huisstijl</a> vanaf € 995, exclusief btw. Liever eerst sparren? Een <a href="/consult/">consult</a> van een uur kost € 85.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever samen aan je merk werken?" intro="Wat je van ons mag verwachten, ook als het om je logo en huisstijl gaat." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen branding en marketing?', a: 'Branding bepaalt wie je bent en hoe mensen je zien. Marketing zorgt dat de juiste mensen je leren kennen. Goede marketing zonder helder merk kost meer geld, omdat mensen je niet onthouden.' },
+      { v: 'Wat kost branding voor een klein bedrijf?', a: 'Je eigen merkverhaal uitwerken kost vooral tijd. Een logo laten ontwerpen kost bij ons vanaf € 495, een complete huisstijl vanaf € 995, exclusief btw. Grote merktrajecten bij reclamebureaus kunnen tienduizenden euro\'s kosten, maar dat is voor het mkb niet nodig.' },
+      { v: 'Wat is een USP?', a: 'Een USP (unique selling point) is het ene punt waarop je echt anders bent dan je concurrenten, en waar je klant iets aan heeft. Lees meer in <a href="/kennisbank/wat-is/usp/">wat is een USP</a>.' },
+      { v: 'Hoe vaak moet je je branding vernieuwen?', a: 'Zelden. Je kern blijft staan. Je logo en huisstijl kun je na tien of vijftien jaar opfrissen, liefst in kleine stappen, zodat klanten je blijven herkennen.' },
+      { v: 'Heb ik als zzp\'er ook branding nodig?', a: 'Ja, al is het klein. Als zzp\'er ben jij het merk. Een heldere doelgroep, één duidelijke belofte en een verzorgde uitstraling op je site en je profielen doen al veel.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Pillar', titel: 'Branding', href: '/branding/', tekst: 'Logo en huisstijl bij Drijfveer Media, vanaf € 495.' },
+      { label: 'Gids', titel: 'Logo en huisstijl: zelf maken of laten maken?', href: '/kennisbank/gidsen/logo-en-huisstijl/', tekst: 'Wat je zelf kunt, en wanneer een ontwerper loont.' },
+      { label: 'Gids', titel: 'Tone of voice bepalen', href: '/kennisbank/gidsen/tone-of-voice/', tekst: 'Zo klinkt je bedrijf overal hetzelfde.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd hoe je merk nu overkomt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je vindbaarheid, en belt je met een eerlijk beeld van wat klanten nu van je zien.`} />
+</Base>

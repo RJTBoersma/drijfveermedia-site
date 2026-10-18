@@ -1,0 +1,66 @@
+---
+// Miniatuur op een kaart: het eerste beeld van de animatie bovenaan de pagina waar de kaart naartoe gaat.
+// Kaart en paginakop delen een view-transition-name, zodat het plaatje bij een klik uitgroeit tot de kop.
+import Tekening from './Tekening.astro';
+import { overgang, miniatuurVoor } from '../../data/miniaturen';
+interface Props { href: string; onderwerp?: string }
+const { href, onderwerp } = Astro.props;
+const soort = miniatuurVoor(href);
+const fallback = onderwerp ?? 'lamp';
+// Elke pagina kan een eigen scène hebben in src/components/scenes/<slug>.astro (slug: pad zonder slashes, / wordt --).
+// Die scène staat bovenaan de pagina; hier verschijnt hij als miniatuur (mini = eerste beeld, zonder tekst).
+const scenes = import.meta.glob('../scenes/*.astro', { eager: true }) as Record<string, { default: any }>;
+const slug = href.replace(/^\/|\/$/g, '').replace(/\//g, '--') || 'home';
+const Scene = !soort ? scenes[`../scenes/${slug}.astro`]?.default : undefined;
+---
+<div class="plaatje" style={`view-transition-name:${overgang(href)}`} aria-hidden="true">
+  {soort === 'ai' && (
+    <svg viewBox="0 0 320 180"><rect x="24" y="16" width="272" height="148" rx="12" fill="#fff" stroke="#d9e1ea" /><circle cx="42" cy="32" r="4" fill="#d9e1ea" /><circle cx="54" cy="32" r="4" fill="#d9e1ea" /><circle cx="66" cy="32" r="4" fill="#d9e1ea" /><rect x="150" y="54" width="128" height="30" rx="12" fill="#074663" /><circle cx="50" cy="108" r="10" fill="#e8eef4" /><rect x="68" y="98" width="190" height="8" rx="4" fill="#d9e1ea" /><rect x="68" y="114" width="96" height="10" rx="4" fill="#ffd2b0" /><rect x="170" y="116" width="80" height="8" rx="4" fill="#d9e1ea" /><rect x="68" y="132" width="150" height="8" rx="4" fill="#d9e1ea" /><path d="M276 18l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#ff6600" /></svg>
+  )}
+  {soort === 'kaart' && (
+    <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#e9eef3" /><path d="M0 120c70-20 120 20 180-4s90-30 140-14" stroke="#fff" stroke-width="14" fill="none" /><path d="M120 0c10 60-10 120 14 180" stroke="#fff" stroke-width="9" fill="none" /><rect x="26" y="40" width="60" height="34" rx="6" fill="#d7e6d8" /><path d="M170 82c0-12 9-20 19-20s19 8 19 20c0 14-19 30-19 30s-19-16-19-30z" fill="#ff6600" /><circle cx="189" cy="82" r="7" fill="#fff" /><path d="M80 66c0-9 7-15 14-15s14 6 14 15c0 10-14 22-14 22S80 76 80 66z" fill="#8aa0b4" /><path d="M250 50c0-9 7-15 14-15s14 6 14 15c0 10-14 22-14 22s-14-12-14-22z" fill="#8aa0b4" /><rect x="20" y="14" width="200" height="22" rx="11" fill="#fff" stroke="#d9e1ea" /></svg>
+  )}
+  {soort === 'schermen' && (
+    <svg viewBox="0 0 320 180"><rect x="40" y="22" width="200" height="124" rx="10" fill="#10283f" /><rect x="48" y="30" width="184" height="108" rx="5" fill="#fff" /><rect x="56" y="40" width="60" height="7" rx="3" fill="#074663" /><rect x="58" y="60" width="96" height="10" rx="3" fill="#10283f" /><rect x="58" y="76" width="120" height="6" rx="3" fill="#d9e1ea" /><rect x="58" y="92" width="58" height="16" rx="5" fill="#ff6600" /><rect x="28" y="146" width="224" height="10" rx="5" fill="#c9d3dd" /><rect x="214" y="66" width="70" height="104" rx="14" fill="#10283f" /><rect x="220" y="72" width="58" height="92" rx="9" fill="#fff" /><rect x="226" y="88" width="40" height="8" rx="3" fill="#10283f" /><rect x="226" y="104" width="34" height="12" rx="4" fill="#ff6600" /></svg>
+  )}
+  {soort === 'drenthe' && (
+    <svg viewBox="0 0 320 180"><path d="M120 28c40-14 60 6 92 26s54 52 46 86-80 30-120 30-70-8-82-30 6-50 18-68 16-30 46-44z" fill="#e3ebf2" stroke="#b9c8d6" stroke-width="2" /><circle cx="160" cy="66" r="8" fill="#ff6600" stroke="#fff" stroke-width="3" /><circle cx="128" cy="44" r="5" fill="#074663" stroke="#fff" stroke-width="2" /><circle cx="226" cy="118" r="5" fill="#074663" stroke="#fff" stroke-width="2" /><circle cx="148" cy="130" r="5" fill="#074663" stroke="#fff" stroke-width="2" /><circle cx="96" cy="142" r="5" fill="#074663" stroke="#fff" stroke-width="2" /><circle cx="200" cy="150" r="5" fill="#074663" stroke="#fff" stroke-width="2" /></svg>
+  )}
+  {soort === 'reken' && (
+    <svg viewBox="0 0 320 180"><rect x="40" y="14" width="240" height="152" rx="12" fill="#fff" stroke="#d9e1ea" /><rect x="58" y="30" width="140" height="10" rx="4" fill="#10283f" /><rect x="58" y="52" width="60" height="16" rx="8" fill="#074663" /><rect x="124" y="52" width="70" height="16" rx="8" fill="none" stroke="#d9e1ea" stroke-width="2" /><rect x="58" y="76" width="48" height="16" rx="8" fill="#074663" /><rect x="112" y="76" width="60" height="16" rx="8" fill="none" stroke="#d9e1ea" stroke-width="2" /><rect x="178" y="76" width="40" height="16" rx="8" fill="none" stroke="#d9e1ea" stroke-width="2" /><rect x="58" y="104" width="204" height="48" rx="10" fill="#fff4ec" /><text x="72" y="138" font-size="26" font-weight="900" fill="#10283f">€ 295</text></svg>
+  )}
+  {soort === 'letters' && (
+    <svg viewBox="0 0 320 180"><g font-weight="900" font-size="38"><rect x="70" y="14" width="86" height="72" rx="10" fill="#fff" stroke="#d9e1ea" /><text x="86" y="62" fill="#ff6600">E</text><rect x="164" y="14" width="86" height="72" rx="10" fill="#fff" stroke="#d9e1ea" /><text x="180" y="62" fill="#ff6600">E</text><rect x="70" y="94" width="86" height="72" rx="10" fill="#fff" stroke="#d9e1ea" /><text x="86" y="142" fill="#ff6600">A</text><rect x="164" y="94" width="86" height="72" rx="10" fill="#074663" /><text x="180" y="142" fill="#ff6600">T</text></g></svg>
+  )}
+  {soort === 'groei' && (
+    <svg viewBox="0 0 320 180"><rect x="40" y="18" width="240" height="144" rx="12" fill="#fff" stroke="#d9e1ea" /><rect x="60" y="36" width="110" height="10" rx="4" fill="#10283f" /><rect x="60" y="54" width="104" height="16" rx="5" fill="#e8eef4" /><rect x="60" y="76" width="196" height="16" rx="5" fill="#ff6600" /><rect x="60" y="104" width="120" height="10" rx="4" fill="#10283f" /><rect x="60" y="122" width="104" height="16" rx="5" fill="#e8eef4" /><rect x="60" y="140" width="166" height="14" rx="5" fill="#ff6600" /></svg>
+  )}
+  {soort === 'team' && (
+    <div class="fotos"><img src="/img/team/robert-klein.webp" alt="" loading="lazy" /><img src="/img/team/thorgall-klein.webp" alt="" loading="lazy" /><img src="/img/team/evelien-klein.webp" alt="" loading="lazy" /><img src="/img/team/johan-klein.webp" alt="" loading="lazy" /></div>
+  )}
+  {soort === 'label' && (
+    <svg viewBox="0 0 320 180"><path d="M160 10v34" stroke="#074663" stroke-width="3" /><path d="M96 50h120l30 40-30 40H96a14 14 0 0 1-14-14V64a14 14 0 0 1 14-14z" fill="#fff" stroke="#074663" stroke-width="3" /><circle cx="222" cy="90" r="7" fill="none" stroke="#ff6600" stroke-width="3" /><text x="156" y="104" text-anchor="middle" font-size="30" font-weight="900" fill="#10283f">€ 250</text></svg>
+  )}
+  {soort === 'formulier' && (
+    <svg viewBox="0 0 320 180"><rect x="50" y="14" width="220" height="152" rx="12" fill="#fff" stroke="#d9e1ea" /><rect x="68" y="32" width="84" height="22" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" /><rect x="160" y="32" width="92" height="22" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" /><rect x="68" y="64" width="184" height="22" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" /><rect x="68" y="96" width="184" height="22" rx="6" fill="none" stroke="#d9e1ea" stroke-width="2" /><rect x="68" y="130" width="120" height="24" rx="7" fill="#ff6600" /></svg>
+  )}
+  {soort === 'boeken' && (
+    <div class="teken-midden"><Tekening naam="boek" maat={96} /></div>
+  )}
+  {soort === 'merk' && (
+    <svg viewBox="0 0 320 180"><text x="160" y="72" text-anchor="middle" font-size="34" font-weight="900" fill="#10283f">Gevonden.</text><text x="160" y="110" text-anchor="middle" font-size="34" font-weight="900" fill="#10283f">Genoemd.</text><text x="160" y="148" text-anchor="middle" font-size="34" font-weight="900" fill="#10283f">Gekozen<tspan fill="#ff6600">.</tspan></text></svg>
+  )}
+  {!soort && Scene && <div class="scene-mini"><Scene mini /></div>}
+  {!soort && !Scene && <div class="teken-midden"><Tekening naam={fallback} maat={84} /></div>}
+</div>
+<style>
+  .plaatje { aspect-ratio: 16 / 9; border-radius: 10px; background: var(--chip); overflow: hidden; display: grid; place-items: center; margin-bottom: 6px; }
+  .plaatje svg { width: 100%; height: 100%; display: block; transition: transform 0.4s cubic-bezier(.3,1.4,.5,1); }
+  .plaatje text { font-family: var(--font); }
+  .fotos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; width: 100%; height: 100%; }
+  .fotos img { width: 100%; height: 100%; object-fit: cover; object-position: top; background: #e8eef4; }
+  .scene-mini { width: 100%; height: 100%; display: grid; place-items: center; padding: 6%; }
+  .scene-mini > :global(*) { max-width: 100%; max-height: 100%; }
+  .teken-midden { display: grid; place-items: center; width: 100%; height: 100%; }
+  :global(a:hover) .plaatje svg { transform: scale(1.04); }
+</style>

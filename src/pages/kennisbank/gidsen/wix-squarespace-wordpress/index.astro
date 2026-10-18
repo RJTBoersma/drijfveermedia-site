@@ -1,0 +1,149 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wix-squarespace-wordpress.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/wix-squarespace-wordpress/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'verschil', titel: 'Het grote verschil' },
+  { id: 'vergelijking', titel: 'De vergelijking in één tabel' },
+  { id: 'wix', titel: 'Wix' },
+  { id: 'squarespace', titel: 'Squarespace' },
+  { id: 'wordpress', titel: 'WordPress' },
+  { id: 'kosten', titel: 'Kosten over drie jaar' },
+  { id: 'keuze', titel: 'Welke past bij jou?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wix of WordPress, of toch Squarespace?',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: [{ '@type': 'SoftwareApplication', name: 'Wix' }, { '@type': 'SoftwareApplication', name: 'Squarespace' }, { '@type': 'SoftwareApplication', name: 'WordPress' }],
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wix of WordPress? Eerlijke vergelijking | Drijfveer Media"
+  description="Wix of WordPress, of toch Squarespace? Een eerlijke vergelijking van gemak, kosten, vindbaarheid en vrijheid, met advies per type bedrijf."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wix, Squarespace of WordPress', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Website" titel="Wix of WordPress, of toch Squarespace?" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Wix of WordPress? Het korte antwoord: Wix en Squarespace zijn makkelijker, WordPress geeft meer vrijheid. Welke het beste past, hangt af van wat je site moet doen en hoeveel tijd je hebt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand oktober 2026)</p>
+          <ul>
+            <li><b>Wix:</b> het makkelijkst om te beginnen, veel vrijheid in de opmaak, maar je kunt je site niet meenemen.</li>
+            <li><b>Squarespace:</b> de mooiste standaardontwerpen, minder keuze, alles in één abonnement.</li>
+            <li><b>WordPress:</b> vrijwel alles kan en de site is van jou, maar je regelt zelf hosting en onderhoud.</li>
+            <li>Volgens W3Techs draait 39,6 procent van alle websites op WordPress, 4,2 procent op Wix en 2,4 procent op Squarespace.</li>
+          </ul>
+        </div>
+
+        <h2 id="verschil">Het grote verschil: huren of bezitten</h2>
+        <p>Wix en Squarespace zijn websitebouwers. Je neemt een abonnement en krijgt alles in één pakket: de software, de hosting, de beveiliging en de updates. Je huurt als het ware een ingericht pand. Handig, maar je mag de muren niet verplaatsen en stop je met huren, dan sta je op straat.</p>
+        <p>WordPress is gratis software die je zelf installeert bij een hostingpartij naar keuze. Je bezit het pand. Je mag verbouwen wat je wilt, verhuizen wanneer je wilt, maar het onderhoud is voor jou. Let op het verschil tussen WordPress.org, de vrije software waar dit over gaat, en WordPress.com, een betaalde dienst die meer op een websitebouwer lijkt.</p>
+
+        <h2 id="vergelijking">Wix of WordPress of Squarespace: de vergelijking</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Wix</th><th>Squarespace</th><th>WordPress</th></tr></thead>
+            <tbody>
+              <tr><td>Leercurve</td><td>Laag</td><td>Laag</td><td>Gemiddeld</td></tr>
+              <tr><td>Ontwerpvrijheid</td><td>Groot, binnen het template</td><td>Beperkt, wel strak</td><td>Onbeperkt</td></tr>
+              <tr><td>Hosting en updates</td><td>Inbegrepen</td><td>Inbegrepen</td><td>Zelf regelen</td></tr>
+              <tr><td>Vindbaarheid in Google</td><td>Goed genoeg voor de basis</td><td>Goed genoeg voor de basis</td><td>Volledige controle</td></tr>
+              <tr><td>Uitbreiden met koppelingen</td><td>Via de eigen appmarkt</td><td>Beperkt</td><td>Duizenden plugins</td></tr>
+              <tr><td>Site verhuizen</td><td>Niet mogelijk</td><td>Alleen de inhoud, beperkt</td><td>Altijd</td></tr>
+              <tr><td>Abonnement per maand</td><td>vanaf rond € 17</td><td>vanaf $ 19 bij jaarbetaling</td><td>hosting € 5 tot € 15</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="wix">Wix: snel en vrij in de opmaak</h2>
+        <p>Wix biedt een editor waarin je elk blok kunt slepen naar elke plek op de pagina. Dat voelt vrij, en voor beginners is het de snelste manier om iets moois neer te zetten. Er is een gratis versie, maar daarop staat reclame van Wix en je krijgt geen eigen domeinnaam. Voor een bedrijf heb je dus een betaald abonnement nodig. Op de internationale prijslijst zijn dat Light ($ 17), Core ($ 29) en Business ($ 39) per maand. In euro's wijken de bedragen iets af.</p>
+        <p>De keerzijde zit in de lange termijn. Een Wix-site kun je niet verhuizen naar een andere aanbieder. Stop je met Wix, dan begin je opnieuw. Geavanceerde aanpassingen aan de techniek, zoals de opbouw van je URL's of eigen structured data, zijn beperkt. Voor een eenvoudige site merk je daar weinig van. Voor een site die moet groeien in Google wel.</p>
+        <p><b>De conclusie voor Wix:</b> een goede keuze voor wie snel en zelfstandig een eenvoudige site wil, zonder grote groeiplannen.</p>
+
+        <h2 id="squarespace">Squarespace: mooi, maar met vaste kaders</h2>
+        <p>Squarespace staat bekend om zijn templates. Ze zijn strak, beeldend en zien er vrijwel altijd verzorgd uit. Fotografen, ontwerpers en creatieve zzp'ers kiezen er daarom graag voor. Je kunt minder schuiven dan bij Wix, maar daardoor maak je het ook minder snel lelijk.</p>
+        <p>Squarespace heeft geen gratis versie, wel een proefperiode van 14 dagen. De openbare prijzen staan in dollars: Basic kost $ 19 per maand bij jaarbetaling of $ 25 per maand los, Core $ 29 of $ 39, Plus $ 49 of $ 65. Squarespace rekent per land een eigen bedrag. Bij een jaarabonnement zit het eerste jaar een domeinnaam in de prijs.</p>
+        <p><b>De conclusie voor Squarespace:</b> ideaal als uitstraling belangrijker is dan uitbreidbaarheid, en als je geen zin hebt in techniek.</p>
+
+        <h2 id="wordpress">WordPress: alles kan, als je het bijhoudt</h2>
+        <p>Een WordPress website kan uitgroeien van vijf pagina's tot vijfhonderd. Met plugins koppel je hem aan je CRM, je boekhouding of een boekingssysteem. Met een pagebuilder zoals Elementor sleep je blokken, net als bij Wix. En de site is van jou: je kunt altijd van hostingpartij of webbouwer wisselen.</p>
+        <p>Die vrijheid heeft een prijs. Je regelt zelf hosting, back-ups en updates. Juist plugins zijn een zwakke plek. Patchstack telde in 2025 ruim 11.000 nieuwe lekken in WordPress, waarvan 91 procent in plugins. Wie WordPress niet bijhoudt, loopt dus risico. Lees ook wat je doet als je <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt</a> is.</p>
+        <p><b>De conclusie voor WordPress:</b> de beste keuze voor een site die moet groeien en klanten moet opleveren, mits iemand het onderhoud doet.</p>
+
+        <h2 id="kosten">Wat kost het over drie jaar?</h2>
+        <p>Het maandbedrag zegt weinig. Reken altijd over een paar jaar, inclusief je eigen tijd. Een ruwe vergelijking voor een eenvoudige bedrijfssite, zonder webshop:</p>
+        <ul>
+          <li><b>Wix of Squarespace, zelf gebouwd:</b> zo'n € 600 tot € 1.000 aan abonnement in drie jaar, plus je eigen uren.</li>
+          <li><b>WordPress, zelf gebouwd:</b> € 180 tot € 540 aan hosting, een premium thema van € 50 tot € 100, plus meer eigen uren voor bouw en onderhoud.</li>
+          <li><b>WordPress, laten maken:</b> een eenmalige bouwprijs, plus hosting en onderhoud. Bij ons kost <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud voor WordPress</a> vanaf € 39 per maand.</li>
+        </ul>
+        <p>Het verschil zit dus minder in geld dan je denkt. Het zit in tijd, en in wat er gebeurt als je ooit wilt overstappen. Een volledig overzicht vind je in <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
+
+        <h2 id="keuze">Welke past bij jouw bedrijf?</h2>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Starter of hobbyproject</h3></div>
+        <p>Een paar pagina's, snel online, weinig budget. Kies Wix of Squarespace. Je hebt binnen een weekend iets wat er netjes uitziet.</p>
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>Creatief vak, beeld staat voorop</h3></div>
+        <p>Fotograaf, interieurontwerper, kunstenaar. Squarespace laat je werk mooi zien zonder dat je verstand hoeft te hebben van ontwerp.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>Dienstverlener met groeiplannen</h3></div>
+        <p>Installateur, advocaat, coach met meerdere diensten en een werkgebied. Je wilt gevonden worden en aanvragen krijgen. Kies WordPress, of een site die een bouwer voor je maakt en onderhoudt.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>Geen tijd en geen zin in techniek</h3></div>
+        <p>Dan maakt het platform minder uit dan de vraag wie het voor je regelt. Een <a href="/website-laten-maken/website-met-ai/">website met AI</a> die wij bouwen en afmaken, kost vanaf € 250. Een maatwerk WordPress-site begint bij € 2.000. Meer over beide routes lees je bij <a href="/website-laten-maken/">website laten maken</a>.</p>
+        <p>Twijfel je nog? Wil je sparren over je keuze, bel dan gerust. We luisteren eerst naar wat je site moet doen en zeggen eerlijk welk platform past. Ook als dat een platform is waar wij niets aan verdienen.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">W3Techs, marktaandelen van contentmanagementsystemen (oktober 2026). Squarespace, squarespace.com/pricing. Wix-prijzen via Websiteplanet en Bureau Imago. Patchstack, State of WordPress Security in 2026. Geraadpleegd in oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het regelen?" intro="Eerlijk advies over het platform, een vaste prijs en een site die van jou is." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is beter voor SEO: Wix of WordPress?', a: 'Voor de basis kunnen ze allebei. WordPress geeft meer controle over techniek en opbouw. Voor een site die op veel zoekwoorden of plaatsen gevonden moet worden, heeft WordPress daarom de voorkeur.' },
+      { v: 'Kan ik mijn Wix-site overzetten naar WordPress?', a: 'Niet automatisch. De teksten en foto\'s kun je meenemen, de site zelf moet opnieuw worden gebouwd.' },
+      { v: 'Is Squarespace duurder dan Wix?', a: 'Ze liggen dicht bij elkaar. Beide rekenen per land een eigen prijs. Vergelijk de prijs na een actie, en het pakket dat je echt nodig hebt.' },
+      { v: 'Is WordPress gratis?', a: 'De software wel. Je betaalt voor hosting, een domeinnaam en eventueel een premium thema of plugins. En je moet het onderhoud doen of laten doen.' },
+      { v: 'Welk platform gebruiken jullie zelf?', a: 'Voor maatwerk sites werken we met WordPress. Onze snelle route bouwen we met hulp van AI. We adviseren wat bij jou past, ook als dat Wix of Squarespace is.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Onderhoud WordPress', href: '/website-laten-maken/onderhoud-wordpress/', tekst: 'Updates, back-ups en beveiliging, vanaf € 39 per maand.' },
+      { label: 'Gids', titel: 'Zelf een website maken of laten maken?', href: '/kennisbank/gidsen/zelf-website-maken/', tekst: 'In 7 stappen online, en wat het echt kost.' },
+      { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'Eerlijke prijzen uit de markt en van ons.' },
+    ]}
+  />
+
+  <Actie titel="Twijfel je nog tussen de drie?" tekst={`Bel ${site.contactpersoon}. Hij stelt een paar vragen over je bedrijf en zegt eerlijk welk platform past. Hij belt je binnen 15 minuten terug.`} />
+</Base>

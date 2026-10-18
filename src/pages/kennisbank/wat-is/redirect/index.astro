@@ -1,0 +1,195 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--redirect.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/redirect/';
+const datum = '2026-10-18';
+const definitie = 'Een redirect is een automatische doorverwijzing van het ene webadres naar het andere, zodat bezoekers en Google op de juiste pagina uitkomen als een pagina is verhuisd of verdwenen.';
+const hoofdstukken = [
+  { id: 'wanneer', titel: 'Wanneer heb je het nodig?' },
+  { id: 'soorten', titel: 'De soorten op een rij' },
+  { id: 'maken', titel: 'Een redirect maken' },
+  { id: 'nieuwe-site', titel: 'Stappenplan bij een nieuwe website' },
+  { id: 'voorbeeld', titel: 'Een voorbeeld' },
+  { id: 'controleren', titel: 'Controleren of het werkt' },
+  { id: 'fouten', titel: 'Zeven fouten' },
+];
+const htaccess = `# Eén pagina permanent doorsturen
+Redirect 301 /tuinen.html https://www.voorbeeld.nl/tuinaanleg/
+
+# Tijdelijk doorsturen
+Redirect 302 /actie/ https://www.voorbeeld.nl/onderhoud/`;
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Redirect',
+  alternateName: ['Doorverwijzing', '301-redirect'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is een redirect? 301 en 302 uitgelegd',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Redirect',
+}];
+---
+<Base
+  title="Wat is een redirect? 301 en 302 uitgelegd | Drijfveer Media"
+  description="Wat is een redirect? Een doorverwijzing van een oud naar een nieuw adres. Lees welke soorten er zijn en hoe je bij een nieuwe site geen bezoekers verliest."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Redirect', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is een redirect?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Vergelijk het met verhuizen. Je geeft je nieuwe adres door aan de post, en brieven naar het oude adres komen toch bij je aan. Een doorverwijzing op je website doet hetzelfde. Wie een oude link volgt of een oud adres intypt, wordt vanzelf doorverwezen naar de nieuwe pagina. De bezoeker merkt er meestal niets van.</p>
+      <p>Hieronder lees je welke soorten er zijn, hoe je er een maakt en hoe je bij een nieuwe website voorkomt dat je bezoekers en posities kwijtraakt. Met de regels die Google zelf geeft.</p>
+
+      <div class="inhoud-blok"><Inhoud items={hoofdstukken} leestijd={8} /></div>
+
+      <h2 id="wanneer">Wanneer heb je het nodig?</h2>
+      <ul class="vink">
+        <li>Je laat een nieuwe website bouwen en de url's veranderen.</li>
+        <li>Je hebt een pagina verwijderd, maar er is een andere pagina die de bezoeker verder helpt.</li>
+        <li>Je verhuist naar een ander domein, bijvoorbeeld na een nieuwe bedrijfsnaam.</li>
+        <li>Je voegt twee pagina's over hetzelfde onderwerp samen tot één sterke pagina.</li>
+        <li>Je site moet altijd op één versie openen: met https, en met of zonder www.</li>
+        <li>Een dienst is even niet beschikbaar en je wilt bezoekers tijdelijk naar een uitlegpagina sturen.</li>
+      </ul>
+      <p>Is een pagina weg en is er geen pagina die de bezoeker echt verder helpt? Dan is een doorverwijzing niet de oplossing. Laat de oude url dan een foutmelding geven: een 404, of een 410 als hij voorgoed verdwenen is. Een goede <a href="/kennisbank/wat-is/404-pagina/">404-pagina</a> helpt de bezoeker alsnog op weg.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="soorten">De soorten redirects op een rij</h2></div>
+      <p>Elke doorverwijzing geeft een code mee. Die code vertelt Google of de verhuizing blijvend is of tijdelijk. Google zet ze in zijn documentatie zo op een rij:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Wat Google doet</th><th>Gebruik je bij</th></tr></thead>
+          <tbody>
+            <tr><td><b>301</b>: permanente doorverwijzing</td><td>Toont het nieuwe adres in de zoekresultaten</td><td>Pagina is voorgoed verhuisd. Verreweg de meest gebruikte.</td></tr>
+            <tr><td><b>308</b>: permanent</td><td>Hetzelfde als 301</td><td>Formulieren en systemen die precies dezelfde vraag moeten doorsturen</td></tr>
+            <tr><td><b>302 en 307</b>: tijdelijke verwijzing</td><td>Houdt meestal het oude adres in de zoekresultaten</td><td>Een pagina is even weg, bijvoorbeeld tijdens onderhoud</td></tr>
+            <tr><td><b>Meta refresh, direct</b>: permanent</td><td>Leest het als permanent</td><td>Alleen als het op de server niet kan</td></tr>
+            <tr><td><b>Meta refresh na een paar seconden</b>: tijdelijk</td><td>Leest het als tijdelijk</td><td>Liever niet: traag en verwarrend</td></tr>
+            <tr><td><b>Doorsturen met JavaScript</b>: permanent</td><td>Ziet het alleen als de pagina goed wordt weergegeven</td><td>Alleen als niets anders kan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>301 of 308?</h3>
+      <p>Voor Google maakt het niet uit: beide zijn permanent. Het verschil is technisch. Bij een 308 moet de browser de vraag precies zo doorsturen, ook als het om een verzonden formulier gaat. Bij een 301 mogen oudere browsers daar een gewone paginavraag van maken. Voor een gewone pagina die verhuist, is 301 prima.</p>
+      <h3>Wanneer is tijdelijk de goede keuze?</h3>
+      <p>Bij een 301 snapt Google dat de oude pagina is opgevolgd. De positie en de waarde van links gaan mee naar het nieuwe adres. Een 302 zegt juist: hou de oude pagina vast, hij komt terug. Google noemt zelf het voorbeeld van een dienst die tijdelijk niet beschikbaar is. Kies je de verkeerde, dan duurt het langer voordat Google doorheeft wat je bedoelt.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="maken">Zo maak je een redirect</h2></div>
+      <p>Hoe je een doorverwijzing instelt, hangt af van je site. De volgorde van voorkeur volgens Google: eerst op de server, dan een directe meta refresh, en pas als laatste JavaScript.</p>
+      <h3>In WordPress</h3>
+      <p>Met een plug-in als Redirection of Rank Math. Je vult het oude pad in, het nieuwe adres, en kiest 301. Sommige plug-ins houden ook bij welke oude adressen nu een 404 geven, zodat je ziet wat je nog mist.</p>
+      <h3>Op een Apache-server, in .htaccess</h3>
+      <p>Eén regel per doorverwijzing. Eerst het oude pad zonder domein, dan het nieuwe adres voluit:</p>
+      <pre><code>{htaccess}</code></pre>
+      <p>Maak eerst een kopie van het bestand. Eén tikfout in .htaccess kan je hele site plat leggen.</p>
+      <h3>Bij een websitebouwer of je hostingpartij</h3>
+      <p>Platforms als Shopify hebben volgens Google vaak een eigen oplossing ingebouwd. Zoek in de hulppagina's van je platform op "redirect". Werk je met een andere server, zoals NGINX, vraag het dan aan wie je server beheert.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="nieuwe-site">Redirects bij een nieuwe website: het stappenplan</h2></div>
+      <p>Bij een nieuwe website gaat het vaak mis, en dan zakt het verkeer in één keer weg. Google heeft een eigen handleiding voor verhuizingen. Dit is die aanpak, vertaald naar een mkb-site:</p>
+      <ol>
+        <li><b>Maak een lijst van alle oude url's.</b> Haal ze uit je sitemap, uit Google Search Console en uit je statistieken. Vergeet pagina's met backlinks niet.</li>
+        <li><b>Koppel elk oud adres aan de best passende nieuwe pagina.</b> Eén op één, in een spreadsheet.</li>
+        <li><b>Stuur niet alles naar de homepage.</b> Google kan dat zien als een zachte 404: de pagina telt dan als verdwenen.</li>
+        <li><b>Voorkom ketens.</b> Googlebot volgt tot tien stappen, maar Google adviseert direct naar het eindadres te wijzen. Lukt dat niet, houd het dan bij hooguit drie.</li>
+        <li><b>Pas je eigen links aan.</b> Je menu en je teksten moeten direct naar de nieuwe adressen wijzen, niet via een omweg.</li>
+        <li><b>Zet een nieuwe sitemap in Search Console.</b> Verhuis je naar een ander domein, gebruik dan ook de tool Adreswijziging in Search Console.</li>
+        <li><b>Laat de doorverwijzingen staan.</b> Google zegt: zo lang mogelijk, in het algemeen minstens een jaar. Voor bezoekers met een oude bladwijzer liefst voorgoed.</li>
+      </ol>
+      <p>Zo kan een mapping eruitzien:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Oude url</th><th>Nieuwe url</th><th>Soort</th></tr></thead>
+          <tbody>
+            <tr><td>/tuinen.html</td><td>/tuinaanleg/</td><td>301</td></tr>
+            <tr><td>/diensten/bestrating-en-tegels.html</td><td>/tuinaanleg/bestrating/</td><td>301</td></tr>
+            <tr><td>/nieuws/open-dag-2021.html</td><td>Geen opvolger</td><td>410</td></tr>
+            <tr><td>http://hovenier-voorbeeld.nl/</td><td>https://www.hovenier-voorbeeld.nl/</td><td>301</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Bij de nieuwe site van Drijfveer Media doen we het zelf precies zo: elke oude url wijst op de lanceerdag direct naar de pagina waarin de inhoud is opgegaan.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2 id="voorbeeld">Een voorbeeld</h2></div>
+      <p>Stel: een hovenier in Roden krijgt een nieuwe website. Zijn oude pagina /tuinen.html staat op plek 3 voor "tuinaanleg Roden" en heeft links van een paar lokale sites. Op de nieuwe site heet die pagina /tuinaanleg/. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Zonder doorverwijzing krijgt iedereen die via Google of een oude link komt een foutmelding. Google haalt de oude pagina na een tijdje uit de resultaten en de links wijzen naar niets. Met één regel op de server, een 301 van het oude naar het nieuwe adres, neemt Google het nieuwe adres over als opvolger. Bij een kleine site duurt dat volgens Google meestal een paar weken.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="controleren">Zo controleer je of een redirect werkt</h2></div>
+      <ul class="vink">
+        <li><b>In je browser.</b> Typ het oude adres in. Kom je op de juiste nieuwe pagina uit? Dan werkt de doorverwijzing voor bezoekers.</li>
+        <li><b>Met de URL-inspectie in Search Console.</b> Die laat zien hoe Google het oude adres ziet. Google noemt dit hulpmiddel zelf voor het testen van losse adressen.</li>
+        <li><b>Met een crawler.</b> Een programma als Screaming Frog loopt je hele site langs en laat ketens en lussen zien. Gratis tot 500 url's.</li>
+        <li><b>In Search Console na de lancering.</b> Kijk bij Pagina's welke adressen een 404 geven of als zachte 404 worden gezien.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="fouten">Zeven fouten die we vaak zien</h2></div>
+      <ol>
+        <li><b>Alles naar de homepage.</b> Makkelijk, maar Google ziet het als verdwenen pagina's.</li>
+        <li><b>Een 302 waar een 301 hoort.</b> Een doorverwijzing in PHP zonder statuscode wordt bijvoorbeeld vanzelf een 302. Controleer het.</li>
+        <li><b>Ketens.</b> A naar B naar C kost snelheid. Laat A direct naar C wijzen.</li>
+        <li><b>Een lus.</b> A stuurt naar B en B weer naar A. De bezoeker krijgt een foutmelding van de browser.</li>
+        <li><b>Te vroeg verwijderen.</b> Na een maand de doorverwijzingen opruimen omdat "het nu wel goed staat".</li>
+        <li><b>Varianten vergeten.</b> Wel https, maar de versie met www werkt niet, of andersom.</li>
+        <li><b>Je eigen links niet aanpassen.</b> Elke klik binnen je site loopt dan nog via de omweg.</li>
+      </ol>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/seo-vriendelijke-urls/">SEO-vriendelijke url's</a>, het begrip <a href="/kennisbank/wat-is/link-juice/">link juice</a> of laat ons je site doorlichten met <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>, vanaf € 395. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een 301 en een 302?', a: 'Een 301 is een permanente doorverwijzing: Google toont het nieuwe adres. Een 302 is tijdelijk: Google houdt meestal het oude adres in de zoekresultaten.' },
+      { v: 'Hoe lang moet een redirect blijven staan?', a: 'Volgens Google zo lang mogelijk, in het algemeen minstens een jaar. Voor bezoekers met oude bladwijzers en links is voorgoed het beste.' },
+      { v: 'Verlies ik posities door een redirect?', a: 'Met een goede 301 naar een passende pagina neemt Google het nieuwe adres over als opvolger. Bij een kleine site duurt dat meestal een paar weken. Zonder doorverwijzing verlies je de pagina.' },
+      { v: 'Mag ik verwijderde pagina\'s naar de homepage sturen?', a: 'Liever niet. Google kan dat zien als een zachte 404. Stuur door naar een pagina over hetzelfde onderwerp, of laat de oude url een 404 of 410 geven.' },
+      { v: 'Wat is het verschil tussen een 404 en een 410?', a: 'Allebei zeggen dat de pagina er niet is. Een 410 zegt erbij dat hij voorgoed weg is en niet terugkomt. Weet je niet zeker of de pagina terugkomt, gebruik dan een 404. In beide gevallen haalt Google de pagina na een tijd uit de zoekresultaten.' },
+      { v: 'Hoeveel redirects achter elkaar kan Google volgen?', a: 'Googlebot volgt tot tien stappen. Google adviseert om direct naar het eindadres te verwijzen, en anders hooguit drie stappen.' },
+    ]}
+  />
+
+  <Actie titel="Lopen er pagina's op jouw site dood?" tekst={`We zoeken het gratis voor je uit. ${site.contactpersoon} belt je met wat er moet gebeuren, ook als je zelf aan de slag wilt.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .inhoud-blok { margin: 8px 0 40px; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

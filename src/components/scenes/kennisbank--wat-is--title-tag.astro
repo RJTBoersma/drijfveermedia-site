@@ -1,0 +1,58 @@
+---
+// Scène voor /kennisbank/wat-is/title-tag/: een browservenster met een tabblad, een zoekresultaat en de regel code eronder.
+// Als hij leeft: twee lijnen laten zien dat de code zowel het tabblad als de klikbare titel vult, en een cursor klikt rustig op het resultaat.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: één regel code bepaalt de tekst op het tabblad van de browser en de klikbare titel in de zoekresultaten.'}>
+  <rect x="30" y="20" width="420" height="230" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M44 20h392a14 14 0 0 1 14 14v30H30V34a14 14 0 0 1 14-14z" fill="#e8eef4" />
+  <path d="M46 64V40a8 8 0 0 1 8-8h156a8 8 0 0 1 8 8v24z" fill="#fff" />
+  <circle class="o" cx="62" cy="48" r="5" />
+  <text x="74" y="52" font-size="11.5" font-weight="700">Loodgieter Emmen</text>
+  <path d="M196 44l8 8M204 44l-8 8" stroke="#8aa0b4" stroke-width="1.6" stroke-linecap="round" />
+  <rect x="46" y="72" width="388" height="18" rx="9" fill="#f3f6f9" />
+
+  <rect x="60" y="102" width="360" height="92" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="80" cy="120" r="7" fill="#e8eef4" />
+  <rect x="94" y="116" width="120" height="7" rx="3.5" fill="#d9e1ea" />
+  <text x="74" y="148" font-size="16" font-weight="900" style="fill:#074663">Loodgieter Emmen, snel ter plaatse</text>
+  <rect class="v" x="74" y="160" width="320" height="6" rx="3" />
+  <rect class="v" x="74" y="172" width="250" height="6" rx="3" />
+
+  <rect x="60" y="208" width="232" height="28" rx="8" fill="#10283f" />
+  <text x="74" y="226.5" font-size="11.5" font-family="ui-monospace, monospace" style="fill:#fff">&lt;title&gt;<tspan style="fill:#ffb47f">Loodgieter Emmen</tspan>&lt;/title&gt;</text>
+
+  {!mini && (
+    <g>
+      <path class="title-lijn" d="M292 222H426a8 8 0 0 0 8-8V60a8 8 0 0 0-8-8H222" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" pathLength="1" />
+      <path class="title-lijn title-lijn2" d="M120 208V196" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <rect class="title-streep" x="74" y="152" width="282" height="2.5" rx="1.25" fill="#074663" />
+      <g class="title-cursor" transform="translate(250 142)">
+        <path d="M0 0l0 20 5-5 4 9 4-2-4-9 7 0z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .title-lijn { stroke-dasharray: 1; }
+  .title-streep { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .title-lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .title-streep { transform: scaleX(0); }
+  :global(.teken-js) .title-cursor { opacity: 0; }
+  .in-beeld .title-lijn { animation: kennisbank-wat-is-title-tag-lijn 1.2s cubic-bezier(.6,.1,.3,1) 0.6s forwards; }
+  .in-beeld .title-lijn2 { animation-delay: 1s; }
+  .in-beeld .title-cursor { animation: kennisbank-wat-is-title-tag-cursor 6s ease-in-out 1.8s infinite; }
+  .in-beeld .title-streep { animation: kennisbank-wat-is-title-tag-streep 6s ease-in-out 1.8s infinite; }
+  @keyframes kennisbank-wat-is-title-tag-lijn { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-wat-is-title-tag-cursor {
+    0% { opacity: 0; transform: translate(420px, 240px); }
+    10% { opacity: 1; }
+    40% { transform: translate(250px, 142px); }
+    44% { transform: translate(250px, 142px) scale(0.85); }
+    48%, 85% { transform: translate(250px, 142px); opacity: 1; }
+    100% { transform: translate(250px, 142px); opacity: 0; }
+  }
+  @keyframes kennisbank-wat-is-title-tag-streep { 0%, 38% { transform: scaleX(0); } 46%, 88% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .title-lijn, .in-beeld .title-cursor, .in-beeld .title-streep { animation: none; } }
+</style>

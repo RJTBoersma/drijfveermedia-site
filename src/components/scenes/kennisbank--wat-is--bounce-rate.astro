@@ -1,0 +1,58 @@
+---
+// Scène voor /kennisbank/wat-is/bounce-rate/: een bezoeker stuitert op een webpagina en vertrekt weer, terwijl een meter het bouncepercentage laat zien.
+// Als hij leeft: een bal komt binnen, raakt de pagina en stuitert weer weg (in een rustige lus), en de meter loopt vol tot 35%.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een bezoeker komt op een webpagina, doet niets en stuitert weer weg. Een meter ernaast toont een bouncepercentage van 35 procent.'}>
+  <!-- webpagina -->
+  <rect x="96" y="36" width="220" height="196" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M97 62V48a11 11 0 0 1 11-11h196a11 11 0 0 1 11 11v14z" fill="#e8eef4" />
+  <circle cx="112" cy="50" r="4" fill="#d9e1ea" /><circle cx="124" cy="50" r="4" fill="#d9e1ea" /><circle cx="136" cy="50" r="4" fill="#d9e1ea" />
+  <rect x="176" y="80" width="120" height="10" rx="5" fill="#10283f" opacity="0.75" />
+  <rect x="176" y="98" width="104" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="176" y="112" width="116" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="176" y="126" width="88" height="7" rx="3.5" fill="#e8eef4" />
+  <rect class="v" x="176" y="150" width="120" height="44" rx="8" />
+  <rect x="200" y="202" width="96" height="20" rx="10" fill="#e8eef4" />
+  <path class="l" d="M276 212h10M282 207l5 5-5 5" />
+
+  <!-- baan van de bezoeker -->
+  <path d="M14 196C70 196 130 170 150 140C130 108 70 86 14 86" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round" />
+  <path class="a" d="M26 78l-12 8 12 8" />
+  <circle cx="150" cy="140" r="5" fill="#ff6600" />
+
+  <!-- meter -->
+  <rect x="338" y="72" width="126" height="126" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="401" y="98" font-size="11" font-weight="800" text-anchor="middle" class="zacht">Bouncepercentage</text>
+  <text x="401" y="142" font-size="32" font-weight="800" text-anchor="middle">35%</text>
+  <rect x="354" y="164" width="94" height="12" rx="6" fill="#e8eef4" />
+  <rect x="354" y="164" width="33" height="12" rx="6" fill="#074663" />
+
+  {!mini && (
+    <g>
+      <circle class="bal" cx="14" cy="196" r="9" fill="#074663" />
+      <rect class="vul" x="354" y="164" width="33" height="12" rx="6" fill="#ff6600" />
+    </g>
+  )}
+</svg>
+<style>
+  .vul { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .vul { transform: scaleX(0); }
+  :global(.teken-js) .bal { opacity: 0; }
+  .in-beeld .vul { animation: kennisbank--wat-is--bounce-rate-vul 1.4s ease-out 0.6s forwards; }
+  .in-beeld .bal { animation: kennisbank--wat-is--bounce-rate-bal 4.2s ease-in-out 0.4s infinite; }
+  @keyframes kennisbank--wat-is--bounce-rate-vul { to { transform: none; } }
+  @keyframes kennisbank--wat-is--bounce-rate-bal {
+    0% { transform: translate(0, 0); opacity: 0; }
+    6% { opacity: 1; }
+    14% { transform: translate(66px, -12px); }
+    24% { transform: translate(116px, -34px); }
+    32% { transform: translate(136px, -56px); }
+    40% { transform: translate(116px, -80px); }
+    50% { transform: translate(66px, -102px); }
+    60% { transform: translate(0, -110px); opacity: 1; }
+    70%, 100% { transform: translate(-10px, -110px); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vul, .in-beeld .bal { animation: none; } }
+</style>

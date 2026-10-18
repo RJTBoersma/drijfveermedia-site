@@ -1,0 +1,174 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--usp.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/usp/';
+const datum = '2026-10-18';
+const definitie = 'Een USP is een eigenschap van je bedrijf, product of dienst die klanten belangrijk vinden en die je concurrent niet of minder goed biedt.';
+const hoofdstukken = [
+  { id: 'afkorting', titel: 'Waar de afkorting voor staat' },
+  { id: 'toets', titel: 'Drie toetsvragen' },
+  { id: 'geen-usp', titel: 'Wat geen USP is' },
+  { id: 'vinden', titel: 'Je USP vinden in vijf stappen' },
+  { id: 'voorbeelden', titel: 'Voorbeelden' },
+  { id: 'gebruiken', titel: 'Waar je hem laat zien' },
+  { id: 'valkuilen', titel: 'Vijf valkuilen' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'USP',
+  alternateName: ['Unique selling point', 'Unique selling proposition', 'Uniek verkoopargument'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is een USP? Betekenis en voorbeelden',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'USP',
+}];
+---
+<Base
+  title="Wat is een USP? Betekenis en voorbeelden | Drijfveer Media"
+  description="Wat is een USP? Een uniek verkoopargument dat je onderscheidt van de concurrent. Met drie toetsvragen, voorbeelden en wat je er concreet mee doet."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'USP', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Branding</p>
+        <h1>Wat is een USP?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Een klant die drie bedrijven vergelijkt, stelt zich één vraag: waarom zou ik bij jou kopen? Je USP is het antwoord. Niet het antwoord dat je graag zou geven, maar het antwoord dat waar is, dat de klant belangrijk vindt en dat je concurrent niet kan geven.</p>
+      <p>Hieronder lees je waar de term vandaan komt, hoe je toetst of jouw verkoopargument goed is, hoe je het vindt en waar je het neerzet.</p>
+
+      <div class="inhoud-blok"><Inhoud items={hoofdstukken} leestijd={7} /></div>
+
+      <h2 id="afkorting">Waar de afkorting voor staat</h2>
+      <p>Voluit is een USP unique selling point of unique selling proposition. In het Nederlands: een uniek verkoopargument. De term komt van Rosser Reeves, een Amerikaanse reclameman van het bureau Ted Bates en een van de eerste grote namen in tv-reclame. In zijn boek Reality in Advertising uit 1961 legde hij het idee uit. Elke advertentie moet de klant één voordeel beloven dat de concurrent niet kan of niet biedt.</p>
+      <p>Een van zijn bekendste regels is nog steeds in gebruik: M&amp;M's smelten in je mond, niet in je hand. Eén eigenschap, één voordeel dat je meteen snapt.</p>
+      <p>Je komt een paar varianten tegen. Ze lijken op elkaar, maar kijken net anders:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Term</th><th>Betekenis</th><th>Kijkt vanuit</th></tr></thead>
+          <tbody>
+            <tr><td>Unique selling point (USP)</td><td>Het punt waarop jij beter of anders bent</td><td>Het bedrijf</td></tr>
+            <tr><td>Unique selling proposition</td><td>De belofte die je daarmee doet</td><td>Het bedrijf, richting de klant</td></tr>
+            <tr><td>Unique value proposition (UVP)</td><td>De waarde die de klant ervan heeft</td><td>De klant</td></tr>
+            <tr><td>Unique buying reason (UBR)</td><td>De reden waarom de klant werkelijk koopt</td><td>De klant</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>In de praktijk bedoelen ze hetzelfde. Het meervoud, selling points, gebruik je als je er een paar naast elkaar zet. De unique buying reason is wel een nuttige check: het kan zijn dat jij denkt dat klanten voor je vakmanschap komen, terwijl ze eigenlijk voor je reactiesnelheid kiezen.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="toets">Wanneer is een USP goed? Drie toetsvragen</h2></div>
+      <p>Leg elk punt langs deze drie vragen:</p>
+      <ol>
+        <li><b>Is het waar, en kun je het laten zien?</b> Een belofte zonder bewijs is een slogan.</li>
+        <li><b>Vindt je klant het belangrijk?</b> Dat je sinds 1987 bestaat, zegt de klant misschien weinig. Dat je morgen kunt komen, wel.</li>
+        <li><b>Kan je concurrent het niet ook zeggen?</b> Als hij dezelfde zin op zijn site kan zetten zonder te liegen, onderscheidt het je niet.</li>
+      </ol>
+      <p>Valt een punt bij één vraag af, dan is het geen USP. Het kan nog wel een goed argument zijn. Alleen niet het argument dat je bovenaan zet.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2 id="geen-usp">Wat geen uniek verkoopargument is</h2></div>
+      <p>Kwaliteit. Klantgericht. Persoonlijk contact. Betrouwbaar. Service staat bij ons hoog in het vaandel. Iedereen zegt het, dus het zegt niets. Het zijn basisvoorwaarden. Een klant verwacht ze gewoon, bij jou en bij elke aanbieder van vergelijkbare producten. Het worden pas unieke eigenschappen als je ze concreet en meetbaar maakt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wat iedereen zegt</th><th>Wat het concreet maakt</th></tr></thead>
+          <tbody>
+            <tr><td>Snelle service</td><td>Binnen 4 uur een monteur bij storing, ook in het weekend</td></tr>
+            <tr><td>Kwaliteit</td><td>Tien jaar garantie op het voegwerk, op papier</td></tr>
+            <tr><td>Persoonlijk contact</td><td>Je hebt één vaste adviseur, met zijn eigen 06-nummer</td></tr>
+            <tr><td>Scherpe prijzen</td><td>Een vaste prijs vooraf, ook als het langer duurt</td></tr>
+            <tr><td>Ervaren</td><td>Gespecialiseerd in rieten daken, en verder niets</td></tr>
+            <tr><td>Duurzaam</td><td>We halen het oude materiaal op en zorgen dat het hergebruikt wordt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De rechterkolom bestaat uit verzonnen voorbeelden. Ze laten zien wat het verschil is: een eigenschap die je kunt controleren en een voordeel dat je voelt.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="vinden">Zo vind je jouw USP in vijf stappen</h2></div>
+      <ol>
+        <li><b>Vraag vijf klanten waarom ze voor jou kozen.</b> Bel ze gewoon. Hun woorden zijn vaak beter dan die van jou. Let op wat ze als eerste noemen.</li>
+        <li><b>Lees je reviews.</b> Welke woorden komen steeds terug? "Kwamen meteen", "dachten mee", "netjes opgeruimd". Daar zit je buying reason.</li>
+        <li><b>Lees de sites van drie concurrenten in je regio.</b> Schrijf op wat zij beloven. Schrap alles uit je eigen lijst wat zij ook zeggen.</li>
+        <li><b>Kies er twee of drie.</b> Een rij van tien selling points onthoudt niemand. Eén hoofd-USP en twee ondersteunende is genoeg.</li>
+        <li><b>Schrijf ze als eigenschap plus voordeel plus bewijs.</b> "We werken met verf die bijna niet ruikt (eigenschap), dus je slaapt dezelfde avond in je slaapkamer (voordeel). Vraag het onze klanten (bewijs)."</li>
+      </ol>
+      <p>Vind je niets? Dan weet je ook iets. Misschien moet je eerst iets aan je dienst veranderen voordat je het kunt beloven. Een vaste prijs, een kortere levertijd, een specialisatie. Dat is geen marketing meer, dat is ondernemen.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="voorbeelden">Voorbeelden van een sterke USP</h2></div>
+      <p>Stel: een schildersbedrijf in Meppel zet op zijn site "vakmanschap en kwaliteit". Dat leest niemand. Beter is: "Je hebt binnen 48 uur een offerte, en we werken met verf die bijna niet ruikt, dus je slaapt dezelfde avond weer in je slaapkamer." Dat is een eigenschap die je kunt controleren, en een voordeel dat je voelt.</p>
+      <p>Een accountant in Leeuwarden die alleen voor agrariërs werkt, hoeft niet uit te leggen waarom hij de klant begrijpt. De specialisatie is de USP. Een hovenier in Emmen die het onderhoud het eerste jaar gratis doet, neemt de grootste twijfel weg: slaat de tuin wel aan? <span class="muted">(Verzonnen voorbeelden.)</span></p>
+      <p>We doen het zelf ook. Bel je ons, dan word je binnen 15 minuten teruggebeld. Ideeën testen we eerst op meer dan honderd eigen sites in ons <a href="/proeflab/">proeflab</a>. En halen we een afgesproken doel niet door ons, dan werken we een maand gratis door. Dat staat in onze <a href="/garantie/">garantie</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="gebruiken">Waar je je USP's laat zien</h2></div>
+      <ul class="vink">
+        <li><b>Bovenaan je homepage.</b> In de kop of direct eronder, niet pas onder aan de pagina.</li>
+        <li><b>In je Google Bedrijfsprofiel.</b> In de omschrijving en in je antwoorden op reviews.</li>
+        <li><b>In je title en meta description.</b> In de zoekresultaten is je verkoopargument vaak de reden om op jou te klikken in plaats van op de buurman.</li>
+        <li><b>Naast je <a href="/kennisbank/wat-is/call-to-action/">call to action</a>.</b> "Vraag een offerte aan" met eronder "binnen 48 uur in je mail" werkt beter dan de knop alleen.</li>
+        <li><b>In je offerte en aan de telefoon.</b> Wat op de site staat, moet de klant ook horen als hij belt.</li>
+        <li><b>In advertenties.</b> Een advertentie zonder onderscheid koopt klikken van mensen die daarna verder zoeken.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="valkuilen">Vijf valkuilen</h2></div>
+      <ol>
+        <li><b>Prijs als enige USP.</b> Er is altijd iemand die het goedkoper doet, en dan heb je niets meer.</li>
+        <li><b>Te veel tegelijk.</b> Tien punten met vinkjes zijn een opsomming, geen keuze.</li>
+        <li><b>Een belofte die je niet nakomt.</b> "Binnen een uur reactie" en dan pas de volgende dag. De klant onthoudt het.</li>
+        <li><b>Kopiëren van de concurrent.</b> Wat hij uniek noemt, is het voor jou per definitie niet.</li>
+        <li><b>Nooit bijwerken.</b> Wat vijf jaar geleden bijzonder was, zoals online een afspraak maken, is nu normaal. Kijk elk jaar opnieuw.</li>
+      </ol>
+
+      <div class="kader">
+        <p class="kader-titel">Lees ook</p>
+        <p>Hoe een USP past in je merk en je <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a>, lees je in de gids <a href="/kennisbank/gidsen/wat-is-branding/">Wat is branding?</a>. Wil je hulp bij het vinden en opschrijven ervan, kijk dan bij <a href="/branding/">branding</a> of laat een <a href="/tekstschrijver/">tekstschrijver</a> je verhaal scherp zetten, vanaf € 75 per pagina.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Waar staat USP voor?', a: 'Voor unique selling point of unique selling proposition. In het Nederlands: een uniek verkoopargument.' },
+      { v: 'Hoeveel USP\'s moet een bedrijf hebben?', a: 'Eén hoofd-USP en hooguit twee ondersteunende. Meer onthoudt een klant niet.' },
+      { v: 'Wat is het verschil tussen een USP en een slogan?', a: 'Een USP is een eigenschap die waar is en die je kunt aantonen. Een slogan is een manier om iets te zeggen. Een goede slogan draagt een USP uit, zoals de M&M\'s die smelten in je mond en niet in je hand.' },
+      { v: 'Kan prijs een USP zijn?', a: 'Wel als je het echt waarmaakt, maar het is een zwakke. Er komt altijd iemand die goedkoper is. Een vaste prijs vooraf is vaak sterker dan de laagste prijs.' },
+      { v: 'Wat als mijn bedrijf niets unieks heeft?', a: 'Vraag eerst je klanten waarom ze voor je kozen. Vind je echt niets, dan is dat een teken om iets aan je dienst te veranderen, zoals een specialisatie of een snellere reactie.' },
+    ]}
+  />
+
+  <Actie titel="Wat maakt jou anders dan de rest?" tekst={`We kijken gratis hoe jouw site zich verhoudt tot die van je concurrenten. ${site.contactpersoon} belt je met wat opvalt, en wat beter kan.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .inhoud-blok { margin: 8px 0 40px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

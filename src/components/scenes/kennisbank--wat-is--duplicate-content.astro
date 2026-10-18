@@ -1,0 +1,59 @@
+---
+// Scène voor /kennisbank/wat-is/duplicate-content/: twee identieke pagina's, met een vergrootglas ertussen dat twijfelt welke het moet tonen; een canonical-pijl wijst de kopie naar het origineel.
+// Als hij leeft: het vraagteken in het vergrootglas knippert rustig, de canonical-pijl tekent zich en het origineel krijgt een vinkje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const docs = [40, 310];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: twee pagina\'s met precies dezelfde tekst. Een vergrootglas ertussen weet niet welke het moet tonen, tot een canonical-pijl de kopie naar het origineel wijst.'}>
+  {docs.map((x, i) => (
+    <g>
+      <rect x={x} y="40" width="130" height="160" rx="12" fill="#fff" stroke={i === 0 ? '#074663' : '#d9e1ea'} stroke-width="2" />
+      <path d={`M${x + 1} 64V52a11 11 0 0 1 11-11h106a11 11 0 0 1 11 11v12z`} fill="#e8eef4" />
+      <rect x={x + 14} y="80" width="86" height="9" rx="4.5" fill="#10283f" opacity="0.75" />
+      <rect x={x + 14} y="98" width="102" height="6" rx="3" fill="#d9e1ea" />
+      <rect x={x + 14} y="110" width="94" height="6" rx="3" fill="#d9e1ea" />
+      <rect x={x + 14} y="122" width="100" height="6" rx="3" fill="#d9e1ea" />
+      <rect x={x + 14} y="134" width="70" height="6" rx="3" fill="#d9e1ea" />
+      <rect class="v" x={x + 14} y="152" width="102" height="34" rx="8" />
+    </g>
+  ))}
+
+  <!-- vergrootglas -->
+  <circle cx="240" cy="106" r="30" fill="#fff" stroke="#074663" stroke-width="3" />
+  <path d="M261 128l18 18" stroke="#074663" stroke-width="6" stroke-linecap="round" />
+  <text x="240" y="118" font-size="32" font-weight="800" text-anchor="middle" class="vraag" style="fill:#ff6600">?</text>
+
+  <!-- canonical -->
+  <path d="M375 206c0 40-40 46-135 46s-135-6-135-40" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-dasharray="5 6" stroke-linecap="round" />
+  <rect x="196" y="238" width="88" height="24" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="240" y="254" font-size="11" font-weight="800" text-anchor="middle">canonical</text>
+
+  {!mini && (
+    <g>
+      <path class="pijl" d="M375 206c0 40-40 46-135 46s-135-6-135-40" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" pathLength="1" />
+      <path class="punt" d="M96 220l9-10 9 10" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <rect x="196" y="238" width="88" height="24" rx="12" fill="#fff" stroke="#ff6600" stroke-width="2" class="punt" />
+      <text x="240" y="254" font-size="11" font-weight="800" text-anchor="middle" class="punt">canonical</text>
+      <g class="vink">
+        <circle cx="160" cy="44" r="13" fill="#1f8a5b" />
+        <path d="M154 44l4 4 8-9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .pijl { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  :global(.teken-js) .pijl { stroke-dashoffset: 1; }
+  :global(.teken-js) .punt, :global(.teken-js) .vink { opacity: 0; }
+  .vink { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .vraag { animation: kennisbank--wat-is--duplicate-content-vraag 3s ease-in-out infinite; }
+  .in-beeld .pijl { animation: kennisbank--wat-is--duplicate-content-pijl 1.6s ease-in-out 0.8s forwards; }
+  .in-beeld .punt { animation: kennisbank--wat-is--duplicate-content-op 0.4s ease-out 2.3s forwards; }
+  .in-beeld .vink { animation: kennisbank--wat-is--duplicate-content-vink 0.5s cubic-bezier(.3,1.6,.5,1) 2.6s forwards; }
+  @keyframes kennisbank--wat-is--duplicate-content-vraag { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  @keyframes kennisbank--wat-is--duplicate-content-pijl { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank--wat-is--duplicate-content-op { to { opacity: 1; } }
+  @keyframes kennisbank--wat-is--duplicate-content-vink { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vraag, .in-beeld .pijl, .in-beeld .punt, .in-beeld .vink { animation: none; } }
+</style>

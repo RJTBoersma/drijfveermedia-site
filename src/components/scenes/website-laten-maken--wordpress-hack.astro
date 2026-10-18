@@ -1,0 +1,73 @@
+---
+// Scène voor /website-laten-maken/wordpress-hack/: een besmette website wordt gescand en schoongemaakt, terwijl de spoedlijn overgaat.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const beestjes = [
+  { x: 200, y: 76 },
+  { x: 282, y: 137 },
+  { x: 62, y: 192 },
+  { x: 232, y: 196 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een gehackte website met virussen wordt gescand. De virussen verdwijnen en de site krijgt een groen schild: weer schoon. Ernaast gaat een telefoon over met de spoedlijn.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- Website -->
+  <rect x="16" y="28" width="300" height="214" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M16 54h300" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="32" cy="41" r="4" fill="#d9e1ea" /><circle cx="44" cy="41" r="4" fill="#d9e1ea" /><circle cx="56" cy="41" r="4" fill="#d9e1ea" />
+  <rect class="v" x="74" y="35" width="170" height="12" rx="6" />
+  <rect x="34" y="70" width="140" height="12" rx="4" fill="#10283f" />
+  <rect x="34" y="90" width="110" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect class="v" x="34" y="122" width="262" height="30" rx="7" />
+  <rect class="v" x="34" y="160" width="120" height="66" rx="8" />
+  <rect class="v" x="166" y="160" width="130" height="66" rx="8" />
+  <!-- Waarschuwing -->
+  <path d="M262 64l22 38h-44z" fill="#fff4ec" stroke="#ff6600" stroke-width="2.5" stroke-linejoin="round" />
+  <path d="M262 78v12M262 96v.5" stroke="#10283f" stroke-width="3" stroke-linecap="round" />
+  <!-- Beestjes -->
+  {beestjes.map((b, i) => (
+    <g class="website-laten-maken--wordpress-hack-beest" style={`--i:${i}`}>
+      <ellipse cx={b.x} cy={b.y} rx="9" ry="11" fill="#ff6600" />
+      <path d={`M${b.x - 9} ${b.y - 4}h-6M${b.x - 9} ${b.y + 4}h-6M${b.x + 9} ${b.y - 4}h6M${b.x + 9} ${b.y + 4}h6M${b.x - 4} ${b.y - 11}l-3-5M${b.x + 4} ${b.y - 11}l3-5`} stroke="#10283f" stroke-width="2" stroke-linecap="round" />
+    </g>
+  ))}
+  <!-- Telefoon met spoedlijn -->
+  <rect x="352" y="34" width="112" height="204" rx="20" fill="#10283f" />
+  <rect x="360" y="46" width="96" height="180" rx="13" fill="#fff" />
+  <text x="408" y="76" text-anchor="middle" font-size="11" font-weight="700" class="zacht">Spoedlijn</text>
+  <text x="408" y="96" text-anchor="middle" font-size="11.5" font-weight="900">088 11 55 666</text>
+  <circle cx="408" cy="146" r="22" fill="#1f8a5b" />
+  <path d="M398 138c0 10 8 18 18 18l3-5-6-4-3 3c-3-1-6-4-7-7l3-3-4-6z" fill="#fff" />
+  <rect class="v" x="374" y="190" width="68" height="10" rx="5" />
+  {!mini && (
+    <g>
+      <g class="website-laten-maken--wordpress-hack-scan">
+        <rect x="18" y="0" width="296" height="3" fill="#1f8a5b" />
+        <rect x="18" y="3" width="296" height="18" fill="#1f8a5b" opacity="0.12" />
+      </g>
+      <g class="website-laten-maken--wordpress-hack-schoon">
+        <rect x="96" y="104" width="140" height="46" rx="12" fill="#fff" stroke="#d9e1ea" />
+        <path d="M120 112l14 5v10c0 9-6 15-14 18-8-3-14-9-14-18v-10z" fill="#1f8a5b" />
+        <path d="M114 127l4 4 8-8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="144" y="132" font-size="13" font-weight="800">Weer schoon</text>
+      </g>
+      <path class="website-laten-maken--wordpress-hack-golf" d="M440 132c6 8 6 20 0 28" fill="none" stroke="#1f8a5b" stroke-width="3" stroke-linecap="round" />
+      <path class="website-laten-maken--wordpress-hack-golf" style="animation-delay:0.25s" d="M448 124c10 12 10 32 0 44" fill="none" stroke="#1f8a5b" stroke-width="3" stroke-linecap="round" />
+    </g>
+  )}
+</svg>
+<style>
+  .website-laten-maken--wordpress-hack-beest { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .website-laten-maken--wordpress-hack-beest { animation: website-laten-maken--wordpress-hack-weg 0.5s ease-in forwards; animation-delay: calc(1.2s + var(--i) * 0.5s); }
+  .website-laten-maken--wordpress-hack-scan { opacity: 0; }
+  .in-beeld .website-laten-maken--wordpress-hack-scan { animation: website-laten-maken--wordpress-hack-scan 3.6s ease-in-out 0.5s infinite; }
+  :global(.teken-js) .website-laten-maken--wordpress-hack-schoon { opacity: 0; }
+  .in-beeld .website-laten-maken--wordpress-hack-schoon { animation: website-laten-maken--wordpress-hack-schoon 0.6s cubic-bezier(.3,1.5,.5,1) 3.3s forwards; }
+  .in-beeld .website-laten-maken--wordpress-hack-golf { animation: website-laten-maken--wordpress-hack-golf 1.6s ease-in-out infinite; }
+  @keyframes website-laten-maken--wordpress-hack-weg { to { opacity: 0; transform: scale(0.2) rotate(40deg); } }
+  @keyframes website-laten-maken--wordpress-hack-scan { 0% { opacity: 0; transform: translateY(56px); } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(226px); } }
+  @keyframes website-laten-maken--wordpress-hack-schoon { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes website-laten-maken--wordpress-hack-golf { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .website-laten-maken--wordpress-hack-beest, .in-beeld .website-laten-maken--wordpress-hack-scan, .in-beeld .website-laten-maken--wordpress-hack-schoon, .in-beeld .website-laten-maken--wordpress-hack-golf { animation: none; }
+  }
+</style>

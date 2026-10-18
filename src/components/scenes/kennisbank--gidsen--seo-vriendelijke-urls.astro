@@ -1,0 +1,56 @@
+---
+// Scène voor /kennisbank/gidsen/seo-vriendelijke-urls/: een rommelige URL in de adresbalk wordt doorgestreept en vervangen door een korte, leesbare URL die past in een nette sitestructuur.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een rommelige URL met cijfers en tekens wordt doorgestreept en vervangen door een korte URL met gewone woorden, die past in een overzichtelijke boomstructuur van de website.'}>
+  <!-- adresbalk -->
+  <rect x="30" y="36" width="420" height="56" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="46" y="50" width="388" height="28" rx="14" />
+  <rect x="58" y="63" width="11" height="9" rx="2" fill="#074663" />
+  <path d="M60 63v-3a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="#074663" stroke-width="2" />
+  <text class="zacht" x="80" y="69" font-size="13">jouwbedrijf.nl/index.php?id=4821&amp;cat=7</text>
+
+  <!-- sitestructuur -->
+  <path class="l" d="M240 140v10H140v16M240 150h100v16M140 194v14h-38v14M140 208h91v14M340 194v14h20v14" />
+  <rect x="190" y="112" width="100" height="28" rx="8" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="240" y="131" font-size="12" font-weight="800" text-anchor="middle">Home</text>
+  <rect x="80" y="166" width="120" height="28" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="140" y="185" font-size="11" text-anchor="middle">/diensten/</text>
+  <rect x="280" y="166" width="120" height="28" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="340" y="185" font-size="11" text-anchor="middle">/kennisbank/</text>
+  <rect x="40" y="222" width="124" height="28" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="102" y="241" font-size="11" text-anchor="middle">/tuinontwerp/</text>
+  <rect x="176" y="222" width="110" height="28" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="231" y="241" font-size="11" text-anchor="middle">/bestrating/</text>
+  <rect x="310" y="222" width="100" height="28" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="360" y="241" font-size="11" text-anchor="middle">/gidsen/</text>
+
+  {!mini && (
+    <g>
+      <path class="streep" d="M78 65H340" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <g class="schoon">
+        <rect x="76" y="54" width="352" height="20" fill="#e8eef4" />
+        <text x="80" y="69" font-size="13"><tspan class="zacht">jouwbedrijf.nl/</tspan><tspan font-weight="800">diensten/tuinontwerp/</tspan></text>
+        <circle cx="404" cy="64" r="8" fill="#1f8a5b" />
+        <path d="M400 64l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+      <path class="route" d="M240 140v10H140v16M140 194v14h-38v14" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <rect class="blad" x="40" y="222" width="124" height="28" rx="8" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    </g>
+  )}
+</svg>
+<style>
+  .streep, .route { stroke-dasharray: 1; }
+  .blad { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .streep, :global(.teken-js) .route { stroke-dashoffset: 1; }
+  :global(.teken-js) .schoon, :global(.teken-js) .blad { opacity: 0; }
+  .in-beeld .streep { animation: kennisbank--gidsen--seo-vriendelijke-urls-trek 0.7s cubic-bezier(.6,.1,.3,1) 0.5s forwards; }
+  .in-beeld .schoon { animation: kennisbank--gidsen--seo-vriendelijke-urls-toon 0.5s ease 1.4s forwards; }
+  .in-beeld .route { animation: kennisbank--gidsen--seo-vriendelijke-urls-trek 1s cubic-bezier(.6,.1,.3,1) 1.9s forwards; }
+  .in-beeld .blad { animation: kennisbank--gidsen--seo-vriendelijke-urls-puls 4s ease-in-out 2.9s infinite both; }
+  @keyframes kennisbank--gidsen--seo-vriendelijke-urls-trek { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank--gidsen--seo-vriendelijke-urls-toon { to { opacity: 1; } }
+  @keyframes kennisbank--gidsen--seo-vriendelijke-urls-puls { 0% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } 100% { opacity: 0.4; transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .streep, .in-beeld .schoon, .in-beeld .route, .in-beeld .blad { animation: none; } }
+</style>

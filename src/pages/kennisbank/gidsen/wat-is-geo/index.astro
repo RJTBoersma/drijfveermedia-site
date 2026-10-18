@@ -1,0 +1,191 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wat-is-geo.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/wat-is-geo/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is GEO precies?' },
+  { id: 'herkomst', titel: 'Waar de term vandaan komt' },
+  { id: 'hoe-kiest-ai', titel: 'Hoe AI kiest wie hij noemt' },
+  { id: 'verschil', titel: 'GEO, SEO en AEO naast elkaar' },
+  { id: 'zelf-doen', titel: 'Zelf aan de slag in zeven stappen' },
+  { id: 'werkt-niet', titel: 'Wat niet werkt' },
+  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat is GEO? Zo word je genoemd door ChatGPT en Google AI',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'Thing', name: 'Generative engine optimization' },
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wat is GEO? Uitleg en stappenplan | Drijfveer Media"
+  description="Wat is GEO? Heldere uitleg over generative engine optimization, het verschil met SEO en een stappenplan om zelf genoemd te worden door AI."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat is GEO?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · GEO" titel="Wat is GEO? Zo word je genoemd door ChatGPT en Google AI" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Wat is GEO? Het werk dat ervoor zorgt dat AI-assistenten jouw bedrijf noemen als iemand om advies vraagt. Hier lees je hoe dat werkt en wat je er deze maand zelf aan kunt doen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>GEO staat voor generative engine optimization: zorgen dat ChatGPT, Gemini, Copilot, Perplexity en Google AI jouw bedrijf noemen.</li>
+            <li>De term komt uit een onderzoek van Princeton University uit 2023. Daarin werden bronnen tot 40% zichtbaarder in AI-antwoorden.</li>
+            <li>Een goede website en sterke SEO blijven de basis. GEO voegt daar duidelijke feiten, antwoorden en vermeldingen elders aan toe.</li>
+            <li>Een nulmeting doe je zelf in een middag. Hieronder staat hoe.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is GEO precies?</h2>
+        <p>Vroeger zocht je in Google en kreeg je tien blauwe links. Nu stel je een vraag en krijg je een antwoord. Een paar alinea's tekst, met daarin drie of vier namen en soms een rijtje bronnen. Dat antwoord komt van een generatieve zoekmachine, een systeem dat zelf tekst schrijft op basis van wat het weet en wat het opzoekt.</p>
+        <p>GEO is alles wat je doet om in dat antwoord te staan. Niet als link op plek zeven, maar met je naam in de tekst. "Voor een hovenier in Assen kun je kijken naar..." en dan jij.</p>
+        <p>Het gaat dus om een andere vraag dan bij SEO. SEO vraagt: sta ik hoog? Bij GEO zorg je dat een machine jouw bedrijf kent, begrijpt en durft aan te raden. Dat vraagt deels hetzelfde werk en deels nieuw werk.</p>
+        <p>Ben je alleen op zoek naar de korte definitie, lees dan het begrip <a href="/kennisbank/wat-is/geo/">GEO</a>. Deze gids gaat verder: hoe het werkt en wat je zelf kunt doen.</p>
+
+        <h2 id="herkomst">Waar de term vandaan komt</h2>
+        <p>De naam generative engine optimization komt uit een wetenschappelijk artikel. Onderzoekers van Princeton University publiceerden het in november 2023, en in 2024 werd het geaccepteerd voor KDD, een grote conferentie over datawetenschap. Ze bouwden een testbank met 10.000 vragen en keken welke aanpassingen aan een webpagina ervoor zorgden dat die vaker in een AI-antwoord terechtkwam.</p>
+        <p>De uitkomsten zijn nog steeds bruikbaar:</p>
+        <ul>
+          <li><b>Bronnen, citaten en cijfers werken.</b> Pagina's waar de onderzoekers bronvermeldingen, citaten van deskundigen of statistieken aan toevoegden, werden 30 tot 40% zichtbaarder.</li>
+          <li><b>Zoekwoorden herhalen werkt niet.</b> Keyword stuffing, de oude SEO-truc, leverde in hun test weinig tot niets op.</li>
+          <li><b>Het verschilt per onderwerp.</b> Cijfers hielpen vooral bij juridische en zakelijke vragen, citaten bij uitleg en geschiedenis.</li>
+        </ul>
+        <p>Dat sluit aan bij wat we zelf zien. Een tekst met eigen cijfers ("we leggen een gazon van 100 m² aan in twee dagen") wordt eerder overgenomen dan een tekst vol beloftes.</p>
+
+        <h2 id="hoe-kiest-ai">Hoe een AI-assistent kiest wie hij noemt</h2>
+        <p>Een AI-assistent haalt zijn kennis uit twee bronnen.</p>
+        <p><b>Wat hij al weet.</b> Een taalmodel is getraind op enorme hoeveelheden tekst van internet. Wat daar vaak en eenduidig over jouw bedrijf stond, zit in zijn geheugen. Wat er nooit stond, weet hij niet. Die kennis loopt altijd een tijd achter.</p>
+        <p><b>Wat hij live opzoekt.</b> Bij vragen over bedrijven, prijzen en actuele zaken zoeken de meeste assistenten eerst op internet. Google gebruikt daarvoor zijn eigen zoekindex. Volgens Google kan de AI-modus meerdere zoekvragen tegelijk stellen over deelonderwerpen, een techniek die Google "query fan-out" noemt. Copilot zoekt via Bing, Perplexity en ChatGPT hebben elk een eigen crawler.</p>
+        <p>Uit de gevonden pagina's kiest de assistent de stukken die de vraag het duidelijkst beantwoorden. Niet de hele pagina, maar een alinea, een tabel of een lijstje. Daarom telt het hoe je schrijft, niet alleen wat je schrijft.</p>
+        <p>Let op: de antwoorden verschillen per keer en per persoon. Dezelfde vraag twee keer stellen geeft soms andere namen. Eén keer kijken zegt dus weinig. Je moet meten over meerdere vragen, meerdere keren.</p>
+
+        <h2 id="verschil">GEO, SEO en AEO: overeenkomsten en verschillen</h2>
+        <p>Je komt drie afkortingen tegen. Ze lijken op elkaar en dat is geen toeval.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Afkorting</th><th>Voluit</th><th>Waar het om draait</th></tr></thead>
+            <tbody>
+              <tr><td>SEO</td><td>Search engine optimization</td><td>Hoog in de gewone zoekresultaten van Google en Bing</td></tr>
+              <tr><td>AEO</td><td>Answer engine optimization</td><td>Het directe antwoord zijn, zoals een uitgelicht fragment</td></tr>
+              <tr><td>GEO</td><td>Generative engine optimization</td><td>Genoemd worden in een geschreven AI-antwoord</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De overeenkomsten zijn groot. Alle drie hebben een site nodig die technisch in orde is, teksten die een vraag echt beantwoorden en autoriteit van buitenaf. Wie zijn technische SEO niet op orde heeft, komt ook in AI-antwoorden niet ver. Google zegt het zelf: voor de AI Overviews en de AI-modus gelden dezelfde basisregels als voor de gewone zoekresultaten.</p>
+        <p>De verschillen zitten in de details. Een AI-assistent leest losse stukken van je pagina, geen hele pagina. Een vermelding zonder link telt ook mee, omdat het model je naam herkent. En het succes meet je anders: niet in posities, maar in hoe vaak je genoemd wordt bij vaste vragen. Het verband met <a href="/kennisbank/wat-is/featured-snippet/">featured snippets</a> is groot, daar begon het antwoordzoeken ooit mee.</p>
+
+        <h2 id="zelf-doen">Zo pak je GEO zelf aan in zeven stappen</h2>
+        <p>Dit is het stappenplan dat we zelf gebruiken, in gewone taal. De eerste drie stappen kosten een middag. De rest is werk voor de komende maanden.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>1. Doe een nulmeting</h3></div>
+        <p>Schrijf tien vragen op die je klanten stellen voordat ze kiezen. Niet "hovenier Assen", maar zoals mensen praten:</p>
+        <ul>
+          <li>Welke hovenier in Assen doet ook onderhoud voor bedrijven?</li>
+          <li>Wat kost een nieuwe tuin van 100 m² in Drenthe?</li>
+          <li>Welke hoveniers in de buurt van Assen hebben goede reviews?</li>
+        </ul>
+        <p>Stel elke vraag aan ChatGPT, Gemini, Copilot, Perplexity en in de AI-modus van Google. Gebruik een venster waarin je niet bent ingelogd, of zet de geschiedenis uit. Noteer in een spreadsheet per vraag: word je genoemd, wie wel, en welke bronnen staan erbij. Die bronnen zijn goud waard. Ze vertellen je waar AI zijn informatie vandaan haalt.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Laat de juiste crawlers binnen</h3></div>
+        <p>AI-diensten sturen eigen bots naar je site. Blokkeer je die per ongeluk, dan kunnen ze je niet noemen. Kijk in je robots.txt (jouwsite.nl/robots.txt) of deze namen niet geblokkeerd zijn:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bot</th><th>Van</th><th>Waarvoor</th></tr></thead>
+            <tbody>
+              <tr><td>OAI-SearchBot</td><td>OpenAI</td><td>Zoeken in ChatGPT</td></tr>
+              <tr><td>PerplexityBot</td><td>Perplexity</td><td>Zoekresultaten in Perplexity</td></tr>
+              <tr><td>Claude-SearchBot en Claude-User</td><td>Anthropic</td><td>Zoeken en vragen van gebruikers in Claude</td></tr>
+              <tr><td>Bingbot</td><td>Microsoft</td><td>Bing, en daarmee Copilot</td></tr>
+              <tr><td>Googlebot</td><td>Google</td><td>Zoeken, AI Overviews en AI-modus</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wil je niet dat je teksten gebruikt worden om modellen te trainen? Dan kun je GPTBot (OpenAI) en ClaudeBot (Anthropic) blokkeren zonder dat je uit de zoekfuncties verdwijnt. Met Google-Extended ligt dat anders: volgens Google regelt die naam ook of je content gebruikt mag worden om antwoorden in de Gemini-app te onderbouwen. Blokkeer hem dus alleen als je dat bewust wilt. Vraag ook je hoster of er een firewall is die AI-bots tegenhoudt.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>3. Meld je site aan bij Google en Bing</h3></div>
+        <p>Zet je site in <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> en in Bing Webmaster Tools. Allebei gratis. Bing is belangrijker dan je denkt, want Copilot leunt erop. Zet daarnaast IndexNow aan, bij WordPress kan dat met een plugin. Dan hoort Bing direct dat er een pagina is bijgekomen of veranderd.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>4. Maak van je bedrijf één herkenbaar geheel</h3></div>
+        <p>AI moet zeker weten dat de naam op je site, in Google Maps en bij de KvK bij hetzelfde bedrijf hoort. Zorg dat naam, adres, telefoonnummer en diensten overal letterlijk gelijk zijn. Maak een over-ons-pagina met feiten: wie de eigenaar is, sinds wanneer je bestaat, waar je werkt. Met <a href="/kennisbank/wat-is/schema-markup/">schema markup</a> leg je dezelfde gegevens vast in code. Google zegt dat er voor AI Overviews geen speciale schema nodig is. Wel moet wat in je code staat kloppen met wat op de pagina staat. Meer over hoe machines je bedrijf herkennen, lees je bij <a href="/kennisbank/wat-is/entiteiten/">entiteiten</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>5. Schrijf pagina's die antwoord geven</h3></div>
+        <p>Neem de vragen uit je nulmeting en geef op je site het beste antwoord. Zet het antwoord in de eerste twee zinnen, daarna de uitleg. Gebruik koppen die als vraag gelezen kunnen worden. En maak het concreet:</p>
+        <ul>
+          <li><b>Zwak:</b> "Wij leveren kwaliteit tegen een scherpe prijs."</li>
+          <li><b>Sterk:</b> "Een nieuwe tuin van 100 m² kost bij ons tussen € 6.000 en € 9.000, afhankelijk van bestrating en beplanting. We werken in Assen en 30 kilometer daaromheen."</li>
+        </ul>
+        <p>Het tweede voorbeeld is verzonnen, maar je ziet het verschil. Een AI kan het overnemen, omdat er feiten in staan. Voeg waar het kan een bron, een citaat of een eigen cijfer toe. Dat waren precies de aanpassingen die in het Princeton-onderzoek het beste werkten.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={48} /><h3>6. Zorg dat anderen over je praten</h3></div>
+        <p>Wat alleen op je eigen site staat, is jouw verhaal. Wat verspreid over het web op meerdere plekken staat, wordt een feit. Kijk naar de bronnen uit je nulmeting. Staat daar steeds een vergelijkingssite, een branchevereniging of de regionale krant tussen? Daar wil je ook op. Reviews in je <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> tellen mee, net als een vermelding op de site van een leverancier of een interview in een vakblad. Dit lijkt op <a href="/kennisbank/gidsen/backlinks/">backlinks verzamelen</a>, maar ook een vermelding zonder link helpt.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>7. Monitor elke maand</h3></div>
+        <p>Stel dezelfde tien vragen elke maand opnieuw, aan dezelfde assistenten. Doe het drie keer per vraag, want de antwoorden wisselen. Tel hoe vaak je genoemd wordt. Zie je de vermeldingen toenemen, dan werkt het. Kijk daarnaast in Google Analytics naar bezoekers die binnenkomen via chatgpt.com, perplexity.ai of copilot.microsoft.com. Klikken uit de AI Overviews en de AI-modus zie je niet apart: Google telt ze mee in Search Console, bij het zoektype Web.</p>
+
+        <h2 id="werkt-niet">Wat niet werkt</h2>
+        <p>Er wordt veel beloofd rond GEO. Een paar dingen kun je overslaan:</p>
+        <ul>
+          <li><b>Verborgen tekst voor AI.</b> Witte letters op een witte achtergrond, of instructies aan chatbots in je code. Zoekmachines zien het en straffen het af.</li>
+          <li><b>Honderden pagina's laten genereren.</b> Pagina's die op elke site kunnen staan, voegen niets toe. AI slaat ze over, Google ook.</li>
+          <li><b>Speciale AI-bestanden als wondermiddel.</b> Google zegt letterlijk dat je geen nieuwe machineleesbare bestanden of AI-tekstbestanden nodig hebt voor zijn AI-functies.</li>
+          <li><b>Nepreviews en nepvermeldingen.</b> Eén ontmaskerde nepreview kost je meer dan tien echte opleveren.</li>
+        </ul>
+        <p>We weten hoe verleidelijk trucs zijn. We hebben er jaren geleden zelf mee gespeeld op onze eigen sites, en een van die sites kreeg een straf van Google. Daarom testen we nu alles eerst in ons <a href="/proeflab/">proeflab</a> en blijven we bij klanten ruim binnen de regels.</p>
+
+        <h2 id="uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>Stap 1 tot en met 3 kun je echt zelf, en het levert meteen inzicht op. Stap 4 en 5 lukken ook, als je tijd hebt om te schrijven. Stap 6 en 7 zijn het taaie deel. Vermeldingen regelen en elke maand netjes meten kost uren, en het effect zie je pas na een paar maanden.</p>
+        <p>Wil je dat wij het overnemen? Op de pagina over <a href="/generative-engine-optimization/">generative engine optimization</a> lees je hoe we het aanpakken. Het begint bij € 495 per maand, maandelijks opzegbaar. Wil je eerst weten waar je staat, vraag dan de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a> aan. Dan doen wij de nulmeting uit stap 1 voor je.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het doen?" intro="Wat je bij ons krijgt als je GEO uitbesteedt, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is GEO in één zin?', a: 'GEO, generative engine optimization, is het werk dat ervoor zorgt dat AI-assistenten zoals ChatGPT, Gemini en Google AI jouw bedrijf noemen in hun antwoord.' },
+      { v: 'Heb ik nog SEO nodig als ik aan GEO doe?', a: 'Ja. AI-assistenten zoeken voor een groot deel via Google en Bing. Een site die daar slecht vindbaar is, wordt ook door AI weinig gevonden. GEO bouwt voort op <a href="/zoekmachine-optimalisatie/">SEO</a>.' },
+      { v: 'Hoe snel zie je resultaat van GEO?', a: 'Technische fouten herstellen werkt binnen weken. Nieuwe pagina\'s en vermeldingen elders hebben meestal twee tot zes maanden nodig voordat ze in antwoorden opduiken. Het hangt sterk af van je branche en je concurrenten.' },
+      { v: 'Kan ik zien hoeveel klanten ik uit ChatGPT krijg?', a: 'Deels. In Google Analytics zie je bezoekers die doorklikken vanaf chatgpt.com, perplexity.ai of copilot.microsoft.com. Wie je naam in een antwoord leest en je daarna zelf opzoekt of belt, zie je niet terug. Vraag nieuwe klanten daarom hoe ze je vonden.' },
+      { v: 'Wat kost GEO?', a: 'Zelf doen kost vooral tijd. Bij Drijfveer Media begint GEO bij € 495 per maand, exclusief btw en maandelijks opzegbaar. De AI-vindbaarheidsanalyse is gratis.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over genoemd worden door AI"
+    links={[
+      { label: 'Gids', titel: 'Google AI-modus', href: '/kennisbank/gidsen/google-ai-modus/', tekst: 'Wat het is en wat het betekent voor je vindbaarheid.' },
+      { label: 'Gids', titel: 'Wat is Perplexity?', href: '/kennisbank/gidsen/perplexity/', tekst: 'De AI-zoekmachine die altijd zijn bronnen noemt.' },
+      { label: 'Dienst', titel: 'Vindbaar in ChatGPT', href: '/generative-engine-optimization/vindbaar-in-chatgpt/', tekst: 'Specifiek voor ChatGPT en Bing.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd wat AI nu over jouw bedrijf zegt?" tekst={`${site.contactpersoon} stelt de vragen van jouw klanten aan ChatGPT, Gemini en Copilot, en belt je met de uitkomst. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>

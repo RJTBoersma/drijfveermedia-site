@@ -1,0 +1,66 @@
+---
+// Scène voor /linkbuilding/link-building-netherlands/ (Engelse pagina): drie Nederlandse sites linken naar jouw site, die bovenaan een Nederlandse zoekopdracht staat. Een molen draait rustig mee.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const nl = [24, 92, 160];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Illustration: three Dutch websites link to your site, which ranks first for a Dutch search, while a windmill turns slowly.'} aria-hidden={mini ? 'true' : undefined}>
+  <rect x="20" y="24" width="252" height="150" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="34" y="38" width="224" height="24" rx="12" fill="none" stroke="#d9e1ea" stroke-width="1.5" />
+  <circle cx="49" cy="49" r="5" fill="none" stroke="#8aa0b4" stroke-width="2" /><path d="M53 53l4 4" stroke="#8aa0b4" stroke-width="2" stroke-linecap="round" />
+  <text x="64" y="54" font-size="11" class="zacht">zonnepanelen kopen</text>
+  <rect x="34" y="72" width="224" height="32" rx="8" fill="#fff4ec" stroke="#ffd6b8" />
+  <circle cx="50" cy="88" r="9" fill="#ff6600" />
+  <text x="46.5" y="92" font-size="10" font-weight="800" style="fill:#fff">1</text>
+  <text x="66" y="86" font-size="11" font-weight="800">Your site</text>
+  <text x="66" y="98" font-size="8" class="zacht">yoursite.com/nl/</text>
+  <circle cx="50" cy="122" r="8" fill="#e8eef4" /><rect x="66" y="116" width="120" height="7" rx="3.5" fill="#d9e1ea" /><rect x="66" y="127" width="80" height="5" rx="2.5" fill="#e8eef4" />
+  <circle cx="50" cy="152" r="8" fill="#e8eef4" /><rect x="66" y="146" width="104" height="7" rx="3.5" fill="#d9e1ea" /><rect x="66" y="157" width="70" height="5" rx="2.5" fill="#e8eef4" />
+
+  {nl.map((y) => (
+    <g>
+      <rect x="330" y={y} width="128" height="54" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect x="340" y={y + 12} width="36" height="30" rx="6" fill="#074663" />
+      <text x="346" y={y + 32} font-size="13" font-weight="800" style="fill:#fff">.nl</text>
+      <rect x="386" y={y + 16} width="60" height="6" rx="3" fill="#d9e1ea" />
+      <rect x="386" y={y + 30} width="44" height="6" rx="3" fill="#e8eef4" />
+    </g>
+  ))}
+  <path d="M330 51C302 51 298 86 272 86M330 119C302 119 298 89 272 89M330 187C292 187 300 92 272 92" fill="none" stroke="#d9e1ea" stroke-width="2" stroke-dasharray="4 5" />
+
+  <path d="M20 252h240" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round" />
+  <path d="M70 252l8-40h12l8 40z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <path d="M80 252v-10a4 4 0 0 1 8 0v10" fill="none" stroke="#074663" stroke-width="2" />
+  <g class="wieken">
+    <path d="M84 212v-30M84 212h30M84 212v30M84 212H54" stroke="#074663" stroke-width="3" stroke-linecap="round" />
+    <path d="M86 184h7v22h-7zM112 214v7H90v-7zM82 240h-7v-22h7zM56 210v-7h22v7z" fill="#e8eef4" stroke="#074663" stroke-width="1.5" />
+  </g>
+  <circle cx="84" cy="212" r="4" fill="#ff6600" />
+
+  {!mini && (
+    <g>
+      <path class="link" d="M330 51C302 51 298 86 272 86" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" pathLength="1" style="--i:0" />
+      <path class="link" d="M330 119C302 119 298 89 272 89" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" pathLength="1" style="--i:1" />
+      <path class="link" d="M330 187C292 187 300 92 272 92" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-dasharray="1" pathLength="1" style="--i:2" />
+      <g class="bezoek">
+        <rect x="146" y="198" width="160" height="34" rx="10" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="164" cy="215" r="9" fill="#1f8a5b" />
+        <path d="M159.5 215l3 3 6-6.5" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="180" y="219" font-size="12" font-weight="800">Dutch visitors</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .wieken { transform-box: view-box; transform-origin: 84px 212px; }
+  .link { stroke-dashoffset: 0; }
+  :global(.teken-js) .link { stroke-dashoffset: 1; }
+  :global(.teken-js) .bezoek { opacity: 0; }
+  .in-beeld .wieken { animation: linkbuilding--link-building-netherlands-draai 8s linear infinite; }
+  .in-beeld .link { animation: linkbuilding--link-building-netherlands-link 0.9s cubic-bezier(.6,.1,.3,1) calc(0.4s + var(--i) * 0.35s) forwards; }
+  .in-beeld .bezoek { animation: linkbuilding--link-building-netherlands-bezoek 6s ease-in-out 2s infinite both; }
+  @keyframes linkbuilding--link-building-netherlands-draai { to { transform: rotate(360deg); } }
+  @keyframes linkbuilding--link-building-netherlands-link { to { stroke-dashoffset: 0; } }
+  @keyframes linkbuilding--link-building-netherlands-bezoek { 0% { opacity: 0; transform: translateY(8px); } 12%, 80% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .wieken, .in-beeld .link, .in-beeld .bezoek { animation: none; } }
+</style>

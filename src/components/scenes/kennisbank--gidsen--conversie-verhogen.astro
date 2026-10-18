@@ -1,0 +1,86 @@
+---
+// Scène voor /kennisbank/gidsen/conversie-verhogen/: een trechter met drie lagen (pagina, knop, formulier) en twee lekken.
+// Als hij leeft: bezoekers vallen erin, één lek krijgt een pleister, uit het andere druppelt het nog, en er komt een aanvraag bij.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een trechter met de lagen pagina, knop en formulier. Bezoekers vallen erin, een lek wordt met een pleister gedicht en het aantal aanvragen per maand gaat van 8 naar 16.'}>
+  <!-- label bezoekers -->
+  <text x="22" y="30" font-size="12.5" font-weight="800">800 bezoekers</text>
+  <text x="22" y="46" font-size="11" class="zacht">per maand</text>
+  <circle cx="190" cy="24" r="5" fill="#8aa0b4" />
+  <circle cx="214" cy="14" r="5" fill="#8aa0b4" />
+  <circle cx="240" cy="26" r="5" fill="#8aa0b4" />
+  <circle cx="262" cy="16" r="5" fill="#8aa0b4" />
+
+  <!-- trechter -->
+  <path d="M100 40H340L250 170V205H190V170Z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <path class="v" d="M131 84H309L282 124H158Z" />
+  <path d="M130 83H310M159 126H281" stroke="#d9e1ea" stroke-width="2" />
+  <text x="220" y="67" font-size="12" font-weight="800" text-anchor="middle">Pagina</text>
+  <text x="220" y="109" font-size="12" font-weight="800" text-anchor="middle">Knop</text>
+  <text x="220" y="152" font-size="12" font-weight="800" text-anchor="middle">Formulier</text>
+
+  <!-- lekken -->
+  <path d="M170 141l8 6" stroke="#ff6600" stroke-width="3" stroke-linecap="round" />
+  <path d="M164 156c0-4 4-8 4-8s4 4 4 8a4 4 0 0 1-8 0z" fill="#8aa0b4" />
+  <path d="M296 96l7-6" stroke="#ff6600" stroke-width="3" stroke-linecap="round" />
+  <path d="M304 112c0-4 4-8 4-8s4 4 4 8a4 4 0 0 1-8 0z" fill="#8aa0b4" />
+
+  <!-- uitstroom naar aanvragen -->
+  <path class="a" d="M220 207v14c0 9 6 15 15 15h47" />
+  <path class="a" d="M276 230l7 6-7 6" />
+  <rect x="290" y="190" width="170" height="62" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="306" y="211" font-size="11" class="zacht">Aanvragen per maand</text>
+  <text x="306" y="240" font-size="24" font-weight="900">8 <tspan font-size="18" class="zacht">→</tspan> <tspan style="fill:#ff6600">16</tspan></text>
+  <circle cx="436" cy="226" r="10" fill="#1f8a5b" />
+  <path d="M431 226l3.5 3.5 6-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+
+  {!mini && (
+    <g>
+      <g class="vallers">
+        <circle class="valler v1" cx="200" cy="34" r="5" fill="#074663" />
+        <circle class="valler v2" cx="228" cy="34" r="5" fill="#074663" />
+        <circle class="valler v3" cx="250" cy="34" r="5" fill="#074663" />
+      </g>
+      <path class="druppel" d="M164 156c0-4 4-8 4-8s4 4 4 8a4 4 0 0 1-8 0z" fill="#8aa0b4" />
+      <g class="pleister">
+        <rect x="288" y="86" width="26" height="12" rx="4" fill="#ff6600" transform="rotate(-56 301 92)" />
+        <circle cx="298" cy="92" r="1.4" fill="#fff" /><circle cx="303" cy="91" r="1.4" fill="#fff" />
+      </g>
+      <g class="melding">
+        <rect x="346" y="150" width="114" height="30" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+        <text x="403" y="170" font-size="12" font-weight="800" text-anchor="middle">+1 aanvraag</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .valler { opacity: 0; }
+  :global(.teken-js) .pleister, :global(.teken-js) .melding, :global(.teken-js) .druppel { opacity: 0; }
+  .pleister { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .valler { animation: kennisbank-gidsen-conversie-verhogen-val 3.6s ease-in infinite; }
+  .in-beeld .v2 { animation-delay: 1.2s; }
+  .in-beeld .v3 { animation-delay: 2.4s; }
+  .in-beeld .druppel { animation: kennisbank-gidsen-conversie-verhogen-drup 3s ease-in 1s infinite; }
+  .in-beeld .pleister { animation: kennisbank-gidsen-conversie-verhogen-plak 0.6s cubic-bezier(.3,1.6,.5,1) 0.8s forwards; }
+  .in-beeld .melding { animation: kennisbank-gidsen-conversie-verhogen-melding 5s ease-in-out 1.8s infinite both; }
+  @keyframes kennisbank-gidsen-conversie-verhogen-val {
+    0% { opacity: 0; transform: translateY(0); }
+    15% { opacity: 1; }
+    70% { opacity: 1; transform: translateY(140px); }
+    85%, 100% { opacity: 0; transform: translateY(168px); }
+  }
+  @keyframes kennisbank-gidsen-conversie-verhogen-drup {
+    0% { opacity: 0; transform: translate(0, -8px); }
+    20% { opacity: 1; transform: translate(0, 0); }
+    80% { opacity: 1; transform: translate(-10px, 60px); }
+    100% { opacity: 0; transform: translate(-12px, 72px); }
+  }
+  @keyframes kennisbank-gidsen-conversie-verhogen-plak { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-conversie-verhogen-melding { 0% { opacity: 0; transform: translateY(10px); } 15%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .valler, .in-beeld .druppel, .in-beeld .pleister, .in-beeld .melding { animation: none; }
+    .in-beeld .pleister, .in-beeld .melding { opacity: 1; }
+  }
+</style>

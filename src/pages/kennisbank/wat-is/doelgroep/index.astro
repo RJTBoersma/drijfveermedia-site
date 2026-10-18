@@ -1,0 +1,195 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--doelgroep.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/doelgroep/';
+const datum = '2026-10-18';
+const definitie = 'Een doelgroep is de groep mensen of bedrijven die je met je product, dienst of boodschap wilt bereiken, omdat zij er het meest aan hebben en het vaakst bij je kopen.';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Waarom het geld bespaart' },
+  { id: 'begrippen', titel: 'Doelgroep, segment, persona' },
+  { id: 'kenmerken', titel: 'Kenmerken om op te delen' },
+  { id: 'stappen', titel: 'Je doelgroep bepalen in zes stappen' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: de fysiotherapeut' },
+  { id: 'kanalen', titel: 'Van doelgroep naar kanalen' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Doelgroep',
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is een doelgroep? Uitleg en stappen | Drijfveer Media"
+  description="Wat is een doelgroep en hoe bepaal je die? De kenmerken, het verschil met een persona, een stappenplan in zes stappen en een voorbeeld uit de praktijk."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Doelgroep', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Marketing</p>
+        <h1>Wat is een doelgroep?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <p>Wat is een doelgroep, en waarom zou je er een kiezen? Veel ondernemers zeggen: "Mijn klant is iedereen met een huis" of "iedereen die een website heeft". Begrijpelijk, want je wilt niemand uitsluiten. Maar wie iedereen wil aanspreken, spreekt niemand echt aan. Je tekst wordt vaag, je advertenties te breed en je budget verdwijnt bij mensen die nooit klant worden.</p>
+        <p>Een scherpe doelgroep doet het omgekeerde. Je weet voor wie je schrijft, waar je moet adverteren en wat je weglaat. Hieronder lees je welke kenmerken je gebruikt, hoe je in zes stappen tot een keuze komt en welke fouten je beter kunt overslaan.</p>
+
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een doelgroep is een groep klanten die op elkaar lijken: in wie ze zijn, waar ze wonen, wat ze willen of hoe ze kopen.</li>
+            <li>Je deelt in op demografische, geografische, psychografische en gedragskenmerken.</li>
+            <li>Begin bij je bestaande klanten. Daar zit de beste informatie.</li>
+            <li>Een persona maakt je doelgroep concreet: één verzonnen klant met een naam en een probleem.</li>
+            <li>Kiezen is niet uitsluiten. Je mag iedereen helpen, maar je praat tegen één groep.</li>
+          </ul>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="waarom">Waarom een duidelijke keuze geld bespaart</h2></div>
+        <p>Elke marketingeuro gaat naar mensen. Hoe beter die mensen passen, hoe meer elke euro oplevert. Een advertentie voor een traplift die bij twintigers verschijnt, is weggegooid geld. Een tekst over "duurzame oplossingen voor iedereen" overtuigt geen enkele boer, geen enkele starter en geen enkele huiseigenaar.</p>
+        <p>Een duidelijke keuze helpt je bij bijna elke beslissing:</p>
+        <ul class="vink">
+          <li><b>Wat je zegt.</b> Je weet welke behoeften en twijfels je moet beantwoorden.</li>
+          <li><b>Hoe je het zegt.</b> Je of u, vakwoorden of gewone taal, kort of uitgebreid.</li>
+          <li><b>Waar je het zegt.</b> Google, Facebook, LinkedIn, de lokale krant of een nieuwsbrief.</li>
+          <li><b>Wat je aanbiedt.</b> Soms blijkt dat je beste klanten een dienst willen die je nog niet hebt.</li>
+          <li><b>Wat je laat liggen.</b> Kanalen en klanten die niets opleveren, schrap je zonder schuldgevoel.</li>
+        </ul>
+
+        <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="begrippen">Doelgroep, segment, persona en ideale klant</h2></div>
+        <p>Deze woorden worden vaak door elkaar gebruikt. Ze bedoelen iets anders.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Begrip</th><th>Wat het is</th><th>Voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td>Markt</td><td>Iedereen die je product zou kunnen kopen</td><td>Alle huiseigenaren in Drenthe</td></tr>
+              <tr><td>Segment</td><td>Een deel van de markt met gedeelde kenmerken</td><td>Eigenaren van een woning van vóór 1975</td></tr>
+              <tr><td>Doelgroep</td><td>Het segment dat je kiest om aan te spreken</td><td>Eigenaren van een oudere woning die willen verduurzamen</td></tr>
+              <tr><td>Ideale klant</td><td>De klant die het best bij je past en het meest oplevert</td><td>Stel van 55 tot 70 dat alles in één keer wil laten doen</td></tr>
+              <tr><td>Persona</td><td>Eén verzonnen persoon die de ideale klant tot leven brengt</td><td>Henk en Ria uit Beilen, net met pensioen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Verzonnen voorbeelden.</p>
+        <p>Segmenteren is het opdelen van de markt in groepen. Daarna kies je. Een persona is de laatste stap: een klantprofiel in de vorm van één mens. Hoe je die maakt, lees je in de gids <a href="/kennisbank/gidsen/persona-maken/">persona maken</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="kenmerken">De kenmerken waarop je indeelt</h2></div>
+        <p>Er zijn vier soorten kenmerken. Bij consumenten (B2C) kijk je naar andere dingen dan bij bedrijven (B2B).</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort</th><th>Bij consumenten</th><th>Bij bedrijven</th></tr></thead>
+            <tbody>
+              <tr><td>Demografische kenmerken</td><td>Leeftijd, gezin, opleiding, inkomen, woonsituatie</td><td>Branche, aantal medewerkers, omzet, leeftijd van het bedrijf</td></tr>
+              <tr><td>Geografische kenmerken</td><td>Woonplaats, wijk, stad of platteland</td><td>Vestigingsplaats, werkgebied, binnen- of buitenland</td></tr>
+              <tr><td>Psychografisch</td><td>Interesses, waarden, levensstijl</td><td>Bedrijfscultuur, ambitie, houding tegenover nieuwe dingen</td></tr>
+              <tr><td>Gedrag</td><td>Koopgedrag, merktrouw, hoe en waar ze zoeken</td><td>Wie beslist, hoe lang het inkoopproces duurt, budgetcyclus</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Demografische en geografische gegevens zijn het makkelijkst te vinden. Maar gedrag en interesses zeggen vaak meer. Twee buren van 45 met hetzelfde inkomen kunnen totaal anders kopen. De een vergelijkt drie offertes tot op de euro. De ander wil gewoon dat het goed gebeurt en kiest de vakman die het beste uitlegt.</p>
+        <p>Bij bedrijven komt er een vraag bij: wie beslist? Bij een klein bedrijf is dat vaak de eigenaar. Bij een groter bedrijf de inkoper, de marketingmanager of de directeur. En wie de dienst gebruikt, is niet altijd wie hem betaalt.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="stappen">Je doelgroep bepalen in zes stappen</h2></div>
+        <ol>
+          <li><b>Beschrijf welk probleem je oplost.</b> Niet wat je verkoopt, maar wat de klant ermee wint. Een schilder verkoopt geen verf. Hij verkoopt een huis dat er weer tien jaar netjes uitziet, zonder dat jij op een ladder staat.</li>
+          <li><b>Kijk naar je bestaande klanten.</b> Pak je facturen van het afgelopen jaar. Wie leverde de meeste omzet op? Waar wonen ze? Welke opdrachten waren het leukst en het meest winstgevend? Vaak blijkt een klein deel van je klanten het grootste deel van je omzet te leveren.</li>
+          <li><b>Praat met je beste klanten.</b> Vraag waarom ze voor jou kozen, hoe ze je vonden en wat ze bijna deed afhaken. Vijf korte gesprekken leveren meer op dan een enquête die niemand invult.</li>
+          <li><b>Doe aanvullend marktonderzoek.</b> Hoe groot is de groep in je regio? Volgens de KVK kun je met de KVK Marktscan zien hoe de bevolking in je gebied is samengesteld. Het CBS en het Sociaal en Cultureel Planbureau publiceren cijfers over bijvoorbeeld uitgaven en gedrag. Kijk ook in Google Search Console naar de zoekwoorden waarop mensen je al vinden.</li>
+          <li><b>Segmenteer en kies.</b> Deel je klanten op in twee of drie groepen. Kies er één als hoofdgroep voor je website en je marketing. De rest help je nog steeds, maar je richt je communicatie niet op hen.</li>
+          <li><b>Schrijf het klantprofiel op en test het.</b> Leg je keuze vast op één A4. Probeer een advertentie, een post of een nieuwe pagina gericht op die groep. Wie reageert er? Stuur bij op wat werkt.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Let op je privacy</p>
+          <p>Gebruik je klantgegevens voor je onderzoek, houd je dan aan de privacywet. De KVK wijst erop dat je alleen gegevens mag bewaren en gebruiken die je nodig hebt voor je bedrijfsvoering. Werk voor je analyse liever met totalen, zoals het aantal klanten per plaats, dan met namen.</p>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="voorbeeld">Voorbeeld: de fysiotherapeut in Assen</h2></div>
+        <p>Een fysiotherapiepraktijk in Assen zegt op de website: "Voor al uw klachten, voor jong en oud." Er komen bezoekers, maar weinig nieuwe patiënten. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+        <p>De praktijk zet de facturen van een jaar op een rij. Daaruit blijkt dat een groot deel van de behandelingen gaat naar hardlopers en fietsers tussen 35 en 55 jaar met knie- of rugklachten. Ze wonen in Assen en de dorpen eromheen. Het zijn trouwe patiënten, ze komen terug bij een nieuwe blessure en ze sturen hun clubgenoten door.</p>
+        <p>De praktijk kiest die groep als hoofddoelgroep. Wat verandert er?</p>
+        <ul class="vink">
+          <li>De homepage opent met "Weer pijnvrij hardlopen of fietsen" in plaats van "Voor al uw klachten".</li>
+          <li>Er komt een pagina over hardloopblessures, met de vragen die sporters echt stellen.</li>
+          <li>De praktijk sponsort de loopgroep van de atletiekvereniging en houdt daar een avond over blessures voorkomen.</li>
+          <li>De toon wordt sportiever, met "je" in plaats van "u".</li>
+        </ul>
+        <p>Ouderen met een nieuwe heup zijn nog steeds welkom. Ze vinden de praktijk via de huisarts. Maar de marketing praat nu tegen één groep, en die voelt zich aangesproken.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={52} /><h2 id="kanalen">Van doelgroep naar kanalen</h2></div>
+        <p>Als je weet wie je klant is, kijk je naar hoe hij zoekt en beslist. Dat bepaalt je kanalen meer dan leeftijd alleen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Hoe je klant zoekt</th><th>Voorbeeld</th><th>Kanalen die passen</th></tr></thead>
+            <tbody>
+              <tr><td>Acuut probleem, nu oplossen</td><td>Lekkage, buitengesloten, kapotte ketel</td><td><a href="/lokale-seo/">Lokale SEO</a>, Google Ads, je bedrijfsprofiel</td></tr>
+              <tr><td>Lang oriënteren, groot bedrag</td><td>Verbouwing, nieuwe website, opleiding</td><td>Artikelen, cases, nieuwsbrief</td></tr>
+              <tr><td>Zakelijke beslisser</td><td>Inkoper, directeur, HR-manager</td><td>LinkedIn, e-mail, vakartikelen</td></tr>
+              <tr><td>Kopen op gevoel en inspiratie</td><td>Interieur, tuin, kleding</td><td>Instagram, Pinterest, voorbeelden op je site</td></tr>
+              <tr><td>Kopen op aanbeveling</td><td>Accountant, aannemer, kapper</td><td>Reviews, doorverwijzingen, je netwerk</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je doelgroep kennen helpt ook bij je teksten. Schrijf in de woorden van je klant. Wie zoekt op "cv-ketel vervangen", leest niet graag over "warmteopwekkers". Meer daarover lees je bij <a href="/kennisbank/wat-is/copywriting/">copywriting</a> en in de gids <a href="/kennisbank/gidsen/tone-of-voice/">tone of voice</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="fouten">Veelgemaakte fouten</h2></div>
+        <ul class="vink">
+          <li><b>"Mijn doelgroep is iedereen."</b> Dan heb je geen keuze gemaakt. Begin met de groep die je nu al het meest oplevert.</li>
+          <li><b>Alleen leeftijd en geslacht.</b> "Vrouwen van 25 tot 65" is geen doelgroep. Een starter en een gepensioneerde willen heel andere dingen.</li>
+          <li><b>Aannames in plaats van gegevens.</b> Je denkt dat je klanten jong zijn, je facturen zeggen iets anders. Kijk eerst.</li>
+          <li><b>Drie groepen op één pagina.</b> Een homepage die zowel particulieren, aannemers als gemeenten aanspreekt, overtuigt niemand. Geef elke groep een eigen pagina.</li>
+          <li><b>Koper en gebruiker verwarren.</b> Bij een kindercoach beslissen de ouders. Bij een traplift vaak de kinderen. Schrijf voor wie beslist.</li>
+          <li><b>Nooit opnieuw kijken.</b> Markten veranderen. Kijk elk jaar of je beste klanten nog dezelfde zijn.</li>
+        </ul>
+
+        <div class="kader">
+          <p class="kader-titel">Meer weten?</p>
+          <p>Maak je doelgroep concreet met de gids <a href="/kennisbank/gidsen/persona-maken/">persona maken</a> en volg de weg van je klant in de gids <a href="/kennisbank/gidsen/customer-journey/">customer journey</a>. Wil je content maken voor je doelgroep, lees dan <a href="/kennisbank/wat-is/contentmarketing/">wat contentmarketing is</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen een doelgroep en een persona?', a: 'Een doelgroep is een groep met gedeelde kenmerken, zoals huiseigenaren in Drenthe met een oudere woning. Een persona is één verzonnen persoon die die groep tot leven brengt, met een naam, een situatie en een probleem.' },
+      { v: 'Mag ik meer dan één doelgroep hebben?', a: 'Ja, maar spreek ze apart aan. Geef elke groep een eigen pagina en een eigen boodschap. Kies daarnaast één hoofdgroep voor je homepage.' },
+      { v: 'Wat is een primaire en een secundaire doelgroep?', a: 'De primaire doelgroep is de groep waar je je marketing vooral op richt. De secundaire doelgroep is een tweede groep die je ook bedient of die meebeslist, zoals de kinderen van een oudere klant.' },
+      { v: 'Hoe vaak moet ik mijn doelgroep opnieuw bepalen?', a: 'Kijk er elk jaar naar, en opnieuw als je een nieuwe dienst begint of als je merkt dat je klanten veranderen. Je facturen en je aanvragen laten dat vaak als eerste zien.' },
+      { v: 'Waar vind ik gratis cijfers over mijn doelgroep?', a: 'Bij het CBS en het Sociaal en Cultureel Planbureau. De KVK Marktscan laat zien hoe de bevolking in je gebied is samengesteld. Je eigen klantgegevens en Google Search Console zijn ook gratis en vaak het meest bruikbaar.' },
+    ]}
+  />
+
+  <Actie titel="Praat jouw website tegen de juiste klant?" tekst={`We kijken gratis naar je site. ${site.contactpersoon} belt je en vertelt of je teksten aansluiten bij de klanten die je het meest opleveren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

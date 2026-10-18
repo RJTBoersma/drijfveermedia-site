@@ -1,0 +1,205 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Aanvraagformulier from '../../components/pagina/Aanvraagformulier.astro';
+import { site } from '../../data/site';
+import Scanner from '../../components/teken/Scanner.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+
+const iconen = ['vergrootglas', 'tandwiel', 'pen', 'ketting', 'pin', 'ai'];
+const onderdelen = [
+  ['Zoekwoorden en posities', 'Op welke zoekwoorden je nu gevonden wordt, en op welke niet.'],
+  ['Techniek en laadsnelheid', 'Of Google je site goed kan lezen, en hoe snel hij laadt op een telefoon.'],
+  ['Content', 'Of je teksten antwoord geven op wat klanten zoeken.'],
+  ['Backlinks en autoriteit', 'Hoe sterk je linkprofiel is, vergeleken met je concurrenten.'],
+  ['Kaart en reviews', 'Hoe je Google Bedrijfsprofiel ervoor staat.'],
+  ['Genoemd door AI', 'Of ChatGPT en Google AI je noemen als iemand naar jouw dienst vraagt.'],
+];
+const hoofdstukken = [
+  { id: 'onderdelen', titel: 'De zes onderdelen van dichtbij' },
+  { id: 'uitkomst', titel: 'Wat je na de scan hebt' },
+  { id: 'verschil', titel: 'Online check of een mens?' },
+  { id: 'zelf', titel: 'Zelf checken in een halfuur' },
+  { id: 'score', titel: 'Wat zegt een SEO-score?' },
+  { id: 'fouten', titel: 'Zeven fouten die een scan vindt' },
+  { id: 'waarom', titel: 'Waarom gratis?' },
+  { id: 'voor-wie', titel: 'Voor wie de scan is' },
+  { id: 'gegevens', titel: 'Wat er met je gegevens gebeurt' },
+];
+---
+<Base
+  title="Gratis SEO-scan van je website | Drijfveer Media"
+  description="Vraag een gratis SEO-scan aan. We bekijken je zoekwoorden, techniek, content, backlinks en AI-vindbaarheid en bellen je binnen 15 minuten terug."
+  kruimels={[{ naam: 'Gratis scan', url: '/gratis-website-analyse/' }]}
+>
+  <Hero kicker="Gratis" titel="Gratis SEO-scan: zo staat je website ervoor" knop={{ tekst: 'Vraag de scan aan', href: '#scan' }}>
+    <p>Vul je gegevens in en we kijken naar je site, je concurrenten en wat AI over je zegt. Op werkdagen bellen we je binnen 15 minuten terug.</p>
+    <div slot="beeld" id="scan">
+      <Aanvraagformulier soort="Gratis scan" knop="Vraag de gratis scan aan" vak website bericht={false} />
+    </div>
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="scan-kop">
+      <div>
+        <h2>Wat we bekijken in de gratis SEO-scan</h2>
+        <p class="sectie-intro">Geen geautomatiseerd rapport van dertig pagina's, maar een mens die naar je site kijkt. Dit zijn de zes onderdelen.</p>
+      </div>
+      <Scanner />
+    </div>
+    <div class="raster">
+      {onderdelen.map(([t, p], i) => (
+        <div class="card"><Tekening naam={iconen[i]} vertraging={i * 120} /><h3>{t}</h3><p>{p}</p></div>
+      ))}
+    </div>
+
+    <div class="tekst" style="margin-top:56px">
+      <h2>Zo werkt het</h2>
+    </div>
+    <ol class="stappen-rij">
+      <li><strong>Je vult het formulier in</strong><p>Wat je doet, waar je zit en je website. Meer hebben we niet nodig.</p></li>
+      <li><strong>We bellen je terug</strong><p>Binnen 15 minuten op werkdagen. We vragen wat je wilt bereiken.</p></li>
+      <li><strong>We kijken je site na</strong><p>Thorgall bekijkt je site en die van je drie grootste concurrenten.</p></li>
+      <li><strong>Je hoort de uitkomst</strong><p>De drie verbeterpunten die het meeste opleveren, in gewone taal.</p></li>
+    </ol>
+
+    <div class="met-zijkolom" style="margin-top:64px">
+      <article class="tekst">
+        <h2 id="onderdelen">De zes onderdelen van de gratis SEO-scan van dichtbij</h2>
+        <p>Een scan is pas nuttig als je weet waar hij naar kijkt. Dit is wat we per onderdeel controleren, en waarom het telt voor je klanten.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={44} /><h3>1. Zoekwoorden en posities</h3></div>
+        <p>We zoeken zoals je klanten zoeken: je dienst met je plaats erbij, en de vragen die mensen stellen voordat ze bellen. "Schilder Meppel", "wat kost buitenschilderwerk", "kozijnen schilderen prijs per meter". Op welke posities sta je, en wie staat erboven? Vaak blijkt dat een site wel gevonden wordt op de bedrijfsnaam, maar niet op de zoekwoorden waar nieuwe klanten mee zoeken.</p>
+        <p>Heb je Google Search Console, dan kun je dat zelf ook zien. In het prestatierapport staan je klikken, vertoningen, de klikfrequentie en je gemiddelde positie, standaard over de afgelopen drie maanden. Voor de scan hebben we die toegang niet nodig. We kijken van buitenaf, zoals Google en je klanten dat ook doen.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={44} vertraging={100} /><h3>2. Techniek en laadsnelheid</h3></div>
+        <p>Staat je site in Google? Met een simpele zoekopdracht zie je welke pagina's Google heeft opgenomen. Werkt alles op een telefoon? Is de site beveiligd met https? En hoe snel laadt hij? Google meet de ervaring van bezoekers met drie Core Web Vitals. Volgens Google is een pagina goed als het grootste element binnen 2,5 seconden in beeld staat (LCP), de pagina binnen 200 milliseconden reageert op een tik (INP) en er weinig verspringt tijdens het laden (CLS onder 0,1).</p>
+        <p>De techniek is zelden het hele verhaal. Maar een pagina die niet in Google staat, kan niet gevonden worden, hoe goed de tekst ook is. Daarom checken we dit altijd eerst.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={44} vertraging={200} /><h3>3. Content</h3></div>
+        <p>Heeft elke dienst een eigen pagina, of staat alles op één pagina "Diensten"? Staat er wat het ongeveer kost, waar je werkt en hoe snel je kunt komen? Geven je teksten antwoord op de vragen die klanten stellen? Een pagina die "kwaliteit en service" belooft, zegt Google en de bezoeker weinig. Een pagina die uitlegt wat je doet, voor wie en tegen welke prijs, zegt alles. Ook de titel en omschrijving die in Google verschijnen, nemen we mee.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={44} vertraging={300} /><h3>4. Backlinks en autoriteit</h3></div>
+        <p>Google vertrouwt een site meer als andere goede sites ernaar linken. We halen je linkprofiel op met SE Ranking en zetten het naast dat van je drie grootste concurrenten. Hoeveel verschillende sites linken naar je? Zijn dat sites uit je vak of je regio? En staan er verdachte links tussen, bijvoorbeeld van een oud linkpakket? Het verschil met je concurrenten laat zien hoeveel autoriteit je mist. Meer daarover lees je bij <a href="/linkbuilding/">linkbuilding</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={44} vertraging={400} /><h3>5. Kaart en reviews</h3></div>
+        <p>Voor een lokaal bedrijf is het kaartje in Google vaak belangrijker dan de gewone zoekresultaten. We kijken of je Google Bedrijfsprofiel volledig is, of de hoofdcategorie klopt, of je naam, adres en telefoonnummer overal hetzelfde zijn en hoe je reviews zich verhouden tot die van je concurrenten. Hoe je dat verbetert, staat bij <a href="/lokale-seo/">lokale SEO</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={44} vertraging={500} /><h3>6. Genoemd door AI</h3></div>
+        <p>We stellen ChatGPT en Gemini de vraag die jouw klant stelt. "Welke schilder in Meppel is betrouwbaar?" Word je genoemd? Wie wel, en welke bronnen staan erbij? Dat laatste is goud waard, want daar zie je waar je zelf zou moeten staan. Wil je dit onderdeel uitgebreider, vraag dan de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-vindbaarheidsanalyse</a> aan.</p>
+
+        <h2 id="uitkomst">Wat je na de scan hebt</h2>
+        <p>Geen lijst met honderd meldingen, maar de drie verbeterpunten die voor jouw bedrijf het meeste opleveren. Per punt hoor je:</p>
+        <ul class="vink">
+          <li>wat er mis is, in gewone taal;</li>
+          <li>waarom het je klanten kost;</li>
+          <li>hoeveel werk het is om op te lossen;</li>
+          <li>wie het kan doen: jij zelf, je webbouwer of wij.</li>
+        </ul>
+        <p>Je hoort ook hoe je ervoor staat ten opzichte van je concurrenten. Niet om je bang te maken, maar omdat je positie in Google altijd relatief is. Je hoeft niet perfect te zijn. Je moet beter zijn dan de drie bedrijven boven je.</p>
+        <div class="kader">
+          <p class="kader-titel">Zo kan een uitkomst eruitzien (verzonnen voorbeeld)</p>
+          <p>Een schildersbedrijf in Meppel vraagt de scan aan. Wat we zien:</p>
+          <ol>
+            <li><b>Geen eigen pagina voor buitenschilderwerk.</b> Juist daar zoeken mensen in het voorjaar op. Een pagina met werkwijze, prijsindicatie en foto's is een middag werk.</li>
+            <li><b>Verkeerde hoofdcategorie in het Bedrijfsprofiel.</b> Er staat "Aannemer" in plaats van "Schilder". Daardoor mist hij het kaartje bij "schilder Meppel". Vijf minuten werk.</li>
+            <li><b>ChatGPT noemt twee concurrenten, hem niet.</b> Als bron staat er een regionale vergelijkingssite bij, waar hij niet op staat. Aanmelden kost een kwartier.</li>
+          </ol>
+          <p>Drie punten, waarvan hij er twee zelf kan oppakken.</p>
+        </div>
+
+        <h2 id="verschil">Online website check of een mens: wat is het verschil?</h2>
+        <p>Er zijn tientallen tools waarmee je zelf een website check doet. Handig, en vaak gratis. Maar ze zien alleen de techniek van één pagina. Ze weten niet wat je doet, wie je klanten zijn of wie je concurrenten zijn. Zo verhouden de drie opties zich.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Online SEO-checker</th><th>Gratis SEO-scan bij ons</th><th>Technische SEO-audit</th></tr></thead>
+            <tbody>
+              <tr><td><b>Wie kijkt</b></td><td>Software</td><td>Een mens, met tools</td><td>Een mens, met tools</td></tr>
+              <tr><td><b>Wat</b></td><td>Techniek van één pagina</td><td>Zes onderdelen, je hele zichtbaarheid</td><td>De techniek van je hele site, tot op de laatste pagina</td></tr>
+              <tr><td><b>Concurrenten</b></td><td>Nee</td><td>Ja, de drie grootste</td><td>Op verzoek</td></tr>
+              <tr><td><b>ChatGPT en Gemini</b></td><td>Nee</td><td>Ja</td><td>Techniek voor AI-crawlers</td></tr>
+              <tr><td><b>Uitkomst</b></td><td>Een score en een lange lijst</td><td>De drie belangrijkste verbeterpunten</td><td>Een rapport op volgorde van winst</td></tr>
+              <tr><td><b>Prijs</b></td><td>Gratis of een abonnement</td><td>Gratis</td><td>Vanaf € 395</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een online checker is prima om fouten op te sporen. De gratis scan vertelt je welke fouten ertoe doen. Wil je daarna alles tot op de bodem weten, dan is de <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> de volgende stap.</p>
+
+        <h2 id="zelf">Zelf je website checken in een halfuur</h2>
+        <p>Wil je eerst zelf kijken? Met deze zes stappen en gratis tools kom je een heel eind.</p>
+        <ol>
+          <li><b>Kijk wat Google van je kent.</b> Typ in Google <code>site:jouwdomein.nl</code>. Je ziet dan pagina's die Google heeft opgenomen. Google zegt er zelf bij dat die lijst niet altijd compleet is. Mist je belangrijkste dienstpagina, dan heb je je eerste verbeterpunt.</li>
+          <li><b>Zoek zoals je klant.</b> Zoek je dienst met je plaats erbij, het liefst in een privévenster. Schrijf op wie in het kaartje staat en wie in de eerste vijf resultaten. Dat zijn je echte concurrenten online.</li>
+          <li><b>Meet je laadsnelheid.</b> Vul je adres in bij PageSpeed Insights van Google. Je krijgt een score per categorie: 90 of hoger is goed, 50 tot 89 kan beter en onder de 50 is slecht. Belangrijker zijn de cijfers van echte bezoekers bovenaan, als Google daar genoeg gegevens voor heeft.</li>
+          <li><b>Open Search Console.</b> Kijk bij Prestaties op het tabblad Zoekopdrachten. Staan daar zoekwoorden met veel vertoningen maar een gemiddelde positie tussen 8 en 20? Die staan net buiten beeld en zijn het snelst te verbeteren.</li>
+          <li><b>Bekijk je links.</b> In Search Console staat het rapport Links. Daar zie je welke sites het vaakst naar je linken. Google noemt het zelf een steekproef, geen volledige lijst.</li>
+          <li><b>Vraag het aan AI.</b> Stel ChatGPT en Gemini de vraag die je klant zou stellen. Noteer wie genoemd wordt en welke bronnen erbij staan.</li>
+        </ol>
+        <p>Heb je nog geen Search Console? In de gids <a href="/kennisbank/gidsen/google-search-console/">website aanmelden bij Google en Search Console gebruiken</a> staat hoe je dat regelt.</p>
+
+        <h2 id="score">Wat zegt een SEO-score eigenlijk?</h2>
+        <p>Veel online tools geven je site een cijfer, bijvoorbeeld 64 van de 100. Dat voelt als een rapportcijfer, maar het is het niet. Elke tool rekent op een eigen manier. Google zelf geeft je site geen SEO-score. Een site met een 95 kan nergens staan, omdat hij geen antwoord geeft op wat mensen zoeken. En een site met een 60 kan bovenaan staan, omdat hij precies dat wel doet.</p>
+        <p>Gebruik zo'n score dus als lijst met aandachtspunten, niet als einddoel. Een melding over een ontbrekende alt-tekst op een foto in je footer is iets anders dan een dienstpagina die niet in Google staat. Het verschil zien is het werk.</p>
+
+        <h2 id="fouten">Zeven fouten die je met een SEO-scan snel vindt</h2>
+        <ol>
+          <li><b>Alles op één pagina.</b> Vijf diensten op één pagina "Diensten", zodat geen enkele dienst echt gevonden wordt.</li>
+          <li><b>Geen plaats en geen prijs.</b> De bezoeker weet niet of je bij hem in de buurt werkt en wat het ongeveer kost.</li>
+          <li><b>Een trage telefoonversie.</b> Grote foto's die op een telefoon seconden laden.</li>
+          <li><b>Pagina's die niet in Google staan.</b> Bijvoorbeeld door een vinkje dat bij de bouw is blijven staan en zoekmachines buitenhoudt.</li>
+          <li><b>Een verouderd Bedrijfsprofiel.</b> Oude openingstijden, een verkeerde categorie of geen foto's.</li>
+          <li><b>Dezelfde titel op elke pagina.</b> Dan weet Google niet welke pagina waarover gaat.</li>
+          <li><b>Geen duidelijke volgende stap.</b> Een telefoonnummer onderaan, een formulier van tien velden.</li>
+        </ol>
+
+        <h2 id="waarom">Waarom gratis?</h2>
+        <p>Omdat het de beste manier is om te laten zien wat we kunnen. Na de scan weet je precies waar je staat, en wat je kunt doen om beter gevonden te worden. Veel punten kun je zelf oppakken. Wil je dat wij het doen, dan hoor je wat het kost. Zo niet, ook goed. Je zit nergens aan vast.</p>
+        <p>Een online SEO-check die je zelf draait, geeft je een cijfer en een lange lijst. Wij vertellen je welke drie dingen voor jouw bedrijf het verschil maken. Dat is iets anders dan honderd meldingen over alt-teksten.</p>
+
+        <h2 id="voor-wie">Voor wie de scan is, en voor wie niet</h2>
+        <p>De scan is gemaakt voor ondernemers in het mkb die klanten willen uit Google en AI. Een installateur, een advocatenkantoor, een fysiotherapeut, een bureau met zakelijke klanten. Je hebt geen verstand van SEO nodig. Het helpt wel als je weet welke diensten je het liefst verkoopt.</p>
+        <p>Voor een webshop met duizenden producten is de scan minder geschikt. Webshops bouwen en optimaliseren doen we niet, en dat zeggen we je dan ook. Heb je nog geen website? Dan kijken we naar je Bedrijfsprofiel en je concurrenten, en hoor je wat een nieuwe site minimaal moet hebben.</p>
+
+        <h2 id="gegevens">Wat er met je gegevens gebeurt</h2>
+        <p>Je vult je naam, je telefoonnummer, je vak, je plaats en je website in. Onze site maakt daar een e-mail van naar {site.email}. Het komt niet in een database op de website terecht en er komen geen tracking-cookies aan te pas. We gebruiken je gegevens om de scan te doen en je te bellen. Je komt niet op een mailinglijst. Alles staat in onze <a href="/privacyverklaring/">privacyverklaring</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={11} />
+        <div class="card zij-actie">
+          <p class="kader-titel">Liever meteen beginnen?</p>
+          <p class="muted">Vul het formulier in, of bel {site.contactpersoon}: <a href={site.telefoonLink}>{site.telefoon}</a>.</p>
+          <a class="btn" href="#scan">Naar het formulier</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Is de scan echt gratis?', a: 'Ja. Je betaalt niets en zit nergens aan vast. Je krijgt de uitkomst, ook als je daarna niet met ons verder gaat.' },
+      { v: 'Wat heb ik nodig voor de scan?', a: 'Alleen je website, wat je doet en waar je zit. Toegang tot je site of Google-accounts is niet nodig.' },
+      { v: 'Kijken jullie ook naar ChatGPT?', a: 'Ja. We vragen ChatGPT en Google AI naar jouw dienst in jouw plaats en vertellen je of je genoemd wordt. Meer daarover lees je bij <a href="/generative-engine-optimization/">GEO</a>.' },
+      { v: 'Wat is het verschil tussen een SEO-scan en een SEO-audit?', a: 'De scan is een snelle blik op je hele zichtbaarheid: zoekwoorden, techniek, content, links, de kaart en AI. Je krijgt de drie belangrijkste verbeterpunten. Een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> gaat diep op de techniek in, pagina voor pagina, en kost vanaf € 395.' },
+      { v: 'Kan ik zelf een gratis SEO-scan doen?', a: 'Ja. Met Google Search Console, PageSpeed Insights en een paar zoekopdrachten kom je een heel eind. Hierboven staat een stappenplan van een halfuur. Wat een tool niet doet, is kiezen welke punten voor jouw bedrijf het meeste opleveren.' },
+      { v: 'Wat is een goede laadsnelheid?', a: 'Google noemt een pagina goed als het grootste element binnen 2,5 seconden in beeld staat, de pagina binnen 200 milliseconden reageert en er weinig verspringt. Meet het met PageSpeed Insights, vooral op een telefoon.' },
+      { v: 'Moet ik na de scan klant worden?', a: 'Nee. Je krijgt de uitkomst en mag er zelf mee aan de slag. Veel punten kun je zelf of met je webbouwer oppakken. Wil je dat wij het doen, dan hoor je eerst wat het kost.' },
+      { v: 'Ik heb nog geen website. Kan ik toch een scan aanvragen?', a: 'Dan kijken we naar je Google Bedrijfsprofiel en je concurrenten, en vertellen we wat een nieuwe site minimaal moet hebben. Zie ook <a href="/website-laten-maken/">website laten maken</a>.' },
+    ]}
+  />
+
+  <Actie titel="Klaar om te weten waar je staat?" tekst={`Vul het formulier in. ${site.contactpersoon} belt je binnen 15 minuten terug, op werkdagen tussen 8.00 en 17.00 uur.`} knop={{ tekst: 'Naar het formulier', href: '#scan' }} />
+</Base>
+<style>
+  .nr { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--tint); color: var(--orange); font-weight: 900; }
+  #scan { scroll-margin-top: 100px; }
+  .zij-actie { padding: 20px 22px; margin-top: 16px; display: grid; gap: 10px; justify-items: start; }
+  .zij-actie p { margin: 0; }
+  .scan-kop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; margin-bottom: 32px; }
+  @media (max-width: 860px) { .scan-kop { grid-template-columns: minmax(0, 1fr); } }
+</style>

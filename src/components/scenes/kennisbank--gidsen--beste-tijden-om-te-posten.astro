@@ -1,0 +1,77 @@
+---
+// Scène voor /kennisbank/gidsen/beste-tijden-om-te-posten/: een weekoverzicht van wanneer je volgers online zijn, met een klok ernaast.
+// Als hij leeft: een oranje kader zoekt door de week en blijft staan op het drukste moment, de klok tikt rustig door en het label met jouw piek verschijnt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const dagen = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'];
+const uren = ['6', '9', '12', '15', '18', '21'];
+const kolX = (k: number) => 62 + k * 36;
+const rijY = (r: number) => 72 + r * 28;
+// drukte per tijdvak (rij) en dag (kolom), 0 tot 4. Verzonnen voorbeeld.
+const drukte = [
+  [1, 1, 1, 1, 1, 0, 0],
+  [2, 2, 2, 2, 1, 1, 1],
+  [2, 3, 2, 2, 2, 1, 1],
+  [2, 2, 2, 2, 1, 1, 0],
+  [3, 4, 3, 3, 2, 2, 1],
+  [2, 3, 2, 2, 1, 1, 1],
+];
+const tint = ['#f4f7fa', '#e8eef4', '#c9d3dd', '#8aa0b4', '#074663'];
+const piek = { k: 1, r: 4 };
+const tikken = Array.from({ length: 12 }, (_, i) => {
+  const h = (i * Math.PI) / 6;
+  return { x1: 401 + 33 * Math.sin(h), y1: 78 - 33 * Math.cos(h), x2: 401 + 38 * Math.sin(h), y2: 78 - 38 * Math.cos(h) };
+});
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een weekoverzicht van de uren waarop je volgers online zijn, met een klok. Een oranje kader zoekt door de week en blijft staan op dinsdagavond, het drukste moment in dit voorbeeld.'}>
+  <!-- weekoverzicht -->
+  <rect x="24" y="22" width="304" height="230" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="40" y="46" font-size="12" font-weight="800">Wanneer zijn je volgers online?</text>
+  {dagen.map((d, i) => <text x={kolX(i) + 16} y="64" text-anchor="middle" font-size="10" class="zacht">{d}</text>)}
+  {uren.map((u, r) => <text x="54" y={rijY(r) + 16} text-anchor="end" font-size="9" class="zacht">{u}</text>)}
+  {drukte.map((rij, r) => rij.map((w, k) => <rect x={kolX(k)} y={rijY(r)} width="32" height="24" rx="5" fill={tint[w]} />))}
+
+  <!-- klok -->
+  <rect x="346" y="22" width="110" height="114" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="401" cy="78" r="42" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  {tikken.map((t) => <path d={`M${t.x1.toFixed(1)} ${t.y1.toFixed(1)}L${t.x2.toFixed(1)} ${t.y2.toFixed(1)}`} stroke="#c9d3dd" stroke-width="2" stroke-linecap="round" />)}
+  <path d="M401 78l-12 10" stroke="#10283f" stroke-width="3" stroke-linecap="round" />
+  <path class="wijzer" d="M401 78V48" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" />
+  <circle cx="401" cy="78" r="3.5" fill="#10283f" />
+
+  <!-- jouw piek -->
+  <rect x="346" y="150" width="110" height="102" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="360" y="174" font-size="11" class="zacht">Jouw piek</text>
+  <text x="360" y="198" font-size="18" font-weight="900">di 19.00</text>
+  <rect class="v" x="360" y="212" width="82" height="8" rx="4" />
+  <rect x="360" y="212" width="64" height="8" rx="4" fill="#ff6600" />
+  <text x="360" y="238" font-size="9" class="zacht">voorbeeld</text>
+
+  {!mini && (
+    <g>
+      <rect class="kader-zoek" x={kolX(piek.k) - 3} y={rijY(piek.r) - 3} width="38" height="30" rx="7" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <g class="label">
+        <rect x={kolX(piek.k) + 40} y={rijY(piek.r) - 34} width="96" height="26" rx="13" fill="#ff6600" />
+        <text x={kolX(piek.k) + 88} y={rijY(piek.r) - 17} font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">Nu plaatsen</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .wijzer { transform-box: view-box; transform-origin: 401px 78px; }
+  .label { transform-box: fill-box; transform-origin: left bottom; }
+  :global(.teken-js) .label { opacity: 0; }
+  :global(.teken-js) .kader-zoek { opacity: 0; }
+  .in-beeld .wijzer { animation: kennisbank-gidsen-beste-tijden-om-te-posten-tik 8s linear infinite; }
+  .in-beeld .kader-zoek { animation: kennisbank-gidsen-beste-tijden-om-te-posten-zoek 2.4s cubic-bezier(.5,.1,.25,1) 0.4s forwards; }
+  .in-beeld .label { animation: kennisbank-gidsen-beste-tijden-om-te-posten-label 0.5s cubic-bezier(.3,1.6,.5,1) 2.9s forwards; }
+  @keyframes kennisbank-gidsen-beste-tijden-om-te-posten-tik { to { transform: rotate(360deg); } }
+  @keyframes kennisbank-gidsen-beste-tijden-om-te-posten-zoek {
+    0% { opacity: 1; transform: translate(144px, -84px); }
+    30% { opacity: 1; transform: translate(72px, -28px); }
+    60% { opacity: 1; transform: translate(108px, 28px); }
+    100% { opacity: 1; transform: none; }
+  }
+  @keyframes kennisbank-gidsen-beste-tijden-om-te-posten-label { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .wijzer, .in-beeld .kader-zoek, .in-beeld .label { animation: none; } }
+</style>

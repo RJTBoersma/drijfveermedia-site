@@ -1,0 +1,191 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--privacyverklaring-en-cookies.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/privacyverklaring-en-cookies/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'verplicht', titel: 'Wanneer is het verplicht?' },
+  { id: 'wat-erin', titel: 'Wat moet erin?' },
+  { id: 'opstellen', titel: 'Opstellen in vijf stappen' },
+  { id: 'cookies', titel: 'Welke cookies mogen zonder toestemming?' },
+  { id: 'cookiemelding', titel: 'Heb je een cookiemelding nodig?' },
+  { id: 'zonder', titel: 'Een site zonder cookiemelding' },
+  { id: 'voorwaarden', titel: 'Algemene voorwaarden' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Privacyverklaring voor websites, cookies en algemene voorwaarden',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  citation: [
+    'https://ondernemersplein.overheid.nl/wetten-en-regels/privacyverklaring-opstellen/',
+    'https://ondernemersplein.overheid.nl/wetten-en-regels/gebruik-van-cookies-op-uw-website/',
+    'https://ondernemersplein.overheid.nl/wetten-en-regels/algemene-voorwaarden/',
+    'https://www.autoriteitpersoonsgegevens.nl/themas/basis-avg/privacyrechten-avg/recht-op-informatie',
+    'https://www.autoriteitpersoonsgegevens.nl/themas/internet-slimme-apparaten/cookies',
+    'https://www.autoriteitpersoonsgegevens.nl/actueel/ap-onderzoekt-websites-vanwege-misleidende-cookiebanner',
+  ],
+}];
+---
+<Base
+  title="Privacyverklaring website: wat moet erin? | Drijfveer Media"
+  description="Een privacyverklaring voor websites opstellen: wat erin moet, wanneer je een cookiemelding nodig hebt en hoe het zit met algemene voorwaarden op je site."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Privacyverklaring en cookies', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Tracking en analytics" titel="Privacyverklaring voor websites, cookies en algemene voorwaarden" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Heeft je site een contactformulier of statistieken? Dan heb je een privacyverklaring nodig, en misschien een cookiemelding. Wat er moet, wat mag en hoe je het netjes regelt, in gewone taal.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Verwerk je persoonsgegevens, bijvoorbeeld via een formulier of e-mail? Dan is een privacyverklaring verplicht.</li>
+            <li>De Autoriteit Persoonsgegevens noemt wat erin moet: wie je bent, welke gegevens, waarom, hoe lang en welke rechten mensen hebben.</li>
+            <li>Voor trackingcookies heb je altijd toestemming nodig. Voor beperkt analytische cookies vaak niet.</li>
+            <li>Algemene voorwaarden zijn niet verplicht. Gebruik je ze wel, dan moet je klant ze vooraf kunnen lezen.</li>
+          </ul>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Geen juridisch advies</p>
+          <p>Wij zijn online marketeers, geen juristen. Deze gids helpt je op weg en is gebaseerd op wat de overheid zelf uitlegt. Lees voor de regels ook <a href="https://ondernemersplein.overheid.nl/wetten-en-regels/privacyverklaring-opstellen/" rel="noopener">Ondernemersplein</a> en de site van de <a href="https://www.autoriteitpersoonsgegevens.nl/" rel="noopener">Autoriteit Persoonsgegevens</a>. Twijfel je over jouw situatie, vraag het dan aan een jurist.</p>
+        </div>
+
+        <h2 id="verplicht">Wanneer is een privacyverklaring verplicht?</h2>
+        <p>Zodra je persoonsgegevens verwerkt. Dat is sneller dan je denkt. Een naam en telefoonnummer uit je contactformulier, een e-mailadres voor je nieuwsbrief, een offerte met een adres erop: het zijn allemaal persoonsgegevens. Volgens de privacywetgeving AVG, voluit de Algemene verordening gegevensbescherming, heb je dan een informatieplicht. Je moet mensen vertellen wat je met hun gegevens doet en waarom.</p>
+        <p>Dat doe je meestal met een privacyverklaring op je site, ook wel privacystatement of privacybeleid genoemd. De naam maakt niet uit. Het gaat erom dat mensen de tekst makkelijk vinden en begrijpen. Bijna elke bedrijfssite heeft er dus een nodig.</p>
+
+        <h2 id="wat-erin">Wat moet er in een privacyverklaring?</h2>
+        <p>De Autoriteit Persoonsgegevens <a href="https://www.autoriteitpersoonsgegevens.nl/themas/basis-avg/privacyrechten-avg/recht-op-informatie" rel="noopener">somt de verplichtingen op</a>. Dit moet er in elk geval in staan:</p>
+        <ul class="vink">
+          <li>Je bedrijfsnaam en contactgegevens.</li>
+          <li>De contactgegevens van je functionaris gegevensbescherming, als je die hebt. De meeste kleine bedrijven hebben er geen.</li>
+          <li>Waarom je gegevens verwerkt, en op welke wettelijke grondslag.</li>
+          <li>Met wie je de gegevens deelt, en of ze buiten Europa terechtkomen.</li>
+          <li>Hoe lang je de gegevens bewaart.</li>
+          <li>Welke rechten mensen hebben, zoals inzage, correctie en verwijdering. En dat ze hun toestemming altijd mogen intrekken.</li>
+          <li>Dat ze een klacht kunnen indienen bij de Autoriteit Persoonsgegevens.</li>
+          <li>Of je gebruikmaakt van geautomatiseerde besluitvorming. Voor de meeste mkb-sites is het antwoord nee, maar zet het er wel in.</li>
+        </ul>
+        <p>Schrijf in begrijpelijke taal. Kort, zonder vaktermen. De AP raadt zelfs aan om in lagen te werken: bovenaan in een paar zinnen het belangrijkste, daaronder de details. Op onze eigen <a href="/privacyverklaring/">privacyverklaring</a> zie je hoe dat eruit kan zien.</p>
+
+        <h2 id="opstellen">Zo stel je hem op in vijf stappen</h2>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Zet op een rij welke gegevens je verzamelt</h3></div>
+        <p>Loop je site en je werkwijze na. Contactformulier, offerteaanvragen, nieuwsbrief, statistieken, chat, sollicitaties. Noteer per onderdeel welke gegevens erin gaan en welke tool ze verwerkt: je hosting, je mailprogramma, je formuliertool. Met die partijen sluit je een verwerkersovereenkomst.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>2. Bepaal per doel de grondslag</h3></div>
+        <p>De AVG kent zes grondslagen. Voor een bedrijfssite gebruik je er meestal drie: een overeenkomst (je maakt een offerte), toestemming (iemand meldt zich aan voor je nieuwsbrief) en een wettelijke plicht (je bewaart facturen voor de Belastingdienst).</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>3. Kies bewaartermijnen</h3></div>
+        <p>Bewaar niets langer dan nodig. Een aanvraag die niets werd, hoeft niet jaren in je mailbox. Facturen en je administratie moet je wel zeven jaar bewaren voor de fiscus. Schrijf per soort gegevens een termijn op.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Schrijf de tekst</h3></div>
+        <p>Ondernemersplein verwijst naar een generator op veiliginternetten.nl voor een basistekst. Gebruik die als begin, en maak hem daarna echt van jou. Een gekopieerde verklaring van een ander bedrijf klopt bijna nooit met wat jouw site doet.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>5. Maak hem vindbaar</h3></div>
+        <p>Zet een link in de footer van elke pagina en bij elk formulier, vlak boven de verzendknop. Volgens de AP is een duidelijke verwijzing bij het formulier genoeg. Kijk de tekst elk jaar na, en altijd als je een nieuwe tool op je site zet.</p>
+
+        <h2 id="cookies">Welke cookies mag je zonder toestemming plaatsen?</h2>
+        <p>Voor cookies geldt naast de AVG ook de Telecommunicatiewet. De overheid deelt ze in drie groepen in.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort cookie</th><th>Waarvoor</th><th>Toestemming nodig?</th></tr></thead>
+            <tbody>
+              <tr><td><b>Functioneel</b></td><td>De site laten werken, zoals een taalkeuze of inlog</td><td>Nee, wel vermelden</td></tr>
+              <tr><td><b>Beperkt analytisch</b></td><td>Bezoekers tellen, met weinig gevolgen voor de privacy</td><td>Nee, wel vermelden</td></tr>
+              <tr><td><b>Tracking en overige</b></td><td>Bezoekers volgen, ook op andere sites, voor advertenties</td><td>Ja, altijd vooraf</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zo staat het bij <a href="https://ondernemersplein.overheid.nl/wetten-en-regels/gebruik-van-cookies-op-uw-website/" rel="noopener">Ondernemersplein</a> en de <a href="https://www.autoriteitpersoonsgegevens.nl/themas/internet-slimme-apparaten/cookies" rel="noopener">AP</a>. Ook pixels van socialemediaplatforms en ingesloten video's of kaarten van andere partijen vallen vaak in de laatste groep. Het lastige grijze gebied is Google Analytics. Daar lees je meer over in de gids over <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>.</p>
+
+        <h2 id="cookiemelding">Heb je een cookiemelding nodig?</h2>
+        <p>Alleen als je cookies of andere volgsoftware plaatst waarvoor toestemming nodig is. Dan moet de cookiemelding aan een paar harde eisen voldoen:</p>
+        <ul>
+          <li>Je vraagt toestemming vóórdat je de cookies plaatst.</li>
+          <li>Naast Accepteren staat een even duidelijke knop om te weigeren.</li>
+          <li>Niets staat vooraf aangevinkt, ook niet in een tweede laag.</li>
+          <li>Verder surfen of scrollen telt niet als toestemming.</li>
+          <li>Wie weigert, kan je site gewoon gebruiken. Een cookiewall mag niet.</li>
+          <li>Toestemming intrekken is net zo makkelijk als geven.</li>
+        </ul>
+        <p>De AP controleert dit sinds 2024 vaker. Op 16 oktober 2026 meldde de toezichthouder dat hij zo'n 100 organisaties had gewaarschuwd over hun cookiebanner, en dat ongeveer 70 procent die daarna aanpaste. Naar twee organisaties die dat niet deden, is een <a href="https://www.autoriteitpersoonsgegevens.nl/actueel/ap-onderzoekt-websites-vanwege-misleidende-cookiebanner" rel="noopener">onderzoek gestart</a>. Een boete is mogelijk.</p>
+
+        <h2 id="zonder">Een site zonder cookiemelding</h2>
+        <p>De makkelijkste cookiemelding is er geen. Dat kan, als je site geen cookies plaatst waarvoor toestemming nodig is. Op onze eigen site doen we het zo:</p>
+        <ul class="vink">
+          <li>Statistieken met een tool die zonder cookies meet en geen persoonsgegevens bewaart.</li>
+          <li>Geen pixels of knoppen van sociale media die meekijken.</li>
+          <li>Geen ingesloten video's of kaarten van andere partijen. Een plaatje met een link werkt ook.</li>
+          <li>Lettertypen op de eigen server, niet bij een andere partij.</li>
+          <li>Een formulier dat spam tegenhoudt zonder cookies.</li>
+        </ul>
+        <p>Adverteer je met Google Ads en wil je zien welke klik een aanvraag oplevert? Dan ontkom je meestal niet aan een cookiemelding. Kies dan een nette, die aan de regels voldoet. Welke kant je ook kiest: zorg dat je privacyverklaring beschrijft wat je site echt doet.</p>
+
+        <h2 id="voorwaarden">Algemene voorwaarden op je site</h2>
+        <p>Algemene voorwaarden zijn <a href="https://ondernemersplein.overheid.nl/wetten-en-regels/algemene-voorwaarden/" rel="noopener">niet verplicht</a>. Zonder voorwaarden gelden gewoon de regels uit de wet. Gebruik je ze wel, dan moet je klant ze kunnen lezen vóórdat hij een overeenkomst sluit. Een link onder je offerte of bij je bestelknop is daarvoor de gewone manier. Deponeren bij de KVK mag, maar hoeft niet.</p>
+        <p>Verkoop je online, dan moeten je bedrijfsgegevens goed vindbaar zijn, volgens Ondernemersplein. Denk aan je KVK-nummer, btw-id, adres, e-mailadres en telefoonnummer. Op onze site staan ze in de footer en op de pagina met <a href="/algemene-voorwaarden/">algemene voorwaarden</a>.</p>
+
+        <h2 id="fouten">Fouten die we vaak zien</h2>
+        <ol>
+          <li><b>Een gekopieerde tekst.</b> Met de naam van een ander bedrijf er nog in. Het gebeurt vaker dan je denkt.</li>
+          <li><b>Een verouderde verklaring.</b> Er staat Universal Analytics in, terwijl de site al jaren iets anders gebruikt.</li>
+          <li><b>Geen link bij het formulier.</b> Juist daar beslist iemand of hij zijn gegevens deelt.</li>
+          <li><b>Een banner zonder weigerknop.</b> Of een banner die tracking al start voordat iemand kiest.</li>
+          <li><b>Tools die niemand meer gebruikt.</b> Een oude chatwidget of pixel die nog stilletjes gegevens verzamelt.</li>
+        </ol>
+
+        <h2 id="hulp">Wat wij voor je kunnen doen</h2>
+        <p>De juridische tekst schrijf je zelf of laat je nakijken door een jurist. Wij zorgen dat de techniek klopt met wat erin staat. Bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a> richten we je meting in, waar het kan zonder cookiemelding, vanaf € 395 eenmalig. We lopen je site na op tools en scripts die gegevens verzamelen, en je krijgt een lijstje van wat er in je privacyverklaring hoort. Laat je een <a href="/website-laten-maken/">website bij ons maken</a>, dan bouwen we hem vanaf het begin zo.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je site nalopen?" intro="Wat je bij ons krijgt, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Heb ik een privacyverklaring nodig als ik alleen een contactformulier heb?', a: 'Ja. Een naam, e-mailadres of telefoonnummer zijn persoonsgegevens. Zodra je die verwerkt, moet je vertellen wat je ermee doet.' },
+      { v: 'Mag ik de privacyverklaring van een ander bedrijf overnemen?', a: 'Liever niet. Hij beschrijft dan de tools en werkwijze van dat bedrijf, niet die van jou. Gebruik een generator als basis en pas hem aan.' },
+      { v: 'Wat is het verschil tussen een privacyverklaring en een cookieverklaring?', a: 'De privacyverklaring gaat over alle persoonsgegevens die je verwerkt. Een cookieverklaring gaat alleen over cookies. Veel kleine bedrijven zetten de cookies gewoon in een apart hoofdstuk van hun privacyverklaring.' },
+      { v: 'Wie controleert of mijn site aan de regels voldoet?', a: 'De Autoriteit Persoonsgegevens houdt toezicht op de AVG en controleert ook cookiebanners. Bij klachten of vragen kun je daar terecht.' },
+      { v: 'Moet mijn KVK-nummer op mijn website staan?', a: 'Verkoop je online, dan moeten je KVK-nummer, btw-id en contactgegevens volgens Ondernemersplein goed vindbaar zijn. Ook als je dat niet doet, is het een teken van betrouwbaarheid.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over meten en privacy"
+    links={[
+      { label: 'Dienst', titel: 'Tracking en analytics', href: '/leadgeneratie/tracking-en-analytics/', tekst: 'Meten waar je aanvragen vandaan komen, liefst zonder cookiemelding.' },
+      { label: 'Gids', titel: 'Google Analytics 4', href: '/kennisbank/gidsen/google-analytics-4/', tekst: 'GA4, Tag Manager en Looker Studio instellen.' },
+      { label: 'Gids', titel: 'UTM-codes', href: '/kennisbank/gidsen/utm-codes/', tekst: 'Zien welke link of campagne werkt.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat jouw site verzamelt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site, ook naar de scripts die meedraaien, en belt je met een eerlijk advies.`} />
+</Base>

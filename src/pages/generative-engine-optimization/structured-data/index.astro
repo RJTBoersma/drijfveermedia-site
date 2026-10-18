@@ -1,0 +1,135 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/generative-engine-optimization--structured-data.astro';
+import { site } from '../../../data/site';
+
+const url = '/generative-engine-optimization/structured-data/';
+const schema = [{
+  '@type': 'Service',
+  name: 'Structured data en schema toevoegen',
+  serviceType: 'Structured data',
+  description: 'Schema.org-markup in JSON-LD voor je bedrijf, diensten, kruimelpad en artikelen, gecontroleerd in de Rich Results Test.',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 295, priceSpecification: { '@type': 'PriceSpecification', price: 295, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+}];
+const voorbeeld = `<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Hoveniersbedrijf De Wit",
+  "telephone": "+31 528 000 000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Voorbeeldweg 1",
+    "addressLocality": "Hoogeveen"
+  },
+  "openingHours": "Mo-Fr 08:00-17:00"
+}
+</script>`;
+const types = [
+  ['Organization of LocalBusiness', 'Homepage, en via een vaste verwijzing op elke pagina', 'Naam, adres, telefoon, openingstijden, logo en je profielen elders'],
+  ['Service met Offer', 'Dienstpagina\'s', 'Wat je aanbiedt, voor welke prijs en in welk gebied'],
+  ['BreadcrumbList', 'Elke pagina behalve de homepage', 'Waar de pagina in je site staat'],
+  ['Article of BlogPosting', 'Blogs en kennisartikelen', 'Wie het schreef en wanneer het is bijgewerkt'],
+  ['Person', 'Teampagina en auteurs', 'Wie er werkt en waar die verstand van heeft'],
+];
+---
+<Base
+  title="Structured data laten toevoegen | Drijfveer Media"
+  description="Structured data laten toevoegen, eerlijk uitgelegd: wat schema wel en niet oplevert in Google en AI. Eenmalig vanaf € 295, inclusief controle."
+  kruimels={[{ naam: 'GEO', url: '/generative-engine-optimization/' }, { naam: 'Structured data', url }]}
+  schema={schema}
+>
+  <Hero kicker="Genoemd · Schema" titel="Structured data: je website leesbaar voor Google en AI" prijs="vanaf € 295" eenmalig>
+    <p>Een stukje code dat zoekmachines precies vertelt wie je bent, wat je doet en waar. Geen wondermiddel, wel een stevig fundament. Wij vertellen je eerlijk wat het oplevert.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <h2>Wat is structured data?</h2>
+        <p>Structured data, in het Nederlands gestructureerde gegevens, is code in de HTML van je pagina die in een vaste taal beschrijft wat er op die pagina staat. Een bezoeker leest "open van maandag tot vrijdag, 8 tot 5" en snapt het. Een zoekmachine ziet een rij woorden. Met structured data geef je die woorden een betekenis: dit is een openingstijd, dit een adres, dit een prijs. Zo vertelt je website Google precies wat wat is.</p>
+        <p>De taal heet schema, naar de woordenlijst op schema.org. Google, Bing en Yahoo begonnen die in 2011, toevallig hetzelfde jaar als Drijfveer Media. Je schrijft het meestal in JSON-LD: een los blokje HTML-code dat bezoekers niet zien. Een verzonnen voorbeeld:</p>
+        <pre><code>{voorbeeld}</code></pre>
+        <p>Vroeger hoorde je ook de termen rich snippets en rich cards. Dat zijn de opvallende extra's in de zoekresultaten die je met deze code kunt krijgen. Google noemt ze nu rich results.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h2>Wat het wel oplevert</h2></div>
+        <p><b>Google en Bing begrijpen wie je bent.</b> Met de code begrijpt Google je content beter. Je bedrijf, je adres, je diensten en je mensen worden aan elkaar gekoppeld tot één geheel, wat zoekmachines een <a href="/kennisbank/wat-is/entiteiten/">entiteit</a> noemen. Volgens de Google structured data-documentatie gebruikt Google die gegevens ook om informatie over de wereld te verzamelen, zoals over bedrijven en personen. Zo kom je in de Knowledge Graph, de kennisbank achter het informatiepaneel in Google.</p>
+        <p><b>Kans op rich results.</b> Denk aan prijzen bij een product, data bij een evenement of je logo. Google deelt zelf voorbeelden: bij Rotten Tomatoes klikten 25 procent meer mensen op pagina's met deze code, en Nestlé mat 82 procent meer klikken op pagina's met een rich result.</p>
+        <p><b>Duidelijke feiten voor AI.</b> AI-assistenten lezen ook de code van je site. Een adres of prijs in schema is ondubbelzinnig. Of dat je vaker in ChatGPT brengt, is niet bewezen. Het maakt de kans op een fout antwoord wel kleiner.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h2>Wat het niet doet</h2></div>
+        <p>Hier gaan veel verkooppraatjes mis. Dit levert het <em>niet</em> op:</p>
+        <ul>
+          <li><b>Hogere posities.</b> Het is geen rankingfactor. Ook voor het AI-overzicht van Google is volgens Google geen speciale code nodig.</li>
+          <li><b>Sterren met je eigen reviews.</b> Sinds september 2019 toont Google geen sterren meer bij bedrijven die reviews over zichzelf op hun eigen site zetten. Reviews werken wel via je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>.</li>
+          <li><b>Uitklapvragen in Google.</b> Sinds 7 mei 2026 toont Google geen FAQ-resultaten meer. Stappenplannen (HowTo) verdwenen al in 2023.</li>
+          <li><b>Kruimelpad op mobiel.</b> Sinds januari 2025 alleen nog op de computer.</li>
+          <li><b>Een garantie.</b> Google beslist zelf of een rich result verschijnt.</li>
+        </ul>
+        <p>Biedt een bureau je nog FAQ-schema aan voor "meer ruimte in Google"? Dan loopt het achter.</p>
+
+        <h2>Welke schema-types een mkb-bedrijf nodig heeft</h2>
+        <p>Meestal zijn dit er vijf. Samen vormen ze één netwerk, waarin elke pagina naar hetzelfde bedrijf verwijst.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Type</th><th>Waar</th><th>Wat het vertelt</th></tr></thead>
+            <tbody>{types.map(([a, b, c]) => <tr><td><b>{a}</b></td><td>{b}</td><td>{c}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <p>De belangrijkste is Organization structured data: die zegt wie er achter de hele site zit. Zorg dat die precies dezelfde naam, hetzelfde adres en hetzelfde telefoonnummer bevat als je Bedrijfsprofiel. Wij doen het op deze site ook zo. Bekijk de broncode van deze pagina maar.</p>
+
+        <h2>Zo controleer je je structured data</h2>
+        <ol>
+          <li>Plak je URL in de Rich Results Test van Google. Je ziet welke types Google vindt en of er fouten in zitten.</li>
+          <li>Controleer dezelfde URL in de Schema Markup Validator van schema.org. Die kijkt ook naar types waar Google niets mee doet.</li>
+          <li>Kijk in Search Console bij "Optimalisaties". Daar staan fouten voor je hele site.</li>
+          <li>Leg de code naast de tekst op de pagina. Staat alles wat in de code staat ook zichtbaar op de pagina? Dat eist Google.</li>
+        </ol>
+        <p>Veelvoorkomende fouten: twee plugins die allebei een eigen bedrijfsblok maken, openingstijden die al jaren niet kloppen, en review-sterren op de eigen homepage.</p>
+
+        <h2>Wat je krijgt voor € 295</h2>
+        <p>Eenmalig, exclusief btw. We kijken eerst wat er al staat, bijvoorbeeld uit Yoast of Rank Math in WordPress. Daarna zetten we het netwerk neer: je bedrijf, je belangrijkste dienstpagina's met prijs, het kruimelpad en je artikelen. Alles komt overeen met je zichtbare tekst en je Bedrijfsprofiel, en we testen het in de Rich Results Test en de validator. Heb je een grote site, dan hoor je vooraf wat het kost.</p>
+        <p>Deze code hoort bij <a href="/generative-engine-optimization/">generative engine optimization</a> en bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>. Neem je GEO bij ons af, dan zit het er al in.</p>
+      </article>
+      <aside class="zijkolom">
+        <Prijskaart naam="Structured data" prijs="€ 295" eenmalig punten={['Bedrijf, diensten, kruimelpad en artikelen', 'Gelijk aan je Bedrijfsprofiel', 'Getest in de Rich Results Test', 'Uitleg in gewone taal']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen structured data en schema markup?', a: 'In de praktijk niets. Structured data is de algemene term, schema markup is de code volgens de woordenlijst van schema.org. Meer bij <a href="/kennisbank/wat-is/schema-markup/">schema markup</a>.' },
+      { v: 'Kan ik de code zelf toevoegen?', a: 'Ja. In WordPress doen plugins zoals Yoast en Rank Math de basis. Controleer daarna wel of de gegevens kloppen en of er geen dubbele blokken ontstaan.' },
+      { v: 'Komen er sterren bij mijn zoekresultaat?', a: 'Niet met reviews over je eigen bedrijf op je eigen site. Google toont die sinds 2019 niet meer. Sterren krijg je via je Google Bedrijfsprofiel, in het kaartje.' },
+      { v: 'Helpt schema om in ChatGPT te komen?', a: 'Dat is niet bewezen. Het maakt je feiten wel duidelijk voor elke machine die je site leest. Meer werk dat wel aantoonbaar helpt, lees je bij <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar in ChatGPT</a>.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over genoemd worden"
+    links={[
+      { label: 'Pillar', titel: 'Generative engine optimization', href: '/generative-engine-optimization/', tekst: 'Genoemd door AI, vanaf € 495 per maand.' },
+      { label: 'Dienst', titel: 'Google AI Overviews', href: '/generative-engine-optimization/google-ai-overviews/', tekst: 'In het AI-overzicht bovenaan Google.' },
+      { label: 'Dienst', titel: 'Technische SEO', href: '/zoekmachine-optimalisatie/technische-seo/', tekst: 'Alles wat Google nodig heeft om je site te lezen.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd wat Google nu van je site leest?" />
+</Base>
+<style>
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 16px 20px; overflow-x: auto; font-size: 0.86rem; line-height: 1.5; margin: 16px 0 20px; }
+</style>

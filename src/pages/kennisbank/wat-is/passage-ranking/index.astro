@@ -1,0 +1,174 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--passage-ranking.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/passage-ranking/';
+const datum = '2026-10-18';
+const definitie = 'Passage ranking is een AI-systeem van Google dat losse stukken tekst binnen een pagina beoordeelt, zodat één sterke alinea op een lange pagina toch kan scoren op een specifieke zoekvraag.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  '@id': `${site.url}${url}#begrip`,
+  name: 'Passage ranking',
+  alternateName: ['Passage-ranking', 'Passages'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'WebPage',
+  '@id': `${site.url}${url}#pagina`,
+  url: `${site.url}${url}`,
+  name: 'Wat is passage ranking?',
+  inLanguage: 'nl-NL',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  about: { '@id': `${site.url}${url}#begrip` },
+}];
+const opbouw = `<h2>Hoe lang gaat een warmtepomp mee?</h2>
+<p>Een warmtepomp gaat bij goed onderhoud meestal vijftien
+tot twintig jaar mee. De buitenunit slijt het snelst ...</p>
+
+<h2>Wat kost onderhoud aan een warmtepomp?</h2>
+<p>...</p>`;
+---
+<Base
+  title="Wat is passage ranking? Simpel uitgelegd | Drijfveer Media"
+  description="Wat is passage ranking? Google beoordeelt ook losse alinea's op je pagina. Zo werkt het, het verschil met een featured snippet en wat je eraan hebt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Passage ranking', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is passage ranking?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je hebt een lange pagina vol informatie. Ergens halverwege staat precies het antwoord dat iemand zoekt. Vroeger keek Google vooral naar de pagina als geheel, en dan verdween dat ene antwoord tussen de rest. Nu kan Google dat stukje zelf herkennen.</p>
+      <p>Dat klinkt als iets voor techneuten. Toch gaat het over iets heel gewoons: hoe je een tekst opbouwt. Hieronder lees je wat Google er zelf over zegt, wat het niet is, en hoe je er met je eigen pagina's van profiteert.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Hoe passage ranking werkt</h2></div>
+      <p>Google maakte het op 15 oktober 2020 bekend, in een blog over AI in de zoekmachine. De uitleg was kort. Heel specifieke zoekopdrachten zijn het lastigst, schreef Google, omdat de ene zin met het antwoord soms diep in een pagina verstopt zit. Door naast de relevantie van de hele pagina ook die van losse passages te begrijpen, vindt Google die speld in de hooiberg. Het zou zo'n 7 procent van alle zoekopdrachten verbeteren, in alle talen, zodra het wereldwijd was uitgerold.</p>
+      <p>Inmiddels staat het in het overzicht van vaste rankingsystemen op Google Search Central. Daar heet het een AI-systeem dat losse delen of passages van een webpagina herkent, om beter te begrijpen hoe relevant een pagina is voor een zoekopdracht.</p>
+      <p>Een passage is dus geen technisch blok. Het is gewoon een stuk tekst: een alinea, een paar alinea's onder een tussenkop, een antwoord op één vraag.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Het gaat om ranking, niet om indexering</h2></div>
+      <p>Belangrijk om te snappen: het gaat om ranking, niet om indexering. Google slaat nog steeds de hele pagina op, niet losse alinea's. Alleen bij het bepalen van de relevantie kijkt het algoritme nu ook naar losse passages. De naam zegt het al.</p>
+      <p>De rest van SEO blijft gewoon meetellen. Backlinks, snelheid, de betrouwbaarheid van je site, of je pagina überhaupt in de index staat. Een sterke alinea op een pagina die Google niet vertrouwt, wint nog steeds niet. Passage ranking geeft een goed antwoord op een lange pagina wel een eerlijkere kans.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Wat is wat? Passages, BERT en de featured snippet</h2></div>
+      <p>Die drie worden vaak door elkaar gehaald. Het draait allemaal op taalbegrip, maar ze doen iets anders.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Begrip</th><th>Wat het doet</th><th>Zie je het?</th></tr></thead>
+          <tbody>
+            <tr><td>Passage ranking</td><td>Beoordeelt losse stukken van een pagina om de hele pagina beter te rangschikken</td><td>Nee, het werkt achter de schermen</td></tr>
+            <tr><td>BERT</td><td>Een taalmodel waarmee Google sinds 2019 snapt hoe woorden samen een betekenis vormen</td><td>Nee, het helpt de zoekvraag te begrijpen</td></tr>
+            <tr><td><a href="/kennisbank/wat-is/featured-snippet/">Featured snippet</a></td><td>Toont een kort antwoord uit één pagina in een blok bovenaan</td><td>Ja, als box boven de zoekresultaten</td></tr>
+            <tr><td>AI-overzicht</td><td>Vat het antwoord samen uit meerdere pagina's</td><td>Ja, bovenaan bij steeds meer vragen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het verband met de featured snippet is wel nauw. In zijn aankondiging liet Google een voorbeeld zien waarin een passage diep in een pagina als uitgelicht antwoord verscheen. Google schreef er direct bij dat de verbetering geldt voor hoe het webpagina's in het algemeen rangschikt, niet alleen voor dat antwoordblok.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2>Voor welke zoekopdrachten maakt het verschil?</h2></div>
+      <p>Niet voor korte, brede zoekopdrachten. Bij "warmtepomp" of "loodgieter Assen" kijkt Google naar hele pagina's en bedrijven. Het verschil zit in de lange, precieze vragen:</p>
+      <ul>
+        <li>vragen met een duidelijk antwoord, zoals "hoe lang gaat een warmtepomp mee";</li>
+        <li>vragen over een detail van een groter onderwerp, zoals "mag je een dakkapel plaatsen zonder vergunning aan de achterkant";</li>
+        <li>vragen waarop weinig pagina's een eigen antwoord hebben, maar veel brede pagina's het ergens noemen.</li>
+      </ul>
+      <p>Juist voor het mkb is dat goed nieuws. Een vakman die op één lange pagina alles over zijn vak uitlegt, kan nu ook gevonden worden op de losse vragen daarin. Ook als een groot platform een aparte pagina voor elke vraag heeft.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: een installateur in Hoogeveen heeft één lange pagina over warmtepompen. Soorten, kosten, subsidie, onderhoud: het staat er allemaal. Halverwege staat de tussenkop "Hoe lang gaat een warmtepomp mee?" met een korte, duidelijke alinea eronder.</p>
+      <p>Iemand zoekt op "levensduur warmtepomp". Vroeger zag Google zijn pagina vooral als een algemeen verhaal en koos het eerder een pagina die alleen over levensduur ging. Nu kan die ene alinea de doorslag geven. Op voorwaarde dat hij de vraag echt beantwoordt. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>In de code ziet zo'n opbouw er heel gewoon uit. Een kop met de vraag, direct het antwoord, dan de volgende vraag:</p>
+      <pre><code>{opbouw}</code></pre>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Een alinea die op zichzelf staat</h2></div>
+      <p>Het verschil tussen een passage die kan scoren en een die verdwijnt, zit vaak in de eerste zin. Vergelijk deze twee:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zwak</th><th>Sterk</th></tr></thead>
+          <tbody>
+            <tr><td>"Zoals we hierboven al zeiden, is dat natuurlijk van veel dingen afhankelijk. Bij ons bedrijf vinden we kwaliteit erg belangrijk, en daarom ..."</td><td>"Een warmtepomp gaat bij goed onderhoud meestal vijftien tot twintig jaar mee. De buitenunit slijt het snelst, vooral bij een plek in de volle zon."</td></tr>
+            <tr><td>Verwijst naar eerdere tekst, noemt het onderwerp niet, geeft geen antwoord</td><td>Noemt het onderwerp, geeft direct het antwoord, voegt een concreet detail toe</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Verzonnen voorbeeldteksten, de getallen zijn ter illustratie.</p>
+      <p>De sterke versie snap je ook als je alleen die alinea leest. Dat is de toets. Een zoekmachine, een AI-assistent en een haastige lezer die naar beneden scrolt, lezen allemaal in stukjes.</p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <p>Technisch hoef je niets te regelen. Er is geen code en geen instelling voor. Wat wel helpt, is een heldere structuur.</p>
+      <ul class="vink">
+        <li>Gebruik <a href="/kennisbank/wat-is/headings/">tussenkoppen</a> die zeggen wat eronder staat. Liefst in de woorden van je klant.</li>
+        <li>Zet het antwoord in de eerste zin onder de kop. Uitleg komt daarna.</li>
+        <li>Eén alinea, één vraag. Een alinea die drie dingen tegelijk wil, wint op geen van drieën.</li>
+        <li>Noem het onderwerp in de alinea zelf. Schrijf "een warmtepomp" in plaats van "hij" als de alinea ook los moet werken.</li>
+        <li>Maak een pagina niet lang om de lengte. Veel inhoud zonder ordening helpt niemand, Google ook niet.</li>
+        <li>Krijgt een onderwerp veel eigen zoekvragen? Dan verdient het een eigen pagina. Anders mag het een sectie blijven.</li>
+      </ul>
+
+      <h3>Zo controleer je je eigen pagina</h3>
+      <ol>
+        <li>Open in Google Search Console het rapport Prestaties en filter op een lange pagina.</li>
+        <li>Kijk op het tabblad Zoekopdrachten naar lange, specifieke zoekvragen. Die komen vaak binnen via één passage.</li>
+        <li>Zoek de alinea op die bij zo'n zoekvraag hoort. Staat het antwoord in de eerste zin? Zo niet, herschrijf hem.</li>
+        <li>Zie je zoekvragen waarvoor nog geen alinea bestaat? Voeg een tussenkop met een kort antwoord toe.</li>
+        <li>Kijk na een paar weken of je positie op die vragen beter is.</li>
+      </ol>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2>Misverstanden over passage ranking</h2></div>
+      <ul>
+        <li><strong>"Lange pagina's winnen nu altijd."</strong> Nee. Een lange pagina kan op losse vragen scoren als die vragen helder beantwoord worden. Lengte op zich levert niets op.</li>
+        <li><strong>"Je moet passages markeren in de code."</strong> Nee. Er bestaat geen speciale code voor. Google herkent de passages zelf.</li>
+        <li><strong>"Google indexeert nu losse alinea's."</strong> Nee. De hele pagina wordt opgeslagen en gerangschikt. Passages helpen alleen bij het bepalen van de relevantie.</li>
+        <li><strong>"Elke alinea moet een eigen kop krijgen."</strong> Nee. Koppen helpen, maar een kop boven elke drie zinnen maakt een pagina onleesbaar. Kop per vraag of per onderwerp is genoeg.</li>
+      </ul>
+      <p>Dezelfde aanpak werkt bij AI-zoekmachines. ChatGPT en de AI Overviews van Google citeren ook losse stukken tekst. Een alinea die op zichzelf een vraag beantwoordt, nemen ze makkelijker over. Meer daarover lees je bij <a href="/kennisbank/wat-is/geo/">GEO</a>.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a> of laat ons je <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> schrijven, vanaf € 75 per pagina. Hoe Google zoekvragen in het algemeen begrijpt, lees je bij <a href="/kennisbank/wat-is/semantisch-zoeken/">semantisch zoeken</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Moet ik iets instellen voor passage ranking?', a: 'Nee. Er is geen code of instelling voor. Google herkent de passages zelf. Je helpt het door duidelijke tussenkoppen te gebruiken en het antwoord direct onder de kop te zetten.' },
+      { v: 'Is passage ranking hetzelfde als een featured snippet?', a: 'Nee. Een featured snippet is het zichtbare antwoordblok bovenaan Google. Passage ranking werkt achter de schermen en helpt bepalen welke pagina\'s hoog komen in de gewone resultaten.' },
+      { v: 'Worden lange pagina\'s nu beter?', a: 'Niet vanzelf. Een lange pagina krijgt wel een eerlijkere kans op losse vragen, als die vragen er helder in beantwoord worden. Een lange pagina zonder ordening heeft er niets aan.' },
+      { v: 'Geldt het ook voor Nederlandstalige zoekopdrachten?', a: 'Ja. Google schreef bij de aankondiging dat het systeem in alle talen zou werken zodra het wereldwijd was uitgerold.' },
+    ]}
+  />
+
+  <Actie titel="Staan jouw antwoorden op de goede plek?" tekst={`We kijken gratis hoe je pagina's zijn opgebouwd. ${site.contactpersoon} belt je met de drie verbeteringen die het meeste opleveren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-wrap: normal; word-break: normal; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

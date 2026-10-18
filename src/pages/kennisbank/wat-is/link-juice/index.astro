@@ -1,0 +1,162 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--link-juice.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/link-juice/';
+const datum = '2026-10-18';
+const definitie = 'Link juice is de waarde die een pagina via een link doorgeeft aan een andere pagina, zodat de pagina die de link krijgt sterker wordt in Google.';
+const hoofdstukken = [
+  { id: 'pagerank', titel: 'Waar het op gebaseerd is: PageRank' },
+  { id: 'verdeling', titel: 'Hoe de waarde wordt verdeeld' },
+  { id: 'intern-extern', titel: 'Intern en extern' },
+  { id: 'kracht', titel: 'Wat de kracht van een link bepaalt' },
+  { id: 'geen', titel: 'Links die niets doorgeven' },
+  { id: 'sculpting', titel: 'PageRank sculpting' },
+  { id: 'doen', titel: 'Wat je ermee doet' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Link juice',
+  alternateName: ['Linkjuice', 'Link equity'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is link juice? Uitleg met voorbeeld',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Link juice',
+}];
+---
+<Base
+  title="Wat is link juice? Uitleg met voorbeeld | Drijfveer Media"
+  description="Wat is link juice? De waarde die een link doorgeeft. Lees hoe het met PageRank samenhangt, wat interne links ermee doen en welke links niets opleveren."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Link juice', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Linkbuilding</p>
+        <h1>Wat is link juice?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Een raar woord, maar het beeld klopt aardig. Zie elke link als een buis. Een sterke pagina die naar jou linkt, laat iets van haar kracht naar jouw pagina stromen. Hoe sterker en relevanter de bron, hoe meer er doorkomt. Het is vakjargon, geen term van Google zelf. Je ziet het ook aaneengeschreven als linkjuice, of in het Engels als link equity.</p>
+
+      <div class="inhoud-blok"><Inhoud items={hoofdstukken} leestijd={6} /></div>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2 id="pagerank">Waar het op gebaseerd is: PageRank</h2></div>
+      <p>Toen Google begon, was PageRank het grote verschil met andere zoekmachines. Het idee: op het web is een link een stem. Een pagina met veel stemmen van sterke pagina's is belangrijk. Google schrijft in zijn eigen overzicht van rankingsystemen dat PageRank sterk veranderd is, maar nog altijd deel uitmaakt van de kern van de ranking.</p>
+      <p>Het oorspronkelijke model werkt met een denkbeeldige surfer die willekeurig op links klikt. Hoe vaker hij op een pagina uitkomt, hoe hoger de PageRank. Bij elke stap is er een kans dat hij stopt en ergens anders opnieuw begint. Daardoor gaat er bij elke link een deel van de waarde verloren. Die dempingsfactor wordt volgens Wikipedia meestal rond de 0,85 aangenomen.</p>
+      <p>Vroeger kon je de PageRank van een pagina zien in de Google Toolbar, als cijfer van 0 tot 10. Google zette die weergave in april 2016 uit. De berekening bestaat nog, alleen kun je hem niet meer zien.</p>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="verdeling">Hoe de waarde wordt verdeeld</h2></div>
+      <p>In het klassieke model wordt de waarde van een pagina verdeeld over al haar uitgaande links. Eén link op een pagina krijgt meer mee dan één link tussen honderd andere. Een vereenvoudigd rekenvoorbeeld, zonder dempingsfactor:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Pagina met 10 punten waarde</th><th>Aantal uitgaande links</th><th>Waarde per link</th></tr></thead>
+          <tbody>
+            <tr><td>Kort artikel</td><td>2</td><td>5 punten</td></tr>
+            <tr><td>Gewone pagina</td><td>10</td><td>1 punt</td></tr>
+            <tr><td>Pagina met groot menu en volle footer</td><td>100</td><td>0,1 punt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Zo werkt het in de praktijk niet meer precies. Hoe Google het nu precies weegt, maakt het niet bekend. Een link midden in een tekst telt volgens de meeste vakmensen zwaarder dan een link in de footer. Maar de les blijft staan: hoe meer links op een pagina, hoe minder elke link meekrijgt.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2 id="intern-extern">Interne en externe link juice</h2></div>
+      <p>Er zijn twee stromen. Externe links, of backlinks, brengen waarde van buiten naar je site. Met <a href="/kennisbank/wat-is/interne-links/">interne links</a> verdeel je die waarde over je eigen pagina's. Bijna alle externe links komen binnen op je homepage of op een paar populaire artikelen. Als die pagina's niet doorlinken naar je diensten, blijft de kracht daar hangen.</p>
+      <p>Daarom kan een site met veel backlinks toch slecht scoren op zijn dienstpagina's. De waarde komt binnen, maar stroomt nergens heen.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="kracht">Wat de kracht van een link bepaalt</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Factor</th><th>Geeft meer door</th><th>Geeft minder door</th></tr></thead>
+          <tbody>
+            <tr><td>Sterkte van de bron</td><td>Een pagina met zelf veel goede links</td><td>Een nieuwe pagina zonder links</td></tr>
+            <tr><td>Onderwerp</td><td>Een site uit je eigen vak of regio</td><td>Een site die niets met je te maken heeft</td></tr>
+            <tr><td>Plek op de pagina</td><td>In de lopende tekst</td><td>In de footer of een lange lijst</td></tr>
+            <tr><td>Aantal links ernaast</td><td>Een paar links op de pagina</td><td>Honderden links op de pagina</td></tr>
+            <tr><td>Linktekst</td><td>Woorden die zeggen waar de pagina over gaat</td><td>"Klik hier" of een kale url</td></tr>
+            <tr><td>Attribuut</td><td>Een gewone link</td><td>Een link met nofollow, sponsored of ugc</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Over de linktekst lees je meer bij <a href="/kennisbank/wat-is/anchortekst/">anchortekst</a>.</p>
+
+      <h2 id="geen">Welke links geven geen link juice door?</h2>
+      <ul>
+        <li><strong>Links met een nofollow-tag</strong>, of met sponsored of ugc. Sinds september 2019 ziet Google al deze attributen als hint. Google bepaalt zelf of het de link meeneemt, maar reken er niet op. Betaalde links horen sponsored of nofollow te hebben.</li>
+        <li><strong>Links naar een pagina die niet meer bestaat.</strong> De waarde loopt dood. Verhuis je een pagina, zet dan een 301-<a href="/kennisbank/wat-is/redirect/">redirect</a>, dan gaat de waarde mee naar het nieuwe adres.</li>
+        <li><strong>Links die Google niet kan volgen.</strong> Google leest volgens zijn eigen documentatie alleen links betrouwbaar als ze een gewone link met een href zijn. Een knop die alleen met JavaScript werkt, geeft vaak niets door.</li>
+        <li><strong>Links van sites die niets met je te maken hebben</strong>, of van linkfarms. Die helpen niet en kunnen je zelfs schaden.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="sculpting">PageRank sculpting: een trucje dat niet meer werkt</h2></div>
+      <p>Vroeger zetten slimme SEO'ers nofollow op links naar hun contactpagina of privacyverklaring. Het idee: dan gaat er meer waarde naar de pagina's die wel moeten scoren. Dat heette PageRank sculpting.</p>
+      <p>Matt Cutts, die toen bij Google werkte, legde in 2009 uit waarom het niet meer werkte. Zijn voorbeeld: een pagina met tien punten en tien uitgaande links, waarvan vijf met nofollow. Vroeger kregen de vijf gewone links elk twee punten. Na een aanpassing door Google kregen ze er elk één. De andere vijf punten verdwijnen gewoon. Je spaart dus niets, je gooit het weg.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="voorbeeld">Een voorbeeld</h2></div>
+      <p>Stel: een bouwbedrijf in Emmen krijgt een link vanaf de site van de lokale ondernemersvereniging, naar zijn homepage. De homepage wordt sterker. Via het menu en de teksten linkt die door naar de pagina's over aanbouw en renovatie, dus die profiteren mee. Maar de pagina over dakkapellen hangt nergens aan. Geen menu-item, geen enkele interne link. Die krijgt dus niets. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>De oplossing kost tien minuten. Een link vanaf de homepage, een link in de tekst van de renovatiepagina en een plek in het menu. Zo krijgt ook die pagina haar deel.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="doen">Wat moet je ermee als ondernemer?</h2></div>
+      <ul class="vink">
+        <li>Zorg dat sites die bij je passen naar je linken: leveranciers, je branchevereniging, lokale media, partners waar je echt mee werkt.</li>
+        <li>Laat je sterkste pagina's verwijzen naar de pagina's die geld moeten opleveren. Met interne links bepaal jij waar de waarde heen gaat.</li>
+        <li>Zorg dat geen belangrijke pagina los hangt. Elke pagina die moet scoren, krijgt links vanuit je eigen site.</li>
+        <li>Kijk in Google Search Console bij Links welke pagina's de meeste externe links krijgen. Daar zit je kracht.</li>
+        <li>Zet interne links niet op nofollow om waarde te sparen. Dat werkt al sinds 2009 niet meer: de waarde verdwijnt gewoon.</li>
+        <li>Houd je menu en footer overzichtelijk. Twintig goede links zijn sterker dan tachtig die nergens over gaan.</li>
+      </ul>
+      <p>Wij testen linkbuilding eerst op onze eigen sites, al vijftien jaar. Daar hebben we ook geleerd waar de grens ligt: ooit namen we met een eigen site te veel risico en kreeg die een penalty van Google. Bij klanten blijven we daarom ruim binnen de regels.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/backlinks/">Wat zijn backlinks en hoe kom je eraan?</a> of bekijk hoe wij <a href="/linkbuilding/">linkbuilding</a> aanpakken, vanaf € 395 per maand met stijggarantie. Hoe sterk een site in zijn geheel is, lees je bij <a href="/kennisbank/wat-is/domain-authority/">Domain Authority</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is link juice hetzelfde als PageRank?', a: 'Bijna. PageRank is de berekening van Google. Link juice is de bijnaam die SEO\'ers geven aan de waarde die via links doorstroomt.' },
+      { v: 'Geven nofollow-links link juice door?', a: 'Reken er niet op. Sinds 2019 ziet Google nofollow, sponsored en ugc als hint en beslist het zelf of het de link meetelt.' },
+      { v: 'Verlies je link juice met een redirect?', a: 'Met een permanente 301-redirect ziet Google het nieuwe adres als opvolger. Geen redirect, dan wijzen de links naar een foutpagina en loopt de waarde dood.' },
+      { v: 'Kun je te veel interne links hebben?', a: 'Google noemt geen vast getal. Hoe meer links op een pagina, hoe minder elke link meekrijgt en hoe moeilijker de bezoeker kiest. Link waar het de lezer helpt.' },
+      { v: 'Geven links in de footer link juice door?', a: 'Ja, maar ze staan op elke pagina hetzelfde en tussen veel andere links. Een link in de lopende tekst zegt meer over het verband tussen twee pagina\'s.' },
+    ]}
+  />
+
+  <Actie titel="Waar lekt jouw site waarde weg?" tekst={`We kijken gratis naar je links, intern en extern. ${site.contactpersoon} belt je met de drie snelste verbeteringen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .inhoud-blok { margin: 8px 0 40px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

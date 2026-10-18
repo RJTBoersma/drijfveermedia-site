@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/werkwijze.astro';
+import { site } from '../../data/site';
+
+const schema = [{
+  '@type': 'HowTo',
+  name: 'Zo werkt Drijfveer Media: van eerste telefoontje tot resultaat',
+  url: `${site.url}/werkwijze/`,
+  step: [
+    'We bellen binnen 15 minuten terug',
+    'Vragen, vragen, vragen',
+    'We bestuderen de mogelijkheden en leggen ze voor',
+    'Een lage investering en targets waar je ons op afrekent',
+    'Beginnen waar het snelst verschil zit, daarna perfectioneren',
+  ].map((naam, i) => ({ '@type': 'HowToStep', position: i + 1, name: naam })),
+}];
+---
+<Base
+  title="Werkwijze: in vijf stappen naar resultaat | Drijfveer Media"
+  description="Zo werken we: binnen 15 minuten terugbellen, doorvragen tot we weten wat je wilt, een helder voorstel, concrete targets en beginnen waar de kans het grootst is."
+  kruimels={[{ naam: 'Werkwijze', url: '/werkwijze/' }]}
+  schema={schema}
+>
+  <Hero kicker="Werkwijze" titel="Van eerste telefoontje tot resultaat in vijf stappen">
+    <p>Geen verkooppraatje en geen dik rapport vooraf. We bellen snel terug, vragen door en beginnen waar je het snelst verschil merkt. Zo gaat dat, stap voor stap.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <div class="stap-kop"><Tekening naam="telefoon" maat={52} /><h2>1. We bellen binnen 15 minuten terug</h2></div>
+      <p>Laat je je nummer achter, dan bellen we je op werkdagen binnen 15 minuten terug. Geïnteresseerd, niet met verkoop in gedachten. {site.contactpersoon}, ons eerste aanspreekpunt, wil vooral weten wie je bent en wat je doet.</p>
+      <p>Waarom zo snel? Omdat je op dat moment met je vraag bezig bent. Een dag later heb je drie andere bureaus gesproken, of ben je het alweer vergeten.</p>
+
+      <div class="stap-kop"><Tekening naam="koffie" maat={52} /><h2>2. Vragen, vragen, vragen</h2></div>
+      <blockquote>We vragen, vragen en vragen, tot we weten wat je wilt. Wat je echt wilt.</blockquote>
+      <p>Veel ondernemers beginnen bij een oplossing. "Ik wil een nieuwe website." Of: "Ik moet iets met SEO." Daar zit bijna altijd een andere vraag achter. Meer aanvragen uit de eigen regio. Minder afhankelijk zijn van Werkspot. Een nieuwe dienst op de kaart zetten.</p>
+      <p>Dus vragen we. Wat levert een goede klant je op? Hoeveel extra werk kun je aan? Wie zijn je concurrenten? Wat heb je al geprobeerd, en waarom werkte dat niet? Pas als we het antwoord kennen, weten we wat werkt.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>3. We zoeken het uit en leggen het je voor</h2></div>
+      <p>Daarna gaan we aan de slag met je site, je concurrenten en de zoekwoorden in jouw markt. We kijken ook wat AI-assistenten als ChatGPT over je bedrijf zeggen. Waar twijfel is, kijken we wat we eerder op onze eigen sites in ons <a href="/proeflab/">proeflab</a> hebben getest.</p>
+      <p>Wat we vinden, leggen we je voor in een gesprek. Telefonisch, of persoonlijk: bij ons aan de Lauwers in Assen of bij jou op locatie. Geen rapport van dertig pagina's, maar de kansen op een rij, in gewone taal.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2>4. Een lage investering en targets waar je ons op afrekent</h2></div>
+      <p>Je hoort welke investering nodig is, en wat je daar concreet van mag verwachten. Liever klein beginnen en laten zien dat het werkt, dan een groot budget vragen op basis van beloftes. Wat onze diensten kosten, staat gewoon op de pagina <a href="/prijzen/">prijzen</a>.</p>
+      <p>Daarbij spreken we targets af waar we op afgerekend kunnen worden. Een aantal aanvragen per maand, bijvoorbeeld, of posities op zoekwoorden die geld opleveren. Halen we die niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2>5. Beginnen waar het snelst verschil zit</h2></div>
+      <p>We beginnen altijd bij de grootste kansen om op korte termijn verschil te maken. Daarna komt het perfectioneren. Dat is het Pareto-principe: ongeveer twintig procent van het werk levert tachtig procent van het resultaat op. Die twintig procent doen we eerst.</p>
+      <p>Een verzonnen voorbeeld. Een hovenier in Roden heeft een prima website. Alleen is zijn Google Bedrijfsprofiel half ingevuld, en noemen zijn pagina's nergens de dorpen waar hij werkt. Dat rechtzetten kost een paar dagen. Dat kan binnen weken meer telefoontjes opleveren. Een nieuw logo of een blog per week kan later nog.</p>
+
+      <h2>En daarna?</h2>
+      <p>Elke maand hoor je wat we deden en wat het opleverde. In gewone taal, want een rapport waar je een marketeer naast nodig hebt, schiet zijn doel voorbij. Werkt iets niet, dan zeggen we dat en stoppen we ermee. Verspild budget schrappen is soms meer waard dan een nieuwe campagne.</p>
+      <p>Je zit nergens aan vast. Onze diensten zijn maandelijks opzegbaar, tenzij we samen iets anders afspreken. Dat de meeste klanten toch jaren blijven, zegt genoeg.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Kost het eerste gesprek iets?', a: 'Nee. Het terugbelgesprek en het voorstel zijn gratis. Je betaalt pas als je zelf besluit met ons verder te gaan.' },
+      { v: 'Moet ik naar Assen komen?', a: 'Hoeft niet. We praten telefonisch, online of bij jou op locatie. Wil je langskomen aan de Lauwers in Assen, dan is dat ook goed. De koffie staat klaar.' },
+      { v: 'Wat als ik buiten kantoortijd bel?', a: 'Dan bellen we de volgende werkdag terug. We zijn bereikbaar op werkdagen van 8.00 tot 17.00 uur.' },
+    ]}
+  />
+
+  <Actie titel="Zullen we bij stap 1 beginnen?" tekst={`Laat je nummer achter of bel zelf. ${site.contactpersoon} belt je binnen 15 minuten terug en stelt eerst vragen. Pas daarna praten we over geld.`} />
+</Base>

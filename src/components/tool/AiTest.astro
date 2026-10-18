@@ -1,0 +1,200 @@
+---
+// "Noemt AI jou?" De bezoeker vult vak, plaats en bedrijfsnaam in. De tool maakt vijf vragen zoals klanten ze stellen,
+// opent elke vraag met één klik in ChatGPT, Perplexity, Copilot of de AI-modus van Google, en geeft na het afvinken een score
+// met de drie belangrijkste verbeterpunten. Alles gebeurt in de browser: er gaan geen gegevens naar ons of naar een API.
+// Later kan dezelfde tool overstappen op echte API-antwoorden (route 1), zonder dat de pagina verandert.
+interface Props { id?: string }
+const { id = 'ai-test' } = Astro.props;
+---
+<section class="wrap sectie" id={id}>
+  <div class="ai-test card" data-ai-test>
+    <div class="kop">
+      <p class="kicker">Gratis test · twee minuten</p>
+      <h2>Noemt AI jou? Test het zelf</h2>
+      <p class="muted">Vul in wat je doet en waar. Je krijgt vijf vragen zoals je klanten ze stellen. Eén klik opent de vraag in een AI-assistent. Jij kijkt of je genoemd wordt. Wat je invult, blijft in je eigen browser.</p>
+    </div>
+
+    <form class="stap stap-1" data-stap="1">
+      <div class="veld-rij">
+        <div class="veld"><label for={`${id}-vak`}>Wat doe je?</label><input id={`${id}-vak`} name="vak" required placeholder="Bijvoorbeeld: loodgieter" autocomplete="off" /></div>
+        <div class="veld"><label for={`${id}-plaats`}>In welke plaats?</label><input id={`${id}-plaats`} name="plaats" required placeholder="Bijvoorbeeld: Emmen" autocomplete="address-level2" /></div>
+        <div class="veld"><label for={`${id}-naam`}>Je bedrijfsnaam</label><input id={`${id}-naam`} name="naam" required placeholder="Bijvoorbeeld: Installatiebedrijf Jansen" autocomplete="organization" /></div>
+      </div>
+      <button class="btn" type="submit">Maak mijn vijf vragen</button>
+    </form>
+
+    <div class="stap stap-2" data-stap="2" hidden>
+      <ol class="vragen" data-vragen></ol>
+      <p class="klein muted tip">Tip: open de assistent in een privévenster, dan telt je eigen zoekgeschiedenis niet mee. Gemini en Claude? Kopieer de vraag en plak hem daar.</p>
+      <div class="acties">
+        <button class="btn" type="button" data-uitslag>Bekijk mijn score</button>
+        <button class="btn btn-ghost" type="button" data-opnieuw>Andere gegevens</button>
+      </div>
+    </div>
+
+    <div class="stap stap-3" data-stap="3" hidden aria-live="polite">
+      <div class="uitslag">
+        <div class="meter" data-meter style="--score:0"><span data-score>0</span><small>van 100</small></div>
+        <div>
+          <h3 data-oordeel></h3>
+          <p data-uitleg></p>
+        </div>
+      </div>
+      <h3 class="punten-kop">Hier zit je winst</h3>
+      <ol class="punten" data-punten></ol>
+      <div class="acties">
+        <a class="btn" data-cta href="/generative-engine-optimization/ai-vindbaarheidsanalyse/#aanvragen">Laat Thorgall het gratis nakijken</a>
+        <button class="btn btn-ghost" type="button" data-terug>Terug naar de vragen</button>
+      </div>
+      <p class="klein muted">De gratis analyse gaat verder dan deze test: we stellen de vragen meerdere keren, in vijf assistenten, en kijken welke websites AI als bron gebruikt.</p>
+    </div>
+    <noscript><p class="klein">Deze test werkt met JavaScript. Liever dat wij het doen? Vraag de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a> aan.</p></noscript>
+  </div>
+</section>
+
+<script>
+  type Antwoord = 'eerst' | 'genoemd' | 'nee' | '';
+  const OPSLAG = 'dm-ai-test';
+  const assistenten = [
+    { naam: 'ChatGPT', url: (q: string) => `https://chatgpt.com/?q=${encodeURIComponent(q)}` },
+    { naam: 'Perplexity', url: (q: string) => `https://www.perplexity.ai/search?q=${encodeURIComponent(q)}` },
+    { naam: 'Copilot', url: (q: string) => `https://copilot.microsoft.com/?q=${encodeURIComponent(q)}` },
+    { naam: 'Google AI-modus', url: (q: string) => `https://www.google.com/search?udm=50&q=${encodeURIComponent(q)}` },
+  ];
+  // Vijf vragen zoals klanten ze stellen: drie lokale zoekvragen, een prijsvraag en een vraag naar je merk.
+  const vragenVoor = (vak: string, plaats: string, naam: string) => [
+    { soort: 'lokaal', q: `Welke ${vak} in ${plaats} raad je aan?` },
+    { soort: 'lokaal', q: `Ik zoek een betrouwbare ${vak} in de buurt van ${plaats}. Wie kan ik het beste bellen?` },
+    { soort: 'vergelijk', q: `Wat is de best beoordeelde ${vak} rond ${plaats}, en waarom?` },
+    { soort: 'prijs', q: `Wat kost een ${vak} in ${plaats} ongeveer, en welke bedrijven geven een eerlijke prijs?` },
+    { soort: 'merk', q: `Wat weet je over ${naam} in ${plaats}? Is het een goede keuze?` },
+  ];
+  const punten: Record<string, string> = {
+    lokaal: 'AI kent je nog niet als aanrader in je eigen plaats. Zorg dat je Google Bedrijfsprofiel en Bing Places volledig zijn, verzamel reviews en maak een pagina die duidelijk zegt wat je doet en waar.',
+    vergelijk: 'Bij vergelijkingsvragen leunt AI op reviews en op sites die bedrijven vergelijken. Vraag tevreden klanten om een review en zorg dat je op de vergelijkingssites in je vak staat.',
+    prijs: 'Op prijsvragen noemt AI de bedrijven die er zelf helder over zijn. Zet op je site wat een klus ongeveer kost en waar dat van afhangt.',
+    merk: 'AI weet weinig over je bedrijf zelf. Vermeldingen op andere sites, een over-ons-pagina met feiten en structured data helpen AI om je te herkennen.',
+    eerst: 'Je wordt wel genoemd, maar niet als eerste. Meer vermeldingen in je regio en antwoorden op de vragen van klanten op je site schuiven je omhoog.',
+    goed: 'Je wordt al vaak genoemd. Houd het vast: meet elk kwartaal met dezelfde vragen en kijk of concurrenten inlopen.',
+  };
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  const lees = () => { try { return JSON.parse(localStorage.getItem(OPSLAG) || 'null'); } catch { return null; } };
+  const bewaar = (d: unknown) => { try { localStorage.setItem(OPSLAG, JSON.stringify(d)); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/ai-test/${stap}`, r: '' })); } catch {} };
+
+  document.querySelectorAll<HTMLElement>('[data-ai-test]').forEach((el) => {
+    const stappen = [...el.querySelectorAll<HTMLElement>('[data-stap]')];
+    const toon = (n: number) => { stappen.forEach((s) => (s.hidden = s.dataset.stap !== String(n))); };
+    const form = el.querySelector<HTMLFormElement>('.stap-1')!;
+    const lijst = el.querySelector<HTMLOListElement>('[data-vragen]')!;
+    let staat: { vak: string; plaats: string; naam: string; antwoorden: Antwoord[] } = { vak: '', plaats: '', naam: '', antwoorden: [] };
+
+    const bouwVragen = () => {
+      const vragen = vragenVoor(staat.vak, staat.plaats, staat.naam);
+      lijst.innerHTML = vragen.map((v, i) => `
+        <li class="vraag" data-i="${i}">
+          <p class="q">${esc(v.q)}</p>
+          <div class="open">${assistenten.map((a) => `<a href="${a.url(v.q)}" target="_blank" rel="noopener">${a.naam}</a>`).join('')}<button type="button" class="kopieer" data-q="${esc(v.q)}">Kopieer</button></div>
+          <fieldset class="keuze"><legend>Werd ${esc(staat.naam)} genoemd?</legend>
+            ${[['eerst', 'Ja, als eerste'], ['genoemd', 'Ja, maar niet als eerste'], ['nee', 'Nee']].map(([w, t]) => `<label><input type="radio" name="v${i}" value="${w}" ${staat.antwoorden[i] === w ? 'checked' : ''}> ${t}</label>`).join('')}
+          </fieldset>
+        </li>`).join('');
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const f = new FormData(form);
+      const nieuw = { vak: String(f.get('vak')).trim().toLowerCase(), plaats: String(f.get('plaats')).trim(), naam: String(f.get('naam')).trim() };
+      const zelfde = nieuw.vak === staat.vak && nieuw.plaats === staat.plaats && nieuw.naam === staat.naam;
+      staat = { ...nieuw, antwoorden: zelfde ? staat.antwoorden : [] };
+      bewaar(staat); bouwVragen(); toon(2); tel('vragen');
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    lijst.addEventListener('change', (e) => {
+      const r = e.target as HTMLInputElement;
+      const i = Number(r.closest<HTMLElement>('.vraag')?.dataset.i);
+      staat.antwoorden[i] = r.value as Antwoord; bewaar(staat);
+    });
+    lijst.addEventListener('click', async (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.kopieer');
+      if (!b) return;
+      try { await navigator.clipboard.writeText(b.dataset.q || ''); b.textContent = 'Gekopieerd'; setTimeout(() => (b.textContent = 'Kopieer'), 1600); } catch { b.textContent = 'Selecteer en kopieer'; }
+    });
+
+    el.querySelector('[data-uitslag]')!.addEventListener('click', () => {
+      const vragen = vragenVoor(staat.vak, staat.plaats, staat.naam);
+      const ingevuld = staat.antwoorden.filter(Boolean).length;
+      if (ingevuld < vragen.length) {
+        const eerste = lijst.querySelector<HTMLElement>(`.vraag:nth-child(${vragen.findIndex((_, i) => !staat.antwoorden[i]) + 1})`);
+        eerste?.classList.add('let-op'); eerste?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => eerste?.classList.remove('let-op'), 1800);
+        return;
+      }
+      const waarde = { eerst: 2, genoemd: 1, nee: 0, '': 0 };
+      const score = Math.round((staat.antwoorden.reduce((s, a) => s + waarde[a], 0) / (vragen.length * 2)) * 100);
+      const oordeel = score >= 70 ? 'AI noemt je vaak' : score >= 30 ? 'AI kent je, maar niet overal' : 'AI noemt je (nog) niet';
+      const uitleg = score >= 70
+        ? `Bij de meeste vragen over ${staat.vak} in ${staat.plaats} kom je in beeld. Dat hebben weinig bedrijven.`
+        : score >= 30
+          ? `Bij een deel van de vragen kom je in beeld. Bij de rest gaat de klant naar een ander.`
+          : `Wie AI vraagt naar een ${staat.vak} in ${staat.plaats}, krijgt nu andere namen. Dat is goed te verbeteren.`;
+      // Verbeterpunten: eerst de soorten vragen waar je niet genoemd werd, dan de vragen waar je niet bovenaan stond
+      const gemist = [...new Set(vragen.filter((_, i) => staat.antwoorden[i] === 'nee').map((v) => v.soort))];
+      const lijstPunten = gemist.map((s) => punten[s]);
+      if (lijstPunten.length < 3 && staat.antwoorden.includes('genoemd')) lijstPunten.push(punten.eerst);
+      if (!lijstPunten.length) lijstPunten.push(punten.goed);
+      el.querySelector('[data-score]')!.textContent = String(score);
+      el.querySelector<HTMLElement>('[data-meter]')!.style.setProperty('--score', String(score));
+      el.querySelector('[data-oordeel]')!.textContent = oordeel;
+      el.querySelector('[data-uitleg]')!.textContent = uitleg;
+      el.querySelector('[data-punten]')!.innerHTML = lijstPunten.slice(0, 3).map((p) => `<li>${esc(p)}</li>`).join('');
+      el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/generative-engine-optimization/ai-vindbaarheidsanalyse/?vak=${encodeURIComponent(staat.vak)}&plaats=${encodeURIComponent(staat.plaats)}#aanvragen`;
+      toon(3); tel('score'); el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    el.querySelector('[data-opnieuw]')!.addEventListener('click', () => toon(1));
+    el.querySelector('[data-terug]')!.addEventListener('click', () => toon(2));
+
+    // Terugkerende bezoeker: gegevens staan al klaar
+    const oud = lees();
+    if (oud?.vak) {
+      staat = { antwoorden: [], ...oud };
+      (form.elements.namedItem('vak') as HTMLInputElement).value = staat.vak;
+      (form.elements.namedItem('plaats') as HTMLInputElement).value = staat.plaats;
+      (form.elements.namedItem('naam') as HTMLInputElement).value = staat.naam;
+    }
+  });
+</script>
+
+<style>
+  .ai-test { padding: clamp(22px, 4vw, 40px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .kop { max-width: 62ch; margin-bottom: 22px; }
+  .kop h2 { margin: 6px 0 10px; }
+  .stap-1 .btn { margin-top: 6px; }
+  .vragen { list-style: none; counter-reset: v; padding: 0; margin: 0 0 14px; display: grid; gap: 12px; }
+  .vragen :global(.vraag) { counter-increment: v; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: box-shadow 0.2s; }
+  .vragen :global(.vraag.let-op) { box-shadow: 0 0 0 3px var(--orange); }
+  .vragen :global(.q) { font-weight: 800; margin: 0 0 10px; }
+  .vragen :global(.q)::before { content: counter(v) '. '; color: var(--orange); }
+  .vragen :global(.open) { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .vragen :global(.open a), .vragen :global(.kopieer) { font: inherit; font-size: 0.92rem; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--line); border-radius: 999px; padding: 5px 12px; text-decoration: none; cursor: pointer; }
+  .vragen :global(.open a:hover), .vragen :global(.kopieer:hover) { border-color: var(--navy); }
+  .vragen :global(.open a)::after { content: ' ↗'; font-weight: 400; }
+  .vragen :global(.keuze) { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.95rem; }
+  .vragen :global(.keuze legend) { font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; padding: 0; }
+  .vragen :global(.keuze label) { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+  .vragen :global(.keuze input) { accent-color: var(--navy); width: 18px; height: 18px; }
+  .tip { margin: 0 0 16px; }
+  .acties { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 14px; }
+  .uitslag { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; margin-bottom: 18px; }
+  .uitslag h3 { margin: 0 0 6px; }
+  .uitslag p { margin: 0; color: var(--muted); }
+  .meter { --score: 0; width: 132px; aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; text-align: center;
+    background: radial-gradient(closest-side, var(--panel) 78%, transparent 79% 100%), conic-gradient(var(--orange) calc(var(--score) * 1%), var(--chip) 0); }
+  .meter span { font-size: 2.4rem; font-weight: 900; line-height: 1; color: var(--ink); }
+  .meter small { color: var(--muted); font-size: 0.85rem; }
+  .punten-kop { font-size: 1.15rem; margin: 6px 0 8px; }
+  .punten { padding-left: 1.2em; margin: 0 0 12px; display: grid; gap: 8px; }
+  .punten :global(li::marker) { color: var(--orange); font-weight: 800; }
+  @media (max-width: 560px) { .uitslag { grid-template-columns: 1fr; justify-items: start; } .meter { width: 112px; } }
+</style>

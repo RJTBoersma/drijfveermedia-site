@@ -1,0 +1,64 @@
+---
+// Scène voor /kennisbank/gidsen/zoekwoordonderzoek/: een lijst zoekwoorden met volumebalken, een vergrootglas zoekt en het zoekwoord met de beste kans licht op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een lijst met zoekwoorden voor een hovenier, met balkjes voor het zoekvolume. Een vergrootglas zoekt en het zoekwoord met de beste kans wordt gemarkeerd.'}>
+  <rect x="34" y="30" width="310" height="212" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="52" y="46" width="274" height="26" rx="13" />
+  <circle class="l" cx="70" cy="59" r="6" />
+  <path class="l" d="M74.5 63.5l4 4" />
+  <text x="86" y="63" font-size="12" font-weight="700">hovenier</text>
+  <text class="zacht" x="52" y="96" font-size="10">Zoekwoord</text>
+  <text class="zacht" x="240" y="96" font-size="10">Volume</text>
+  <path d="M52 103h274" stroke="#d9e1ea" stroke-width="1.5" />
+
+  <text x="52" y="124" font-size="12">hovenier</text>
+  <rect x="240" y="116" width="84" height="9" rx="4.5" fill="#074663" />
+  <path d="M52 136h274" stroke="#e8eef4" stroke-width="1.5" />
+
+  <text x="52" y="156" font-size="12">hovenier assen</text>
+  <rect x="240" y="148" width="30" height="9" rx="4.5" fill="#074663" />
+  <path d="M52 168h274" stroke="#e8eef4" stroke-width="1.5" />
+
+  <text x="52" y="188" font-size="12">tuin laten aanleggen kosten</text>
+  <rect x="240" y="180" width="46" height="9" rx="4.5" fill="#074663" />
+  <path d="M52 200h274" stroke="#e8eef4" stroke-width="1.5" />
+
+  <text x="52" y="220" font-size="12">beplantingsplan maken</text>
+  <rect x="240" y="212" width="20" height="9" rx="4.5" fill="#074663" />
+
+  <g class="glas">
+    <circle cx="398" cy="128" r="38" fill="#fff" fill-opacity="0.6" stroke="#074663" stroke-width="6" />
+    <path d="M425 155l30 30" stroke="#074663" stroke-width="11" stroke-linecap="round" />
+    <path class="a" d="M378 112a24 24 0 0 1 18-8" />
+  </g>
+
+  {!mini && (
+    <g>
+      <rect class="markering" x="44" y="139" width="290" height="26" rx="8" fill="#ff6600" fill-opacity="0.13" />
+      <g class="kans">
+        <rect x="364" y="196" width="100" height="28" rx="14" fill="#fff" stroke="#ff6600" stroke-width="2" />
+        <circle cx="381" cy="210" r="7" fill="#1f8a5b" />
+        <path d="M377.5 210l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="394" y="214" font-size="11" font-weight="800">Beste kans</text>
+      </g>
+      <path class="pijl" d="M362 206C345 200 340 170 336 156" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 5" />
+    </g>
+  )}
+</svg>
+<style>
+  .glas { transform-box: view-box; }
+  .markering, .kans { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .markering { opacity: 0; transform: scaleX(0.2); }
+  :global(.teken-js) .kans, :global(.teken-js) .pijl { opacity: 0; }
+  .in-beeld .markering { animation: kennisbank--gidsen--zoekwoordonderzoek-markeer 0.7s cubic-bezier(.6,.1,.3,1) 0.8s forwards; }
+  .in-beeld .kans { animation: kennisbank--gidsen--zoekwoordonderzoek-pop 0.5s cubic-bezier(.3,1.5,.5,1) 1.5s forwards; }
+  .in-beeld .pijl { animation: kennisbank--gidsen--zoekwoordonderzoek-pijl 0.6s ease 1.3s forwards; }
+  .in-beeld .glas { animation: kennisbank--gidsen--zoekwoordonderzoek-zoek 6s ease-in-out 2s infinite; }
+  @keyframes kennisbank--gidsen--zoekwoordonderzoek-markeer { to { opacity: 1; transform: none; } }
+  @keyframes kennisbank--gidsen--zoekwoordonderzoek-pop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank--gidsen--zoekwoordonderzoek-pijl { to { opacity: 1; } }
+  @keyframes kennisbank--gidsen--zoekwoordonderzoek-zoek { 0%, 100% { transform: translate(0, 0); } 35% { transform: translate(-12px, 8px); } 70% { transform: translate(6px, -6px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .markering, .in-beeld .kans, .in-beeld .pijl, .in-beeld .glas { animation: none; } }
+</style>

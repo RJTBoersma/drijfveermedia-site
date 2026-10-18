@@ -1,0 +1,235 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--funnel.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/funnel/';
+const definitie = 'Een funnel is het model van de stappen die iemand zet van de eerste kennismaking met je bedrijf tot betalende klant, met bij elke stap minder mensen over.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Funnel',
+  alternateName: ['Marketing funnel', 'Sales funnel', 'Trechter'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+  dateModified: '2026-10-18',
+}];
+const hoofdstukken = [
+  { id: 'trechter', titel: 'Waarom het een trechter heet' },
+  { id: 'fases', titel: 'De fases: tofu, mofu en bofu' },
+  { id: 'verschil', titel: 'Marketing funnel of sales funnel' },
+  { id: 'modellen', titel: 'Funnel, AIDA en customer journey' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld: waar lekt het?' },
+  { id: 'bouwen', titel: 'Zo bouw je er een in zes stappen' },
+  { id: 'meten', titel: 'Meten in Google Analytics 4' },
+  { id: 'fouten', titel: 'Zeven veelgemaakte fouten' },
+  { id: 'nodig', titel: 'Heb je er een nodig?' },
+];
+---
+<Base
+  title="Wat is een funnel? Fases en rekenvoorbeeld | Drijfveer Media"
+  description="Wat is een funnel? De stappen van eerste kennismaking tot betalende klant: tofu, mofu en bofu, een rekenvoorbeeld en zo meet je het in GA4."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Funnel', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Leadgeneratie</p>
+        <h1>Wat is een funnel?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-18" />
+        <p>Wat is een funnel precies? Funnel is Engels voor trechter. Bovenin gaan veel mensen erin: iedereen die ooit van je hoort. Onderin komt een klein groepje eruit: de mensen die echt iets kopen. Daartussen zitten stappen, en bij elke stap haakt een deel af. Een marketeer die over je funnel praat, bedoelt dus eigenlijk: welke route leggen jouw klanten af, en waar raak je ze onderweg kwijt?</p>
+        <p>Dat klinkt als iets voor grote webshops. Toch heeft elke loodgieter, accountant en hovenier er een, of hij het zo noemt of niet. Hieronder lees je hoe het werkt, met de termen die je tegenkomt, een rekenvoorbeeld en een stappenplan dat je zelf kunt gebruiken.</p>
+
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een funnel laat zien hoe een vreemde stap voor stap klant wordt: opmerken, overwegen, kopen.</li>
+            <li>Die drie fases heten ook wel tofu, mofu en bofu: top, middle en bottom of the funnel.</li>
+            <li>De marketing funnel gaat over aandacht en vertrouwen, de sales funnel over de verkoop zelf.</li>
+            <li>De winst zit meestal niet in meer bezoekers, maar in minder afhakers onderaan.</li>
+            <li>In Google Analytics 4 zie je je eigen trechter via Verkennen en dan Trechterverkenning.</li>
+          </ul>
+        </div>
+
+        <div class="stap-kop" id="trechter"><Tekening naam="magneet" maat={52} /><h2>Waarom het een trechter heet</h2></div>
+        <p>Neem duizend mensen die deze maand je naam zien. In Google, op een bus, in een bericht van een buurman. Een deel klikt door naar je site. Een kleiner deel leest verder dan de eerste pagina. Nog minder mensen vullen het formulier in. En van die aanvragen wordt een deel klant. Teken je dat als balkjes onder elkaar, dan krijg je vanzelf de vorm van een trechter.</p>
+        <p>Het idee is ouder dan internet. Volgens Wikipedia stond de basis al in 1898 in het Amerikaanse vakblad Printers' Ink: een advertentie moet de aandacht trekken, interesse wekken en overtuigen. Dat werd later het bekende AIDA-model. William W. Townsend koppelde het in 1924 in zijn boek Bond Salesmanship aan het beeld van een trechter. Sindsdien bestaan er tientallen varianten, met drie, vijf of zeven stappen. Het principe blijft hetzelfde.</p>
+        <p>Waarom is dat model handig? Omdat het je dwingt per stap te kijken. "We krijgen te weinig klanten" is een gevoel. "Van de veertig aanvragen per maand worden er maar vijf klant" is een probleem dat je kunt oplossen.</p>
+
+        <div class="stap-kop" id="fases"><Tekening naam="doel" maat={52} /><h2>De fases van een funnel: tofu, mofu en bofu</h2></div>
+        <p>De meeste marketeers delen de trechter in drie lagen. De Engelse afkortingen klinken als een gerecht, maar ze zijn simpel.</p>
+
+        <h3>Tofu: awareness, de bovenkant</h3>
+        <p>Top of the funnel. Iemand heeft een probleem of een wens, maar kent jou nog niet. Een huiseigenaar in Assen merkt dat zijn cv-ketel rare geluiden maakt. Hij zoekt "cv-ketel tikt", leest een uitleg, ziet een filmpje. In deze fase wil hij leren, niet kopen. Wie hem nu al een offerte door de strot duwt, is hem kwijt.</p>
+        <p>Wat werkt hier: een duidelijke uitleg op je site, een goed <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>, artikelen die echte vragen beantwoorden. Dat heet ook wel <a href="/kennisbank/wat-is/contentmarketing/">contentmarketing</a>.</p>
+
+        <h3>Mofu: overweging, het midden</h3>
+        <p>Middle of the funnel. De klant weet nu wat hij nodig heeft en gaat vergelijken. Repareren of vervangen? Welk merk? Wie in de buurt doet dit goed? Hij kijkt naar prijzen, reviews, voorbeelden van je werk en hoe snel je kunt komen. Hier win je op vertrouwen.</p>
+        <p>Wat werkt hier: een prijsindicatie, cases, reviews, een vergelijking van opties, een eerlijk antwoord op "wat kost het". Hier vang je ook leads: mensen die hun e-mailadres of telefoonnummer achterlaten voor een checklist of een prijsindicatie op maat.</p>
+
+        <h3>Bofu: conversie, de onderkant</h3>
+        <p>Bottom of the funnel. De klant wil kopen en kiest tussen twee of drie partijen. Nu tellen kleine dingen. Hoe snel bel je terug? Is je offerte helder? Kan hij makkelijk een afspraak maken? Een <a href="/kennisbank/wat-is/call-to-action/">call to action</a> die duidelijk zegt wat er gebeurt, haalt hier de drempel weg.</p>
+        <p>Wat werkt hier: een <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina</a> met één doel, een kort formulier, snel terugbellen en opvolgen van offertes.</p>
+
+        <h3>Na de koop: klant blijven</h3>
+        <p>Veel modellen stoppen bij de aankoop. Dat is zonde. Een tevreden klant komt terug, geeft een review en stuurt zijn zwager. Daarom tekenen sommige marketeers onder de trechter nog een omgekeerde trechter: van klant naar vaste klant naar ambassadeur. Voor een lokaal bedrijf is dat vaak de goedkoopste groei die er is.</p>
+
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Fase</th><th>Wat de klant denkt</th><th>Wat jij laat zien</th><th>Wat je meet</th></tr></thead>
+            <tbody>
+              <tr><td><b>Tofu</b> (awareness)</td><td>"Wat is dit, hoe los ik het op?"</td><td>Uitleg, tips, antwoorden op vragen</td><td>Vertoningen, bezoekers, nieuwe gebruikers</td></tr>
+              <tr><td><b>Mofu</b> (overweging)</td><td>"Wie kan dit, wat kost het?"</td><td>Prijzen, cases, reviews, vergelijkingen</td><td>Terugkerende bezoekers, downloads, inschrijvingen</td></tr>
+              <tr><td><b>Bofu</b> (conversie)</td><td>"Bij wie doe ik het?"</td><td>Offerteformulier, telefoonnummer, garantie</td><td>Aanvragen, telefoontjes, getekende offertes</td></tr>
+              <tr><td><b>Na de koop</b></td><td>"Was dit een goede keus?"</td><td>Service, nazorg, reviewverzoek</td><td>Herhaalaankopen, reviews, doorverwijzingen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="stap-kop" id="verschil"><Tekening naam="megafoon" maat={52} /><h2>Marketing funnel of sales funnel: wat is het verschil?</h2></div>
+        <p>De twee woorden worden door elkaar gebruikt. Wie het precies wil hebben, maakt dit onderscheid:</p>
+        <ul>
+          <li><b>De marketing funnel</b> is het bovenste deel. Mensen leren je kennen en gaan je vertrouwen. Het eindpunt is een lead: iemand van wie je de gegevens hebt en die interesse toont.</li>
+          <li><b>De sales funnel</b> is het onderste deel. Van lead naar offerte naar ja. Hier gaat het over je aanbod, je prijs en je opvolging. In grotere bedrijven ligt dat deel bij de verkopers.</li>
+        </ul>
+        <p>Bij een klein bedrijf doet vaak één persoon allebei. Dan maakt de naam weinig uit. Wat wel uitmaakt: weet je wanneer iemand van het ene deel naar het andere gaat? Een bezoeker die je prijspagina drie keer bekijkt, verdient een andere aanpak dan iemand die net een blog las.</p>
+
+        <div class="stap-kop" id="modellen"><Tekening naam="kompas" maat={52} /><h2>Funnel, AIDA en customer journey: hoe hangen ze samen?</h2></div>
+        <p>Je komt in marketingland meer modellen tegen die op hetzelfde lijken. Ze kijken vanuit een andere hoek naar dezelfde reis.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Model</th><th>Kijkt vanuit</th><th>Handig voor</th></tr></thead>
+            <tbody>
+              <tr><td><b>Funnel</b></td><td>Jouw bedrijf: hoeveel mensen zitten in welke stap?</td><td>Lekken vinden en cijfers vergelijken</td></tr>
+              <tr><td><b>AIDA</b></td><td>Eén boodschap: attention, interest, desire, action</td><td>Een pagina, mail of advertentie opbouwen</td></tr>
+              <tr><td><b>Customer journey</b></td><td>De klant: wat doet, denkt en voelt hij per moment?</td><td>Zien welke kanalen en momenten ertoe doen</td></tr>
+              <tr><td><b>See-Think-Do-Care</b></td><td>De intentie van je publiek, van kijken tot klant zijn</td><td>Per fase de juiste content en advertenties kiezen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De <a href="/kennisbank/gidsen/customer-journey/">customer journey</a> is in feite de trechter gezien door de ogen van de klant. Die loopt in het echt nooit netjes van boven naar beneden. Hij zoekt, haakt af, ziet je drie weken later terug in een advertentie en belt dan ineens. Het model van <a href="/kennisbank/gidsen/see-think-do-care/">See-Think-Do-Care</a> houdt daar meer rekening mee. Gebruik de funnel om te meten en de customer journey om je klant te begrijpen. Dan heb je aan allebei iets.</p>
+
+        <div class="stap-kop" id="rekenvoorbeeld"><Tekening naam="munten" maat={52} /><h2>Een rekenvoorbeeld: waar lekt jouw funnel?</h2></div>
+        <p>Stel: een installatiebedrijf in Hoogeveen krijgt 1.500 bezoekers per maand op de website. Zo ziet zijn trechter eruit. <span class="muted">(Verzonnen voorbeeld, met realistische verhoudingen.)</span></p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Stap</th><th>Aantal</th><th>Door naar volgende stap</th></tr></thead>
+            <tbody>
+              <tr><td>Bezoekers</td><td>1.500</td><td>2% vraagt iets aan</td></tr>
+              <tr><td>Aanvragen</td><td>30</td><td>80% krijgt een offerte</td></tr>
+              <tr><td>Offertes</td><td>24</td><td>25% zegt ja</td></tr>
+              <tr><td>Klanten</td><td>6</td><td>Gemiddeld € 2.500 per klus</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Omzet uit de website: zes klussen van € 2.500, samen € 15.000 per maand. De eigenaar wil meer. Zijn eerste gedachte is vaak: meer bezoekers. Maar kijk wat er gebeurt als je één stap tegelijk verbetert.</p>
+        <ul>
+          <li><b>Twee keer zoveel bezoekers</b> (3.000 per maand) levert twaalf klussen op. Dat kost wel maanden SEO-werk of een flink advertentiebudget.</li>
+          <li><b>Offertes beter opvolgen</b>, met een belletje na drie dagen en een korte mail na een week. Gaat de score van 25 naar 35 procent, dan worden het ruim acht klussen. Dat kost vooral discipline.</li>
+          <li><b>Een betere landingspagina</b> die meer bezoekers laat aanvragen: van 2 naar 3 procent. Dan zijn het negen klussen, met dezelfde bezoekers.</li>
+        </ul>
+        <p>Doe je de laatste twee samen, dan kom je op 45 aanvragen, 36 offertes en ruim twaalf klussen. Evenveel als bij dubbel zo veel bezoekers, maar zonder één euro extra aan verkeer. Daarom beginnen we bij een nieuwe klant waar de grootste kans op snel verschil zit. Dat is vaak onderaan de trechter. Verspild budget bovenin schrappen is soms meer waard dan een nieuwe campagne.</p>
+        <p>Maak deze som zelf eens met je eigen cijfers. Pak de aanvragen van de afgelopen drie maanden, tel de offertes en tel de opdrachten. De stap met het laagste percentage is je grootste lek.</p>
+
+        <div class="stap-kop" id="bouwen"><Tekening naam="tandwiel" maat={52} /><h2>Zo bouw je een trechter in zes stappen</h2></div>
+        <p>Voor een dienstverlener hoeft een funnel geen ingewikkeld systeem te zijn. Dit is een opzet die past bij een klein bedrijf.</p>
+
+        <h3>1. Kies één aanbod en één doelgroep</h3>
+        <p>Een funnel voor "alles wat we doen" werkt niet. Kies het aanbod waar je het meest aan verdient, bijvoorbeeld een warmtepomp of een badkamerrenovatie. En bepaal voor wie: welke <a href="/kennisbank/wat-is/doelgroep/">doelgroep</a>, in welke regio, met welk probleem.</p>
+
+        <h3>2. Zorg dat je gevonden wordt bovenin</h3>
+        <p>Waar zoekt je klant als hij het probleem merkt? Meestal in Google. Dan heb je pagina's nodig die zijn vragen beantwoorden, een Bedrijfsprofiel voor de kaart en eventueel <a href="/kennisbank/wat-is/sea/">SEA</a> voor snelle zichtbaarheid. Kijk naar de <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>: iemand die "warmtepomp ervaringen" zoekt, zit in een andere fase dan iemand die "warmtepomp installateur Assen" typt.</p>
+
+        <h3>3. Maak een landingspagina per aanbod</h3>
+        <p>Eén pagina, één doel. Bovenaan de belofte, daaronder het bewijs, dan het aanbod en een knop. Geen menu dat de bezoeker wegleidt. Hoe je die opbouwt, lees je in de gids <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken</a>.</p>
+
+        <h3>4. Bied een tussenstap voor twijfelaars</h3>
+        <p>Niet iedereen is klaar voor een offerte. Geef die mensen iets kleiners: een prijsindicatie per mail, een checklist "waar let je op bij een installateur", een gratis inspectie. Zo krijg je toch hun gegevens, en dus een lead die je kunt opvolgen.</p>
+
+        <h3>5. Volg op, per mail en telefoon</h3>
+        <p>Hier gaat het in de praktijk het vaakst mis. Een aanvraag die pas na twee dagen wordt teruggebeld, is vaak al naar de concurrent. Een offerte zonder opvolging verdwijnt in een la. Zet vaste momenten in je agenda, of laat een systeem de mails versturen. Dat laatste heet <a href="/kennisbank/wat-is/marketing-automation/">marketing automation</a>. Een simpele reeks van twee of drie mails werkt vaak al.</p>
+
+        <h3>6. Haal afhakers terug met retargeting</h3>
+        <p>Met retargeting zie je advertenties van een bedrijf waar je eerder op de site was. In Google Ads heet dat niet meer "remarketing" maar "Uw gegevens", volgens de Help van Google Ads. Let op: je volgt bezoekers dan met trackingcookies. Daarvoor moet je volgens de Autoriteit Persoonsgegevens eerst toestemming vragen. Meer over de regels lees je bij het begrip <a href="/kennisbank/wat-is/cookie/">cookie</a>. Is je lijst klein, begin dan liever met e-mail: dat is goedkoper en je hebt de toestemming al.</p>
+
+        <div class="stap-kop" id="meten"><Tekening naam="grafiek" maat={52} /><h2>Meten in Google Analytics 4: waar haken mensen af?</h2></div>
+        <p>Een funnel die je niet meet, is een tekening op een bierviltje. Google Analytics 4 heeft er een eigen rapport voor. Zo maak je het, volgens de Help van Google Analytics:</p>
+        <ol>
+          <li>Ga in het menu links naar <b>Verkennen</b>.</li>
+          <li>Kies onder "Beginnen met een nieuwe verkenning" de template <b>Trechterverkenning</b>.</li>
+          <li>Voeg je stappen toe, bijvoorbeeld: bezoek aan de dienstpagina, bezoek aan de offertepagina, formulier verstuurd.</li>
+          <li>Kies of de trechter <b>open</b> of <b>gesloten</b> is. Bij een open trechter telt iemand mee vanaf elke stap. Bij een gesloten trechter alleen als hij bij stap één begint.</li>
+          <li>Klik op <b>Opslaan</b> om er een vast trechterrapport van te maken.</li>
+        </ol>
+        <p>Je ziet dan per stap hoeveel procent doorgaat en hoeveel er afhaakt. Een gebruiker telt maar één keer mee per periode. Ook als hij de stappen twee keer doorloopt.</p>
+        <p>Twee kanttekeningen. Aanvragen die per telefoon binnenkomen, ziet Analytics niet vanzelf. Tel die apart, bijvoorbeeld met een eigen nummer op de site. En wat er na de aanvraag gebeurt, offerte en opdracht, staat in je agenda of boekhouding, niet in Analytics. Leg die cijfers er elke maand naast. Hoe je dat inricht, staat in de gids <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>. Wil je het laten doen, zonder cookiemelding voor gewone statistieken, kijk dan bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+        <div class="stap-kop" id="fouten"><Tekening naam="schild" maat={52} /><h2>Zeven veelgemaakte fouten</h2></div>
+        <ol>
+          <li><b>Alleen bovenin investeren.</b> Meer verkeer naar een pagina die niet overtuigt, is duur water in een lekke emmer.</li>
+          <li><b>Te vroeg om de verkoop vragen.</b> Een blog over "waarom tikt mijn cv-ketel" hoeft geen offerteknop van een halve pagina.</li>
+          <li><b>Te laat om de verkoop vragen.</b> Andersom kan ook. Iemand op je prijspagina wil een knop zien, geen nieuwsbrief.</li>
+          <li><b>Geen opvolging.</b> Veel offertes worden niet afgewezen, maar vergeten. Ook door de klant.</li>
+          <li><b>Alles automatiseren.</b> Een reeks van tien mails voelt al snel als een machine. Bij een dienst van een paar duizend euro wil de klant een mens spreken.</li>
+          <li><b>Een funnel die niemand meet.</b> Zonder cijfers per stap gok je waar het probleem zit.</li>
+          <li><b>Een model kopiëren van een webshop.</b> Een webshop verkoopt in één bezoek. Een aannemer verkoopt na een keukentafelgesprek. Dat vraagt een andere trechter.</li>
+        </ol>
+
+        <div class="stap-kop" id="nodig"><Tekening naam="koffie" maat={52} /><h2>Heb je als klein bedrijf wel een funnel nodig?</h2></div>
+        <p>Eerlijk antwoord: je hebt er al een. Elke klant die ooit belde, liep een route af. De vraag is alleen of je die route kent. Je hebt geen dure software of een "funnelbouwer" nodig. Een A4'tje met vier stappen en de aantallen per maand is genoeg om te beginnen.</p>
+        <p>Pas op voor bureaus die met veel jargon een complex systeem verkopen. Vakjargon verbergt vaak gebrek aan inhoud. Wie niet in gewone taal kan uitleggen hoe jouw klant van zoeken naar bellen gaat, kan dat ook niet verbeteren. Een goede funnel voelt voor de klant niet als een trechter. Hij voelt als een bedrijf dat precies op het juiste moment het juiste antwoord geeft.</p>
+        <p>Wil je weten hoe je meer aanvragen uit je bezoekers haalt? Op de pagina over <a href="/leadgeneratie/">leadgeneratie</a> lees je hoe wij dat aanpakken, met doelen waar je ons op kunt afrekenen. Liever zelf aan de slag? Begin met de gids <a href="/kennisbank/gidsen/leads-genereren/">leads genereren als mkb'er</a>.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Meer weten?</p>
+          <p>Lees ook <a href="/kennisbank/gidsen/conversie-verhogen/">conversie van je website verhogen</a> en <a href="/kennisbank/gidsen/meer-klanten-via-je-website/">de 9 grootste fouten op mkb-websites</a>. Wil je je offertes automatisch per mail laten opvolgen, kijk dan bij <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een funnel in gewone taal?', a: 'De route van eerste kennismaking tot klant, getekend als trechter. Bovenin veel mensen die je leren kennen, onderin een kleine groep die koopt. Bij elke stap haakt een deel af.' },
+      { v: 'Wat betekenen tofu, mofu en bofu?', a: 'Top, middle en bottom of the funnel. Tofu is de fase waarin iemand een probleem merkt (awareness), mofu de fase van vergelijken (overweging), bofu de fase waarin hij kiest en koopt (conversie).' },
+      { v: 'Wat is het verschil tussen een marketing funnel en een sales funnel?', a: 'De marketing funnel gaat van onbekende tot lead: aandacht en vertrouwen. De sales funnel gaat van lead tot betalende klant: offerte, gesprek en akkoord. Samen vormen ze de hele trechter.' },
+      { v: 'Wat is een goed conversiepercentage?', a: 'Dat verschilt sterk per branche, prijs en soort bezoeker. Vergelijk jezelf liever met je eigen cijfers van vorig kwartaal dan met een gemiddelde van internet. Elke stap die je beter maakt, telt.' },
+      { v: 'Wat is een lead magnet?', a: 'Iets kleins en nuttigs dat je weggeeft in ruil voor een e-mailadres of telefoonnummer. Denk aan een checklist, een prijsindicatie op maat of een gratis inspectie. Het helpt twijfelaars in de overwegingsfase een stap te zetten, zonder dat ze meteen een offerte hoeven aan te vragen.' },
+      { v: 'Hoe lang duurt het voordat ik resultaat zie?', a: 'Opvolging en een betere landingspagina merk je vaak binnen een paar weken in je aanvragen. Meer verkeer bovenin via SEO kost meestal maanden. Daarom loont het om onderaan te beginnen.' },
+      { v: 'Heb ik speciale software nodig voor een funnel?', a: 'Nee. Een website met een goede landingspagina, Google Analytics 4 en een vaste routine voor opvolging is genoeg. Software voor marketing automation helpt pas als je veel leads hebt.' },
+      { v: 'Is een funnel hetzelfde als een customer journey?', a: 'Bijna. De funnel kijkt vanuit je bedrijf en telt mensen per stap. De customer journey kijkt vanuit de klant: wat doet, denkt en voelt hij onderweg. Gebruik ze naast elkaar.' },
+    ]}
+  />
+
+  <Actie titel="Waar lekt jouw trechter?" tekst={`We kijken gratis naar je site en je aanvragen. ${site.contactpersoon} belt je met de stap waar je het snelst meer klanten uit haalt.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .stap-kop { scroll-margin-top: 96px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

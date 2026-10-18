@@ -1,0 +1,73 @@
+---
+// Scène voor /linkbuilding/linkbuilding-uitbesteden/: een kalender met zes maanden, elke maand een nieuwe link.
+// Rechts het maandoverzicht en een kop koffie: jij hoeft er niet naar om te kijken. Maand voor maand verschijnt een vinkje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const maanden = ['Jan', 'Feb', 'Mrt', 'Apr', 'Mei', 'Jun'].map((naam, i) => ({ naam, x: 40 + (i % 3) * 84, y: i < 3 ? 82 : 162 }));
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kalender met zes maanden. Elke maand komt er een nieuwe link bij en verschijnt er een vinkje. Rechts een maandoverzicht en een dampende kop koffie.'}>
+  <rect x="24" y="30" width="270" height="214" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M24 66V42a12 12 0 0 1 12-12h246a12 12 0 0 1 12 12v24z" fill="#074663" />
+  <text x="40" y="54" font-size="14" font-weight="800" style="fill:#fff">Elke maand nieuwe links</text>
+  <path d="M70 24v14M248 24v14" stroke="#10283f" stroke-width="4" stroke-linecap="round" />
+  {maanden.map((m) => (
+    <g>
+      <rect x={m.x} y={m.y} width="74" height="68" rx="8" fill="#e8eef4" />
+      <text x={m.x + 10} y={m.y + 20} font-size="12" font-weight="800">{m.naam}</text>
+      <rect x={m.x + 16} y={m.y + 38} width="22" height="12" rx="6" fill="none" stroke="#074663" stroke-width="2.5" />
+      <rect x={m.x + 32} y={m.y + 38} width="22" height="12" rx="6" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    </g>
+  ))}
+  <rect x="314" y="44" width="142" height="128" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="328" y="70" font-size="13" font-weight="900">Maandoverzicht</text>
+  <path d="M328 80h112" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="334" cy="98" r="5" fill="#1f8a5b" />
+  <rect class="v" x="346" y="94" width="90" height="8" rx="4" />
+  <circle cx="334" cy="122" r="5" fill="#1f8a5b" />
+  <rect class="v" x="346" y="118" width="74" height="8" rx="4" />
+  <circle cx="334" cy="146" r="5" fill="#ff6600" />
+  <rect class="v" x="346" y="142" width="82" height="8" rx="4" />
+  <path class="v" d="M352 206h44v24a14 14 0 0 1-14 14h-16a14 14 0 0 1-14-14z" />
+  <path class="l" d="M352 206h44v24a14 14 0 0 1-14 14h-16a14 14 0 0 1-14-14zM396 212h6a9 9 0 0 1 0 18h-6M340 252h68" />
+  {!mini && (
+    <g>
+      {maanden.map((m, i) => (
+        <g class="linkbuilding-uitbesteden-vink" style={`transition-delay:${0.6 + i * 0.45}s`}>
+          <circle cx={m.x + 62} cy={m.y + 14} r="9" fill="#1f8a5b" />
+          <path d={`M${m.x + 57} ${m.y + 14}l4 4 6-7`} stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <path class="linkbuilding-uitbesteden-damp" d="M364 196c-6-8 6-12 0-20" fill="none" stroke="#8aa0b4" stroke-width="2.5" stroke-linecap="round" />
+      <path class="linkbuilding-uitbesteden-damp twee" d="M382 196c-6-8 6-12 0-20" fill="none" stroke="#8aa0b4" stroke-width="2.5" stroke-linecap="round" />
+      <g class="linkbuilding-uitbesteden-mail">
+        <rect x="330" y="8" width="126" height="28" rx="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <circle cx="345" cy="22" r="5" fill="#ff6600" />
+        <text x="356" y="27" font-size="12" font-weight="800">Nieuw overzicht</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .linkbuilding-uitbesteden-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .linkbuilding-uitbesteden-vink { opacity: 0; transform: scale(0.3); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(.3,1.7,.5,1); }
+  :global(.teken-js) .in-beeld .linkbuilding-uitbesteden-vink { opacity: 1; transform: none; }
+  :global(.teken-js) .linkbuilding-uitbesteden-damp { opacity: 0; }
+  .in-beeld .linkbuilding-uitbesteden-damp { animation: linkbuilding-uitbesteden-damp 4s ease-in-out 1s infinite; }
+  .in-beeld .linkbuilding-uitbesteden-damp.twee { animation-delay: 3s; }
+  :global(.teken-js) .linkbuilding-uitbesteden-mail { opacity: 0; }
+  .in-beeld .linkbuilding-uitbesteden-mail { animation: linkbuilding-uitbesteden-mail 7s ease-in-out 3.6s infinite both; }
+  @keyframes linkbuilding-uitbesteden-damp {
+    0% { opacity: 0; transform: translateY(6px); }
+    30% { opacity: 0.9; }
+    100% { opacity: 0; transform: translateY(-14px); }
+  }
+  @keyframes linkbuilding-uitbesteden-mail {
+    0% { opacity: 0; transform: translateY(-8px); }
+    10%, 80% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: translateY(-4px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .linkbuilding-uitbesteden-damp, .in-beeld .linkbuilding-uitbesteden-mail { animation: none; }
+    .linkbuilding-uitbesteden-vink { transition: none !important; }
+  }
+</style>

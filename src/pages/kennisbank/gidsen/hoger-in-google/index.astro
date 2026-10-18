@@ -1,0 +1,479 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--hoger-in-google.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/hoger-in-google/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-google-wil', titel: 'Wat Google eerst wil zien' },
+  { id: 'kans', titel: 'Waarom klein een voordeel is' },
+  { id: 'nulmeting', titel: 'Waar sta je nu?' },
+  { id: 'diagnose', titel: 'Waarom sta je niet bovenaan?' },
+  { id: 'fase-1', titel: 'Fase 1: de snelle winst' },
+  { id: 'fase-2', titel: 'Fase 2: betere inhoud' },
+  { id: 'fase-3', titel: 'Fase 3: autoriteit' },
+  { id: 'eeat', titel: 'E-E-A-T in de praktijk' },
+  { id: 'lokaal', titel: 'Lokaal: het kaartje' },
+  { id: 'ai', titel: 'In het AI-overzicht' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een hovenier' },
+  { id: 'checklist', titel: 'SEO-checklist' },
+  { id: 'tools', titel: 'Tools' },
+  { id: 'hoe-lang', titel: 'Hoe lang duurt het?' },
+  { id: 'werkt-niet', titel: 'Wat niet werkt' },
+  { id: 'betalen', titel: 'Kun je betalen?' },
+  { id: 'tijd', titel: 'Hoeveel tijd kost het?' },
+  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Hoger in Google komen als klein bedrijf',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Zoekmachineoptimalisatie voor kleine bedrijven',
+  citation: [
+    'https://developers.google.com/search/docs/fundamentals/seo-starter-guide',
+    'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+    'https://developers.google.com/search/docs/appearance/title-link',
+    'https://developers.google.com/search/docs/essentials/spam-policies',
+    'https://developers.google.com/search/blog/2023/02/google-search-and-ai-content',
+    'https://support.google.com/business/answer/7091',
+    'https://support.google.com/webmasters/answer/7576553',
+  ],
+}];
+---
+<Base
+  title="Hoger in Google komen als klein bedrijf | Drijfveer Media"
+  description="Hoger in Google komen als klein bedrijf, zonder groot budget. Een stappenplan in drie fasen, een SEO-checklist en de fouten die je beter kunt laten."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Hoger in Google', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Hoger in Google komen als klein bedrijf" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Hoger in Google komen lukt ook zonder marketingafdeling. Je hoeft niet alles te doen. Je moet de goede dingen eerst doen. Deze gids zet ze op volgorde in drie fasen, van het werk dat binnen weken iets oplevert tot het werk dat jaren blijft renderen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Begin bij zoekopdrachten waar je al bijna scoort, op plek 5 tot 20. Daar zit de snelste winst.</li>
+            <li>Maak één goede pagina per dienst, en per plaats alleen als je daar echt iets over te vertellen hebt.</li>
+            <li>Werk je lokaal? Dan zijn je Google Bedrijfsprofiel en je reviews minstens zo belangrijk als je site.</li>
+            <li>Liever vijf echte links uit je eigen regio dan vijftig uit een linkpakket.</li>
+            <li>Meet aanvragen, niet alleen posities.</li>
+            <li>Reken op drie tot zes maanden voor duidelijk resultaat. Bij weinig concurrentie gaat het sneller.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-google-wil">Hoger in Google komen: wat Google eerst wil zien</h2>
+        <p>Google zoekt bij elke zoekopdracht de pagina die de vraag het best beantwoordt, van een bron die het vertrouwt. Daarvoor kijkt Google grofweg naar drie dingen. Past je pagina bij wat iemand zoekt? Is je site betrouwbaar, bijvoorbeeld omdat andere sites ernaar linken? En kan Google je site goed lezen, ook op een telefoon?</p>
+        <p>Google geeft zelf geen lijst met gewichten. Wel schrijft Google in zijn eigen SEO-gids dat er geen geheimen zijn die je automatisch op plek 1 zetten. Het is dus geen kwestie van één knop vinden. Het is een reeks gewone stappen, op de goede volgorde. Wil je eerst snappen hoe het achter de schermen werkt, lees dan <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe SEO werkt</a>. Deze gids gaat over wat je morgen kunt doen.</p>
+
+        <h2 id="kans">Waarom een klein bedrijf juist kans maakt</h2>
+        <p>Een landelijke keten schrijft geen pagina over "dakgoot vervangen in Roden" of "boekhouder voor zzp'ers in Meppel". Jij wel. Die zoekopdrachten hebben weinig volume, maar wie zo zoekt, wil iets kopen of iemand inhuren. Tien bezoekers die klaar zijn om te bellen, zijn meer waard dan duizend die rondkijken.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekopdracht</th><th>Hoe vaak gezocht</th><th>Concurrentie</th><th>Waarde voor een klein bedrijf</th></tr></thead>
+            <tbody>
+              <tr><td>hovenier</td><td>Vaak</td><td>Hoog, landelijk</td><td>Laag: de zoeker kan overal wonen</td></tr>
+              <tr><td>hovenier Zuidwolde</td><td>Af en toe</td><td>Laag</td><td>Hoog: lokaal en klaar om te bellen</td></tr>
+              <tr><td>tuin bestraten kosten per m2</td><td>Regelmatig</td><td>Gemiddeld</td><td>Gemiddeld: oriënterend, wel een kans om vertrouwen te winnen</td></tr>
+              <tr><td>sierbestrating laten leggen Hoogeveen</td><td>Zelden</td><td>Bijna geen</td><td>Hoog: precies jouw klus</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Je succes is wel sterk afhankelijk van je markt. Een hovenier in Zuidwolde heeft minder concurrentie in Google dan een advocaat in Amsterdam. Kijk dus eerst eerlijk naar wie er nu bovenaan staat voor jouw vak. Staan daar alleen grote platforms en vergelijkingssites? Dan is de lange, lokale zoekopdracht je ingang.</p>
+
+        <h2 id="nulmeting">Waar sta je nu? Een nulmeting in een uur</h2>
+        <p>Zonder beginpunt weet je over drie maanden niet of iets heeft gewerkt. Neem daarom een uur voor een nulmeting. Je hebt Google Search Console nodig. Heb je dat nog niet, lees dan eerst de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console instellen</a>. Na een paar dagen zie je de eerste cijfers.</p>
+        <ol>
+          <li><b>Open Prestaties en kies Zoekresultaten.</b> Zet bovenaan alle vier de cijfers aan: klikken, vertoningen, CTR en gemiddelde positie. Kies als periode de afgelopen drie maanden.</li>
+          <li><b>Schrijf de totalen op.</b> Klikken en vertoningen per maand. Dat is je beginpunt voor het organisch verkeer.</li>
+          <li><b>Open het tabblad Pagina's.</b> Welke pagina's krijgen klikken? Zijn dat je dienstpagina's, of een oude blog over iets anders?</li>
+          <li><b>Check de indexering.</b> Typ in Google site:jouwdomein.nl. Ontbreken belangrijke pagina's, plak ze dan in de URL-inspectie van Search Console.</li>
+          <li><b>Zoek jezelf zoals een klant.</b> Kies vijf zoekopdrachten die klanten zouden typen. Je kunt die zoekopdrachten uitvoeren in een incognitovenster. Noteer wie er bovenaan staat en wat voor pagina dat is.</li>
+          <li><b>Tel je aanvragen.</b> Hoeveel telefoontjes en formulieren kwamen er vorige maand binnen, en hoeveel via Google?</li>
+        </ol>
+        <p>Let op bij stap 5: Google laat volgens Search Console Help niet iedereen dezelfde resultaten zien. Tijd, plek, apparaat en recente zoekgeschiedenis maken verschil. Gebruik je eigen zoekopdracht dus om te zien wat voor pagina's er staan, niet om je exacte plek te meten. Daarvoor is Search Console betrouwbaarder.</p>
+
+        <h2 id="diagnose">Waarom sta je (nog) niet bovenaan? Een snelle diagnose</h2>
+        <p>Met je nulmeting in de hand kun je vaak al zien waar het knelt. Zoek je eigen situatie in de linkerkolom. De oplossing staat ernaast, en verderop in deze gids lees je hoe je die aanpakt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je ziet</th><th>Waarschijnlijke oorzaak</th><th>Wat je doet</th></tr></thead>
+            <tbody>
+              <tr><td>Je pagina staat helemaal niet in Google</td><td>Te nieuw, op noindex gezet, of nergens naartoe gelinkt</td><td>URL-inspectie, noindex weghalen, linken vanaf je homepage</td></tr>
+              <tr><td>Veel vertoningen, weinig klikken</td><td>Je titel en beschrijving overtuigen niet</td><td>Meta titel en description herschrijven (fase 1)</td></tr>
+              <tr><td>Je blijft hangen op plek 8 tot 20</td><td>Je pagina is minder compleet dan de top 3, of je hebt minder autoriteit</td><td>Inhoud aanvullen (fase 2), daarna links (fase 3)</td></tr>
+              <tr><td>Een andere pagina van jezelf verschijnt</td><td>Twee pagina's mikken op hetzelfde zoekwoord</td><td>Kies één pagina, voeg samen of stuur door</td></tr>
+              <tr><td>Je staat niet in het kaartje</td><td>Onvolledig bedrijfsprofiel, weinig reviews of grote afstand</td><td>Profiel afmaken en reviews verzamelen</td></tr>
+              <tr><td>Je zakte plotseling</td><td>Technische fout, verhuizing zonder redirects of een wijziging bij Google</td><td>Search Console checken op fouten en vergelijken per pagina</td></tr>
+              <tr><td>Wel bezoekers, geen aanvragen</td><td>De pagina overtuigt niet of de contactmogelijkheid is lastig</td><td>Zie de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie verhogen</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een plotselinge daling is schrikken. Raak niet in paniek en verander niet tien dingen tegelijk. In de blog <a href="/kennisbank/hoe-voorkom-je-een-daling-in-websiteverkeer/">een daling in websiteverkeer voorkomen</a> lees je hoe je de oorzaak stap voor stap vindt.</p>
+
+        <h2 id="fase-1">Fase 1: de snelle winst (week 1 tot 4)</h2>
+        <p>We beginnen altijd waar de grootste kans op snel verschil zit. Daarna komen de puntjes op de i. In de eerste vier weken pak je vier dingen aan die weinig tijd kosten en vaak snel iets opleveren.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>Zoek je bijna-toppers: plek 5 tot 20</h3></div>
+        <p>Ga in Search Console naar Prestaties en Zoekresultaten. Zet Gemiddelde positie aan, open het tabblad Zoekopdrachten en klik op de kolom Positie om te sorteren. Zoek de zoekopdrachten waar je tussen plek 5 en 20 staat, met flink wat vertoningen. Daar is een paar plekken stijgen genoeg voor veel meer klikken.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een pagina over "dakgoot vervangen" heeft 2.400 vertoningen per maand op gemiddeld plek 8. De CTR is 1 procent: 24 klikken. Na een betere titel en een aangevulde tekst staat hij op plek 3 en stijgt de CTR naar 6 procent. Dan zijn het 144 klikken per maand, zonder één nieuwe pagina. Hoe hoog de CTR echt wordt, verschilt per zoekopdracht. Kijk daarom naar je eigen cijfers.</p>
+        </div>
+        <p>Open daarna elke bijna-topper en kijk naar de pagina die erbij hoort. Beantwoordt die de zoekopdracht echt? Vaak mist er iets simpels: een prijs, een plaatsnaam, een antwoord op een vraag die klanten stellen. Vul dat aan.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>Herschrijf je meta titel en description</h3></div>
+        <p>De meta titel is de blauwe regel in de zoekresultaten. Google schrijft dat een goede titel uniek is per pagina, duidelijk en kort, en precies beschrijft wat er op de pagina staat. Zoekwoorden opstapelen en dezelfde standaardtekst op elke pagina raadt Google af. Een maximumlengte noemt Google niet, wel dat een lange titel wordt afgekapt op de breedte van het scherm. Wij houden daarom zo'n 60 tekens aan.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Nu</th><th>Beter</th><th>Waarom</th></tr></thead>
+            <tbody>
+              <tr><td>Home</td><td>Hovenier in Zuidwolde: tuinaanleg en onderhoud</td><td>Zegt wat je doet en waar</td></tr>
+              <tr><td>Diensten | Bedrijfsnaam</td><td>Dakgoot vervangen in Emmen: prijs en werkwijze</td><td>Belangrijkste woord vooraan, plus een belofte</td></tr>
+              <tr><td>Schilder, schilderwerk, schilder Assen, schilders</td><td>Schilder in Assen voor binnen- en buitenwerk</td><td>Geen opgestapelde zoekwoorden</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De meta description eronder bepaalt mee of iemand klikt. Google gebruikt soms een stuk uit je tekst in plaats daarvan. Schrijf hem toch, als een korte belofte met een reden om te klikken. Zie <a href="/kennisbank/gidsen/meta-description/">een meta description schrijven die klikt</a>. Dit is vaak het snelste werk met het meeste effect, zeker bij pagina's die al op de eerste pagina staan.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>Haal de technische remmen weg</h3></div>
+        <p>Een betere tekst helpt niet als Google de pagina niet kan lezen. Loop deze vijf punten na. Search Console laat de grootste problemen zien.</p>
+        <ul class="vink">
+          <li>Staan je belangrijke pagina's in de index? Check het met de URL-inspectie.</li>
+          <li>Staat er geen pagina per ongeluk op noindex? Dat gebeurt vaak na een nieuwe site of een vergeten testinstelling.</li>
+          <li>Werkt de site goed op een telefoon? Google gebruikt de mobiele versie om je te beoordelen.</li>
+          <li>Laadt hij snel? Google noemt een LCP binnen 2,5 seconden goed. Test het met PageSpeed Insights.</li>
+          <li>Draait alles op https, zonder waarschuwingen in de browser?</li>
+        </ul>
+        <p>Voor snelheid helpt de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>. Diepere problemen, zoals dubbele pagina's of een rommelige structuur, vragen een technische check.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>Maak je bedrijfsprofiel af</h3></div>
+        <p>Werk je lokaal, maak dan in deze eerste weken je Google Bedrijfsprofiel volledig. Kies de juiste hoofdcategorie, vul je diensten en openingstijden in, en zet er minstens tien echte foto's op. Naam, adres en telefoonnummer moeten precies hetzelfde zijn als op je site. Meer daarover verderop bij het kaartje, en in de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>.</p>
+
+        <h2 id="fase-2">Fase 2: inhoud die beter is dan de top 3 (maand 2 en 3)</h2>
+        <p>Nu de remmen eraf zijn, ga je bouwen. Volgens Google heeft goede, bruikbare inhoud waarschijnlijk meer invloed op je plek dan alle andere tips samen. In deze fase zorg je dat elke belangrijke dienst een pagina heeft die beter is dan wat er nu staat.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>Kies per pagina één onderwerp en één bedoeling</h3></div>
+        <p>Schrijf op welke woorden je klanten typen. Niet "installatietechniek", maar "cv-ketel vervangen" of "lekkage dak". Kijk dan wat Google bovenaan zet. Zie je prijzen, dan wil de zoeker een bedrag. Zie je stappenplannen, dan wil hij het zelf doen. Zie je bedrijven in de buurt, dan wil hij iemand inhuren. Die bedoeling heet <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>. Meer hierover in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a>.</p>
+        <p>Geef elke pagina één hoofdonderwerp. Twee pagina's die op hetzelfde woord mikken, zitten elkaar in de weg. Dat heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3>Maak een zoekwoordplan op één A4'tje</h3></div>
+        <p>Je hebt geen dure tool nodig voor een plan. Een tabel met vier kolommen is genoeg. Per pagina schrijf je op waar hij over gaat, wat de zoeker wil en hoe ver je bent. Zo voorkom je dat twee pagina's elkaar beconcurreren, en zie je meteen wat er nog mist. Een voorbeeld voor een hovenier (verzonnen):</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Pagina</th><th>Hoofdzoekwoord</th><th>De zoeker wil</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>/tuinaanleg/</td><td>tuinaanleg Zuidwolde</td><td>Een hovenier inhuren</td><td>Bestaat, titel herschrijven</td></tr>
+              <tr><td>/tuinonderhoud/</td><td>tuinonderhoud abonnement</td><td>Weten wat het kost per jaar</td><td>Nieuw, met prijstabel</td></tr>
+              <tr><td>/bestrating/</td><td>tuin bestraten kosten</td><td>Een prijs per vierkante meter</td><td>Nieuw, met rekenvoorbeeld</td></tr>
+              <tr><td>/blog/beste-tijd-heg-snoeien/</td><td>wanneer heg snoeien</td><td>Een datum en een uitleg</td><td>Bestaat, linken naar /tuinonderhoud/</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>Eén pagina per dienst, en per plaats alleen als het klopt</h3></div>
+        <p>Eén pagina "Diensten" met tien opsommingstekens scoort op niets. Geef elke belangrijke dienst een eigen pagina met een eigen titel, een prijsindicatie, foto's van eigen werk en de vragen die klanten stellen. Werk je in meerdere plaatsen, maak dan alleen een plaatspagina als je daar echt iets over te vertellen hebt: projecten, reistijd, het soort klussen. Veertig kopieën met een andere plaatsnaam noemt Google doorway-pagina's. Dat staat in zijn spamregels.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Schrijf beter dan de bovenste drie</h3></div>
+        <p>Lees de drie pagina's die nu bovenaan staan. Wat missen ze? Vaak is dat een prijsindicatie, foto's van echt werk of een eerlijk antwoord op de vraag die klanten aan de telefoon stellen. Kwalitatief hoogwaardige content is geen kwestie van lengte. Google zegt zelf dat er geen ideaal woordaantal is. Het gaat erom dat je pagina de vraag beter beantwoordt dan de rest.</p>
+        <p>Google heeft een lijst met vragen om je eigen tekst te beoordelen. Deze zes vinden wij het nuttigst:</p>
+        <ul class="vink">
+          <li>Geeft de pagina eigen informatie, eigen ervaring of een eigen analyse?</li>
+          <li>Beschrijft hij het onderwerp volledig, of moet de lezer daarna opnieuw zoeken?</li>
+          <li>Gaat hij verder dan het voor de hand liggende?</li>
+          <li>Zou je deze pagina bewaren, of doorsturen naar een vriend?</li>
+          <li>Is hij geschreven of nagekeken door iemand die het vak echt kent?</li>
+          <li>Staan er geen fouten in die iemand makkelijk kan controleren?</li>
+        </ul>
+        <p>Geef het antwoord in de eerste alinea. Zet daarna de details, en onderaan de veelgestelde vragen van je klanten. Hoe je zo'n tekst schrijft, lees je in de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>Gebruik vormen die lezers en Google helpen</h3></div>
+        <p>Een muur van tekst leest niemand. Deze vormen maken een pagina bruikbaarder. Ze geven Google bovendien losse stukken die precies één vraag beantwoorden.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vorm</th><th>Wat het is</th><th>Wanneer gebruiken</th></tr></thead>
+            <tbody>
+              <tr><td>FAQ</td><td>Veelgestelde vragen met een kort, direct antwoord</td><td>Op elke dienstpagina, met de vragen die klanten echt stellen</td></tr>
+              <tr><td>Stappenplan</td><td>Genummerde stappen van begin tot eind</td><td>Bij "hoe doe je" en "hoe werkt het"</td></tr>
+              <tr><td>Prijstabel</td><td>Wat iets kost, met wat erbij zit</td><td>Bij elke dienst waar mensen naar de prijs zoeken</td></tr>
+              <tr><td>Vergelijking</td><td>Twee of drie opties naast elkaar</td><td>Bij "of"-vragen, zoals kunststof of hout</td></tr>
+              <tr><td>Rekenvoorbeeld</td><td>Een uitgerekende situatie met bedragen</td><td>Bij kosten, besparing en terugverdientijd</td></tr>
+              <tr><td>Eigen foto's</td><td>Beeld van jouw werk, met een beschrijvende alt-tekst</td><td>Altijd, geen stockfoto's</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>AI-gegenereerde content: mag dat?</h3></div>
+        <p>Ja, zolang hij klopt en iets toevoegt. Google kijkt volgens eigen zeggen naar de kwaliteit van inhoud, niet naar hoe die gemaakt is. AI levert ook geen voordeel op: het is gewoon tekst. Wel treedt Google op tegen massaal gemaakte pagina's zonder eigen waarde. Dat heet scaled content abuse. Honderd teksten laten schrijven die niemand nakijkt, is dus vragen om problemen.</p>
+        <p>Wij gebruiken AI om mee te denken, voor eerste versies en om gegevens te ordenen. Een mens controleert de feiten en maakt de tekst af, met eigen ervaring erin. Hoe dat gaat, lees je bij <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>Link je eigen pagina's slim aan elkaar</h3></div>
+        <p>Link vanaf je homepage naar je belangrijkste diensten, en vanuit een blog naar de dienst waar hij over gaat. Gebruik een linktekst die zegt waar het heen gaat, niet "klik hier". Google schrijft dat de linktekst mensen en Google vertelt wat ze op de volgende pagina vinden. Zo snapt Google welke pagina's bij elkaar horen en welke het belangrijkst zijn. Zie <a href="/kennisbank/wat-is/interne-links/">interne links</a> en <a href="/kennisbank/wat-is/anchortekst/">anchortekst</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>Houd je pagina's actueel</h3></div>
+        <p>Google heeft systemen die bij sommige zoekopdrachten nieuwere inhoud voorrang geven. Denk aan prijzen, regels en subsidies. Een pagina met tarieven van drie jaar geleden wint het niet van een concurrent met actuele bedragen. Plan daarom twee keer per jaar een uur om je belangrijkste pagina's na te lopen. Kloppen de prijzen nog? Zijn er nieuwe vragen van klanten? Heb je nieuwe foto's?</p>
+        <p>Alleen de datum aanpassen helpt niet. Google noemt dat juist als waarschuwingssignaal: een datum veranderen terwijl de inhoud nauwelijks is gewijzigd. Pas de datum dus alleen aan als je echt iets hebt verbeterd.</p>
+
+        <h2 id="fase-3">Fase 3: autoriteit opbouwen (maand 3 tot 6)</h2>
+        <p>Inhoud en techniek heb je zelf in de hand. Autoriteit niet: die krijg je van anderen. Daarom duurt deze fase het langst. Hij levert ook het meest op als je concurrenten even goede pagina's hebben.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Kwalitatieve backlinks uit je eigen kring</h3></div>
+        <p>Kwalitatieve backlinks komen zelden uit een pakket. Ze komen van mensen en organisaties die je kent. Dat is kwalitatieve linkbuilding: weinig links, maar van echte sites uit je vak of je regio. Tien plekken waar een klein bedrijf vaak een link kan krijgen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bron</th><th>Hoe je het vraagt</th><th>Moeite</th></tr></thead>
+            <tbody>
+              <tr><td>Leveranciers</td><td>Vraag om een vermelding op hun pagina met dealers of vakmensen</td><td>Laag</td></tr>
+              <tr><td>Brancheorganisatie</td><td>Controleer of je ledenprofiel een link naar je site heeft</td><td>Laag</td></tr>
+              <tr><td>Ondernemersvereniging</td><td>Een profiel op hun site, of een stukje in hun nieuwsbrief</td><td>Laag</td></tr>
+              <tr><td>Sportclub die je sponsort</td><td>Vraag om een link bij de sponsors, niet alleen een logo</td><td>Laag</td></tr>
+              <tr><td>Samenwerkingspartners</td><td>Een gezamenlijk project beschrijven, op beide sites</td><td>Gemiddeld</td></tr>
+              <tr><td>Lokale nieuwssite of krant</td><td>Echt nieuws aanbieden: een nieuw pand, een jubileum, een opvallende klus</td><td>Gemiddeld</td></tr>
+              <tr><td>Scholen en opleidingen</td><td>Stageplekken aanbieden, met een vermelding op hun site</td><td>Gemiddeld</td></tr>
+              <tr><td>Evenementen</td><td>Een bijdrage aan een braderie, beurs of open dag in je regio</td><td>Gemiddeld</td></tr>
+              <tr><td>Vakblad of vaksite</td><td>Een artikel met echte kennis aanbieden, zonder ervoor te betalen</td><td>Hoog</td></tr>
+              <tr><td>Bestaande vermeldingen</td><td>Sites die je naam al noemen zonder link vriendelijk om een link vragen</td><td>Laag</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Meer ideeën staan in de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks voor een lokaal bedrijf</a>. Wil je dit uit handen geven, kijk dan bij <a href="/linkbuilding/">linkbuilding</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>Reviews: elke klus een kans</h3></div>
+        <p>Reviews tellen voor het kaartje, en ze overtuigen de klant die twijfelt. Maak het makkelijk: stuur na elke klus een korte mail of app met je reviewlink. Reageer op elke review, ook op de kritische. Google schrijft dat reageren laat zien dat je feedback waardeert. Hoe je een reviewlink maakt en lastige reviews beantwoordt, lees je in de gids <a href="/kennisbank/gidsen/google-reviews/">Google reviews</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>Wat je niet moet doen: links kopen</h3></div>
+        <p>Links kopen of ruilen om hoger te komen gaat tegen de spamregels van Google in. Dat geldt ook voor betaalde gastblogs met links en "jij linkt naar mij, ik naar jou" op grote schaal. Een betaalde vermelding mag wel, als de link het label nofollow of sponsored krijgt. Dan geeft hij geen rankingwaarde door. Honderd links voor € 50 komen bijna altijd uit netwerken die Google kent. Soms merk je de straf pas na een jaar.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>Meet elke maand, en durf te stoppen</h3></div>
+        <p>Posities zeggen iets, maar aanvragen zeggen meer. Kijk elke maand naar je organisch verkeer en naar het aantal telefoontjes en formulieren. Komt het organische verkeer binnen op de pagina's die geld opleveren, of op een oude blog over iets anders? Schrijf de cijfers op naast je nulmeting.</p>
+        <p>Wat werkt, doe je vaker. Waar na drie maanden niets beweegt, stop je mee of pak je het anders aan. Dat klinkt logisch, maar het gebeurt weinig. Ook bureaus adviseren te zelden om ergens mee te stoppen. Terwijl tijd of geld weghalen bij wat niet werkt, soms meer oplevert dan iets nieuws beginnen.</p>
+
+        <h2 id="eeat">E-E-A-T: laat zien dat je je vak kent</h2>
+        <p>Google gebruikt vier letters om te beschrijven wat betrouwbare inhoud is. E-E-A-T is volgens Google zelf geen losse rankingfactor. Wel zoeken de systemen naar signalen die erbij passen, en vertrouwen is het belangrijkste. Zo vertaal je het naar je eigen site:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Engels</th><th>Nederlands</th><th>Zo laat je het zien</th></tr></thead>
+            <tbody>
+              <tr><td>Experience</td><td>Ervaring</td><td>Foto's en verhalen van eigen klussen, met wat er misging en hoe je het oploste</td></tr>
+              <tr><td>Expertise</td><td>Deskundigheid</td><td>Uitleg die verder gaat dan de folder, met vakkennis die alleen een vakman heeft</td></tr>
+              <tr><td>Authoritativeness</td><td>Autoriteit</td><td>Vermeldingen en links van leveranciers, vakbladen en je brancheorganisatie</td></tr>
+              <tr><td>Trustworthiness</td><td>Betrouwbaarheid</td><td>Adres, KvK-nummer, echte namen en gezichten, eerlijke prijzen en reviews</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij onderwerpen over gezondheid, geld en veiligheid weegt dit volgens Google nog zwaarder. Ben je boekhouder, advocaat of financieel adviseur, zet dan altijd een naam en functie onder je teksten. Meer uitleg bij <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a>.</p>
+
+        <h2 id="lokaal">Lokaal hoger in Google: het kaartje met drie bedrijven</h2>
+        <p>Voor een lokaal bedrijf is het kaartje vaak belangrijker dan de gewone resultaten. Google bepaalt volgens zijn eigen uitleg wie erin komt op relevantie, afstand en bekendheid. Afstand kun je niet veranderen. De andere twee wel.</p>
+        <ul class="vink">
+          <li>Kies de hoofdcategorie die het best past, en voeg alleen extra categorieën toe die je echt doet.</li>
+          <li>Houd naam, adres en telefoonnummer overal gelijk: op je site, je profiel en in bedrijvengidsen.</li>
+          <li>Vul openingstijden in, ook op feestdagen. Google noemt actuele gegevens zelf als factor.</li>
+          <li>Plaats regelmatig nieuwe foto's van je werk.</li>
+          <li>Verzamel reviews en reageer erop. Google noemt het aantal reviews bij bekendheid.</li>
+          <li>Zorg dat je site een pagina heeft voor elke dienst uit je profiel.</li>
+        </ul>
+        <p>Een betere lokale plek kun je volgens Google niet aanvragen of kopen. Wil je dit laten regelen, kijk dan bij <a href="/lokale-seo/">lokale SEO</a>, vanaf € 295 per maand.</p>
+
+        <h2 id="ai">Hoger in Google én in het AI-overzicht</h2>
+        <p>Steeds vaker staat er boven de gewone resultaten een AI-overzicht, met links naar de bronnen. Wie in Google bovenaan wil blijven, wil ook daarin genoemd worden. Goed nieuws: Google schrijft dat je daar geen aparte trucs voor nodig hebt. Er zijn geen extra eisen, geen speciale code en geen nieuwe bestanden. Je pagina moet in de index staan en geschikt zijn om met een tekstfragment in de resultaten te verschijnen.</p>
+        <p>Wat volgens Google wel helpt, is de gewone basis goed doen. Uit de lijst van Google, vertaald naar een klein bedrijf:</p>
+        <ul class="vink">
+          <li>Zorg dat Googlebot je site mag crawlen, ook via je hosting of beveiligingsdienst.</li>
+          <li>Maak je pagina's vindbaar via interne links.</li>
+          <li>Zet belangrijke informatie in tekst, niet alleen in een plaatje of video.</li>
+          <li>Laat gestructureerde gegevens kloppen met wat er zichtbaar op de pagina staat.</li>
+          <li>Houd je Google Bedrijfsprofiel actueel.</li>
+        </ul>
+        <p>Ons advies erbovenop: zet onder elke kop eerst het antwoord in één of twee zinnen, en daarna de uitleg. Dat leest prettig voor mensen, en een AI kan dat stuk makkelijk overnemen. Klikken vanuit het AI-overzicht tellen in Search Console mee onder de gewone zoekresultaten. Meer hierover bij <a href="/generative-engine-optimization/google-ai-overviews/">Google AI Overviews</a>.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: een hovenier in Zuidwolde, zes maanden later</h2>
+        <p>Hoe ziet dat stappenplan eruit bij een echt soort bedrijf? Hieronder een hovenier met twee man personeel. Het bedrijf en alle cijfers zijn verzonnen, de aanpak niet.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat hij deed</th><th>Klikken per maand</th><th>Aanvragen via de site</th></tr></thead>
+            <tbody>
+              <tr><td>Start</td><td>Nulmeting: één pagina "Diensten", geen bedrijfsprofiel, titels "Home" en "Over ons"</td><td>40</td><td>2</td></tr>
+              <tr><td>Maand 1</td><td>Titels herschreven, bedrijfsprofiel ingevuld met 15 foto's, noindex van een oude testpagina gehaald</td><td>55</td><td>2</td></tr>
+              <tr><td>Maand 2 en 3</td><td>Drie dienstpagina's met prijzen: tuinaanleg, onderhoud, bestrating. Elk met een FAQ</td><td>90</td><td>4</td></tr>
+              <tr><td>Maand 4 tot 6</td><td>Links van zijn leverancier, de voetbalclub en de ondernemersvereniging. Na elke klus een reviewlink</td><td>140</td><td>7</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let op wat hij níet deed: geen veertig plaatspagina's, geen linkpakket, geen blog per week. Hij deed een paar dingen goed, in de goede volgorde. Dat is ook hoe wij werken: eerst de grootste kans, daarna perfectioneren.</p>
+
+        <h2 id="checklist">SEO-checklist voor een kleine website</h2>
+        <p>Loop je site langs met deze SEO-checklist. Elk vinkje dat ontbreekt, is een kans. Print hem uit of zet hem in je agenda voor elk kwartaal.</p>
+
+        <h3>Techniek</h3>
+        <ul class="vink">
+          <li>Search Console is ingesteld en laat geen grote fouten zien.</li>
+          <li>Je belangrijke pagina's staan in de index.</li>
+          <li>Geen pagina staat per ongeluk op noindex.</li>
+          <li>De site werkt goed op een telefoon en laadt snel.</li>
+          <li>Alles draait op https, en er is één vaste versie van je domein.</li>
+        </ul>
+        <h3>Inhoud</h3>
+        <ul class="vink">
+          <li>Elke dienst heeft een eigen pagina met een eigen titel.</li>
+          <li>Het belangrijkste zoekwoord staat in de titel, de H1 en de eerste alinea.</li>
+          <li>Elke pagina heeft een unieke meta description.</li>
+          <li>Het antwoord op de vraag van de zoeker staat bovenaan.</li>
+          <li>Er staan prijzen of prijsindicaties waar mensen naar zoeken.</li>
+          <li>Afbeeldingen hebben een beschrijvende alt-tekst.</li>
+          <li>Er staan echte foto's van jou, je team en je werk op.</li>
+        </ul>
+        <h3>Structuur</h3>
+        <ul class="vink">
+          <li>Je homepage linkt naar je belangrijkste diensten.</li>
+          <li>Blogs linken naar de dienst waar ze over gaan.</li>
+          <li>Geen twee pagina's mikken op hetzelfde zoekwoord.</li>
+          <li>De URL's zijn kort en leesbaar. Zie <a href="/kennisbank/gidsen/seo-vriendelijke-urls/">SEO-vriendelijke URL's</a>.</li>
+        </ul>
+        <h3>Lokaal en vertrouwen</h3>
+        <ul class="vink">
+          <li>Naam, adres en telefoonnummer staan in de footer en kloppen met je bedrijfsprofiel.</li>
+          <li>Je bedrijfsprofiel is volledig en heeft recente foto's.</li>
+          <li>Je vraagt na elke klus om een review en reageert op elke review.</li>
+          <li>Een bezoeker ziet op elke pagina hoe hij je kan bellen of mailen.</li>
+        </ul>
+        <h3>Autoriteit en meten</h3>
+        <ul class="vink">
+          <li>Leveranciers, branche en ondernemersvereniging linken naar je site.</li>
+          <li>Je hebt geen links gekocht of geruild.</li>
+          <li>Je meet aanvragen uit Google, niet alleen bezoekers.</li>
+          <li>Je kijkt één keer per maand in Search Console en schrijft de cijfers op.</li>
+        </ul>
+
+        <h2 id="tools">Welke tools heb je nodig?</h2>
+        <p>Voor een kleine site kom je een heel eind met gratis tools van Google. Betaalde tools geven meer zicht op concurrenten en links. Zelf gebruiken we SE Ranking.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Taak</th><th>Gratis</th><th>Betaald</th></tr></thead>
+            <tbody>
+              <tr><td>Posities, klikken en indexering</td><td>Google Search Console</td><td>Ahrefs, SE Ranking</td></tr>
+              <tr><td>Zoekvolumes</td><td>Zoekwoordplanner in Google Ads</td><td>SE Ranking, Ahrefs</td></tr>
+              <tr><td>Snelheid</td><td>PageSpeed Insights</td><td>Niet nodig</td></tr>
+              <tr><td>Technische fouten op je site</td><td>Screaming Frog, gratis tot 500 URL's</td><td>Screaming Frog met licentie</td></tr>
+              <tr><td>Bezoekers en aanvragen</td><td>Google Analytics 4</td><td>Privacyvriendelijke alternatieven</td></tr>
+              <tr><td>Lokale zichtbaarheid</td><td>Google Bedrijfsprofiel</td><td>Lokale rankingtools</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Google waarschuwt wel: tools van anderen hebben geen toegang tot de interne gegevens van Google. Een score van een tool is dus een schatting, geen oordeel van Google. Wees ook kritisch op tools die beweren door Google goedgekeurd te zijn.</p>
+
+        <h2 id="hoe-lang">Hoe lang duurt het voordat je stijgt?</h2>
+        <p>Google zegt zelf dat sommige wijzigingen binnen uren effect hebben en andere pas na maanden. Het advies is een paar weken te wachten voordat je oordeelt. Een nieuwe pagina kan volgens Google een week nodig hebben voordat hij wordt gecrawld. Hoe snel het daarna gaat, is sterk afhankelijk van je uitgangspunt. Uit onze ervaring:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Situatie</th><th>Wat je mag verwachten</th></tr></thead>
+            <tbody>
+              <tr><td>Pagina staat al op plek 5 tot 20, je verbetert titel en tekst</td><td>Vaak binnen een paar weken zichtbaar</td></tr>
+              <tr><td>Nieuwe dienstpagina, lokaal, weinig concurrentie</td><td>Een tot drie maanden</td></tr>
+              <tr><td>Nieuwe site of nieuw domein</td><td>Drie tot zes maanden, soms langer</td></tr>
+              <tr><td>Landelijk zoekwoord met sterke concurrentie</td><td>Zes maanden tot een jaar, of langer</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wie belooft dat je binnen een maand op plek 1 staat, vertelt je niet de waarheid. Google schrijft het zelf: niemand kan een eerste plek garanderen. Wees ook voorzichtig met conclusies na twee weken. Posities schommelen, zeker bij nieuwe pagina's. Kijk naar de lijn over een paar maanden, niet naar de dag.</p>
+
+        <h2 id="werkt-niet">Wat niet werkt (en je posities kan kosten)</h2>
+        <ul>
+          <li><b>Zoekwoorden volproppen.</b> Een tekst die "schilder Assen" twintig keer noemt, leest slecht en gaat tegen de spamregels in.</li>
+          <li><b>Linkpakketten.</b> Gekochte links uit netwerken die Google kent. Soms merk je de straf pas veel later.</li>
+          <li><b>Pagina's die alleen voor Google bestaan.</b> Dezelfde tekst met veertig plaatsnamen, of honderd AI-teksten die niemand heeft nagelezen.</li>
+          <li><b>Je site "aanmelden bij duizend zoekmachines".</b> Google noemt dat doorgaans zinloos.</li>
+          <li><b>Elke week een blog om het bloggen.</b> Google schrijft dat veel nieuwe inhoud toevoegen om "vers" te lijken niet helpt.</li>
+          <li><b>De datum aanpassen zonder iets te veranderen.</b> Ook dat noemt Google als waarschuwing.</li>
+        </ul>
+        <p>We praten hier uit ervaring. Op onze eigen sites hebben we vroeger technieken getest die Google niet goed vindt, en één site kreeg daarvoor een penalty. Daarom testen we nieuwe technieken nu eerst in <a href="/proeflab/">ons proeflab</a> van meer dan honderd eigen sites. Bij klanten blijven we ruim binnen de regels.</p>
+
+        <h2 id="betalen">Kun je betalen om hoger in Google te komen?</h2>
+        <p>Niet in de gewone resultaten. Google neemt volgens eigen zeggen nooit geld aan om sites op te nemen of hoger te zetten, en adverteren heeft geen invloed op je organische plek. Ook een betere plek in het kaartje kun je niet kopen. Wat wel kan: adverteren met Google Ads. Dan sta je bovenaan met het label Gesponsord, en betaal je per klik.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>SEO</th><th>Google Ads</th></tr></thead>
+            <tbody>
+              <tr><td>Kosten</td><td>Tijd, of een vast bedrag per maand voor een bureau</td><td>Per klik, plus beheer</td></tr>
+              <tr><td>Resultaat zichtbaar</td><td>Na weken tot maanden</td><td>Dezelfde dag</td></tr>
+              <tr><td>Als je stopt</td><td>Het organische verkeer blijft nog een tijd</td><td>Het verkeer stopt meteen</td></tr>
+              <tr><td>Slim voor</td><td>Vaste stroom aanvragen op lange termijn</td><td>Snel starten, testen welke woorden aanvragen geven</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Vaak werkt een combinatie het best. Adverteer de eerste maanden op een paar woorden die geld opleveren, terwijl je SEO groeit. Dan weet je ook meteen welke zoekopdrachten aanvragen geven. Lees <a href="/kennisbank/gidsen/wat-is-google-ads/">wat Google Ads is en kost</a>.</p>
+
+        <h2 id="tijd">Hoeveel tijd kost het als je het zelf doet?</h2>
+        <p>De meeste ondernemers onderschatten niet de moeilijkheid, maar de tijd. Daarom hieronder onze inschatting voor een kleine site met vijf tot tien diensten. Het zijn richtgetallen uit onze praktijk, geen vaste regels. Met ervaring gaat het sneller, de eerste keer duurt het langer.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Taak</th><th>Tijd</th><th>Hoe vaak</th></tr></thead>
+            <tbody>
+              <tr><td>Nulmeting in Search Console</td><td>1 uur</td><td>Eenmalig</td></tr>
+              <tr><td>Titels en descriptions herschrijven</td><td>10 tot 15 minuten per pagina</td><td>Eenmalig, daarna per nieuwe pagina</td></tr>
+              <tr><td>Bedrijfsprofiel volledig invullen</td><td>1 tot 2 uur</td><td>Eenmalig, daarna foto's bijwerken</td></tr>
+              <tr><td>Een goede dienstpagina schrijven</td><td>3 tot 5 uur per pagina</td><td>Per dienst</td></tr>
+              <tr><td>Links regelen uit je eigen kring</td><td>1 uur</td><td>Per week, een paar maanden lang</td></tr>
+              <tr><td>Reviews vragen en beantwoorden</td><td>15 minuten</td><td>Per week</td></tr>
+              <tr><td>Cijfers bekijken en noteren</td><td>30 minuten</td><td>Per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Reken voor de eerste drie maanden op een dag of vijf werk, daarna een paar uur per maand. Heb je die tijd, dan kun je een heel eind komen. Heb je hem niet, dan blijft het vaak bij goede voornemens.</p>
+
+        <h2 id="uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>Google schrijft dat een klein lokaal bedrijf veel van dit werk zelf kan doen. Dat klopt. De nulmeting, de titels en je bedrijfsprofiel kun je dit weekend regelen. Voor de rest is vooral tijd nodig, en ervaring om te zien wat eerst moet.</p>
+        <p>Heb je die tijd niet, of zit je vast? Dan kun je <a href="/zoekmachine-optimalisatie/">SEO laten doen</a> vanaf € 495 per maand. Lokaal gevonden worden kan al vanaf € 295 per maand met <a href="/lokale-seo/">lokale SEO</a>. Allebei maandelijks opzegbaar en met stijggarantie: we spreken een doel af, en halen we dat niet door ons, dan werken we een maand gratis door. Wat we daarvoor van jou vragen, staat bij <a href="/garantie/">de garantie</a>. Wat SEO bij andere bureaus kost, lees je in de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={25} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het werk doen?" intro="Wat je bij ons krijgt, en waarom je dat kunt nagaan." />
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik betalen om hoger in Google te komen?', a: 'Niet in de gewone resultaten. Google neemt geen geld aan voor een organische plek, ook niet in het kaartje. Wel kun je adverteren, dan sta je bovenaan met een advertentie. Lees <a href="/kennisbank/gidsen/wat-is-google-ads/">wat Google Ads is en kost</a>.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Kleine verbeteringen aan pagina\'s die al op plek 5 tot 20 staan, zie je soms binnen weken. Voor duidelijke groei reken je op drie tot zes maanden.' },
+      { v: 'Waarom zakt mijn site in Google?', a: 'Vaak door een van vier dingen: een technisch probleem zoals een pagina op noindex, een concurrent die beter werk levert, een aanpassing in de systemen van Google, of een verhuizing zonder goede doorverwijzingen. Search Console laat meestal zien welke pagina\'s en zoekopdrachten zakten.' },
+      { v: 'Hoe kom ik hoger in Google Maps?', a: 'Met een volledig ingevuld Google Bedrijfsprofiel, de juiste hoofdcategorie, actuele gegevens, foto\'s en een vaste stroom reviews. Google kijkt naar relevantie, afstand en bekendheid.' },
+      { v: 'Helpt een blog om hoger te komen?', a: 'Alleen als je schrijft over vragen die je klanten echt stellen, en vanuit elk artikel linkt naar de dienst die erbij hoort. Een blog om het bloggen helpt weinig.' },
+      { v: 'Moet ik mijn website aanmelden bij Google?', a: 'Het hoeft niet, Google vindt je meestal vanzelf. Met Google Search Console gaat het wel sneller en zie je wat er misgaat.' },
+      { v: 'Wat kost het om hoger in Google te komen?', a: 'Zelf doen kost vooral tijd. Uitbesteden kost bij de meeste bureaus € 500 tot € 3.500 per maand. Bij ons begint SEO bij € 495 en lokale SEO bij € 295 per maand. Meer in de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Pillar', titel: 'Zoekmachineoptimalisatie', href: '/zoekmachine-optimalisatie/', tekst: 'SEO met stijggarantie, vanaf € 495 per maand.' },
+      { label: 'Gids', titel: 'Hoe werkt SEO?', href: '/kennisbank/gidsen/hoe-werkt-seo/', tekst: 'Uitleg voor ondernemers, zonder jargon.' },
+      { label: 'Gids', titel: 'Google Search Console', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Zien hoe Google je site ziet.' },
+      { label: 'Gids', titel: 'Backlinks voor een lokaal bedrijf', href: '/kennisbank/gidsen/backlinks/', tekst: 'Waar je links vandaan haalt zonder risico.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten welke stap bij jou het meest oplevert?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je concurrenten en belt je met de drie dingen die bij jou het snelst verschil maken.`} />
+</Base>

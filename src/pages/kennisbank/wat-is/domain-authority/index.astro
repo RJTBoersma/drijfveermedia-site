@@ -1,0 +1,159 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--domain-authority.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/domain-authority/';
+const datum = '2026-10-18';
+const definitie = 'Domain Authority (DA) is een score van 1 tot 100, bedacht door het SEO-bedrijf Moz, die voorspelt hoe sterk een website in Google kan scoren, vooral op basis van de links die ernaar wijzen.';
+const hoofdstukken = [
+  { id: 'berekening', titel: 'Hoe de score wordt berekend' },
+  { id: 'familie', titel: 'De scores rond DA' },
+  { id: 'tools', titel: 'Vier tools, vier scores' },
+  { id: 'niet', titel: 'Wat het getal niet is' },
+  { id: 'goed', titel: 'Wat is een goede DA?' },
+  { id: 'controleren', titel: 'Controleren in vijf stappen' },
+  { id: 'verhogen', titel: 'Verhogen zonder risico' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Domain Authority',
+  alternateName: ['DA', 'Domeinautoriteit'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is Domain Authority (DA)? Uitleg',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Domain Authority',
+}];
+---
+<Base
+  title="Wat is Domain Authority (DA)? Uitleg | Drijfveer Media"
+  description="Wat is Domain Authority? Een score van 1 tot 100 die voorspelt hoe sterk je site is. Wat de DA wel en niet zegt, en hoe je hem verhoogt met goede links."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Domain Authority', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Linkbuilding</p>
+        <h1>Wat is Domain Authority?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je komt het tegen in offertes, in SEO-tools en in mailtjes van linkverkopers. "Onze site heeft DA 45." Klinkt indrukwekkend. In het Nederlands heet het ook wel domeinautoriteit. Maar wat zegt dat getal eigenlijk, en wat niet? En hoe gebruik je het zonder je te laten foppen?</p>
+
+      <div class="inhoud-blok"><Inhoud items={hoofdstukken} leestijd={6} /></div>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="berekening">Hoe Domain Authority wordt berekend</h2></div>
+      <p>Moz kijkt vooral naar links. Hoeveel verschillende websites linken naar jou (de linking root domains), hoe sterk zijn die sites zelf en hoe goed zijn die links? Een rekenmodel dat zelf leert, vergelijkt dat met duizenden echte zoekresultaten. Sinds maart 2019 werkt Moz met dit nieuwere model, Domain Authority 2.0. De uitkomst wordt uitgedrukt op een schaal van 1 tot 100.</p>
+      <p>Een nieuwe site begint op 1. Reuzen staan bovenaan. In de lijst van Moz met de 500 sterkste sites heeft de Engelse Wikipedia een DA van 98, met zo'n 7,5 miljoen verschillende domeinen die ernaar linken (opgevraagd op 18 oktober 2026).</p>
+      <p>De schaal is niet gelijkmatig. Van 20 naar 30 gaat veel makkelijker dan van 70 naar 80. En het is een vergelijking: als een reus er veel links bij krijgt, kan jouw score zakken terwijl er bij jou niets veranderde. Moz zegt het zelf: gebruik de score om te vergelijken, niet als absoluut cijfer.</p>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2 id="familie">De scores rond DA: pagina, merk en spam</h2></div>
+      <p>Naast de score voor je hele domein is er Page Authority (PA): dezelfde berekening voor één pagina. Handig als je wilt weten welke pagina van een site de sterkste is. Moz heeft ook Brand Authority, een score voor de kracht van een merk. Die werkt volgens Moz nog alleen met gegevens uit de Verenigde Staten, Groot-Brittannië, Canada en Australië.</p>
+      <p>Vroeger had Moz ook MozRank en MozTrust, zichtbaar in de MozBar, een toolbar voor je browser. Die cijfers zijn verdwenen. Wie nu de oude uitlegpagina's van Moz over MozRank of MozTrust opent, wordt met een redirect doorgestuurd naar de uitleg over DA. De DA bekijk je in Link Explorer of in de MozBar, die nog steeds bestaat.</p>
+      <p>Moz geeft daarnaast een Spam Score. Dat percentage laat zien hoeveel sites met vergelijkbare kenmerken door Google zijn bestraft. Moz kijkt daarvoor naar 27 kenmerken. Tot 30% noemt Moz laag.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="tools">Vier tools, vier scores</h2></div>
+      <p>Andere tools hebben hun eigen versie. Elk cijfer wordt anders berekend, op een andere verzameling links.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Tool</th><th>Naam van de score</th><th>Schaal</th></tr></thead>
+          <tbody>
+            <tr><td>Moz</td><td>Domain Authority (DA)</td><td>1 tot 100</td></tr>
+            <tr><td>Ahrefs</td><td>Domain Rating (DR)</td><td>0 tot 100</td></tr>
+            <tr><td>Semrush</td><td>Authority Score</td><td>1 tot 100</td></tr>
+            <tr><td>SE Ranking</td><td>Domain Trust</td><td>Eigen score, gebruiken wij zelf</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Vergelijk dus nooit de DA van de een met de DR van de ander. Een site met DA 30 kan bij Ahrefs op DR 45 staan, of andersom. Kies één tool en blijf die gebruiken.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="niet">Wat het getal niet is</h2></div>
+      <p>Het is geen cijfer van Google. Moz zegt dat zelf ook: het is geen rankingfactor en heeft geen invloed op je posities. Google kijkt wel naar links en autoriteit, maar niet naar dit getal. Het is een schatting van buitenaf, een thermometer.</p>
+      <p>En een thermometer kun je voor de gek houden. Er zijn sites die hun score opblazen met duizenden waardeloze links, en daarna "links op DA 50" verkopen. Een link van zo'n site levert je weinig op, of zelfs een probleem. Een link van een lokale brancheclub met DA 15 kan meer waard zijn.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="goed">Wat is een goede DA?</h2></div>
+      <p>Er is geen goede score in het algemeen. Een DA van 20 kan in de ene branche ruim voldoende zijn en in een andere veel te laag. Het enige vergelijkingspunt dat telt: de sites die nu boven jou staan op de zoekwoorden waarmee je klanten wilt vinden.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Situatie</th><th>Wat het vaak betekent</th></tr></thead>
+          <tbody>
+            <tr><td>Jouw DA ligt ruim onder die van de top 3</td><td>De achterstand zit waarschijnlijk in links. Linkbuilding loont.</td></tr>
+            <tr><td>Jouw DA ligt gelijk of hoger, maar je staat lager</td><td>Het gat zit ergens anders: tekst, techniek of zoekintentie.</td></tr>
+            <tr><td>De top 3 heeft een lage DA</td><td>Weinig concurrentie. Goede pagina's kunnen snel stijgen.</td></tr>
+            <tr><td>Je DA daalt zonder dat je links verloor</td><td>Vaak een aanpassing van het model of de index van Moz.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="controleren">Zo controleer je je DA in vijf stappen</h2></div>
+      <ol>
+        <li>Maak een gratis account aan bij Moz en open Link Explorer. Je kunt ook de gratis MozBar in je browser zetten.</li>
+        <li>Vul je eigen domein in. Noteer de DA, het aantal linking root domains en de Spam Score.</li>
+        <li>Zoek in Google op je belangrijkste zoekwoord, bijvoorbeeld "fysiotherapeut Meppel". Noteer de eerste drie bedrijven.</li>
+        <li>Zoek hun scores op en zet alles in één tabel.</li>
+        <li>Herhaal het elk kwartaal. Kijk naar de trend, niet naar één meting.</li>
+      </ol>
+      <p>Een voorbeeld. Een fysiotherapeut in Meppel heeft DA 12. De drie praktijken die boven haar staan in Google, hebben 18, 21 en 25. Haar teksten zijn prima, haar techniek ook. Dan zit het gat vrijwel zeker in links. Een vermelding bij de plaatselijke sportclub, een stuk op een gezondheidssite en een plek in een regionale bedrijvengids kunnen dat gat al flink kleiner maken. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="verhogen">Je DA verhogen zonder risico</h2></div>
+      <ul class="vink">
+        <li>Gebruik de score om jezelf te vergelijken met je directe concurrenten, niet als doel op zich.</li>
+        <li>Verhoog je score met relevante links uit je branche en je regio. Koop geen pakketjes "hoge DA"-links.</li>
+        <li>Kijk bij een linkaanbod naar de site zelf: heeft hij echte bezoekers en past hij bij jouw vak?</li>
+        <li>Laat je sterke pagina's met <a href="/kennisbank/wat-is/interne-links/">interne links</a> doorverwijzen naar de pagina's die moeten scoren.</li>
+        <li>Maak iets waar mensen vanzelf naar linken: een prijsoverzicht, een handige rekenhulp, een eerlijk antwoord op een vraag uit je vak.</li>
+      </ul>
+      <p>In de internetmarketing is het verleidelijk om op één getal te sturen. Domain Authority geeft je richting, geen garantie. Bij <a href="/cases/conflictbemiddeling/">Conflictbemiddeling Nederland</a> zagen we de autoriteit van de site stijgen, samen met 47% meer organisch verkeer en eerste posities op "mediation opleiding". Dat kwam door een nieuwe site, SEO en linkbuilding samen.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/backlinks/">backlinks voor lokale bedrijven</a>, het begrip <a href="/kennisbank/wat-is/link-juice/">link juice</a> of bekijk hoe we aan <a href="/linkbuilding/">linkbuilding</a> doen, vanaf € 395 per maand met stijggarantie. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een goede Domain Authority?', a: 'Dat hangt af van je concurrenten. Kijk naar de DA van de sites die nu bovenaan staan op jouw zoekwoorden. Zit je daar ruim onder, dan is links verdienen vaak de snelste winst.' },
+      { v: 'Gebruikt Google de DA?', a: 'Nee. De score is van Moz, niet van Google. Moz zegt zelf dat het geen rankingfactor is. Hij voorspelt alleen hoe sterk een site waarschijnlijk is.' },
+      { v: 'Waarom is mijn DA gedaald?', a: 'Je kunt links zijn kwijtgeraakt, maar vaak is het iets anders: Moz heeft zijn index of model aangepast, of andere sites kregen er veel links bij. De score is een vergelijking.' },
+      { v: 'Wat is het verschil tussen DA en PA?', a: 'Domain Authority gaat over je hele domein, Page Authority over één pagina. Beide komen van Moz en gebruiken dezelfde schaal van 1 tot 100.' },
+      { v: 'Is een link van een site met hoge DA altijd goed?', a: 'Nee. Kijk of de site echte bezoekers heeft en bij je vak of regio past. Een hoge score kan opgeblazen zijn met waardeloze links.' },
+    ]}
+  />
+
+  <Actie titel="Hoe sterk is jouw site tegenover je concurrent?" tekst={`We zetten het gratis voor je naast elkaar. ${site.contactpersoon} belt je met wat het gat is en hoe je het dicht.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .inhoud-blok { margin: 8px 0 40px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

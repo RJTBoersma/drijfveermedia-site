@@ -1,0 +1,400 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--meer-klanten-via-je-website.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/meer-klanten-via-je-website/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'eerst', titel: 'Bezoekers of aanvragen?' },
+  { id: 'som', titel: 'De som achter meer klanten' },
+  { id: 'meten', titel: 'Zo zie je waar het lekt' },
+  { id: 'fouten', titel: 'Deel 1: de 9 fouten' },
+  { id: 'dienstpagina', titel: 'Een dienstpagina die werkt' },
+  { id: 'vertrouwen', titel: 'Vertrouwen wekken' },
+  { id: 'kanalen', titel: 'Deel 2: meer relevante bezoekers' },
+  { id: 'daarna', titel: 'Deel 3: na de aanvraag' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een installateur' },
+  { id: 'laten', titel: 'Wat je beter kunt laten' },
+  { id: 'problemen', titel: 'Problemen en oplossingen' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'check', titel: 'De 20-puntencheck' },
+  { id: 'aanpak', titel: 'Waar begin je?' },
+];
+const check = [
+  'Je homepage zegt in één zin wat je doet, voor wie en waar.',
+  'Elke dienst heeft een eigen pagina met wat het is, voor wie, een prijsindicatie en hoe je begint.',
+  'Je menu heeft hooguit twee niveaus en gebruikt de woorden van je klant.',
+  'Je telefoonnummer staat op elke pagina en is op mobiel met één tik te bellen.',
+  'Je openingstijden staan bij je telefoonnummer.',
+  'Je contactformulier vraagt hooguit naam, e-mail, telefoon en bericht.',
+  'Je hebt het formulier deze maand zelf getest en de mail kwam aan.',
+  'Na het versturen ziet de bezoeker wat er nu gebeurt en wanneer.',
+  'Elke pagina heeft één duidelijke knop met de volgende stap.',
+  'Je laat eigen foto\'s van je werk zien, geen stockfoto\'s.',
+  'Er staan reviews of reacties van klanten op je site, met naam en plaats.',
+  'Je site laadt op een telefoon binnen een paar seconden.',
+  'Tekst is op mobiel leesbaar zonder inzoomen, knoppen zijn groot genoeg.',
+  'Je Google Bedrijfsprofiel is compleet en je reageert op reviews.',
+  'Je weet op welke zoekopdrachten je gevonden wordt (Search Console).',
+  'Je meet hoeveel aanvragen er per maand binnenkomen, en via welk kanaal.',
+  'Je belt een aanvraag dezelfde werkdag terug.',
+  'Je vraagt na elke klus om een review.',
+  'Je hebt een vaste plek voor nieuwe, nuttige content, en je vult die regelmatig.',
+  'Je kijkt elk kwartaal welke kanalen klanten opleveren en schrapt wat niets doet.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'De 20-puntencheck: meer klanten via je website\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  check.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Meer klanten via je website: de 9 grootste fouten en de kanalen die werken',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Meer aanvragen en klanten uit de website van een klein bedrijf',
+}];
+---
+<Base
+  title="Meer klanten via je website: de 9 grootste fouten"
+  description="Meer klanten via je website? De 9 grootste fouten, de kanalen die relevante bezoekers brengen, een rekenvoorbeeld en een check van 20 punten."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Meer klanten via je website', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Leadgeneratie" titel="Meer klanten via je website: de 9 grootste fouten en wat wel werkt" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Je website ziet er goed uit, er komen bezoekers, maar de telefoon blijft stil. Of er komt bijna niemand. Wie meer klanten via zijn website wil, moet eerst weten welk van de twee het is. Deze gids helpt bij allebei.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Meer klanten via je website komt uit drie knoppen: meer relevante bezoekers, meer aanvragen uit die bezoekers en meer opdrachten uit die aanvragen.</li>
+            <li>Begin bij de site zelf. Meer bezoekers helpt pas als je site ze ook omzet in aanvragen.</li>
+            <li>Het contactformulier is de snelste winst: naam, e-mail, telefoon en bericht is genoeg.</li>
+            <li>Kies daarna twee kanalen voor nieuwe bezoekers. Voor een lokaal bedrijf zijn dat meestal Google Bedrijfsprofiel en SEO.</li>
+            <li>Reageer op een aanvraag binnen het uur. Na drie dagen ben je vergeten.</li>
+          </ul>
+        </div>
+
+        <h2 id="eerst">Eerst: zit het probleem in bezoekers of in aanvragen?</h2>
+        <p>Er zijn twee redenen waarom een website weinig klanten oplevert. Er zijn te weinig mensen die op je website terechtkomen. Of ze komen wel, maar doen niets. Dat zijn twee heel verschillende problemen, met een andere oplossing.</p>
+        <p>Kijk in Google Analytics of Search Console hoeveel bezoekers je per maand hebt, en tel hoeveel aanvragen er binnenkwamen. Honderden bezoekers en nul aanvragen? Dan zit het probleem op je site. Twintig bezoekers per maand? Dan moet je eerst gevonden worden. We horen het geregeld: "Ik sta nu hoog in Google, maar de aanvragen blijven achter." Dan helpt nog meer verkeer niet. Dan moet de site beter.</p>
+        <p>Nieuwe marketingtactieken lossen dat ook niet op. Influencer marketing, een paar influencers inhuren of een dure campagne op social media: het stuurt alleen meer mensen naar dezelfde site die nu niet werkt. Repareer eerst de basis.</p>
+
+        <h2 id="som">De som achter meer klanten</h2>
+        <p>Hoeveel klanten je website oplevert, is een vermenigvuldiging van drie getallen. Het aantal bezoekers, het deel dat iets aanvraagt, en het deel van die aanvragen dat klant wordt. Verbeter je één van de drie, dan groeit de uitkomst. Verbeter je ze alle drie, dan groeit hij hard.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers): een installatiebedrijf</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th>Situatie</th><th>Bezoekers</th><th>Vraagt aan</th><th>Wordt klant</th><th>Klanten per maand</th></tr></thead>
+              <tbody>
+                <tr><td>Nu</td><td>600</td><td>1%</td><td>1 op 3</td><td>2</td></tr>
+                <tr><td>Twee keer zoveel bezoekers</td><td>1.200</td><td>1%</td><td>1 op 3</td><td>4</td></tr>
+                <tr><td>Beter formulier en betere teksten</td><td>600</td><td>2%</td><td>1 op 3</td><td>4</td></tr>
+                <tr><td>Sneller terugbellen</td><td>600</td><td>1%</td><td>1 op 2</td><td>3</td></tr>
+                <tr><td>Alle drie</td><td>1.200</td><td>2%</td><td>1 op 2</td><td>12</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Met een marge van € 1.500 per klus is het verschil tussen de eerste en de laatste regel € 15.000 per maand. Het tweede en derde punt kosten vaak het minst. Daarom beginnen we bijna altijd bij de site en de opvolging, niet bij meer verkeer.</p>
+        </div>
+
+        <h2 id="meten">Zo zie je waar het lekt</h2>
+        <p>Je hoeft geen analist te zijn. Met twee gratis tools van Google weet je in een half uur waar je staat.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={44} /><h3>Search Console: hoe vinden mensen je?</h3></div>
+        <p>Open in <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> het prestatierapport. Standaard zie je de afgelopen drie maanden. Kijk naar het tabblad Zoekopdrachten: zijn dat woorden waarmee een klant zoekt, of vooral je bedrijfsnaam? Kijk dan bij Pagina's welke pagina's klikken krijgen. En bij Apparaten zie je hoeveel mensen op een telefoon zoeken.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={44} /><h3>Analytics: wat doen ze op je site?</h3></div>
+        <p>In <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a> ga je naar Verkeersacquisitie om te zien via welk kanaal mensen binnenkomen. Bij Pagina's en schermen zie je welke pagina's gelezen worden. Het belangrijkste getal: hoeveel formulieren en klikken op je telefoonnummer er per maand zijn. Meet je dat nog niet, dan is dat stap één. Hulp nodig? Zie <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+        <p>Schrijf drie getallen op: bezoekers per maand, aanvragen per maand en opdrachten per maand. Dat is je nulmeting. Na elke verbetering kijk je of ze veranderen.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={44} /><h3>De vijfsecondentest</h3></div>
+        <p>Cijfers vertellen waar het lekt, niet waarom. Daarvoor heb je iemand nodig die je site niet kent. Vraag een kennis, je buurman of een klant om je homepage vijf seconden op zijn telefoon te bekijken. Leg de telefoon dan weg en stel drie vragen:</p>
+        <ol>
+          <li>Wat doet dit bedrijf?</li>
+          <li>Voor wie, en in welke regio?</li>
+          <li>Wat zou je doen als je het nodig had?</li>
+        </ol>
+        <p>Kan hij één van de drie niet beantwoorden, dan weet je waar je moet beginnen. Het kost niets en het is pijnlijk eerlijk. Doe de test bij drie mensen, dan zie je of het aan de persoon ligt of aan je site.</p>
+
+        <h2 id="fouten">Deel 1: de 9 fouten die je klanten kosten</h2>
+        <p>Deze fouten zien we op sites van kleine bedrijven het vaakst. Ze kosten weinig om op te lossen, en je merkt het verschil in je aanvragen.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3 id="fout-1">1. Je site gaat over jou in plaats van over de klant</h3></div>
+        <p>"Welkom bij [bedrijfsnaam], sinds 1987 uw partner in kwaliteit." Elke bezoeker vraagt zich onbewust af: wat heb ik hieraan? Een kop die het probleem van de klant noemt, houdt hem vast.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Over jezelf</th><th>Over de klant</th></tr></thead>
+            <tbody>
+              <tr><td>"Welkom bij Dakwerken Jansen"</td><td>"Lekkage aan je dak? We komen binnen twee dagen kijken in heel Drenthe."</td></tr>
+              <tr><td>"Uw partner in administratie"</td><td>"Nooit meer zelf je btw-aangifte doen. Vaste prijs per kwartaal."</td></tr>
+              <tr><td>"Kwaliteit staat bij ons voorop"</td><td>"Elke badkamer opgeleverd binnen de afgesproken drie weken."</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Als ondernemer sta je te dicht bij je eigen bedrijf om dat scherp te zien. Een tip uit de praktijk: laat iemand je interviewen over wat je doet en voor wie. Schrijf op hoe je klanten het zelf zeggen, en gebruik die woorden. De gids <a href="/kennisbank/gidsen/persona-maken/">persona maken</a> helpt daarbij.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3 id="fout-2">2. Er komen geen relevante bezoekers</h3></div>
+        <p>Duizend bezoekers uit heel Nederland zijn niets waard voor een kapper in Assen. Honderd relevante bezoekers uit de regio wel. Kijk in Search Console op welke zoekwoorden je gevonden wordt. Passen die bij wat je verkoopt?</p>
+        <p>Voor lokale bedrijven begint het bij een goed ingericht <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Daarna komt waardevolle content: pagina's die de vragen van je klanten beantwoorden. Wie regelmatig content plaatst die echt over zijn vak gaat, trekt de mensen die hij zoekt. Zo kun je je doelgroepen bereiken zonder per klik te betalen. In deel 2 lees je welke kanalen er zijn.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={48} /><h3 id="fout-3">3. Bezoekers vinden niet wat ze zoeken</h3></div>
+        <p>Een menu met twaalf knoppen, diensten verstopt onder "Over ons", drie niveaus diep klikken voor een prijs. Bezoekers geven het snel op. Houd je menu op hooguit twee niveaus en noem dingen zoals je klant ze noemt. "Dakwerk", niet "Onze expertises".</p>
+        <p>Zet bij elke dienst wat het is, voor wie, wat het ongeveer kost en hoe je begint. Relevante content op de juiste plek is beter dan alles op één pagina. Een bezoeker die via Google op een dienstpagina binnenkomt, ziet je homepage misschien nooit. Elke pagina moet dus op zichzelf kunnen staan.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3 id="fout-4">4. Een muur van tekst, of juist bijna niets</h3></div>
+        <p>Grote merken komen weg met een foto en drie woorden. Een klein bedrijf moet uitleggen wat het doet, en dat vraagt tekst. Maar niemand leest een lap van vijfhonderd woorden zonder kopje.</p>
+        <p>Gebruik korte alinea's, tussenkoppen en opsommingen. Zet het belangrijkste vet. Stel bij elke zin de vraag: en dus? Heeft de lezer er niets aan, haal hem weg. Een lettergrootte van minstens 16 pixels leest prettig op elk scherm.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3 id="fout-5">5. Stockfoto's in plaats van het echte werk</h3></div>
+        <p>De lachende man met helm kent iedereen al. Hij staat op honderd andere bouwsites. Stockfoto's maken je site inwisselbaar. Laat in plaats daarvan het echte werk zien: een badkamer die je hebt opgeleverd, je bus voor de deur, je team aan de koffie.</p>
+        <p>Een telefoonfoto van eigen werk overtuigt meer dan een dure stockfoto. Zet er een korte uitleg bij en, als het kan, een reactie van de klant. Pas op met foto's van internet: volgens de KVK zit er automatisch auteursrecht op, en een claim loopt al snel op tot honderden euro's per foto.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3 id="fout-6">6. Er is geen duidelijke volgende stap</h3></div>
+        <p>Een bezoeker heeft je tekst gelezen en is overtuigd. En dan? Als er geen knop staat, of vijf verschillende, vertrekt hij. Geef elke pagina één hoofddoel en één duidelijke <a href="/kennisbank/wat-is/call-to-action/">call to action</a>: "Vraag een prijs aan", "Plan een gratis inmeting".</p>
+        <p>Let op het moment. Iemand die net begint met oriënteren, is nog niet klaar voor "Koop nu". Een prijsindicatie of een checklist past dan beter.</p>
+
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3 id="fout-7">7. Contact opnemen is een speurtocht</h3></div>
+        <p>Je telefoonnummer hoort rechtsboven op elke pagina, en op mobiel met één tik te bellen. Niet alleen onderaan de contactpagina. Zet er je openingstijden bij, zodat iemand weet of hij nu kan bellen.</p>
+        <p>Veel mensen bellen liever dan dat ze een formulier invullen, zeker bij spoed. Anderen willen juist niet bellen. Geef ze allebei een makkelijke weg. Een knop voor WhatsApp kan ook, als je die berichten dezelfde dag beantwoordt.</p>
+
+        <div class="stap-kop"><Tekening naam="mail" maat={48} /><h3 id="fout-8">8. Je contactformulier jaagt mensen weg</h3></div>
+        <p>Dit is de fout met de snelste winst. Een formulier met twaalf verplichte velden, een captcha en een keuzelijst "Hoe heeft u ons gevonden?" schrikt af. Ondernemers zeggen dan: "Maar we hebben die gegevens nodig." Dat kan zijn. Maar het formulier is er voor het gemak van de bezoeker, niet voor jouw administratie.</p>
+        <p>Vraag alleen naam, e-mailadres, telefoonnummer en een bericht. Maak telefoon en bericht niet verplicht. De rest vraag je in het eerste gesprek. Test na elke wijziging aan je site of het formulier nog werkt en of de mail echt aankomt. Een formulier dat stilletjes kapot is, is een van de veelvoorkomende problemen die niemand opmerkt.</p>
+        <p>Een bezoeker ziet je formulier onbewust als voorproefje van de samenwerking. Moeizaam formulier, moeizaam bedrijf. Zet na het versturen een bedankpagina neer die zegt wat er nu gebeurt: "We bellen je vandaag nog, uiterlijk om 17.00 uur."</p>
+
+        <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3 id="fout-9">9. Je site is traag of onhandig op mobiel</h3></div>
+        <p>Een groot deel van je bezoekers bekijkt je site op de telefoon, vaak onderweg. Hoeveel precies, zie je in Search Console bij Apparaten. Laadt de site traag, moet je inzoomen om te lezen of zijn de knoppen te klein, dan zijn ze weg.</p>
+        <p>Google meet de ervaring met drie Core Web Vitals. Volgens Google is een pagina goed als het grootste element binnen 2,5 seconden in beeld staat, de pagina binnen 200 milliseconden op een tik reageert en er bijna niets verspringt tijdens het laden. Test je site met PageSpeed Insights en kijk naar de score voor mobiel. Te grote foto's zijn vaak de boosdoener. Meer in de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+
+        <h2 id="dienstpagina">Een dienstpagina die aanvragen oplevert</h2>
+        <p>Voor de meeste kleine bedrijven is de dienstpagina belangrijker dan de homepage. Daar komt iemand binnen die "dakkapel plaatsen Assen" zocht. Deze opbouw werkt voor bijna elke dienst:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Blok</th><th>Wat erin staat</th><th>Voorbeeld (verzonnen)</th></tr></thead>
+            <tbody>
+              <tr><td>Kop</td><td>De dienst, voor wie en waar</td><td>"Dakkapel laten plaatsen in Drenthe, in één dag"</td></tr>
+              <tr><td>Eerste alinea</td><td>Het probleem van de klant en jouw antwoord</td><td>"Meer ruimte op zolder zonder verbouwing van maanden."</td></tr>
+              <tr><td>Knop en telefoon</td><td>De volgende stap, meteen zichtbaar</td><td>"Plan een gratis inmeting" plus je nummer</td></tr>
+              <tr><td>Wat je krijgt</td><td>Wat er precies gebeurt, in stappen</td><td>Inmeting, offerte, productie, plaatsing</td></tr>
+              <tr><td>Prijs</td><td>Een vanaf-prijs of wat de prijs bepaalt</td><td>"Vanaf € 7.500, inclusief plaatsing"</td></tr>
+              <tr><td>Bewijs</td><td>Foto's van eigen werk, reviews met plaats</td><td>"Familie De Boer, Smilde"</td></tr>
+              <tr><td>Vragen</td><td>De vijf vragen die je het vaakst hoort</td><td>"Heb ik een vergunning nodig?"</td></tr>
+              <tr><td>Afsluiting</td><td>Nog één keer de volgende stap</td><td>Kort formulier of terugbelverzoek</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Schrijf in de woorden van je klant. Hij zoekt op "lekkage dak", niet op "dakrenovatie-oplossingen". Wil je hulp met de teksten, kijk dan bij <a href="/tekstschrijver/">tekstschrijver</a>.</p>
+
+        <h2 id="vertrouwen">Vertrouwen wekken bij een onbekende bezoeker</h2>
+        <p>Iemand die je niet kent, moet besluiten of hij je zijn huis, zijn administratie of zijn geld toevertrouwt. Hij zoekt naar signalen dat dat goed gaat. Geef ze hem.</p>
+        <ul class="vink">
+          <li><b>Reviews met naam en plaats.</b> "Jan uit Veenhuizen" overtuigt meer dan "Tevreden klant". Plaats ze bij de dienst waar ze over gaan, niet alleen op een aparte pagina.</li>
+          <li><b>Gezichten.</b> Een foto van jou en je team, met namen. Mensen kopen bij mensen.</li>
+          <li><b>Een adres en een KvK-nummer.</b> Een bedrijf met alleen een formulier en geen adres voelt onzeker.</li>
+          <li><b>Eerlijkheid over wat je niet doet.</b> "Geen platte daken" of "alleen in Drenthe" klinkt niet als een nadeel. Het klinkt als iemand die weet waar hij goed in is.</li>
+          <li><b>Wat er gebeurt als het misgaat.</b> Een garantie, een vaste prijs, een belofte over de oplevering. Alleen als je het echt waarmaakt.</li>
+          <li><b>Alleen echte keurmerken.</b> Noem lidmaatschappen en certificaten die je hebt. Logo's die je niet mag voeren, kosten je meer vertrouwen dan ze opleveren.</li>
+        </ul>
+
+        <h2 id="kanalen">Deel 2: meer relevante bezoekers, welke kanalen werken?</h2>
+        <p>Zet je site aanvragen om, dan loont het om meer mensen te trekken. Er zijn tientallen manieren. Probeer ze niet allemaal tegelijk. Kies er twee die passen bij hoe jouw klanten zoeken, en doe die goed.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kanaal</th><th>Eerste resultaat</th><th>Kosten</th><th>Past bij</th></tr></thead>
+            <tbody>
+              <tr><td>Google Bedrijfsprofiel</td><td>Weken</td><td>Vooral tijd</td><td>Elk bedrijf met klanten in de regio</td></tr>
+              <tr><td>SEO</td><td>Maanden</td><td>Tijd of een vast maandbedrag</td><td>Diensten waar mensen actief naar zoeken</td></tr>
+              <tr><td>Contentmarketing</td><td>Maanden</td><td>Tijd of een vast maandbedrag</td><td>Wie veel vragen krijgt van klanten</td></tr>
+              <tr><td>Google Ads</td><td>Dagen</td><td>Per klik</td><td>Spoed, seizoenswerk, een nieuwe dienst</td></tr>
+              <tr><td>Social media</td><td>Maanden</td><td>Vooral tijd</td><td>Zichtbaar werk, lokale binding</td></tr>
+              <tr><td>E-mail en nieuwsbrief</td><td>Weken</td><td>Laag</td><td>Terugkerende klanten, aanraders</td></tr>
+              <tr><td>Links en vermeldingen</td><td>Maanden</td><td>Tijd of een vast maandbedrag</td><td>Wie hoger in Google wil</td></tr>
+              <tr><td>Influencer marketing</td><td>Wisselend</td><td>Per samenwerking</td><td>Consumentenproducten, zelden voor dienstverleners</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={44} /><h3>Google Bedrijfsprofiel en lokale SEO</h3></div>
+        <p>Voor een lokaal bedrijf is dit de eerste plek. Iemand zoekt "schilder Assen" en ziet drie bedrijven op de kaart. Volgens Google hangen die lokale resultaten vooral af van relevantie, afstand en bekendheid. Bij bekendheid kijkt Google onder meer naar reviews en naar hoeveel websites naar je bedrijf linken. Een compleet profiel met de juiste categorie, foto's van je werk en reacties op elke review doet veel. Lees de gids <a href="/kennisbank/gidsen/google-reviews/">Google reviews</a>, of laat het doen via <a href="/lokale-seo/">lokale SEO</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={44} /><h3>SEO: gevonden worden op wat klanten zoeken</h3></div>
+        <p>SEO is je site zo inrichten dat Google begrijpt wat je doet en waar. Voor een mkb'er betekent dat meestal: een eigen pagina per dienst, pagina's voor de plaatsen waar je echt werkt, snelle techniek en links van andere sites. Het duurt maanden, maar daarna betaal je niet per bezoeker. Begin met de gids <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={44} /><h3>Contentmarketing</h3></div>
+        <p>Contentmarketing is nuttige artikelen, uitleg en voorbeelden maken die je klanten trekken. Google zegt zelf dat zijn systemen voorrang geven aan nuttige, betrouwbare informatie die gemaakt is voor mensen, niet om hoger te komen. Een van de vragen die Google je laat stellen: is dit een pagina die iemand zou bewaren of doorsturen?</p>
+        <p>Om goede content te creëren maak je eerst een lijst van de vragen die klanten je stellen. Aan de telefoon, in de mail, bij de koffie. Elke vraag is een artikel. "Wat kost een dakkapel in 2026?", "Heb ik een vergunning nodig voor een schuur?". Plan regelmatig content, liever één goed artikel per maand dan vier halve. Meer in <a href="/kennisbank/gidsen/bedrijfsblog-beginnen/">een bedrijfsblog beginnen</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={44} /><h3>Google Ads: snel, maar je betaalt per klik</h3></div>
+        <p>Met Google Ads sta je morgen bovenaan, voor de zoekwoorden die je kiest. Handig voor spoed, voor seizoenswerk of om te testen of een nieuwe dienst aanslaat. Stop je met betalen, dan ben je weg. En adverteren heeft volgens Google geen invloed op je gewone, onbetaalde posities. Een campagne loont pas als je site aanvragen omzet. Hoe je er een opzet, lees je in <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="social" maat={44} /><h3>Social media</h3></div>
+        <p>Social media brengt zelden direct aanvragen, maar wel bekendheid en vertrouwen. Een hovenier die elke week een voor-en-na-foto plaatst, wordt herkend in het dorp. Kies één kanaal waar je klanten zitten: Facebook of Instagram voor particulieren, LinkedIn voor zakelijke klanten. Link in je berichten naar de pagina op je site waar iemand de volgende stap kan zetten. Zie <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="mail" maat={44} /><h3>E-mail en nieuwsbrief</h3></div>
+        <p>Je bestaande klanten zijn je beste bron van nieuwe klanten. Een nieuwsbrief een paar keer per jaar houdt je in beeld, en ze sturen hem door. Let op de regels: volgens de ACM mag je reclame per e-mail alleen sturen aan mensen die daar vooraf toestemming voor gaven. Bestaande klanten mag je wel mailen over diensten die passen bij wat ze eerder afnamen, met een makkelijke manier om af te melden. Lees <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={44} /><h3>Links, vermeldingen en gastartikelen</h3></div>
+        <p>Een link van een andere site brengt bezoekers, en helpt je in Google. Denk lokaal: de ondernemersvereniging, een leverancier die jou als vakman noemt, de sportclub die je sponsort, een gastartikel op een site die je klanten lezen. Pas op met trucs. Google noemt links die vooral bedoeld zijn om posities te beïnvloeden linkspam, en geeft als voorbeeld ook reacties op fora met een link in je handtekening. Reageren op fora en in groepen helpt alleen als je echt een vraag beantwoordt. Meer in de gids <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={44} /><h3>Influencer marketing</h3></div>
+        <p>Bij influencer marketing betaal je mensen met veel volgers om je product te laten zien. Voor kleding, eten of een gadget kan dat werken. Voor een loodgieter, een advocaat of een boekhouder bijna nooit. De lokale variant werkt wel: een tevreden klant die in de buurtapp je naam noemt. Daar betaal je niets voor, behalve goed werk en de vraag of hij dat wil doen.</p>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={44} /><h3>Genoemd worden door AI-assistenten</h3></div>
+        <p>Steeds meer mensen vragen ChatGPT, Gemini of Google zelf om een advies: "Welke schilder in Assen is goed?". Die antwoorden zijn gebaseerd op wat er online over je staat: je site, je profiel, reviews en vermeldingen elders. Wie de basis van hierboven op orde heeft, maakt meer kans om genoemd te worden. Hoe dat werkt, lees je bij <a href="/generative-engine-optimization/">GEO</a>.</p>
+
+        <h2 id="daarna">Deel 3: na de aanvraag smeed je het ijzer als het heet is</h2>
+        <p>De beste website helpt niet als je drie dagen wacht met terugbellen. Wie een aanvraag doet, vraagt er vaak meer en kiest de eerste die serieus reageert. Bel dezelfde dag, liefst binnen het uur. Wij bellen zelf binnen 15 minuten terug op werkdagen. Dat is geen trucje, het is gewoon wat je zelf ook zou willen als klant.</p>
+        <ul class="vink">
+          <li><b>Stel eerst vragen.</b> Wat is er aan de hand, wanneer moet het klaar zijn, wat heb je al geprobeerd?</li>
+          <li><b>Spreek een volgende stap af.</b> Een inmeting, een offerte op donderdag, een belafspraak op vrijdag.</li>
+          <li><b>Stuur dezelfde dag een korte mail</b> met wat je besprak.</li>
+          <li><b>Vraag na de klus om een review.</b> Dat helpt de volgende bezoeker kiezen, en je Google Bedrijfsprofiel.</li>
+        </ul>
+        <div class="stap-kop"><Tekening naam="team" maat={44} /><h3>Meer klanten uit je bestaande klanten</h3></div>
+        <p>De goedkoopste nieuwe klant is degene die door een oude klant wordt gestuurd. Je website kan daarbij helpen. Zet op je site een pagina waar je naar kunt verwijzen als iemand vraagt "wie doet dat bij jou?". Stuur na een klus een korte mail met een link naar je reviewpagina. En bied, waar het past, een vervolg aan: een onderhoudsbeurt, een jaarlijkse controle, een abonnement. Een klant die elk jaar terugkomt, hoef je maar één keer te vinden.</p>
+        <p>Zo maakt de cirkel zich rond. Elke tevreden klant maakt je site overtuigender voor de volgende. Meer over opvolgen staat in de gids <a href="/kennisbank/gidsen/leads-genereren/">leads genereren</a>.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: een installateur in Drenthe</h2>
+        <p>Een verzonnen voorbeeld, maar met de stappen zoals ze in de praktijk vaak gaan. Een installatiebedrijf in Beilen heeft een nette site en zo'n 500 bezoekers per maand. Er komen drie aanvragen per maand binnen, vooral van bestaande klanten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat hij doet</th><th>Wat er verandert (verzonnen)</th></tr></thead>
+            <tbody>
+              <tr><td>Week 1</td><td>Formulier van tien naar vier velden, telefoonnummer bovenaan, bedankpagina</td><td>Vijf aanvragen in de eerste maand</td></tr>
+              <tr><td>Week 2 tot 4</td><td>Nieuwe koppen op de homepage en de pagina over warmtepompen, eigen foto's</td><td>Bezoekers blijven langer op de dienstpagina</td></tr>
+              <tr><td>Maand 2</td><td>Bedrijfsprofiel aangevuld, twintig klanten om een review gevraagd</td><td>Meer telefoontjes via de kaart</td></tr>
+              <tr><td>Maand 3 tot 6</td><td>Elke maand één artikel over een vraag die klanten stellen</td><td>Langzaam meer bezoekers uit de regio</td></tr>
+              <tr><td>Na een half jaar</td><td>Eerste kleine Google Ads-campagne voor warmtepompen</td><td>Een vaste stroom aanvragen die hij kan plannen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Valt je iets op? Hij begint niet met adverteren. Hij begint met de dingen die niets kosten en meteen werken. Pas als de site aanvragen omzet, betaalt hij voor extra bezoekers.</p>
+
+        <h2 id="laten">Wat je beter kunt laten</h2>
+        <p>Niet alles wat op websites staat, levert iets op. Deze dingen kosten vaak meer klanten dan ze brengen:</p>
+        <ul>
+          <li><b>Een schuivende fotoreeks bovenaan.</b> Bezoekers lezen alleen de eerste dia. Kies één sterke foto met een duidelijke kop.</li>
+          <li><b>Een pop-up die meteen verschijnt.</b> Iemand is net binnen en moet eerst iets wegklikken. Wil je een nieuwsbrief aanbieden, doe het onderaan een artikel.</li>
+          <li><b>Een chat waar niemand achter zit.</b> Een vraag die pas morgen antwoord krijgt, is een gemiste klant.</li>
+          <li><b>Video die vanzelf start met geluid.</b> Op kantoor of in de trein klikt men meteen weg.</li>
+          <li><b>Gekochte volgers of reviews.</b> Ze leveren geen klanten op, en nepreviews kunnen je profiel in de problemen brengen.</li>
+          <li><b>Alles tegelijk proberen.</b> Zes kanalen half doen levert minder op dan twee goed. Verspild budget schrappen is soms meer waard dan een nieuwe campagne.</li>
+        </ul>
+
+        <h2 id="problemen">Veelvoorkomende problemen en hun oplossing</h2>
+        <p>Herken je jouw situatie? Dan weet je waar je moet zoeken.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je ziet</th><th>Waarschijnlijke oorzaak</th><th>Wat je doet</th></tr></thead>
+            <tbody>
+              <tr><td>Veel bezoekers, bijna geen aanvragen</td><td>Onduidelijke kop, geen knop, lastig formulier</td><td>Fout 1, 6, 7 en 8 aanpakken</td></tr>
+              <tr><td>Aanvragen van de verkeerde klanten</td><td>Teksten trekken prijsjagers of mensen buiten je regio</td><td>Vanaf-prijs en werkgebied noemen, teksten scherper</td></tr>
+              <tr><td>Weinig bezoekers</td><td>Niet gevonden op de woorden van je klanten</td><td>Bedrijfsprofiel, pagina per dienst, SEO</td></tr>
+              <tr><td>Mobiele bezoekers haken snel af</td><td>Trage site, kleine knoppen, te veel tekst bovenaan</td><td>PageSpeed Insights, foto's verkleinen, knoppen groter</td></tr>
+              <tr><td>Aanvragen ineens weg</td><td>Kapot formulier, mail in de spam, of een daling in Google</td><td>Formulier testen, Search Console bekijken</td></tr>
+              <tr><td>Veel spam via het formulier</td><td>Geen beveiliging tegen robots</td><td>Een onzichtbare spamfilter, geen puzzel voor de bezoeker</td></tr>
+              <tr><td>Aanvragen, maar weinig opdrachten</td><td>Traag terugbellen, offerte te laat, prijs past niet</td><td>Binnen het uur bellen, offerte binnen drie dagen</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="kosten">Wat kost het om meer klanten uit je website te halen?</h2>
+        <p>Veel van deze gids kun je zelf, met een paar uur per week. Wil je hulp, dan zijn dit onze vanaf-prijzen, exclusief btw:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Wanneer kies je dit</th><th>Vanaf</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/leadgeneratie/conversie-optimalisatie/">Conversie-optimalisatie</a></td><td>Genoeg bezoekers, te weinig aanvragen</td><td>€ 395</td></tr>
+              <tr><td><a href="/leadgeneratie/landingspagina-laten-maken/">Landingspagina</a></td><td>Eén dienst die je meer wilt verkopen</td><td>€ 250</td></tr>
+              <tr><td>Lokale SEO</td><td>Gevonden worden in je regio en op de kaart</td><td>€ 295 per maand</td></tr>
+              <tr><td><a href="/zoekmachine-optimalisatie/">SEO</a></td><td>Hoger in Google op je belangrijkste diensten</td><td>€ 495 per maand</td></tr>
+              <tr><td><a href="/tekstschrijver/contentmarketing/">Contentmarketing</a></td><td>Elke maand nieuwe artikelen die klanten trekken</td><td>€ 495 per maand</td></tr>
+              <tr><td><a href="/social-media-beheer/">Social media beheer</a></td><td>Je kanalen actief, zonder er zelf naar om te kijken</td><td>€ 395 per maand</td></tr>
+              <tr><td><a href="/online-adverteren/google-ads-bureau/">Google Ads</a></td><td>Snel bovenaan, voor gekozen zoekwoorden</td><td>Afhankelijk van je advertentiebudget</td></tr>
+              <tr><td><a href="/leadgeneratie/">Leadgeneratie</a></td><td>Alles in samenhang, met een afgesproken aantal aanvragen</td><td>€ 495 per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Alles is maandelijks opzegbaar, tenzij we samen iets anders afspreken. En we spreken vooraf een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p>
+
+        <h2 id="check">De 20-puntencheck voor je website</h2>
+        <p>Loop deze punten na. Elk punt dat je niet kunt afvinken, is een plek waar klanten weglekken. Je kunt de lijst ook downloaden.</p>
+        <div class="kader check-lijst">
+          <ol>{check.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="meer-klanten-20-puntencheck.txt">Download de check</a>
+        </div>
+
+        <h2 id="aanpak">Meer klanten: waar begin je?</h2>
+        <p>Begin bij het formulier en je contactgegevens (fout 7 en 8). Dat kost een uur en levert meteen iets op. Pak daarna je homepage en je belangrijkste dienstpagina aan (fout 1, 4 en 6). Pas als je site aanvragen omzet, loont het om te werken aan meer bezoekers (deel 2). Kies dan twee kanalen en geef ze drie maanden.</p>
+        <p>Een haalbaar plan voor de eerste dertig dagen, naast je gewone werk:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Week</th><th>Wat je doet</th><th>Tijd</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Nulmeting: bezoekers, aanvragen en opdrachten opschrijven. Formulier inkorten en testen. Telefoonnummer bovenaan.</td><td>2 uur</td></tr>
+              <tr><td>2</td><td>Homepagekop en je belangrijkste dienstpagina herschrijven volgens de opbouw hierboven</td><td>3 uur</td></tr>
+              <tr><td>3</td><td>Eigen foto's maken en plaatsen, reviews bij de diensten zetten</td><td>2 uur</td></tr>
+              <tr><td>4</td><td>Google Bedrijfsprofiel aanvullen, tien klanten om een review vragen, de 20-puntencheck nog eens doorlopen</td><td>2 uur</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Na een maand kijk je opnieuw naar je drie getallen. Zijn de aanvragen gestegen, dan is het tijd voor deel 2: meer relevante bezoekers.</p>
+        <p>Wil je hulp? Met <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> halen we meer aanvragen uit dezelfde bezoekers, vanaf € 395. Is één pagina voor één dienst genoeg, kies dan een <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina</a> vanaf € 250. En wil je dat het structureel meer klanten via je website oplevert, dan is <a href="/leadgeneratie/">leadgeneratie</a> de dienst die daarbij hoort. Daar spreken we vooraf af hoeveel aanvragen het moet opleveren.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={22} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je site nalopen?" intro="Wat je van ons mag verwachten, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel aanvragen moet mijn website opleveren?', a: 'Dat hangt af van je bezoekers. Bij een dienstverlener vraagt meestal een klein deel van de bezoekers iets aan. Meet je eigen percentage en kijk of het stijgt na elke verbetering. Dat zegt meer dan een gemiddelde van een ander.' },
+      { v: 'Heb ik een nieuwe website nodig voor meer klanten?', a: 'Vaak niet. Een korter formulier, een betere kop en een zichtbaar telefoonnummer leveren al veel op. Is je site technisch verouderd of onbruikbaar op mobiel, dan is een nieuwe site soms wel de snelste weg.' },
+      { v: 'Hoe krijg ik meer bezoekers op mijn website?', a: 'Kies twee kanalen die passen bij hoe je klanten zoeken. Voor een lokaal bedrijf zijn dat meestal een compleet Google Bedrijfsprofiel en SEO. Google Ads is sneller, maar je betaalt per klik.' },
+      { v: 'Hoe lang duurt het voordat ik meer klanten heb?', a: 'Verbeteringen aan je formulier en teksten merk je binnen weken. Een beter Bedrijfsprofiel binnen een paar maanden. SEO en artikelen duren langer, maar blijven daarna opleveren.' },
+      { v: 'Helpt een chatfunctie op mijn site?', a: 'Alleen als er iemand reageert. Een chat die pas de volgende dag antwoord geeft, werkt averechts. Een duidelijk telefoonnummer en een kort formulier zijn voor de meeste kleine bedrijven beter.' },
+      { v: 'Moet ik prijzen op mijn site zetten?', a: 'Als het kan wel. Een vanaf-prijs of prijsindicatie haalt een drempel weg en filtert mensen met een te klein budget. Wij doen het zelf ook.' },
+      { v: 'Hoe zie ik waar bezoekers afhaken?', a: 'In Google Analytics zie je op welke pagina\'s mensen vertrekken. Met een tool die klikken en scrollen laat zien, zie je waar het precies misgaat. Begin bij je drukst bezochte pagina\'s.' },
+      { v: 'Kan ik dit allemaal zelf doen?', a: 'Een groot deel wel. Het formulier, je teksten, eigen foto\'s en je Google Bedrijfsprofiel kosten vooral tijd. Lastiger zijn meten, techniek en SEO. Begin zelf met de 20-puntencheck en vraag hulp bij de punten waar je vastloopt.' },
+      { v: 'Is social media genoeg voor meer klanten?', a: 'Voor de meeste dienstverleners niet. Social media helpt bij bekendheid en vertrouwen, maar wie een loodgieter of boekhouder zoekt, gaat naar Google. Zorg dat je daar gevonden wordt en gebruik social media als aanvulling.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Leads genereren als mkb\'er', href: '/kennisbank/gidsen/leads-genereren/', tekst: 'Het stappenplan, van ideale klant tot opvolging.' },
+      { label: 'Dienst', titel: 'Conversie-optimalisatie', href: '/leadgeneratie/conversie-optimalisatie/', tekst: 'Meer aanvragen uit dezelfde bezoekers, vanaf € 395.' },
+      { label: 'Gids', titel: 'Landingspagina maken', href: '/kennisbank/gidsen/landingspagina-maken/', tekst: 'Eén pagina, één doel: zo bouw je hem op.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten welke fouten jouw site maakt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} loopt je site na op deze negen punten en belt je met de drie verbeteringen die het meeste opleveren.`} />
+</Base>
+<style>
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+</style>

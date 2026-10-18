@@ -1,0 +1,185 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--breadcrumbs.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/breadcrumbs/';
+const definitie = 'Breadcrumbs zijn een rijtje links bovenaan een pagina dat laat zien waar je op een website bent, bijvoorbeeld Home › Kennisbank › Begrippen.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Breadcrumbs',
+  alternateName: ['Kruimelpad', 'Broodkruimels', 'Breadcrumb navigation'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+
+const codeHtml = `<nav aria-label="Kruimelpad">
+  <ol>
+    <li><a href="/">Home</a></li>
+    <li><a href="/verwarming/">Verwarming</a></li>
+    <li><a href="/verwarming/warmtepomp/">Warmtepomp</a></li>
+    <li><span aria-current="page">Hybride warmtepomp</span></li>
+  </ol>
+</nav>`;
+
+const codeJson = `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Verwarming",
+      "item": "https://www.voorbeeld.nl/verwarming/" },
+    { "@type": "ListItem", "position": 2, "name": "Warmtepomp",
+      "item": "https://www.voorbeeld.nl/verwarming/warmtepomp/" },
+    { "@type": "ListItem", "position": 3, "name": "Hybride warmtepomp" }
+  ]
+}`;
+---
+<Base
+  title="Wat zijn breadcrumbs? Uitleg en tips | Drijfveer Media"
+  description="Wat zijn breadcrumbs? Het kruimelpad bovenaan een pagina. Met de drie soorten, de code voor Google, de vaakste fouten en hoe je ze in WordPress aanzet."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Breadcrumbs', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO en webdesign</p>
+        <h1>Wat zijn breadcrumbs?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum="2026-10-18" />
+      <p>Kijk maar boven deze pagina: Home, Kennisbank, Begrippen, Breadcrumbs. Met één klik ben je een stap terug. Dat rijtje links is het kruimelpad. Het is klein, het valt nauwelijks op, en toch helpt het bezoekers en zoekmachines allebei. Hieronder lees je hoe het werkt, hoe het er in de code uitziet en welke fouten je beter voorkomt.</p>
+
+      <h2>Waar de naam vandaan komt</h2>
+      <p>Uit het sprookje van Hans en Grietje. Zij strooiden broodkruimels in het bos om de weg terug te vinden. In het Nederlands heet het ook wel kruimelpad of broodkruimelnavigatie. Je ziet het meestal bovenaan, tussen het menu en de titel van de pagina, met een pijltje of schuine streep tussen de stappen.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>Drie soorten breadcrumbs</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Wat je ziet</th><th>Wanneer gebruiken</th></tr></thead>
+          <tbody>
+            <tr><td>Op locatie</td><td>Waar de pagina in de websitestructuur hangt, zoals Home › Diensten › Dakkapel</td><td>Bijna altijd. Dit is verreweg de meest gebruikte soort, en meestal de beste.</td></tr>
+            <tr><td>Op kenmerk</td><td>Gekozen filters, zoals Schoenen › Wandelschoenen › Maat 42</td><td>In grote catalogi met veel filters</td></tr>
+            <tr><td>Op pad</td><td>De reeds afgelegde weg van de bezoeker, zoals de terugknop van je browser</td><td>Liever niet. Iedereen ziet iets anders, en de terugknop doet het al.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2>Wat ze opleveren</h2></div>
+      <h3>Voor je bezoeker</h3>
+      <p>Wie via Google binnenkomt, landt vaak diep in je site. Het kruimelpad maakt hem attent op waar hij is en wat er nog meer is. Het is interne navigatie die bijna geen ruimte kost. Vooral op een telefoon, waar het menu achter een knop zit, is dat handig.</p>
+      <h3>Voor Google</h3>
+      <p>Elke stap is een link naar een bovenliggende pagina. Daardoor krijgen je hoofdpagina's extra <a href="/kennisbank/wat-is/interne-links/">interne links</a>, en daarmee SEO-waarde. Google ziet ook hoe je site in elkaar zit. Zet je er BreadcrumbList-<a href="/kennisbank/wat-is/schema-markup/">schema markup</a> bij, dan kan Google het pad in de zoekresultaten tonen in plaats van het kale webadres.</p>
+      <p>Een kanttekening. Op 23 januari 2025 maakte Google bekend dat breadcrumbs niet meer in de mobiele zoekresultaten verschijnen, omdat ze op kleine schermen werden afgekapt. Op desktop toont Google ze nog wel. De markup blijft dus nuttig, alleen zie je het effect niet meer op je telefoon.</p>
+      <h3>Voor toegankelijkheid</h3>
+      <p>Het W3C, dat de webstandaarden maakt, beschrijft hoe een goed kruimelpad in elkaar zit. Het staat in een navigatieblok met een eigen label, zodat een screenreader het herkent. De huidige pagina krijgt de markering <code>aria-current="page"</code>. Zo hoort een blinde bezoeker ook waar hij is.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2>Breadcrumbs, menu of terugknop?</h2></div>
+      <p>Het kruimelpad doet iets anders dan de andere manieren om over een site te bewegen. Daarom vervangt het ze niet:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Hulpmiddel</th><th>Laat zien</th><th>Sterk in</th></tr></thead>
+          <tbody>
+            <tr><td>Hoofdmenu</td><td>De belangrijkste onderdelen van je site</td><td>Een nieuw onderwerp kiezen</td></tr>
+            <tr><td>Kruimelpad</td><td>Waar deze pagina in de opbouw hangt</td><td>Eén of meer niveaus omhoog</td></tr>
+            <tr><td>Terugknop van de browser</td><td>De vorige pagina die je zag</td><td>Terug naar waar je vandaan kwam, ook als dat Google was</td></tr>
+            <tr><td>Zoekveld</td><td>Wat je intypt</td><td>Iets specifieks vinden op een grote site</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Eerst de opbouw, dan het pad</h2></div>
+      <p>Een kruimelpad is zo goed als de websitestructuur eronder. Rommelig ingedeelde pagina's geven een rommelig pad. Begin daarom bij de indeling. Voor de meeste mkb-sites werkt een trechter met drie lagen goed:</p>
+      <ol>
+        <li><b>De homepage.</b> Wie je bent, wat je doet en voor wie.</li>
+        <li><b>Hoofdpagina's per dienst.</b> Bijvoorbeeld Verwarming, Sanitair en Elektra.</li>
+        <li><b>Pagina's daaronder.</b> De onderdelen van elke dienst, zoals Warmtepomp of Cv-ketel vervangen, en je blogs over dat onderwerp.</li>
+      </ol>
+      <p>Elke pagina hangt onder één hoofdpagina. Past een pagina echt op twee plekken, dan mag dat. Google staat meerdere kruimelpaden voor één pagina toe, als bezoekers er ook langs twee routes komen. Kies wel één pad om zichtbaar te tonen, anders wordt het onoverzichtelijk.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2>Vormgeving die werkt</h2></div>
+      <ul class="vink">
+        <li>Zet het pad op een vaste plek: onder het menu en boven de titel van de pagina.</li>
+        <li>Gebruik een duidelijk scheidingsteken, zoals › of een schuine streep.</li>
+        <li>Houd het klein, maar leesbaar. Het is een hulpmiddel, geen kop.</li>
+        <li>Maak de links groot genoeg om met een duim te raken.</li>
+        <li>Is het pad op een telefoon te lang, laat dan de tussenstappen weg of laat het pad netjes afbreken op een nieuwe regel.</li>
+        <li>Laat het laatste item, de huidige pagina, zien als gewone tekst.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Zo ziet een kruimelpad eruit in de code</h2></div>
+      <p>Het zichtbare deel is een gewone lijst met links. Neem het verzonnen voorbeeld van een installatiebedrijf:</p>
+      <pre><code>{codeHtml}</code></pre>
+      <p>Daarnaast geef je Google dezelfde stappen in gestructureerde data. Dat gebeurt meestal met JSON-LD:</p>
+      <pre><code>{codeJson}</code></pre>
+      <p>Twee dingen uit de richtlijnen van Google. Je hoeft de homepage en de pagina zelf niet als stap op te nemen. En het pad mag de route zijn die een bezoeker meestal volgt. Het hoeft niet precies je URL na te bootsen. Wel moet het zichtbare pad kloppen met wat in de code staat.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: een installatiebedrijf uit Hoogeveen heeft een site met een trechterstructuur. Bovenaan de homepage, daaronder Verwarming, daaronder Warmtepomp, en in de desbetreffende categorie een pagina over de hybride warmtepomp. Iemand zoekt "hybride warmtepomp Hoogeveen" en komt direct op die laatste pagina. Hij wil eigenlijk eerst weten welke soorten er zijn. Het kruimelpad Home › Verwarming › Warmtepomp brengt hem er in één klik. Zonder pad klikt hij weg. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Veel voorkomende fouten</h2></div>
+      <ul>
+        <li><b>Incomplete breadcrumbs.</b> Er ontbreekt een stap, zodat de bezoeker van Warmtepomp ineens op Home belandt.</li>
+        <li><b>Een pad dat niet klopt.</b> Het kruimelpad zegt iets anders dan het menu of de URL. Dat verwart mensen.</li>
+        <li><b>Het laatste item klikbaar.</b> Dat is de pagina waar je al bent. Een link naar jezelf helpt niemand.</li>
+        <li><b>Te klein en te grijs.</b> Zo onopvallend dat niemand ze ziet, zeker op mobiel. Zorg dat ze ook met een vinger te raken zijn.</li>
+        <li><b>Geen code erachter.</b> Wel zichtbaar op de pagina, maar zonder BreadcrumbList in de code. Of andersom: wel code, maar niets zichtbaars. Dat laatste mag volgens Google niet.</li>
+        <li><b>Breadcrumbs in plaats van een menu.</b> Een kruimelpad is een aanvulling, geen vervanging van je hoofdmenu.</li>
+        <li><b>Lange of vage namen.</b> Zet in je breadcrumbs de naam van de pagina zoals bezoekers hem kennen. Kort: "Dakkapel", niet "Onze dakkapellen voor uw woning".</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Breadcrumbs toevoegen aan je website</h2></div>
+      <h3>In WordPress</h3>
+      <p>De meeste SEO-plugins kunnen het. In Yoast SEO zet je ze aan onder Settings, Advanced, Breadcrumbs. Yoast zet de BreadcrumbList dan zelf in de code. Laat je thema het pad niet vanzelf zien, dan heb je een stukje code in het thema nodig, of plaats je het Yoast-blok voor breadcrumbs of de shortcode <code>[wpseo_breadcrumb]</code> op de pagina. Rank Math heeft een vergelijkbare functie.</p>
+      <h3>Bij een eigen gebouwde site</h3>
+      <p>Daar bouwt je webbouwer het pad in de sjablonen, het liefst op één plek, zodat elke nieuwe pagina het vanzelf krijgt. Zo doen we het op deze site. Elke pagina geeft zijn eigen stappen door. Het zichtbare pad en de code worden dan uit dezelfde lijst gemaakt, en kunnen dus niet uit elkaar lopen.</p>
+      <h3>Controleren</h3>
+      <p>Plak het adres van een pagina in de Rich Results Test van Google. Die laat zien of de breadcrumbs goed in de code staan. Zodra Google ze op je site vindt, krijg je in Search Console een statusrapport voor breadcrumbs. Daar zie je welke pagina's fouten hebben.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Wat je ermee moet</h2></div>
+      <p>Een website bevat al snel meer dan twee niveaus: diensten, onderdelen van die diensten, blogs. Zet er dan een kruimelpad op. Met breadcrumbs zorg je ervoor dat geen bezoeker vastloopt op een pagina zonder uitweg. Heeft je site tien pagina's naast elkaar, dan heb je het niet nodig. Breadcrumbs zorgen pas voor overzicht als er iets te overzien is.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer lezen</p>
+        <p>Een goede structuur begint bij het ontwerp. Lees hoe we dat aanpakken bij <a href="/website-laten-maken/ux-ui-design/">UX- en UI-design</a>, of wat we nakijken bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>. Meer begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    titel="Veelgestelde vragen over breadcrumbs"
+    vragen={[
+      { v: 'Wat is het Nederlandse woord voor breadcrumbs?', a: 'Kruimelpad of broodkruimelnavigatie. De naam komt uit het sprookje van Hans en Grietje, die broodkruimels strooiden om de weg terug te vinden.' },
+      { v: 'Zijn breadcrumbs goed voor SEO?', a: 'Ze helpen. Je hoofdpagina\'s krijgen extra interne links en Google ziet hoe je site is opgebouwd. Met BreadcrumbList-markup kan Google het pad op desktop in de zoekresultaten tonen. Een kruimelpad alleen zet je niet bovenaan.' },
+      { v: 'Waarom zie ik geen breadcrumbs meer in Google op mijn telefoon?', a: 'Google toont ze sinds januari 2025 niet meer in de mobiele zoekresultaten, omdat ze op kleine schermen werden afgekapt. Op desktop verschijnen ze nog wel.' },
+      { v: 'Moet de homepage in het kruimelpad staan?', a: 'Zichtbaar is het gebruikelijk en handig. In de gestructureerde data is het volgens Google niet nodig.' },
+      { v: 'Heeft elke website breadcrumbs nodig?', a: 'Nee. Een kleine site met een paar pagina\'s naast elkaar heeft genoeg aan een goed menu. Zodra je site meerdere niveaus heeft, zijn ze wel de moeite waard.' },
+    ]}
+  />
+
+  <Actie titel="Kunnen bezoekers de weg vinden op jouw site?" tekst={`We kijken gratis naar je structuur, je menu en je kruimelpad. ${site.contactpersoon} belt je met de punten die bezoekers nu laten afhaken.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; background: var(--ink); color: #e8eef4; border-radius: 10px; padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; margin: 0 0 1.4em; }
+  pre code { font-family: var(--mono); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

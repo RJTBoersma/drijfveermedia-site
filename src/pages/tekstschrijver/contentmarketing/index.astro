@@ -1,0 +1,248 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/tekstschrijver--contentmarketing.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/tekstschrijver/contentmarketing/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat contentmarketing is' },
+  { id: 'stilvallen', titel: 'Waarom het stilvalt' },
+  { id: 'opbrengst', titel: 'Wat het oplevert' },
+  { id: 'formats', titel: 'Wat je krijgt' },
+  { id: 'werkwijze', titel: 'Zo werkt het, maand na maand' },
+  { id: 'google', titel: 'Wat Google van content vraagt' },
+  { id: 'wie', titel: 'Zelf, freelancer of bureau' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'fouten', titel: 'Vijf fouten die we vaak zien' },
+];
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${site.url}${url}#dienst`,
+    name: 'Content marketing uitbesteden',
+    serviceType: 'Contentmarketing',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: { '@type': 'Country', name: 'Nederland' },
+    url: `${site.url}${url}`,
+    offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Content marketing uitbesteden: elke maand artikelen die klanten trekken',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}${url}#dienst` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  },
+];
+---
+<Base
+  title="Content marketing uitbesteden | Drijfveer Media"
+  description="Content marketing uitbesteden aan een bureau dat ook SEO doet. Elke maand artikelen die klanten trekken, vanaf € 495 per maand en maandelijks opzegbaar."
+  kruimels={[{ naam: 'Tekstschrijver', url: '/tekstschrijver/' }, { naam: 'Contentmarketing', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Teksten" titel="Content marketing uitbesteden: elke maand artikelen die klanten trekken" prijs="vanaf € 495 per maand">
+    <p>Je weet dat je iets moet publiceren. Alleen komt het er niet van. Wij schrijven elke maand de artikelen die jouw klanten zoeken, en zorgen dat Google ze vindt. Een content marketing bureau dat zelf ook SEO doet, dus niets valt tussen wal en schip.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Contentmarketing is elke maand nuttige artikelen publiceren die de vragen van je klanten beantwoorden.</li>
+            <li>Het stopt bijna altijd door tijd, niet door gebrek aan kennis. Daarom besteden veel ondernemers het uit.</li>
+            <li>Wij kiezen onderwerpen op zoekvragen, schrijven met jouw kennis, publiceren en meten elke maand wat het oplevert.</li>
+            <li>Reken op een paar maanden voordat een nieuw artikel zijn plek in Google vindt.</li>
+            <li>Vanaf € 495 per maand, maandelijks opzegbaar, met een doel waar je ons op afrekent.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat contentmarketing is, en wat niet</h2>
+        <p>Content marketing uitbesteden betekent dat een ander elke maand nuttige artikelen voor je maakt en publiceert. Artikelen die de vragen van je klanten beantwoorden, zodat ze jou vinden en vertrouwen voordat ze iets kopen. Denk aan "Wat kost een dakkapel?" of "Mediation of naar de rechter?". Wie zo'n vraag googelt, heeft een probleem. Wie het beste antwoord geeft, krijgt vaak ook de klus.</p>
+        <p>Contentmarketing is geen elke week een berichtje omdat het moet. Een artikel zonder lezer is geld weggegooid. Het doel is niet zo veel mogelijk output, maar zo veel mogelijk bezoekers die bij je passen. Een korte definitie lees je in het begrip <a href="/kennisbank/wat-is/contentmarketing/">contentmarketing</a>.</p>
+
+        <h2 id="stilvallen">Waarom het bij de meeste organisaties stilvalt</h2>
+        <p>Bij de meeste organisaties ontbreekt het niet aan kennis. Het ontbreekt aan tijd. Je begint vol goede moed, schrijft drie blogs en dan wordt het druk. De vierde komt er nooit. Wat we het vaakst zien:</p>
+        <ul class="vink">
+          <li><b>Geen capaciteit.</b> Schrijven komt na het echte werk, en het echte werk is nooit af.</li>
+          <li><b>Geen continuïteit.</b> Twee artikelen in maart, niets tot oktober. Je lezers merken dat, en je verliest het ritme.</li>
+          <li><b>Geen regie.</b> Niemand bepaalt welke onderwerpen echt klanten opleveren. Dus schrijf je over wat toevallig opkomt.</li>
+          <li><b>Een vaag doel.</b> "Meer zichtbaarheid" kun je niet meten. Dan weet je ook nooit of het werkt.</li>
+        </ul>
+        <p>Een bureau dat alleen productie levert, lost maar een deel op. Je betaalt dan voor teksten, niet voor resultaat. Wij kiezen de onderwerpen op wat je klanten zoeken, en kijken elke maand of het iets oplevert.</p>
+
+        <h2 id="opbrengst">Wat levert content marketing uitbesteden op?</h2>
+        <p>Een advertentie stopt zodra je stopt met betalen. Een goed artikel blijft staan. Het trekt elke maand opnieuw bezoekers, zonder dat je er nog iets voor doet. Elk nieuw artikel komt er dus bij, in plaats van dat het het vorige vervangt.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een installateur in Emmen publiceert twee artikelen per maand. Na een jaar staan er 24. Stel dat elk artikel na een paar maanden gemiddeld 60 bezoekers per maand trekt. Dan komen er na dat jaar zo'n 1.400 bezoekers per maand binnen via de artikelen. Vraagt 1 procent daarvan een offerte aan, dan zijn dat 14 aanvragen per maand. Sommige artikelen doen het veel beter, andere vallen tegen. Daarom meten we per artikel.</p>
+        </div>
+        <p>Er komen nog drie voordelen bij. Klanten die eerst je artikel lazen, bellen met betere vragen en minder twijfel. Je dienstpagina's worden sterker, omdat de artikelen ernaar linken. En AI-assistenten zoals ChatGPT en Gemini halen hun antwoorden ook van sites die een vraag goed uitleggen. Hoe dat werkt, lees je bij <a href="/generative-engine-optimization/">GEO</a>.</p>
+
+        <h2 id="formats">Wat je krijgt als je contentmarketing bij ons uitbesteedt</h2>
+        <p>De kern is geschreven content op je eigen website. Die is van jou, blijft staan en wordt beter gevonden naarmate hij ouder en sterker wordt. We werken met formats die bewezen bezoekers trekken:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Format</th><th>Voorbeeld van een zoekvraag</th><th>Waarom het werkt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Uitleg</b></td><td>Wat is een warmtepomp en hoe werkt hij?</td><td>Beantwoordt één vraag goed, vroeg in de oriëntatie</td></tr>
+              <tr><td><b>Kosten</b></td><td>Wat kost een badkamer verbouwen?</td><td>Mensen zoeken veel op prijzen, en wie het eerlijk uitlegt, wint vertrouwen</td></tr>
+              <tr><td><b>Vergelijking</b></td><td>Kunststof of houten kozijnen?</td><td>Helpt bij een keuze, vlak voor de aanvraag</td></tr>
+              <tr><td><b>Stappenplan</b></td><td>Zo vraag je een omgevingsvergunning aan</td><td>Wordt bewaard en gedeeld</td></tr>
+              <tr><td><b>Checklist</b></td><td>Waar let je op bij een offerte voor een dak?</td><td>Kort, praktisch, en goed als download voor je nieuwsbrief</td></tr>
+              <tr><td><b>Veelgestelde vragen</b></td><td>Hoe lang duurt het plaatsen van een dakkapel?</td><td>Precies de vragen die je aan de telefoon krijgt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Eén goed artikel kun je vaker gebruiken. Haal er korte stukken uit als social content, en een alinea voor je nieuwsbrieven. Zo verspreiden we het werk over meer kanalen zonder dat het dubbel kost. Wil je je kanalen helemaal laten beheren, dan past <a href="/social-media-beheer/">social media beheer</a> erbij. Voor mailings is er <a href="/leadgeneratie/e-mailmarketing/">e-mailmarketing</a>.</p>
+
+        <h2 id="werkwijze">Zo werkt het, maand na maand</h2>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. We kiezen de onderwerpen</h3></div>
+        <p>We beginnen met zoekwoordonderzoek in SE Ranking en met de vragen die jij aan de telefoon krijgt. Die twee lijsten leggen we naast elkaar. Bovenaan komen onderwerpen met zoekvolume, waar je een kans maakt en waar een klant achter zit. Dat wordt de planning voor de komende maanden.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>2. We produceren de artikelen</h3></div>
+        <p>Elke maand schrijven we de afgesproken artikelen. Met jouw kennis erin: soms een kort telefoontje, soms een paar vragen per mail. De copy is helder, met tussenkoppen, een title en meta description, en links naar je dienstpagina's. Je leest mee voordat het online gaat.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={48} /><h3>3. We publiceren en verspreiden</h3></div>
+        <p>We zetten het artikel op je site en melden het aan bij Google via Search Console. Bestaande pagina's krijgen een link naar het nieuwe stuk, zodat Google het snel vindt. Daarna gaat het naar je nieuwsbrief of social kanalen, als je die hebt.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>4. We meten en sturen bij</h3></div>
+        <p>Elke maand zie je per artikel hoeveel mensen het vonden en of er aanvragen uit kwamen. In gewone taal, zonder dat je een marketeer nodig hebt om het te snappen. Werkt een onderwerp niet, dan stoppen we ermee. Geld steken in iets wat niets oplevert, daar doen we niet aan mee.</p>
+
+        <h3>Voorbeeld van een kwartaalplanning</h3>
+        <p>Zo kan een planning eruitzien voor een installatiebedrijf. Een verzonnen voorbeeld, maar wel zoals wij het opbouwen: elk artikel hoort bij een dienst en linkt ernaar.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Maand</th><th>Artikel</th><th>Linkt naar dienstpagina</th></tr></thead>
+            <tbody>
+              <tr><td>Januari</td><td>Wat kost een warmtepomp in een jaren-70-woning?</td><td>Warmtepomp installeren</td></tr>
+              <tr><td>Januari</td><td>Hybride of volledig elektrisch: wat past bij jouw huis?</td><td>Warmtepomp installeren</td></tr>
+              <tr><td>Februari</td><td>Zo herken je dat je cv-ketel aan vervanging toe is</td><td>Cv-ketel vervangen</td></tr>
+              <tr><td>Februari</td><td>Checklist: je huis klaarmaken voor een warmtepomp</td><td>Warmtepomp installeren</td></tr>
+              <tr><td>Maart</td><td>Vloerverwarming in een bestaand huis: kan dat?</td><td>Vloerverwarming</td></tr>
+              <tr><td>Maart</td><td>De vijf vragen die klanten ons het vaakst stellen</td><td>Contact</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Zo ziet een artikel van ons eruit</h3>
+        <p>Elk artikel volgt dezelfde opbouw. Niet omdat het een trucje is, maar omdat lezers het zo het snelst vinden:</p>
+        <ol>
+          <li><b>Een titel die de vraag herhaalt.</b> Zoals de klant hem intypt, niet zoals een marketeer hem zou bedenken.</li>
+          <li><b>Het antwoord bovenaan.</b> In de eerste alinea's, kort en concreet. Wie haast heeft, weet het dan al. Zoekmachines en AI-assistenten pakken juist dat stuk op.</li>
+          <li><b>Tussenkoppen die je kunt scannen.</b> Een lezer op zijn telefoon springt naar het deel dat hij zoekt.</li>
+          <li><b>Iets wat alleen jij weet.</b> Een voorbeeld uit je werk, een fout die je vaak ziet, een prijs uit de praktijk.</li>
+          <li><b>Een tabel of stappenplan</b> als dat de lezer helpt kiezen of doen.</li>
+          <li><b>Een link naar je dienst</b> en één duidelijke volgende stap.</li>
+          <li><b>Naam en datum.</b> Zodat de lezer ziet wie het schreef en hoe actueel het is.</li>
+        </ol>
+        <h3>Wat we elke maand meten</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Cijfer</th><th>Wat het zegt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Bezoekers per artikel</b></td><td>Of het onderwerp leeft, en of Google het artikel laat zien</td></tr>
+              <tr><td><b>Posities in Google</b></td><td>Of een artikel stijgt, en waar nog ruimte zit</td></tr>
+              <tr><td><b>Klikken naar je dienstpagina</b></td><td>Of lezers de stap naar je aanbod zetten</td></tr>
+              <tr><td><b>Aanvragen</b></td><td>Waar het uiteindelijk om gaat: telefoontjes, formulieren, mails</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die aanvragen kun je alleen koppelen aan een artikel als je meting goed staat. Hoe dat werkt, lees je bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
+
+        <h2 id="google">Wat Google van content vraagt</h2>
+        <p>Google zegt het zelf duidelijk in zijn uitleg over <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" rel="noopener">nuttige, betrouwbare content</a>: schrijf eerst voor mensen, niet voor zoekmachines. Een paar punten uit die uitleg die we elke maand gebruiken:</p>
+        <ul>
+          <li><b>Er is geen ideaal aantal woorden.</b> Google schrijft letterlijk dat het geen voorkeur heeft voor een bepaalde lengte. Een artikel is zo lang als nodig om de vraag te beantwoorden.</li>
+          <li><b>Eigen ervaring telt.</b> Content die laat zien dat iemand het vak echt kent, bijvoorbeeld uit eigen werk, scoort beter dan een samenvatting van wat anderen schreven.</li>
+          <li><b>Veel onderwerpen tegelijk is een waarschuwing.</b> Wie over van alles schrijft in de hoop dat iets aanslaat, maakt volgens Google content voor zoekmachines.</li>
+          <li><b>Een nieuwe datum maakt een oud artikel niet vers.</b> Alleen echt bijwerken helpt.</li>
+          <li><b>Vertrouwen is het belangrijkste.</b> Van ervaring, deskundigheid, autoriteit en betrouwbaarheid noemt Google vertrouwen het zwaarst. Lees meer in het begrip <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a>.</li>
+        </ul>
+        <p>Daarom schrijven we met jouw kennis erin. Een kort telefoontje over hoe een klus echt gaat, levert betere copy op dan een middag zoeken op internet.</p>
+
+        <h2 id="wie">Een marketing bureau, een freelancer of zelf?</h2>
+        <p>Een goede freelancer kan prima artikelen schrijven. Maar een artikel dat gevonden moet worden, vraagt meer disciplines dan schrijven alleen. Zoekwoordonderzoek, techniek, interne links en meten horen erbij. Als je met één freelancer werkt, moet jij die regie meestal zelf voeren.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf doen</th><th>Freelance tekstschrijver</th><th>Bij ons</th></tr></thead>
+            <tbody>
+              <tr><td><b>Kennis van je vak</b></td><td>Het meest</td><td>Via jou</td><td>Via jou, in een kort gesprek</td></tr>
+              <tr><td><b>Capaciteit</b></td><td>Wat er overblijft na je werk</td><td>Afhankelijk van één persoon</td><td>Een team van vier en een community van freelancers</td></tr>
+              <tr><td><b>Onderwerpkeuze</b></td><td>Op gevoel</td><td>Vaak door jou aangeleverd</td><td>Op zoekvragen en jouw telefoonvragen</td></tr>
+              <tr><td><b>SEO en techniek</b></td><td>Zelf uitzoeken</td><td>Verschilt per schrijver</td><td>Hoort erbij</td></tr>
+              <tr><td><b>Meten</b></td><td>Zelden</td><td>Meestal niet</td><td>Elke maand, per artikel</td></tr>
+              <tr><td><b>Kosten</b></td><td>Je eigen uren</td><td>Per tekst of per uur</td><td>Vanaf € 495 per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij Drijfveer Media zit het onder één dak, samen met <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a> en <a href="/linkbuilding/">linkbuilding</a>. En is er iemand ziek of op vakantie, dan loopt de planning gewoon door. Het verschil zit niet in de pen, maar in alles eromheen.</p>
+
+        <h2 id="kosten">Wat kost content marketing uitbesteden?</h2>
+        <p>Contentmarketing bij Drijfveer Media begint bij € 495 per maand, exclusief btw. Daarvoor krijg je de onderwerpkeuze, het schrijven, het plaatsen en de maandelijkse meting. Hoeveel artikelen dat per maand zijn, hangt af van de lengte en hoeveel onderzoek een onderwerp vraagt. Dat spreken we vooraf af, zodat je weet wat je krijgt.</p>
+        <p>Het is maandelijks opzegbaar. We spreken wel een doel af, bijvoorbeeld een aantal bezoekers of aanvragen uit de artikelen. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>. Heb je maar een paar losse teksten nodig? Dan is onze <a href="/tekstschrijver/">tekstschrijver</a> per pagina goedkoper.</p>
+        <h3>Wanneer we het je afraden</h3>
+        <p>Staat je website technisch niet goed, of laadt hij traag? Dan helpt een stapel nieuwe artikelen weinig. Begin dan eerst bij de basis. En zoekt bijna niemand naar wat je doet, dan zeggen we dat ook. Dan zijn andere kanalen slimmer.</p>
+
+        <h2 id="fouten">Vijf fouten die we vaak zien</h2>
+        <ol>
+          <li><b>Schrijven over jezelf.</b> "Wij hebben een nieuwe bus" interesseert een klant niet. "Zo voorkom je een lekkage" wel.</li>
+          <li><b>Geen link naar je dienst.</b> Een lezer die overtuigd is, moet met één klik bij je offerteformulier zijn.</li>
+          <li><b>Te algemeen.</b> Een artikel dat ook op honderd andere sites staat, heeft geen reden om bovenaan te komen. Je eigen ervaring en voorbeelden maken het verschil.</li>
+          <li><b>Publiceren en vergeten.</b> Een artikel met prijzen van drie jaar geleden kost vertrouwen. Werk je beste artikelen elk jaar bij.</li>
+          <li><b>Te snel opgeven.</b> Na twee maanden zie je weinig. Contentmarketing produceren is werk voor de lange adem. Spreek daarom vooraf af wanneer je evalueert.</li>
+        </ol>
+        <p>Wil je zelf beginnen? Lees dan de gids <a href="/kennisbank/gidsen/bedrijfsblog-beginnen/">een bedrijfsblog beginnen</a>. Daar staan de bekende valkuilen uitgebreider in.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+        <Prijskaart naam="Contentmarketing" prijs="€ 495" eenheid="per maand" punten={['Onderwerpen op basis van zoekvragen', 'Artikelen geschreven en geplaatst', 'Interne links en aanmelding bij Google', 'Elke maand een helder overzicht']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost content marketing uitbesteden?', a: 'Bij ons vanaf € 495 per maand, exclusief btw en maandelijks opzegbaar. Daarvoor krijg je de onderwerpkeuze, het schrijven, het plaatsen en de maandelijkse meting.' },
+      { v: 'Hoeveel artikelen krijg ik per maand?', a: 'Dat hangt af van de lengte en het onderzoek per artikel. Een korte uitleg kost minder tijd dan een uitgebreide gids. We spreken het aantal vooraf af en houden ons eraan.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Contentmarketing is geen snelle actie. Een nieuw artikel heeft meestal een paar maanden nodig om zijn plek in Google te vinden. Daarom spreken we een doel af dat past bij die termijn, en laten we elke maand zien hoe het ervoor staat.' },
+      { v: 'Moet ik zelf veel tijd vrijmaken?', a: 'Weinig. Een kort gesprek of een paar vragen per mail is meestal genoeg om jouw kennis in een artikel te krijgen. En je leest mee voordat het online gaat.' },
+      { v: 'Plaatsen jullie de artikelen ook op mijn website?', a: 'Ja. We zetten ze in WordPress of een ander systeem, met afbeeldingen, links en de juiste instellingen. Heb je liever dat je het zelf doet, dan leveren we de tekst kant-en-klaar aan.' },
+      { v: 'Wat is het verschil met SEO-teksten?', a: 'SEO-teksten zijn de vaste pagina\'s van je site, zoals je dienstpagina\'s. Bij contentmarketing komen er elke maand nieuwe artikelen bij die vragen van klanten beantwoorden en naar die dienstpagina\'s linken. Voor losse pagina\'s is er <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a>.' },
+      { v: 'Hoe lang moet een artikel zijn?', a: 'Zo lang als nodig om de vraag goed te beantwoorden. Google zegt zelf dat het geen voorkeur heeft voor een bepaald aantal woorden.' },
+      { v: 'Gebruiken jullie AI voor de artikelen?', a: 'We gebruiken AI waar het tijd scheelt, zoals bij research en het ordenen van informatie. Het schrijven, de keuzes en de eindredactie doen we zelf. Lees meer op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over teksten"
+    links={[
+      { label: 'Pillar', titel: 'Tekstschrijver', href: '/tekstschrijver/', tekst: 'Webteksten en mailings, vanaf € 75 per pagina.' },
+      { label: 'Gids', titel: 'Een bedrijfsblog beginnen', href: '/kennisbank/gidsen/bedrijfsblog-beginnen/', tekst: 'Zonder de bekende fouten.' },
+      { label: 'Gids', titel: 'Zoekwoordonderzoek doen', href: '/kennisbank/gidsen/zoekwoordonderzoek/', tekst: 'Zo vind je de vragen van je klanten.' },
+      { label: 'Gids', titel: 'SEO-teksten schrijven', href: '/kennisbank/gidsen/seo-teksten-schrijven/', tekst: 'Ook met hulp van AI.' },
+    ]}
+  />
+
+  <Actie titel="Waar zoeken jouw klanten op?" tekst={`${site.contactpersoon} zoekt uit welke vragen jouw klanten in Google stellen, en belt je met de eerste vijf onderwerpen. Gratis, en je zit nergens aan vast.`} />
+</Base>

@@ -1,0 +1,237 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Plaatje from '../../components/teken/Plaatje.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/werkgebied.astro';
+import paginas from '../../../scripts/paginas.json';
+import { site } from '../../data/site';
+
+const url = '/werkgebied/';
+
+// Alle plaatspagina's uit de structuur, gegroepeerd per provincie en per plaats.
+const diensten: [string, string][] = [['webdesign-', 'Webdesign'], ['seo-', 'SEO'], ['online-marketing-', 'Online marketing']];
+const provincieVan: Record<string, string> = {
+  assen: 'Drenthe', emmen: 'Drenthe', hoogeveen: 'Drenthe', meppel: 'Drenthe', drenthe: 'Drenthe',
+  leeuwarden: 'Friesland', drachten: 'Friesland', heerenveen: 'Friesland', sneek: 'Friesland', joure: 'Friesland', friesland: 'Friesland',
+  groningen: 'Groningen', veendam: 'Groningen', stadskanaal: 'Groningen',
+  zwolle: 'Zwolle',
+};
+const groot = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+type Plaats = { naam: string; links: { dienst: string; href: string }[] };
+const groepen: { naam: string; regio?: string; intro: string; plaatsen: Plaats[] }[] = [
+  { naam: 'Drenthe', regio: '/regio/drenthe/', intro: 'Onze thuisprovincie, met Assen als uitvalsbasis.', plaatsen: [] },
+  { naam: 'Friesland', regio: '/regio/friesland/', intro: 'Van de Friese meren tot de Waddenkust.', plaatsen: [] },
+  { naam: 'Groningen', regio: '/regio/groningen/', intro: 'De stad en de Ommelanden, tot aan de Duitse grens.', plaatsen: [] },
+  { naam: 'Zwolle', intro: 'Net buiten het Noorden, maar voor ons dichtbij.', plaatsen: [] },
+];
+for (const p of paginas.filter((x: any) => x.type === 'plaats')) {
+  const pad = p.url.replace(/\//g, '');
+  const d = diensten.find(([voor]) => pad.startsWith(voor));
+  if (!d) continue;
+  const slug = pad.slice(d[0].length);
+  const groep = groepen.find((g) => g.naam === provincieVan[slug]);
+  if (!groep) continue;
+  const naam = ['drenthe', 'friesland'].includes(slug) ? `Heel ${groot(slug)}` : groot(slug);
+  let plaats = groep.plaatsen.find((x) => x.naam === naam);
+  if (!plaats) { plaats = { naam, links: [] }; groep.plaatsen.push(plaats); }
+  plaats.links.push({ dienst: d[1], href: p.url });
+}
+const volgorde = diensten.map(([, n]) => n);
+for (const g of groepen) {
+  g.plaatsen.sort((a, b) => Number(a.naam.startsWith('Heel')) - Number(b.naam.startsWith('Heel')) || b.links.length - a.links.length);
+  for (const pl of g.plaatsen) pl.links.sort((a, b) => volgorde.indexOf(a.dienst) - volgorde.indexOf(b.dienst));
+}
+const aantal = groepen.reduce((s, g) => s + g.plaatsen.reduce((t, pl) => t + pl.links.length, 0), 0);
+
+const schema = [
+  {
+    '@type': 'Service',
+    name: 'Online marketing in Noord-Nederland',
+    serviceType: 'Online marketing',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: [
+      { '@type': 'AdministrativeArea', name: 'Drenthe' },
+      { '@type': 'AdministrativeArea', name: 'Friesland' },
+      { '@type': 'AdministrativeArea', name: 'Groningen' },
+      { '@type': 'City', name: 'Zwolle' },
+      { '@type': 'Country', name: 'Nederland' },
+    ],
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'ItemList',
+    name: 'Plaatsen en provincies in ons werkgebied',
+    itemListElement: groepen.flatMap((g) => g.plaatsen.flatMap((pl) => pl.links.map((l) => l.href))).map((h, i) => ({ '@type': 'ListItem', position: i + 1, url: `${site.url}${h}` })),
+  },
+];
+---
+<Base
+  title="Online marketing Noord-Nederland | Drijfveer Media"
+  description="Online marketing in Noord-Nederland vanuit Assen: voor ondernemers in Drenthe, Friesland, Groningen en Zwolle. Bekijk alle plaatsen waar we werken."
+  kruimels={[{ naam: 'Werkgebied', url }]}
+  schema={schema}
+>
+  <Hero kicker="Werkgebied" titel="Online marketing in Noord-Nederland, vanuit Assen">
+    <p>Ons enige kantoor staat in Assen, midden in het Noorden. Van daaruit werken we voor ondernemers in Drenthe, Friesland, Groningen en Zwolle. En net zo goed voor klanten in de rest van het land en over de grens.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Eén kantoor in Assen, het hele Noorden binnen bereik</h2>
+      <p>Drijfveer Media bestaat sinds 2011 en zit aan de Lauwers 9 in Assen. Een tweede vestiging hebben we niet. Die is ook niet nodig, want Assen ligt precies tussen de drie noordelijke provincies in. De trein naar Groningen doet er een kleine twintig minuten over. Emmen, Zwolle en Leeuwarden liggen op een uur rijden of minder. Voor de meeste klanten in het Noorden is een bezoek dus zo geregeld.</p>
+      <p>Toevallig, maar wel mooi: ons adres heet Lauwers, net als het riviertje dat een deel van de grens tussen Friesland en Groningen vormt.</p>
+      <p>Wil je aan tafel zitten, dan komen we naar je toe. Of je komt koffie drinken in ons bedrijfsverzamelpand, tussen andere ondernemers die ook gewoon hard werken. Na dat eerste gesprek gaat veel prima telefonisch of via een videogesprek. Dat scheelt reistijd, en die tijd stoppen we liever in jouw website.</p>
+
+      <h2>Kies je provincie</h2>
+      <p>Per provincie lees je wat er speelt, welke plaatsen een eigen pagina hebben en wat we er voor ondernemers kunnen betekenen.</p>
+    </div>
+    <div class="raster provincies">
+      {groepen.filter((g) => g.regio).map((g) => (
+        <a class="card" href={g.regio}>
+          <Plaatje href={g.regio!} onderwerp="huis" />
+          <span class="kicker">Provincie</span>
+          <h3>{g.naam}</h3>
+          <p>{g.intro}</p>
+          <span class="meer">Online marketing in {g.naam}</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="tekst" style="margin-top:48px">
+      <h2 id="plaatsen">Alle plaatsen met een eigen pagina</h2>
+      <p>Voor de plaatsen waar het meest gezocht wordt naar webdesign, SEO of online marketing schreven we een eigen pagina. Dat zijn er nu {aantal}. Op elke pagina lees je wat er lokaal speelt en hoe we het daar aanpakken.</p>
+    </div>
+    <div class="groepen">
+      {groepen.map((g) => (
+        <div class="groep">
+          <div class="groep-kop">
+            <h3>{g.naam}</h3>
+            {g.regio && <a href={g.regio} class="klein">Alles over {g.naam}</a>}
+          </div>
+          <ul class="plaatslijst">
+            {g.plaatsen.map((pl) => (
+              <li>
+                <b>{pl.naam}</b>
+                <ul class="chips">{pl.links.map((l) => <li><a class="chip" href={l.href}>{l.dienst}</a></li>)}</ul>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="tekst" style="margin-top:32px">
+      <p>Staat jouw plaats er niet bij? Dan helpen we je net zo graag. Een bedrijf in Roden, Dokkum, Winschoten of Coevorden pakken we op dezelfde manier aan. Alleen de zoekwoorden en de concurrenten verschillen.</p>
+
+      <h2>Online marketing in Noord-Nederland: wat hier anders werkt</h2>
+      <p>Een bakker in Sneek heeft andere klanten dan een softwarebedrijf in Amsterdam. Wie in het Noorden online klanten wil, merkt een paar verschillen.</p>
+      <div class="stap-kop"><Tekening naam="pin" maat={44} /><h3>Klanten zoeken met een plaatsnaam</h3></div>
+      <p>Afstanden zijn hier groter en dorpen kleiner. Mensen typen daarom vaak de plaats erbij: "dakdekker Drachten", "fysiotherapeut Veendam". Google laat dan het kaartje met drie bedrijven zien. Wie daar staat, krijgt de telefoontjes. Een goed ingericht Google Bedrijfsprofiel en een duidelijke pagina per dienst leveren hier vaak meer op dan een dure campagne.</p>
+      <div class="stap-kop"><Tekening naam="grafiek" maat={44} vertraging={150} /><h3>De concurrentie is vaak lager</h3></div>
+      <p>Op veel zoekwoorden met een noordelijke plaatsnaam staan geen sterke sites bovenaan. Soms een verouderde pagina van een concurrent, soms een overzichtssite. Dat is goed nieuws. Met <a href="/lokale-seo/">lokale SEO</a> en een paar sterke links sta je hier vaak sneller bovenaan dan in de Randstad. Daarna is het zaak die plek vast te houden.</p>
+      <div class="stap-kop"><Tekening naam="kalender" maat={44} vertraging={300} /><h3>Het seizoen telt mee</h3></div>
+      <p>Toerisme op de Friese meren, op de Waddeneilanden en in de Drentse bossen draait op het voorjaar en de zomer. Gasten oriënteren zich maanden vooruit. Wie in maart pas begint met vindbaarheid, is in juli te laat. Begin in de winter, dan sta je er als het druk wordt.</p>
+      <div class="stap-kop"><Tekening naam="ster" maat={44} vertraging={450} /><h3>Wat buren zeggen, weegt zwaar</h3></div>
+      <p>In het Noorden kiezen mensen graag een bedrijf dat een bekende al aanraadt. Online betekent dat: reviews. Vraag elke tevreden klant om een review en reageer op elke review, ook op de kritische. Dat is gratis en het werkt beter dan een slogan.</p>
+
+      <h2>Welke kanalen je combineert, per soort bedrijf</h2>
+      <p>Een marketingbureau in het Noorden moet niet met één standaardpakket komen. Een recreatiebedrijf aan het Tjeukemeer heeft andere klanten dan een accountant in Zwolle. Dit is waar we bij verschillende soorten bedrijven meestal beginnen. Na de analyse kan het anders uitpakken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort bedrijf</th><th>Waar klanten zoeken</th><th>Begin met</th></tr></thead>
+          <tbody>
+            <tr><td>Vakman in een dorp of kleine stad</td><td>Google met plaatsnaam, het kaartje, reviews</td><td>Lokale SEO en een pagina per dienst</td></tr>
+            <tr><td>Recreatie en toerisme</td><td>Google, AI-assistenten, maanden vooruit</td><td>SEO in de winter, daarna Google Ads in het seizoen</td></tr>
+            <tr><td>Zakelijke dienstverlener in Groningen of Zwolle</td><td>Google, LinkedIn, aanbevelingen</td><td>SEO, inhoudelijke artikelen en leadgeneratie</td></tr>
+            <tr><td>Zorg en praktijken</td><td>Het kaartje, reviews, vragen aan AI</td><td>Lokale SEO en GEO</td></tr>
+            <tr><td>Bedrijf dat landelijk levert</td><td>Google zonder plaatsnaam, AI-assistenten</td><td>SEO met linkbuilding, daarna GEO</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Twee kanalen goed doen, levert meer op dan vijf half. Daarom houden we het aantal kanalen bewust klein en voegen we pas iets toe als het vorige werkt.</p>
+
+      <h2>Wat we doen, waar in het Noorden je ook zit</h2>
+      <p>In Leeuwarden betaal je hetzelfde als in Assen of Zwolle. Alle prijzen zijn vanaf-prijzen, exclusief btw.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Dienst</th><th>Wat je krijgt</th><th>Vanaf</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/zoekmachine-optimalisatie/">SEO</a></td><td>Hoger in Google op de woorden waarop jouw klanten zoeken</td><td>€ 495 p/m</td></tr>
+            <tr><td><a href="/lokale-seo/">Lokale SEO</a></td><td>Bovenaan op de kaart in je eigen regio, inclusief reviews</td><td>€ 295 p/m</td></tr>
+            <tr><td><a href="/linkbuilding/">Linkbuilding</a></td><td>Sterke links, eerst getest op onze eigen sites</td><td>€ 395 p/m</td></tr>
+            <tr><td><a href="/generative-engine-optimization/">GEO</a></td><td>Genoemd worden door ChatGPT, Gemini en Google AI</td><td>€ 495 p/m</td></tr>
+            <tr><td><a href="/website-laten-maken/">Website</a></td><td>Snel met AI, of maatwerk in WordPress vanaf € 2.000</td><td>€ 250</td></tr>
+            <tr><td><a href="/leadgeneratie/">Leadgeneratie</a></td><td>Meer aanvragen uit je bezoekers, inclusief conversie-optimalisatie (CRO)</td><td>€ 495 p/m</td></tr>
+            <tr><td><a href="/online-marketing-uitbesteden/">Alles uitbesteden</a></td><td>Je hele online marketing in één hand</td><td>€ 595 p/m</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Alles is maandelijks opzegbaar, tenzij we samen iets anders afspreken. We combineren alleen de kanalen die bij jouw doel passen. Wat niets oplevert, schrappen we. Hiermee voorkom je een mooie marketingstrategie op papier die nooit live gaat. Alle bedragen staan ook op de pagina <a href="/prijzen/">prijzen</a>.</p>
+
+      <h2>Zo kies je een marketingbureau in het Noorden</h2>
+      <p>Er zijn in Drenthe, Friesland en Groningen tientallen bureaus. Om de hoek is niet automatisch beter. Let op deze vier dingen.</p>
+      <ul class="vink">
+        <li><b>Hoe snel reageren ze?</b> Bel eens op een dinsdagochtend. Wie dan pas na drie dagen terugbelt, doet dat later bij jouw vragen ook.</li>
+        <li><b>Kennen ze de regio?</b> Vraag hoe ze naar jouw zoekwoorden en plaatsen kijken. Een bureau dat het verschil niet weet tussen Hoogeveen en Heerenveen, mist kansen.</li>
+        <li><b>Zijn ze eerlijk over wat het gaat opleveren?</b> Wie in het eerste gesprek al een aantal aanvragen belooft, heeft je cijfers nog niet gezien.</li>
+        <li><b>Hoe lang zit je vast?</b> Maandelijks opzegbaar zegt iets over het vertrouwen dat een bureau in zijn eigen werk heeft.</li>
+      </ul>
+      <p>Wij werken op die manier: binnen 15 minuten terugbellen, eerst een analyse en dan pas een voorstel, en per maand opzegbaar. Wil je meer vragen voor een bureau op een rij? Lees dan de gids <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte voor een website of SEO beoordelen</a>.</p>
+
+      <h2>Ook buiten het Noorden</h2>
+      <p>Het Noorden is ons thuis, niet onze grens. Onze klanten komen uit heel Nederland, en we werkten ook voor bedrijven in het buitenland. Kärcher, bol.com en Nyenrode staan bijvoorbeeld op onze klantenlijst. Een marketingbureau hoeft niet om de hoek te zitten om goed werk te leveren. Het moet wel snel reageren en eerlijk zeggen wat werkt.</p>
+      <p>Buitenlandse bedrijven die in Nederland gevonden willen worden, helpen we met <a href="/linkbuilding/link-building-netherlands/">link building in the Netherlands</a> en <a href="/linkbuilding/linkbuilding-niederlande/">Linkbuilding in den Niederlanden</a>. Wie liever Engels leest, vindt alles over samenwerken op onze <a href="/en/">Engelse pagina</a>.</p>
+
+      <h2>Hoe een samenwerking begint</h2>
+    </div>
+    <ol class="stappen-rij">
+      <li><strong>Je belt of mailt</strong><p>Op werkdagen bellen we je binnen 15 minuten terug. Uit interesse, niet om te verkopen.</p></li>
+      <li><strong>We vragen door</strong><p>Wat wil je bereiken, en wat wil je echt? Pas als dat helder is, kijken we verder.</p></li>
+      <li><strong>Gratis analyse</strong><p>We bekijken je website en je vindbaarheid, en leggen de kansen aan je voor. Bij ons, bij jou of aan de telefoon.</p></li>
+      <li><strong>Doelen op papier</strong><p>Een lage investering en concrete targets waar je ons op kunt afrekenen.</p></li>
+      <li><strong>Eerst de snelle winst</strong><p>We beginnen waar het snelst verschil te maken is. Daarna perfectioneren we.</p></li>
+    </ol>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Hebben jullie ook een kantoor in Groningen, Leeuwarden of Zwolle?', a: 'Nee. Assen is onze enige vestiging. We komen graag naar je toe, overal in Noord-Nederland, of je komt langs aan de Lauwers 9 in Assen.' },
+      { v: 'Werken jullie ook voor bedrijven buiten het Noorden?', a: 'Ja. Onze klanten komen uit heel Nederland en we werkten ook voor bedrijven in het buitenland. Overleg gaat dan telefonisch of via een videogesprek, met dezelfde vaste afspraken als hier.' },
+      { v: 'Wat kost online marketing in Noord-Nederland?', a: 'Overal hetzelfde. Lokale SEO begint bij € 295 per maand, SEO bij € 495 per maand en een website bij € 250. Alles staat op de pagina <a href="/prijzen/">prijzen</a>.' },
+      { v: 'Heeft het zin om in een dorp online zichtbaar te zijn?', a: 'Ja, juist daar. Er zijn minder concurrenten, dus met een goed Google Bedrijfsprofiel en een paar sterke pagina\'s sta je snel bovenaan. Een kleine markt betekent ook dat elke klant meer telt.' },
+      { v: 'Moet ik voor elke plaats een eigen pagina maken?', a: 'Alleen voor plaatsen waar je echt werkt en waar je iets eigens over kunt vertellen. Tien pagina\'s met dezelfde tekst en een andere plaatsnaam ziet Google als opvulling. Beter een paar pagina\'s met echte lokale details.' },
+      { v: 'Kan ik ook eerst alleen een analyse laten doen?', a: 'Ja. De <a href="/gratis-website-analyse/">gratis scan</a> laat zien waar je staat in Google en bij AI-assistenten, met de drie belangrijkste verbeterpunten. Wil je de techniek van je site tot op de bodem laten nakijken, dan is er de technische SEO-audit vanaf € 395. Pas daarna beslis je of je maandelijks met ons wilt samenwerken.' },
+      { v: 'Hoe snel reageren jullie?', a: 'Op werkdagen tussen 8.00 en 17.00 uur bellen we je binnen 15 minuten terug. Dat geldt in Delfzijl net zo goed als in Dokkum of Zwolle.' },
+      { v: 'Wie is mijn aanspreekpunt?', a: `${site.contactpersoon} van Eeden. Hij neemt de telefoon op, belt je terug en houdt je project bij. Mailen kan ook, naar ${site.email}.` },
+    ]}
+  />
+
+  <Verder
+    titel="Waar wil je beginnen?"
+    links={[
+      { label: 'Pillar', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Bovenaan in Google Maps in je eigen regio.', teken: 'pin' },
+      { label: 'Pillar', titel: 'Website laten maken', href: '/website-laten-maken/', tekst: 'Snel met AI of maatwerk in WordPress.', teken: 'scherm' },
+      { label: 'Pillar', titel: 'Online marketing uitbesteden', href: '/online-marketing-uitbesteden/', tekst: 'Alles in één hand, maandelijks opzegbaar.', teken: 'team' },
+    ]}
+  />
+
+  <Actie titel="Ondernemer in het Noorden, of verder weg?" tekst={`Bel of mail ${site.contactpersoon}. Hij belt je binnen 15 minuten terug, waar je ook zit. Een kop koffie in Assen kan altijd.`} />
+</Base>
+<style>
+  .provincies { margin-top: 8px; }
+  .groepen { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); margin-top: 8px; }
+  .groep { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+  .groep-kop { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  .groep-kop h3 { margin: 0; font-size: 1.2rem; }
+  .plaatslijst { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .plaatslijst > li { display: grid; gap: 6px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .plaatslijst > li:first-child { border-top: 0; padding-top: 0; }
+  .stappen-rij { margin-top: 8px; }
+</style>

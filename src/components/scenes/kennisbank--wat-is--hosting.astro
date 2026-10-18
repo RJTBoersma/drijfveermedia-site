@@ -1,0 +1,75 @@
+---
+// Scène voor /kennisbank/wat-is/hosting/: de bestanden van een website gaan de server in, en die server stuurt de site
+// dag en nacht naar een laptop en een telefoon.
+// Als hij leeft: de lampjes van de server knipperen rustig, pakketjes reizen van de server naar de bezoekers
+// en het uptime-label verschijnt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const lades = [44, 92, 140, 188];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: de bestanden van een website worden naar een server geüpload. De server stuurt de site dag en nacht naar een laptop en een telefoon.'}>
+  <!-- websitebestanden -->
+  <rect x="16" y="64" width="104" height="122" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M17 86v-10a9 9 0 0 1 9-9h84a9 9 0 0 1 9 9v10z" fill="#e8eef4" />
+  <text x="28" y="81" font-size="10.5" font-weight="800">Jouw site</text>
+  <rect class="v" x="28" y="98" width="80" height="34" rx="6" />
+  <path class="l" d="M32 128l16-14 12 10 10-7 16 11" />
+  <rect x="28" y="142" width="64" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="28" y="156" width="80" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="28" y="170" width="52" height="7" rx="3.5" fill="#e8eef4" />
+  <path class="a" d="M126 124h26M144 116l8 8-8 8" />
+  <text x="70" y="208" font-size="10.5" text-anchor="middle" class="zacht">uploaden</text>
+
+  <!-- serverkast -->
+  <rect x="160" y="26" width="132" height="214" rx="12" fill="#10283f" />
+  {lades.map((y) => (
+    <g>
+      <rect x="172" y={y} width="108" height="38" rx="6" fill="#074663" />
+      <rect x="182" y={y + 14} width="52" height="9" rx="4.5" fill="#fff" opacity="0.25" />
+      <circle cx="252" cy={y + 19} r="4.5" fill="#1f8a5b" />
+      <circle cx="267" cy={y + 19} r="4.5" fill="#ff6600" opacity="0.85" />
+    </g>
+  ))}
+  <rect x="190" y="240" width="72" height="8" rx="4" fill="#d9e1ea" />
+
+  <!-- bezoekers -->
+  <rect x="338" y="58" width="112" height="72" rx="8" fill="#fff" stroke="#074663" stroke-width="2" />
+  <rect class="v" x="348" y="68" width="92" height="52" rx="4" />
+  <path d="M326 136h136l-10 12H336z" fill="#d9e1ea" />
+  <rect x="372" y="166" width="54" height="86" rx="10" fill="#fff" stroke="#074663" stroke-width="2" />
+  <rect class="v" x="380" y="178" width="38" height="58" rx="4" />
+  <circle cx="399" cy="244" r="3" fill="#074663" />
+  <path d="M296 96H332" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-dasharray="5 7" stroke-linecap="round" />
+  <path d="M296 196C330 196 344 206 366 206" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-dasharray="5 7" stroke-linecap="round" />
+
+  {!mini && (
+    <g>
+      <circle class="hosting-knipper hosting-k1" cx="252" cy="63" r="4.5" fill="#7fe0b0" />
+      <circle class="hosting-knipper hosting-k2" cx="252" cy="111" r="4.5" fill="#7fe0b0" />
+      <circle class="hosting-knipper hosting-k3" cx="252" cy="159" r="4.5" fill="#7fe0b0" />
+      <circle class="hosting-knipper hosting-k4" cx="252" cy="207" r="4.5" fill="#7fe0b0" />
+      <rect class="hosting-pakket hosting-p1" x="296" y="91" width="12" height="10" rx="2.5" fill="#ff6600" />
+      <rect class="hosting-pakket hosting-p2" x="296" y="191" width="12" height="10" rx="2.5" fill="#ff6600" />
+      <g class="hosting-label">
+        <rect x="326" y="14" width="128" height="28" rx="14" fill="#1f8a5b" />
+        <text x="390" y="32.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">Uptime 99,9%</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .hosting-label { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .hosting-pakket, :global(.teken-js) .hosting-label, :global(.teken-js) .hosting-knipper { opacity: 0; }
+  .in-beeld .hosting-knipper { animation: kennisbank--wat-is--hosting-knipper 4s ease-in-out infinite; }
+  .in-beeld .hosting-k2 { animation-delay: 0.7s; }
+  .in-beeld .hosting-k3 { animation-delay: 1.5s; }
+  .in-beeld .hosting-k4 { animation-delay: 2.3s; }
+  .in-beeld .hosting-p1 { animation: kennisbank--wat-is--hosting-p1 3.2s ease-in-out 0.8s infinite; }
+  .in-beeld .hosting-p2 { animation: kennisbank--wat-is--hosting-p2 3.2s ease-in-out 2.4s infinite; }
+  .in-beeld .hosting-label { animation: kennisbank--wat-is--hosting-label 0.6s cubic-bezier(.3,1.6,.5,1) 1.2s forwards; }
+  @keyframes kennisbank--wat-is--hosting-knipper { 0%, 100% { opacity: 0; } 10%, 30% { opacity: 1; } 45% { opacity: 0; } }
+  @keyframes kennisbank--wat-is--hosting-p1 { 0% { opacity: 0; transform: translateX(0); } 10% { opacity: 1; } 55% { opacity: 1; transform: translateX(28px); } 65%, 100% { opacity: 0; transform: translateX(30px); } }
+  @keyframes kennisbank--wat-is--hosting-p2 { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 35% { transform: translate(34px, 2px); } 55% { opacity: 1; transform: translate(62px, 10px); } 65%, 100% { opacity: 0; transform: translate(64px, 10px); } }
+  @keyframes kennisbank--wat-is--hosting-label { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .hosting-knipper, .in-beeld .hosting-pakket, .in-beeld .hosting-label { animation: none; } }
+</style>

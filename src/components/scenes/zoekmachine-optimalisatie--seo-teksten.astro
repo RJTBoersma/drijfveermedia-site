@@ -1,0 +1,83 @@
+---
+// Scène voor /zoekmachine-optimalisatie/seo-teksten/: een pen schrijft een webtekst met het zoekwoord gemarkeerd, het zoekresultaat staat klaar en de checklist loopt vol.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const punten = ['Antwoord eerst', 'Duidelijke titel', 'Meta description'];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een pen schrijft een webtekst over het plaatsen van een dakkapel. Het zoekwoord wordt gemarkeerd, het zoekresultaat staat klaar en een checklist wordt afgevinkt.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- de tekst -->
+  <rect x="24" y="40" width="236" height="210" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="44" y="76" font-size="17" font-weight="900">Dakkapel plaatsen</text>
+  <rect class="v" x="44" y="92" width="56" height="8" rx="4" />
+  <rect x="104" y="90" width="70" height="12" rx="4" fill="#ffd2b0" />
+  <rect class="v" x="178" y="92" width="62" height="8" rx="4" />
+  <rect class="v" x="44" y="110" width="196" height="8" rx="4" />
+  <rect class="v" x="44" y="128" width="170" height="8" rx="4" />
+  <rect x="44" y="150" width="118" height="10" rx="4" fill="#074663" />
+  <rect class="v" x="44" y="172" width="196" height="8" rx="4" />
+  <rect class="v" x="44" y="190" width="150" height="8" rx="4" />
+  <rect class="v" x="44" y="208" width="182" height="8" rx="4" />
+  <!-- het zoekresultaat -->
+  <rect x="278" y="24" width="186" height="80" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="v" cx="295" cy="43" r="7" />
+  <text x="308" y="47" font-size="10" class="zacht">jouwbedrijf.nl</text>
+  <text x="292" y="70" font-size="12.5" font-weight="800" style="fill:#074663">Dakkapel laten plaatsen</text>
+  <rect class="v" x="292" y="80" width="156" height="6" rx="3" />
+  <rect class="v" x="292" y="91" width="112" height="6" rx="3" />
+  <!-- checklist -->
+  <rect x="278" y="120" width="186" height="118" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  {punten.map((p, i) => (
+    <g>
+      <text x="294" y={152 + i * 32} font-size="11.5" font-weight="700">{p}</text>
+      <circle cx="444" cy={148 + i * 32} r="9" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    </g>
+  ))}
+  {!mini && (
+    <g>
+      <rect class="markeer" x="104" y="90" width="70" height="12" rx="4" fill="#ff6600" opacity=".35" />
+      <rect class="regel" x="44" y="226" width="140" height="8" rx="4" fill="#074663" opacity=".55" />
+      {punten.map((_, i) => (
+        <g class="vink" style={`--i:${i}`}>
+          <circle cx="444" cy={148 + i * 32} r="9" fill="#1f8a5b" />
+          <path d={`M440 ${148 + i * 32}l3 3 5-6`} fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <g class="pen">
+        <path d="M0 0l3-11 30-30 8 8-30 30z" fill="#074663" />
+        <path d="M0 0l3-11 8 8z" fill="#ff6600" />
+        <path d="M27-35l8 8" stroke="#fff" stroke-width="2" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .markeer { transform-box: fill-box; transform-origin: left center; }
+  .regel { transform-box: fill-box; transform-origin: left center; }
+  .vink { transform-box: fill-box; transform-origin: center; }
+  .pen { transform: translate(186px, 232px); }
+  :global(.teken-js) .markeer { transform: scaleX(0); }
+  :global(.teken-js) .vink { opacity: 0; transform: scale(0.4); }
+  :global(.teken-js) .regel { transform: scaleX(0); }
+  :global(.teken-js) .pen { opacity: 0; }
+  .in-beeld .markeer { animation: zoekmachine-optimalisatie--seo-teksten-markeer 0.9s ease 0.5s forwards; }
+  .in-beeld .vink { animation: zoekmachine-optimalisatie--seo-teksten-vink 0.5s cubic-bezier(.3,1.7,.5,1) calc(1.4s + var(--i) * 0.6s) forwards; }
+  .in-beeld .regel { animation: zoekmachine-optimalisatie--seo-teksten-regel 5s ease-in-out 0.8s infinite both; }
+  .in-beeld .pen { animation: zoekmachine-optimalisatie--seo-teksten-pen 5s ease-in-out 0.8s infinite both; }
+  @keyframes zoekmachine-optimalisatie--seo-teksten-markeer { to { transform: none; } }
+  @keyframes zoekmachine-optimalisatie--seo-teksten-vink { to { opacity: 1; transform: none; } }
+  @keyframes zoekmachine-optimalisatie--seo-teksten-regel {
+    0%, 8% { transform: scaleX(0); opacity: 0.55; }
+    60%, 85% { transform: none; opacity: 0.55; }
+    100% { transform: none; opacity: 0; }
+  }
+  @keyframes zoekmachine-optimalisatie--seo-teksten-pen {
+    0% { opacity: 0; transform: translate(46px, 232px); }
+    8% { opacity: 1; transform: translate(46px, 232px); }
+    60% { opacity: 1; transform: translate(186px, 232px); }
+    85% { opacity: 1; transform: translate(186px, 232px); }
+    100% { opacity: 0; transform: translate(186px, 232px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .markeer, .in-beeld .vink, .in-beeld .regel, .in-beeld .pen { animation: none; }
+  }
+</style>

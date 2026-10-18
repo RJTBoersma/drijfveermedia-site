@@ -1,0 +1,370 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--seo-teksten-schrijven.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/seo-teksten-schrijven/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een SEO-tekst?' },
+  { id: 'google', titel: 'Wat Google zelf zegt' },
+  { id: 'voorbereiden', titel: 'Voor je begint' },
+  { id: 'stappen', titel: 'Schrijven in acht stappen' },
+  { id: 'plekken', titel: 'Waar het zoekwoord staat' },
+  { id: 'opbouw', titel: 'Een opbouw per soort pagina' },
+  { id: 'koppen', titel: 'Titels en koppen' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: voor en na' },
+  { id: 'ai', titel: 'Schrijven met AI' },
+  { id: 'ai-antwoorden', titel: 'Genoemd worden door AI' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'checklist', titel: 'Checklist' },
+  { id: 'bijwerken', titel: 'Meten en bijwerken' },
+  { id: 'zelf-of-laten', titel: 'Zelf of laten schrijven?' },
+];
+const check = [
+  'Ik weet op welk zoekwoord deze pagina gevonden moet worden, en welke varianten erbij horen.',
+  'Ik heb de eerste vijf resultaten in Google gelezen en weet wat zij missen.',
+  'Het antwoord op de zoekvraag staat in de eerste alinea.',
+  'Het zoekwoord staat in de paginatitel, de H1, de eerste honderd woorden en één of twee tussenkoppen.',
+  'Wie alleen de koppen leest, snapt het verhaal.',
+  'Er staat iets in wat alleen ik weet: een voorbeeld, een prijs, een foto of een fout die ik vaak zie.',
+  'Alle feiten en bedragen kloppen, en bij cijfers van anderen noem ik de bron.',
+  'Alinea\'s zijn kort, lijstjes en tabellen maken het scanbaar.',
+  'Ik link naar twee of drie eigen pagina\'s met een linktekst die zegt waar je uitkomt.',
+  'Afbeeldingen hebben een alt-tekst die beschrijft wat erop staat.',
+  'De meta description vat de pagina samen en geeft een reden om te klikken.',
+  'Onderaan staat één duidelijke volgende stap.',
+  'Ik heb de tekst hardop gelezen en hij klinkt als mij.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Checklist: SEO-teksten schrijven\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  check.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'SEO-teksten schrijven: zo doe je het zelf, ook met hulp van AI',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="SEO-teksten schrijven, ook met AI | Drijfveer Media"
+  description="SEO-teksten schrijven die gevonden worden en overtuigen: een stappenplan, een vaste opbouw per pagina en hoe je AI inzet zonder dat het zo leest."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'SEO-teksten schrijven', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Teksten" titel="SEO-teksten schrijven: zo doe je het zelf, ook met hulp van AI">
+    <p>Een goede SEO-tekst beantwoordt de vraag van je klant beter dan de rest, in de woorden die hij zelf gebruikt. In deze gids leer je SEO-teksten schrijven voor je eigen site. Met een stappenplan, een vaste opbouw, een voorbeeld en eerlijk advies over AI.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een SEO-tekst is gewoon een goede tekst, gebouwd rond de vraag die mensen in Google typen.</li>
+            <li>Geef het antwoord in de eerste alinea. Uitleg en voorbeelden komen daarna.</li>
+            <li>Zet het zoekwoord in de titel, de eerste zinnen en één of twee koppen. Daarna schrijf je gewoon.</li>
+            <li>Google heeft geen voorkeur voor een aantal woorden. Een tekst is lang genoeg als de lezer niet opnieuw hoeft te zoeken.</li>
+            <li>AI helpt met de opzet en de controle. De inhoud, de voorbeelden en de toon komen van jou.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een SEO-tekst eigenlijk?</h2>
+        <p>Een SEO-tekst is een tekst die geschreven is om gevonden te worden op een bepaalde zoekvraag, en die de lezer daarna helpt of overtuigt. Het woord klinkt technischer dan het is.</p>
+        <p>Vroeger betekende het: zo vaak mogelijk het zoekwoord herhalen. Dat werkt al jaren niet meer. Op die manier SEO-teksten schrijven levert SEO content op waar Google en lezers zo doorheen prikken. Google beloont wat het zelf "helpful content" noemt: inhoud die gemaakt is om mensen te helpen, niet om hoger in de zoekresultaten te komen.</p>
+        <p>Een goede SEO-tekst doet dus twee dingen tegelijk. Hij laat Google zonder twijfel zien waar de pagina over gaat. En hij geeft de lezer die vanuit Google binnenkomt precies wat hij zocht. Mis je het eerste, dan word je niet gevonden. Mis je het tweede, dan word je gevonden en klikt men weg.</p>
+        <p>Er zijn grofweg drie soorten. Een <b>dienstpagina</b> moet iemand overtuigen om te bellen of een offerte aan te vragen. Een <b>informatieve tekst</b>, zoals een blog of gids, legt iets uit. En een <b>plaatspagina</b> laat zien dat je in een bepaalde regio werkt. Alle drie zijn het SEO-teksten, maar ze hebben elk een andere opbouw. Daar komen we zo op terug.</p>
+
+        <h2 id="google">Wat Google zelf zegt over goede teksten</h2>
+        <p>Over SEO-teksten gaan veel fabels rond. Gelukkig is Google er zelf vrij duidelijk over, in de documentatie van Google Search Central. Dit zijn de punten die er voor jou als schrijver toe doen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je vaak hoort</th><th>Wat Google zegt</th></tr></thead>
+            <tbody>
+              <tr><td>"Een tekst moet minstens 300 (of 1.000) woorden zijn."</td><td>Er is geen magisch aantal woorden, geen minimum en geen maximum. Google raadt je zelfs af om naar een woordenaantal toe te schrijven.</td></tr>
+              <tr><td>"Het zoekwoord moet een vast percentage van de tekst zijn."</td><td>Woorden steeds herhalen is vermoeiend voor lezers en valt onder de spamregels (keyword stuffing).</td></tr>
+              <tr><td>"Je moet meta keywords invullen."</td><td>Google gebruikt de meta keywords-tag niet.</td></tr>
+              <tr><td>"Koppen moeten precies in de volgorde H1, H2, H3."</td><td>Voor Google maakt de volgorde niet uit, en er is geen ideaal aantal koppen. Een nette volgorde helpt wel mensen die een schermlezer gebruiken.</td></tr>
+              <tr><td>"E-E-A-T is een rankingfactor."</td><td>Nee. Google gebruikt een mix van signalen die passen bij ervaring, deskundigheid, autoriteit en betrouwbaarheid. Vertrouwen is daarvan het belangrijkst.</td></tr>
+              <tr><td>"Met AI geschreven teksten worden afgestraft."</td><td>Google beloont goede inhoud, hoe die ook gemaakt is. Wel tegen de regels: op grote schaal pagina's laten maken die de lezer niets bieden.</td></tr>
+              <tr><td>"Pas de datum aan, dan lijkt je pagina vers."</td><td>Een datum veranderen zonder echte aanpassingen noemt Google juist een waarschuwingssignaal.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bron: Google Search Central, de SEO-startersgids, de pagina over nuttige, betrouwbare inhoud en de spamregels voor Google Zoeken, opgehaald in oktober 2026.</p>
+        <p>Google geeft schrijvers ook een handige zelftoets. Stel jezelf na het schrijven drie vragen. <b>Wie</b> heeft dit geschreven, en is dat voor de lezer duidelijk? <b>Hoe</b> is het gemaakt, bijvoorbeeld met hulp van AI? En <b>waarom</b> bestaat deze pagina: om mensen te helpen of vooral om bezoekers te trekken? Is het eerlijke antwoord op die laatste vraag "voor Google", dan is de tekst nog niet goed.</p>
+        <p>Een andere vraag uit die lijst vinden we nog sterker. Heeft de lezer na afloop het gevoel dat hij genoeg weet om zijn doel te halen? Of moet hij opnieuw gaan zoeken? Die vraag beslist meer over je posities dan elk trucje.</p>
+
+        <h2 id="voorbereiden">Voor je begint: zoekwoord, vraag en lezer</h2>
+        <p>Bij SEO-teksten schrijven gebeurt de helft van het werk voordat je één zin op papier zet. Voor je gaat schrijven bedenk je eerst drie dingen.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={44} /><h3>Op welk zoekwoord moet de pagina gevonden worden?</h3></div>
+        <p>Kies één hoofdzoekwoord per pagina, met een paar varianten. Een zoekwoorden onderzoek laat zien welke woorden mensen echt gebruiken. Vaak zijn dat andere woorden dan in je vak. Een installateur zegt "hybride warmtepomp", de klant typt "warmtepomp naast cv-ketel". Hoe je dat uitzoekt, staat in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a>.</p>
+        <p>Let ook op lange zoekopdrachten. "Dakkapel" is lastig en algemeen. "Dakkapel plaatsen Assen prijs" heeft veel minder zoekers, maar wie dat typt wil iets laten doen. Voor een klein bedrijf zijn juist die specifieke woorden vaak de snelste winst.</p>
+        <div class="stap-kop"><Tekening naam="kompas" maat={44} /><h3>Wat wil de zoeker?</h3></div>
+        <p>Achter elke zoekopdracht zit een bedoeling. Die <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a> bepaalt wat voor tekst je schrijft.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort vraag</th><th>Voorbeeld</th><th>Welke tekst past</th></tr></thead>
+            <tbody>
+              <tr><td>Informatief</td><td>hoe werkt een warmtepomp</td><td>Een gids of blog die het uitlegt</td></tr>
+              <tr><td>Vergelijkend</td><td>warmtepomp of cv-ketel</td><td>Een vergelijking met voor- en nadelen en een tabel</td></tr>
+              <tr><td>Kopen of laten doen</td><td>warmtepomp laten plaatsen</td><td>Een dienstpagina met prijs, werkwijze en een knop</td></tr>
+              <tr><td>Lokaal</td><td>installateur emmen</td><td>Een plaatspagina of je Google Bedrijfsprofiel</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Probeer nooit alles op één pagina te doen. Een informatief stuk dat halverwege een verkooppraatje wordt, overtuigt niemand. Schrijf liever twee pagina's die naar elkaar linken.</p>
+        <div class="stap-kop"><Tekening naam="scan" maat={44} /><h3>Wat staat er nu bovenaan?</h3></div>
+        <p>Zoek je zoekwoord op in Google en lees de eerste vijf resultaten. Schrijf op welke vragen ze beantwoorden, welke voorbeelden ze geven en hoe lang ze ongeveer zijn. Kijk dan vooral naar wat ze missen. Geen prijs? Geen voorbeeld uit de praktijk? Verouderde informatie? Daar zit jouw kans. Neem nooit tekst over. Je zoekt naar gaten, niet naar zinnen.</p>
+
+        <h2 id="stappen">SEO-teksten schrijven in acht stappen</h2>
+        <p>Heb je je zoekwoord, je lezer en je gaten? Dan begin je met schrijven. Dit is de volgorde die we zelf aanhouden.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Schrijf eerst het antwoord</h3></div>
+        <p>Beantwoord de vraag uit de zoekopdracht in de eerste twee of drie zinnen. Wie zoekt op "wat kost een dakkapel", wil een bedrag zien, niet eerst een alinea over de geschiedenis van je bedrijf. Daarna mag je de vraag volledig beantwoorden, met uitleg, uitzonderingen en voorbeelden. Ook AI-assistenten en de AI-overzichten van Google pakken het liefst een helder antwoord in de eerste zin van een alinea.</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>2. Maak een duidelijke titel en koppen</h3></div>
+        <p>De H1 is je duidelijke titel, met het zoekwoord erin. De tussenkoppen zijn de vragen die een lezer onderweg heeft: wat kost het, hoe lang duurt het, wat als het misgaat. Iemand die alleen de <a href="/kennisbank/wat-is/headings/">koppen</a> leest, moet het verhaal al snappen. Schrijf de koppen het liefst eerst, als een inhoudsopgave. Dan zie je meteen of er een vraag ontbreekt.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Gebruik de woorden van je klant</h3></div>
+        <p>Zet het zoekwoord in de titel, in de eerste honderd woorden en in één of twee koppen. Gebruik daarna synoniemen en woorden die erbij horen, zoals je ze aan de telefoon ook zou gebruiken. Een tekst over een dakkapel noemt vanzelf "vergunning", "prijs per meter" en "plaatsing in één dag". Tel geen percentages, lees hardop. Klinkt het houterig, dan staat het zoekwoord er te vaak in.</p>
+        <div class="stap-kop"><Tekening naam="lamp" maat={48} /><h3>4. Voeg toe wat alleen jij weet</h3></div>
+        <p>Noem bedragen, aantallen, termijnen, plaatsnamen en merken. "Snel geleverd" zegt niets, "binnen drie werkdagen in heel Drenthe" wel. Voeg iets toe wat alleen jij weet: een fout die je vaak ziet, een vraag die klanten altijd stellen, een foto van je eigen werk. Dat is de ervaring en deskundigheid waar Google naar kijkt, samengevat als <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a>. Een tekst die alleen samenvat wat al op andere sites staat, heeft Google niet nodig.</p>
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>5. Schrijf voor wie scant</h3></div>
+        <p>De meeste mensen lezen niet, ze scannen. Houd alinea's kort, drie tot vijf zinnen. Gebruik lijstjes voor stappen, een tabel voor prijzen en vet voor de kern. Wissel korte en lange zinnen af. Zo blijft het lezen. Schrijf actief: "wij plaatsen de dakkapel" leest sneller dan "de dakkapel wordt door ons geplaatst".</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>6. Link naar je eigen pagina's</h3></div>
+        <p>Verwijs in de tekst naar pagina's die de lezer op weg helpen, met een linktekst die zegt waar je uitkomt. Niet "klik hier", maar "bekijk de prijzen van onderhoud". Zo vindt Google je andere pagina's en blijft de lezer langer. Linken naar een betrouwbare bron buiten je site mag ook, bijvoorbeeld als je een cijfer van het CBS noemt. Meer hierover lees je bij <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</p>
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>7. Controleer feiten en bronnen</h3></div>
+        <p>Klopt elk bedrag nog? Bestaat die regel echt? Komt dat percentage ergens vandaan? Fouten die een lezer makkelijk kan nakijken, kosten meteen vertrouwen. Google noemt dat ook letterlijk in zijn zelftoets. Noem bij een cijfer van een ander gewoon de bron, zoals "volgens het CBS".</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>8. Titel, omschrijving en volgende stap</h3></div>
+        <p>Schrijf als laatste de paginatitel en de meta description. Die zijn je etalage in Google. Volgens Google is er geen maximale lengte voor een meta description, maar wordt de tekst in de zoekresultaten afgekapt waar dat nodig is. Zet het belangrijkste dus vooraan. Google kiest soms ook zelf een stuk tekst van je pagina als dat beter bij de zoekopdracht past. Hoe je een omschrijving schrijft die aangeklikt wordt, staat in de gids <a href="/kennisbank/gidsen/meta-description/">meta description schrijven</a>. Sluit de tekst af met één duidelijke volgende stap: bellen, een offerte, een afspraak.</p>
+
+        <h2 id="plekken">Waar het zoekwoord moet staan</h2>
+        <p>Je hoeft het zoekwoord niet overal in te proppen. Een paar vaste plekken zijn genoeg. Daarna schrijf je gewoon.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Plek</th><th>Hoe</th><th>Voorbeeld voor "dakkapel plaatsen"</th></tr></thead>
+            <tbody>
+              <tr><td>Paginatitel (<a href="/kennisbank/wat-is/title-tag/">title tag</a>)</td><td>Zoekwoord vooraan, daarna je merk</td><td>Dakkapel plaatsen in Assen, vaste prijs | Bedrijfsnaam</td></tr>
+              <tr><td>Meta description</td><td>Zoekwoord of variant, plus een reden om te klikken</td><td>Dakkapel plaatsen in één dag, inclusief vergunningcheck. Bekijk de prijzen.</td></tr>
+              <tr><td>H1</td><td>Eén per pagina, met het zoekwoord</td><td>Dakkapel plaatsen in Assen en omgeving</td></tr>
+              <tr><td>Eerste alinea</td><td>In de eerste honderd woorden</td><td>"Een dakkapel plaatsen kost meestal ..."</td></tr>
+              <tr><td>Tussenkoppen</td><td>In één of twee, de rest gaat over vragen</td><td>Wat kost een dakkapel plaatsen?</td></tr>
+              <tr><td>URL</td><td>Kort en leesbaar</td><td>/dakkapel-plaatsen/</td></tr>
+              <tr><td>Alt-tekst van een foto</td><td>Beschrijf wat erop staat, alleen als het past</td><td>Nieuwe dakkapel op een rijtjeshuis in Assen</td></tr>
+              <tr><td>Linktekst naar de pagina</td><td>Vanaf andere pagina's op je site</td><td>"bekijk wat een dakkapel plaatsen kost"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Volgens Google hebben zoekwoorden in je domeinnaam of URL los nauwelijks effect. Een korte, leesbare URL is vooral prettig voor mensen. Meer daarover lees je in de gids over <a href="/kennisbank/gidsen/seo-vriendelijke-urls/">SEO-vriendelijke URL's</a>. Voor de <a href="/kennisbank/wat-is/alt-tekst/">alt-tekst</a> geldt hetzelfde: schrijf hem voor iemand die de foto niet kan zien, niet voor Google.</p>
+
+        <h2 id="opbouw">Een opbouw die werkt, per soort pagina</h2>
+        <p>Bij SEO-teksten schrijven hoef je niet elke keer het wiel uit te vinden. Dit zijn de opbouwen die we zelf het vaakst gebruiken. Kopieer ze gerust.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Dienstpagina</th><th>Gids of blog</th><th>Plaatspagina</th></tr></thead>
+            <tbody>
+              <tr><td><b>Doel</b></td><td>Een aanvraag of telefoontje</td><td>Uitleggen, vertrouwen opbouwen</td><td>Laten zien dat je in die regio werkt</td></tr>
+              <tr><td><b>Begin</b></td><td>Wat je doet, voor wie, wat het kost</td><td>Het antwoord op de hoofdvraag</td><td>Wat je in die plaats doet en hoe snel je er bent</td></tr>
+              <tr><td><b>Midden</b></td><td>Wat de klant krijgt, hoe het werkt, bewijs</td><td>Vervolgvragen, stappen, voorbeelden, tabellen</td><td>Lokale details, klussen in de buurt, reistijd</td></tr>
+              <tr><td><b>Einde</b></td><td>Vragen en één knop</td><td>Wat de lezer nu kan doen</td><td>Contact en een link naar je dienst</td></tr>
+              <tr><td><b>Lengte, ruwweg</b></td><td>Zo kort als kan, zo lang als nodig</td><td>Vaak het langst</td><td>Kort, maar echt anders per plaats</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>De dienstpagina in acht blokken</h3>
+        <ol>
+          <li><b>Kop met belofte.</b> Het zoekwoord en wat de klant eraan heeft.</li>
+          <li><b>Het antwoord.</b> In drie zinnen: wat je doet, voor wie, en wat het kost.</li>
+          <li><b>Wat de klant krijgt.</b> Concreet, in een lijstje.</li>
+          <li><b>Hoe het werkt.</b> De stappen, van eerste contact tot oplevering.</li>
+          <li><b>Wat het kost.</b> Een vanaf-prijs of een rekenvoorbeeld.</li>
+          <li><b>Waarom jij.</b> Bewijs: een voorbeeld, een garantie, een foto.</li>
+          <li><b>Vragen.</b> Vijf echte vragen met korte antwoorden.</li>
+          <li><b>De volgende stap.</b> Eén knop, één telefoonnummer.</li>
+        </ol>
+        <h3>De informatieve tekst</h3>
+        <p>Een informatieve tekst, zoals een blog of gids, bouw je op rond vragen. Begin met de hoofdvraag en geef het antwoord meteen. Behandel daarna de logische vervolgvragen, elk onder een eigen kop. Gebruik een tabel als je dingen vergelijkt en een genummerde lijst als de volgorde ertoe doet. Eindig met wat de lezer nu kan doen. Wil je een blog opzetten die jaren meegaat, lees dan ook hoe je <a href="/kennisbank/gidsen/bedrijfsblog-beginnen/">een bedrijfsblog begint</a>.</p>
+        <h3>De plaatspagina</h3>
+        <p>Werk je in meerdere plaatsen, dan is het verleidelijk om één tekst te maken en alleen de plaatsnaam te wisselen. Doe dat niet. Google noemt blokken tekst met alleen plaatsnamen zelfs letterlijk als voorbeeld van spam. Schrijf per plaats iets wat echt over die plaats gaat: de wijken waar je vaak werkt, hoe lang je erover rijdt, het soort huizen of bedrijven. Lukt dat niet, maak dan geen aparte pagina.</p>
+
+        <h2 id="koppen">Titels en koppen die aangeklikt worden</h2>
+        <p>Je titel is het eerste wat iemand van je tekst ziet, in Google en op je pagina. Neem er de tijd voor. Lukt het niet, schrijf dan eerst de rest. Vaak staat de beste titel al ergens in je tekst. Deze vormen werken bijna altijd:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vorm</th><th>Voorbeeld</th><th>Werkt goed voor</th></tr></thead>
+            <tbody>
+              <tr><td>De vraag</td><td>Wat kost een dakkapel in 2026?</td><td>Teksten die een veelgestelde vraag beantwoorden</td></tr>
+              <tr><td>Het stappenplan</td><td>Zo vraag je een omgevingsvergunning aan in 5 stappen</td><td>Gidsen en uitleg</td></tr>
+              <tr><td>Het getal</td><td>7 fouten bij het kiezen van een aannemer</td><td>Lijstjes en tips</td></tr>
+              <tr><td>De belofte</td><td>Geen lekkage meer, met een dakcheck van 30 minuten</td><td>Dienstpagina's</td></tr>
+              <tr><td>De vergelijking</td><td>Kunststof of houten kozijnen: wat past bij jouw huis?</td><td>Twijfel tussen twee keuzes</td></tr>
+              <tr><td>De plaats</td><td>Hovenier in Meppel, ook voor kleine tuinen</td><td>Lokale dienstpagina's</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Twee regels gelden altijd. Een titel belooft niets wat de tekst niet waarmaakt. Google vraagt ook expliciet om titels die niet overdrijven of schokken. En een titel gaat over de lezer, niet over jou. "Onze diensten" is een mapnaam, geen titel.</p>
+        <p>Weet ook dat Google de titel in de zoekresultaten soms zelf aanpast. Volgens Google gebeurt dat vooral als een titel half leeg is, verouderd, niet klopt met de pagina of op veel pagina's bijna hetzelfde is. Een korte, beschrijvende titel die per pagina anders is, heb je zelf het best in de hand.</p>
+
+        <h2 id="voorbeeld">Voorbeeld: van een zwakke naar een sterke SEO-tekst</h2>
+        <p>Zo ziet het er in de praktijk uit. Hieronder de eerste alinea van een dienstpagina van een dakdekker uit Hoogeveen, voor en na. Het bedrijf en de bedragen zijn verzonnen, de fouten zien we elke week.</p>
+        <div class="kader">
+          <p class="kader-titel">Voor</p>
+          <p>"Welkom op de website van ons dakdekkersbedrijf. Wij zijn een dynamisch en betrouwbaar bedrijf met passie voor kwaliteit. Dakdekker Hoogeveen, dakdekker Drenthe, dakreparatie Hoogeveen. Neem gerust contact op voor al uw dakwerkzaamheden."</p>
+        </div>
+        <div class="kader kader-oranje">
+          <p class="kader-titel">Na</p>
+          <p>"Lekt je dak of mist er een pan na de storm? Als dakdekker in Hoogeveen zijn we meestal binnen twee werkdagen bij je. Een kleine reparatie kost vanaf € 150, inclusief voorrijden. Je krijgt vooraf een vaste prijs en na afloop foto's van het werk. Bel ons of vraag hieronder een prijs aan."</p>
+        </div>
+        <p>Wat is er veranderd?</p>
+        <ul>
+          <li><b>Het probleem van de lezer staat voorop.</b> Niet "welkom", maar de reden waarom hij zocht.</li>
+          <li><b>Het zoekwoord staat er één keer, in een gewone zin.</b> Het rijtje plaatsnamen is weg.</li>
+          <li><b>Er staan feiten in.</b> Een termijn, een vanaf-prijs, wat er bij die prijs zit.</li>
+          <li><b>Er is een volgende stap.</b> Bellen of een prijs aanvragen.</li>
+          <li><b>Het klinkt als een mens.</b> Je leest het hardop zonder te haperen.</li>
+        </ul>
+        <p>Dezelfde dakdekker kan daarna een informatieve tekst schrijven over "dak lekt na storm, wat nu?". Die pagina helpt mensen op het moment dat het misgaat, en verwijst naar de dienstpagina. Zo vangen twee teksten twee soorten zoekers, zonder elkaar in de weg te zitten.</p>
+
+        <h2 id="ai">SEO-teksten schrijven met AI: zo doe je het goed</h2>
+        <p>AI kan je een hoop werk besparen, als je het als assistent gebruikt en niet als schrijver. Wij gebruiken zelf onder meer Claude, ChatGPT en Gemini, en we zijn daar <a href="/zo-werken-we-met-ai/">open over</a>. De inhoud komt van mensen. AI helpt met de rest.</p>
+        <p>Google zegt het zelf ook. Het beloont goede inhoud, hoe die ook gemaakt is. Maar wie met AI veel pagina's maakt die de lezer niets bieden, valt onder wat Google misbruik van geschaalde content noemt. Dat staat in de spamregels. Het eerste voorbeeld daar: met generatieve AI veel pagina's maken zonder iets toe te voegen voor de lezer.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Taak</th><th>AI is hier</th><th>Waarom</th></tr></thead>
+            <tbody>
+              <tr><td>Een opzet met koppen maken</td><td>Goed</td><td>Snel een structuur om op te schieten</td></tr>
+              <tr><td>Vragen bedenken die je vergat</td><td>Goed</td><td>Vult je blinde vlekken aan</td></tr>
+              <tr><td>Vijf varianten van een titel</td><td>Goed</td><td>Jij kiest, AI levert de opties</td></tr>
+              <tr><td>Lange zinnen korter maken</td><td>Goed</td><td>Controleer wel of de betekenis klopt</td></tr>
+              <tr><td>Feiten, prijzen en regels</td><td>Slecht</td><td>Een taalmodel voorspelt woorden, het kent jouw prijzen niet</td></tr>
+              <tr><td>Voorbeelden uit jouw praktijk</td><td>Slecht</td><td>Verzint ze, en dat leest de klant</td></tr>
+              <tr><td>Jouw toon</td><td>Matig</td><td>Klinkt snel algemeen, tenzij jij herschrijft</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een SEO-tekst schrijven met AI gaat zo:</p>
+        <ol>
+          <li>Verzamel je eigen kennis. Spreek in op je telefoon wat je een klant zou vertellen, of schrijf steekwoorden op.</li>
+          <li>Laat AI daar een opzet van maken, met het zoekwoord en de opbouw van hierboven.</li>
+          <li>Herschrijf die opzet in je eigen woorden. Voeg je voorbeelden, prijzen en plaatsnamen toe.</li>
+          <li>Laat AI controleren: welke vraag beantwoord ik niet? Welke zin is te lang?</li>
+          <li>Controleer elk feit zelf. Wat je niet kunt nakijken, haal je weg.</li>
+          <li>Lees het geheel hardop. Klinkt het als jij aan de keukentafel? Dan is het klaar.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Een prompt om mee te beginnen</p>
+          <p>"Je bent een ervaren tekstschrijver. Hieronder staan mijn aantekeningen over [dienst] voor klanten in [regio]. Maak een opzet voor een webpagina rond het zoekwoord [zoekwoord]. Begin met een antwoord in drie zinnen. Gebruik koppen als vragen. Verzin geen feiten, prijzen of klantverhalen. Markeer plekken waar ik een eigen voorbeeld moet toevoegen."</p>
+        </div>
+        <p>Die laatste zin is de belangrijkste. Hij dwingt je om de tekst eigen te maken. En dat merkt je lezer.</p>
+        <p>Herken je de typische AI-zinnen? Haal ze eruit. Denk aan een opening over een wereld die snel verandert, rijtjes van drie bijvoeglijke naamwoorden en een slotalinea die alles nog eens herhaalt. Lezers haken af op zulke zinnen, ook als ze niet weten waarom.</p>
+
+        <h2 id="ai-antwoorden">Schrijven voor Google én voor AI-antwoorden</h2>
+        <p>Steeds meer mensen stellen hun vraag aan ChatGPT, Gemini of de AI-modus van Google. Die geven één antwoord en noemen daar soms een paar bronnen bij. Wil je daar genoemd worden, dan helpt dezelfde aanpak als hierboven, met een paar accenten:</p>
+        <ul>
+          <li><b>Eén vraag, één helder antwoord.</b> Begin een alinea met het antwoord zelf, niet met een aanloop.</li>
+          <li><b>Feiten die je kunt citeren.</b> Een bedrag, een termijn, een stappenplan. Vage zinnen worden niet overgenomen.</li>
+          <li><b>Duidelijk wie je bent.</b> Naam, plaats, wat je doet en voor wie. Overal hetzelfde.</li>
+          <li><b>Een nette opbouw.</b> Koppen als vragen, tabellen voor vergelijkingen, lijstjes voor stappen.</li>
+        </ul>
+        <p>Dit heet <a href="/kennisbank/wat-is/geo/">generative engine optimization</a>, kortweg GEO. Wil je weten hoe dat precies werkt, lees dan <a href="/kennisbank/gidsen/wat-is-geo/">wat GEO is</a>.</p>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <p>Dit zijn de fouten die we het vaakst zien als ondernemers zelf SEO-teksten schrijven. Ze zijn allemaal makkelijk te herstellen.</p>
+        <ul>
+          <li><b>Schrijven over jezelf.</b> "Wij zijn een dynamisch bedrijf met passie voor kwaliteit." De lezer wil weten wat hij eraan heeft.</li>
+          <li><b>Het zoekwoord in elke zin.</b> Het leest slecht en het helpt niet meer.</li>
+          <li><b>Te dun.</b> Een dienstpagina van tachtig woorden beantwoordt geen enkele vraag. Er is geen minimum, maar een pagina moet de vraag wel volledig beantwoorden.</li>
+          <li><b>Twee pagina's over hetzelfde.</b> Dan weet Google niet welke het moet tonen. Kies er één en laat de andere ernaar linken. Dit heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>.</li>
+          <li><b>Overal dezelfde tekst.</b> Tien plaatspagina's met alleen een andere plaatsnaam zien Google en lezers meteen.</li>
+          <li><b>Een AI-tekst ongelezen online zetten.</b> Er staan vrijwel altijd fouten of verzonnen details in.</li>
+          <li><b>Geen volgende stap.</b> De lezer is overtuigd, maar weet niet wat hij nu moet doen.</li>
+          <li><b>Nooit bijwerken.</b> Prijzen van drie jaar geleden kosten vertrouwen.</li>
+        </ul>
+
+        <h2 id="checklist">Checklist voor je op publiceren drukt</h2>
+        <p>Loop deze punten na bij elke nieuwe tekst. Je kunt de lijst ook downloaden en naast je toetsenbord leggen.</p>
+        <div class="kader check-lijst">
+          <ol>{check.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="checklist-seo-teksten-schrijven.txt">Download de checklist</a>
+        </div>
+
+        <h2 id="bijwerken">Na publicatie: meten en bijwerken</h2>
+        <p>SEO-teksten schrijven houdt niet op bij publiceren. Een tekst is nooit helemaal af. Na een paar weken weet je pas echt waar mensen op zoeken. Dat zie je in Google Search Console, gratis. Zo kijk je per pagina:</p>
+        <ol>
+          <li>Open Search Console en kies <b>Prestaties</b> en daarna <b>Zoekresultaten</b>. Je ziet standaard de laatste drie maanden.</li>
+          <li>Zet bovenaan <b>Gemiddelde CTR</b> en <b>Gemiddelde positie</b> aan, naast klikken en vertoningen.</li>
+          <li>Klik op het tabblad <b>Pagina's</b> en dan op de pagina die je wilt bekijken.</li>
+          <li>Ga terug naar het tabblad <b>Zoekopdrachten</b>. Nu zie je alleen de zoekopdrachten van die ene pagina.</li>
+        </ol>
+        <p>Wat zie je dan? Vaak duiken er vragen op waar je niet aan dacht. Voeg daar een alinea of een vraag over toe. Veel vertoningen maar weinig klikken? Dan overtuigen je titel en omschrijving niet. Sta je op plek 8 tot 15? Dan zit je dichtbij. Een betere tekst kan dan net het verschil maken.</p>
+        <p>Zo'n content update, met echte aanpassingen en een nieuwe datum, doet vaak meer dan een nieuwe pagina. Alleen de datum veranderen heeft geen zin. Google noemt dat juist een slecht signaal. Werk je belangrijkste pagina's minstens eens per jaar bij, en prijspagina's zodra er iets verandert. Hoe je Search Console instelt, lees je in de gids <a href="/kennisbank/gidsen/google-search-console/">Search Console gebruiken</a>.</p>
+
+        <h2 id="zelf-of-laten">Zelf schrijven of een SEO-tekstschrijver inhuren?</h2>
+        <p>Zelf SEO-teksten schrijven kan prima, zeker met deze gids en een AI-assistent naast je. Jij kent je vak en je klanten het best. Dit zijn de drie routes op een rij:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf schrijven</th><th>Zelf, met AI als hulp</th><th>Laten schrijven</th></tr></thead>
+            <tbody>
+              <tr><td><b>Tijd per pagina</b></td><td>2 tot 4 uur</td><td>1 tot 3 uur</td><td>Een gesprek van een half uur en nalezen</td></tr>
+              <tr><td><b>Kosten</b></td><td>Je eigen uren</td><td>Je eigen uren, plus eventueel een abonnement</td><td>Bij ons vanaf € 75 per pagina</td></tr>
+              <tr><td><b>Sterk in</b></td><td>Vakkennis en jouw toon</td><td>Snelheid en structuur</td><td>Opbouw, zoekwoorden en een frisse blik</td></tr>
+              <tr><td><b>Valkuil</b></td><td>Schrijven voor vakgenoten</td><td>Algemene tekst zonder eigen inbreng</td><td>Een schrijver die je vak niet snapt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">De uren zijn onze eigen inschatting voor een gemiddelde dienstpagina. Een lange gids kost meer tijd.</p>
+        <p>Heb je die tijd niet, of wil je dat een SEO-tekstschrijver meekijkt? Wij schrijven <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> vanaf € 75 per pagina. We beginnen met vragen stellen, zodat de tekst klinkt als jouw bedrijf en niet als een bureau. Voor nieuwsbrieven, mailings en andere teksten kun je terecht bij onze <a href="/tekstschrijver/">tekstschrijvers</a>. Wil je elke maand nieuwe artikelen, kijk dan bij <a href="/tekstschrijver/contentmarketing/">contentmarketing</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={18} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij de pen vasthouden?" intro="Jij vertelt, wij schrijven. Teksten die gevonden worden en klinken als jouw bedrijf." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe lang moet een SEO-tekst zijn?', a: 'Er is geen vast minimum. Google zegt zelf dat het geen voorkeur heeft voor een aantal woorden. Een tekst moet de vraag volledig beantwoorden. Voor een dienstpagina is dat vaak 600 tot 1.200 woorden, voor een uitgebreide gids meer.' },
+      { v: 'Hoe vaak moet het zoekwoord in de tekst staan?', a: 'In de titel, in de eerste honderd woorden en in één of twee koppen. Daarna schrijf je natuurlijk, met synoniemen. Klinkt het houterig, dan staat het er te vaak in.' },
+      { v: 'Mag ik SEO-teksten met ChatGPT schrijven?', a: 'Ja, als je de tekst controleert en eigen kennis toevoegt. Google beloont goede inhoud, hoe die ook gemaakt is. Wel tegen de regels: op grote schaal pagina\'s laten maken die de lezer niets bieden.' },
+      { v: 'Wat is het verschil tussen een SEO-tekst en een gewone tekst?', a: 'Een SEO-tekst is gebouwd rond een zoekvraag: het zoekwoord staat op vaste plekken en de opbouw volgt de vragen van de zoeker. Voor de rest is het gewoon een goede tekst.' },
+      { v: 'Hoe snel zie ik resultaat van een nieuwe tekst?', a: 'Google moet de pagina eerst opnieuw bezoeken. Kijk na vier tot acht weken in Search Console welke zoekopdrachten erbij zijn gekomen. Bij veel concurrentie duurt het langer.' },
+      { v: 'Moet ik oude teksten herschrijven of nieuwe schrijven?', a: 'Begin met bestaande pagina\'s die al vertoningen hebben maar weinig klikken, of die op plek 8 tot 15 staan. Daar levert verbeteren vaak sneller iets op dan een nieuwe pagina.' },
+      { v: 'Hoe leer ik zelf SEO-teksten schrijven?', a: 'Begin met één belangrijke pagina en volg de acht stappen uit deze gids. Vergelijk je tekst daarna met de eerste vijf resultaten in Google. Na drie of vier pagina\'s gaat het een stuk sneller.' },
+      { v: 'Wat kost een SEO-tekst laten schrijven?', a: 'Bij ons vanaf € 75 per pagina. Bekijk wat je krijgt op de pagina <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a>.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'SEO-teksten laten schrijven', href: '/zoekmachine-optimalisatie/seo-teksten/', tekst: 'Vanaf € 75 per pagina, in jouw toon.' },
+      { label: 'Gids', titel: 'Zoekwoordonderzoek doen', href: '/kennisbank/gidsen/zoekwoordonderzoek/', tekst: 'Eerst weten waar je over schrijft.' },
+      { label: 'Gids', titel: 'Meta description schrijven', href: '/kennisbank/gidsen/meta-description/', tekst: 'Je etalage in Google, zo wordt er geklikt.' },
+      { label: 'Gids', titel: 'Tone of voice bepalen', href: '/kennisbank/gidsen/tone-of-voice/', tekst: 'Zo klinkt elke tekst als jouw bedrijf.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten welke pagina's eerst een betere tekst nodig hebben?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je teksten en je zoekwoorden, en belt je met de pagina's waar de meeste winst zit.`} />
+</Base>
+<style>
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+</style>

@@ -1,0 +1,67 @@
+---
+// Scène voor /kennisbank/wat-is/doelgroep/: een groep mensen, een vergrootglas dat er twee uitlicht, en rechts het klantprofiel van de ideale klant.
+// Als hij leeft: de twee mensen onder het vergrootglas kleuren oranje, een stippellijn loopt naar het profiel en de regels van het profiel lopen vol.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const mensen = [
+  [48, 70], [96, 70], [144, 70], [192, 70], [240, 70],
+  [48, 130], [96, 130], [144, 130], [192, 130], [240, 130],
+  [48, 190], [96, 190], [144, 190],
+];
+const uitgelicht = [[144, 130], [192, 130]];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een groep mensen met een vergrootglas dat twee van hen uitlicht. Rechts staat het klantprofiel van de ideale klant: hardloper van 35 tot 55, uit Assen en omgeving, wil pijnvrij lopen.'}>
+  <!-- de groep -->
+  {mensen.map(([x, y]) => (
+    <g>
+      <circle cx={x} cy={y - 14} r="9" fill="#fff" stroke="#074663" stroke-width="2.5" />
+      <path class="l" d={`M${x - 13} ${y + 14}c0-10 6-16 13-16s13 6 13 16`} />
+    </g>
+  ))}
+
+  <!-- het vergrootglas -->
+  <g class="loep">
+    <circle cx="168" cy="126" r="44" fill="none" stroke="#074663" stroke-width="4" />
+    <path d="M200 158l30 30" stroke="#074663" stroke-width="9" stroke-linecap="round" />
+    <path d="M136 108a34 34 0 0 1 16-14" fill="none" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- het klantprofiel -->
+  <rect x="290" y="56" width="166" height="150" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="316" cy="84" r="13" fill="#e8eef4" stroke="#074663" stroke-width="2" />
+  <text x="338" y="81" font-size="12" font-weight="800">Ideale klant</text>
+  <text x="338" y="96" font-size="10" class="zacht">klantprofiel</text>
+  <text x="306" y="128" font-size="11">Hardloper, 35 tot 55</text>
+  <text x="306" y="150" font-size="11">Assen en omgeving</text>
+  <text x="306" y="172" font-size="11">Wil pijnvrij lopen</text>
+  <rect x="306" y="186" width="80" height="8" rx="4" fill="#e8eef4" />
+
+  {!mini && (
+    <g>
+      {uitgelicht.map(([x, y]) => (
+        <g class="dg-uit">
+          <circle cx={x} cy={y - 14} r="9" fill="#ff6600" stroke="#ff6600" stroke-width="2.5" />
+          <path d={`M${x - 13} ${y + 14}c0-10 6-16 13-16s13 6 13 16`} fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" />
+        </g>
+      ))}
+      <path class="dg-lijn" d="M212 112C240 100 262 96 290 96" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-dasharray="1" stroke-linecap="round" pathLength="1" />
+      <rect class="dg-balk" x="306" y="186" width="80" height="8" rx="4" fill="#1f8a5b" />
+    </g>
+  )}
+</svg>
+<style>
+  .loep { transform-box: fill-box; transform-origin: center; }
+  .dg-balk { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .dg-uit { opacity: 0; }
+  :global(.teken-js) .dg-lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .dg-balk { transform: scaleX(0); }
+  .in-beeld .loep { animation: kennisbank-wat-is-doelgroep-loep 6s ease-in-out 0.4s infinite; }
+  .in-beeld .dg-uit { animation: kennisbank-wat-is-doelgroep-uit 6s ease-in-out 0.4s infinite; }
+  .in-beeld .dg-lijn { animation: kennisbank-wat-is-doelgroep-lijn 6s ease-in-out 0.4s infinite; }
+  .in-beeld .dg-balk { animation: kennisbank-wat-is-doelgroep-balk 6s ease-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-doelgroep-loep { 0%, 100% { transform: none; } 10% { transform: translate(-96px, -58px); } 18% { transform: translate(-48px, 4px); } 25% { transform: none; } }
+  @keyframes kennisbank-wat-is-doelgroep-uit { 0%, 25% { opacity: 0; } 32%, 85% { opacity: 1; } 95%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-doelgroep-lijn { 0%, 32% { stroke-dashoffset: 1; opacity: 1; } 48%, 85% { stroke-dashoffset: 0; opacity: 1; } 95%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+  @keyframes kennisbank-wat-is-doelgroep-balk { 0%, 48% { transform: scaleX(0); } 62%, 85% { transform: scaleX(1); opacity: 1; } 95%, 100% { transform: scaleX(1); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .loep, .in-beeld .dg-uit, .in-beeld .dg-lijn, .in-beeld .dg-balk { animation: none; } }
+</style>

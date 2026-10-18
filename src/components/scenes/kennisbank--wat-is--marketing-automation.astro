@@ -1,0 +1,81 @@
+---
+// Scène voor /kennisbank/wat-is/marketing-automation/: een workflow zoals je hem in een automatiseringstool bouwt.
+// Trigger (offerte verstuurd), wachten, een vraag (mail geopend?) en twee vervolgstappen. Rechtsboven het contact in het CRM met een leadscore.
+// Als hij leeft: een bolletje loopt door de workflow naar de ja-tak, die oplicht, en de leadscore loopt op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const stappen = [
+  { y: 30, tekst: 'Offerte verstuurd', label: 'Trigger', accent: true },
+  { y: 110, tekst: 'Wacht 3 dagen', label: 'Wachten', accent: false },
+  { y: 190, tekst: 'Mail geopend?', label: 'Vraag', accent: false },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een automatische workflow. Na de trigger offerte verstuurd wacht het systeem drie dagen en kijkt of de mail is geopend. Bij ja volgt een mail met een prijsvoorbeeld, bij nee een belafspraak. Rechtsboven stijgt de leadscore van het contact.'}>
+  {stappen.map((s) => (
+    <g>
+      <text x="26" y={s.y - 6} font-size="10.5" font-weight="800" class="zacht">{s.label}</text>
+      <rect x="24" y={s.y} width="156" height="40" rx="10" fill="#fff" stroke={s.accent ? '#ff6600' : '#074663'} stroke-width="2" />
+      <text x="102" y={s.y + 25} font-size="12.5" font-weight="800" text-anchor="middle">{s.tekst}</text>
+    </g>
+  ))}
+  <path class="l" d="M102 70V102M96 96l6 6 6-6" />
+  <path class="l" d="M102 150V182M96 176l6 6 6-6" />
+  <path class="l" d="M180 210H212V170H244M238 164l6 6-6 6" />
+  <path class="l" d="M212 210V234H244M238 228l6 6-6 6" />
+  <text x="216" y="164" font-size="10.5" font-weight="800" class="zacht">ja</text>
+  <text x="218" y="228" font-size="10.5" font-weight="800" class="zacht">nee</text>
+
+  <rect x="248" y="150" width="208" height="40" rx="10" fill="#e8eef4" stroke="#074663" stroke-width="2" />
+  <text x="352" y="175" font-size="12.5" font-weight="800" text-anchor="middle">Mail: prijsvoorbeeld</text>
+  <rect x="248" y="214" width="208" height="40" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="352" y="239" font-size="12.5" font-weight="800" text-anchor="middle">Taak: klant bellen</text>
+
+  <rect x="248" y="24" width="208" height="96" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="276" cy="52" r="14" fill="#e8eef4" />
+  <circle cx="276" cy="47" r="5" fill="#074663" />
+  <path d="M267 60c2-6 16-6 18 0" fill="#074663" />
+  <text x="298" y="49" font-size="12.5" font-weight="800">Contact (voorbeeld)</text>
+  <text x="298" y="64" font-size="11" class="zacht">Offerte dakkapel</text>
+  <text x="264" y="92" font-size="11" font-weight="800">Leadscore</text>
+  <rect x="330" y="84" width="110" height="10" rx="5" fill="#e8eef4" />
+  <rect x="330" y="84" width="44" height="10" rx="5" fill="#074663" />
+  <text x="440" y="110" font-size="10.5" font-weight="800" text-anchor="end" class="zacht">CRM</text>
+
+  {!mini && (
+    <g>
+      <circle class="ma-bol" cx="102" cy="70" r="6" fill="#ff6600" />
+      <rect class="ma-ja" x="248" y="150" width="208" height="40" rx="10" fill="none" stroke="#ff6600" stroke-width="3" />
+      <rect class="ma-score" x="330" y="84" width="110" height="10" rx="5" fill="#ff6600" />
+      <g class="ma-plus">
+        <rect x="378" y="98" width="40" height="18" rx="9" fill="#1f8a5b" />
+        <text x="398" y="111" font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">+20</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .ma-bol, .ma-plus { transform-box: fill-box; transform-origin: center; }
+  .ma-score { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .ma-bol, :global(.teken-js) .ma-ja, :global(.teken-js) .ma-plus { opacity: 0; }
+  :global(.teken-js) .ma-score { transform: scaleX(0.4); opacity: 0; }
+  .in-beeld .ma-bol { animation: kennisbank-wat-is-marketing-automation-bol 7s ease-in-out 0.4s infinite; }
+  .in-beeld .ma-ja { animation: kennisbank-wat-is-marketing-automation-ja 7s ease-in-out 0.4s infinite; }
+  .in-beeld .ma-score { animation: kennisbank-wat-is-marketing-automation-score 7s ease-out 0.4s infinite; }
+  .in-beeld .ma-plus { animation: kennisbank-wat-is-marketing-automation-plus 7s ease-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-marketing-automation-bol {
+    0% { opacity: 0; transform: translate(0, 0); }
+    5% { opacity: 1; transform: translate(0, 0); }
+    20% { transform: translate(0, 40px); }
+    30% { transform: translate(0, 80px); }
+    44% { transform: translate(0, 120px); }
+    52% { transform: translate(78px, 140px); }
+    58% { transform: translate(110px, 140px); }
+    64% { transform: translate(110px, 100px); }
+    70% { opacity: 1; transform: translate(142px, 100px); }
+    76%, 100% { opacity: 0; transform: translate(142px, 100px); }
+  }
+  @keyframes kennisbank-wat-is-marketing-automation-ja { 0%, 68% { opacity: 0; } 74%, 92% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-marketing-automation-score { 0%, 70% { opacity: 0; transform: scaleX(0.4); } 74% { opacity: 1; } 86%, 94% { opacity: 1; transform: scaleX(0.6); } 100% { opacity: 0; transform: scaleX(0.6); } }
+  @keyframes kennisbank-wat-is-marketing-automation-plus { 0%, 72% { opacity: 0; transform: translateY(6px); } 78%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .ma-bol, .in-beeld .ma-ja, .in-beeld .ma-score, .in-beeld .ma-plus { animation: none; } }
+</style>

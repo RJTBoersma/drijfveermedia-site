@@ -1,0 +1,255 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--title-tag.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/title-tag/';
+const datum = '2026-10-18';
+const definitie = 'Een title tag is het HTML-element dat de titel van een webpagina definieert: de tekst die Google meestal als klikbare link in de zoekresultaten toont en die je browser op het tabblad zet.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  '@id': `${site.url}${url}#begrip`,
+  name: 'Title tag',
+  alternateName: ['Paginatitel', 'Title-element', 'SEO-titel'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'WebPage',
+  '@id': `${site.url}${url}#pagina`,
+  url: `${site.url}${url}`,
+  name: 'Wat is een title tag?',
+  inLanguage: 'nl-NL',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  about: { '@id': `${site.url}${url}#begrip` },
+}];
+const code = `<head>
+  <title>Loodgieter Emmen, snel ter plaatse | Jansen</title>
+  <meta name="description" content="...">
+</head>`;
+const yoast = `%%title%% %%page%% %%sep%% %%sitename%%`;
+const og = `<meta property="og:title" content="Lekt je kraan nog steeds? Zo maak je hem zelf dicht">`;
+---
+<Base
+  title="Wat is een title tag? Uitleg en tips | Drijfveer Media"
+  description="Wat is een title tag? De klikbare titel van je pagina in Google. Lees waarom hij zo zwaar telt, hoe lang hij mag zijn en hoe je er een schrijft die klikt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Title tag', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is een title tag?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Zoek iets op in Google en kijk naar de grote, blauwe regels. Dat zijn meestal title tags. Het is het eerste wat potentiële bezoekers van je pagina lezen, nog voordat ze er zijn. In de code ziet het er zo uit:</p>
+      <pre><code>{code}</code></pre>
+      <p>De titel staat in de head van de pagina, dus niet zichtbaar op de pagina zelf. Je hoort er verschillende namen voor: title tag, title-element, paginatitel of SEO-titel. Het is steeds hetzelfde ding. Google noemt de regel in de zoekresultaten zelf een title link.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2>Waar zie je de titel terug?</h2></div>
+      <p>Op meer plekken dan je denkt. Daarom is het geen klusje voor de programmeur alleen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Plek</th><th>Wat er gebeurt</th></tr></thead>
+          <tbody>
+            <tr><td>Zoekresultaten van Google en Bing</td><td>De titel wordt de klikbare link boven je omschrijving</td></tr>
+            <tr><td>Tabblad van de browser</td><td>Wie tien tabbladen open heeft, herkent je pagina aan de eerste woorden</td></tr>
+            <tr><td>Bladwijzers en favorieten</td><td>De titel wordt de standaardnaam van de bladwijzer</td></tr>
+            <tr><td>Social media shares</td><td>LinkedIn en Facebook lezen eerst de og:title; ontbreekt die, dan vaak de gewone titel</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Waarom de titel zo zwaar telt</h2></div>
+      <p>Hij doet twee dingen tegelijk. Google leest erin waar de pagina over gaat. En mensen beslissen erop of ze klikken. Google schrijft in zijn eigen documentatie dat de title link vaak het belangrijkste stukje informatie is waarop mensen kiezen welk resultaat ze openen.</p>
+      <p>Het percentage dat klikt, heet de click-through rate, kortweg <a href="/kennisbank/wat-is/ctr/">CTR</a>. Een resultaat op plek 4 met een sterke titel kan meer bezoekers trekken dan plek 3 met een saaie. Een rekenvoorbeeld, met verzonnen cijfers: een dienstpagina wordt in een maand 2.000 keer getoond. Bij een CTR van 2 procent levert dat 40 bezoekers op. Haal je met een betere titel 4 procent, dan zijn het er 80. Zelfde positie, dubbel zoveel bezoekers.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Neemt Google je titel altijd over?</h2></div>
+      <p>Nee. Google stelt de title link automatisch samen en kijkt daarbij naar meerdere bronnen. Volgens de documentatie zijn dat:</p>
+      <ul>
+        <li>de inhoud van je title tag;</li>
+        <li>de grootste, zichtbare titel op de pagina;</li>
+        <li>koppen, zoals de H1;</li>
+        <li>de og:title in je code;</li>
+        <li>andere grote, opvallende tekst;</li>
+        <li>overige tekst op de pagina;</li>
+        <li>ankerteksten op de pagina en in links van andere sites naar je pagina;</li>
+        <li>gestructureerde gegevens van het type WebSite.</li>
+      </ul>
+      <p>De title tag blijft wel verreweg de belangrijkste bron. Toen Google in augustus 2021 zijn systeem aanpaste, schreef het dat het in meer dan 80 procent van de gevallen de inhoud van de title tag gebruikt. Het herschrijft vooral titels die niet kloppen. Google noemt zelf deze gevallen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Probleem</th><th>Voorbeeld</th><th>Wat Google doet</th></tr></thead>
+          <tbody>
+            <tr><td>Half lege titel</td><td>"| Bakkerij De Vries"</td><td>Pakt de grote kop van de pagina erbij</td></tr>
+            <tr><td>Verouderde titel</td><td>"Openingstijden 2024" terwijl op de pagina 2026 staat</td><td>Neemt het jaartal van de zichtbare kop</td></tr>
+            <tr><td>Titel die niet klopt</td><td>Een rij zoekwoorden die niet over de pagina gaat</td><td>Maakt er een kortere, passende titel van</td></tr>
+            <tr><td>Overal dezelfde titel</td><td>Tien pagina's die allemaal "Diensten" heten</td><td>Zoekt per pagina een onderscheidend stukje tekst</td></tr>
+            <tr><td>Geen duidelijke hoofdkop</td><td>Twee koppen die even groot zijn</td><td>Gebruikt vaak de eerste kop</td></tr>
+            <tr><td>Andere taal</td><td>Een Nederlandse pagina met een Engelse titel</td><td>Kiest een titel in de taal van de pagina</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Voorbeelden in eigen woorden, naar de documentatie van Google Search Central.</p>
+      <p>Ziet Google je naam al in het resultaat staan, dan kan het je merknaam ook uit de title link weglaten. Dat is geen fout. Het voorkomt dubbel werk.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2>Hoe lang mag een title tag zijn?</h2></div>
+      <p>Er is geen officiële grens. Google zegt zelf dat een title tag zo lang mag zijn als je wilt, maar dat de title link wordt afgekapt waar dat nodig is, meestal op de breedte van het scherm. Wat erachter valt, ziet niemand. Google meet dus niet in tekens maar in ruimte. Een titel met veel brede letters, zoals de W en de M, wordt eerder afgekapt dan een titel met smalle letters.</p>
+      <p>Een veilige vuistregel is 50 tot 60 karakters. Op deze site houden we 30 tot 60 aan. Zet het belangrijkste in de eerste 40 tekens, dan staat het er op een telefoon ook nog.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Zo schrijf je een goede titel</h2></div>
+      <ul class="vink">
+        <li>Zet het belangrijkste trefwoord vooraan. Mensen lezen de eerste woorden, en op een telefoon valt het einde er soms af.</li>
+        <li>Geef elke pagina een unieke title. Met tien keer dezelfde title maak je het zoekmachines moeilijker om te kiezen. Dat heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>.</li>
+        <li>Je merknaam hoort achteraan, na een verticale streep of dubbele punt. Alleen op je homepage mag hij naar voren.</li>
+        <li>Beloof wat de pagina waarmaakt. "Klik hier" of een rij zoekwoorden achter elkaar werkt averechts. Zulke titels herschrijft Google vaak.</li>
+        <li>Een getal, een plaatsnaam of een concreet voordeel valt op tussen tien andere resultaten.</li>
+        <li>Schrijf in dezelfde taal als de pagina.</li>
+        <li>Herhaal geen woorden. "Schilder Assen, schilders Assen, schilderwerk Assen" helpt niemand, en Google ziet het als volproppen.</li>
+      </ul>
+
+      <h3>Een vaste opbouw per soort pagina</h3>
+      <p>Wie veel pagina's heeft, werkt het snelst met een vast patroon. Deze patronen werken in de praktijk goed. De voorbeelden zijn verzonnen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort pagina</th><th>Opbouw</th><th>Voorbeeld</th></tr></thead>
+          <tbody>
+            <tr><td>Homepage</td><td>Merknaam, wat je doet, waar</td><td>Jansen Loodgieters: loodgieter in Emmen en omstreken</td></tr>
+            <tr><td>Dienstpagina</td><td>Dienst, plaats, voordeel, merk</td><td>Cv-ketel vervangen in Emmen, binnen 1 dag | Jansen</td></tr>
+            <tr><td>Plaatspagina</td><td>Dienst en plaats, voordeel, merk</td><td>Loodgieter Klazienaveen, ook in het weekend | Jansen</td></tr>
+            <tr><td>Gids of blog</td><td>De vraag of belofte, merk</td><td>Wat kost een nieuwe cv-ketel in 2026? | Jansen</td></tr>
+            <tr><td>Product</td><td>Product, kenmerk, winkel</td><td>Combiketel 28 kW, inclusief montage | Jansen</td></tr>
+            <tr><td>Contact</td><td>Actie, merk, plaats</td><td>Contact en spoedservice | Jansen Loodgieters Emmen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Van zwak naar sterk</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Voor</th><th>Na</th><th>Wat er beter is</th></tr></thead>
+          <tbody>
+            <tr><td>Home</td><td>Hovenier Roden: tuinaanleg en onderhoud | Groen</td><td>Zegt wat het bedrijf doet en waar</td></tr>
+            <tr><td>Diensten | Groen</td><td>Tuinonderhoud per maand in Roden en Leek | Groen</td><td>Elke dienst krijgt een eigen titel</td></tr>
+            <tr><td>Blog 14</td><td>Wanneer snoei je een haag? Kalender per soort</td><td>Stelt de vraag die mensen intypen</td></tr>
+            <tr><td>Tuin, tuinman, hovenier, tuinonderhoud, Roden</td><td>Hovenier in Roden voor tuinaanleg en onderhoud</td><td>Een zin in plaats van een rij zoekwoorden</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Verzonnen voorbeelden.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Title tag of H1?</h2></div>
+      <p>Niet hetzelfde. De <a href="/kennisbank/wat-is/headings/">H1</a> is de kop die bezoekers bovenaan de pagina zien. De titel staat in Google en op het tabblad. Ze mogen op elkaar lijken, en dat is zelfs verstandig: Google kijkt ook naar je H1 als het een title link samenstelt. De titel is meestal korter en eindigt vaak met je bedrijfsnaam.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Waar je het ziet</th><th>Doel</th></tr></thead>
+          <tbody>
+            <tr><td>Title tag</td><td>Google, tabblad, bladwijzer</td><td>Laten klikken en vertellen waar de pagina over gaat</td></tr>
+            <tr><td>H1</td><td>Bovenaan de pagina</td><td>De bezoeker bevestigen dat hij goed zit</td></tr>
+            <tr><td><a href="/kennisbank/gidsen/meta-description/">Meta description</a></td><td>Onder de titel in Google, als Google hem overneemt</td><td>Uitleggen waarom deze pagina het antwoord is</td></tr>
+            <tr><td>og:title</td><td>Bij delen op social media</td><td>Een titel die werkt in een tijdlijn</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2>Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><strong>"Home" of de bedrijfsnaam als enige titel.</strong> Google noemt dit zelf als voorbeeld van een vage titel.</li>
+        <li><strong>Overal dezelfde title.</strong> Vaak een instelling in het thema of de plugin die nooit is aangepast.</li>
+        <li><strong>Een oude datum.</strong> "Prijzen 2023" op een pagina die al jaren meegaat.</li>
+        <li><strong>Te lang.</strong> Het belangrijkste staat achteraan en valt weg.</li>
+        <li><strong>Je merknaam vooraan op elke pagina.</strong> Dan beginnen al je resultaten met dezelfde woorden en valt er niets op.</li>
+        <li><strong>Iets beloven wat er niet staat.</strong> Mensen klikken, zien het niet, en gaan terug naar Google.</li>
+        <li><strong>Een andere tekst dan de H1 zonder reden.</strong> Dan moet Google raden welke de echte titel is.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Waar pas je de title tag aan?</h2></div>
+      <h3>WordPress met Yoast SEO of Rank Math</h3>
+      <p>Onder de editor staat een blok van de plugin met een veld voor de SEO-titel. Daar vul je per pagina de titel in. Laat je het leeg, dan gebruikt de plugin een sjabloon. Bij Yoast SEO is dat standaard:</p>
+      <pre><code>{yoast}</code></pre>
+      <p>Dat betekent: de naam van de pagina, eventueel een paginanummer, een scheidingsteken en de naam van je site. Prima als basis. Voor je belangrijkste pagina's schrijf je de titel beter zelf.</p>
+      <h3>De og:title voor social media</h3>
+      <p>Deelt iemand je pagina op LinkedIn, Facebook of in WhatsApp, dan zoekt dat platform eerst naar een og:title. Dat is een aparte regel in de code, onderdeel van het Open Graph-protocol:</p>
+      <pre><code>{og}</code></pre>
+      <p>Hier mag je wat losser schrijven dan in Google. In een tijdlijn hoeft je zoekwoord niet vooraan. Een vraag of een prikkelende belofte werkt daar vaak beter. Yoast SEO en Rank Math hebben er een eigen veld voor, op het tabblad voor social media.</p>
+      <h3>Wix en Squarespace</h3>
+      <p>Hier staat het veld bij de SEO-instellingen van elke pagina. Zoek naar paginatitel of SEO-titel.</p>
+      <h3>Een zelf gebouwde site</h3>
+      <p>Dan zet je webbouwer de titel in de head van elke pagina, zoals in het codevoorbeeld bovenaan. Vraag of elke pagina een eigen titel kan krijgen. Een sjabloon dat overal dezelfde tekst zet, is de meest voorkomende fout.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: een loodgieter in Emmen heeft een homepage met de titel "Home". In Google staat dan zoiets als "Home | Loodgietersbedrijf Jansen". Niemand ziet waar het over gaat. Hij maakt er "Loodgieter Emmen, snel ter plaatse | Jansen" van. Nu staan de dienst, de plaats en een reden om te klikken erin. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Een nieuwe titel zie je niet meteen terug. Google moet de pagina eerst opnieuw bezoeken en verwerken. Volgens Google duurt dat een paar dagen tot een paar weken. Vraag in <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> een nieuwe indexering aan, dan gaat het meestal sneller.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2>Meten of je nieuwe titel werkt</h2></div>
+      <ol>
+        <li>Open in Search Console het rapport Prestaties en zet de kolommen vertoningen, CTR en gemiddelde positie aan.</li>
+        <li>Klik op het tabblad Pagina's en sorteer op vertoningen.</li>
+        <li>Zoek pagina's met veel vertoningen en een lage CTR. Dat zijn je kandidaten.</li>
+        <li>Noteer de cijfers van de afgelopen vier weken en pas de titel aan.</li>
+        <li>Vergelijk na vier tot zes weken dezelfde periode. Kijk naar de CTR bij een gelijke positie.</li>
+      </ol>
+      <p>Verandert de positie flink, dan zegt de CTR minder. Een resultaat dat stijgt, krijgt vanzelf meer klikken. Vergelijk dus appels met appels.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Checklist voor elke pagina</h2></div>
+      <p>Loop deze vragen langs voordat je een pagina publiceert. Kun je ze allemaal met ja beantwoorden, dan zit je goed.</p>
+      <ul class="vink">
+        <li>Heeft de pagina een eigen titel die nergens anders op je site staat?</li>
+        <li>Staat het woord waarop mensen zoeken in de eerste 40 tekens?</li>
+        <li>Blijft de titel onder de 60 tekens, of valt er niets belangrijks af als hij wordt ingekort?</li>
+        <li>Zegt de titel wat de bezoeker op de pagina vindt, zonder overdrijving?</li>
+        <li>Staat je merknaam achteraan, behalve op de homepage?</li>
+        <li>Past de titel bij de H1, zodat Google niet hoeft te twijfelen?</li>
+        <li>Staat er geen verouderd jaartal of een actie die al voorbij is in?</li>
+      </ul>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <p>Typ in Google <code>site:jouwdomein.nl</code> en loop de titels langs. Zie je "Home", "Diensten" of tien keer dezelfde tekst? Daar ligt winst. Kijk daarna in Search Console welke pagina's veel vertoningen hebben maar weinig klikken. Begin bij die titels. Herschrijven kost een uur.</p>
+      <p>Op deze site controleert een script bij elke wijziging of iedere titel tussen de 30 en 60 tekens zit en het zoekwoord vooraan staat. Saai werk. Het levert wel klikken op.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>De titel en de omschrijving eronder werken samen. Lees daarom ook de gids <a href="/kennisbank/gidsen/meta-description/">Meta description schrijven die klikt</a>, of laat ons je <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a> schrijven, vanaf € 75 per pagina. Wat we verder voor je vindbaarheid doen, lees je bij <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel tekens mag een title tag hebben?', a: 'Er is geen harde grens. Google kapt de titel af op de breedte van het scherm. Houd 50 tot 60 tekens aan en zet het belangrijkste in de eerste 40.' },
+      { v: 'Waarom toont Google een andere titel dan ik heb ingesteld?', a: 'Google herschrijft titels die leeg, verouderd, te lang of overal hetzelfde zijn, of die niet passen bij de pagina. Het gebruikt dan bijvoorbeeld je H1. In de meeste gevallen neemt het je eigen titel gewoon over.' },
+      { v: 'Moet mijn bedrijfsnaam in de titel?', a: 'Op je homepage wel, vooraan. Op andere pagina\'s achteraan, na een verticale streep. Is de titel te lang, dan laat je de naam weg. Google toont je sitenaam vaak al apart.' },
+      { v: 'Is de title tag hetzelfde als de H1?', a: 'Nee. De title tag staat in Google en op het tabblad, de H1 bovenaan de pagina. Ze mogen op elkaar lijken. De titel is meestal korter en bevat je merknaam.' },
+      { v: 'Hoe snel zie ik een nieuwe titel in Google?', a: 'Google moet de pagina eerst opnieuw bezoeken. Dat duurt een paar dagen tot een paar weken. Met een verzoek tot indexering in Search Console gaat het vaak sneller.' },
+    ]}
+  />
+
+  <Actie titel="Wat zegt jouw titel in Google?" tekst={`We kijken gratis naar de titels van je belangrijkste pagina's. ${site.contactpersoon} belt je met de drie die het eerst beter moeten.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-wrap: normal; word-break: normal; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,60 @@
+---
+// Scène voor /kennisbank/gidsen/utm-codes/: een link met drie labels erachter, en drie bakjes (nieuwsbrief, LinkedIn, flyer) die bezoekers opvangen.
+// Als hij leeft: de labels klikken één voor één aan de link vast en een bezoeker reist steeds naar het juiste bakje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const bakken = [
+  { x: 36, label: 'Nieuwsbrief', n: '210', h: 64 },
+  { x: 182, label: 'LinkedIn', n: '74', h: 32 },
+  { x: 328, label: 'Flyer', n: '38', h: 20 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een link krijgt labels voor bron, medium en campagne, en elke bezoeker belandt in het bakje van het kanaal waar hij vandaan kwam.'}>
+  <!-- de link -->
+  <rect x="36" y="26" width="408" height="40" rx="20" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M58 46h8M54 40a6 6 0 0 0 0 12h4M70 40a6 6 0 0 1 0 12h-4" fill="none" stroke="#074663" stroke-width="2.2" stroke-linecap="round" />
+  <text x="80" y="51" font-size="12" font-weight="800">jouwbedrijf.nl/actie</text>
+
+  <!-- labels (basistekening) -->
+  <g class="labels">
+    <rect x="226" y="35" width="62" height="22" rx="6" fill="#e8eef4" />
+    <text x="234" y="50" font-size="10.5" font-weight="700">source</text>
+    <rect x="294" y="35" width="64" height="22" rx="6" fill="#e8eef4" />
+    <text x="302" y="50" font-size="10.5" font-weight="700">medium</text>
+    <rect x="364" y="35" width="72" height="22" rx="6" fill="#ffe3cf" />
+    <text x="374" y="50" font-size="10.5" font-weight="700">campaign</text>
+  </g>
+
+  <!-- verdeellijnen -->
+  <path d="M240 66v26M240 92H94v28M240 92v28M240 92h146v28" fill="none" stroke="#d9e1ea" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- bakjes -->
+  {bakken.map((b) => (
+    <g>
+      <rect x={b.x} y="122" width="116" height="122" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x={b.x + 14} y="144" font-size="11" class="zacht">{b.label}</text>
+      <text x={b.x + 14} y="168" font-size="18" font-weight="900">{b.n}</text>
+      <rect x={b.x + 14} y={230 - b.h} width="88" height={b.h} rx="6" fill={b.x === 36 ? '#074663' : '#e8eef4'} />
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      <g class="label-nieuw"><rect x="364" y="35" width="72" height="22" rx="6" fill="#ff6600" /><text x="374" y="50" font-size="10.5" font-weight="700" style="fill:#fff">campaign</text></g>
+      <circle class="bezoeker" r="7" fill="#ff6600" stroke="#fff" stroke-width="2.5" style="offset-path: path('M240 66V92H94V122');" />
+      <g class="telt"><rect x="98" y="152" width="44" height="20" rx="10" fill="#1f8a5b" /><text x="108" y="166" font-size="10.5" font-weight="800" style="fill:#fff">+1</text></g>
+    </g>
+  )}
+</svg>
+<style>
+  .label-nieuw { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .label-nieuw { opacity: 0; }
+  .in-beeld .label-nieuw { animation: kennisbank-gidsen-utm-codes-plak 0.5s cubic-bezier(.3,1.6,.5,1) 0.6s forwards; }
+  :global(.teken-js) .bezoeker, :global(.teken-js) .telt { opacity: 0; }
+  .in-beeld .bezoeker { animation: kennisbank-gidsen-utm-codes-reis 4.5s ease-in-out 1.2s infinite; }
+  .in-beeld .telt { animation: kennisbank-gidsen-utm-codes-telt 4.5s ease-in-out 1.2s infinite; }
+  @keyframes kennisbank-gidsen-utm-codes-plak { from { opacity: 0; transform: translateY(-14px) scale(0.8); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-utm-codes-reis { 0% { offset-distance: 0%; opacity: 0; } 8% { opacity: 1; } 55% { offset-distance: 100%; opacity: 1; } 65%, 100% { offset-distance: 100%; opacity: 0; } }
+  @keyframes kennisbank-gidsen-utm-codes-telt { 0%, 55% { opacity: 0; transform: translateY(6px); } 62%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .label-nieuw, .in-beeld .bezoeker, .in-beeld .telt { animation: none; } }
+</style>

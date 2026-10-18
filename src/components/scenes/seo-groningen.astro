@@ -1,0 +1,71 @@
+---
+// Scène voor /seo-groningen/: een kaartje van de stad met de Martinitoren en een pin, naast de zoekresultaten. "Jouw bedrijf" klimt van plek vijf naar plek één.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [
+  { y: 84, w: 150, w2: 96, k: 'r1' },
+  { y: 114, w: 128, w2: 110, k: 'r2' },
+  { y: 144, w: 160, w2: 84, k: 'r3' },
+  { y: 174, w: 118, w2: 100, k: 'r4' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kaartje van de stad Groningen met de Martinitoren en een pin, naast de zoekresultaten van Google. Jouw bedrijf klimt van de vijfde naar de eerste plek.'}>
+  <!-- kaartje van de stad -->
+  <rect x="24" y="40" width="112" height="170" rx="10" fill="#e9eef3" />
+  <path d="M24 176c30-6 60 8 112-4M66 40c4 50-6 110 4 170" stroke="#fff" stroke-width="7" fill="none" />
+  <path d="M52 112c0-22 14-32 32-32s34 10 34 32-16 34-34 34-32-12-32-34z" stroke="#fff" stroke-width="6" fill="none" />
+  <rect x="34" y="52" width="26" height="18" rx="4" fill="#d7e6d8" />
+  <rect x="96" y="182" width="30" height="18" rx="4" fill="#d7e6d8" />
+  <path class="v" d="M80 120v-16h8v16zM81 104l3-12 3 12z" />
+  <path class="l" d="M80 120v-16h8v16zM81 104l3-12 3 12M84 92v-5" style="stroke-width:1.8" />
+  <g class="pin">
+    <path class="o" d="M96 150c0-8 5-13 12-13s12 5 12 13c0 9-12 20-12 20s-12-11-12-20z" />
+    <circle cx="108" cy="150" r="4.5" fill="#fff" />
+  </g>
+  <text x="80" y="228" text-anchor="middle" font-size="11" class="zacht">Groningen</text>
+  <!-- zoekresultaten -->
+  <rect x="150" y="24" width="296" height="222" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="166" y="38" width="264" height="30" rx="15" fill="#e8eef4" />
+  <text x="182" y="58" font-size="12" font-weight="700">loodgieter groningen</text>
+  <circle class="l" cx="408" cy="51" r="6" style="stroke-width:2" />
+  <path class="l" d="M412.5 55.5l5 5" style="stroke-width:2" />
+  {rijen.map((r) => (
+    <g class={r.k}>
+      <circle cx="180" cy={r.y + 12} r="7" fill="#e8eef4" />
+      <rect x="194" y={r.y + 4} width={r.w} height="7" rx="3.5" fill="#10283f" />
+      <rect x="194" y={r.y + 15} width={r.w2} height="5" rx="2.5" fill="#d9e1ea" />
+    </g>
+  ))}
+  <g class="jouw">
+    <rect x="160" y="200" width="276" height="32" rx="8" fill="#fff4ec" />
+    <rect class="o" x="160" y="200" width="4" height="32" rx="2" />
+    <circle class="o" cx="180" cy="216" r="7" />
+    <text x="194" y="214" font-size="12" font-weight="800">Jouw bedrijf</text>
+    <rect x="194" y="219" width="96" height="5" rx="2.5" fill="#d9e1ea" />
+    {!mini && (
+      <g class="een">
+        <rect x="384" y="205" width="40" height="22" rx="11" fill="#1f8a5b" />
+        <text x="404" y="220" text-anchor="middle" font-size="12" font-weight="900" style="fill:#fff">+4</text>
+      </g>
+    )}
+  </g>
+</svg>
+<style>
+  .r1, .r2, .r3, .r4, .jouw { transition: transform 1.3s cubic-bezier(.5,0,.2,1); }
+  [data-leeft].in-beeld .r1 { transform: translateY(30px); transition-delay: 0.9s; }
+  [data-leeft].in-beeld .r2 { transform: translateY(30px); transition-delay: 0.95s; }
+  [data-leeft].in-beeld .r3 { transform: translateY(30px); transition-delay: 1s; }
+  [data-leeft].in-beeld .r4 { transform: translateY(30px); transition-delay: 1.05s; }
+  [data-leeft].in-beeld .jouw { transform: translateY(-120px); transition-delay: 0.8s; }
+  .pin, .een { transform-box: fill-box; transform-origin: 50% 100%; }
+  .een { transform-origin: center; }
+  [data-leeft].in-beeld .pin { animation: seo-groningen-pin 3.6s ease-in-out 2.4s infinite; }
+  :global(.teken-js) .een { opacity: 0; }
+  .in-beeld .een { animation: seo-groningen-een 0.6s cubic-bezier(.3,1.6,.5,1) 2.3s both; }
+  @keyframes seo-groningen-pin { 0%, 60%, 100% { transform: none; } 75% { transform: translateY(-6px); } 88% { transform: none; } }
+  @keyframes seo-groningen-een { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .r1, .r2, .r3, .r4, .jouw { transition: none; }
+    [data-leeft].in-beeld .pin, .in-beeld .een { animation: none; }
+  }
+</style>

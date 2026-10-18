@@ -1,0 +1,69 @@
+---
+// Scène voor /linkbuilding/google-disavow-tool/: een disavow-bestand met slechte links wordt geüpload, en jouw site staat er beschermd bij.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 80, t: '# Spamlinks, eigenaar', zacht: true },
+  { y: 96, t: '# reageert niet op mail', zacht: true },
+  { y: 120, t: 'domain:linkfarm-voorbeeld.xyz', w: 156 },
+  { y: 140, t: 'domain:spamblog-voorbeeld.top', w: 154 },
+  { y: 160, t: 'http://forum-voorbeeld.biz/p=12', w: 158 },
+  { y: 186, t: '# Gekochte links uit 2019', zacht: true },
+  { y: 206, t: 'domain:links-voorbeeld.club', w: 140 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een tekstbestand met slechte links wordt geüpload naar Google, zodat jouw site er geen last meer van heeft.'}>
+  <rect x="24" y="26" width="200" height="218" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M36 27h176a11 11 0 0 1 11 11v18H25V38a11 11 0 0 1 11-11z" fill="#e8eef4" />
+  <text x="40" y="47" font-size="12" font-weight="800">disavow.txt</text>
+  <circle cx="198" cy="42" r="4" fill="#d9e1ea" /><circle cx="210" cy="42" r="4" fill="#d9e1ea" />
+  {regels.map((r) => <text x="38" y={r.y} font-size="10" class={r.zacht ? 'zacht' : undefined} font-weight={r.zacht ? undefined : '700'}>{r.t}</text>)}
+
+  <path class="l" d="M232 135h22" />
+  <path class="l" d="M248 129l6 6-6 6" />
+  <rect x="262" y="94" width="88" height="82" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path class="a" d="M306 108v28M296 118l10-10 10 10" />
+  <text x="306" y="154" font-size="11" font-weight="800" text-anchor="middle">Uploaden</text>
+  <rect x="274" y="162" width="64" height="6" rx="3" fill="#e8eef4" />
+
+  <rect x="368" y="62" width="96" height="112" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M380 63h72a11 11 0 0 1 11 11v8h-94v-8a11 11 0 0 1 11-11z" fill="#e8eef4" />
+  <circle cx="382" cy="72" r="3" fill="#d9e1ea" /><circle cx="392" cy="72" r="3" fill="#d9e1ea" />
+  <text x="380" y="102" font-size="11" font-weight="800">Jouw site</text>
+  <rect x="380" y="112" width="70" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="380" y="125" width="56" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="380" y="138" width="62" height="7" rx="3.5" fill="#e8eef4" />
+  <path d="M436 158l22 9v15c0 13-10 22-22 26-12-4-22-13-22-26v-15z" fill="#074663" />
+  <path d="M427 183l6 6 12-13" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+
+  {!mini && (
+    <g>
+      {regels.filter((r) => r.w).map((r, i) => <path class="streep" d={`M38 ${r.y + 4}h${r.w}`} stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" fill="none" pathLength="1" style={`--i:${i}`} />)}
+      <rect class="balk" x="274" y="162" width="64" height="6" rx="3" fill="#ff6600" />
+      <g class="klaar">
+        <rect x="270" y="190" width="110" height="28" rx="14" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="286" cy="204" r="8" fill="#1f8a5b" />
+        <path d="M282 204l3 3 5-5.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="300" y="208" font-size="11" font-weight="800">Geüpload</text>
+      </g>
+      <circle class="gloed" cx="436" cy="184" r="30" fill="none" stroke="#074663" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .streep { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  :global(.teken-js) .streep { stroke-dashoffset: 1; }
+  .balk { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .balk { transform: scaleX(0); }
+  :global(.teken-js) .klaar, :global(.teken-js) .gloed { opacity: 0; }
+  .gloed { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .streep { animation: linkbuilding--google-disavow-tool-streep 0.6s ease-out calc(0.4s + var(--i) * 0.35s) forwards; }
+  .in-beeld .balk { animation: linkbuilding--google-disavow-tool-balk 1.2s ease-in-out 1.9s forwards; }
+  .in-beeld .klaar { animation: linkbuilding--google-disavow-tool-klaar 0.5s ease-out 3.2s forwards; }
+  .in-beeld .gloed { animation: linkbuilding--google-disavow-tool-gloed 4s ease-out 3.4s infinite; }
+  @keyframes linkbuilding--google-disavow-tool-streep { to { stroke-dashoffset: 0; } }
+  @keyframes linkbuilding--google-disavow-tool-balk { to { transform: none; } }
+  @keyframes linkbuilding--google-disavow-tool-klaar { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes linkbuilding--google-disavow-tool-gloed { 0% { opacity: 0.7; transform: scale(0.8); } 60%, 100% { opacity: 0; transform: scale(1.5); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .streep, .in-beeld .balk, .in-beeld .klaar, .in-beeld .gloed { animation: none; } }
+</style>

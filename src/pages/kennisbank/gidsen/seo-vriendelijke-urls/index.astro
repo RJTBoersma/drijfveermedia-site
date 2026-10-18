@@ -1,0 +1,297 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--seo-vriendelijke-urls.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/seo-vriendelijke-urls/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een SEO-vriendelijke URL?' },
+  { id: 'hoeveel', titel: 'Hoeveel maakt een URL uit?' },
+  { id: 'regels', titel: 'Tien regels' },
+  { id: 'structuur', titel: 'Een logische URL-structuur' },
+  { id: 'voorbeelden', titel: 'Goed en fout naast elkaar' },
+  { id: 'parameters', titel: 'Parameters en canonical' },
+  { id: 'aanpassen', titel: 'Bestaande URL\'s aanpassen' },
+  { id: 'wordpress', titel: 'Instellen in WordPress' },
+  { id: 'bestanden', titel: 'Afbeeldingen en pdf\'s' },
+  { id: 'fouten', titel: 'Vijf fouten bij een nieuwe site' },
+  { id: 'controleren', titel: 'Je URL\'s controleren' },
+  { id: 'checklist', titel: 'Checklist' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'SEO-vriendelijke URL\'s: zo maak je adressen die Google en klanten snappen',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  citation: [
+    'https://developers.google.com/search/docs/crawling-indexing/url-structure',
+    'https://developers.google.com/search/docs/fundamentals/seo-starter-guide',
+    'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
+    'https://developers.google.com/search/docs/crawling-indexing/301-redirects',
+    'https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes',
+  ],
+}];
+---
+<Base
+  title="SEO-vriendelijke URL maken: 10 regels | Drijfveer Media"
+  description="Zo maak je een SEO-vriendelijke URL: kort, leesbaar, met koppeltekens. Met wat Google zegt, voorbeelden, een checklist en een plan om URL's te wijzigen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'SEO-vriendelijke URL\'s', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="SEO-vriendelijke URL's: zo maak je adressen die Google en klanten snappen">
+    <p>Een SEO-vriendelijke URL vertelt in één oogopslag waar een pagina over gaat. Dat helpt Google, en het helpt de mens die twijfelt of hij klikt. Hier lees je de regels, wat Google er zelf over zegt, en hoe je bestaande URL's veilig verandert.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Gebruik gewone woorden, kleine letters en koppeltekens. Geen cijferreeksen, underscores of hoofdletters.</li>
+            <li>Kort is beter: drie tot vijf woorden na je domeinnaam is genoeg.</li>
+            <li>Zoekwoorden in de URL helpen volgens Google nauwelijks voor je plek. Ze helpen wel de lezer.</li>
+            <li>Bouw je site op in een logische structuur van hooguit drie niveaus.</li>
+            <li>Verander je een bestaande URL, stuur de oude dan altijd met een 301 door, rechtstreeks en voor minstens een jaar.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een SEO-vriendelijke URL?</h2>
+        <p>Een SEO-vriendelijke URL is een webadres dat in gewone, leesbare woorden zegt wat er op de pagina staat. Kijk naar de URL https://www.jouwbedrijf.nl/diensten/tuinontwerp/. Je weet al waar je uitkomt voordat je klikt. Vergelijk dat met jouwbedrijf.nl/index.php?id=4821&amp;cat=7. Daar kan niemand iets mee. Google raadt in zijn eigen richtlijnen aan om leesbare woorden te gebruiken in plaats van lange ID-nummers.</p>
+        <p>Een URL bestaat uit een paar vaste delen. De eerste drie liggen meestal vast. Je SEO-werk zit in de rest.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Deel</th><th>Voorbeeld</th><th>Wat het doet</th></tr></thead>
+            <tbody>
+              <tr><td>Protocol</td><td>https://</td><td>Een beveiligde verbinding. Zonder de s waarschuwen browsers je bezoekers.</td></tr>
+              <tr><td>Subdomein</td><td>www.</td><td>Mag, hoeft niet. Kies één vorm en houd je eraan.</td></tr>
+              <tr><td>Domeinnaam</td><td>jouwbedrijf.nl</td><td>Je naam op internet. Zie <a href="/kennisbank/gidsen/domeinnaam-kiezen/">domeinnaam kiezen</a>.</td></tr>
+              <tr><td>Map</td><td>/diensten/</td><td>Laat zien in welk deel van de site je bent.</td></tr>
+              <tr><td>Slug</td><td>/tuinontwerp/</td><td>Het stukje dat deze ene pagina beschrijft.</td></tr>
+              <tr><td>Parameter</td><td>?sort=prijs</td><td>Een extra instructie, bijvoorbeeld om te sorteren of te filteren.</td></tr>
+              <tr><td>Fragment</td><td>#prijzen</td><td>Springt naar een plek op de pagina. Google negeert dit deel meestal.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De mappen en de slug bepaal je zelf. Parameters en fragmenten wil je zo veel mogelijk vermijden in de adressen die je in Google wilt hebben.</p>
+
+        <h2 id="hoeveel">Hoeveel maakt een URL uit voor Google?</h2>
+        <p>Minder dan veel mensen denken. Google schrijft in zijn SEO-gids dat zoekwoorden in je domeinnaam of URL nauwelijks effect hebben op je plek. Behalve dat ze in het kruimelpad kunnen verschijnen. Dat is het grijze padje boven je titel in de zoekresultaten. Google leert dat kruimelpad zelf uit de woorden in je URL.</p>
+        <p>Toch loont het. Een heldere URL helpt op plekken die wel een rol spelen:</p>
+        <ul>
+          <li><b>In de zoekresultaten.</b> Een herkenbaar pad wekt vertrouwen. Iemand ziet meteen dat hij op de goede plek uitkomt.</li>
+          <li><b>Bij het delen.</b> Een kortere URL past in een mail, een appje of een offerte, en ziet er niet uit als spam.</li>
+          <li><b>Als linktekst.</b> Plakt iemand je kale URL in een forum of artikel, dan is de URL de linktekst. Staan er woorden in, dan zegt die link meteen iets.</li>
+          <li><b>Bij het crawlen.</b> Rommelige adressen met veel parameters kunnen volgens Google duizenden varianten van dezelfde pagina opleveren. Dan verspilt Googlebot tijd.</li>
+          <li><b>Voor jezelf.</b> Een site met een logische URL-structuur is makkelijker te beheren, te meten en uit te breiden.</li>
+        </ul>
+        <p>Een goede URL tilt een zwakke pagina dus niet naar plek 1. Een slechte URL kan wel klikken en crawltijd kosten. Zie het als de bewegwijzering van je site: niemand komt voor de bordjes, maar zonder bordjes raakt iedereen de weg kwijt.</p>
+
+        <h2 id="regels">Tien regels voor een SEO-vriendelijke URL</h2>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>1. Gewone woorden, geen codes</h3></div>
+        <p>Beschrijf de inhoud in de taal van je klant. Dus /kozijnen-vervangen/ en niet /product-17/ of /?p=342. Een goede URL geeft in een paar woorden aan wat de bezoeker gaat lezen. Google noemt een URL met alleen willekeurige tekens "minder nuttig voor gebruikers".</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>2. Koppeltekens tussen woorden</h3></div>
+        <p>Google raadt koppeltekens (-) aan en underscores (_) af. Een underscore wordt van oudsher gebruikt voor dingen die bij elkaar horen, zoals in programmeercode. Woorden helemaal aan elkaar plakken, zoals /tuinontwerpassen/, raadt Google ook af. Met koppeltekens herkennen mensen en zoekmachines de losse begrippen beter.</p>
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>3. Alleen kleine letters</h3></div>
+        <p>URL's zijn hoofdlettergevoelig. Google schrijft dat het /APPLE en /apple als twee verschillende adressen ziet. Hoofdletters in URL's leveren zo dubbele pagina's of foutmeldingen op, vooral als iemand het adres overtypt. Gebruik daarom overal kleine letters. Stuur varianten met hoofdletters door naar de versie met kleine letters.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>4. Houd hem kort</h3></div>
+        <p>Drie tot vijf woorden in de slug is genoeg. Laat lidwoorden en vulwoorden weg: /wat-kost-een-dakkapel/ mag, /dakkapel-kosten/ is korter en zegt hetzelfde. Een kortere URL is makkelijker te lezen, te typen en te delen. Een harde maximumlengte staat niet in de richtlijnen van Google. Onze vuistregel: past hij niet op één regel van een visitekaartje, dan is hij te lang.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>5. Je zoekwoord, één keer</h3></div>
+        <p>Zet het belangrijkste woord van de pagina in de slug. Eén keer is genoeg. /hovenier-assen-hovenier-drenthe-tuinman/ oogt als spam en doet niets extra. Weet je nog niet welk woord? Begin dan met <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a>. Een handige bron is je eigen H1: de URL is vaak een ingekorte versie van je kop.</p>
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>6. De taal van je klant</h3></div>
+        <p>Google raadt aan woorden te gebruiken in de taal waarin je klanten zoeken. Een Nederlandse site krijgt dus /dakgoot-vervangen/ en niet /gutter-replacement/. Heb je een Engelse of Duitse versie, geef die dan ook Engelse of Duitse woorden in de URL, in een eigen map zoals /en/.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>7. Geen vreemde tekens</h3></div>
+        <p>Spaties, accenten en tekens als &amp;, %, # of ? horen niet in een slug. Achter de schermen wordt een é omgezet naar %C3%A9, en een spatie naar %20. Browsers tonen dat netjes, maar zodra iemand zo'n URL kopieert en plakt, staat er een rij vreemde codes. Google kan het wel lezen, maar mensen niet. Schrijf dus "cafe" in plaats van "café", en /sudwest-fryslan/ in plaats van Súdwest-Fryslân. Houd je bij gewone karakters: a tot z, 0 tot 9 en het koppelteken.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>8. Geen jaartal, tenzij het moet</h3></div>
+        <p>Een pagina als /tarieven-2025/ is volgend jaar verouderd. Dan moet je de URL veranderen en doorsturen, of je toont een oud jaartal. Laat het jaar weg en zet de datum in de tekst. Alleen bij iets dat echt bij één jaar hoort, zoals een jaarverslag of een evenement, hoort het jaar in de URL.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>9. Zo min mogelijk parameters</h3></div>
+        <p>Parameters zijn de stukjes na een vraagteken, zoals ?sort=prijs of ?sessie=8812. Google raadt aan URL's in te korten door parameters weg te halen die de inhoud niet veranderen. Sessiecodes in de URL raadt Google af. Daarover meer in het deel over <a href="#parameters">parameters en canonical</a>.</p>
+        <div class="stap-kop"><Tekening naam="huis" maat={48} /><h3>10. Eén vaste vorm voor je hele site</h3></div>
+        <p>Kies: met of zonder www, en met of zonder slash aan het eind. Alle andere varianten stuur je door naar die ene vorm. Anders staat dezelfde pagina onder vier adressen: met en zonder www, met en zonder slash. Het maakt niet uit welke vorm je kiest, als je maar consequent bent. Link in je eigen menu's en teksten ook altijd naar die vaste vorm.</p>
+
+        <h2 id="structuur">Hoe ziet een goede URL-structuur eruit?</h2>
+        <p>Een goede URL-structuur volgt de opbouw van je site: van algemeen naar specifiek, in hooguit drie niveaus. Zo'n hiërarchische structuur laat zien welke pagina's bij elkaar horen. Bezoekers kunnen een stukje van de URL weghalen en komen dan op een logische overzichtspagina uit. Google schrijft dat mappen vooral helpen bij grote sites, met meer dan een paar duizend URL's. Google leert dan per map hoe vaak er iets verandert, en crawlt daarnaar.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort site</th><th>Voorbeeld van een goede structuur</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Zzp'er met een paar diensten</td><td>/boekhouding/, /belastingaangifte/, /contact/</td><td>Geen map nodig. Plat en kort is prima.</td></tr>
+              <tr><td>Vakbedrijf met veel diensten</td><td>/dakwerk/dakgoot-vervangen/, /dakwerk/dakkapel-plaatsen/</td><td>Een map per hoofddienst, de overzichtspagina op /dakwerk/.</td></tr>
+              <tr><td>Bedrijf dat in meerdere plaatsen werkt</td><td>/hovenier-zuidwolde/, /hovenier-hoogeveen/</td><td>Alleen als elke plaatspagina echt eigen inhoud heeft.</td></tr>
+              <tr><td>Site met kennisbank of blog</td><td>/kennisbank/gidsen/onderwerp/</td><td>Geen datum in het pad, dan kun je het artikel blijven bijwerken.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zo ziet de URL-structuur eruit op onze eigen site. Diensten staan onder hun hoofdonderwerp, zoals /zoekmachine-optimalisatie/seo-teksten/. Gidsen staan onder /kennisbank/gidsen/. Pagina's voor een plaats staan juist bovenaan, als /webdesign-assen/. Dat is een kort adres dat precies zegt wat mensen zoeken. Je ziet: een structuur is een hulpmiddel, geen wet. Kies wat het duidelijkst is.</p>
+        <div class="kader">
+          <p class="kader-titel">Vuistregel</p>
+          <p>Kun je de URL hardop voorlezen aan iemand aan de telefoon, zonder te spellen? Dan zit je goed.</p>
+        </div>
+
+        <h2 id="voorbeelden">Goede en slechte voorbeelden naast elkaar</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Niet zo</th><th>Wel zo</th><th>Waarom</th></tr></thead>
+            <tbody>
+              <tr><td>/index.php?id=4821</td><td>/tuinontwerp/</td><td>Woorden in plaats van een nummer</td></tr>
+              <tr><td>/Diensten/Tuin_Ontwerp/</td><td>/diensten/tuinontwerp/</td><td>Kleine letters, geen underscore</td></tr>
+              <tr><td>/blog/2019/03/14/tips-voor-het-onderhouden-van-je-gazon-in-het-voorjaar/</td><td>/blog/gazon-voorjaar/</td><td>Korter, zonder datum</td></tr>
+              <tr><td>/café-menukaart/</td><td>/cafe-menukaart/</td><td>Geen accent</td></tr>
+              <tr><td>/schoenen?kleur=rood&amp;maat=42&amp;sort=prijs</td><td>/schoenen/rood/</td><td>Minder parameters</td></tr>
+              <tr><td>/dienstenoverzicht/onze-diensten/alle-diensten/schilderwerk/</td><td>/schilderwerk/</td><td>Minder niveaus</td></tr>
+              <tr><td>/pagina.html?sessie=8812</td><td>/pagina/</td><td>Geen sessiecode</td></tr>
+              <tr><td>/kozijnen-kozijnen-assen-kozijn-goedkoop/</td><td>/kozijnen-assen/</td><td>Zoekwoord één keer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="parameters">Parameters, filters en de canonical-tag</h2>
+        <p>Parameters zijn niet altijd te vermijden. Een zoekfunctie, een filter op kleur of een UTM-code in een nieuwsbrief maakt ze vanzelf aan. Het probleem: elke combinatie is voor Google een apart adres. Google beschrijft hoe een paar filters samen zo een explosie van URL's geven die allemaal bijna hetzelfde laten zien.</p>
+        <p>Je vertelt Google welke versie de echte is met een canonical. Google noemt drie manieren, van sterk naar zwak:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Methode</th><th>Hoe sterk volgens Google</th><th>Wanneer gebruiken</th></tr></thead>
+            <tbody>
+              <tr><td>301-redirect</td><td>Sterk signaal</td><td>Als de oude URL niet meer nodig is</td></tr>
+              <tr><td>rel="canonical" in de code</td><td>Sterk signaal</td><td>Als de variant moet blijven werken, zoals een gefilterde lijst</td></tr>
+              <tr><td>Opnemen in je sitemap</td><td>Zwak signaal</td><td>Altijd, alleen met de echte URL's</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een paar regels die Google erbij geeft. Gebruik geen robots.txt om een canonical te kiezen. Geef geen tegenstrijdige signalen, zoals een andere URL in je sitemap dan in je canonical-tag. Zet op de echte pagina zelf ook een canonical die naar zichzelf wijst. En link binnen je site altijd naar de canonieke URL, niet naar een variant.</p>
+        <p>Plak je UTM-codes alleen in links van buiten, zoals in een nieuwsbrief of advertentie. Nooit in links op je eigen site. Hoe UTM-codes werken, lees je in de gids <a href="/kennisbank/gidsen/utm-codes/">UTM-codes maken</a>. Gebruik je WordPress met Yoast of Rank Math, dan zetten die de canonical meestal automatisch. Voor dubbele pagina's in het algemeen, zie <a href="/kennisbank/wat-is/duplicate-content/">duplicate content</a>.</p>
+
+        <h2 id="aanpassen">Bestaande URL's aanpassen: doe het voorzichtig</h2>
+        <p>Een bestaande URL verander je alleen als het echt iets oplevert. Elke oude URL heeft misschien links van andere sites, bladwijzers van klanten en een plek in Google. Gooi je die weg, dan begin je voor die pagina opnieuw.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Situatie</th><th>Ons advies</th></tr></thead>
+            <tbody>
+              <tr><td>De pagina scoort goed en de URL is lelijk maar werkt</td><td>Laten staan. De winst is klein, het risico niet.</td></tr>
+              <tr><td>Er staat een oud jaartal of een verkeerde dienst in de URL</td><td>Aanpassen, met een 301-redirect.</td></tr>
+              <tr><td>De URL bevat sessiecodes of hoofdletters die dubbele pagina's geven</td><td>Aanpassen, en de varianten doorsturen of canonicaliseren.</td></tr>
+              <tr><td>Je bouwt een nieuwe site</td><td>Het moment om de structuur goed te zetten, met een volledige lijst redirects.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Verander je hem toch, volg dan deze stappen. Ze zijn gebaseerd op wat Google schrijft over redirects en verhuizingen.</p>
+        <ol>
+          <li><b>Maak een lijst van alle oude en nieuwe URL's naast elkaar.</b> Haal de oude uit je sitemap, Search Console en een crawl van je site.</li>
+          <li><b>Stel per oude URL een permanente <a href="/kennisbank/wat-is/redirect/">redirect</a> in.</b> Google raadt een 301 of 308 op de server aan. Een JavaScript-doorverwijzing alleen als het niet anders kan.</li>
+          <li><b>Stuur direct door, zonder ketens.</b> Googlebot volgt maximaal tien stappen, maar Google adviseert om rechtstreeks naar het eindadres te sturen. Lukt dat niet, dan liefst niet meer dan drie stappen.</li>
+          <li><b>Pas je interne links aan</b>, zodat je eigen site meteen naar de nieuwe adressen linkt.</li>
+          <li><b>Vernieuw je sitemap en dien hem in</b> in Search Console.</li>
+          <li><b>Laat de redirects minstens een jaar staan.</b> Dat is het advies van Google. Liefst laat je ze gewoon altijd staan.</li>
+          <li><b>Houd Search Console een paar weken in de gaten.</b> Volgens Google kan het een paar weken of langer duren voordat de nieuwe URL's de oude vervangen. Wat schommelen in die tijd is normaal.</li>
+        </ol>
+        <p>Een 301 kost volgens Google geen PageRank. De waarde van links naar de oude URL gaat dus mee. Op een Apache-server zet je een enkele redirect zo in je .htaccess-bestand:</p>
+        <pre><code>Redirect 301 /oude-pagina/ https://www.jouwbedrijf.nl/nieuwe-pagina/</code></pre>
+        <p>We hebben dat zelf net gedaan. Bij de lancering van deze site kregen ruim honderd oude blogs een nieuwe plek, en elke oude URL wijst in één stap naar zijn nieuwe adres. Deze gids is daar een voorbeeld van. De oude blog stond op /blog/url-optimalisatie-zo-maak-je-seo-vriendelijke-urls/. Nu is het /kennisbank/gidsen/seo-vriendelijke-urls/. Korter, en het past in de structuur.</p>
+        <p>Werk je met een webmaster of webbouwer, vraag dan voor de livegang om die lijst met redirects. Ontbreekt hij, dan is dat een slecht teken.</p>
+
+        <h2 id="wordpress">URL's instellen in WordPress</h2>
+        <p>In WordPress ga je naar Instellingen en dan Permalinks. Staat daar Eenvoudig of Dag en naam, kies dan Berichtnaam. Dan krijgt elke pagina een URL op basis van de titel. Doe dit bij voorkeur bij een nieuwe site. Verander je het bij een bestaande site, dan veranderen al je URL's tegelijk en heb je redirects nodig.</p>
+        <p>Die automatische slug is vaak te lang, want hij neemt de hele titel over. Pas hem per pagina aan in het veld Slug of URL in de editor. Doe dit voordat je publiceert. Pas je later toch een slug aan, zorg dan voor een redirect. Een gratis plugin als Redirection helpt daarbij: die beheert 301-redirects en houdt 404-fouten bij. Een SEO-plugin als Yoast of Rank Math regelt de canonical.</p>
+        <p>Begin je aan een nieuwe site? Dan is dit hét moment om de structuur goed te zetten. Achteraf verhuizen kost meer werk. Bij <a href="/website-laten-maken/">een website laten maken</a> bespreken we de structuur eerst met je, voordat er één pagina gebouwd wordt.</p>
+
+        <h2 id="bestanden">Bestandsnamen van afbeeldingen en pdf's</h2>
+        <p>Ook een foto of een pdf heeft een URL, en daar gelden dezelfde regels. Google schrijft dat de bestandsnaam van een afbeelding een heel licht signaal geeft over waar het plaatje over gaat. Het advies: kort, maar beschrijvend. Een naam als IMG00023.JPG zegt niets. Algemene namen als foto1.jpg raadt Google af.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Niet zo</th><th>Wel zo</th></tr></thead>
+            <tbody>
+              <tr><td>IMG_2034.JPG</td><td>dakkapel-kunststof-assen.jpg</td></tr>
+              <tr><td>Scan 12-03 definitief (2).pdf</td><td>prijslijst-tuinonderhoud.pdf</td></tr>
+              <tr><td>foto1.webp</td><td>bestrating-oprit-zuidwolde.webp</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Hernoem een bestand voordat je het uploadt. Achteraf hernoemen geeft een nieuwe URL, en dan heb je weer een redirect nodig. Vergeet ook de <a href="/kennisbank/wat-is/alt-tekst/">alt-tekst</a> niet. Volgens Google is dat het belangrijkste extra gegeven dat je bij een afbeelding kunt meegeven.</p>
+
+        <h2 id="fouten">Vijf URL-fouten die we vaak zien bij een nieuwe site</h2>
+        <p>Bij een nieuwe website gaat het zelden mis bij de mooie dingen. Het gaat mis bij de details. Deze vijf komen we het vaakst tegen als we een site na de livegang nalopen.</p>
+        <ol>
+          <li><b>Links naar het testadres.</b> De site is gebouwd op een tijdelijk adres, en in teksten en menu's staan nog links daarheen.</li>
+          <li><b>Oude URL's zonder doorverwijzing.</b> Wie een oude link volgt, krijgt een <a href="/kennisbank/wat-is/404-pagina/">404-pagina</a>. De waarde van links naar die oude pagina's gaat verloren.</li>
+          <li><b>Http-links na de overstap naar https.</b> Afbeeldingen en links die nog via http laden, geven een waarschuwing in de browser. Zie <a href="/kennisbank/wat-is/mixed-content/">mixed content</a>.</li>
+          <li><b>Twee versies van elke pagina.</b> De pagina werkt met en zonder slash aan het eind, zonder dat de ene naar de andere doorstuurt.</li>
+          <li><b>Overbodige mappen.</b> WordPress zet standaard /category/ voor categoriepagina's. Dat is niet fout, maar wel een woord dat niets zegt. Je kunt het aanpassen bij Permalinks, liefst voordat de site live gaat.</li>
+        </ol>
+
+        <h2 id="controleren">Je URL's controleren in een kwartier</h2>
+        <p>Wil je weten hoe jouw URL's ervoor staan? Dit kun je zelf nalopen.</p>
+        <ol>
+          <li><b>Zoek in Google op site:jouwdomein.nl.</b> Kijk of je rare adressen ziet: met parameters, hoofdletters of dubbel.</li>
+          <li><b>Plak een belangrijke URL in de URL-inspectie van Search Console.</b> Je ziet welke canonieke URL Google heeft gekozen. Is dat een andere dan je dacht? Dan klopt er iets niet.</li>
+          <li><b>Open het rapport Pagina-indexering.</b> Google schrijft wel dat je dit bij een site met minder dan 500 pagina's meestal niet nodig hebt. Dan volstaat de site:-zoekopdracht.</li>
+          <li><b>Crawl je site.</b> Met de gratis versie van Screaming Frog crawl je tot 500 URL's. Je ziet in één lijst alle adressen, redirects en kapotte links.</li>
+        </ol>
+        <p>Wil je dat iemand het voor je doet? We bekijken je URL's mee in een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a>, vanaf € 395, als onderdeel van <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>.</p>
+
+        <h2 id="checklist">Checklist: is jouw URL in orde?</h2>
+        <p>Loop elke nieuwe pagina langs met deze twaalf punten voordat je op publiceren drukt.</p>
+        <ul class="vink">
+          <li>De URL bestaat uit gewone woorden die zeggen wat er op de pagina staat.</li>
+          <li>Woorden zijn gescheiden met koppeltekens, niet met underscores of spaties.</li>
+          <li>Alles is in kleine letters.</li>
+          <li>De slug heeft drie tot vijf woorden, zonder vulwoorden.</li>
+          <li>Het belangrijkste woord staat erin, één keer.</li>
+          <li>Er staan geen accenten of tekens als &amp;, %, # of ? in.</li>
+          <li>Er staat geen jaartal in, tenzij de pagina echt bij één jaar hoort.</li>
+          <li>Er zitten geen sessiecodes of overbodige parameters in.</li>
+          <li>De pagina zit in de juiste map, hooguit drie niveaus diep.</li>
+          <li>De URL volgt de vaste vorm van je site: met of zonder www en slash.</li>
+          <li>De pagina heeft een canonical die naar zichzelf wijst.</li>
+          <li>Verandert er een bestaande URL? Dan staat er een 301 rechtstreeks naar het nieuwe adres.</li>
+        </ul>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={15} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij meekijken?" intro="Een nette structuur is het begin. Daarna gaat het om teksten en links die je echt vooruit helpen." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe lang mag een URL zijn?', a: 'Google noemt geen harde grens, maar korter is beter. Houd de slug op drie tot vijf woorden. Lange URL\'s zijn lastig te lezen en te delen.' },
+      { v: 'Moet mijn zoekwoord in de URL staan?', a: 'Het helpt vooral de lezer, die meteen ziet dat de pagina past bij zijn vraag. Voor je plek in Google heeft het volgens Google nauwelijks effect. Eén keer is genoeg.' },
+      { v: 'Koppeltekens of underscores?', a: 'Koppeltekens. Google raadt dat zelf aan, omdat mensen en zoekmachines woorden met een koppelteken beter als losse begrippen herkennen.' },
+      { v: 'Kan ik de URL van een bestaande pagina veranderen?', a: 'Ja, maar alleen met een 301-redirect van het oude naar het nieuwe adres, rechtstreeks en voor minstens een jaar. Doe het alleen als het echt iets oplevert.' },
+      { v: 'Moet een URL eindigen op een slash?', a: 'Dat maakt voor Google niet uit. Kies één vorm voor je hele site, stuur de andere vorm door en link altijd naar de vaste vorm.' },
+      { v: 'Wat is een canonical-tag?', a: 'Een regel in de code van een pagina die zegt welke URL de echte versie is als dezelfde inhoud onder meerdere adressen staat. Google ziet het als een sterk signaal, maar beslist uiteindelijk zelf.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Begrip', titel: 'Wat is een redirect?', href: '/kennisbank/wat-is/redirect/', tekst: 'Een oude URL doorsturen zonder je posities te verliezen.', teken: 'ketting' },
+      { label: 'Gids', titel: 'Hoger in Google komen', href: '/kennisbank/gidsen/hoger-in-google/', tekst: 'Het stappenplan voor een klein bedrijf, met checklist.' },
+      { label: 'Dienst', titel: 'Technische SEO en SEO-audit', href: '/zoekmachine-optimalisatie/technische-seo/', tekst: 'Vanaf € 395. Structuur, snelheid en fouten in één rapport.' },
+    ]}
+  />
+
+  <Actie titel="Twijfel je of je site goed in elkaar zit?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je structuur, je URL's en je vindbaarheid, en belt je met wat het eerst moet.`} />
+</Base>
+<style>
+  .tekst pre { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; max-width: 100%; margin: 0 0 1.2em; font-size: 0.92rem; }
+  .tekst pre code { white-space: pre; overflow-wrap: normal; word-break: normal; }
+</style>

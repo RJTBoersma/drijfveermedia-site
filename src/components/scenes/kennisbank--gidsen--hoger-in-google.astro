@@ -1,0 +1,64 @@
+---
+// Scène voor /kennisbank/gidsen/hoger-in-google/: een trap met een vlag bovenaan, naast een lijst zoekresultaten met jouw bedrijf op plek 1.
+// Als hij leeft: een bolletje klimt de trap op naar de vlag, de vlag wappert en jouw resultaat licht rustig op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [126, 166, 206];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een trap met een vlag bovenaan, naast een lijst zoekresultaten waarin jouw bedrijf op plek 1 staat.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- trap en vlag -->
+  <path class="v" d="M18 238h30v-36h30v-36h30v-36h30v-36h22v144H18z" />
+  <path class="l" d="M18 238h30v-36h30v-36h30v-36h30v-36h22" />
+  <path class="l" d="M150 94V50" />
+  <g class="vlag"><path class="o" d="M150 52h-28l8 9-8 9h28z" /></g>
+  <circle cx="33" cy="231" r="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+
+  <!-- zoekresultaten -->
+  <rect x="172" y="22" width="286" height="226" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="188" y="38" width="254" height="30" rx="15" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="206" y="58" font-size="12.5" class="zacht">schilder roden</text>
+  <circle cx="420" cy="52" r="6" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M424 56l5 5" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <rect x="188" y="84" width="254" height="34" rx="8" fill="#fff4ec" stroke="#ff6600" stroke-width="1.5" />
+  <circle cx="206" cy="101" r="10" fill="#ff6600" />
+  <text x="206" y="105.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">1</text>
+  <text x="226" y="99" font-size="13" font-weight="800">Jouw bedrijf</text>
+  <rect x="226" y="105" width="120" height="6" rx="3" fill="#ffd2b0" />
+  {rijen.map((y, i) => (
+    <g>
+      <circle cx="206" cy={y + 17} r="10" fill="#e8eef4" />
+      <text x="206" y={y + 21.5} font-size="12" font-weight="800" text-anchor="middle">{i + 2}</text>
+      <rect x="226" y={y + 8} width={150 - i * 20} height="8" rx="4" fill="#10283f" opacity="0.75" />
+      <rect x="226" y={y + 21} width={190 - i * 30} height="6" rx="3" fill="#d9e1ea" />
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      <circle class="klimmer" cx="149" cy="87" r="7" fill="#ff6600" />
+      <rect class="gloed" x="186" y="82" width="258" height="38" rx="10" fill="none" stroke="#ff6600" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .vlag { transform-box: fill-box; transform-origin: 100% 50%; }
+  .in-beeld .vlag { animation: kennisbank-gidsen-hoger-in-google-wapper 3.6s ease-in-out 2.4s infinite; }
+  :global(.teken-js) .klimmer { transform: translate(-116px, 144px); }
+  .in-beeld .klimmer { animation: kennisbank-gidsen-hoger-in-google-klim 2.2s ease-in-out 0.5s forwards; }
+  :global(.teken-js) .gloed { opacity: 0; }
+  .in-beeld .gloed { animation: kennisbank-gidsen-hoger-in-google-gloed 4s ease-in-out 2.6s infinite; }
+  @keyframes kennisbank-gidsen-hoger-in-google-klim {
+    0% { transform: translate(-116px, 144px); }
+    12% { transform: translate(-101px, 116px); }
+    25% { transform: translate(-86px, 108px); }
+    37% { transform: translate(-71px, 80px); }
+    50% { transform: translate(-56px, 72px); }
+    62% { transform: translate(-41px, 44px); }
+    75% { transform: translate(-26px, 36px); }
+    87% { transform: translate(-13px, 8px); }
+    100% { transform: translate(0, 0); }
+  }
+  @keyframes kennisbank-gidsen-hoger-in-google-wapper { 0%, 100% { transform: skewY(0deg) scaleX(1); } 50% { transform: skewY(-6deg) scaleX(0.94); } }
+  @keyframes kennisbank-gidsen-hoger-in-google-gloed { 0%, 100% { opacity: 0; } 50% { opacity: 0.8; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vlag, .in-beeld .klimmer, .in-beeld .gloed { animation: none; } }
+</style>

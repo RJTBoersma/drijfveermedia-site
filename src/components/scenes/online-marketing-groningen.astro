@@ -1,0 +1,67 @@
+---
+// Scène voor /online-marketing-groningen/: een mengpaneel met marketingkanalen. Wat niets oplevert gaat omlaag, wat werkt gaat omhoog, en de meter met aanvragen loopt op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kanalen = [
+  { naam: 'SEO', x: 84, y: 156, k: 'k1' },
+  { naam: 'Kaart', x: 138, y: 146, k: 'k2' },
+  { naam: 'Ads', x: 192, y: 122, k: 'k3' },
+  { naam: 'Mail', x: 246, y: 136, k: 'k4' },
+  { naam: 'Social', x: 300, y: 104, k: 'k5' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een mengpaneel met vijf marketingkanalen. Social gaat omlaag, SEO en de kaart van Google gaan omhoog, en de meter met aanvragen slaat uit.'}>
+  <rect x="40" y="28" width="400" height="214" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="62" y="58" font-size="14" font-weight="800">Jouw marketingmix</text>
+  <path d="M60 70h360" stroke="#e8eef4" stroke-width="2" />
+  {kanalen.map((c) => (
+    <g>
+      <path d={`M${c.x} 88v112`} stroke="#e8eef4" stroke-width="8" stroke-linecap="round" />
+      <path class="l" d={`M${c.x - 10} 92h20M${c.x - 10} 144h20M${c.x - 10} 196h20`} style="stroke-width:1.5;stroke:#d9e1ea" />
+      <text x={c.x} y="224" text-anchor="middle" font-size="11" font-weight="700">{c.naam}</text>
+    </g>
+  ))}
+  <!-- meter -->
+  <path d="M342 150a38 38 0 0 1 76 0" fill="none" stroke="#e8eef4" stroke-width="10" stroke-linecap="round" />
+  <path class="a" d="M400 116a38 38 0 0 1 18 34" style="stroke-width:10;stroke-linecap:butt;opacity:.35" />
+  <circle cx="380" cy="150" r="6" fill="#10283f" />
+  <text x="380" y="184" text-anchor="middle" font-size="12" font-weight="800">Aanvragen</text>
+  <g transform="rotate(-62 380 150)">
+    <g class="naald">
+      <path d="M380 150v-34" stroke="#10283f" stroke-width="3.5" stroke-linecap="round" />
+    </g>
+  </g>
+  <!-- knoppen -->
+  {kanalen.map((c, i) => (
+    <g class={c.k}>
+      <rect x={c.x - 14} y={c.y - 8} width="28" height="16" rx="5" fill={i === 0 ? '#ff6600' : '#074663'} />
+      <path d={`M${c.x - 7} ${c.y}h14`} stroke="#fff" stroke-width="2" stroke-linecap="round" />
+    </g>
+  ))}
+  {!mini && (
+    <g transform="translate(300 36)">
+      <g class="plus">
+        <rect width="128" height="30" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+        <text x="64" y="20" text-anchor="middle" font-size="12" font-weight="800">Meer uit je budget</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .k1, .k2, .k3, .k4, .k5 { transition: transform 1.4s cubic-bezier(.5,0,.2,1); }
+  .naald { transform-box: view-box; transform-origin: 380px 150px; transition: transform 1.6s cubic-bezier(.3,1.3,.5,1) 1.6s; }
+  [data-leeft].in-beeld .k1 { transform: translateY(-56px); transition-delay: 0.9s; }
+  [data-leeft].in-beeld .k2 { transform: translateY(-40px); transition-delay: 1.05s; }
+  [data-leeft].in-beeld .k3 { transform: translateY(6px); transition-delay: 1.2s; }
+  [data-leeft].in-beeld .k4 { transform: translateY(-12px); transition-delay: 1.3s; }
+  [data-leeft].in-beeld .k5 { transform: translateY(62px); transition-delay: 0.5s; }
+  [data-leeft].in-beeld .naald { transform: rotate(100deg); animation: online-marketing-groningen-tril 4s ease-in-out 3.4s infinite; }
+  :global(.teken-js) .plus { opacity: 0; }
+  .in-beeld .plus { animation: online-marketing-groningen-plus 0.6s cubic-bezier(.3,1.6,.5,1) 2.2s both; }
+  @keyframes online-marketing-groningen-tril { 0%, 100% { transform: rotate(100deg); } 50% { transform: rotate(92deg); } }
+  @keyframes online-marketing-groningen-plus { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .k1, .k2, .k3, .k4, .k5, .naald { transition: none; }
+    [data-leeft].in-beeld .naald, .in-beeld .plus { animation: none; }
+  }
+</style>

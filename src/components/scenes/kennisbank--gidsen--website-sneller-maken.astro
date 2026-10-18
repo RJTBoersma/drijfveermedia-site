@@ -1,0 +1,75 @@
+---
+// Scène voor /kennisbank/gidsen/website-sneller-maken/: een browser laadt, de snelheidsmeter staat in het groen en de drie Core Web Vitals krijgen een vinkje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een website laadt in een browser, de snelheidsmeter wijst naar groen en de drie Core Web Vitals krijgen een groen vinkje.'}>
+  <!-- browser -->
+  <rect x="30" y="30" width="270" height="210" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="48" cy="46" r="4" fill="#d9e1ea" />
+  <circle cx="60" cy="46" r="4" fill="#d9e1ea" />
+  <circle cx="72" cy="46" r="4" fill="#d9e1ea" />
+  <rect class="v" x="88" y="38" width="196" height="16" rx="8" />
+  <text class="zacht" x="100" y="50" font-size="10">jouwbedrijf.nl</text>
+  <rect x="31" y="62" width="268" height="4" fill="#e8eef4" />
+  <rect class="v" x="48" y="80" width="234" height="76" rx="8" />
+  <path class="l" d="M64 146l30-32 22 20 18-14 34 26" />
+  <circle class="o" cx="250" cy="100" r="9" />
+  <rect x="48" y="170" width="170" height="10" rx="5" fill="#10283f" />
+  <rect x="48" y="188" width="220" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="48" y="201" width="196" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="48" y="216" width="72" height="14" rx="7" fill="#074663" />
+
+  <!-- snelheidsmeter -->
+  <path d="M340 118A55 55 0 0 1 367.5 70.37" fill="none" stroke="#d9e1ea" stroke-width="10" />
+  <path d="M367.5 70.37A55 55 0 0 1 422.5 70.37" fill="none" stroke="#ffd2b0" stroke-width="10" />
+  <path d="M422.5 70.37A55 55 0 0 1 450 118" fill="none" stroke="#1f8a5b" stroke-width="10" />
+  <g transform="rotate(52 395 118)">
+    <g class="naald">
+      <path d="M395 118V76" stroke="#10283f" stroke-width="4" stroke-linecap="round" />
+    </g>
+  </g>
+  <circle cx="395" cy="118" r="7" fill="#10283f" />
+  <text class="zacht" x="395" y="146" font-size="12" text-anchor="middle">Laadtijd</text>
+  <text x="395" y="168" font-size="20" font-weight="900" text-anchor="middle">1,4 s</text>
+
+  {!mini && (
+    <g>
+      <rect class="balk" x="31" y="62" width="268" height="4" fill="#ff6600" />
+      <g class="chip chip-1">
+        <rect x="322" y="182" width="146" height="22" rx="11" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="336" cy="193" r="7" fill="#1f8a5b" />
+        <path d="M332.5 193l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="350" y="197" font-size="11" font-weight="700">LCP 1,8 s</text>
+      </g>
+      <g class="chip chip-2">
+        <rect x="322" y="210" width="146" height="22" rx="11" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="336" cy="221" r="7" fill="#1f8a5b" />
+        <path d="M332.5 221l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="350" y="225" font-size="11" font-weight="700">INP 120 ms</text>
+      </g>
+      <g class="chip chip-3">
+        <rect x="322" y="238" width="146" height="22" rx="11" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="336" cy="249" r="7" fill="#1f8a5b" />
+        <path d="M332.5 249l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="350" y="253" font-size="11" font-weight="700">CLS 0,02</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .naald { transform-box: view-box; transform-origin: 395px 118px; }
+  .balk { transform-box: fill-box; transform-origin: left center; }
+  .chip { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .balk { transform: scaleX(0); }
+  :global(.teken-js) .chip { opacity: 0; }
+  .in-beeld .balk { animation: kennisbank--gidsen--website-sneller-maken-laad 1.3s cubic-bezier(.6,.1,.3,1) 0.3s forwards; }
+  .in-beeld .chip-1 { animation: kennisbank--gidsen--website-sneller-maken-chip 0.5s cubic-bezier(.3,1.5,.5,1) 1.5s forwards; }
+  .in-beeld .chip-2 { animation: kennisbank--gidsen--website-sneller-maken-chip 0.5s cubic-bezier(.3,1.5,.5,1) 1.8s forwards; }
+  .in-beeld .chip-3 { animation: kennisbank--gidsen--website-sneller-maken-chip 0.5s cubic-bezier(.3,1.5,.5,1) 2.1s forwards; }
+  .in-beeld .naald { animation: kennisbank--gidsen--website-sneller-maken-tril 4s ease-in-out 1.6s infinite; }
+  @keyframes kennisbank--gidsen--website-sneller-maken-laad { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes kennisbank--gidsen--website-sneller-maken-chip { from { opacity: 0; transform: translateX(10px) scale(0.9); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank--gidsen--website-sneller-maken-tril { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(-5deg); } 60% { transform: rotate(3deg); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .balk, .in-beeld .chip-1, .in-beeld .chip-2, .in-beeld .chip-3, .in-beeld .naald { animation: none; } }
+</style>

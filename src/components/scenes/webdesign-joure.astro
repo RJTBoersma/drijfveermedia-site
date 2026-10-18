@@ -1,0 +1,67 @@
+---
+// Scène voor /webdesign-joure/: het knooppunt van de A6 en A7 bij Joure, een wegwijzer naar Sneek, Heerenveen en
+// Lemmer, en een (verzonnen) website met het werkgebied erop. In de volledige versie rijden er auto's en komt er een
+// aanvraag uit Lemmer binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: het knooppunt van de A6 en A7 bij Joure met een wegwijzer naar Sneek, Heerenveen en Lemmer. Ernaast een website met het werkgebied, en er komt een aanvraag uit Lemmer binnen.'}>
+  <!-- wegen -->
+  <path d="M20 170H460" stroke="#d9e1ea" stroke-width="22" stroke-linecap="round" />
+  <path d="M236 170L160 262" stroke="#d9e1ea" stroke-width="18" />
+  <path d="M30 170H450" stroke="#fff" stroke-width="2" stroke-dasharray="12 10" />
+  <path d="M232 176L166 256" stroke="#fff" stroke-width="2" stroke-dasharray="10 9" />
+  <rect x="396" y="190" width="30" height="18" rx="4" fill="#074663" /><text x="411" y="203" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" style="fill:#fff">A7</text>
+  <rect x="190" y="236" width="30" height="18" rx="4" fill="#074663" /><text x="205" y="249" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" style="fill:#fff">A6</text>
+  <!-- Joure -->
+  <path d="M232 112c0-10 7-17 16-17s16 7 16 17c0 12-16 26-16 26s-16-14-16-26z" fill="#ff6600" />
+  <circle cx="248" cy="112" r="6" fill="#fff" />
+  <text x="248" y="150" text-anchor="middle" font-size="13" font-weight="900">Joure</text>
+  <!-- wegwijzer -->
+  <path class="l" d="M76 150V40" />
+  <path d="M34 46h80l10 9-10 9H34z" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="40" y="59" font-size="11" font-weight="800">Heerenveen</text>
+  <path d="M112 74H48l-10 9 10 9h64z" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="56" y="87" font-size="11" font-weight="800">Sneek</text>
+  <path d="M48 102h56v18l-28 10-28-10z" fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+  <text x="76" y="116" text-anchor="middle" font-size="11" font-weight="800">Lemmer</text>
+  <!-- website met werkgebied -->
+  <rect x="306" y="24" width="152" height="112" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="320" cy="37" r="3.5" fill="#d9e1ea" /><circle cx="331" cy="37" r="3.5" fill="#d9e1ea" /><circle cx="342" cy="37" r="3.5" fill="#d9e1ea" />
+  <path d="M306 48h152" stroke="#d9e1ea" stroke-width="2" />
+  <text x="318" y="66" font-size="10.5" font-weight="800" fill="#074663" style="fill:#074663">Installateur (voorbeeld)</text>
+  <text x="318" y="82" font-size="9.5" class="zacht">Werkgebied:</text>
+  <g font-size="9.5" font-weight="700">
+    <rect x="318" y="88" width="38" height="16" rx="8" fill="#e8eef4" /><text x="337" y="99.5" text-anchor="middle">Joure</text>
+    <rect x="360" y="88" width="44" height="16" rx="8" fill="#e8eef4" /><text x="382" y="99.5" text-anchor="middle">Lemmer</text>
+    <rect x="408" y="88" width="38" height="16" rx="8" fill="#e8eef4" /><text x="427" y="99.5" text-anchor="middle">Sneek</text>
+  </g>
+  <rect x="318" y="112" width="62" height="16" rx="5" fill="#ff6600" />
+  <text x="349" y="123.5" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" style="fill:#fff">Bel direct</text>
+  {!mini && (
+    <g>
+      <g class="auto a1"><rect x="0" y="158" width="26" height="12" rx="4" fill="#074663" /><circle cx="6" cy="171" r="3" fill="#10283f" /><circle cx="20" cy="171" r="3" fill="#10283f" /></g>
+      <g class="auto a2"><rect x="0" y="174" width="26" height="12" rx="4" fill="#ff6600" /><circle cx="6" cy="187" r="3" fill="#10283f" /><circle cx="20" cy="187" r="3" fill="#10283f" /></g>
+      <g class="aanvraag">
+        <rect x="282" y="212" width="176" height="36" rx="10" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="300" cy="230" r="9" fill="#1f8a5b" />
+        <path d="M295.5 230l3 3 5.5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+        <text x="316" y="227" font-size="11" font-weight="800">Nieuwe aanvraag</text>
+        <text x="316" y="240" font-size="9.5" class="zacht">cv-ketel, Lemmer</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .auto, .aanvraag { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .auto, :global(.teken-js) .aanvraag { opacity: 0; }
+  .a1 { transform: translateX(120px); }
+  .a2 { transform: translateX(330px); }
+  .in-beeld .a1 { animation: webdesign-joure-rechts 7s linear 0.3s infinite; }
+  .in-beeld .a2 { animation: webdesign-joure-links 6s linear 1.2s infinite; }
+  .in-beeld .aanvraag { animation: webdesign-joure-aanvraag 6s ease-in-out 1.8s infinite; }
+  @keyframes webdesign-joure-rechts { 0% { opacity: 0; transform: translateX(10px); } 8%, 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(440px); } }
+  @keyframes webdesign-joure-links { 0% { opacity: 0; transform: translateX(440px); } 8%, 90% { opacity: 1; } 100% { opacity: 0; transform: translateX(10px); } }
+  @keyframes webdesign-joure-aanvraag { 0% { opacity: 0; transform: translateY(8px); } 12%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .a1, .in-beeld .a2, .in-beeld .aanvraag { animation: none; } }
+</style>

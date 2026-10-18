@@ -1,0 +1,74 @@
+---
+// Scène voor /kennisbank/gidsen/customer-journey/: een kronkelende weg met vijf haltes, van zoeken tot terugkomen.
+// Als hij leeft: een klant (oranje bolletje) reist rustig langs de haltes, bij de offerte verschijnt een twijfelwolkje en bij de laatste halte klopt een hartje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const haltes = [
+  { x: 56, y: 214, t: 'Zoeken', ty: 246 },
+  { x: 146, y: 150, t: 'Vergelijken', ty: 128 },
+  { x: 240, y: 196, t: 'Kiezen', ty: 228 },
+  { x: 330, y: 118, t: 'Levering', ty: 96 },
+  { x: 418, y: 170, t: 'Terugkomen', ty: 202 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kronkelende weg met vijf haltes: zoeken, vergelijken, kiezen, levering en terugkomen. Een klant reist langs de haltes en bij de laatste halte klopt een hart.'}>
+  <!-- de weg -->
+  <path d="M20 238L56 214L146 150L240 196L330 118L418 170L462 140" fill="none" stroke="#e8eef4" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M20 238L56 214L146 150L240 196L330 118L418 170L462 140" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="7 8" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- haltes -->
+  {haltes.map((h, i) => (
+    <g>
+      <circle cx={h.x} cy={h.y} r="15" fill="#fff" stroke={i === 4 ? '#ff6600' : '#074663'} stroke-width="2.5" />
+      <text x={h.x} y={h.y + 4.5} font-size="13" font-weight="800" text-anchor="middle">{i + 1}</text>
+      <text x={h.x} y={h.ty} font-size="12" font-weight="800" text-anchor="middle">{h.t}</text>
+    </g>
+  ))}
+
+  <!-- kaartje bovenaan -->
+  <rect x="24" y="22" width="150" height="54" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="38" y="44" font-size="12" font-weight="800">Klantreis</text>
+  <rect class="v" x="38" y="54" width="110" height="7" rx="3.5" />
+  <circle cx="156" cy="40" r="5" fill="#ff6600" />
+
+  <!-- hart bij de laatste halte -->
+  <g class="hart">
+    <path d="M440 214c-4-4-11-1-11 5 0 6 11 12 11 12s11-6 11-12c0-6-7-9-11-5z" fill="#ff6600" />
+  </g>
+
+  {!mini && (
+    <g>
+      <g class="wolk">
+        <rect x="256" y="140" width="108" height="30" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+        <path d="M262 168l-8 12 16-9z" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" stroke-linejoin="round" />
+        <text x="310" y="160" font-size="11.5" font-weight="800" text-anchor="middle">Belt hij terug?</text>
+      </g>
+      <circle class="reiziger" cx="20" cy="238" r="7" fill="#ff6600" stroke="#fff" stroke-width="2.5" />
+    </g>
+  )}
+</svg>
+<style>
+  .hart { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .wolk { opacity: 0; }
+  .in-beeld .reiziger { animation: kennisbank-gidsen-customer-journey-reis 8s ease-in-out 0.4s infinite; }
+  .in-beeld .wolk { animation: kennisbank-gidsen-customer-journey-wolk 8s ease-in-out 0.4s infinite; }
+  .in-beeld .hart { animation: kennisbank-gidsen-customer-journey-klop 8s ease-in-out 0.4s infinite; }
+  @keyframes kennisbank-gidsen-customer-journey-reis {
+    0% { transform: translate(0, 0); }
+    6% { transform: translate(36px, -24px); }
+    10% { transform: translate(36px, -24px); }
+    22% { transform: translate(126px, -88px); }
+    28% { transform: translate(126px, -88px); }
+    42% { transform: translate(220px, -42px); }
+    54% { transform: translate(220px, -42px); }
+    68% { transform: translate(310px, -120px); }
+    74% { transform: translate(310px, -120px); }
+    88%, 95% { opacity: 1; transform: translate(398px, -68px); }
+    97% { opacity: 0; transform: translate(398px, -68px); }
+    98% { opacity: 0; transform: translate(0, 0); }
+    100% { opacity: 1; transform: translate(0, 0); }
+  }
+  @keyframes kennisbank-gidsen-customer-journey-wolk { 0%, 40% { opacity: 0; } 44%, 54% { opacity: 1; } 58%, 100% { opacity: 0; } }
+  @keyframes kennisbank-gidsen-customer-journey-klop { 0%, 88% { transform: scale(1); } 92% { transform: scale(1.3); } 96% { transform: scale(0.95); } 100% { transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .reiziger, .in-beeld .wolk, .in-beeld .hart { animation: none; } }
+</style>

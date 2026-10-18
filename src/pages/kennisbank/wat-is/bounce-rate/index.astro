@@ -1,0 +1,215 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--bounce-rate.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/bounce-rate/';
+const datum = '2026-10-18';
+const definitie = 'De bounce rate, of het bouncepercentage, is het percentage bezoekers dat je website weer verlaat zonder iets te doen: geen tweede pagina, geen klik, geen aanvraag.';
+const hoofdstukken = [
+  { id: 'meten', titel: 'Zo meet Google Analytics 4 het' },
+  { id: 'engagement', titel: 'Bounce rate en engagement rate' },
+  { id: 'uitstap', titel: 'Bounce, uitstappunt en engagementduur' },
+  { id: 'goed', titel: 'Wat is een goed percentage?' },
+  { id: 'rapport', titel: 'Het cijfer in je rapport zetten' },
+  { id: 'oorzaken', titel: 'Waarom bezoekers vertrekken' },
+  { id: 'fouten', titel: 'Vijf leesfouten' },
+  { id: 'google', titel: 'Telt het mee in Google?' },
+  { id: 'verlagen', titel: 'Verlagen in vijf stappen' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Bounce rate',
+  alternateName: ['Bouncepercentage'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is een bounce rate? Uitleg en GA4',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Bounce rate',
+}];
+---
+<Base
+  title="Wat is een bounce rate? Uitleg en GA4 | Drijfveer Media"
+  description="Wat is een bounce rate? Het percentage bezoekers dat vertrekt zonder iets te doen. Zo meet Google Analytics het en zo weet je of jouw cijfer een probleem is."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Bounce rate', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Analytics</p>
+        <h1>Wat is een bounce rate?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>In een winkel zie je het gebeuren. Iemand stapt binnen, kijkt even rond en loopt weer naar buiten. Op je website zie je dat niet. Je ziet alleen een getal. En dat getal wordt vaak verkeerd gelezen.</p>
+      <p>Hieronder lees je hoe Google Analytics 4 het meet, wat het verschil is met de engagement rate, wanneer een hoog cijfer een probleem is en hoe je het stap voor stap omlaag krijgt. Met de echte menunamen, zodat je het meteen in je eigen account kunt nakijken.</p>
+
+      <div class="inhoud-blok"><Inhoud items={hoofdstukken} leestijd={9} /></div>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="meten">Zo meet Google Analytics 4 het</h2></div>
+      <p>Google Analytics 4 telt in sessies. Een sessie is één bezoek: van het moment dat iemand je site opent tot hij een halfuur niets meer doet. Dat halfuur is de standaard en kun je aanpassen. Een sessie telt als sessie met engagement als de bezoeker:</p>
+      <ul class="vink">
+        <li>langer dan 10 seconden blijft,</li>
+        <li>of een belangrijke gebeurtenis doet, zoals een formulier verzenden,</li>
+        <li>of minstens twee pagina's bekijkt.</li>
+      </ul>
+      <p>Geen van drieën? Dan is het een bounce. Het bouncepercentage is dus het deel van alle sessies zonder engagement. Zo staat het in de helpdocumentatie van Google Analytics. De formule:</p>
+      <p class="formule">Bouncepercentage = sessies zonder engagement ÷ totale aantal sessies × 100%</p>
+      <p>Die grens van 10 seconden ligt niet vast. In de instellingen van je Google-tag kun je de timer voor sessies met engagement langer zetten. Bij een site met lange teksten kan dat zinvol zijn. Weet wel dat je cijfers dan niet meer te vergelijken zijn met die van vóór de wijziging.</p>
+      <h3>Rekenvoorbeeld</h3>
+      <p>Je dienstpagina heeft in een maand 400 sessies. Daarvan zijn er 260 met engagement: mensen die bleven lezen, doorklikten of belden. Dan blijven er 140 over. 140 gedeeld door 400 is 0,35. Je bounce rate is 35%, je engagement rate 65%. Samen altijd 100%. <span class="muted">(Verzonnen cijfers.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="engagement">Het verschil tussen bounce rate en engagement rate</h2></div>
+      <p>Hier loopt veel uitleg op internet achter. In het oude Universal Analytics was een bounce een sessie van één pagina zonder enige interactie. Las iemand vijf minuten je hele pagina en belde hij daarna, dan telde dat toch als bounce. Universal Analytics stopte op 1 juli 2023 met het verwerken van gegevens. Sinds juli 2024 zijn ook de oude cijfers weg.</p>
+      <p>Google Analytics 4 draaide het om. Het kijkt eerst naar de engagement rate: het percentage sessies met engagement. Het bouncepercentage is daar volgens Google precies het omgekeerde van. Is je engagement rate 70%, dan is je bounce rate 30%. Twee kanten van dezelfde munt.</p>
+      <p>Google geeft zelf een voorbeeld. Iemand leest een paar minuten op je homepage en vertrekt zonder klik. In Universal Analytics was dat een bounce. In GA4 niet, want hij bleef langer dan 10 seconden. Andersom telt iemand die binnen 10 seconden weg is, zonder klik en zonder tweede pagina, in GA4 wel als bounce.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Cijfer</th><th>Wat het meet</th><th>Wanneer een sessie meetelt</th></tr></thead>
+          <tbody>
+            <tr><td>Bounce rate in Universal Analytics (tot 2023)</td><td>Deel van de sessies met maar één pagina en geen interactie</td><td>Eén pagina bekeken, verder niets gemeten, hoe lang iemand ook las</td></tr>
+            <tr><td>Bouncepercentage in GA4</td><td>Deel van de sessies zonder engagement</td><td>Korter dan 10 seconden, geen belangrijke gebeurtenis, maar één pagina</td></tr>
+            <tr><td>Engagementpercentage in GA4</td><td>Deel van de sessies met engagement</td><td>Langer dan 10 seconden, of een belangrijke gebeurtenis, of twee of meer pagina's</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Wat betekent dat voor jou? Vergelijk nooit een GA4-cijfer met een oud rapport uit Universal Analytics. Een daling van 60% naar 35% kan helemaal door de nieuwe rekenwijze komen. En kijk liever naar het engagementpercentage. Dat vertelt hetzelfde, maar in de positieve richting.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="uitstap">Bounce, uitstappunt en engagementduur naast elkaar</h2></div>
+      <p>Drie cijfers worden vaak door elkaar gehaald. Ze beantwoorden elk een andere vraag.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Cijfer in GA4</th><th>De vraag die het beantwoordt</th><th>Handig bij</th></tr></thead>
+          <tbody>
+            <tr><td>Bouncepercentage</td><td>Hoeveel bezoeken leverden niets op?</td><td>Landingspagina's en pagina's achter een advertentie</td></tr>
+            <tr><td>Uitstappunten</td><td>Op welke pagina hield het bezoek op?</td><td>Een offerteformulier of de laatste stap voor een aanvraag</td></tr>
+            <tr><td>Gemiddelde engagementduur</td><td>Hoe lang was je pagina echt in beeld?</td><td>Lange teksten, blogs en gidsen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een uitstappunt is geen fout. Elk bezoek eindigt ergens. Op je bedankpagina wil je juist veel uitstappunten zien. Op de pagina vóór je formulier niet. De engagementduur telt alleen de tijd dat je site echt in beeld was in de browser, niet een tabblad dat op de achtergrond openstaat.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2 id="goed">Wat is een goede bounce rate?</h2></div>
+      <p>Je ziet online tabellen met "normale" percentages per branche. Wees daar voorzichtig mee. Veel van die lijstjes stammen uit de tijd van Universal Analytics en meten dus iets anders dan jouw GA4-account. Bovendien verschilt het sterk per type website en vooral per pagina.</p>
+      <p>Bounce rates hangen af van het doel van de pagina. Deze vuistregels helpen meer dan een landelijk gemiddelde:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Type pagina</th><th>Is een hoge bounce erg?</th><th>Waarom</th></tr></thead>
+          <tbody>
+            <tr><td>Contactpagina</td><td>Nee</td><td>Mensen zoeken je nummer of adres en bellen meteen. Telt die belklik niet, dan lijkt het een bounce.</td></tr>
+            <tr><td>Blog of uitleg</td><td>Meestal niet</td><td>Wie in één keer zijn antwoord vindt, heeft geen reden om door te klikken.</td></tr>
+            <tr><td>Dienstpagina</td><td>Ja</td><td>Hier moet de bezoeker doorklikken naar prijzen, een case of je formulier.</td></tr>
+            <tr><td>Landingspagina achter een advertentie</td><td>Ja, en het kost geld</td><td>Je betaalt per klik. Elke bounce is weggegooid budget.</td></tr>
+            <tr><td>Homepage</td><td>Ja</td><td>Een homepage is een doorgeefluik. Wie daar strandt, vond de weg niet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het beste vergelijkingspunt ben je zelf. Zet een pagina naast dezelfde pagina van vorige maand of vorig jaar. Of naast een andere pagina met hetzelfde doel op je eigen site. Dan meet je allebei op dezelfde manier.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="rapport">Zo zet je het bouncepercentage in je rapport</h2></div>
+      <p>In de meeste standaardrapporten van GA4 staat het bouncepercentage niet. Je voegt het zelf toe. Daarvoor heb je de rol Bewerker of Beheerder nodig. De stappen volgens Google:</p>
+      <ol>
+        <li>Log in bij Google Analytics en kies <b>Rapporten</b> in het linkermenu.</li>
+        <li>Open het rapport <b>Pagina's en schermen</b>.</li>
+        <li>Klik rechtsboven op <b>Rapport aanpassen</b>.</li>
+        <li>Kies onder Rapportgegevens voor <b>Statistieken</b>.</li>
+        <li>Klik onderaan op <b>Statistiek toevoegen</b> en typ <b>Bouncepercentage</b>. Doe hetzelfde met <b>Engagementpercentage</b>.</li>
+        <li>Klik op <b>Toepassen</b> en sla het rapport op.</li>
+      </ol>
+      <p>De twee kolommen staan daarna helemaal rechts in de tabel. Zie je alleen "Kaarten toevoegen"? Dan zit je in een overzichtsrapport. Statistieken voeg je alleen toe aan een detailrapport.</p>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2 id="oorzaken">Waarom vertrekken bezoekers? Zeven oorzaken</h2></div>
+      <p>Een hoge bounce op een pagina die moet verkopen, heeft bijna altijd een oorzaak die je kunt vinden. Mensen vertrekken omdat ze niet vonden wat ze zochten, of omdat het te veel moeite kostte. Deze zeven zien we het vaakst:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Oorzaak</th><th>Zo herken je het</th><th>Wat je doet</th></tr></thead>
+          <tbody>
+            <tr><td>De pagina past niet bij de zoekvraag</td><td>Hoge bounce vanuit Google, lage vanuit je nieuwsbrief</td><td>Lees je kop naast het zoekwoord. Belooft de pagina wat de zoeker wil?</td></tr>
+            <tr><td>Advertentie en pagina zeggen iets anders</td><td>Hoge bounce bij betaald verkeer</td><td>Stuur elke advertentiegroep naar een eigen pagina met dezelfde belofte</td></tr>
+            <tr><td>Trage pagina op mobiel</td><td>Veel hoger percentage op telefoons dan op laptops</td><td>Maak foto's kleiner en schrap wat niet nodig is</td></tr>
+            <tr><td>Pop-up of melding vult het scherm</td><td>Het cijfer schoot omhoog na het plaatsen van een pop-up</td><td>Weg ermee, of pas tonen na een tijdje</td></tr>
+            <tr><td>Geen duidelijke volgende stap</td><td>Mensen lezen lang, maar klikken nergens op</td><td>Eén opvallende knop met een heldere tekst</td></tr>
+            <tr><td>De pagina oogt onbetrouwbaar</td><td>Weinig klikken op je formulier, ook bij goed verkeer</td><td>Laat zien wie je bent: foto, adres, telefoonnummer, echte voorbeelden</td></tr>
+            <tr><td>De meting klopt niet</td><td>Belklikken en formulieren tellen niet als gebeurtenis</td><td>Markeer ze als belangrijke gebeurtenis</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Google geeft in zijn eigen uitleg dezelfde richting. Is het engagementpercentage laag op een paar pagina's, kijk dan of de inhoud aansluit bij de marketing die mensen erheen stuurt. En of bezoekers er makkelijk doen wat jij wilt. Is het overal slecht, controleer dan eerst je meetcode.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="fouten">Vijf fouten bij het lezen van je cijfers</h2></div>
+      <ol>
+        <li><b>Kijken naar het gemiddelde van de hele site.</b> Een blog met veel lezers trekt het hele cijfer omhoog, terwijl je dienstpagina's het prima doen. Kijk per pagina en per kanaal.</li>
+        <li><b>Bellers tellen als vertrekkers.</b> Iemand die op je nummer tikt en belt, is je beste bezoeker. Zonder gebeurtenis voor die klik vertrekt hij in je rapport na acht seconden.</li>
+        <li><b>Niet elke pagina meet mee.</b> Staat de meetcode niet op alle pagina's, bijvoorbeeld niet op je offertepagina, dan klopt er niets van.</li>
+        <li><b>Te kleine aantallen.</b> Twintig sessies in een maand zeggen niets. Kijk over een langere periode of wacht tot je een paar honderd sessies hebt.</li>
+        <li><b>Oud en nieuw vergelijken.</b> Een rapport uit 2022 en een rapport uit 2026 meten een bounce op een andere manier. Dat is geen verbetering, dat is een andere rekensom.</li>
+      </ol>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="google">Telt het bouncepercentage mee voor je positie in Google?</h2></div>
+      <p>Een hardnekkig verhaal. In het overzicht dat Google zelf publiceert van zijn rankingsystemen, komt het bouncepercentage niet voor. Het is een cijfer uit jouw eigen Analytics-account, en lang niet elke site heeft dat. Wel schrijft Google dat het verzamelde en geanonimiseerde interactiegegevens gebruikt om te beoordelen of resultaten relevant zijn.</p>
+      <p>Het verschil doet ertoe. Wie op jouw pagina komt en direct terug naar de zoekresultaten gaat om een ander resultaat te proberen, was niet tevreden. Dat kost je hoe dan ook een klant, of Google er nu iets mee doet of niet. Werk dus aan de oorzaak, niet aan het cijfer.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="verlagen">Je bounce rate verlagen in vijf stappen</h2></div>
+      <ol>
+        <li><b>Zet de meting goed.</b> Maak van formulieren, belklikken en klikken op je e-mailadres een belangrijke gebeurtenis. Hoe dat werkt, lees je in de gids over <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>.</li>
+        <li><b>Kies drie pagina's.</b> Neem de pagina's die geld moeten opleveren en de meeste bezoekers krijgen. Daar zit de grootste winst.</li>
+        <li><b>Zoek de oorzaak per kanaal.</b> Is het percentage alleen hoog vanuit Google, dan klopt de belofte niet. Is het alleen hoog op mobiel, dan is het de snelheid of de opmaak.</li>
+        <li><b>Verander één ding tegelijk.</b> Een betere kop, een snellere pagina of een duidelijkere <a href="/kennisbank/wat-is/call-to-action/">call to action</a>. Zo weet je wat werkte.</li>
+        <li><b>Meet na vier weken opnieuw.</b> Vergelijk met dezelfde periode ervoor en kijk niet alleen naar het percentage. Kijk ook naar aanvragen.</li>
+      </ol>
+      <p>Een voorbeeld. Een installateur uit Hoogeveen adverteert op "cv-ketel vervangen". De advertentie belooft een vaste prijs, maar de pagina opent met een lap tekst over de geschiedenis van het bedrijf. Twee op de drie bezoekers vertrekken binnen tien seconden. Hij zet de prijs en een knop "Plan een afspraak" bovenaan, en schrapt de pop-up voor zijn nieuwsbrief. Een maand later blijft meer dan de helft. Het aantal aanvragen stijgt mee, en daar ging het om. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Een rapportage vol percentages waar je nog uitleg bij nodig hebt, schiet zijn doel voorbij. Een cijfer is pas nuttig als duidelijk is wat je ermee moet. Van cijfer naar verbetering: dat is de kern van <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>, meer aanvragen uit dezelfde bezoekers.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/conversie-verhogen/">conversie van je website verhogen</a> of laat ons je metingen inrichten met <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>, vanaf € 395. Wat betrokkenheid betekent op social media, staat bij <a href="/kennisbank/wat-is/engagement/">engagement</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen bounce rate en bouncepercentage?', a: 'Er is geen verschil. Bouncepercentage is de Nederlandse naam die Google Analytics gebruikt, bounce rate de Engelse.' },
+      { v: 'Waarom is mijn bounce rate in GA4 lager dan vroeger?', a: 'Omdat GA4 anders rekent. In Universal Analytics was elk bezoek van één pagina zonder interactie een bounce. In GA4 telt een bezoek van meer dan 10 seconden al als sessie met engagement, ook als iemand maar één pagina bekijkt.' },
+      { v: 'Hoe bereken je het bouncepercentage?', a: 'Deel het aantal sessies zonder engagement door het totale aantal sessies en vermenigvuldig met 100. Bij 140 bounces op 400 sessies is dat 35%.' },
+      { v: 'Is een hoog bouncepercentage slecht voor SEO?', a: 'Google noemt het bouncepercentage niet in zijn overzicht van rankingsystemen. Maar bezoekers die direct teruggaan naar de zoekresultaten, waren niet tevreden. Daar wil je hoe dan ook iets aan doen.' },
+      { v: 'Waar vind ik het bouncepercentage in Google Analytics 4?', a: 'Standaard nergens. Open het rapport Pagina\'s en schermen, klik op Rapport aanpassen, kies Statistieken en voeg Bouncepercentage toe. Je hebt daarvoor de rol Bewerker of Beheerder nodig.' },
+      { v: 'Kan ik de grens van 10 seconden aanpassen?', a: 'Ja. In de instellingen van je Google-tag stel je de timer voor sessies met engagement in. De standaard is 10 seconden.' },
+    ]}
+  />
+
+  <Actie titel="Waarom vertrekken bezoekers van jouw site?" tekst={`We zoeken het gratis voor je uit. ${site.contactpersoon} belt je met de drie pagina's waar de meeste winst zit.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .inhoud-blok { margin: 8px 0 40px; }
+  .formule { font-weight: 700; padding: 12px 16px; background: var(--bg); border-radius: 10px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

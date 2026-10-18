@@ -1,0 +1,327 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--perplexity.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/perplexity/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is Perplexity?' },
+  { id: 'wie', titel: 'Wie zit erachter?' },
+  { id: 'hoe-werkt', titel: 'Hoe het werkt' },
+  { id: 'onderdelen', titel: 'Alle onderdelen' },
+  { id: 'modellen', titel: 'Welke taalmodellen?' },
+  { id: 'verschil', titel: 'Het verschil met Google en ChatGPT' },
+  { id: 'kosten', titel: 'Abonnementen en prijzen' },
+  { id: 'gebruiken', titel: 'Acht toepassingen voor ondernemers' },
+  { id: 'voorbeeld', titel: 'Een onderzoek van begin tot eind' },
+  { id: 'tips', titel: 'Betere vragen stellen' },
+  { id: 'teams', titel: 'Perplexity voor teams' },
+  { id: 'privacy', titel: 'Privacy en je gegevens' },
+  { id: 'betrouwbaar', titel: 'Hoe betrouwbaar is het?' },
+  { id: 'genoemd', titel: 'Als bron genoemd worden' },
+  { id: 'meten', titel: 'Meten of het werkt' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat is Perplexity? De AI-zoekmachine die zijn bronnen noemt',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'SoftwareApplication', name: 'Perplexity', applicationCategory: 'AI-zoekmachine' },
+  citation: [
+    'https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you',
+    'https://www.perplexity.ai/help-center/en/articles/10352895-how-does-perplexity-work',
+    'https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity',
+    'https://docs.perplexity.ai/guides/bots',
+  ],
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Perplexity: wat is het en hoe word je bron?"
+  description="Perplexity uitgelegd: hoe de AI-zoekmachine met bronvermelding werkt, wat elk abonnement kost, hoe veilig het is en hoe je bedrijf bron wordt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat is Perplexity?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · GEO" titel="Wat is Perplexity? De AI-zoekmachine die zijn bronnen noemt" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Perplexity is een AI-zoekmachine. Je stelt een vraag, hij zoekt op internet en schrijft een antwoord met genummerde bronnen erbij. Voor ondernemers is dat om twee redenen interessant: het is een sterk onderzoeksgereedschap, en jouw website kan tussen die bronnen staan.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand 18 oktober 2026)</p>
+          <ul>
+            <li>Perplexity noemt zichzelf een antwoordmachine: een zoekmachine die geen lijst links geeft, maar een geschreven antwoord met bronvermelding bij elke bewering.</li>
+            <li>De basisversie is gratis. Pro kost $ 20 per maand of $ 200 per jaar. Voor teams is er Enterprise Pro vanaf $ 40 per gebruiker per maand.</li>
+            <li>Bij de gratis, Pro- en Max-versie staat het gebruik van je gegevens voor AI-training standaard aan. Je kunt het uitzetten.</li>
+            <li>Omdat het altijd zijn bronnen laat zien, is het de makkelijkste plek om te zien of AI jouw website gebruikt.</li>
+          </ul>
+        </div>
+        <p class="klein muted">Prijzen, functies en instellingen in deze gids komen uit het helpcentrum en de documentatie van Perplexity zelf (perplexity.ai en docs.perplexity.ai). Geraadpleegd oktober 2026. Perplexity past zijn aanbod vaak aan. Zie je iets anders in de app, dan geldt dat.</p>
+
+        <h2 id="wat-is">Wat is Perplexity?</h2>
+        <p>Perplexity is een zoekmachine die werkt met kunstmatige intelligentie. Volgens het eigen helpcentrum zoekt hij bij elke vraag in realtime op internet en geeft hij een antwoord in gewone taal, met citaten en links naar de oorspronkelijke bronnen. Het bedrijf noemt dat een answer engine: een antwoordmachine.</p>
+        <p>Het verschil met een gewone zoekmachine zie je meteen. Bij Google typ je een paar woorden en krijg je een rij links, die je zelf moet doorlezen. Bij Perplexity stel je een volledige vraag en krijg je één samengevat antwoord. Achter elke bewering staat een nummertje. Klik je erop, dan zie je van welke website die informatie komt.</p>
+        <p>Het verschil met een gewone chatbot is net zo belangrijk. Een chatbot praat vaak uit zijn geheugen: wat hij tijdens zijn training heeft geleerd. Perplexity zoekt bij elke vraag opnieuw en laat zien waar het antwoord vandaan komt. Daardoor is het actueler, en kun je het controleren.</p>
+        <p>Je gebruikt het via de website perplexity.ai, de apps voor iPhone en Android, een desktop-app, de eigen browser Comet en een API voor ontwikkelaars. De website is ook in het Nederlands te gebruiken.</p>
+
+        <h2 id="wie">Wie zit erachter?</h2>
+        <p>Perplexity AI is een Amerikaans bedrijf. Volgens Wikipedia werd het op 22 augustus 2022 opgericht door Aravind Srinivas, Denis Yarats, Johnny Ho en Andy Konwinski, en ging de zoekmachine op 7 december 2022 online. Srinivas is er nog steeds de topman. In juli 2025 kwam de browser Comet, in februari 2026 de agent Perplexity Computer.</p>
+        <p>Het bedrijf is veel kleiner dan Google of OpenAI. Op zijn zakelijke pagina schrijft Perplexity dat meer dan 50.000 organisaties het vertrouwen. Hoeveel mensen er in Nederland gebruik van maken, maakt het bedrijf niet bekend.</p>
+
+        <h2 id="hoe-werkt">Hoe werkt de AI-zoekmachine?</h2>
+        <p>Volgens de eigen uitleg in het helpcentrum gaat het in vier stappen:</p>
+        <ol>
+          <li><b>Je vraag begrijpen.</b> Een taalmodel leest wat je precies wilt weten, ook de context en de nuances.</li>
+          <li><b>Zoeken.</b> Het systeem zoekt op internet naar artikelen, websites en vakbladen.</li>
+          <li><b>Samenvatten.</b> De meest relevante stukken worden samengevoegd tot één helder antwoord.</li>
+          <li><b>Bronnen tonen.</b> Elk antwoord krijgt genummerde verwijzingen naar de oorspronkelijke pagina's.</li>
+        </ol>
+        <p>Daarna kun je doorvragen. Perplexity onthoudt de context van je eerdere vragen in dezelfde sessie, dus je hoeft niet alles opnieuw uit te leggen.</p>
+        <h3>De zoekmodi</h3>
+        <p>Je kiest zelf hoe diep het gaat. Dit zijn de modi zoals het helpcentrum ze beschrijft:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Modus</th><th>Wat het doet</th><th>Hoe lang</th><th>Voor wie</th></tr></thead>
+            <tbody>
+              <tr><td>Best (standaard)</td><td>Kiest zelf het geschikte model voor je vraag</td><td>Seconden</td><td>Iedereen, zonder limiet</td></tr>
+              <tr><td>Pro Search</td><td>Doet meerdere zoekopdrachten en leest tientallen bronnen</td><td>Seconden</td><td>Gratis: 3 per dag. Pro: ruimer</td></tr>
+              <tr><td>Research</td><td>Doet tientallen zoekopdrachten, leest honderden bronnen en schrijft een rapport</td><td>Meestal 2 tot 5 minuten</td><td>Gratis: 1 per maand. Pro: ruimer</td></tr>
+              <tr><td>Create files and apps</td><td>Maakt rapporten, spreadsheets, dashboards en eenvoudige webapps</td><td>Minuten</td><td>Pro en hoger</td></tr>
+              <tr><td>Model Council</td><td>Stelt je vraag aan meerdere modellen tegelijk en voegt de antwoorden samen</td><td>Minuten</td><td>Max en Enterprise Max</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een rapport uit Research kun je exporteren als pdf of document, of omzetten naar een webpagina die je deelt. Handig als je een collega of je boekhouder iets wilt laten zien.</p>
+
+        <h2 id="onderdelen">Alle onderdelen: van zoekbalk tot Comet en Computer</h2>
+        <p>Perplexity is in een paar jaar uitgegroeid van een zoekbalk tot een hele familie producten. Dit zijn de onderdelen die je tegenkomt.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>Zoeken</h3></div>
+        <p>De kern. Een vraag, een antwoord, bronnen. Je kunt bestanden uploaden, zoals pdf's, spreadsheets, foto's, audio en video, en er vragen over stellen naast wat er op het web staat.</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>Projects</h3></div>
+        <p>Een Project is een vaste werkplek waar je zoekopdrachten, bestanden en instructies bij elkaar houdt, en die je met anderen kunt delen. Bijvoorbeeld een project "Concurrenten 2026" met je vaste instructie: "Antwoord altijd in een tabel met prijs, werkgebied en reviews."</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>Comet</h3></div>
+        <p>Een eigen webbrowser met een AI-assistent erin, voor Mac, Windows, iPhone en Android. Je kunt hem vragen stellen over de pagina die je bekijkt, mails laten beantwoorden of taken laten uitvoeren op websites.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>Computer</h3></div>
+        <p>Perplexity noemt Computer een digitale medewerker. Het doet niet alleen onderzoek, maar voert ook taken uit: documenten en presentaties maken, eenvoudige apps bouwen, mail beheren en terugkerende klussen op een schema draaien. Het koppelt met onder meer Gmail, Outlook, Slack, Notion en GitHub. Computer werkt met credits. Volgens het helpcentrum is 100 credits gelijk aan $ 1. Een korte vraag kost 15 tot 70 credits, een onderzoeksrapport 350 tot 950, een dashboard 2.400 tot 9.800.</p>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>Op je telefoon en computer</h3></div>
+        <p>Naast de website zijn er apps voor iPhone, Android en de computer. Op Android kun je met Draw to Search een stuk van je scherm omcirkelen en daar een vraag over stellen. Bijvoorbeeld een product op een foto: wat is het en waar koop je het?</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>Betaalde databronnen</h3></div>
+        <p>In Perplexity kun je ook zoeken in bronnen die normaal achter een betaalmuur zitten, zoals Statista, PitchBook, CB Insights en Morningstar. Voor marktonderzoek kan dat schelen.</p>
+
+        <h2 id="modellen">Welk taalmodel gebruikt het?</h2>
+        <p>Perplexity bouwt geen alleenstaand groot taalmodel zoals Google of OpenAI. Het gebruikt een mix. Er is een eigen model, Sonar, en daarnaast modellen van andere makers. In oktober 2026 noemt het helpcentrum voor Pro onder meer GPT-5.2 van OpenAI, Claude Sonnet 4.6 van Anthropic, Gemini 3.1 Pro van Google en Grok 4.</p>
+        <p>In de standaardmodus kiest Perplexity zelf het model. Met Pro kies je het zelf, via de modelkeuze rechtsonder in de zoekbalk. Het maakt uit: het ene model schrijft beter, het andere redeneert beter. Voor de meeste vragen is de standaard prima.</p>
+        <p>Goed om te weten: volgens Perplexity verbieden de afspraken met OpenAI, Anthropic en andere leveranciers dat zij data uit Perplexity gebruiken om hun eigen modellen te trainen.</p>
+
+        <h2 id="verschil">Perplexity, Google of ChatGPT?</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Google Zoeken</th><th>ChatGPT</th><th>Perplexity</th></tr></thead>
+            <tbody>
+              <tr><td><b>Wat je krijgt</b></td><td>Een lijst links, soms met AI-overzicht</td><td>Een gesprek</td><td>Een antwoord met bronnen</td></tr>
+              <tr><td><b>Zoekt actueel</b></td><td>Ja</td><td>Bij veel vragen</td><td>Bij elke vraag</td></tr>
+              <tr><td><b>Bronvermelding</b></td><td>Links</td><td>Soms</td><td>Bij elk antwoord, genummerd</td></tr>
+              <tr><td><b>Gratis</b></td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td><b>Betaald vanaf</b></td><td>Geen abonnement nodig</td><td>$&nbsp;8 per maand (Go)</td><td>$&nbsp;20 per maand (Pro)</td></tr>
+              <tr><td><b>Sterk in</b></td><td>Lokaal zoeken, kaarten, winkels</td><td>Schrijven, brainstormen</td><td>Uitzoeken en vergelijken</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Perplexity is veel kleiner dan Google en ChatGPT. Maar de gebruikers zijn interessant: mensen die iets willen uitzoeken en vergelijken voordat ze kiezen. Precies het moment waarop je als bedrijf in beeld wilt zijn. Over betaalde zichtbaarheid in ChatGPT lees je meer bij <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</p>
+        <p>En de AI-modus van Google dan? Die lijkt er het meest op: ook daar krijg je een geschreven antwoord met links, en ook daar kun je doorvragen. Het verschil zit in de bron. De AI-modus put uit de zoekindex van Google, Perplexity zoekt met eigen bots en toont bij elk antwoord genummerde bronnen. Wie in beide wil verschijnen, heeft grotendeels hetzelfde huiswerk. Lees ook onze gids over de <a href="/kennisbank/gidsen/google-ai-modus/">Google AI-modus</a>.</p>
+
+        <h2 id="kosten">Wat kost Perplexity Pro? Alle abonnementen</h2>
+        <p>Perplexity noemt zijn prijzen in dollars. Dit zijn de bedragen uit het helpcentrum, oktober 2026:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Abonnement</th><th>Prijs</th><th>Wat je krijgt</th></tr></thead>
+            <tbody>
+              <tr><td>Standard</td><td>Gratis</td><td>Vrijwel onbeperkt gewoon zoeken, 3 Pro Searches per dag, 1 Research per maand, beperkte uploads</td></tr>
+              <tr><td>Pro</td><td>$&nbsp;20 per maand of $&nbsp;200 per jaar</td><td>Ruim Pro Search en Research, zelf een model kiezen, afbeeldingen en video maken, tot 50 bestanden per project</td></tr>
+              <tr><td>Education Pro</td><td>$&nbsp;10 per maand</td><td>Alles van Pro, voor studenten en docenten na verificatie</td></tr>
+              <tr><td>Max</td><td>Prijs in de app</td><td>Hoogste limieten, als eerste nieuwe functies, Model Council, 10.000 Computer-credits per maand</td></tr>
+              <tr><td>Enterprise Pro</td><td>$&nbsp;40 per gebruiker per maand of $&nbsp;400 per jaar</td><td>Alles van Pro, plus beheer, 400 Pro Searches per week, gegevens nooit gebruikt voor training</td></tr>
+              <tr><td>Enterprise Max</td><td>$&nbsp;325 per gebruiker per maand of $&nbsp;3.250 per jaar</td><td>Hoogste limieten, 500 Research per maand, uitgebreide beveiliging</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Goed om te weten voor je afsluit</p>
+          <ul class="vink">
+            <li><b>Bedenktijd in Europa.</b> Volgens het helpcentrum krijg je in de EU je geld terug als je binnen 14 dagen na aankoop opzegt. Dat geldt voor maand- en jaarabonnementen.</li>
+            <li><b>Via de app of via de site.</b> Heb je via de App Store of Google Play betaald, dan regel je opzeggen ook daar. Pas je betaalgegevens niet aan via de app store, want dan ontstaat een tweede abonnement.</li>
+            <li><b>Korting voor non-profits.</b> Scholen en non-profitorganisaties kunnen Enterprise Pro krijgen voor $ 30 per gebruiker per maand.</li>
+            <li><b>Geen proefperiode voor Enterprise.</b> Wil je het zakelijke abonnement eerst testen, dan loopt dat via het verkoopteam.</li>
+            <li><b>Btw-nummer.</b> Bij Enterprise kun je je btw-nummer invullen, zodat de btw wordt verlegd.</li>
+          </ul>
+        </div>
+        <p>Voor de meeste ondernemers is de gratis versie genoeg om mee te beginnen. Gebruik je Research meer dan eens per maand, of wil je zelf het model kiezen, dan is Pro de logische stap.</p>
+
+        <h2 id="gebruiken">Zo gebruik je Perplexity als ondernemer</h2>
+        <p>Omdat het altijd zijn bronnen noemt, is het een sterke tool voor onderzoek. Acht toepassingen die tijd schelen, met een vraag om over te nemen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Toepassing</th><th>Voorbeeldvraag</th></tr></thead>
+            <tbody>
+              <tr><td>Subsidies en regels uitzoeken</td><td>"Welke subsidies zijn er in 2026 voor verduurzaming van een bedrijfspand in Drenthe? Noem per regeling de voorwaarden en de bron."</td></tr>
+              <tr><td>Concurrenten bekijken</td><td>"Welke installatiebedrijven in Groningen bieden onderhoudscontracten aan voor warmtepompen? Zet ze in een tabel."</td></tr>
+              <tr><td>Een leverancier kiezen</td><td>"Vergelijk drie boekhoudpakketten voor een bedrijf met vijf medewerkers op prijs, koppelingen en support."</td></tr>
+              <tr><td>Feiten checken</td><td>"Klopt het dat [bewering]? Geef bronnen voor en tegen."</td></tr>
+              <tr><td>Een klantgesprek voorbereiden</td><td>"Wat is er het afgelopen jaar in het nieuws geweest over [bedrijf van de klant]?"</td></tr>
+              <tr><td>Een markt verkennen</td><td>Met Research: "Hoe groot is de vraag naar zonnepanelen op bedrijfsdaken in Noord-Nederland en welke trends zie je?"</td></tr>
+              <tr><td>Een document doorlichten</td><td>Upload een offerte van een concurrent en vraag: "Wat staat hierin dat niet in de mijne staat?"</td></tr>
+              <tr><td>Je eigen zichtbaarheid meten</td><td>Stel de vragen die je klanten stellen en kijk of jouw site bij de bronnen staat.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Dat laatste is voor je vindbaarheid het belangrijkste. Andere AI-assistenten laten niet altijd zien waar ze hun kennis vandaan halen. Perplexity wel. Het staat dan ook in het rijtje tools dat wij dagelijks gebruiken, naast Claude, ChatGPT en Gemini.</p>
+
+        <h2 id="voorbeeld">Een onderzoek van begin tot eind</h2>
+        <p>Hoe ziet dat er in de praktijk uit? Een verzonnen voorbeeld van een installateur in Meppel die wil weten of het loont om warmtepompen voor bedrijfspanden aan te bieden.</p>
+        <ol>
+          <li><b>Eerste vraag, gewone zoekopdracht.</b> "Welke subsidies zijn er in 2026 voor warmtepompen in bedrijfspanden in Nederland?" Hij krijgt in een paar seconden een overzicht met vijf bronnen, waaronder een overheidssite.</li>
+          <li><b>Doorvragen.</b> "Welke van deze regelingen gelden ook voor huurders van een pand?" Perplexity onthoudt waar het over ging en zoekt gericht verder.</li>
+          <li><b>Research starten.</b> "Maak een rapport over de vraag naar warmtepompen bij mkb-bedrijven in Drenthe en Overijssel: subsidies, concurrenten, gemiddelde kosten en wat klanten vaak vragen." Na een paar minuten ligt er een rapport met tientallen bronnen.</li>
+          <li><b>Eigen cijfers toevoegen.</b> Hij uploadt een spreadsheet met zijn eigen offertes van vorig jaar en vraagt: "Vergelijk mijn prijzen met wat je online vond."</li>
+          <li><b>Controleren.</b> Bij elk bedrag in het rapport klikt hij op de bron. Twee cijfers blijken van 2023. Die zoekt hij zelf opnieuw op.</li>
+          <li><b>Delen.</b> Hij exporteert het rapport als pdf voor zijn compagnon.</li>
+        </ol>
+        <p>Tijd: een uur in plaats van een middag. Maar stap 5 is niet over te slaan. Juist daar zat de fout.</p>
+
+        <h2 id="tips">Betere antwoorden: zo stel je je vraag</h2>
+        <p>Het helpcentrum van Perplexity geeft één gouden regel: zeg duidelijk wat je wilt en geef details. Een vage vraag levert een vaag antwoord op. Uitgewerkt in vijf tips:</p>
+        <ol>
+          <li><b>Stel een hele vraag.</b> Niet "warmtepomp", maar "Wat kost een warmtepomp voor een kantoor van 200 vierkante meter, inclusief installatie?"</li>
+          <li><b>Geef context.</b> "Ik heb een bakkerij met twee filialen in Assen en Emmen" verandert het antwoord.</li>
+          <li><b>Zeg welke vorm je wilt.</b> Een tabel, opsomming, stappenplan of samenvatting van vijf regels.</li>
+          <li><b>Begin breed, ga dan dieper.</b> Vooral in Research werkt het goed om na het eerste rapport door te vragen: "Focus nu op de kosten."</li>
+          <li><b>Combineer bronnen.</b> Upload je eigen cijfers en vraag Perplexity ze te vergelijken met wat er op het web staat.</li>
+        </ol>
+        <p>En een tip van ons: vraag altijd om de bron bij een getal. "Noem bij elk bedrag de bron en de datum." Dan zie je meteen of het cijfer van 2026 is of van 2019.</p>
+
+        <h2 id="teams">Perplexity voor teams</h2>
+        <p>Werk je er met meerdere mensen mee, dan is de zakelijke versie het bekijken waard. Volgens het helpcentrum krijg je met Enterprise Pro, naast alles wat in Pro zit:</p>
+        <ul>
+          <li><b>Centraal beheer.</b> Een beheerder voegt mensen toe en haalt ze weg, en regelt de facturen. Een plek kun je doorgeven aan een collega zonder een nieuwe te kopen.</li>
+          <li><b>Inloggen via je eigen systeem.</b> Met single sign-on en SCIM sluit het aan op je bestaande accounts, bijvoorbeeld via Google Workspace of Entra ID.</li>
+          <li><b>Zoeken in je eigen bestanden.</b> Met Internal Knowledge Search en koppelingen met cloudopslag zoekt Perplexity in je eigen documenten en op het web tegelijk, met bronvermelding.</li>
+          <li><b>Koppelingen met werktools.</b> Onder meer Asana, Jira, Confluence, HubSpot en Slack.</li>
+          <li><b>Strengere privacy.</b> Vragen worden nooit gebruikt om modellen te trainen, en bestanden worden kort bewaard.</li>
+        </ul>
+        <p>Voor een team van drie mensen dat af en toe iets opzoekt, is dat te veel. Voor een advieskantoor of een bedrijf dat veel rapporten maakt, kan het tijd schelen. Reken het door: Enterprise Pro kost $ 40 per gebruiker per maand.</p>
+
+        <h2 id="privacy">Privacy: wat gebeurt er met je vragen?</h2>
+        <p>Dit is het deel dat veel gidsen overslaan. Volgens het helpcentrum van Perplexity zit het zo:</p>
+        <ul>
+          <li><b>Gratis, Pro en Max:</b> de instelling AI Data Retention staat standaard aan. Je zoekvragen kunnen dan gebruikt worden om AI-modellen te trainen en de zoekkwaliteit te verbeteren.</li>
+          <li><b>Uitzetten:</b> ga naar je accountinstellingen, open Preferences en zet AI data retention uit. Dat geldt alleen voor gegevens die je daarna invoert. Wat al verzameld is, kan niet worden verwijderd uit de trainingsdata.</li>
+          <li><b>Enterprise Pro en Max:</b> je vragen worden nooit gebruikt voor training. Geüploade bestanden worden 7 dagen bewaard. Beheerders kunnen eigen bewaartermijnen instellen.</li>
+          <li><b>Verkoop van gegevens:</b> Perplexity schrijft dat het je gegevens niet verkoopt en alleen deelt met dienstverleners zoals de betaalprovider, of als de wet dat eist.</li>
+          <li><b>Account opheffen:</b> je gegevens worden dan binnen 30 dagen verwijderd.</li>
+        </ul>
+        <p>Voor een ondernemer betekent dat: zet geen klantnamen, adressen of vertrouwelijke offertes in de gratis versie. Onder de AVG is dat verwerking van persoonsgegevens. Werk je er met een team mee, dan is Enterprise Pro de verstandige keus. En vergeet de AI-geletterdheid niet: volgens de Autoriteit Persoonsgegevens moeten organisaties die AI gebruiken sinds 2 februari 2025 zorgen dat hun medewerkers er verantwoord mee kunnen werken. Een korte <a href="/trainingen/">training</a> helpt daarbij.</p>
+
+        <h2 id="betrouwbaar">Hoe betrouwbaar is Perplexity?</h2>
+        <p>Betrouwbaarder dan een chatbot zonder bronnen, omdat je elke bewering kunt nalopen. Maar niet foutloos. Perplexity zegt in zijn eigen uitleg dat het streeft naar nauwkeurigheid en raadt aan om bronnen te controleren. Drie dingen gaan er in de praktijk mis:</p>
+        <ul>
+          <li><b>Een goede bron, verkeerd samengevat.</b> Het cijfer staat wel in het artikel, maar slaat op iets anders.</li>
+          <li><b>Een zwakke bron.</b> Een forumbericht of een oude blog weegt soms even zwaar als een officiële site.</li>
+          <li><b>Verouderde informatie.</b> Een prijs of regel uit een artikel van jaren geleden.</li>
+        </ul>
+        <p>Klik dus door bij alles wat ertoe doet: geld, gezondheid, contracten, wetten.</p>
+        <h3>De kritiek op het bedrijf</h3>
+        <p>Perplexity is niet onomstreden. Volgens Wikipedia verwijten mediabedrijven als de BBC, Dow Jones en The New York Times het bedrijf dat het hun artikelen zonder toestemming gebruikt. Wired en later Cloudflare meldden dat het ook met niet-aangekondigde crawlers websites las die bots hadden geblokkeerd. Voor jou als website-eigenaar betekent dat: een blokkade in robots.txt is de eerste stap als je níet gebruikt wilt worden, maar niet altijd waterdicht.</p>
+
+        <h2 id="genoemd">Zo word je als bron genoemd in Perplexity</h2>
+        <p>Perplexity citeert pagina's die de vraag duidelijk, betrouwbaar en actueel beantwoorden. Dit zijn de stappen die het verschil maken, in de volgorde waarin wij ze aanpakken.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>1. Laat de bots van Perplexity toe</h3></div>
+        <p>Volgens de eigen documentatie zijn er twee. PerplexityBot zoekt websites om ze in de zoekresultaten te tonen en wordt niet gebruikt om AI-modellen te trainen. Perplexity-User haalt een pagina op als een gebruiker een vraag stelt, en negeert robots.txt meestal omdat een mens om de pagina vroeg. Blokkeer je PerplexityBot, dan kun je niet als bron verschijnen. Gebruikt je hosting een firewall zoals die van Cloudflare, dan moet je de bots daar soms apart toestaan. Perplexity publiceert daarvoor de IP-adressen.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>2. Beantwoord één vraag per pagina, goed</h3></div>
+        <p>Een pagina die de vraag "wat kost een dakkapel?" helder beantwoordt, met een prijsrange, wat erbij zit en hoe lang het duurt, wordt eerder geciteerd dan een algemene pagina "Onze diensten". Zet het antwoord bovenaan. Gebruik tussenkoppen die de vraag herhalen.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>3. Houd het actueel</h3></div>
+        <p>Perplexity zoekt bij elke vraag opnieuw. Een prijs uit 2022 verliest het van een prijs uit 2026. Zet een datum op je pagina's en werk ze echt bij.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>4. Maak je tekst citeerbaar</h3></div>
+        <p>Korte, feitelijke zinnen met een getal of een conclusie worden makkelijk overgenomen. De onderzoekers die de term GEO bedachten, lieten in hun artikel "GEO: Generative Engine Optimization" zien dat aanpassingen aan een tekst de zichtbaarheid in AI-antwoorden tot 40% konden verhogen, en dat het effect per onderwerp verschilt. Meer daarover in onze gids <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>5. Word genoemd op plekken die al geciteerd worden</h3></div>
+        <p>Kijk welke sites Perplexity nu als bron gebruikt voor vragen in jouw branche. Vaak zijn dat vakbladen, vergelijkingssites of fora. Een vermelding of een gastartikel daar maakt je vindbaar via een omweg. Dat is werk dat lijkt op <a href="/linkbuilding/">linkbuilding</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>6. Laat je techniek nakijken</h3></div>
+        <p>Een pagina die pas na seconden laadt, of waarvan de tekst alleen in een plaatje staat, is voor elke bot lastig. Zet de belangrijkste informatie in gewone tekst en zorg dat je site snel is.</p>
+
+        <h2 id="meten">Meten of Perplexity je site gebruikt</h2>
+        <p>Drie manieren, van simpel naar grondig:</p>
+        <ol>
+          <li><b>Zelf vragen stellen.</b> Maak een lijst van tien vragen die je klanten stellen. Stel ze elke maand en noteer of je site bij de bronnen staat.</li>
+          <li><b>Kijken in Google Analytics.</b> Bezoekers die op een bron klikken, komen binnen via perplexity.ai. Je ziet ze bij de verkeersbronnen. Hoe je dat goed inricht, lees je in onze gids over <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>.</li>
+          <li><b>De serverlogs bekijken.</b> Je webbouwer of hostingpartij ziet daarin of PerplexityBot en Perplexity-User langskomen, en welke pagina's ze ophalen.</li>
+        </ol>
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Het antwoord overnemen zonder de bron te openen.</b> De bronvermelding is er juist om te klikken.</li>
+          <li><b>Eén woord als zoekopdracht.</b> Perplexity werkt het best met een hele vraag en context.</li>
+          <li><b>Klantgegevens in de gratis versie.</b> Daar staat het gebruik voor training standaard aan.</li>
+          <li><b>Betalen voor Pro en alleen gewoon zoeken.</b> Gebruik je geen Research of modelkeuze, dan volstaat de gratis versie.</li>
+          <li><b>Als website-eigenaar PerplexityBot blokkeren zonder het te weten.</b> Een firewall, zoals die van Cloudflare, kan bots tegenhouden. Perplexity raadt dan aan zijn bots daar apart toe te staan.</li>
+          <li><b>Alleen naar Google kijken.</b> Wie wil weten of AI zijn site gebruikt, heeft aan Perplexity de duidelijkste graadmeter, omdat elke bron zichtbaar is.</li>
+        </ul>
+        <p>Wil je dat wij zorgen dat AI-zoekmachines jouw site als bron gebruiken? Lees dan hoe we <a href="/generative-engine-optimization/">generative engine optimization</a> aanpakken, vanaf € 495 per maand en maandelijks opzegbaar.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">Perplexity: helpcentrum (onder meer "What is Perplexity?", "How does Perplexity work?", "Which Perplexity Subscription Plan is right for you?", "Enterprise Pricing and Billing", "Data Collection at Perplexity", "Refunds", "How credits work on Perplexity", "Tips for Getting Better Answers") en de documentatie over crawlers op docs.perplexity.ai. Bedrijfsgeschiedenis en kritiek: Wikipedia, "Perplexity AI". Onderzoek: Aggarwal e.a., "GEO: Generative Engine Optimization", arXiv 2311.09735. Wet: Autoriteit Persoonsgegevens. Allemaal geraadpleegd oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={19} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het regelen?" intro="Wat je van ons kunt verwachten als we samen werken aan je zichtbaarheid in AI-zoekmachines." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Perplexity gratis?', a: 'Ja. De gratis versie is vrijwel onbeperkt te gebruiken voor gewone zoekopdrachten, met 3 Pro Searches per dag. Pro kost $ 20 per maand of $ 200 per jaar en geeft meer diepgaande zoekopdrachten en keuze uit taalmodellen.' },
+      { v: 'Is Perplexity betrouwbaar?', a: 'Betrouwbaarder dan een chatbot zonder bronnen, omdat je elke bewering kunt nalopen. Maar het kan bronnen verkeerd samenvatten of een zwakke bron gebruiken. Klik bij belangrijke beslissingen altijd door naar de bron.' },
+      { v: 'Werkt Perplexity in het Nederlands?', a: 'Ja. De website is in het Nederlands te gebruiken en je kunt je vragen in het Nederlands stellen. De bronnen die het vindt, kunnen ook Engelstalig zijn.' },
+      { v: 'Wat is het verschil tussen Perplexity en ChatGPT?', a: 'Perplexity is gebouwd als zoekmachine en zoekt bij elke vraag op internet, met bronnen. ChatGPT is gebouwd als gesprekspartner en zoekt alleen als dat nodig is. Lees ook hoe je <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar wordt in ChatGPT</a>.' },
+      { v: 'Gebruikt Perplexity mijn vragen om AI te trainen?', a: 'Bij de gratis, Pro- en Max-versie staat dat standaard aan. Je zet het uit in je accountinstellingen bij Preferences, onder AI data retention. Bij Enterprise Pro en Enterprise Max worden je gegevens nooit voor training gebruikt.' },
+      { v: 'Wat is Perplexity Comet?', a: 'De eigen webbrowser van Perplexity, met een AI-assistent die vragen beantwoordt over de pagina die je bekijkt en taken voor je kan uitvoeren. Hij is er voor Mac, Windows, iPhone en Android.' },
+      { v: 'Hoe zie ik of Perplexity mijn site gebruikt?', a: 'Stel de vragen die je klanten stellen en kijk naar de bronnen. In Google Analytics zie je bezoekers die doorklikken via perplexity.ai. Of laat het meten met de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">gratis AI-vindbaarheidsanalyse</a>.' },
+      { v: 'Kan ik Perplexity blokkeren?', a: 'Je kunt PerplexityBot blokkeren in je robots.txt. Perplexity-User, die pagina’s ophaalt als een gebruiker erom vraagt, negeert robots.txt volgens de eigen documentatie meestal. Blokkeren betekent ook dat je niet meer als bron verschijnt.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over AI-zoeken"
+    links={[
+      { label: 'Gids', titel: 'Wat is GEO?', href: '/kennisbank/gidsen/wat-is-geo/', tekst: 'Zo word je genoemd door ChatGPT en Google AI.' },
+      { label: 'Gids', titel: 'Google Gemini', href: '/kennisbank/gidsen/google-gemini/', tekst: 'De AI-assistent van Google, met alle abonnementen.' },
+      { label: 'Dienst', titel: 'Vindbaar in ChatGPT', href: '/generative-engine-optimization/vindbaar-in-chatgpt/', tekst: 'Specifiek voor ChatGPT en Bing.' },
+    ]}
+  />
+
+  <Actie titel="Sta jij al tussen de bronnen?" tekst={`${site.contactpersoon} stelt de vragen van jouw klanten aan Perplexity en de andere AI-zoekmachines, en belt je met wat hij ziet. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>

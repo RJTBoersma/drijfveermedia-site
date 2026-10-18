@@ -1,0 +1,22 @@
+---
+// Prijs van een dienst, met wat erbij zit.
+interface Props { naam: string; prijs: string; eenheid?: string; punten: string[]; noot?: string; eenmalig?: boolean }
+const { naam, prijs, eenheid, punten, noot, eenmalig = false } = Astro.props;
+---
+<div class="card prijskaart">
+  <p class="kicker">{naam}</p>
+  <p class="bedrag"><span>vanaf</span> {prijs}{eenheid && <small> {eenheid}</small>}</p>
+  <p class="muted klein">{eenmalig ? 'Eenmalig, exclusief btw.' : 'Exclusief btw. Maandelijks opzegbaar.'}</p>
+  <ul class="vink">{punten.map((p) => <li>{p}</li>)}</ul>
+  <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+  {noot && <p class="muted klein noot">{noot}</p>}
+</div>
+<style>
+  .prijskaart { padding: 24px; }
+  .bedrag { font-size: var(--step-3); font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin: 8px 0 6px; }
+  .bedrag span { font-size: 1rem; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+  .bedrag small { font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+  .vink { margin-top: 18px; }
+  .btn { width: 100%; }
+  .noot { margin: 12px 0 0; }
+</style>

@@ -1,0 +1,293 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--ctr.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/ctr/';
+const datum = '2026-10-18';
+const definitie = 'CTR (click-through rate, in het Nederlands klikfrequentie) is het percentage mensen dat op je link, advertentie of zoekresultaat klikt nadat ze hem te zien kregen.';
+const hoofdstukken = [
+  { id: 'berekenen', titel: 'De formule' },
+  { id: 'waar', titel: 'Waar je het getal vindt' },
+  { id: 'google-ads', titel: 'In Google Ads' },
+  { id: 'zoekresultaten', titel: 'In de gewone zoekresultaten' },
+  { id: 'goed', titel: 'Wat is een goede score?' },
+  { id: 'e-mail', titel: 'In e-mail' },
+  { id: 'valkuil', titel: 'Wanneer hoog niet goed is' },
+  { id: 'ads-verhogen', titel: 'Verhogen in Google Ads' },
+  { id: 'seo-verhogen', titel: 'Verhogen in de zoekresultaten' },
+  { id: 'stappenplan', titel: 'Stappenplan in Search Console' },
+  { id: 'voor-na', titel: 'Titels voor en na' },
+  { id: 'voorbeeld', titel: 'Rekenvoorbeeld' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'CTR (click-through rate)',
+  alternateName: ['Klikfrequentie', 'Click-through rate', 'Doorklikratio'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is CTR? Zo bereken en verhoog je hem | Drijfveer Media"
+  description="Wat is CTR? De klikfrequentie berekenen voor Google Ads, Search Console en e-mail, wat een goede score is en hoe je hem stap voor stap verhoogt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'CTR', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Meten</p>
+        <h1>Wat is CTR?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Honderd mensen zien je advertentie. Vijf klikken erop. Dan is je CTR 5 procent. Zo simpel is het getal, en toch zegt het veel. Het laat zien of je boodschap aanslaat bij de mensen die hem zien. Je komt het tegen in Google Ads, in Google Search Console en in je e-mailprogramma. Overal betekent het ongeveer hetzelfde, maar een goede score verschilt per plek enorm. Hieronder lees je hoe je het berekent, wat normaal is en hoe je hem omhoog krijgt.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>CTR = klikken ÷ vertoningen × 100.</li>
+          <li>In Google Ads telt de verwachte CTR mee in de veiling. Een hogere CTR kan je dus een betere plek opleveren.</li>
+          <li>In de gewone zoekresultaten hangt het klikpercentage vooral af van je positie, en of er een AI-antwoord boven je staat.</li>
+          <li>Vergelijk je eigen cijfers alleen met zichzelf: per positie, per soort zoekopdracht, per kanaal.</li>
+          <li>Een hoge CTR is pas goed als er ook klanten uit komen.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={13} />
+
+      <div class="stap-kop" id="berekenen"><Tekening naam="pen" maat={52} /><h2>CTR berekenen: de formule</h2></div>
+      <p>CTR staat voor click-through rate. In het Nederlands zeg je klikfrequentie of doorklikratio. De formule is overal dezelfde:</p>
+      <div class="kader formule">
+        <p><b>CTR = aantal klikken ÷ aantal vertoningen × 100%</b></p>
+      </div>
+      <p>Een vertoning is één keer dat je link of advertentie in beeld kwam. Een klik is iemand die erop klikte. Drie voorbeelden:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Waar</th><th>Klikken</th><th>Vertoningen</th><th>CTR</th></tr></thead>
+          <tbody>
+            <tr><td>Zoekadvertentie</td><td>42</td><td>600</td><td>7,0%</td></tr>
+            <tr><td>Pagina in de zoekresultaten</td><td>310</td><td>12.400</td><td>2,5%</td></tr>
+            <tr><td>Nieuwsbrief, afgeleverd bij 1.500 lezers</td><td>39</td><td>1.500</td><td>2,6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen cijfers, als rekenvoorbeeld.</p>
+      <p>Let bij e-mail op wat je als vertoning telt. De meeste mailprogramma's delen het aantal klikken door het aantal afgeleverde e-mails. Deel je door het aantal geopende mails, dan heet het de click-to-open rate. Die is altijd hoger, omdat je alleen kijkt naar mensen die de mail echt openden.</p>
+
+      <div class="stap-kop" id="waar"><Tekening naam="vergrootglas" maat={52} /><h2>Waar je het getal tegenkomt</h2></div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Plek</th><th>Waar je hem vindt</th><th>Waar het over gaat</th></tr></thead>
+          <tbody>
+            <tr><td>Google Ads</td><td>Kolom CTR bij campagnes, advertenties en zoekwoorden</td><td>Hoe vaak je advertentie wordt aangeklikt</td></tr>
+            <tr><td>Google Search Console</td><td>Prestaties, Zoekresultaten, vakje Gemiddelde CTR</td><td>Hoe vaak je gewone zoekresultaat wordt aangeklikt</td></tr>
+            <tr><td>E-mailprogramma</td><td>Rapport per verzonden mailing</td><td>Hoeveel ontvangers op een link klikten</td></tr>
+            <tr><td>Advertenties op social media</td><td>Advertentiebeheer van het platform</td><td>Hoe vaak je advertentie wordt aangeklikt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het rekenwerk is hetzelfde, de betekenis niet. Een advertentie in Google verschijnt bij iemand die actief zoekt. Een advertentie op social media verschijnt tussen foto's van vrienden. Een percentage dat bij het een prima is, is bij het ander slecht. Vergelijk dus nooit kanalen met elkaar op CTR.</p>
+
+      <div class="stap-kop" id="google-ads"><Tekening naam="megafoon" maat={52} /><h2>CTR in Google Ads</h2></div>
+      <p>Google noemt de klikfrequentie zelf een goede aanwijzing dat mensen je advertentie nuttig en relevant vinden. Elke advertentie en elk zoekwoord heeft een eigen percentage. Belangrijker: dat percentage telt mee in de verwachte CTR van een zoekwoord. Die verwachte CTR is één van de drie onderdelen van de kwaliteitsscore, en de kwaliteit van je advertentie telt mee in de veiling. Een advertentie waar vaker op geklikt wordt, kan dus een betere plek krijgen voor hetzelfde geld. Hoe die veiling werkt, lees je in <a href="/kennisbank/wat-is/sea/">Wat is SEA?</a></p>
+      <h3>Wat is normaal voor een zoekadvertentie?</h3>
+      <p>Nederlandse cijfers per branche zijn er niet openbaar. Het grootste onderzoek dat elk jaar verschijnt, komt van LocaliQ en WordStream, op basis van Amerikaanse adverteerders. Volgens hun cijfers van 2026 klikt gemiddeld 6,64 procent van de mensen die een zoekadvertentie zien. Een greep uit de branches:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Branche</th><th>Gemiddeld klikpercentage zoekadvertenties</th></tr></thead>
+          <tbody>
+            <tr><td>Financiën en verzekeringen</td><td>9,83%</td></tr>
+            <tr><td>Vastgoed</td><td>7,61%</td></tr>
+            <tr><td>Restaurants en eten</td><td>6,83%</td></tr>
+            <tr><td>Huis en verbouwen</td><td>6,47%</td></tr>
+            <tr><td>Zakelijke dienstverlening</td><td>6,10%</td></tr>
+            <tr><td>Advocaten en juridisch</td><td>5,87%</td></tr>
+            <tr><td>Tandartsen</td><td>5,66%</td></tr>
+            <tr><td>Autoreparatie en onderhoud</td><td>5,56%</td></tr>
+            <tr><td><b>Alle branches</b></td><td><b>6,64%</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: LocaliQ, Search Advertising Benchmarks 2026 (bijgewerkt juni 2026). Amerikaanse cijfers, als richtgetal.</p>
+      <p>Zit je ver onder deze getallen, dan is dat een signaal. Vaak sluiten je advertenties niet goed aan op de zoekwoorden, of sta je laag op de pagina. Zit je er ruim boven? Mooi, maar kijk dan of die klikken ook aanvragen opleveren.</p>
+
+      <div class="stap-kop" id="zoekresultaten"><Tekening naam="scherm" maat={52} /><h2>Klikfrequentie in de gewone zoekresultaten</h2></div>
+      <p>Ook in de onbetaalde zoekresultaten heeft elke pagina een klikpercentage. Dat vind je gratis in Google Search Console. Open Prestaties en kies Zoekresultaten. Bovenaan staan vier vakjes: Totaal aantal klikken, Totaal aantal vertoningen, Gemiddelde CTR en Gemiddelde positie. Klik ze alle vier aan, dan zie je ze in de grafiek en in de tabel.</p>
+      <p>Volgens Google telt een vertoning elke keer dat je site in de zoekresultaten verschijnt. De gemiddelde positie is de gemiddelde plek van je hoogste resultaat. Standaard zie je de laatste drie maanden. Onder de grafiek kun je wisselen tussen Zoekopdrachten, Pagina's, Landen, Apparaten, Zoekopmaak en Datums. Wil je je site eerst koppelen? Lees de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console gebruiken</a>.</p>
+      <h3>Hoeveel klikken krijgt welke positie?</h3>
+      <p>De CTR in de gewone resultaten hangt vooral af van je positie. En steeds vaker van iets anders: het AI-antwoord dat Google boven de resultaten zet. Dat antwoord beantwoordt de vraag al deels, dus klikken minder mensen door. Het Amerikaanse bureau First Page Sage meet dat effect twee keer per jaar. Hun cijfers van september 2026:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Positie</th><th>Zonder AI-antwoord</th><th>Met AI-antwoord</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>22,6%</td><td>3,6%</td></tr>
+            <tr><td>2</td><td>10,2%</td><td>1,4%</td></tr>
+            <tr><td>3</td><td>5,8%</td><td>0,8%</td></tr>
+            <tr><td>4</td><td>3,7%</td><td>0,5%</td></tr>
+            <tr><td>5</td><td>2,5%</td><td>0,3%</td></tr>
+            <tr><td>10</td><td>0,5%</td><td>0,1%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: First Page Sage, Google Click-Through Rates by Ranking Position, 22 september 2026. Amerikaanse zoekopdrachten. Gebruik het als richting, niet als norm.</p>
+      <p>Twee lessen. Van positie 2 naar 1 levert ruim twee keer zoveel klikken op. En bij informatieve vragen, waar vaak een AI-antwoord staat, levert zelfs de eerste plek weinig klikken op. Daar wil je juist als bron in dat antwoord genoemd worden. Meer daarover in de uitleg over <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+
+      <div class="stap-kop" id="goed"><Tekening naam="doel" maat={52} /><h2>Wat is een goede CTR?</h2></div>
+      <p>Het eerlijke antwoord: dat hangt ervan af. Een richtlijn per kanaal, op basis van de bronnen op deze pagina:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Kanaal</th><th>Richtgetal</th><th>Waar het van afhangt</th></tr></thead>
+          <tbody>
+            <tr><td>Zoekadvertentie in Google</td><td>Rond 6 tot 7%</td><td>Branche, positie, hoe goed advertentie en zoekwoord aansluiten</td></tr>
+            <tr><td>Gewoon zoekresultaat op plek 1</td><td>Van een paar procent tot ruim 20%</td><td>Wel of geen AI-antwoord, advertenties erboven, merknaam of niet</td></tr>
+            <tr><td>Nieuwsbrief</td><td>Rond 2,6% van de afgeleverde mails</td><td>Branche, hoe vaak je mailt, hoe goed je lijst is</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Beter dan een landelijk gemiddelde is je eigen gemiddelde. Een zoekopdracht met je bedrijfsnaam erin heeft vanzelf een hoge klikfrequentie: mensen zoeken jou. Een algemene zoekopdracht als "dakkapel" veel minder. Zet die twee in Search Console apart, met een filter op je merknaam, anders zegt het gemiddelde niets.</p>
+
+      <div class="stap-kop" id="e-mail"><Tekening naam="mail" maat={52} /><h2>Klikken in e-mail: wat is normaal?</h2></div>
+      <p>Mailchimp publiceert gemiddelden over de mailings van al zijn gebruikers. Het gemiddelde klikpercentage is daar 2,62 procent. Per sector: zakelijk en financieel 2,78 procent, onderwijs en training 3,02 procent, goede doelen 3,27 procent en webwinkels 1,74 procent.</p>
+      <p>Zo haal je meer klikken uit een nieuwsbrief:</p>
+      <ul>
+        <li>Eén hoofdboodschap per mail, met één duidelijke knop.</li>
+        <li>Een onderwerpregel die zegt wat de lezer krijgt, zodat de juiste mensen openen.</li>
+        <li>De belangrijkste link bovenaan, niet pas na drie alinea's.</li>
+        <li>Een schone lijst: mensen die al een jaar niets openen, drukken je percentage.</li>
+      </ul>
+      <p>Meer tips staan in de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a>.</p>
+
+      <div class="stap-kop" id="valkuil"><Tekening naam="schild" maat={52} /><h2>Waarom hoog niet altijd goed is</h2></div>
+      <p>Een CTR is een middel, geen doel. Drie situaties waarin een hoog percentage je juist geld kost:</p>
+      <ul>
+        <li><b>De advertentie belooft te veel.</b> "Gratis offerte, vandaag nog geplaatst" trekt klikken. Kun je dat niet waarmaken, dan betaal je voor bezoekers die meteen weer weg zijn.</li>
+        <li><b>De verkeerde mensen klikken.</b> Een advertentie zonder prijs trekt ook mensen die het veel goedkoper zoeken. Noem je een vanafprijs, dan daalt het klikpercentage soms, maar stijgt het aandeel serieuze aanvragen.</li>
+        <li><b>Een pakkende titel die niet klopt met de pagina.</b> Mensen klikken, zien iets anders en gaan terug naar Google.</li>
+      </ul>
+      <p>Kijk daarom altijd naar het hele rijtje: klikken, aanvragen en wat een aanvraag kost. Wat een klik kost, lees je in het begrip <a href="/kennisbank/wat-is/cpc/">CPC</a>. Of de klikken ook omzet opleveren, zie je aan de <a href="/kennisbank/wat-is/roas/">ROAS</a>.</p>
+
+      <div class="stap-kop" id="ads-verhogen"><Tekening naam="raket" maat={52} /><h2>CTR verhogen in Google Ads: acht ingrepen</h2></div>
+      <ol>
+        <li><b>Zet het zoekwoord in een kop.</b> Wie "cv-ketel vervangen" zoekt en die woorden terugziet, klikt eerder.</li>
+        <li><b>Maak kleine advertentiegroepen.</b> Eén thema per groep, zodat elke advertentie past bij wat er gezocht wordt.</li>
+        <li><b>Noem een concreet voordeel.</b> Een prijs, een levertijd of een garantie werkt beter dan "kwaliteit en service".</li>
+        <li><b>Voeg sitelinks, highlights en je telefoonnummer toe.</b> Je advertentie wordt groter en valt meer op.</li>
+        <li><b>Schrijf tien of meer verschillende koppen.</b> Google test dan meer combinaties en vindt sneller de beste.</li>
+        <li><b>Sluit irrelevante zoektermen uit.</b> Elke vertoning bij een verkeerde zoekopdracht drukt je percentage.</li>
+        <li><b>Beperk je gebied en tijden.</b> Toon je advertentie alleen waar en wanneer je klanten kunt helpen.</li>
+        <li><b>Kijk naar je positie.</b> Onderaan de pagina wordt minder geklikt. Soms is een iets hoger bod de beste ingreep.</li>
+      </ol>
+      <p>Het complete stappenplan voor advertenties staat in de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>.</p>
+
+      <div class="stap-kop" id="seo-verhogen"><Tekening naam="vergrootglas" maat={52} /><h2>Meer klikken uit de zoekresultaten</h2></div>
+      <p>In de gewone resultaten bepalen twee dingen wat mensen van je zien: de titel en het stukje tekst eronder. Je hebt er invloed op, maar geen volledige controle. Google zegt zelf dat het de titel automatisch kiest. Meestal komt die uit de <a href="/kennisbank/wat-is/title-tag/">title tag</a>, maar Google kijkt ook naar je H1, andere koppen en links naar de pagina. Het tekstje eronder haalt Google vooral uit de inhoud van je pagina. De meta description gebruikt Google als die de pagina beter beschrijft.</p>
+      <ul>
+        <li><b>Zet het onderwerp vooraan in je title tag.</b> Google kort lange titels in, passend bij de breedte van het scherm.</li>
+        <li><b>Schrijf een meta description als een korte pitch.</b> Wat krijgt de lezer, waarom bij jou? Hoe je dat doet, staat in de gids <a href="/kennisbank/gidsen/meta-description/">meta description schrijven</a>.</li>
+        <li><b>Beantwoord de vraag van de zoeker in je titel.</b> Zoekt iemand naar kosten, noem dan dat je de kosten uitlegt.</li>
+        <li><b>Gebruik gestructureerde gegevens.</b> Met <a href="/kennisbank/wat-is/schema-markup/">schema markup</a> kan Google extra's tonen, zoals veelgestelde vragen of een beoordeling.</li>
+        <li><b>Houd je titel actueel.</b> Een jaartal in de titel werkt alleen als de inhoud ook echt van dat jaar is.</li>
+      </ul>
+      <p>Twijfel je of het lukt? Google heeft een paar dagen tot een paar weken nodig om een gewijzigde pagina opnieuw te verwerken. Geef een aanpassing dus minstens een maand voordat je oordeelt.</p>
+
+      <div class="stap-kop" id="stappenplan"><Tekening naam="kompas" maat={52} /><h2>Stappenplan: kansen vinden in Search Console</h2></div>
+      <p>Met dit stappenplan vind je in een kwartier de pagina's waar de meeste klikken te halen zijn.</p>
+      <ol>
+        <li>Open Search Console en ga naar Prestaties, Zoekresultaten.</li>
+        <li>Zet de periode op drie maanden en klik Gemiddelde CTR en Gemiddelde positie aan.</li>
+        <li>Kies het tabblad Pagina's en sorteer op vertoningen, van hoog naar laag.</li>
+        <li>Zoek pagina's met veel vertoningen, een positie tussen 1 en 10 en een klikpercentage dat laag is voor die positie.</li>
+        <li>Klik zo'n pagina aan en kijk bij Zoekopdrachten op welke woorden hij verschijnt.</li>
+        <li>Schrijf een nieuwe title tag en meta description die precies op die zoekopdrachten antwoord geven.</li>
+        <li>Noteer de datum. Vergelijk na vier tot zes weken met het datumfilter de periode ervoor met de periode erna.</li>
+      </ol>
+      <p>Verandert de positie in die tijd ook, dan is de vergelijking scheef. Kijk daarom naar de klikfrequentie bij een gelijke positie.</p>
+
+      <div class="stap-kop" id="voor-na"><Tekening naam="pen" maat={52} /><h2>Titels die aangeklikt worden: voor en na</h2></div>
+      <p>De meeste winst zit in titels die nu niets zeggen. Vier voorbeelden van hoe het beter kan:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekopdracht</th><th>Voor</th><th>Na</th></tr></thead>
+          <tbody>
+            <tr><td>dakkapel plaatsen kosten</td><td>Dakkapellen | Bouwbedrijf</td><td>Dakkapel plaatsen: kosten en prijzen per meter | Bouwbedrijf</td></tr>
+            <tr><td>boekhouder zzp groningen</td><td>Home</td><td>Boekhouder voor zzp'ers in Groningen | Vaste prijs per kwartaal</td></tr>
+            <tr><td>hovenier tuin onderhoud</td><td>Diensten</td><td>Tuinonderhoud door een hovenier, ook per keer | Hoveniersbedrijf</td></tr>
+            <tr><td>rijschool emmen</td><td>Welkom bij onze rijschool</td><td>Rijschool in Emmen: proefles en pakketten | Rijschool</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeelden.</p>
+      <p>Wat de nieuwe titels gemeen hebben: de woorden van de zoeker staan vooraan, er staat iets in wat de lezer krijgt, en de bedrijfsnaam sluit af. Doe hetzelfde in de meta description. Herhaal daar niet de titel, maar beantwoord de vraag die erachter zit. Iemand die naar kosten zoekt, wil lezen dat er een prijsindicatie op de pagina staat.</p>
+      <p>Schrijf ook niet alleen voor Google. Een titel die klopt met wat er op de pagina staat, houdt de bezoeker vast. Een titel die meer belooft, levert een klik op en een bezoeker die na vijf seconden weer weg is.</p>
+
+      <div class="stap-kop" id="voorbeeld"><Tekening naam="munten" maat={52} /><h2>Rekenvoorbeeld: wat twee procentpunten opleveren</h2></div>
+      <p>Stel: een kapsalon in Meppel staat op positie 3 voor "kapper meppel". De pagina krijgt 2.000 vertoningen per maand en 4 procent klikt door: 80 bezoekers. De titel is "Home | Kapsalon".</p>
+      <p>De eigenaar maakt er "Kapper in Meppel, ook 's avonds | Kapsalon" van en zet in de meta description dat je online een afspraak maakt. Het percentage stijgt naar 6 procent. Dat zijn 120 bezoekers per maand, 40 meer, zonder één plek te stijgen. Boekt één op de tien bezoekers een afspraak, dan zijn dat vier extra klanten per maand. Voor tien minuten werk. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Bij een advertentie werkt het zelfs dubbel. Meer klikken bij hetzelfde aantal vertoningen verbetert je verwachte CTR, een onderdeel van de kwaliteitsscore. Google kan je daardoor hoger plaatsen, of dezelfde plek goedkoper maken.</p>
+
+      <h2>Veelgemaakte fouten bij het lezen van het getal</h2>
+      <ul>
+        <li><b>Kijken naar het gemiddelde van je hele site.</b> Dat gemiddelde zakt vanzelf als je op meer woorden gaat verschijnen, ook op pagina 2. Dat is groei, geen probleem.</li>
+        <li><b>Merknaam en algemene woorden door elkaar.</b> Filter je bedrijfsnaam eruit, anders lijkt alles beter dan het is.</li>
+        <li><b>Te snel conclusies trekken.</b> Bij 200 vertoningen is één klik meer of minder al een half procentpunt. Wacht op genoeg gegevens.</li>
+        <li><b>Seizoenen vergeten.</b> Een hovenier krijgt in april andere zoekopdrachten dan in december. Vergelijk een maand met dezelfde maand vorig jaar.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Wil je zien hoe je site er in Google voor staat? Lees <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a>, of laat ons meekijken met een <a href="/gratis-website-analyse/">gratis website-analyse</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Hoe bereken je de CTR?', a: 'Deel het aantal klikken door het aantal vertoningen en vermenigvuldig met 100. Vijf klikken op honderd vertoningen is een CTR van 5 procent.' },
+      { v: 'Wat is het verschil tussen CTR en klikfrequentie?', a: 'Er is geen verschil. CTR is de Engelse afkorting van click-through rate. Google gebruikt in het Nederlands het woord klikfrequentie.' },
+      { v: 'Wat is een goede CTR in Google Ads?', a: 'In 2026 was het gemiddelde voor zoekadvertenties 6,64 procent, volgens Amerikaanse cijfers van LocaliQ. Belangrijker dan dat getal: levert je advertentie aanvragen op tegen een prijs die je kunt betalen?' },
+      { v: 'Waarom daalt mijn CTR in Search Console terwijl mijn klikken stijgen?', a: 'Waarschijnlijk verschijn je op meer zoekopdrachten, ook op lagere posities. Die leveren vertoningen op maar weinig klikken. Dan daalt het gemiddelde, terwijl je in werkelijkheid groeit.' },
+      { v: 'Telt de CTR mee voor mijn positie in Google?', a: 'In Google Ads wel: de verwachte CTR is een onderdeel van de kwaliteitsscore. Voor de gewone zoekresultaten zegt Google er weinig over. Zeker is dat meer klikken op dezelfde positie gewoon meer bezoekers betekent.' },
+      { v: 'Hoe verhoog ik mijn CTR snel?', a: 'Begin bij pagina\'s met veel vertoningen en weinig klikken voor hun positie. Herschrijf de title tag en meta description zodat ze precies antwoord geven op waar mensen naar zochten. In Google Ads: zet het zoekwoord in een kop en voeg sitelinks toe.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over meten"
+    links={[
+      { label: 'Begrip', titel: 'Wat is SEA?', href: '/kennisbank/wat-is/sea/', tekst: 'Zoekmachine adverteren in gewone taal.', teken: 'megafoon' },
+      { label: 'Begrip', titel: 'Wat is CPC?', href: '/kennisbank/wat-is/cpc/', tekst: 'Wat een klik kost en hoe je minder betaalt.', teken: 'munten' },
+      { label: 'Gids', titel: 'Meta description schrijven', href: '/kennisbank/gidsen/meta-description/', tekst: 'Het tekstje dat mensen laat klikken.' },
+    ]}
+  />
+
+  <Actie titel="Waar laat jouw site klikken liggen?" tekst={`We zoeken gratis de pagina's op waar met een betere titel de meeste bezoekers te halen zijn. ${site.contactpersoon} belt je met de uitkomst.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .formule p { margin: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

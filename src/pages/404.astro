@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Pagina niet gevonden | Drijfveer Media" description="Deze pagina bestaat niet (meer)." noindex>
+  <section class="wrap niet-gevonden">
+    <p class="kicker">404</p>
+    <h1>Moi. Deze pagina is er niet (meer).</h1>
+    <blockquote>
+      <p>“Je stapt nooit twee keer in dezelfde rivier.”</p>
+      <footer>Herakleitos, overgeleverd door Plato, Cratylus 402a</footer>
+    </blockquote>
+    <p>En deze pagina is meegestroomd.</p>
+    <p id="suggestie" hidden></p>
+    <div class="card omkeer">
+      <h2>Deze pagina vond je niet. Vinden je klanten jóu wel?</h2>
+      <p class="muted">Laat je site gratis nakijken. Binnen kantoortijd bellen we je binnen 15 minuten terug.</p>
+      <a class="btn" href="/gratis-website-analyse/">Doe de gratis scan</a>
+    </div>
+    <p>Of ga naar <a href="/">de homepage</a>, <a href="/prijzen/">de prijzen</a> of <a href="/kennisbank/">de kennisbank</a>. Liever bellen? <a href={site.telefoonLink}>{site.telefoon}</a>.</p>
+  </section>
+</Base>
+<script>
+  // Raad op basis van het adres welke pagina bedoeld was.
+  const slug = location.pathname.toLowerCase();
+  const kandidaten: [RegExp, string, string][] = [
+    [/webdesign-([a-z-]+)/, '/webdesign-$1/', 'Webdesign'],
+    [/seo-([a-z-]+)/, '/seo-$1/', 'SEO'],
+    [/website/, '/website-laten-maken/', 'Website laten maken'],
+    [/link/, '/linkbuilding/', 'Linkbuilding'],
+    [/seo|zoekmachine/, '/zoekmachine-optimalisatie/', 'SEO'],
+    [/ads|adverte/, '/online-adverteren/', 'Online adverteren'],
+    [/geo|chatgpt|ai/, '/generative-engine-optimization/', 'GEO'],
+    [/blog|kennis/, '/kennisbank/', 'De kennisbank'],
+  ];
+  for (const [re, doel, naam] of kandidaten) {
+    const m = slug.match(re);
+    if (m) {
+      const url = doel.replace('$1', (m[1] || '').replace(/-(oud|old|\d+)$/, ''));
+      const p = document.getElementById('suggestie');
+      if (p) { p.hidden = false; p.innerHTML = `Zocht je <a href="${url}">${naam}${m[1] ? ' in ' + m[1].replace(/-/g, ' ').replace(/^./, (c) => c.toUpperCase()) : ''}</a>?`; }
+      break;
+    }
+  }
+</script>
+<style>
+  .niet-gevonden { padding-block: 48px; max-width: 760px; display: grid; gap: 18px; }
+  blockquote { margin: 0; }
+  blockquote p { font-size: var(--step-2); font-weight: 800; margin: 0; line-height: 1.2; }
+  blockquote footer { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
+  .omkeer { padding: 26px; display: grid; gap: 10px; justify-items: start; }
+  .omkeer h2 { font-size: var(--step-1); }
+  .omkeer p { margin: 0; }
+</style>

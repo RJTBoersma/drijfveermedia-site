@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import { site, team } from '../../data/site';
+import RitTerug from '../../components/teken/RitTerug.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+
+const meningen = [
+  'Veel bureaus zijn beter in zichzelf verkopen dan in klanten laten groeien. Een gelikte pitch zegt niets over wat er na de handtekening gebeurt.',
+  'Vakjargon verbergt vaak een gebrek aan inhoud. Wie het niet simpel kan uitleggen, snapt het zelf niet goed.',
+  'Een bureau verdient zijn geld aan klanten die blijven omdat het werkt. Niet aan klanten die vastzitten aan een contract.',
+  'Wie alleen successen rapporteert, vertelt je niet het hele verhaal. Je betaalt ook voor eerlijk advies over wat niet werkt.',
+  'Soms is stoppen met verspild budget meer waard dan een nieuwe campagne.',
+  'Een rapport waar je een marketeer bij nodig hebt om het te snappen, schiet zijn doel voorbij.',
+];
+const schema = [{ '@type': 'AboutPage', name: 'Over Drijfveer Media', url: `${site.url}/over-ons/`, about: { '@id': `${site.url}/#organisatie` } }];
+---
+<Base
+  title="Over ons: online marketingbureau uit Assen | Drijfveer Media"
+  description="Drijfveer Media is sinds 2011 een online marketingbureau, nu met een team van vier aan de Lauwers in Assen. Lees hoe het begon en waar we voor staan."
+  kruimels={[{ naam: 'Over ons', url: '/over-ons/' }]}
+  schema={schema}
+>
+  <Hero kicker="Over ons" titel="Vier mensen in Assen die zorgen dat jij gevonden wordt" knop={{ tekst: 'Maak kennis', href: '/contact/' }}>
+    <p>Drijfveer Media bestaat sinds 2011. We zijn met z'n vieren, met een vaste groep freelancers om ons heen. Nuchter, betaalbaar en we doen wat we zeggen.</p>
+    <div slot="beeld" class="fotos">
+      {team.map((p) => (
+        <figure>
+          <img src={`/img/team/${p.slug}.webp`} width="300" height="300" alt={`${p.naam}, ${p.rol.toLowerCase()}`} loading="eager" decoding="async" />
+          <figcaption><b>{p.naam.split(' ')[0]}</b> {p.rol}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Hoe het begon</h2>
+      <p>In 2011 gingen Robert Boersma en Evelien Heerema twee weken op vakantie naar België. Na twee dagen hadden ze het wel gezien. Ze hadden gepraat en wisten wat ze wilden: voor zichzelf beginnen. Op dag drie stonden ze weer thuis en schreven ze Drijfveer Media in bij de Kamer van Koophandel.</p>
+      <RitTerug />
+      <p>Het begon in Groningen, met SEO en linkbuilding voor zzp'ers en kleine bedrijven. Daar kwamen al snel teksten bij, omdat goede teksten en SEO niet zonder elkaar kunnen. Later volgden websites, Google Ads en leadgeneratie. Inmiddels zitten we aan de Lauwers in Assen, in een bedrijfsverzamelpand tussen andere hardwerkende ondernemers.</p>
+      <figure class="pand"><img src="/img/kantoor-assen.webp" width="1100" height="1040" alt="Ons kantoorpand aan de Lauwers in Assen" loading="lazy" decoding="async" /><figcaption>Lauwers 9 in Assen. Kom gerust langs, maar bel even van tevoren.</figcaption></figure>
+
+      <h2>Robert in zijn eigen woorden</h2>
+      <p>Voordat hij Drijfveer Media begon, was Robert general manager bij wat toen de grootste leadgenerator van de Benelux was. Waarom hij daar wegging? "Ik vond het niet meer leuk. De uitdaging was weg."</p>
+      <h3>Waar hij trots op is</h3>
+      <p>"Er gaat niets boven een persoonlijk compliment van een klant. Maar waar ik het meest trots op ben, is dat we geen wanbetalers hebben en dat klanten heel lang klant blijven. Dat zegt iets."</p>
+      <h3>Wat hem dwarszit</h3>
+      <p>"Het irriteert me dat er veel cowboys zijn die doen alsof ze verstand hebben van online marketing, maar alleen een handboek voor beginners hebben doorgebladerd. Ze zijn goed in sales en waardeloos in uitvoering. Dat schaadt het vertrouwen in de hele branche. Hoe vaak wij wel niet de puinhopen van andere 'marketeers' hebben moeten opruimen."</p>
+      <p>Daarom werkt Drijfveer Media zoals het werkt: eerst een doel op papier, dan pas aan de slag, en elke maand laten zien of het lukt.</p>
+
+      <h2>Waarom Drijfveer</h2>
+      <p>Talent zonder inzet blijft een belofte. Kennis die je niet deelt, verdampt. Alles begint bij de juiste drijfveer: weten waar je naartoe wilt, en waarom.</p>
+      <blockquote>"Wie niet weet naar welke haven hij vaart, heeft nooit gunstige wind." Seneca, Brieven aan Lucilius</blockquote>
+      <p>Daarom beginnen we bij elke klant met één vraag: wat moet jouw website opleveren? Pas als dat helder is, praten we over SEO, campagnes of een nieuw ontwerp.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={56} /><h2>De klant is bij ons geen koning</h2></div>
+      <p>Een koning wordt niet tegengesproken. Hij staat boven iedereen en hoort alleen wat hij wil horen. Zo werken wij niet. Bij ons ben je voorzitter. Jij hakt de knopen door, wij geven eerlijk advies, ook als dat iets anders is dan je hoopte. Je hebt recht op een kritische blik op alles wat we doen, en die krijg je ook van ons. Steeds met dezelfde vraag erbij: wat levert het jouw bedrijf op, en is dat het maximale?</p>
+
+      <h2>Waar we voor staan</h2>
+    </div>
+    <ol class="meningen">
+      {meningen.map((m) => <li>{m}</li>)}
+    </ol>
+    <div class="tekst" style="margin-top:40px">
+      <div class="stap-kop"><Tekening naam="kolf" maat={56} /><h2>Wat er ooit misging</h2></div>
+      <p>Vroeger namen we op onze eigen sites weleens te veel risico, met technieken die Google niet waardeert. Eén site kreeg een straf van Google. Daar hebben we meer van geleerd dan van welke cursus ook.</p>
+      <p>Daarom testen we nu alles eerst op onze eigen sites. In vijftien jaar zijn dat er meer dan honderd geworden, in allerlei beroepen. Dat is <a href="/proeflab/">ons proeflab</a>. Bij klanten blijven we ruim binnen de regels van Google en de AI-zoekmachines. Wat werkt, gebruiken we voor jou. Wat niet werkt, heeft dan al onze eigen site gekost, niet de jouwe.</p>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={56} /><h2>Hoe we met AI werken</h2></div>
+      <p>We werken elke dag met AI. Voor onderzoek, eerste versies en rekenwerk. Een mens beslist, controleert en past aan. Dat maakt ons sneller en scherper, en dat merk je aan de prijs en het resultaat. Wil je liever geen AI in je project? Bij een paar diensten kan dat. Voor de rest zijn we dan waarschijnlijk niet het goede bureau voor je, en dat zeggen we liever eerlijk vooraf. <a href="/zo-werken-we-met-ai/">Zo werken we met AI</a>.</p>
+    </div>
+  </section>
+
+  <section class="wrap sectie">
+    <h2>Het team</h2>
+    <div class="raster team">
+      {team.map((p) => (
+        <div class="card persoon">
+          <img src={`/img/team/${p.slug}-klein.webp`} width="88" height="88" alt="" loading="lazy" decoding="async" />
+          <h3>{p.naam}</h3>
+          <p class="rol">{p.rol}</p>
+          <p>{p.kort}</p>
+        </div>
+      ))}
+    </div>
+    <p class="muted" style="margin-top:20px">Daarnaast werken we met een vaste groep freelancers: ontwerpers, tekstschrijvers en developers die we al jaren kennen.</p>
+  </section>
+
+  <Bewijs titel="Waarom ondernemers bij ons blijven" />
+
+  <Actie titel="Kom gerust langs aan de Lauwers" tekst={`Je vindt ons op ${site.straat} in ${site.plaats}. De koffie staat klaar. Liever eerst bellen? ${site.contactpersoon} belt je binnen 15 minuten terug.`} knop={{ tekst: 'Plan een kennismaking', href: '/contact/' }} />
+</Base>
+<style>
+  .fotos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .fotos figure { margin: 0; position: relative; border-radius: var(--radius); overflow: hidden; }
+  .fotos img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .fotos figcaption { position: absolute; left: 10px; bottom: 10px; right: 10px; background: rgb(255 255 255 / 0.92); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; line-height: 1.3; }
+  .fotos figcaption b { display: block; }
+  .meningen { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); counter-reset: m; }
+  .meningen li { counter-increment: m; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 22px 22px 64px; position: relative; font-weight: 600; line-height: 1.45; }
+  .meningen li::before { content: counter(m); position: absolute; left: 20px; top: 18px; font-size: 1.8rem; font-weight: 900; color: var(--orange); }
+  .persoon img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; }
+  .persoon h3 { margin-top: 6px; }
+  .rol { color: var(--navy) !important; font-weight: 700; }
+  .pand { margin: 24px 0; } .pand img { width: 100%; height: auto; border-radius: var(--radius); display: block; } .pand figcaption { color: var(--muted); font-size: 0.95rem; margin-top: 8px; }
+  .fotos img { background: #e8eef4; object-position: top; }
+</style>

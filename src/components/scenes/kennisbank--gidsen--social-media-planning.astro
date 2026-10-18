@@ -1,0 +1,94 @@
+---
+// Scène voor /kennisbank/gidsen/social-media-planning/: een contentkalender voor een maand met vaste onderwerpen in kleur.
+// Als hij leeft: het laatste bericht schuift vanuit de lijst met onderwerpen in een leeg vakje, de teller loopt vol en 'vandaag' licht rustig op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const dagen = ['ma', 'di', 'wo', 'do', 'vr', 'za', 'zo'];
+const kolX = (k: number) => 40 + k * 40;
+const rijY = (r: number) => 96 + r * 36;
+// [kolom, rij, soort]: w = werk, t = team, p = tip, a = aanbod
+const posts: [number, number, string][] = [
+  [0, 0, 'w'], [2, 0, 'p'], [4, 0, 't'],
+  [1, 1, 'w'], [3, 1, 'p'], [5, 1, 'a'],
+  [0, 2, 'w'], [2, 2, 't'],
+  [1, 3, 'w'], [3, 3, 'p'], [4, 3, 't'],
+];
+const kleur: Record<string, { fill: string; stroke: string }> = {
+  w: { fill: '#074663', stroke: '#074663' },
+  t: { fill: '#e8eef4', stroke: '#074663' },
+  p: { fill: '#fff', stroke: '#ff6600' },
+  a: { fill: '#ff6600', stroke: '#ff6600' },
+};
+// het vakje waar het laatste bericht in schuift
+const doel = { k: 4, r: 2 };
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een contentkalender voor een hele maand, met vaste onderwerpen in eigen kleuren. Een nieuw bericht schuift in een leeg vakje en de teller met geplande berichten loopt vol.'}>
+  <!-- kalender -->
+  <rect x="24" y="30" width="304" height="216" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="40" y="58" font-size="14" font-weight="800">Contentkalender</text>
+  <text x="312" y="58" font-size="11" text-anchor="end" class="zacht">een maand vooruit</text>
+  {dagen.map((d, i) => <text x={kolX(i) + 17} y="84" text-anchor="middle" font-size="10" class="zacht">{d}</text>)}
+  {[0, 1, 2, 3].map((r) => dagen.map((_, k) => <rect class="v" x={kolX(k)} y={rijY(r)} width="34" height="30" rx="6" />))}
+  {posts.map(([k, r, s]) => (
+    <g>
+      <rect x={kolX(k)} y={rijY(r)} width="34" height="30" rx="6" fill={kleur[s].fill} stroke={kleur[s].stroke} stroke-width="2" />
+      <rect x={kolX(k) + 7} y={rijY(r) + 10} width="20" height="4" rx="2" fill={s === 'w' || s === 'a' ? '#fff' : '#074663'} opacity=".85" />
+      <rect x={kolX(k) + 7} y={rijY(r) + 18} width="12" height="4" rx="2" fill={s === 'w' || s === 'a' ? '#fff' : '#c9d3dd'} opacity=".7" />
+    </g>
+  ))}
+  <!-- weekend vrij: twee lichte strepen -->
+  <path d="M286 232h28" stroke="#d9e1ea" stroke-width="2" stroke-linecap="round" />
+
+  <!-- vaste onderwerpen -->
+  <rect x="344" y="30" width="116" height="138" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="358" y="56" font-size="12" font-weight="800">Onderwerpen</text>
+  <rect x="358" y="70" width="16" height="14" rx="4" fill="#074663" />
+  <text x="382" y="81" font-size="11">Je werk</text>
+  <rect x="358" y="94" width="16" height="14" rx="4" fill="#e8eef4" stroke="#074663" stroke-width="1.5" />
+  <text x="382" y="105" font-size="11">Het team</text>
+  <rect x="358" y="118" width="16" height="14" rx="4" fill="#fff" stroke="#ff6600" stroke-width="2" />
+  <text x="382" y="129" font-size="11">Een vaktip</text>
+  <rect x="358" y="142" width="16" height="14" rx="4" fill="#ff6600" />
+  <text x="382" y="153" font-size="11">Aanbod</text>
+
+  <!-- teller -->
+  <rect x="344" y="180" width="116" height="66" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="358" y="204" font-size="12" font-weight="800">Gepland</text>
+  <rect class="v" x="358" y="218" width="88" height="10" rx="5" />
+  <rect x="358" y="218" width="80" height="10" rx="5" fill="#074663" />
+
+  {!mini && (
+    <g>
+      <!-- 'vandaag' -->
+      <rect class="vandaag" x={kolX(1) - 3} y={rijY(0) - 3} width="40" height="36" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+      <!-- het laatste bericht schuift in zijn vakje -->
+      <g class="nieuw">
+        <rect x={kolX(doel.k)} y={rijY(doel.r)} width="34" height="30" rx="6" fill="#fff" stroke="#ff6600" stroke-width="2" />
+        <rect x={kolX(doel.k) + 7} y={rijY(doel.r) + 10} width="20" height="4" rx="2" fill="#074663" opacity=".85" />
+        <rect x={kolX(doel.k) + 7} y={rijY(doel.r) + 18} width="12" height="4" rx="2" fill="#c9d3dd" />
+      </g>
+      <rect class="vol" x="428" y="218" width="18" height="10" rx="5" fill="#074663" />
+      <g class="vink">
+        <circle cx={kolX(doel.k) + 34} cy={rijY(doel.r)} r="9" fill="#1f8a5b" stroke="#fff" stroke-width="2" />
+        <path d={`M${kolX(doel.k) + 30} ${rijY(doel.r)}l3 3 5-6`} fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .nieuw, .vol, .vink { transform-box: fill-box; }
+  .vol { transform-origin: left center; }
+  .vink { transform-origin: center; }
+  :global(.teken-js) .nieuw { opacity: 0; transform: translate(158px, -50px); }
+  :global(.teken-js) .vol { transform: scaleX(0); }
+  :global(.teken-js) .vink { opacity: 0; }
+  .in-beeld .nieuw { animation: kennisbank-gidsen-social-media-planning-schuif 1.2s cubic-bezier(.5,.1,.25,1) 0.6s forwards; }
+  .in-beeld .vol { animation: kennisbank-gidsen-social-media-planning-vol 0.5s ease-out 1.8s forwards; }
+  .in-beeld .vink { animation: kennisbank-gidsen-social-media-planning-vink 0.5s cubic-bezier(.3,1.6,.5,1) 2s forwards; }
+  .in-beeld .vandaag { animation: kennisbank-gidsen-social-media-planning-adem 4s ease-in-out 2.4s infinite; }
+  @keyframes kennisbank-gidsen-social-media-planning-schuif { 0% { opacity: 0; transform: translate(158px, -50px); } 15% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-social-media-planning-vol { to { transform: none; } }
+  @keyframes kennisbank-gidsen-social-media-planning-vink { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-social-media-planning-adem { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .nieuw, .in-beeld .vol, .in-beeld .vink, .in-beeld .vandaag { animation: none; } }
+</style>

@@ -1,0 +1,68 @@
+---
+// Scène voor /kennisbank/gidsen/wordpress-gehackt/: een website met verdachte code en een onbekend beheeraccount.
+// Een scanlijn loopt rustig over de code, het opschonen loopt vol en een schild met vinkje meldt dat de site weer schoon is.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 92, w: 150, x: 46 },
+  { y: 110, w: 120, x: 62 },
+  { y: 128, w: 170, x: 62 },
+  { y: 146, w: 96, x: 62 },
+  { y: 182, w: 136, x: 46 },
+  { y: 200, w: 110, x: 62 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een gehackte WordPress-site met een verdachte regel code en een onbekend beheeraccount. Een scan loopt over de code, het opschonen loopt vol en een schild met vinkje laat zien dat de site weer schoon is.'}>
+  <!-- venster met code -->
+  <rect x="22" y="30" width="270" height="210" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M22 54H292" stroke="#e8eef4" stroke-width="2" />
+  <circle cx="38" cy="42" r="4" fill="#d9e1ea" />
+  <circle cx="51" cy="42" r="4" fill="#d9e1ea" />
+  <circle cx="64" cy="42" r="4" fill="#d9e1ea" />
+  <text x="46" y="76" font-size="10" font-weight="800" class="zacht">wp-content/plugins</text>
+  {regels.map((r) => <rect x={r.x} y={r.y} width={r.w} height="7" rx="3.5" fill="#d9e1ea" />)}
+  <!-- de verdachte regel -->
+  <rect x="40" y="159" width="236" height="16" rx="5" fill="#fff4ec" stroke="#ff6600" stroke-width="1.5" />
+  <text x="62" y="171" font-size="10" font-weight="800">eval(base64_decode(...))</text>
+  <circle cx="50" cy="167" r="4" fill="#ff6600" />
+  <!-- onbekend account -->
+  <rect x="150" y="212" width="126" height="20" rx="10" fill="#e8eef4" />
+  <circle cx="162" cy="222" r="5" fill="#074663" />
+  <text x="172" y="226" font-size="9.5" font-weight="700">wp-maintenance-01</text>
+
+  <!-- schild -->
+  <path d="M384 40l58 20v44c0 40-26 66-58 78-32-12-58-38-58-78V60z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <path class="v" d="M384 54l44 15v35c0 31-19 52-44 62-25-10-44-31-44-62V69z" />
+  <path d="M376 86h16v16h16v16h-16v16h-16v-16h-16v-16h16z" fill="#074663" />
+  <text x="384" y="208" font-size="11" font-weight="800" text-anchor="middle">Opschonen</text>
+  <rect x="330" y="216" width="108" height="10" rx="5" fill="#e8eef4" />
+  <rect class={mini ? undefined : 'balk'} x="330" y="216" width="108" height="10" rx="5" fill="#ff6600" />
+
+  {!mini && (
+    <g>
+      <rect class="scan" x="34" y="84" width="246" height="3" rx="1.5" fill="#ff6600" opacity="0.55" />
+      <g class="schoon">
+        <circle cx="430" cy="58" r="14" fill="#1f8a5b" />
+        <path d="M423 58l5 5 9-10" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .balk, .schoon { transform-box: fill-box; }
+  .balk { transform-origin: left center; }
+  .schoon { transform-origin: center; }
+  :global(.teken-js) .balk { transform: scaleX(0.08); }
+  :global(.teken-js) .schoon { opacity: 0; transform: scale(0.4); }
+  :global(.teken-js) .scan { opacity: 0; }
+  .in-beeld .scan { animation: kennisbank-gidsen-wordpress-gehackt-scan 4s ease-in-out 0.3s infinite; }
+  .in-beeld .balk { animation: kennisbank-gidsen-wordpress-gehackt-balk 2.4s cubic-bezier(.5,.1,.3,1) 0.6s forwards; }
+  .in-beeld .schoon { animation: kennisbank-gidsen-wordpress-gehackt-schoon 0.6s cubic-bezier(.3,1.7,.5,1) 3.1s forwards; }
+  @keyframes kennisbank-gidsen-wordpress-gehackt-scan { 0% { opacity: 0; transform: translateY(0); } 10% { opacity: 0.6; } 90% { opacity: 0.6; transform: translateY(124px); } 100% { opacity: 0; transform: translateY(124px); } }
+  @keyframes kennisbank-gidsen-wordpress-gehackt-balk { to { transform: none; } }
+  @keyframes kennisbank-gidsen-wordpress-gehackt-schoon { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .scan { animation: none; opacity: 0; }
+    .in-beeld .balk, .in-beeld .schoon { animation: none; opacity: 1; transform: none; }
+  }
+</style>

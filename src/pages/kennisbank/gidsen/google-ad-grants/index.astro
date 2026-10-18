@@ -1,0 +1,181 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-ad-grants.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-ad-grants/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat het is' },
+  { id: 'voorwaarden', titel: 'Wie komt in aanmerking?' },
+  { id: 'aanvragen', titel: 'Zo vraag je het aan' },
+  { id: 'regels', titel: 'De regels om je grant te houden' },
+  { id: 'voorbeeld', titel: 'Een voorbeeld' },
+  { id: 'valkuilen', titel: 'Waar het vaak misgaat' },
+  { id: 'hulp', titel: 'Zelf doen of hulp vragen?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Google Ad Grants: gratis adverteren voor goede doelen',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google Ad Grants',
+  citation: [
+    'https://www.google.com/intl/nl/nonprofits/offerings/google-ad-grants/',
+    'https://support.google.com/nonprofits/answer/3215869?hl=nl&co=GENIE.CountryCode%3DNL',
+    'https://support.google.com/nonprofits/answer/117827?hl=nl',
+    'https://support.google.com/nonprofits/answer/4410314?hl=nl',
+    'https://support.google.com/nonprofits/answer/1657899?hl=nl',
+    'https://support.google.com/nonprofits/answer/6077350?hl=nl',
+  ],
+}];
+---
+<Base
+  title="Google Ad Grants: gratis adverteren voor goede doelen"
+  description="Google Ad Grants geeft goede doelen $ 10.000 per maand aan gratis zoekadvertenties. Dit zijn de actuele voorwaarden, de regels en zo vraag je het aan."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google Ad Grants', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Online adverteren" titel="Google Ad Grants: gratis adverteren voor goede doelen" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Met Google Ad Grants krijgt een goed doel elke maand $ 10.000 aan advertentietegoed voor Google Zoeken. Gratis, maar niet zonder regels. Hier lees je wie in aanmerking komt, hoe je het aanvraagt en hoe je het tegoed houdt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Google Ad Grants is $ 10.000 per maand aan tegoed voor tekstadvertenties in Google Zoeken. Geen geld op je rekening, wel gratis klikken.</li>
+            <li>In Nederland komen verenigingen, stichtingen, ANBI's en kerkgenootschappen in aanmerking. Een ANBI-status is dus niet verplicht.</li>
+            <li>Je account moet elke maand minstens 5% klikfrequentie halen en minstens één conversie meten.</li>
+            <li>Overheden, ziekenhuizen en scholen zijn uitgesloten. Hun fondsen en stichtingen niet.</li>
+          </ul>
+        </div>
+        <p class="klein muted">Bijgewerkt met de voorwaarden zoals Google ze op 17 oktober 2026 in de eigen hulppagina's beschrijft. Google kan die altijd aanpassen.</p>
+
+        <h2 id="wat-is">Wat is Google Ad Grants?</h2>
+        <p>Google Ad Grants is een programma van Google dat non-profitorganisaties gratis laat adverteren in Google Zoeken. Je krijgt elke maand een tegoed van $ 10.000, in natura. Dat betekent: je krijgt geen geld, maar je mag dat bedrag aan klikken op je advertenties besteden.</p>
+        <p>Je adverteert alleen met tekstadvertenties in de zoekresultaten. Geen banners, geen display marketing en geen filmpjes op YouTube. Voor YouTube heeft Google een apart non-profitprogramma.</p>
+        <p>Het werkt verder net als gewone <a href="/kennisbank/gidsen/wat-is-google-ads/">Google Ads</a>. Iemand zoekt naar "vrijwilligerswerk met dieren" of "doneren aan kankeronderzoek", en jouw advertentie verschijnt. Klikt hij, dan gaat de klik van je tegoed af in plaats van van je bankrekening.</p>
+
+        <h2 id="voorwaarden">Wie komt in aanmerking voor Google Ad Grants?</h2>
+        <p>Je hebt eerst een account bij Google voor Non-profitorganisaties nodig. Google laat de non-profitstatus controleren door een validatiepartner, op dit moment Goodstack. Oudere artikelen noemen nog TechSoup; dat is niet meer actueel.</p>
+        <p>Voor Nederland noemt Google vier soorten organisaties die in aanmerking komen:</p>
+        <ul class="vink">
+          <li>een non-profitvereniging</li>
+          <li>een non-profitstichting</li>
+          <li>een Algemeen Nut Beogende Instelling (ANBI)</li>
+          <li>een kerkgenootschap of een zelfstandig onderdeel daarvan</li>
+        </ul>
+        <p>Veel sites schrijven dat je een ANBI-status nodig hebt. Volgens de huidige voorwaarden van Google is dat dus niet zo. Een stichting of vereniging zonder winstoogmerk kan ook. Je organisatie moet wel uitsluitend een goed doel dienen, en dat moet op je website te zien zijn.</p>
+        <p>Drie groepen vallen buiten de boot, ook als ze het algemeen nut dienen:</p>
+        <ul>
+          <li><b>Overheidsinstellingen.</b> Gemeenten, provincies en hun diensten.</li>
+          <li><b>Ziekenhuizen en zorginstellingen.</b> Een stichting of fonds dat aan een ziekenhuis verbonden is, komt wel in aanmerking.</li>
+          <li><b>Scholen en universiteiten.</b> Ook hier mag het filantropische onderdeel, zoals een universiteitsfonds, wel meedoen.</li>
+        </ul>
+        <p>Daarnaast stelt Google eisen aan je website. Je moet eigenaar zijn van het domein en de site moet via HTTPS werken. Hij moet genoeg eigen tekst bevatten over je missie en je activiteiten, met een adres en registratienummer. Een site die meteen doorstuurt naar een donatieplatform of Facebook-pagina wordt afgekeurd. Toon je advertenties van anderen, zoals AdSense, of verdien je vooral aan affiliate-links, dan kom je niet in aanmerking. Financiële informatie moet duidelijk op de site staan.</p>
+
+        <h2 id="aanvragen">Zo vraag je Google Ad Grants aan</h2>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>1. Zet je website op orde</h3></div>
+        <p>Loop het websitebeleid van Google na voordat je iets aanvraagt. De meeste afwijzingen gaan over de site: te weinig eigen tekst, een onduidelijke missie, kapotte links of een donatieknop die niet werkt. Test je snelheid met PageSpeed Insights, vooral op mobiel.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>2. Maak een account voor non-profitorganisaties</h3></div>
+        <p>Meld je aan bij Google voor Non-profitorganisaties en doorloop de controle via Goodstack. Houd je inschrijving bij de KvK en, als je die hebt, je ANBI-beschikking bij de hand.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>3. Activeer Ad Grants</h3></div>
+        <p>Log in, klik onder Google Ad Grants op "Aan de slag" en vul de website in die je wilt gebruiken. Bekijk de welkomstvideo van ongeveer vijf minuten en vink aan dat je hem hebt gezien. Dien daarna je activeringsverzoek in.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>4. Wacht op de beoordeling</h3></div>
+        <p>Google beoordeelt je verzoek meestal binnen drie tot vijf werkdagen. Je krijgt per mail de volgende stappen.</p>
+        <div class="kader">
+          <p class="kader-titel">Let op: maak zelf geen Google Ads-account aan</p>
+          <p>Google maakt bij de activering zelf een account voor je, gekoppeld aan hetzelfde e-mailadres als je non-profitaccount. Maak je er zelf een aan en vul je betaalgegevens in, dan betaal je gewoon voor je klikken. Google betaalt dat geld niet terug.</p>
+        </div>
+
+        <h2 id="regels">De regels: zo houd je je grant</h2>
+        <p>Het tegoed krijgen is het makkelijke deel. Het houden vraagt onderhoud. Google controleert automatisch en zet je account zonder waarschuwing stil als je de regels breekt. Dit zijn de belangrijkste:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Regel</th><th>Wat het betekent</th></tr></thead>
+            <tbody>
+              <tr><td>5% klikfrequentie</td><td>Over je hele account klikt elke maand minstens 5% van de mensen die je advertentie zien. Twee maanden op rij lager, dan wordt je account tijdelijk gedeactiveerd.</td></tr>
+              <tr><td>Geen losse woorden</td><td>Zoekwoorden van één woord mogen niet. Uitzonderingen: je eigen naam, erkende ziektes en een korte lijst zoals doneren, donatie en vrijwilliger.</td></tr>
+              <tr><td>Niet te algemeen</td><td>Woorden als "het nieuws van vandaag" of alleen een plaatsnaam zijn verboden. Elk zoekwoord moet bij je missie passen.</td></tr>
+              <tr><td>Kwaliteitsscore 3 of hoger</td><td>Zoekwoorden met een kwaliteitsscore van 1 of 2 moet je pauzeren. Een automatische regel kan dat dagelijks voor je doen.</td></tr>
+              <tr><td>Conversies meten</td><td>Je meet minstens één zinvolle actie, zoals een donatie of aanmelding, en haalt er elke maand minstens één.</td></tr>
+              <tr><td>Slim bieden</td><td>Elke campagne biedt op conversies, bijvoorbeeld met "Aantal conversies maximaliseren".</td></tr>
+              <tr><td>Accountstructuur</td><td>Een locatie die past bij je werkgebied en minstens twee sitelinks.</td></tr>
+              <tr><td>Enquête invullen</td><td>Google stuurt af en toe een programma-enquête. Niet invullen kan je deelname kosten.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De rode draad is je missie. Elke advertentie en elk zoekwoord moet aansluiten bij wat je organisatie doet. Google wil voorkomen dat het tegoed opgaat aan klikken van mensen die iets anders zoeken.</p>
+
+        <h2 id="voorbeeld">Een voorbeeld: een dierenopvang in Drenthe</h2>
+        <p>Stel: een dierenopvang bij Assen wil meer vrijwilligers, meer adopties en meer donateurs. Een verzonnen voorbeeld. Zo zou het account eruit kunnen zien.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Campagne</th><th>Voorbeelden van zoekwoorden</th><th>Conversie</th></tr></thead>
+            <tbody>
+              <tr><td>Vrijwilligers</td><td>vrijwilligerswerk met dieren assen, vrijwilliger dierenasiel drenthe</td><td>Aanmeldformulier</td></tr>
+              <tr><td>Adoptie</td><td>kat adopteren drenthe, hond uit het asiel assen</td><td>Adoptieformulier</td></tr>
+              <tr><td>Doneren</td><td>doneren dierenopvang, dierenasiel steunen</td><td>Donatie afgerond</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Elke campagne krijgt een eigen landingspagina. De vrijwilligerspagina vertelt welke taken er zijn, hoeveel uur per week je kwijt bent en wie je begeleidt. De adoptiepagina toont de dieren die nu een huis zoeken. Zo past de pagina bij de zoekopdracht, en dat houdt je klikfrequentie en kwaliteitsscore omhoog.</p>
+
+        <h2 id="valkuilen">Waar het vaak misgaat</h2>
+        <ul>
+          <li><b>Het tegoed niet opmaken.</b> Reken niet op $ 10.000 aan klikken. Door de regels blijft er bij kleine organisaties vaak veel liggen. Dat is niet erg, zolang de klikken die je krijgt iets opleveren.</li>
+          <li><b>Geen conversiemeting.</b> Zonder meting kun je niet slim bieden, en zonder slim bieden voldoe je niet aan de regels. Begin hier, bijvoorbeeld met <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>.</li>
+          <li><b>Alles naar de homepage.</b> Een algemene homepage past slecht bij specifieke zoekopdrachten. Je klikfrequentie zakt, en daarmee je account.</li>
+          <li><b>Instellen en vergeten.</b> Vrijwilligers die het account opzetten, vertrekken. Twee maanden niemand die kijkt is genoeg om onder de 5% te zakken.</li>
+        </ul>
+
+        <h2 id="hulp">Zelf doen of hulp vragen?</h2>
+        <p>Een vrijwilliger met tijd en wat kennis van <a href="/online-adverteren/">online adverteren</a> kan Google Ad Grants prima zelf beheren. Reken op een paar uur per maand: het zoektermenrapport nalopen, slechte zoekwoorden pauzeren, advertenties verbeteren. Gebruik de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a> als vaste controle; bijna alle punten gelden ook voor een grant-account.</p>
+        <p>Wil je het uitbesteden? Dan blijven de klikken gratis en betaal je alleen voor het beheer. Bij <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a> spreken we vooraf af wat het moet opleveren, in aanmeldingen of donaties. Is je website nog niet klaar voor de keuring van Google, dan kijken we daar eerst naar.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je grant beheren?" intro="Wat je van ons mag verwachten, ook als je budget van Google komt." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Google Ad Grants echt gratis?', a: 'Ja. Het tegoed van $ 10.000 per maand kost je niets. Je betaalt alleen als je iemand inhuurt voor het beheer, of als je per ongeluk zelf een betaald Google Ads-account aanmaakt.' },
+      { v: 'Heb ik een ANBI-status nodig?', a: 'Nee. In Nederland komen ook non-profitverenigingen, non-profitstichtingen en kerkgenootschappen in aanmerking.' },
+      { v: 'Kan ik Google Ad Grants naast betaalde Google Ads gebruiken?', a: 'Ja, maar in een apart account. Met een betaald account kun je wel banners, video en zoekwoorden van één woord gebruiken, en daar gelden de regels van Ad Grants niet.' },
+      { v: 'Wat gebeurt er als mijn account wordt stilgezet?', a: 'Je advertenties stoppen. Los het probleem op, bijvoorbeeld door zoekwoorden met een lage klikfrequentie te pauzeren, en dien daarna een herstelverzoek in via je account.' },
+      { v: 'Mag ik mijn grant in een persbericht noemen?', a: 'Nee, persberichten over je deelname staan Google niet toe. Op je eigen socials, in je nieuwsbrief en op je website mag je het wel vertellen.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Wat is Google Ads?', href: '/kennisbank/gidsen/wat-is-google-ads/', tekst: 'Hoe de veiling werkt en wat je moet weten voor je begint.' },
+      { label: 'Dienst', titel: 'Google Ads uitbesteden', href: '/online-adverteren/google-ads-bureau/', tekst: 'Wij beheren je campagnes, met doelen waar je ons op afrekent.' },
+      { label: 'Gids', titel: 'Landingspagina maken', href: '/kennisbank/gidsen/landingspagina-maken/', tekst: 'Een pagina per campagne houdt je klikfrequentie omhoog.' },
+    ]}
+  />
+
+  <Actie titel="Is jouw website klaar voor Google Ad Grants?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt of je site voldoet aan het websitebeleid van Google en belt je met wat er nog moet gebeuren.`} />
+</Base>

@@ -1,0 +1,193 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Bewijs from '../../components/pagina/Bewijs.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Verder from '../../components/pagina/Verder.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+import Prijskaart from '../../components/pagina/Prijskaart.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/webdesign-friesland.astro';
+import { site } from '../../data/site';
+
+const url = '/webdesign-friesland/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'voor-wie', titel: 'Voor elk soort bedrijf' },
+  { id: 'sectoren', titel: 'Wat je site moet doen, per sector' },
+  { id: 'extra', titel: 'Wat een Friese site extra moet kunnen' },
+  { id: 'routes', titel: 'Twee routes' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld: B&B bij Bolsward' },
+  { id: 'checklist', titel: 'Checklist voor je huidige site' },
+  { id: 'fouten', titel: 'Vier fouten bij een nieuwe site' },
+  { id: 'aanleveren', titel: 'Wat je zelf klaarlegt' },
+  { id: 'stappen', titel: 'Zo verloopt het' },
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Webdesign in Friesland',
+  serviceType: 'Website laten maken',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Friesland' },
+  url: `${site.url}${url}`,
+  dateModified: datum,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Webdesign Friesland: website laten maken | Drijfveer Media"
+  description="Webdesign in Friesland: een snelle, vindbare website voor je bedrijf, vanaf € 250. Van Leeuwarden tot Lemmer, gebouwd door een team uit Assen."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Friesland', url: '/regio/friesland/' }, { naam: 'Webdesign Friesland', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Friesland" titel="Webdesign in Friesland, van Lemmer tot Dokkum" prijs="vanaf € 250" eenmalig>
+    <p>Een website voor je Friese bedrijf die snel laadt, goed werkt op de telefoon en gevonden wordt. Gemaakt door een team uit Assen dat graag bij je langskomt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <h2 id="voor-wie">Webdesign in Friesland voor elk soort bedrijf</h2>
+        <p>We maken voor ondernemers in heel Friesland websites die gevonden worden en aanvragen opleveren. Een jachtwerf in Lemmer, een aannemer in Bolsward of een fysiotherapeut in Heerenveen: elk bedrijf krijgt een site die past bij zijn klanten. Ons kantoor staat in Assen. Voor het eerste gesprek komen we naar je toe, of je komt bij ons langs. Wat we verder in de provincie doen, lees je op de pagina over <a href="/regio/friesland/">Friesland</a>.</p>
+        <p>Smaak verschilt. De een wil strak en zakelijk, de ander warm en ambachtelijk. Dat mag. Maar een prachtig ontwerp dat niemand vindt, levert niets op. Daarom begint goed webdesign in Friesland bij ons met twee vragen. Wie moet de site vinden? En wat moet die bezoeker daarna doen: bellen, mailen, boeken of langskomen?</p>
+
+        <h2 id="sectoren">Wat je website moet doen, per sector</h2>
+        <p>Friesland telde begin 2024 volgens het CBS 85.030 bedrijfsvestigingen. Ze zijn verdeeld over heel verschillende sectoren, en elke sector heeft andere bezoekers. Een professionele website voor een bouwbedrijf ziet er daarom anders uit dan die voor een camping.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Sector</th><th>Vestigingen</th><th>Wat de bezoeker wil</th><th>Wat de site moet hebben</th></tr></thead>
+            <tbody>
+              <tr><td>Zakelijke dienstverlening</td><td>17.645</td><td>Weten of je te vertrouwen bent</td><td>Wie je bent, werkwijze, tarieven, bewijs</td></tr>
+              <tr><td>Handel en horeca</td><td>15.775</td><td>Openingstijden, aanbod, route</td><td>Snelle mobiele site, kaart, actuele tijden</td></tr>
+              <tr><td>Nijverheid, energie en bouw</td><td>14.405</td><td>Weten wat je levert en in welk gebied</td><td>Pagina per dienst, projecten, offerteformulier</td></tr>
+              <tr><td>Overheid, onderwijs en zorg</td><td>13.230</td><td>Snel de juiste informatie vinden</td><td>Heldere menu's, goed leesbare teksten</td></tr>
+              <tr><td>Cultuur, recreatie en overige diensten</td><td>9.135</td><td>Beleven en boeken</td><td>Foto's, prijzen, beschikbaarheid, andere talen</td></tr>
+              <tr><td>Landbouw, bosbouw en visserij</td><td>6.220</td><td>Specifieke vakinformatie</td><td>Vakpagina's, contact met de eigenaar</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Bron: CBS, Kerncijfers wijken en buurten 2024, opgeteld voor de 18 Friese gemeenten.</p>
+        <p>Valt je bedrijf in twee rijen, bijvoorbeeld een loonbedrijf dat ook recreatieterreinen onderhoudt? Dan maken we twee duidelijke ingangen op de homepage, zodat elke bezoeker in één klik bij zijn eigen verhaal is.</p>
+
+        <h2 id="extra">Wat een website in Friesland extra moet kunnen</h2>
+        <div class="stap-kop"><Tekening naam="huis" maat={44} /><h3>Gasten van buiten de provincie overtuigen</h3></div>
+        <p>Friese hotels ontvingen in 2025 volgens het CBS 982.000 gasten. Ruim 160.000 van hen kwamen uit het buitenland, onder wie 76.000 Duitsers. Zij kennen je niet en vergelijken online. Echte foto's, duidelijke prijzen en een telefoonnummer dat je met één tik belt, maken dan het verschil. Komen er veel Duitse gasten bij jou? Dan loont een korte Duitse pagina met de belangrijkste informatie, vertaald door iemand die de taal goed kent.</p>
+        <div class="stap-kop"><Tekening naam="pin" maat={44} vertraging={150} /><h3>Gevonden worden op je eigen plaatsnaam</h3></div>
+        <p>Wie een aannemer zoekt, typt "aannemer Sneek" en niet "aannemer Friesland". Een goede site heeft daarom een duidelijke pagina per dienst en noemt de plaatsen waar je echt werkt. Zo kom je terecht in de zoekresultaten van je eigen regio. Voor de grotere plaatsen hebben we ook aparte pagina's, zoals <a href="/webdesign-leeuwarden/">webdesign in Leeuwarden</a>, <a href="/webdesign-heerenveen/">Heerenveen</a> en <a href="/webdesign-sneek/">Sneek</a>.</p>
+        <div class="stap-kop"><Tekening naam="raket" maat={44} vertraging={300} /><h3>Snel laden, ook met slecht bereik</h3></div>
+        <p>Op het water of op het platteland is het bereik niet altijd goed. Een bezoeker die vijf seconden moet wachten, ben je dan kwijt. Wij mikken op een snelle laadtijd. Google zegt dat het grootste beeld van een pagina binnen 2,5 seconden hoort te staan, en dat een knop binnen 200 milliseconden moet reageren. Lichte foto's in WebP en weinig plug-ins helpen daar het meest bij.</p>
+        <div class="stap-kop"><Tekening naam="merk" maat={44} vertraging={450} /><h3>Kiezen tussen .frl en .nl</h3></div>
+        <p>Met een .frl-adres laat je zien waar je vandaan komt. Een .nl-adres kennen meer mensen. Voor Google maakt de extensie weinig uit; die kijkt naar je inhoud, je adres en je links. Twijfel je? Lees dan eerst de gids over <a href="/kennisbank/gidsen/domeinnaam-kiezen/">een domeinnaam kiezen</a>.</p>
+
+        <h2 id="routes">Twee routes naar je nieuwe site</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Vanaf</th><th>Past bij</th><th>Wat je krijgt</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/website-laten-maken/website-met-ai/">Website met AI</a></td><td>€ 250</td><td>Zzp'ers, starters en kleine bedrijven die snel online willen</td><td>Een site die we met AI opzetten en met de hand afmaken</td></tr>
+              <tr><td><a href="/website-laten-maken/">Maatwerk website</a></td><td>€ 2.000</td><td>Bedrijven met meer pagina's, meer diensten of eigen wensen</td><td>Een eigen ontwerp in WordPress, geen standaard template</td></tr>
+              <tr><td><a href="/website-laten-maken/ux-ui-design/">UX- en UI-design</a></td><td>€ 750</td><td>Wie al een site heeft die niet doet wat hij moet doen</td><td>Een ontwerp dat bezoekers laat bellen of boeken</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Beide bouwroutes leveren professionele websites op die werken op elke telefoon, met de technische basis voor SEO erin. Je beheert je website volledig zelf, of je laat het <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud</a> aan ons vanaf € 39 per maand. De site en de teksten zijn van jou. Hosting en webshops doen we niet. Dat zeggen we liever vooraf.</p>
+
+        <h2 id="rekenvoorbeeld">Rekenvoorbeeld: een B&B bij Bolsward</h2>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: B&B De Greidhoeke</p>
+          <p>Een B&B met drie kamers bij Bolsward krijgt nu vooral gasten via boekingssites. De eigenaren willen meer gasten die direct boeken. Ze kiezen voor een site met AI, met vijf pagina's.</p>
+          <div class="tabel-scroll">
+            <table>
+              <thead><tr><th>Onderdeel</th><th>Prijs</th></tr></thead>
+              <tbody>
+                <tr><td>Website met AI</td><td>vanaf € 250</td></tr>
+                <tr><td>Teksten voor 4 pagina's (€ 75 per pagina)</td><td>€ 300</td></tr>
+                <tr><td>Google Bedrijfsprofiel, Bing en Apple inrichten</td><td>vanaf € 249</td></tr>
+                <tr><td><strong>Samen, eenmalig</strong></td><td><strong>vanaf € 799</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Stel dat een directe boeking van twee nachten € 240 oplevert. Dan is de site terugverdiend na vier directe boekingen. Alles wat daarna komt, is winst ten opzichte van nu.</p>
+          <p class="muted klein">Het bedrijf en de opbrengst per boeking zijn verzonnen. De prijzen zijn onze vanaf-prijzen, exclusief btw.</p>
+        </div>
+
+        <h2 id="checklist">Checklist: is je huidige site klaar voor volgend jaar?</h2>
+        <p>Loop deze punten na op je eigen telefoon. Elk nee is een punt om aan te werken.</p>
+        <ul class="vink">
+          <li>Zie je binnen vijf seconden wat je doet en waar je zit?</li>
+          <li>Kun je met één tik bellen?</li>
+          <li>Staan je prijzen of vanaf-prijzen erop?</li>
+          <li>Noem je de plaatsen waar je werkt, zoals Lemmer, Joure of Heerenveen?</li>
+          <li>Kloppen je openingstijden en je adres, ook in je Google Bedrijfsprofiel?</li>
+          <li>Laadt de homepage vlot op 4G?</li>
+          <li>Staan er echte foto's op, van jou en je werk?</li>
+          <li>Is er bewijs: projecten, klanten of een uitgelegde werkwijze?</li>
+        </ul>
+        <p>Twijfel je over een paar punten, vraag dan de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan. Dan kijken wij mee.</p>
+
+        <h2 id="fouten">Vier fouten bij een nieuwe website, en hoe je ze voorkomt</h2>
+        <ol>
+          <li><strong>Je plek in Google kwijtraken bij de overstap.</strong> Krijgen je pagina's nieuwe adressen zonder doorverwijzing, dan begint Google bij nul. Wij sturen elk oud adres door naar de nieuwe pagina.</li>
+          <li><strong>Een homepage die alles en niets zegt.</strong> Een grote foto van een Fries landschap met "Welkom" eronder vertelt een bezoeker niet wat je doet. Zet je dienst en je werkgebied bovenaan.</li>
+          <li><strong>Alleen een contactformulier.</strong> Veel mensen bellen liever, zeker voor een klus aan huis. Zet je telefoonnummer op elke pagina.</li>
+          <li><strong>Een site die niemand bijhoudt.</strong> Verouderde prijzen en een nieuwsbericht uit 2021 wekken twijfel. Kies een systeem dat je zelf snapt, of laat het bijhouden.</li>
+        </ol>
+
+        <h2 id="aanleveren">Wat je zelf klaarlegt voor de start</h2>
+        <p>Hoe sneller dit er is, hoe sneller je nieuwe site live staat. Voor webdesign in Friesland op afstand is dit lijstje extra handig, want dan hoeven we niet heen en weer te rijden voor een foto of een wachtwoord.</p>
+        <ul class="vink">
+          <li>Je logo, liefst als SVG of in hoge kwaliteit. Geen logo? Kijk bij <a href="/branding/logo-laten-maken/">logo laten maken</a>.</li>
+          <li>Tien tot twintig echte foto's van je bedrijf, je team en je werk.</li>
+          <li>Een lijst van je diensten, met wat je per dienst rekent.</li>
+          <li>De plaatsen waar je werkt, of waar je gasten vandaan komen.</li>
+          <li>Toegang tot je domeinnaam, of de naam van het bedrijf waar die staat.</li>
+          <li>Twee of drie sites die je mooi vindt, en waarom.</li>
+        </ul>
+
+        <h2 id="stappen">Zo verloopt het, ook op afstand</h2>
+        <ol class="stappen-rij">
+          <li><strong>Bellen</strong><p>Je vertelt wat je wilt. Wij vragen door tot het helder is.</p></li>
+          <li><strong>Op bezoek</strong><p>We komen naar je toe in Friesland, of je komt koffie drinken in Assen.</p></li>
+          <li><strong>Vaste prijs</strong><p>Je krijgt een voorstel met één bedrag. Je weet vooraf waar je aan toe bent.</p></li>
+          <li><strong>Ontwerp en bouw</strong><p>Je ziet het ontwerp eerst. Daarna bouwen en testen we.</p></li>
+          <li><strong>Live en gevonden</strong><p>Na de lancering helpen we je hoger in Google, als je dat wilt.</p></li>
+        </ol>
+        <p>Afstand is bij webdesign in Friesland geen probleem. Heerenveen ligt op ongeveer een uur rijden van ons kantoor, Lemmer en Sneek op ruim een uur. Na het eerste gesprek gaat bijna alles via een link waarop je het ontwerp bekijkt, en via de telefoon. Een nieuwe website is daarna een begin. Wil je ook hoger in Google komen, lees dan wat <a href="/seo-friesland/">SEO in Friesland</a> inhoudt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+        <Prijskaart naam="Website laten maken" prijs="€ 250" eenmalig punten={['Snel met AI, of maatwerk vanaf € 2.000', 'Werkt op elke telefoon', 'Klaar voor Google', 'Helemaal van jou']} noot="Je hoort de vaste prijs na een kort gesprek." />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost webdesign in Friesland?', a: 'Een website met AI begint bij € 250, een maatwerk website in WordPress bij € 2.000. Teksten kosten € 75 per pagina. Na een kort gesprek krijg je een vaste prijs. Alle bedragen zijn exclusief btw.' },
+      { v: 'Komen jullie bij mij langs in Friesland?', a: `Ja. Ons kantoor staat in Assen, maar voor het eerste gesprek komen we graag naar je toe. Liever eerst mailen? Dat kan via ${site.email}.` },
+      { v: 'Scoor ik met een nieuwe website meteen hoger in Google?', a: 'Niet vanzelf. Een nieuwe site heeft de technische basis op orde, maar posities komen pas met goede teksten, links en een sterk bedrijfsprofiel. Daar helpen we je mee met <a href="/seo-friesland/">SEO in Friesland</a>.' },
+      { v: 'Zijn jullie een webdesignbureau of een marketingbureau?', a: 'Allebei. We bouwen websites, maar kijken altijd verder dan het ontwerp: wordt de site gevonden en levert hij aanvragen op? Daarom werken webdesign en vindbaarheid bij ons samen.' },
+      { v: 'Kan ik mijn site in het Nederlands, Fries en Duits laten maken?', a: 'De site bouwen we in elke taal die je wilt. De teksten schrijven wij in het Nederlands. Een Friese of Duitse versie laat je het best vertalen door iemand die de taal goed beheerst. Wij zetten die teksten er dan in.' },
+      { v: 'Bouwen jullie ook webshops?', a: 'Nee. We maken websites voor dienstverleners, ambachtslieden, recreatiebedrijven en andere bedrijven die aanvragen of boekingen willen. Voor een webshop kun je beter bij een gespecialiseerd bureau terecht.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer webdesign in de regio Friesland"
+    links={[
+      { label: 'Friesland', titel: 'Webdesign in Drachten', href: '/webdesign-drachten/', tekst: 'Voor ondernemers in de tweede plaats van Friesland.', teken: 'scherm' },
+      { label: 'Friesland', titel: 'Webdesign in Joure', href: '/webdesign-joure/', tekst: 'Een website voor bedrijven rond de Friese meren.', teken: 'scherm' },
+      { label: 'Regio', titel: 'Online marketing in Friesland', href: '/online-marketing-friesland/', tekst: 'Na je website: meer klanten via alle kanalen.', teken: 'megafoon' },
+      { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'Prijzen in 2026, en waar het verschil in zit.' },
+    ]}
+  />
+
+  <Actie titel="Een nieuwe website voor je Friese bedrijf?" tekst={`Vertel ${site.contactpersoon} wat je zoekt. Hij belt je binnen 15 minuten terug en plant een gesprek bij jou op de zaak of bij ons in Assen.`} />
+</Base>
+<style>
+  .tekst .stappen-rij { margin: 8px 0 24px; padding-left: 0; }
+</style>

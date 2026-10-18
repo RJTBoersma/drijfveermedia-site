@@ -1,0 +1,10 @@
+---
+// Scène voor /logboek/nulmeting-oktober-2026/: het verloop van het afgelopen jaar, tot en met de nulmeting.
+import { getEntry } from 'astro:content';
+import Groeilijn from '../beeld/Groeilijn.astro';
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const e = await getEntry('logboek', 'nulmeting-oktober-2026');
+const punten = (e?.data.historie ?? []) as [string, number][];
+---
+<Groeilijn punten={punten} mini={mini} id={mini ? 'nulmeting-mini' : 'nulmeting'} label="Verkeer uit Google per maand, oktober 2025 tot oktober 2026" />

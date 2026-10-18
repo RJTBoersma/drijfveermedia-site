@@ -1,0 +1,244 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--roas.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/roas/';
+const datum = '2026-10-18';
+const definitie = 'ROAS (return on ad spend) is de omzet die je advertenties opleveren, gedeeld door wat die advertenties kostten.';
+const hoofdstukken = [
+  { id: 'formule', titel: 'De formule' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld' },
+  { id: 'btw', titel: 'Btw en retouren' },
+  { id: 'break-even', titel: 'Break-even' },
+  { id: 'goed', titel: 'Wat is goed?' },
+  { id: 'verschil', titel: 'ROI, POAS en CPA' },
+  { id: 'doel-roas', titel: 'Doel-ROAS in Google Ads' },
+  { id: 'diensten', titel: 'Voor dienstverleners' },
+  { id: 'verbeteren', titel: 'Omhoog of juist omlaag' },
+  { id: 'valkuilen', titel: 'Valkuilen' },
+];
+const marges = [
+  ['20%', '5', '500%'],
+  ['25%', '4', '400%'],
+  ['33%', '3', '300%'],
+  ['40%', '2,5', '250%'],
+  ['50%', '2', '200%'],
+  ['60%', '1,67', '167%'],
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'ROAS (return on ad spend)',
+  alternateName: ['Return on ad spend', 'Rendement op advertentie-uitgaven'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is ROAS? Formule en rekenvoorbeeld | Drijfveer Media"
+  description="Wat is ROAS? Zo bereken je het rendement op je advertenties, vind je je break-evenpunt en kies je een doel-ROAS die echt winst oplevert."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'ROAS', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Online adverteren</p>
+        <h1>Wat is ROAS?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je steekt € 200 in advertenties en er komt € 1.000 omzet uit. Is dat goed? Dat getal heet de ROAS: het rendement op je advertentie-uitgaven. Hij vertelt in één oogopslag hoeveel omzet elke euro advertentiebudget oplevert. Maar omzet is geen winst. Wie dat vergeet, kan met een prachtig rendement toch geld verliezen. Hieronder lees je hoe je het berekent, waar je break-evenpunt ligt en hoe je een doel kiest dat echt iets oplevert.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>ROAS = omzet uit advertenties ÷ advertentiekosten.</li>
+          <li>Je schrijft hem als getal (5), als verhouding (5:1) of als percentage (500%). Google Ads gebruikt percentages.</li>
+          <li>Je speelt quitte bij 1 gedeeld door je marge. Met 25 procent marge is dat een rendement van 4.</li>
+          <li>Reken met omzet zonder btw, anders lijkt het beter dan het is.</li>
+          <li>Geen webshop? Geef een aanvraag een waarde, dan kun je het ook gebruiken.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={10} />
+
+      <div class="stap-kop" id="formule"><Tekening naam="pen" maat={52} /><h2>De ROAS-formule</h2></div>
+      <p>ROAS staat voor return on ad spend. De formule is kort:</p>
+      <div class="kader formule">
+        <p><b>ROAS = omzet uit advertenties ÷ advertentiekosten</b></p>
+      </div>
+      <p>Je hebt dus twee getallen nodig: de omzet die je aan een campagne kunt toeschrijven, en wat die campagne kostte. Uit € 1.000 omzet op € 200 kosten komt 5. Elke euro leverde vijf euro omzet op.</p>
+      <p>Hetzelfde getal kom je in drie vormen tegen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Schrijfwijze</th><th>Voorbeeld</th><th>Waar je het ziet</th></tr></thead>
+          <tbody>
+            <tr><td>Getal</td><td>5</td><td>In de meeste uitleg en rapporten</td></tr>
+            <tr><td>Verhouding</td><td>5:1</td><td>In gesprekken met bureaus</td></tr>
+            <tr><td>Percentage</td><td>500%</td><td>In Google Ads, bij de biedstrategie Doel-ROAS</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>ROAS berekenen in Google Ads gaat zo: voeg via Kolommen de kolom Conv. waarde/kosten toe. Vermenigvuldig dat getal met 100 en je hebt het percentage. Dat is ook precies hoe Google zelf adviseert een doel te bepalen.</p>
+
+      <div class="stap-kop" id="rekenvoorbeeld"><Tekening naam="munten" maat={52} /><h2>Rekenvoorbeeld: een webshop in tuinmeubelen</h2></div>
+      <p>Stel: een webshop uit Drachten verkoopt tuinmeubelen via Google Shopping. In mei kost de campagne € 1.500. Er komen 40 bestellingen uit van gemiddeld € 225, samen € 9.000 omzet. De brutomarge, wat er na inkoop en verzending overblijft, is 30 procent.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Berekening</th><th>Uitkomst</th></tr></thead>
+          <tbody>
+            <tr><td>Rendement</td><td>€ 9.000 ÷ € 1.500</td><td>6 (600%)</td></tr>
+            <tr><td>Brutowinst op de verkopen</td><td>30% van € 9.000</td><td>€ 2.700</td></tr>
+            <tr><td>Min de advertentiekosten</td><td>€ 2.700 − € 1.500</td><td>€ 1.200</td></tr>
+            <tr><td>Break-evenpunt</td><td>1 ÷ 0,30</td><td>3,33</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld, omzet zonder btw.</p>
+      <p>De campagne verdient € 1.200 bij, voor de vaste kosten van het bedrijf. Een rendement van 6 klinkt riant. Bij een marge van 10 procent was het een verliespost geweest: dan blijft er van € 9.000 omzet maar € 900 over, minder dan de € 1.500 die de advertenties kostten.</p>
+
+      <div class="stap-kop" id="btw"><Tekening naam="schild" maat={52} /><h2>Let op de btw en retouren</h2></div>
+      <p>Hier gaat het in Nederland vaak mis, en bijna niemand schrijft erover. Je advertentiekosten zie je in Google Ads zonder btw. Maar veel webshops sturen de orderwaarde inclusief btw mee als conversiewaarde. Dan vergelijk je appels met peren.</p>
+      <p>Met 21 procent btw is het verschil groot. Een orderwaarde van € 1.210 inclusief btw is € 1.000 omzet voor jou. Zegt Google Ads dat je rendement 6 is, dan is het in werkelijkheid 6 ÷ 1,21 = 4,96. Bij een krappe marge is dat precies het verschil tussen winst en verlies.</p>
+      <p>Hetzelfde geldt voor retouren. Een bestelling die wordt teruggestuurd, telt in Google Ads gewoon als omzet. Stuurt een kwart van je klanten iets terug, haal dat dan van je omzet af voordat je het rendement beoordeelt. Of laat je webbouwer de orderwaarde zonder btw en verzendkosten doorgeven. Dan klopt het getal in je account vanaf de bron.</p>
+
+      <div class="stap-kop" id="break-even"><Tekening naam="doel" maat={52} /><h2>Break-even: vanaf wanneer verdien je eraan?</h2></div>
+      <p>Het belangrijkste getal naast je ROAS is het punt waarop je quitte speelt. Geen winst, geen verlies. Je berekent het met je brutomarge:</p>
+      <div class="kader formule">
+        <p><b>Break-even ROAS = 1 ÷ brutomarge</b></p>
+      </div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Brutomarge</th><th>Break-evenpunt</th><th>Als percentage</th></tr></thead>
+          <tbody>
+            {marges.map(([m, g, p]) => <tr><td>{m}</td><td>{g}</td><td>{p}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p>Alles boven dit getal levert brutowinst op, alles eronder kost je geld. Een lage marge vraagt dus een hoog rendement. Verkoop je met 20 procent marge, dan moet elke advertentie-euro minstens vijf euro omzet opleveren voordat je er iets aan verdient.</p>
+
+      <div class="stap-kop" id="goed"><Tekening naam="ster" maat={52} /><h2>Wat is een goede ROAS?</h2></div>
+      <p>Wie je een vast getal noemt, maakt het zich te makkelijk. Een goed rendement ligt boven je break-evenpunt, met genoeg ruimte voor de winst die je wilt maken. Ook dat kun je uitrekenen:</p>
+      <div class="kader formule">
+        <p><b>Doel = 1 ÷ (brutomarge − gewenste winst per euro omzet)</b></p>
+        <p>Voorbeeld: je marge is 30 procent en je wilt 10 cent winst per euro omzet overhouden. Dan is je doel 1 ÷ (0,30 − 0,10) = 5, oftewel 500%.</p>
+      </div>
+      <p>Drie dingen schuiven dat doel op:</p>
+      <ul>
+        <li><b>Klantwaarde.</b> Komt een klant gemiddeld drie keer terug, dan mag de eerste bestelling minder opleveren.</li>
+        <li><b>De fase van je bedrijf.</b> Wie wil groeien en een klantenbestand opbouwen, accepteert tijdelijk een lager rendement.</li>
+        <li><b>Andere kosten.</b> Betaal je een bureau of besteed je zelf uren aan de campagne, tel die dan mee. Anders is het rendement mooier dan je winst.</li>
+      </ul>
+
+      <div class="stap-kop" id="verschil"><Tekening naam="grafiek" maat={52} /><h2>Het verschil met ROI, POAS en CPA</h2></div>
+      <p>Naast ROAS kom je een paar verwante getallen tegen. Ze meten allemaal iets anders.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Getal</th><th>Formule</th><th>Wat het zegt</th></tr></thead>
+          <tbody>
+            <tr><td>ROAS</td><td>Omzet ÷ advertentiekosten</td><td>Hoeveel omzet elke advertentie-euro oplevert</td></tr>
+            <tr><td>POAS</td><td>Brutowinst ÷ advertentiekosten</td><td>Hoeveel winst elke advertentie-euro oplevert. Boven 1 verdien je eraan.</td></tr>
+            <tr><td>ROI</td><td>(Winst − investering) ÷ investering</td><td>Het rendement op alles wat je erin stopt, ook uren en bureaukosten</td></tr>
+            <tr><td>CPA</td><td>Advertentiekosten ÷ aantal conversies</td><td>Wat één bestelling of aanvraag kost</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>POAS is eigenlijk het eerlijkste getal, omdat het naar winst kijkt in plaats van omzet. Het nadeel: je moet per product de marge doorgeven aan Google Ads, en dat vraagt extra werk. Voor de meeste webshops is ROAS met een goed berekend break-evenpunt een prima werkwijze. Wat een klik kost, staat in het begrip <a href="/kennisbank/wat-is/cpc/">CPC</a>.</p>
+
+      <div class="stap-kop" id="doel-roas"><Tekening naam="tandwiel" maat={52} /><h2>Doel-ROAS in Google Ads</h2></div>
+      <p>Doel-ROAS is een biedstrategie in Google Ads. Jij geeft het rendement op dat je wilt halen, bijvoorbeeld 500 procent. Google voorspelt bij elke zoekopdracht hoeveel een conversie waard kan zijn en biedt hoger waar de kans op een waardevolle bestelling groot is. Dat staat in de uitleg van Google zelf. Een paar dingen die je moet weten:</p>
+      <ul>
+        <li><b>Conversiewaarde nodig.</b> Google moet weten wat elke bestelling waard is. Zonder waarden werkt de strategie niet.</li>
+        <li><b>Genoeg conversies.</b> Voor zoek- en Shopping-campagnes vraagt Google minstens 15 conversies in de afgelopen 30 dagen.</li>
+        <li><b>Budget.</b> Google raadt aan om je budget zo in te stellen dat het systeem tot twee keer je dagbudget kan uitgeven op een dag.</li>
+        <li><b>Nieuwe naam.</b> Vanaf juni 2026 heet "Conversiewaarde maximaliseren met een doel-ROAS" in Google Ads kortweg Doel-ROAS. Het gedrag is hetzelfde gebleven.</li>
+      </ul>
+      <p>Zet je doel niet meteen op het scherpste getal. Een te hoog doel betekent dat Google alleen nog meebiedt waar het heel zeker is van een verkoop. Je rendement ziet er dan mooi uit, maar je omzet krimpt. Begin rond het rendement dat je nu haalt en schroef in stappen omhoog. Geef het systeem na elke wijziging een week of twee.</p>
+
+      <div class="stap-kop" id="diensten"><Tekening naam="huis" maat={52} /><h2>ROAS voor dienstverleners zonder webshop</h2></div>
+      <p>Verkoop je geen producten online, maar krijg je offerteaanvragen of telefoontjes? Dan heb je geen orderwaarde. Je kunt het rendement toch berekenen door een aanvraag een waarde te geven.</p>
+      <div class="kader">
+        <p class="kader-titel">Verzonnen voorbeeld</p>
+        <p>Een installateur in Assen krijgt via Google Ads aanvragen voor een warmtepomp. Een opdracht levert gemiddeld € 6.000 omzet op. Van de tien aanvragen worden er twee een opdracht. Eén aanvraag is dus gemiddeld € 1.200 omzet waard. Kost de campagne € 800 en komen er acht aanvragen uit, dan is de omzet € 9.600 en het rendement 12.</p>
+      </div>
+      <p>Geef die € 1.200 in Google Ads mee als waarde bij de conversie. Dan kun je per campagne en zoekwoord zien welke het meeste opleveren. Werk je met verschillende diensten, geef ze dan elk een eigen waarde. Een aanvraag voor een warmtepomp is meer waard dan een vraag over onderhoud. Weet je nog niet hoeveel aanvragen een opdracht worden? Houd het dan een paar maanden bij. Zonder dat getal blijft elk rendement een gok. Hoe je aanvragen en telefoontjes meet, lees je in het begrip <a href="/kennisbank/wat-is/google-tag-manager/">Google Tag Manager</a>.</p>
+
+      <div class="stap-kop" id="verbeteren"><Tekening naam="raket" maat={52} /><h2>Hoger rendement, of juist bewust lager</h2></div>
+      <h3>Zo krijg je een hogere ROAS</h3>
+      <ul>
+        <li><b>Schrap wat niet verkoopt.</b> Producten en zoekwoorden die al maanden alleen kosten, mogen eruit.</li>
+        <li><b>Verbeter je productpagina's.</b> Een betere pagina verkoopt meer aan dezelfde bezoekers. Dat is rendement zonder extra budget.</li>
+        <li><b>Splits op marge.</b> Zet producten met een hoge marge in een eigen campagne met een lager doel, en producten met een lage marge met een hoger doel.</li>
+        <li><b>Sluit irrelevante zoektermen uit.</b> Elke klik van iemand die niets wil kopen, drukt je rendement.</li>
+        <li><b>Kijk naar je feed.</b> Bij Shopping bepalen producttitel, foto en prijs voor een groot deel of er geklikt wordt. Lees meer bij <a href="/online-adverteren/google-shopping/">Google Shopping</a>.</li>
+      </ul>
+      <h3>Wanneer een lagere ROAS slim is</h3>
+      <p>Een lagere ROAS is niet altijd slecht nieuws. Ga je van 8 naar 5, maar verdubbelt je omzet, dan kan je winst in euro's flink stijgen. Zolang je boven je break-evenpunt blijft, levert elke extra verkoop geld op. Ook bij een product dat klanten later vaker kopen, of een nieuwe markt die je wilt veroveren, kan een lager rendement een bewuste keuze zijn. Stuur daarom op winst in euro's, niet op een zo hoog mogelijk percentage.</p>
+
+      <div class="stap-kop" id="valkuilen"><Tekening naam="lamp" maat={52} /><h2>Valkuilen bij het lezen van het getal</h2></div>
+      <ul>
+        <li><b>Merkzoekwoorden.</b> Mensen die op je bedrijfsnaam zoeken, kopen vaak toch al. Een campagne op je eigen naam heeft daardoor een hoog rendement en trekt het gemiddelde omhoog. Bekijk die apart.</li>
+        <li><b>Toeschrijving.</b> Iemand ziet je advertentie, komt later via Google terug en koopt. Welk kanaal krijgt de omzet? Google Ads en je analysetool kunnen daar verschillend over oordelen.</li>
+        <li><b>Te vroeg oordelen.</b> Bij dure producten duurt het soms dagen of weken tussen klik en aankoop. De omzet van deze week komt dan pas later binnen.</li>
+        <li><b>Alleen naar de eerste aankoop kijken.</b> Een klant die terugkomt, is meer waard dan zijn eerste bestelling.</li>
+      </ul>
+      <p>Een rendement dat je niet kunt uitleggen aan je boekhouder, zegt weinig. Leg de cijfers uit Google Ads daarom af en toe naast je echte omzet en marge. Klopt het ongeveer, dan kun je erop sturen.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees hoe <a href="/kennisbank/wat-is/sea/">zoekmachine adverteren</a> werkt, of loop met de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a> na waar je budget weglekt. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Hoe bereken je ROAS?', a: 'Deel de omzet uit je advertenties door de advertentiekosten. € 5.000 omzet op € 1.000 kosten geeft een rendement van 5, of 500 procent.' },
+      { v: 'Wat is een goede ROAS?', a: 'Een rendement boven je break-evenpunt, met ruimte voor winst. Je break-evenpunt is 1 gedeeld door je brutomarge. Met 25 procent marge speel je quitte bij 4. Een vast getal dat voor iedereen geldt, bestaat niet.' },
+      { v: 'Wat is het verschil tussen ROAS en ROI?', a: 'ROAS kijkt naar omzet tegenover advertentiekosten. ROI kijkt naar winst tegenover alles wat je investeert, ook uren en bureaukosten. ROI zegt dus meer over je echte resultaat.' },
+      { v: 'Reken ik met omzet inclusief of exclusief btw?', a: 'Exclusief. Je advertentiekosten zie je in Google Ads zonder btw, dus reken ook je omzet zonder btw. Anders lijkt je rendement 21 procent hoger dan het is.' },
+      { v: 'Kan ik ROAS gebruiken zonder webshop?', a: 'Ja, als je een aanvraag een waarde geeft. Reken uit hoeveel omzet een aanvraag gemiddeld oplevert en geef die waarde mee aan Google Ads.' },
+      { v: 'Waarom daalt mijn rendement als ik mijn budget verhoog?', a: 'Met meer budget komt Google ook in veilingen waar de kans op een verkoop kleiner is. Dat is normaal. Kijk of je winst in euro\'s nog stijgt en of je boven je break-evenpunt blijft.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over adverteren"
+    links={[
+      { label: 'Begrip', titel: 'Wat is SEA?', href: '/kennisbank/wat-is/sea/', tekst: 'Zoekmachine adverteren in gewone taal.', teken: 'megafoon' },
+      { label: 'Begrip', titel: 'Wat is CTR?', href: '/kennisbank/wat-is/ctr/', tekst: 'De klikfrequentie berekenen en verhogen.', teken: 'klik' },
+      { label: 'Dienst', titel: 'Google Shopping', href: '/online-adverteren/google-shopping/', tekst: 'Je producten met foto en prijs in Google.' },
+    ]}
+  />
+
+  <Actie titel="Weet jij wat je advertenties echt opleveren?" tekst={`${site.contactpersoon} rekent gratis met je uit waar je break-evenpunt ligt en of je campagnes daarboven zitten. Ook als het eerlijke antwoord is dat je beter iets kunt stoppen.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .formule p { margin: 0; }
+  .formule p + p { margin-top: 10px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,126 @@
+---
+import Base from '../../layouts/Base.astro';
+import Inhoud from '../../components/pagina/Inhoud.astro';
+import Scene from '../../components/scenes/disclaimer.astro';
+import { site } from '../../data/site';
+import { overgang } from '../../data/miniaturen';
+
+const url = '/disclaimer/';
+const artikelen = [
+  { id: 'website', titel: '1. Over deze website' },
+  { id: 'informatie', titel: '2. De informatie op deze site' },
+  { id: 'prijzen', titel: '3. Prijzen' },
+  { id: 'cases', titel: '4. Cases en resultaten' },
+  { id: 'garantie', titel: '5. Onze garantie' },
+  { id: 'aansprakelijkheid', titel: '6. Aansprakelijkheid' },
+  { id: 'links', titel: '7. Links naar andere websites' },
+  { id: 'rechten', titel: '8. Teksten, tekeningen en namen' },
+  { id: 'wijzigingen', titel: '9. Wijzigingen' },
+];
+const schema = [{
+  '@type': 'WebPage',
+  name: 'Disclaimer van Drijfveer Media',
+  url: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  dateModified: '2026-10-17',
+  publisher: { '@id': `${site.url}/#organisatie` },
+}];
+---
+<Base
+  title="Disclaimer van drijfveermedia.nl | Drijfveer Media"
+  description="Wat je wel en niet van de informatie op drijfveermedia.nl mag verwachten: prijzen, cases, de garantie, links naar andere sites en het gebruik van onze teksten."
+  kruimels={[{ naam: 'Disclaimer', url }]}
+  schema={schema}
+>
+  <section class="wrap jur-kop">
+    <div>
+      <p class="kicker">Juridisch</p>
+      <h1>Disclaimer</h1>
+      <p class="lead">We doen ons best om alles op deze site kloppend en actueel te houden. Toch kan er iets misgaan. Hier lees je wat je van de informatie mag verwachten, en wat niet.</p>
+    </div>
+    <div class="kop-beeld" style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+  </section>
+
+  <section class="wrap sectie">
+    <div class="met-zijkolom">
+      <article class="tekst juridisch">
+        <h2 id="website">1. Over deze website</h2>
+        <ol class="leden">
+          <li>De website www.drijfveermedia.nl is van Drijfveer Media, {site.straat}, {site.postcode} {site.plaats}. KvK-nummer {site.kvk}.</li>
+          <li>Deze disclaimer geldt voor alle pagina's van deze website. Door de site te gebruiken, ga je ermee akkoord.</li>
+        </ol>
+
+        <h2 id="informatie">2. De informatie op deze site</h2>
+        <ol class="leden">
+          <li>We schrijven onze pagina's zorgvuldig. Toch kan informatie onvolledig zijn of verouderen. Zoekmachines en AI-tools veranderen snel, en wat vandaag klopt, kan over een jaar anders zijn.</li>
+          <li>Alle informatie op deze website is onder voorbehoud van programmeer- en typefouten.</li>
+          <li>Onze gidsen en uitleg in de <a href="/kennisbank/">kennisbank</a> zijn algemeen. Ze zijn geen persoonlijk advies voor jouw situatie. Wil je weten wat voor jouw bedrijf werkt? Vraag het ons.</li>
+          <li>Staat er bij een voorbeeld "verzonnen voorbeeld", dan is het een illustratie. Het gaat dan niet om een echte klant.</li>
+        </ol>
+
+        <h2 id="prijzen">3. Prijzen</h2>
+        <ol class="leden">
+          <li>De prijzen op deze site zijn vanaf-prijzen, in euro's en exclusief btw. Een overzicht staat op de pagina <a href="/prijzen/">prijzen</a>.</li>
+          <li>Wat je precies betaalt, staat in de offerte die je van ons krijgt. Prijzen op de site zijn onder voorbehoud van type- en rekenfouten.</li>
+        </ol>
+
+        <h2 id="cases">4. Cases en resultaten</h2>
+        <ol class="leden">
+          <li>De cijfers in onze <a href="/cases/">cases</a> zijn echte resultaten bij die klanten. Ze zijn geen belofte dat jouw site precies hetzelfde haalt.</li>
+          <li>Elke markt, elke website en elke concurrent is anders. En hoe Google en AI-tools een site beoordelen, bepalen ze zelf. Daarom spreken we bij jou liever een eigen doel af.</li>
+        </ol>
+
+        <h2 id="garantie">5. Onze garantie</h2>
+        <ol class="leden">
+          <li>We spreken samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Bij zoekmachine-optimalisatie en linkbuilding heet dat de stijggarantie.</li>
+          <li>Voorwaarde is dat jij doet wat nodig is en wat we je vragen om het doel te halen. Denk aan op tijd toegang geven tot je website, informatie aanleveren en afgesproken aanpassingen doorvoeren.</li>
+          <li>De garantie geldt zoals die staat in artikel 4 lid 19 van onze <a href="/algemene-voorwaarden/#artikel-4-19">algemene voorwaarden</a> en in de overeenkomst die we met je sluiten. Een tekst op deze website is op zichzelf geen garantie. Meer uitleg vind je op de pagina over <a href="/garantie/">onze garantie</a>.</li>
+        </ol>
+
+        <h2 id="aansprakelijkheid">6. Aansprakelijkheid</h2>
+        <ol class="leden">
+          <li>Gebruik je informatie van deze site, dan doe je dat op eigen risico. We zijn niet aansprakelijk voor schade die daaruit volgt.</li>
+          <li>We zijn ook niet aansprakelijk voor schade doordat de site tijdelijk niet werkt of niet goed te bereiken is.</li>
+          <li>Werk je met ons samen, dan gelden de afspraken uit de overeenkomst en onze algemene voorwaarden. Die gaan voor deze disclaimer.</li>
+        </ol>
+
+        <h2 id="links">7. Links naar andere websites</h2>
+        <ol class="leden">
+          <li>Op deze site staan links naar websites van anderen, bijvoorbeeld van klanten of van tools die we noemen. We hebben geen invloed op die sites en zijn niet verantwoordelijk voor wat erop staat.</li>
+        </ol>
+
+        <h2 id="rechten">8. Teksten, tekeningen en namen</h2>
+        <ol class="leden">
+          <li>De teksten, tekeningen en vormgeving van deze site zijn van Drijfveer Media. Wil je iets overnemen? Vraag het ons eerst.</li>
+          <li>Namen van klanten, merken en tools die we noemen, zijn van hun eigenaren.</li>
+          <li>Hoe we met je gegevens omgaan, lees je in onze <a href="/privacyverklaring/">privacyverklaring</a>.</li>
+        </ol>
+
+        <h2 id="wijzigingen">9. Wijzigingen</h2>
+        <ol class="leden">
+          <li>We kunnen deze disclaimer aanpassen. De datum hieronder laat zien wanneer dat voor het laatst gebeurde.</li>
+          <li>Vragen over deze disclaimer? Bel <a href={site.telefoonLink}>{site.telefoon}</a> of mail <a href={`mailto:${site.email}`}>{site.email}</a>.</li>
+        </ol>
+
+        <p class="bijgewerkt">Laatst bijgewerkt: 17 oktober 2026</p>
+      </article>
+
+      <aside class="zijkolom">
+        <Inhoud items={artikelen} />
+      </aside>
+    </div>
+  </section>
+</Base>
+<style>
+  .jur-kop { padding-block: 24px 8px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; align-items: center; }
+  h1 { margin: 10px 0 16px; }
+  .lead { font-size: var(--step-1); line-height: 1.45; max-width: 44ch; }
+  .kop-beeld { min-width: 0; }
+  .juridisch { counter-reset: art; }
+  .juridisch h2 { counter-increment: art; }
+  .leden { list-style: none; padding-left: 0; counter-reset: lid; }
+  .leden > li { counter-increment: lid; position: relative; padding-left: 46px; margin-bottom: 0.7em; }
+  .leden > li::before { content: counter(art) "." counter(lid); position: absolute; left: 0; top: 0; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
+  .bijgewerkt { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 860px) { .jur-kop { grid-template-columns: minmax(0, 1fr); } .kop-beeld { max-width: 420px; } }
+</style>

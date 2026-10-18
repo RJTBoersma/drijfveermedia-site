@@ -1,0 +1,228 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--keyword-cannibalization.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/keyword-cannibalization/';
+const datum = '2026-10-18';
+const definitie = 'Keyword cannibalization is de situatie waarin twee of meer pagina\'s van dezelfde website op hetzelfde zoekwoord en dezelfde vraag mikken, waardoor ze elkaar in Google beconcurreren en geen van beide goed scoort.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  '@id': `${site.url}${url}#begrip`,
+  name: 'Keyword cannibalization',
+  alternateName: ['Zoekwoordkannibalisatie', 'Keyword cannibalisation'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'WebPage',
+  '@id': `${site.url}${url}#pagina`,
+  url: `${site.url}${url}`,
+  name: 'Wat is keyword cannibalization?',
+  inLanguage: 'nl-NL',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  about: { '@id': `${site.url}${url}#begrip` },
+}];
+const zoekopdracht = `site:fysiogroningen-voorbeeld.nl dry needling`;
+---
+<Base
+  title="Wat is keyword cannibalization? Zo los je het op"
+  description="Wat is keyword cannibalization? Twee eigen pagina's die vechten om één zoekwoord. Zo herken je het in Search Console en zo los je het op, stap voor stap."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Keyword cannibalization', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is keyword cannibalization?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je werkt hard aan je site. Je schrijft blogs, maakt dienstpagina's, zet er nog een pagina bij. En juist daardoor zak je. Het klinkt gek, maar je kunt jezelf beconcurreren. In het Nederlands heet het zoekwoordkannibalisatie: concurrentie met jezelf.</p>
+      <p>Het overkomt vooral sites die al een tijdje bestaan. Hoe meer pagina's, hoe groter de kans dat twee ervan hetzelfde antwoord geven. Op deze pagina lees je hoe je het herkent, wanneer het juist geen probleem is, en welke oplossing bij welke situatie past.</p>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2>Waarom kannibalisatie je posities kost</h2></div>
+      <p>Google laat per zoekopdracht meestal niet meer dan twee pagina's van dezelfde site zien in de bovenste resultaten. Dat staat in de uitleg van Google over zijn eigen rankingsystemen, onder het kopje site diversity. Mikken er drie op dezelfde vraag, dan moet Google kiezen. Dat gaat vaak mis op drie manieren:</p>
+      <ul>
+        <li><strong>De verkeerde pagina wint.</strong> Een oude blog staat in Google, terwijl je dienstpagina met prijs en contactknop onzichtbaar blijft.</li>
+        <li><strong>De posities schommelen.</strong> Deze week staat pagina A op 6, volgende week pagina B op 11. Geen van beide komt verder.</li>
+        <li><strong>De kracht raakt verdeeld.</strong> Backlinks en <a href="/kennisbank/wat-is/interne-links/">interne links</a> gaan naar drie pagina's in plaats van één sterke.</li>
+      </ul>
+      <p>Het is geen straf van Google. Het is een keuzeprobleem dat je zelf veroorzaakt, en dus ook zelf kunt oplossen. De schade zit vaak in de conversie. Een bezoeker die op een informatieve blog landt, belt minder snel dan iemand die op je dienstpagina komt.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Wanneer is het juist geen probleem?</h2></div>
+      <p>Niet elke dubbele vermelding is kannibalisatie. Staan twee pagina's van jou op plek 1 en 2 voor hetzelfde woord, dan is dat prima. Je neemt dan meer ruimte in dan je concurrent. Pas als ze elkaar omlaag houden, heb je een probleem.</p>
+      <p>De toets is de <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>. Wil iemand met deze zoekopdracht hetzelfde weten of doen? Dan hoort er één pagina bij. Wil hij iets anders, dan mogen het twee pagina's zijn, ook als de woorden op elkaar lijken.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Twee pagina's over</th><th>Zelfde intentie?</th><th>Kannibalisatie?</th></tr></thead>
+          <tbody>
+            <tr><td>"Dakkapel plaatsen" en "dakkapel laten plaatsen"</td><td>Ja, iemand zoekt een vakman</td><td>Ja, voeg samen</td></tr>
+            <tr><td>"Dakkapel prijs" en "dakkapel plaatsen"</td><td>Deels, de één vergelijkt nog, de ander wil een offerte</td><td>Alleen als beide pagina's hetzelfde zeggen</td></tr>
+            <tr><td>"Wat is een dakkapel" en "dakkapel plaatsen Assen"</td><td>Nee, uitleg tegenover aanbod</td><td>Nee, mits ze naar elkaar linken</td></tr>
+            <tr><td>"Dakkapel subsidie 2026" en "dakkapel subsidie 2025"</td><td>Ja, het jaar verandert, de vraag niet</td><td>Ja, houd één pagina en werk die bij</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Verzonnen voorbeelden, ter illustratie.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Het verschil met duplicate content</h2></div>
+      <p>Het lijkt op <a href="/kennisbank/wat-is/duplicate-content/">duplicate content</a>, maar is niet hetzelfde. Bij dubbele content staat dezelfde tekst op meerdere plekken. Bij kannibalisatie kunnen de teksten heel verschillend zijn. Ze beantwoorden alleen dezelfde vraag.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Duplicate content</th><th>Keyword cannibalization</th></tr></thead>
+          <tbody>
+            <tr><td>Wat is dubbel?</td><td>De tekst zelf</td><td>Het zoekwoord en de vraag</td></tr>
+            <tr><td>Meestal de oorzaak</td><td>Techniek: adressen, filters, kopieën</td><td>Content: te veel pagina's over één onderwerp</td></tr>
+            <tr><td>Hoe je het ziet</td><td>Meldingen over canonieke pagina's in Search Console</td><td>Meerdere pagina's per zoekopdracht in het rapport Prestaties</td></tr>
+            <tr><td>Meestal de oplossing</td><td>Redirect of canonical</td><td>Samenvoegen, herschrijven of de interne links aanpassen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Hoe ontstaat het?</h2></div>
+      <p>Bijna nooit met opzet. Dit zijn de situaties die we het vaakst zien:</p>
+      <ul>
+        <li><strong>Blogs die op elkaar lijken.</strong> In 2021 schreef je "Tips voor een gezonde rug", in 2024 "Zo voorkom je rugklachten". Twee keer dezelfde vraag.</li>
+        <li><strong>Een blog naast een dienstpagina.</strong> De blog legt een behandeling uit, de dienstpagina biedt hem aan. Allebei mikken ze op dezelfde zoekterm.</li>
+        <li><strong>Een homepage die alles wil.</strong> De homepage noemt in elke zin je hoofddienst, terwijl daar ook een eigen pagina voor is.</li>
+        <li><strong>Plaatspagina's voor één regio.</strong> "Installateur Assen" en "installateur Drenthe" met bijna dezelfde tekst.</li>
+        <li><strong>Jaarlijkse pagina's.</strong> Elk jaar een nieuwe actie- of prijspagina, terwijl de oude blijft staan.</li>
+        <li><strong>Categorieën en tags.</strong> In WordPress krijgt een tag soms dezelfde naam als een categorie of dienstpagina.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Zo vind je keyword cannibalization</h2></div>
+      <p>Een goede analyse begint in Google Search Console. Dat is gratis, en het laat zien wat Google echt doet in plaats van wat een tool schat.</p>
+
+      <h3>Stap voor stap in Search Console</h3>
+      <ol>
+        <li>Open je property en klik op Prestaties, dan op Zoekresultaten.</li>
+        <li>Zet de periode op de afgelopen drie of zes maanden. Zet bovenaan Gemiddelde positie aan.</li>
+        <li>Klik op Nieuw (het filter met het plusje) en kies Zoekopdracht. Vul een zoekwoord in dat belangrijk voor je is.</li>
+        <li>Klik onder de grafiek op het tabblad Pagina's.</li>
+        <li>Zie je twee of meer pagina's met flink wat vertoningen? Dan heb je een kandidaat.</li>
+        <li>Klik een pagina aan en kijk in de grafiek of de posities sterk schommelen. Wisselen twee pagina's elkaar af, dan heb je beet.</li>
+      </ol>
+      <p>Laat je niet misleiden door kleine aantallen. Een pagina met vijf vertoningen in drie maanden is geen echte concurrent. Kijk naar pagina's die allebei serieus meedoen.</p>
+
+      <h3>Een snelle check in Google</h3>
+      <p>Typ in Google het woord site, een dubbele punt, je domein en het zoekwoord. Bijvoorbeeld:</p>
+      <pre><code>{zoekopdracht}</code></pre>
+      <p>Je ziet dan welke pagina's van jouw site Google bij dat woord vindt. Zijn het er vijf, dan weet je waar je moet zoeken. Meer van dit soort zoektrucs staan in <a href="/kennisbank/geavanceerd-zoeken-met-google/">geavanceerd zoeken met Google</a>.</p>
+
+      <h3>Voor grotere sites</h3>
+      <p>Heb je honderden pagina's, dan wordt klikken in Search Console te veel werk. Haal de gegevens dan met de gratis add-on Search Analytics for Sheets in een spreadsheet, met zoekopdracht en pagina naast elkaar. Sorteer op zoekopdracht en je ziet meteen waar meerdere pagina's opduiken. Een crawler als Screaming Frog laat daarnaast zien welke pagina's dezelfde titel of H1 hebben. Dat is geen bewijs, wel een sterke aanwijzing.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Welke oplossing past?</h2></div>
+      <p>Kies eerst per zoekwoord één hoofdpagina. Meestal is dat de pagina die het dichtst bij een aanvraag ligt, of die de meeste links heeft. Daarna kies je wat je met de andere pagina doet.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Situatie</th><th>Oplossing</th></tr></thead>
+          <tbody>
+            <tr><td>Twee pagina's zeggen hetzelfde, één is zwakker</td><td>Samenvoegen en de zwakke met een 301-redirect doorsturen</td></tr>
+            <tr><td>Beide pagina's hebben bestaansrecht</td><td>Herschrijven, zodat elke pagina een eigen zoekwoord en vraag krijgt</td></tr>
+            <tr><td>Een pagina moet blijven voor bezoekers, niet voor Google</td><td>Canonical naar de hoofdpagina, of noindex</td></tr>
+            <tr><td>De verkeerde pagina wint, maar de inhoud klopt</td><td>Interne links en ankerteksten naar de hoofdpagina laten wijzen</td></tr>
+            <tr><td>Een oude actie of jaarpagina</td><td>Doorsturen naar de actuele pagina, en voortaan één pagina bijwerken</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Samenvoegen in vijf stappen</h3>
+      <p>Samenvoegen werkt het vaakst. Zo pak je het aan zonder iets kwijt te raken:</p>
+      <ol>
+        <li><strong>Kies de winnaar.</strong> Kijk in Search Console welke pagina de meeste klikken heeft, en in je linkprofiel welke de meeste backlinks heeft. Meestal houd je die.</li>
+        <li><strong>Haal het beste over.</strong> Neem goede alinea's, voorbeelden en vragen van de zwakke pagina over in de winnaar. Herschrijf ze, plak ze niet.</li>
+        <li><strong>Zet een 301-<a href="/kennisbank/wat-is/redirect/">redirect</a>.</strong> Het oude adres stuurt bezoekers en Google door naar de winnaar. Zo gaan de links mee.</li>
+        <li><strong>Pas je interne links aan.</strong> Zoek op je site naar links naar het oude adres en laat ze direct naar de winnaar wijzen.</li>
+        <li><strong>Vraag om een nieuwe indexering.</strong> Gebruik de URL-inspectie in Search Console. Kijk na vier tot acht weken of de posities rustiger zijn.</li>
+      </ol>
+      <p>Verwijder een pagina nooit zonder redirect. Dan verlies je de links die ernaar wijzen, en bezoekers met een oude bladwijzer komen op een foutpagina.</p>
+
+      <h3>Herschrijven op een andere vraag</h3>
+      <p>Soms heb je beide pagina's nodig. Maak dan het verschil scherp. Van de blog maak je een uitleg: wat is het, hoe werkt het, voor wie is het. Van de dienstpagina maak je een aanbod: wat kost het, hoe gaat het, wanneer kun je terecht. Pas ook de title en de H1 aan, zodat Google het verschil ziet. Laat de blog met een duidelijke link naar de dienstpagina wijzen.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: een fysiotherapeut in Groningen heeft een dienstpagina over dry needling en drie blogs over hetzelfde onderwerp. In Search Console ziet ze dat bij "dry needling Groningen" steeds een blog verschijnt, op plek 14. De dienstpagina zakt weg.</p>
+      <p>Ze voegt de drie blogs samen tot één heldere gids over wat dry needling is en voor wie het werkt. De oude adressen stuurt ze door naar de gids. In de gids staat een link naar de dienstpagina, met de tekst "dry needling in Groningen". Op de dienstpagina zet ze de prijs, de wachttijd en de vergoeding door de verzekeraar. Nu heeft elke vraag één antwoord. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>Voorkomen met een zoekwoordkaart</h2></div>
+      <p>Voorkomen is een stuk makkelijker dan genezen. Houd een simpele lijst bij met per pagina één hoofdzoekwoord en de vraag die de pagina beantwoordt. Wil je een nieuwe pagina maken? Kijk eerst of het zoekwoord al bezet is.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Pagina</th><th>Hoofdzoekwoord</th><th>Vraag van de bezoeker</th></tr></thead>
+          <tbody>
+            <tr><td>/dry-needling/</td><td>dry needling groningen</td><td>Waar kan ik terecht en wat kost het?</td></tr>
+            <tr><td>/gids/dry-needling/</td><td>wat is dry needling</td><td>Hoe werkt het en helpt het bij mij?</td></tr>
+            <tr><td>/rugklachten/</td><td>fysiotherapeut rugklachten groningen</td><td>Kan iemand mijn rug behandelen?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Verzonnen voorbeeld van een zoekwoordkaart.</p>
+      <p>Zo'n kaart maak je bij <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek</a>. Wij werken met een vaste regel: elk zoekwoord krijgt precies één pagina. Op deze site keurt een controlescript de hele site af als twee pagina's hetzelfde zoekwoord hebben.</p>
+
+      <div class="stap-kop"><Tekening naam="kolf" maat={52} /><h2>Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><strong>Pagina's weggooien zonder redirect.</strong> De links en de bezoekers van die pagina verdwijnen mee.</li>
+        <li><strong>Een canonical tussen pagina's die niet op elkaar lijken.</strong> Een canonical is voor kopieën. Bij twee verschillende teksten negeert Google hem vaak.</li>
+        <li><strong>De sterkste pagina op noindex zetten.</strong> Kijk altijd eerst naar klikken en links voordat je kiest welke blijft.</li>
+        <li><strong>Alles tegelijk omgooien.</strong> Pak eerst één zoekwoord aan en kijk wat het doet. Dan weet je waar een stijging of daling vandaan komt.</li>
+        <li><strong>Schrikken van twee resultaten in de top 3.</strong> Dat is geen kannibalisatie. Dat is winst.</li>
+      </ul>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li><strong>Kies per zoekwoord één hoofdpagina.</strong> Schrijf op welke pagina voor welke vraag moet scoren.</li>
+        <li><strong>Check je vijf belangrijkste zoekwoorden</strong> in Search Console op meerdere pagina's.</li>
+        <li><strong>Samenvoegen</strong> werkt het vaakst. Neem het beste uit de zwakke pagina's over en zet een 301-redirect naar de hoofdpagina.</li>
+        <li><strong>Herschrijven</strong> als beide pagina's bestaansrecht hebben. Maak van de blog een uitleg en van de dienstpagina een aanbod.</li>
+        <li><strong>Interne links</strong> en ankerteksten consequent naar de hoofdpagina laten wijzen.</li>
+        <li><strong>Kijk voor je schrijft.</strong> Zoek op je eigen site of het onderwerp al bestaat. Werk liever een oude pagina bij dan dat je een nieuwe maakt.</li>
+      </ul>
+      <p>Dit soort rankings rechttrekken is vaak de snelste winst die een bestaande site kan pakken. Er hoeft niets nieuws geschreven te worden. Alleen orde.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>In de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">Zoekwoordonderzoek doen</a> lees je hoe je per pagina één zoekwoord kiest. Wil je dat wij je site doorlichten en de rankings rechttrekken? Kijk bij <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>, vanaf € 495 per maand. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is keyword cannibalization slecht voor SEO?', a: 'Het kan je posities kosten, omdat Google moet kiezen tussen je eigen pagina\'s. Het is geen straf. Staan twee pagina\'s van jou allebei hoog, dan is er niets aan de hand.' },
+      { v: 'Hoe zie ik of ik er last van heb?', a: 'Kijk in Google Search Console bij Prestaties. Filter op een zoekopdracht en open het tabblad Pagina\'s. Krijgen meerdere pagina\'s vertoningen en wisselen ze elkaar af, dan is het waarschijnlijk kannibalisatie.' },
+      { v: 'Moet ik een van de pagina\'s verwijderen?', a: 'Meestal voeg je ze samen. Je neemt het beste van de zwakke pagina over en stuurt het oude adres met een 301-redirect door. Verwijderen zonder redirect kost je links en bezoekers.' },
+      { v: 'Helpt een canonical-tag tegen kannibalisatie?', a: 'Alleen als de pagina\'s bijna gelijk zijn. Bij twee verschillende teksten over hetzelfde onderwerp werkt samenvoegen of herschrijven beter.' },
+      { v: 'Hoe snel zie ik resultaat na het samenvoegen?', a: 'Reken op vier tot acht weken. Google moet de redirect en de nieuwe pagina eerst verwerken. Daarna worden de posities vaak rustiger en stabieler.' },
+    ]}
+  />
+
+  <Actie titel="Zit jouw site zichzelf in de weg?" tekst={`We zoeken het gratis voor je uit in de zoekresultaten. ${site.contactpersoon} belt je met welke pagina's elkaar beconcurreren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-wrap: normal; word-break: normal; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

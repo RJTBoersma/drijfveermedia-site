@@ -1,0 +1,62 @@
+---
+// Scène voor /website-laten-maken/onderhoud-wordpress/: een onderhoudslijst waar elke maand alles op groen komt, met een schild dat de site beschermt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 82, tekst: 'Updates geïnstalleerd' },
+  { y: 126, tekst: 'Back-up gemaakt' },
+  { y: 170, tekst: 'Beveiliging gecontroleerd' },
+  { y: 214, tekst: 'Snelheid gemeten' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een onderhoudslijst voor een website. Updates, back-up, beveiliging en snelheid krijgen een groen vinkje, naast een schild dat de site beschermt.'} aria-hidden={mini ? 'true' : undefined}>
+  <rect x="16" y="22" width="300" height="230" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="36" y="50" font-size="14" font-weight="800">Onderhoud deze maand</text>
+  <path d="M16 62h300" stroke="#d9e1ea" stroke-width="2" />
+  {regels.map((r) => (
+    <g>
+      <rect class="v" x="32" y={r.y - 16} width="268" height="34" rx="9" />
+      <text x="46" y={r.y + 5} font-size="12.5" font-weight="700">{r.tekst}</text>
+      <circle cx="280" cy={r.y + 1} r="10" fill="#1f8a5b" />
+      <path d={`M275 ${r.y + 1}l4 4 7-8`} stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  ))}
+  <!-- Schild -->
+  <path d="M396 40l52 18v40c0 38-24 64-52 76-28-12-52-38-52-76V58z" fill="#fff" stroke="#074663" stroke-width="3" stroke-linejoin="round" />
+  <path class="v" d="M396 54l38 13v31c0 28-17 47-38 57-21-10-38-29-38-57V67z" />
+  <path d="M378 104l12 12 24-26" stroke="#1f8a5b" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Prijs -->
+  <rect x="344" y="196" width="104" height="40" rx="12" fill="#fff4ec" stroke="#ffd6b8" />
+  <text x="358" y="221" font-size="14" font-weight="900">€ 39 p/m</text>
+  {!mini && (
+    <g>
+      <rect x="32" y="102" width="268" height="4" rx="2" fill="#e8eef4" />
+      <rect class="website-laten-maken--onderhoud-wordpress-balk" x="32" y="102" width="268" height="4" rx="2" fill="#ff6600" />
+      {regels.map((r, i) => (
+        <circle class="website-laten-maken--onderhoud-wordpress-pols" style={`--i:${i}`} cx="280" cy={r.y + 1} r="10" fill="none" stroke="#1f8a5b" stroke-width="2.5" />
+      ))}
+      <path class="website-laten-maken--onderhoud-wordpress-gloed" d="M396 40l52 18v40c0 38-24 64-52 76-28-12-52-38-52-76V58z" fill="none" stroke="#ff6600" stroke-width="3" stroke-linejoin="round" />
+      <g class="website-laten-maken--onderhoud-wordpress-blok">
+        <circle cx="462" cy="122" r="7" fill="#ff6600" />
+        <path d="M458 118l8 8M466 118l-8 8" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .website-laten-maken--onderhoud-wordpress-balk { transform-box: fill-box; transform-origin: left center; transform: scaleX(1); }
+  .in-beeld .website-laten-maken--onderhoud-wordpress-balk { animation: website-laten-maken--onderhoud-wordpress-balk 5s ease-in-out 0.4s infinite; }
+  .website-laten-maken--onderhoud-wordpress-pols { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .in-beeld .website-laten-maken--onderhoud-wordpress-pols { animation: website-laten-maken--onderhoud-wordpress-pols 0.9s ease-out forwards; animation-delay: calc(0.6s + var(--i) * 0.45s); }
+  .website-laten-maken--onderhoud-wordpress-gloed { opacity: 0; }
+  .in-beeld .website-laten-maken--onderhoud-wordpress-gloed { animation: website-laten-maken--onderhoud-wordpress-gloed 4s ease-in-out 2.6s infinite; }
+  :global(.teken-js) .website-laten-maken--onderhoud-wordpress-blok { opacity: 0; }
+  .in-beeld .website-laten-maken--onderhoud-wordpress-blok { animation: website-laten-maken--onderhoud-wordpress-blok 4s ease-in-out 2.6s infinite; }
+  @keyframes website-laten-maken--onderhoud-wordpress-balk { 0% { transform: scaleX(0); } 60%, 85% { transform: scaleX(1); } 100% { transform: scaleX(1); opacity: 0; } }
+  @keyframes website-laten-maken--onderhoud-wordpress-pols { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.9); } }
+  @keyframes website-laten-maken--onderhoud-wordpress-gloed { 0%, 100% { opacity: 0; } 40%, 60% { opacity: 0.8; } }
+  @keyframes website-laten-maken--onderhoud-wordpress-blok { 0% { opacity: 0; transform: translateX(14px); } 30% { opacity: 1; transform: translateX(0); } 45% { opacity: 1; transform: translateX(-6px); } 70%, 100% { opacity: 0; transform: translateX(16px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .website-laten-maken--onderhoud-wordpress-balk, .in-beeld .website-laten-maken--onderhoud-wordpress-pols, .in-beeld .website-laten-maken--onderhoud-wordpress-gloed, .in-beeld .website-laten-maken--onderhoud-wordpress-blok { animation: none; }
+  }
+</style>

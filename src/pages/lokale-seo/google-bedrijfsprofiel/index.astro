@@ -1,0 +1,263 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Kaartpakket from '../../../components/beeld/Kaartpakket.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import { site } from '../../../data/site';
+
+const url = '/lokale-seo/google-bedrijfsprofiel/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Waarom dat kaartje uitmaakt' },
+  { id: 'hoe-google-kiest', titel: 'Hoe Google kiest' },
+  { id: 'aanpak', titel: 'Zo optimaliseren we je profiel' },
+  { id: 'regels', titel: 'Regels die je profiel kunnen kosten' },
+  { id: 'verificatie', titel: 'Verificatie' },
+  { id: 'bing-apple', titel: 'Bing Places en Apple' },
+  { id: 'nap', titel: 'Overal dezelfde gegevens' },
+  { id: 'werkwijze', titel: 'Onze werkwijze' },
+  { id: 'wat-je-krijgt', titel: 'Wat je krijgt voor € 249' },
+  { id: 'checklist', titel: 'Checklist voor je profiel' },
+];
+const check = [
+  'Het profiel is geverifieerd en staat op een account dat van jou is, niet van een oud-medewerker of bureau.',
+  'De bedrijfsnaam is precies je echte naam, zonder plaatsnaam of zoekwoorden.',
+  'De hoofdcategorie is de meest specifieke die past, met alleen extra categorieën die echt kloppen.',
+  'Adres of servicegebied klopt. Kom je bij klanten thuis, dan staan de plaatsen erin.',
+  'Openingstijden kloppen, ook de afwijkende tijden voor feestdagen en vakantie.',
+  'Telefoonnummer en website zijn dezelfde als op je eigen site.',
+  'De beschrijving vertelt wat je doet, voor wie en waar, zonder links of acties (max. 750 tekens).',
+  'Elke dienst staat apart in het profiel, met een korte uitleg.',
+  'Er staan echte foto\'s in: buitenkant, binnenkant, team en werk.',
+  'Je hebt een reviewlink en QR-code, en je reageert op reviews.',
+  'Je bedrijf staat met dezelfde gegevens in Bing Places en Apple Business.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'Checklist Google Bedrijfsprofiel\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  check.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nHulp nodig? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Service',
+  name: 'Google Bedrijfsprofiel, Bing Places en Apple Business Connect optimaliseren',
+  serviceType: 'Lokale SEO',
+  description: 'Je Google Bedrijfsprofiel, Bing Places en Apple Business (voorheen Apple Business Connect) volledig ingevuld en op elkaar afgestemd, met reviewlink en QR-code.',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 249, priceSpecification: { '@type': 'PriceSpecification', price: 249, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+}];
+---
+<Base
+  title="Google Bedrijfsprofiel laten optimaliseren | Drijfveer Media"
+  description="Google Bedrijfsprofiel (Google Mijn Bedrijf) laten optimaliseren, met Bing Places en Apple Business Connect erbij. Eenmalig vanaf € 249, zodat klanten je vinden op de kaart."
+  kruimels={[{ naam: 'Lokale SEO', url: '/lokale-seo/' }, { naam: 'Google Bedrijfsprofiel', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gevonden · Lokale SEO" titel="Google Bedrijfsprofiel laten optimaliseren, met Bing en Apple erbij" prijs="vanaf € 249" eenmalig>
+    <p>Wie in jouw plaats zoekt naar wat jij doet, ziet eerst een kaartje met drie bedrijven. Wij zorgen dat jij daar staat, op Google Maps, Bing en Apple Kaarten.</p>
+    <Kaartpakket slot="beeld" zoekterm="loodgieter emmen" jij="Installatiebedrijf Jansen" anderen={['Loodgietersbedrijf De Boer', 'Sanitair Bakker']} label="Verzonnen voorbeeld van het kaartje in Google" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Je Google Bedrijfsprofiel laten optimaliseren is het snelste stuk lokale SEO: het profiel is gratis, het verschil zit in hoe je het invult.</li>
+            <li>We richten Google, Bing Places en Apple Business (voorheen Apple Business Connect) in met precies dezelfde gegevens.</li>
+            <li>We houden ons aan de regels van Google, zodat je profiel niet wordt geschorst.</li>
+            <li>Eenmalig vanaf € 249, exclusief btw. Met een reviewlink, QR-code en uitleg om het zelf bij te houden.</li>
+          </ul>
+        </div>
+
+        <h2 id="waarom">Waarom dat kaartje zo veel uitmaakt</h2>
+        <p>Zoek op "kapper Assen" of "boekhouder Meppel" en kijk wat je als eerste ziet. Een kaart met drie bedrijven, het zogeheten local pack. Pas daaronder komen de gewone zoekresultaten. Op een telefoon vult dat kaartje het hele scherm.</p>
+        <p>Mensen die daar klikken, willen vaak meteen iets. Ze bellen, vragen een route of openen je website. Een goed ingevuld bedrijfsprofiel is daarom het snelste en goedkoopste stuk <a href="/lokale-seo/">lokale SEO</a> dat er is. Het profiel is gratis. Het verschil zit in hoe je het invult.</p>
+        <p>De meeste profielen die we zien, zijn half af. Een verkeerde categorie, geen foto's, openingstijden van twee jaar geleden. Google kiest dan liever een concurrent die het wel goed heeft geregeld.</p>
+
+        <h2 id="hoe-google-kiest">Hoe Google kiest wie op de kaart komt</h2>
+        <p>Google zegt het in zijn eigen helpcentrum: lokale resultaten draaien vooral om drie dingen.</p>
+        <div class="drie-kaarten drie-tekst">
+          <div><Tekening naam="doel" maat={52} /><b>Relevantie</b><span>Past je profiel bij wat iemand zoekt? Dat leest Google uit je categorie, je diensten en je beschrijving.</span></div>
+          <div><Tekening naam="pin" maat={52} vertraging={200} /><b>Afstand</b><span>Hoe ver zit je van de zoeker? Daar kan niemand iets aan veranderen. Ook wij niet.</span></div>
+          <div><Tekening naam="ster" maat={52} vertraging={400} /><b>Bekendheid</b><span>Google noemt het prominentie. Reviews en links naar je bedrijf tellen mee.</span></div>
+        </div>
+        <p>Google schrijft er nog twee dingen bij. Bedrijven met complete en correcte informatie hebben meer kans om getoond te worden. En een betere plek kopen of aanvragen kan niet. Een bureau dat belooft je "via een contact bij Google" bovenaan te zetten, kun je dus beter niet bellen. Hoe het hele plaatje van lokale vindbaarheid werkt, lees je op de pagina over <a href="/lokale-seo/">lokale SEO</a>.</p>
+
+        <h2 id="aanpak">Zo optimaliseren we je profiel</h2>
+        <p>We lopen alles na wat Google gebruikt om te bepalen wie bovenaan het kaartje komt. Aan de afstand kunnen we niets doen. Aan relevantie en bekendheid wel.</p>
+        <ul class="vink">
+          <li><b>Categorie.</b> De juiste hoofdcategorie is de belangrijkste keuze in je hele profiel. Google zegt zelf dat je categorieën invloed hebben op je positie. We kiezen de meest specifieke die past, met zoekwoorden in de hand. Daarna alleen de extra categorieën die echt kloppen. Google vraagt om er zo min mogelijk te gebruiken.</li>
+          <li><b>Bedrijfsnaam.</b> Precies zoals je bedrijf heet, zonder plaatsnaam of zoekwoorden erachter. Dat mag niet van Google en kan je profiel kosten.</li>
+          <li><b>Beschrijving.</b> Een tekst die vertelt wat je doet, voor wie en waar. Geschreven voor mensen, met de woorden waarop ze zoeken. Google staat maximaal 750 tekens toe, zonder links en zonder acties of kortingen.</li>
+          <li><b>Diensten en producten.</b> Elke dienst apart, met een korte uitleg en waar het kan een vanaf-prijs.</li>
+          <li><b>Servicegebied.</b> Kom je bij klanten thuis? Dan stellen we in welke plaatsen je bedient. Google staat maximaal twintig gebieden toe, en raadt aan binnen ongeveer twee uur rijden te blijven.</li>
+          <li><b>Openingstijden.</b> Inclusief feestdagen en afwijkende tijden, zodat niemand voor een dichte deur staat.</li>
+          <li><b>Foto's.</b> Echte foto's van je bedrijf, je team en je werk. Geen stockfoto's. Google vraagt jpg of png, tussen 10 KB en 5 MB, liefst 720 bij 720 pixels. Een video mag maximaal 30 seconden duren.</li>
+          <li><b>Kenmerken en openingsdatum.</b> Denk aan parkeren of wifi, en de maand en het jaar waarin je begon. Kleine dingen die je profiel completer maken.</li>
+          <li><b>Google Posts.</b> Google kent drie soorten: een update, een aanbieding en een evenement. We zetten de eerste posts klaar en laten zien hoe je er zelf in vijf minuten één maakt.</li>
+          <li><b>Reviews.</b> Je krijgt een korte reviewlink en een QR-code, plus een voorbeeldtekst om klanten om een review te vragen. Meer daarover bij <a href="/lokale-seo/reviews/">reviews en reputatie</a>.</li>
+        </ul>
+        <p>Vragen van klanten die vaak terugkomen, verwerken we in je beschrijving, je diensten en je posts. Zo staat het antwoord er al voordat iemand belt.</p>
+
+        <h2 id="regels">Regels die je profiel kunnen kosten</h2>
+        <p>Google is streng op bedrijfsprofielen, en terecht: er wordt veel mee gesjoemeld. Een geschorst profiel is in één klap weg van de kaart. Dit zijn de regels die het vaakst misgaan, uit de richtlijnen van Google:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je ziet</th><th>Mag het?</th><th>Waarom niet, of hoe wel</th></tr></thead>
+            <tbody>
+              <tr><td>"Schildersbedrijf De Vries Assen Goedkoop"</td><td>Nee</td><td>Alleen je echte naam, zoals op je pand en je briefpapier</td></tr>
+              <tr><td>Een postbus als adres</td><td>Nee</td><td>Google wil een echte locatie, of een servicegebied</td></tr>
+              <tr><td>Een virtueel kantoor of postadres waar je niet zit</td><td>Nee</td><td>Dat komt niet in aanmerking voor een profiel</td></tr>
+              <tr><td>Een flexplek in een bedrijfsverzamelgebouw</td><td>Alleen met voorwaarden</td><td>Met een naambord, en tijdens openingstijden personeel dat klanten ontvangt</td></tr>
+              <tr><td>Twee profielen voor hetzelfde bedrijf</td><td>Nee</td><td>Eén profiel per bedrijfslocatie</td></tr>
+              <tr><td>Een link of "nu 20% korting" in de beschrijving</td><td>Nee</td><td>Acties horen in een post, niet in de beschrijving</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Voorbeeldnamen zijn verzonnen.</p>
+        <p>Werk je vanuit huis en kom je bij klanten? Dan verberg je je adres en geef je een servicegebied op. Dat is volgens de regels, en klanten zien je huisadres niet.</p>
+
+        <h2 id="verificatie">Verificatie: zo bewijs je dat het jouw bedrijf is</h2>
+        <p>Zonder verificatie kun je je profiel niet goed beheren. Google kiest zelf welke methode je krijgt, op basis van je soort bedrijf, je regio en openbare informatie. Je kunt het niet zelf kiezen. Dit zijn de mogelijkheden volgens Google:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Methode</th><th>Hoe het werkt</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Telefoon of sms</td><td>Je krijgt een code op je zakelijke nummer</td><td>Een keuzemenu of centrale ontvangt de code niet</td></tr>
+              <tr><td>E-mail</td><td>Je volgt de stappen in een mail van Google</td><td>Je moet bij dat mailadres kunnen</td></tr>
+              <tr><td>Live videogesprek</td><td>Je laat een medewerker van Google je bedrijf zien</td><td>Alleen tijdens je openingstijden, op je bedrijfslocatie</td></tr>
+              <tr><td>Video-opname</td><td>Je filmt je locatie, je werk en bewijs dat je de baas bent</td><td>Google raadt deze aan als je hem krijgt</td></tr>
+              <tr><td>Briefkaart</td><td>Een code van vijf cijfers per post</td><td>Komt meestal binnen 14 dagen, verloopt na 30 dagen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Na de verificatie kan de beoordeling tot vijf werkdagen duren. Is je website al geverifieerd in Google Search Console, dan kan het soms meteen. Een veelgemaakte fout: tijdens het wachten op de briefkaart je naam, adres of categorie aanpassen. Dan werkt de code niet meer. Alle stappen staan in de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel aanmaken, verifiëren en optimaliseren</a>. Wij regelen het voor je, of zeggen precies wat je moet doen.</p>
+
+        <h2 id="bing-apple">Bing Places en Apple Business Connect: de vergeten kaarten</h2>
+        <div class="drie-kaarten" aria-hidden="true">
+          <div><Tekening naam="pin" maat={64} /><b>Google Maps</b></div>
+          <div><Tekening naam="pin" maat={64} vertraging={250} /><b>Bing Places</b></div>
+          <div><Tekening naam="pin" maat={64} vertraging={500} /><b>Apple Kaarten</b></div>
+        </div>
+        <p>Bijna iedereen denkt alleen aan Google. Maar wie een iPhone gebruikt en Apple Kaarten opent, ziet de gegevens uit Apple Business Connect. Dat heet sinds kort gewoon Apple Business, meldt Apple in zijn eigen handleiding. En Bing Places is het bedrijfsprofiel voor Bing. Dat telt vaker mee dan je denkt: Microsoft Copilot haalt informatie van het web op via de zoekdienst van Bing, schrijft Microsoft. Een bedrijf dat in Bing ontbreekt of verkeerd staat, mist dus ook kansen in AI-antwoorden. Meer daarover lees je bij <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Google Bedrijfsprofiel</th><th>Bing Places</th><th>Apple Business</th></tr></thead>
+            <tbody>
+              <tr><td>Waar je zichtbaar bent</td><td>Google Zoeken en Google Maps</td><td>Bing en de kaarten van Bing</td><td>Apple Kaarten op iPhone, iPad en Mac</td></tr>
+              <tr><td>Wat je instelt</td><td>Gegevens, categorieën, diensten, foto's, posts</td><td>Naam, adres, telefoon, openingstijden, foto's</td><td>Plaatskaart, foto's, aanbevelingen, actieknoppen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We zetten je bedrijf op alle drie de kaarten met dezelfde gegevens. Bij Apple gebruiken we de plaatskaart, foto's en waar het past een aanbeveling met een knop naar je site. Apple laat je in het onderdeel inzichten zien hoe mensen je vinden.</p>
+
+        <h2 id="nap">Overal dezelfde gegevens: waarom NAP telt</h2>
+        <p>Naam, adres en telefoonnummer, de zogeheten NAP-gegevens, moeten overal letterlijk gelijk zijn. Op je website, in je drie profielen, op Facebook en in branchegidsen. Kleine verschillen maken zoekmachines onzeker over wie je bent. Dat kost vindbaarheid.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Plek</th><th>Zo staat het er</th><th>Probleem</th></tr></thead>
+            <tbody>
+              <tr><td>Website</td><td>Lauwers 9, 9405 BL Assen</td><td>Goed</td></tr>
+              <tr><td>Google</td><td>Lauwers 9a, Assen</td><td>Ander huisnummer, geen postcode</td></tr>
+              <tr><td>Facebook</td><td>Oud adres van voor de verhuizing</td><td>Klanten rijden naar het verkeerde pand</td></tr>
+              <tr><td>Branchegids</td><td>Oud mobiel nummer van een oud-medewerker</td><td>Telefoon gaat nergens over</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld.</p>
+        <p>We controleren de plekken waar je bedrijf het vaakst staat en zetten verschillen op een lijstje. Wat we zelf kunnen aanpassen, passen we aan. Voor de rest krijg je precies te horen waar je moet inloggen. Op je eigen website zetten we dezelfde gegevens ook in de code, als <a href="/generative-engine-optimization/structured-data/">structured data</a>. Zo zegt alles hetzelfde.</p>
+
+        <h2 id="werkwijze">Onze werkwijze in zes stappen</h2>
+        <ol class="stappen">
+          <li><b>We bellen je binnen 15 minuten terug.</b> We vragen wat je doet, waar je klanten zitten en wat je het liefst wilt verkopen.</li>
+          <li><b>We bekijken je profiel en je concurrenten.</b> Wie staan er nu in het kaartje op jouw belangrijkste zoekwoorden, en wat hebben zij wat jij niet hebt?</li>
+          <li><b>We regelen de toegang.</b> Is het profiel nog niet van jou, of beheert een oud-medewerker het? Dan zorgen we eerst dat jij eigenaar bent. Wij krijgen alleen beheerdersrechten.</li>
+          <li><b>We richten Google in.</b> Categorie, beschrijving, diensten, servicegebied, foto's, eerste posts.</li>
+          <li><b>We zetten Bing en Apple klaar.</b> Met precies dezelfde gegevens als Google en je website.</li>
+          <li><b>We dragen over.</b> Je krijgt je reviewlink, de QR-code en een korte uitleg om het zelf bij te houden.</li>
+        </ol>
+
+        <h2 id="wat-je-krijgt">Wat je krijgt voor € 249</h2>
+        <p>Je Google Bedrijfsprofiel, Bing Places en Apple Business, alle drie helemaal ingevuld en op elkaar afgestemd. Je krijgt een reviewlink met QR-code en een korte uitleg om het profiel zelf bij te houden. Het is een eenmalig bedrag, exclusief btw.</p>
+        <p>Wil je dat wij het bijhouden? Met posts, nieuwe foto's, reacties op reviews en een maandelijkse blik op je posities in de zoekresultaten? Dan past <a href="/lokale-seo/">lokale SEO</a> beter, vanaf € 295 per maand. Daar zit dit allemaal in.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Profiel inrichten</th><th>Lokale SEO</th></tr></thead>
+            <tbody>
+              <tr><td>Prijs</td><td>Eenmalig vanaf € 249</td><td>Vanaf € 295 per maand</td></tr>
+              <tr><td>Google, Bing en Apple ingericht</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td>Reviewlink en QR-code</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td>Posts en nieuwe foto's</td><td>Eerste posts</td><td>Elke maand</td></tr>
+              <tr><td>Reageren op reviews</td><td>Uitleg hoe</td><td>Wij doen het</td></tr>
+              <tr><td>Lokale pagina's en links</td><td>Nee</td><td>Ja</td></tr>
+              <tr><td>Meting van je plek op de kaart</td><td>Nee</td><td>Elke maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Wat we van jou nodig hebben</h3>
+        <p>Toegang tot je profiel, of het e-mailadres waarmee het is aangemaakt. Een stuk of tien goede foto's. En een halfuur om je diensten en werkgebied met ons door te nemen. Meer niet.</p>
+        <h3>Bijhouden in tien minuten per week</h3>
+        <p>Doe je het daarna zelf? Plaats eens per week of twee een korte post met een foto van recent werk. Reageer op nieuwe reviews. Zet afwijkende openingstijden erin zodra je ze weet. En kijk één keer per maand of alles nog klopt, van telefoonnummer tot foto's.</p>
+
+        <h2 id="checklist">Checklist: staat jouw profiel er goed voor?</h2>
+        <p>Loop deze punten na. Kun je ze allemaal afvinken, dan zit je profiel goed in elkaar. Je kunt de lijst ook downloaden.</p>
+        <div class="kader check-lijst">
+          <ol>{check.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="checklist-google-bedrijfsprofiel.txt">Download de checklist</a>
+        </div>
+        <p>Zelf aan de slag? In de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel aanmaken, verifiëren en optimaliseren</a> staat stap voor stap hoe het werkt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={11} />
+        <Prijskaart naam="Bedrijfsprofiel + Bing + Apple" prijs="€ 249" eenmalig punten={['Google Bedrijfsprofiel volledig ingevuld', 'Bing Places en Apple Business', 'Gelijke NAP-gegevens overal', 'Reviewlink en QR-code']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Is een Google Bedrijfsprofiel gratis?', a: 'Ja, het profiel zelf is gratis. Je betaalt bij ons voor het werk: alles goed invullen, op Bing en Apple zetten en zorgen dat de gegevens overal kloppen.' },
+      { v: 'Hoe snel sta ik hoger op Google Maps?', a: 'Een paar wijzigingen, zoals een betere categorie, zie je vaak binnen een paar weken terug. Reviews en posts werken geleidelijk. Hoe hoog je komt, hangt ook af van de concurrentie in je plaats.' },
+      { v: 'Mag ik een zoekwoord in mijn bedrijfsnaam zetten?', a: 'Nee. Google wil alleen je echte bedrijfsnaam zien. Wie er zoekwoorden of een plaatsnaam achter zet, loopt het risico dat het profiel wordt geschorst.' },
+      { v: 'Ik heb geen winkel of kantoor. Kan ik toch een profiel maken?', a: 'Ja. Dan maak je een profiel met een servicegebied in plaats van een bezoekadres. Je adres is dan niet zichtbaar voor klanten. Je kunt tot twintig gebieden opgeven.' },
+      { v: 'Een oud-medewerker of vorig bureau heeft mijn profiel. Wat nu?', a: 'Vraag eerst of die persoon je tot eigenaar wil maken. Lukt dat niet, dan vraag je via Google het eigendom aan met de knop Toegang aanvragen. De huidige eigenaar krijgt dan drie dagen om te reageren. Wij helpen je daarbij.' },
+      { v: 'Moet ik ook in Bing Places en Apple Business staan?', a: 'Het kost weinig tijd, dus ja. Wie een iPhone heeft en Apple Kaarten gebruikt, ziet Apple Business. En Microsoft Copilot zoekt via Bing.' },
+      { v: 'Wat is het verschil met lokale SEO?', a: 'Dit is het eenmalig inrichten van je profielen. <a href="/lokale-seo/">Lokale SEO</a> is het doorlopende werk: profielen bijhouden, reviews, lokale pagina\'s en links. Vanaf € 295 per maand.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over lokaal gevonden worden"
+    links={[
+      { label: 'Pillar', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Gevonden in je regio, vanaf € 295 per maand.' },
+      { label: 'Dienst', titel: 'Reviews en reputatie', href: '/lokale-seo/reviews/', tekst: 'Meer reviews, en goed reageren.' },
+      { label: 'Gids', titel: 'Google Bedrijfsprofiel', href: '/kennisbank/gidsen/google-bedrijfsprofiel/', tekst: 'Aanmaken, verifiëren en optimaliseren, stap voor stap.' },
+      { label: 'Gids', titel: 'Google reviews', href: '/kennisbank/gidsen/google-reviews/', tekst: 'Reageren, verwijderen en een reviewlink maken.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd hoe jouw profiel ervoor staat?" />
+</Base>
+<style>
+  .drie-kaarten { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 8px 0 20px; }
+  .drie-kaarten div { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 10px; display: grid; justify-items: center; gap: 6px; font-size: 0.95rem; text-align: center; }
+  .drie-tekst div { justify-items: start; text-align: left; padding: 18px 16px; align-content: start; }
+  .drie-tekst span { color: var(--muted); line-height: 1.45; }
+  .stappen li { margin-bottom: 10px; }
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+  @media (max-width: 640px) { .drie-tekst { grid-template-columns: minmax(0, 1fr); } }
+</style>

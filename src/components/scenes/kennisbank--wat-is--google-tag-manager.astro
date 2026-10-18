@@ -1,0 +1,72 @@
+---
+// Scène voor /kennisbank/wat-is/google-tag-manager/: links een website met één codefragment, in het midden de container met tags, triggers en variabelen,
+// rechts drie meetdiensten die hun gegevens via die container krijgen. Als hij leeft: een trigger gaat af en er lopen pulsjes van de container naar de diensten.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const diensten = [
+  { y: 46, naam: 'Analytics' },
+  { y: 112, naam: 'Google Ads' },
+  { y: 178, naam: 'Meta-pixel' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een website met één stukje code van Tag Manager. Dat leidt naar een container met tags, triggers en variabelen, die gegevens doorgeeft aan Analytics, Google Ads en de Meta-pixel.'}>
+  <!-- website -->
+  <rect x="16" y="58" width="136" height="150" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M17 82V70a11 11 0 0 1 11-11h112a11 11 0 0 1 11 11v12z" fill="#e8eef4" />
+  <circle cx="30" cy="70" r="3.5" fill="#d9e1ea" /><circle cx="41" cy="70" r="3.5" fill="#d9e1ea" /><circle cx="52" cy="70" r="3.5" fill="#d9e1ea" />
+  <rect x="30" y="94" width="108" height="20" rx="6" fill="#10283f" />
+  <text x="84" y="108" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">GTM-ABC123</text>
+  <rect x="30" y="124" width="90" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="30" y="138" width="104" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="30" y="164" width="70" height="26" rx="8" fill="#ff6600" />
+  <text x="65" y="181" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">Verstuur</text>
+  <path class="l" d="M152 133h22" />
+
+  <!-- container -->
+  <rect x="176" y="60" width="128" height="146" rx="14" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <text x="240" y="84" font-size="12" font-weight="800" text-anchor="middle">Container</text>
+  <rect x="190" y="96" width="100" height="26" rx="8" fill="#e8eef4" />
+  <text x="240" y="113" font-size="11" font-weight="700" text-anchor="middle">Tags</text>
+  <rect x="190" y="128" width="100" height="26" rx="8" fill="#e8eef4" />
+  <text x="240" y="145" font-size="11" font-weight="700" text-anchor="middle">Triggers</text>
+  <rect x="190" y="160" width="100" height="26" rx="8" fill="#e8eef4" />
+  <text x="240" y="177" font-size="11" font-weight="700" text-anchor="middle">Variabelen</text>
+
+  <!-- diensten -->
+  {diensten.map((d) => (
+    <g>
+      <path class="l" d={`M304 133L340 ${d.y + 22}`} />
+      <rect x="340" y={d.y} width="124" height="44" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <circle cx="360" cy={d.y + 22} r="9" class="v" />
+      <text x="378" y={d.y + 26} font-size="11.5" font-weight="800">{d.naam}</text>
+    </g>
+  ))}
+  <path d="M355 77v-8M360 77v-12M365 77v-5" stroke="#074663" stroke-width="2.4" stroke-linecap="round" />
+  <path d="M355 131l9-5v14l-9-5z" fill="#074663" />
+  <circle cx="360" cy="200" r="3.5" fill="#ff6600" />
+
+  {!mini && (
+    <g>
+      <rect class="gtm-trigger" x="188" y="126" width="104" height="30" rx="9" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <circle class="gtm-puls gtm-p1" cx="304" cy="133" r="5" fill="#ff6600" />
+      <circle class="gtm-puls gtm-p2" cx="304" cy="133" r="5" fill="#ff6600" />
+      <circle class="gtm-puls gtm-p3" cx="304" cy="133" r="5" fill="#ff6600" />
+      <g class="gtm-vink"><rect x="30" y="218" width="112" height="24" rx="12" fill="#1f8a5b" /><text x="86" y="234.5" font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">Getest in preview</text></g>
+    </g>
+  )}
+</svg>
+<style>
+  .gtm-trigger, .gtm-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .gtm-trigger, :global(.teken-js) .gtm-puls, :global(.teken-js) .gtm-vink { opacity: 0; }
+  .in-beeld .gtm-trigger { animation: kennisbank--wat-is--google-tag-manager-trigger 4s ease-in-out 0.4s infinite; }
+  .in-beeld .gtm-p1 { animation: kennisbank--wat-is--google-tag-manager-p1 4s ease-in-out 0.4s infinite; }
+  .in-beeld .gtm-p2 { animation: kennisbank--wat-is--google-tag-manager-p2 4s ease-in-out 0.4s infinite; }
+  .in-beeld .gtm-p3 { animation: kennisbank--wat-is--google-tag-manager-p3 4s ease-in-out 0.4s infinite; }
+  .in-beeld .gtm-vink { animation: kennisbank--wat-is--google-tag-manager-vink 0.5s cubic-bezier(.3,1.5,.5,1) 1.4s forwards; }
+  @keyframes kennisbank--wat-is--google-tag-manager-trigger { 0%, 100% { opacity: 0; } 8%, 30% { opacity: 1; } 40% { opacity: 0; } }
+  @keyframes kennisbank--wat-is--google-tag-manager-p1 { 0%, 28% { opacity: 0; transform: none; } 32% { opacity: 1; } 56% { opacity: 1; transform: translate(36px, -65px); } 62%, 100% { opacity: 0; transform: translate(36px, -65px); } }
+  @keyframes kennisbank--wat-is--google-tag-manager-p2 { 0%, 28% { opacity: 0; transform: none; } 32% { opacity: 1; } 56% { opacity: 1; transform: translate(36px, 1px); } 62%, 100% { opacity: 0; transform: translate(36px, 1px); } }
+  @keyframes kennisbank--wat-is--google-tag-manager-p3 { 0%, 28% { opacity: 0; transform: none; } 32% { opacity: 1; } 56% { opacity: 1; transform: translate(36px, 67px); } 62%, 100% { opacity: 0; transform: translate(36px, 67px); } }
+  @keyframes kennisbank--wat-is--google-tag-manager-vink { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .gtm-trigger, .in-beeld .gtm-puls, .in-beeld .gtm-vink { animation: none; } }
+</style>

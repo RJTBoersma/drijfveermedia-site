@@ -1,0 +1,288 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/website-laten-maken--onderhoud-wordpress.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/website-laten-maken/onderhoud-wordpress/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Waarom onderhoud nodig is' },
+  { id: 'pakket', titel: 'Wat we doen voor € 39' },
+  { id: 'laten-liggen', titel: 'Als je het laat liggen' },
+  { id: 'php', titel: 'De PHP-versie' },
+  { id: 'automatisch', titel: 'Automatische updates' },
+  { id: 'niet', titel: 'Wat er niet in zit' },
+  { id: 'zelf', titel: 'Zelf doen: de checklist' },
+  { id: 'vergelijking', titel: 'Zelf, host of uitbesteden' },
+  { id: 'overstappen', titel: 'Overstappen naar ons' },
+];
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${site.url}${url}#dienst`,
+    name: 'Onderhoud van WordPress-websites',
+    serviceType: 'WordPress-onderhoud',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: { '@type': 'Country', name: 'Nederland' },
+    url: `${site.url}${url}`,
+    offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 39, priceSpecification: { '@type': 'UnitPriceSpecification', price: 39, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Onderhoud van WordPress-sites: veilig, snel en bijgewerkt',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}${url}#dienst` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  },
+];
+---
+<Base
+  title="Onderhoud WordPress vanaf € 39 per maand | Drijfveer Media"
+  description="Onderhoud van WordPress uitbesteden: updates, back-ups, beveiliging en snelheid voor € 39 per maand. Maandelijks opzegbaar, jij hebt je handen vrij."
+  kruimels={[{ naam: 'Website laten maken', url: '/website-laten-maken/' }, { naam: 'Onderhoud WordPress', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Website" titel="Onderhoud van WordPress-sites: veilig, snel en bijgewerkt" prijs="vanaf € 39 per maand">
+    <p>Je site werkt vandaag. Over een half jaar ook? Wij installeren de updates, maken back-ups, houden de beveiliging in de gaten en zorgen dat alles snel blijft. Jij hebt je handen vrij.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Bijna elk lek in WordPress zit in een plugin of thema, niet in WordPress zelf.</li>
+            <li>Aanvallers zijn snel: zware lekken worden vaak binnen een dag misbruikt. Tijdig bijwerken is je eerste verdediging.</li>
+            <li>Automatische updates helpen, maar controleren niet of je site daarna nog werkt.</li>
+            <li>Onderhoud van WordPress bij ons: updates, back-ups buiten je server, beveiliging en snelheid voor € 39 per maand.</li>
+            <li>Maandelijks opzegbaar. Hosting blijft bij je eigen partij, op jouw naam.</li>
+          </ul>
+        </div>
+
+        <h2 id="waarom">Waarom WordPress-onderhoud nodig is</h2>
+        <p>WordPress is het populairste websitesysteem ter wereld. Volgens <a href="https://w3techs.com/technologies/details/cm-wordpress" rel="noopener">W3Techs</a> draait 39,6% van alle websites erop (oktober 2026). Die populariteit maakt het ook een doelwit. Wie een lek vindt in een veelgebruikte plugin, kan in één keer duizenden sites aanvallen. Dat gebeurt geautomatiseerd, dag en nacht.</p>
+        <p>De cijfers van beveiligingsbedrijf Patchstack laten zien waar het risico zit. In hun <a href="https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/" rel="noopener">rapport over 2025</a> tellen ze 11.334 nieuwe kwetsbaarheden in WordPress-software. Dat is 42% meer dan het jaar ervoor. Daarvan zat 91% in plugins en 9% in thema's. In WordPress zelf vonden ze er zes, en die waren niet ernstig. Het lek zit dus bijna nooit in het systeem, maar in de onderdelen die je erbij installeert.</p>
+        <p>Drie andere cijfers uit hetzelfde rapport zijn voor een ondernemer nog belangrijker:</p>
+        <ul>
+          <li><b>Snelheid.</b> Bij de lekken die het zwaarst werden misbruikt, rekende Patchstack een mediaan van vijf uur tussen bekendmaking en de eerste aanval. Ongeveer de helft van de zware lekken werd binnen 24 uur misbruikt.</li>
+          <li><b>Geen oplossing.</b> Voor 46% van de lekken was er nog geen update van de maker toen het lek openbaar werd. Dan helpt bijwerken niet, en moet je de plugin uitzetten of vervangen.</li>
+          <li><b>Oude lekken.</b> Van de tien lekken waar aanvallers in 2025 het vaakst op mikten, waren er maar vier uit 2025. De rest was ouder. Aanvallers zoeken dus juist naar sites die al lang achterlopen.</li>
+        </ul>
+        <p>In Nederland zag de Autoriteit Persoonsgegevens hetzelfde. Op 27 augustus 2026 bracht de AP een <a href="https://www.autoriteitpersoonsgegevens.nl/actueel/advies-van-de-ap-aan-wordpress-gebruikers-die-getroffen-zijn-door-datalek" rel="noopener">advies uit aan WordPress-gebruikers</a>. Er waren kwetsbaarheden in WordPress die actief werden misbruikt, met datalekken tot gevolg. Er was een update, maar veel gebruikers hadden die volgens de AP nog niet geïnstalleerd.</p>
+        <h3>WordPress zelf: vijf beveiligingsupdates in twee maanden</h3>
+        <p>Ook WordPress zelf krijgt regelmatig updates die je niet wilt missen. Dit verscheen er in de afgelopen maanden, volgens de <a href="https://wordpress.org/news/category/releases/" rel="noopener">releasepagina van WordPress.org</a>:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Datum</th><th>Versie</th><th>Wat erin zat</th></tr></thead>
+            <tbody>
+              <tr><td>6 augustus 2026</td><td>7.0.3</td><td>Meerdere beveiligingsoplossingen</td></tr>
+              <tr><td>12 augustus 2026</td><td>7.0.4</td><td>Een beveiligingsoplossing</td></tr>
+              <tr><td>19 augustus 2026</td><td>7.1</td><td>Grote update met nieuwe functies</td></tr>
+              <tr><td>17 september 2026</td><td>7.1.1</td><td>11 beveiligingsoplossingen en tientallen bugfixes</td></tr>
+              <tr><td>22 september 2026</td><td>7.1.2</td><td>Oplossing voor een kritiek beveiligingslek</td></tr>
+              <tr><td>6 oktober 2026</td><td>7.1.3</td><td>7 beveiligingsoplossingen en 4 bugfixes</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het goede nieuws: voor veel lekken bestaat snel een oplossing. Je moet de update alleen wel tijdig installeren. Precies daar gaat het mis bij veel websites in WordPress. Niemand voelt zich verantwoordelijk, de bouwer is uit beeld en de eigenaar durft niet op "bijwerken" te klikken omdat het de vorige keer misging.</p>
+
+        <h2 id="pakket">Wat we doen voor € 39 per maand</h2>
+        <p>Het standaard pakket bestaat uit vier dingen. Samen houden ze je WordPress-website veilig en snel.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>Updates installeren, en controleren</h3></div>
+        <p>We houden WordPress, je thema en je plugins bij. Beveiligingsupdates krijgen voorrang. Gewone WordPress-updates zetten we niet blind door: we kijken eerst wat er verandert en controleren daarna of je formulieren, menu's en belangrijkste pagina's nog werken. Botst een update met een andere plugin, dan lossen we dat op of zetten we hem terug.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>Back-ups die je ook echt kunt terugzetten</h3></div>
+        <p>We maken back-ups van je bestanden en je database, en bewaren ze buiten je eigen server. Een back-up die op dezelfde server staat als je site, is weg als die server problemen heeft. Of als een hacker erbij kan. We controleren ook of een back-up compleet is. Een back-up die je nooit hebt geprobeerd terug te zetten, is een gok.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>Beveiliging</h3></div>
+        <p>We kijken of er gebruikers met beheerdersrechten zijn die er niet horen, of er plugins draaien die al jaren niet meer worden bijgewerkt en of er vreemde bestanden opduiken. Ongebruikte plugins en thema's halen we weg, want elke plugin is een deur. Komt er een lek naar buiten waar nog geen update voor is, dan hoor je van ons of je die plugin beter kunt uitzetten of vervangen. En we adviseren je over sterke wachtwoorden en inloggen in twee stappen.</p>
+
+        <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3>Snelheid en techniek</h3></div>
+        <p>Een site wordt langzaam trager. Afbeeldingen worden te groot geüpload, de database vult zich met oude revisies en plugins stapelen zich op. We houden de caching goed ingesteld, verkleinen zware afbeeldingen en zoeken broken links op, zodat bezoekers en Google niet op een foutpagina belanden.</p>
+        <p>Elke maand krijg je een kort overzicht in gewone taal: wat we deden, wat ons opviel en of er iets is waar je over moet beslissen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Wat je merkt als het ontbreekt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Updates</b></td><td>Een melding van je host, een waarschuwing in Google of een site die ineens doorverwijst</td></tr>
+              <tr><td><b>Back-ups</b></td><td>Pas als het misgaat: dan blijkt er niets terug te zetten</td></tr>
+              <tr><td><b>Beveiliging</b></td><td>Onbekende beheerders, spam vanaf je domein, een datalek</td></tr>
+              <tr><td><b>Snelheid</b></td><td>Bezoekers haken af op hun telefoon en je zakt langzaam weg in Google</td></tr>
+              <tr><td><b>Broken links</b></td><td>Klikken die op een foutpagina eindigen, en klanten die het opgeven</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Wat een goede back-up heeft</h3>
+        <p>Bijna elke host zegt dat hij back-ups maakt. Toch blijkt pas op het slechtste moment of je er iets aan hebt. Een goede back-up voldoet aan vier eisen:</p>
+        <ol>
+          <li><b>Alles erin.</b> De bestanden én de database. Zonder database heb je een lege site met een mooi thema.</li>
+          <li><b>Buiten de server.</b> Op een andere plek dan je website, zodat een storing of hacker er niet bij kan.</li>
+          <li><b>Ver genoeg terug.</b> Een hack merk je soms pas na weken. Heb je alleen de back-up van gisteren, dan is die ook besmet.</li>
+          <li><b>Getest.</b> Een back-up die nooit is teruggezet, is een belofte. Zet hem af en toe terug op een testomgeving.</li>
+        </ol>
+
+        <h2 id="laten-liggen">Wat er gebeurt als je onderhoud van WordPress laat liggen</h2>
+        <p>Een site zonder onderhoud gaat niet in één keer kapot. Het gaat sluipend. Zo verloopt het vaak, in een verzonnen maar herkenbaar voorbeeld van een loodgieter in Groningen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat er gebeurt</th></tr></thead>
+            <tbody>
+              <tr><td>Maand 1</td><td>Drie plugins hebben een update. Niemand klikt, want de site werkt toch.</td></tr>
+              <tr><td>Maand 4</td><td>Het contactformulier verstuurt geen mail meer na een wijziging bij de host. Niemand merkt het.</td></tr>
+              <tr><td>Maand 7</td><td>Een lek in een van die plugins wordt bekend. Binnen een dag zoeken scripts naar sites die achterlopen.</td></tr>
+              <tr><td>Maand 8</td><td>Bezoekers uit Google worden doorgestuurd naar een gokwebsite. De eigenaar ziet het zelf niet.</td></tr>
+              <tr><td>Maand 9</td><td>Google zet een waarschuwing bij de site. De host haalt hem offline. De telefoon blijft stil.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een jaar onderhoud van WordPress kost bij ons 12 keer € 39, dus € 468. Stel dat het opruimen van een hack zes uur werk is: dat is € 510 aan consult. Daar komen de weken bij dat je site een waarschuwing had of offline was, en de aanvragen die je in die tijd misliep. Hoeveel dat is, weet je zelf het best. Voor de meeste ondernemers is het meer dan een jaar onderhoud.</p>
+        </div>
+        <h3>Signalen van achterstallig onderhoud</h3>
+        <ul class="vink">
+          <li>In je dashboard staat een getal bij Updates dat al weken niet verdwijnt.</li>
+          <li>De Sitediagnose meldt een "kritiek probleem", of noemt een verouderde PHP-versie.</li>
+          <li>Bij plugins staat dat ze niet zijn getest met jouw versie van WordPress.</li>
+          <li>Er zijn plugins die al jaren geen update kregen.</li>
+          <li>Je site is merkbaar trager geworden op je telefoon.</li>
+          <li>Je weet niet waar je laatste back-up staat, of van wanneer hij is.</li>
+        </ul>
+        <p>Herken je er twee of meer? Dan is het tijd voor een grote beurt. Daarna is gewoon WordPress-onderhoud genoeg om het zo te houden.</p>
+
+        <h2 id="php">De PHP-versie: de update die vaak vergeten wordt</h2>
+        <p>WordPress draait op PHP, de programmeertaal op de server van je host. Ook PHP krijgt maar een beperkte tijd beveiligingsupdates. Volgens <a href="https://www.php.net/supported-versions.php" rel="noopener">PHP.net</a> ziet het er nu zo uit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>PHP-versie</th><th>Beveiligingsupdates tot</th><th>Wat betekent dat?</th></tr></thead>
+            <tbody>
+              <tr><td>8.1 en ouder</td><td>Afgelopen</td><td>Geen oplossingen meer voor nieuwe lekken. Overstappen</td></tr>
+              <tr><td>8.2</td><td>31 december 2026</td><td>Nog ruim twee maanden. Plan de overstap nu</td></tr>
+              <tr><td>8.3</td><td>31 december 2027</td><td>Prima, en de versie die WordPress minimaal aanraadt</td></tr>
+              <tr><td>8.4</td><td>31 december 2028</td><td>Goed</td></tr>
+              <tr><td>8.5</td><td>31 december 2029</td><td>De nieuwste. Test eerst of je plugins ermee overweg kunnen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>WordPress zelf raadt op de pagina met <a href="https://wordpress.org/about/requirements/" rel="noopener">systeemeisen</a> PHP 8.3 of hoger aan, plus MySQL 8.0 of MariaDB 10.11 en HTTPS. De PHP-versie stel je meestal in via het controlepaneel van je host. Wij kijken bij elke onderhoudsbeurt welke versie je site gebruikt. Is er een nieuwere nodig, dan testen we eerst of je thema en plugins ermee werken en vertellen we je wat je bij je host moet aanzetten. Kan je host het niet, dan helpen we je verhuizen naar een andere partij. De hosting zelf blijft van jou.</p>
+
+        <h2 id="automatisch">Automatische updates: handig, maar niet genoeg</h2>
+        <p>Sinds WordPress 5.5 kun je per plugin en per thema automatische updates aanzetten. Volgens de <a href="https://wordpress.org/documentation/article/plugins-themes-auto-updates/" rel="noopener">documentatie van WordPress.org</a> controleert WordPress dan twee keer per dag of er iets nieuws is. Dat is beter dan niets. Toch vertrouwen we er niet blind op.</p>
+        <ul>
+          <li><b>Niemand kijkt na of het werkt.</b> Een update die je formulier breekt, merk je pas als de aanvragen uitblijven.</li>
+          <li><b>Het hangt aan WordPress-cron.</b> Draait die niet goed op je server, dan gebeurt er niets. Je ziet dat in de Sitediagnose van WordPress (in het Engels: Site Health).</li>
+          <li><b>Betaalde plugins doen vaak niet mee.</b> Die hebben een licentie nodig, en die is nogal eens verlopen.</li>
+          <li><b>Zonder update helpt het niets.</b> Bij bijna de helft van de lekken was er nog geen update. Dan moet iemand besluiten om de plugin uit te zetten.</li>
+        </ul>
+        <p>Wij zetten automatische updates aan waar dat veilig kan, en kijken daarna zelf. Zo krijg je het beste van allebei.</p>
+
+        <h2 id="niet">Wat er niet in zit</h2>
+        <p>Liever duidelijk vooraf dan een verrassing achteraf.</p>
+        <ul>
+          <li><b>Hosting.</b> Die zit niet in onderhoud. Je site blijft staan bij je eigen hostingpartij, op jouw naam. Ga je ooit verhuizen naar een andere host, dan heb je aan onze back-ups een complete kopie. Wat hosting precies is, lees je in het begrip <a href="/kennisbank/wat-is/hosting/">hosting</a>.</li>
+          <li><b>Teksten aanpassen en nieuwe pagina's.</b> Dat is inhoudelijk werk, geen onderhoud. Wil je dat we dat doen, dan spreken we het apart af.</li>
+          <li><b>Een hack opruimen.</b> Goed onderhoud maakt een hack veel minder waarschijnlijk, maar nooit onmogelijk. Gaat het toch mis, dan helpen we met <a href="/website-laten-maken/wordpress-hack/">een WordPress-hack verwijderen</a>, op basis van een consult van € 85 per uur.</li>
+        </ul>
+
+        <h2 id="zelf">Zelf doen: de maandelijkse checklist</h2>
+        <p>Ben je handig en heb je er tijd voor, dan kun je het zelf. Dit is het lijstje dat we zelf ook afwerken, met de menunamen uit het Nederlandse beheerscherm van WordPress.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Taak</th><th>Waar in WordPress</th><th>Hoe vaak</th></tr></thead>
+            <tbody>
+              <tr><td>Back-up maken en buiten de server bewaren</td><td>Via je backup-plugin of je host</td><td>Voor elke update, en volgens een vast schema</td></tr>
+              <tr><td>WordPress, thema's en plugins bijwerken</td><td>Dashboard, Updates</td><td>Beveiligingsupdates direct, de rest wekelijks</td></tr>
+              <tr><td>Ongebruikte plugins en thema's verwijderen</td><td>Plugins, Geïnstalleerde plugins en Weergave, Thema's</td><td>Elke maand</td></tr>
+              <tr><td>Beheerders nalopen</td><td>Gebruikers, Alle gebruikers</td><td>Elke maand</td></tr>
+              <tr><td>Gezondheid van de site checken</td><td>Sitediagnose, in het menu aan de linkerkant</td><td>Elke maand</td></tr>
+              <tr><td>Formulier en belangrijkste pagina's testen</td><td>Op je eigen site, op je telefoon</td><td>Na elke update</td></tr>
+              <tr><td>Snelheid meten</td><td>PageSpeed Insights</td><td>Elk kwartaal</td></tr>
+              <tr><td>Back-up terugzetten als proef</td><td>Op een testomgeving</td><td>Twee keer per jaar</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Werk onderdelen één voor één bij, niet alles tegelijk. Dan weet je welke update een probleem geeft. Reken op een uur tot twee per maand, en meer als er iets misgaat. Voor een ondernemer met een volle agenda is € 39 per maand dan vaak goedkoper dan zelf doen. Wil je weten hoe snel je site nu is, lees dan de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+
+        <h2 id="vergelijking">Zelf doen, je host of uitbesteden?</h2>
+        <p>Veel hostingpartijen bieden automatische updates of een beheerpakket aan. Dat kan prima werken. Vergelijk wel wat je krijgt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf doen</th><th>Automatische updates van je host</th><th>Onderhoud bij ons</th></tr></thead>
+            <tbody>
+              <tr><td><b>Updates</b></td><td>Als je eraan denkt</td><td>Automatisch</td><td>Automatisch waar het kan, met de hand waar het moet</td></tr>
+              <tr><td><b>Controle na de update</b></td><td>Als je tijd hebt</td><td>Meestal niet</td><td>Ja, formulieren en belangrijkste pagina's</td></tr>
+              <tr><td><b>Lek zonder update</b></td><td>Je moet het zelf horen</td><td>Verschilt per host</td><td>Je hoort van ons wat je ermee moet</td></tr>
+              <tr><td><b>Back-ups buiten de server</b></td><td>Zelf regelen</td><td>Vaak op dezelfde server of bij dezelfde partij</td><td>Ja</td></tr>
+              <tr><td><b>Snelheid en broken links</b></td><td>Zelf regelen</td><td>Meestal niet</td><td>Ja</td></tr>
+              <tr><td><b>Kosten</b></td><td>Je eigen uren</td><td>Verschilt per host</td><td>€ 39 per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Vertrouw ook niet alleen op de beveiliging van je host. Patchstack liet een groot aantal hostingbedrijven testen met aanvallen op bekende WordPress-lekken. Volgens het rapport werd maar 26% van die aanvallen tegengehouden. De firewall van een host ziet een lek in een plugin vaak niet als aanval.</p>
+
+        <h2 id="contract">Geen jarenlang WordPress onderhoudscontract</h2>
+        <p>Een WordPress onderhoudscontract klinkt als iets waar je een jaar aan vastzit. Bij ons niet. Het is maandelijks opzegbaar, tenzij we samen iets anders afspreken. Je blijft omdat het werkt, niet omdat het moet. Een bureau hoort te verdienen aan klanten die blijven omdat het werkt, niet aan klanten die vastzitten.</p>
+
+        <h2 id="overstappen">Overstappen: zo nemen we je site over</h2>
+        <p>Heeft iemand anders je site gebouwd? Geen probleem. Zo gaat het in de praktijk:</p>
+        <ol>
+          <li><b>Kennismaken.</b> {site.contactpersoon} belt je binnen 15 minuten terug en vraagt hoe je site in elkaar zit en wie hem nu beheert.</li>
+          <li><b>Toegang.</b> We krijgen toegang tot je WordPress en je hosting. Je hoeft je eigen wachtwoord niet weg te geven: een eigen account voor ons is genoeg.</li>
+          <li><b>Een eerste check.</b> We kijken welke versies er draaien, welke plugins verouderd zijn en of er al back-ups zijn.</li>
+          <li><b>Achterstallig onderhoud.</b> Is er veel bij te werken, dan hoor je vooraf wat het kost om hem op orde te brengen.</li>
+          <li><b>Het maandbedrag.</b> Daarna valt je site gewoon onder het onderhoud van € 39 per maand.</li>
+        </ol>
+        <p>Nog geen site, of toe aan een nieuwe? Kijk bij <a href="/website-laten-maken/">website laten maken</a> welke route bij je past.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={14} />
+        <Prijskaart naam="Onderhoud WordPress" prijs="€ 39" eenheid="per maand" punten={['Updates van WordPress, thema en plugins', 'Back-ups buiten je server', 'Beveiliging in de gaten', 'Snelheid en broken links', 'Maandelijks overzicht in gewone taal']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat valt er onder onderhoud van WordPress?', a: 'Updates van WordPress, je thema en plugins, back-ups van je bestanden en database, controle op beveiliging en het snel houden van je site. Hosting, nieuwe teksten en het opruimen van een hack vallen er niet onder.' },
+      { v: 'Wat kost WordPress-onderhoud?', a: 'Bij ons € 39 per maand, exclusief btw en maandelijks opzegbaar. Is er achterstallig onderhoud, dan hoor je vooraf wat het kost om je site eerst op orde te brengen.' },
+      { v: 'Regelen jullie ook de hosting?', a: 'Nee. Je site blijft bij je eigen hostingpartij staan, op jouw naam. Wij hebben alleen toegang nodig om het onderhoud te doen.' },
+      { v: 'Kunnen jullie een site onderhouden die iemand anders heeft gebouwd?', a: 'Ja. We kijken eerst hoe hij ervoor staat. Is er achterstallig onderhoud, dan hoor je vooraf wat het kost om hem bij te werken.' },
+      { v: 'Is automatische updates aanzetten niet genoeg?', a: 'Het helpt, maar niemand controleert daarna of je site nog werkt. Betaalde plugins doen vaak niet mee, en voor bijna de helft van de lekken was er volgens Patchstack nog geen update toen ze bekend werden.' },
+      { v: 'Hoe vaak moet je WordPress updaten?', a: 'Beveiligingsupdates zo snel mogelijk, want zware lekken worden vaak binnen een dag misbruikt. Gewone updates van plugins en thema\'s kun je bundelen, bijvoorbeeld wekelijks. Maak altijd eerst een back-up en test daarna je formulier.' },
+      { v: 'Wat als een update mijn site breekt?', a: 'Dan lossen wij het op. Daarvoor maken we vooraf een back-up en controleren we na de update of alles nog werkt.' },
+      { v: 'Zit ik vast aan een contract?', a: 'Nee. Het onderhoud is maandelijks opzegbaar, tenzij we samen iets anders afspreken.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over je website"
+    links={[
+      { label: 'Pillar', titel: 'Website laten maken', href: '/website-laten-maken/', tekst: 'Snel met AI of maatwerk in WordPress.' },
+      { label: 'Spoed', titel: 'WordPress gehackt', href: '/website-laten-maken/wordpress-hack/', tekst: 'Snel hulp als het toch misgaat.', teken: 'schild' },
+      { label: 'Gids', titel: 'Website sneller maken', href: '/kennisbank/gidsen/website-sneller-maken/', tekst: 'Core Web Vitals in gewone taal.' },
+      { label: 'Gids', titel: 'WordPress gehackt: wat nu?', href: '/kennisbank/gidsen/wordpress-gehackt/', tekst: 'Het stappenplan als het misgaat.' },
+    ]}
+  />
+
+  <Actie titel="Hoe staat jouw WordPress-site ervoor?" tekst={`Laat ${site.contactpersoon} je site gratis nakijken. Hij belt je binnen 15 minuten terug en vertelt eerlijk of er achterstallig onderhoud is.`} />
+</Base>

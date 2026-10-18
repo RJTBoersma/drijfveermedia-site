@@ -1,0 +1,35 @@
+---
+// Wie er aan dit werk zit: gezichten bij de dienst. Gegevens uit src/data/site.ts.
+import { persoon } from '../../data/site';
+interface Props { titel?: string; wie: { slug: string; taak: string }[]; extra?: string }
+const { titel = 'Wie er voor je aan de slag gaat', wie, extra } = Astro.props;
+---
+<section class="wrap sectie wie-doet-het" aria-labelledby="wie-kop">
+  <h2 id="wie-kop">{titel}</h2>
+  <ul class="wie-lijst">
+    {wie.map(({ slug, taak }) => {
+      const p = persoon(slug);
+      return (
+        <li class="card">
+          <img src={`/img/team/${p.slug}-klein.webp`} width="80" height="80" alt={p.naam} loading="lazy" decoding="async" />
+          <div>
+            <p class="wie-naam">{p.naam}</p>
+            <p class="muted klein wie-rol">{p.rol}</p>
+            <p class="wie-taak">{taak}</p>
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+  {extra && <p class="muted wie-extra">{extra}</p>}
+</section>
+<style>
+  .wie-doet-het h2 { margin: 0 0 18px; }
+  .wie-lijst { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; }
+  .wie-lijst li { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; }
+  .wie-lijst img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: top; background: #e8eef4; flex: none; }
+  .wie-lijst p { margin: 0; }
+  .wie-naam { font-weight: 800; }
+  .wie-rol { margin-bottom: 6px !important; }
+  .wie-extra { margin-top: 14px; max-width: 70ch; }
+</style>

@@ -1,0 +1,217 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Regiokaart from '../../../components/beeld/Regiokaart.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import { site } from '../../../data/site';
+
+const url = '/regio/drenthe/';
+const omtrek: [number, number][] = [[6.11, 52.7], [6.25, 52.66], [6.45, 52.665], [6.62, 52.63], [6.75, 52.65], [6.9, 52.64], [7.07, 52.64], [7.09, 52.75], [7.05, 52.85], [6.98, 52.95], [6.88, 53.05], [6.75, 53.12], [6.62, 53.2], [6.5, 53.2], [6.4, 53.18], [6.33, 53.1], [6.3, 53.02], [6.22, 52.92], [6.12, 52.85], [6.1, 52.78]];
+const plaatsen = [
+  { naam: 'Assen', lat: 52.993, lng: 6.564, href: '/webdesign-assen/', thuis: true },
+  { naam: 'Emmen', lat: 52.785, lng: 6.897, href: '/webdesign-emmen/' },
+  { naam: 'Hoogeveen', lat: 52.723, lng: 6.476, href: '/webdesign-hoogeveen/' },
+  { naam: 'Meppel', lat: 52.696, lng: 6.194, href: '/seo-meppel/' },
+  { naam: 'Coevorden', lat: 52.661, lng: 6.741 },
+  { naam: 'Beilen', lat: 52.862, lng: 6.511 },
+  { naam: 'Roden', lat: 53.138, lng: 6.431 },
+];
+const perPlaats = [
+  { plaats: 'Assen', links: [['Webdesign', '/webdesign-assen/'], ['SEO', '/seo-assen/'], ['Online marketing', '/online-marketing-assen/']] },
+  { plaats: 'Emmen', links: [['Webdesign', '/webdesign-emmen/'], ['SEO', '/seo-emmen/'], ['Online marketing', '/online-marketing-emmen/']] },
+  { plaats: 'Hoogeveen', links: [['Webdesign', '/webdesign-hoogeveen/']] },
+  { plaats: 'Meppel', links: [['SEO', '/seo-meppel/']] },
+  { plaats: 'Heel Drenthe', links: [['Webdesign', '/webdesign-drenthe/']] },
+];
+// Inwoners: CBS, eind augustus 2026. Vestigingen: CBS, 1 januari 2026 (voorlopig). Banen: provincie Drenthe (LISA), 1 april 2025.
+const gemeenten = [
+  { naam: 'Emmen', inwoners: '109.820', vestigingen: '11.690', banen: '50.970' },
+  { naam: 'Assen', inwoners: '70.852', vestigingen: '7.225', banen: '44.650' },
+  { naam: 'Hoogeveen', inwoners: '56.573', vestigingen: '6.285', banen: '31.400' },
+  { naam: 'Meppel', inwoners: '36.843', vestigingen: '4.315', banen: '21.630' },
+  { naam: 'Coevorden', inwoners: '35.835', vestigingen: '4.455', banen: '16.460' },
+  { naam: 'Tynaarlo', inwoners: '35.202', vestigingen: '4.880', banen: '14.100' },
+  { naam: 'Midden-Drenthe', inwoners: '34.530', vestigingen: '4.440', banen: '15.210' },
+  { naam: 'Noordenveld', inwoners: '31.883', vestigingen: '4.060', banen: '12.580' },
+  { naam: 'Borger-Odoorn', inwoners: '26.269', vestigingen: '3.310', banen: '8.450' },
+  { naam: 'Aa en Hunze', inwoners: '26.162', vestigingen: '3.430', banen: '9.050' },
+  { naam: 'De Wolden', inwoners: '24.732', vestigingen: '3.855', banen: '9.310' },
+  { naam: 'Westerveld', inwoners: '20.121', vestigingen: '3.025', banen: '10.540' },
+];
+const schema = [{
+  '@type': 'Service',
+  name: 'Online marketing in Drenthe',
+  serviceType: 'Online marketing',
+  provider: { '@id': `${site.url}/#organisatie` },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Drenthe' },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Marketingbureau Drenthe: online marketing | Drijfveer Media"
+  description="Marketingbureau in Drenthe, met kantoor in Assen. SEO, websites, GEO en Google Ads voor ondernemers in Assen, Emmen, Hoogeveen, Meppel en Coevorden."
+  kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Drenthe', url }]}
+  schema={schema}
+>
+  <Hero kicker="Werkgebied · Drenthe" titel="Marketingbureau in Drenthe, met kantoor in Assen">
+    <p>Al sinds 2011 helpen we ondernemers in Drenthe om online gevonden, genoemd en gekozen te worden. Een marketingbureau uit Drenthe zelf, voor de hovenier in Roden en de installateur in Emmen.</p>
+    <Regiokaart slot="beeld" naam="Drenthe" omtrek={omtrek} plaatsen={plaatsen} punten={[{ soort: 'tt', lat: 52.955, lng: 6.5, label: 'TT-circuit' }, { soort: 'hunebed', lat: 52.93, lng: 6.8, label: 'Hunebedden' }, { soort: 'boom', lat: 52.82, lng: 6.3 }, { soort: 'boom', lat: 53.06, lng: 6.72 }, { soort: 'boom', lat: 52.76, lng: 6.62 }, { soort: 'boom', lat: 52.97, lng: 6.97 }, { soort: 'boom', lat: 53.1, lng: 6.55 }]} />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="tekst">
+      <h2>Een marketingbureau uit Drenthe, niet uit de Randstad</h2>
+      <p>Drenthe is geen provincie van grote kantoortorens. Het is een provincie van familiebedrijven, bouwers, installateurs, zorgverleners en recreatiebedrijven. Meer dan 95 procent van het Drentse bedrijfsleven is mkb, schrijft de provincie. Ondernemers die hard werken en weinig tijd hebben om zich met hun website bezig te houden. Daar zijn wij voor.</p>
+      <p>We zitten aan de Lauwers in Assen. Wie langs wil komen, is welkom. En wie liever belt, krijgt binnen een kwartier antwoord. Dat is geen marketingpraatje. Het is hoe we werken, op werkdagen van 8.00 tot 17.00 uur.</p>
+      <p>Omdat we hier zelf ondernemen, rijden we dezelfde wegen als onze klanten en kennen we de afstanden. Een gesprek in Emmen, Meppel of Coevorden is voor ons een rit, geen dagje uit. Dat scheelt in kosten en in drempel.</p>
+
+      <h2>Drenthe in cijfers: twaalf gemeenten, twaalf markten</h2>
+      <p>Drenthe telde eind augustus 2026 volgens het CBS 508.822 inwoners. Die wonen verspreid: 192 mensen per vierkante kilometer, tegen 536 in heel Nederland. Begin 2026 telde het CBS 60.975 bedrijfsvestigingen in de provincie. De provincie zelf telde op 1 april 2025 ruim 244.000 banen, waarvan de zorg met ruim 47.000 de grootste werkgever is. Per gemeente ziet dat er zo uit:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Gemeente</th><th>Inwoners</th><th>Bedrijfsvestigingen</th><th>Banen</th></tr></thead>
+          <tbody>
+            {gemeenten.map((g) => <tr><td><b>{g.naam}</b></td><td>{g.inwoners}</td><td>{g.vestigingen}</td><td>{g.banen}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bronnen: CBS (inwoners eind augustus 2026, vestigingen 1 januari 2026, voorlopig) en provincie Drenthe (banen 1 april 2025, LISA).</p>
+      <p>Wat zegt dit voor je online marketing? Drie dingen. In Emmen en Assen zitten de meeste bedrijven, dus daar is de concurrentie in Google het grootst. In gemeenten als Westerveld en De Wolden zijn minder bedrijven per zoekopdracht, dus sta je daar sneller bovenaan. En wie in meer gemeenten werkt, moet dat op zijn site en in zijn Google Bedrijfsprofiel laten zien. Anders weet Google niet dat je er komt.</p>
+
+      <h2>Online marketing per plaats in Drenthe</h2>
+      <p>Voor de grootste plaatsen hebben we een eigen pagina, met wat er daar speelt en wat we er doen. Klik op een plaats op de kaart, of kies hieronder.</p>
+    </div>
+    <div class="raster plaatsen">
+      {perPlaats.map((p) => (
+        <div class="card">
+          <h3>{p.plaats}</h3>
+          <ul class="chips">{p.links.map(([n, h]) => <li><a class="chip" href={h}>{n}</a></li>)}</ul>
+        </div>
+      ))}
+    </div>
+    <div class="tekst" style="margin-top:40px">
+      <p>Zit je in een kleinere plaats, zoals Beilen, Roden, Gieten, Westerbork of Zuidlaren? Dan helpen we je net zo goed. Je pagina zie je hier niet, maar je bent welkom. Dezelfde aanpak werkt in een dorp van drieduizend inwoners net zo goed als in Emmen. Alleen de zoekwoorden verschillen.</p>
+
+      <h2>Wat we doen voor ondernemers in Drenthe</h2>
+      <p>Alles wat je nodig hebt om online klanten te krijgen, in drie stappen.</p>
+    </div>
+    <div class="raster drie">
+      <div class="card">
+        <Tekening naam="vergrootglas" />
+        <span class="kicker">Gevonden</span>
+        <h3>Bovenaan in Google</h3>
+        <p><a href="/zoekmachine-optimalisatie/">SEO</a> vanaf € 495 per maand en <a href="/lokale-seo/">lokale SEO</a> vanaf € 295. Zodat klanten uit de regio je vinden als ze zoeken op wat je doet.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="ai" vertraging={200} />
+        <span class="kicker">Genoemd</span>
+        <h3>Aangeraden door AI</h3>
+        <p><a href="/generative-engine-optimization/">GEO</a> vanaf € 495 per maand. Zodat ChatGPT en Google AI je noemen als iemand in Drenthe om advies vraagt.</p>
+      </div>
+      <div class="card">
+        <Tekening naam="klik" vertraging={400} />
+        <span class="kicker">Gekozen</span>
+        <h3>Een site die overtuigt</h3>
+        <p><a href="/website-laten-maken/">Websites</a> vanaf € 250, <a href="/online-adverteren/google-ads-bureau/">Google Ads</a> en <a href="/leadgeneratie/">leadgeneratie</a>. Zodat bezoekers ook echt bellen.</p>
+      </div>
+    </div>
+    <div class="tekst" style="margin-top:40px">
+      <h3>Alle diensten en prijzen op een rij</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Dienst</th><th>Vanaf (excl. btw)</th><th>Wanneer kies je dit</th></tr></thead>
+          <tbody>
+            <tr><td>Lokale SEO</td><td>€ 295 per maand</td><td>Je werkt vooral in je eigen regio en wilt in het kaartje van Google</td></tr>
+            <tr><td>SEO</td><td>€ 495 per maand</td><td>Je wilt op je diensten gevonden worden, ook buiten de regio</td></tr>
+            <tr><td>Linkbuilding</td><td>€ 395 per maand</td><td>Je pagina's zijn goed, maar je site mist autoriteit</td></tr>
+            <tr><td>GEO</td><td>€ 495 per maand</td><td>Je klanten vragen steeds vaker een AI-assistent om advies</td></tr>
+            <tr><td>Website</td><td>€ 250 (AI) of € 2.000 (maatwerk)</td><td>Je site is verouderd, traag of levert niets op</td></tr>
+            <tr><td>Google Ads</td><td>Afhankelijk van je advertentiebudget</td><td>Je wilt snel aanvragen, of een nieuwe dienst testen</td></tr>
+            <tr><td>Leadgeneratie</td><td>€ 495 per maand</td><td>Je wilt afrekenen op aanvragen, niet op bezoekers</td></tr>
+            <tr><td>Social media beheer</td><td>€ 395 per maand</td><td>Je wilt je kanalen bijhouden zonder er zelf naar om te kijken</td></tr>
+            <tr><td>Alles uitbesteden</td><td>€ 595 per maand</td><td>Je wilt één partij voor je hele online marketing</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Maandelijks opzegbaar, tenzij we samen iets anders afspreken. Alle prijzen vind je ook op de pagina <a href="/prijzen/">prijzen</a>.</p>
+
+      <h2>Waar online marketing in Drenthe veel oplevert</h2>
+      <p>Elke branche zoekt anders. Een paar voorbeelden van wat we vaak zien.</p>
+    </div>
+    <div class="raster raster-2 branches">
+      <div class="card"><Tekening naam="tandwiel" /><h3>Bouw en installatie</h3><p>Het CBS telde begin 2026 ruim 6.000 bouwbedrijven in Drenthe. Klanten zoeken met spoed en bellen de eerste die ze vinden. Hier wint wie bovenaan het kaartje van Google staat en direct bereikbaar is.</p></div>
+      <div class="card"><Tekening naam="huis" vertraging={150} /><h3>Recreatie en toerisme</h3><p>Gasten uit de rest van het land en uit Duitsland oriënteren zich lang. Goede content en vindbaarheid op vragen als "vakantiepark Drenthe met zwembad" maken het verschil.</p></div>
+      <div class="card"><Tekening naam="team" vertraging={300} /><h3>Zorg en welzijn</h3><p>De grootste werkgever van de provincie. Vertrouwen telt hier het zwaarst. Duidelijke informatie, echte foto's en reviews doen meer dan een mooie slogan.</p></div>
+      <div class="card"><Tekening naam="kompas" vertraging={450} /><h3>Zakelijke dienstverlening</h3><p>Met 10.730 vestigingen de grootste groep bedrijven in Drenthe. Accountants, adviseurs en bureaus worden steeds vaker eerst via AI gevonden. Daar helpt GEO.</p></div>
+    </div>
+    <div class="tekst" style="margin-top:40px">
+      <h2>Waarom lokaal gevonden worden in Drenthe anders werkt</h2>
+      <p>In de stad ligt de concurrent om de hoek. In Drenthe zijn de afstanden groter. Klanten zoeken daarom vaak op een plaatsnaam, of op "in de buurt". Google schrijft zelf dat lokale resultaten vooral draaien om relevantie, afstand en prominentie. Een installateur uit Hoogeveen die ook in Zuidwolde en Ruinen werkt, moet dat duidelijk maken. Op zijn site, in zijn Google Bedrijfsprofiel en in de teksten per dienst.</p>
+      <p>In dat profiel kun je volgens Google tot 20 servicegebieden opgeven, op hooguit zo'n twee uur rijden. Voor de meeste Drentse vakmensen past het hele werkgebied daar ruim in. Wat niet werkt: veertig bijna gelijke plaatspagina's. Google noemt dat in zijn spamregels als misbruik.</p>
+      <p>Daar komt bij dat de concurrentie in Drenthe vaak lager is dan in de Randstad. Met een goede aanpak sta je hier sneller bovenaan, en je zichtbaarheid levert dan direct leads op. Wij beginnen altijd waar het snelst verschil te maken is. Voor de een is dat lokale SEO, voor de ander een betere website of een gerichte campagne voor de juiste doelgroep. Maatwerk dus, geen vast pakket.</p>
+
+      <h2>Rekenvoorbeeld: wat mag een lead je kosten?</h2>
+      <p>Een goede strategie begint bij een som. Een verzonnen voorbeeld, met verzonnen cijfers:</p>
+      <div class="kader">
+        <p class="kader-titel">Kozijnenbedrijf uit Hoogeveen (verzonnen voorbeeld)</p>
+        <p>Een gemiddelde opdracht levert € 6.000 omzet en € 1.500 marge op. De eigenaar wil maximaal een vijfde van die marge aan werving uitgeven: € 300 per klant. Van elke vijf aanvragen wordt er één een opdracht. Dan mag een aanvraag hooguit € 60 kosten.</p>
+      </div>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Wat hij nu doet</th><th>Kosten per maand</th><th>Aanvragen</th><th>Per aanvraag</th></tr></thead>
+          <tbody>
+            <tr><td>Advertentie in een regionaal blad</td><td>€ 450</td><td>2</td><td>€ 225</td></tr>
+            <tr><td>Google Ads op "kozijnen Hoogeveen"</td><td>€ 400</td><td>8</td><td>€ 50</td></tr>
+            <tr><td>Lokale SEO, na een half jaar</td><td>€ 295</td><td>6</td><td>€ 49</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De advertentie in het blad is in dit voorbeeld vier keer te duur. Die schrappen levert meer op dan een nieuwe campagne. Dat soort keuzes maken we samen, op basis van echte cijfers uit je eigen bedrijf. Bureaus adviseren te weinig om ergens mee te stoppen. Wij doen dat wel.</p>
+
+      <h2>Zo kies je een marketingbureau in Drenthe</h2>
+      <p>Een gelikte pitch zegt weinig over wat er na de handtekening gebeurt. Stel daarom deze vragen, aan ons en aan elk ander bureau:</p>
+      <ul class="vink">
+        <li>Waarop mag ik jullie afrekenen? Vraag om een doel in aanvragen of telefoontjes, niet in "bereik".</li>
+        <li>Hoe lang zit ik vast? Een bureau dat werkt, heeft geen jaarcontract nodig.</li>
+        <li>Wat staat er op mijn naam? Je website, je advertentieaccount en je Google Bedrijfsprofiel horen van jou te zijn.</li>
+        <li>Wie doet het werk? Een vast aanspreekpunt werkt beter dan elke maand een ander.</li>
+        <li>Snap ik de rapportage zonder uitleg? Zo niet, dan schiet hij zijn doel voorbij.</li>
+      </ul>
+      <p>En social media? Dat kan, maar het hoeft niet. Veel Drentse ondernemers halen meer uit een site die gevonden wordt dan uit drie posts per week. Wil je het toch, dan helpen we je met <a href="/social-media-beheer/">social media beheer</a> en goede content.</p>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Werken jullie alleen voor bedrijven in Drenthe?', a: 'Nee. We komen uit Assen en kennen Drenthe goed, maar we werken voor ondernemers in heel Nederland. Zie ook <a href="/regio/groningen/">Groningen</a> en <a href="/regio/friesland/">Friesland</a>.' },
+      { v: 'Komen jullie ook langs?', a: 'Ja. In Drenthe komen we graag bij je langs. Je kunt ook bij ons in Assen koffie komen drinken, of alles telefonisch en online regelen.' },
+      { v: 'Wat kost online marketing in Drenthe?', a: 'Dat hangt af van wat je nodig hebt. Lokale SEO begint bij € 295 per maand, een website bij € 250 en alles uitbesteden bij € 595 per maand. Alle prijzen staan op de pagina <a href="/prijzen/">prijzen</a>.' },
+      { v: 'Hoe begint een samenwerking?', a: 'Met een telefoontje. We vragen wat je wilt bereiken en kijken daarna gratis naar je website en je vindbaarheid. Je hoort welke stappen het meeste opleveren en wat dat kost. Daarna beslis jij.' },
+      { v: 'Is het in Drenthe makkelijker om bovenaan te komen?', a: 'Vaak wel. In veel branches is de concurrentie hier lager dan in grote steden. Dat betekent niet dat het vanzelf gaat, maar wel dat je sneller resultaat ziet.' },
+      { v: 'Wat als het niet werkt?', a: 'We spreken vooraf een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is om het doel te halen. Lees de details bij onze <a href="/garantie/">garantie</a>.' },
+      { v: 'Doen jullie ook advertenties op Facebook en Instagram?', a: 'Nee. We beheren wel social media kanalen, maar adverteren op social media doen we niet. Onze kracht ligt bij Google, AI-zoekmachines en je website.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over ons werkgebied"
+    links={[
+      { label: 'Overzicht', titel: 'Werkgebied', href: '/werkgebied/', tekst: 'Alle plaatsen in het Noorden waar we werken.' },
+      { label: 'Regio', titel: 'Groningen', href: '/regio/groningen/', tekst: 'Onze diensten in de buurprovincie.' },
+      { label: 'Regio', titel: 'Friesland', href: '/regio/friesland/', tekst: 'Wat we doen voor Friese ondernemers.' },
+      { label: 'Dienst', titel: 'Online marketing uitbesteden', href: '/online-marketing-uitbesteden/', tekst: 'Alles in één hand, maandelijks opzegbaar.' },
+    ]}
+  />
+
+  <Actie titel="Ondernemer in Drenthe?" tekst={`Bel of mail ${site.contactpersoon}. Binnen 15 minuten heb je hem aan de lijn, en een kop koffie in Assen kan altijd.`} />
+</Base>
+<style>
+  .plaatsen .card { gap: 12px; }
+  .drie { margin-top: 8px; }
+</style>

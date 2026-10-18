@@ -1,0 +1,363 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/leadgeneratie--e-mailmarketing.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/leadgeneratie/e-mailmarketing/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat e-mailmarketing is' },
+  { id: 'waarom', titel: 'Waarom e-mail nog werkt' },
+  { id: 'soorten', titel: 'Nieuwsbrief of automatische mail' },
+  { id: 'opvolging', titel: 'Voorbeeld: offertes opvolgen' },
+  { id: 'regels', titel: 'De regels: wat mag er?' },
+  { id: 'inbox', titel: 'In de inbox, niet in de spam' },
+  { id: 'lijst', titel: 'Je lijst laten groeien' },
+  { id: 'schrijven', titel: 'Mails die gelezen worden' },
+  { id: 'meten', titel: 'Welke cijfers tellen' },
+  { id: 'tools', titel: 'Een verzendtool kiezen' },
+  { id: 'fouten', titel: 'Acht fouten die we vaak zien' },
+  { id: 'aanpak', titel: 'Zo pakken we het aan' },
+  { id: 'kosten', titel: 'Wat het kost' },
+];
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${site.url}${url}#dienst`,
+    name: 'E-mailmarketing en marketing automation',
+    serviceType: 'E-mailmarketing',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: { '@type': 'Country', name: 'Nederland' },
+    url: `${site.url}${url}`,
+    offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 295, priceSpecification: { '@type': 'UnitPriceSpecification', price: 295, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'E-mailmarketing die je aanvragen opvolgt',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}${url}#dienst` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  },
+];
+---
+<Base
+  title="E-mailmarketing en automatische opvolging | Drijfveer Media"
+  description="E-mailmarketing voor het mkb: nieuwsbrieven en automatische opvolging van aanvragen en offertes. Vanaf € 295 per maand, maandelijks opzegbaar."
+  kruimels={[{ naam: 'Leadgeneratie', url: '/leadgeneratie/' }, { naam: 'E-mailmarketing', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Leadgeneratie" titel="E-mailmarketing die je aanvragen opvolgt terwijl jij werkt" prijs="vanaf € 295 per maand">
+    <p>Een offerte versturen en dan niets meer horen. Herkenbaar? Met e-mailmarketing gaan de juiste mails vanzelf de deur uit, op het juiste moment. Jij hoeft alleen nog te bellen als de klant ja zegt. Wij zijn het e-mailmarketing bureau dat het hele traject regelt, van eerste mail tot opvolging.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>E-mailmarketing is mailen naar mensen die je al kennen: inschrijvers, aanvragers en bestaande klanten.</li>
+            <li>Voor een dienstverlener levert automatische opvolging van offertes vaak meer op dan een nieuwsbrief.</li>
+            <li>Je mag alleen mailen met toestemming. Bestaande klanten zijn een uitzondering, voor vergelijkbare diensten.</li>
+            <li>Gmail eist sinds februari 2024 dat je domein goed is ingesteld. Anders belandt je mail in de spam.</li>
+            <li>Kijk naar kliks, antwoorden en aanvragen. Open rates zeggen steeds minder.</li>
+            <li>Wij doen het voor je vanaf € 295 per maand, maandelijks opzegbaar.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is e-mailmarketing?</h2>
+        <p>E-mailmarketing is het versturen van mails aan mensen die jou al kennen, met een zakelijk doel. Dat doel kan een nieuwe opdracht zijn, een herhaalaankoop, een review of gewoon dat een klant je niet vergeet. Het verschil met een gewone mail: je stuurt hem niet één keer met de hand, maar vanuit een verzendtool, naar een lijst of op een vast moment.</p>
+        <p>Er zijn twee smaken. Nieuwsbrieven verstuur je naar iedereen tegelijk. Automatische mails, ook wel marketing automation genoemd, gaan naar één persoon op het moment dat er iets gebeurt. Over dat tweede gaat het hieronder het meest, omdat het voor de meeste mkb'ers het meeste oplevert. In het begrip <a href="/kennisbank/wat-is/marketing-automation/">marketing automation</a> lees je hoe dat technisch werkt.</p>
+
+        <h2 id="waarom">Waarom e-mail nog steeds werkt</h2>
+        <p>Op Facebook en Instagram bepaalt een algoritme wie je bericht ziet. In de mailbox niet. Wie zich inschrijft of een offerte aanvraagt, geeft je een directe lijn. Die lijst is van jou, en niemand kan hem morgen afpakken of duurder maken.</p>
+        <p>Voor de meeste mkb'ers zit de winst niet in nieuwe mensen, maar in mensen die je al kent. Bestaande klanten die weer iets nodig hebben. Iemand die een offerte kreeg en nog twijfelt. Een klant van twee jaar geleden die je allang vergeten is. E-mailmarketing houdt die mensen warm, zonder dat jij er elke week aan hoeft te denken. Het is daarmee een logisch onderdeel van <a href="/leadgeneratie/">leadgeneratie</a>.</p>
+        <p>Nog een voordeel: het kost weinig. Een verzendtool is voor een kleine lijst vaak gratis. Je betaalt vooral met tijd. En die tijd kun je één keer goed besteden, aan een reeks die jaren voor je blijft werken.</p>
+
+        <h2 id="soorten">Nieuwsbrieven en automatische opvolging: niet hetzelfde</h2>
+        <p>Veel ondernemers denken bij e-mailmarketing aan een nieuwsbrief. Dat is één vorm. De andere vorm levert vaak meer op. Een nieuwsbrief schrijf je elke keer opnieuw. Een automatische reeks schrijf je één keer goed, en daarna werkt hij jaren voor je.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort mail</th><th>Wanneer</th><th>Doel</th><th>Voorbeeld van een onderwerpregel</th></tr></thead>
+            <tbody>
+              <tr><td><b>Bevestiging</b></td><td>Direct na een aanvraag</td><td>Vertrouwen, verwachting zetten</td><td>"We hebben je aanvraag, morgen bellen we"</td></tr>
+              <tr><td><b>Offerte-opvolging</b></td><td>3 en 10 dagen na de offerte</td><td>Twijfel wegnemen</td><td>"Nog vragen over je offerte voor de dakgoot?"</td></tr>
+              <tr><td><b>Welkom</b></td><td>Na een inschrijving</td><td>Laten zien wat je biedt</td><td>"Dit kun je van ons verwachten"</td></tr>
+              <tr><td><b>Reviewverzoek</b></td><td>Een paar dagen na de klus</td><td>Reviews in Google</td><td>"Hoe vond je het resultaat?"</td></tr>
+              <tr><td><b>Onderhoudsherinnering</b></td><td>Een jaar na de klus</td><td>Herhaalopdracht</td><td>"Tijd voor de jaarlijkse controle van je ketel"</td></tr>
+              <tr><td><b>Wekker</b></td><td>Na 18 maanden zonder contact</td><td>Oude klant terughalen</td><td>"Lang niet gesproken, alles goed met de tuin?"</td></tr>
+              <tr><td><b>Nieuwsbrief</b></td><td>Elke maand of elk kwartaal</td><td>In beeld blijven</td><td>"Drie dingen die je tuin nu nodig heeft"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De eerste zes zijn automatische mails. Die gaan vanzelf, op basis van een gebeurtenis. Alleen de nieuwsbrief vraagt elke keer nieuw werk. Begin je net? Zet dan eerst de bevestiging en de offerte-opvolging aan. Die twee hebben het kortste pad naar een opdracht.</p>
+        <h3>Welke reeks past bij jouw bedrijf?</h3>
+        <ul>
+          <li><b>Installateurs, garages en hoveniers</b> hebben veel aan de onderhoudsherinnering. Een ketel, een auto of een tuin heeft elk jaar iets nodig.</li>
+          <li><b>Adviseurs en coaches</b> winnen het meest met een welkomstreeks na een download of inschrijving. Drie of vier mails die laten zien hoe je werkt.</li>
+          <li><b>Bouw en verbouw</b> draait om offertes. Daar levert de opvolging het meest op, omdat één extra opdracht al duizenden euro's waard is.</li>
+          <li><b>Opleiders en trainers</b> hebben vaste momenten in het jaar. Een herinnering voordat de inschrijving sluit, is dan goud waard.</li>
+        </ul>
+
+        <h2 id="opvolging">Voorbeeld: een reeks die offertes opvolgt</h2>
+        <p>Zo ziet een eenvoudige reeks voor offertes eruit. Het is een verzonnen voorbeeld voor een schildersbedrijf, maar het schema werkt voor bijna elke dienstverlener.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Moment</th><th>Mail</th><th>Wat erin staat</th></tr></thead>
+            <tbody>
+              <tr><td><b>Dag 0</b></td><td>De offerte zelf</td><td>Prijs, planning en één duidelijke knop: akkoord geven of een belafspraak maken.</td></tr>
+              <tr><td><b>Dag 3</b></td><td>"Nog vragen?"</td><td>Kort en persoonlijk. Twee vragen die klanten vaak stellen, met het antwoord erbij.</td></tr>
+              <tr><td><b>Dag 10</b></td><td>Bewijs</td><td>Foto's van een vergelijkbare klus en een paar zinnen over hoe het verliep.</td></tr>
+              <tr><td><b>Dag 21</b></td><td>De eerlijke vraag</td><td>"Heb je voor een ander gekozen? Dan horen we graag waarom." Dit is vaak de mail waar de meeste mensen op antwoorden.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Zegt iemand ja, dan stopt de reeks vanzelf. Daar zorgt de koppeling met je offerteformulier of je boekhoudpakket voor. Zo krijgt niemand een herinnering voor iets wat hij al heeft gekocht.</p>
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een schilder in Meppel verstuurt dertig offertes per maand. Hij hoort van de helft niets terug. Stel dat de reeks hierboven daar twee extra opdrachten per maand van maakt. Bij een gemiddelde klus van € 2.500 is dat € 5.000 omzet per maand erbij. Ook als het er maar één is, is de investering ruim terugverdiend. Maak dezelfde som met je eigen cijfers: hoeveel offertes, hoeveel stilte, en wat is één opdracht waard?</p>
+        </div>
+
+        <h3>Voorbeeld: een welkomstreeks in drie mails</h3>
+        <p>Schrijft iemand zich in via je site, dan is hij op dat moment het meest nieuwsgierig. Gebruik dat. Een verzonnen voorbeeld voor een boekhouder in Zwolle:</p>
+        <ol>
+          <li><b>Direct:</b> "Welkom, dit kun je van me verwachten." Wie je bent, wat je stuurt en hoe vaak. Plus de checklist die iemand kwam halen.</li>
+          <li><b>Na drie dagen:</b> "De drie vragen die ondernemers mij het vaakst stellen." Met korte antwoorden, zodat de lezer meteen iets aan je heeft.</li>
+          <li><b>Na een week:</b> "Zo werk ik, en zo plan je een kennismaking." Eén knop naar je agenda of je telefoonnummer.</li>
+        </ol>
+        <p>Drie mails, één keer geschreven. Daarna doet hij zijn werk voor elke nieuwe inschrijver, ook als jij op vakantie bent.</p>
+
+        <h2 id="regels">De regels: wat mag en wat niet</h2>
+        <p>E-mailmarketing is goed geregeld in de wet, en dat is maar goed ook. De basis staat in artikel 11.7 van de <a href="https://wetten.overheid.nl/jci1.3:c:BWBR0009950&hoofdstuk=11&artikel=11.7" rel="noopener">Telecommunicatiewet</a>. De ACM houdt toezicht en zet de regels op een rij op de pagina <a href="https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/spam-voorkomen-uw-reclame" rel="noopener">spam voorkomen in uw reclame</a>. Dit zijn de belangrijkste:</p>
+        <ul>
+          <li><b>Eerst toestemming, dan versturen.</b> De ontvanger koos er zelf voor, en niet via een vooraf aangevinkt hokje of je algemene voorwaarden.</li>
+          <li><b>Bewijs bewaren.</b> Volgens de ACM moet je die toestemming tot vijf jaar na verzending kunnen aantonen. Een tool die bijhoudt wanneer en waar iemand zich inschreef, regelt dat.</li>
+          <li><b>Duidelijke afzender.</b> Je bedrijfsnaam of je eigen naam, geen verzonnen alias.</li>
+          <li><b>Afmelden in elke mail.</b> Snel en gratis, dus niet via een vragenlijst of een inlog.</li>
+        </ul>
+        <h3>De uitzondering voor bestaande klanten</h3>
+        <p>Klanten die al iets bij je kochten, mag je mailen over je eigen, vergelijkbare producten of diensten. Ook zonder dat ze zich inschreven. Twee voorwaarden: je bood ze bij het verzamelen van hun adres de kans om nee te zeggen, en ze kunnen zich bij elke mail afmelden. Een hovenier mag zijn klanten dus mailen over snoeiwerk. Over een aanbieding van zijn zwager de makelaar niet.</p>
+        <h3>En zakelijke adressen?</h3>
+        <p>Veel ondernemers denken dat je naar bedrijven vrij mag mailen. Dat klopt niet. Het verbod in de wet geldt voor elke eindgebruiker, ook voor een bv of een zzp'er. Er is één uitzondering: een adres dat een bedrijf zelf heeft bekendgemaakt om dit soort berichten te ontvangen, mag je gebruiken voor dat doel. Een info-adres op een website is dat meestal niet. Twijfel je, vraag dan eerst toestemming.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Situatie</th><th>Mag je mailen?</th></tr></thead>
+            <tbody>
+              <tr><td>Iemand schreef zich in via je website</td><td>Ja, over waar hij zich voor inschreef</td></tr>
+              <tr><td>Bestaande klant, over een vergelijkbare dienst</td><td>Ja, met een afmeldlink in elke mail</td></tr>
+              <tr><td>Iemand vroeg een offerte aan, maar kocht niets</td><td>Over die offerte wel. Een nieuwsbrief alleen met toestemming</td></tr>
+              <tr><td>Visitekaartje van een beurs</td><td>Alleen als diegene toestemming gaf. Vraag het ter plekke</td></tr>
+              <tr><td>Gekochte adressenlijst</td><td>Bijna nooit. En je belandt er snel mee in de spam</td></tr>
+              <tr><td>Info-adres van een bedrijf, van internet geplukt</td><td>Nee, tenzij het adres juist voor dit soort berichten is bekendgemaakt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Opvolging van een offerte sluit aan op een vraag die de klant zelf stelde. Houd die mails daarom strikt bij die offerte. Stop je er een aanbieding voor iets anders in, dan wordt het reclame en gelden de regels hierboven. Twijfel je over je eigen situatie, lees dan de pagina van de ACM of vraag het juridisch na. Wij lopen je lijst bij de start altijd samen na.</p>
+
+        <h2 id="inbox">In de inbox, niet in de spam</h2>
+        <p>De beste mail heeft niets aan een plek in de spammap. Gmail heeft de lat daarvoor hoger gelegd. Volgens de <a href="https://support.google.com/a/answer/81126?hl=nl" rel="noopener">richtlijnen voor afzenders van Google</a> moet sinds 1 februari 2024 elke afzender naar Gmail-adressen aan een paar eisen voldoen:</p>
+        <ul>
+          <li><b>SPF of DKIM</b> op het domein waarmee je verstuurt. Dat zijn instellingen die bewijzen dat jij de mail echt verstuurde.</li>
+          <li><b>Een spampercentage onder de 0,3%.</b> Google raadt aan om onder de 0,1% te blijven.</li>
+          <li><b>Wie meer dan 5000 mails per dag naar Gmail stuurt,</b> heeft SPF én DKIM nodig, plus DMARC, en een afmeldknop waarmee je in één klik weg bent.</li>
+        </ul>
+        <p>Een mkb'er haalt die 5000 per dag zelden. Toch raden we alle drie de instellingen aan. Ze kosten eenmalig een halfuur werk in je DNS en ze voorkomen dat iemand anders mailt alsof hij jou is. Wat DNS is, lees je in het begrip <a href="/kennisbank/wat-is/dns/">DNS</a>.</p>
+        <h3>Zo houd je je lijst schoon</h3>
+        <ul class="vink">
+          <li>Gebruik dubbele bevestiging bij inschrijving: eerst een mail met een bevestigingslink. Typefouten en neppe adressen komen er dan niet in.</li>
+          <li>Haal adressen die niet aankomen (bounces) meteen van de lijst.</li>
+          <li>Stuur mensen die een jaar nergens op klikten nog één mail: "Wil je nog van ons horen?" Wie niet reageert, haal je eraf.</li>
+          <li>Verstuur vanaf je eigen domein, niet vanaf een gratis Gmail- of Outlook-adres.</li>
+        </ul>
+
+        <h2 id="lijst">Je lijst laten groeien, zonder trucjes</h2>
+        <p>Een lijst van tweehonderd mensen die je kennen, is meer waard dan tweeduizend adressen van onbekenden. Begin daarom bij de plekken waar klanten je al vertrouwen.</p>
+        <ul>
+          <li><b>Je offerteformulier.</b> Een vinkje: "Stuur me af en toe een tip of aanbieding." Niet vooraf aangevinkt.</li>
+          <li><b>Na de klus.</b> Bij de oplevering of de factuur: "Mogen we je over een jaar herinneren aan onderhoud?" Veel klanten zeggen ja, omdat het ze werk scheelt.</li>
+          <li><b>Een nuttige download.</b> Een checklist of prijsoverzicht op je site, in ruil voor een mailadres. Denk aan "Zo bereid je een verbouwing voor" of "Wat kost een dakkapel in 2026". Beloof alleen wat je ook stuurt.</li>
+          <li><b>Een QR-code.</b> Op de bon, de bus of het visitekaartje, naar een inschrijfpagina van één scherm.</li>
+          <li><b>Je eigen mailhandtekening.</b> Een korte regel onder elke mail die je toch al verstuurt.</li>
+        </ul>
+        <p>Houd het inschrijfformulier kort. Een mailadres en een voornaam zijn genoeg. Vertel erbij wat iemand krijgt en hoe vaak: "Vier keer per jaar een tip voor je tuin, afmelden kan altijd." Zo weet de lezer waar hij ja tegen zegt, en zo bewijs je later ook waarvoor hij toestemming gaf.</p>
+        <h3>Personaliseren en segmenteren</h3>
+        <p>Je hoeft niet iedereen hetzelfde te sturen. Een paar eenvoudige groepen maken je mails al veel beter:</p>
+        <ul>
+          <li><b>Klant of nog geen klant.</b> Een klant wil onderhoudstips. Iemand die nog twijfelt, wil bewijs.</li>
+          <li><b>Per dienst.</b> Wie een offerte voor een badkamer kreeg, heeft niets aan een mail over dakgoten.</li>
+          <li><b>Per plaats.</b> Werk je in heel Drenthe? Dan kun je de mail over je nieuwe vestiging of je open dag alleen sturen naar wie in de buurt woont.</li>
+          <li><b>Zakelijk of particulier.</b> Een bedrijf wil een factuur op naam en een vast aanspreekpunt. Een particulier wil weten wanneer je komt.</li>
+        </ul>
+        <p>Leg die groepen vast op het moment dat iemand op je lijst komt. Achteraf uitzoeken wie wat is, kost veel meer tijd.</p>
+        <h3>Vergeet de AVG niet</h3>
+        <p>Een mailadres is een persoonsgegeven. Zet in je privacyverklaring dat je mailt, waarom en hoe lang je adressen bewaart. Sluit met je verzendtool een verwerkersovereenkomst. En haal mensen die zich afmelden echt uit je systemen, niet alleen uit de verzendlijst. In de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a> staat wat er verder op je site moet.</p>
+
+        <h2 id="schrijven">Wat een succesvolle e-mailmarketingcampagne gemeen heeft</h2>
+        <p>Of het nu om één mail gaat of om een reeks: dezelfde dingen maken het verschil.</p>
+        <ul class="vink">
+          <li><b>Een herkenbare afzender.</b> "Thorgall van Drijfveer Media" wordt vaker geopend dan "info" of "noreply".</li>
+          <li><b>Korte, concrete onderwerpregels.</b> "Je offerte voor de dakgoot" werkt beter dan "Nieuws uit onze werkplaats".</li>
+          <li><b>Personaliseren met verstand.</b> De voornaam erboven is het minste. Gepersonaliseerde e-mails gaan over de dienst die iemand aanvroeg, of over zijn woonplaats.</li>
+          <li><b>Eén doel per mail.</b> Eén knop, één vraag. Net als op een goede <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina</a>.</li>
+          <li><b>Goed leesbaar op een telefoon.</b> Korte alinea's, een knop waar je duim op past, en niet alles in een plaatje.</li>
+          <li><b>Schrijf zoals je praat.</b> Een mail van een mens wordt eerder beantwoord dan een folder in een mailbox.</li>
+        </ul>
+        <h3>Onderwerpregels: zo kan het beter</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zwak</th><th>Beter</th><th>Waarom</th></tr></thead>
+            <tbody>
+              <tr><td>Nieuwsbrief oktober</td><td>Je cv-ketel en de eerste vorst</td><td>Gaat over de lezer, niet over de kalender</td></tr>
+              <tr><td>Belangrijke informatie</td><td>Je afspraak is verzet naar donderdag 9.00 uur</td><td>Zegt meteen wat er speelt</td></tr>
+              <tr><td>Super actie, nu 20% korting</td><td>Tot vrijdag: onderhoudsbeurt voor € 89</td><td>Concreet, met een einddatum</td></tr>
+              <tr><td>Follow-up</td><td>Nog vragen over je offerte voor de veranda?</td><td>Persoonlijk en herkenbaar</td></tr>
+              <tr><td>Wij zijn verhuisd</td><td>Ons nieuwe adres, met gratis parkeren voor de deur</td><td>Geeft er meteen iets bij</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De bedragen en tijden in de tabel zijn voorbeelden. Let ook op de preheader: het grijze regeltje dat na de onderwerpregel in de inbox staat. Laat je dat leeg, dan vult de mailapp het met de eerste tekst die hij vindt, vaak "Bekijk deze mail in je browser". Zonde van de ruimte.</p>
+        <h3>De opbouw van een nieuwsbrief die gelezen wordt</h3>
+        <p>Een nieuwsbrief van een mkb'er hoeft geen tijdschrift te zijn. Dit schema werkt bijna altijd:</p>
+        <ol>
+          <li><b>Eén hoofdonderwerp</b> dat je lezer nu nodig heeft. Een tip voor het seizoen, een veelgestelde vraag, een veranderde regel.</li>
+          <li><b>Eén voorbeeld uit je werk.</b> Een klus van deze maand, met een foto en drie zinnen.</li>
+          <li><b>Eén actie.</b> Een afspraak plannen, een offerte aanvragen, een review geven. Met één knop.</li>
+          <li><b>Een persoonlijke afsluiting</b> met je naam en een vraag waar mensen op kunnen antwoorden.</li>
+        </ol>
+        <p>Vier blokken, en in vijf minuten gelezen. Wie dat elk kwartaal volhoudt, blijft in beeld bij klanten die anders bij de concurrent waren beland. Hoe je een verhaal vertelt dat blijft hangen, lees je in het begrip <a href="/kennisbank/wat-is/storytelling/">storytelling</a>.</p>
+        <h3>Testen: alleen als je lijst groot genoeg is</h3>
+        <p>De meeste tools laten je twee onderwerpregels testen. De ene helft van een testgroep krijgt versie A, de andere helft versie B, en de winnaar gaat naar de rest. Leuk, maar met een lijst van een paar honderd adressen is het verschil vaak toeval. Test pas als je meer dan duizend ontvangers hebt, en test dan één ding tegelijk. Daaronder leer je meer van de antwoorden die mensen terugsturen.</p>
+        <h3>Hoe vaak versturen?</h3>
+        <p>Liever één goede nieuwsbrief per kwartaal dan elke week een halve. Kies een ritme dat je volhoudt, en houd je eraan. Automatische mails versturen los van dat ritme, want die hangen aan een gebeurtenis. Stijgen de afmeldingen na elke verzending? Dan mail je te vaak, of niet over wat je lezers interesseert.</p>
+
+        <h2 id="meten">Meten: welke cijfers tellen</h2>
+        <p>Elke verzendtool geeft je een dashboard vol getallen. De meeste zijn interessant. Een paar zijn belangrijk.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Cijfer</th><th>Wat het zegt</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td><b>Open rate</b></td><td>Hoeveel ontvangers de mail openden</td><td>Steeds minder betrouwbaar, zie hieronder</td></tr>
+              <tr><td><b>Klikpercentage</b></td><td>Hoeveel ontvangers op een link klikten</td><td>Betere graadmeter voor interesse</td></tr>
+              <tr><td><b>Antwoorden</b></td><td>Hoeveel mensen terugmailden</td><td>Bij opvolgmails het belangrijkste cijfer</td></tr>
+              <tr><td><b>Aanvragen</b></td><td>Hoeveel offertes, afspraken of telefoontjes er kwamen</td><td>Meet je met <a href="/leadgeneratie/tracking-en-analytics/">tracking</a> en UTM-codes</td></tr>
+              <tr><td><b>Afmeldingen</b></td><td>Hoeveel mensen niet meer willen</td><td>Een piek na één mail zegt iets over die mail</td></tr>
+              <tr><td><b>Bounces</b></td><td>Hoeveel mails niet aankwamen</td><td>Hoog? Dan is je lijst vervuild</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Waarom zijn open rates minder betrouwbaar? Een mail telt als geopend als er een onzichtbaar plaatje wordt geladen. Apple downloadt met <a href="https://www.apple.com/legal/privacy/data/nl/mail-privacy-protection/" rel="noopener">Privacybescherming in Mail</a> dat soort extern materiaal standaard op de achtergrond, zodra een mail binnenkomt. Of de ontvanger hem nu leest of niet. Een mail aan iemand met een iPhone kan dus als geopend tellen, terwijl niemand hem zag. Wij kijken daarom naar kliks, antwoorden en vooral naar aanvragen. Dat zijn de cijfers die in je agenda terechtkomen.</p>
+        <p>Zet achter elke link in je mails een UTM-code. Dan zie je in je statistieken welke mail welke aanvraag opleverde. Hoe je die maakt, staat in de gids over <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a>.</p>
+
+        <h2 id="tools">Een e-mailmarketingtool kiezen</h2>
+        <p>Voor een kleine lijst hoef je niets te betalen. Dit bieden een paar bekende tools gratis aan, volgens hun eigen prijspagina's in oktober 2026:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Gratis tot</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td><b>Laposta</b></td><td>2.000 relaties en 12.000 mails per maand</td><td>Nederlandstalig. Met een betaald abonnement verstuur je zonder Laposta-reclame</td></tr>
+              <tr><td><b>MailerLite</b></td><td>250 abonnees en 2.500 mails per maand</td><td>Automatische reeksen zitten ook in de gratis versie</td></tr>
+              <tr><td><b>Brevo</b></td><td>300 mails per dag</td><td>Telt vooral het aantal mails, niet het aantal contacten</td></tr>
+              <tr><td><b>Mailchimp</b></td><td>Minder dan 250 contacten</td><td>Bekend, maar de prijs loopt op met je lijst</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Prijzen en grenzen veranderen regelmatig. Kijk dus altijd zelf op de site van de tool voordat je kiest. Let bij je keuze op vier dingen:</p>
+        <ol>
+          <li><b>Kan hij reeksen versturen op basis van een gebeurtenis?</b> Een nieuwsbrief kan elke tool. Automatische opvolging zit niet altijd in het gratis pakket.</li>
+          <li><b>Koppelt hij met je website of offertesoftware?</b> Anders typ je adressen over, en dat houdt niemand vol.</li>
+          <li><b>Staat het account op jouw naam?</b> Dan blijft de lijst van jou, ook als je ooit van bureau wisselt.</li>
+          <li><b>Hoe gaat hij om met de AVG?</b> Vraag om een verwerkersovereenkomst. Een nette tool heeft die standaard.</li>
+        </ol>
+
+        <h2 id="fouten">Acht fouten die we vaak zien</h2>
+        <ol>
+          <li><b>Versturen vanaf een gratis mailadres.</b> Een nieuwsbrief vanaf een Gmail-adres haalt de inbox slecht.</li>
+          <li><b>Een lijst importeren zonder toestemming.</b> Het mag niet, en de klachten trekken je spampercentage omhoog.</li>
+          <li><b>Alles in één groot plaatje.</b> Veel mailapps tonen plaatjes niet meteen. Dan ziet je ontvanger een lege mail.</li>
+          <li><b>Vijf knoppen in één mail.</b> Wie alles vraagt, krijgt niets.</li>
+          <li><b>Geen afmeldlink, of een verstopte.</b> Mensen klikken dan op "spam" in plaats van "afmelden". Dat is veel schadelijker.</li>
+          <li><b>Alleen naar de open rate kijken.</b> Zie hierboven: dat getal klopt steeds minder vaak.</li>
+          <li><b>Een reeks bouwen en nooit meer bekijken.</b> Een mail met een oude prijs of een verlopen actie doet meer kwaad dan goed.</li>
+          <li><b>Beginnen met de nieuwsbrief.</b> De opvolging van offertes levert meestal sneller iets op. Doe die eerst.</li>
+        </ol>
+
+        <h2 id="aanpak">Zo pakken we je e-mailmarketing aan</h2>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>1. Eerst vragen</h3></div>
+        <p>{site.contactpersoon} belt je binnen 15 minuten terug en vraagt hoe je nu werkt. Hoeveel offertes gaan er de deur uit? Wat gebeurt er daarna? Welke klanten komen terug en welke niet? Daar zien we meestal al waar de eerste winst zit.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Tool en techniek</h3></div>
+        <p>We kiezen samen een verzendtool die bij je past, zoals Laposta, MailerLite of Brevo. Het account staat op jouw naam, dus de lijst blijft van jou. Daarna stellen we SPF, DKIM en DMARC in, zodat je mails in de inbox landen en niet in de spam.</p>
+        <div class="stap-kop"><Tekening naam="magneet" maat={48} /><h3>3. Inschrijvers verzamelen</h3></div>
+        <p>Een inschrijfformulier op je site, een vinkje bij je offerteformulier, een QR-code op de bon. Elke plek waar een klant je al vertrouwt, kan een adres opleveren. Altijd met een vinkje dat niet vooraf is aangezet.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Reeksen en nieuwsbrieven schrijven</h3></div>
+        <p>We schrijven de automatische mails en de nieuwsbrieven in jouw toon. Je leest alles voordat het live gaat. Wij versturen en houden de lijst schoon.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>5. Meten en schrappen</h3></div>
+        <p>Elke maand kijken we wat de mails opleverden. Een mail die niets doet, gaat eruit of wordt herschreven. Je krijgt een kort overzicht in gewone taal, zonder grafieken waar je een marketeer bij nodig hebt. Zo werken we bij alles: eerst daar beginnen waar het snelst verschil te maken is, daarna perfectioneren. Lees er meer over op <a href="/werkwijze/">onze werkwijze</a>.</p>
+
+        <h2 id="kosten">Wat e-mailmarketing kost</h2>
+        <p>E-mailmarketing bij ons begint bij € 295 per maand, exclusief btw en maandelijks opzegbaar. Daarvoor schrijven en versturen we je nieuwsbrieven, houden we je automatische reeksen bij en krijg je het maandoverzicht. Hoeveel mails er precies in je maand zitten, leggen we vooraf vast. De verzendtool betaal je zelf. Voor een kleine lijst is die vaak gratis, zie de tabel hierboven.</p>
+        <p>We spreken samen een doel af, bijvoorbeeld een aantal extra opdrachten uit je offertes. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
+        <h3>Zelf doen of uitbesteden?</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf doen</th><th>Bij ons</th></tr></thead>
+            <tbody>
+              <tr><td><b>Kosten</b></td><td>Je eigen uren plus de tool</td><td>Vanaf € 295 per maand plus de tool</td></tr>
+              <tr><td><b>Tijd per maand</b></td><td>Al snel een dag voor een nieuwsbrief en het bijhouden</td><td>Meelezen voordat iets de deur uitgaat</td></tr>
+              <tr><td><b>Techniek</b></td><td>SPF, DKIM en DMARC zelf uitzoeken</td><td>Geregeld bij de start</td></tr>
+              <tr><td><b>Past bij</b></td><td>Wie graag schrijft en het volhoudt</td><td>Wie het wil, maar er nooit aan toekomt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Liever zelf aan de slag? In de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a> lees je hoe je begint. Wil je weten waar mail past in de weg van eerste klik naar klant, lees dan het begrip <a href="/kennisbank/wat-is/funnel/">funnel</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={18} />
+        <Prijskaart naam="E-mailmarketing" prijs="€ 295" eenheid="per maand" punten={['Nieuwsbrieven geschreven en verstuurd', 'Automatische opvolging van aanvragen en offertes', 'SPF, DKIM en DMARC ingesteld', 'Maandoverzicht in gewone taal']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is e-mailmarketing?', a: 'Mails versturen aan mensen die je al kennen, met een zakelijk doel: een opdracht, een herhaalaankoop of een review. Je verstuurt ze vanuit een verzendtool, als nieuwsbrief aan iedereen of automatisch na een gebeurtenis.' },
+      { v: 'Hoe vaak moet ik een nieuwsbrief versturen?', a: 'Liever één goede nieuwsbrief per kwartaal dan elke week een halve. Voor de meeste mkb\'ers werkt eens per maand of eens per kwartaal goed. De automatische mails gaan los daarvan vanzelf.' },
+      { v: 'Ik heb maar een kleine lijst. Heeft het zin?', a: 'Ja. Juist automatische opvolging werkt al bij een paar aanvragen per week. Elke offerte die je beter opvolgt, telt.' },
+      { v: 'Mag ik mijn klanten zomaar mailen?', a: 'Bestaande klanten mag je mailen over vergelijkbare diensten, als je ze bij het verzamelen de kans gaf om nee te zeggen en ze zich bij elke mail kunnen afmelden. Voor nieuwe contacten heb je toestemming nodig. Dat staat in artikel 11.7 van de Telecommunicatiewet.' },
+      { v: 'Mag ik naar zakelijke e-mailadressen mailen zonder toestemming?', a: 'Meestal niet. Het verbod geldt ook voor bedrijven. Alleen een adres dat een bedrijf zelf heeft bekendgemaakt om dit soort berichten te ontvangen, mag je daarvoor gebruiken.' },
+      { v: 'Welk programma gebruiken jullie?', a: 'Dat hangt af van wat je nodig hebt. Vaak Laposta, MailerLite of Brevo. Werk je al met een tool of CRM, dan kijken we eerst of we daarmee verder kunnen.' },
+      { v: 'Wat als mijn mails in de spam belanden?', a: 'Dan ligt het vaak aan de instellingen van je domein (SPF, DKIM en DMARC) of aan een vervuilde lijst. Allebei lossen we op bij de start.' },
+      { v: 'Wat kost e-mailmarketing?', a: 'Bij ons vanaf € 295 per maand, exclusief btw en maandelijks opzegbaar. De verzendtool betaal je zelf. Voor een kleine lijst is die vaak gratis.' },
+      { v: 'Hoe snel levert het iets op?', a: 'Een reeks die offertes opvolgt, werkt vanaf de eerste offerte die je na de start verstuurt. Een nieuwsbrief heeft meer tijd nodig: reken op een paar edities voordat lezers hem herkennen en erop reageren.' },
+      { v: 'Wat is het verschil tussen e-mailmarketing en marketing automation?', a: 'Marketing automation is het deel van e-mailmarketing dat vanzelf gaat: mails die vertrekken na een gebeurtenis, zoals een aanvraag of een afgeronde klus. Een nieuwsbrief verstuur je zelf, op een moment dat jij kiest.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer aanvragen uit je bezoekers"
+    links={[
+      { label: 'Pillar', titel: 'Leadgeneratie', href: '/leadgeneratie/', tekst: 'Van bezoeker naar aanvraag, vanaf € 495 per maand.' },
+      { label: 'Dienst', titel: 'Landingspagina laten maken', href: '/leadgeneratie/landingspagina-laten-maken/', tekst: 'Eén pagina, één doel, vanaf € 250.' },
+      { label: 'Gids', titel: 'Nieuwsbrief maken', href: '/kennisbank/gidsen/nieuwsbrief-maken/', tekst: 'Zelf beginnen met e-mailmarketing.' },
+      { label: 'Dienst', titel: 'Tracking en analytics', href: '/leadgeneratie/tracking-en-analytics/', tekst: 'Zien welke mail welke aanvraag opleverde.' },
+    ]}
+  />
+
+  <Actie titel="Hoeveel offertes blijven bij jou liggen?" tekst={`${site.contactpersoon} belt je binnen 15 minuten terug en kijkt met je mee waar opvolging het meeste oplevert. Daarna hoor je wat het kost.`} />
+</Base>

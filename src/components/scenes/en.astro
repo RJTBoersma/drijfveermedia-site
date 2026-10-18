@@ -1,0 +1,58 @@
+---
+// Scène voor /en/: een wereldbol met een pin in het noorden van Nederland. Vanaf Assen loopt een lijn naar een Nederlands zoekresultaat waarin het buitenlandse bedrijf bovenaan staat.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const boog = 'M180 92C220 34 276 30 304 66';
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Drawing: a globe with a pin in the north of the Netherlands. A line runs from Assen to a Dutch search result where your company is listed first.'}>
+  <!-- wereldbol -->
+  <circle class="v" cx="150" cy="150" r="96" />
+  <circle class="l" cx="150" cy="150" r="96" />
+  <ellipse class="l" cx="150" cy="150" rx="40" ry="96" />
+  <path class="l" d="M54 150h192M66 102h168M66 198h168M150 54v192" />
+  <!-- Nederland, heel schematisch -->
+  <path d="M158 118c-4-8 0-16 8-20 6-4 16-6 22-2 4 4 2 10 0 16-2 8-8 14-16 14-6 0-12-2-14-8z" fill="#fff" stroke="#074663" stroke-width="2" />
+  <!-- pin bij Assen -->
+  <path class="o" d="M178 78c0-8 6-14 13-14s13 6 13 14c0 10-13 22-13 22s-13-12-13-22z" />
+  <circle cx="191" cy="78" r="5" fill="#fff" />
+  <rect x="200" y="118" width="74" height="24" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <text x="237" y="134" text-anchor="middle" font-size="12" font-weight="800">Assen, NL</text>
+  <!-- de boog -->
+  <path class="l" d={boog} stroke-dasharray="3 7" />
+  <!-- zoekresultaat -->
+  <rect x="300" y="40" width="160" height="128" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="314" y="54" width="132" height="18" rx="9" />
+  <text x="326" y="67" font-size="10" font-weight="700" class="zacht">zoeken in Nederland</text>
+  <rect x="314" y="86" width="4" height="26" rx="2" fill="#ff6600" />
+  <text x="324" y="96" font-size="11" font-weight="800">Your company</text>
+  <rect x="324" y="104" width="110" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="324" y="124" width="84" height="8" rx="4" fill="#8aa0b4" />
+  <rect x="324" y="138" width="104" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="324" y="152" width="70" height="6" rx="3" fill="#e8eef4" />
+  {!mini && (
+    <g>
+      <path class="en-loper" d={boog} pathLength="1" fill="none" stroke="#ff6600" stroke-width="4" stroke-linecap="round" />
+      <g class="en-ballon">
+        <path d="M300 196h88a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10h-62l-12 12v-12h-14a10 10 0 0 1-10-10v-20a10 10 0 0 1 10-10z" fill="#074663" />
+        <text x="344" y="221" text-anchor="middle" font-size="13" font-weight="800" style="fill:#fff">Hello, hallo</text>
+      </g>
+      <g class="en-ring"><circle cx="191" cy="78" r="9" fill="none" stroke="#ff6600" stroke-width="2.5" /></g>
+    </g>
+  )}
+</svg>
+<style>
+  .en-loper { stroke-dasharray: 0.16 0.84; stroke-dashoffset: 0.16; }
+  .en-ring { transform-box: fill-box; transform-origin: center; }
+  .en-ballon { transform-box: fill-box; transform-origin: 20% 100%; }
+  :global(.teken-js) .en-loper { opacity: 0; }
+  :global(.teken-js) .en-ballon { opacity: 0; transform: scale(0.5); }
+  .in-beeld .en-loper { animation: en-loper 3.6s ease-in-out 0.6s infinite both; }
+  .in-beeld .en-ballon { animation: en-ballon 0.5s cubic-bezier(.3,1.6,.5,1) 1.2s forwards; }
+  .in-beeld .en-ring { animation: en-ring 3.6s ease-out 0.6s infinite both; }
+  @keyframes en-loper { 0% { stroke-dashoffset: 0.16; opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { stroke-dashoffset: -0.84; opacity: 0; } }
+  @keyframes en-ballon { to { opacity: 1; transform: none; } }
+  @keyframes en-ring { 0% { transform: scale(1); opacity: 0.9; } 60%, 100% { transform: scale(3); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .en-loper, .in-beeld .en-ballon, .in-beeld .en-ring { animation: none; opacity: 1; transform: none; }
+  }
+</style>

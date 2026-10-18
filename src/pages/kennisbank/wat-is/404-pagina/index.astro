@@ -1,0 +1,160 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--404-pagina.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/404-pagina/';
+const definitie = 'Een 404-pagina is de pagina die een bezoeker te zien krijgt als het adres dat hij opvraagt niet (meer) bestaat, genoemd naar de foutcode 404 Not Found.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: '404-pagina',
+  alternateName: ['Foutpagina', 'Pagina niet gevonden', '404 Not Found'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+
+const codeAntwoord = `GET /tuinaanleg-assen/ HTTP/1.1
+Host: www.jouwbedrijf.nl
+
+HTTP/1.1 404 Not Found
+Content-Type: text/html; charset=UTF-8`;
+
+const codeCurl = `curl -I https://www.jouwbedrijf.nl/floatingfeather`;
+
+const codeApache = `ErrorDocument 404 /404.html`;
+---
+<Base
+  title="Wat is een 404-pagina? Uitleg en tips | Drijfveer Media"
+  description="Wat is een 404-pagina? De melding als een pagina niet bestaat. Met het verschil tussen 404, 410 en soft 404, en hoe je bezoekers toch vasthoudt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: '404-pagina', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is een 404-pagina?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum="2026-10-18" />
+      <p>Iedereen komt ze tegen. Je klikt op een link en krijgt "Pagina niet gevonden". De 404-pagina is wat de bezoeker op dat moment ziet. Bij sommige sites is dat een kale foutmelding in het Engels. Bij andere een pagina die je netjes verder helpt. Het verschil merk je in je omzet, want wie op een dood spoor belandt, gaat meestal terug naar Google en klikt op de volgende.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Wat betekent 404 precies?</h2></div>
+      <p>Volgens de definitie is 404 een HTTP-statuscode. Elke keer dat je browser een webpagina opvraagt, stuurt de server een korte code terug. Codes die met een 2 beginnen betekenen dat alles goed ging. Een 4 betekent dat er iets mis is aan de kant van de vraag. De 404 zegt: de server is wel bereikbaar, maar het gevraagde adres staat er niet. Daarom staat er in het Engels vaak "404 Not Found" of "404 error".</p>
+      <p>Zo ziet zo'n uitwisseling eruit als je hem zichtbaar maakt. De browser vraagt een oude pagina op, de server antwoordt met 404:</p>
+      <pre><code>{codeAntwoord}</code></pre>
+      <p>Een 404 zegt niets over de reden. De pagina kan tijdelijk weg zijn of voorgoed. Is hij echt voorgoed verdwenen, dan mag de server ook 410 Gone sturen. Dat betekent: weg en komt niet terug.</p>
+
+      <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2>404, 410, 301 en soft 404: het verschil</h2></div>
+      <p>Rond verdwenen pagina's kom je vier begrippen tegen. Ze lijken op elkaar, maar Google gaat er heel anders mee om. Dit staat in de documentatie van Google over statuscodes:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Code</th><th>Betekenis</th><th>Wat Google doet</th><th>Gebruik het als</th></tr></thead>
+          <tbody>
+            <tr><td>404</td><td>Niet gevonden</td><td>Haalt de pagina na een tijd uit de index en komt er steeds minder vaak langs</td><td>Een pagina weg is en er geen goede vervanger is</td></tr>
+            <tr><td>410</td><td>Weg, voorgoed</td><td>Behandelt hem in de praktijk hetzelfde als een 404</td><td>Je zeker weet dat de pagina nooit terugkomt</td></tr>
+            <tr><td>301</td><td>Permanent verhuisd</td><td>Volgt de doorverwijzing en neemt het nieuwe adres over</td><td>Er een nieuwe pagina is over hetzelfde onderwerp</td></tr>
+            <tr><td>Soft 404</td><td>De pagina zegt "niet gevonden", maar de server meldt 200 (alles goed)</td><td>Ziet een foutpagina die zich voordoet als echte pagina en blijft hem crawlen</td><td>Nooit: dit is een fout die je oplost</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een <a href="/kennisbank/wat-is/redirect/">redirect</a> is dus de oplossing als er een vervanger is. Een echte 404 of 410 als er niets vergelijkbaars bestaat. Een soft 404 is nooit goed. Volgens Google blijven zulke pagina's gecrawld worden, waardoor ze je <a href="/kennisbank/wat-is/crawlbudget/">crawlbudget</a> opsouperen.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Waar komen 404-fouten vandaan?</h2></div>
+      <ul class="vink">
+        <li>Een pagina is verwijderd of verplaatst, zonder doorverwijzing.</li>
+        <li>Je hebt een nieuwe website en de oude adressen bestaan niet meer.</li>
+        <li>Je hebt een adres ingekort, bijvoorbeeld van /tuinaanleg-assen/ naar /tuinaanleg/. Links in oude nieuwsbrieven, op social media en op andere sites wijzen nog naar het oude.</li>
+        <li>Een andere site linkt naar je met een tikfout in het adres.</li>
+        <li>Een bezoeker typt zelf iets verkeerd.</li>
+        <li>In je eigen menu of tekst staat een link die niet klopt.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Schaden 404-fouten je positie in Google?</h2></div>
+      <p>Nee, niet op zichzelf. Google schrijft dat 404's een normaal onderdeel van het web zijn. Dat sommige adressen op je site niet meer bestaan, heeft geen invloed op hoe je andere pagina's scoren. Google raadt zelfs aan om een verwijderde pagina een echte 404 of 410 te laten geven.</p>
+      <p>Het probleem zit ergens anders. Een oude pagina met bezoekers of links van andere sites is waardevol. Laat je die op een 404 eindigen, dan verlies je die bezoekers en die links. En een bezoeker die op een foutpagina belandt, vertrekt vaak. Search Console geeft zelf ook de goede maat: los vooral 404-fouten op van pagina's waar je zelf naar linkt of die in je <a href="/kennisbank/wat-is/sitemap/">sitemap</a> staan.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Doe de floatingfeather-test</h2></div>
+      <p>Typ je eigen domeinnaam in met daarachter /floatingfeather. Dus jouwbedrijf.nl/floatingfeather. Die pagina bestaat niet, dus je zou je eigen 404-pagina moeten zien. Wat gebeurt er? Krijg je een kale error van de server, een witte pagina, of word je stilletjes naar de homepage gestuurd? Dan is er werk aan de winkel.</p>
+      <p>Wat je ziet, is de helft. De andere helft is de code die de server meestuurt. Die controleer je zo:</p>
+      <ol>
+        <li>Open de pagina in Chrome en druk op F12. Kies het tabblad Netwerk en laad de pagina opnieuw. In de kolom Status hoort bij het eerste verzoek 404 te staan.</li>
+        <li>Of gebruik de opdrachtregel. Deze regel toont alleen de kop van het antwoord. Op de eerste regel moet 404 staan, niet 200 of 301.</li>
+      </ol>
+      <pre><code>{codeCurl}</code></pre>
+
+      <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2>Wat staat er op een goede 404-pagina?</h2></div>
+      <ul class="vink">
+        <li>Een korte, vriendelijke melding in gewone taal. Geef de bezoeker niet de schuld.</li>
+        <li>Je gewone menu en huisstijl, zodat iemand ziet dat hij nog bij jou is.</li>
+        <li>Een zoekveld en links naar je belangrijkste diensten.</li>
+        <li>Je telefoonnummer. Wie zoekt en niets vindt, belt misschien liever.</li>
+        <li>Een beetje humor mag. Het verzacht de teleurstelling, als het past bij je bedrijf. Een grap zonder uitweg is wel een gemiste kans.</li>
+        <li>Geen automatische doorverwijzing naar de homepage. Dat voelt voor de bezoeker als een trucje en Google ziet het als soft 404.</li>
+      </ul>
+      <h3>Zo doen we het zelf</h3>
+      <p>Doe de test gerust bij ons. Je krijgt "Moi. Deze pagina is er niet (meer)." met daaronder een spreuk van Herakleitos over de rivier waar je nooit twee keer in stapt. Een stukje code kijkt naar het adres dat je intypte en raadt welke pagina je bedoelde. Ging het over SEO in Emmen, dan krijg je een link naar die pagina. Verder staan er links naar de homepage, de prijzen en de kennisbank, ons telefoonnummer en de gratis website-analyse.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Een eigen 404-pagina instellen</h2></div>
+      <h3>WordPress</h3>
+      <p>WordPress zoekt bij een onbekend adres naar het bestand 404.php in je thema. Is dat er niet, dan valt het terug op index.php. De meeste thema's hebben er een. Aanpassen kan in de thema-editor, met een paginabouwer die een 404-sjabloon heeft, of door je webbouwer. Maak je een gewone pagina met de titel "Niet gevonden" en stuur je alles daarheen? Dan krijgt die pagina code 200 en heb je een soft 404 gebouwd.</p>
+      <h3>Apache en .htaccess</h3>
+      <p>Draait je site op een Apache-server, dan wijs je de foutpagina aan met één regel in het bestand .htaccess:</p>
+      <pre><code>{codeApache}</code></pre>
+      <p>Begin het adres met een schuine streep, zoals hierboven. Zet je er een volledig webadres neer, met https ervoor, dan stuurt Apache volgens zijn eigen handleiding een doorverwijzing in plaats van een 404. Zoekmachines raken daar in de war van.</p>
+      <h3>Andere systemen</h3>
+      <p>Werk je met een websitebouwer als Wix of Squarespace, zoek dan in de hulppagina's van die bouwer op "404". Deze site is gebouwd met Astro. Daar is het een gewoon bestand dat bij het bouwen 404.html wordt. Test na elke aanpassing opnieuw of de code echt 404 is.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Wat moet je ermee als ondernemer?</h2></div>
+      <ol>
+        <li>Doe de floatingfeather-test en controleer de statuscode.</li>
+        <li>Open Google Search Console, ga naar Indexering en dan Pagina's. Kijk bij "Niet gevonden (404)" en bij "Soft 404". Search Console toont daar alleen adressen die de afgelopen maand een 404 gaven, dus kijk eens per maand.</li>
+        <li>Trok een adres vroeger bezoekers of links? Zet er een 301-doorverwijzing op naar de beste vervanger.</li>
+        <li>Komt de fout door een link in je eigen menu of tekst? Herstel die link.</li>
+        <li>Bouw je een nieuwe website? Maak vooraf een lijst van alle oude adressen, zodat geen bezoeker op een dood spoor belandt.</li>
+      </ol>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> of laat ons je site bijhouden met <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud voor WordPress</a>, vanaf € 39 per maand. Gaat het om een hele site, dan lopen we in een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> alle foutpagina's na. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    titel="Veelgestelde vragen over de 404-pagina"
+    vragen={[
+      { v: 'Wat betekent 404 not found?', a: 'Dat de server van de website werkt, maar dat het adres dat je opvroeg er niet bestaat. Vaak is de pagina verwijderd of verplaatst, of zit er een tikfout in de link.' },
+      { v: 'Wat is het verschil tussen een 404 en een 410?', a: 'Een 404 zegt alleen dat de pagina er niet is. Een 410 zegt dat hij voorgoed weg is. Google gaat er vrijwel hetzelfde mee om. Twijfel je, gebruik dan een 404.' },
+      { v: 'Kan ik alle 404-fouten niet gewoon naar de homepage sturen?', a: 'Liever niet. De bezoeker zocht iets anders en snapt niet waarom hij op de homepage staat. Google ziet het bovendien vaak als soft 404. Verwijs alleen door als er een pagina is over hetzelfde onderwerp.' },
+      { v: 'Wat is een soft 404?', a: 'Een pagina die tegen de bezoeker zegt dat iets niet gevonden is, terwijl de server code 200 meestuurt. Voor Google is dat verwarrend. Zorg dat zo\'n pagina echt een 404 teruggeeft.' },
+      { v: 'Hoe vind ik de 404-fouten op mijn site?', a: 'In Google Search Console onder Indexering, Pagina\'s, bij "Niet gevonden (404)". Een crawler als Screaming Frog vindt ook kapotte links binnen je eigen site, gratis tot 500 URL\'s.' },
+    ]}
+  />
+
+  <Actie titel="Hoeveel bezoekers lopen bij jou dood?" tekst={`We zoeken het gratis voor je uit. ${site.contactpersoon} belt je met de lijst en wat ermee moet.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; background: var(--ink); color: #e8eef4; border-radius: 10px; padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; margin: 0 0 1.4em; }
+  pre code { font-family: var(--mono); }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,66 @@
+---
+// Scène voor /kennisbank/wat-is/storytelling/: een verhaalboog van begin via conflict naar een goede afloop.
+// Links de held met een tekstballon, in het midden een onweerswolk (het conflict), rechts de zon met een vinkje (de afloop).
+// Als hij leeft: een oranje lijn volgt de boog van begin tot eind, de bliksem flitst en aan het eind verschijnt het vinkje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const boog = 'M70 196C150 196 186 92 250 92C314 92 352 176 420 136';
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een verhaalboog met begin, midden en eind. Links een held met een tekstballon "Er was eens", in het midden een onweerswolk als conflict en rechts een zon met een vinkje als goede afloop.'}>
+  <!-- grondlijn en labels -->
+  <path d="M40 216h400" stroke="#d9e1ea" stroke-width="2" stroke-linecap="round" />
+  <text x="70" y="242" font-size="13" font-weight="800" text-anchor="middle">Begin</text>
+  <text x="250" y="242" font-size="13" font-weight="800" text-anchor="middle">Midden</text>
+  <text x="420" y="242" font-size="13" font-weight="800" text-anchor="middle">Eind</text>
+
+  <!-- de boog -->
+  <path class="l" d={boog} />
+  <circle cx="70" cy="196" r="7" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <circle cx="250" cy="92" r="7" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <circle cx="420" cy="136" r="7" fill="#fff" stroke="#074663" stroke-width="2.5" />
+
+  <!-- de held -->
+  <circle cx="70" cy="146" r="11" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <path class="l" d="M70 157v20M58 168l12-6 12 6M62 190l8-13 8 13" />
+
+  <!-- tekstballon -->
+  <rect x="24" y="30" width="132" height="40" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M60 70l-6 14 18-14" fill="#fff" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <path d="M58 68h18" stroke="#fff" stroke-width="3" />
+  <text x="90" y="55" font-size="13" font-weight="800" text-anchor="middle">Er was eens ...</text>
+
+  <!-- het conflict: onweerswolk -->
+  <path d="M214 62a16 16 0 0 1 8-30a22 22 0 0 1 40-6a16 16 0 0 1 22 18a12 12 0 0 1-4 18z" fill="#e8eef4" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <path class="bliksem" d="M250 63l-6 9h8l-5 9" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- de afloop: zon -->
+  <g class="zon">
+    <circle class="o" cx="420" cy="66" r="16" />
+    <path class="a" d="M420 38v-8M420 102v-8M392 66h-8M456 66h-8M400 46l-6-6M446 92l-6-6M440 46l6-6M394 92l6-6" />
+  </g>
+
+  {!mini && (
+    <g>
+      <path class="verhaal-lijn" d={boog} fill="none" stroke="#ff6600" stroke-width="4" stroke-linecap="round" pathLength="1" />
+      <g class="verhaal-vink">
+        <circle cx="420" cy="136" r="13" fill="#1f8a5b" />
+        <path d="M413.5 136l4.5 4.5 8-9" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .verhaal-lijn { stroke-dasharray: 1; }
+  .verhaal-vink, .zon { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .verhaal-lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .verhaal-vink { opacity: 0; }
+  .in-beeld .verhaal-lijn { animation: kennisbank-wat-is-storytelling-lijn 6s cubic-bezier(.5,.1,.4,1) 0.5s infinite; }
+  .in-beeld .verhaal-vink { animation: kennisbank-wat-is-storytelling-vink 6s ease-out 0.5s infinite; }
+  .in-beeld .bliksem { animation: kennisbank-wat-is-storytelling-flits 6s linear 0.5s infinite; }
+  .in-beeld .zon { animation: kennisbank-wat-is-storytelling-zon 6s ease-in-out 0.5s infinite; }
+  @keyframes kennisbank-wat-is-storytelling-lijn { 0% { stroke-dashoffset: 1; opacity: 1; } 55%, 88% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+  @keyframes kennisbank-wat-is-storytelling-vink { 0%, 52% { opacity: 0; transform: scale(.4); } 60%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-storytelling-flits { 0%, 22%, 26%, 30%, 100% { opacity: 1; } 24%, 28% { opacity: .15; } }
+  @keyframes kennisbank-wat-is-storytelling-zon { 0%, 50% { transform: none; } 62% { transform: scale(1.12); } 74%, 100% { transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .verhaal-lijn, .in-beeld .verhaal-vink, .in-beeld .bliksem, .in-beeld .zon { animation: none; } }
+</style>

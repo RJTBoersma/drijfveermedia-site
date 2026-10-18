@@ -1,0 +1,58 @@
+---
+// Scène voor /proeflab/: een kolf waar belletjes uit opstijgen, naast een rij eigen testsites. Eén site kreeg ooit een waarschuwing, de rest krijgt een vinkje.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const sites = [0, 1, 2, 3, 4, 5].map((i) => ({ x: 176 + (i % 3) * 98, y: 34 + Math.floor(i / 3) * 84, i }));
+const waarschuwing = 4;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kolf met opstijgende belletjes naast zes eigen testsites. Eén site heeft een waarschuwing, de andere krijgen een vinkje.'}>
+  <!-- werkbank -->
+  <path class="l" d="M20 232H460" />
+  <!-- kolf -->
+  <path class="o" d="M52 196h76l14 30H38z" />
+  <path class="l" d="M74 40h32M80 40v62L36 226h108L100 102V40" />
+  <path class="a" d="M58 168h64" />
+  <circle cx="86" cy="186" r="4" fill="#fff" /><circle cx="100" cy="206" r="3" fill="#fff" /><circle cx="76" cy="212" r="3" fill="#fff" />
+  <!-- zes eigen sites -->
+  {sites.map((s) => (
+    <g>
+      <rect x={s.x} y={s.y} width="86" height="66" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <path d={`M${s.x} ${s.y + 14}h86`} stroke="#d9e1ea" stroke-width="2" />
+      <circle cx={s.x + 9} cy={s.y + 7} r="2.5" fill="#d9e1ea" /><circle cx={s.x + 17} cy={s.y + 7} r="2.5" fill="#d9e1ea" />
+      <rect x={s.x + 10} y={s.y + 24} width="44" height="7" rx="3" fill={s.i === waarschuwing ? '#8aa0b4' : '#074663'} />
+      <rect x={s.x + 10} y={s.y + 37} width="52" height="5" rx="2.5" fill="#e8eef4" />
+      <rect x={s.x + 10} y={s.y + 47} width="42" height="5" rx="2.5" fill="#e8eef4" />
+    </g>
+  ))}
+  <!-- de site met de waarschuwing -->
+  <path d="M346 156l12 22h-24z" fill="#ff6600" />
+  <path d="M346 164v6M346 174v.5" stroke="#10283f" stroke-width="2.4" stroke-linecap="round" />
+  <text x="318" y="210" text-anchor="middle" font-size="12" font-weight="700" class="zacht">Eigen sites, eigen risico</text>
+  {!mini && (
+    <g>
+      <g class="proeflab-bel proeflab-bel-1"><circle cx="90" cy="34" r="5" fill="none" stroke="#ff6600" stroke-width="2" /></g>
+      <g class="proeflab-bel proeflab-bel-2"><circle cx="98" cy="34" r="3.5" fill="none" stroke="#ff6600" stroke-width="2" /></g>
+      <g class="proeflab-bel proeflab-bel-3"><circle cx="84" cy="34" r="3" fill="none" stroke="#074663" stroke-width="2" /></g>
+      {sites.filter((s) => s.i !== waarschuwing).map((s, n) => (
+        <g class="proeflab-vink" style={`animation-delay:${0.6 + n * 0.35}s`}>
+          <circle cx={s.x + 72} cy={s.y + 50} r="10" fill="#1f8a5b" />
+          <path d={`M${s.x + 67} ${s.y + 50}l3.5 3.5 6-7`} fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+    </g>
+  )}
+</svg>
+<style>
+  .proeflab-vink { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .proeflab-vink { opacity: 0; transform: scale(0.4); }
+  :global(.teken-js) .proeflab-bel { opacity: 0; }
+  .in-beeld .proeflab-vink { animation: proeflab-vink 0.45s cubic-bezier(.3,1.7,.5,1) forwards; }
+  .in-beeld .proeflab-bel { animation: proeflab-bel 3.6s ease-in infinite; }
+  .in-beeld .proeflab-bel-2 { animation-delay: 1.2s; }
+  .in-beeld .proeflab-bel-3 { animation-delay: 2.4s; }
+  @keyframes proeflab-vink { to { opacity: 1; transform: none; } }
+  @keyframes proeflab-bel { 0% { opacity: 0; transform: translateY(60px); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-22px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .proeflab-vink, .in-beeld .proeflab-bel { animation: none; opacity: 1; transform: none; }
+  }
+</style>

@@ -1,0 +1,179 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--linkedin-bedrijfspagina.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/linkedin-bedrijfspagina/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'verschil', titel: 'Bedrijfspagina of profiel?' },
+  { id: 'voorbereiden', titel: 'Wat je klaarlegt' },
+  { id: 'aanmaken', titel: 'Aanmaken in zes stappen' },
+  { id: 'inrichten', titel: 'Je pagina inrichten' },
+  { id: 'volgers', titel: 'Je eerste volgers' },
+  { id: 'posten', titel: 'Wat post je als bedrijf?' },
+  { id: 'meten', titel: 'Statistieken en showcasepagina' },
+  { id: 'fouten', titel: 'Fouten die je makkelijk voorkomt' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'LinkedIn-bedrijfspagina aanmaken en goed inrichten',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="LinkedIn-bedrijfspagina aanmaken | Drijfveer Media"
+  description="Een LinkedIn-bedrijfspagina aanmaken kost tien minuten. Zo richt je hem daarna in voor volgers en klanten, met de juiste afmetingen en zonder valkuilen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'LinkedIn-bedrijfspagina', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Social media" titel="LinkedIn-bedrijfspagina aanmaken en goed inrichten" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een LinkedIn-bedrijfspagina staat er in tien minuten. Een pagina die volgers, sollicitanten en klanten oplevert, vraagt iets meer. Hier lees je allebei.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een LinkedIn-bedrijfspagina is gratis. Je maakt hem aan vanuit je persoonlijk profiel.</li>
+            <li>Vul alles in: logo, omslagfoto, slogan, omschrijving, website en locatie. Volledige pagina's krijgen volgens LinkedIn tot 30 procent meer bezoekers per week.</li>
+            <li>Maak minstens twee mensen beheerder, zodat je nooit buitengesloten raakt.</li>
+            <li>Je eerste volgers komen van je medewerkers en je eigen netwerk. Daarna doen regelmatige berichten het werk.</li>
+          </ul>
+        </div>
+
+        <h2 id="verschil">Bedrijfspagina of persoonlijk profiel: wat is het verschil?</h2>
+        <p>Een persoonlijk profiel hoort bij een mens. Daar staan je werkervaring, je opleiding en je connecties. Een bedrijfspagina hoort bij je organisatie. Mensen kunnen hem volgen, je kunt er vacatures op zetten en je medewerkers koppelen er hun profiel aan.</p>
+        <p>Maak dus nooit een persoonlijk profiel aan op naam van je bedrijf. Dat mag niet volgens de regels van LinkedIn, en zo'n account kan zomaar verdwijnen, met al je connecties erbij. Je hebt wel een eigen profiel nodig om de pagina aan te maken. LinkedIn wil weten wie erachter zit.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Persoonlijk profiel</th><th>LinkedIn-bedrijfspagina</th></tr></thead>
+            <tbody>
+              <tr><td>Van wie</td><td>Eén persoon</td><td>Je bedrijf</td></tr>
+              <tr><td>Contact</td><td>Connecties, over en weer</td><td>Volgers, eenrichting</td></tr>
+              <tr><td>Wie beheert</td><td>Jij alleen</td><td>Eén of meer beheerders</td></tr>
+              <tr><td>Vacatures en statistieken</td><td>Beperkt</td><td>Ja</td></tr>
+              <tr><td>Blijft bestaan als iemand vertrekt</td><td>Nee</td><td>Ja</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De twee versterken elkaar. Berichten van mensen worden vaak beter gelezen dan berichten van bedrijven. Een goede pagina geeft die mensen iets om naar te verwijzen.</p>
+
+        <h2 id="voorbereiden">Wat je klaarlegt voordat je begint</h2>
+        <ul class="vink">
+          <li>Een persoonlijk profiel met je echte voor- en achternaam en een bevestigd e-mailadres.</li>
+          <li>Je logo, vierkant, minstens 268 bij 268 pixels. LinkedIn raadt 400 bij 400 aan.</li>
+          <li>Een omslagfoto van 1512 bij 256 pixels, als JPG of PNG van maximaal 3 MB.</li>
+          <li>Een slogan van één regel: wat je doet en voor wie.</li>
+          <li>Een korte omschrijving van je bedrijf, zo'n 150 tot 250 woorden.</li>
+          <li>Je website, je branche, het aantal medewerkers en je adres.</li>
+        </ul>
+        <p>Zoek ook even of je bedrijf al op LinkedIn staat. Medewerkers die je bedrijfsnaam bij hun werkervaring invullen, laten soms een lege pagina achter. Die kun je claimen in plaats van een tweede pagina te maken. Twee pagina's met dezelfde naam verwarren iedereen.</p>
+
+        <h2 id="aanmaken">LinkedIn-bedrijfspagina aanmaken in zes stappen</h2>
+        <p>Dit werkt op de computer en in de app op een iPhone. In de Android-app kan het (nog) niet.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>1. Open het menu voor bedrijven</h3></div>
+        <p>Klik rechtsboven op je LinkedIn-startpagina op het rasterpictogram <i>Voor bedrijven</i>. Scrol naar beneden en kies <i>Een bedrijfspagina maken</i>.</p>
+        <div class="stap-kop"><Tekening naam="huis" maat={48} /><h3>2. Kies het type pagina</h3></div>
+        <p>Je kiest uit bedrijf, showcasepagina of onderwijsinstelling. Voor vrijwel elke ondernemer is het antwoord: bedrijf.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Vul naam en webadres in</h3></div>
+        <p>Je pagina krijgt een adres als linkedin.com/company/jouwbedrijf. Gebruik kleine letters en desnoods een streepje, zoals jouw-bedrijf. Kies iets wat je ook in je e-mailhandtekening durft te zetten.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>4. Vul de bedrijfsgegevens in</h3></div>
+        <p>Website, branche, bedrijfsgrootte en type organisatie. Branche en grootte lijken bijzaak, maar je hebt ze nodig om later connecties uit te nodigen om je pagina te volgen.</p>
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>5. Logo en slogan</h3></div>
+        <p>Upload je logo en schrijf je slogan, in het Engels de tagline. Die staat direct onder je naam, ook in zoekresultaten. Je hebt 120 tekens. Schrijf wat je doet, niet wat je vindt. "Installateur voor warmtepompen in Drenthe" zegt meer dan "Passie voor techniek".</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>6. Bevestigen en aanmaken</h3></div>
+        <p>Vink aan dat je namens het bedrijf mag handelen en klik op <i>Pagina maken</i>. Je bent nu automatisch hoofdbeheerder, in het Engels super admin.</p>
+
+        <h2 id="inrichten">Je pagina inrichten zodat hij gevonden wordt</h2>
+        <p>Een pagina met alleen een naam ziet eruit als een bedrijf dat net failliet is. Volgens LinkedIn zelf krijgen pagina's met logo, omschrijving en website tot 30 procent meer weergaven per week (bron: LinkedIn Help, <i>Complete your LinkedIn Page</i>). Loop deze punten langs.</p>
+        <ul>
+          <li><b>Omslagfoto.</b> Een foto van je werk of je team zegt meer dan een slogan op een gekleurd vlak. Zet belangrijke dingen in het midden, want op een telefoon valt de rand weg.</li>
+          <li><b>Omschrijving.</b> Je hebt tot 2.000 tekens. Begin met wat je doet, voor wie en waar. Gebruik de woorden waarop klanten zoeken, want LinkedIn en Google lezen mee.</li>
+          <li><b>Locatie.</b> Vul je adres in, en meerdere vestigingen als je die hebt.</li>
+          <li><b>Website.</b> Vul je webadres in. Dan krijgt je pagina een knop naar je site, zodat bezoekers een volgende stap hebben. Een eigen knop zoals <i>Contact opnemen</i> zit tegenwoordig vooral in het betaalde Premium-abonnement.</li>
+          <li><b>Beheerders.</b> Voeg minstens één collega toe als hoofdbeheerder. LinkedIn kan geen beheerders voor je terugzetten als de enige beheerder vertrekt of zijn account kwijt is.</li>
+        </ul>
+        <p>Er zijn drie soorten beheerder. De hoofdbeheerder mag alles. De contentbeheerder plaatst berichten en vacatures. De analist mag alleen statistieken bekijken. Geef een bureau of stagiair dus gewoon contentbeheer. Zo houd jij de sleutels.</p>
+
+        <h2 id="volgers">Je eerste volgers</h2>
+        <p>Een nieuwe pagina heeft nul volgers en dus nul bereik. De eerste honderd komen bijna altijd uit je eigen kring.</p>
+        <ol>
+          <li><b>Medewerkers koppelen.</b> Vraag iedereen om je bedrijf als huidige werkgever op zijn profiel te zetten. Het kan twee tot vier weken duren voordat ze op de pagina verschijnen.</li>
+          <li><b>Connecties uitnodigen.</b> Als beheerder kun je connecties uit je eigen netwerk vragen je pagina te volgen. Je krijgt daar elke maand een beperkt aantal uitnodigingen voor. Kies mensen die er echt iets aan hebben.</li>
+          <li><b>Overal laten zien.</b> Zet de link in je e-mailhandtekening, op je website en op je offertes.</li>
+          <li><b>Regelmatig posten.</b> Een pagina die leeft, groeit vanzelf een beetje. Een pagina die stilstaat niet.</li>
+        </ol>
+
+        <h2 id="posten">Wat post je als bedrijf op LinkedIn?</h2>
+        <p>LinkedIn is geen plek voor aanbiedingen. Het is een plek om te laten zien dat je weet waar je het over hebt. Deze berichten werken voor de meeste mkb'ers:</p>
+        <ul>
+          <li>Een project dat je afrondde, met wat de klant eraan heeft.</li>
+          <li>Een les uit je vak: wat gaat er vaak mis en hoe voorkom je het.</li>
+          <li>Nieuwe collega's, jubilea en mijlpalen.</li>
+          <li>Vacatures, met een foto van de werkplek en niet alleen een functietitel.</li>
+          <li>Een korte reactie op nieuws uit je branche.</li>
+        </ul>
+        <p>Eén tot twee berichten per week is genoeg. Vraag collega's om een bericht te delen met een eigen zin erbij. Hun netwerk is samen vaak vele malen groter dan dat van de pagina. Wil je je berichten vooruit plannen, lees dan de gids over <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a>.</p>
+
+        <h2 id="meten">Statistieken, vacatures en de showcasepagina</h2>
+        <p>Bij de statistieken van je pagina (in het menu <i>Analytics</i>) zie je hoeveel mensen je pagina bezochten, wie je volgers zijn naar functie en branche, en hoe je berichten het doen. Kijk eens per maand. Zie je dat vooral studenten volgen terwijl je directeuren wilt bereiken, dan klopt je inhoud niet met je doel.</p>
+        <p>Vacatures plaats je vanaf je pagina onder het tabblad Vacatures. Een deel van de mogelijkheden is betaald. Voor een klein bedrijf werkt een gewoon bericht met de vacature en een link naar je website vaak net zo goed.</p>
+        <p>Een showcasepagina is een extra pagina onder je bedrijfspagina, voor een merk of afdeling met een eigen doelgroep. Je kunt er tot 25 maken. Voor de meeste mkb'ers is dat overbodig. Elke extra pagina moet ook gevuld worden.</p>
+
+        <h2 id="fouten">Fouten die je makkelijk voorkomt</h2>
+        <ul>
+          <li><b>Eén beheerder.</b> Vertrekt die, dan zit je vast. Zorg voor twee hoofdbeheerders.</li>
+          <li><b>Een halve pagina.</b> Geen logo, geen omschrijving. Dat kost je weergaven en vertrouwen.</li>
+          <li><b>Alleen maar zenden.</b> Reageer op wie reageert, ook als pagina.</li>
+          <li><b>Eens per kwartaal iets plaatsen.</b> Dan zien je volgers je berichten nauwelijks. Liever elke week een kort bericht.</li>
+          <li><b>Een tweede pagina naast een oude.</b> Claim de bestaande pagina, of vraag LinkedIn de dubbele te sluiten.</li>
+        </ul>
+        <p>Geen tijd om de pagina bij te houden? Bij <a href="/social-media-beheer/">social media beheer</a> nemen wij je LinkedIn-bedrijfspagina mee, samen met Facebook of Instagram. Je persoonlijke profiel blijft van jou. Dat hoort ook zo, want daar zoeken mensen jou.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Wil je dat wij je bedrijfspagina bijhouden?" intro="Wat je van ons kunt verwachten, en waarom je dat kunt nagaan." case={false} />
+
+  <Faq
+    vragen={[
+      { v: 'Is een LinkedIn-bedrijfspagina gratis?', a: 'Ja. Aanmaken en berichten plaatsen kost niets. Alleen extra functies, zoals een Premium-bedrijfspagina en betaalde vacatures, kosten geld.' },
+      { v: 'Heb ik een persoonlijk profiel nodig voor een bedrijfspagina?', a: 'Ja. Je maakt de pagina aan vanuit je eigen profiel, met je echte naam. Je profiel staat niet zichtbaar op de pagina, tenzij je er zelf als medewerker aan koppelt.' },
+      { v: 'Welke afmetingen hebben het logo en de omslagfoto?', a: 'Het logo is minimaal 268 bij 268 pixels, aanbevolen is 400 bij 400. De omslagfoto is 1512 bij 256 pixels. Beide als JPG of PNG, tot 3 MB.' },
+      { v: 'Kan ik een LinkedIn-bedrijfspagina aanmaken in de app?', a: 'In de app op een iPhone wel, in de Android-app niet. Op de computer kan het altijd.' },
+      { v: 'Hoe krijg ik meer volgers op mijn bedrijfspagina?', a: 'Koppel je medewerkers, nodig connecties uit, zet de link op je website en in je e-mailhandtekening, en post elke week. Vraag collega\'s je berichten te delen met een eigen zin erbij.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Social media planning', href: '/kennisbank/gidsen/social-media-planning/', tekst: 'Een maand vooruit plannen in een uur.' },
+      { label: 'Gids', titel: 'De beste tijd om te posten', href: '/kennisbank/gidsen/beste-tijden-om-te-posten/', tekst: 'Ook voor LinkedIn: wat het onderzoek zegt.' },
+      { label: 'Dienst', titel: 'Social media beheer', href: '/social-media-beheer/', tekst: 'Wij houden je pagina actief. Vanaf € 395 per maand.' },
+    ]}
+  />
+
+  <Actie titel="Wil je dat je bedrijfspagina klanten oplevert?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je LinkedIn-pagina, en belt je met een eerlijk advies over wat het meeste oplevert.`} />
+</Base>

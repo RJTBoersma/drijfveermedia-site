@@ -1,0 +1,73 @@
+---
+// Scène voor /kennisbank/gidsen/google-reviews/: een review met vijf sterren en een reactie van de eigenaar, naast een kaartje met QR-code.
+// Als hij leeft: de sterren kleuren een voor een, er komt een nieuwe review binnen en een scanlijn gaat over de QR-code.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const ster = (cx: number, cy: number, r = 8) => {
+  const p: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    const hoek = -Math.PI / 2 + (i * Math.PI) / 5;
+    const straal = i % 2 ? r * 0.45 : r;
+    p.push(`${(cx + straal * Math.cos(hoek)).toFixed(1)} ${(cy + straal * Math.sin(hoek)).toFixed(1)}`);
+  }
+  return `M${p.join('L')}z`;
+};
+const sterren = [0, 1, 2, 3, 4].map((i) => ster(92 + i * 20, 72));
+// QR-blokjes (vast patroon, geen echte code)
+const blokjes = [[366, 74], [376, 84], [366, 94], [386, 74], [376, 104], [356, 114], [366, 124], [396, 114], [406, 124], [386, 134], [416, 104], [396, 94], [376, 144], [406, 144], [416, 134], [336, 114], [346, 124], [366, 144]];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een Google review met vijf sterren en een reactie van de eigenaar, naast een kaartje met een QR-code om een review achter te laten.'}>
+  <!-- review -->
+  <rect x="30" y="30" width="250" height="112" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="56" cy="58" r="14" fill="#e8eef4" />
+  <path d="M56 52a5 5 0 1 1 0 .1zM47 68c2-6 6-8 9-8s7 2 9 8" fill="none" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <text x="80" y="56" font-size="13" font-weight="800">Anja (voorbeeld)</text>
+  {sterren.map((d) => <path d={d} fill="none" stroke="#074663" stroke-width="1.6" stroke-linejoin="round" />)}
+  <rect x="48" y="94" width="210" height="8" rx="4" fill="#d9e1ea" />
+  <rect x="48" y="110" width="170" height="8" rx="4" fill="#d9e1ea" />
+  <rect x="48" y="126" width="120" height="8" rx="4" fill="#d9e1ea" />
+
+  <!-- reactie van de eigenaar -->
+  <path d="M60 142v18" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="70" y="152" width="210" height="80" rx="14" fill="#f4f7fa" stroke="#d9e1ea" stroke-width="2" />
+  <text x="88" y="176" font-size="11.5" font-weight="800">Reactie van de eigenaar</text>
+  <rect x="88" y="188" width="170" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="88" y="202" width="140" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="88" y="216" width="90" height="7" rx="3.5" fill="#ffd2b0" />
+
+  <!-- kaartje met QR-code -->
+  <rect x="314" y="40" width="140" height="196" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="326" y="64" width="116" height="100" rx="6" fill="#fff" />
+  <g fill="#10283f">
+    <path d="M336 64h26v26h-26zM342 70v14h14V70z" fill-rule="evenodd" />
+    <rect x="346" y="74" width="6" height="6" />
+    <path d="M406 64h26v26h-26zM412 70v14h14V70z" fill-rule="evenodd" />
+    <rect x="416" y="74" width="6" height="6" />
+    <path d="M336 138h26v26h-26zM342 144v14h14v-14z" fill-rule="evenodd" />
+    <rect x="346" y="148" width="6" height="6" />
+    {blokjes.map(([x, y]) => <rect x={x} y={y} width="8" height="8" />)}
+  </g>
+  <text x="384" y="190" font-size="12" font-weight="800" text-anchor="middle">Laat een review</text>
+  <text x="384" y="206" font-size="12" font-weight="800" text-anchor="middle">achter</text>
+  <rect x="344" y="216" width="80" height="8" rx="4" fill="#ff6600" />
+
+  {!mini && (
+    <g>
+      {sterren.map((d, i) => <path class="ster" style={`--i:${i}`} d={d} fill="#ff6600" stroke="#ff6600" stroke-width="1.6" stroke-linejoin="round" />)}
+      <g class="scan"><rect x="330" y="62" width="108" height="3" rx="1.5" fill="#ff6600" /><rect x="330" y="65" width="108" height="14" fill="url(#kennisbank-gidsen-google-reviews-gloed)" /></g>
+      <g class="nieuw"><rect x="198" y="16" width="104" height="30" rx="15" fill="#074663" /><text x="250" y="36" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">+1 review</text></g>
+      <defs><linearGradient id="kennisbank-gidsen-google-reviews-gloed" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff6600" stop-opacity=".25" /><stop offset="1" stop-color="#ff6600" stop-opacity="0" /></linearGradient></defs>
+    </g>
+  )}
+</svg>
+<style>
+  .ster, .nieuw { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .ster, :global(.teken-js) .nieuw, :global(.teken-js) .scan { opacity: 0; }
+  .in-beeld .ster { animation: kennisbank-gidsen-google-reviews-ster 0.45s cubic-bezier(.3,1.7,.5,1) calc(0.6s + var(--i) * 0.22s) forwards; }
+  .in-beeld .nieuw { animation: kennisbank-gidsen-google-reviews-nieuw 6s ease-in-out 2s infinite both; }
+  .in-beeld .scan { animation: kennisbank-gidsen-google-reviews-scan 3.4s ease-in-out 1.2s infinite; }
+  @keyframes kennisbank-gidsen-google-reviews-ster { from { opacity: 0; transform: scale(0.3) rotate(-30deg); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-google-reviews-nieuw { 0% { opacity: 0; transform: translateY(10px); } 12%, 70% { opacity: 1; transform: none; } 85%, 100% { opacity: 0; transform: translateY(-6px); } }
+  @keyframes kennisbank-gidsen-google-reviews-scan { 0% { opacity: 0; transform: translateY(0); } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(92px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .ster, .in-beeld .nieuw, .in-beeld .scan { animation: none; } }
+</style>

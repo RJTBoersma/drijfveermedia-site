@@ -1,0 +1,427 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--hoe-werkt-seo.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/hoe-werkt-seo/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-seo', titel: 'Wat is SEO?' },
+  { id: 'zoekresultaten', titel: 'De pagina met zoekresultaten' },
+  { id: 'drie-stappen', titel: 'Crawlen, indexeren, rangschikken' },
+  { id: 'systemen', titel: 'De systemen achter de volgorde' },
+  { id: 'pijlers', titel: 'Inhoud, techniek en autoriteit' },
+  { id: 'zoekwoorden', titel: 'Zoekwoorden en zoekintentie' },
+  { id: 'lokaal', titel: 'SEO voor een lokaal bedrijf' },
+  { id: 'ai', titel: 'SEO en AI-antwoorden' },
+  { id: 'voorbeeld', titel: 'Eén zoekopdracht van begin tot eind' },
+  { id: 'telt-niet', titel: 'Wat volgens Google niet telt' },
+  { id: 'veranderd', titel: 'Hoe SEO is veranderd' },
+  { id: 'regels', titel: 'Wat mag en wat niet' },
+  { id: 'hoe-lang', titel: 'Hoe lang duurt het?' },
+  { id: 'meten', titel: 'Meten of het werkt' },
+  { id: 'zelf', titel: 'Zes stappen om zelf te beginnen' },
+  { id: 'bureau', titel: 'Een SEO-bureau beoordelen' },
+  { id: 'begrippen', titel: 'Begrippen op een rij' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Hoe werkt SEO? Uitleg voor ondernemers',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Zoekmachineoptimalisatie',
+  citation: [
+    'https://developers.google.com/search/docs/fundamentals/how-search-works',
+    'https://developers.google.com/search/docs/fundamentals/seo-starter-guide',
+    'https://developers.google.com/search/docs/appearance/ranking-systems-guide',
+    'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+    'https://developers.google.com/search/docs/essentials/spam-policies',
+    'https://developers.google.com/search/docs/appearance/ai-features',
+    'https://developers.google.com/search/docs/fundamentals/do-i-need-seo',
+    'https://support.google.com/business/answer/7091',
+  ],
+}];
+---
+<Base
+  title="Hoe werkt SEO? Uitleg voor ondernemers | Drijfveer Media"
+  description="Hoe werkt SEO? Heldere uitleg voor ondernemers: hoe Google pagina's vindt en rangschikt, wat telt en wat niet, en hoe lang het duurt voor het werkt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Hoe werkt SEO?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Hoe werkt SEO? Uitleg voor ondernemers" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Hoe werkt SEO nu echt, zonder vaktaal? Google zoekt bij elke vraag de pagina die het beste antwoord geeft, van een bron die het vertrouwt. SEO is zorgen dat dat jouw pagina is. Hier lees je hoe dat in elkaar zit, met wat Google er zelf over zegt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">Hoe werkt SEO in het kort?</p>
+          <ul>
+            <li>SEO is alles wat je doet om beter gevonden te worden in de gewone resultaten van zoekmachines, zonder per klik te betalen.</li>
+            <li>Google werkt in drie stappen: pagina's vinden, begrijpen en opslaan, en op volgorde zetten.</li>
+            <li>Je stuurt op drie dingen: je inhoud, je techniek en hoe betrouwbaar anderen je vinden.</li>
+            <li>Google neemt geen geld aan voor een hogere plek. Niemand kan je plek 1 garanderen.</li>
+            <li>Dezelfde basis zorgt dat je ook in AI-antwoorden terechtkomt, van Google en van andere AI-assistenten.</li>
+            <li>Reken op drie tot zes maanden voordat je duidelijk resultaat ziet.</li>
+          </ul>
+        </div>
+
+        <p>Deze SEO-uitleg is geschreven voor ondernemers, niet voor programmeurs. Je hoeft na het lezen niet alles zelf te doen. Wel snap je wat er gebeurt als iemand jouw vak intypt, en kun je een bureau de goede vragen stellen. Waar het kan, verwijzen we naar wat Google zelf schrijft in de documentatie van Google Search Central. Daar komen de feiten vandaan. De rest is onze ervaring.</p>
+
+        <h2 id="wat-is-seo">Wat is SEO?</h2>
+        <p>SEO staat voor search engine optimization, in het Nederlands zoekmachineoptimalisatie. Het is het verbeteren van je website zodat hij hoger komt in de gewone, onbetaalde zoekresultaten. Die resultaten heten ook wel organisch. Google omschrijft SEO zelf als zoekmachines helpen je inhoud te begrijpen, en mensen helpen beslissen of ze jouw site willen bezoeken.</p>
+        <p>SEO is geen trucje. Het is een verzameling strategieën waarmee je laat zien dat jouw pagina het beste antwoord is. Wat SEO biedt, is verkeer waar je niet per klik voor betaalt. Stop je met adverteren, dan stoppen de bezoekers meteen. Stop je met SEO, dan blijven ze vaak nog maanden komen. Al zakt je plek langzaam als concurrenten wel doorgaan.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>SEO (organisch)</th><th>Adverteren (SEA)</th></tr></thead>
+            <tbody>
+              <tr><td>Betalen per klik</td><td>Nee</td><td>Ja</td></tr>
+              <tr><td>Snelheid</td><td>Maanden</td><td>Dezelfde dag</td></tr>
+              <tr><td>Als je stopt</td><td>Bezoekers zakken langzaam weg</td><td>Bezoekers stoppen meteen</td></tr>
+              <tr><td>Waar in Google</td><td>De gewone resultaten en het kaartje</td><td>Bovenaan en onderaan, met het label Gesponsord</td></tr>
+              <tr><td>Goed voor</td><td>Een vaste stroom bezoekers op lange termijn</td><td>Snel testen en pieken opvangen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Adverteren heeft volgens Google geen invloed op je plek in de gewone resultaten. Het zijn twee gescheiden werelden. Meer over het verschil lees je bij <a href="/kennisbank/wat-is/seo-en-sea/">SEO en SEA</a>.</p>
+
+        <h2 id="zoekresultaten">Wat staat er op een pagina met zoekresultaten?</h2>
+        <p>Typ "dakdekker Emmen" en je ziet geen nette lijst van tien links meer. Google stelt de pagina per vraag samen. Welke blokken je krijgt, hangt af van wat je zoekt. Bij "fietsenmaker" zie je een kaartje, bij "moderne fiets" eerder foto's. Dit zijn de blokken die je het vaakst tegenkomt, en hoe je erin komt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Blok</th><th>Wat het is</th><th>Hoe je erin komt</th></tr></thead>
+            <tbody>
+              <tr><td>Advertenties</td><td>Betaalde resultaten met het label Gesponsord</td><td>Google Ads, betalen per klik</td></tr>
+              <tr><td>AI-overzicht</td><td>Een samenvatting door AI, met links naar bronnen</td><td>Goede SEO, plus duidelijke antwoorden op je pagina</td></tr>
+              <tr><td>Het kaartje</td><td>Drie bedrijven op de kaart, bij zoekopdrachten met een lokale bedoeling</td><td>Je Google Bedrijfsprofiel, reviews en lokale SEO</td></tr>
+              <tr><td>Gewone resultaten</td><td>Blauwe links met een titel en een korte tekst</td><td>SEO: inhoud, techniek en autoriteit</td></tr>
+              <tr><td>Mensen vragen ook</td><td>Uitklapbare vragen met een kort antwoord</td><td>Een vraag als kop, met het antwoord er direct onder</td></tr>
+              <tr><td>Afbeeldingen en video's</td><td>Een rij plaatjes of filmpjes</td><td>Eigen beeld met een goede alt-tekst bij relevante tekst</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>SEO gaat dus niet alleen over de blauwe links. Een lokale vakman wint vaak meer in het kaartje dan in de lijst eronder. En steeds vaker staat er een AI-overzicht boven alles. Wie goed vindbaar is in de gewone resultaten, heeft ook de meeste kans om daarin als bron genoemd te worden.</p>
+
+        <h3>Hoe Google je titel en tekstje kiest</h3>
+        <p>Je denkt misschien dat Google precies laat zien wat jij als titel en omschrijving invult. Dat klopt niet altijd. Google schrijft dat het de blauwe titel samenstelt uit meerdere bronnen: de title-tag, maar ook koppen op de pagina. Het korte tekstje eronder haalt Google meestal uit je tekst zelf, en soms uit je meta description.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat jij schrijft</th><th>Wat Google ermee doet</th><th>Tip</th></tr></thead>
+            <tbody>
+              <tr><td>Title-tag</td><td>Meestal de basis voor de blauwe titel. Te lang wordt afgekapt op de breedte van het scherm.</td><td>Uniek per pagina, kort en precies</td></tr>
+              <tr><td>H1 en andere koppen</td><td>Kan Google gebruiken als je title-tag vaag of opgestapeld is</td><td>Laat je H1 en title hetzelfde zeggen</td></tr>
+              <tr><td>Meta description</td><td>Soms het tekstje onder de titel, vaak niet</td><td>Een korte samenvatting van één of twee zinnen</td></tr>
+              <tr><td>De tekst op de pagina</td><td>De vaakste bron van het tekstje, passend bij de zoekopdracht</td><td>Zet het antwoord vroeg en duidelijk in de tekst</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="drie-stappen">Hoe werkt SEO bij Google? Drie stappen</h2>
+        <p>Google beschrijft het zelf in drie stappen. Niet elke pagina komt door alle drie. Google zegt er eerlijk bij dat het niet garandeert dat een pagina wordt gecrawld, opgeslagen of getoond. Ook niet als je alles goed doet.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Crawlen: pagina's vinden</h3></div>
+        <p>Er is geen centrale lijst van alle websites. Google moet nieuwe pagina's dus zelf ontdekken. Een programma, Googlebot, volgt links van pagina naar pagina. Ook leest het sitemaps: lijsten met pagina's die je zelf aanlevert. De meeste pagina's vindt Google vanzelf, via links van pagina's die het al kent.</p>
+        <p>Googlebot bepaalt zelf welke sites het bezoekt, hoe vaak en hoeveel pagina's. Het laadt je pagina zoals een browser dat doet, met een recente versie van Chrome, en voert ook JavaScript uit. Wat kan het tegenhouden? Een server die traag of kapot is, een regel in je robots.txt die Googlebot buitensluit, of pagina's die alleen na inloggen te zien zijn. Een pagina waar geen enkele link naartoe wijst, wordt slecht gevonden.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>2. Indexeren: begrijpen en opslaan</h3></div>
+        <p>Daarna probeert Google te snappen waar de pagina over gaat. Het leest de tekst, de titel, de koppen en de alt-teksten van afbeeldingen. Ook kijkt het of de pagina een kopie is van een andere pagina. Pagina's die sterk op elkaar lijken, worden gegroepeerd. Uit zo'n groep kiest Google er één: de canonieke versie. Die kan in de resultaten komen. De rest blijft meestal in de kast.</p>
+        <p>Bij het opslaan noteert Google ook signalen, zoals de taal van de pagina, het land waar de inhoud bij hoort en hoe bruikbaar de pagina is. Opslaan in de index is niet gegarandeerd. Google noemt zelf drie bekende oorzaken: de kwaliteit van de inhoud is laag, een robots-tag verbiedt het, of het ontwerp van de site maakt het lastig.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>3. Rangschikken: de beste bovenaan</h3></div>
+        <p>Typt iemand een vraag, dan zoekt Google in die index naar pagina's die passen. Welke bovenaan komt, hangt volgens Google af van honderden factoren. Daar horen ook dingen bij die over de zoeker gaan: waar hij is, welke taal hij spreekt en of hij op een telefoon of computer zoekt. Wie in Assen "slotenmaker" typt, krijgt andere resultaten dan iemand in Apeldoorn. Op plek 1 staan in een stad waar je niet werkt, levert je dus niets op.</p>
+        <p>Betalen voor een hogere plek kan niet. Google schrijft letterlijk dat het geen geld aanneemt om een site vaker te crawlen of hoger te zetten. Wie je iets anders vertelt, heeft het mis.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Check het zelf in vijf minuten</p>
+          <ul class="vink">
+            <li>Typ in Google <b>site:jouwdomein.nl</b>. Zie je je pagina's, dan staat je site in de index.</li>
+            <li>Mis je een belangrijke pagina? Plak de URL in de URL-inspectie van Google Search Console. Je ziet of hij is opgeslagen, en zo niet, waarom.</li>
+            <li>Is de pagina net nieuw? Volgens Google kan het een week duren voordat een nieuwe pagina wordt gecrawld. Met Indexering aanvragen in de URL-inspectie zet je hem in de wachtrij.</li>
+          </ul>
+        </div>
+
+        <h3>Robots.txt, noindex en nosnippet: wat doet wat?</h3>
+        <p>Soms wil je juist dat Google iets níet ziet, zoals een bedankpagina of een testomgeving. Daar zijn drie knoppen voor, en ze worden vaak door elkaar gehaald. Dat kan je ongemerkt posities kosten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Knop</th><th>Wat het doet</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>robots.txt</td><td>Vraagt Googlebot een pagina of map niet te bezoeken</td><td>Volgens Google kan de URL toch in de index komen, alleen zonder inhoud. Niet geschikt om iets uit Google te houden.</td></tr>
+              <tr><td>noindex</td><td>Vraagt Google de pagina niet in de resultaten te tonen</td><td>Google moet de pagina wel kunnen bezoeken om de noindex te lezen. Vergeet hem niet weg te halen na een test.</td></tr>
+              <tr><td>nosnippet</td><td>Beperkt welke tekst Google van je pagina laat zien, ook in AI-functies</td><td>Je pagina kan nog steeds verschijnen, alleen met minder tekst.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een veelgemaakte fout na een nieuwe website: de hele site staat nog op "niet indexeren" omdat dat tijdens het bouwen handig was. In WordPress staat die instelling onder Instellingen, Lezen, bij Zoekmachine zichtbaarheid. Check het altijd na de livegang.</p>
+
+        <h2 id="systemen">Welke systemen bepalen de volgorde?</h2>
+        <p>Google gebruikt geen enkel algoritme, maar een hele reeks systemen. Een deel daarvan beschrijft Google zelf in zijn gids over rankingsystemen. Je hoeft ze niet te kennen om goed te scoren. Ze laten wel zien waarom de oude trucjes niet meer werken. Dit zijn de belangrijkste, met wat ze voor jou betekenen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Systeem</th><th>Wat het doet</th><th>Wat dat voor jou betekent</th></tr></thead>
+            <tbody>
+              <tr><td>BERT en neural matching</td><td>Begrijpen wat woorden samen betekenen, en welke begrippen in een vraag en een pagina bij elkaar passen</td><td>Schrijf gewoon. Google snapt dat "cv-ketel kapot" en "verwarming doet het niet" over hetzelfde gaan.</td></tr>
+              <tr><td>RankBrain</td><td>Koppelt woorden aan begrippen, ook als niet alle zoekwoorden letterlijk op de pagina staan</td><td>Je hoeft niet elke variant van je zoekwoord te herhalen.</td></tr>
+              <tr><td>Passage ranking</td><td>Herkent losse stukken van een pagina die een vraag beantwoorden</td><td>Een goed antwoord diep in een lange pagina kan toch gevonden worden. Zie <a href="/kennisbank/wat-is/passage-ranking/">passage ranking</a>.</td></tr>
+              <tr><td>PageRank en linkanalyse</td><td>Leest hoe pagina's naar elkaar linken, om te snappen waar ze over gaan en hoe belangrijk ze zijn</td><td>Links van andere sites en je eigen interne links tellen nog steeds mee.</td></tr>
+              <tr><td>Versheid</td><td>Laat nieuwere inhoud zien bij vragen waar dat logisch is</td><td>Bij nieuws en prijzen telt actualiteit. Bij een uitleg over dakgoten veel minder.</td></tr>
+              <tr><td>Ontdubbeling en sitediversiteit</td><td>Toont geen bijna gelijke pagina's, en meestal niet meer dan twee resultaten van dezelfde site bovenaan</td><td>Tien pagina's over hetzelfde onderwerp helpen niet. Eén sterke pagina wel.</td></tr>
+              <tr><td>Reviewsysteem</td><td>Beloont reviews met eigen analyse, geschreven door mensen die het onderwerp echt kennen</td><td>Eigen ervaring en eigen foto's wegen zwaarder dan een samenvatting van anderen.</td></tr>
+              <tr><td>Spamdetectie (SpamBrain)</td><td>Vindt pagina's en links die de regels overtreden</td><td>Gekochte links en volgepropte teksten worden herkend, soms pas later.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Twee dingen uit die gids zijn handig om te onthouden. De systemen kijken vooral per pagina, maar gebruiken ook signalen over de hele site. Een paar sterke pagina's maken dus niet elke pagina sterk. En Google past de systemen voortdurend aan. Een plek is nooit voor altijd.</p>
+
+        <h2 id="pijlers">De drie pijlers: inhoud, techniek en autoriteit</h2>
+        <p>Aan alles wat Google meeweegt, kun je drie knoppen hangen. Een goede aanpak werkt aan alle drie, in de volgorde waarin je het snelst verschil maakt. Die volgorde verschilt per site. Een mooie tekst helpt niet als Google de pagina niet kan lezen. En een technisch perfecte site zonder goede tekst scoort ook niet.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Inhoud: het beste antwoord geven</h3></div>
+        <p>Volgens Google heeft inhoud die mensen nuttig vinden waarschijnlijk meer invloed op je plek dan alle andere tips uit zijn eigen SEO-gids. Begin bij de belangrijkste zoekwoorden van je klanten, en bij wat ze met die woorden bedoelen. Iemand die "dakkapel prijs" typt, wil een bedrag zien, geen bedrijfsgeschiedenis. Een tekst die alleen de juiste zoekwoorden bevat, wint het niet meer.</p>
+        <p>Laat ook zien dat je weet waar je het over hebt. Expertise tonen doe je met foto's van eigen werk, echte prijzen, een naam onder de tekst en voorbeelden uit je praktijk. Google noemt dat <a href="/kennisbank/wat-is/e-e-a-t/">E-E-A-T</a>: ervaring, deskundigheid, gezag en betrouwbaarheid. Volgens Google is vertrouwen daarvan het belangrijkst. Bij onderwerpen over gezondheid, geld en veiligheid weegt het nog zwaarder.</p>
+        <p>Een minimum aantal woorden bestaat niet, schrijft Google zelf. Een prijspagina mag kort zijn, een uitleg als deze is langer. Tekst toevoegen om het aantal gaat ten koste van de lezer, en daarmee ook van je plek. Google zet het zelfs in zijn lijst met waarschuwingen: schrijf je naar een woordaantal omdat je hebt gehoord dat Google dat wil? Dan zit je verkeerd.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>Techniek: zorgen dat Google je kan lezen</h3></div>
+        <p>Google gebruikt de mobiele versie van je site om te indexeren en te rangschikken. Werkt je site slecht op een telefoon, dan merk je dat dus overal. Ook meet Google hoe prettig een pagina laadt, met drie getallen: de Core Web Vitals.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Meting</th><th>Wat het meet</th><th>Goed volgens Google</th></tr></thead>
+            <tbody>
+              <tr><td>LCP</td><td>Hoe snel het grootste stuk van de pagina in beeld staat</td><td>Binnen 2,5 seconden</td></tr>
+              <tr><td>INP</td><td>Hoe snel de pagina reageert als je klikt of typt</td><td>Onder 200 milliseconden</td></tr>
+              <tr><td>CLS</td><td>Hoeveel de pagina verspringt tijdens het laden</td><td>Onder 0,1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Daarbij hoort een site beveiligd te zijn met https, een logische opbouw te hebben en geen pagina's die per ongeluk op "niet indexeren" staan. Snelheid alleen maakt je geen nummer 1. Een trage site houdt je wel tegen. Hoe je dat verbetert, staat in de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>. Hoe wij een site nalopen, lees je bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>.</p>
+        <p>Een laatste technische laag zijn gestructureerde gegevens: een stukje code dat zegt wat iets is, zoals een bedrijf, een vraag of een review. Volgens Google maakt geldige structured data je pagina geschikt voor extra's in de zoekresultaten, zoals sterren en carrousels. Het is geen garantie op een hogere plek. Google vraagt wel dat de gegevens kloppen met wat zichtbaar op de pagina staat. Meer bij <a href="/kennisbank/wat-is/schema-markup/">schema markup</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>Autoriteit: wat anderen over je zeggen</h3></div>
+        <p>Een link van een andere site naar de jouwe werkt als een aanbeveling. Google vindt de meeste nieuwe pagina's via links, en gebruikt links ook om te bepalen wat belangrijk is. Eén link van een vakblad of een lokale krant weegt zwaarder dan honderd links van sites die niemand leest. Ook als je merk genoemd wordt zonder link, kan dat helpen. Zeker bij AI-zoekmachines, die bedrijfsnamen uit artikelen en overzichten halen. Het opbouwen van links heet <a href="/linkbuilding/">linkbuilding</a>.</p>
+        <p>Links kopen om hoger te komen mag niet volgens Google. Een betaalde vermelding mag wel, als de link het label nofollow of sponsored krijgt. Dan geeft hij geen rankingwaarde door. Meer hierover in de gids <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</p>
+
+        <h2 id="zoekwoorden">Zoekwoorden en zoekintentie</h2>
+        <p>Een zoekwoord is wat iemand intypt. De zoekintentie is wat hij ermee wil. Die twee horen bij elkaar. Twee mensen die "warmtepomp" typen, kunnen iets heel anders zoeken: de een wil weten hoe het werkt, de ander wil er morgen een laten plaatsen. Kijk daarom altijd eerst wat Google nu bovenaan zet. Dat laat zien wat Google denkt dat mensen willen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Intentie</th><th>De zoeker wil</th><th>Voorbeeld</th><th>Passende pagina</th></tr></thead>
+            <tbody>
+              <tr><td>Informatief</td><td>Iets weten of begrijpen</td><td>hoe werkt een warmtepomp</td><td>Uitleg of gids</td></tr>
+              <tr><td>Vergelijkend</td><td>Keuzes afwegen voor hij koopt</td><td>warmtepomp of hybride</td><td>Vergelijking met voor- en nadelen</td></tr>
+              <tr><td>Transactioneel</td><td>Iets kopen of laten doen</td><td>warmtepomp laten installeren Assen</td><td>Dienstpagina met prijs en contact</td></tr>
+              <tr><td>Navigerend</td><td>Naar een bekende site of bedrijf</td><td>naam van een installateur</td><td>Je homepage of contactpagina</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Hoe vind je de woorden van je klanten? Begin bij wat ze aan de telefoon vragen. Kijk daarna in Google Search Console welke zoekopdrachten je nu al vertoningen geven. Voor zoekvolumes gebruik je de Zoekwoordplanner van Google Ads, in het Engels de Keyword Planner. Die vind je in Google Ads onder Tools. Kies daar Nieuwe zoekwoorden ontdekken. Je moet wel eerst je account afronden met factureringsgegevens, maar je hoeft niet te adverteren.</p>
+        <p>Lange, specifieke zoekopdrachten worden minder vaak gezocht. Wie "lekkage plat dak repareren Meppel" typt, weet wel precies wat hij wil. Juist die zoekopdrachten zijn haalbaar voor een klein bedrijf. Hoe je dit stap voor stap doet, lees je in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a> en bij <a href="/kennisbank/wat-is/zoekintentie/">zoekintentie</a>.</p>
+
+        <h2 id="lokaal">Hoe werkt SEO voor een lokaal bedrijf?</h2>
+        <p>Hetzelfde, met één laag extra. Zoekt iemand een bedrijf in de buurt, dan toont Google vaak eerst het kaartje met drie bedrijven. Wie daarin staat, bepaalt Google volgens zijn eigen uitleg vooral op drie dingen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Factor</th><th>Wat Google ermee bedoelt</th><th>Wat je eraan doet</th></tr></thead>
+            <tbody>
+              <tr><td>Relevantie</td><td>Hoe goed je bedrijfsprofiel past bij de zoekopdracht</td><td>Profiel volledig invullen: categorie, diensten, openingstijden, foto's</td></tr>
+              <tr><td>Afstand</td><td>Hoe ver je bedrijf ligt van de zoeker</td><td>Weinig, je adres verplaats je niet. Zorg wel dat het klopt.</td></tr>
+              <tr><td>Bekendheid</td><td>Hoe bekend je bedrijf is, ook online</td><td>Reviews verzamelen en beantwoorden, links en vermeldingen in je regio</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Google zegt er nadrukkelijk bij dat je een betere lokale plek niet kunt aanvragen of kopen. Bij bekendheid noemt Google letterlijk het aantal sites dat naar je bedrijf linkt en het aantal reviews. Lokale SEO is dus gewone SEO plus een goed onderhouden Google Bedrijfsprofiel. Hoe je dat inricht, lees je in de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Wil je het laten doen, kijk dan bij <a href="/lokale-seo/">lokale SEO</a>.</p>
+
+        <h2 id="ai">Hoe werkt SEO in AI-antwoorden?</h2>
+        <p>Steeds vaker staat er boven de zoekresultaten een AI-overzicht. Google heeft ook de AI-modus, een soort gesprek met de zoekmachine. En veel mensen stellen hun vraag meteen aan ChatGPT, Gemini of Copilot. Telt SEO dan nog? Ja. Google schrijft dat de gewone SEO-basis ook voor de AI-functies geldt. Er zijn geen extra eisen, geen speciale bestanden en geen aparte code nodig.</p>
+        <p>Wel moet je pagina in de index staan en geschikt zijn om met een tekstfragment in de zoekresultaten te verschijnen. De AI-functies van Google kunnen volgens Google meerdere zoekopdrachten tegelijk uitvoeren over deelonderwerpen. Daardoor tonen ze vaak meer verschillende links dan een gewone zoekopdracht. Een pagina die één deelvraag goed beantwoordt, maakt zo ook kans. Duidelijke koppen met het antwoord eronder helpen daarbij.</p>
+        <p>Voor andere AI-assistenten geldt grotendeels hetzelfde idee: ze halen informatie van pagina's die goed vindbaar en goed leesbaar zijn. In onze ervaring noemen ze vaker bedrijven die op meerdere plekken genoemd worden. Goede SEO voor Google is dus de basis om in AI-antwoorden terecht te komen. Wat er nog bij komt, lees je bij <a href="/generative-engine-optimization/">generative engine optimization</a> en in de gids <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+
+        <h2 id="voorbeeld">Hoe werkt SEO voor één zoekopdracht? Van begin tot eind</h2>
+        <p>Om het concreet te maken, volgen we één pagina door het hele proces. Het bedrijf en de cijfers zijn verzonnen. De stappen kloppen.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: een installateur in Hoogeveen</p>
+          <ol>
+            <li><b>De pagina.</b> Een installateur zet een nieuwe pagina online: "Warmtepomp laten plaatsen in Hoogeveen". Met prijzen, foto's van eigen werk, een uitleg over subsidie en de vragen die klanten aan de telefoon stellen.</li>
+            <li><b>Crawlen.</b> De homepage linkt naar de nieuwe pagina en hij staat in de sitemap. Googlebot vindt hem binnen een paar dagen.</li>
+            <li><b>Indexeren.</b> Google leest de titel, de koppen en de tekst. Er is geen andere pagina op de site die er sterk op lijkt. De pagina wordt opgeslagen.</li>
+            <li><b>Rangschikken.</b> Iemand in Hoogeveen typt "warmtepomp installateur". Google ziet een lokale bedoeling en toont eerst het kaartje. De pagina zelf komt op plek 14. Er is nog weinig dat zegt dat dit bedrijf te vertrouwen is.</li>
+            <li><b>Autoriteit.</b> De installateur vraagt zijn leverancier en de plaatselijke ondernemersvereniging om een vermelding met link. Klanten krijgen na de klus een reviewlink.</li>
+            <li><b>Na drie maanden.</b> De pagina staat op plek 5 en het bedrijf staat in het kaartje. In Search Console zie je 1.800 vertoningen en 90 klikken per maand.</li>
+          </ol>
+        </div>
+        <p>Wat is dat waard? Stel: 3 op de 100 bezoekers vragen een offerte aan, en 1 op de 4 offertes wordt een opdracht met € 1.000 marge. Van 90 bezoekers is dat bijna 3 aanvragen, en gemiddeld zo'n € 700 marge per maand. Uit één pagina. Hetzelfde verkeer via Google Ads kost bij een klikprijs van € 3,29 bijna € 300 per maand. Dat bedrag is de gemiddelde klikprijs voor "elektricien" in Nederland volgens SE Ranking, uit onze gids over <a href="/online-adverteren/google-ads-campagne-opzetten/">een Google Ads-campagne opzetten</a>. Het verschil: de advertentie stopt als je stopt met betalen.</p>
+
+        <h2 id="telt-niet">Wat volgens Google niet (meer) telt</h2>
+        <p>Over SEO doen veel verhalen de ronde. Google heeft zelf een lijst gemaakt van dingen waar je je niet druk om hoeft te maken. Handig als iemand je er toch mee lastigvalt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je hoort</th><th>Wat Google zegt</th></tr></thead>
+            <tbody>
+              <tr><td>"Vul de meta keywords in."</td><td>Google gebruikt de meta keywords-tag niet.</td></tr>
+              <tr><td>"Herhaal je zoekwoord zo vaak mogelijk."</td><td>Dat heet keyword stuffing en gaat tegen de spamregels in.</td></tr>
+              <tr><td>"Een pagina moet minstens 1.000 woorden hebben."</td><td>Lengte alleen telt niet. Er is geen magisch woordaantal.</td></tr>
+              <tr><td>"Je zoekwoord moet in je domeinnaam."</td><td>Zoekwoorden in je domein of URL hebben nauwelijks effect, behalve dat ze in het kruimelpad verschijnen.</td></tr>
+              <tr><td>"Dubbele inhoud levert een straf op."</td><td>Dezelfde tekst onder twee adressen op je eigen site geeft geen straf. Wel kiest Google er één. Inhoud van anderen kopiëren is een ander verhaal.</td></tr>
+              <tr><td>"Koppen moeten precies op volgorde staan."</td><td>Handig voor schermlezers, maar voor Google maakt de volgorde niet uit.</td></tr>
+              <tr><td>"E-E-A-T is een rankingfactor."</td><td>Nee. Google gebruikt wel een mix van signalen die passen bij E-E-A-T.</td></tr>
+              <tr><td>"Zonder .nl-domein scoor je niet."</td><td>De extensie telt alleen als je op een bepaald land mikt, en dan nog weinig.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Nog één die we vaak horen: "Meld je site aan bij duizend zoekmachines." Google noemt dat doorgaans zinloos. Je site aanmelden bij Google hoeft meestal ook niet. Google vindt je vanzelf. Search Console maakt het alleen sneller en geeft inzicht.</p>
+
+        <h2 id="veranderd">Hoe SEO is veranderd: van trucjes naar antwoorden</h2>
+        <p>Veel SEO-uitleg op internet is ooit waar geweest. Het probleem is dat het nooit is weggehaald. Wie vandaag een oude checklist volgt, doet dingen die niets meer opleveren, of die nu tegen de regels zijn. Dit is het verschil tussen toen en nu, volgens wat Google er nu zelf over schrijft.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Toen</th><th>Nu</th></tr></thead>
+            <tbody>
+              <tr><td>Meta keywords invullen</td><td>Google gebruikt die tag niet.</td></tr>
+              <tr><td>Je zoekwoord zo vaak mogelijk herhalen</td><td>Systemen als BERT en RankBrain begrijpen begrippen en synoniemen. Herhalen is keyword stuffing.</td></tr>
+              <tr><td>Veel links verzamelen, waar dan ook vandaan</td><td>Gekochte en geruilde links vallen onder linkspam. Een paar echte links wegen zwaarder.</td></tr>
+              <tr><td>Voor elke variant een aparte pagina</td><td>Massaal gemaakte pagina's zonder eigen waarde gaan tegen de spamregels in.</td></tr>
+              <tr><td>De computerversie van je site telt</td><td>Google kijkt naar de mobiele versie.</td></tr>
+              <tr><td>Tien blauwe links</td><td>Een pagina met advertenties, een kaartje, vragen en vaak een AI-overzicht.</td></tr>
+              <tr><td>Alleen Google telt</td><td>Mensen zoeken ook via AI-assistenten, die grotendeels dezelfde goede pagina's gebruiken.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat niet veranderd is: Google wil de zoeker zo goed mogelijk helpen. Wie dat ook wil, hoeft zich over de meeste veranderingen weinig zorgen te maken. Wie probeert Google te slim af te zijn, krijgt het steeds moeilijker.</p>
+
+        <h2 id="regels">Wat mag en wat niet: de spamregels</h2>
+        <p>Google heeft een lijst met spamregels. Overtreed je die, dan kun je zakken of zelfs uit de resultaten verdwijnen. Soms automatisch, soms na controle door een medewerker van Google. Dit zijn de regels waar kleine bedrijven het vaakst tegenaan lopen.</p>
+        <ul>
+          <li><b>Links kopen of ruilen voor een hogere plek.</b> Ook "jij linkt naar mij, ik naar jou" op grote schaal, en links in gastblogs waar voor betaald is.</li>
+          <li><b>Keyword stuffing.</b> Een tekst vol herhaalde zoekwoorden of rijtjes plaatsnamen.</li>
+          <li><b>Massaal gemaakte pagina's zonder waarde.</b> Google noemt het scaled content abuse. Bijvoorbeeld honderd AI-teksten die niemand heeft nagelezen.</li>
+          <li><b>Doorway-pagina's.</b> Bijna gelijke pagina's per plaats die allemaal naar dezelfde pagina leiden.</li>
+          <li><b>Verborgen tekst.</b> Witte tekst op een witte achtergrond, of tekst buiten beeld gezet.</li>
+          <li><b>Cloaking.</b> Google iets anders laten zien dan de bezoeker.</li>
+        </ul>
+        <p>AI gebruiken is niet verboden. Google schrijft dat het kijkt naar de kwaliteit van inhoud, niet naar hoe die gemaakt is. Wel is AI inzetten met als hoofddoel de zoekresultaten te manipuleren tegen de regels. AI-tekst levert ook geen voordeel op: het is gewoon tekst. Hoe wij AI gebruiken, lees je bij <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
+        <p>We weten uit eigen ervaring hoe dit afloopt. Vroeger namen we met eigen sites soms te veel risico, en een van onze sites kreeg daarvoor een penalty van Google. Daarom testen we nu eerst in <a href="/proeflab/">ons proeflab</a>. Bij klanten blijven we ruim binnen de regels.</p>
+
+        <h2 id="hoe-lang">Hoe lang duurt het voordat SEO werkt?</h2>
+        <p>Google zegt zelf dat sommige wijzigingen binnen een paar uur effect hebben en andere pas na maanden. Het advies: wacht een paar weken voordat je beoordeelt of iets heeft gewerkt. In onze ervaring kan het drie tot zes maanden duren voordat je duidelijk resultaat ziet. Op een woord met veel concurrentie duurt het langer. Een ruwe tijdlijn voor een gemiddelde mkb-site:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat je meestal ziet</th></tr></thead>
+            <tbody>
+              <tr><td>Eerste weken</td><td>Technische fouten opgelost, betere titels. Pagina's die al op de eerste pagina stonden, krijgen meer klikken.</td></tr>
+              <tr><td>Maand 2 en 3</td><td>Eerste stijgingen op specifieke zoekopdrachten met weinig concurrentie. Meer vertoningen in Search Console.</td></tr>
+              <tr><td>Maand 3 tot 6</td><td>Duidelijke groei in bezoekers, en daarna in aanvragen.</td></tr>
+              <tr><td>Na 6 maanden</td><td>Zicht op de grotere zoekwoorden, als je blijft bouwen aan inhoud en links.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Hoe snel het gaat, hangt af van vijf dingen: hoe sterk je site al is, of je lokaal of landelijk gevonden wilt worden, hoe goed je teksten zijn, hoeveel goede links je hebt en wat je concurrenten doen. Een nieuwe site heeft meer tijd nodig dan een site die al jaren bestaat. Verhuis je je site of verander je veel adressen, reken dan op een paar weken schommelen. Google schrijft dat het bij een middelgrote site een paar weken of langer duurt voordat de nieuwe adressen de oude vervangen. Hoe je dat goed doet, lees je in de gids <a href="/kennisbank/gidsen/seo-vriendelijke-urls/">SEO-vriendelijke URL's</a>. We horen het vaak van ondernemers die na drie maanden stopten omdat er nog niet genoeg gebeurde. Jammer, want juist daarna komt het rendement.</p>
+
+        <h2 id="meten">Hoe meet je of SEO werkt?</h2>
+        <p>Posities zeggen iets, maar aanvragen zeggen meer. Begin met Google Search Console. Onder Prestaties staat het rapport met je zoekresultaten. Standaard zie je de laatste drie maanden, met vier cijfers.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Cijfer in Search Console</th><th>Wat het betekent</th><th>Waar je op let</th></tr></thead>
+            <tbody>
+              <tr><td>Vertoningen</td><td>Hoe vaak je site in de resultaten verscheen</td><td>Stijgt dit, dan vindt Google je relevanter. Klikken volgen later.</td></tr>
+              <tr><td>Klikken</td><td>Hoe vaak iemand vanuit Google op je site klikte</td><td>De bezoekers die je echt krijgt.</td></tr>
+              <tr><td>CTR</td><td>Klikken gedeeld door vertoningen</td><td>Laag bij een goede plek? Dan is je titel niet aantrekkelijk genoeg.</td></tr>
+              <tr><td>Gemiddelde positie</td><td>Je gemiddelde plek in de resultaten</td><td>Een gemiddelde. Per zoekopdracht en per pagina bekijken zegt meer.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Met de tabbladen Zoekopdrachten, Pagina's, Landen en Apparaten zie je waar het verkeer vandaan komt. Let op: Google zegt zelf dat zoekresultaten verschillen per persoon, tijd, plek en apparaat. Je eigen positie checken vanaf je bureau zegt dus weinig. Search Console is betrouwbaarder. Klikken vanuit het AI-overzicht en de AI-modus van Google tellen er gewoon in mee, onder de zoekresultaten op internet.</p>
+        <p>Koppel daarna wat bezoekers doen. Meet in Google Analytics 4 of een privacyvriendelijk alternatief hoeveel formulieren en telefoontjes uit organisch verkeer komen. De gids <a href="/kennisbank/gidsen/google-search-console/">Google Search Console</a> laat zien hoe je het instelt. Onze vuistregel: één keer per maand kijken is genoeg. Elke dag kijken maakt je alleen onrustig.</p>
+
+        <h2 id="zelf">Wat kun je zelf doen? Zes eerste stappen</h2>
+        <p>Google schrijft dat je als klein lokaal bedrijf veel van het werk zelf kunt doen. Dit zijn de zes stappen waarmee je website beter vindbaar wordt, in de volgorde die wij aanraden.</p>
+        <ol>
+          <li><b>Zet Google Search Console aan.</b> Dan zie je waar je nu staat en wat er misgaat.</li>
+          <li><b>Zoek de woorden van je klanten.</b> Met de Zoekwoordplanner en de vragen onder Mensen vragen ook.</li>
+          <li><b>Geef elke dienst een eigen pagina.</b> Met het antwoord op de vraag van je klant in de eerste alinea.</li>
+          <li><b>Herschrijf je titels.</b> Belangrijkste woord vooraan, kort en duidelijk, uniek per pagina. Zie <a href="/kennisbank/wat-is/title-tag/">title tag</a>.</li>
+          <li><b>Link je pagina's aan elkaar.</b> Vanaf je homepage naar je diensten, met een linktekst die zegt waar het heen gaat.</li>
+          <li><b>Vul je Google Bedrijfsprofiel volledig in</b> als je lokaal werkt, en vraag tevreden klanten om een review.</li>
+        </ol>
+        <p>Elke stap maakt je website beter. Geen enkele stap zet je website bovenaan in één week. Wil je verder dan deze zes? De gids <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a> geeft een volledig stappenplan voor de eerste zes maanden, met een checklist.</p>
+
+        <h2 id="bureau">Een SEO-bureau beoordelen: de vragen van Google</h2>
+        <p>Google heeft een eigen pagina over het inhuren van een SEO-specialist. Daar staan vragen in die je elk bureau kunt stellen. Wij vinden ze goed, dus hier zijn ze in het kort.</p>
+        <ul class="vink">
+          <li>Kun je voorbeelden van eerder werk laten zien?</li>
+          <li>Volg je de richtlijnen van Google Search?</li>
+          <li>Welk resultaat verwacht je, wanneer, en hoe meet je dat?</li>
+          <li>Wat is je ervaring in mijn branche en in mijn regio?</li>
+          <li>Vertel je welke wijzigingen je op mijn site doet, en waarom?</li>
+        </ul>
+        <p>Google geeft ook waarschuwingen. Niemand kan een eerste plek garanderen. Je hoeft nooit naar je SEO-bureau te linken. Geef bij een audit alleen leestoegang tot Search Console. En wees wantrouwig bij ongevraagde mails over je vindbaarheid.</p>
+        <p>Wij garanderen dus geen plek 1. Wel spreken we een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Hoe dat werkt, lees je bij <a href="/garantie/">de garantie</a>. Wil je je SEO laten doen, kijk dan bij <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>: vanaf € 495 per maand, maandelijks opzegbaar. Wat een goede specialist doet, staat in <a href="/kennisbank/gidsen/wat-doet-een-seo-specialist/">wat doet een SEO-specialist</a>.</p>
+
+        <h2 id="begrippen">De begrippen op een rij</h2>
+        <p>Krijg je een rapport vol vaktaal? Bij een goede SEO-uitleg horen de woorden die je het vaakst tegenkomt. Wie ze niet in gewone taal kan uitleggen, snapt ze misschien zelf niet goed.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Begrip</th><th>In gewone taal</th></tr></thead>
+            <tbody>
+              <tr><td>Crawlen</td><td>Googlebot bezoekt en leest je pagina's.</td></tr>
+              <tr><td>Index</td><td>De grote database van Google met alle opgeslagen pagina's.</td></tr>
+              <tr><td>Organisch</td><td>De gewone, onbetaalde zoekresultaten.</td></tr>
+              <tr><td>Backlink</td><td>Een link van een andere site naar jouw site.</td></tr>
+              <tr><td>Canonical</td><td>De versie van een pagina die Google kiest als er meerdere bijna gelijke zijn.</td></tr>
+              <tr><td>Sitemap</td><td>Een lijst met je pagina's voor zoekmachines. Zie <a href="/kennisbank/wat-is/sitemap/">sitemap</a>.</td></tr>
+              <tr><td>Title tag</td><td>De titel van je pagina, vaak de blauwe regel in Google.</td></tr>
+              <tr><td>Meta description</td><td>Het korte stukje tekst onder die titel. Zie de gids <a href="/kennisbank/gidsen/meta-description/">meta description</a>.</td></tr>
+              <tr><td>Crawlbudget</td><td>Hoeveel pagina's Google op je site wil en kan bezoeken. Vooral belangrijk bij grote sites.</td></tr>
+              <tr><td>E-E-A-T</td><td>Ervaring, deskundigheid, gezag en betrouwbaarheid.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Deze SEO-uitleg is geen complete gids voor elke techniek. Wel genoeg om te begrijpen wat er gebeurt, en om een bureau of webbouwer de goede vragen te stellen. Alle begrippen vind je in onze <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={24} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het doen?" intro="Wat je krijgt als je je SEO bij ons onderbrengt, en waarom je dat kunt nagaan." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent SEO?', a: 'SEO staat voor search engine optimization, of zoekmachineoptimalisatie. Het is het verbeteren van je website zodat je hoger komt in de gewone, onbetaalde zoekresultaten.' },
+      { v: 'Hoe werkt SEO in één zin?', a: 'Google vindt je pagina via links, slaat hem op als hij goed genoeg is, en zet hem hoger naarmate hij de vraag beter beantwoordt en je site meer vertrouwen verdient.' },
+      { v: 'Kan ik SEO zelf doen?', a: 'De basis wel, en Google raadt dat kleine lokale bedrijven ook aan: Search Console, goede titels, een pagina per dienst en je bedrijfsprofiel. Voor techniek, linkbuilding en zoekwoorden met veel concurrentie helpt ervaring.' },
+      { v: 'Kan ik Google betalen om hoger te komen?', a: 'Nee. Google neemt geen geld aan voor een hogere plek in de gewone resultaten, ook niet in het kaartje. Betalen kan alleen voor advertenties, en die staan apart met het label Gesponsord.' },
+      { v: 'Is SEO eenmalig of doorlopend?', a: 'Een deel is eenmalig, zoals technische fouten oplossen. Groeien in Google vraagt doorlopend werk, omdat je concurrenten bezig blijven en Google zijn systemen aanpast.' },
+      { v: 'Werkt SEO nog nu iedereen AI gebruikt?', a: 'Ja. Volgens Google gelden voor het AI-overzicht en de AI-modus dezelfde SEO-basisregels, zonder extra eisen. Ook andere AI-zoekmachines halen hun antwoorden grotendeels uit goed vindbare pagina\'s. SEO is de basis, <a href="/kennisbank/gidsen/wat-is-geo/">GEO</a> komt erbovenop.' },
+      { v: 'Hoeveel woorden moet een pagina hebben?', a: 'Daar is geen regel voor. Google zegt zelf dat er geen minimum of maximum is. Schrijf zoveel als nodig is om de vraag goed te beantwoorden.' },
+      { v: 'Wat kost SEO?', a: 'Bij de meeste bureaus € 500 tot € 3.500 per maand. Bij ons begint SEO bij € 495 per maand. Meer in de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Pillar', titel: 'Zoekmachineoptimalisatie', href: '/zoekmachine-optimalisatie/', tekst: 'SEO met stijggarantie, vanaf € 495 per maand.' },
+      { label: 'Gids', titel: 'Hoger in Google komen', href: '/kennisbank/gidsen/hoger-in-google/', tekst: 'Het stappenplan voor een klein bedrijf, met checklist.' },
+      { label: 'Gids', titel: 'Wat kost SEO?', href: '/kennisbank/gidsen/wat-kost-seo/', tekst: 'Prijzen, tarieven en wat je ervoor krijgt.' },
+      { label: 'Gids', titel: 'Zoekwoordonderzoek doen', href: '/kennisbank/gidsen/zoekwoordonderzoek/', tekst: 'De woorden van je klanten vinden.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd hoe Google naar jouw site kijkt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} loopt je site na op inhoud, techniek en autoriteit, en belt je met wat het eerst moet.`} />
+</Base>

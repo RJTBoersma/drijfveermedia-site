@@ -1,0 +1,255 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--chatgpt-voor-bedrijven.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/chatgpt-voor-bedrijven/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat ChatGPT wel en niet is' },
+  { id: 'toepassingen', titel: 'Tien toepassingen die tijd schelen' },
+  { id: 'afdelingen', titel: 'Per afdeling' },
+  { id: 'prompt', titel: 'Zo schrijf je een goede prompt' },
+  { id: 'niet-invoeren', titel: 'Wat je er niet in zet' },
+  { id: 'abonnement', titel: 'Welk abonnement?' },
+  { id: 'verschil', titel: 'Persoonlijk of zakelijk account' },
+  { id: 'automatiseren', titel: 'Taken automatiseren' },
+  { id: 'afspraken', titel: 'Afspraken voor je team' },
+  { id: 'invoeren', titel: 'Invoeren in vier weken' },
+  { id: 'controleren', titel: 'Controleren blijft mensenwerk' },
+  { id: 'zelf', titel: 'Hoe wij het zelf gebruiken' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'ChatGPT voor bedrijven: zo zet je het slim en veilig in',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'ChatGPT',
+  citation: [
+    'https://learn.chatgpt.com/docs/pricing',
+    'https://learn.chatgpt.com/docs/enterprise/work-admin-faq',
+    'https://www.autoriteitpersoonsgegevens.nl/themas/algoritmes-ai/ai-verordening',
+  ],
+}];
+---
+<Base
+  title="ChatGPT voor bedrijven: slim en veilig gebruiken"
+  description="ChatGPT voor bedrijven: tien toepassingen die echt tijd schelen, alle abonnementen op een rij, wat je er niet in zet en afspraken voor je team."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'ChatGPT voor bedrijven', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Trainingen" titel="ChatGPT voor bedrijven: zo zet je het slim en veilig in" knop={{ tekst: 'Bespreek een training', href: '/contact/' }}>
+    <p>Bijna iedereen heeft ChatGPT wel eens geprobeerd. Weinig bedrijven halen er echt tijd mee terug. Hier lees je waarvoor het werkt, welk abonnement je nodig hebt, hoe je goede opdrachten schrijft en wat je er nooit in zet.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand 18 oktober 2026)</p>
+          <ul>
+            <li>ChatGPT voor bedrijven werkt het best als hulp bij werk dat je toch al doet: teksten, mails, samenvattingen en onderzoek.</li>
+            <li>Voor teams is er ChatGPT Business: $ 20 per gebruiker per maand bij jaarlijkse betaling, $ 25 bij maandelijkse. Daar traint OpenAI standaard niet op je bedrijfsgegevens.</li>
+            <li>Een goede prompt heeft context, een duidelijke opdracht en een gewenste vorm.</li>
+            <li>Zet geen persoonsgegevens van klanten of vertrouwelijke bedrijfsgegevens in een gratis of persoonlijk account.</li>
+            <li>Sinds februari 2025 moeten organisaties die AI gebruiken zorgen dat hun medewerkers er verstandig mee kunnen werken.</li>
+          </ul>
+        </div>
+        <p class="klein muted">Prijzen en functies in deze gids komen uit de documentatie van OpenAI zelf (learn.chatgpt.com en developers.openai.com) en de nieuwsberichten op openai.com. Geraadpleegd oktober 2026. OpenAI noemt zijn prijzen in dollars. Wat je in euro's betaalt, zie je bij het afsluiten.</p>
+
+        <h2 id="wat-is-het">Wat ChatGPT wel en niet is</h2>
+        <p>ChatGPT is een AI-assistent van het Amerikaanse bedrijf OpenAI. Je typt een vraag of opdracht, en je krijgt binnen seconden een antwoord in gewone taal. Het schrijft, vat samen, vertaalt, rekent, maakt afbeeldingen en zoekt op internet. Volgens OpenAI heeft ChatGPT inmiddels meer dan 1 miljard gebruikers. Sinds 7 oktober 2026 wordt het model GPT-6 wereldwijd in ChatGPT uitgerold.</p>
+        <p>Wat het niet is: een encyclopedie die altijd gelijk heeft. ChatGPT voorspelt welke woorden logisch volgen. Meestal klopt dat. Soms verzint het met grote stelligheid een wet, een cijfer of een bron die niet bestaat. Zie het als een snelle, slimme stagiair. Je krijgt in een paar seconden een eerste versie, maar je leest alles na voordat het de deur uitgaat.</p>
+
+        <h2 id="toepassingen">Tien toepassingen die echt tijd schelen</h2>
+        <p>De meeste winst zit niet in grote projecten, maar in kleine taken die elke week terugkomen. Dit zijn de toepassingen van ChatGPT voor bedrijven die we bij ondernemers het vaakst zien werken:</p>
+        <ol>
+          <li><b>Eerste versies van teksten.</b> Een webpagina, een vacature, een productomschrijving. Jij maakt hem af.</li>
+          <li><b>Mails beantwoorden.</b> Plak een lastige mail erin en vraag om een vriendelijk, kort antwoord. Handig voor je klantenservice.</li>
+          <li><b>Samenvatten.</b> Een rapport van dertig pagina's of de notulen van een lange vergadering, in tien regels.</li>
+          <li><b>Offertes helder maken.</b> Vraag welke zinnen een klant niet zal snappen, en laat ze herschrijven.</li>
+          <li><b>Vertalen.</b> Een mail aan een Duitse leverancier of een Engelse versie van je dienstpagina, als eerste opzet.</li>
+          <li><b>Veelgestelde vragen opstellen.</b> Geef een lijst met vragen die klanten echt stellen en laat er korte antwoorden bij schrijven.</li>
+          <li><b>Brainstormen.</b> Tien namen voor een actie, twintig onderwerpen voor je nieuwsbrief. Negen zijn niks, één is goed.</li>
+          <li><b>Excel en formules.</b> Beschrijf wat je wilt uitrekenen en je krijgt de formule, met uitleg.</li>
+          <li><b>Een gesprek voorbereiden.</b> Laat je de vragen stellen die een kritische klant zou stellen.</li>
+          <li><b>Onderzoek.</b> Een eerste overzicht van een onderwerp, met bronnen die je daarna zelf naloopt.</li>
+        </ol>
+        <p>Je hoeft niet alles te automatiseren om tijd te winnen. Wie elke dag een halfuur bespaart op mails en teksten, wint per jaar bijna drie werkweken. Zo simpel zit productiviteit vaak in elkaar.</p>
+
+        <h2 id="afdelingen">Per afdeling: waar het helpt en waar je oplet</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Afdeling</th><th>Waar ChatGPT helpt</th><th>Waar je oplet</th></tr></thead>
+            <tbody>
+              <tr><td>Verkoop</td><td>Offertes herschrijven, een klantgesprek voorbereiden, opvolgmails</td><td>Prijzen en kortingen altijd zelf invullen</td></tr>
+              <tr><td>Klantenservice</td><td>Conceptantwoorden, standaardantwoorden op veelgestelde vragen</td><td>Geen klantnamen of ordergegevens in een persoonlijk account</td></tr>
+              <tr><td>Marketing</td><td>Eerste versies van webteksten, nieuwsbrieven en social posts</td><td>Toon en feiten nalezen, eigen voorbeelden toevoegen</td></tr>
+              <tr><td>Administratie</td><td>Formules, samenvattingen van facturen of contracten</td><td>Bedragen narekenen, geen financiële gegevens in een gratis account</td></tr>
+              <tr><td>HR</td><td>Vacatureteksten, onboardingschema's, beleid in gewone taal</td><td>Geen gegevens van sollicitanten of medewerkers invoeren</td></tr>
+              <tr><td>Directie</td><td>Plannen doordenken, vergaderstukken samenvatten</td><td>Vertrouwelijke plannen alleen in een zakelijk account</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="prompt">Zo schrijf je een goede prompt</h2>
+        <p>Een prompt is de opdracht die je ChatGPT geeft. Hoe beter de opdracht, hoe beter het antwoord. De meeste teleurstellingen komen door een prompt van één regel. Geef ChatGPT wat je een nieuwe collega ook zou geven:</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Context</h3></div>
+        <p>Wie ben je, wat doet je bedrijf, voor wie is de tekst? "Ik heb een hoveniersbedrijf in Assen met vijf mensen. Mijn klanten zijn huiseigenaren van 40 tot 70 jaar."</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>Opdracht</h3></div>
+        <p>Wat moet er gebeuren, en waarom? "Schrijf een mail aan klanten die vorig jaar een tuin bij ons lieten aanleggen. Doel: ze herinneren aan het voorjaarsonderhoud."</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Vorm</h3></div>
+        <p>Hoe lang, welke toon, wat moet erin? "Maximaal 120 woorden, je-vorm, nuchter, geen uitroeptekens. Eindig met een uitnodiging om te bellen."</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>Voorbeeld</h3></div>
+        <p>Plak een tekst die je zelf goed vindt erbij en vraag om dezelfde stijl. Dat werkt beter dan elke beschrijving van je tone of voice.</p>
+        <div class="kader">
+          <p class="kader-titel">Vijf prompts om over te nemen</p>
+          <ul>
+            <li>"Hier is een mail van een klant die boos is over een late levering. Schrijf een kort, eerlijk antwoord zonder excuses die als een smoes klinken. Stel twee oplossingen voor."</li>
+            <li>"Lees deze offerte als een klant zonder vakkennis. Welke vijf zinnen zijn onduidelijk? Herschrijf ze in gewone taal."</li>
+            <li>"Stel me tien vragen over mijn bedrijf, één voor één, en schrijf daarna op basis van mijn antwoorden een tekst voor mijn over-ons-pagina van 200 woorden."</li>
+            <li>"Maak van deze aantekeningen een verslag met besluiten, actiepunten, wie wat doet en voor wanneer."</li>
+            <li>"Geef de tien vragen die klanten stellen voordat ze [dienst] kopen, met bij elke vraag een antwoord van maximaal drie zinnen."</li>
+          </ul>
+        </div>
+
+        <h2 id="niet-invoeren">Wat je niet in ChatGPT zet</h2>
+        <p>Alles wat je typt, gaat naar de servers van OpenAI. Bij persoonlijke accounts kan OpenAI je gesprekken gebruiken om zijn modellen te verbeteren, tenzij je dat in de instellingen uitzet. OpenAI heeft daar een eigen helpartikel over: je kunt je geschiedenis aan laten staan en toch modeltraining uitzetten. Zet in een persoonlijk account dus geen dingen die niet op straat mogen liggen:</p>
+        <ul>
+          <li>Namen, adressen, telefoonnummers of mails van klanten. Voor de AVG is dat verwerking van persoonsgegevens.</li>
+          <li>Medische gegevens, burgerservicenummers en andere gevoelige informatie.</li>
+          <li>Wachtwoorden en inloggegevens.</li>
+          <li>Vertrouwelijke bedrijfsgegevens, zoals contracten, cijfers die nog niet openbaar zijn of plannen van een klant.</li>
+        </ul>
+        <p>Wil je toch een klantmail laten herschrijven? Haal eerst de naam en contactgegevens eruit. "Meneer X uit Y" werkt net zo goed. Zo houd je de privacy van je klant intact en het resultaat is hetzelfde.</p>
+
+        <h2 id="abonnement">ChatGPT zakelijk: welk abonnement?</h2>
+        <p>Dit zijn de abonnementen zoals OpenAI ze in zijn documentatie noemt, oktober 2026. Prijzen per maand, in dollars.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Abonnement</th><th>Prijs</th><th>Voor wie</th></tr></thead>
+            <tbody>
+              <tr><td>Free</td><td>$&nbsp;0</td><td>Proberen, af en toe een vraag</td></tr>
+              <tr><td>Go</td><td>$&nbsp;8</td><td>Iets meer gebruik voor weinig geld, persoonlijk</td></tr>
+              <tr><td>Plus</td><td>$&nbsp;20</td><td>Dagelijks gebruik door één persoon</td></tr>
+              <tr><td>Pro</td><td>$&nbsp;100, $&nbsp;200 of $&nbsp;500</td><td>Zware gebruikers en ontwikkelaars</td></tr>
+              <tr><td>Business</td><td>$&nbsp;20 per gebruiker bij jaarlijkse betaling, $&nbsp;25 maandelijks, vanaf 2 gebruikers</td><td>Teams en mkb</td></tr>
+              <tr><td>Enterprise</td><td>Op aanvraag</td><td>Grote organisaties met strenge eisen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Sinds augustus 2026 kun je bij Business ook Premium-plekken kiezen. Volgens OpenAI geven die vijf keer zoveel gebruik en hebben ze geen limiet per vijf uur. Je kunt plekken mengen: de collega die er de hele dag mee werkt een Premium-plek, de rest een gewone.</p>
+        <p>Werkt je team er dagelijks mee, of komen er klantgegevens in de buurt, dan is een zakelijk account de verstandige keus. Zie het verschil hieronder.</p>
+        <p>ChatGPT is niet de enige. <a href="/kennisbank/gidsen/microsoft-copilot/">Microsoft Copilot</a> zit al in Microsoft 365 als je dat gebruikt. <a href="/kennisbank/gidsen/google-gemini/">Google Gemini</a> werkt samen met Gmail en Google Drive. En <a href="/kennisbank/gidsen/claude/">Claude</a> is de assistent van Anthropic, die wij zelf ook dagelijks gebruiken. Kies de tool die past bij de software die je al hebt.</p>
+
+        <h2 id="verschil">Persoonlijk of zakelijk account: de verschillen</h2>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Free, Go, Plus, Pro</th><th>Business</th><th>Enterprise</th></tr></thead>
+            <tbody>
+              <tr><td><b>Training op je gegevens</b></td><td>Mogelijk, tenzij je het uitzet</td><td>Standaard niet</td><td>Standaard niet</td></tr>
+              <tr><td><b>Gedeelde werkruimte</b></td><td>Nee</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td><b>Beheer en inloggen</b></td><td>Ieder voor zich</td><td>Beheerdersopties, SAML SSO en tweestapsverificatie</td><td>Plus SCIM, rollen en domeinverificatie</td></tr>
+              <tr><td><b>Auditlogs</b></td><td>Nee</td><td>Nee</td><td>Ja, via de Compliance API</td></tr>
+              <tr><td><b>Bewaartermijnen en dataopslag in de regio</b></td><td>Nee</td><td>Nee</td><td>Ja</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor de meeste mkb-bedrijven is Business genoeg. Enterprise wordt interessant als je moet kunnen aantonen waar je gegevens staan. OpenAI biedt sinds februari 2025 dataopslag in Europa aan en breidde dat in november 2025 uit voor Enterprise-klanten wereldwijd.</p>
+
+        <h2 id="automatiseren">Taken automatiseren met ChatGPT Work</h2>
+        <p>ChatGPT doet steeds meer dan antwoorden. Met ChatGPT Work voert het taken in meerdere stappen uit, met de bestanden, apps en tools waar jij toegang toe hebt. Denk aan: een spreadsheet met offertes doorlopen en een overzicht maken, een presentatie opbouwen uit losse documenten, of elke maandag een update samenstellen. Volgens de documentatie van OpenAI zit Work in alle abonnementen, van Free tot Enterprise, en deelt het gebruik met de programmeertool Codex.</p>
+        <p>Klinkt goed. Maar automatiseren vraagt meer zorg dan een tekstje schrijven. Een taak die zelf mails verstuurt of bestanden aanpast, kan ook zelf fouten maken. Begin daarom met taken die alleen lezen en samenvatten. Laat een mens elke stap goedkeuren die iets naar buiten stuurt. En koppel alleen de apps die echt nodig zijn.</p>
+        <p>Een chatbot op je website die zelfstandig klanten te woord staat, valt buiten wat wij bouwen. Wel helpen we je team om ChatGPT verstandig in te zetten bij hun eigen werk.</p>
+
+        <h2 id="afspraken">Afspraken voor je team</h2>
+        <p>Gebruiken je medewerkers ChatGPT al? Grote kans van wel, ook als niemand het zegt. Maak er dus afspraken over. Eén A4 is genoeg:</p>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeld: AI-afspraken op één A4</p>
+          <ul class="vink">
+            <li>We gebruiken [ChatGPT Business] met ons werkaccount. Geen privéaccounts voor werk.</li>
+            <li>We zetten er nooit in: namen en contactgegevens van klanten, BSN's, medische gegevens, wachtwoorden, contracten.</li>
+            <li>Alles wat naar een klant gaat, leest een mens eerst na. Cijfers en feiten zoeken we zelf na.</li>
+            <li>We zeggen het eerlijk als een klant ernaar vraagt.</li>
+            <li>Bij twijfel vraag je het aan [naam].</li>
+            <li>We bekijken deze afspraken elk halfjaar opnieuw.</li>
+          </ul>
+        </div>
+        <p>Dat is niet alleen verstandig, het is ook een plicht. Volgens de <a href="https://www.autoriteitpersoonsgegevens.nl/themas/algoritmes-ai/ai-verordening" rel="noopener">Autoriteit Persoonsgegevens</a> moeten organisaties die AI-systemen gebruiken sinds 2 februari 2025 zorgen dat hun werknemers AI-geletterd zijn. Dat staat in de Europese AI-verordening. In gewone taal: je team moet weten wat AI kan, wat het niet kan en waar de risico's zitten. Een korte <a href="/trainingen/">training</a> is daar een praktische manier voor.</p>
+
+        <h2 id="invoeren">Stappenplan: ChatGPT invoeren in vier weken</h2>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>Week 1: kijk wat er al gebeurt</h3></div>
+        <p>Vraag je medewerkers eerlijk wie het al gebruikt, waarvoor en met welk account. Geen verwijten, alleen een inventaris.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>Week 2: kies je account en maak afspraken</h3></div>
+        <p>Kies een abonnement, bijvoorbeeld Business. Schrijf je A4 met afspraken en deel die met iedereen.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Week 3: train op eigen werk</h3></div>
+        <p>Neem met je team drie echte taken en oefen er samen mee. Een mail, een offerte, een samenvatting. Deel de prompts die goed werken.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>Week 4: meet en stuur bij</h3></div>
+        <p>Hoeveel tijd kosten die taken nu? Wat ging er mis? Pas je afspraken aan en kies de volgende drie taken.</p>
+
+        <h2 id="controleren">Controleren blijft mensenwerk</h2>
+        <p>Laat nooit een tekst van ChatGPT ongelezen online of naar een klant gaan. Controleren doe je op drie punten:</p>
+        <ol>
+          <li><b>Feiten.</b> Klopt elk cijfer, elke naam en elke regel? Zoek het na bij de bron.</li>
+          <li><b>Toon.</b> Klinkt het als jouw bedrijf, of als een folder? Haal de holle zinnen eruit.</li>
+          <li><b>Inhoud.</b> Staat er iets in wat alleen jij weet? Een voorbeeld uit je eigen werk maakt een tekst geloofwaardig, voor lezers en voor Google.</li>
+        </ol>
+        <p>Google beoordeelt een tekst op kwaliteit, niet op wie of wat hem schreef. Maar een tekst die net zo klinkt als duizend andere, valt nergens op. Hoe je teksten schrijft die gevonden worden, lees je in de gids over <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>.</p>
+
+        <h2 id="zelf">Hoe wij het zelf gebruiken</h2>
+        <p>We werken elke dag met AI. Met onder meer Claude, ChatGPT, Gemini, Copilot, Perplexity en NotebookLM. Voor eerste versies, onderzoek, data en het saaie rekenwerk. Zo steken onze mensen hun tijd in wat telt: nadenken, controleren en afmaken. Hoe we dat precies doen, en wat we niet aan AI overlaten, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
+        <p>Er is ook een andere kant. Je klanten gebruiken ChatGPT steeds vaker om een bedrijf te zoeken. "Welke installateur in Drenthe is goed in warmtepompen?" Of jij dan genoemd wordt, kun je beïnvloeden. Dat heet <a href="/generative-engine-optimization/">generative engine optimization</a>. In augustus 2026 breidde OpenAI de advertenties in ChatGPT uit naar 31 Europese markten. Daarover lees je meer bij <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</p>
+
+        <h2 id="training">Je team laten trainen</h2>
+        <p>Wil je dat je team ChatGPT goed en veilig gebruikt? In een AI-training werken we met jullie eigen teksten, mails en vragen. Geen algemene cursus, maar de taken die jullie elke week doen. Je leert prompts schrijven, resultaten controleren en wat je er wel en niet in zet. De prijs is in overleg en hoor je vooraf. Kijk bij <a href="/trainingen/">trainingen en workshops</a> wat er kan.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">OpenAI: prijzen en abonnementen in de documentatie op learn.chatgpt.com ("Pricing", "ChatGPT Work admin FAQ", "ChatGPT Work Overview"), nieuwsberichten op openai.com ("GPT-6 and Intelligent UI for everyone", 7 oktober 2026; "Premium seats are coming to ChatGPT Business", 10 augustus 2026; "ChatGPT Ads expands across Europe", 18 augustus 2026; "Introducing data residency in Europe", 5 februari 2025; over meer dan 1 miljard gebruikers, 11 september 2026). Wet: Autoriteit Persoonsgegevens. Allemaal geraadpleegd oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={14} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Waarom je ons een training kunt toevertrouwen" intro="We gebruiken AI elke dag in ons eigen werk. Dit is wat je verder van ons mag verwachten." case={false} />
+
+  <Faq
+    vragen={[
+      { v: 'Is ChatGPT voor bedrijven veilig onder de AVG?', a: 'Dat hangt af van wat je erin zet en welk account je gebruikt. Zet geen persoonsgegevens in een gratis of persoonlijk account. Kies voor zakelijk gebruik ChatGPT Business of Enterprise, waar OpenAI standaard niet op je bedrijfsgegevens traint, en maak afspraken met je team.' },
+      { v: 'Wat kost ChatGPT zakelijk?', a: 'ChatGPT Business kost volgens OpenAI $ 20 per gebruiker per maand bij jaarlijkse betaling en $ 25 bij maandelijkse betaling, vanaf twee gebruikers. Enterprise is op aanvraag.' },
+      { v: 'Mag ik teksten van ChatGPT op mijn website zetten?', a: 'Ja. Zorg wel dat ze kloppen en echt bij jou passen. Vul ze aan met eigen ervaring en voorbeelden, anders lijkt je site op die van iedereen.' },
+      { v: 'Ziet Google dat een tekst met AI is geschreven?', a: 'Google kijkt naar kwaliteit, niet naar hoe een tekst is gemaakt. Een slappe tekst scoort slecht, of een mens of AI hem schreef.' },
+      { v: 'Kan ChatGPT mijn klantenservice overnemen?', a: 'Het kan je helpen sneller en beter te antwoorden, met concepten die jij nakijkt. Een chatbot op je site die zelfstandig klanten te woord staat, bouwen wij niet.' },
+      { v: 'Moet mijn team een AI-training volgen?', a: 'Sinds 2 februari 2025 moeten organisaties die AI-systemen gebruiken zorgen dat hun medewerkers AI-geletterd zijn, aldus de Autoriteit Persoonsgegevens. Hoe je dat doet, mag je zelf bepalen. Een korte training op eigen werk is een praktische manier.' },
+      { v: 'Is ChatGPT beter dan Claude, Gemini of Copilot?', a: 'Ze zijn alle vier goed en verschillen per taak. Kies vooral wat aansluit bij de software die je al gebruikt, en probeer er twee naast elkaar.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over AI in je bedrijf"
+    links={[
+      { label: 'Dienst', titel: 'Trainingen en workshops', href: '/trainingen/', tekst: 'SEO, Google Ads en AI voor je team.' },
+      { label: 'Gids', titel: 'Wat is Claude?', href: '/kennisbank/gidsen/claude/', tekst: 'De AI-assistent van Anthropic uitgelegd.' },
+      { label: 'Dienst', titel: 'Vindbaar in ChatGPT', href: '/generative-engine-optimization/vindbaar-in-chatgpt/', tekst: 'Zorgen dat ChatGPT jouw bedrijf noemt.' },
+    ]}
+  />
+
+  <Actie titel="Wil je dat je team slimmer werkt met AI?" tekst={`Bel ${site.contactpersoon} of laat een bericht achter. We bellen je binnen 15 minuten terug en vragen eerst wat je team nu al doet.`} knop={{ tekst: 'Bespreek een training', href: '/contact/' }} />
+</Base>

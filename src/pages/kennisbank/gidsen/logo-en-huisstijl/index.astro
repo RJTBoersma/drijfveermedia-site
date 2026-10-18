@@ -1,0 +1,188 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--logo-en-huisstijl.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/logo-en-huisstijl/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'kan-dat', titel: 'Kun je een logo zelf maken?' },
+  { id: 'goed-logo', titel: 'Wat maakt een logo goed?' },
+  { id: 'stappen', titel: 'Zelf een logo maken in zeven stappen' },
+  { id: 'tools', titel: 'Gratis tools die we aanraden' },
+  { id: 'huisstijl', titel: 'Huisstijl zelf maken' },
+  { id: 'kosten', titel: 'Wat kost laten maken?' },
+  { id: 'kiezen', titel: 'Zelf of laten maken: zo kies je' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Logo zelf maken of laten maken? Logo en huisstijl op een rij',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: ['Logo', 'Huisstijl'],
+}];
+---
+<Base
+  title="Logo zelf maken of laten maken? Zo kies je | Drijfveer Media"
+  description="Een logo zelf maken kan, als je weet waar je op let. Stappenplan, gratis tools, wat een huisstijl nodig heeft en wanneer een ontwerper de moeite loont."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Logo en huisstijl', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Branding" titel="Logo zelf maken of laten maken? Logo en huisstijl op een rij" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een logo zelf maken kan in een middag. Een logo maken dat over tien jaar nog werkt, is een ander verhaal. Hier lees je hoe je het zelf goed aanpakt, en wanneer je beter een ontwerper inschakelt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een logo zelf maken is prima als je net begint, weinig budget hebt en het logo later mag vervangen.</li>
+            <li>Bepaal eerst je doelgroep en wat je wilt uitstralen. Pas daarna ga je schetsen.</li>
+            <li>Zorg altijd voor een vectorbestand (SVG, PDF of EPS). Zonder dat bestand loop je later vast.</li>
+            <li>Een logo laten maken kost bij een freelancer of klein bureau meestal € 300 tot € 1.500. Bij ons begint het bij € 495.</li>
+          </ul>
+        </div>
+
+        <h2 id="kan-dat">Logo zelf maken: kan dat?</h2>
+        <p>Ja. Met de tools van nu kan iedereen een logo zelf maken, ook zonder ontwerpopleiding. De vraag is niet of het kan, maar of het verstandig is voor jouw situatie. Een logo is het gezicht van je merk. Het staat op je website, je offerte, je bus en als klein icoontje in Google. Elke keer dat je het verandert, begint de herkenbaarheid opnieuw.</p>
+        <p>Zelf maken past vooral bij deze situaties:</p>
+        <ul class="vink">
+          <li>Je start net en wilt eerst kijken of je bedrijf aanslaat.</li>
+          <li>Je hebt een klein budget en liever geld over voor je website of je eerste klanten.</li>
+          <li>Je werkt vooral voor particulieren in je eigen dorp of regio, waar mensen jou kennen en niet je logo.</li>
+          <li>Je vindt het leuk en hebt gevoel voor vormgeving.</li>
+        </ul>
+        <p>Werk je voor zakelijke klanten, wil je groeien of moet het logo straks op een gevel en drie bussen? Dan is een logo een investering die je maar één keer goed wilt doen.</p>
+
+        <h2 id="goed-logo">Wat maakt een logo goed?</h2>
+        <p>Een goed logo is vooral bruikbaar. Mooi is mooi meegenomen. Test elk ontwerp op deze vijf punten:</p>
+        <ol>
+          <li><b>Eenvoudig.</b> Iemand moet het na één blik ongeveer kunnen natekenen.</li>
+          <li><b>Leesbaar in het klein.</b> Als profielfoto op WhatsApp of als icoontje in een browsertabblad moet je nog zien wat het is.</li>
+          <li><b>Werkt in één kleur.</b> Zwart op een factuur, wit op een donkere bus.</li>
+          <li><b>Onderscheidend.</b> Geen moersleutel als je installateur bent, geen huisje als je makelaar bent. Die heeft je concurrent al.</li>
+          <li><b>Past bij je doelgroep.</b> Een notaris en een kinderopvang vragen om een ander lettertype en andere kleuren.</li>
+        </ol>
+        <p>Je kiest daarbij uit drie soorten. Een woordmerk is alleen je naam in een eigen letter. Een beeldmerk is een teken zonder tekst. Een combinatie heeft allebei. Voor wie zelf aan de slag gaat, is een woordmerk de veiligste keuze. Een goed beeldmerk tekenen is echt vakwerk, en een los teken herkent pas iemand als je merk al bekend is.</p>
+
+        <h2 id="stappen">Zo maak je zelf een logo in zeven stappen</h2>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Schrijf op wat je wilt uitstralen</h3></div>
+        <p>Begin niet in een tool, maar met pen en papier. Voor wie werk je? Welke drie woorden moeten mensen bij je denken: degelijk, vriendelijk, snel, chic, stoer? En waarin ben je anders dan je concurrent? Weet je dat nog niet precies, lees dan eerst de gids <a href="/kennisbank/gidsen/wat-is-branding/">wat is branding</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>2. Kijk wat je concurrenten doen</h3></div>
+        <p>Zoek tien concurrenten op in Google en zet hun logo's naast elkaar. Je ziet meteen welke kleuren en vormen in jouw branche steeds terugkomen. Daar wil je juist niet op lijken. Zoek ook in het merkregister van het BOIP, het Benelux-Bureau voor de Intellectuele Eigendom, of er al een vergelijkbare naam of vorm staat.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Schets twintig ideeën op papier</h3></div>
+        <p>Twintig, niet drie. De eerste ideeën zijn bijna altijd de voor de hand liggende. Pas bij nummer twaalf komt er vaak iets wat echt van jou is. Gebruik een dikke stift, dan blijf je vanzelf eenvoudig.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>4. Kies een lettertype met karakter</h3></div>
+        <p>Bij een woordmerk is het lettertype je logo. Kies een letter die past bij je uitstraling en die goed leesbaar blijft. Google Fonts heeft honderden lettertypes die je gratis zakelijk mag gebruiken. Pas de letter daarna een beetje aan, bijvoorbeeld de afstand tussen de letters of één afwijkende letter. Dan wordt het echt van jou.</p>
+
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>5. Kies één of twee kleuren</h3></div>
+        <p>Minder is beter. Eén hoofdkleur en eventueel een accentkleur is genoeg. Check of je logo ook in zwart en wit werkt. Wat kleuren met mensen doen, lees je in de gids <a href="/kennisbank/gidsen/kleuren-in-marketing/">kleuren in marketing</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>6. Teken het uit als vectorbestand</h3></div>
+        <p>Een vectorbestand bestaat uit lijnen en vlakken in plaats van pixels. Je kunt het zo groot maken als je wilt, van visitekaartje tot spandoek, en het blijft scherp. Een JPG of PNG kan dat niet. Sla je logo dus op als SVG, PDF of EPS en bewaar dat bronbestand goed. Een drukker, een reclamemaker of een websitebouwer vraagt er altijd naar.</p>
+
+        <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>7. Test het in het echt</h3></div>
+        <p>Print je logo op postzegelformaat en op A4. Zet het als profielfoto op je telefoon. Plak het op een foto van je bus of je gevel. Laat het aan vijf mensen uit je doelgroep zien en vraag wat ze denken dat je doet. Niet of ze het mooi vinden, want dan zeggen ze uit beleefdheid ja.</p>
+
+        <h2 id="tools">Gratis tools om een logo te ontwerpen</h2>
+        <p>Dit zijn tools die we zelf kennen en die voor een beginner goed te doen zijn.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Goed voor</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Canva</td><td>Snel iets maken met sjablonen</td><td>Sjablonen gebruiken anderen ook</td></tr>
+              <tr><td>Adobe Express</td><td>Idem, met nette lettertypes</td><td>Niet alles zit in de gratis versie</td></tr>
+              <tr><td>Figma</td><td>Zelf tekenen, export naar SVG</td><td>Even inkomen</td></tr>
+              <tr><td>Inkscape</td><td>Gratis vectorprogramma, alles kan</td><td>Leercurve</td></tr>
+              <tr><td>AI-logogenerators</td><td>Inspiratie en snelle richtingen</td><td>Rechten en eigenheid onzeker</td></tr>
+              <tr><td>Google Fonts</td><td>Gratis lettertypes</td><td>Kies er hooguit twee</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Lees bij elke tool de licentievoorwaarden voordat je begint. Bij sommige diensten mag je een logo dat met hun sjablonen of stockelementen is gemaakt niet als merk laten vastleggen. Bij een logo dat volledig door AI is gemaakt, is het nog onzeker of er auteursrecht op rust. Gebruik AI dus gerust voor ideeën, maar maak het eindontwerp zelf.</p>
+
+        <h2 id="huisstijl">Huisstijl zelf maken: wat hoort erbij?</h2>
+        <p>Een logo is het begin. Een huisstijl is de set vaste afspraken die zorgt dat alles van je bedrijf er hetzelfde uitziet. Ook een huisstijl zelf maken is goed te doen, als je het klein houdt. Dit heb je minimaal nodig:</p>
+        <ul class="vink">
+          <li>Je logo in drie versies: kleur, zwart en wit. Liefst ook een vierkante versie voor profielfoto's.</li>
+          <li>Twee of drie kleuren met vaste codes: HEX voor je website, CMYK voor drukwerk.</li>
+          <li>Eén lettertype voor koppen en één voor lopende tekst.</li>
+          <li>Een ontwerp voor je visitekaartjes, briefpapier en e-mailhandtekening.</li>
+          <li>Een offertesjabloon in dezelfde stijl. Die vergeten de meeste mensen, terwijl een klant hem heel goed leest.</li>
+        </ul>
+        <p>Zet alles op één of twee pagina's: een mini-huisstijlhandboek. Geef dat aan iedereen die iets voor je maakt. Zo voorkom je dat er na een jaar vijf soorten blauw rondgaan.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Bewaar je bronbestanden</p>
+          <p>Een van de eerste dingen die een websitebouwer of drukker vraagt, is je logo als vectorbestand. Heb je alleen een klein plaatje uit een oude mail, dan moet het logo opnieuw worden opgebouwd. Dat is op te lossen, maar het kost tijd en geld die je liever ergens anders aan besteedt. Zet je bronbestanden dus op een vaste plek, met een kopie in de cloud.</p>
+        </div>
+
+        <h2 id="kosten">Wat kost een logo laten maken?</h2>
+        <p>De prijzen lopen ver uiteen. Dit zijn gangbare bedragen in Nederland, als indicatie.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Indicatie</th><th>Wat je krijgt</th></tr></thead>
+            <tbody>
+              <tr><td>Zelf maken met een tool</td><td>€ 0 tot € 100</td><td>Snel resultaat, weinig eigenheid</td></tr>
+              <tr><td>Ontwerpplatform of wedstrijdsite</td><td>€ 50 tot € 400</td><td>Veel keus, wisselende kwaliteit, weinig vragen vooraf</td></tr>
+              <tr><td>Freelance ontwerper of klein bureau</td><td>€ 300 tot € 1.500</td><td>Persoonlijk ontwerp, bestanden en rechten</td></tr>
+              <tr><td>Reclame- of brandingbureau</td><td>€ 1.500 tot € 7.500 en meer</td><td>Uitgebreid traject met strategie</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let bij elke offerte op drie dingen: krijg je de vectorbestanden, gaan de rechten schriftelijk naar jou over, en hoeveel correctierondes zitten erbij? Over die rechten lees je meer op de pagina <a href="/branding/logo-laten-maken/">logo laten maken</a>.</p>
+
+        <h2 id="kiezen">Zelf maken of laten maken: zo kies je</h2>
+        <p>Tel het eens uit in uren. Een goed logo zelf maken kost een beginner al snel twintig uur, inclusief zoeken, schetsen, leren en twijfelen. Wat levert een uur van jouw eigen werk op? Bij een uurtarief van € 60 heb je dan € 1.200 aan tijd in je logo gestoken. Vaak zonder vectorbestand en zonder test op een bus.</p>
+        <p>Onze eerlijke vuistregel: start je net en is het budget krap, maak dan zelf een eenvoudig woordmerk. Doe het netjes, volg de stappen hierboven, en vervang het als het bedrijf loopt. Heb je al klanten en wil je groeien, laat het dan maken. Een logo gaat tien jaar mee. Een logo van € 495 kost je dan minder dan € 50 per jaar.</p>
+        <p>Bij Drijfveer Media kost een logo vanaf € 495 en een complete <a href="/branding/huisstijl-laten-maken/">huisstijl</a> vanaf € 995, exclusief btw. Je krijgt alle bestanden en de rechten op jouw naam. Meer over hoe we werken, lees je op de pagina over <a href="/branding/">branding</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever een logo dat in één keer goed is?" intro="Wat je van ons mag verwachten als we je logo of huisstijl ontwerpen." />
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik gratis een logo maken?', a: 'Ja, met tools als Canva, Figma of Inkscape. Let er wel op dat je een vectorbestand kunt downloaden en dat je het logo zakelijk mag gebruiken. Gratis betekent niet altijd dat het logo echt van jou is.' },
+      { v: 'Welk bestandsformaat heb ik nodig voor mijn logo?', a: 'Een vectorbestand (SVG, PDF of EPS) als bron, en PNG met doorzichtige achtergrond voor in Word, e-mail en social media. Een JPG alleen is te weinig.' },
+      { v: 'Mag ik een logo laten maken met AI?', a: 'Voor ideeën is AI handig. Bij een logo dat helemaal door AI is gemaakt, is het onzeker of er auteursrecht op rust. Wil je je logo als merk vastleggen, laat het eindontwerp dan door een mens maken.' },
+      { v: 'Wat is het verschil tussen een logo en een huisstijl?', a: 'Het logo is het teken van je bedrijf. De huisstijl is het hele systeem eromheen: kleuren, lettertypes en hoe je alles toepast op briefpapier, visitekaartjes en je website.' },
+      { v: 'Hoe lang duurt het om een logo te laten maken?', a: 'Bij een freelancer of klein bureau meestal twee tot zes weken. Het hangt vooral af van hoe snel je keuzes maakt tussen de ontwerprondes.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Logo laten maken', href: '/branding/logo-laten-maken/', tekst: 'Vanaf € 495, met alle bestanden en rechten.' },
+      { label: 'Gids', titel: 'Wat is branding?', href: '/kennisbank/gidsen/wat-is-branding/', tekst: 'Merk, doelgroep en USP uitgelegd.' },
+      { label: 'Gids', titel: 'Kleuren in marketing', href: '/kennisbank/gidsen/kleuren-in-marketing/', tekst: 'Wat kleuren betekenen en hoe je kiest.' },
+    ]}
+  />
+
+  <Actie titel="Twijfel je of je logo nog werkt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je uitstraling, en zegt eerlijk of een nieuw logo nodig is of dat opfrissen genoeg is.`} />
+</Base>

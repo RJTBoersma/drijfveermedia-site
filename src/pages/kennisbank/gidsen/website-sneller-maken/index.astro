@@ -1,0 +1,228 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--website-sneller-maken.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/website-sneller-maken/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Waarom snelheid geld oplevert' },
+  { id: 'meten', titel: 'Hoe snel is je website nu?' },
+  { id: 'core-web-vitals', titel: 'Wat zijn de Core Web Vitals?' },
+  { id: 'gewicht', titel: 'Hoe zwaar is een pagina?' },
+  { id: 'diagnose', titel: 'Wat remt jouw site af?' },
+  { id: 'stappen', titel: 'Tien stappen naar een snellere site' },
+  { id: 'wordpress', titel: 'Een trage WordPress-website' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'zelf-of-laten-doen', titel: 'Zelf doen of laten doen?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Website sneller maken: zo haal je de Core Web Vitals',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  citation: [
+    'https://developers.google.com/search/docs/appearance/core-web-vitals',
+    'https://web.dev/articles/vitals',
+    'https://web.dev/articles/ttfb',
+    'https://developers.google.com/speed/docs/insights/v5/about',
+    'https://almanac.httparchive.org/en/2025/page-weight',
+  ],
+}];
+---
+<Base
+  title="Website sneller maken en Core Web Vitals | Drijfveer Media"
+  description="Website sneller maken? Meet de snelheid met PageSpeed Insights, begrijp de Core Web Vitals en los de grootste remmen zelf op, stap voor stap."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Website sneller maken', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Website sneller maken: zo haal je de Core Web Vitals">
+    <p>Een trage website kost je bezoekers, aanvragen en posities in Google. Je website sneller maken lukt vaak in een middag. In deze gids lees je hoe je meet, wat de cijfers betekenen en waar de winst zit.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Meet eerst met Google PageSpeed Insights. Kijk naar de gegevens van echte bezoekers, niet alleen naar het rapportcijfer.</li>
+            <li>De Core Web Vitals zijn LCP (laden), INP (reageren) en CLS (verspringen). Goed is onder 2,5 seconden, onder 200 milliseconden en onder 0,1.</li>
+            <li>De grootste winst zit bijna altijd in afbeeldingen, caching, minder plugins en betere webhosting.</li>
+            <li>Snelheid telt mee in Google, maar het is geen toverstaf. Een snelle site met zwakke teksten blijft onzichtbaar.</li>
+          </ul>
+        </div>
+
+        <h2 id="waarom">Waarom een snelle website geld oplevert</h2>
+        <p>Een snelle website levert meer aanvragen op, omdat minder mensen afhaken. Iemand die op zijn telefoon een loodgieter zoekt, gaat niet staan wachten. Blijft het scherm wit, dan tikt hij op terug en kiest hij het volgende resultaat. Die klant zie je nooit in je cijfers terug.</p>
+        <p>Google kijkt daar ook naar. Google raadt site-eigenaren aan om goede Core Web Vitals te halen, omdat dat past bij wat de rankingsystemen willen belonen. Google zegt er wel eerlijk bij dat het altijd de meest relevante pagina laat zien, ook als die wat trager is. Snelheid is dus een voorwaarde, geen trucje. Bij twee even goede pagina's wint de snelste vaker.</p>
+        <p>Er is nog een reden die vaak vergeten wordt. Google gebruikt de mobiele versie van je site om hem te indexeren en te beoordelen. Is je website op een telefoon met matig bereik traag, dan is dat de versie waarop je beoordeeld wordt.</p>
+
+        <h2 id="meten">Hoe snel is je website nu?</h2>
+        <p>Je meet de snelheid van je website gratis met Google PageSpeed Insights. Vul je adres in op pagespeed.web.dev en wacht een halve minuut. Je krijgt twee soorten uitkomsten, en het verschil is belangrijk.</p>
+        <ul>
+          <li><b>Gegevens van echte bezoekers.</b> Bovenaan staat hoe je site de afgelopen 28 dagen presteerde bij mensen die Chrome gebruiken. Dit telt voor Google. Kleine sites hebben soms te weinig bezoekers, dan blijft dit blok leeg.</li>
+          <li><b>De labtest.</b> Daaronder staat het bekende cijfer van 0 tot 100. Dat is één testrit met Lighthouse op een nagebootste, gemiddelde telefoon. Handig om problemen te vinden, maar het cijfer schommelt per meting.</li>
+        </ul>
+        <p>Test altijd een paar pagina's: je homepage, een dienstpagina en een pagina met veel foto's. Wil je een tweede mening, probeer dan GTmetrix. Die laat in een waterval zien welk bestand hoeveel seconden kost. Heb je Search Console, kijk dan bij Core Web Vitals. Daar zie je per groep pagina's wat goed gaat en wat niet. Hoe je dat instelt, lees je in de gids <a href="/kennisbank/gidsen/google-search-console/">Search Console gebruiken</a>.</p>
+        <h3>Zo lees je het rapport van PageSpeed Insights</h3>
+        <ol>
+          <li>Kies bovenaan eerst Mobiel. Daar zitten de meeste van je bezoekers.</li>
+          <li>Kijk of de beoordeling van de Core Web Vitals geslaagd of niet geslaagd is. Dat is het oordeel over echte bezoekers.</li>
+          <li>Kijk welke van de drie meetwaarden rood of oranje is. Daar begin je.</li>
+          <li>Scrol naar de diagnose onder de labtest. Daar staat welk bestand of welk script de vertraging veroorzaakt, met een schatting van wat het scheelt.</li>
+          <li>Pak eerst de punten met de grootste besparing in seconden aan. Kleine punten van een paar milliseconden kunnen wachten.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Laat je niet gek maken door de 100</p>
+          <p>Een score van 100 is leuk voor een screenshot. Je bezoekers merken het verschil tussen 85 en 100 niet. Ze merken wel of je pagina binnen twee seconden staat. Stuur dus op de drie meetwaarden hieronder, niet op het cijfer.</p>
+        </div>
+
+        <h2 id="core-web-vitals">Wat zijn de Core Web Vitals?</h2>
+        <p>De Core Web Vitals zijn drie meetwaarden waarmee Google de ervaring van een bezoeker in cijfers vangt: hoe snel de pagina staat, hoe snel hij reageert en of hij rustig blijft staan. Een pagina scoort goed als minstens 75 procent van de bezoeken binnen de grens blijft, apart gemeten voor mobiel en desktop.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Meetwaarde</th><th>Wat het meet</th><th>Goed</th><th>Slecht</th></tr></thead>
+            <tbody>
+              <tr><td>LCP (Largest Contentful Paint)</td><td>Hoe lang het duurt tot het grootste blok in beeld staat</td><td>tot 2,5 seconden</td><td>boven 4 seconden</td></tr>
+              <tr><td>INP (Interaction to Next Paint)</td><td>Hoe snel de pagina reageert op een tik of klik</td><td>tot 200 ms</td><td>boven 500 ms</td></tr>
+              <tr><td>CLS (Cumulative Layout Shift)</td><td>Hoeveel de pagina verspringt tijdens het laden</td><td>tot 0,1</td><td>boven 0,25</td></tr>
+              <tr><td>TTFB (Time to First Byte), geen Core Web Vital</td><td>Hoe snel de server de eerste data stuurt</td><td>tot 0,8 seconden</td><td>boven 1,8 seconden</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>LCP: staat de pagina er?</h3></div>
+        <p>Het grootste element is meestal de grote foto bovenaan of de eerste kop. Een foto van 3 MB rechtstreeks van de camera is de bekendste boosdoener. Een trage server is de tweede.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>INP: reageert de pagina?</h3></div>
+        <p>INP verving op 12 maart 2024 de oude meetwaarde FID. Het meet hoe lang het duurt voordat er iets zichtbaar gebeurt na een klik. Te veel JavaScript is hier bijna altijd de oorzaak: chatwidgets, trackers, sliders en zware pagebuilders.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>CLS: blijft alles staan?</h3></div>
+        <p>Je kent het. Je wilt op een knop tikken en net op dat moment schuift er een banner boven en tik je op iets anders. Dat is verspringen. Het komt door afbeeldingen zonder vaste maat, lettertypen die laat inladen en blokken die later worden ingevoegd.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>TTFB: hoe snel antwoordt de server?</h3></div>
+        <p>TTFB telt niet als Core Web Vital, maar alles begint ermee. Zolang de server niets terugstuurt, kan de browser niets laten zien. Volgens web.dev is 0,8 seconden of minder een goede richtlijn. Is je TTFB hoog, dan ligt het bijna altijd aan de webhosting, een oude PHP-versie of het ontbreken van caching.</p>
+
+        <h2 id="gewicht">Hoe zwaar is een gemiddelde pagina?</h2>
+        <p>Het HTTP Archive meet elk jaar miljoenen websites. Volgens de Web Almanac van 2025 woog de mediane homepage op mobiel in juli 2025 2,6 MB. Dat is 8,4 procent meer dan een jaar eerder. Zo was dat gewicht verdeeld:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort bestand</th><th>Mediane mobiele homepage</th></tr></thead>
+            <tbody>
+              <tr><td>Afbeeldingen</td><td>911 KB</td></tr>
+              <tr><td>JavaScript</td><td>632 KB</td></tr>
+              <tr><td>Lettertypen</td><td>122 KB</td></tr>
+              <tr><td>CSS</td><td>77 KB</td></tr>
+              <tr><td>HTML</td><td>22 KB</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Afbeeldingen en JavaScript zijn samen dus het grootste deel. Daar zit ook de winst. JavaScript is daarbij duurder dan zijn bestandsgrootte doet vermoeden: een telefoon moet het niet alleen downloaden, maar ook uitvoeren. Op een goedkope telefoon kan dat het scherm een paar seconden laten bevriezen.</p>
+
+        <h2 id="diagnose">Wat remt jouw site af?</h2>
+        <p>Begin niet met alles tegelijk. Kijk eerst welk symptoom je ziet en zoek in deze tabel de waarschijnlijke oorzaak.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je ziet</th><th>Waarschijnlijke oorzaak</th><th>Eerste oplossing</th></tr></thead>
+            <tbody>
+              <tr><td>Het scherm blijft lang wit</td><td>Trage server of geen caching</td><td>Caching aanzetten, hosting en PHP-versie nakijken</td></tr>
+              <tr><td>De tekst staat er, de grote foto komt laat</td><td>Te zware of te grote afbeelding</td><td>Foto verkleinen en omzetten naar WebP</td></tr>
+              <tr><td>Knoppen reageren traag op een tik</td><td>Te veel JavaScript</td><td>Scripts en plugins schrappen</td></tr>
+              <tr><td>De pagina verspringt tijdens het laden</td><td>Afbeeldingen of banners zonder vaste maat</td><td>Breedte en hoogte invullen, ruimte reserveren</td></tr>
+              <tr><td>Alleen de homepage is traag</td><td>Slider, video of te veel beeld bovenaan</td><td>Eén foto met een duidelijke kop</td></tr>
+              <tr><td>Alleen de beheeromgeving is traag</td><td>Hosting of een zware plugin op de achtergrond</td><td>Plugins één voor één uitzetten</td></tr>
+              <tr><td>Traag op drukke momenten</td><td>Gedeelde hosting die het niet aankan</td><td>Zwaarder pakket of andere webhosting</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="stappen">Website sneller maken in tien stappen</h2>
+        <p>Je website sneller maken doe je het best in deze volgorde. Begin bij stap 1 en meet na elke stap opnieuw. Zo weet je wat werkte. Maak eerst een back-up, zeker bij een WordPress website.</p>
+        <ol>
+          <li><b>Verklein je afbeeldingen.</b> Een foto hoeft zelden breder te zijn dan 1.600 pixels. Zet hem om naar <a href="/kennisbank/wat-is/webp/">WebP</a> of AVIF en de bestandsgrootte gaat vaak van 2 MB naar 150 KB. Gratis tools: Squoosh in je browser, of een plugin als ShortPixel of Imagify.</li>
+          <li><b>Zet caching aan.</b> Caching bewaart een kant-en-klare versie van je pagina, zodat de server niet elke keer opnieuw hoeft te rekenen. In WordPress doe je dat met een plugin als WP Rocket, LiteSpeed Cache of WP Super Cache. Vaak scheelt dit meteen een seconde.</li>
+          <li><b>Ruim plugins en scripts op.</b> Elke plugin laadt code, ook op pagina's waar je hem niet gebruikt. Haal weg wat je niet mist. Kijk kritisch naar chatwidgets, social-feeds en drie verschillende trackers.</li>
+          <li><b>Laad de grote foto bovenaan als eerste.</b> Lazy loading is goed voor afbeeldingen lager op de pagina, maar niet voor de bovenste. Die moet juist voorrang krijgen.</li>
+          <li><b>Beperk lettertypen.</b> Elke letterdikte is een apart bestand. Twee lettertypen met elk twee diktes is genoeg. Host ze bij voorkeur op je eigen server.</li>
+          <li><b>Schrap de slider en de autoplay-video.</b> Ze zijn zwaar, en bezoekers klikken er zelden op. Eén sterke foto met een duidelijke kop werkt beter.</li>
+          <li><b>Laat video pas laden bij een klik.</b> Een ingesloten YouTube-video laadt meteen een berg scripts mee. Toon eerst een stilstaand plaatje met een afspeelknop, en laad de video pas als iemand erop klikt. De Web Almanac noemt dat een facade.</li>
+          <li><b>Geef elk beeld een vaste maat.</b> Vul bij elke afbeelding de breedte en hoogte in. Dan reserveert de browser alvast ruimte en verspringt er niets.</li>
+          <li><b>Zet compressie aan en ruim doorverwijzingen op.</b> Met gzip- of Brotli-compressie verstuurt de server tekstbestanden kleiner. En een link die via twee doorverwijzingen loopt, kost twee keer extra wachten. Laat elke oude URL in één keer naar de nieuwe wijzen.</li>
+          <li><b>Kies betere webhosting.</b> Een goedkoop pakket deelt een server met honderden andere sites. Let op een actuele PHP-versie, een server in Nederland of Duitsland en ingebouwde caching. Een CDN zoals Cloudflare helpt bezoekers die verder weg zitten.</li>
+        </ol>
+        <p>Met de eerste drie stappen maak je de meeste sites al een stuk sneller. De rest is fijnslijpen.</p>
+
+        <h2 id="wordpress">Is je WordPress-website traag? Hier zit het meestal</h2>
+        <p>Een trage WordPress website heeft bijna altijd dezelfde oorzaken. Een zwaar thema met een pagebuilder die op elke pagina honderden kilobytes extra laadt. Dertig plugins, waarvan de helft niet meer gebruikt wordt. Foto's die rechtstreeks uit de telefoon zijn geüpload. En goedkope hosting die op drukke momenten gaat haperen.</p>
+        <p>We zijn er zelf ook niet vrij van gebleven. Onze oude homepage woog 2,3 MB en laadde 14 scripts. Voor de nieuwe site hebben we een harde grens gesteld: maximaal 500 KB per pagina (700 KB voor de homepage), alle tekst direct in de HTML en geen slider. Dat lukt alleen door bij elk onderdeel te vragen of het echt nodig is. Die vraag kun je bij je eigen site ook stellen.</p>
+        <p>Is alleen de beheeromgeving traag, terwijl je website laadt zoals het hoort? Dan ligt het meestal aan de hosting of aan een plugin die op de achtergrond zwaar werk doet. Zet plugins één voor één uit en kijk wanneer het beter wordt. Kijk ook bij Tools, Sitediagnose. Daar meldt WordPress zelf of je PHP-versie verouderd is en of er iets traag reageert.</p>
+        <h3>Vijf snelle controles in WordPress</h3>
+        <ul class="vink">
+          <li>Bij Plugins, Geïnstalleerde plugins: verwijder elke plugin die uit staat of die je niet mist.</li>
+          <li>Bij Media: open je grootste foto's. Alles boven de 500 KB kan kleiner.</li>
+          <li>Bij je hostingpartij: draai je op PHP 8.3 of nieuwer?</li>
+          <li>Staat er een cacheplugin aan, en is de cache na een wijziging geleegd?</li>
+          <li>Laadt je thema een pagebuilder op pagina's die hem niet gebruiken?</li>
+        </ul>
+
+        <h2 id="fouten">Veelgemaakte fouten bij het versnellen</h2>
+        <ul>
+          <li><b>Drie cacheplugins tegelijk.</b> Ze zitten elkaar in de weg en kunnen je site zelfs breken. Kies er één.</li>
+          <li><b>Alleen op desktop testen.</b> Op je laptop met glasvezel voelt elke site snel. Test op mobiel.</li>
+          <li><b>Alles lazy loaden.</b> Ook de foto bovenaan. Dan wordt LCP juist slechter.</li>
+          <li><b>Jagen op 100.</b> Uren werk voor een paar punten die geen bezoeker merkt.</li>
+          <li><b>Geen back-up vooraf.</b> Juist instellingen voor caching en het samenvoegen van scripts kunnen een site breken.</li>
+          <li><b>Niet opnieuw meten.</b> Zonder meting na elke stap weet je niet wat hielp en wat niet.</li>
+        </ul>
+
+        <h2 id="zelf-of-laten-doen">Zelf doen of laten doen?</h2>
+        <p>Afbeeldingen verkleinen, plugins opruimen en caching aanzetten kun je zelf. Reken op een middag. Voor de rest van het werk om je website sneller te maken, zoals JavaScript, de opbouw van het thema of een verhuizing naar andere hosting, is het slim om iemand mee te laten kijken. Een fout in de cache-instellingen kan je site onbereikbaar maken, en dan ben je verder van huis.</p>
+        <p>Wij nemen snelheid mee in een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a>, vanaf € 395. Je krijgt een lijst op volgorde van wat het meeste oplevert, in gewone taal. Heb je een WordPress-site, dan houdt ons <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud vanaf € 39 per maand</a> hem snel en veilig. Snelheid is een onderdeel van <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>, en we kijken dus ook altijd naar je teksten en je vindbaarheid. Een site die in een seconde laadt maar niets zegt, levert geen klanten op.</p>
+        <div class="kader klein">
+          <p class="kader-titel">Bronnen (geraadpleegd oktober 2026)</p>
+          <p>Google Search Central, <a href="https://developers.google.com/search/docs/appearance/core-web-vitals?hl=nl" rel="noopener">Core Web Vitals en zoekresultaten</a> en de documentatie over paginabeleving en mobile-first indexing. web.dev, artikelen over de Web Vitals, TTFB en de overstap van FID naar INP. Google, documentatie van PageSpeed Insights. HTTP Archive, <a href="https://almanac.httparchive.org/en/2025/page-weight" rel="noopener">Web Almanac 2025, Page Weight</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={13} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het voor je doen?" intro="Snelheid is techniek, maar het doel is meer aanvragen. Daar spreken we je ook op aan." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is een goede laadtijd voor een website?', a: 'Streef ernaar dat het grootste element binnen 2,5 seconden in beeld staat, gemeten op mobiel. Dat is de grens die Google als goed beschouwt. Onder 2 seconden is mooi.' },
+      { v: 'Telt de snelheid van mijn website mee in Google?', a: 'Ja. Google raadt goede Core Web Vitals aan omdat dat past bij wat de rankingsystemen belonen. Het is wel één signaal van vele. Goede inhoud weegt zwaarder, maar bij twee vergelijkbare pagina\'s helpt snelheid.' },
+      { v: 'Waarom geeft PageSpeed Insights steeds een andere score?', a: 'Het cijfer van 0 tot 100 komt uit een labtest, en die verschilt per meting door netwerk en server. Kijk liever naar de gegevens van echte bezoekers bovenaan het rapport.' },
+      { v: 'Moet mijn site een score van 100 halen?', a: 'Nee. Zorg dat LCP, INP en CLS alle drie groen zijn. Of je dan 88 of 100 scoort, merkt een bezoeker niet.' },
+      { v: 'Is GTmetrix beter dan PageSpeed Insights?', a: 'Ze vullen elkaar aan. PageSpeed Insights laat zien wat echte bezoekers ervaren. GTmetrix laat in een waterval zien welk bestand hoeveel tijd kost. Gebruik ze allebei.' },
+      { v: 'Helpt een andere hostingpartij?', a: 'Als je TTFB hoog is, vaak wel. Ligt het aan zware foto\'s of te veel scripts, dan helpt betere hosting weinig. Meet daarom eerst.' },
+      { v: 'Wat kost het om mijn website sneller te laten maken?', a: 'Bij ons valt snelheid onder een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a>, vanaf € 395. Voor WordPress-sites is er <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud</a> vanaf € 39 per maand, inclusief snelheid.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Technische SEO en SEO-audit', href: '/zoekmachine-optimalisatie/technische-seo/', tekst: 'Vanaf € 395. Wij vinden wat je site remt.' },
+      { label: 'Gids', titel: 'Search Console gebruiken', href: '/kennisbank/gidsen/google-search-console/', tekst: 'Zo zie je wat Google van je site vindt.' },
+      { label: 'Begrip', titel: 'Wat is WebP?', href: '/kennisbank/wat-is/webp/', tekst: 'Het beeldformaat dat je foto\'s licht maakt.', teken: 'scherm' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat jouw site afremt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je snelheid en je vindbaarheid, en belt je met de drie dingen die het meeste opleveren.`} />
+</Base>

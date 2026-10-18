@@ -1,0 +1,85 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--webp.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/webp/';
+const definitie = 'WebP is een afbeeldingsformaat van Google dat foto\'s en plaatjes flink kleiner maakt dan JPEG of PNG, zonder dat je het verschil in kwaliteit ziet.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'WebP',
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is WebP? Kleinere foto, snellere site | Drijfveer Media"
+  description="Wat is WebP? Het afbeeldingsformaat van Google maakt foto's een kwart tot een derde kleiner dan JPEG. Zo werkt het en zo zet je je foto's om."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'WebP', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is WebP?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum="2026-10-17" />
+      <p>Je webbouwer zegt dat je foto's "naar WebP moeten". Wat betekent dat? Het is een modernere manier om afbeeldingen op te slaan. Google bracht het formaat in 2010 uit, met één doel: het web sneller maken. Inmiddels openen alle gangbare browsers het, van Chrome en Safari tot Firefox en Edge.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Hoe het formaat zo klein blijft</h2></div>
+      <p>Elk afbeeldingsformaat gebruikt compressie. Het bestand wordt slim ingepakt, zodat het minder ruimte kost. JPEG doet dat al sinds 1992. WebP gebruikt een techniek uit de videowereld: het voorspelt de kleur van een blokje pixels uit de blokjes eromheen en bewaart alleen het verschil.</p>
+      <p>Het resultaat volgens Google zelf: een foto is 25 tot 34 procent kleiner dan een JPEG van dezelfde kwaliteit. Zonder enig kwaliteitsverlies is het bestand 26 procent kleiner dan een PNG. Transparantie kan ook, dus een logo met een doorzichtige achtergrond past erin. En bewegende plaatjes, als lichtere vervanger van een GIF.</p>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2>Waarom WebP je site sneller maakt</h2></div>
+      <p>Op de meeste websites zijn foto's het zwaarste deel van de pagina. Hoe groter de totale bestandsgrootte, hoe langer de laadtijd. Zeker op een telefoon met matig bereik. Bezoekers wachten daar niet op. Google meet die snelheid ook, met de <a href="/kennisbank/gidsen/website-sneller-maken/">Core Web Vitals</a>, en weegt hem mee.</p>
+      <p>Snelheid alleen zet je niet bovenaan. Een trage site kost je wel bezoekers die al op weg naar je waren.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2>Een rekenvoorbeeld</h2></div>
+      <p>Stel: een hovenier in Roden zet twintig projectfoto's op zijn site, zo van zijn telefoon. Elke foto is 4000 pixels breed en 3 MB groot. Die ene pagina weegt dan 60 MB. Bij een redelijke 4G-verbinding van 20 megabit per seconde ben je ruim twintig seconden aan het laden.</p>
+      <p>De oplossing: verklein de foto's eerst naar 1600 pixels breed. Groot genoeg voor elk scherm. Zet ze daarna om naar WebP. Elke foto weegt nu zo'n 200 kB, de hele pagina 4 MB. Eerlijk is eerlijk: het meeste haal je hier met het verkleinen. Het nieuwe formaat haalt er daarna nog een flink stuk af. <span class="muted">(Verzonnen voorbeeld, met realistische getallen.)</span></p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Kijk wat je nu hebt. Klik met rechts op een foto op je site, open hem in een nieuw tabblad en kijk naar het einde van het adres: .jpg, .png of .webp.</li>
+        <li>Werk je met WordPress? Dat kan sinds versie 5.8 met WebP overweg. Een plug-in als Converter for Media of EWWW Image Optimizer zet je bestaande afbeeldingen automatisch om.</li>
+        <li>Losse foto's converteren kan gratis in je browser met Squoosh. Photoshop kan ook direct in dit formaat opslaan.</li>
+        <li>Verklein een foto altijd eerst naar de maat die je echt nodig hebt.</li>
+        <li>Geef elke afbeelding een goede <a href="/kennisbank/wat-is/alt-tekst/">alt-tekst</a>. Dat helpt je in Google Afbeeldingen.</li>
+      </ul>
+
+      <h2>En AVIF dan?</h2>
+      <p>AVIF is nog nieuwer en vaak nog kleiner. Moderne browsers kunnen het inmiddels allemaal tonen. Het omzetten kost wel meer rekenkracht, en niet elke plug-in kan het al. Voor de meeste mkb-sites is WebP nu de veilige keuze. Je kunt ook beide aanbieden: de browser kiest dan zelf.</p>
+      <p>Op deze site doen we het zelf ook, bijvoorbeeld voor de foto's van ons team.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/website-sneller-maken/">Website sneller maken</a> of laat je site doorlichten met een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-check</a>. Met ons <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a> blijven je afbeeldingen ook na de lancering licht. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Actie titel="Hoe zwaar is jouw website?" tekst={`We kijken gratis naar je laadtijd en je afbeeldingen. ${site.contactpersoon} belt je met de drie punten die het snelst verschil maken.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

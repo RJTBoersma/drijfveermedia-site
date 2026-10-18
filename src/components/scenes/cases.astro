@@ -1,0 +1,68 @@
+---
+// Scène voor /cases/: drie dossierkaarten naast elkaar, elk met de groei van één klant. De oranje staven groeien, een cursor bladert langs de kaarten.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kaarten = [
+  { x: 28, soort: 'Klussen', getal: '+87%', na: 94 },
+  { x: 175, soort: 'Mediation', getal: '+47%', na: 74 },
+  { x: 322, soort: 'Dakramen', getal: '+32%', na: 66 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: drie kaarten met de groei van drie klanten, 87, 47 en 32 procent meer bezoekers. Oranje staven groeien en een cursor wijst ze een voor een aan.'}>
+  <path class="l" d="M16 236h448" />
+  {kaarten.map((k) => (
+    <g>
+      <rect x={k.x} y="52" width="130" height="164" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect class="v" x={k.x + 14} y="68" width="58" height="8" rx="4" />
+      <circle cx={k.x + 112} cy="72" r="6" fill="#e8eef4" />
+      <text x={k.x + 14} y="102" font-size="12" font-weight="700" class="zacht">{k.soort}</text>
+      <text x={k.x + 14} y="138" font-size="30" font-weight="900" fill="#10283f">{k.getal}</text>
+      <rect x={k.x + 14} y="154" width="50" height="14" rx="5" fill="#e8eef4" />
+      <rect x={k.x + 14} y="174" width={k.na} height="14" rx="5" fill="none" stroke="#d9e1ea" stroke-width="1.5" stroke-dasharray="4 3" />
+      <text x={k.x + 14} y="204" font-size="10" class="zacht">bezoekers uit Google</text>
+    </g>
+  ))}
+  {!mini && (
+    <g>
+      {kaarten.map((k, i) => (
+        <rect class="cases-staaf" style={`--i:${i}`} x={k.x + 14} y="174" width={k.na} height="14" rx="5" fill="#ff6600" />
+      ))}
+      <g class="cases-cursor">
+        <path d="M0 0l0 22 6-6 5 11 4-2-5-11 8 0z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+        <circle class="cases-klik" cx="0" cy="0" r="12" fill="none" stroke="#ff6600" stroke-width="2" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .cases-staaf { transform-box: fill-box; transform-origin: left center; }
+  :global(.teken-js) .cases-staaf { transform: scaleX(0); }
+  .in-beeld .cases-staaf { animation: cases-groei 0.9s cubic-bezier(.2,.8,.2,1) calc(0.5s + var(--i) * 0.35s) forwards; }
+  .cases-cursor { transform: translate(120px, 150px); }
+  :global(.teken-js) .cases-cursor { opacity: 0; }
+  .in-beeld .cases-cursor { animation: cases-wijs 7s ease-in-out 1.8s infinite both; }
+  .cases-klik { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .in-beeld .cases-klik { animation: cases-ring 7s ease-out 1.8s infinite both; }
+  @keyframes cases-groei { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes cases-wijs {
+    0% { opacity: 0; transform: translate(120px, 150px); }
+    8% { opacity: 1; }
+    25%, 33% { transform: translate(120px, 150px); }
+    50%, 58% { transform: translate(267px, 150px); }
+    75%, 83% { transform: translate(414px, 150px); }
+    95% { opacity: 1; }
+    100% { opacity: 0; transform: translate(414px, 150px); }
+  }
+  @keyframes cases-ring {
+    0%, 26% { opacity: 0; transform: scale(0.3); }
+    29% { opacity: 1; }
+    33% { opacity: 0; transform: scale(1.4); }
+    51% { opacity: 0; transform: scale(0.3); }
+    54% { opacity: 1; }
+    58% { opacity: 0; transform: scale(1.4); }
+    76% { opacity: 0; transform: scale(0.3); }
+    79% { opacity: 1; }
+    83%, 100% { opacity: 0; transform: scale(1.4); }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .cases-staaf, .in-beeld .cases-cursor, .in-beeld .cases-klik { animation: none; } }
+</style>

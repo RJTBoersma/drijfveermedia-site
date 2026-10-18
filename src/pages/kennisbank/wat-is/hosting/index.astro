@@ -1,0 +1,237 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--hosting.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/hosting/';
+const datum = '2026-10-18';
+const definitie = 'Hosting, of webhosting, is ruimte en rekenkracht huren op een server die dag en nacht aan internet hangt, zodat je website en vaak ook je e-mail altijd bereikbaar zijn.';
+const hoofdstukken = [
+  { id: 'gewone-taal', titel: 'Hosting in gewone taal' },
+  { id: 'drie-dingen', titel: 'Domeinnaam, hosting en website' },
+  { id: 'techniek', titel: 'Hoe het technisch werkt' },
+  { id: 'soorten', titel: 'Soorten hosting' },
+  { id: 'pakket', titel: 'Wat zit er in een pakket?' },
+  { id: 'uptime', titel: 'Uptime in uren' },
+  { id: 'snelheid', titel: 'Snelheid' },
+  { id: 'kiezen', titel: 'Tien vragen voor je tekent' },
+  { id: 'kosten', titel: 'Wat kost het?' },
+  { id: 'verhuizen', titel: 'Verhuizen naar een andere partij' },
+  { id: 'wij', titel: 'Waarom wij geen hosting verkopen' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'Hosting',
+    alternateName: ['Webhosting', 'Websitehosting'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is hosting?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://wordpress.org/about/requirements/',
+      'https://letsencrypt.org/about/',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is hosting? Uitleg, soorten en kosten | Drijfveer Media"
+  description="Wat is hosting? Webhosting is de server waar je website op draait. Zo werkt het, welke soorten er zijn, wat het kost en waar je op let bij het kiezen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Hosting', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Website</p>
+        <h1>Wat is hosting?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Een website is een verzameling bestanden. Die moeten ergens staan, op een computer die nooit uitgaat en altijd bereikbaar is. Die plek huur je. Dat is webhosting. Zonder hosting heb je wel een ontwerp en misschien een mooie naam, maar geen site die iemand kan bezoeken.</p>
+      <p>Eerlijk vooraf: wij verkopen zelf geen hosting. Voor nieuwe sites regel je die zelf, op je eigen naam. Juist daarom leggen we hier uit hoe het werkt en waar je op let. Dan maak je een goede keuze, ook zonder ons.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={9} />
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2 id="gewone-taal">Hosting in gewone taal</h2></div>
+      <p>Vergelijk je website met een winkel. De domeinnaam is het adres op de gevel. De website is de inrichting: schappen, prijskaartjes, de toonbank. De hosting is het pand zelf, met stroom, verwarming en een deur die open is. Je kunt de mooiste inrichting hebben, zonder pand staat hij op straat.</p>
+      <p>Het pand is in dit geval een server: een krachtige computer in een datacenter. Een hosting provider zet daar honderden van neer, zorgt voor koeling, noodstroom en een snelle verbinding, en verhuurt de ruimte in stukjes. Jij betaalt per maand of per jaar en hoeft nooit een kabel aan te raken.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="drie-dingen">Domeinnaam, hosting en website: drie verschillende dingen</h2></div>
+      <p>Deze drie lopen in gesprekken vaak door elkaar. Ze hangen samen, maar je kunt ze los van elkaar kopen en los van elkaar verhuizen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Wat is het?</th><th>Vergelijking</th><th>Waar regel je het?</th></tr></thead>
+          <tbody>
+            <tr><td><b>Domeinnaam</b></td><td>Je adres op internet, zoals jouwbedrijf.nl</td><td>Het adres op de gevel</td><td>Bij een registrar, vaak dezelfde partij als je hosting</td></tr>
+            <tr><td><b>Webhosting</b></td><td>De server waar je bestanden en database op staan</td><td>Het pand</td><td>Bij een hostingpartij naar keuze</td></tr>
+            <tr><td><b>Website</b></td><td>De pagina's, teksten, foto's en techniek</td><td>De inrichting</td><td>Zelf bouwen of laten maken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De koppeling tussen adres en pand loopt via <a href="/kennisbank/wat-is/dns/">DNS</a>: een record bij je domeinnaam vertelt de wereld op welke server je site staat. Verhuis je naar een andere hostingpartij, dan pas je dat record aan. Het adres blijft hetzelfde.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="techniek">Hoe werkt webhosting technisch?</h2></div>
+      <p>Iemand typt jouwbedrijf.nl in. Zijn browser zoekt het IP-adres van jouw server op en vraagt daar om de pagina. De server stuurt de bestanden terug: HTML, opmaak, scripts en afbeeldingen. De browser zet ze in elkaar tot de pagina die je ziet. Dat herhaalt zich bij elke klik, voor elke bezoeker.</p>
+      <p>Bij een site in WordPress gebeurt er meer. De teksten staan niet in losse bestanden maar in een database. Bij elk verzoek haalt de server de juiste stukken op en bouwt de pagina in PHP, de programmeertaal van WordPress. Daarom vraagt WordPress meer van een server dan een eenvoudige site van losse bestanden. Volgens WordPress.org heeft je server liefst PHP 8.3 of nieuwer nodig, MySQL 8.0 of MariaDB 10.11 of nieuwer, en ondersteuning voor https.</p>
+      <p>Hoe komt je site op de server? Op drie manieren:</p>
+      <ul>
+        <li><strong>Via een CMS.</strong> Je installeert WordPress met één klik in je hostingpakket en bouwt daarna alles in de browser. Foto's uploaden gaat dan gewoon via de beheeromgeving.</li>
+        <li><strong>Via SFTP.</strong> Je zet bestanden van je eigen computer over naar de server, met een programma als FileZilla.</li>
+        <li><strong>Automatisch.</strong> Moderne sites worden vaak gebouwd en daarna in één keer gepubliceerd. Zo werkt onze eigen site ook.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="soorten">Welke soorten hosting zijn er?</h2></div>
+      <p>Het verschil zit vooral in hoeveel van de server van jou is, en wie hem bijhoudt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Wat het is</th><th>Past bij</th><th>Wie beheert de server?</th></tr></thead>
+          <tbody>
+            <tr><td><b>Shared hosting</b></td><td>Je deelt een server met honderden andere sites</td><td>De meeste mkb-sites, tot een paar duizend bezoekers per dag</td><td>De hostingpartij</td></tr>
+            <tr><td><b>Managed WordPress hosting</b></td><td>Gedeeld of eigen, maar ingericht voor WordPress, vaak met updates en caching</td><td>WordPress-sites waar snelheid telt</td><td>De hostingpartij</td></tr>
+            <tr><td><b>VPS</b></td><td>Een eigen virtuele server met vaste rekenkracht en geheugen</td><td>Drukke sites, maatwerk, meerdere sites</td><td>Jij of je ontwikkelaar, of los bij te kopen</td></tr>
+            <tr><td><b>Dedicated server</b></td><td>Een hele fysieke server alleen voor jou</td><td>Grote platforms met veel verkeer</td><td>Jij of een beheerpartij</td></tr>
+            <tr><td><b>Cloudhosting</b></td><td>Rekenkracht uit een groot netwerk die meegroeit met de drukte</td><td>Sites met grote pieken</td><td>Meestal een ontwikkelaar</td></tr>
+            <tr><td><b>Websitebouwer</b></td><td>Wix, Squarespace en dergelijke: hosting zit in het abonnement</td><td>Wie alles in één pakket wil</td><td>Het platform, je kunt niet weg met je site</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Voor een gewone bedrijfssite van een installateur, advocaat of kapper is shared hosting bij een degelijke partij bijna altijd genoeg. Een VPS kopen "voor de zekerheid" is vaak geld weggooien, tenzij iemand hem ook echt bijhoudt. Een eigen server die niemand updatet, is onveiliger dan een gedeelde server die wel goed beheerd wordt.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="pakket">Wat zit er in een hostingpakket?</h2></div>
+      <p>Pakketten verschillen per partij, maar dit zijn de onderdelen die je terugziet:</p>
+      <ul class="vink">
+        <li><strong>Opslag.</strong> Ruimte voor je bestanden, foto's en database. Een gewone bedrijfssite heeft genoeg aan een paar gigabyte.</li>
+        <li><strong>Dataverkeer.</strong> Hoeveel er per maand naar bezoekers mag. Bij de meeste pakketten is dat ruim of onbeperkt.</li>
+        <li><strong>Databases.</strong> Nodig voor WordPress en andere systemen. Eén is meestal genoeg per site.</li>
+        <li><strong>E-mail.</strong> Mailboxen op je eigen domein. Soms inbegrepen, soms los, en niet altijd van goede kwaliteit. Veel bedrijven nemen mail los af.</li>
+        <li><strong>SSL.</strong> Een certificaat voor de beveiligde verbinding. Via Let's Encrypt kan dat gratis, en de meeste partijen zetten het met één klik aan.</li>
+        <li><strong>Back-ups.</strong> Automatische kopieën van je site. Vraag hoe vaak, hoe lang ze bewaard worden en of je ze zelf kunt terugzetten.</li>
+        <li><strong>Beheeromgeving.</strong> Een controlepaneel waar je mailadressen, databases, PHP-versie en certificaten regelt.</li>
+        <li><strong>Testomgeving.</strong> Een kopie van je site om updates eerst veilig uit te proberen. Handig, niet overal standaard.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="uptime">Uptime: wat betekent 99,9 procent?</h2></div>
+      <p>Uptime is het deel van de tijd dat je site bereikbaar is. Hostingpartijen beloven vaak 99,9 procent. Dat klinkt als altijd. Reken het om naar uren en het wordt concreter:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Belofte</th><th>Maximaal plat per jaar</th><th>Per maand van 30 dagen</th></tr></thead>
+          <tbody>
+            <tr><td>99%</td><td>87,6 uur (ruim 3,5 dag)</td><td>7,2 uur</td></tr>
+            <tr><td>99,5%</td><td>43,8 uur</td><td>3,6 uur</td></tr>
+            <tr><td>99,9%</td><td>8,8 uur</td><td>43 minuten</td></tr>
+            <tr><td>99,95%</td><td>4,4 uur</td><td>22 minuten</td></tr>
+            <tr><td>99,99%</td><td>53 minuten</td><td>4 minuten</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Twee kanttekeningen. Kijk of gepland onderhoud meetelt; vaak niet. En kijk wat je krijgt als de belofte niet wordt gehaald. Meestal is dat een klein deel van je maandbedrag terug, niet je gemiste omzet. Wil je het zelf bijhouden, dan sturen gratis monitoringdiensten je een mail zodra je site niet reageert.</p>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2 id="snelheid">Snelheid: waar hosting het verschil maakt, en waar niet</h2></div>
+      <p>Webhosting bepaalt hoe snel de server begint met antwoorden. Een overvolle gedeelde server, een oude PHP-versie of een datacenter aan de andere kant van de wereld voel je meteen. Voor Nederlandse bezoekers is een datacenter in Nederland of elders in Europa logisch. Caching op de server helpt WordPress flink: pagina's worden dan niet bij elke klik opnieuw gebouwd.</p>
+      <p>Maar het grootste deel van de laadtijd zit meestal in de site zelf. Te grote foto's, een zwaar thema, twintig plugins. Daar helpt geen dure webhosting tegen. Verklein eerst je afbeeldingen, bijvoorbeeld naar <a href="/kennisbank/wat-is/webp/">WebP</a>, en lees de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>. Is de server daarna nog de traagste schakel, dan pas is overstappen de moeite waard.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="kiezen">Webhosting kiezen: tien vragen voor je tekent</h2></div>
+      <ol>
+        <li><strong>Komt het pakket op mijn naam?</strong> Niet op die van je webbouwer of je neef.</li>
+        <li><strong>Wat is de opzegtermijn?</strong> Maandelijks opzegbaar of een jaar vast.</li>
+        <li><strong>Wat kost het na het eerste jaar?</strong> Een lage instapprijs wordt bij verlenging soms twee keer zo hoog.</li>
+        <li><strong>Hoe vaak worden back-ups gemaakt</strong>, hoe lang bewaard, en kan ik ze zelf terugzetten?</li>
+        <li><strong>Is een SSL-certificaat gratis</strong> en verlengt het automatisch?</li>
+        <li><strong>Welke PHP-versie</strong> draait er, en kan ik zelf wisselen?</li>
+        <li><strong>Waar staat de server?</strong> En krijg ik een verwerkersovereenkomst? Je hostingpartij bewaart de gegevens uit je contactformulier, dus de AVG geldt ook hier.</li>
+        <li><strong>Hoe bereik ik support</strong>, en op welke tijden? Bel eens voor je tekent.</li>
+        <li><strong>Is e-mail inbegrepen</strong>, en zo ja, hoe groot zijn de mailboxen?</li>
+        <li><strong>Helpen ze bij een verhuizing</strong>, en kan ik zonder gedoe weer weg?</li>
+      </ol>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="kosten">Wat kost webhosting?</h2></div>
+      <p>Voor webhosting van een gewone bedrijfssite betaal je bij de meeste partijen een paar euro per maand. Reken voor WordPress-hosting op ongeveer € 60 tot € 300 per jaar, afhankelijk van snelheid en extra's. Een VPS of managed hosting met persoonlijk beheer kost meer. Een domeinnaam komt daar los bij, meestal € 10 tot € 20 per jaar.</p>
+      <div class="kader">
+        <p class="kader-titel">Rekenvoorbeeld</p>
+        <p>Een hovenier in Assen heeft een site in WordPress met tien pagina's en een fotogalerij. Hij kiest shared hosting voor € 7 per maand, met dagelijkse back-ups en een gratis certificaat. Zijn .nl-domein kost € 12 per jaar. Totaal: € 96 per jaar, minder dan één uur werk van hem. Wil hij niet zelf updaten, dan komt er onderhoud bij. <span class="muted">(Verzonnen voorbeeld, met verzonnen cijfers.)</span></p>
+      </div>
+      <p>Pas op voor gratis webhosting. Je betaalt dan met reclame op je site, een vreemd webadres of beperkingen die je pas merkt als het te laat is. Voor een bedrijf is dat de besparing niet waard.</p>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2 id="verhuizen">Verhuizen naar een andere hostingpartij</h2></div>
+      <p>Ontevreden over je huidige partij? Verhuizen is geen hogere wiskunde, als je de volgorde aanhoudt:</p>
+      <ol>
+        <li>Maak een volledige back-up van je bestanden en je database, en bewaar die ook op je eigen computer.</li>
+        <li>Neem het nieuwe pakket af, op je eigen naam.</li>
+        <li>Zet bestanden en database over. Voor WordPress zijn er plugins die dat in één keer doen.</li>
+        <li>Test de site op de nieuwe server via een tijdelijk adres.</li>
+        <li>Verlaag een dag van tevoren de TTL van je records. Zet daarna het A-record om naar het nieuwe IP-adres.</li>
+        <li>Controleer of het certificaat is aangemaakt en of je mail nog binnenkomt.</li>
+        <li>Zeg de oude hosting pas op als alles een week goed draait.</li>
+      </ol>
+      <p>Draait je mail bij de oude partij? Regel die dan eerst, anders verdwijnt hij mee met het oude pakket.</p>
+
+      <h2 id="wij">Waarom wij geen hosting verkopen</h2>
+      <p>Een website inclusief hosting bij één partij is makkelijk, tot je weg wilt. Dan blijkt soms dat de server, het domein of de inlog op naam van het bureau staan. Dan zit je vast.</p>
+      <p>Wij doen het andersom. Voor nieuwe sites regelen we geen hosting. Je sluit die zelf af, op je eigen naam, bij een partij naar keuze. Wij helpen je kiezen en zetten de site er voor je op. Zo blijven domein, hosting en website van jou. Ook onze eigen site staat gewoon bij een externe hostingpartij.</p>
+      <p>Wil je niet zelf updaten? Met ons <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a> houden we updates, back-ups, beveiliging en snelheid bij, vanaf € 39 per maand. Je site blijft dan gewoon bij je eigen hostingpartij staan.</p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <ul class="vink">
+        <li>Zoek uit bij wie je site nu staat en op wiens naam. Staat er een bureau tussen, vraag dan om eigen inloggegevens.</li>
+        <li>Controleer of er back-ups zijn die je zelf kunt terugzetten. Probeer het een keer.</li>
+        <li>Kijk of je certificaat automatisch verlengt en of de PHP-versie nog ondersteund wordt.</li>
+        <li>Zet de verlengdatum en de kosten van hosting en domein in je agenda.</li>
+        <li>Is je site traag? Laat eerst de site zelf nakijken, en verhuis pas daarna.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees hoe een <a href="/kennisbank/wat-is/cms/">CMS</a> werkt en wat een <a href="/kennisbank/wat-is/ssl-certificaat/">SSL-certificaat</a> doet. Twijfel je tussen een websitebouwer en WordPress, dan helpt de vergelijking <a href="/kennisbank/gidsen/wix-squarespace-wordpress/">Wix, Squarespace of WordPress</a>. Wat een site in totaal kost per jaar, staat in <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen hosting en een domeinnaam?', a: 'De domeinnaam is je adres, zoals jouwbedrijf.nl. Hosting is de server waar je website op staat. Je hebt ze allebei nodig, maar je kunt ze bij verschillende partijen afnemen en los van elkaar verhuizen.' },
+      { v: 'Heb ik hosting nodig als ik Wix of Squarespace gebruik?', a: 'Nee, die zit in je abonnement. Het nadeel: je kunt je site niet meenemen naar een andere partij. Stop je met het abonnement, dan stopt je site.' },
+      { v: 'Regelen jullie ook de hosting?', a: 'Nee. Voor nieuwe sites regel je hosting zelf, op je eigen naam, bij een partij naar keuze. Wij helpen je kiezen en zetten de site er voor je op. Zo zit je nooit aan ons vast.' },
+      { v: 'Is shared hosting veilig genoeg?', a: 'Voor de meeste bedrijfssites wel, bij een partij die zijn servers goed bijhoudt en de sites van elkaar afschermt. De grootste risico\'s zitten meestal in de site zelf: verouderde plugins en zwakke wachtwoorden.' },
+      { v: 'Kan ik mijn website thuis op een eigen computer hosten?', a: 'Technisch kan het, maar voor een bedrijf is het af te raden. Je moet zelf zorgen voor beveiliging, back-ups, een vast IP-adres en een computer die nooit uitgaat. Een hostingpakket is goedkoper dan de tijd die dat kost.' },
+      { v: 'Wat gebeurt er als ik mijn hosting opzeg?', a: 'Dan gaat je site offline en worden je bestanden na een tijdje verwijderd. Maak dus altijd eerst een eigen back-up en zet de site over voordat je opzegt. Draait je mail er ook, regel die dan eerst.' },
+    ]}
+  />
+
+  <Actie titel="Twijfel je over je hosting?" tekst={`We kijken gratis naar de snelheid en de basis van je site, en zeggen eerlijk of de hosting het probleem is. ${site.contactpersoon} belt je met de uitkomst.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

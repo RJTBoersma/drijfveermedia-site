@@ -1,0 +1,53 @@
+---
+// Scène voor /kennisbank/wat-is/zoekintentie/: een zoekbalk boven een wegwijzer met vier borden, één per soort zoekintentie.
+// Als hij leeft: de cursor in de zoekbalk knippert en de borden lichten om de beurt op, alsof de zoeker een richting kiest.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const borden = [
+  { y: 92, rechts: true, label: 'Informatief' },
+  { y: 128, rechts: false, label: 'Navigerend' },
+  { y: 164, rechts: true, label: 'Commercieel' },
+  { y: 200, rechts: false, label: 'Transactioneel' },
+];
+const vorm = (y: number, rechts: boolean) => rechts
+  ? `M246 ${y}H386L402 ${y + 15}L386 ${y + 30}H246Z`
+  : `M234 ${y}H96L80 ${y + 15}L96 ${y + 30}H234Z`;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een zoekbalk boven een wegwijzer met vier borden: informatief, navigerend, commercieel en transactioneel.'}>
+  <rect x="80" y="24" width="320" height="36" rx="18" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="102" cy="42" r="6.5" fill="none" stroke="#074663" stroke-width="2.2" />
+  <path d="M107 47l5 5" stroke="#074663" stroke-width="2.2" stroke-linecap="round" />
+  <text x="122" y="47" font-size="13.5" font-weight="700">dakkapel prijs</text>
+
+  <rect x="234" y="76" width="12" height="174" rx="3" fill="#074663" />
+  <path class="l" d="M170 250h140" />
+  {borden.map((b) => (
+    <g>
+      <path d={vorm(b.y, b.rechts)} fill="#fff" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+      <text x={b.rechts ? 260 : 220} y={b.y + 20} font-size="12.5" font-weight="800" text-anchor={b.rechts ? 'start' : 'end'}>{b.label}</text>
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      <rect class="intentie-caret" x="233" y="33" width="2" height="18" rx="1" fill="#ff6600" />
+      {borden.map((b, i) => (
+        <g class={`intentie-licht intentie-licht${i}`}>
+          <path d={vorm(b.y, b.rechts)} fill="none" stroke="#ff6600" stroke-width="3" stroke-linejoin="round" />
+          <circle cx={b.rechts ? 386 : 96} cy={b.y + 15} r="4.5" fill="#ff6600" />
+        </g>
+      ))}
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .intentie-licht { opacity: 0; }
+  .in-beeld .intentie-licht { animation: kennisbank-wat-is-zoekintentie-licht 8s ease-in-out infinite; }
+  .in-beeld .intentie-licht1 { animation-delay: 2s; }
+  .in-beeld .intentie-licht2 { animation-delay: 4s; }
+  .in-beeld .intentie-licht3 { animation-delay: 6s; }
+  .in-beeld .intentie-caret { animation: kennisbank-wat-is-zoekintentie-knipper 1.1s steps(1) infinite; }
+  @keyframes kennisbank-wat-is-zoekintentie-licht { 0% { opacity: 0; } 5%, 22% { opacity: 1; } 27%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-zoekintentie-knipper { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .intentie-licht, .in-beeld .intentie-caret { animation: none; } }
+</style>

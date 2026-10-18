@@ -1,0 +1,73 @@
+---
+// Getekende kaart van een provincie met de plaatsen die een eigen pagina hebben.
+// Coördinaten in lengte- en breedtegraden; de kaart rekent ze om naar het vlak.
+interface Plaats { naam: string; lat: number; lng: number; href?: string; thuis?: boolean }
+interface Punt { soort: 'tt' | 'hunebed' | 'boom'; lat: number; lng: number; label?: string }
+interface Props { naam: string; omtrek: [number, number][]; plaatsen: Plaats[]; punten?: Punt[]; label?: string }
+const { naam, omtrek, plaatsen, punten = [], label = `Getekende kaart van ${naam}` } = Astro.props;
+const lngs = omtrek.map((p) => p[0]), lats = omtrek.map((p) => p[1]);
+const [minX, maxX, minY, maxY] = [Math.min(...lngs), Math.max(...lngs), Math.min(...lats), Math.max(...lats)];
+const W = 420, k = Math.cos((((minY + maxY) / 2) * Math.PI) / 180); // lengtegraden smaller op onze breedte
+const H = Math.round((W * (maxY - minY)) / ((maxX - minX) * k));
+const pad = 24;
+const thuis = Astro.props.plaatsen.find((p) => p.thuis);
+const x = (lng: number) => pad + ((lng - minX) / (maxX - minX)) * (W - 2 * pad);
+const y = (lat: number) => pad + ((maxY - lat) / (maxY - minY)) * (H - 2 * pad);
+// Vloeiende lijn door de punten (gesloten Catmull-Rom), zodat de kaart getekend oogt en niet hoekig.
+const pt = omtrek.map(([g, b]) => [x(g), y(b)]);
+const n = pt.length;
+const f = (v: number) => v.toFixed(1);
+let pad2 = `M${f(pt[0][0])} ${f(pt[0][1])}`;
+for (let i = 0; i < n; i++) {
+  const [p0, p1, p2, p3] = [pt[(i - 1 + n) % n], pt[i], pt[(i + 1) % n], pt[(i + 2) % n]];
+  pad2 += ` C${f(p1[0] + (p2[0] - p0[0]) / 6)} ${f(p1[1] + (p2[1] - p0[1]) / 6)} ${f(p2[0] - (p3[0] - p1[0]) / 6)} ${f(p2[1] - (p3[1] - p1[1]) / 6)} ${f(p2[0])} ${f(p2[1])}`;
+}
+pad2 += 'Z';
+---
+<figure class="regiokaart card" aria-label={label}>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} data-teken>
+    <path d={pad2} class="land" />
+    {thuis && plaatsen.filter((p) => !p.thuis).map((p, i) => (
+      <path class="route" pathLength="1" style={`--i:${i}`} d={`M${x(thuis.lng).toFixed(1)} ${y(thuis.lat).toFixed(1)} Q${((x(thuis.lng) + x(p.lng)) / 2 + 18).toFixed(1)} ${((y(thuis.lat) + y(p.lat)) / 2 - 18).toFixed(1)} ${x(p.lng).toFixed(1)} ${y(p.lat).toFixed(1)}`} />
+    ))}
+    {punten.map((p) => (
+      <g class="punt" transform={`translate(${x(p.lng).toFixed(1)} ${y(p.lat).toFixed(1)})`}>
+        {p.soort === 'boom' && <><path d="M0 -14l8 12h-5l6 9H-9l6-9h-5z" fill="#9cc3a3" /><path d="M0 7v4" stroke="#6b8f72" stroke-width="2" /></>}
+        {p.soort === 'tt' && <><ellipse rx="16" ry="9" fill="none" stroke="#10283f" stroke-width="3" /><ellipse rx="16" ry="9" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="3 3" /><path d="M14 -9v-10l9 3-9 3" fill="#ff6600" stroke="#10283f" stroke-width="1" /></>}
+        {p.soort === 'hunebed' && <><ellipse cx="-9" cy="3" rx="6" ry="5" fill="#9aa9b8" /><ellipse cx="9" cy="3" rx="6" ry="5" fill="#9aa9b8" /><path d="M-16 -4c4-7 28-7 32 0z" fill="#7d8e9f" /></>}
+        {p.label && <text class="punt-label" x="0" y="24" text-anchor="middle">{p.label}</text>}
+      </g>
+    ))}
+    {plaatsen.map((p, i) => (
+      <g class:list={['plaats', { thuis: p.thuis }]} style={`--i:${i}`}>
+        {p.href ? (
+          <a href={p.href}>
+            <circle cx={x(p.lng)} cy={y(p.lat)} r={p.thuis ? 9 : 6} />
+            <text x={x(p.lng) + 12} y={y(p.lat) + 5}>{p.naam}</text>
+          </a>
+        ) : (
+          <>
+            <circle cx={x(p.lng)} cy={y(p.lat)} r={p.thuis ? 9 : 6} />
+            <text x={x(p.lng) + 12} y={y(p.lat) + 5}>{p.naam}</text>
+          </>
+        )}
+      </g>
+    ))}
+  </svg>
+  <figcaption class="klein muted">{label}. Oranje: hier zit ons kantoor.</figcaption>
+</figure>
+<style>
+  .regiokaart { margin: 0; padding: 16px; box-shadow: 0 24px 60px -30px rgb(7 70 99 / 0.35); }
+  svg { width: 100%; height: auto; overflow: visible; }
+  .land { fill: #e3ebf2; stroke: #b9c8d6; stroke-width: 2; stroke-linejoin: round; }
+  .plaats circle { fill: var(--navy); stroke: #fff; stroke-width: 3; animation: op 0.5s ease both; animation-delay: calc(var(--i) * 90ms); transform-box: fill-box; transform-origin: center; }
+  .plaats.thuis circle { fill: var(--orange); }
+  .plaats text { font: 700 15px var(--font); fill: var(--ink); paint-order: stroke; stroke: #e3ebf2; stroke-width: 4px; }
+  .plaats a:hover text { text-decoration: underline; }
+  .route { fill: none; stroke: var(--orange); stroke-width: 2; stroke-linecap: round; opacity: 0.55; }
+  :global(.teken-js) .route { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s ease; transition-delay: calc(0.6s + var(--i) * 0.15s); }
+  :global(.teken-js) :global(.in-beeld) .route { stroke-dashoffset: 0; }
+  .punt-label { font: 600 11px var(--font); fill: var(--muted); }
+  @keyframes op { from { transform: scale(0); } to { transform: scale(1); } }
+  figcaption { margin-top: 8px; }
+</style>

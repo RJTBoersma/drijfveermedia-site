@@ -1,0 +1,213 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--werkspot-alternatieven.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/werkspot-alternatieven/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'waarom', titel: 'Waarom vakmannen iets anders zoeken' },
+  { id: 'modellen', titel: 'Vijf manieren van betalen' },
+  { id: 'platforms', titel: 'Andere klusplatforms op een rij' },
+  { id: 'eigen-kanalen', titel: 'Vijf eigen kanalen' },
+  { id: 'rekensom', titel: 'De rekensom' },
+  { id: 'plan', titel: 'Een plan voor 90 dagen' },
+  { id: 'naast', titel: 'Naast of in plaats van?' },
+  { id: 'hulp', titel: 'Hoe wij helpen' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Werkspot alternatief? Zo vind je als vakman zelf klanten',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Klanten vinden als vakman',
+  citation: ['https://nl.wikipedia.org/wiki/Werkspot', 'https://zoofy.nl/vakman/', 'https://www.solvari.nl/pro/aanmelden-bedrijf', 'https://klaardeklus.nl/'],
+}];
+---
+<Base
+  title="Werkspot alternatief: zo vind je zelf klanten"
+  description="Op zoek naar een Werkspot alternatief? Vergelijk andere klusplatforms en lees hoe je als vakman zelf klanten vindt, zonder te betalen per reactie."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Werkspot-alternatieven', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Leadgeneratie" titel="Werkspot alternatief? Zo vind je als vakman zelf klanten" knop={{ tekst: 'Laat je vindbaarheid gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Betalen om te mogen reageren, en dan de klus niet krijgen. Veel vakmannen zoeken daarom een Werkspot alternatief. Hier vind je de andere platforms op een rij, en vooral: hoe je klanten krijgt die jou rechtstreeks bellen.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Op Werkspot plaatst een klant gratis een klus. Vakmensen die willen reageren, betalen daarvoor, ook als ze de klus niet krijgen.</li>
+            <li>Andere platforms werken anders: met een lidmaatschap, betalen per lead of gratis reageren. Elk model heeft zijn eigen haken.</li>
+            <li>Het beste Werkspot alternatief is geen ander platform, maar klanten die jou direct vinden via Google Maps, reviews en je eigen site.</li>
+            <li>Stop niet in één keer. Bouw je eigen kanalen op en schroef het platform terug zodra die werken.</li>
+          </ul>
+        </div>
+
+        <h2 id="waarom">Waarom vakmannen een Werkspot alternatief zoeken</h2>
+        <p>Werkspot bestaat sinds 2005 en is een van de bekendste klusplatforms van Nederland. Volgens Wikipedia is het sinds 2013 in handen van het Amerikaanse HomeAdvisor, onderdeel van IAC. Het idee is simpel. Een huiseigenaar plaatst gratis een klus, vakmensen uit de buurt reageren en de klant kiest.</p>
+        <p>Voor de vakman zit er een prijskaartje aan. Vroeger betaalde je een abonnement. Volgens Wikipedia schafte Werkspot dat in 2018 af. Nu geldt: wie reageert, betaalt. En dat geld ben je kwijt, ook als je de klus niet krijgt. Dat lees je ook vaak terug als je online zoekt naar ervaringen van vakmensen:</p>
+        <ul>
+          <li><b>Je betaalt ook voor niks.</b> Meerdere vakmannen reageren op dezelfde klus en betalen allemaal. Eén krijgt het werk.</li>
+          <li><b>Je concurreert op prijs.</b> Als vijf mensen een offerte sturen, wint vaak de goedkoopste. Dat is lastig als je kwaliteit levert.</li>
+          <li><b>Vage omschrijvingen.</b> Ook Wikipedia noemt het: klanten omschrijven een klus niet altijd volledig, en reageren kost geld. Dus betaal je voor een klus waarvan je niet weet wat hij inhoudt.</li>
+          <li><b>Je bouwt niets op.</b> Een tevreden klant onthoudt het platform, niet jouw naam. Volgend jaar zoekt hij weer daar.</li>
+        </ul>
+        <p>Hoeveel je per reactie betaalt, verschilt per klus en verandert regelmatig. Zoofy, een concurrent van Werkspot, schrijft op zijn eigen blog over 6 tot 40 euro per lead. Dat is het verhaal van een concurrent, dus kijk in je eigen account wat je werkelijk betaalt.</p>
+        <p>Dat betekent niet dat het platform slecht is. Voor een starter zonder naam kan het een snelle manier zijn om werk te vinden. De leadkosten zijn dan een soort marketingbudget. Het wordt een probleem als je er jaren van afhankelijk blijft.</p>
+
+        <h2 id="modellen">Vijf manieren waarop je voor klussen betaalt</h2>
+        <p>Elk klusplatform verdient ergens aan. Het verschil zit in wanneer en waarvoor je betaalt. Wie dat snapt, kiest makkelijker het model dat bij zijn vak past.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Model</th><th>Wat betaal je</th><th>Past bij</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Betalen per reactie</td><td>Een bedrag per klus waarop je reageert</td><td>Starters die snel werk zoeken</td><td>Je betaalt ook als je de klus niet krijgt</td></tr>
+              <tr><td>Betalen per lead</td><td>Een bedrag per aanvraag die je ontvangt</td><td>Grotere projecten zoals renovatie of verduurzaming</td><td>Vaak met een pakket of contract</td></tr>
+              <tr><td>Lidmaatschap</td><td>Een vast bedrag per maand of jaar</td><td>Kleine klussen tegen vaste tarieven</td><td>Je werkt tegen de tarieven van het platform</td></tr>
+              <tr><td>Gratis reageren</td><td>Niets, of alleen extra's</td><td>Wie wil proberen zonder risico</td><td>Kijk hoeveel klussen er in jouw regio zijn</td></tr>
+              <tr><td>Eigen kanalen</td><td>Tijd, of een vast bedrag voor hulp</td><td>Wie op lange termijn onafhankelijk wil zijn</td><td>Het duurt een paar maanden voor het loopt</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="platforms">Andere klusplatforms op een rij</h2>
+        <p>We hebben de sites van deze platforms op 18 oktober 2026 bekeken. Prijzen en voorwaarden veranderen, dus kijk altijd op de site zelf voordat je je aanmeldt.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Platform</th><th>Hoe het werkt voor de vakman</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Zoofy</td><td>Geen leadkosten, wel een lidmaatschap: € 19,95 per maand of € 119 per jaar, exclusief btw. Je accepteert klussen in een app. De klant betaalt via Zoofy.</td><td>Uitbetaling na minimaal 29 dagen. Voorrijkosten worden niet gefactureerd.</td></tr>
+              <tr><td>Trustoo</td><td>Gratis aanmelden. Klanten vergelijken bedrijven en vragen een prijsopgave aan, in ongeveer 90 categorieën.</td><td>Breder dan klussen alleen. Kijk welke aanvragen in jouw vak binnenkomen.</td></tr>
+              <tr><td>Solvari</td><td>Gratis aanmelden. Je betaalt pas als je een lead ontvangt, via pakketten of creditbundels. Je kiest zelf vak, regio en het maximale aantal leads.</td><td>Er zijn maand- en jaarcontracten. Lees de voorwaarden.</td></tr>
+              <tr><td>Homedeal</td><td>Je betaalt per offerteaanvraag en stelt zelf categorie, regio en budget in. Meer dan 35 vakgebieden.</td><td>Vraag vooraf wat een aanvraag in jouw markt kost.</td></tr>
+              <tr><td>Klaar de Klus</td><td>Klanten plaatsen gratis een klus, vakmensen reageren zonder leadkosten en zonder commissie. Afspraken en betalingen lopen rechtstreeks.</td><td>Kijk hoeveel klussen er in jouw regio en vak worden geplaatst.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Vijf vragen voordat je je aanmeldt</h3>
+        <ol>
+          <li>Wat betaal ik precies: per reactie, per lead, per maand of een deel van de klus?</li>
+          <li>Krijgen andere vakmensen dezelfde aanvraag, en zo ja, hoeveel?</li>
+          <li>Krijg ik geld terug bij een aanvraag die niet klopt, zoals een verkeerd telefoonnummer?</li>
+          <li>Hoe lang zit ik vast, en hoe zeg ik op?</li>
+          <li>Hoeveel aanvragen kwamen er de afgelopen maanden binnen in mijn vak en mijn regio?</li>
+        </ol>
+        <p>Krijg je op die laatste vraag geen duidelijk antwoord, wees dan voorzichtig. En lees de ervaringen van andere vakmensen kritisch. Een paar boze reviews zeggen weinig, maar dezelfde klacht in tientallen reviews wel.</p>
+        <p>Merk je het patroon? Elk platform verdient ergens aan: per reactie, per lead, via een lidmaatschap of een deel van de klus. Dat is niet erg, maar het blijft hun klant. Daarom is het slimste alternatief er een die je zelf in handen hebt.</p>
+
+        <h2 id="eigen-kanalen">Klanten vinden zonder Werkspot: vijf eigen kanalen</h2>
+        <p>Een huiseigenaar met lekkage pakt zijn telefoon en typt "loodgieter" plus zijn woonplaats. Wie daar bovenaan staat, krijgt het telefoontje. Zonder tussenpersoon en zonder leadkosten. Zo kom je daar.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>1. Een sterk Google Bedrijfsprofiel</h3></div>
+        <p>Dit is het kaartje met drie bedrijven dat bovenaan Google en in Google Maps verschijnt. Het is gratis. Vul alles in: je vak als hoofdcategorie, je werkgebied, openingstijden, foto's van echt werk. Een schilder die elke week een foto van een opgeleverde klus plaatst, valt op tussen profielen die al twee jaar stilstaan. In de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel aanmaken en optimaliseren</a> staat het stap voor stap.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>2. Reviews die je zelf verzamelt</h3></div>
+        <p>Reviews op een platform blijven op dat platform. Reviews op je Google-profiel zijn van jou en tellen mee voor je plek in Maps. Vraag elke tevreden klant erom, op het moment dat je de klus oplevert. Met een reviewlink of QR-code kost het de klant één minuut. Lees hoe in de gids <a href="/kennisbank/gidsen/google-reviews/">Google reviews</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>3. Een eigen website met een pagina per dienst</h3></div>
+        <p>Geen visitekaartje met één pagina, maar een pagina per klus die je wilt doen: "dakgoot vervangen", "badkamer renoveren", "groepenkast vervangen". Met wat het kost, hoe lang het duurt en foto's. Zo vindt Google je op precies die zoekopdrachten. Een elektricien die alleen "Welkom" op zijn homepage heeft staan, wordt nergens op gevonden. Een eenvoudige <a href="/website-laten-maken/website-met-ai/">website met AI</a> kan bij ons vanaf € 250.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={48} /><h3>4. Google Ads voor spoedklussen</h3></div>
+        <p>Voor werk waar mensen nu iemand voor zoeken, zoals een verstopping of stormschade, werkt adverteren snel. Je betaalt per klik, en wie klikt komt alleen bij jou terecht. Geen gedeelde lead. Begin klein en reken uit wat een klus je mag kosten. Lees eerst <a href="/kennisbank/gidsen/wat-is-google-ads/">wat Google Ads is en wat het kost</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>5. Een netwerk dat je doorverwijst</h3></div>
+        <p>Aannemers die geen tijd hebben voor kleine klussen. Makelaars met kopers die willen verbouwen. Een VvE-beheerder met twintig panden. Collega's in een ander vak die regelmatig gevraagd worden of ze "nog een goede schilder" kennen. Eén goede relatie levert meer op dan honderd reacties op een platform. Spreek af dat je elkaar doorverwijst, en doe het ook echt.</p>
+
+        <h2 id="rekensom">De rekensom: platform of eigen kanaal</h2>
+        <div class="kader kader-oranje">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen): een schilder in Rotterdam</p>
+          <p>Hij reageert per maand op 30 klussen en betaalt gemiddeld € 15 per reactie: € 450. Hij krijgt er vijf. Elke klus kost hem dus € 90 aan leadkosten, plus de tijd voor 30 offertes waarvan er 25 voor niks waren.</p>
+          <p>Zet hij hetzelfde bedrag een jaar lang in op zijn eigen profiel, site en reviews, dan betaalt hij in het begin voor iets wat nog weinig oplevert. Maar elke aanvraag die later binnenkomt, is van hem alleen. Hij hoeft niet tegen vier anderen op te bieden.</p>
+        </div>
+        <h3>Wat kost een aanvraag via Google Ads?</h3>
+        <p>Een tweede vergelijking. In onze gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a> staan gemiddelde klikprijzen uit SE Ranking van oktober 2026: € 2,25 voor "loodgieter", € 1,73 voor "schilder" en € 3,29 voor "elektricien". Stel dat één op de tien bezoekers belt of mailt (verzonnen aanname). Dan kost een aanvraag een loodgieter zo'n € 22,50, een schilder € 17,30 en een elektricien € 32,90. En die aanvraag is van jou alleen. Of het in jouw regio zo uitpakt, hangt af van je site en je concurrenten. Daarom begin je klein en meet je alles.</p>
+        <p>Vul de som in met je eigen getallen. Kijk in je platformaccount wat je de afgelopen drie maanden hebt betaald en hoeveel klussen dat opleverde. Dat getal is je vertrekpunt.</p>
+
+        <h2 id="plan">Een plan voor de eerste 90 dagen</h2>
+        <p>Je hoeft niet alles tegelijk te doen. Dit is een volgorde die past naast een volle agenda.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wanneer</th><th>Wat je doet</th><th>Tijd</th></tr></thead>
+            <tbody>
+              <tr><td>Week 1</td><td>Google Bedrijfsprofiel volledig invullen, tien foto's van echt werk erbij</td><td>Twee uur</td></tr>
+              <tr><td>Week 2</td><td>Reviewlink maken, de laatste tien klanten om een review vragen</td><td>Een uur</td></tr>
+              <tr><td>Week 3 tot 6</td><td>Na elke klus om een review vragen, elke week een foto plaatsen</td><td>Een kwartier per week</td></tr>
+              <tr><td>Maand 2</td><td>Website met een pagina per dienst en je werkgebied</td><td>Een paar dagen, of laten maken</td></tr>
+              <tr><td>Maand 3</td><td>Bijhouden waar elke klus vandaan kwam, platform terugschroeven waar het kan</td><td>Tien minuten per klus</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Zolang je nog op een platform zit</h3>
+        <ul class="vink">
+          <li>Reageer alleen op klussen met een duidelijke omschrijving. Een vage klus is een dure gok.</li>
+          <li>Reageer snel en bel als het kan. Een gesprek wint het van een bericht.</li>
+          <li>Vraag na de klus om een review op je Google-profiel. Dan bouw je iets op dat van jou blijft.</li>
+          <li>Noteer per klus wat je eraan betaalde en wat hij opleverde. Dan weet je wanneer je kunt afbouwen.</li>
+        </ul>
+
+        <h2 id="naast">Naast Werkspot of in plaats van?</h2>
+        <p>Begin naast Werkspot. Wie in één keer stopt, heeft een paar stille maanden, want eigen kanalen hebben tijd nodig. Een Google Bedrijfsprofiel kan binnen weken iets opleveren. Een website die gevonden wordt, duurt eerder een paar maanden.</p>
+        <p>Houd bij waar elke klus vandaan komt. Zie je dat er via je eigen kanalen genoeg binnenkomt, reageer dan alleen nog op klussen die echt passen. Zo bouw je het platform af zonder dat je agenda leegloopt. Een goed Werkspot alternatief maakt je onafhankelijk, niet afhankelijk van een ander platform.</p>
+        <div class="kader">
+          <p class="kader-titel">Zoek je zelf een vakman voor een klus?</p>
+          <p>Dan werkt het andersom net zo. Zoek in Google Maps op het vak plus je woonplaats, bijvoorbeeld "loodgieter Assen". Lees recente reviews, kijk of het bedrijf een eigen site met foto's van echt werk heeft en vraag twee of drie offertes aan met dezelfde omschrijving. Dan kun je ze eerlijk vergelijken.</p>
+        </div>
+
+        <h2 id="hulp">Hoe wij helpen</h2>
+        <p>We kennen leadsites van binnenuit. We hebben al 15 jaar meer dan 100 eigen leadsites in verschillende beroepen. Daar testen we ideeën voordat we ze bij klanten inzetten. Die kennis gebruiken we nu om vakmensen zelf vindbaar te maken.</p>
+        <p>Met <a href="/lokale-seo/">lokale SEO</a> zorgen we dat je bovenaan Google Maps komt in je werkgebied, inclusief reviews, vanaf € 295 per maand. Wil je dat we ook je site en de opvolging van aanvragen meenemen, dan is <a href="/leadgeneratie/">leadgeneratie</a> de volgende stap, vanaf € 495 per maand. We spreken vooraf een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p>
+        <div class="kader klein">
+          <p class="kader-titel">Bronnen (geraadpleegd oktober 2026)</p>
+          <p>Wikipedia, <a href="https://nl.wikipedia.org/wiki/Werkspot" rel="noopener">Werkspot</a>. De pagina's voor vakmensen van Zoofy, Trustoo, Solvari, Homedeal en Klaar de Klus (18 oktober 2026). Blog van Zoofy over Werkspot als alternatief. Klikprijzen uit SE Ranking, oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je vindbaar maken?" intro="Wat je van ons mag verwachten, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost Werkspot voor een vakman?', a: 'Je betaalt als je op een klus reageert. Hoeveel, hangt af van de klus en verandert regelmatig. Kijk in je account wat je per reactie betaalt en reken uit wat een gewonnen klus je gemiddeld kost.' },
+      { v: 'Wat is het beste Werkspot alternatief?', a: 'Voor de lange termijn: klanten die jou direct vinden, via je Google Bedrijfsprofiel, reviews en een eigen site. Als ander platform hangt het af van je vak. Voor kleine klussen werkt het lidmaatschap van Zoofy anders dan een leadplatform zoals Solvari voor renovaties.' },
+      { v: 'Is er een klusplatform zonder leadkosten?', a: 'Ja. Zoofy rekent een lidmaatschap in plaats van leadkosten, en Klaar de Klus zegt geen leadkosten en geen commissie te rekenen. Kijk wel hoeveel klussen er in jouw regio binnenkomen.' },
+      { v: 'Wat kost een lead bij Solvari of Homedeal?', a: 'Dat noemen ze niet openbaar. Bij Solvari bespreek je pakketten en creditbundels met een accountmanager, bij Homedeal vraag je de prijs per markt op. Vraag altijd wat een aanvraag in jouw vak en regio kost, en met hoeveel anderen je hem deelt.' },
+      { v: 'Kan ik mijn Werkspot-reviews meenemen?', a: 'Nee, die blijven op het platform. Vraag tevreden klanten voortaan om een review op je Google-profiel. Daar bouw je iets op dat van jou blijft.' },
+      { v: 'Hoe lang duurt het voordat ik zonder platform genoeg klussen heb?', a: 'Met een goed Google Bedrijfsprofiel en actief reviews vragen zie je vaak binnen een paar maanden meer telefoontjes. Een site die op losse diensten gevonden wordt, duurt meestal langer. Daarom raden we aan het platform niet in één keer op te zeggen.' },
+      { v: 'Ik heb geen tijd voor marketing. Wat nu?', a: 'Begin met twee dingen: je Google Bedrijfsprofiel volledig invullen en na elke klus om een review vragen. Dat kost een uur per week. Wil je het helemaal uit handen geven, bel ons dan.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Pillar', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Bovenaan Google Maps in je eigen werkgebied, vanaf € 295 per maand.' },
+      { label: 'Gids', titel: 'Leads genereren als mkb\'er', href: '/kennisbank/gidsen/leads-genereren/', tekst: 'Het stappenplan, van ideale klant tot opvolging.' },
+      { label: 'Gids', titel: 'Google Bedrijfsprofiel', href: '/kennisbank/gidsen/google-bedrijfsprofiel/', tekst: 'Aanmaken, verifiëren en optimaliseren.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten hoe vindbaar je zonder platform bent?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt hoe je er in Google Maps en de zoekresultaten voor staat in je werkgebied, en belt je met de eerste drie stappen.`} />
+</Base>

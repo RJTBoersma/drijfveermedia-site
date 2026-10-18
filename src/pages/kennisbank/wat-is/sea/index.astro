@@ -1,0 +1,350 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--sea.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/sea/';
+const datum = '2026-10-18';
+const definitie = 'SEA (search engine advertising) is adverteren in zoekmachines: je advertentie staat bij de zoekresultaten en je betaalt pas als iemand erop klikt.';
+const hoofdstukken = [
+  { id: 'betekenis', titel: 'Waar SEA voor staat' },
+  { id: 'advertentie', titel: 'Zo ziet een advertentie eruit' },
+  { id: 'veiling', titel: 'Hoe de veiling werkt' },
+  { id: 'kwaliteitsscore', titel: 'De kwaliteitsscore' },
+  { id: 'campagnetypes', titel: 'Campagnetypes' },
+  { id: 'bieden', titel: 'Biedstrategieën' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld' },
+  { id: 'seo', titel: 'Het verschil met SEO' },
+  { id: 'voor-en-nadelen', titel: 'Voor- en nadelen' },
+  { id: 'meten', titel: 'De cijfers die tellen' },
+  { id: 'fouten', titel: 'Fouten die geld kosten' },
+  { id: 'beginnen', titel: 'Zelf beginnen of uitbesteden' },
+];
+// Gemiddelde klikprijzen en zoekvolumes in Nederland, opgevraagd in SE Ranking op 18 oktober 2026 (zelfde tabel als in de gids Google Ads-campagne opzetten).
+const klikprijzen = [
+  ['hypotheekadviseur', '€ 8,15', '9.900'],
+  ['dakdekker', '€ 4,81', '9.900'],
+  ['boekhouder', '€ 3,80', '8.000'],
+  ['elektricien', '€ 3,29', '10.800'],
+  ['kozijnen', '€ 2,57', '14.800'],
+  ['loodgieter', '€ 2,25', '18.100'],
+  ['schilder', '€ 1,73', '10.800'],
+  ['hovenier', '€ 0,88', '10.800'],
+  ['glazenwasser', '€ 0,56', '4.400'],
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'SEA (search engine advertising)',
+  alternateName: ['Zoekmachine adverteren', 'Search engine advertising'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'Article',
+  headline: 'Wat is SEA? Zoekmachine adverteren uitgelegd',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Wat is SEA? Adverteren in Google uitgelegd | Drijfveer Media"
+  description="Wat is SEA? Zoekmachine adverteren in gewone taal: hoe de veiling werkt, wat een klik kost, het verschil met SEO en wanneer het voor jou loont."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'SEA', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Online adverteren</p>
+        <h1>Wat is SEA?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Zoek op "loodgieter Assen" en je ziet het meteen. Bovenaan staan een paar resultaten met het woord Gesponsord erboven. Daar heeft een bedrijf voor betaald. Dat is wat SEA is: adverteren in een zoekmachine, op het moment dat iemand zelf zoekt naar wat jij verkoopt. Hieronder lees je hoe het werkt, wat het kost en waar het vaak misgaat. Met echte klikprijzen uit Nederland en een rekenvoorbeeld dat je op je eigen bedrijf kunt loslaten.</p>
+
+      <div class="kader kader-oranje in-het-kort">
+        <p class="kader-titel">In het kort</p>
+        <ul>
+          <li>SEA staat voor search engine advertising, in het Nederlands zoekmachine adverteren.</li>
+          <li>In Nederland betekent dat bijna altijd Google Ads. Google had in september 2026 ruim 89 procent van de zoekopdrachten.</li>
+          <li>Je betaalt per klik. Wat een klik kost, bepaalt een veiling die bij elke zoekopdracht opnieuw draait.</li>
+          <li>Een klik kost in Nederland gemiddeld van zo'n 50 cent tot ruim € 8, afhankelijk van je branche.</li>
+          <li>Het werkt snel, maar stopt ook direct als je stopt met betalen. Daarom combineer je het meestal met SEO.</li>
+        </ul>
+      </div>
+
+      <Inhoud items={hoofdstukken} leestijd={14} />
+
+      <div class="stap-kop" id="betekenis"><Tekening naam="boek" maat={52} /><h2>Waar staat SEA voor?</h2></div>
+      <p>De afkorting komt uit het Engels: search engine advertising. Letterlijk vertaald is het adverteren in zoekmachines. Je hoort ook wel betaald zoeken, zoekmachineadvertenties of PPC. Die laatste staat voor pay per click: je betaalt per klik, niet per vertoning.</p>
+      <p>Daarnaast kom je SEM tegen, search engine marketing. Dat is de paraplu. Onder SEM vallen zowel betaalde advertenties als SEO, het onbetaald hoger komen in de gewone resultaten. In de praktijk gebruiken veel mensen SEM en SEA door elkaar. Wij houden het simpel: SEA is het betaalde deel.</p>
+      <h3>Google Ads en Microsoft Ads</h3>
+      <p>Er zijn twee grote platforms om in zoekmachines te adverteren. Google Ads voor Google, en Microsoft Advertising, vroeger Bing Ads, voor Bing. Volgens StatCounter ging in september 2026 89,1 procent van de Nederlandse zoekopdrachten via Google en 4,6 procent via Bing. Voor de meeste ondernemers is het dus eerst en vooral Google.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Google Ads</th><th>Microsoft Advertising</th></tr></thead>
+          <tbody>
+            <tr><td>Zoekmachine</td><td>Google</td><td>Bing</td></tr>
+            <tr><td>Aandeel in Nederland (sept. 2026)</td><td>89,1%</td><td>4,6%</td></tr>
+            <tr><td>Bereik</td><td>Bijna iedereen die zoekt</td><td>Veel kleiner</td></tr>
+            <tr><td>Wanneer interessant</td><td>Altijd als eerste stap</td><td>Als Google al goed loopt en je meer volume zoekt</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron marktaandeel: StatCounter Global Stats, zoekmachines in Nederland, september 2026.</p>
+      <p>Eerlijk is eerlijk: Microsoft Advertising bieden wij niet aan. Wij richten ons op Google, omdat daar in Nederland de zoekopdrachten zitten. Verder in deze uitleg gaat het dan ook over Google Ads.</p>
+
+      <div class="stap-kop" id="advertentie"><Tekening naam="scherm" maat={52} /><h2>Zo ziet een advertentie in Google eruit</h2></div>
+      <p>Een zoekadvertentie lijkt sterk op een gewoon zoekresultaat. Het verschil zit in het label Gesponsord. Een advertentie bestaat uit een paar vaste onderdelen:</p>
+      <ul>
+        <li><b>Koppen.</b> Tot drie korte regels van maximaal 30 tekens, naast elkaar of onder elkaar.</li>
+        <li><b>Weergave-URL.</b> Je domeinnaam met twee optionele paddelen, zoals jouwbedrijf.nl/cv-ketel/emmen.</li>
+        <li><b>Beschrijving.</b> Eén of twee regels van maximaal 90 tekens.</li>
+        <li><b>Extra items.</b> Sitelinks naar andere pagina's, je telefoonnummer, je adres en korte highlights zoals "geen voorrijkosten".</li>
+      </ul>
+      <p>Je schrijft geen vaste advertentie meer, maar losse koppen en beschrijvingen. Google test zelf welke combinatie het beste werkt bij welke zoekopdracht. Dat heet een responsieve zoekadvertentie. In de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a> staat precies hoeveel koppen je nodig hebt en hoe je ze schrijft.</p>
+      <p>Advertenties staan meestal boven de gewone resultaten, soms ook eronder. Welke plek je krijgt, en of je er überhaupt bij staat, beslist de veiling.</p>
+
+      <div class="stap-kop" id="veiling"><Tekening naam="munten" maat={52} /><h2>Hoe de veiling werkt</h2></div>
+      <p>Bij elke zoekopdracht houdt Google in een fractie van een seconde een veiling. Alle adverteerders die op een passend zoekwoord bieden, doen mee. Maar het is geen veiling waarbij het hoogste bod wint. Google berekent voor elke advertentie een advertentierangschikking. Volgens Google zelf telt die zes dingen mee:</p>
+      <ol>
+        <li><b>Je bod.</b> Het maximale bedrag dat je voor een klik wilt betalen.</li>
+        <li><b>De kwaliteit van je advertentie en landingspagina.</b> Is de advertentie relevant, en vindt de bezoeker op de pagina wat de advertentie belooft?</li>
+        <li><b>De drempels.</b> Een advertentie moet een minimale kwaliteit halen om getoond te worden. Voor de plekken boven de resultaten ligt die drempel hoger.</li>
+        <li><b>De concurrentie in die veiling.</b> Hoe dicht je bij de anderen zit.</li>
+        <li><b>De context.</b> Wat iemand precies zocht, waar hij is, op welk apparaat en hoe laat.</li>
+        <li><b>Je extra items.</b> Het verwachte effect van sitelinks, telefoonnummer en andere onderdelen.</li>
+      </ol>
+      <p>Het mooie aan dit systeem: een kleine adverteerder met een goede advertentie en een sterke landingspagina kan boven een grote partij uitkomen die meer biedt. Relevantie wordt beloond.</p>
+      <h3>Je betaalt minder dan je bod</h3>
+      <p>Wat je uiteindelijk per klik betaalt, is meestal lager dan je maximale bod. Google rekent net genoeg om de adverteerder direct onder je te verslaan en de drempel te halen. Staat er niemand onder je, dan betaal je het minimum dat nodig is om de drempel te passeren. Hoe dat precies zit, lees je in het begrip <a href="/kennisbank/wat-is/cpc/">CPC</a>.</p>
+
+      <div class="stap-kop" id="kwaliteitsscore"><Tekening naam="ster" maat={52} /><h2>De kwaliteitsscore: het rapportcijfer per zoekwoord</h2></div>
+      <p>Op veel sites lees je dat je positie gelijk is aan bod maal kwaliteitsscore. Dat is te simpel. Google noemt de kwaliteitsscore zelf een diagnostisch hulpmiddel. Het cijfer gaat niet als zodanig de veiling in. Wat wel meetelt, is de kwaliteit van je advertentie op het moment van de veiling. De kwaliteitsscore is daar een goede samenvatting van, met terugwerkende kracht.</p>
+      <p>Het cijfer loopt van 1 tot 10 en geldt per zoekwoord. Het is opgebouwd uit drie onderdelen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Onderdeel</th><th>Wat Google beoordeelt</th><th>Waar je aan draait</th></tr></thead>
+          <tbody>
+            <tr><td>Verwachte CTR</td><td>De kans dat iemand op je advertentie klikt</td><td>Koppen met het zoekwoord, een sterk aanbod, extra items</td></tr>
+            <tr><td>Advertentierelevantie</td><td>Hoe goed de advertentie past bij de zoekopdracht</td><td>Kleine advertentiegroepen met één thema</td></tr>
+            <tr><td>Ervaring op de landingspagina</td><td>Hoe nuttig en relevant de pagina is na de klik</td><td>Een eigen pagina per dienst, snel op mobiel, duidelijk vervolg</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Elk onderdeel krijgt het oordeel hoger dan gemiddeld, gemiddeld of lager dan gemiddeld. Google vergelijkt je daarvoor met andere adverteerders die de afgelopen 90 dagen op dezelfde zoekopdracht verschenen. Je vindt de score in je account onder Campagnes, Zoekwoorden. Klik op Kolommen en zet de kolommen Kwaliteitsscore, Verw. CTR, Advertentierelevantie en Erv. op landingspagina aan. Wat <a href="/kennisbank/wat-is/ctr/">CTR</a> precies is, lees je in een apart begrip.</p>
+
+      <div class="stap-kop" id="campagnetypes"><Tekening naam="tandwiel" maat={52} /><h2>Campagnetypes: niet alles is zoeken</h2></div>
+      <p>Strikt genomen gaat zoekmachine adverteren over advertenties in de zoekresultaten. In Google Ads kun je ook op andere plekken adverteren. Het campagnetype bepaalt waar je verschijnt:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Campagnetype</th><th>Waar je verschijnt</th><th>Past bij</th></tr></thead>
+          <tbody>
+            <tr><td><b>Zoeken</b></td><td>Tekstadvertenties bij de zoekresultaten</td><td>Dienstverleners, mensen die nu zoeken</td></tr>
+            <tr><td><b>Shopping</b></td><td>Producten met foto en prijs</td><td>Webshops</td></tr>
+            <tr><td><b>Performance Max</b></td><td>Alle kanalen van Google in één campagne</td><td>Adverteerders met veel conversies</td></tr>
+            <tr><td><b>Display</b></td><td>Banners op andere websites en apps</td><td>Naamsbekendheid, opnieuw benaderen</td></tr>
+            <tr><td><b>Demand Gen en Video</b></td><td>YouTube, Discover en Gmail</td><td>Merk en bereik</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Voor een installateur, advocaat of hovenier is een zoekcampagne bijna altijd de beste start. Je ziet precies op welke zoektermen je verschijnt en wat elke klik kost. Heb je producten te koop, kijk dan naar <a href="/online-adverteren/google-shopping/">Google Shopping</a>.</p>
+
+      <div class="stap-kop" id="bieden"><Tekening naam="doel" maat={52} /><h2>Biedstrategieën in gewone taal</h2></div>
+      <p>Met een biedstrategie vertel je Google wat je wilt bereiken. Google stelt dan per veiling je bod in. Dit zijn de strategieën die er voor een zoekcampagne toe doen:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Biedstrategie</th><th>Wat Google doet</th><th>Wanneer</th></tr></thead>
+          <tbody>
+            <tr><td>Klikken maximaliseren</td><td>Zoveel mogelijk klikken binnen je budget</td><td>Bij de start, met een maximale klikprijs als grens</td></tr>
+            <tr><td>Conversies maximaliseren</td><td>Zoveel mogelijk aanvragen of verkopen binnen je budget</td><td>Zodra je meting werkt en de eerste conversies binnen zijn</td></tr>
+            <tr><td>Doel-CPA</td><td>Conversies tegen een gemiddelde prijs die jij opgeeft</td><td>Als je weet wat een aanvraag mag kosten</td></tr>
+            <tr><td>Conversiewaarde maximaliseren</td><td>Zoveel mogelijk omzet binnen je budget</td><td>Als je de waarde van elke verkoop meet</td></tr>
+            <tr><td>Doel-ROAS</td><td>Omzet tegen een rendement dat jij opgeeft</td><td>Webshops met minstens 15 conversies in 30 dagen</td></tr>
+            <tr><td>Handmatige CPC</td><td>Niets: jij bepaalt het bod per zoekwoord</td><td>Wie alles zelf wil sturen en daar tijd voor heeft</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Twee dingen die veel uitleg op internet nog mist. Sinds maart 2025 bestaat Verbeterde CPC niet meer voor zoekcampagnes. En vanaf juni 2026 heten de strategieën met een doel in Google Ads kortweg Doel-CPA en Doel-ROAS. Het gedrag erachter is niet veranderd, zegt Google. Wat <a href="/kennisbank/wat-is/roas/">ROAS</a> is en hoe je een goed doel kiest, lees je in het begrip zelf.</p>
+
+      <div class="stap-kop" id="kosten"><Tekening naam="munten" maat={52} /><h2>Wat kost SEA?</h2></div>
+      <p>De kosten bestaan uit twee delen. Het geld dat naar Google gaat voor de klikken, je advertentiebudget. En de tijd van wie de campagne bouwt en bijhoudt. Doe je het zelf, dan is dat jouw tijd. Besteed je het uit, dan is het een maandbedrag aan een bureau.</p>
+      <h3>Wat een klik kost per branche</h3>
+      <p>Om een idee te geven: dit zijn gemiddelde klikprijzen in Nederland voor veelgezochte beroepen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Zoekwoord</th><th>Gemiddelde klikprijs</th><th>Zoekvolume per maand</th></tr></thead>
+          <tbody>
+            {klikprijzen.map(([k, cpc, vol]) => <tr><td>{k}</td><td>{cpc}</td><td>{vol}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: SE Ranking, zoekwoorddatabase Nederland, opgevraagd op 18 oktober 2026. Een gemiddelde over het hele land. Wat jij betaalt, hangt af van je regio, de concurrentie op dat moment en de kwaliteit van je advertentie.</p>
+      <h3>Hoe het budget werkt</h3>
+      <p>Je stelt per campagne een gemiddeld dagbudget in. Op drukke dagen mag Google tot twee keer dat bedrag uitgeven, op rustige dagen minder. Over een maand betaal je nooit meer dan je dagbudget keer 30,4. Werk je liever met een maandbedrag, deel dat dan door 30,4. Een maandbudget van € 600 wordt zo een dagbudget van € 19,74.</p>
+      <p>Hoeveel budget je nodig hebt, reken je terug vanaf je doel. Een handige ondergrens: je dagbudget moet genoeg zijn voor minstens tien klikken per dag. Minder dan dat, en het duurt maanden voordat je weet wat werkt.</p>
+
+      <div class="stap-kop" id="rekenvoorbeeld"><Tekening naam="pen" maat={52} /><h2>Rekenvoorbeeld: een installateur in Hoogeveen</h2></div>
+      <p>Stel: een installateur in Hoogeveen wil meer opdrachten voor het vervangen van een cv-ketel. Een klus levert gemiddeld € 600 marge op. Hij wil er maximaal een kwart aan werving uitgeven, dus € 150 per nieuwe klant.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Getal</th><th>Uitleg</th></tr></thead>
+          <tbody>
+            <tr><td>Klikprijs</td><td>€ 3,00</td><td>Inschatting uit de Zoekwoordplanner</td></tr>
+            <tr><td>Klikken per maand</td><td>200</td><td>Budget van € 600 gedeeld door € 3</td></tr>
+            <tr><td>Aanvragen</td><td>12</td><td>6 procent van de bezoekers vraagt een offerte aan</td></tr>
+            <tr><td>Kosten per aanvraag</td><td>€ 50</td><td>€ 600 gedeeld door 12</td></tr>
+            <tr><td>Opdrachten</td><td>4</td><td>Eén op de drie offertes wordt een klus</td></tr>
+            <tr><td>Kosten per klant</td><td>€ 150</td><td>Precies zijn grens</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Verzonnen voorbeeld, met realistische getallen.</p>
+      <p>Wat leert dit? De klikprijs is maar één knop. Stijgt het percentage aanvragen van 6 naar 9 procent, door een betere landingspagina, dan daalt de prijs per klant naar € 100. Zonder dat er een euro extra naar Google gaat. Kijk daarom altijd eerst naar de pagina waar de bezoeker landt. In de gids <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina maken</a> lees je waar je op let.</p>
+
+      <div class="stap-kop" id="seo"><Tekening naam="vergrootglas" maat={52} /><h2>SEA en SEO: wat is het verschil?</h2></div>
+      <p>Het verschil met SEO in één zin: bij SEO verdien je je plek in de gewone resultaten met een goede website, bij advertenties koop je hem per klik. De belangrijkste verschillen op een rij:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Adverteren</th><th>SEO</th></tr></thead>
+          <tbody>
+            <tr><td>Snelheid</td><td>Dezelfde dag zichtbaar</td><td>Meestal een paar maanden</td></tr>
+            <tr><td>Kosten</td><td>Per klik, elke maand opnieuw</td><td>Werk aan je site, geen klikprijs</td></tr>
+            <tr><td>Als je stopt</td><td>Direct onzichtbaar</td><td>Posities blijven nog een tijd staan</td></tr>
+            <tr><td>Controle</td><td>Jij kiest zoekwoord, tekst en budget</td><td>Google kiest wat het laat zien</td></tr>
+            <tr><td>Testen</td><td>Binnen weken weet je welke zoektermen klanten opleveren</td><td>Duurt langer om te meten</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het is zelden het een of het ander. Advertenties zijn de kraan die je vandaag open kunt draaien. SEO is de bron die blijft stromen, ook in een maand dat je niets uitgeeft. Een slimme combinatie: test met advertenties welke zoektermen echt aanvragen opleveren, en investeer daarna met SEO in precies die woorden. Meer over die afweging in <a href="/kennisbank/wat-is/seo-en-sea/">het verschil tussen SEO en SEA</a>.</p>
+
+      <div class="stap-kop" id="voor-en-nadelen"><Tekening naam="lamp" maat={52} /><h2>Voor- en nadelen van zoekmachine adverteren</h2></div>
+      <div class="twee">
+        <div class="card blok">
+          <p class="kader-titel">Voordelen</p>
+          <ul class="vink">
+            <li>Je bereikt mensen op het moment dat ze zoeken.</li>
+            <li>Binnen een dag zichtbaar, ook op woorden waar je organisch nog nergens staat.</li>
+            <li>Je bepaalt zelf het budget en kunt elke dag bijsturen.</li>
+            <li>Alles is meetbaar, tot de kosten per aanvraag.</li>
+            <li>Je kiest je werkgebied tot op de kilometer.</li>
+          </ul>
+        </div>
+        <div class="card blok">
+          <p class="kader-titel">Nadelen</p>
+          <ul>
+            <li>Stop je met betalen, dan ben je weg.</li>
+            <li>In drukke branches lopen klikprijzen snel op.</li>
+            <li>Zonder goede meting gooi je geld weg zonder het te merken.</li>
+            <li>Geen zoekvolume, geen klikken: voor iets nieuws zoekt nog niemand.</li>
+            <li>De standaardinstellingen van Google zijn vooral goed voor Google.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stap-kop" id="meten"><Tekening naam="grafiek" maat={52} /><h2>De cijfers die tellen</h2></div>
+      <p>Een account staat vol cijfers. Je hebt er maar een handvol nodig om te weten of je campagne werkt.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Cijfer</th><th>Wat het zegt</th><th>Meer weten</th></tr></thead>
+          <tbody>
+            <tr><td>CTR</td><td>Hoeveel procent van de mensen die je advertentie zien, erop klikt</td><td><a href="/kennisbank/wat-is/ctr/">Wat is CTR?</a></td></tr>
+            <tr><td>CPC</td><td>Wat je gemiddeld per klik betaalt</td><td><a href="/kennisbank/wat-is/cpc/">Wat is CPC?</a></td></tr>
+            <tr><td>Conversies</td><td>Aanvragen, telefoontjes of verkopen uit je advertenties</td><td><a href="/kennisbank/wat-is/google-tag-manager/">Meten met Tag Manager</a></td></tr>
+            <tr><td>Kosten per conversie</td><td>Wat één aanvraag of verkoop je kost</td><td><a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a></td></tr>
+            <tr><td>ROAS</td><td>Hoeveel omzet elke uitgegeven euro oplevert</td><td><a href="/kennisbank/wat-is/roas/">Wat is ROAS?</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Het belangrijkste cijfer staat onderaan je bankrekening, niet in Google Ads. Een hoge CTR en een lage klikprijs zijn mooi, maar zeggen niets als er geen klanten uit komen. Stuur daarom op conversies en op wat een conversie mag kosten.</p>
+
+      <div class="stap-kop" id="fouten"><Tekening naam="schild" maat={52} /><h2>Zeven fouten die geld kosten</h2></div>
+      <p>Deze lekken zie je in veel accounts terug.</p>
+      <ol>
+        <li><b>Geen conversiemeting.</b> Dan weet je niet welke zoekwoorden klanten opleveren, en kunnen de slimme biedstrategieën van Google niet leren.</li>
+        <li><b>Het Display-netwerk staat aan in een zoekcampagne.</b> Je tekstadvertentie verschijnt dan als banner op allerlei sites, bij mensen die niet zoeken.</li>
+        <li><b>Locatie op "aanwezigheid of interesse".</b> Dan ziet ook iemand in Spanje die over Assen leest je advertentie. Kies "aanwezigheid".</li>
+        <li><b>Alles naar de homepage.</b> Wie op "dakgoot repareren" zoekt, wil een pagina over dakgoten. Niet je hele bedrijf.</li>
+        <li><b>Brede zoekwoorden zonder uitsluitingen.</b> Woorden als gratis, vacature, cursus en zelf kosten klikken en leveren niets op.</li>
+        <li><b>Aanbevelingen automatisch laten toepassen.</b> Een voorstel van Google is geen opdracht. Lees ze en kies zelf.</li>
+        <li><b>Nooit iets stopzetten.</b> Zoekwoorden die al maanden alleen geld kosten, mogen eruit. Verspild budget schrappen levert soms meer op dan een nieuwe campagne.</li>
+      </ol>
+      <p>Heb je al een campagne draaien? Loop dan de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a> na. In tien punten zie je waar je budget weglekt.</p>
+
+      <div class="stap-kop" id="beginnen"><Tekening naam="raket" maat={52} /><h2>Zelf beginnen of uitbesteden?</h2></div>
+      <p>Een eerste campagne opzetten kan iedereen. Zo begin je:</p>
+      <ol>
+        <li>Bepaal wat een aanvraag of verkoop maximaal mag kosten.</li>
+        <li>Maak een Google Ads-account aan in de expertmodus, op naam van je eigen bedrijf.</li>
+        <li>Zet conversiemeting aan voordat je de eerste euro uitgeeft.</li>
+        <li>Zoek zoekwoorden met koopintentie in de Zoekwoordplanner.</li>
+        <li>Bouw kleine advertentiegroepen met elk een eigen landingspagina.</li>
+        <li>Kies je werkgebied, zet de netwerken goed en stel een dagbudget in.</li>
+        <li>Kijk elke week in het zoektermenrapport en sluit onzin uit.</li>
+      </ol>
+      <p>Het volledige stappenplan, met de instellingen die er echt toe doen, staat in de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a>.</p>
+      <p>Geen tijd of zin? Dan doen wij het. We beginnen met de vraag wat een klant voor jou waard is en spreken een doel af waar je ons op kunt afrekenen. Het account staat op jouw naam en je zit nergens aan vast: we werken maandelijks opzegbaar, met <a href="/garantie/">garantie</a>. Wat het kost, hangt af van je advertentiebudget. Lees meer over <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a> of over <a href="/online-adverteren/">online adverteren</a> in het algemeen. Wil je juist weten wat er in AI-chats aan advertentieplekken bijkomt, lees dan over <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/wat-is-google-ads/">Wat is Google Ads?</a> voor de uitleg van het platform zelf. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent SEA?', a: 'SEA staat voor search engine advertising, in het Nederlands zoekmachine adverteren. Je plaatst advertenties bij de zoekresultaten van Google of Bing en betaalt per klik.' },
+      { v: 'Is SEA hetzelfde als Google Ads?', a: 'Bijna. Google Ads is het platform waarmee je in Google adverteert, en in Nederland loopt bijna al het zoekverkeer via Google. Adverteren in Bing gaat via Microsoft Advertising.' },
+      { v: 'Hoeveel budget heb ik nodig om te beginnen?', a: 'Genoeg voor minstens tien klikken per dag. Kost een klik in jouw branche € 2, dan is dat zo\'n € 20 per dag, ruim € 600 per maand. Met minder kan het, maar dan duurt het lang voordat je weet wat werkt.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Zodra je advertenties zijn goedgekeurd, kunnen ze verschijnen. Vaak is dat dezelfde dag. Reken op een week of vier voordat je weet wat een aanvraag kost.' },
+      { v: 'Moet ik kiezen tussen SEA en SEO?', a: 'Nee. Advertenties leveren snel bezoekers op, SEO bouwt aan bezoekers die blijven komen. De meeste bedrijven doen het slimst met allebei, en gebruiken de cijfers uit hun advertenties om te kiezen waar ze met SEO op inzetten.' },
+      { v: 'Doen jullie ook Microsoft Ads?', a: 'Nee. Wij richten ons op Google Ads, omdat daar voor onze klanten de zoekopdrachten zitten. Ruim 89 procent van de zoekopdrachten in Nederland gaat via Google.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder lezen over adverteren"
+    links={[
+      { label: 'Begrip', titel: 'Wat is CPC?', href: '/kennisbank/wat-is/cpc/', tekst: 'Wat een klik kost en waarom je minder betaalt dan je bod.', teken: 'munten' },
+      { label: 'Begrip', titel: 'Wat is ROAS?', href: '/kennisbank/wat-is/roas/', tekst: 'Hoeveel omzet elke advertentie-euro oplevert.', teken: 'grafiek' },
+      { label: 'Gids', titel: 'Google Ads-campagne opzetten', href: '/online-adverteren/google-ads-campagne-opzetten/', tekst: 'Het complete stappenplan, met de 10-puntencheck.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd of adverteren voor jou loont?" tekst={`${site.contactpersoon} rekent met je uit wat een klant voor jou waard is en wat een klik in jouw branche kost. Daarna weet je of Google Ads past, of dat je geld beter ergens anders werkt.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  .stap-kop { scroll-margin-top: 90px; }
+  .twee { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 8px 0 24px; }
+  .blok { padding: 20px 22px; }
+  .blok ul { margin-bottom: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) { .twee { grid-template-columns: minmax(0, 1fr); } }
+</style>

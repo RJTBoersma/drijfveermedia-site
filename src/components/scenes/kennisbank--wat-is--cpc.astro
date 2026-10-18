@@ -1,0 +1,57 @@
+---
+// Scène voor /kennisbank/wat-is/cpc/: de veiling achter één zoekopdracht. Drie adverteerders, elk met een balk voor hun advertentierangschikking.
+// Rechts het verschil tussen je maximale CPC en wat je echt betaalt. Als hij leeft: de hamer tikt, een label wijst naar de concurrent die de prijs bepaalt en het bedrag dat je echt betaalt licht op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const rijen = [
+  { y: 82, naam: 'Jouw bedrijf', breed: 196, kleur: '#ff6600', plek: '1' },
+  { y: 132, naam: 'Bedrijf A', breed: 150, kleur: '#074663', plek: '2' },
+  { y: 182, naam: 'Bedrijf B', breed: 96, kleur: '#074663', plek: '3' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een veiling tussen drie adverteerders. Jouw bedrijf wint de bovenste plek met een maximale CPC van 3 euro, maar betaalt maar 2,41 euro per klik.'}>
+  <rect x="20" y="24" width="290" height="222" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="40" y="54" font-size="13" font-weight="800">Veiling bij één zoekopdracht</text>
+  {rijen.map((r) => (
+    <g>
+      <circle cx="50" cy={r.y + 10} r="11" fill={r.plek === '1' ? '#ff6600' : '#e8eef4'} />
+      <text x="50" y={r.y + 14} font-size="11" font-weight="800" text-anchor="middle" style={r.plek === '1' ? 'fill:#fff' : undefined}>{r.plek}</text>
+      <text x="70" y={r.y + 4} font-size="11" font-weight="700" class="zacht">{r.naam}</text>
+      <rect x="70" y={r.y + 12} width="220" height="12" rx="6" fill="#e8eef4" />
+      <rect x="70" y={r.y + 12} width={r.breed} height="12" rx="6" fill={r.kleur} />
+    </g>
+  ))}
+  <path d="M220 88v122" stroke="#10283f" stroke-width="1.6" stroke-dasharray="4 4" />
+
+  <!-- wat je betaalt -->
+  <rect x="328" y="50" width="132" height="168" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="394" y="78" font-size="11" font-weight="800" text-anchor="middle" class="zacht">Max. CPC</text>
+  <text x="394" y="102" font-size="18" font-weight="800" text-anchor="middle" class="zacht">€ 3,00</text>
+  <path d="M348 120h92" stroke="#e8eef4" stroke-width="2" />
+  <text x="394" y="144" font-size="11" font-weight="800" text-anchor="middle" class="zacht">Je betaalt</text>
+  <rect x="348" y="156" width="92" height="40" rx="10" fill="#fff4ec" />
+  <text x="394" y="183" font-size="22" font-weight="800" text-anchor="middle">€ 2,41</text>
+
+  {!mini && (
+    <g>
+      <g class="cpc-hamer">
+        <rect x="262" y="34" width="30" height="14" rx="4" fill="#074663" />
+        <path d="M277 48l-14 24" stroke="#074663" stroke-width="5" stroke-linecap="round" />
+      </g>
+      <g class="cpc-kader"><rect x="344" y="152" width="100" height="48" rx="12" fill="none" stroke="#ff6600" stroke-width="2.5" /></g>
+      <g class="cpc-noot"><rect x="168" y="212" width="104" height="22" rx="11" fill="#10283f" /><text x="220" y="227" font-size="10.5" font-weight="800" text-anchor="middle" style="fill:#fff">net boven A</text></g>
+    </g>
+  )}
+</svg>
+<style>
+  .cpc-hamer { transform-box: fill-box; transform-origin: 90% 10%; }
+  .cpc-kader, .cpc-noot { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .cpc-kader, :global(.teken-js) .cpc-noot { opacity: 0; }
+  .in-beeld .cpc-noot { animation: kennisbank--wat-is--cpc-noot 0.5s ease-out 0.8s forwards; }
+  .in-beeld .cpc-hamer { animation: kennisbank--wat-is--cpc-hamer 4s ease-in-out 0.6s infinite; }
+  .in-beeld .cpc-kader { animation: kennisbank--wat-is--cpc-kader 4s ease-in-out 0.6s infinite; }
+  @keyframes kennisbank--wat-is--cpc-noot { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank--wat-is--cpc-hamer { 0%, 70%, 100% { transform: rotate(0); } 78% { transform: rotate(-24deg); } 84% { transform: rotate(8deg); } 90% { transform: rotate(0); } }
+  @keyframes kennisbank--wat-is--cpc-kader { 0%, 82% { opacity: 0; transform: scale(1.12); } 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .cpc-noot, .in-beeld .cpc-hamer, .in-beeld .cpc-kader { animation: none; } }
+</style>

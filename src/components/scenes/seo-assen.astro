@@ -1,0 +1,67 @@
+---
+// Scène voor /seo-assen/: een zoekresultaat in Google waarin "Jouw bedrijf · Assen" naar plek één klimt, naast een getekend kaartje van Assen met de ring, de A28 en een pin.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een zoekopdracht naar een fysiotherapeut in Assen. Jouw bedrijf klimt naar de eerste plek, naast een kaartje van Assen met de ring, de A28 en een pin.'}>
+  <!-- zoekscherm -->
+  <rect x="22" y="26" width="236" height="220" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="38" y="42" width="204" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="l" cx="55" cy="55" r="5" />
+  <path class="l" d="M59 59l4 4" />
+  <text x="70" y="60" font-size="11" font-weight="700">fysiotherapeut assen</text>
+  <g>
+    <rect x="38" y="84" width="204" height="34" rx="7" fill="#f3f6f9" />
+    <rect x="48" y="93" width="110" height="7" rx="3" fill="#d9e1ea" />
+    <rect x="48" y="106" width="160" height="5" rx="2" fill="#e8eef4" />
+    <rect x="38" y="122" width="204" height="34" rx="7" fill="#f3f6f9" />
+    <rect x="48" y="131" width="96" height="7" rx="3" fill="#d9e1ea" />
+    <rect x="48" y="144" width="150" height="5" rx="2" fill="#e8eef4" />
+    <rect x="38" y="160" width="204" height="34" rx="7" fill="#f3f6f9" />
+    <rect x="48" y="169" width="120" height="7" rx="3" fill="#d9e1ea" />
+    <rect x="48" y="182" width="140" height="5" rx="2" fill="#e8eef4" />
+    <rect x="38" y="198" width="204" height="34" rx="7" fill="#f3f6f9" />
+    <rect x="48" y="207" width="88" height="7" rx="3" fill="#d9e1ea" />
+    <rect x="48" y="220" width="156" height="5" rx="2" fill="#e8eef4" />
+  </g>
+  <!-- kaartje van Assen -->
+  <path d="M300 74c34-34 104-40 138-12s30 82 10 122-78 54-116 40-48-50-44-90 0-40 12-60z" fill="#e9eef3" stroke="#b9c8d6" stroke-width="2" />
+  <ellipse cx="372" cy="142" rx="50" ry="44" fill="none" stroke="#fff" stroke-width="8" />
+  <path d="M372 142c10-30 30-60 54-84" stroke="#cfe0ee" stroke-width="6" fill="none" stroke-linecap="round" />
+  <path d="M308 50c14 60 12 130-4 200" stroke="#fff" stroke-width="10" fill="none" />
+  <rect x="290" y="226" width="30" height="16" rx="4" fill="#10283f" />
+  <text x="305" y="238" text-anchor="middle" font-size="10" font-weight="800" style="fill:#fff">A28</text>
+  <text x="380" y="88" text-anchor="middle" font-size="9" font-weight="700" class="zacht">Marsdijk</text>
+  <text x="404" y="196" text-anchor="middle" font-size="9" font-weight="700" class="zacht">Assen-Oost</text>
+  <text x="342" y="212" text-anchor="middle" font-size="9" font-weight="700" class="zacht">Kloosterveen</text>
+  <path d="M358 128c0-9 6-15 14-15s14 6 14 15c0 11-14 24-14 24s-14-13-14-24z" fill="#ff6600" />
+  <circle cx="372" cy="128" r="5" fill="#fff" />
+  {!mini && (
+    <g>
+      <circle class="seo-assen-ring" cx="372" cy="150" r="10" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="seo-assen-kaart">
+        <rect x="36" y="82" width="208" height="38" rx="8" fill="#fff" stroke="#ff6600" stroke-width="2.5" />
+        <circle cx="52" cy="101" r="9" fill="#ff6600" />
+        <text x="52" y="105" text-anchor="middle" font-size="11" font-weight="900" style="fill:#fff">1</text>
+        <text x="68" y="98" font-size="11" font-weight="800">Jouw bedrijf · Assen</text>
+        <text x="68" y="112" font-size="8.5" class="zacht">Nu open · bellen · route</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .seo-assen-ring { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .seo-assen-ring { opacity: 0; }
+  :global(.teken-js) .seo-assen-kaart { transform: translateY(116px); opacity: 0; }
+  .in-beeld .seo-assen-kaart { animation: seo-assen-klim 2.2s cubic-bezier(.5,0,.2,1) 0.5s forwards; }
+  .in-beeld .seo-assen-ring { animation: seo-assen-ring 3s ease-out 2.4s infinite; }
+  @keyframes seo-assen-klim {
+    0% { opacity: 0; transform: translateY(116px); }
+    15% { opacity: 1; transform: translateY(116px); }
+    45% { transform: translateY(76px); }
+    70% { transform: translateY(38px); }
+    100% { opacity: 1; transform: none; }
+  }
+  @keyframes seo-assen-ring { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(2.6); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .seo-assen-kaart, .in-beeld .seo-assen-ring { animation: none; } }
+</style>

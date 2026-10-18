@@ -1,0 +1,167 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--microsoft-copilot.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/microsoft-copilot/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat is Microsoft Copilot?' },
+  { id: 'waar', titel: 'Waar je het tegenkomt' },
+  { id: 'werk', titel: 'Wat het doet in je werk' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'bing', titel: 'Waarom Bing telt' },
+  { id: 'genoemd', titel: 'Zo word je genoemd' },
+  { id: 'let-op', titel: 'Waar je op let' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Microsoft Copilot voor ondernemers: wat het is en hoe je erin genoemd wordt',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'SoftwareApplication', name: 'Microsoft Copilot', applicationCategory: 'AI-assistent' },
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Microsoft Copilot voor ondernemers | Drijfveer Media"
+  description="Microsoft Copilot uitgelegd voor ondernemers: wat het doet in Word, Excel en Outlook, wat het kost en hoe je bedrijf in de antwoorden komt via Bing."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Microsoft Copilot', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · GEO" titel="Microsoft Copilot voor ondernemers: zo werkt het en zo word je genoemd" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Microsoft Copilot is de AI-assistent van Microsoft. Hij zit in Windows, in Edge en in Word, Excel en Outlook. Wat heb je er als ondernemer aan, wat kost het, en hoe zorg je dat hij jouw bedrijf aanraadt?</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand oktober 2026)</p>
+          <ul>
+            <li>Microsoft Copilot is een chatbot, gebouwd op de taalmodellen van OpenAI. Hij begon in februari 2023 als Bing Chat.</li>
+            <li>De gratis versie werkt in Windows, Edge en in de app. In de Office-apps zit hij bij Microsoft 365, vanaf € 10 per maand voor particulieren.</li>
+            <li>In augustus 2026 kondigde Microsoft aan de versie voor consumenten en die voor werk samen te voegen tot één app.</li>
+            <li>Voor antwoorden met actuele informatie leunt de assistent op Bing. Wie in Bing goed vindbaar is, maakt de meeste kans om genoemd te worden.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is Microsoft Copilot?</h2>
+        <p>Het is een AI-assistent: je typt of spreekt een vraag in en krijgt een antwoord in gewone taal. Hij kan teksten schrijven, samenvatten, afbeeldingen maken en bronnen noemen. Het gesprek lijkt sterk op dat van ChatGPT, en dat is geen toeval. Microsoft is sinds 2019 een grote investeerder in OpenAI, en Copilot draait op een model dat is gebouwd op de GPT-modellen van OpenAI.</p>
+        <p>De geschiedenis verklaart de verwarrende namen. In februari 2023 lanceerde Microsoft Bing Chat, een chatbot in de zoekmachine Bing en de browser Edge. In de loop van 2023 kregen alle AI-producten van Microsoft de naam Copilot. Er kwam een versie voor Windows, een voor Office (Microsoft 365 Copilot) en een losse app. In 2024 verscheen zelfs een speciale Copilot-toets op nieuwe Windows-toetsenborden.</p>
+        <p>In augustus 2026 maakte Microsoft bekend dat de versie voor consumenten en de versie voor werk samengaan in één nieuwe app. Een aantal functies van de consumentenversie verdwijnt daarbij, waaronder Deep Research en het figuurtje Mico. Verwacht dus dat schermen en namen nog veranderen.</p>
+
+        <h2 id="waar">Waar je hem tegenkomt</h2>
+        <ul>
+          <li><b>Windows.</b> Via de taakbalk of de speciale toets op je laptop.</li>
+          <li><b>Edge.</b> In de browser van Microsoft zit de assistent in een zijpaneel.</li>
+          <li><b>Bing.</b> De zoekmachine combineert zoekresultaten met AI-antwoorden.</li>
+          <li><b>Microsoft 365.</b> In Word, Excel, PowerPoint, Outlook en Teams.</li>
+          <li><b>Losse apps.</b> Voor iPhone, Android en Mac, en gewoon in de browser.</li>
+        </ul>
+        <p>Veel ondernemers gebruiken hem dus al zonder het te merken. Dat maakt hem belangrijk: wie op een zakelijke laptop iets vraagt, komt vaak eerder bij Microsoft uit dan bij Google.</p>
+
+        <h2 id="werk">Wat hij doet in je werk</h2>
+        <p>Voor ondernemers zit de grootste winst in de Office-apps. Een paar voorbeelden per programma:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>App</th><th>Voorbeeld van een prompt</th></tr></thead>
+            <tbody>
+              <tr><td>Word</td><td>"Maak van deze aantekeningen een offerte van één pagina, zakelijk maar vriendelijk."</td></tr>
+              <tr><td>Excel</td><td>"Welke klanten hebben dit jaar minder besteld dan vorig jaar? Maak er een grafiek van."</td></tr>
+              <tr><td>Outlook</td><td>"Vat de mailwisseling met deze leverancier samen en zet de openstaande punten op een rij."</td></tr>
+              <tr><td>Teams</td><td>"Wat is er besloten in het overleg van vanochtend, en wie doet wat?"</td></tr>
+              <tr><td>PowerPoint</td><td>"Maak vijf dia's over onze nieuwe dienst, op basis van dit Word-document."</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een goede prompt geeft context. Zeg voor wie de tekst is, welke toon je wilt en welke feiten erin moeten. Dan hoef je minder te herschrijven. En lees altijd na: ook deze assistent maakt fouten, vooral met cijfers.</p>
+
+        <h2 id="kosten">Wat kost Microsoft Copilot?</h2>
+        <p>De chatbot zelf is gratis te gebruiken met een Microsoft-account. Wil je hem in de Office-apps, dan heb je een abonnement op Microsoft 365 nodig. De prijzen voor particulieren op de Nederlandse site van Microsoft:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Abonnement</th><th>Per maand</th><th>Per jaar</th><th>Wat je krijgt</th></tr></thead>
+            <tbody>
+              <tr><td>Gratis</td><td>€ 0</td><td>€ 0</td><td>Chatten in Windows, Edge en de app</td></tr>
+              <tr><td>Microsoft 365 Personal</td><td>€ 10</td><td>€ 99</td><td>1 persoon, Word, Excel, PowerPoint en Outlook met AI, 1 TB opslag</td></tr>
+              <tr><td>Microsoft 365 Family</td><td>€ 13</td><td>€ 129</td><td>Tot 6 personen, AI alleen voor de eigenaar van het abonnement</td></tr>
+              <tr><td>Microsoft 365 Premium</td><td>€ 22</td><td>€ 219</td><td>Ruimere limieten en AI die zelf onderzoek en analyses doet</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor bedrijven heeft Microsoft aparte abonnementen, zoals Microsoft 365 Business Standard en Business Premium met Copilot. De prijs per gebruiker hangt af van het abonnement en het aantal gebruikers. De actuele bedragen staan op de site van Microsoft. Werk je met klantgegevens, kies dan een zakelijk abonnement en spreek met je IT-leverancier af wat de assistent mag lezen.</p>
+
+        <h2 id="bing">Waarom Bing ineens telt voor je vindbaarheid</h2>
+        <p>Stel een vraag als "welke installateur in Zwolle plaatst zonnepanelen?" en de assistent zoekt het antwoord op. Daarvoor gebruikt hij Bing, de zoekmachine van Microsoft. Sinds 2025 combineert Bing zelf ook zoekresultaten met AI-antwoorden, onder de naam Copilot Search.</p>
+        <p>De meeste Nederlandse ondernemers kijken alleen naar Google. Bing is voor hen een bijzaak. Maar vragen aan de assistent van Microsoft waarvoor actuele informatie nodig is, lopen via die zoekmachine. Sta je niet in Bing, of staan je gegevens daar verkeerd, dan noemt de assistent je niet. Dat is de reden dat Bing voor generative engine optimization ineens telt.</p>
+
+        <h2 id="genoemd">Zo word je genoemd in de antwoorden</h2>
+        <p>Het goede nieuws: dit is minder werk dan je denkt, omdat weinig concurrenten het doen.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>1. Meld je site aan bij Bing</h3></div>
+        <p>Dat doe je in Bing Webmaster Tools. Gratis, en in een kwartier gedaan. Heb je Google Search Console al, dan kun je je site daaruit importeren. Dien je sitemap in en kijk of er pagina's zijn die Bing niet kan lezen.</p>
+
+        <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3>2. Zet IndexNow aan</h3></div>
+        <p>Met IndexNow laat je Bing direct weten dat een pagina nieuw of veranderd is. Veel websitesystemen hebben er een plugin of instelling voor. Zo staat een nieuwe dienst of prijs sneller in de antwoorden.</p>
+
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>3. Claim je bedrijf in Bing Places</h3></div>
+        <p>Bing Places is de tegenhanger van het Google Bedrijfsprofiel. Vul hetzelfde in: naam, adres, telefoonnummer, openingstijden, diensten. Precies gelijk aan je site en aan Google. Wil je dit in één keer goed laten regelen, kijk dan bij <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel, Bing Places en Apple</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Schrijf pagina's die een vraag beantwoorden</h3></div>
+        <p>Een AI-assistent haalt het antwoord uit pagina's die de vraag duidelijk beantwoorden. Per dienst: wat het is, wat het kost, hoe lang het duurt, waar je werkt. Gewone tekst, geen informatie die alleen in een plaatje staat. Zet een paar veelgestelde vragen onderaan.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>5. Test het, elke maand</h3></div>
+        <p>Stel de vragen die je klanten stellen aan de assistent en noteer of je genoemd wordt en welke bronnen erbij staan. In Google Analytics zie je bezoekers die doorklikken via copilot.microsoft.com. Hoe je zo'n meting opzet voor alle assistenten tegelijk, lees je in onze gids <a href="/kennisbank/gidsen/wat-is-geo/">wat is GEO</a>.</p>
+
+        <h2 id="let-op">Waar je op let</h2>
+        <ul class="vink">
+          <li><b>Controleer wat hij schrijft.</b> Microsoft zegt in de gebruiksvoorwaarden van de gratis versie zelf dat je er niet op moet vertrouwen voor belangrijk advies.</li>
+          <li><b>Let op wat hij mag lezen.</b> In een zakelijke omgeving kan de assistent standaard in je eigen mails en documenten zoeken. Regel samen met je IT-leverancier wie waar bij mag.</li>
+          <li><b>Begin klein.</b> Kies één taak die elke week terugkomt, zoals verslagen of offertes, en maak die eerst sneller.</li>
+        </ul>
+        <p>Wij gebruiken hem naast Claude, ChatGPT en Gemini. Op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a> lees je waarvoor. Wil je dat wij zorgen dat AI-assistenten jouw bedrijf noemen? Lees dan hoe we <a href="/generative-engine-optimization/">generative engine optimization</a> aanpakken, vanaf € 495 per maand en maandelijks opzegbaar.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij het regelen?" intro="Wat je van ons kunt verwachten als we samen zorgen dat je gevonden en genoemd wordt." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Microsoft Copilot gratis?', a: 'De chatbot in Windows, Edge en de app is gratis met een Microsoft-account. Voor de assistent in Word, Excel en Outlook heb je Microsoft 365 nodig, vanaf € 10 per maand voor particulieren (stand oktober 2026).' },
+      { v: 'Wat is het verschil tussen Copilot en ChatGPT?', a: 'Beide draaien op technologie van OpenAI. ChatGPT is van OpenAI zelf. De assistent van Microsoft zit verweven met Windows, Office en de zoekmachine Bing. Lees ook hoe je <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar wordt in ChatGPT</a>.' },
+      { v: 'Wat is Microsoft 365 Copilot?', a: 'De assistent in de Office-apps van Microsoft, zoals Word, Excel, Outlook en Teams. Microsoft kondigde in augustus 2026 aan deze samen te voegen met de gewone app voor consumenten.' },
+      { v: 'Waarom noemt Copilot mijn bedrijf niet?', a: 'Vaak omdat je site niet goed in Bing staat, of je gegevens daar ontbreken. Meld je site aan bij Bing Webmaster Tools en claim je bedrijf in Bing Places.' },
+      { v: 'Werkt de assistent in het Nederlands?', a: 'Ja. Je kunt in het Nederlands vragen stellen en krijgt Nederlandse antwoorden, ook in de Office-apps.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over AI-assistenten"
+    links={[
+      { label: 'Gids', titel: 'Wat is Google Gemini?', href: '/kennisbank/gidsen/google-gemini/', tekst: 'De AI-assistent van Google, en hoe je erin genoemd wordt.' },
+      { label: 'Gids', titel: 'Wat is Claude?', href: '/kennisbank/gidsen/claude/', tekst: 'De assistent van Anthropic uitgelegd.' },
+      { label: 'Dienst', titel: 'Vindbaar in ChatGPT', href: '/generative-engine-optimization/vindbaar-in-chatgpt/', tekst: 'Specifiek voor ChatGPT en Bing.' },
+    ]}
+  />
+
+  <Actie titel="Noemt AI jouw bedrijf al?" tekst={`${site.contactpersoon} stelt de vragen van jouw klanten aan Microsoft Copilot, ChatGPT en Gemini, en belt je met de uitkomst. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis scan aan', href: '/gratis-website-analyse/' }} />
+</Base>

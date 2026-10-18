@@ -1,0 +1,162 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--instagram-algoritme.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/instagram-algoritme/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'niet-een', titel: 'Er is niet één algoritme' },
+  { id: 'signalen', titel: 'Wat telt het zwaarst' },
+  { id: 'praktijk', titel: 'Wat je ermee doet' },
+  { id: 'hashtags', titel: 'Hashtags en zoekwoorden' },
+  { id: 'mythes', titel: 'Drie hardnekkige mythes' },
+  { id: 'tijd', titel: 'Beste tijd om te posten' },
+  { id: 'checklist', titel: 'Checklist per bericht' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Het Instagram algoritme: zo werkt het en zo gebruik je het',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Instagram algoritme: zo werkt het | Drijfveer Media"
+  description="Hoe werkt het Instagram algoritme? Wat telt in je feed, stories, reels en verkennen, hoe vergroot je je bereik en wanneer post je het beste."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Instagram algoritme', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Social media" titel="Het Instagram algoritme: zo werkt het en zo gebruik je het" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Het Instagram algoritme is geen zwarte doos. Instagram legt zelf uit waar het op let. Wie dat snapt, maakt berichten die vaker gezien worden, zonder trucjes.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Instagram heeft geen één algoritme. Feed, stories, reels en verkennen werken elk anders.</li>
+            <li>Het voorspelt wat iemand met je bericht gaat doen: bekijken, liken, reageren, delen of opslaan.</li>
+            <li>Delen en opslaan wegen zwaar. Maak dus berichten die mensen willen bewaren of doorsturen.</li>
+            <li>Sinds eind 2025 mag je maximaal vijf hashtags per bericht gebruiken. Zoekwoorden in je tekst tellen mee.</li>
+          </ul>
+        </div>
+
+        <h2 id="niet-een">Er is niet één algoritme</h2>
+        <p>Veel mensen praten over "het" Instagram algoritme, alsof er één knop is die bepaalt wie je bericht ziet. Zo werkt het niet. Instagram schrijft zelf, in het stuk <i>Instagram Ranking Explained</i> van topman Adam Mosseri, dat elk onderdeel van de app een eigen algoritme heeft. Mensen zoeken in stories naar hun vrienden, gebruiken verkennen om nieuwe dingen te vinden en willen in reels vermaakt worden. Dus rangschikt Instagram die onderdelen ook anders.</p>
+        <p>Elk algoritme doet in grote lijnen hetzelfde. Eerst verzamelt het alle berichten die iemand zou kunnen zien. Dan kijkt het naar duizenden signalen: wie plaatste het, wanneer, hoe vaak heeft deze persoon met dat account te maken gehad. Daarna voorspelt het hoe groot de kans is dat iemand iets met het bericht doet. Wat de hoogste kans heeft, komt bovenaan.</p>
+
+        <h2 id="signalen">Wat telt het zwaarst in het Instagram algoritme?</h2>
+        <p>Dit is wat Instagram zelf noemt als de belangrijkste voorspellingen per onderdeel. We hebben het voor je in een tabel gezet.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Wat je ziet</th><th>Wat het zwaarst telt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Feed</b></td><td>Vooral accounts die je volgt, plus aanbevelingen</td><td>Een paar seconden blijven kijken, reageren, liken, delen en op de profielfoto tikken</td></tr>
+              <tr><td><b>Stories</b></td><td>Alleen accounts die je volgt</td><td>Hoe vaak je iemands stories bekijkt, of je reageert, en hoe close je bent</td></tr>
+              <tr><td><b>Verkennen</b></td><td>Vooral accounts die je nog niet volgt</td><td>Likes, opslaan en delen. Populariteit weegt hier veel zwaarder dan in de feed</td></tr>
+              <tr><td><b>Reels</b></td><td>Vooral accounts die je nog niet volgt</td><td>Doorsturen, helemaal uitkijken, liken en naar de geluidspagina gaan</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bron: Instagram, <i>Instagram Ranking Explained</i>, about.instagram.com. Instagram voegt regelmatig signalen toe of haalt ze weg, maar de lijn is al jaren dezelfde.</p>
+        <p>Twee dingen vallen op. In je feed draait het om de band tussen jou en je volger. Wie vaak op jouw berichten reageert, ziet je vaker. Bij verkennen en reels draait het om het bericht zelf. Daar kun je mensen bereiken die je nog niet kennen, maar alleen als je bericht snel interactie krijgt.</p>
+
+        <h2 id="praktijk">Wat betekent dat voor jouw bedrijf?</h2>
+        <p>Je hoeft het algoritme niet te slim af te zijn. Je moet berichten maken waar mensen iets mee doen. Zo pak je dat aan.</p>
+
+        <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>Maak berichten om te bewaren</h3></div>
+        <p>Opslaan is een sterk signaal. Mensen bewaren iets wat ze later nog nodig hebben. Een carrousel met "vijf dingen die je checkt voordat je een aannemer belt" wordt vaker opgeslagen dan een foto van je bedrijfsbus. Denk aan checklists, stappen, voor-en-navergelijkingen en prijsindicaties.</p>
+
+        <div class="stap-kop"><Tekening naam="megafoon" maat={48} /><h3>Maak berichten om door te sturen</h3></div>
+        <p>Delen laat zien dat iemand je content goed genoeg vond om aan een ander te laten zien. Herkenbare situaties uit je vak doen het hier goed. Een kapper die laat zien wat er gebeurt als je zelf je pony knipt, wordt doorgestuurd. Een kapper die "nieuwe kleuren binnen" post, niet.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>Pak ze in de eerste seconde</h3></div>
+        <p>In de feed telt of iemand blijft hangen. Je beeld en je eerste regel bepalen dat. Begin met het interessantste, niet met "Goedemorgen allemaal". Bij video geldt hetzelfde: wat in de eerste seconde gebeurt, beslist of iemand doorkijkt.</p>
+
+        <div class="stap-kop"><Tekening naam="social" maat={48} /><h3>Reageer op reacties</h3></div>
+        <p>Elke reactie is een gesprek. Antwoord je snel, dan reageert de ander vaak weer. Dat zijn extra signalen, en je bouwt een band op. Die band zorgt ervoor dat je volger je volgende bericht eerder te zien krijgt.</p>
+
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>Wees origineel</h3></div>
+        <p>Instagram schrijft dat het reels minder laat zien als ze een watermerk van een andere app hebben, een lage resolutie, randen, vooral tekst, of als ze al eerder op Instagram stonden. Een filmpje van TikTok overzetten met het logo er nog op, kost je dus bereik. Maak het liever opnieuw, of exporteer het zonder watermerk.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Feed, stories of reels?</p>
+          <p>Wil je je vaste klanten bereiken, dan zijn de feed en <a href="/kennisbank/gidsen/instagram-stories/">Instagram Stories</a> je beste plek. Wil je nieuwe mensen bereiken, dan zijn reels en carrousels die in verkennen terechtkomen de route. Een mix werkt meestal het best.</p>
+        </div>
+
+        <h2 id="hashtags">Hashtags en zoekwoorden in 2027</h2>
+        <p>Vroeger mocht je dertig hashtags onder een bericht zetten, en veel bedrijven deden dat ook. Sinds eind 2025 is het maximum vijf. Hashtags zijn minder belangrijk geworden, omdat Instagram zelf steeds beter snapt waar een bericht over gaat.</p>
+        <ul>
+          <li>Kies drie tot vijf hashtags die precies passen, zoals #hoveniersdrenthe in plaats van #tuin.</li>
+          <li>Zet de woorden waarop mensen zoeken gewoon in je tekst. "Nieuwe badkamer in Hoogeveen" is vindbaarder dan "Weer een mooie klus geklaard".</li>
+          <li>Zet in je naam en bio wat je doet en waar. Die worden in de zoekfunctie gelezen.</li>
+          <li>Vul bij foto's de locatie in. Dat helpt mensen in de buurt.</li>
+        </ul>
+
+        <h2 id="mythes">Drie hardnekkige mythes</h2>
+        <p><b>"Instagram verbergt mijn account stiekem."</b> Instagram zegt dat het niet de bedoeling is om accounts zonder uitleg te verstoppen. Wel worden berichten die tegen de aanbevelingsrichtlijnen ingaan, niet meer aanbevolen aan mensen die je niet volgen. Of dat bij jou speelt, zie je onder <i>Accountstatus</i> in je instellingen.</p>
+        <p><b>"Meer volgers is meer bereik."</b> Niet als die volgers niets met je berichten doen. Gekochte volgers reageren nergens op, en dat zie je terug in je cijfers. Duizend echte volgers uit je regio zijn meer waard dan tienduizend uit het buitenland.</p>
+        <p><b>"Je moet elke dag posten."</b> Regelmaat telt, maar kwaliteit telt zwaarder. Drie goede berichten per week verslaan zeven matige. Kijk in de gids <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a> hoe je een ritme kiest dat je volhoudt.</p>
+
+        <h2 id="tijd">De beste tijd om te posten op Instagram</h2>
+        <p>Wanneer een bericht geplaatst is, is een van de signalen. Een bericht dat online komt als je volgers slapen, heeft al een achterstand. Grote onderzoeken spreken elkaar wel tegen. Sprout Social vond voor 2026 de meeste interactie op dinsdag tussen 13.00 en 19.00 uur en woensdag tussen 12.00 en 21.00 uur. Hootsuite noemt in zijn onderzoek over 2025 juist maandag van 15.00 tot 21.00 uur.</p>
+        <p>Het beste antwoord staat in je eigen app. Ga naar je professionele dashboard, open de inzichten, tik op je totale aantal volgers en scrol naar de meest actieve tijden. Daar zie je per dag en per uur wanneer jouw volgers online zijn. Meer uitleg en de cijfers per kanaal lees je in de gids over de <a href="/kennisbank/gidsen/beste-tijden-om-te-posten/">beste tijden om te posten op social media</a>.</p>
+
+        <h2 id="checklist">Checklist voor elk bericht</h2>
+        <ul class="vink">
+          <li>Waarom zou iemand dit opslaan of doorsturen?</li>
+          <li>Pakt de eerste regel of de eerste seconde de aandacht?</li>
+          <li>Staat het belangrijkste zoekwoord in de tekst?</li>
+          <li>Hooguit vijf hashtags, allemaal passend?</li>
+          <li>Eigen beeld, zonder watermerk van een andere app?</li>
+          <li>Geplaatst op een tijd dat je volgers online zijn?</li>
+          <li>Heb je tijd om de eerste reacties te beantwoorden?</li>
+        </ul>
+        <p>Liever dat iemand anders dit bijhoudt? Bij <a href="/social-media-beheer/">social media beheer</a> plannen en schrijven wij je berichten, en houden we de reacties bij. Foto's en filmpjes van je werk lever je zelf aan. Echte beelden van jouw bedrijf werken nu eenmaal beter dan alles wat wij kunnen verzinnen.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je Instagram bijhouden?" intro="Wat je van ons kunt verwachten, en waarom je dat kunt nagaan." case={false} />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe werkt het Instagram algoritme in het kort?', a: 'Instagram voorspelt per bericht hoe groot de kans is dat iemand het bekijkt, liket, erop reageert, het deelt of opslaat. Berichten met de hoogste kans komen bovenaan. Feed, stories, reels en verkennen hebben elk hun eigen weging.' },
+      { v: 'Hoeveel hashtags mag je op Instagram gebruiken?', a: 'Sinds eind 2025 maximaal vijf per bericht. Kies hashtags die precies bij je bericht passen en zet je belangrijkste zoekwoorden ook gewoon in je tekst.' },
+      { v: 'Waarom daalt mijn bereik op Instagram?', a: 'Vaak omdat volgers minder met je berichten doen dan eerst. Kijk welke berichten wel werkten en maak daar meer van. Controleer ook je accountstatus in de instellingen.' },
+      { v: 'Wat is de beste tijd om te posten op Instagram?', a: 'Onderzoeken wijzen vooral op doordeweekse middagen, maar ze spreken elkaar tegen. Kijk in je inzichten bij de meest actieve tijden van je eigen volgers. Dat is het betrouwbaarste antwoord.' },
+      { v: 'Werkt het algoritme voor stories anders?', a: 'Ja. In stories zie je alleen accounts die je volgt. Instagram zet die op volgorde op basis van hoe vaak je hun stories bekijkt, of je erop reageert en hoe close je met iemand bent.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Instagram Stories', href: '/kennisbank/gidsen/instagram-stories/', tekst: 'Alles over stories, stickers en highlights.' },
+      { label: 'Gids', titel: 'Social media planning', href: '/kennisbank/gidsen/social-media-planning/', tekst: 'Een maand vooruit plannen in een uur.' },
+      { label: 'Dienst', titel: 'Social media beheer', href: '/social-media-beheer/', tekst: 'Wij plannen, schrijven en plaatsen. Vanaf € 395 per maand.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat Instagram jou kan opleveren?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je kanalen, en belt je met een eerlijk advies. Ook als dat advies is dat je tijd beter ergens anders in steekt.`} />
+</Base>

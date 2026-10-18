@@ -1,0 +1,171 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--ux.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/ux/';
+const definitie = 'UX, kort voor user experience, is de hele ervaring die iemand heeft met je bedrijf via je website, app of product: vindt hij snel wat hij zoekt, lukt het zonder gedoe en voelt het goed?';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'UX (user experience)',
+  alternateName: ['User experience', 'Gebruikerservaring', 'UX-design'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+  dateModified: '2026-10-18',
+}];
+const hoofdstukken = [
+  { id: 'verschil', titel: 'UX en UI: het verschil' },
+  { id: 'onderdelen', titel: 'Waar het uit bestaat' },
+  { id: 'werkwijze', titel: 'Van onderzoek tot prototype' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: twee schilders' },
+  { id: 'zelf-testen', titel: 'Zelf testen met vijf mensen' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'kosten', titel: 'Wat het kost' },
+];
+---
+<Base
+  title="Wat is UX? User experience in gewone taal | Drijfveer Media"
+  description="Wat is UX? User experience is hoe makkelijk en prettig je site werkt voor een bezoeker. Het verschil met UI, de stappen van UX-design en een test."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'UX', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Webdesign</p>
+        <h1>Wat is UX?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-18" />
+        <p>Wat is UX, en waarom heeft je webbouwer het er steeds over? UX staat voor user experience: gebruikerservaring. Het gaat niet over hoe je site eruitziet, maar over hoe hij werkt voor de mensen die hem gebruiken. Kan een klant op zijn telefoon in een minuut zien wat je doet, wat het kost en hoe hij je bereikt? Dan is de gebruikerservaring goed.</p>
+        <p>De term is bedacht door Don Norman, een Amerikaanse ontwerper en cognitiewetenschapper. Samen met Jakob Nielsen schreef hij in 1998 een definitie die nog steeds gebruikt wordt: user experience omvat alle aspecten van hoe iemand omgaat met een bedrijf, zijn diensten en zijn producten. Dus niet alleen de website. Ook de offerte, het telefoontje en de factuur.</p>
+
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>De gebruikerservaring gaat over hoe makkelijk en prettig iets werkt. De interface gaat over hoe het eruitziet.</li>
+            <li>Een goede ervaring begint bij de gebruiker: wie is het, wat wil hij, waar loopt hij vast?</li>
+            <li>Een UX-designer werkt met onderzoek, persona's, wireframes, prototypes en testen.</li>
+            <li>Vijf testpersonen vinden al de meeste problemen, volgens onderzoek van Jakob Nielsen.</li>
+            <li>Een site die beter werkt, levert meestal meer aanvragen op uit dezelfde bezoekers.</li>
+          </ul>
+        </div>
+
+        <div class="stap-kop" id="verschil"><Tekening naam="scherm" maat={52} /><h2>UX en UI: wat is het verschil?</h2></div>
+        <p>De twee afkortingen worden vaak in één adem genoemd. UI staat voor user interface: alles wat je ziet en aanraakt. Knoppen, kleuren, letters, iconen. De UX is breder. Die gaat over de vraag of de bezoeker zijn doel bereikt.</p>
+        <p>Een vergelijking die Norman en Nielsen zelf gebruiken: een site met filmrecensies kan een perfecte zoekfunctie hebben. Maar als de film die je zoekt er niet in staat, is de ervaring toch slecht. Mooie interface, slechte ervaring. Voor een installateur werkt het net zo. Een strakke site zonder prijsindicatie laat de bezoeker met lege handen achter.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>UX</th><th>UI</th></tr></thead>
+            <tbody>
+              <tr><td><b>Vraag</b></td><td>Werkt het, en voelt het goed?</td><td>Hoe ziet het eruit?</td></tr>
+              <tr><td><b>Gaat over</b></td><td>Route, volgorde, inhoud, snelheid, logica</td><td>Kleuren, letters, knoppen, beeld</td></tr>
+              <tr><td><b>Werk</b></td><td>Onderzoek, wireframes, testen</td><td>Visueel design, huisstijl toepassen</td></tr>
+              <tr><td><b>Meet je aan</b></td><td>Taken die lukken, aanvragen, afhakers</td><td>Herkenbaarheid, leesbaarheid, uitstraling</td></tr>
+              <tr><td><b>Vergelijking</b></td><td>De plattegrond van een winkel</td><td>De inrichting en de verlichting</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>In de praktijk doet bij een kleine website vaak één designer allebei. Bij ons heet die dienst daarom ook <a href="/website-laten-maken/ux-ui-design/">UX- en UI-design</a>.</p>
+
+        <div class="stap-kop" id="onderdelen"><Tekening naam="doel" maat={52} /><h2>Waar een goede user experience uit bestaat</h2></div>
+        <p>Een gebruiksvriendelijk ontwerp herken je aan zes dingen.</p>
+        <ul class="vink">
+          <li><b>Vindbaar.</b> De navigatie is logisch. Een bezoeker vindt de dienst die hij zoekt binnen twee kliks, zonder na te denken over waar hij moet klikken.</li>
+          <li><b>Begrijpelijk.</b> Gewone woorden in plaats van vakjargon. "Dakkapel laten plaatsen" in plaats van "dakopbouwoplossingen".</li>
+          <li><b>Snel.</b> De pagina staat er binnen een paar tellen, ook op een telefoon met matig bereik. Hoe je dat meet, lees je in de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</li>
+          <li><b>Mobiel eerst.</b> Knoppen groot genoeg voor een duim, tekst leesbaar zonder inzoomen, een telefoonnummer dat belt met één tik.</li>
+          <li><b>Toegankelijk.</b> Toegankelijkheid betekent dat ook iemand die slecht ziet, kleuren lastig onderscheidt of geen muis gebruikt verder kan. Genoeg contrast, teksten bij afbeeldingen, een formulier dat met het toetsenbord werkt.</li>
+          <li><b>Betrouwbaar.</b> Reviews, foto's van echt werk, een adres en een gezicht. Vertrouwen is ook een ervaring.</li>
+        </ul>
+
+        <div class="stap-kop" id="werkwijze"><Tekening naam="pen" maat={52} /><h2>Hoe UX-design werkt: van onderzoek tot prototype</h2></div>
+        <p>UX design is geen kwestie van smaak. Het is een werkwijze in stappen, waarbij je steeds toetst of je aannames kloppen.</p>
+        <h3>1. Gebruikersonderzoek</h3>
+        <p>Wie zijn je bezoekers en wat willen ze? Je haalt het uit gesprekken met klanten, uit je cijfers in Analytics, uit vragen die aan de telefoon steeds terugkomen. Een mkb'er weet hier vaak meer dan hij denkt. Schrijf de tien vragen op die klanten het vaakst stellen. Dat is al gebruikersonderzoek.</p>
+        <h3>2. Persona en klantreis</h3>
+        <p>Een persona is een beschrijving van een typische klant, met een naam, een situatie en een doel. "Anja, 54, wil een nieuwe badkamer, zoekt 's avonds op haar tablet en belt liever dan dat ze mailt." Met de klantreis teken je uit welke stappen zij zet, van eerste zoekopdracht tot afspraak. Hoe je dat doet, staat in de gidsen <a href="/kennisbank/gidsen/persona-maken/">persona maken</a> en <a href="/kennisbank/gidsen/customer-journey/">customer journey</a>.</p>
+        <h3>3. Wireframe</h3>
+        <p>Een wireframe is een schets van een pagina in grijze blokken, zonder kleur of foto's. Wat staat bovenaan, waar komt de knop, welke vraag beantwoord je eerst? Omdat er nog niets mooi is, praat je over de inhoud en de volgorde.</p>
+        <h3>4. Prototype</h3>
+        <p>Daarna volgt een klikbaar prototype, vaak gemaakt in een programma als Figma. Het lijkt op een echte site, maar er zit nog geen techniek achter. Aanpassen kost hier minuten. In een gebouwde site kost het dagen.</p>
+        <h3>5. Testen</h3>
+        <p>Je laat echte mensen een taak uitvoeren met het prototype. "Vraag een offerte aan voor een dakkapel." Je kijkt waar ze aarzelen. Volgens een bekend artikel van Jakob Nielsen uit 2000 vind je met vijf testpersonen al zo'n 85 procent van de problemen. Zijn advies: liever drie kleine tests met vijf mensen dan één grote met vijftien. Na elke ronde verbeter je het ontwerp en test je opnieuw.</p>
+
+        <div class="stap-kop" id="voorbeeld"><Tekening naam="huis" maat={52} /><h2>Een voorbeeld: twee schilders in Assen</h2></div>
+        <p>Twee schildersbedrijven hebben allebei een nette website. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+        <p>De eerste opent met een grote foto van een opgeknapt huis en de tekst "Vakmanschap sinds 1998". Het menu heeft acht knoppen. Wie wil weten wat buitenschilderwerk kost, moet naar "Diensten", dan "Buiten", dan onderaan naar het contactformulier. Dat vraagt naam, adres, bouwjaar, aantal kozijnen en een foto.</p>
+        <p>De tweede opent met "Buitenschilderwerk in Assen en omgeving. Binnen twee werkdagen een vaste prijs." Daaronder een knop "Prijs aanvragen" en het telefoonnummer. Het formulier vraagt een naam, een telefoonnummer en een foto. De rest bespreken ze aan de telefoon.</p>
+        <p>Allebei mooi. Maar bij de tweede komen meer aanvragen binnen. Dat is het verschil tussen design en user experience. Kleine verbeteringen in die route hebben vaak meer effect op je conversie dan een nieuwe huisstijl. Dat is ook precies waar <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> over gaat.</p>
+
+        <div class="stap-kop" id="zelf-testen"><Tekening naam="team" maat={52} /><h2>Zelf testen met vijf mensen aan de keukentafel</h2></div>
+        <p>Je hebt geen lab nodig. Zo test je je eigen site in een middag.</p>
+        <ol>
+          <li><b>Zoek vijf mensen</b> die op je klanten lijken, maar je site nog niet kennen. Een buurman, een klant van een collega, een familielid buiten de branche.</li>
+          <li><b>Bedenk drie taken.</b> Bijvoorbeeld: zoek uit wat een kozijn schilderen ongeveer kost. Vraag een offerte aan. Zoek het telefoonnummer.</li>
+          <li><b>Geef ze je site op hun eigen telefoon.</b> Daar zitten je echte bezoekers ook.</li>
+          <li><b>Vraag ze hardop te denken</b> en help niet. Ook niet als ze vastlopen. Juist dat wil je zien.</li>
+          <li><b>Schrijf op waar ze aarzelen,</b> terugklikken of iets anders lezen dan je bedoelde.</li>
+          <li><b>Los de drie grootste problemen op</b> en test daarna opnieuw met vijf andere mensen.</li>
+        </ol>
+
+        <div class="stap-kop" id="fouten"><Tekening naam="schild" maat={52} /><h2>Veelgemaakte fouten</h2></div>
+        <ul>
+          <li><b>Ontwerpen voor de eigenaar.</b> Jij vindt die grote foto van je bedrijfsbus mooi. Je klant wil weten of je in zijn dorp komt.</li>
+          <li><b>Alleen op een groot scherm kijken.</b> Het ontwerp wordt goedgekeurd op een laptop, terwijl veel bezoekers op hun telefoon kijken.</li>
+          <li><b>Te veel keuzes.</b> Acht knoppen in het menu en drie verschillende knoppen per pagina. Wie alles belangrijk maakt, maakt niets belangrijk.</li>
+          <li><b>Formulieren die te veel vragen.</b> Elk extra veld is een reden om af te haken.</li>
+          <li><b>Nooit testen.</b> De aanname "dat snapt iedereen" blijkt bij de eerste testpersoon al niet te kloppen.</li>
+        </ul>
+
+        <div class="stap-kop" id="kosten"><Tekening naam="munten" maat={52} /><h2>Wat kost het om je site te verbeteren?</h2></div>
+        <p>Minder dan je denkt, als je klein begint. De test aan de keukentafel kost je een middag en een paar kopjes koffie. Daarmee vind je de grootste drempels zelf. Begin bij de pagina waar de meeste bezoekers binnenkomen. Vaak is dat de homepage of je belangrijkste dienstpagina.</p>
+        <p>Wil je dat een designer meekijkt en het ontwerp verbetert? Bij ons begint UX- en UI-design bij € 750, eenmalig en exclusief btw. Hoeveel pagina's en schermen erin zitten, hoor je vooraf, met een vaste prijs. Bouwt iemand anders je site, dan leveren we het ontwerp zo aan dat die ermee verder kan.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Meer weten?</p>
+          <p>Wil je dat iemand je site met een frisse blik bekijkt? Lees hoe we <a href="/website-laten-maken/ux-ui-design/">UX- en UI-design</a> aanpakken, of laat een complete site maken via <a href="/website-laten-maken/">website laten maken</a>. Een duidelijke <a href="/kennisbank/wat-is/call-to-action/">call to action</a> is vaak de snelste winst. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent UX letterlijk?', a: 'UX is de afkorting van user experience, in het Nederlands gebruikerservaring. De X staat voor experience.' },
+      { v: 'Wat doet een UX-designer?', a: 'Die onderzoekt wie de gebruikers zijn en wat ze willen, schetst de route door een site of app in wireframes, maakt er een prototype van en test dat met echte mensen. Pas daarna wordt er gebouwd.' },
+      { v: 'Is UX hetzelfde als webdesign?', a: 'Nee. Webdesign gaat vaak vooral over het uiterlijk van een site. De gebruikerservaring gaat over de vraag of bezoekers er makkelijk hun doel bereiken. Een goed webdesign heeft allebei.' },
+      { v: 'Is dit ook iets voor een kleine website?', a: 'Juist een kleine site. Met weinig bezoekers telt elke aanvraag. Een duidelijke route naar je telefoonnummer of formulier levert vaak meer op dan extra bezoekers.' },
+    ]}
+  />
+
+  <Actie titel="Hoe werkt jouw site op een telefoon?" tekst={`We lopen je site gratis door als een klant die je niet kent. ${site.contactpersoon} belt je met de drie drempels die het meeste kosten.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .stap-kop { scroll-margin-top: 96px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

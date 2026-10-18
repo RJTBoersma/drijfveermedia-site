@@ -1,0 +1,71 @@
+---
+// Scène voor /seo-meppel/: een Meppeler gracht met pakhuizen, een ophaalbrug en de kerktoren. Boven de daken een zoekveld; jouw bedrijf verschijnt als eerste resultaat terwijl er een bootje door de gracht vaart.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een gracht in Meppel met pakhuizen, een ophaalbrug en de kerktoren. Boven de daken een zoekveld met dakdekker Meppel, waarin jouw bedrijf als eerste verschijnt. Door de gracht vaart een bootje.'}>
+  <!-- kerktoren op de achtergrond -->
+  <path class="v" d="M338 172V86h30v86z" />
+  <path class="l" d="M338 172V86h30v86M334 86h38M342 86l11-34 11 34" />
+  <path class="l" d="M353 52v-10M349 46h8" />
+  <rect x="347" y="100" width="12" height="18" rx="6" fill="#fff" />
+  <!-- pakhuizen links -->
+  <path d="M24 172v-62l26-28 26 28v62zM76 172v-66l24-22 24 22v66zM124 172v-56l26-26 26 26v56z" fill="#fff" />
+  <path class="l" d="M24 172v-62l26-28 26 28v62M76 172v-66l24-22 24 22v66M124 172v-56l26-26 26 26v56" />
+  <rect class="v" x="40" y="118" width="20" height="16" rx="2" />
+  <rect class="v" x="40" y="144" width="20" height="16" rx="2" />
+  <rect class="v" x="90" y="104" width="20" height="16" rx="2" />
+  <rect class="v" x="90" y="132" width="20" height="16" rx="2" />
+  <rect x="140" y="122" width="20" height="16" rx="2" fill="#ffe3cf" />
+  <rect class="v" x="140" y="148" width="20" height="16" rx="2" />
+  <!-- pakhuis rechts -->
+  <path d="M392 172v-60l30-30 30 30v60z" fill="#fff" />
+  <path class="l" d="M392 172v-60l30-30 30 30v60" />
+  <rect class="v" x="410" y="122" width="24" height="18" rx="2" />
+  <path d="M410 172v-22h24v22z" fill="#074663" />
+  <!-- kades en water -->
+  <path d="M16 178h448v46H16z" fill="#dbe8f2" />
+  <path class="l" d="M16 176h448M16 226h448" />
+  <path d="M40 194h30M110 208h40M300 198h34M390 212h36" stroke="#b9d0e2" stroke-width="3" stroke-linecap="round" />
+  <!-- ophaalbrug -->
+  <path class="l" d="M214 176v-52M276 176v-52M206 124h78" />
+  <path class="l" d="M214 136l62 0M226 124v-14M264 124v-14M222 110h46" />
+  <path d="M198 172h94v8h-94z" fill="#074663" />
+  <path class="a" d="M208 124l-6 48M282 124l6 48" />
+  <!-- aangemeerd bootje -->
+  <path d="M60 214h56l-8 10H70z" fill="#074663" />
+  <path d="M78 214v-10h20v10" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <!-- zoekveld -->
+  <rect x="20" y="10" width="200" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle class="l" cx="36" cy="23" r="5" />
+  <path class="l" d="M40 27l4 4" />
+  <text x="52" y="28" font-size="11" font-weight="700">dakdekker meppel</text>
+  {!mini && (
+    <g>
+      <g class="seo-meppel-boot">
+        <path d="M300 206h50l-7 10h-36z" fill="#ff6600" />
+        <path class="l" d="M318 206v-24M318 184l18 18h-18" />
+      </g>
+      <g class="seo-meppel-kaart">
+        <rect x="20" y="44" width="200" height="34" rx="8" fill="#fff" stroke="#ff6600" stroke-width="2.5" />
+        <circle cx="36" cy="61" r="9" fill="#ff6600" />
+        <text x="36" y="65" text-anchor="middle" font-size="11" font-weight="900" style="fill:#fff">1</text>
+        <text x="52" y="58" font-size="11" font-weight="800">Jouw bedrijf · Meppel</text>
+        <text x="52" y="71" font-size="8.5" class="zacht">Werkt in Meppel en omgeving</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .seo-meppel-kaart { opacity: 0; }
+  .in-beeld .seo-meppel-kaart { animation: seo-meppel-kaart 0.7s cubic-bezier(.3,1.6,.5,1) 0.9s forwards; }
+  .in-beeld .seo-meppel-boot { animation: seo-meppel-varen 8s ease-in-out 0.4s infinite; }
+  @keyframes seo-meppel-kaart { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+  @keyframes seo-meppel-varen {
+    0% { transform: translateX(0); opacity: 1; }
+    45% { transform: translateX(-130px); opacity: 1; }
+    55% { transform: translateX(-130px); opacity: 1; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .seo-meppel-kaart, .in-beeld .seo-meppel-boot { animation: none; } }
+</style>

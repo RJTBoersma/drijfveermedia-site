@@ -1,0 +1,22 @@
+---
+// Gerelateerde pagina's: interne links naar verwante diensten en gidsen.
+import Plaatje from '../teken/Plaatje.astro';
+interface Link { titel: string; href: string; tekst?: string; label?: string; teken?: string }
+interface Props { titel?: string; links: Link[] }
+const { titel = 'Lees ook', links } = Astro.props;
+const standaard: Record<string, string> = { Gids: 'boek', Dienst: 'klik', Pillar: 'doel', Case: 'raket', Regio: 'huis', Assen: 'huis', Gratis: 'scan', Overzicht: 'boek' };
+---
+<section class="wrap sectie">
+  <h2>{titel}</h2>
+  <div class="raster">
+    {links.map((l, i) => (
+      <a class="card" href={l.href}>
+        <Plaatje href={l.href} onderwerp={l.teken ?? standaard[l.label ?? ''] ?? 'lamp'} />
+        {l.label && <span class="kicker">{l.label}</span>}
+        <h3>{l.titel}</h3>
+        {l.tekst && <p>{l.tekst}</p>}
+        <span class="meer">Lees meer</span>
+      </a>
+    ))}
+  </div>
+</section>

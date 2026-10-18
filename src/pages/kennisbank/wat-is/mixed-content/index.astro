@@ -1,0 +1,191 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--mixed-content.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/mixed-content/';
+const datum = '2026-10-18';
+const definitie = 'Mixed content betekent dat een beveiligde pagina (https) onderdelen zoals afbeeldingen, scripts of lettertypes nog via een onbeveiligde verbinding (http) inlaadt, waardoor de pagina niet meer volledig veilig is.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  '@id': `${site.url}${url}#begrip`,
+  name: 'Mixed content',
+  alternateName: ['Gemengde content', 'Gemengde inhoud'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}, {
+  '@type': 'WebPage',
+  '@id': `${site.url}${url}#pagina`,
+  url: `${site.url}${url}`,
+  name: 'Wat is mixed content?',
+  inLanguage: 'nl-NL',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  about: { '@id': `${site.url}${url}#begrip` },
+}];
+const voorbeeld = `<img src="http://www.kapsalonvoorbeeld.nl/foto/salon.jpg" alt="De salon">
+<script src="http://afspraken-voorbeeld.nl/widget.js"></script>`;
+const opgelost = `<img src="https://www.kapsalonvoorbeeld.nl/foto/salon.jpg" alt="De salon">
+<script src="https://afspraken-voorbeeld.nl/widget.js"></script>`;
+const wpcli = `wp search-replace 'http://www.jouwsite.nl' 'https://www.jouwsite.nl' --skip-columns=guid --dry-run`;
+const csp = `Content-Security-Policy: upgrade-insecure-requests`;
+---
+<Base
+  title="Wat is mixed content? Vinden en oplossen | Drijfveer Media"
+  description="Wat is mixed content? Een https-pagina die toch onveilige http-onderdelen laadt. Zo spoor je de boosdoener op en zo los je het blijvend op, ook in WordPress."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Mixed content', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is mixed content?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Een pagina bestaat uit tientallen losse stukjes: tekst, foto's, lettertypes, scripts, een ingesloten video. De pagina zelf komt binnen via een veilige verbinding. Maar haalt één van die stukjes zijn inhoud nog op via http, dan heb je een mix van veilig en onveilig. In het Nederlands heet dat ook wel gemengde content.</p>
+      <p>Het probleem: alles wat via http binnenkomt, kan onderweg worden bekeken of aangepast. Het slotje in je adresbalk belooft dan meer dan de pagina waarmaakt. Hieronder lees je hoe het ontstaat, hoe je het in een paar minuten vindt en hoe je het blijvend oplost.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2>Hoe ziet het eruit in de code?</h2></div>
+      <p>Stel, de afsprakenpagina van een verzonnen kapsalon draait netjes op https, op <code>https://www.kapsalonvoorbeeld.nl/afspraak/</code>. In de broncode staan nog twee regels van vroeger:</p>
+      <pre><code>{voorbeeld}</code></pre>
+      <p>De foto en het script beginnen met <code>http://</code>. Dat zijn de onbeveiligde elementen. De oplossing is in dit geval één letter per regel:</p>
+      <pre><code>{opgelost}</code></pre>
+      <p>Simpel, zolang de bron ook echt via https bereikbaar is. Test dat door het adres met https in je browser te openen. Krijg je de foto of het bestand te zien, dan kun je het aanpassen.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2>Twee soorten: passief en actief</h2></div>
+      <p>Niet elk onveilig onderdeel is even gevaarlijk. Browsers maken onderscheid tussen inhoud die alleen iets laat zien en inhoud die de pagina kan veranderen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Voorbeelden</th><th>Wat de browser doet</th><th>Risico</th></tr></thead>
+          <tbody>
+            <tr><td>Passief (beeld en geluid)</td><td>Afbeeldingen, audio, video</td><td>Probeert ze via https te laden; lukt dat niet, dan blijven ze weg</td><td>Een foto kan worden vervangen, bezoekers kunnen worden gevolgd</td></tr>
+            <tr><td>Actief (code)</td><td>Scripts, stylesheets, iframes, lettertypes, gegevens die een script ophaalt</td><td>Blokkeert ze</td><td>Wie het bestand onderweg aanpast, kan de hele pagina overnemen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Volgens de documentatie van MDN, de naslag voor webontwikkelaars, zetten browsers afbeeldingen, audio en video automatisch om naar https. Alle andere soorten blokkeren ze. Een uitzondering: staat er een IP-adres in plaats van een domeinnaam, dan wordt ook een afbeelding geblokkeerd. En een afbeelding die via <code>srcset</code> of een <code>picture</code>-element wordt ingeladen, valt ook in de blokkeerbare groep.</p>
+      <p>Actief is het echte gevaar. Volgens web.dev, de ontwikkelaarssite van Google, kan iemand via een onveilig script wachtwoorden onderscheppen, inlogsessies stelen of bezoekers naar een andere site sturen.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Wat merk je ervan?</h2></div>
+      <p>Omdat browsers als Google Chrome scripts altijd blokkeren, kan het flinke problemen veroorzaken. Een formulier dat niet verstuurt. Een menu dat niet opent. Een opmaak die uit elkaar valt, omdat het stylesheet niet laadt. Een lettertype dat ineens Times New Roman is.</p>
+      <p>Bij passieve onderdelen merk je soms niets, omdat de browser het zelf oplost. Of je ziet een leeg vak waar een foto hoort. Klik je op het icoontje links van het webadres, dan meldt de browser dat de verbinding niet volledig beveiligd is.</p>
+      <p>Voor je vindbaarheid is het een klein punt. Google maakte in 2014 bekend dat https een licht rankingsignaal is, dat toen bij minder dan 1 procent van de zoekopdrachten meetelde. Het grotere probleem is vertrouwen. Wie twijfelt aan je site, belt niet. En een kapot contactformulier kost je aanvragen, elke dag weer.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2>Hoe ontstaat mixed content?</h2></div>
+      <p>Bijna altijd na een overstap. Een site draaide jarenlang op http en kreeg later een <a href="/kennisbank/wat-is/ssl-certificaat/">ssl-certificaat</a>. Wat er dan blijft hangen:</p>
+      <ul>
+        <li><strong>Oude http-links in de database.</strong> WordPress slaat bij elke afbeelding in een bericht het volledige adres op, met http ervoor.</li>
+        <li><strong>Vaste adressen in je thema.</strong> Een logo of achtergrond die in de code van het thema of in een CSS-bestand staat.</li>
+        <li><strong>Plug-ins en widgets.</strong> Een reviewblok, een kaart of een boekingsmodule met een insluitcode van jaren terug.</li>
+        <li><strong>Externe bronnen.</strong> Een lettertype, een teller of een script van een andere partij dat nooit is bijgewerkt.</li>
+        <li><strong>Handmatig geplakte code.</strong> Een video of nieuwsbriefformulier dat iemand ooit in een tekstblok heeft gezet.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Zo spoor je het op</h2></div>
+
+      <h3>Per pagina, met de ontwikkelaarstools van Chrome</h3>
+      <ol>
+        <li>Open de pagina in Google Chrome.</li>
+        <li>Druk op F12, of op Cmd + Option + I op een Mac. De Chrome Developer Tools gaan open.</li>
+        <li>Kies het tabblad Console. Mixed content-waarschuwingen staan daar in het geel of rood, met het precieze adres van elke boosdoener.</li>
+        <li>Kijk ook op het tabblad Issues. Chrome zet daar elke onveilige bron op een rij, met wat de browser ermee deed.</li>
+        <li>Schrijf elk adres op, samen met de pagina waar je het vond.</li>
+      </ol>
+      <p>Let op: de console toont alleen de pagina die je nu bekijkt. Bij een volgende pagina begint hij opnieuw. Firefox en Safari hebben vergelijkbare ontwikkelaarstools, met de meldingen in hun console.</p>
+
+      <h3>Voor de hele site</h3>
+      <p>Bij meer dan een handvol pagina's wordt dat klikken te veel. Een crawler als Screaming Frog bezoekt al je pagina's en heeft een apart overzicht voor beveiliging, met onder meer mixed content. Op een WordPress-site kun je ook in de database zoeken naar <code>http://</code> gevolgd door je eigen domeinnaam. Elke treffer is een kandidaat.</p>
+
+      <div class="stap-kop"><Tekening naam="pen" maat={52} /><h2>Oplossen in vijf stappen</h2></div>
+      <p>Het principe is simpel: alles via veilige verbindingen, niets meer via http. Zo pak je het aan op een WordPress-site. Op andere systemen werkt het net zo, alleen heten de menu's anders.</p>
+      <ol>
+        <li><strong>Maak een back-up.</strong> Van de bestanden en van de database. Je gaat in één keer veel adressen wijzigen.</li>
+        <li><strong>Zet de basis goed.</strong> Zorg dat er een geldig certificaat op je domein staat. Bij de meeste hostingpartijen zet je er gratis een aan. Stuur daarna alle http-verkeer met een 301-<a href="/kennisbank/wat-is/redirect/">redirect</a> door naar https. Zet in WordPress bij Instellingen, Algemeen het WordPress-adres en het siteadres op https.</li>
+        <li><strong>Vervang de adressen in de database.</strong> Met de plug-in Better Search Replace, te vinden onder Gereedschap, vervang je <code>http://www.jouwsite.nl</code> door <code>https://www.jouwsite.nl</code>. Draai hem eerst als proefrun: dan zie je hoeveel velden er veranderen, zonder dat er iets verandert. Werk je met de opdrachtregel, dan doet WP-CLI hetzelfde.</li>
+        <li><strong>Pak thema, plug-ins en externe code aan.</strong> Zoek in je thema naar vaste http-adressen. Vraag bij widgets en ingesloten video's om nieuwe code, of haal ze weg. Is een externe bron niet via https te krijgen, zet het bestand dan zelf op je site, mits dat mag. Of laat het weg.</li>
+        <li><strong>Controleer opnieuw.</strong> Open je belangrijkste pagina's met de Developer Tools en laat de crawler nog een keer lopen. Leeg eerst de cache van je site en van je browser.</li>
+      </ol>
+      <p>Het WP-CLI-commando voor stap 3 ziet er zo uit. De optie <code>--dry-run</code> maakt er een proefrun van; haal die pas weg als de uitkomst klopt.</p>
+      <pre><code>{wpcli}</code></pre>
+      <p>Zoeken en vervangen met een gewone databasequery is riskant. WordPress bewaart veel instellingen als zogeheten geserialiseerde data. Een simpele vervanging maakt die kapot. Better Search Replace en WP-CLI houden daar rekening mee.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2>Plug-ins: handig als pleister</h2></div>
+      <p>Er zijn plug-ins die het probleem tijdens het laden van de pagina oplossen. Ze herschrijven http naar https voordat de bezoeker de pagina krijgt. Handig als noodoplossing, maar de echte reparatie zit in de stappen hierboven. Een plug-in die je later uitzet, brengt het probleem in één klap terug.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Plug-in</th><th>Wat hij doet</th><th>Let op</th></tr></thead>
+          <tbody>
+            <tr><td>Really Simple Security (voorheen Really Simple SSL)</td><td>Zet je site over op https, met een 301-redirect; de Pro-versie zoekt en repareert onveilige bronnen</td><td>Is inmiddels een complete beveiligingsplug-in, met veel meer dan alleen ssl</td></tr>
+            <tr><td>SSL Insecure Content Fixer</td><td>Lost de meeste onveilige verwijzingen op, met een instelbaar niveau van eenvoudig tot uitgebreid</td><td>Begint op het eenvoudigste niveau; zet het pas hoger als dat nodig is</td></tr>
+            <tr><td>Better Search Replace</td><td>Vervangt adressen blijvend in de database, met een proefrun vooraf</td><td>Eenmalig gebruiken en daarna weer verwijderen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De bekendste noemen we vaak als Really Simple SSL, omdat hij jarenlang zo heette. Zoek je hem op, gebruik dan de nieuwe naam. SSL Insecure Content Fixer adviseert in zijn eigen uitleg om bij twijfel in de console van je browser te kijken. Dat is precies stap één.</p>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2>De serveroplossing voor grote sites</h2></div>
+      <p>Op grote sites of sites waar veel mensen aan werken, sluipt het er steeds weer in. Dan kun je de browser met één regel in de serverinstellingen vragen om alle http-verzoeken van de pagina zelf naar https om te zetten:</p>
+      <pre><code>{csp}</code></pre>
+      <p>Dit is onderdeel van een zogeheten Content Security Policy. Het is een vangnet, geen vervanging voor schone code. Kan een bron niet via https, dan laadt hij ook met deze regel niet. Met dezelfde techniek kun je de browser ook laten melden welke onveilige bronnen bezoekers tegenkomen, zonder iets te blokkeren. Laat zoiets instellen door je webbouwer of <a href="/kennisbank/wat-is/hosting/">hostingpartij</a>.</p>
+      <p>Een stap verder is HSTS. Daarmee onthoudt de browser dat jouw site alleen via https bereikbaar is, ook als iemand http intypt. Zet dat pas aan als alles werkt. Terugdraaien is lastig, omdat browsers het een tijd onthouden.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Een voorbeeld</h2></div>
+      <p>Stel: bij een kapsalon in Assen doet de online afsprakenmodule het ineens niet meer. Er verschijnt een leeg vak. In de console van de browser blijkt het script van de module nog via http te laden, met een insluitcode van jaren terug. De leverancier heeft allang een https-versie. Nieuwe code erin, probleem weg. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Het lastige: de site zag er normaal uit. Het slotje stond er gewoon. Alleen kwamen er geen afspraken meer binnen. Kijk bij een controle dus niet alleen naar de voorkant van je site, maar ook in de console.</p>
+
+      <h2>Wat moet je ermee als ondernemer?</h2>
+      <p>Twijfel je of je website mixed content heeft? Neem tien minuten en loop dit lijstje af.</p>
+      <ul class="vink">
+        <li>Open je homepage, je contactpagina en je belangrijkste dienstpagina in Chrome en kijk op het icoontje links van het adres.</li>
+        <li>Open de Developer Tools en kijk in de console naar waarschuwingen over onveilige bronnen.</li>
+        <li>Verstuur je eigen contactformulier. Komt het bericht aan?</li>
+        <li>Na een verhuizing of nieuw thema: controleer het opnieuw. Juist dan komt het vaak terug.</li>
+        <li>Laat de oplossing blijvend doen in de database en de code, en gebruik een plug-in hooguit als tijdelijke pleister.</li>
+      </ul>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Veiligheid gaat verder dan een slotje. Lees de gids <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt: wat nu?</a> of laat ons het bijhouden met <a href="/website-laten-maken/onderhoud-wordpress/">WordPress-onderhoud</a>, vanaf € 39 per maand. In een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> lopen we dit ook na. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is mixed content gevaarlijk?', a: 'Onveilige scripts en stylesheets wel: daarmee kan iemand de pagina aanpassen of gegevens onderscheppen. Daarom blokkeren browsers ze. Onveilige afbeeldingen zijn minder gevaarlijk, maar ook die horen via https te laden.' },
+      { v: 'Waarom staat het slotje er niet terwijl ik een certificaat heb?', a: 'Waarschijnlijk laadt de pagina nog iets via http, zoals een foto, script of lettertype. Open de Developer Tools in je browser en kijk in de console welk adres het is.' },
+      { v: 'Is een plug-in genoeg om het op te lossen?', a: 'Als pleister wel. Een plug-in herschrijft de adressen elke keer opnieuw. Beter is het om ze blijvend te vervangen in de database en de code, zodat je niet afhankelijk bent van die ene plug-in.' },
+      { v: 'Heeft mixed content invloed op mijn plek in Google?', a: 'Nauwelijks direct. Https is een licht rankingsignaal. De grotere schade zit in bezoekers die afhaken en formulieren of knoppen die niet meer werken.' },
+      { v: 'Kan ik http-adressen ook vervangen door adressen die met // beginnen?', a: 'Dat kan technisch, maar het is niet meer nodig. Gebruik gewoon https. Dat is duidelijker en werkt overal.' },
+    ]}
+  />
+
+  <Actie titel="Is jouw site echt helemaal veilig?" tekst={`We lopen je site gratis na op onveilige onderdelen. ${site.contactpersoon} belt je met wat er gevonden is.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 18px 20px; overflow-x: auto; font-size: 0.9rem; line-height: 1.6; margin: 0 0 1.4em; max-width: 100%; }
+  pre code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; overflow-wrap: normal; word-break: normal; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

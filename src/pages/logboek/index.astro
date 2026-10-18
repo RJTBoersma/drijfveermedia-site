@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Plaatje from '../../components/teken/Plaatje.astro';
+import Scene from '../../components/scenes/logboek.astro';
+import { site } from '../../data/site';
+
+const items = (await getCollection('logboek')).sort((a, b) => b.data.maand.localeCompare(a.data.maand));
+const maandNaam = (m: string) => new Date(m + '-15').toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
+const schema = [{
+  '@type': 'Blog',
+  name: 'Logboek van Drijfveer Media',
+  description: 'Elke maand hoe de eigen website van Drijfveer Media scoort in Google.',
+  url: `${site.url}/logboek/`,
+  publisher: { '@id': `${site.url}/#organisatie` },
+}];
+---
+<Base
+  title="Logboek: zo scoren we zelf in Google | Drijfveer Media"
+  description="Elke maand de eerlijke cijfers van onze eigen site: bezoekers uit Google, posities en aanvragen. Ook als het tegenvalt. Lees mee hoe we groeien."
+  kruimels={[{ naam: 'Logboek', url: '/logboek/' }]}
+  schema={schema}
+>
+  <Hero kicker="Logboek · Zo scoren we zelf" titel="Zo scoren we zelf: elke maand de echte cijfers" bel={false}>
+    <p>Een marketingbureau dat zegt dat het je hoger in Google krijgt, moet dat ook zelf laten zien. Hier houden we bij hoe onze eigen site het doet.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie">
+    <div class="tekst">
+      <h2>Waarom we dit bijhouden</h2>
+      <p>De meeste bureaus laten alleen hun beste resultaten zien. Logisch, maar je weet dan niet hoe ze werken als het tegenzit. Wij doen het andersom.</p>
+      <p>Elke maand zetten we hier drie getallen neer: hoeveel mensen ons via Google vinden, op hoeveel zoekwoorden we in de top 10 staan en hoeveel aanvragen er binnenkwamen. Daarbij schrijven we wat we die maand deden en wat het opleverde. Of niet.</p>
+      <p>We begonnen in oktober 2026 met een nulmeting, vlak voor de lancering van de nieuwe site. Het startpunt is niet om trots op te zijn. Juist daarom is het interessant om te volgen.</p>
+      <p>De cijfers over bezoekers en posities komen uit SE Ranking. Dat zijn schattingen voor Google Nederland. De aanvragen tellen we zelf.</p>
+    </div>
+  </section>
+
+  <section class="wrap sectie">
+    <h2>Alle maanden</h2>
+    <div class="raster">
+      {items.map((i) => (
+        <a class="card" href={`/logboek/${i.id}/`}>
+          <Plaatje href={`/logboek/${i.id}/`} onderwerp="grafiek" />
+          <span class="kicker">{maandNaam(i.data.maand)}</span>
+          <h3>{i.data.titel}</h3>
+          <p>{i.data.verkeer.toLocaleString('nl-NL')} bezoekers uit Google, {i.data.top10.toLocaleString('nl-NL')} zoekwoorden in de top 10{i.data.aanvragen !== undefined ? `, ${i.data.aanvragen} aanvragen` : ''}.</p>
+          <span class="meer">Lees de meting</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap sectie">
+    <div class="tekst">
+      <h2>Wat je eraan hebt</h2>
+      <p>Je ziet hier hoe lang SEO duurt, wat een nieuwe site doet met je posities en wat AI-antwoorden in Google betekenen voor je verkeer. Zonder mooie praatjes. Benieuwd hoe het met je eigen site gaat? Lees hoe we werken aan <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a> of laat je site <a href="/gratis-website-analyse/">gratis nakijken</a>.</p>
+    </div>
+  </section>
+
+  <Actie titel="Hoe scoort jouw site?" />
+</Base>

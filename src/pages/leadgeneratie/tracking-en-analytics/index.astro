@@ -1,0 +1,226 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
+import Scene from '../../../components/scenes/leadgeneratie--tracking-en-analytics.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/leadgeneratie/tracking-en-analytics/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'niet-genoeg', titel: 'Bezoekers tellen is niet genoeg' },
+  { id: 'wat-doet', titel: 'Wat een specialist doet' },
+  { id: 'meetplan', titel: 'Wat we meten' },
+  { id: 'cookies', titel: 'Meten zonder cookiemelding' },
+  { id: 'instellingen', titel: 'Zes instellingen die vaak fout staan' },
+  { id: 'aanpak', titel: 'Zo richten we het in' },
+  { id: 'overzicht', titel: 'Het overzicht op één scherm' },
+  { id: 'kosten', titel: 'Wat het kost' },
+];
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${site.url}${url}#dienst`,
+    name: 'Tracking en analytics inrichten',
+    serviceType: 'Webanalyse',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: { '@type': 'Country', name: 'Nederland' },
+    url: `${site.url}${url}`,
+    offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 395, priceSpecification: { '@type': 'PriceSpecification', price: 395, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Google Analytics specialist: weet waar je aanvragen vandaan komen',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}${url}#dienst` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  },
+];
+---
+<Base
+  title="Google Analytics specialist voor het mkb | Drijfveer Media"
+  description="Een Google Analytics specialist die meet waar je aanvragen vandaan komen, ook zonder cookiemelding. Tracking eenmalig ingericht vanaf € 395 exclusief btw."
+  kruimels={[{ naam: 'Leadgeneratie', url: '/leadgeneratie/' }, { naam: 'Tracking en analytics', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Leadgeneratie" titel="Google Analytics specialist: weet waar je aanvragen vandaan komen" prijs="vanaf € 395" eenmalig>
+    <p>Hoeveel aanvragen kwamen er vorige maand uit Google? En hoeveel uit je advertenties? Wie dat niet weet, stuurt op gevoel. Wij richten je meting zo in dat je het wel weet. Liefst zonder cookiemelding.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Goede tracking meet aanvragen, telefoontjes en berichten, niet alleen bezoekers.</li>
+            <li>Adverteer je niet? Dan kan het vaak zonder cookiemelding, met een cookieloze tool.</li>
+            <li>Gebruik je Google Analytics 4, controleer dan de bewaartermijn, de belangrijke gebeurtenissen en je eigen bezoeken.</li>
+            <li>Je krijgt één overzicht met vier of vijf getallen, en een korte training om het zelf te lezen.</li>
+            <li>Eenmalig vanaf € 395, exclusief btw.</li>
+          </ul>
+        </div>
+
+        <h2 id="niet-genoeg">Bezoekers tellen is niet genoeg</h2>
+        <p>Op de meeste sites die we nakijken, staat wel ergens Google Analytics. Het telt bezoekers, toont een grafiek en daar blijft het bij. Maar een ondernemer wil niet weten hoeveel mensen er langskwamen. Hij wil weten wie er belde, wie een offerte aanvroeg en via welke weg die mensen binnenkwamen.</p>
+        <p>Dat zijn de vragen waar goede tracking antwoord op geeft:</p>
+        <ul class="vink">
+          <li>Welk kanaal levert de meeste aanvragen op: Google, Google Maps, advertenties of je nieuwsbrief?</li>
+          <li>Welke pagina's leiden tot een aanvraag, en welke niet?</li>
+          <li>Hoeveel mensen tikken op je telefoonnummer of sturen een WhatsApp-bericht?</li>
+          <li>Wat kost één aanvraag uit je advertenties?</li>
+          <li>Waar haken bezoekers af in je formulier?</li>
+        </ul>
+        <p>Met die antwoorden neem je betere beslissingen. Je ziet de groeikansen die je laat liggen, en je ziet welk budget je kunt schrappen. Dat laatste vergeten veel bureaus te zeggen. Wij niet.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld</p>
+          <p>Stel: een hovenier in Roden geeft elke maand € 400 uit aan advertenties op social media. Na de inrichting van zijn meting blijkt dat bijna al zijn aanvragen via Google Maps en zijn eigen site binnenkomen. De advertenties leverden in drie maanden geen enkele aanvraag op. Hij stopt ermee en steekt dat geld in zijn bedrijfsprofiel en zijn site. Zonder meting had hij dat nooit geweten.</p>
+        </div>
+
+        <h2 id="wat-doet">Wat doet een Google Analytics specialist?</h2>
+        <p>Een Google Analytics specialist zorgt dat de cijfers over je website kloppen en dat je er iets mee kunt. Het meeste werk zit niet in de grafieken, maar in de voorbereiding: wat moet je weten, en hoe meet je dat betrouwbaar? Dit zijn de taken, en waarom ze ertoe doen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Taak</th><th>Wat het is</th><th>Waarom het telt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Meetplan</b></td><td>Op papier: welke acties tellen als succes</td><td>Zonder plan meet je alles en weet je niets</td></tr>
+              <tr><td><b>Inrichten</b></td><td>De tool installeren en de acties instellen</td><td>Een standaardinstallatie telt geen aanvragen</td></tr>
+              <tr><td><b>Google Tag Manager</b></td><td>Eén plek voor alle meetcodes op je site</td><td>Wijzigen zonder je webbouwer te bellen</td></tr>
+              <tr><td><b>Koppelingen</b></td><td>Search Console en Google Ads aan Analytics</td><td>Zien welke zoekwoorden en advertenties aanvragen opleveren</td></tr>
+              <tr><td><b>Privacy</b></td><td>Cookiemelding en toestemmingsmodus, of juist cookieloos</td><td>Binnen de regels van de ACM blijven</td></tr>
+              <tr><td><b>Testen</b></td><td>Zelf een aanvraag doen en kijken of hij binnenkomt</td><td>Halve gegevens leiden tot verkeerde conclusies</td></tr>
+              <tr><td><b>Dashboards</b></td><td>Een overzicht in Looker Studio of in de tool zelf</td><td>Je ziet in één oogopslag hoe het gaat</td></tr>
+              <tr><td><b>Training</b></td><td>Uitleg hoe je het overzicht leest</td><td>De data wordt van jou, niet van het bureau</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat is Google Tag Manager precies? Volgens <a href="https://support.google.com/tagmanager/answer/6102821?hl=nl" rel="noopener">Google</a> is het een tagbeheersysteem waarmee je meetcodes op je site bijwerkt vanuit één webscherm. Eén stukje code op je site, en daarna regel je alles in Tag Manager. In het begrip <a href="/kennisbank/wat-is/google-tag-manager/">Google Tag Manager</a> leggen we het rustig uit.</p>
+
+        <h2 id="meetplan">Wat we meten: het meetplan</h2>
+        <p>Een meetplan is kort. Meestal vier tot zes acties. Voor een dienstverlener ziet het er vaak zo uit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Actie</th><th>Hoe we het meten</th><th>Soort</th></tr></thead>
+            <tbody>
+              <tr><td>Offerteformulier verstuurd</td><td>Een gebeurtenis bij het verzenden, of het laden van de bedankpagina</td><td>Hard: dit is een aanvraag</td></tr>
+              <tr><td>Tik op je telefoonnummer</td><td>Een klik op een link die met tel: begint</td><td>Hard, op een telefoon</td></tr>
+              <tr><td>WhatsApp-bericht gestart</td><td>Een klik op je WhatsApp-link</td><td>Hard</td></tr>
+              <tr><td>Klik op je mailadres</td><td>Een klik op een link die met mailto: begint</td><td>Zacht: niet iedereen mailt daarna echt</td></tr>
+              <tr><td>Prijslijst gedownload</td><td>Een klik op het bestand</td><td>Zacht: interesse</td></tr>
+              <tr><td>Routebeschrijving geopend</td><td>Een klik op je adres of kaart</td><td>Zacht, maar goud voor een winkel of praktijk</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Let op het verschil tussen een tik op je nummer en een telefoongesprek. De meting ziet dat iemand op je nummer tikte. Of hij ook echt belde en of je opnam, ziet hij niet. Wil je dat weten, schrijf dan een maand lang op hoe nieuwe klanten je vonden. Leg dat naast je cijfers. Dan weet je hoe zwaar een tik op je nummer weegt.</p>
+        <p>Hoe je harde en zachte acties gebruikt om je site te verbeteren, lees je bij <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>.</p>
+
+        <h2 id="cookies">Meten zonder cookiemelding: kan dat?</h2>
+        <p>Ja, in veel gevallen wel. De regels zijn helder. Volgens de <a href="https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/online-beinvloeden/cookies-plaatsen" rel="noopener">ACM</a> mag je analytische cookies met weinig gevolgen voor de privacy van bezoekers zonder toestemming plaatsen. Je moet wel vertellen dat je ze gebruikt, bijvoorbeeld in je <a href="/privacyverklaring/">privacyverklaring</a>. Voor privacygevoelige analytische cookies en tracking cookies is altijd toestemming nodig. Vooraf aangevinkte keuzes zijn verboden.</p>
+        <p>Er zijn tools die zonder cookies meten en geen persoonsgegevens bewaren. Daarmee hoeft er geen banner op je site. Op onze eigen site kiezen we ook voor meten zonder cookiemelding.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Cookiemelding nodig?</th><th>Past bij</th></tr></thead>
+            <tbody>
+              <tr><td><b>Plausible</b></td><td>Nee</td><td>Wie eenvoudig wil zien waar bezoekers en aanvragen vandaan komen, met de data in Europa</td></tr>
+              <tr><td><b>Simple Analytics</b></td><td>Nee</td><td>Hetzelfde, van een Nederlands bedrijf uit Amsterdam</td></tr>
+              <tr><td><b>Matomo, cookieloos ingesteld</b></td><td>Nee, mits goed ingesteld</td><td>Wie de gegevens op een eigen server wil houden</td></tr>
+              <tr><td><b>Google Analytics 4</b></td><td>Meestal wel</td><td>Wie adverteert met Google Ads en de cijfers wil koppelen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Google Analytics met een cookiemelding</h3>
+        <p>Adverteer je met Google Ads? Dan is Google Analytics 4 met Google Tag Manager vaak de beste keus, omdat je je aanvragen dan kunt terugkoppelen aan je campagnes. Dan hoort er een nette cookiemelding bij, met de toestemmingsmodus van Google. Die geeft de keuze van je bezoeker door aan de Google-tag. Weigert iemand, dan passen de tags hun gedrag aan. Belangrijk: de toestemmingsmodus is zelf geen banner. Die heb je er los van nodig, en hij moet een echte keuze bieden.</p>
+        <p>Adverteer je niet? Dan raden we meestal een cookieloze tool aan. Minder gedoe, en je bezoekers zien gewoon je site. Wat een cookie precies is, lees je in het begrip <a href="/kennisbank/wat-is/cookie/">cookie</a>. Wat er verder op je site moet staan, staat in de gids <a href="/kennisbank/gidsen/privacyverklaring-en-cookies/">privacyverklaring en cookies</a>.</p>
+
+        <h2 id="instellingen">Zes instellingen in Google Analytics 4 die vaak fout staan</h2>
+        <p>Heb je Google Analytics al? Kijk dan eerst naar deze punten. Ze staan bij veel sites die we nakijken niet goed.</p>
+        <ol>
+          <li><b>Er staat nog een oude code op je site.</b> Universal Analytics verwerkt volgens <a href="https://support.google.com/analytics/answer/11583528?hl=nl" rel="noopener">Google</a> sinds 1 juli 2023 geen gegevens meer, en de oude cijfers zijn sinds juli 2024 weg. Begint je code met UA-, dan meet je site niets.</li>
+          <li><b>De bewaartermijn is kort.</b> In de gratis versie stel je de bewaartermijn van gegevens in op <a href="https://support.google.com/analytics/answer/7667196?hl=nl" rel="noopener">2 of 14 maanden</a>. Die termijn geldt voor je verkenningen en trechters, niet voor de standaardrapporten. Staat hij op 2 maanden, dan kun je in een verkenning dit najaar niet met vorig najaar vergelijken. Wij zetten hem op 14.</li>
+          <li><b>Er zijn geen belangrijke gebeurtenissen.</b> Zo heten conversies tegenwoordig in Analytics. Zonder die instelling ziet de tool een aanvraag als een gewone klik.</li>
+          <li><b>Je eigen bezoeken tellen mee.</b> Wie elke dag zijn eigen site opent, vertekent de cijfers. Sluit het verkeer van je kantoor uit.</li>
+          <li><b>Search Console is niet gekoppeld.</b> Dan zie je niet op welke zoekwoorden mensen je vinden.</li>
+          <li><b>Er is nooit getest.</b> Vul je eigen formulier in en kijk of de aanvraag in de realtime weergave verschijnt. Zie je niets, dan meet je niets.</li>
+        </ol>
+        <p>Wil je het zelf nalopen? In de gids <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4, Tag Manager en Looker Studio</a> staat het stap voor stap. Kom je er niet uit, dan kijken wij mee.</p>
+
+        <h2 id="aanpak">Wat een Google Analytics specialist bij ons voor je inricht</h2>
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Een meetplan</h3></div>
+        <p>Eerst bepalen we wat telt als succes. Een formulier, een klik op je nummer, een mail, een WhatsApp, een download van je prijslijst. Meestal zijn het er vier of vijf. Alles wat niet bijdraagt aan een beslissing, meten we niet.</p>
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Inrichten en Tag Manager instellen</h3></div>
+        <p>We installeren de tool die bij je past en zetten de metingen klaar. Bij Google Analytics loopt dat via de Google Tag Manager, zodat je later niet voor elke wijziging je webbouwer hoeft te bellen. We koppelen Search Console en, als je adverteert, Google Ads.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>3. Testen</h3></div>
+        <p>We doen zelf een aanvraag, tikken op het nummer en sturen een bericht. Pas als elke actie netjes binnenkomt, is de meting klaar. Een verzameling van halve gegevens is erger dan geen gegevens, omdat je er verkeerde conclusies uit trekt.</p>
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>4. Eén overzicht dat je zelf snapt</h3></div>
+        <p>Je krijgt een overzicht op één scherm, bijvoorbeeld in Looker Studio. Dat is gratis te gebruiken. Vier of vijf getallen: bezoekers, aanvragen, aanvragen per bron en wat een aanvraag kost. Geen dashboards met twintig grafieken. Een rapport waar je een marketeer bij nodig hebt, schiet zijn doel voorbij.</p>
+        <div class="stap-kop"><Tekening naam="koffie" maat={48} /><h3>5. Een korte training</h3></div>
+        <p>In een halfuur laten we zien hoe je het overzicht leest. Zo wordt de data toegankelijk voor iedereen in je bedrijf, ook als wij niet meekijken.</p>
+
+        <h2 id="overzicht">Het overzicht: vier getallen op één scherm</h2>
+        <p>Zo ziet een maandoverzicht eruit. De cijfers zijn verzonnen, het idee niet.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bron</th><th>Bezoekers</th><th>Aanvragen</th><th>Kosten</th><th>Per aanvraag</th></tr></thead>
+            <tbody>
+              <tr><td>Google, gewone resultaten</td><td>620</td><td>9</td><td>-</td><td>-</td></tr>
+              <tr><td>Google Maps en bedrijfsprofiel</td><td>180</td><td>7</td><td>-</td><td>-</td></tr>
+              <tr><td>Google Ads</td><td>240</td><td>5</td><td>€ 310</td><td>€ 62</td></tr>
+              <tr><td>Nieuwsbrief</td><td>45</td><td>2</td><td>-</td><td>-</td></tr>
+              <tr><td>Social media</td><td>90</td><td>0</td><td>€ 150</td><td>geen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>In tien seconden zie je wat werkt. In dit voorbeeld leveren Maps en de gewone zoekresultaten het meeste op, voor niets. De advertenties op social media kosten geld en leveren deze maand niets op. Dat is geen reden om meteen te stoppen, wel om de vraag te stellen. Zo wordt je marketing data-gedreven, in plaats van een gok.</p>
+        <p>Komen er via advertenties aanvragen binnen? Zet dan in elke link een UTM-code. Daarmee ziet je tool precies welke campagne of mail de bezoeker stuurde. Hoe dat werkt, staat in de gids over <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a>.</p>
+
+        <h2 id="kosten">Wat het kost</h2>
+        <p>Tracking inrichten kost eenmalig vanaf € 395, exclusief btw. Daarvoor krijg je het meetplan, de installatie, het testen, het overzicht en de training. Een tool zoals Plausible kost een klein maandbedrag, dat je zelf betaalt. Google Analytics is gratis. Heb je al een installatie die alleen nagekeken en rechtgezet moet worden, dan is dat vaak minder werk. Dat hoor je vooraf.</p>
+        <p>Wil je dat we elke maand met je meekijken? Data-analyse hoort bij <a href="/leadgeneratie/">leadgeneratie</a>, waar we op basis van de cijfers bijsturen en een doel afspreken waar je ons op afrekent. Wie liever zelf leert meten, kan ook een <a href="/trainingen/">training</a> volgen voor zichzelf of het team.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+        <Prijskaart naam="Tracking en analytics" prijs="€ 395" eenmalig punten={['Meetplan met je belangrijkste acties', 'Inrichting, het liefst zonder cookiemelding', 'Getest met echte aanvragen', 'Overzicht op één scherm plus training']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost een Google Analytics specialist?', a: 'Bij ons kost het inrichten van je meting eenmalig vanaf € 395, exclusief btw. Daar zit het meetplan, de installatie, het testen, een overzicht en een korte training in.' },
+      { v: 'Mag ik Google Analytics gebruiken zonder cookiemelding?', a: 'Daar zijn de meningen over verdeeld, omdat de gegevens naar Google gaan. Wie zeker wil zijn, vraagt toestemming of kiest een tool die zonder cookies meet. Wij leggen je de keuze voor en zeggen eerlijk wat wij zouden doen.' },
+      { v: 'Ik heb Google Analytics al. Kunnen jullie het nakijken?', a: 'Ja. Vaak staat het er wel, maar telt het geen aanvragen of dubbel. We kijken het na en zetten het recht. Dat is meestal minder werk dan een nieuwe inrichting.' },
+      { v: 'Wat is Google Tag Manager?', a: 'Een gratis hulpmiddel van Google waarmee je metingen op je site beheert vanuit één plek. Zo hoef je niet bij elke wijziging in de code van je website te duiken.' },
+      { v: 'Werkt mijn oude Google Analytics nog?', a: 'Begint je code met UA-, dan niet. Universal Analytics verwerkt sinds 1 juli 2023 geen gegevens meer. Je hebt een Google Analytics 4-property nodig, of een andere tool.' },
+      { v: 'Van wie zijn de gegevens?', a: 'Van jou. De accounts staan op jouw naam. Wij krijgen toegang zolang we voor je werken.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'De meting werkt meteen na de inrichting. Na een maand of twee heb je genoeg gegevens om echte conclusies te trekken.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over meten en aanvragen"
+    links={[
+      { label: 'Pillar', titel: 'Leadgeneratie', href: '/leadgeneratie/', tekst: 'Van bezoeker naar aanvraag, vanaf € 495 per maand.' },
+      { label: 'Gids', titel: 'Google Analytics 4', href: '/kennisbank/gidsen/google-analytics-4/', tekst: 'GA4, Tag Manager en Looker Studio uitgelegd.' },
+      { label: 'Gids', titel: 'UTM-codes', href: '/kennisbank/gidsen/utm-codes/', tekst: 'Zien welke link of campagne werkt.' },
+      { label: 'Dienst', titel: 'Conversie-optimalisatie', href: '/leadgeneratie/conversie-optimalisatie/', tekst: 'Meer aanvragen uit dezelfde bezoekers.' },
+    ]}
+  />
+
+  <Actie titel="Weet jij waar je aanvragen vandaan komen?" tekst={`${site.contactpersoon} belt je binnen 15 minuten terug en kijkt wat je nu al meet. Daarna hoor je wat er beter kan, en wat het kost.`} />
+</Base>

@@ -1,0 +1,94 @@
+---
+// Scène voor /zoekmachine-optimalisatie/technische-seo/: een snelheidsmeter slaat door naar groen en een crawler loopt de structuur van de site af, pagina voor pagina goedgekeurd.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kinderen = [
+  { x: 255, label: 'Diensten' },
+  { x: 335, label: 'Blog' },
+  { x: 415, label: 'Contact' },
+];
+const kleinkinderen = [230, 280, 335, 415];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een snelheidsmeter slaat door naar groen, terwijl een crawler de pagina\'s van een website een voor een afloopt en goedkeurt.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- snelheidsmeter -->
+  <rect x="20" y="28" width="180" height="152" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="36" y="52" font-size="12" font-weight="800">Snelheid</text>
+  <path d="M52 140A58 58 0 0 1 81 89.8" fill="none" stroke="#ffd2b0" stroke-width="10" />
+  <path d="M81 89.8A58 58 0 0 1 139 89.8" fill="none" stroke="#d9e1ea" stroke-width="10" />
+  <path d="M139 89.8A58 58 0 0 1 168 140" fill="none" stroke="#1f8a5b" stroke-width="10" />
+  <circle cx="110" cy="140" r="7" fill="#074663" />
+  <text x="110" y="168" text-anchor="middle" font-size="11" class="zacht">Core Web Vitals</text>
+  <!-- checklist -->
+  {['robots.txt', 'sitemap.xml'].map((t, i) => (
+    <g>
+      <rect x="20" y={194 + i * 32} width="180" height="24" rx="12" fill="#e8eef4" />
+      <text x="36" y={210 + i * 32} font-size="11.5" font-weight="700">{t}</text>
+      <circle cx="184" cy={206 + i * 32} r="8" fill="#1f8a5b" />
+      <path d={`M180 ${206 + i * 32}l3 3 5-6`} fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+  ))}
+  <!-- sitestructuur -->
+  <path class="l" d="M335 64L255 115M335 64v51M335 64l80 51" />
+  <path class="l" d="M255 141l-25 49M255 141l25 49M335 141v49M415 141v49" />
+  <rect x="300" y="36" width="70" height="28" rx="7" fill="#074663" />
+  <text x="335" y="55" text-anchor="middle" font-size="12" font-weight="800" style="fill:#fff">Home</text>
+  {kinderen.map((k) => (
+    <g>
+      <rect x={k.x - 32} y="115" width="64" height="26" rx="7" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x={k.x} y="132" text-anchor="middle" font-size="11" font-weight="700">{k.label}</text>
+    </g>
+  ))}
+  {kleinkinderen.map((x) => (
+    <g>
+      <rect x={x - 20} y="190" width="40" height="30" rx="6" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <rect class="v" x={x - 12} y="198" width="24" height="5" rx="2.5" />
+      <rect class="v" x={x - 12} y="208" width="16" height="5" rx="2.5" />
+    </g>
+  ))}
+  {!mini && (
+    <g>
+      <path class="naald" d="M110 140V92" stroke="#10283f" stroke-width="4" stroke-linecap="round" />
+      <circle cx="110" cy="140" r="4" fill="#fff" />
+      {kleinkinderen.map((x, i) => (
+        <g class="ok" style={`--i:${i}`}>
+          <circle cx={x + 18} cy="190" r="8" fill="#1f8a5b" />
+          <path d={`M${x + 14} 190l3 3 5-6`} fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <g class="crawler">
+        <path d="M-7 -8l-4-6M7 -8l4-6" stroke="#10283f" stroke-width="2" stroke-linecap="round" />
+        <circle r="10" fill="#ff6600" />
+        <circle cx="-3.5" cy="-1" r="2.2" fill="#fff" /><circle cx="3.5" cy="-1" r="2.2" fill="#fff" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .naald { transform-origin: 110px 140px; transform: rotate(52deg); }
+  .crawler { transform: translate(335px, 78px); }
+  .ok { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .naald { transform: rotate(-70deg); }
+  :global(.teken-js) .ok { opacity: 0; transform: scale(0.4); }
+  :global(.teken-js) .crawler { opacity: 0; }
+  .in-beeld .naald { animation: zoekmachine-optimalisatie--technische-seo-naald 1.6s cubic-bezier(.3,1.4,.5,1) 0.6s forwards; }
+  .in-beeld .ok { animation: zoekmachine-optimalisatie--technische-seo-ok 0.5s cubic-bezier(.3,1.7,.5,1) calc(1.6s + var(--i) * 0.7s) forwards; }
+  .in-beeld .crawler { animation: zoekmachine-optimalisatie--technische-seo-crawl 8s ease-in-out 0.4s infinite both; }
+  @keyframes zoekmachine-optimalisatie--technische-seo-naald { from { transform: rotate(-70deg); } to { transform: rotate(52deg); } }
+  @keyframes zoekmachine-optimalisatie--technische-seo-ok { to { opacity: 1; transform: none; } }
+  @keyframes zoekmachine-optimalisatie--technische-seo-crawl {
+    0% { opacity: 0; transform: translate(335px, 78px); }
+    5% { opacity: 1; transform: translate(335px, 78px); }
+    18% { transform: translate(262px, 104px); }
+    30% { transform: translate(238px, 176px); }
+    40% { transform: translate(262px, 104px); }
+    52% { transform: translate(335px, 104px); }
+    62% { transform: translate(335px, 176px); }
+    72% { transform: translate(408px, 104px); }
+    84% { transform: translate(415px, 176px); }
+    95% { opacity: 1; transform: translate(335px, 78px); }
+    100% { opacity: 0; transform: translate(335px, 78px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .naald, .in-beeld .ok, .in-beeld .crawler { animation: none; }
+  }
+</style>

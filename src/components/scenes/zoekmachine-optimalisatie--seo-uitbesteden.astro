@@ -1,0 +1,61 @@
+---
+// Scène voor /zoekmachine-optimalisatie/seo-uitbesteden/: jij drinkt rustig je koffie, ondertussen wordt de takenlijst van deze maand afgevinkt en stijgen de bezoekers uit Google.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const taken = ['Techniek nagekeken', 'Teksten verbeterd', 'Links geplaatst', 'Rapport gestuurd'];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een kop koffie voor jou, terwijl de takenlijst van deze maand wordt afgevinkt en de bezoekers uit Google stijgen.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- jij: koffie -->
+  <path d="M52 236h110" stroke="#d9e1ea" stroke-width="4" stroke-linecap="round" />
+  <path d="M66 150h72v52a24 24 0 0 1-24 24H90a24 24 0 0 1-24-24z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <path class="l" d="M138 164h8a14 14 0 0 1 0 28h-8" />
+  <path d="M34 40h140a10 10 0 0 1 10 10v34a10 10 0 0 1-10 10H70l-12 12v-12H34a10 10 0 0 1-10-10V50a10 10 0 0 1 10-10z" fill="#fff" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+  <text x="40" y="62" font-size="11.5" font-weight="800">Thorgall</text>
+  <text x="40" y="80" font-size="11">Je rapport staat klaar</text>
+  <rect class="o" x="86" y="186" width="32" height="8" rx="4" />
+  <text x="107" y="262" text-anchor="middle" font-size="11.5" class="zacht">Jij runt je bedrijf</text>
+  <!-- de takenlijst -->
+  <rect x="190" y="30" width="176" height="220" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="248" y="20" width="60" height="18" rx="6" fill="#074663" />
+  <text x="208" y="66" font-size="13" font-weight="800">Deze maand</text>
+  {taken.map((t, i) => (
+    <g>
+      <rect x="208" y={84 + i * 40} width="18" height="18" rx="4" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x="236" y={98 + i * 40} font-size="11.5" font-weight="600">{t}</text>
+    </g>
+  ))}
+  <!-- bezoekers uit Google -->
+  <rect x="380" y="70" width="88" height="130" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="392" y="92" font-size="10.5" font-weight="800">Bezoekers</text>
+  <text x="392" y="106" font-size="9.5" class="zacht">uit Google</text>
+  <path class="l" d="M392 184h64" />
+  <path d="M394 176l14-8 14 2 14-14 18-16" fill="none" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  {!mini && (
+    <g>
+      <path class="stoom" d="M88 138c-6-8 6-12 0-22M104 136c-6-8 6-12 0-22M120 138c-6-8 6-12 0-22" fill="none" stroke="#c9d3dd" stroke-width="3" stroke-linecap="round" />
+      {taken.map((_, i) => (
+        <path class="vink" style={`--i:${i}`} d={`M211 ${93 + i * 40}l4 4 8-9`} fill="none" stroke="#1f8a5b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      ))}
+      <path class="lijn" d="M394 176l14-8 14 2 14-14 18-16" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <circle class="punt" cx="454" cy="140" r="5" fill="#ff6600" />
+    </g>
+  )}
+</svg>
+<style>
+  .lijn { stroke-dasharray: 1; }
+  .vink { stroke-dasharray: 1; }
+  .punt { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .lijn { stroke-dashoffset: 1; }
+  :global(.teken-js) .vink { stroke-dashoffset: 1; }
+  :global(.teken-js) .punt { opacity: 0; }
+  .in-beeld .vink { animation: zoekmachine-optimalisatie--seo-uitbesteden-vink 0.4s ease-out calc(0.6s + var(--i) * 0.6s) forwards; }
+  .in-beeld .lijn { animation: zoekmachine-optimalisatie--seo-uitbesteden-vink 1.4s cubic-bezier(.6,.1,.3,1) 2.8s forwards; }
+  .in-beeld .punt { animation: zoekmachine-optimalisatie--seo-uitbesteden-punt 2.4s ease-in-out 4.2s infinite both; }
+  .in-beeld .stoom { animation: zoekmachine-optimalisatie--seo-uitbesteden-stoom 4s ease-in-out infinite; }
+  @keyframes zoekmachine-optimalisatie--seo-uitbesteden-vink { to { stroke-dashoffset: 0; } }
+  @keyframes zoekmachine-optimalisatie--seo-uitbesteden-punt { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.6); } }
+  @keyframes zoekmachine-optimalisatie--seo-uitbesteden-stoom { 0% { opacity: 0; transform: translateY(6px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .vink, .in-beeld .lijn, .in-beeld .punt, .in-beeld .stoom { animation: none; }
+  }
+</style>

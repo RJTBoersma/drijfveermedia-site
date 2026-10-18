@@ -1,0 +1,176 @@
+# Drijfveer Media, Apache-instellingen (Vimexx). Gegenereerd door scripts/redirects.py; pas scripts/htaccess-basis.txt aan, niet dit bestand.
+Options -Indexes
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+
+RewriteEngine On
+# Altijd https en www, in één stap
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ https://www.drijfveermedia.nl/$1 [L,R=301]
+# Mappen altijd met slash aan het eind
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !(\.[a-z0-9]{2,5}|/)$ [NC]
+RewriteRule ^(.*)$ https://www.drijfveermedia.nl/$1/ [L,R=301]
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  <FilesMatch "\.(css|js|woff2|svg|webp|png|jpg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=600"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/json text/plain application/xml
+</IfModule>
+
+# Oude URL's van de vorige site (één stap, geen ketens)
+RedirectMatch 301 ^/404\-2/?$ /
+RedirectMatch 301 ^/DM\-algemenevoorwaarden\.pdf/?$ /algemene-voorwaarden/
+RedirectMatch 301 ^/blog/10\-mythes\-vs\-4\-oud\-google\-medewerkers/?$ /kennisbank/gidsen/hoe-werkt-seo/
+RedirectMatch 301 ^/blog/17\-soorten\-linkbait\-om\-je\-site\-te\-verbeteren/?$ /kennisbank/gidsen/backlinks/
+RedirectMatch 301 ^/blog/17\-tips\-om\-meer\-twittervolgers\-te\-krijgen/?$ /kennisbank/gidsen/social-media-planning/
+RedirectMatch 301 ^/blog/18\-soorten\-backlinks\-die\-je\-moet\-vermijden/?$ /kennisbank/gidsen/backlinks/
+RedirectMatch 301 ^/blog/5\-goede\-alternatieven\-voor\-google\-analytics/?$ /kennisbank/gidsen/google-analytics-4/
+RedirectMatch 301 ^/blog/5\-linkbuilding\-tips\-na\-google\-penguin/?$ /kennisbank/gidsen/backlinks/
+RedirectMatch 301 ^/blog/5\-redenen\-waarom\-je\-een\-bedrijfsblog\-moet\-hebben\-inclusief\-statistieken/?$ /kennisbank/gidsen/bedrijfsblog-beginnen/
+RedirectMatch 301 ^/blog/5\-stappen\-om\-google\-analytics\-avg\-vriendelijk\-in\-te\-stellen/?$ /kennisbank/gidsen/google-analytics-4/
+RedirectMatch 301 ^/blog/6\-gratis\-alternatieven\-voor\-googles\-keyword\-tool/?$ /kennisbank/gidsen/zoekwoordonderzoek/
+RedirectMatch 301 ^/blog/6\-meest\-interessante\-websitestatistieken\-voor\-kleine\-ondernemer/?$ /kennisbank/gidsen/google-analytics-4/
+RedirectMatch 301 ^/blog/7\-manieren\-succesvol\-gebruiken\-e\-mailnieuwsbrief\-online\-marketingcampagne/?$ /kennisbank/gidsen/nieuwsbrief-maken/
+RedirectMatch 301 ^/blog/8\-mythes\-over\-linkbuilding/?$ /kennisbank/gidsen/backlinks/
+RedirectMatch 301 ^/blog/8\-tips\-voor\-het\-schrijven\-van\-effectieve\-video\-marketing\-scripts/?$ /tekstschrijver/
+RedirectMatch 301 ^/blog/9\-tips\-voor\-een\-succesvollere\-headline/?$ /kennisbank/gidsen/seo-teksten-schrijven/
+RedirectMatch 301 ^/blog/?$ /kennisbank/
+RedirectMatch 301 ^/blog/alles\-wat\-je\-moet\-weten\-over\-webp/?$ /kennisbank/wat-is/webp/
+RedirectMatch 301 ^/blog/answer\-engine\-optimization\-de\-toekomst\-van\-vindbaarheid\-online/?$ /kennisbank/gidsen/wat-is-geo/
+RedirectMatch 301 ^/blog/b2b\-e\-mailmarketing\-hoe\-blijf\-je\-uit\-de\-spamfolder/?$ /kennisbank/gidsen/nieuwsbrief-maken/
+RedirectMatch 301 ^/blog/blog\-beginnen\-voorkom\-deze\-fouten/?$ /kennisbank/gidsen/bedrijfsblog-beginnen/
+RedirectMatch 301 ^/blog/corporate\-blogging/?$ /kennisbank/gidsen/bedrijfsblog-beginnen/
+RedirectMatch 301 ^/blog/de\-20\-beste\-online\-marketingblogs/?$ /kennisbank/de-20-beste-online-marketingblogs/
+RedirectMatch 301 ^/blog/de\-9\-grootste\-fouten\-op\-websites\-van\-kleine\-ondernemingen/?$ /kennisbank/gidsen/meer-klanten-via-je-website/
+RedirectMatch 301 ^/blog/de\-drijfveer\-media\-seo\-rap/?$ /over-ons/
+RedirectMatch 301 ^/blog/de\-impact\-van\-positieve\-en\-negatieve\-beoordelingen\-op\-een\-bedrijf/?$ /kennisbank/gidsen/google-reviews/
+RedirectMatch 301 ^/blog/de\-invloed\-van\-social\-media\-op\-zoekmachine\-optimalisatie/?$ /social-media-beheer/
+RedirectMatch 301 ^/blog/de\-leukste\-google\-easter\-eggs/?$ /kennisbank/geavanceerd-zoeken-met-google/
+RedirectMatch 301 ^/blog/de\-title\-tag\-uitgelegd\-en\-title\-tag\-optimalisatie\-tips/?$ /kennisbank/wat-is/title-tag/
+RedirectMatch 301 ^/blog/de\-voordelen\-van\-pillarpages/?$ /kennisbank/wat-is/interne-links/
+RedirectMatch 301 ^/blog/demografie\-per\-sociaal\-media\-platform\-anno\-2021/?$ /kennisbank/gidsen/social-media-planning/
+RedirectMatch 301 ^/blog/domain\-authority\-da\-en\-page\-authority\-pa/?$ /kennisbank/wat-is/domain-authority/
+RedirectMatch 301 ^/blog/domeinnaam\-kiezen/?$ /kennisbank/gidsen/domeinnaam-kiezen/
+RedirectMatch 301 ^/blog/drie\-manieren\-om\-meer\-uit\-contentmarketing\-te\-halen/?$ /tekstschrijver/contentmarketing/
+RedirectMatch 301 ^/blog/drijft\-jouw\-contactformulier\-je\-bezoekers\-tot\-wanhoop/?$ /kennisbank/gidsen/meer-klanten-via-je-website/
+RedirectMatch 301 ^/blog/een\-nieuw\-waarschuwingssysteem\-bij\-google\-ads/?$ /kennisbank/gidsen/wat-is-google-ads/
+RedirectMatch 301 ^/blog/geavanceerd\-zoeken\-met\-google/?$ /kennisbank/geavanceerd-zoeken-met-google/
+RedirectMatch 301 ^/blog/generative\-engine\-optimization\-geo\-zichtbaar\-worden\-in\-ai\-antwoorden/?$ /kennisbank/gidsen/wat-is-geo/
+RedirectMatch 301 ^/blog/google\-indexeert\-mijn\-site\-niet/?$ /kennisbank/gidsen/google-search-console/
+RedirectMatch 301 ^/blog/google\-introduceert\-penguin\-2\-0/?$ /linkbuilding/
+RedirectMatch 301 ^/blog/google\-lamda\-en\-mum\-gaan\-seo\-veranderen/?$ /kennisbank/wat-is/semantisch-zoeken/
+RedirectMatch 301 ^/blog/google\-mijn\-bedrijf\-optimalisatie\-7\-goede\-tips/?$ /kennisbank/gidsen/google-bedrijfsprofiel/
+RedirectMatch 301 ^/blog/google\-optimalisatie\-over\-het\-wat\-en\-hoe/?$ /kennisbank/gidsen/hoger-in-google/
+RedirectMatch 301 ^/blog/google\-update\-bert/?$ /kennisbank/wat-is/semantisch-zoeken/
+RedirectMatch 301 ^/blog/google\-waarschuwt\-nu\-wanneer\-de\-zoekresultaten\-onbetrouwbaar\-zijn/?$ /kennisbank/gidsen/hoe-werkt-seo/
+RedirectMatch 301 ^/blog/googles\-nofollow\-tag\-gewijzigd\-de\-consequenties/?$ /kennisbank/gidsen/backlinks/
+RedirectMatch 301 ^/blog/het\-belang\-van\-alt\-tekst\-voor\-seo/?$ /kennisbank/wat-is/alt-tekst/
+RedirectMatch 301 ^/blog/het\-belang\-van\-een\-sterke\-404\-pagina/?$ /kennisbank/wat-is/404-pagina/
+RedirectMatch 301 ^/blog/het\-gevaar\-van\-keyword\-cannibalization\-en\-hoe\-je\-het\-kan\-oplossen/?$ /kennisbank/wat-is/keyword-cannibalization/
+RedirectMatch 301 ^/blog/het\-raadsel\-van\-google\-rankings/?$ /kennisbank/gidsen/hoe-werkt-seo/
+RedirectMatch 301 ^/blog/hoe\-geef\-anchortekst\-vorm/?$ /kennisbank/wat-is/anchortekst/
+RedirectMatch 301 ^/blog/hoe\-je\-blogposts\-effectief\-te\-promoten/?$ /kennisbank/gidsen/bedrijfsblog-beginnen/
+RedirectMatch 301 ^/blog/hoe\-kan\-je\-het\-aantal\-volgers\-op\-instagram\-vergroten/?$ /kennisbank/gidsen/instagram-algoritme/
+RedirectMatch 301 ^/blog/hoe\-krijg\-je\-positie\-0\-in\-google/?$ /kennisbank/wat-is/featured-snippet/
+RedirectMatch 301 ^/blog/hoe\-maak\-je\-een\-online\-marketingplan/?$ /kennisbank/gidsen/marketingplan-maken/
+RedirectMatch 301 ^/blog/hoe\-optimaliseer\-je\-voor\-google\-discover/?$ /kennisbank/gidsen/hoger-in-google/
+RedirectMatch 301 ^/blog/hoe\-slecht\-is\-duplicate\-content\-voor\-seo/?$ /kennisbank/wat-is/duplicate-content/
+RedirectMatch 301 ^/blog/hoe\-voorkom\-je\-een\-daling\-in\-websiteverkeer/?$ /kennisbank/hoe-voorkom-je-een-daling-in-websiteverkeer/
+RedirectMatch 301 ^/blog/hoe\-ziet\-een\-goede\-bedankpagina\-eruit/?$ /kennisbank/gidsen/conversie-verhogen/
+RedirectMatch 301 ^/blog/hoelang\-duurt\-het\-voordat\-seo\-resultaat\-heeft/?$ /kennisbank/gidsen/hoe-werkt-seo/
+RedirectMatch 301 ^/blog/hoeveel\-invloed\-hebben\-google\-recensies\-op\-je\-ranking\-in\-google/?$ /kennisbank/gidsen/google-reviews/
+RedirectMatch 301 ^/blog/langere\-meta\-omschrijvingen\-2x\-zoveel\-ruimte\-om\-aandacht\-trekken/?$ /kennisbank/gidsen/meta-description/
+RedirectMatch 301 ^/blog/linkbuilden\-voor\-beginners/?$ /kennisbank/gidsen/backlinks/
+RedirectMatch 301 ^/blog/linkbuilding\-met\-google\-alerts/?$ /kennisbank/gidsen/backlinks/
+RedirectMatch 301 ^/blog/linkedin\-profiel\-optimalisatie/?$ /kennisbank/gidsen/linkedin-bedrijfspagina/
+RedirectMatch 301 ^/blog/meeste\-facebook\-videos\-worden\-bekeken\-zonder\-geluid/?$ /kennisbank/gidsen/social-media-planning/
+RedirectMatch 301 ^/blog/mobielvriendelijkheid\-wordt\-nog\-belangrijker\-door\-amp/?$ /kennisbank/gidsen/website-sneller-maken/
+RedirectMatch 301 ^/blog/negatieve\-seo\-de\-keerzijde\-van\-googles\-ranking\-systeem/?$ /linkbuilding/google-disavow-tool/
+RedirectMatch 301 ^/blog/online\-marketing\-werkervaringsplaats\-assen/?$ /werken-bij/
+RedirectMatch 301 ^/blog/optimaliseer\-je\-e\-mailcampagnes\-door\-te\-leren\-van\-afmeldingen/?$ /kennisbank/gidsen/nieuwsbrief-maken/
+RedirectMatch 301 ^/blog/promotie\-seizoensgebonden\-producten/?$ /kennisbank/gidsen/inhaakkalender/
+RedirectMatch 301 ^/blog/seo\-aeo\-en\-geo\-van\-gevonden\-worden\-tot\-genoemd\-worden/?$ /kennisbank/gidsen/wat-is-geo/
+RedirectMatch 301 ^/blog/seo\-minimum\-aantal\-woorden\-feiten\-of\-fictie/?$ /kennisbank/gidsen/hoe-werkt-seo/
+RedirectMatch 301 ^/blog/seo\-tips\-voor\-blogs/?$ /kennisbank/gidsen/seo-teksten-schrijven/
+RedirectMatch 301 ^/blog/seo\-voor\-pinterest/?$ /social-media-beheer/
+RedirectMatch 301 ^/blog/stagelopen\-bij\-drijfveer\-media\-leerzaam\-en\-gezellig/?$ /werken-bij/
+RedirectMatch 301 ^/blog/tiktok\-marketing\-een\-inleiding/?$ /social-media-beheer/
+RedirectMatch 301 ^/blog/top\-9\-instagram\-marketing\-tips/?$ /kennisbank/gidsen/instagram-algoritme/
+RedirectMatch 301 ^/blog/url\-optimalisatie\-zo\-maak\-je\-seo\-vriendelijke\-urls/?$ /kennisbank/gidsen/seo-vriendelijke-urls/
+RedirectMatch 301 ^/blog/vijf\-stappen\-om\-je\-mobiele\-website\-te\-optimaliseren/?$ /kennisbank/gidsen/website-sneller-maken/
+RedirectMatch 301 ^/blog/voorkom\-mixed\-content\-en\-beloon\-veilige\-site/?$ /kennisbank/wat-is/mixed-content/
+RedirectMatch 301 ^/blog/waarom\-we\-vanaf\-nu\-tutoyeren/?$ /over-ons/
+RedirectMatch 301 ^/blog/wat\-is\-crawlbudget/?$ /kennisbank/wat-is/crawlbudget/
+RedirectMatch 301 ^/blog/wat\-is\-e\-e\-a\-t\-en\-waarom\-is\-het\-belangrijk\-voor\-seo/?$ /kennisbank/wat-is/e-e-a-t/
+RedirectMatch 301 ^/blog/wat\-is\-een\-bounce\-rate/?$ /kennisbank/wat-is/bounce-rate/
+RedirectMatch 301 ^/blog/wat\-is\-een\-redirect/?$ /kennisbank/wat-is/redirect/
+RedirectMatch 301 ^/blog/wat\-is\-een\-sitemap\-belangrijk\-voor\-je\-seo/?$ /kennisbank/wat-is/sitemap/
+RedirectMatch 301 ^/blog/wat\-is\-google\-passage\-ranking/?$ /kennisbank/wat-is/passage-ranking/
+RedirectMatch 301 ^/blog/wat\-is\-het\-verschil\-tussen\-seo\-en\-sea/?$ /kennisbank/wat-is/seo-en-sea/
+RedirectMatch 301 ^/blog/wat\-is\-interne\-linkbuilding/?$ /kennisbank/wat-is/interne-links/
+RedirectMatch 301 ^/blog/wat\-is\-link\-juice/?$ /kennisbank/wat-is/link-juice/
+RedirectMatch 301 ^/blog/wat\-is\-semantisch\-zoeken/?$ /kennisbank/wat-is/semantisch-zoeken/
+RedirectMatch 301 ^/blog/wat\-is\-seo\-en\-waarom\-is\-het\-belangrijk/?$ /kennisbank/gidsen/hoe-werkt-seo/
+RedirectMatch 301 ^/blog/wat\-is\-zoekintentie\-aka\-search\-intent/?$ /kennisbank/wat-is/zoekintentie/
+RedirectMatch 301 ^/blog/wat\-zijn\-de\-googles\-core\-web\-vitals/?$ /kennisbank/gidsen/website-sneller-maken/
+RedirectMatch 301 ^/blog/wat\-zijn\-entiteiten\-in\-seo\-en\-waarom\-zijn\-ze\-belangrijk/?$ /kennisbank/wat-is/entiteiten/
+RedirectMatch 301 ^/blog/wat\-zijn\-google\-sitelinks/?$ /kennisbank/wat-is/sitelinks/
+RedirectMatch 301 ^/blog/wat\-zijn\-headings/?$ /kennisbank/wat-is/headings/
+RedirectMatch 301 ^/blog/welke\-impact\-heeft\-voice\-search\-op\-seo/?$ /kennisbank/wat-is/zoekintentie/
+RedirectMatch 301 ^/blog/werken\-voor\-niets\-hoe\-wenselijk\-is\-dat/?$ /werken-bij/
+RedirectMatch 301 ^/blog/what\-the\-floc\-google\-stopt\-met\-third\-party\-cookies/?$ /kennisbank/gidsen/privacyverklaring-en-cookies/
+RedirectMatch 301 ^/blog/whitelabel\-seo\-alleen\-maar\-winnaars/?$ /zoekmachine-optimalisatie/seo-uitbesteden/
+RedirectMatch 301 ^/blog/zeven\-tips\-om\-je\-merk\-neer\-te\-zetten\-op\-de\-social\-media/?$ /kennisbank/gidsen/social-media-planning/
+RedirectMatch 301 ^/blog/zichtbaarheid\-met\-google\-posts/?$ /kennisbank/gidsen/google-bedrijfsprofiel/
+RedirectMatch 301 ^/blog/zoekwoorden\-onderzoek/?$ /kennisbank/gidsen/zoekwoordonderzoek/
+RedirectMatch 301 ^/cases/cijferbaas/?$ /cases/
+RedirectMatch 301 ^/cases/dakraam\-concurrent/?$ /cases/dakraamconcurrent/
+RedirectMatch 301 ^/cases/dw\-huisontruiming/?$ /cases/
+RedirectMatch 301 ^/cases/industrialfreezing/?$ /cases/
+RedirectMatch 301 ^/content\-marketing\-uitbesteden/?$ /tekstschrijver/contentmarketing/
+RedirectMatch 301 ^/diensten/?$ /prijzen/
+RedirectMatch 301 ^/diensten/ai\-vindbaarheidsanalyse/?$ /generative-engine-optimization/ai-vindbaarheidsanalyse/
+RedirectMatch 301 ^/diensten/generative\-engine\-optimization/?$ /generative-engine-optimization/
+RedirectMatch 301 ^/diensten/google\-ads/?$ /online-adverteren/google-ads-bureau/
+RedirectMatch 301 ^/diensten/leadgeneratie/?$ /leadgeneratie/
+RedirectMatch 301 ^/diensten/link\-building\-netherlands/?$ /linkbuilding/link-building-netherlands/
+RedirectMatch 301 ^/diensten/linkbuilding/?$ /linkbuilding/
+RedirectMatch 301 ^/diensten/linkbuilding/google\-disavow\-tool/?$ /linkbuilding/google-disavow-tool/
+RedirectMatch 301 ^/diensten/linkbuilding/linkbuilding\-uitbesteden/?$ /linkbuilding/linkbuilding-uitbesteden/
+RedirectMatch 301 ^/diensten/linkbuilding\-niederlande/?$ /linkbuilding/linkbuilding-niederlande/
+RedirectMatch 301 ^/diensten/lokale\-online\-marketing/?$ /lokale-seo/
+RedirectMatch 301 ^/diensten/tekstschrijver/?$ /tekstschrijver/
+RedirectMatch 301 ^/diensten/website\-laten\-maken/?$ /website-laten-maken/
+RedirectMatch 301 ^/diensten/wordpress\-hack/?$ /website-laten-maken/wordpress-hack/
+RedirectMatch 301 ^/diensten/zoekmachine\-optimalisatie/?$ /zoekmachine-optimalisatie/
+RedirectMatch 301 ^/ervaringsberoepen/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-aannemers/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-accountants/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-advocaten/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-boekhouders/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-kappers/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-makelaars/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-notarissen/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-restaurants/?$ /cases/
+RedirectMatch 301 ^/ervaringsberoepen/online\-marketing\-tandartsen/?$ /cases/
+RedirectMatch 301 ^/google\-ads\-uitbesteden/?$ /online-adverteren/google-ads-bureau/
+RedirectMatch 301 ^/google\-optimalisatie\-google\-ranking/?$ /zoekmachine-optimalisatie/
+RedirectMatch 301 ^/over\-ons/team/?$ /over-ons/
+RedirectMatch 301 ^/privacy/?$ /privacyverklaring/
+RedirectMatch 301 ^/seo\-uitbesteden/?$ /zoekmachine-optimalisatie/seo-uitbesteden/
+RedirectMatch 301 ^/vacatures/?$ /werken-bij/
+RedirectMatch 301 ^/vacatures/online\-marketing\-stage/?$ /werken-bij/
+RedirectMatch 301 ^/website\-toevoegen\-aan\-google/?$ /kennisbank/gidsen/google-search-console/
+RedirectMatch 301 ^/wp\-content/uploads/Algemene\-Voorwaarden\-2\.pdf/?$ /algemene-voorwaarden/

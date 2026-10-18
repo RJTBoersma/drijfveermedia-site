@@ -1,0 +1,80 @@
+---
+// Scène voor /online-marketing-friesland/: drie kanalen (Google, een AI-antwoord en een nieuwsbrief) sturen
+// bezoekers naar de website van "Jouw bedrijf". Op de telefoon rechts komen aanvragen binnen uit Friese plaatsen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kanalen = [
+  { y: 34, label: 'Google', sub: 'Zoeken en kaart' },
+  { y: 110, label: 'AI-antwoord', sub: 'Genoemd worden' },
+  { y: 186, label: 'Nieuwsbrief', sub: 'Vaste klanten' },
+];
+const lijnen = ['M144 59C166 59 164 112 186 112', 'M144 135H186', 'M144 211C166 211 164 158 186 158'];
+const meldingen = [
+  { y: 78, plaats: 'uit Sneek' },
+  { y: 122, plaats: 'uit Heerenveen' },
+  { y: 166, plaats: 'uit Leeuwarden' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: Google, een AI-antwoord en een nieuwsbrief sturen bezoekers naar de website van jouw bedrijf. Op een telefoon komen aanvragen binnen uit Sneek, Heerenveen en Leeuwarden.'}>
+  <!-- verbindingslijnen (stil) -->
+  <g fill="none" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round">
+    {lijnen.map((d) => <path d={d} />)}
+    <path d="M290 135H330" />
+  </g>
+  <!-- kanalen -->
+  {kanalen.map((k, i) => (
+    <g transform={`translate(20 ${k.y})`}>
+      <rect width="124" height="50" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <circle class="v" cx="25" cy="25" r="14" />
+      {i === 0 && <path class="l" d="M23 23m-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0M27.5 27.5l5 5" />}
+      {i === 1 && <path class="a" d="M25 15l2.6 7.4L35 25l-7.4 2.6L25 35l-2.6-7.4L15 25l7.4-2.6z" style="fill:#ff6600" />}
+      {i === 2 && <path class="l" d="M16 19h18v13H16zM16 19l9 7 9-7" />}
+      <text x="46" y="23" font-size="11" font-weight="800">{k.label}</text>
+      <text x="46" y="37" font-size="8.5" class="zacht">{k.sub}</text>
+    </g>
+  ))}
+  <!-- website van jouw bedrijf -->
+  <rect x="186" y="66" width="104" height="138" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M186 84h104" stroke="#d9e1ea" stroke-width="1.5" />
+  <circle cx="196" cy="75" r="2.5" fill="#d9e1ea" /><circle cx="204" cy="75" r="2.5" fill="#d9e1ea" /><circle cx="212" cy="75" r="2.5" fill="#d9e1ea" />
+  <rect x="196" y="92" width="84" height="34" rx="5" fill="#e8eef4" />
+  <path d="M204 120l14-14 10 8 12-12 12 18z" fill="#c4d0dc" />
+  <text x="196" y="142" font-size="10.5" font-weight="900">Jouw bedrijf</text>
+  <rect x="196" y="150" width="78" height="4" rx="2" fill="#d9e1ea" /><rect x="196" y="158" width="60" height="4" rx="2" fill="#d9e1ea" />
+  <rect x="196" y="172" width="56" height="18" rx="5" fill="#ff6600" />
+  <text x="224" y="184.5" text-anchor="middle" font-size="8.5" font-weight="800" style="fill:#fff">Bel ons</text>
+  <!-- telefoon met aanvragen -->
+  <rect x="330" y="28" width="128" height="216" rx="18" fill="#10283f" />
+  <rect x="337" y="38" width="114" height="196" rx="12" fill="#f4f7fa" />
+  <rect x="374" y="44" width="40" height="5" rx="2.5" fill="#10283f" opacity="0.25" />
+  <text x="345" y="66" font-size="9" font-weight="800" class="zacht">Vandaag</text>
+  {meldingen.map((m, i) => (
+    <g class="online-marketing-friesland-melding" style={`--i:${i}`}>
+      <rect x="343" y={m.y} width="102" height="36" rx="8" fill="#fff" stroke="#d9e1ea" />
+      <circle cx="357" cy={m.y + 18} r="7" fill="#1f8a5b" />
+      <path d={`M353.5 ${m.y + 18}l2.5 2.5 4.5-5`} fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      <text x="369" y={m.y + 16} font-size="8" font-weight="800">Nieuwe aanvraag</text>
+      <text x="369" y={m.y + 27} font-size="8" class="zacht">{m.plaats}</text>
+    </g>
+  ))}
+  <rect x="343" y="210" width="102" height="14" rx="7" fill="#e8eef4" />
+  {!mini && (
+    <g fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 10">
+      {lijnen.map((d, i) => <path class="online-marketing-friesland-stroom" d={d} style={`--i:${i}`} />)}
+      <path class="online-marketing-friesland-stroom" d="M290 135H330" style="--i:3" />
+    </g>
+  )}
+</svg>
+<style>
+  .online-marketing-friesland-melding { transform-box: fill-box; }
+  :global(.teken-js) .online-marketing-friesland-melding { opacity: 0; }
+  .in-beeld .online-marketing-friesland-melding { animation: online-marketing-friesland-op 0.6s cubic-bezier(.3,1.5,.5,1) calc(1.2s + var(--i) * 0.9s) forwards; }
+  :global(.teken-js) .online-marketing-friesland-stroom { opacity: 0; }
+  .in-beeld .online-marketing-friesland-stroom { animation: online-marketing-friesland-zicht 0.5s ease calc(0.3s + var(--i) * 0.15s) forwards, online-marketing-friesland-stroom 1.4s linear 0.3s infinite; }
+  @keyframes online-marketing-friesland-op { from { opacity: 0; transform: translateY(-10px) scale(0.96); } to { opacity: 1; transform: none; } }
+  @keyframes online-marketing-friesland-zicht { to { opacity: 1; } }
+  @keyframes online-marketing-friesland-stroom { to { stroke-dashoffset: -24; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .online-marketing-friesland-melding, .in-beeld .online-marketing-friesland-stroom { animation: none; }
+  }
+</style>

@@ -1,0 +1,245 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--engagement.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/engagement/';
+const datum = '2026-10-18';
+const definitie = 'Engagement is de mate waarin mensen actief iets doen met je content of je merk: liken, reageren, delen, opslaan of doorklikken. Het meet betrokkenheid, niet alleen hoeveel mensen iets zagen.';
+const hoofdstukken = [
+  { id: 'verschil', titel: 'Engagement, bereik en volgers' },
+  { id: 'interacties', titel: 'Welke interacties tellen' },
+  { id: 'berekenen', titel: 'Engagement rate berekenen' },
+  { id: 'goed', titel: 'Wat is een goede score?' },
+  { id: 'algoritme', titel: 'Engagement en het algoritme' },
+  { id: 'platformen', titel: 'Per platform' },
+  { id: 'website', titel: 'Engagement op je website' },
+  { id: 'nieuwsbrief', titel: 'In je nieuwsbrief' },
+  { id: 'klant', titel: 'Betrokkenheid van klanten' },
+  { id: 'tips', titel: 'Twaalf manieren om het te verhogen' },
+  { id: 'niet-doen', titel: 'Wat je beter niet doet' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: de bakker' },
+  { id: 'meten', titel: 'Meten zonder gek te worden' },
+];
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Engagement',
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+---
+<Base
+  title="Wat is engagement? Uitleg en berekenen | Drijfveer Media"
+  description="Wat is engagement? Likes, reacties en delen meten hoe betrokken je publiek is. Zo bereken je de engagement rate, wat een goede score is en hoe je hem verhoogt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Engagement', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Social media</p>
+        <h1>Wat is engagement?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <p>Wat is engagement? Het Engelse woord betekent betrokkenheid. In marketing gaat het om alles wat mensen doen met wat jij plaatst. Een like, een reactie, een gedeeld bericht, een opgeslagen post, een klik naar je website. Duizend mensen die je bericht zien en doorscrollen, leveren nul engagement op. Twintig mensen die reageren en vragen stellen, zijn goud waard.</p>
+        <p>Je komt het woord het vaakst tegen bij social media, maar het speelt ook op je website en in je nieuwsbrief. Hieronder lees je welke interacties meetellen, hoe je de engagement rate berekent, wat een goede score is en hoe je hem omhoog krijgt zonder trucjes.</p>
+
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Engagement is interactie: likes, reacties, delen, opslaan, klikken en berichten.</li>
+            <li>De engagement rate is het aantal interacties gedeeld door volgers, bereik of weergaven, keer honderd.</li>
+            <li>Vergelijk alleen cijfers die op dezelfde manier zijn berekend. Het beste ijkpunt is je eigen gemiddelde.</li>
+            <li>Algoritmes laten berichten met veel interactie aan meer mensen zien. Engagement levert dus bereik op.</li>
+            <li>Trucjes als "like als je ..." werken averechts. Facebook laat zulke berichten sinds 2017 minder zien.</li>
+          </ul>
+        </div>
+
+        <div class="stap-kop"><Tekening naam="social" maat={52} /><h2 id="verschil">Engagement, bereik en volgers: het verschil</h2></div>
+        <p>Drie cijfers die vaak door elkaar lopen. Ze meten iets anders.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Cijfer</th><th>Wat het meet</th><th>Waarom het telt</th></tr></thead>
+            <tbody>
+              <tr><td>Volgers</td><td>Hoeveel mensen je account volgen</td><td>Je potentiële publiek, maar zegt niets over aandacht</td></tr>
+              <tr><td>Bereik</td><td>Hoeveel verschillende mensen je bericht zagen</td><td>Hoe ver je boodschap kwam</td></tr>
+              <tr><td>Weergaven</td><td>Hoe vaak je bericht in beeld kwam, ook dubbel</td><td>Hoe vaak je zichtbaar was</td></tr>
+              <tr><td>Engagement</td><td>Hoeveel mensen er iets mee deden</td><td>Of je boodschap raakte</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een account met 10.000 volgers en drie likes per bericht doet het slechter dan een account met 800 volgers en veertig reacties. De eerste heeft een publiek dat niet meer kijkt. De tweede heeft een relatie met de mensen die er zijn.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={52} /><h2 id="interacties">Welke interacties meetellen</h2></div>
+        <p>Niet elke interactie is evenveel waard. Een like kost een halve seconde. Een reactie typen, een bericht delen of opslaan vraagt meer moeite. Dat zegt ook meer over hoe betrokken iemand is.</p>
+        <ul>
+          <li><b>Likes en andere reacties met een icoon.</b> Snel, laagdrempelig, het zwakste signaal.</li>
+          <li><b>Reacties in woorden.</b> Iemand nam de moeite om iets te zeggen. Het begin van een gesprek.</li>
+          <li><b>Delen.</b> Iemand vindt het goed genoeg om aan zijn eigen netwerk te laten zien. Zo groeit je bereik buiten je volgers.</li>
+          <li><b>Opslaan.</b> Iemand wil het later terugzien. Typisch voor tips, checklists en recepten.</li>
+          <li><b>Klikken.</b> Naar je profiel, je website of een link.</li>
+          <li><b>Privéberichten.</b> Onzichtbaar voor anderen, vaak het waardevolst. Hier begint een aanvraag.</li>
+          <li><b>Kijktijd.</b> Hoe lang iemand naar je video of bericht keek.</li>
+        </ul>
+        <p>Elk platform telt anders mee. LinkedIn berekent volgens de eigen helppagina het betrokkenheidspercentage als het aantal interacties per weergave. Daar tellen klikken, reacties, opmerkingen en deelacties mee. Instagram noemt in de eigen uitleg over de rangschikking voor de feed vijf interacties die het zwaarst wegen: hoe lang je bij een bericht blijft, of je reageert, liket, deelt en op de profielfoto tikt.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="berekenen">Engagement rate berekenen</h2></div>
+        <p>De engagement rate zet het aantal interacties af tegen een basis. Daarvoor zijn drie gangbare manieren:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Methode</th><th>Formule</th><th>Handig voor</th></tr></thead>
+            <tbody>
+              <tr><td>Per volger</td><td>interacties ÷ aantal volgers × 100</td><td>Accounts vergelijken, zoals in benchmarkrapporten</td></tr>
+              <tr><td>Per bereik</td><td>interacties ÷ bereik × 100</td><td>Zien hoe sterk een bericht was bij wie het zag</td></tr>
+              <tr><td>Per weergave</td><td>interacties ÷ weergaven × 100</td><td>LinkedIn en advertenties, waar weergaven de standaard zijn</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een rekenvoorbeeld. Een bericht krijgt 40 likes, 8 reacties, 4 keer delen en 6 keer opslaan. Samen 58 interacties. Het account heeft 1.200 volgers. Het bericht bereikte 800 mensen en kwam 1.100 keer in beeld. <span class="muted">(Verzonnen cijfers.)</span></p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Methode</th><th>Som</th><th>Engagement rate</th></tr></thead>
+            <tbody>
+              <tr><td>Per volger</td><td>58 ÷ 1.200 × 100</td><td>4,8%</td></tr>
+              <tr><td>Per bereik</td><td>58 ÷ 800 × 100</td><td>7,3%</td></tr>
+              <tr><td>Per weergave</td><td>58 ÷ 1.100 × 100</td><td>5,3%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Hetzelfde bericht, drie verschillende scores. Daarom zijn lijstjes met "een goede engagement rate is 3%" zo verwarrend. Vraag altijd hoe het getal is berekend. En vergelijk alleen appels met appels.</p>
+        <p>Voor je eigen account werkt "per bereik" meestal het best. Het laat zien hoe goed een bericht was bij de mensen die het echt zagen. Je vindt het bereik per bericht in de statistieken van Instagram, Facebook en LinkedIn.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={52} /><h2 id="goed">Wat is een goede score?</h2></div>
+        <p>Het eerlijke antwoord: dat hangt af van je platform, je branche, de grootte van je account en de rekenmethode. Een vast getal voor iedereen bestaat niet.</p>
+        <p>Wel weten we iets over de trend. Rival IQ, een bedrijf dat social media analyseert, onderzocht voor het rapport van 2025 ruim 4 miljoen berichten. Rival IQ rekent per volger. De engagement rate daalde op elk platform: op Facebook met 36%, op Instagram met 16%, op TikTok met 34% en op X met 48%. Op Instagram deden carrousels, berichten met meerdere foto's, het dat jaar beter dan Reels.</p>
+        <p>Wat betekent dat voor jou? Lagere cijfers dan een paar jaar geleden zijn normaal. Vergelijk jezelf daarom vooral met jezelf. Neem het gemiddelde van je berichten van de afgelopen drie maanden. Dat is je nulpunt. Scoort een bericht duidelijk hoger, kijk dan wat er anders aan was. Doe daar meer van.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="algoritme">Waarom het algoritme reacties beloont</h2></div>
+        <p>Je volgers zien lang niet alles wat je plaatst. Een algoritme kiest per persoon welke berichten bovenaan komen. Instagram legde in 2023 uit hoe dat werkt. Het platform voorspelt hoe groot de kans is dat iemand iets met een bericht doet. Hoe groter die kans, hoe hoger het bericht in de feed komt.</p>
+        <p>Instagram kijkt daarbij onder meer naar hoeveel mensen een bericht liken, er reacties onder zetten, het delen en opslaan, en hoe snel dat gaat. En naar hoe vaak iemand eerder met jouw account in gesprek was. Voor Verkennen noemt Instagram likes, opslaan en delen als de belangrijkste acties. Voor Reels gaat het om opnieuw delen, de video helemaal afkijken, liken en doorklikken naar het geluid.</p>
+        <p>Engagement werkt dus als een vliegwiel. Een bericht met snelle reacties krijgt meer bereik. Meer bereik levert meer reacties op. En wie vaak met je praat, krijgt jouw volgende bericht eerder te zien. Meer over Instagram lees je in de gids <a href="/kennisbank/gidsen/instagram-algoritme/">het Instagram-algoritme</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="kompas" maat={52} /><h2 id="platformen">Per platform: wat telt en waar je het vindt</h2></div>
+        <p>Elk kanaal meet het op zijn eigen manier. Dit overzicht helpt om de cijfers goed te lezen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kanaal</th><th>Wat telt vooral</th><th>Waar je het vindt</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td>Instagram</td><td>Likes, reacties, delen, opslaan, kijktijd</td><td>De statistieken van je zakelijke account</td><td>Opslaan en delen zeggen meer dan likes</td></tr>
+              <tr><td>Facebook</td><td>Reacties, opmerkingen, delen, klikken</td><td>De statistieken van je pagina</td><td>Lokale groepen en vragen werken vaak goed</td></tr>
+              <tr><td>LinkedIn</td><td>Klikken, reacties, opmerkingen, reposts</td><td>De analyses van je bedrijfspagina</td><td>Rekent per weergave, inclusief klikken</td></tr>
+              <tr><td>Website</td><td>Sessies met engagement</td><td>Google Analytics 4</td><td>Een ander begrip dan op social media</td></tr>
+              <tr><td>Nieuwsbrief</td><td>Klikken, antwoorden, uitschrijvingen</td><td>Je mailprogramma</td><td>Klikken zijn betrouwbaarder dan openingen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Het belangrijkste uit deze tabel: een percentage van Instagram en een percentage van LinkedIn kun je niet naast elkaar leggen. Ze tellen andere dingen en delen door een andere basis. Kijk per kanaal naar je eigen ontwikkeling.</p>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="website">Engagement op je website</h2></div>
+        <p>Ook Google Analytics 4 spreekt van engagement. Daar betekent het iets heel concreets. Volgens Google is een sessie met engagement een bezoek dat aan één van drie voorwaarden voldoet:</p>
+        <ul class="vink">
+          <li>het duurt langer dan 10 seconden;</li>
+          <li>er vindt een belangrijke gebeurtenis plaats, zoals een ingevuld formulier;</li>
+          <li>de bezoeker bekijkt 2 of meer pagina's.</li>
+        </ul>
+        <p>Het engagementpercentage is het deel van alle bezoeken dat zo'n sessie met engagement was. Het <a href="/kennisbank/wat-is/bounce-rate/">bouncepercentage</a> is volgens Google precies het omgekeerde. Heeft een pagina een laag engagementpercentage, dan vinden bezoekers niet snel genoeg wat ze zoeken. Kijk dan naar de eerste schermvulling: staat daar het antwoord, en een duidelijke volgende stap? Hoe je Analytics instelt, lees je in de gids <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="mail" maat={52} /><h2 id="nieuwsbrief">Betrokkenheid in je nieuwsbrief</h2></div>
+        <p>Ook bij e-mail draait het om interactie. Je mailprogramma laat zien hoeveel mensen je mail openden, hoeveel er klikten en hoeveel zich uitschreven. Het openingspercentage is minder betrouwbaar dan het lijkt. Apple Mail kan met de functie 'Bescherm activiteiten in Mail' de inhoud van een mail al op de achtergrond laden zodra hij binnenkomt. Volgens Apple is dat om je privacy te beschermen. Gevolg: een mail telt dan al snel als geopend, ook als niemand hem las. Kijk daarom vooral naar klikken.</p>
+        <p>Het sterkste signaal is een antwoord. Iemand die terugmailt "goede tip, kun je eens langskomen?", is meer waard dan honderd openingen. Eindig je nieuwsbrief daarom eens met een vraag. Hoe je een nieuwsbrief opzet die gelezen wordt, lees je in de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="klant">Betrokkenheid van je klanten</h2></div>
+        <p>Engagement is meer dan een cijfer op een dashboard. In de breedste zin gaat het over hoe betrokken klanten zich voelen bij je bedrijf. Klanten die betrokken zijn, komen terug, laten een review achter en noemen je naam als een buurman een vakman zoekt.</p>
+        <p>Die betrokkenheid bouw je overal op. Met een snelle reactie op een vraag onder je post. Met een <a href="/leadgeneratie/e-mailmarketing/">nieuwsbrief</a> die iets nuttigs brengt in plaats van alleen aanbiedingen. Met een bedankje na een klus en een verzoek om een <a href="/lokale-seo/reviews/">review</a>. En met content die echte vragen beantwoordt. Daarover lees je meer bij <a href="/kennisbank/wat-is/contentmarketing/">contentmarketing</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="tips">Twaalf manieren om meer reacties te krijgen</h2></div>
+        <ol>
+          <li><b>Zet het belangrijkste in de eerste regel.</b> Daar beslist iemand of hij stopt met scrollen.</li>
+          <li><b>Stel een echte vraag.</b> Niet "wat vinden jullie?", maar "kunststof of hout: waar zou jij voor kiezen?"</li>
+          <li><b>Reageer op elke reactie.</b> Liefst dezelfde dag. Een gesprek onder je bericht trekt meer gesprek aan.</li>
+          <li><b>Laat mensen zien.</b> Jezelf, je team, je klanten (met toestemming). Mensen reageren liever op mensen dan op een logo.</li>
+          <li><b>Geef iets om op te slaan.</b> Een checklist, drie tips, een stappenplan. Dat wordt bewaard en gedeeld.</li>
+          <li><b>Probeer carrousels.</b> Meerdere foto's of slides in één bericht. Volgens Rival IQ deden ze het in 2025 op Instagram beter dan Reels.</li>
+          <li><b>Vertel een verhaal.</b> Een klus met een probleem en een oplossing houdt mensen langer vast. Lees meer over <a href="/kennisbank/wat-is/storytelling/">storytelling</a>.</li>
+          <li><b>Kies lokale onderwerpen.</b> Een post over de wegafsluiting in je dorp raakt meer mensen dan algemene tips.</li>
+          <li><b>Gebruik de interactieve opties.</b> Een poll of vraagsticker in Stories is een laagdrempelige manier om te reageren.</li>
+          <li><b>Plaats op vaste momenten.</b> Je volgers raken eraan gewend. In de gids <a href="/kennisbank/gidsen/beste-tijden-om-te-posten/">beste tijden om te posten</a> lees je wanneer.</li>
+          <li><b>Deel werk van anderen.</b> Een samenwerkingspartner, een klant die iets moois deed. Zij delen het weer terug.</li>
+          <li><b>Kijk wat werkt en doe meer daarvan.</b> Zet je vijf beste berichten van het kwartaal naast elkaar. Wat hebben ze gemeen?</li>
+        </ol>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="niet-doen">Wat je beter niet doet</h2></div>
+        <ul class="vink">
+          <li><b>Om likes bedelen.</b> Berichten als "LIKE als je het eens bent" of "tag drie vrienden" noemt Meta engagement bait. Facebook maakte in december 2017 bekend zulke berichten minder te laten zien, en breidde dat later uit naar Nederlandstalige berichten. Vragen om advies of tips valt er niet onder.</li>
+          <li><b>Volgers of likes kopen.</b> Je cijfers zien er groter uit, maar die accounts reageren nooit. Je engagement rate zakt erdoor in.</li>
+          <li><b>Alleen zenden.</b> Elke post een aanbieding. Volgers haken af, en het algoritme merkt dat.</li>
+          <li><b>Reacties negeren.</b> Een vraag die drie dagen onbeantwoord blijft, zien ook anderen. Dat kost meer dan een week niet posten.</li>
+          <li><b>Staren op likes.</b> Likes betalen geen rekeningen. Kijk vooral naar berichten, klikken en aanvragen.</li>
+        </ul>
+
+        <div class="stap-kop"><Tekening naam="koffie" maat={52} /><h2 id="voorbeeld">Voorbeeld: de bakker in Meppel</h2></div>
+        <p>Een bakkerij in Meppel post drie keer per week een foto van het brood van de dag, met de tekst "Vers uit de oven". Ze heeft 1.500 volgers. Gemiddeld komt een bericht bij 600 mensen en krijgt het 15 likes en geen reacties. Engagement rate per bereik: 2,5%. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+        <p>De bakker verandert drie dingen. Op dinsdag laat hij om vijf uur 's ochtends zien wie er in de bakkerij staat, met naam. Op donderdag vraagt hij welk brood volgende week terug moet komen, met twee foto's om uit te kiezen. Op zaterdag deelt hij een tip om brood langer vers te houden. En hij reageert op elke reactie, nog dezelfde dag.</p>
+        <p>Na twee maanden komen de berichten gemiddeld bij 900 mensen. Ze krijgen 45 likes, 12 reacties en worden 10 keer opgeslagen of gedeeld. Dat zijn 67 interacties op 900: een engagement rate van 7,4%. Belangrijker: er komen nu elke week vragen binnen over taarten voor verjaardagen. Daar verdient hij aan.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="meten">Meten zonder gek te worden</h2></div>
+        <p>Je hoeft niet elke dag in de statistieken te duiken. Eén keer per maand is genoeg. Schrijf drie cijfers op:</p>
+        <ol>
+          <li>de gemiddelde engagement rate per bereik van je berichten;</li>
+          <li>je drie beste berichten, en waarom die het goed deden;</li>
+          <li>het aantal privéberichten, klikken naar je site en aanvragen via social media.</li>
+        </ol>
+        <p>Het derde cijfer is het belangrijkste. Engagement is een middel, geen doel. Het gaat erom dat de juiste mensen je onthouden en je bellen als ze je nodig hebben.</p>
+        <p>Geen tijd om het zelf bij te houden? Met <a href="/social-media-beheer/">social media beheer</a> nemen wij het plannen, schrijven, plaatsen en reageren over, vanaf € 395 per maand. Elke maand krijg je een overzicht van wat het oplevert.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Meer weten?</p>
+          <p>Lees hoe je een vaste <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a> maakt en hoe je een sterke <a href="/kennisbank/gidsen/linkedin-bedrijfspagina/">LinkedIn-bedrijfspagina</a> opzet. Wil je weten voor wie je eigenlijk post, lees dan <a href="/kennisbank/wat-is/doelgroep/">wat een doelgroep is</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={12} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Wat betekent engagement in het Nederlands?', a: 'Betrokkenheid. In marketing bedoel je ermee alle interactie van mensen met je content of merk, zoals likes, reacties, delen en klikken.' },
+      { v: 'Hoe bereken je de engagement rate?', a: 'Tel alle interacties op een bericht bij elkaar: likes, reacties, delen, opslaan. Deel dat door het bereik, het aantal volgers of het aantal weergaven en vermenigvuldig met honderd. Vergelijk alleen cijfers met dezelfde methode.' },
+      { v: 'Wat is een goede engagement rate op Instagram?', a: 'Daar is geen vast getal voor. Het verschilt per branche, accountgrootte en rekenmethode, en volgens Rival IQ daalden de cijfers in 2025 op elk platform. Je eigen gemiddelde van de laatste drie maanden is het beste ijkpunt.' },
+      { v: 'Wat telt zwaarder: een like of een reactie?', a: 'Een reactie, een gedeeld of een opgeslagen bericht zegt meer dan een like, omdat het meer moeite kost. Instagram noemt reageren, delen en opslaan naast liken als belangrijke signalen.' },
+      { v: 'Wat is engagement in Google Analytics?', a: 'In Google Analytics 4 is een sessie met engagement een bezoek dat langer dan 10 seconden duurt, een belangrijke gebeurtenis heeft of 2 of meer paginaweergaven telt. Het engagementpercentage is het deel van alle sessies dat daaraan voldoet.' },
+      { v: 'Is engagement belangrijker dan het aantal volgers?', a: 'Voor de meeste bedrijven wel. Volgers die nooit reageren, leveren weinig op. Een kleiner publiek dat meepraat en doorklikt, brengt meer aanvragen en meer bereik via het algoritme.' },
+      { v: 'Wat is engagement bait?', a: 'Berichten die mensen aansporen om te liken, te delen of vrienden te taggen alleen om het bereik op te krikken, zoals: like als je het eens bent. Facebook laat zulke berichten sinds 2017 minder zien.' },
+      { v: 'Waarom daalt mijn engagement?', a: 'Vaak door minder reacties van jouw kant, berichten die vooral verkopen of een publiek dat niet meer past. Ook platforms veranderen hun algoritme. Vergelijk je beste en slechtste berichten van de laatste maanden en kijk wat het verschil is.' },
+    ]}
+  />
+
+  <Actie titel="Levert jouw social media iets op?" tekst={`${site.contactpersoon} kijkt gratis met je mee naar je kanalen en je website, en belt je met de drie punten die het meeste verschil maken.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

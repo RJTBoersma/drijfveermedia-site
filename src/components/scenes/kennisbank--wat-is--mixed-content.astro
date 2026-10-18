@@ -1,0 +1,54 @@
+---
+// Scène voor /kennisbank/wat-is/mixed-content/: een beveiligde pagina waarop één foto nog via een onveilig http-adres laadt; het slot in de adresbalk staat open.
+// Als hij leeft: een waarschuwing knippert bij de foto, dan wordt het adres https, gaat het slot dicht en kleurt het groen. Daarna begint het rustig opnieuw.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een webpagina waarop één foto via een onveilig adres laadt. Na de reparatie laadt alles via https en gaat het slot dicht.'}>
+  <rect x="30" y="20" width="420" height="230" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M44 20h392a14 14 0 0 1 14 14v26H30V34a14 14 0 0 1 14-14z" fill="#e8eef4" />
+  <rect x="48" y="28" width="384" height="24" rx="12" fill="#fff" />
+  <rect x="60" y="38" width="14" height="10" rx="2" fill="#ff6600" />
+  <path d="M63 38v-4a4 4 0 0 1 8 0" fill="none" stroke="#ff6600" stroke-width="2" stroke-linecap="round" transform="rotate(-25 63 38)" />
+  <text x="84" y="45" font-size="11.5" class="zacht">jouwbedrijf.nl</text>
+
+  <rect x="50" y="76" width="120" height="10" rx="5" fill="#074663" />
+  <rect class="v" x="50" y="96" width="176" height="6" rx="3" />
+  <rect class="v" x="50" y="108" width="160" height="6" rx="3" />
+  <rect class="v" x="50" y="120" width="170" height="6" rx="3" />
+  <rect class="v" x="50" y="132" width="120" height="6" rx="3" />
+  <rect x="50" y="156" width="176" height="64" rx="8" fill="#f3f6f9" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="62" y="168" width="70" height="8" rx="4" fill="#074663" />
+  <rect class="v" x="62" y="184" width="150" height="6" rx="3" />
+  <rect x="62" y="198" width="60" height="12" rx="6" fill="#d9e1ea" />
+
+  <rect x="250" y="72" width="180" height="108" rx="8" fill="#e8eef4" />
+  <circle cx="284" cy="96" r="12" fill="#fff" />
+  <path d="M250 168L296 126L326 150L356 124L430 172a8 8 0 0 1-8 8H258a8 8 0 0 1-8-8z" fill="#074663" />
+  <rect x="250" y="190" width="180" height="30" rx="8" fill="#10283f" />
+  <text x="264" y="209.5" font-size="12" font-family="ui-monospace, monospace" style="fill:#ffb47f">http://foto.jpg</text>
+
+  {!mini && (
+    <g>
+      <g class="mixed-waarschuwing">
+        <path d="M410 76l16 28h-32z" fill="#ff6600" stroke="#fff" stroke-width="2" stroke-linejoin="round" />
+        <path d="M410 86v8M410 98v1" stroke="#fff" stroke-width="2.4" stroke-linecap="round" />
+      </g>
+      <g class="mixed-hersteld">
+        <rect x="250" y="190" width="180" height="30" rx="8" fill="#10283f" />
+        <text x="264" y="209.5" font-size="12" font-family="ui-monospace, monospace" style="fill:#9fe3bf">https://foto.jpg</text>
+        <rect x="55" y="29.5" width="26" height="21" fill="#fff" />
+        <rect x="60" y="38" width="14" height="10" rx="2" fill="#1f8a5b" />
+        <path d="M63 38v-4a4 4 0 0 1 8 0v4" fill="none" stroke="#1f8a5b" stroke-width="2" stroke-linecap="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .mixed-waarschuwing, :global(.teken-js) .mixed-hersteld { opacity: 0; }
+  .in-beeld .mixed-waarschuwing { animation: kennisbank-wat-is-mixed-content-waarschuw 7s ease-in-out 0.5s infinite; }
+  .in-beeld .mixed-hersteld { animation: kennisbank-wat-is-mixed-content-herstel 7s ease-in-out 0.5s infinite; }
+  @keyframes kennisbank-wat-is-mixed-content-waarschuw { 0% { opacity: 0; } 6%, 14% { opacity: 1; } 20% { opacity: 0.2; } 26%, 36% { opacity: 1; } 44%, 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-mixed-content-herstel { 0%, 42% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .mixed-waarschuwing, .in-beeld .mixed-hersteld { animation: none; } }
+</style>

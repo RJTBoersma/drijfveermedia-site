@@ -1,0 +1,66 @@
+---
+// Scène voor /kennisbank/wat-is/llm/: links een chatvenster waarin een taalmodel een antwoord schrijft, met daaronder de kansen op het volgende woord.
+// Rechts een klein neuraal netwerk. Als hij leeft: de knopen lichten om de beurt op, het meest waarschijnlijke woord wordt gekozen en verschijnt in het antwoord.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const kansen = [
+  { woord: 'gemiddeld', pct: 52, y: 156 },
+  { woord: 'tussen', pct: 31, y: 184 },
+  { woord: 'veel', pct: 9, y: 212 },
+];
+const lagen = [
+  { x: 332, y: [86, 138, 190] },
+  { x: 392, y: [62, 112, 162, 212] },
+  { x: 450, y: [110, 166] },
+];
+const lijnen: string[] = [];
+for (let i = 0; i < lagen.length - 1; i++) {
+  for (const a of lagen[i].y) for (const b of lagen[i + 1].y) lijnen.push(`M${lagen[i].x} ${a}L${lagen[i + 1].x} ${b}`);
+}
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een chatvenster waarin een taalmodel antwoord geeft op de vraag wat een dakkapel kost. Het model berekent de kans op het volgende woord: gemiddeld 52 procent, tussen 31 procent, veel 9 procent. Rechts een klein neuraal netwerk.'}>
+  <rect x="20" y="22" width="276" height="226" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="120" y="38" width="160" height="30" rx="12" fill="#074663" />
+  <text x="200" y="57.5" font-size="12.5" font-weight="700" text-anchor="middle" style="fill:#fff">Wat kost een dakkapel?</text>
+  <rect x="34" y="80" width="226" height="30" rx="12" fill="#e8eef4" />
+  <text x="46" y="99.5" font-size="12.5" font-weight="700">Een dakkapel kost</text>
+  <text x="36" y="136" font-size="11" font-weight="800" class="zacht">Kans op het volgende woord</text>
+  {kansen.map((k) => (
+    <g>
+      <text x="36" y={k.y + 9} font-size="12" font-weight="700">{k.woord}</text>
+      <rect x="116" y={k.y} width="128" height="11" rx="5.5" fill="#e8eef4" />
+      <rect x="116" y={k.y} width={Math.max(8, 128 * k.pct / 100 * 1.7)} height="11" rx="5.5" fill={k.pct > 50 ? '#ff6600' : '#074663'} />
+      <text x="284" y={k.y + 9.5} font-size="11.5" font-weight="800" text-anchor="end">{k.pct}%</text>
+    </g>
+  ))}
+
+  {lijnen.map((d) => <path d={d} stroke="#d9e1ea" stroke-width="1.5" />)}
+  {lagen.map((l) => l.y.map((y) => <circle cx={l.x} cy={y} r="9" fill="#fff" stroke="#074663" stroke-width="2.2" />))}
+  <text x="332" y="236" font-size="11" font-weight="700" text-anchor="middle" class="zacht">tokens in</text>
+  <text x="450" y="236" font-size="11" font-weight="700" text-anchor="middle" class="zacht">woord uit</text>
+  <path class="a" d="M300 99h18M312 93l6 6-6 6" />
+
+  {!mini && (
+    <g>
+      {lagen.map((l, i) => l.y.map((y) => <circle class={`llm-knoop llm-laag${i}`} cx={l.x} cy={y} r="5" fill="#ff6600" />))}
+      <rect class="llm-kies" x="28" y="150" width="262" height="23" rx="8" fill="none" stroke="#ff6600" stroke-width="2" />
+      <text class="llm-woord" x="158" y="99.5" font-size="12.5" font-weight="700" style="fill:#ff6600">gemiddeld</text>
+      <rect class="llm-caret" x="225" y="88" width="2" height="15" rx="1" fill="#10283f" />
+    </g>
+  )}
+</svg>
+<style>
+  .llm-knoop, .llm-kies { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .llm-knoop, :global(.teken-js) .llm-kies, :global(.teken-js) .llm-woord { opacity: 0; }
+  .in-beeld .llm-knoop { animation: kennisbank-wat-is-llm-knoop 5s ease-in-out infinite; }
+  .in-beeld .llm-laag1 { animation-delay: 0.5s; }
+  .in-beeld .llm-laag2 { animation-delay: 1s; }
+  .in-beeld .llm-kies { animation: kennisbank-wat-is-llm-kies 5s ease-in-out infinite; }
+  .in-beeld .llm-woord { animation: kennisbank-wat-is-llm-woord 5s ease-out infinite; }
+  .in-beeld .llm-caret { animation: kennisbank-wat-is-llm-caret 1s steps(1) infinite; }
+  @keyframes kennisbank-wat-is-llm-knoop { 0% { opacity: 0; transform: scale(0.4); } 10%, 22% { opacity: 1; transform: none; } 34%, 100% { opacity: 0; transform: scale(0.4); } }
+  @keyframes kennisbank-wat-is-llm-kies { 0%, 30% { opacity: 0; } 38%, 88% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-llm-woord { 0%, 42% { opacity: 0; } 50%, 88% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes kennisbank-wat-is-llm-caret { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .llm-knoop, .in-beeld .llm-kies, .in-beeld .llm-woord, .in-beeld .llm-caret { animation: none; } }
+</style>

@@ -1,0 +1,70 @@
+---
+// Scène voor /kennisbank/wat-is/seo-en-sea/: een zoekresultatenpagina met bovenaan een betaalde advertentie (SEA, munten per klik) en daaronder de gewone resultaten (SEO, langzaam stijgend).
+// Als hij leeft: er vallen in een rustige lus munten in het advertentieblok, en naast de gewone resultaten tekent een stijgende lijn zich.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een pagina met zoekresultaten. Bovenaan een gesponsorde advertentie waar je per klik voor betaalt, daaronder de gewone resultaten met jouw bedrijf, dat langzaam stijgt.'}>
+  <rect x="112" y="16" width="256" height="238" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="128" y="30" width="224" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="144" y="48.5" font-size="11.5">dakdekker groningen</text>
+  <circle cx="334" cy="43" r="5.5" fill="none" stroke="#074663" stroke-width="2" />
+  <path d="M338 47l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+
+  <!-- advertentie -->
+  <rect x="128" y="70" width="224" height="52" rx="10" fill="#fff4ec" stroke="#ffd2b0" stroke-width="1.5" />
+  <text x="142" y="88" font-size="10" font-weight="800" class="zacht">Gesponsord</text>
+  <rect x="142" y="96" width="130" height="8" rx="4" fill="#10283f" opacity="0.75" />
+  <rect x="142" y="109" width="170" height="5" rx="2.5" fill="#ffd2b0" />
+
+  <!-- gewone resultaten -->
+  <rect x="128" y="134" width="224" height="40" rx="10" fill="#fff" stroke="#074663" stroke-width="1.5" />
+  <text x="142" y="151" font-size="12" font-weight="800" style="fill:#074663">Jouw bedrijf</text>
+  <rect x="142" y="159" width="150" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="142" y="188" width="120" height="8" rx="4" fill="#10283f" opacity="0.5" />
+  <rect x="142" y="201" width="170" height="5" rx="2.5" fill="#e8eef4" />
+  <rect x="142" y="222" width="108" height="8" rx="4" fill="#10283f" opacity="0.5" />
+  <rect x="142" y="235" width="150" height="5" rx="2.5" fill="#e8eef4" />
+
+  <!-- labels -->
+  <rect x="34" y="80" width="60" height="30" rx="15" fill="#ff6600" />
+  <text x="64" y="100" font-size="13" font-weight="800" text-anchor="middle" style="fill:#fff">SEA</text>
+  <path class="a" d="M96 95h24" stroke-width="2" />
+  <rect x="34" y="140" width="60" height="30" rx="15" fill="#074663" />
+  <text x="64" y="160" font-size="13" font-weight="800" text-anchor="middle" style="fill:#fff">SEO</text>
+  <path class="l" d="M96 155h24" stroke-width="2" />
+
+  <!-- munt en grafiekje -->
+  <circle cx="414" cy="96" r="16" fill="#fff" stroke="#ff6600" stroke-width="2.5" />
+  <text x="414" y="101" font-size="14" font-weight="800" text-anchor="middle" style="fill:#ff6600">€</text>
+  <path d="M388 232h64M388 232v-64" stroke="#d9e1ea" stroke-width="2" fill="none" stroke-linecap="round" />
+
+  {!mini && (
+    <g>
+      <g class="munt">
+        <circle cx="300" cy="66" r="9" fill="#ff6600" />
+        <text x="300" y="70" font-size="10" font-weight="800" text-anchor="middle" style="fill:#fff">€</text>
+      </g>
+      <path class="groei" d="M392 226l14-10 12 4 14-18 16-22" fill="none" stroke="#074663" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <circle class="top" cx="448" cy="180" r="5" fill="#074663" />
+    </g>
+  )}
+</svg>
+<style>
+  .groei { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  :global(.teken-js) .groei { stroke-dashoffset: 1; }
+  :global(.teken-js) .munt, :global(.teken-js) .top { opacity: 0; }
+  .top { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .groei { animation: kennisbank--wat-is--seo-en-sea-groei 2.6s ease-in-out 0.6s forwards; }
+  .in-beeld .top { animation: kennisbank--wat-is--seo-en-sea-top 3.2s ease-in-out 3.2s infinite; }
+  .in-beeld .munt { animation: kennisbank--wat-is--seo-en-sea-munt 3s ease-in 0.4s infinite; }
+  @keyframes kennisbank--wat-is--seo-en-sea-groei { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank--wat-is--seo-en-sea-top { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.6); } }
+  @keyframes kennisbank--wat-is--seo-en-sea-munt {
+    0% { opacity: 0; transform: translate(0, -40px); }
+    20% { opacity: 1; }
+    55% { opacity: 1; transform: translate(0, 30px); }
+    70%, 100% { opacity: 0; transform: translate(0, 30px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .groei, .in-beeld .top, .in-beeld .munt { animation: none; } }
+</style>

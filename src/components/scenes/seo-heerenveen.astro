@@ -1,0 +1,60 @@
+---
+// Scène voor /seo-heerenveen/: een ijsbaan waarop drie websites racen. De snelle site schiet naar voren en staat bovenaan; een stopwatch meet de laadtijd.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een ijsbaan waarop drie websites racen. De snelste website gaat als eerste over de finish en staat bovenaan in de zoekresultaten. Een stopwatch meet de laadtijd.'}>
+  <!-- ijsbaan -->
+  <rect x="30" y="50" width="320" height="170" rx="85" fill="none" stroke="#dfeaf3" stroke-width="44" />
+  <rect x="30" y="50" width="320" height="170" rx="85" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="8 8" />
+  <rect x="8" y="28" width="364" height="214" rx="107" fill="none" stroke="#074663" stroke-width="2" />
+  <rect x="52" y="72" width="276" height="126" rx="63" fill="#fff" stroke="#074663" stroke-width="2" />
+  <path d="M232 198v44" stroke="#10283f" stroke-width="4" stroke-dasharray="4 4" />
+  <!-- zoekresultaten op het middenterrein -->
+  <circle class="o" cx="128" cy="108" r="8" />
+  <text x="128" y="112" text-anchor="middle" font-size="9" font-weight="900" style="fill:#fff">1</text>
+  <text x="144" y="112" font-size="11" font-weight="800">Jouw bedrijf</text>
+  <circle cx="128" cy="135" r="8" fill="#e8eef4" />
+  <text x="128" y="139" text-anchor="middle" font-size="9" font-weight="900">2</text>
+  <rect x="144" y="131" width="96" height="7" rx="3.5" fill="#d9e1ea" />
+  <circle cx="128" cy="162" r="8" fill="#e8eef4" />
+  <text x="128" y="166" text-anchor="middle" font-size="9" font-weight="900">3</text>
+  <rect x="144" y="158" width="78" height="7" rx="3.5" fill="#d9e1ea" />
+  <!-- twee trage sites -->
+  <g>
+    <rect x="96" y="210" width="32" height="22" rx="4" fill="#fff" stroke="#8aa0b4" stroke-width="2" />
+    <path d="M96 216h32" stroke="#8aa0b4" stroke-width="2" />
+    <rect x="144" y="210" width="32" height="22" rx="4" fill="#fff" stroke="#8aa0b4" stroke-width="2" />
+    <path d="M144 216h32" stroke="#8aa0b4" stroke-width="2" />
+  </g>
+  <!-- de snelle site -->
+  <g class={mini ? undefined : 'shv-snel'}>
+    <path class="a" d="M226 214h-14M226 222h-20M226 230h-12" style="stroke-width:2" />
+    <rect x="240" y="210" width="32" height="22" rx="4" fill="#ff6600" />
+    <path d="M240 216h32" stroke="#fff" stroke-width="2" />
+  </g>
+  <!-- stopwatch -->
+  <rect x="413" y="70" width="14" height="10" rx="2" fill="#074663" />
+  <path class="l" d="M446 88l6-6" />
+  <circle cx="420" cy="120" r="38" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <path d="M420 88v6M452 120h-6M420 152v-6M388 120h6" stroke="#8aa0b4" stroke-width="2" stroke-linecap="round" />
+  <path class={mini ? undefined : 'shv-wijzer'} d="M420 120V96" stroke="#ff6600" stroke-width="3" stroke-linecap="round" />
+  <circle cx="420" cy="120" r="4" fill="#10283f" />
+  <text x="420" y="184" text-anchor="middle" font-size="16" font-weight="900">1,4 s</text>
+  <text x="420" y="200" text-anchor="middle" font-size="10" class="zacht">laadtijd</text>
+</svg>
+<style>
+  .shv-wijzer { transform-box: view-box; transform-origin: 420px 120px; }
+  :global(.teken-js) .shv-snel { transform: translateX(-180px); opacity: 0; }
+  .in-beeld .shv-snel { animation: seo-heerenveen-snel 1.6s cubic-bezier(.4,0,.2,1) 0.6s forwards; }
+  .in-beeld .shv-wijzer { animation: seo-heerenveen-wijzer 6s linear 0.6s infinite; }
+  @keyframes seo-heerenveen-snel {
+    0% { transform: translateX(-180px); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: none; opacity: 1; }
+  }
+  @keyframes seo-heerenveen-wijzer { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .shv-snel, .in-beeld .shv-wijzer { animation: none; }
+  }
+</style>

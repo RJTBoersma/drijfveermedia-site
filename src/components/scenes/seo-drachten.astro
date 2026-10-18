@@ -1,0 +1,76 @@
+---
+// Scène voor /seo-drachten/: een rotonde met drie afslagen (Drachten, regio, landelijk). Op elke afslag vinden klanten jouw bedrijf; in de zoekresultaten sta je bovenaan.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een rotonde met afslagen naar Drachten, de regio en de rest van het land. Ernaast een lijst met zoekresultaten waarin jouw bedrijf bovenaan staat.'}>
+  <!-- kaartje -->
+  <rect x="10" y="14" width="292" height="242" rx="14" fill="#e9eef3" />
+  <path d="M12 140H112M170 16V82M228 140H300M211 181L290 254" stroke="#fff" stroke-width="18" fill="none" />
+  <circle cx="170" cy="140" r="58" fill="none" stroke="#fff" stroke-width="22" />
+  <circle cx="170" cy="140" r="58" fill="none" stroke="#d9e1ea" stroke-width="1.5" stroke-dasharray="6 8" />
+  <circle cx="170" cy="140" r="42" fill="#d7e6d8" />
+  <rect x="40" y="200" width="54" height="34" rx="6" fill="#d7e6d8" />
+  <rect x="236" y="34" width="50" height="40" rx="6" fill="#d7e6d8" />
+  <!-- speld op het middeneiland -->
+  <path d="M156 132c0-9 6-16 14-16s14 7 14 16c0 11-14 24-14 24s-14-13-14-24z" fill="#ff6600" />
+  <circle cx="170" cy="132" r="5.5" fill="#fff" />
+  <!-- borden bij de afslagen -->
+  <g font-size="11" font-weight="800">
+    <rect x="22" y="104" width="72" height="22" rx="5" fill="#fff" stroke="#074663" stroke-width="1.5" />
+    <text x="58" y="119" text-anchor="middle">Drachten</text>
+    <rect x="184" y="24" width="50" height="22" rx="5" fill="#fff" stroke="#074663" stroke-width="1.5" />
+    <text x="209" y="39" text-anchor="middle">Regio</text>
+    <rect x="214" y="222" width="76" height="22" rx="5" fill="#fff" stroke="#074663" stroke-width="1.5" />
+    <text x="252" y="237" text-anchor="middle">Landelijk</text>
+  </g>
+  <!-- zoekresultaten -->
+  <rect x="300" y="52" width="166" height="174" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="314" y="66" width="138" height="22" rx="11" fill="none" stroke="#d9e1ea" stroke-width="1.5" />
+  <circle cx="327" cy="77" r="4.5" fill="none" stroke="#8aa0b4" stroke-width="1.5" />
+  <path d="M330.5 80.5l3 3" stroke="#8aa0b4" stroke-width="1.5" stroke-linecap="round" />
+  <text x="340" y="81" font-size="10" class="zacht">installateur drachten</text>
+  <rect x="312" y="98" width="142" height="34" rx="8" fill="#fff4ec" />
+  <circle class="o" cx="327" cy="115" r="9" />
+  <text x="327" y="119" text-anchor="middle" font-size="10" font-weight="900" style="fill:#fff">1</text>
+  <text x="343" y="113" font-size="11" font-weight="800">Jouw bedrijf</text>
+  <rect x="343" y="118" width="70" height="5" rx="2.5" fill="#ffd2b0" />
+  <circle cx="327" cy="153" r="9" fill="#e8eef4" />
+  <text x="327" y="157" text-anchor="middle" font-size="10" font-weight="900">2</text>
+  <rect x="343" y="146" width="84" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="343" y="157" width="56" height="5" rx="2.5" fill="#e8eef4" />
+  <circle cx="327" cy="191" r="9" fill="#e8eef4" />
+  <text x="327" y="195" text-anchor="middle" font-size="10" font-weight="900">3</text>
+  <rect x="343" y="184" width="74" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="343" y="195" width="50" height="5" rx="2.5" fill="#e8eef4" />
+  {!mini && (
+    <g>
+      <circle class="sdr-ring" cx="170" cy="150" r="10" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="sdr-auto sdr-auto-1"><rect x="163" y="77" width="14" height="10" rx="3" fill="#074663" /></g>
+      <g class="sdr-auto sdr-auto-2"><rect x="163" y="77" width="14" height="10" rx="3" fill="#8aa0b4" /></g>
+      <g class="sdr-auto sdr-auto-3"><rect x="163" y="77" width="14" height="10" rx="3" fill="#10283f" /></g>
+      <g class="sdr-badge">
+        <rect x="384" y="24" width="86" height="24" rx="12" fill="#1f8a5b" />
+        <text x="427" y="40" text-anchor="middle" font-size="11" font-weight="800" style="fill:#fff">+3 posities</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .sdr-auto { transform-box: view-box; transform-origin: 170px 140px; }
+  .sdr-auto-2 { transform: rotate(-120deg); }
+  .sdr-auto-3 { transform: rotate(-240deg); }
+  .sdr-ring { transform-box: fill-box; transform-origin: center; opacity: 0; }
+  :global(.teken-js) .sdr-auto, :global(.teken-js) .sdr-badge { opacity: 0; }
+  .in-beeld .sdr-auto { opacity: 1; animation: seo-drachten-rond 7.5s linear 0.4s infinite; }
+  .in-beeld .sdr-auto-2 { animation-delay: -2.1s; }
+  .in-beeld .sdr-auto-3 { animation-delay: -4.6s; }
+  .in-beeld .sdr-ring { animation: seo-drachten-ring 2.4s ease-out 1s infinite; }
+  .in-beeld .sdr-badge { animation: seo-drachten-badge 6s ease-in-out 1.4s infinite both; }
+  @keyframes seo-drachten-rond { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+  @keyframes seo-drachten-ring { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(2.6); opacity: 0; } }
+  @keyframes seo-drachten-badge { 0% { opacity: 0; transform: translateY(8px); } 15%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .sdr-auto, .in-beeld .sdr-ring, .in-beeld .sdr-badge { animation: none; }
+  }
+</style>

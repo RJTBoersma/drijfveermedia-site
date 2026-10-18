@@ -1,0 +1,499 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--google-search-console.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/google-search-console/';
+const gepubliceerd = '2026-10-17';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is Google Search Console?' },
+  { id: 'aanmelden', titel: 'Aanmelden in vijf stappen' },
+  { id: 'verifieren', titel: 'Verifiëren: welke methode?' },
+  { id: 'gebruikers', titel: 'Gebruikers en rechten' },
+  { id: 'menu', titel: 'Het menu op een rij' },
+  { id: 'prestaties', titel: 'Het prestatierapport lezen' },
+  { id: 'ai-rapport', titel: 'Zichtbaar in AI-antwoorden' },
+  { id: 'url-inspectie', titel: 'URL-inspectie' },
+  { id: 'paginas', titel: 'Waarom een pagina ontbreekt' },
+  { id: 'sitemaps', titel: 'Sitemaps' },
+  { id: 'site-vitaliteit', titel: 'Site-vitaliteit' },
+  { id: 'beveiliging', titel: 'Beveiliging en handmatige acties' },
+  { id: 'overig', titel: 'Links, robots.txt en meer' },
+  { id: 'niet-geindexeerd', titel: 'Google indexeert je site niet' },
+  { id: 'verouderd', titel: 'Verouderde tips' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'routine', titel: 'Je maandelijkse ronde' },
+  { id: 'hulp', titel: 'Zelf doen of laten doen?' },
+];
+const ronde = [
+  'Open het Overzicht. Staat er iets bij Beveiliging en handmatige acties? Dan gaat dat voor alles.',
+  'Prestaties: vergelijk de laatste 28 dagen met dezelfde periode vorig jaar. Klikken omlaag? Zoek uit welke pagina het verschil maakt.',
+  'Zoek drie zoekopdrachten met veel vertoningen en een lage CTR. Herschrijf de titel en de omschrijving van die pagina.',
+  'Zoek pagina\'s op een gemiddelde positie tussen 5 en 15. Maak de beste ervan beter: meer antwoorden, een tabel, interne links.',
+  'Pagina\'s: is het aantal geïndexeerde pagina\'s stabiel of gegroeid? Staat er een belangrijke pagina bij Niet geïndexeerd?',
+  'Sitemaps: staat de status nog op Geslaagd?',
+  'Site-vitaliteit: zijn er URL\'s op mobiel naar Slecht gezakt?',
+  'Lees de berichten in Search Console en schrijf op wat je hebt aangepast, met de datum erbij.',
+];
+const download = 'data:text/plain;charset=utf-8,' + encodeURIComponent(
+  'De maandelijkse ronde door Google Search Console\nDrijfveer Media, www.drijfveermedia.nl' + url + '\n\n' +
+  ronde.map((c, i) => `[ ] ${i + 1}. ${c}`).join('\n') +
+  `\n\nVragen? Bel ${site.contactpersoon}: ${site.telefoon}\n`
+);
+const schema = [{
+  '@type': 'Article',
+  headline: 'Website aanmelden bij Google en Google Search Console gebruiken',
+  datePublished: gepubliceerd,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google Search Console',
+  citation: [
+    'https://support.google.com/webmasters/answer/9128668?hl=nl',
+    'https://support.google.com/webmasters/answer/34592?hl=nl',
+    'https://support.google.com/webmasters/answer/9008080?hl=nl',
+    'https://support.google.com/webmasters/answer/7687615?hl=nl',
+    'https://support.google.com/webmasters/answer/7576553?hl=nl',
+    'https://support.google.com/webmasters/answer/9012289?hl=nl',
+    'https://support.google.com/webmasters/answer/7440203?hl=nl',
+    'https://support.google.com/webmasters/answer/7451001?hl=nl',
+    'https://support.google.com/webmasters/answer/9205520?hl=nl',
+    'https://support.google.com/webmasters/answer/9044101?hl=nl',
+    'https://support.google.com/webmasters/answer/9044175?hl=nl',
+    'https://support.google.com/webmasters/answer/9689846?hl=nl',
+    'https://support.google.com/analytics/answer/10737381?hl=nl',
+    'https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports',
+  ],
+}];
+---
+<Base
+  title="Google Search Console: website aanmelden en gebruiken"
+  description="Google Search Console instellen en gebruiken: je website aanmelden bij Google, verifiëren, je sitemap insturen en elk rapport lezen, met de echte menunamen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Google Search Console', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · SEO" titel="Website aanmelden bij Google met Google Search Console" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Google Search Console laat zien hoe Google jouw site ziet: op welke zoekwoorden je verschijnt, welke pagina's in Google staan en wat er misgaat. Gratis, en in tien minuten ingesteld. Deze gids loopt elk onderdeel langs, met de menunamen zoals je ze op je scherm ziet.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Google Search Console is een gratis tool van Google waarmee je ziet hoe je site het doet in de zoekresultaten.</li>
+            <li>Je website aanmelden bij Google gaat in vijf stappen: inloggen, property kiezen, eigendom verifiëren, sitemap insturen en je homepage laten indexeren.</li>
+            <li>Kun je bij de DNS van je domein? Kies dan een domeinproperty. Die dekt je hele site in één keer.</li>
+            <li>Search Console bewaart 16 maanden aan gegevens. Begin dus vandaag, ook als je er nu nog niets mee doet.</li>
+            <li>Een kwartier per maand is genoeg. Onderaan staat de vaste ronde als checklist om te downloaden.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is Google Search Console?</h2>
+        <p>Google Search Console is een gratis dienst van Google. Je volgt er de aanwezigheid van je website in Google Zoeken mee, en je spoort problemen op. Tot mei 2015 heette de tool Google Webmaster Tools. Wie je die naam nog hoort gebruiken, bedoelt hetzelfde.</p>
+        <p>Volgens Google doe je er vijf dingen mee:</p>
+        <ul class="vink">
+          <li>Controleren of Google je site kan vinden en lezen.</li>
+          <li>Indexeringsproblemen oplossen en opnieuw indexering aanvragen voor nieuwe of aangepaste pagina's.</li>
+          <li>Zien hoe vaak je in Google verschijnt, op welke zoekopdrachten en hoe vaak mensen klikken.</li>
+          <li>Een melding krijgen als Google problemen vindt, zoals spam of een hack.</li>
+          <li>Zien welke andere sites naar jou linken.</li>
+        </ul>
+        <p>Je hoeft je niet aan te melden om in Google te komen. Google vindt de meeste sites vanzelf. Search Console geeft je wel zicht op wat er gebeurt, en een paar knoppen om Google te helpen. Google zegt het zelf eerlijk: heb je een klein bedrijf en weinig tijd, dan heb je de tool niet per se nodig. Wij raden hem toch iedere ondernemer aan. Instellen kost tien minuten, en de cijfers die je nu niet verzamelt, krijg je later niet terug.</p>
+
+        <h3>Search Console of Google Analytics?</h3>
+        <p>Die twee worden vaak door elkaar gehaald. Het verschil zit in het moment.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Google Search Console</th><th>Google Analytics 4</th></tr></thead>
+            <tbody>
+              <tr><td>Meet</td><td>Wat er in Google gebeurt, vóór de klik</td><td>Wat bezoekers op je site doen, na de klik</td></tr>
+              <tr><td>Belangrijkste cijfers</td><td>Vertoningen, klikken, CTR, positie</td><td>Bezoekers, sessies, conversies</td></tr>
+              <tr><td>Zoekwoorden</td><td>Ja, per pagina</td><td>Nee, alleen via de koppeling met Search Console</td></tr>
+              <tr><td>Technische problemen</td><td>Ja: indexering, snelheid, beveiliging</td><td>Nee</td></tr>
+              <tr><td>Cookiemelding nodig</td><td>Nee, er staat niets op je site</td><td>Ja, in de meeste gevallen</td></tr>
+              <tr><td>Hoe ver terug</td><td>16 maanden</td><td>Afhankelijk van je instellingen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor SEO heb je vooral Search Console nodig. Wil je ook weten wat bezoekers na de klik doen, lees dan de gids over <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a>. Hoe je de twee koppelt, staat verderop.</p>
+
+        <h3>Wat heb je nodig?</h3>
+        <ul>
+          <li>Een Google-account. Neem een zakelijk account dat blijft als er iemand vertrekt, niet het privé-Gmailadres van je webbouwer.</li>
+          <li>Een recente browser met cookies en JavaScript aan, zoals Chrome, Firefox, Edge of Safari.</li>
+          <li>Toegang tot het DNS-beheer bij je domeinnaamprovider, of tot de code of plugins van je website.</li>
+        </ul>
+
+        <h2 id="aanmelden">Website aanmelden bij Google in vijf stappen</h2>
+        <p>Leg de inloggegevens van je hosting of je WordPress klaar. Dan ben je in een kwartier klaar.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>1. Log in</h3></div>
+        <p>Ga naar search.google.com/search-console en log in met je Google-account. Heeft iemand anders je al toegang gegeven tot de site? Dan zie je hem meteen in de propertykiezer linksboven, en ben je klaar.</p>
+
+        <div class="stap-kop"><Tekening naam="huis" maat={48} /><h3>2. Kies het type property</h3></div>
+        <p>Een Search Console-property is wat Google je site in de tool noemt. Open de propertykiezer en klik op <b>+ Property toevoegen</b>. Je kiest uit twee soorten websiteproperty's:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Domeinproperty</th><th>URL-voorvoegsel</th></tr></thead>
+            <tbody>
+              <tr><td>Je typt</td><td>jouwbedrijf.nl (zonder https en zonder www)</td><td>https://www.jouwbedrijf.nl/</td></tr>
+              <tr><td>Wat het dekt</td><td>Alles: met en zonder www, http en https, alle subdomeinen</td><td>Alleen URL's die precies zo beginnen</td></tr>
+              <tr><td>Verifiëren</td><td>Alleen via een DNS-record</td><td>Op meerdere manieren</td></tr>
+              <tr><td>Kies dit als</td><td>Je bij je DNS kunt, of je hoster dat voor je doet</td><td>Je niet bij je DNS kunt, of één map apart wilt volgen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een voorbeeld maakt het verschil duidelijk. Een property voor http://jouwbedrijf.nl/ ziet de pagina https://jouwbedrijf.nl/contact/ niet, want het protocol verschilt. Een domeinproperty ziet beide. Daarom adviseren wij de domeinproperty. Wil je later één deel apart bekijken, bijvoorbeeld je blog, dan voeg je daar een URL-voorvoegsel bij. Dat wordt automatisch geverifieerd zodra de domeinproperty geverifieerd is.</p>
+        <p>Nieuw sinds kort: Google rolt ook platformproperty's uit, voor je account op bijvoorbeeld Instagram, TikTok, X of YouTube. Dan zie je hoe je profiel het doet in Google Zoeken. Handig als je veel met social media werkt, maar voor de meeste mkb'ers is de websiteproperty het belangrijkst. Eén account kan maximaal 1.000 property's bevatten.</p>
+
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>3. Bewijs dat de site van jou is</h3></div>
+        <p>Google laat alleen de echte eigenaar bij de gegevens. Bij een domeinproperty krijg je een TXT-record dat begint met google-site-verification=. Dat zet je in het DNS-beheer bij je domeinnaamprovider. Staat je provider in de lijst van Google, dan log je daar in en gaat het vanzelf. Welke methode bij jou past, lees je in het volgende hoofdstuk.</p>
+
+        <div class="stap-kop"><Tekening naam="mail" maat={48} /><h3>4. Stuur je sitemap in</h3></div>
+        <p>Ga in het menu naar <b>Indexeren</b>, <b>Sitemaps</b>. Vul het adres van je <a href="/kennisbank/wat-is/sitemap/">sitemap</a> in bij Een nieuwe sitemap toevoegen en klik op Verzenden. Onder <b>Verzonden sitemaps</b> zie je daarna of Google hem kon lezen.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>5. Vraag indexering aan voor je homepage</h3></div>
+        <p>Plak het adres van je homepage in de zoekbalk bovenaan het scherm. Dat is de URL-inspectie. Staat de pagina nog niet in Google, klik dan op <b>Indexering aanvragen</b>. Google raadt dit zelf aan voor een nieuwe site: vanaf de homepage vindt Google de rest via je menu.</p>
+        <p>Daarna is het wachten. Google verzamelt gegevens zodra je de property hebt toegevoegd, zelfs voor de verificatie. Het duurt wel een paar dagen voordat je de eerste cijfers ziet. En een nieuwe pagina kan volgens Google een paar dagen tot een paar weken nodig hebben voordat hij gecrawld is.</p>
+
+        <h2 id="verifieren">Verifiëren: welke methode kies je?</h2>
+        <p>Search Console kent zes manieren om te bewijzen dat een site van jou is. Dit zijn ze, met de opmerkingen die Google er zelf bij geeft:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Methode</th><th>Werkt voor</th><th>Hoe makkelijk</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td><b>Domeinnaamprovider</b> (DNS-record)</td><td>Domeinproperty en URL-voorvoegsel</td><td>Iets lastiger, maar de enige manier voor een domeinproperty</td><td>Kan 2 tot 3 dagen duren. Laat het record altijd staan.</td></tr>
+              <tr><td><b>HTML-bestand uploaden</b></td><td>URL-voorvoegsel</td><td>Relatief makkelijk</td><td>Moet in de hoofdmap staan en zonder inloggen te openen zijn</td></tr>
+              <tr><td><b>HTML-tag</b></td><td>URL-voorvoegsel</td><td>Relatief makkelijk</td><td>Moet in de &lt;head&gt; van je homepage. Een nieuw thema haalt hem soms weg.</td></tr>
+              <tr><td><b>Google Analytics</b></td><td>URL-voorvoegsel</td><td>Makkelijk als Analytics al op je site staat</td><td>Je hebt toegang tot dat Analytics-account nodig</td></tr>
+              <tr><td><b>Google Tag Manager</b></td><td>URL-voorvoegsel</td><td>Makkelijk als Tag Manager al op je site staat</td><td>Je hebt toegang tot dat Tag Manager-account nodig</td></tr>
+              <tr><td><b>Google Sites of Blogger</b></td><td>Sites op die platforms</td><td>Gaat via het platform</td><td>Volg de aanbevolen methode van het platform</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Verifiëren per websitebouwer</h3>
+        <ul>
+          <li><b>WordPress.</b> Google raadt Site Kit aan, de enige plugin die Google officieel uitgeeft. Die regelt de verificatie en toont je cijfers in je dashboard. Gebruik je Yoast of Rank Math, dan zit daar een veld waar je de code uit de HTML-tag plakt.</li>
+          <li><b>Wix, Squarespace en Shopify.</b> Zoek in de hulppagina's van je platform op Search Console. Daar staat welke methode werkt. Vaak maakt het platform ook zelf je sitemap aan.</li>
+          <li><b>Een site die je bureau bouwde.</b> Vraag je bureau om het DNS-record of de HTML-tag te plaatsen. Maar laat de property op jouw eigen Google-account staan.</li>
+        </ul>
+
+        <h3>Als de verificatie mislukt</h3>
+        <p>De meeste fouten hebben een simpele oorzaak:</p>
+        <ul>
+          <li><b>DNS-record nog niet zichtbaar.</b> Google noemt zelf twee tot drie dagen. Wacht een dag of twee en probeer het opnieuw.</li>
+          <li><b>Metatag niet gevonden.</b> Open je homepage, druk op Ctrl + U om de broncode te zien en zoek met Ctrl + F naar google-site-verification. Staat hij er niet, of buiten de &lt;head&gt;, dan ziet Google hem ook niet. Let op caching: leeg de cache van je site na het plaatsen.</li>
+          <li><b>Bestand niet bereikbaar.</b> Open het in een incognitovenster. Moet je inloggen of krijg je een 404, dan kan Google er ook niet bij.</li>
+          <li><b>Omleiding naar een ander domein.</b> Google volgt bij een verificatiebestand geen omleiding naar een ander domein. Kies dan de HTML-tag.</li>
+        </ul>
+        <p>Tip van Google zelf: voeg een tweede verificatiemethode toe. Dat doe je onder <b>Instellingen</b>, <b>Eigendomsverificatie</b>. Haalt iemand bij een update de tag weg, dan blijf je toch eigenaar. Search Console controleert namelijk regelmatig of je bewijs er nog staat. Is het weg, dan krijg je een melding en verlopen je rechten na een tijd.</p>
+
+        <h2 id="gebruikers">Gebruikers en rechten: wie mag wat?</h2>
+        <p>Werk je met een webbouwer, een collega of een bureau? Geef ze dan hun eigen toegang. Deel nooit je wachtwoord. Je regelt het onder <b>Instellingen</b>, <b>Gebruikers en rechten</b>, <b>Gebruiker toevoegen</b>. Vul het Google-account in, kies het niveau en sla op. Alleen een eigenaar ziet deze pagina.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Rol</th><th>Wat iemand mag</th><th>Geef je aan</th></tr></thead>
+            <tbody>
+              <tr><td><b>Geverifieerde eigenaar</b></td><td>Alles. Bewezen met een eigen verificatie, zoals een DNS-record of HTML-tag.</td><td>Jezelf, op een zakelijk account</td></tr>
+              <tr><td><b>Gemachtigde eigenaar</b></td><td>Dezelfde rechten, maar toegevoegd door een geverifieerde eigenaar</td><td>Een vaste collega of compagnon</td></tr>
+              <tr><td><b>Volledige rechten</b></td><td>Alle gegevens bekijken en bepaalde acties uitvoeren</td><td>Een bureau dat actief aan je SEO werkt</td></tr>
+              <tr><td><b>Beperkte rechten</b></td><td>De meeste gegevens bekijken</td><td>Iemand die alleen meekijkt of een audit doet</td></tr>
+              <tr><td><b>Partner</b></td><td>Bepaalde acties via een koppeling, zonder de gegevens zelf te zien</td><td>Gekoppelde diensten</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Laat een SEO-specialist een audit doen? Geef dan alleen leesrechten. Dat adviseert Google zelf, in het stuk over het inhuren van een SEO. Een property kan tot 100 gebruikers hebben die geen eigenaar zijn. Let op: een sitemap insturen via het rapport Sitemaps mag alleen een eigenaar.</p>
+        <p>Vertrekt je enige eigenaar, bijvoorbeeld je oude webbouwer? Dan verifieer je zelf opnieuw en haal je daarna zijn verificatiebewijs van je site. Anders kan hij zichzelf weer toevoegen. Zie je een eigenaar die je niet kent? Google waarschuwt dat je site dan misschien gehackt is.</p>
+
+        <h2 id="menu">Het menu van Google Search Console op een rij</h2>
+        <p>Search Console heeft veel menu's. Niet alles is voor jou bedoeld. Deze tabel laat zien wat waar staat en hoe vaak een gewone bedrijfssite ernaar hoeft te kijken.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Menu</th><th>Wat je er ziet</th><th>Hoe vaak kijken</th></tr></thead>
+            <tbody>
+              <tr><td>Overzicht</td><td>Samenvatting: klikken, indexering, handmatige acties en beveiliging</td><td>Elke keer dat je inlogt</td></tr>
+              <tr><td>Inzichten</td><td>Eenvoudig overzicht van je beste en stijgende pagina's en zoekopdrachten</td><td>Maandelijks, als je weinig tijd hebt</td></tr>
+              <tr><td>Prestaties</td><td>Klikken, vertoningen, CTR en positie, per zoekopdracht en per pagina</td><td>Maandelijks</td></tr>
+              <tr><td>URL-inspectie</td><td>De status van één specifieke URL</td><td>Na elke nieuwe of aangepaste pagina</td></tr>
+              <tr><td>Indexeren: Pagina's</td><td>Welke pagina's in Google staan, en waarom andere niet</td><td>Maandelijks</td></tr>
+              <tr><td>Indexeren: Sitemaps</td><td>Of Google je sitemap kan lezen</td><td>Na een nieuwe site of verhuizing</td></tr>
+              <tr><td>Indexeren: Verwijderingen</td><td>Een pagina tijdelijk uit Google halen</td><td>Alleen bij nood</td></tr>
+              <tr><td>Functionaliteit: Site-vitaliteit</td><td>Snelheid en stabiliteit voor echte bezoekers</td><td>Elk kwartaal</td></tr>
+              <tr><td>Optimalisaties</td><td>Fouten in gestructureerde gegevens, zoals broodkruimels</td><td>Na wijzigingen aan je site</td></tr>
+              <tr><td>Beveiliging en handmatige acties</td><td>Hacks, malware en straffen van Google</td><td>Bij elke melding</td></tr>
+              <tr><td>Links</td><td>Wie naar je linkt, en je interne links</td><td>Elk kwartaal</td></tr>
+              <tr><td>Instellingen</td><td>Gebruikers, verificatie, koppelingen, crawlstatistieken, robots.txt</td><td>Bij het instellen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Heeft je site een webshop of video's, dan zie je extra rapporten, zoals Shopping en Video-pagina's. Krijg je verkeer via Discover of Google Nieuws, dan staan die onder Prestaties.</p>
+
+        <h2 id="prestaties">Het prestatierapport lezen</h2>
+        <p>Klik op <b>Prestaties</b> en dan op <b>Zoekresultaten</b>. Standaard zie je de laatste drie maanden. Boven de grafiek staan vier vakjes. Klik ze alle vier aan.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Cijfer</th><th>Wat het is (volgens Google)</th><th>Hoe je het leest</th></tr></thead>
+            <tbody>
+              <tr><td><b>Klikken</b></td><td>Hoe vaak iemand vanuit Google op je site klikte</td><td>Het enige cijfer dat bezoekers oplevert</td></tr>
+              <tr><td><b>Vertoningen</b></td><td>Hoe vaak je site in de zoekresultaten stond</td><td>Laat zien waar je al zichtbaar bent</td></tr>
+              <tr><td><b>CTR</b></td><td>Klikken gedeeld door vertoningen</td><td>Laag bij veel vertoningen? Dan spreekt je resultaat niet aan.</td></tr>
+              <tr><td><b>Gemiddelde positie</b></td><td>De gemiddelde plek van je hoogste resultaat</td><td>Een gemiddelde over alle zoekers, geen vaste plek</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Onder de grafiek kies je hoe de tabel de gegevens groepeert: <b>Zoekopdrachten</b>, <b>Pagina's</b>, <b>Landen</b>, <b>Apparaten</b>, <b>Zoekopmaak</b> of <b>Datums</b>. Met de filters bovenaan kies je de periode en het zoektype: web, afbeeldingen, video of nieuws. Sinds september 2026 kun je bij web ook kiezen voor multimodaal. Dat zijn zoekopdrachten met een foto, zoals met Google Lens. Ook zoekopdrachten in AI Overviews en AI-modus tellen mee in deze totalen.</p>
+        <p>Je kunt 16 maanden terugkijken. De nieuwste gegevens zijn voorlopig en staan als stippellijn in de grafiek. Met de weergave van 24 uur zie je zelfs per uur wat er gebeurt. Handig als je net een campagne of nieuwe pagina live hebt gezet.</p>
+        <p>Schrik niet als je jezelf niet ziet als je zelf op een zoekopdracht uit de lijst zoekt. Google past de resultaten aan op tijd, plaats, apparaat en zoekgeschiedenis. Daarom is de gemiddelde positie ook echt een gemiddelde.</p>
+
+        <h3>Vier analyses die bezoekers opleveren</h3>
+        <div class="stap-kop"><Tekening naam="lamp" maat={44} /><h4>Veel vertoningen, weinig klikken</h4></div>
+        <p>Sorteer op vertoningen en kijk naar de CTR. Een zoekopdracht met 3.000 vertoningen en een CTR van 1 procent is een kans. Je staat er al, maar je resultaat spreekt niet aan. Herschrijf de titel en de <a href="/kennisbank/gidsen/meta-description/">meta description</a> van die pagina. Dat is vaak het snelste resultaat dat SEO kan opleveren.</p>
+        <div class="stap-kop"><Tekening naam="raket" maat={44} /><h4>Net niet op pagina 1</h4></div>
+        <p>Filter op een gemiddelde positie tussen 5 en 15. Dat zijn pagina's die Google al relevant vindt, maar net niet goed genoeg. Een betere tekst, een paar extra antwoorden en wat interne links tillen ze vaak over de streep.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={44} /><h4>Twee pagina's op één zoekwoord</h4></div>
+        <p>Klik op een zoekopdracht en open daarna het tabblad Pagina's. Zie je twee of drie pagina's die elk een beetje vertoningen krijgen? Dan concurreren ze met elkaar. Dat heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>. Kies één hoofdpagina en laat de andere ernaar linken, of voeg ze samen.</p>
+        <div class="stap-kop"><Tekening naam="merk" maat={44} /><h4>Je naam eruit filteren</h4></div>
+        <p>Klik op <b>+ Nieuw</b>, kies <b>Zoekopdracht</b> en filter op zoekopdrachten die je bedrijfsnaam níet bevatten. Wat overblijft, zijn mensen die je nog niet kenden. Dat is het verkeer waar SEO om draait. Groeit alleen het verkeer op je naam, dan groeit vooral je bekendheid.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
+          <p>Een installateur in Hoogeveen staat op "cv-ketel vervangen hoogeveen" gemiddeld op plek 4. Dat levert 2.400 vertoningen per jaar op, met een CTR van 2 procent: 48 klikken. Hij herschrijft zijn titel en omschrijving. Er komt een prijsindicatie in en "binnen een week geplaatst". De CTR stijgt naar 5 procent: 120 klikken. Doet 1 op de 10 bezoekers een aanvraag, dan zijn dat 7 extra aanvragen per jaar, voor een uur werk.</p>
+        </div>
+
+        <h2 id="ai-rapport">Zie je of je in AI-antwoorden verschijnt?</h2>
+        <p>Steeds meer mensen lezen het antwoord bovenaan Google, in AI Overviews of in de AI-modus. Ook daar kun je met een link verschijnen. Sinds juni 2025 telt Google de AI-modus mee in de totalen van het prestatierapport, net als de AI Overviews.</p>
+        <p>In juni 2026 kwam Google met aparte rapporten voor generatieve AI-functies, voor Zoeken en voor Discover. Sinds 31 augustus 2026 heeft elke website ze. Je ziet daar:</p>
+        <ul>
+          <li><b>Vertoningen:</b> hoe vaak een URL van je site in een AI-functie verscheen.</li>
+          <li><b>Pagina's:</b> welke URL's dat waren.</li>
+          <li><b>Landen en apparaten:</b> waar en op welk toestel.</li>
+          <li><b>Datums:</b> de ontwikkeling per uur, dag, week of maand.</li>
+        </ul>
+        <p>Dat is nuttig, want zo zie je welke pagina's Google geschikt vindt als bron. Wil je daar gericht op werken, lees dan over <a href="/generative-engine-optimization/google-ai-overviews/">vindbaar worden in Google AI Overviews</a> of de gids over de <a href="/kennisbank/gidsen/google-ai-modus/">AI-modus van Google</a>.</p>
+
+        <h2 id="url-inspectie">URL-inspectie: staat deze pagina in Google?</h2>
+        <p>Plak een specifieke URL in de balk bovenaan. Die URL moet binnen de property vallen die je open hebt. Je krijgt de versie te zien die Google in zijn index heeft, dus niet de pagina zoals hij nu live staat. Bovenaan staat een van deze uitkomsten:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat er staat</th><th>Wat het betekent</th><th>Wat je doet</th></tr></thead>
+            <tbody>
+              <tr><td>URL is geïndexeerd door Google</td><td>De pagina kan in de zoekresultaten verschijnen. Een garantie is het niet.</td><td>Meestal niets</td></tr>
+              <tr><td>URL is geïndexeerd door Google, maar bevat problemen</td><td>Hij staat erin, maar bijvoorbeeld je gestructureerde gegevens kloppen niet</td><td>Lees de waarschuwing en los het op</td></tr>
+              <tr><td>URL is niet geïndexeerd door Google</td><td>De pagina verschijnt niet in Google</td><td>Open Pagina-indexering voor de reden</td></tr>
+              <tr><td>URL is een alternatieve versie</td><td>Google ziet een andere URL als hoofdversie</td><td>Controleer of dat de URL is die je verwacht</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Klik daarna op de knoppen die je nodig hebt:</p>
+        <ul>
+          <li><b>Live URL testen</b> kijkt of de pagina zoals hij nu online staat, te indexeren is. Doe dit na een reparatie.</li>
+          <li><b>Indexering aanvragen</b> zet de pagina in de wachtrij. Er geldt een dagelijkse limiet, dus gebruik het voor je belangrijke pagina's.</li>
+          <li><b>Gecrawlde pagina bekijken</b> toont de HTML en een schermafbeelding zoals Google de pagina zag. Zo zie je of een cookiemelding of JavaScript je tekst verbergt.</li>
+        </ul>
+        <p>De tool test niet alles. Of je pagina aan de kwaliteitsrichtlijnen voldoet, of er een handmatige actie loopt en of de URL tijdelijk is geblokkeerd, zie je hier niet. Kijk daarvoor in de rapporten zelf.</p>
+
+        <h2 id="paginas">Het rapport Pagina's: waarom een pagina niet in Google staat</h2>
+        <p>Ga naar <b>Indexeren</b>, <b>Pagina's</b>. Je ziet twee getallen: Geïndexeerd en Niet geïndexeerd. Daaronder staat de tabel Waarom pagina's niet worden geïndexeerd. Raak niet in paniek. Volgens Google heeft bijna elke site pagina's die terecht niet in de index staan. Het doel is dat je belangrijke pagina's erin staan.</p>
+        <p>Een tip uit de handleiding van Google zelf: heeft je site minder dan 500 pagina's, dan heb je dit rapport waarschijnlijk niet nodig. Typ dan site:jouwbedrijf.nl in Google. Zie je je belangrijke pagina's, dan zit het goed.</p>
+        <p>Dit zijn de redenen die je het vaakst tegenkomt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Reden in Search Console</th><th>Wat er aan de hand is</th><th>Moet je iets doen?</th></tr></thead>
+            <tbody>
+              <tr><td>Pagina met omleiding</td><td>De URL stuurt door naar een andere pagina</td><td>Nee, dat is de bedoeling van een <a href="/kennisbank/wat-is/redirect/">redirect</a></td></tr>
+              <tr><td>URL gemarkeerd als 'noindex'</td><td>De pagina vraagt Google zelf om hem niet op te nemen</td><td>Alleen als de pagina wél gevonden moet worden: haal de noindex weg</td></tr>
+              <tr><td>URL geblokkeerd door robots.txt</td><td>Je robots.txt verbiedt Google de pagina te bezoeken</td><td>Alleen als dat niet de bedoeling is</td></tr>
+              <tr><td>Niet gevonden (404)</td><td>De pagina bestaat niet (meer)</td><td>Alleen als je er zelf naar linkt. Verplaatst? Zet een omleiding.</td></tr>
+              <tr><td>Soft 404</td><td>De pagina zegt "niet gevonden", maar de server meldt dat alles goed is</td><td>Ja: geef een echte 404 of vul de pagina</td></tr>
+              <tr><td>Serverfout (5xx)</td><td>Je server gaf een fout toen Google langskwam</td><td>Ja, als het blijft gebeuren: neem contact op met je hoster</td></tr>
+              <tr><td>Fout met omleiding</td><td>Een omleidingsketen die te lang is of in een rondje loopt</td><td>Ja: laat de oude URL in één stap naar de nieuwe wijzen</td></tr>
+              <tr><td>Gevonden - momenteel niet geïndexeerd</td><td>Google kent de URL, maar heeft hem nog niet bezocht</td><td>Even wachten. Blijft het, zorg dan voor meer interne links.</td></tr>
+              <tr><td>Gecrawld - momenteel niet geïndexeerd</td><td>Google heeft de pagina gelezen, maar (nog) niet opgenomen</td><td>Maak de pagina beter en unieker. Opnieuw indienen is niet nodig.</td></tr>
+              <tr><td>Dubbele pagina zonder door de gebruiker geselecteerde canonieke versie</td><td>Google vindt de pagina een kopie en koos zelf een hoofdversie</td><td>Alleen als Google de verkeerde koos: geef een canonical aan</td></tr>
+              <tr><td>Duplicaat, Google heeft een andere canonieke pagina gekozen dan de gebruiker</td><td>Jij wees een hoofdversie aan, Google koos een andere</td><td>Controleer of de pagina's echt op elkaar lijken</td></tr>
+              <tr><td>Alternatieve pagina met correcte canonieke tag</td><td>Een variant die netjes naar de hoofdversie verwijst</td><td>Nee</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Meer over dubbele pagina's lees je bij <a href="/kennisbank/wat-is/duplicate-content/">duplicate content</a>. Heb je een probleem opgelost? Open het probleem en klik op <b>Oplossing valideren</b>. Google controleert dan de bekende URL's opnieuw. Dat duurt volgens Google meestal ongeveer twee weken. Je krijgt een mail als het klaar is.</p>
+
+        <h2 id="sitemaps">Sitemaps: insturen en de status lezen</h2>
+        <p>Een sitemap is een bestand dat Google vertelt welke pagina's je hebt. Google zegt het eerlijk: heeft je site minder dan zo'n 500 pagina's en kun je elke pagina bereiken via links vanaf je homepage, dan heb je hem waarschijnlijk niet nodig. Insturen kost alleen een minuut, dus wij doen het altijd.</p>
+        <p>Waar je sitemap staat, hangt af van je systeem:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Systeem</th><th>Meestal te vinden op</th></tr></thead>
+            <tbody>
+              <tr><td>WordPress zonder SEO-plugin</td><td>/wp-sitemap.xml</td></tr>
+              <tr><td>WordPress met Yoast of Rank Math</td><td>/sitemap_index.xml</td></tr>
+              <tr><td>Wix, Squarespace, Shopify</td><td>/sitemap.xml, die het platform zelf bijhoudt</td></tr>
+              <tr><td>Andere systemen</td><td>/sitemap.xml, of de regel Sitemap: in je robots.txt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Onder Verzonden sitemaps staat per sitemap het type, de datum van insturen, wanneer Google hem voor het laatst las en de status. Er zijn drie statussen:</p>
+        <ul>
+          <li><b>Geslaagd:</b> gelezen zonder fouten. De URL's staan in de wachtrij om bezocht te worden.</li>
+          <li><b>Kan niet ophalen:</b> Google kan het bestand niet openen. Controleer het adres, en of je robots.txt of een inlogscherm het blokkeert.</li>
+          <li><b>Bevat fouten:</b> een deel is gelezen. Klik op de sitemap voor de lijst met fouten.</li>
+        </ul>
+        <p>Let op twee dingen. Google volgt bij een sitemap geen omleidingen, dus stuur het exacte adres in. En zet in je sitemap alleen pagina's die in Google mogen. Een sitemap vol noindex-pagina's of omleidingen geeft Google tegenstrijdige signalen.</p>
+
+        <h2 id="site-vitaliteit">Site-vitaliteit: hoe snel voelt je site?</h2>
+        <p>Dit rapport heet in het Engels Core Web Vitals. Je vindt het onder <b>Functionaliteit</b>, <b>Site-vitaliteit</b>. Site-vitaliteit geeft per groep vergelijkbare pagina's een oordeel: Goed, Verbetering nodig of Slecht. Apart voor mobiele apparaten en voor desktop. Het slechtste cijfer bepaalt het oordeel.</p>
+        <p>Google meet drie dingen. Dit zijn de grenzen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Meting</th><th>Wat het meet</th><th>Goed</th><th>Verbetering nodig</th><th>Slecht</th></tr></thead>
+            <tbody>
+              <tr><td><b>LCP</b></td><td>Hoe snel het grootste stuk van de pagina zichtbaar is</td><td>tot 2,5 s</td><td>tot 4 s</td><td>meer dan 4 s</td></tr>
+              <tr><td><b>INP</b></td><td>Hoe snel de pagina reageert op een klik of tik</td><td>tot 200 ms</td><td>tot 500 ms</td><td>meer dan 500 ms</td></tr>
+              <tr><td><b>CLS</b></td><td>Hoeveel de pagina verspringt tijdens het laden</td><td>tot 0,1</td><td>tot 0,25</td><td>meer dan 0,25</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De cijfers komen van echte Chrome-gebruikers, over de laatste 28 dagen. Google kijkt naar de waarde die 75 procent van de bezoeken haalt. Een kleine site ziet daarom vaak Geen gegevens beschikbaar. Er zijn dan te weinig bezoekers om iets te zeggen. Test je pagina's in dat geval los met PageSpeed Insights. Staat er veel in het rood, lees dan de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
+
+        <h2 id="beveiliging">Beveiliging, handmatige acties en verwijderingen</h2>
+        <p>Hopelijk staat hier nooit iets. Is alles in orde, dan zie je een groen vinkje.</p>
+        <h3>Beveiligingsproblemen</h3>
+        <p>Vindt Google dat je site gehackt is of bezoekers kan schaden, dan staat het hier. Google deelt het op in drie soorten:</p>
+        <ul>
+          <li><b>Gehackte content:</b> inhoud die via een lek op je site is gezet, zonder dat jij dat wilde.</li>
+          <li><b>Malware en ongewenste software:</b> software die een apparaat of de gebruiker schaadt, of zich misleidend gedraagt.</li>
+          <li><b>Social engineering:</b> pagina's waarvan Google vindt dat ze bezoekers verleiden tot iets gevaarlijks, zoals vertrouwelijke gegevens invullen of software downloaden.</li>
+        </ul>
+        <p>Zo'n probleem kost je direct klanten. Google kan een waarschuwing tonen in de zoekresultaten, en de browser kan een waarschuwingspagina laten zien. Los het op de hele site op, niet op een paar pagina's. Klik daarna op <b>Beoordeling aanvragen</b> en beschrijf wat er mis was en wat je deed. Is je WordPress-site gehackt? Lees dan eerst <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt: wat nu?</a></p>
+        <h3>Handmatige acties</h3>
+        <p>Een handmatige actie is een straf die een medewerker van Google oplegt. Bijvoorbeeld omdat je links kocht of spam publiceerde. Je site verschijnt dan gedeeltelijk of helemaal niet meer in Google. Je krijgt er een bericht over in Search Console. Los het probleem op alle genoemde pagina's op en dien dan een verzoek tot heroverweging in. Volgens Google duurt de beoordeling een paar dagen tot weken, bij links soms langer. Gaat het om slechte links, dan kan de <a href="/linkbuilding/google-disavow-tool/">disavow tool</a> nodig zijn.</p>
+        <h3>Verwijderingen</h3>
+        <p>Staat er per ongeluk een pagina met gevoelige gegevens in Google? Onder <b>Indexeren</b>, <b>Verwijderingen</b>, <b>Nieuw verzoek</b> haal je hem tijdelijk uit de resultaten. Een goedgekeurd verzoek geldt ongeveer zes maanden. Het is dus geen definitieve oplossing. Haal de pagina ook echt weg, of zet er een noindex op.</p>
+
+        <h2 id="overig">Links, robots.txt, crawlstatistieken en koppelingen</h2>
+        <h3>Links</h3>
+        <p>Onder <b>Links</b> zie je je meest gelinkte pagina's, de sites die het vaakst naar je linken en de linkteksten. Het is een steekproef, geen volledige lijst. Tabellen stoppen bij 1.000 rijen en je ziet niet of een link nofollow is. Gebruik het om te controleren of de sites die voor jou tellen, zoals je brancheorganisatie of een lokale krant, naar je linken. Meer daarover in de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</p>
+        <h3>Het robots.txt-rapport</h3>
+        <p>Onder <b>Instellingen</b> staat het robots.txt-rapport. Daar zie je of Google je robots.txt-bestand kon ophalen, wanneer dat was en of er fouten in staan. Heb je per ongeluk je hele site geblokkeerd en dat net hersteld? Dan kun je hier om een nieuwe crawl van het bestand vragen. Het rapport werkt alleen voor een domeinproperty of een property met een URL-voorvoegsel zonder pad.</p>
+        <h3>Crawlstatistieken</h3>
+        <p>Ook onder Instellingen. Je ziet hoeveel verzoeken Google aan je site deed, de reactietijd van je server en of er beschikbaarheidsproblemen waren. Google zegt erbij dat je dit pas nodig hebt bij een site vanaf ongeveer 1.000 pagina's.</p>
+        <h3>Google Search Console koppelen aan Google Analytics 4</h3>
+        <p>Met een koppeling zie je in Analytics welke zoekopdrachten bezoekers naar welke landingspagina brachten, en wat ze daarna deden. Je moet daarvoor de rol Bewerker hebben in Analytics en geverifieerd eigenaar zijn in Search Console. Zo doe je het in Analytics:</p>
+        <ol>
+          <li>Ga naar <b>Beheerder</b> en klik onder Productkoppelingen op <b>Search Console-koppelingen</b>.</li>
+          <li>Klik op <b>Koppelen</b> en daarna op <b>Accounts kiezen</b>. Kies je property en klik op <b>Bevestigen</b>.</li>
+          <li>Klik op <b>Volgende</b>, kies de webgegevensstream van je site en dien de koppeling in.</li>
+        </ol>
+        <p>Daarna komen er twee rapporten bij: Organische zoekresultaten van Google en Organisch zoekverkeer van Google. Je vindt ze onder Bibliotheek, waar je ze nog moet publiceren. De gegevens komen volgens Google 48 uur na het verzamelen beschikbaar.</p>
+        <h3>Adreswijziging</h3>
+        <p>Verhuis je naar een nieuwe domeinnaam? Zet eerst alle oude URL's met een omleiding naar de nieuwe. Meld de verhuizing daarna onder <b>Instellingen</b>, <b>Adreswijziging</b>. Zo weet Google sneller dat je nieuwe site de oude vervangt.</p>
+
+        <h2 id="niet-geindexeerd">Google indexeert mijn site niet: wat nu?</h2>
+        <p>Staat je site, of een belangrijke pagina, niet in Google? Loop deze lijst van boven naar beneden af. Meestal zit het probleem in de eerste drie punten.</p>
+        <ol>
+          <li><b>Check de URL-inspectie.</b> Search Console vertelt vaak gewoon waarom een pagina er niet in staat. Kijk onder Pagina-indexering bij Indexering toegestaan.</li>
+          <li><b>Zoek naar een noindex-tag.</b> In WordPress staat onder <b>Instellingen</b>, <b>Lezen</b> het vinkje "Zoekmachines ontmoedigen deze site te indexeren". Na de bouw van een site blijft het nogal eens aan staan.</li>
+          <li><b>Bekijk je robots.txt.</b> Typ je domein met /robots.txt erachter. Staat er "Disallow: /", dan mag Google je hele site niet bezoeken. Het robots.txt-rapport laat zien welke versie Google heeft.</li>
+          <li><b>Kijk bij Handmatige acties en Beveiligingsproblemen.</b> Staat daar iets, dan los je eerst dat op.</li>
+          <li><b>Is de site nieuw?</b> Stuur je sitemap in, vraag indexering aan voor je homepage en zorg voor een paar links van andere sites, zoals je brancheorganisatie of een bedrijvengids. Volgens Google kan het tot een week duren voordat een nieuwe site gecrawld wordt.</li>
+          <li><b>Hangt de pagina los?</b> Een pagina waar geen enkele link naartoe gaat, vindt Google moeilijk. Link ernaar vanuit je menu of een verwante pagina. Lees ook over <a href="/kennisbank/wat-is/interne-links/">interne links</a>.</li>
+          <li><b>Staat dezelfde tekst ook elders?</b> Dubbele of heel dunne pagina's slaat Google soms over. Een productomschrijving van de leverancier staat op honderd andere sites. Schrijf ze uit en maak ze uniek.</li>
+          <li><b>Veel slechte links?</b> Een linkprofiel vol spam is een slecht signaal. Bekijk het rapport Links.</li>
+        </ol>
+        <p>Kom je er niet uit? Bij een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> lopen we dit allemaal voor je na, vanaf € 395 eenmalig.</p>
+
+        <h2 id="verouderd">Verouderde tips over Google Search Console</h2>
+        <p>Search Console verandert vaak. Veel handleidingen online zijn niet meer bijgewerkt. Kom je deze tips tegen, dan weet je dat ze oud zijn:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je nog leest</th><th>Hoe het nu zit</th></tr></thead>
+            <tbody>
+              <tr><td>"Meld je aan bij Google Webmaster Tools"</td><td>Heet sinds 2015 Google Search Console</td></tr>
+              <tr><td>"Voeg vier varianten van je site toe: met en zonder www, http en https"</td><td>Eén domeinproperty dekt ze allemaal</td></tr>
+              <tr><td>"Kijk naar FID in het snelheidsrapport"</td><td>INP verving FID in maart 2024</td></tr>
+              <tr><td>"Controleer het rapport Gebruiksgemak op mobiele apparaten"</td><td>Google heeft dat rapport eind 2023 uitgezet</td></tr>
+              <tr><td>"Test je robots.txt in de robots.txt-tester"</td><td>Je hebt nu het robots.txt-rapport onder Instellingen</td></tr>
+              <tr><td>"Search Console laat niets zien over AI"</td><td>AI Overviews en AI-modus tellen mee, en sinds 2026 zijn er aparte AI-rapporten</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>De property staat op het account van je webbouwer.</b> Stopt de samenwerking, dan sta je met lege handen. Zet hem op een account van je eigen bedrijf.</li>
+          <li><b>Alleen de http-variant toegevoegd.</b> Dan zie je bijna niets, want je site draait op https. Een domeinproperty voorkomt dit.</li>
+          <li><b>Het verificatiebewijs verdwijnt bij een nieuw thema.</b> Gebruik het DNS-record, of een tweede methode als reserve.</li>
+          <li><b>Paniek over Niet geïndexeerd.</b> Omleidingen, noindex-pagina's en oude URL's horen daar vaak terecht.</li>
+          <li><b>Een testomgeving in Google.</b> Een kopie van je site op een subdomein, zonder wachtwoord, wordt gewoon gevonden. Dat geeft dubbele inhoud.</li>
+          <li><b>De gemiddelde positie lezen als vaste plek.</b> Het is een gemiddelde over alle zoekers en alle zoekopdrachten.</li>
+          <li><b>Alleen kijken als er iets mis is.</b> Dan heb je geen idee wat normaal is. Een vaste maandelijkse ronde geeft je dat gevoel wel.</li>
+        </ul>
+
+        <h2 id="routine">Je maandelijkse ronde in een kwartier</h2>
+        <p>Met deze acht stappen houd je Search Console bij zonder er een hobby van te maken. Je kunt de lijst downloaden en afvinken.</p>
+        <div class="kader check-lijst">
+          <ol>{ronde.map((c) => <li>{c}</li>)}</ol>
+          <a class="btn" href={download} download="search-console-maandronde.txt">Download de checklist</a>
+        </div>
+        <div class="kader">
+          <p class="kader-titel">Zo kan het eruitzien (verzonnen voorbeeld)</p>
+          <p>Een hovenier uit de buurt van Assen doet zijn ronde op de eerste maandag van de maand. In oktober ziet hij dat "tuin laten aanleggen assen" 900 vertoningen had en maar 11 klikken. Zijn titel was "Home". Hij past de titel aan naar "Tuin laten aanleggen in Assen | prijs per m²". Een maand later staat hij op dezelfde plek, met 38 klikken. Daarnaast ziet hij een pagina over schuttingen op positie 9. Die vult hij aan met prijzen en foto's van eigen werk.</p>
+        </div>
+        <p>Werk je met een bureau of freelancer? Vraag dan om dezelfde ronde in het maandrapport, in gewone taal. Een rapport waar je uitleg bij nodig hebt, schiet zijn doel voorbij.</p>
+
+        <h2 id="hulp">Zelf doen of laten doen?</h2>
+        <p>Je website aanmelden bij Google en de maandelijkse ronde doe je zelf. Daar hoef je niemand voor in te huren. Lastiger wordt het als er pagina's uit Google verdwijnen, als je verkeer ineens daalt of als je niet weet wat de cijfers betekenen. Dan helpt een tweede paar ogen. Begin eventueel met een <a href="/consult/">consult</a> van een uur, voor € 85. Of laat ons het hele <a href="/zoekmachine-optimalisatie/">SEO-traject</a> doen, vanaf € 495 per maand. Dan houden wij Google Search Console voor je in de gaten en krijg je elke maand een rapport in gewone taal. Maandelijks opzegbaar, met stijggarantie.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={25} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij meekijken?" intro="Wat je van ons mag verwachten als we je site in Google in de gaten houden." />
+
+  <Faq
+    vragen={[
+      { v: 'Is Google Search Console gratis?', a: 'Ja, helemaal. Je hebt alleen een Google-account nodig en je moet kunnen bewijzen dat de site van jou is.' },
+      { v: 'Moet ik mijn website aanmelden bij Google om gevonden te worden?', a: 'Nee. Google vindt de meeste sites vanzelf via links. Met Search Console gaat het wel sneller, en zie je wat er gebeurt.' },
+      { v: 'Moet ik elke nieuwe pagina aanmelden?', a: 'Nee. Met een sitemap en goede interne links vindt Google nieuwe pagina\'s zelf. Voor een belangrijke pagina kun je via de URL-inspectie wel indexering aanvragen.' },
+      { v: 'Hoe lang duurt het voordat ik gegevens zie?', a: 'Google verzamelt gegevens zodra je de property toevoegt. De eerste cijfers zie je na een paar dagen. Je kunt maximaal 16 maanden terugkijken.' },
+      { v: 'Waarom wijken de cijfers af van Google Analytics?', a: 'Ze meten iets anders. Search Console telt klikken in Google, Analytics telt bezoeken op je site. Bezoekers die geen toestemming geven voor cookies, ziet Analytics soms niet.' },
+      { v: 'Hoeveel websites kan ik toevoegen?', a: 'Volgens Google maximaal 1.000 property\'s per account. Per property kun je tot 100 gebruikers toevoegen die geen eigenaar zijn.' },
+      { v: 'Wat betekent Gecrawld - momenteel niet geïndexeerd?', a: 'Google heeft de pagina gelezen, maar niet opgenomen. Opnieuw indienen helpt meestal niet. Maak de pagina beter en unieker, en link ernaar vanaf andere pagina\'s.' },
+      { v: 'Wat betekent een melding over handmatige acties?', a: 'Dat een medewerker van Google vond dat je site het spambeleid overtreedt, bijvoorbeeld met gekochte links. Los het op en dien daarna een verzoek tot heroverweging in. Bij slechte links kan de <a href="/linkbuilding/google-disavow-tool/">disavow tool</a> nodig zijn.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Technische SEO en audit', href: '/zoekmachine-optimalisatie/technische-seo/', tekst: 'Alles nagelopen wat Google tegenhoudt, vanaf € 395.' },
+      { label: 'Gids', titel: 'Hoger in Google komen', href: '/kennisbank/gidsen/hoger-in-google/', tekst: 'Tien stappen voor een klein bedrijf.' },
+      { label: 'Gids', titel: 'Google Analytics 4', href: '/kennisbank/gidsen/google-analytics-4/', tekst: 'Wat bezoekers doen na de klik.' },
+      { label: 'Gids', titel: 'Meta description schrijven', href: '/kennisbank/gidsen/meta-description/', tekst: 'Meer klikken uit dezelfde posities.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat Google van je site vindt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt hoe je site er in Google voor staat en belt je met wat het eerst aandacht nodig heeft.`} />
+</Base>
+<style>
+  .check-lijst ol { margin-bottom: 18px; }
+  .check-lijst li { margin-bottom: 8px; }
+  .stap-kop h4 { margin: 0; font-size: 1.08rem; }
+</style>

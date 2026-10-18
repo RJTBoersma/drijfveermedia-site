@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/pagina/Hero.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import Tekening from '../../components/teken/Tekening.astro';
+import Scene from '../../components/scenes/werken-bij.astro';
+import { site } from '../../data/site';
+
+const mail = `mailto:${site.email}?subject=${encodeURIComponent('Open sollicitatie')}`;
+const schema = [{ '@type': 'WebPage', name: 'Werken bij Drijfveer Media', url: `${site.url}/werken-bij/`, about: { '@id': `${site.url}/#organisatie` } }];
+---
+<Base
+  title="Werken bij: stage of werkervaring | Drijfveer Media"
+  description="Stage lopen of werkervaring opdoen in online marketing bij Drijfveer Media in Assen. Geen vacature gezien? Een open sollicitatie is altijd welkom."
+  kruimels={[{ naam: 'Werken bij', url: '/werken-bij/' }]}
+  schema={schema}
+>
+  <Hero kicker="Werken bij" titel="Stage lopen of werkervaring opdoen in online marketing" knop={{ tekst: 'Stuur een open sollicitatie', href: mail }}>
+    <p>We zijn een klein bureau in Assen: een team van vier, met een vaste groep freelancers eromheen. Vacatures zetten we hier zodra ze er zijn. Een stage of werkervaringsplaats bespreken we graag, ook zonder vacature.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie">
+    <div class="tekst">
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2>Stage lopen bij Drijfveer Media</h2></div>
+      <p>Door de jaren heen liepen hier hbo-studenten stage, onder meer van NHL Stenden in Leeuwarden. Een meewerkstage in het derde jaar, of een afstudeerstage met een onderzoek binnen het bedrijf.</p>
+      <p>Je werkt mee aan echte opdrachten voor klanten. SEO-teksten schrijven, links zoeken, websites en zoekwoorden analyseren, en soms een stukje webdesign. Je krijgt eigen taken en eigen verantwoordelijkheid. Fouten maken mag, als je ervan leert.</p>
+
+      <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2>Een werkervaringsplaats</h2></div>
+      <p>Pas afgestudeerd en nog geen baan? Dat overkomt meer mensen dan je denkt. Een gat in je cv en weinig ervaring maken solliciteren lastig. Een werkervaringsplaats bij ons kan dan helpen.</p>
+      <p>Je doet ervaring op in een vak met veel vacatures, en je bouwt aan een cv waarmee je voor de dag kunt komen. We helpen je ook met solliciteren: je cv, je brief en de voorbereiding op een gesprek. Vind je een baan, dan ben je weg. Zo hoort het ook. In het verleden duurde zo'n plek gemiddeld een maand of vier.</p>
+
+      <h2>Wat je bij ons leert</h2>
+      <ul class="vink">
+        <li>Hoe <a href="/zoekmachine-optimalisatie/">SEO</a> en <a href="/generative-engine-optimization/">GEO</a> in de praktijk werken, op sites van echte klanten.</li>
+        <li>Werken met Google Search Console, SE Ranking en AI-tools als Claude en ChatGPT. Hoe wij AI gebruiken, lees je bij <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</li>
+        <li>Schrijven voor mensen en zoekmachines tegelijk.</li>
+        <li>Uitleggen wat je doet in gewone taal. Dat is lastiger dan het klinkt.</li>
+      </ul>
+
+      <h2>Wat we van je vragen</h2>
+      <p>Nieuwsgierigheid, vooral. Je schrijft goed Nederlands en zoekt dingen eerst zelf uit voordat je het vraagt. En je durft te zeggen als je het ergens niet mee eens bent. Ervaring is niet nodig.</p>
+
+      <h2>Waar je werkt</h2>
+      <p>Aan de {site.straat} in {site.plaats}, in een bedrijfsverzamelpand vol hardwerkende ondernemers. Je zit dus niet alleen met ons vieren, maar tussen allerlei bedrijven. Goed voor je netwerk, en voor de koffiepauze. Wie we zijn, lees je op <a href="/over-ons/">over ons</a>.</p>
+
+      <h2>Zo reageer je</h2>
+      <p>Stuur een mail naar <a href={mail}>{site.email}</a> met je cv en een paar zinnen over wie je bent en wat je wilt leren. Zet erbij of het om een stage gaat, en hoe lang, of om een werkervaringsplaats. Liever eerst even bellen? Dat kan ook, op <a href={site.telefoonLink}>{site.telefoon}</a>.</p>
+      <p>Kwam je hier via de console van onze website? Dan weten we al dat je graag onder de motorkap kijkt. Zet dat er gerust bij.</p>
+    </div>
+  </section>
+
+  <Actie titel="Zin om bij ons te leren?" tekst="Stuur je cv en een paar zinnen over jezelf. Er hoeft geen vacature open te staan." knop={{ tekst: 'Stuur een open sollicitatie', href: mail }} />
+</Base>

@@ -1,0 +1,186 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--instagram-stories.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/instagram-stories/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat zijn Instagram Stories?' },
+  { id: 'waarom', titel: 'Waarom ze werken voor je bedrijf' },
+  { id: 'maken', titel: 'Een story maken' },
+  { id: 'stickers', titel: 'Stickers die reacties opleveren' },
+  { id: 'highlights', titel: 'Highlights' },
+  { id: 'ideeen', titel: 'Twaalf ideeën' },
+  { id: 'statistieken', titel: 'Statistieken lezen' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Instagram Stories: alles wat je als ondernemer moet weten',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Instagram Stories: alles wat je moet weten | Drijfveer Media"
+  description="Instagram Stories voor je bedrijf: hoe ze werken, welke stickers reacties opleveren, hoe je highlights inzet en welke statistieken je bijhoudt."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Instagram Stories', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Social media" titel="Instagram Stories: alles wat je als ondernemer moet weten" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Instagram Stories zijn snel gemaakt, mogen rommelig zijn en zijn na een dag weer weg. Juist daarom zijn ze ideaal voor een klein bedrijf. Zo haal je er het meeste uit.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een Instagram Story is een verticale foto of video die na 24 uur verdwijnt.</li>
+            <li>Stories bereiken vooral je bestaande volgers. Ideaal om contact te houden met vaste klanten.</li>
+            <li>Stickers zoals de poll, vragen en de link leveren interactie op, en dat versterkt je band met volgers.</li>
+            <li>Met highlights blijven je beste stories voor altijd op je profiel staan.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat zijn Instagram Stories?</h2>
+        <p>Een Instagram Story is een korte foto of video die schermvullend en verticaal in beeld komt. Je volgers zien hem bovenin hun app, als een rondje met een gekleurde rand rond je profielfoto. Ze tikken erop, kijken, en tikken door naar de volgende. Na 24 uur is je story verdwenen, tenzij je hem bewaart als highlight.</p>
+        <p>Wie zie je als eerste? Volgens Instagram zelf hangt dat af van hoe vaak je iemands stories bekijkt, of je erop reageert en hoe close je met diegene bent. Stories zijn dus vooral een middel om mensen die je al kennen vast te houden. Voor nieuwe mensen werken reels en het verkennen-scherm beter. Hoe dat zit, lees je in de gids over het <a href="/kennisbank/gidsen/instagram-algoritme/">Instagram algoritme</a>.</p>
+
+        <h2 id="waarom">Waarom Instagram Stories werken voor een klein bedrijf</h2>
+        <ul>
+          <li><b>Ze mogen eenvoudig zijn.</b> Een foto van de werkbank, een kort filmpje van een levering. Niemand verwacht een perfect plaatje.</li>
+          <li><b>Ze laten zien wie je bent.</b> Achter de schermen, de mensen, de sfeer. Dat schept vertrouwen voordat iemand belt.</li>
+          <li><b>Ze lokken reacties uit.</b> Een reactie op een story komt binnen als privébericht. Zo begint een gesprek vaak vanzelf.</li>
+          <li><b>Ze houden je in beeld.</b> Wie elke week even langskomt in iemands stories, wordt niet vergeten als die persoon jou nodig heeft.</li>
+        </ul>
+
+        <h2 id="maken">Een Instagram Story maken in vijf stappen</h2>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>1. Open de camera</h3></div>
+        <p>Veeg in de app vanaf je feed naar rechts, of tik op het plusje en kies <i>Story</i>. Maak een foto of video, of kies iets uit je galerij.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>2. Kies het goede formaat</h3></div>
+        <p>Stories zijn verticaal: 9 bij 16, ofwel 1080 bij 1920 pixels. Een liggende foto krijgt randen. Houd boven en onder ongeveer 250 pixels vrij van tekst, want daar staan je naam, de balkjes en het berichtveld.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Voeg tekst en stickers toe</h3></div>
+        <p>Korte tekst, groot genoeg om op een telefoon te lezen. Voeg een sticker toe als je iets van je kijker wilt, zoals een stem, een vraag of een klik. Daarover hieronder meer.</p>
+        <div class="stap-kop"><Tekening naam="social" maat={48} /><h3>4. Kies met wie je deelt</h3></div>
+        <p>Deel met al je volgers via <i>Jouw verhaal</i>, of alleen met een lijst <i>Hechte vrienden</i>. Die tweede optie is handig voor bijvoorbeeld vaste klanten of je personeel.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>5. Plan vooruit als je wilt</h3></div>
+        <p>Via Meta Business Suite kun je stories vooruit inplannen, net als gewone berichten. Interactieve stickers zijn daar soms beperkt. Wil je een poll gebruiken, plaats die story dan liever direct in de app.</p>
+
+        <h2 id="stickers">Stickers die interactie opleveren</h2>
+        <p>Stickers maken van kijkers deelnemers. Elke tik of reactie is een signaal dat je volger je graag ziet. Dit zijn de handigste voor ondernemers.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Sticker</th><th>Wat doet hij</th><th>Voorbeeld voor je bedrijf</th></tr></thead>
+            <tbody>
+              <tr><td><b>Poll</b></td><td>Twee of meer keuzes, kijkers stemmen</td><td>"Welke tegel voor deze badkamer: grijs of wit?"</td></tr>
+              <tr><td><b>Vragen</b></td><td>Kijkers sturen een vraag in</td><td>"Stel je vraag over zonnepanelen, ik beantwoord ze vrijdag"</td></tr>
+              <tr><td><b>Quiz</b></td><td>Meerkeuzevraag met goed antwoord</td><td>"Hoe vaak moet je cv-ketel onderhoud krijgen?"</td></tr>
+              <tr><td><b>Emoji-schuif</b></td><td>Kijkers geven aan hoe leuk ze iets vinden</td><td>Een nieuwe taart, een opgeleverde tuin</td></tr>
+              <tr><td><b>Aftellen</b></td><td>Klok die aftelt naar een moment</td><td>Opening, actie of open dag; kijkers kunnen een herinnering aanzetten</td></tr>
+              <tr><td><b>Link</b></td><td>Klikbare link naar een webpagina</td><td>Naar je offertepagina of agenda</td></tr>
+              <tr><td><b>Locatie en vermelding</b></td><td>Plaats of account in je story</td><td>"Vandaag aan het werk in Roden", met de klant getagd als die dat goed vindt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Vroeger kon je alleen met tienduizend volgers een link toevoegen met een swipe omhoog. Die tijd is voorbij. Iedereen heeft nu de linksticker. Gebruik hem, maar niet in elke story. Wie alleen maar naar zijn webshop of offerteformulier stuurt, ziet zijn kijkers afhaken.</p>
+
+        <h2 id="highlights">Highlights: je beste stories bewaren</h2>
+        <p>Highlights zijn de rondjes onder je bio. Daarin bewaar je stories die je na 24 uur niet kwijt wilt. Voor een nieuwe bezoeker zijn ze een soort etalage: hij ziet in een paar tikken wat je doet.</p>
+        <p>Goede highlights voor een klein bedrijf zijn bijvoorbeeld:</p>
+        <ul class="vink">
+          <li><b>Werk</b> of <b>Projecten</b>: je beste klussen, met voor en na.</li>
+          <li><b>Team</b>: wie zijn de mensen achter je bedrijf.</li>
+          <li><b>Veelgestelde vragen</b>: de antwoorden die je toch steeds geeft.</li>
+          <li><b>Prijzen</b> of <b>Werkwijze</b>: wat kost het en hoe gaat het in zijn werk.</li>
+          <li><b>Klanten</b>: berichten en foto's die klanten zelf deelden, met hun toestemming.</li>
+        </ul>
+        <p>Geef elke highlight een eigen omslagje in je huisstijl. Dat oogt rustig en je profiel herken je meteen. Ruim ze eens per halfjaar op. Een highlight vol acties van twee jaar geleden werkt tegen je.</p>
+
+        <h2 id="ideeen">Twaalf ideeën voor stories</h2>
+        <ol>
+          <li>Een kijkje in de werkplaats of keuken om acht uur 's ochtends.</li>
+          <li>Voor en na van een klus, in twee fragmenten.</li>
+          <li>Een poll over twee kleuren, ontwerpen of smaken.</li>
+          <li>De vraag van de week, met je antwoord in de volgende story.</li>
+          <li>Een nieuwe levering of een nieuw product dat binnenkomt.</li>
+          <li>Een collega die vertelt wat hij vandaag doet.</li>
+          <li>Een snelle tip: "zo maak je een kitrand netjes af".</li>
+          <li>Aftellen naar je open dag of je zomersluiting.</li>
+          <li>Een bericht van een klant, met toestemming gedeeld.</li>
+          <li>Een quiz over iets uit je vak.</li>
+          <li>Een feestdag of inhaakmoment uit de <a href="/kennisbank/gidsen/inhaakkalender/">inhaakkalender 2027</a>.</li>
+          <li>Een link naar je nieuwste blog of je nieuwste reel.</li>
+        </ol>
+        <p>Drie tot zeven stories per week is voor de meeste bedrijven een prima ritme. Neem ze op in je <a href="/kennisbank/gidsen/social-media-planning/">social media planning</a>, maar laat ruimte voor wat er spontaan gebeurt. Juist dat maakt stories leuk om te kijken.</p>
+
+        <h2 id="statistieken">Statistieken van je Instagram Stories lezen</h2>
+        <p>Met een zakelijk of creator-account zie je per story hoe hij het deed. Tik op een story en veeg omhoog, of kijk in je professionele dashboard bij de inzichten. Let vooral op deze cijfers:</p>
+        <ul>
+          <li><b>Bereik:</b> hoeveel verschillende accounts je story zagen.</li>
+          <li><b>Antwoorden:</b> hoeveel mensen een bericht stuurden. Dit is goud, want dit zijn gesprekken.</li>
+          <li><b>Navigatie:</b> hoe vaak mensen doortikten, terugtikten of je stories verlieten. Haken veel mensen af bij fragment drie, dan was dat fragment te lang of te saai.</li>
+          <li><b>Linkklikken en stickertikken:</b> hoeveel mensen echt iets deden.</li>
+        </ul>
+        <p>Vergelijk niet één story met de andere, maar kijk naar weken. Welke soort story levert de meeste antwoorden op? Maak daar meer van.</p>
+
+        <div class="kader">
+          <p class="kader-titel">Stories, reels of een bericht?</p>
+          <p><b>Stories</b> zijn voor je vaste volgers, dagelijks en informeel. <b>Reels</b> zijn korte video's die ook bij nieuwe mensen terechtkomen. <b>Berichten</b> in je feed blijven op je profiel staan en vormen je visitekaartje. Een mix van de drie werkt het best.</p>
+        </div>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Twintig fragmenten achter elkaar.</b> Bij elk extra fragment haken mensen af. Houd een reeks kort.</li>
+          <li><b>Te kleine tekst.</b> Wat op je scherm leesbaar lijkt, is dat in de trein niet. Groter dus.</li>
+          <li><b>Gesproken video zonder ondertitels.</b> Veel mensen kijken zonder geluid. Instagram kan automatisch ondertitels toevoegen.</li>
+          <li><b>Alleen maar reclame.</b> Stories zijn het informele kanaal. Wie er een folder van maakt, raakt kijkers kwijt.</li>
+          <li><b>Niet reageren op antwoorden.</b> Iemand stuurt je een bericht en hoort niets. Dat is een gemiste klant.</li>
+        </ul>
+        <p>Lukt het niet om dit zelf bij te houden? Bij <a href="/social-media-beheer/">social media beheer</a> plannen wij je berichten en stories in en houden we de reacties bij. Jij levert de foto's en filmpjes van je werk, wij maken er iets van in jouw toon.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je stories inplannen?" intro="Wat je van ons kunt verwachten, en waarom je dat kunt nagaan." case={false} />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe lang blijft een Instagram Story staan?', a: '24 uur. Daarna verdwijnt hij uit je verhaal, maar blijft hij in je archief bewaard. Zet hem in een highlight als hij langer zichtbaar moet zijn.' },
+      { v: 'Kan ik zien wie mijn Instagram Story bekeek?', a: 'Ja, tot 48 uur na het plaatsen zie je wie keek. Tik op je story en veeg omhoog. Bij zakelijke accounts zie je daar ook bereik en interactie.' },
+      { v: 'Wat is het beste formaat voor een Instagram Story?', a: 'Verticaal, 9 bij 16, ofwel 1080 bij 1920 pixels. Houd boven en onder wat ruimte vrij voor je naam en het berichtveld.' },
+      { v: 'Hoe vaak moet ik een story plaatsen?', a: 'Drie tot zeven keer per week is een goed ritme voor de meeste bedrijven. Liever regelmatig een paar dan één keer per maand twintig.' },
+      { v: 'Hoe zet ik een link in mijn Instagram Story?', a: 'Maak je story, tik op het stickerpictogram en kies de linksticker. Plak je webadres en geef de knop eventueel een eigen tekst. Iedereen kan dit, ongeacht het aantal volgers.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Instagram algoritme', href: '/kennisbank/gidsen/instagram-algoritme/', tekst: 'Wat telt in feed, stories, reels en verkennen.' },
+      { label: 'Gids', titel: 'Inhaakkalender 2027', href: '/kennisbank/gidsen/inhaakkalender/', tekst: 'Een jaar vol momenten voor je stories.' },
+      { label: 'Dienst', titel: 'Social media beheer', href: '/social-media-beheer/', tekst: 'Wij plannen, schrijven en plaatsen. Vanaf € 395 per maand.' },
+    ]}
+  />
+
+  <Actie titel="Wil je dat je Instagram klanten oplevert?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je kanalen, en belt je met een eerlijk advies over wat het meeste oplevert.`} />
+</Base>

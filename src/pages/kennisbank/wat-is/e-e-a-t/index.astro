@@ -1,0 +1,299 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Letters from '../../../../components/beeld/Letters.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/e-e-a-t/';
+const datum = '2026-10-18';
+const definitie = 'E-E-A-T staat voor Experience, Expertise, Authoritativeness en Trustworthiness: ervaring, deskundigheid, autoriteit en betrouwbaarheid. Google gebruikt deze vier begrippen om te beoordelen of content te vertrouwen is.';
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'E-E-A-T',
+    alternateName: ['EEAT', 'Experience, Expertise, Authoritativeness, Trustworthiness'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Wat is E-E-A-T?',
+    inLanguage: 'nl-NL',
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    mainEntity: { '@id': `${site.url}${url}#begrip` },
+  },
+];
+const hoofdstukken = [
+  { id: 'letters', titel: 'De vier letters uitgelegd' },
+  { id: 'herkomst', titel: 'Waar E-E-A-T vandaan komt' },
+  { id: 'rankingfactor', titel: 'Is het een rankingfactor?' },
+  { id: 'vertrouwen', titel: 'Waarom vertrouwen het zwaarst weegt' },
+  { id: 'ymyl', titel: 'YMYL: waar Google strenger is' },
+  { id: 'beoordelen', titel: 'Hoe Google het inschat' },
+  { id: 'aan-de-slag', titel: 'Per letter aan de slag' },
+  { id: 'voorbeeld', titel: 'Twee voorbeelden' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'ai', titel: 'AI-teksten en AI-zoekmachines' },
+  { id: 'per-pagina', titel: 'Welke pagina wat laat zien' },
+  { id: 'checklist', titel: 'Checklist voor je eigen site' },
+  { id: 'zelf', titel: 'Hoe we het zelf doen' },
+];
+---
+<Base
+  title="Wat is E-E-A-T? Uitleg in gewone taal | Drijfveer Media"
+  description="Wat is E-E-A-T? Ervaring, deskundigheid, autoriteit en betrouwbaarheid: zo beoordeelt Google of je content te vertrouwen is. Met voorbeelden en checklist."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'E-E-A-T', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · SEO</p>
+        <h1>Wat is E-E-A-T?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Letters items={[
+        { letter: 'E', en: 'Experience', nl: 'Heb je het zelf gedaan?' },
+        { letter: 'E', en: 'Expertise', nl: 'Weet je waar je het over hebt?' },
+        { letter: 'A', en: 'Authoritativeness', nl: 'Zien anderen je als bron?' },
+        { letter: 'T', en: 'Trustworthiness', nl: 'Kun je vertrouwd worden?' },
+      ]} label="De vier letters van E-E-A-T" /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Wat is E-E-A-T, en waarom hoor je het overal zodra het over Google gaat? Kort gezegd: het is de lat waarlangs Google kwaliteit meet. Niet met een score, maar met vier vragen. Heeft de maker dit zelf meegemaakt? Weet hij er genoeg van? Zien anderen hem als bron? En kun je erop vertrouwen? Hieronder lees je wat er achter die vragen zit, wat Google er zelf over zegt en wat je er als ondernemer morgen mee kunt.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={14} />
+
+      <h2 id="letters">De vier letters uitgelegd</h2>
+      <p>De afkorting is Engels. Elke letter staat voor een eigenschap van de maker van een pagina, of van de website als geheel. Je spreekt het uit als vier losse letters. Google noemde het bij de introductie ook wel "double E-A-T".</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Letter</th><th>Betekenis</th><th>De vraag erachter</th><th>Zo laat je het zien</th></tr></thead>
+          <tbody>
+            <tr><td><b>E</b></td><td>Experience: ervaring</td><td>Heeft de maker het zelf gedaan, gebruikt of meegemaakt?</td><td>Eigen foto's, eigen cijfers, verslagen van echte klussen</td></tr>
+            <tr><td><b>E</b></td><td>Expertise: deskundigheid</td><td>Heeft de maker de kennis of vaardigheid die het onderwerp vraagt?</td><td>Opleiding, vakkennis, uitleg die tot in de details klopt</td></tr>
+            <tr><td><b>A</b></td><td>Authoritativeness: autoriteit</td><td>Is de maker of de site een bekende bron voor dit onderwerp?</td><td>Vermeldingen en backlinks van andere sites, bekendheid in de branche</td></tr>
+            <tr><td><b>T</b></td><td>Trustworthiness: betrouwbaarheid</td><td>Is de pagina juist, eerlijk, veilig en betrouwbaar?</td><td>Contactgegevens, bronnen, eerlijke reviews, een veilige site</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Ervaring en deskundigheid lijken op elkaar, maar zijn niet hetzelfde. Een loodgieter met dertig jaar praktijk heeft ervaring. Een docent installatietechniek heeft deskundigheid. Voor een review van een cv-ketel wil je de eerste. Voor de regels rond gasleidingen liefst allebei.</p>
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="herkomst">Waar E-E-A-T vandaan komt</h2></div>
+      <p>Google laat zijn zoekresultaten beoordelen door mensen van buiten het bedrijf, de zogeheten quality raters. Zij werken met een lange handleiding: de Search Quality Rater Guidelines. De versie van 11 september 2025 telt 182 pagina's. E-E-A-T is daarin een van de begrippen waar de raters steeds op terugvallen.</p>
+      <p>De raters stellen niet zelf je positie vast. Google gebruikt hun oordeel om te testen of veranderingen aan het zoeksysteem betere resultaten geven. Google vergelijkt het met de kaartjes waarop gasten in een restaurant hun mening geven: nuttige feedback, maar de kok bepaalt het menu. Hoeveel er getest wordt, laat Google zelf zien. In 2023 deed Google volgens eigen cijfers 719.326 van zulke kwaliteitstests. Daarbovenop kwamen 124.942 proeven waarbij raters twee sets resultaten naast elkaar legden.</p>
+      <p>Eerst heette het E-A-T, met drie letters. Op 15 december 2022 kwam de eerste E erbij, van experience. Google gaf daar een helder voorbeeld bij. Wil je weten hoe je je belastingaangifte invult, dan zoek je een expert in boekhouden. Zoek je reviews van belastingsoftware, dan wil je juist mensen horen die er zelf mee gewerkt hebben. Beide zijn waardevol, op een ander moment.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="rankingfactor">Is E-E-A-T een rankingfactor?</h2></div>
+      <p>Nee, niet direct. Google schrijft zelf dat E-E-A-T geen specifieke rankingfactor is. Er bestaat geen E-E-A-T-score die je ergens kunt opvragen. Wat Google wel doet, is een mix van signalen gebruiken die samen laten zien of content goede E-E-A-T heeft. Denk aan wie de maker is, hoe andere sites naar je verwijzen en of je informatie klopt.</p>
+      <p>Het verschil lijkt klein, maar het voorkomt verkeerde verwachtingen. Een auteursblokje toevoegen levert op zich geen posities op. Een auteur die echt verstand van zaken heeft en dat laat zien in zijn tekst, wel. Google raadt aan de richtlijnen vooral te lezen om je eigen content eerlijk te beoordelen.</p>
+      <h3>Vijf misverstanden</h3>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Je hoort weleens</th><th>Wat Google zelf zegt</th></tr></thead>
+          <tbody>
+            <tr><td>"Je E-E-A-T-score moet omhoog."</td><td>Zo'n score bestaat niet. Het is een kader, geen getal.</td></tr>
+            <tr><td>"Het geldt alleen voor medische en financiële sites."</td><td>Het geldt voor alle content. Bij YMYL-onderwerpen weegt het alleen extra zwaar.</td></tr>
+            <tr><td>"Een auteursvak toevoegen is genoeg."</td><td>Het gaat om wat erachter zit: echte kennis en ervaring die je in de tekst terugziet.</td></tr>
+            <tr><td>"Langere teksten scoren beter."</td><td>Google heeft geen voorkeur voor een aantal woorden. Schrijven naar een woordaantal noemt Google zelfs een waarschuwingssignaal.</td></tr>
+            <tr><td>"De raters bepalen je positie."</td><td>Raters hebben geen invloed op hoe een pagina scoort. Hun oordeel dient om het systeem te testen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="vertrouwen">Waarom vertrouwen het zwaarst weegt</h2></div>
+      <p>Volgens Google is de T de belangrijkste letter. De andere drie dragen bij aan vertrouwen, maar een pagina hoeft ze niet alle drie te hebben. De handleiding geeft een voorbeeld dat blijft hangen. Een financiële oplichter kan heel ervaren en deskundig zijn in oplichten. Toch is zijn pagina onbetrouwbaar, en daarmee is de E-E-A-T laag.</p>
+      <p>Hoeveel vertrouwen nodig is, hangt af van de pagina. Google noemt een paar voorbeelden:</p>
+      <ul>
+        <li>Een webwinkel heeft een veilige betaling en goede klantenservice nodig.</li>
+        <li>Een productreview moet eerlijk zijn en kopers helpen, niet alleen verkopen.</li>
+        <li>Uitleg over een YMYL-onderwerp moet kloppen, anders doet hij schade.</li>
+        <li>Een grappig berichtje over een luchtig onderwerp heeft weinig vertrouwen nodig.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="munten" maat={52} /><h2 id="ymyl">YMYL: waar Google extra streng is</h2></div>
+      <p>YMYL staat voor "your money or your life". Het zijn onderwerpen waar slechte informatie echte schade kan doen aan iemands gezondheid, geld of veiligheid, of aan de samenleving. Voor die onderwerpen geeft Google volgens eigen zeggen nog meer gewicht aan sterke E-E-A-T. De handleiding deelt ze in vier groepen in.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort YMYL</th><th>Waar het om gaat</th><th>Voorbeelden uit het mkb</th></tr></thead>
+          <tbody>
+            <tr><td>Gezondheid en veiligheid</td><td>Lichamelijke en geestelijke gezondheid, veiligheid, ook online</td><td>Fysiotherapeut, tandarts, elektricien, gasinstallateur</td></tr>
+            <tr><td>Financiële zekerheid</td><td>Je vermogen om jezelf en je gezin te onderhouden</td><td>Boekhouder, hypotheekadviseur, verzekeraar</td></tr>
+            <tr><td>Overheid en samenleving</td><td>Verkiezingen, publieke instellingen, regels die mensen raken</td><td>Juridisch advies, uitleg over vergunningen</td></tr>
+            <tr><td>Overig</td><td>Andere onderwerpen die mensen of de samenleving kunnen schaden</td><td>Per geval bekijken</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Valt jouw vak hieronder, dan is er een tweede vraag: is ervaring genoeg, of moet het van een deskundige komen? De richtlijnen maken dat onderscheid zelf. Een forum waar mensen delen hoe ze een zware behandeling doorkomen, kan veel waarde hebben door die ervaring. Maar welke behandeling werkt en welke medicijnen veilig zijn, hoort van experts te komen.</p>
+      <p>Vertaald naar een boekhoudkantoor: ondernemers die vertellen hoe zij hun eerste aangifte beleefden, is mooie ervaring. Hoe de aftrekposten werken, is werk voor de deskundige.</p>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2 id="beoordelen">Hoe Google E-E-A-T inschat</h2></div>
+      <p>De raters krijgen drie plekken om te kijken. Ze zijn ook voor jou het handigste startpunt.</p>
+      <ol>
+        <li><b>Wat de site over zichzelf zegt.</b> De over-ons-pagina, de profielen van de makers, de contactgegevens.</li>
+        <li><b>Wat anderen erover zeggen.</b> Onafhankelijke reviews, nieuwsberichten, vermeldingen op andere sites. Een rater googelt dus je bedrijfsnaam.</li>
+        <li><b>Wat er op de pagina zelf te zien is.</b> Soms blijkt deskundigheid gewoon uit het werk. Een kapper die in een video laat zien hoe ze knipt, hoeft geen diploma te tonen.</li>
+      </ol>
+      <p>Google geeft makers zelf drie vragen mee: wie, hoe en waarom.</p>
+      <ul>
+        <li><b>Wie</b> heeft het gemaakt? Is dat voor een bezoeker meteen duidelijk, met een naam die leidt naar meer achtergrond? Google raadt sterk aan om juiste informatie over de auteur toe te voegen.</li>
+        <li><b>Hoe</b> is het gemaakt? Heb je een product zelf getest, laat dan zien hoe. Gebruik je AI of andere automatisering, leg dat dan uit waar een lezer dat zou verwachten.</li>
+        <li><b>Waarom</b> is het gemaakt? Volgens Google misschien wel de belangrijkste vraag. Het antwoord moet zijn: om mensen te helpen. Niet om bezoekers uit zoekmachines te trekken.</li>
+      </ul>
+      <p>Dat laatste is de kern van wat Google helpful content noemt. Het systeem dat in 2022 onder die naam begon, is sinds maart 2024 onderdeel van de gewone rankingsystemen. De gedachte erachter is gebleven.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="aan-de-slag">Wat is E-E-A-T in de praktijk? Per letter aan de slag</h2></div>
+      <p>Theorie genoeg. Dit kun je per letter doen, ook zonder groot budget.</p>
+
+      <h3>Ervaring laten zien</h3>
+      <ul class="vink">
+        <li>Gebruik eigen foto's van eigen werk, geen stockfoto's van lachende monteurs.</li>
+        <li>Noem cijfers uit je praktijk: hoe lang een klus duurde, wat het kostte, wat er misging.</li>
+        <li>Schrijf cases: de vraag van de klant, wat je deed, wat het opleverde. Alleen met toestemming en zonder te overdrijven.</li>
+        <li>Vertel ook wat je níet zou doen en waarom. Dat schrijft alleen iemand die het heeft meegemaakt.</li>
+      </ul>
+
+      <h3>Deskundigheid aantonen</h3>
+      <ul class="vink">
+        <li>Zet bij elk artikel een auteur, met naam, functie en een link naar een korte profielpagina.</li>
+        <li>Noem op die pagina opleiding, erkenningen en jaren in het vak. Alleen wat klopt.</li>
+        <li>Verwijs naar goede bronnen als je feiten noemt: de wet, een richtlijn, de maker van een product.</li>
+        <li>Laat een vakkundige collega lastige teksten nalezen, en vermeld dat.</li>
+      </ul>
+
+      <h3>Autoriteit opbouwen</h3>
+      <ul class="vink">
+        <li>Zorg dat andere sites in je branche naar je verwijzen. Backlinks van relevante sites wegen zwaarder dan veel links van willekeurige sites. Hoe dat werkt, lees je in de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</li>
+        <li>Wees zichtbaar waar je klanten kijken: brancheverenigingen, lokale nieuwssites, vakbladen.</li>
+        <li>Schrijf over een afgebakend vak. Een site die alles over dakramen weet, wint het van een site die van alles een beetje weet.</li>
+      </ul>
+
+      <h3>Betrouwbaarheid regelen</h3>
+      <ul class="vink">
+        <li>Maak contactgegevens makkelijk te vinden: adres, telefoon, e-mail en KvK-nummer.</li>
+        <li>Zorg voor een beveiligde site met een <a href="/kennisbank/wat-is/ssl-certificaat/">ssl-certificaat</a>, een privacyverklaring en duidelijke voorwaarden.</li>
+        <li>Verzamel reviews op Google en reageer op alle reviews, ook de kritische. Lees de gids over <a href="/kennisbank/gidsen/google-reviews/">Google-reviews</a>.</li>
+        <li>Houd oude pagina's actueel. Een prijs uit 2019 ondermijnt alles wat je goed doet.</li>
+        <li>Wees duidelijk over belangen. Verdien je aan een product dat je aanraadt, zeg dat dan.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="voorbeeld">Twee voorbeelden</h2></div>
+      <h3>Twee fysiotherapeuten</h3>
+      <p>Twee fysiotherapeuten schrijven allebei een pagina over rugpijn. De eerste plakt een algemene tekst online, zonder naam erbij. De tweede schrijft zelf. Ze noemt haar opleiding en twintig jaar praktijkervaring, laat oefeningen zien die ze met patiënten doet en verwijst naar de richtlijn van haar beroepsvereniging. Onder de pagina staan reviews van echte patiënten. Rugpijn is een gezondheidsonderwerp, dus YMYL. Je voelt zelf wel welke pagina Google liever laat zien. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <h3>Een installateur in Hoogeveen, voor en na</h3>
+      <p>Een installatiebedrijf wil gevonden worden op warmtepompen. Zo zag de pagina eruit, en zo na een middag werk. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Letter</th><th>Voor</th><th>Na</th></tr></thead>
+          <tbody>
+            <tr><td>Ervaring</td><td>Stockfoto van een warmtepomp</td><td>Foto's van drie eigen installaties in de regio, met het type woning erbij</td></tr>
+            <tr><td>Deskundigheid</td><td>Geen naam onder de tekst</td><td>Geschreven door de eigenaar, met zijn erkenningen en jaren in het vak</td></tr>
+            <tr><td>Autoriteit</td><td>Niemand verwijst naar de site</td><td>Vermelding bij de leverancier en een artikel op een lokale nieuwssite</td></tr>
+            <tr><td>Betrouwbaarheid</td><td>Alleen een contactformulier</td><td>Adres, telefoon, KvK-nummer, reviews en een eerlijk verhaal over wanneer een warmtepomp níet past</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Niets hiervan is een truc. Het zijn dingen die een klant ook wil zien voordat hij belt.</p>
+
+      <div class="stap-kop"><Tekening naam="lamp" maat={52} /><h2 id="fouten">Veelgemaakte fouten</h2></div>
+      <ul>
+        <li><b>Een auteursvak zonder inhoud.</b> Alleen "Redactie" of een voornaam zegt niets. Laat zien wie het is en waarom die persoon het weet.</li>
+        <li><b>Verzonnen deskundigen.</b> Een nepnaam met een stockfoto valt door de mand bij iedereen die even zoekt. In de richtlijnen krijgt een pagina die misleidt over wie erachter zit het laagste oordeel.</li>
+        <li><b>Schrijven over alles.</b> Een bouwbedrijf met artikelen over beleggen en recepten verwatert zijn profiel. Blijf bij je vak.</li>
+        <li><b>Reviews negeren.</b> Een slechte review zonder antwoord zegt meer dan de review zelf.</li>
+        <li><b>Datums oppoetsen.</b> Google noemt het een waarschuwingssignaal als je de datum van een pagina aanpast zonder dat de inhoud echt verandert.</li>
+        <li><b>Bronnen weglaten.</b> Een cijfer zonder bron is een mening. Noem waar het vandaan komt.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="ai" maat={52} /><h2 id="ai">E-E-A-T, AI-teksten en AI-zoekmachines</h2></div>
+      <p>Mag je teksten met AI schrijven? Volgens Google wel, zolang ze mensen echt helpen. Google zei in februari 2023 dat het beloont wat nuttig is, ongeacht hoe het gemaakt is. Wat niet mag, is automatisering inzetten met als hoofddoel posities manipuleren. Massaal pagina's laten schrijven over onderwerpen waar je geen verstand van hebt, valt daaronder.</p>
+      <p>Het lastige punt is de eerste E. Een taalmodel heeft nooit een dak gerepareerd. De ervaring moet dus van jou komen: je eigen foto's, je eigen cijfers, je eigen mening. Wij gebruiken zelf AI bij ons werk en leggen op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a> uit hoe.</p>
+      <p>Bij AI-zoekmachines telt het net zo. ChatGPT, Gemini en de AI-overzichten van Google zetten bronnen bij hun antwoord. Google zegt dat voor zijn eigen AI-functies dezelfde basisregels gelden als voor de gewone zoekresultaten. Een site die herkenbaar is als deskundige, betrouwbare bron, maakt dus ook daar meer kans. Hoe dat in zijn werk gaat, lees je bij <a href="/generative-engine-optimization/">genoemd worden door AI</a>.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="per-pagina">Welke pagina wat moet laten zien</h2></div>
+      <p>Niet elke pagina hoeft alles te doen. Een rater kijkt naar het doel van de pagina en naar de site als geheel. Zo verdeel je het werk.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Pagina</th><th>Wat daar het meeste telt</th></tr></thead>
+          <tbody>
+            <tr><td>Homepage</td><td>Wie je bent, wat je doet, voor wie en waar. Een echte naam en een echt adres.</td></tr>
+            <tr><td>Dienstpagina</td><td>Ervaring: eigen werk, prijzen, werkwijze, reviews van klanten die precies deze dienst kregen.</td></tr>
+            <tr><td>Artikel of gids</td><td>Deskundigheid: een auteur met profiel, bronnen bij feiten, een datum die klopt.</td></tr>
+            <tr><td>Over ons</td><td>De mensen, hun achtergrond en het verhaal van het bedrijf. Ook wat er ooit misging.</td></tr>
+            <tr><td>Contact</td><td>Betrouwbaarheid: adres, telefoon, openingstijden, KvK-nummer, een route.</td></tr>
+            <tr><td>Cases en reviews</td><td>Bewijs van buiten: wat klanten zeggen en wat het werk opleverde.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>De pagina's versterken elkaar. Een gids van een auteur die op de over-ons-pagina staat, van een bedrijf met reviews en een adres, is samen sterker dan elk los onderdeel. Link ze dus ook naar elkaar.</p>
+
+      <div class="stap-kop"><Tekening naam="ster" maat={52} /><h2 id="checklist">Checklist voor je eigen site</h2></div>
+      <p>Loop deze vragen langs met je eigen website open. Elke "nee" is een klus.</p>
+      <ul class="vink">
+        <li>Staat bij elk artikel wie het schreef, met een link naar een profiel?</li>
+        <li>Heeft je over-ons-pagina echte mensen met foto, rol en ervaring?</li>
+        <li>Zijn adres, telefoonnummer, e-mail en KvK-nummer binnen één klik te vinden?</li>
+        <li>Staan er eigen foto's en eigen cijfers op je belangrijkste pagina's?</li>
+        <li>Heb je cases of projecten die laten zien wat je voor klanten deed?</li>
+        <li>Verwijs je naar bronnen bij feiten en regels?</li>
+        <li>Heb je recente reviews, en reageer je op elke review?</li>
+        <li>Is je site beveiligd en heb je een privacyverklaring?</li>
+        <li>Verwijzen andere sites uit je vak of je regio naar je?</li>
+        <li>Klopt elke prijs en elk feit nog op je oudste pagina's?</li>
+        <li>Weet een klant na het lezen genoeg om een keuze te maken?</li>
+        <li>Ben je eerlijk over wanneer jouw dienst níet de beste keus is?</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2 id="zelf">Hoe we het zelf doen</h2></div>
+      <p>Wie over E-E-A-T schrijft, moet het zelf ook laten zien. Dit vind je op deze site terug. Op elke pagina in de kennisbank staat wie hem schreef en wanneer hij voor het laatst is bijgewerkt. Op <a href="/over-ons/">over ons</a> staan de vier mensen van het team, met hun rol. Onze <a href="/cases/">cases</a> noemen echte cijfers, en we zeggen erbij wat we niet weten. In het <a href="/proeflab/">proeflab</a> vertellen we eerlijk dat een eigen site ooit een penalty van Google kreeg. En onderaan elke pagina staan ons adres in Assen en ons telefoonnummer.</p>
+      <p>Is dat perfect? Nee. Maar het is wat een klant ook wil weten: wie zit erachter, wat hebben ze gedaan en kan ik ze bellen.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Lees de gids <a href="/kennisbank/gidsen/hoe-werkt-seo/">Hoe werkt SEO?</a> of bekijk wat we doen aan <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>. Hoe Google je bedrijf herkent, staat bij <a href="/kennisbank/wat-is/entiteiten/">entiteiten</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Is E-E-A-T een rankingfactor?', a: 'Niet direct. Google schrijft dat E-E-A-T zelf geen specifieke rankingfactor is. Google gebruikt wel een mix van signalen die samen laten zien of content ervaring, deskundigheid, autoriteit en betrouwbaarheid heeft.' },
+      { v: 'Wat betekent de extra E in E-E-A-T?', a: 'De eerste E staat voor experience: eigen ervaring met het onderwerp. Google voegde die letter toe op 15 december 2022. Daarvoor heette het E-A-T.' },
+      { v: 'Welke letter is het belangrijkst?', a: 'De T van trustworthiness, betrouwbaarheid. Volgens Google dragen de andere drie bij aan vertrouwen. Een pagina die niet te vertrouwen is, heeft lage E-E-A-T, hoe deskundig hij ook lijkt.' },
+      { v: 'Wat is YMYL?', a: 'YMYL staat voor your money or your life: onderwerpen waar slechte informatie schade kan doen aan gezondheid, geld, veiligheid of de samenleving. Daar weegt E-E-A-T voor Google extra zwaar.' },
+      { v: 'Wat doet een quality rater?', a: 'Een quality rater is een beoordelaar van buiten Google. Hij bekijkt zoekresultaten aan de hand van de openbare richtlijnen en geeft aan hoe goed ze zijn. Google gebruikt die oordelen om veranderingen te testen. Een rater kan jouw positie niet veranderen.' },
+      { v: 'Kun je E-E-A-T meten?', a: 'Niet als getal. Je kunt wel de onderdelen nalopen: staat er een auteur bij, kloppen je contactgegevens, verwijzen andere sites naar je, heb je recente reviews? De checklist op deze pagina helpt daarbij.' },
+      { v: 'Geldt E-E-A-T ook voor kleine bedrijven?', a: 'Ja. Juist een lokaal bedrijf kan het goed laten zien: eigen foto\'s, een echte eigenaar met een naam, reviews van klanten uit de buurt en een adres dat klopt.' },
+      { v: 'Mag ik AI gebruiken voor mijn teksten?', a: 'Volgens Google wel, zolang de tekst mensen helpt. De ervaring moet wel van jou komen. Content die vooral gemaakt wordt om posities te manipuleren, valt onder het spambeleid van Google.' },
+      { v: 'Hoe snel zie je resultaat van werken aan E-E-A-T?', a: 'Reken op maanden, niet op weken. Google zegt zelf dat sommige veranderingen binnen uren zichtbaar zijn en andere maanden kosten. Vertrouwen en autoriteit bouw je stap voor stap op.' },
+    ]}
+  />
+
+  <Actie titel="Hoe scoort jouw site op E-E-A-T?" tekst={`We kijken het gratis voor je na. ${site.contactpersoon} belt je met de drie punten die het meeste opleveren.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 0 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

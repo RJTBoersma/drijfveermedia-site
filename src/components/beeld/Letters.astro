@@ -1,0 +1,24 @@
+---
+// Vier letters, vier begrippen. Voor uitleg van een afkorting zoals E-E-A-T.
+interface Props { items: { letter: string; en: string; nl: string }[]; label?: string }
+const { items, label = 'De letters uitgelegd' } = Astro.props;
+---
+<figure class="letters" aria-label={label}>
+  {items.map((i, n) => (
+    <div class="tegel" style={`--n:${n}`}>
+      <b aria-hidden="true">{i.letter}</b>
+      <span class="en">{i.en}</span>
+      <span class="nl">{i.nl}</span>
+    </div>
+  ))}
+</figure>
+<style>
+  .letters { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .tegel { align-content: start; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 2px; animation: in 0.5s ease both; animation-delay: calc(var(--n) * 110ms); }
+  .tegel:last-child { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .tegel:last-child .nl { color: #c9d8e4; }
+  b { font-size: 3.2rem; font-weight: 900; line-height: 1; letter-spacing: -0.04em; color: var(--orange); }
+  .en { font-weight: 800; }
+  .nl { color: var(--muted); font-size: 0.95rem; }
+  @keyframes in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+</style>

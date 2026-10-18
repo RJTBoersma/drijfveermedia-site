@@ -1,0 +1,68 @@
+---
+// Scène voor /kennisbank/wat-is/copywriting/: een webpagina waar de vage kop plaatsmaakt voor een kop die iets belooft, met een pen ernaast.
+// Als hij leeft: een streep gaat door de oude zin, de pen schrijft mee, de balk met aanvragen groeit en er komt een aanvraag binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een webpagina waarop de vage zin "Wij leveren kwaliteit en service" wordt doorgestreept. Daaronder staat de kop "Morgen een lekvrij dak" met een oranje knop. Rechts een pen en een grafiek met aanvragen die groeit.'}>
+  <!-- de pagina -->
+  <rect x="24" y="28" width="280" height="214" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="42" cy="44" r="4" fill="#d9e1ea" />
+  <circle cx="54" cy="44" r="4" fill="#d9e1ea" />
+  <circle cx="66" cy="44" r="4" fill="#d9e1ea" />
+  <text x="44" y="76" font-size="12" class="zacht">Wij leveren kwaliteit en service</text>
+  <text x="44" y="106" font-size="20" font-weight="800">Morgen een lekvrij dak</text>
+  <path class="a" d="M44 116h176" />
+  <rect class="v" x="44" y="130" width="220" height="8" rx="4" />
+  <rect class="v" x="44" y="146" width="180" height="8" rx="4" />
+  <rect x="44" y="170" width="150" height="34" rx="10" fill="#ff6600" />
+  <text x="119" y="192" font-size="13" font-weight="800" text-anchor="middle" style="fill:#fff">Plan je inspectie</text>
+  <rect x="44" y="218" width="120" height="7" rx="3.5" fill="#e8eef4" />
+
+  <!-- de pen -->
+  <g class="pen">
+    <path d="M372 40l26 26-62 62-32 8 8-32z" fill="#fff" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+    <path class="l" d="M362 50l26 26" />
+    <path class="o" d="M312 128l-8 8 8-2z" />
+    <path class="l" d="M314 104l18 18" />
+  </g>
+
+  <!-- de grafiek met aanvragen -->
+  <rect x="330" y="150" width="128" height="92" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="344" y="170" font-size="11" font-weight="800">Aanvragen</text>
+  <rect x="348" y="208" width="18" height="22" rx="3" fill="#d9e1ea" />
+  <rect x="376" y="198" width="18" height="32" rx="3" fill="#d9e1ea" />
+  <rect x="404" y="186" width="18" height="44" rx="3" fill="#074663" />
+  <path d="M340 230h108" stroke="#d9e1ea" stroke-width="2" />
+
+  {!mini && (
+    <g>
+      <path class="copy-streep" d="M40 72h196" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" pathLength="1" />
+      <rect class="copy-groei" x="430" y="180" width="18" height="50" rx="3" fill="#ff6600" />
+      <g class="copy-melding">
+        <rect x="200" y="166" width="110" height="34" rx="12" fill="#fff" stroke="#1f8a5b" stroke-width="2" />
+        <circle cx="218" cy="183" r="8" fill="#1f8a5b" />
+        <path d="M214.5 183l2.5 2.5 4.5-5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="232" y="187.5" font-size="11.5" font-weight="800">+1 aanvraag</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .pen { transform-box: fill-box; transform-origin: 10% 90%; }
+  .copy-streep { stroke-dasharray: 1; }
+  .copy-groei { transform-box: fill-box; transform-origin: bottom center; }
+  .copy-melding { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .copy-streep { stroke-dashoffset: 1; }
+  :global(.teken-js) .copy-groei { transform: scaleY(0); }
+  :global(.teken-js) .copy-melding { opacity: 0; }
+  .in-beeld .copy-streep { animation: kennisbank-wat-is-copywriting-streep 0.9s cubic-bezier(.6,.1,.3,1) 0.5s forwards; }
+  .in-beeld .pen { animation: kennisbank-wat-is-copywriting-pen 4s ease-in-out 1.4s infinite; }
+  .in-beeld .copy-groei { animation: kennisbank-wat-is-copywriting-groei 6s ease-out 1.4s infinite; }
+  .in-beeld .copy-melding { animation: kennisbank-wat-is-copywriting-melding 6s ease-in-out 1.4s infinite; }
+  @keyframes kennisbank-wat-is-copywriting-streep { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-wat-is-copywriting-pen { 0%, 100% { transform: none; } 25% { transform: translate(-4px, 3px) rotate(-3deg); } 50% { transform: translate(2px, -2px); } 75% { transform: translate(-2px, 2px) rotate(2deg); } }
+  @keyframes kennisbank-wat-is-copywriting-groei { 0%, 20% { transform: scaleY(0); } 40%, 90% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+  @keyframes kennisbank-wat-is-copywriting-melding { 0%, 30% { opacity: 0; transform: translateY(8px) scale(.9); } 38%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .copy-streep, .in-beeld .pen, .in-beeld .copy-groei, .in-beeld .copy-melding { animation: none; } }
+</style>

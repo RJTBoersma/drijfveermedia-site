@@ -1,0 +1,28 @@
+---
+// Gids "Wat kost SEO?": het rekenvoorbeeld uit de tekst in munten. € 495 kosten tegenover twee klanten van € 1.000.
+// Eén munt is ongeveer € 125, dus 4 munten tegenover 16.
+const kosten = 4, opbrengst = 16;
+const munt = (x: number, i: number, kleur: string) => `<g class="munt" style="--i:${i}"><ellipse cx="${x}" cy="${222 - i * 9}" rx="34" ry="9" fill="${kleur}" stroke="#10283f" stroke-width="2"/><path d="M${x - 34} ${222 - i * 9}v-5a34 9 0 0 0 68 0v5" fill="${kleur}" stroke="#10283f" stroke-width="2" transform="translate(0 0)"/></g>`;
+const linker = Array.from({ length: kosten }, (_, i) => munt(110, i, '#e8eef4')).join('');
+const rechter = Array.from({ length: opbrengst }, (_, i) => munt(310, i, '#ff6600')).join('');
+---
+<figure class="munten card">
+  <svg class="scene" viewBox="0 0 420 300" data-teken role="img" aria-label="Rekenvoorbeeld: 495 euro per maand aan SEO tegenover 2.000 euro aan twee nieuwe klanten.">
+    <g set:html={linker} />
+    <g set:html={rechter} />
+    <path class="l" pathLength="1" d="M30 240H390" />
+    <text x="110" y="268" text-anchor="middle" font-weight="900" font-size="17">€ 495</text>
+    <text x="110" y="288" text-anchor="middle" font-size="13" class="zacht">SEO per maand</text>
+    <text x="310" y="268" text-anchor="middle" font-weight="900" font-size="17">€ 2.000</text>
+    <text x="310" y="288" text-anchor="middle" font-size="13" class="zacht">2 nieuwe klanten</text>
+    <path class="a" pathLength="1" d="M170 120c40-40 80-50 110-40M268 70l14 10-12 12" />
+  </svg>
+  <figcaption class="klein muted">Het voorbeeld uit de tekst: een klant levert gemiddeld € 1.000 op.</figcaption>
+</figure>
+<style>
+  .munten { margin: 28px 0; padding: 18px; max-width: 460px; }
+  .munten :global(.munt) { transform-box: fill-box; }
+  :global(.teken-js) .munten :global(.munt) { opacity: 0; transform: translateY(-40px); transition: all 0.35s cubic-bezier(.4,1.4,.6,1); transition-delay: calc(0.4s + var(--i) * 0.12s); }
+  :global(.teken-js) :global(.in-beeld) :global(.munt) { opacity: 1; transform: none; }
+  figcaption { margin-top: 6px; }
+</style>

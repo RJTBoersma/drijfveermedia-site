@@ -1,0 +1,32 @@
+---
+// Afsluitend blok met Thorgall (AIDA: action).
+import { site } from '../../data/site';
+interface Props { titel?: string; tekst?: string; knop?: { tekst: string; href: string } }
+const {
+  titel = 'Benieuwd waar jouw grootste kans zit?',
+  tekst = `${site.contactpersoon} belt je binnen 15 minuten terug en vraagt eerst wat jij wilt bereiken. Pas daarna praten we over geld.`,
+  knop = { tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' },
+} = Astro.props;
+---
+<section class="wrap sectie" data-aida="action">
+  <div class="card actie">
+    <img class="gezicht" src="/img/team/thorgall-klein.webp" width="88" height="88" alt={`${site.contactpersoon} van Drijfveer Media`} loading="lazy" decoding="async" />
+    <div>
+      <h2>{titel}</h2>
+      <p class="muted">{tekst}</p>
+    </div>
+    <div class="acties">
+      <a class="btn" href={knop.href}>{knop.tekst}</a>
+      <span class="klein">Of bel <a class="tel" href={site.telefoonLink}>{site.telefoon}</a></span>
+    </div>
+  </div>
+</section>
+<style>
+  .actie { padding: 28px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 20px 32px; align-items: center; }
+  .actie h2 { font-size: var(--step-2); }
+  .actie p { margin: 8px 0 0; }
+  .gezicht { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; object-position: top; background: #e8eef4; }
+  .acties { display: grid; gap: 8px; justify-items: start; }
+  .tel { font-weight: 800; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  @media (max-width: 800px) { .actie { grid-template-columns: minmax(0, 1fr); } }
+</style>

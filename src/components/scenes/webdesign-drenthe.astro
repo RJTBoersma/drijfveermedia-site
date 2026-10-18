@@ -1,0 +1,72 @@
+---
+// Scène voor /webdesign-drenthe/: in een Drents landschap met een hunebed en bomen zet een bouwkraan het laatste blok in een website. Een cursor tikt op de belknop.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een Drents landschap met een hunebed en bomen. Een bouwkraan zet het laatste blok in een nieuwe website en een cursor tikt op de belknop.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- grond en heide -->
+  <path class="l" d="M14 232H466" />
+  <path d="M20 232c10-8 20-8 30 0M150 232c8-6 16-6 24 0M410 232c8-6 16-6 24 0" stroke="#b9c8d6" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  <!-- hunebed -->
+  <ellipse cx="52" cy="218" rx="10" ry="14" fill="#e8eef4" stroke="#074663" stroke-width="2.5" />
+  <ellipse cx="82" cy="220" rx="10" ry="12" fill="#e8eef4" stroke="#074663" stroke-width="2.5" />
+  <ellipse cx="110" cy="218" rx="10" ry="14" fill="#e8eef4" stroke="#074663" stroke-width="2.5" />
+  <path d="M34 200c6-14 70-18 90-6 8 6 4 14-6 14H42c-8 0-12-3-8-8z" fill="#c9d3dd" stroke="#074663" stroke-width="2.5" stroke-linejoin="round" />
+  <!-- bomen -->
+  <path class="l" d="M146 232v-30" />
+  <circle class="v" cx="146" cy="186" r="20" />
+  <circle class="l" cx="146" cy="186" r="20" />
+  <path class="l" d="M452 232v-26" />
+  <path class="v" d="M452 160l18 46h-36z" />
+  <path class="l" d="M452 160l18 46h-36z" />
+  <!-- website in aanbouw -->
+  <rect x="172" y="62" width="232" height="160" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M172 82h232" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="186" cy="72" r="3.5" fill="#d9e1ea" /><circle cx="198" cy="72" r="3.5" fill="#d9e1ea" /><circle cx="210" cy="72" r="3.5" fill="#d9e1ea" />
+  <rect x="186" y="94" width="90" height="10" rx="4" fill="#074663" />
+  <rect class="v" x="186" y="112" width="204" height="40" rx="6" />
+  <rect x="198" y="124" width="120" height="7" rx="3" fill="#fff" />
+  <rect x="186" y="160" width="62" height="18" rx="9" fill="#ff6600" />
+  <text x="217" y="173" text-anchor="middle" font-size="9" font-weight="800" style="fill:#fff">Bel direct</text>
+  <rect class="v" x="186" y="186" width="96" height="26" rx="5" />
+  <rect x="294" y="186" width="96" height="26" rx="5" fill="none" stroke="#b9c8d6" stroke-width="2" stroke-dasharray="5 4" />
+  <!-- bouwkraan -->
+  <path class="l" d="M430 232V40M424 232V40M424 60l6 10M424 90l6 10M424 120l6 10M424 150l6 10M424 180l6 10M424 210l6 10" />
+  <path class="l" d="M300 40h170M300 40l124-14v14M470 40v8" />
+  <rect x="456" y="44" width="16" height="12" rx="2" fill="#074663" />
+  <rect x="418" y="40" width="18" height="14" rx="3" fill="#ff6600" />
+  <path class="l" d="M342 40v14" />
+  <path class="l" d="M338 54h8M342 54v4" />
+  {!mini && (
+    <g>
+      <path class="webdesign-drenthe-kabel" d="M342 58V180" stroke="#074663" stroke-width="2" fill="none" />
+      <g class="webdesign-drenthe-blok">
+        <rect x="294" y="186" width="96" height="26" rx="5" fill="#ffe3cf" stroke="#ff6600" stroke-width="2" />
+        <text x="342" y="203" text-anchor="middle" font-size="9" font-weight="800">Werkgebied</text>
+        <path d="M342 180v6" stroke="#074663" stroke-width="2" />
+      </g>
+      <g class="webdesign-drenthe-cursor">
+        <circle class="webdesign-drenthe-tik" cx="246" cy="174" r="9" fill="none" stroke="#ff6600" stroke-width="2.5" />
+        <path d="M246 174l0 22 6-6 5 10 4-2-5-10 8 0z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .webdesign-drenthe-kabel { transform-box: fill-box; transform-origin: 50% 0; }
+  .webdesign-drenthe-tik { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .webdesign-drenthe-kabel { transform: scaleY(0.05); }
+  :global(.teken-js) .webdesign-drenthe-blok { transform: translateY(-126px); opacity: 0; }
+  :global(.teken-js) .webdesign-drenthe-tik { opacity: 0; }
+  .in-beeld .webdesign-drenthe-kabel { animation: webdesign-drenthe-kabel 2s cubic-bezier(.5,0,.3,1) 0.5s forwards; }
+  .in-beeld .webdesign-drenthe-blok { animation: webdesign-drenthe-blok 2s cubic-bezier(.5,0,.3,1) 0.5s forwards; }
+  .in-beeld .webdesign-drenthe-tik { animation: webdesign-drenthe-tik 4s ease-out 2.8s infinite; }
+  .in-beeld .webdesign-drenthe-cursor { animation: webdesign-drenthe-druk 4s ease-in-out 2.8s infinite; }
+  @keyframes webdesign-drenthe-kabel { to { transform: scaleY(1); } }
+  @keyframes webdesign-drenthe-blok { 0% { opacity: 1; transform: translateY(-126px); } 100% { opacity: 1; transform: none; } }
+  @keyframes webdesign-drenthe-tik { 0%, 10% { opacity: 0; transform: scale(0.5); } 15% { opacity: 1; } 45%, 100% { opacity: 0; transform: scale(2.2); } }
+  @keyframes webdesign-drenthe-druk { 0%, 100% { transform: none; } 10% { transform: translate(1px, 2px); } 20% { transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .webdesign-drenthe-kabel, .in-beeld .webdesign-drenthe-blok, .in-beeld .webdesign-drenthe-tik, .in-beeld .webdesign-drenthe-cursor { animation: none; }
+  }
+</style>

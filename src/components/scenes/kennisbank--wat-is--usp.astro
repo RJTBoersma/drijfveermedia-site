@@ -1,0 +1,50 @@
+---
+// Scène voor /kennisbank/wat-is/usp/: vier winkeltjes naast elkaar. Drie roepen hetzelfde ("Kwaliteit"), één belooft iets concreets.
+// In de volledige versie komt dat ene winkeltje naar voren, worden de andere stiller en fonkelt er een ster boven.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const winkels = [20, 132, 244, 356];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: vier winkeltjes naast elkaar. Drie hebben hetzelfde bord met kwaliteit, één belooft een offerte binnen 48 uur en springt eruit.'}>
+  <path d="M10 222h460" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round" />
+  {winkels.map((x, i) => (
+    <g class={i === 2 ? 'uniek' : 'gewoon'}>
+      <rect x={x} y="84" width="104" height="138" rx="8" fill="#fff" stroke={i === 2 ? '#074663' : '#d9e1ea'} stroke-width={i === 2 ? 3 : 2} />
+      <path d={`M${x} 104h104v-12a8 8 0 0 0-8-8H${x + 8}a8 8 0 0 0-8 8z`} fill={i === 2 ? '#074663' : '#c9d3dd'} />
+      <path d={`M${x} 104q13 14 26 0q13 14 26 0q13 14 26 0q13 14 26 0`} fill={i === 2 ? '#074663' : '#c9d3dd'} />
+      <rect x={x + 14} y="176" width="30" height="46" rx="3" fill="#e8eef4" />
+      <rect x={x + 54} y="176" width="36" height="24" rx="3" fill="#e8eef4" />
+      {i === 2 ? (
+        <g>
+          <text x={x + 52} y="146" font-size="22" font-weight="900" text-anchor="middle" style="fill:#ff6600">48 uur</text>
+          <text x={x + 52} y="163" font-size="11" font-weight="800" text-anchor="middle">offerte</text>
+        </g>
+      ) : (
+        <text x={x + 52} y="150" font-size="13" font-weight="800" text-anchor="middle" class="zacht">Kwaliteit</text>
+      )}
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      <path class="ster" d="M296 34l6 14 15 1-11 10 4 15-14-8-14 8 4-15-11-10 15-1z" fill="#ff6600" />
+      <path class="straal" d="M262 52l-10-6M330 52l10-6M296 22v-10" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+  )}
+</svg>
+<style>
+  .uniek, .ster, .straal { transform-box: fill-box; transform-origin: center bottom; }
+  .ster { transform-origin: center; }
+  :global(.teken-js) .ster, :global(.teken-js) .straal { opacity: 0; }
+  .in-beeld .uniek { animation: kennisbank-wat-is-usp-op 0.7s cubic-bezier(.3,1.5,.5,1) 0.5s forwards; }
+  .in-beeld .gewoon { animation: kennisbank-wat-is-usp-stil 0.7s ease 0.5s forwards; }
+  .in-beeld .ster { animation: kennisbank-wat-is-usp-ster 5s ease-in-out 1.1s infinite; }
+  .in-beeld .straal { animation: kennisbank-wat-is-usp-straal 5s ease-in-out 1.1s infinite; }
+  @keyframes kennisbank-wat-is-usp-op { to { transform: translateY(-14px) scale(1.04); } }
+  @keyframes kennisbank-wat-is-usp-stil { to { opacity: .55; } }
+  @keyframes kennisbank-wat-is-usp-ster { 0% { opacity: 0; transform: scale(.5) rotate(-20deg); } 12%, 80% { opacity: 1; transform: scale(1) rotate(0deg); } 45% { transform: scale(1.12) rotate(8deg); } 100% { opacity: 0; transform: scale(.8); } }
+  @keyframes kennisbank-wat-is-usp-straal { 0%, 10% { opacity: 0; } 20%, 70% { opacity: 1; } 90%, 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .uniek, .in-beeld .gewoon, .in-beeld .ster, .in-beeld .straal { animation: none; }
+  }
+</style>

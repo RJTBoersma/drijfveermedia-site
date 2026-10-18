@@ -1,0 +1,227 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--dns.astro';
+import { site, persoon } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/dns/';
+const datum = '2026-10-18';
+const definitie = 'DNS (Domain Name System) is het adresboek van internet: het zoekt bij een domeinnaam het IP-adres op van de server waar je website of je e-mail draait.';
+const hoofdstukken = [
+  { id: 'adresboek', titel: 'Het adresboek van internet' },
+  { id: 'opzoeken', titel: 'Wat er gebeurt als je een adres intypt' },
+  { id: 'wie-doet-wat', titel: 'Registrar, nameservers en records' },
+  { id: 'records', titel: 'De records die je echt tegenkomt' },
+  { id: 'ttl', titel: 'TTL, cache en propagatie' },
+  { id: 'mail', titel: 'Je e-mail hangt er ook aan' },
+  { id: 'voorbeeld', titel: 'Voorbeeld: een site verhuizen' },
+  { id: 'fouten', titel: 'Fouten die we vaak zien' },
+  { id: 'veilig', titel: 'Veiligheid en storingen' },
+  { id: 'ondernemer', titel: 'Wat moet je ermee?' },
+];
+const schema = [
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${site.url}${url}#begrip`,
+    name: 'DNS',
+    alternateName: ['Domain Name System', 'Domeinnaamsysteem'],
+    description: definitie,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+    url: `${site.url}${url}`,
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${site.url}${url}`,
+    url: `${site.url}${url}`,
+    name: 'Wat is DNS?',
+    about: { '@id': `${site.url}${url}#begrip` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    inLanguage: 'nl-NL',
+    citation: [
+      'https://www.rfc-editor.org/info/rfc882',
+      'https://root-servers.org/',
+      'https://www.sidn.nl/product/nl-domeinnaam',
+      'https://support.google.com/a/answer/48090?hl=nl',
+      'https://support.google.com/a/answer/81126?hl=nl',
+      'https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/',
+    ],
+  },
+];
+---
+<Base
+  title="Wat is DNS? Uitleg, records en voorbeeld | Drijfveer Media"
+  description="Wat is DNS? Het adresboek van internet koppelt je domeinnaam aan je website en e-mail. Zo werken nameservers, records, TTL en propagatie, in gewone taal."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'DNS', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Techniek</p>
+        <h1>Wat is DNS?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="robert" datum={datum} />
+      <p>Je typt jouwbedrijf.nl in de adresbalk en een halve tel later staat je website er. Of je stuurt een offerte naar een klant en die komt netjes aan. Dat lijkt vanzelf te gaan. Achter de schermen doet DNS het opzoekwerk, een systeem dat al ruim veertig jaar draait. Wie weet hoe dat werkt, voorkomt de klassieke paniek na een verhuizing: site weg, mail weg, en niemand weet waarom.</p>
+      <p>Op deze pagina lees je wat het is, wie er welke knoppen heeft, welke records ertoe doen en wat je als ondernemer zelf moet weten. Zonder diploma netwerkbeheer.</p>
+
+      <Inhoud items={hoofdstukken} leestijd={10} />
+
+      <div class="stap-kop"><Tekening naam="boek" maat={52} /><h2 id="adresboek">Het adresboek van internet</h2></div>
+      <p>Computers vinden elkaar via nummers. Elke server op internet heeft een IP-adres, zoals 185.12.34.56. Dat is een oud IPv4-adres. De nieuwere IPv6-adressen zijn nog langer, met letters en dubbele punten erin. Niemand onthoudt die. Daarom bestaan er namen: een domeinnaam als jouwbedrijf.nl. DNS zorgt dat de naam bij het juiste nummer uitkomt.</p>
+      <p>Het Domain Name System koppelt die twee aan elkaar. Vergelijk het met de contacten in je telefoon. Je tikt op "Jan van de bakker" en je telefoon belt het nummer dat erachter zit. Verandert Jan van nummer, dan pas je het één keer aan en de rest gaat vanzelf goed.</p>
+      <p>In de begintijd van internet stond die koppeling in één tekstbestand, dat elke computer zelf moest bijhouden. Dat werd onwerkbaar toen het net groeide. In november 1983 beschreef Paul Mockapetris daarom een nieuw systeem, in de openbare standaard RFC 882. Het idee: geen centraal bestand, maar een boom van servers die elk een stukje van het antwoord weten. Dat ontwerp draait in de basis nog steeds.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2 id="opzoeken">Wat er gebeurt als je een adres intypt</h2></div>
+      <p>Het opzoeken heet een DNS-lookup. Je merkt er niets van, maar er gebeuren tot zes dingen achter elkaar:</p>
+      <ol>
+        <li><strong>Eigen geheugen.</strong> Je browser en je computer kijken eerst of ze het antwoord nog weten van een vorig bezoek.</li>
+        <li><strong>De resolver.</strong> Zo niet, dan gaat de vraag naar een DNS-resolver. Meestal is dat een server van je internetprovider. Die zoekt het antwoord voor je uit.</li>
+        <li><strong>De rootservers.</strong> De resolver begint bovenaan de boom. Een rootserver weet niet waar jouwbedrijf.nl staat, maar wel wie over alle .nl-namen gaat.</li>
+        <li><strong>De .nl-servers.</strong> Die zijn van SIDN, de beheerder van .nl. Ze weten welke nameservers bij jouwbedrijf.nl horen.</li>
+        <li><strong>De gezaghebbende nameserver.</strong> Dat is de server waar de records van jouw domein echt staan. Hij geeft het IP-adres terug.</li>
+        <li><strong>Onthouden.</strong> De resolver geeft het antwoord aan je browser en bewaart het een tijdje. De volgende bezoeker krijgt het meteen.</li>
+      </ol>
+      <p>Dat hele rondje kost meestal een fractie van een seconde. De rootlaag is zwaar uitgevoerd. Volgens root-servers.org bestaat die op 18 oktober 2026 uit 13 rootnamen, beheerd door 12 onafhankelijke organisaties, met samen 2.047 servers verspreid over de wereld. Een paar daarvan staan in Amsterdam.</p>
+
+      <div class="stap-kop"><Tekening naam="team" maat={52} /><h2 id="wie-doet-wat">Registrar, nameservers en DNS-records: wie doet wat?</h2></div>
+      <p>Hier gaat het in de praktijk mis, want er zijn meer partijen dan je denkt. Een domeinnaam koop je niet bij SIDN zelf. Dat gaat via een registrar: een bedrijf dat namen voor je registreert, vaak ook je hostingpartij. SIDN beheert er volgens eigen opgave meer dan 6 miljoen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Partij</th><th>Wat doet het?</th><th>Wat regel je daar?</th></tr></thead>
+          <tbody>
+            <tr><td><b>Registrar</b></td><td>Registreert je domeinnaam op jouw naam</td><td>Eigenaarsgegevens, verlenging, verhuistoken, welke nameservers je gebruikt</td></tr>
+            <tr><td><b>SIDN (bij .nl)</b></td><td>Houdt het register van alle .nl-namen bij</td><td>Niets direct: wijzigingen lopen via je registrar</td></tr>
+            <tr><td><b>Nameservers</b></td><td>Bewaren de records van jouw domein en beantwoorden vragen</td><td>Staan meestal bij je registrar of je hostingpartij</td></tr>
+            <tr><td><b>Hostingpartij</b></td><td>Draait de server waar je website op staat</td><td>Levert het IP-adres voor je A-record</td></tr>
+            <tr><td><b>Mailprovider</b></td><td>Ontvangt en verstuurt je e-mail</td><td>Levert de waarden voor je MX- en TXT-records</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Soms zit alles bij één bedrijf. Dat is overzichtelijk. Vaak is het verspreid: domein bij partij A, website bij partij B, mail bij Microsoft of Google. Dan is het extra belangrijk dat je weet waar de nameservers staan. Daar, en alleen daar, pas je de records aan. Wijzig je de records op een plek waar de nameservers niet naar wijzen, dan gebeurt er helemaal niets.</p>
+
+      <div class="stap-kop"><Tekening naam="tandwiel" maat={52} /><h2 id="records">De records die je echt tegenkomt</h2></div>
+      <p>Een record is één regel in het adresboek van je domein. Elke regel heeft een naam, een type, een waarde en een TTL. Er bestaan tientallen typen. Voor een gewone bedrijfssite heb je er deze nodig:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Record</th><th>Waarvoor</th><th>Voorbeeldwaarde</th></tr></thead>
+          <tbody>
+            <tr><td><b>A-record</b></td><td>Koppelt een naam aan een IPv4-adres van een server</td><td>185.12.34.56</td></tr>
+            <tr><td><b>AAAA</b></td><td>Hetzelfde, maar voor een IPv6-adres</td><td>2a01:7c8:… (lang)</td></tr>
+            <tr><td><b>CNAME</b></td><td>Maakt van een naam een alias van een andere naam</td><td>www wijst naar jouwbedrijf.nl</td></tr>
+            <tr><td><b>MX-record</b></td><td>Vertelt waar e-mail voor je domein heen moet</td><td>mail.provider.nl, met een prioriteit</td></tr>
+            <tr><td><b>TXT</b></td><td>Tekstregels voor controles: SPF, DKIM, DMARC, verificatie bij Google</td><td>v=spf1 include:… ~all</td></tr>
+            <tr><td><b>NS</b></td><td>Noemt de nameservers die over het domein gaan</td><td>ns1.provider.nl</td></tr>
+            <tr><td><b>CAA</b></td><td>Bepaalt welke partij een SSL-certificaat voor je domein mag uitgeven</td><td>0 issue "letsencrypt.org"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Een subdomein is een naam vóór je domein, zoals www.jouwbedrijf.nl, offerte.jouwbedrijf.nl of mail.jouwbedrijf.nl. Je maakt het aan met een eigen A-record of een CNAME. Zo kan een afsprakenmodule van een externe leverancier gewoon onder jouw naam draaien, terwijl de rest van je site blijft waar hij staat.</p>
+      <p>Twee dingen om te onthouden. Een CNAME mag niet naast andere records op dezelfde naam staan, en daarom zet je hem niet op het kale domein zelf. En bij MX geldt: het laagste prioriteitsgetal krijgt de mail eerst. Een tweede MX met een hoger getal is de reserve.</p>
+
+      <div class="stap-kop"><Tekening naam="kalender" maat={52} /><h2 id="ttl">TTL, DNS-cache en propagatie</h2></div>
+      <p>Weet je nog, die resolver die het antwoord een tijdje bewaart? Hoe lang, dat bepaal jij met de TTL: time to live. Die waarde staat bij elk record, in seconden. Een TTL van 3600 betekent: onthoud dit een uur, vraag het daarna opnieuw.</p>
+      <p>Dat bewaren heet de DNS-cache. Het maakt internet snel, maar het verklaart ook waarom een wijziging niet overal tegelijk zichtbaar is. Elke resolver ter wereld houdt het oude antwoord vast tot zijn TTL is verlopen. Het moment waarop alle oude antwoorden zijn vervangen, noemen mensen propagatie. Vroeger hoorde je vaak "dat duurt 24 tot 48 uur". In werkelijkheid hangt het vooral af van de TTL die er vóór je wijziging stond.</p>
+      <p>Google raadt in zijn uitleg voor Workspace-beheerders een TTL van 3600 seconden aan. Wil je snel kunnen wisselen, zet hem dan tijdelijk op 300 (vijf minuten). Staat alles goed, dan kan hij terug naar 86400, één dag. Let op: een kortere TTL werkt pas als de oude periode voorbij is. Verlaag hem dus een dag vóór je verhuizing, niet op het moment zelf.</p>
+      <div class="kader">
+        <p class="kader-titel">Zie je de wijziging zelf nog niet?</p>
+        <ul>
+          <li>Ververs met Ctrl+F5, of open de site in een privévenster.</li>
+          <li>Leeg het geheugen van Windows met het commando <code>ipconfig /flushdns</code> in de opdrachtprompt.</li>
+          <li>Google Public DNS heeft een eigen pagina om een domein uit zijn cache te laten halen (Flush Cache).</li>
+          <li>Werkt het op je telefoon via 4G wel en op kantoor niet? Dan houdt de resolver van je kantoornetwerk nog vast. Wachten of de router herstarten helpt.</li>
+        </ul>
+      </div>
+
+      <div class="stap-kop"><Tekening naam="mail" maat={52} /><h2 id="mail">Je e-mail hangt er ook aan</h2></div>
+      <p>Bij DNS denkt iedereen aan websites. Maar je e-mail leunt er minstens zo zwaar op. Het MX-record bepaalt waar mail voor info@jouwbedrijf.nl wordt afgeleverd. Drie TXT-records bepalen of jouw verzonden mail wordt vertrouwd:</p>
+      <ul class="vink">
+        <li><strong>SPF</strong> somt op welke servers namens jouw domein mogen mailen. Je website, je nieuwsbrieftool en je boekhoudpakket horen er allemaal in.</li>
+        <li><strong>DKIM</strong> zet een digitale handtekening onder elk bericht, zodat de ontvanger ziet dat het echt van jou komt.</li>
+        <li><strong>DMARC</strong> vertelt de ontvangende server wat hij moet doen met mail die niet door die controles komt.</li>
+      </ul>
+      <p>Dit is geen theorie. Volgens Google moet sinds 1 februari 2024 iedereen die naar Gmail-adressen mailt minstens SPF of DKIM hebben ingesteld. Wie meer dan 5.000 berichten per dag stuurt, heeft alle drie nodig. Zonder die records belandt je offerte eerder in de spam of wordt hij geweigerd. Belt een klant dat hij je mail nooit kreeg? Kijk dan eerst hier.</p>
+
+      <div class="stap-kop"><Tekening naam="scherm" maat={52} /><h2 id="voorbeeld">Voorbeeld: een installateur verhuist zijn website</h2></div>
+      <p>Stel: een installatiebedrijf in Hoogeveen laat een nieuwe website bouwen. De oude staat bij partij A, de nieuwe komt bij partij B. De domeinnaam en de nameservers blijven bij partij A, de mail draait op Microsoft 365. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <ol>
+        <li><strong>Maandag:</strong> hij maakt een schermafdruk van alle records, zodat er altijd een terugweg is. De TTL van het A-record en van www gaat naar 300 seconden.</li>
+        <li><strong>Dinsdag:</strong> de nieuwe site staat klaar bij partij B en is getest op een tijdelijk adres.</li>
+        <li><strong>Woensdag 7.30 uur:</strong> het A-record krijgt het nieuwe IP-adres. De CNAME voor www wijst al naar het hoofddomein en blijft staan.</li>
+        <li><strong>Woensdag 7.45 uur:</strong> op zijn telefoon en in een privévenster ziet hij de nieuwe site. Het certificaat voor https wordt bij partij B aangemaakt.</li>
+        <li><strong>De MX- en TXT-records</strong> raakt niemand aan. De mail blijft dus gewoon werken.</li>
+        <li><strong>Een week later:</strong> de TTL gaat terug naar 3600 en de oude hosting wordt opgezegd.</li>
+      </ol>
+      <p>Hadden ze in plaats daarvan de nameservers naar partij B verhuisd, dan was het anders gelopen. Nieuwe nameservers beginnen vaak met een lege of standaardset records. Het MX-record naar Microsoft was dan verdwenen, en de hele ochtend was er geen mail binnengekomen. Juist die fout zien we het vaakst.</p>
+
+      <h2 id="fouten">Fouten die we vaak zien</h2>
+      <ul>
+        <li><strong>Het domein staat op naam van de webbouwer.</strong> Gaat die failliet of stopt hij, dan ben je je adres kwijt. Een domeinnaam hoort op jouw naam te staan, in een account waar jij bij kunt.</li>
+        <li><strong>Niemand weet meer waar de nameservers staan.</strong> Je past records aan bij partij A, terwijl partij B de baas is.</li>
+        <li><strong>Nameservers wisselen zonder de records mee te nemen.</strong> Met als klassiek gevolg: geen mail meer.</li>
+        <li><strong>De TTL pas verlagen als het al te laat is.</strong> De oude, lange TTL loopt dan gewoon door.</li>
+        <li><strong>Twee SPF-records.</strong> Er mag er maar één zijn. Een nieuwe dienst voeg je toe aan het bestaande record.</li>
+        <li><strong>Vergeten te verlengen.</strong> Een verlopen domein gaat uit de lucht, en een ander kan het daarna registreren.</li>
+        <li><strong>Geen tweestapsverificatie op het account van je registrar.</strong> Wie daar binnenkomt, kan je hele domein omleiden.</li>
+      </ul>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={52} /><h2 id="veilig">Veiligheid en storingen</h2></div>
+      <p>DNS is oud en was niet gebouwd voor kwaadwillenden. Een aanvaller kan proberen een resolver een vals antwoord te laten onthouden, zodat bezoekers op een nagemaakte site landen. Daar is DNSSEC voor bedacht: elk antwoord krijgt een digitale handtekening, zodat vervalsen opvalt. DNSSEC versleutelt niets, het bewijst alleen dat het antwoord klopt. Veel registrars zetten het met één schakelaar aan.</p>
+      <p>Versleutelen kan wel, met DNS over HTTPS of over TLS. Dan ziet niemand onderweg welke adressen je opvraagt. Moderne browsers en telefoons ondersteunen dat. Google Public DNS (8.8.8.8 en 8.8.4.4) biedt het ook aan.</p>
+      <p>Hoe hard alles van dit adresboek afhangt, bleek op 4 oktober 2021. Facebook, Instagram en WhatsApp lagen urenlang plat. Volgens de eigen analyse van Meta haalde een fout in het netwerk de nameservers van het bedrijf van internet. Daardoor kon niemand de adressen nog vinden, ook de eigen technici niet. Voor een mkb'er is de les kleiner, maar dezelfde: zorg dat je weet wie je nameservers beheert en hoe je erbij komt als het misgaat.</p>
+
+      <h2 id="ondernemer">Wat moet je ermee als ondernemer?</h2>
+      <p>Je hoeft geen DNS-records uit je hoofd te kennen. Wel deze vijf dingen:</p>
+      <ul class="vink">
+        <li>Weet bij welke registrar je domein staat, en zorg dat het op naam van je bedrijf staat. Bewaar de inlog in je wachtwoordkluis, met tweestapsverificatie.</li>
+        <li>Weet waar je nameservers staan. Daar beheer je de records.</li>
+        <li>Maak een schermafdruk of export van je records en bewaar die. Doe dat opnieuw na elke wijziging.</li>
+        <li>Laat SPF, DKIM en DMARC controleren. De gratis test op internet.nl laat in een paar minuten zien wat er ontbreekt, ook of DNSSEC aanstaat.</li>
+        <li>Gaat je website verhuizen? Verlaag de TTL een dag van tevoren en laat de MX-records met rust.</li>
+      </ul>
+      <p>Wij beheren het domein en de records van onze eigen site zelf. Bouwen we een nieuwe site voor je, dan helpen we je een hostingpartij kiezen en zetten we de site er voor je op. De hosting zelf regelen we voor nieuwe sites niet. Die neem je af op je eigen naam. Zo blijven domein, hosting en site echt van jou.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer weten?</p>
+        <p>Nog geen domein? Lees eerst de gids <a href="/kennisbank/gidsen/domeinnaam-kiezen/">domeinnaam kiezen en registreren</a>. Wat er op die server gebeurt, staat bij <a href="/kennisbank/wat-is/hosting/">wat is hosting</a>, en de beveiligde verbinding bij het <a href="/kennisbank/wat-is/ssl-certificaat/">SSL-certificaat</a>. Verandert bij een verhuizing ook je adresstructuur, regel dan een <a href="/kennisbank/wat-is/redirect/">redirect</a>. Een nieuwe site laten bouwen kan via <a href="/website-laten-maken/">website laten maken</a>. Andere begrippen vind je in de <a href="/kennisbank/wat-is/">begrippenlijst</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Waar staat DNS voor?', a: 'Voor Domain Name System, in het Nederlands het domeinnaamsysteem. Het vertaalt een naam als jouwbedrijf.nl naar het IP-adres van de server waar je site of mail draait.' },
+      { v: 'Hoe lang duurt het voordat een wijziging zichtbaar is?', a: 'Dat hangt af van de TTL die bij het record stond. Bij een TTL van 300 seconden zie je het meestal binnen een paar minuten, bij 86400 kan het een dag duren. Verlaag de TTL daarom een dag voor een geplande wijziging.' },
+      { v: 'Wat is het verschil tussen nameservers en records?', a: 'Nameservers zijn de servers waar je records op staan. De records zelf zijn de regels met de antwoorden, zoals het IP-adres van je site of de mailserver. Wissel je van nameservers, dan moeten de records op de nieuwe plek opnieuw goed staan.' },
+      { v: 'Kost het geld om records te wijzigen?', a: 'Bij vrijwel elke registrar of hostingpartij zit het beheer van records bij je domein of hostingpakket in. Je betaalt voor de domeinnaam, niet voor het aanpassen.' },
+      { v: 'Moet ik een andere resolver gebruiken, zoals 8.8.8.8?', a: 'Voor je website maakt het niets uit. Het gaat om je eigen apparaat: welke server jouw vragen beantwoordt. Een publieke resolver kan sneller zijn of extra privacy bieden. Voor de meeste ondernemers is die van de provider prima.' },
+      { v: 'Waarom komt mijn mail niet aan terwijl mijn site het wel doet?', a: 'Website en mail gebruiken verschillende records. Controleer het MX-record en de TXT-records voor SPF, DKIM en DMARC. Na een verhuizing van nameservers zijn die vaak verdwenen.' },
+    ]}
+  />
+
+  <Actie titel="Verhuist je site binnenkort?" tekst={`We kijken gratis mee naar je domein, je records en je e-mailinstellingen. ${site.contactpersoon} belt je met wat er goed staat en wat beter kan.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  .tekst :global(.inhoud) { margin: 8px 0 32px; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

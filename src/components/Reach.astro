@@ -1,0 +1,41 @@
+---
+import { site } from '../data/site';
+const { compact = false } = Astro.props;
+---
+<span class:list={['reach', { compact }]} data-reach>
+  <span class="dot" aria-hidden="true"></span>
+  <span class="txt"><span class="lbl" data-reach-label>Bel {site.contactpersoon}</span><span class="sep"> · </span><a href={site.telefoonLink} class="tel">{site.telefoon}</a></span>
+</span>
+<script>
+  // Kantoortijden: werkdagen 8.00 tot 17.00 uur, Nederlandse tijd.
+  function status() {
+    const nu = new Date();
+    const delen = new Intl.DateTimeFormat('nl-NL', { timeZone: 'Europe/Amsterdam', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(nu);
+    const dag = delen.find((p) => p.type === 'weekday')?.value ?? '';
+    const uur = Number(delen.find((p) => p.type === 'hour')?.value ?? 0);
+    const min = Number(delen.find((p) => p.type === 'minute')?.value ?? 0);
+    const werkdag = !['za', 'zo'].includes(dag.replace('.', ''));
+    const tijd = uur * 60 + min;
+    const open = werkdag && tijd >= 480 && tijd < 1020;
+    document.querySelectorAll<HTMLElement>('[data-reach]').forEach((el) => {
+      el.classList.toggle('open', open);
+      const label = el.querySelector('[data-reach-label]');
+      if (!label) return;
+      if (open) label.textContent = 'Thorgall is nu bereikbaar';
+      else {
+        const vrijdagAvond = dag.startsWith('vr') && tijd >= 1020;
+        const weekend = !werkdag;
+        label.textContent = vrijdagAvond || weekend ? 'Maandag vanaf 8.00 uur bereikbaar' : 'Morgen vanaf 8.00 uur bereikbaar';
+      }
+    });
+  }
+  status();
+  setInterval(status, 60000);
+</script>
+<style>
+  .reach { display: inline-flex; align-items: center; gap: 9px; font-size: 0.95rem; white-space: nowrap; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #9aa9b8; flex: none; }
+  .reach.open .dot { background: var(--ok); box-shadow: 0 0 0 4px rgb(31 138 91 / 0.18); }
+  .tel { color: var(--ink); font-weight: 700; text-decoration: none; font-variant-numeric: tabular-nums; }
+  .reach.compact .lbl, .reach.compact .sep { display: none; }
+</style>

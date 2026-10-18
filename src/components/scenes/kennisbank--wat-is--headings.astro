@@ -1,0 +1,77 @@
+---
+// Scène voor /kennisbank/wat-is/headings/: een webpagina met koppen van H1 tot H3, en ernaast de boomstructuur die Google en een screenreader daaruit halen.
+// Als hij leeft: een markering springt van kop naar kop (zoals een screenreader), en in de boom loopt een bolletje mee.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const koppen = [
+  { n: 'H1', y: 40, x: 54, w: 150, h: 14 },
+  { n: 'H2', y: 98, x: 54, w: 120, h: 10 },
+  { n: 'H3', y: 140, x: 74, w: 96, h: 9 },
+  { n: 'H3', y: 176, x: 74, w: 104, h: 9 },
+  { n: 'H2', y: 216, x: 54, w: 128, h: 10 },
+];
+const boom = [
+  { x: 360, y: 52 },
+  { x: 384, y: 98 },
+  { x: 408, y: 140 },
+  { x: 408, y: 176 },
+  { x: 384, y: 216 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een webpagina met een H1, twee H2-koppen en twee H3-koppen. Ernaast de boomstructuur die zoekmachines en screenreaders daaruit halen.'}>
+  <!-- pagina -->
+  <rect x="36" y="18" width="268" height="236" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  {koppen.map((k, i) => (
+    <g>
+      <rect x={k.x} y={k.y} width="28" height="20" rx="6" fill={i === 0 ? '#ff6600' : '#074663'} />
+      <text x={k.x + 14} y={k.y + 14} font-size="10.5" font-weight="800" text-anchor="middle" style="fill:#fff">{k.n}</text>
+      <rect x={k.x + 36} y={k.y + 10 - k.h / 2} width={k.w} height={k.h} rx={k.h / 2} fill="#10283f" opacity={i === 0 ? 0.85 : 0.65} />
+    </g>
+  ))}
+  <rect x="54" y="68" width="220" height="6" rx="3" fill="#e8eef4" />
+  <rect x="54" y="80" width="190" height="6" rx="3" fill="#e8eef4" />
+  <rect x="90" y="124" width="170" height="6" rx="3" fill="#e8eef4" />
+  <rect x="110" y="166" width="140" height="6" rx="3" fill="#e8eef4" />
+  <rect x="110" y="202" width="150" height="6" rx="3" fill="#e8eef4" />
+  <rect x="90" y="242" width="170" height="6" rx="3" fill="#e8eef4" />
+
+  <!-- boom -->
+  <path class="l" d="M360 52v164h24M360 98h24M384 98v78h24M384 140h24" stroke-width="2" />
+  {boom.map((b, i) => <circle cx={b.x} cy={b.y} r={i === 0 ? 9 : 7} fill={i === 0 ? '#ff6600' : '#fff'} stroke={i === 0 ? '#ff6600' : '#074663'} stroke-width="2.5" />)}
+  <rect x="396" y="94" width="50" height="8" rx="4" fill="#d9e1ea" />
+  <rect x="420" y="136" width="40" height="8" rx="4" fill="#e8eef4" />
+  <rect x="420" y="172" width="44" height="8" rx="4" fill="#e8eef4" />
+  <rect x="396" y="212" width="54" height="8" rx="4" fill="#d9e1ea" />
+  <rect x="374" y="48" width="64" height="8" rx="4" fill="#10283f" opacity="0.75" />
+
+  {!mini && (
+    <g>
+      <rect class="markering" x="46" y="34" width="238" height="32" rx="8" fill="none" stroke="#ff6600" stroke-width="2.5" />
+      <circle class="volger" cx="360" cy="52" r="12" fill="none" stroke="#ff6600" stroke-width="2.5" />
+    </g>
+  )}
+</svg>
+<style>
+  :global(.teken-js) .markering, :global(.teken-js) .volger { opacity: 0; }
+  .in-beeld .markering { animation: kennisbank--wat-is--headings-spring 6s ease-in-out 0.6s infinite; }
+  .in-beeld .volger { animation: kennisbank--wat-is--headings-volg 6s ease-in-out 0.6s infinite; }
+  @keyframes kennisbank--wat-is--headings-spring {
+    0% { opacity: 0; transform: translate(0, 0); }
+    4%, 16% { opacity: 1; transform: translate(0, 0); }
+    20%, 34% { transform: translate(0, 58px); }
+    38%, 52% { transform: translate(20px, 100px); }
+    56%, 70% { transform: translate(20px, 136px); }
+    74%, 88% { opacity: 1; transform: translate(0, 176px); }
+    96%, 100% { opacity: 0; transform: translate(0, 176px); }
+  }
+  @keyframes kennisbank--wat-is--headings-volg {
+    0% { opacity: 0; transform: translate(0, 0); }
+    4%, 16% { opacity: 1; transform: translate(0, 0); }
+    20%, 34% { transform: translate(24px, 46px); }
+    38%, 52% { transform: translate(48px, 88px); }
+    56%, 70% { transform: translate(48px, 124px); }
+    74%, 88% { opacity: 1; transform: translate(24px, 164px); }
+    96%, 100% { opacity: 0; transform: translate(24px, 164px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .markering, .in-beeld .volger { animation: none; } }
+</style>

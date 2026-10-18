@@ -1,0 +1,82 @@
+---
+// Scène voor /kennisbank/wat-is/ux/: links een wireframe in grijze blokken, rechts hetzelfde scherm uitgewerkt op een telefoon, met een persona ernaast.
+// Als hij leeft: een vinger tikt op de oranje knop, er gaat een kring uit en er verschijnt een melding dat het in twee tikken gelukt is.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: links een wireframe van een webpagina in grijze blokken, rechts hetzelfde scherm uitgewerkt op een telefoon met een oranje knop. Een vinger tikt op de knop en de aanvraag is in twee tikken gelukt.'}>
+  <!-- wireframe -->
+  <text x="26" y="34" font-size="11" font-weight="800" class="zacht">Wireframe</text>
+  <rect x="24" y="44" width="150" height="196" rx="10" fill="#fff" stroke="#8aa0b4" stroke-width="2" stroke-dasharray="6 5" />
+  <rect x="36" y="56" width="126" height="16" rx="4" fill="#e8eef4" />
+  <rect x="36" y="84" width="90" height="10" rx="5" fill="#d9e1ea" />
+  <rect x="36" y="100" width="70" height="10" rx="5" fill="#d9e1ea" />
+  <rect x="36" y="120" width="126" height="44" rx="6" fill="#e8eef4" />
+  <path d="M36 120l126 44M162 120L36 164" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="36" y="176" width="80" height="22" rx="6" fill="none" stroke="#8aa0b4" stroke-width="2" />
+  <rect x="36" y="210" width="110" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="36" y="222" width="90" height="7" rx="3.5" fill="#e8eef4" />
+
+  <path class="a" d="M186 142h40M218 134l8 8-8 8" />
+
+  <!-- telefoon -->
+  <rect x="238" y="18" width="128" height="236" rx="18" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <rect x="290" y="26" width="24" height="5" rx="2.5" fill="#d9e1ea" />
+  <rect x="248" y="38" width="108" height="22" rx="4" fill="#074663" />
+  <path d="M256 45h12M256 49h12M256 53h12" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+  <circle cx="344" cy="49" r="5" fill="#ff6600" />
+  <rect x="256" y="72" width="84" height="9" rx="4.5" fill="#10283f" />
+  <rect x="256" y="86" width="62" height="9" rx="4.5" fill="#10283f" />
+  <rect x="256" y="104" width="90" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="256" y="115" width="76" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="256" y="134" width="92" height="30" rx="9" fill="#ff6600" />
+  <text x="302" y="153.5" font-size="12" font-weight="800" text-anchor="middle" style="fill:#fff">Aanvragen</text>
+  <rect x="256" y="178" width="92" height="44" rx="8" fill="#e8eef4" />
+  <path d="M266 206l8-10 7 7 9-12 12 15z" fill="#074663" />
+  <circle cx="330" cy="192" r="5" fill="#fff" />
+  <rect x="256" y="230" width="70" height="6" rx="3" fill="#e8eef4" />
+
+  <!-- persona -->
+  <rect x="384" y="178" width="86" height="62" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="404" cy="200" r="11" fill="#e8eef4" />
+  <circle cx="404" cy="196" r="4.5" fill="#074663" />
+  <path d="M396 207c2-5 14-5 16 0" fill="#074663" />
+  <text x="420" y="198" font-size="10.5" font-weight="800">Persona</text>
+  <text x="420" y="211" font-size="9.5" class="zacht">54 jaar</text>
+  <text x="394" y="229" font-size="9.5" class="zacht">belt liever</text>
+
+  {!mini && (
+    <g>
+      <circle class="ux-kring" cx="302" cy="149" r="12" fill="none" stroke="#10283f" stroke-width="2" />
+      <g class="ux-vinger">
+        <path d="M302 150c-3 0-5 2-5 5v14c0 8 6 14 14 14h2c7 0 12-5 12-12v-9c0-3-2-5-5-5s-5 2-5 5v-3c0-3-2-5-5-5s-5 2-5 5v-4c0-3-1-5-3-5z" fill="#fff" stroke="#10283f" stroke-width="2" stroke-linejoin="round" />
+      </g>
+      <g class="ux-melding">
+        <rect x="376" y="96" width="98" height="44" rx="10" fill="#fff" stroke="#1f8a5b" stroke-width="2" />
+        <circle cx="392" cy="118" r="8" fill="#1f8a5b" />
+        <path d="M388 118l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="405" y="114" font-size="10.5" font-weight="800">Gelukt</text>
+        <text x="405" y="128" font-size="9.5" class="zacht">in 2 tikken</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .ux-kring, .ux-melding { transform-box: fill-box; transform-origin: center; }
+  .ux-vinger { transform-box: fill-box; transform-origin: 0 0; }
+  :global(.teken-js) .ux-kring, :global(.teken-js) .ux-melding, :global(.teken-js) .ux-vinger { opacity: 0; }
+  .in-beeld .ux-vinger { animation: kennisbank-wat-is-ux-vinger 5s ease-in-out 0.4s infinite; }
+  .in-beeld .ux-kring { animation: kennisbank-wat-is-ux-kring 5s ease-out 0.4s infinite; }
+  .in-beeld .ux-melding { animation: kennisbank-wat-is-ux-melding 5s ease-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-ux-vinger {
+    0% { opacity: 0; transform: translate(30px, 50px); }
+    12% { opacity: 1; }
+    34% { transform: translate(0, 0); }
+    40% { transform: translate(0, 2px) scale(0.94); }
+    46%, 82% { opacity: 1; transform: translate(0, 0); }
+    100% { opacity: 0; transform: translate(20px, 40px); }
+  }
+  @keyframes kennisbank-wat-is-ux-kring { 0%, 38% { opacity: 0; transform: scale(0.5); } 42% { opacity: 1; } 60%, 100% { opacity: 0; transform: scale(2.4); } }
+  @keyframes kennisbank-wat-is-ux-melding { 0%, 46% { opacity: 0; transform: translateY(8px) scale(0.9); } 54%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .ux-vinger, .in-beeld .ux-kring, .in-beeld .ux-melding { animation: none; } }
+</style>

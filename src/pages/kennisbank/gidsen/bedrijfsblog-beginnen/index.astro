@@ -1,0 +1,165 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--bedrijfsblog-beginnen.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/bedrijfsblog-beginnen/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'zin', titel: 'Heeft een bedrijfsblog nog zin?' },
+  { id: 'fouten', titel: 'Acht fouten die bijna iedereen maakt' },
+  { id: 'plan', titel: 'Een blog beginnen in zes stappen' },
+  { id: 'onderwerpen', titel: 'Onderwerpen vinden' },
+  { id: 'artikel', titel: 'Een artikel dat gelezen wordt' },
+  { id: 'promoten', titel: 'Na het publiceren' },
+  { id: 'uitbesteden', titel: 'Zelf schrijven of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Een bedrijfsblog beginnen zonder de bekende fouten',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Bedrijfsblog',
+}];
+---
+<Base
+  title="Bedrijfsblog beginnen zonder fouten | Drijfveer Media"
+  description="Een bedrijfsblog beginnen dat klanten oplevert? De acht bekendste fouten, een plan in zes stappen, onderwerpen vinden en wat je doet na het publiceren."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Bedrijfsblog beginnen', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Teksten" titel="Een bedrijfsblog beginnen zonder de bekende fouten" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een goed bedrijfsblog brengt mensen naar je site die nog geen klant zijn, maar wel een vraag hebben. Toch staan er overal blogs stil na drie berichten. Hier lees je hoe je het wel volhoudt, en waarover je schrijft.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een bedrijfsblog werkt als je schrijft over de vragen van je klanten, niet over je eigen nieuws.</li>
+            <li>Eén goed artikel per maand levert meer op dan vier snelle berichten.</li>
+            <li>Elk artikel linkt naar je dienst en eindigt met een duidelijke volgende stap.</li>
+            <li>Plan vooraf twaalf onderwerpen. Dan stop je niet na drie berichten.</li>
+          </ul>
+        </div>
+
+        <h2 id="zin">Heeft een bedrijfsblog nog zin?</h2>
+        <p>Ja, maar anders dan tien jaar geleden. Een bedrijfsblog vol korte berichtjes om Google te pleasen werkt niet meer. Google en AI-assistenten zoals ChatGPT zoeken het beste antwoord op een vraag. Een uitgebreid artikel dat echt helpt, heeft daar een goede kans. Een nieuwsbericht over je nieuwe bedrijfsbus heeft dat niet.</p>
+        <p>Goed bloggen levert je vier dingen op. Je wordt gevonden op vragen waar je diensten-pagina's nooit op scoren. Lezers leren je kennen voordat ze je bellen, dus het eerste gesprek gaat sneller. Je bouwt aan autoriteit, ook in de ogen van Google. En je hebt iets om te delen in je nieuwsbrief en op social media.</p>
+        <p>Een eerlijk verhaal uit eigen huis. Op onze oude site stonden meer dan honderd blogs. Toen we de nieuwe site bouwden, hebben we ze allemaal nagelopen. Veel waren kort, gingen over hetzelfde of waren verouderd. Een artikel over Google+ helpt niemand meer. We hebben ze samengevoegd tot gidsen zoals deze: minder pagina's, meer antwoord.</p>
+
+        <h2 id="fouten">Acht fouten die bijna iedereen maakt</h2>
+        <ol>
+          <li><b>Schrijven over jezelf.</b> "Wij hebben een nieuwe collega" interesseert je moeder, niet je klant. Een blog is geen reclamefolder. Schrijf over wat de lezer wil weten.</li>
+          <li><b>Te hoge verwachtingen.</b> Ik geef het toe: toen ik mijn eerste website begon, dacht ik binnen een paar maanden binnen te zijn. Zo ging het niet. Reken bij een nieuw blog op zes tot twaalf maanden voordat het echt bezoekers oplevert.</li>
+          <li><b>Te hard van start.</b> Elke week een artikel, de eerste maand. Daarna niets meer. Een blog waarvan het laatste bericht uit 2022 is, doet meer kwaad dan geen blog.</li>
+          <li><b>Onderwerpen waar niemand op zoekt.</b> Een prachtig verhaal dat niemand vindt, leest ook niemand.</li>
+          <li><b>Steeds hetzelfde onderwerp.</b> Vijf artikelen over "tips voor je tuin" gaan met elkaar concurreren in Google. Dat heet <a href="/kennisbank/wat-is/keyword-cannibalization/">keyword cannibalization</a>.</li>
+          <li><b>Geen volgende stap.</b> De lezer is geïnteresseerd, en dan? Link naar je dienst en sluit af met een uitnodiging om te bellen of iets aan te vragen.</li>
+          <li><b>Plaatjes van internet plukken.</b> Een foto uit Google Afbeeldingen gebruiken kan je een claim van honderden euro's opleveren. Gebruik eigen foto's of beelden waarvan je zeker weet dat ze vrij zijn.</li>
+          <li><b>Niet promoten.</b> Publiceren is het halve werk. Een artikel dat niemand te zien krijgt, levert ook niets op.</li>
+        </ol>
+
+        <h2 id="plan">Een blog beginnen: een plan in zes stappen</h2>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>1. Bepaal waarom je blogt</h3></div>
+        <p>Wil je meer aanvragen voor één dienst? Wil je bekend worden in je regio? Wil je minder vragen aan de telefoon die steeds terugkomen? Kies één hoofddoel. Dat bepaalt waarover je schrijft en hoe je meet of het werkt.</p>
+
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>2. Weet voor wie je schrijft</h3></div>
+        <p>Schrijf voor één lezer: je ideale klant. Wat weet hij al, waar maakt hij zich zorgen over, welke woorden gebruikt hij? Een particulier die zijn huis wil isoleren, leest iets anders dan een aannemer die isolatiemateriaal inkoopt.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>3. Maak een lijst met twaalf onderwerpen</h3></div>
+        <p>Twaalf onderwerpen is een jaar lang één artikel per maand. Zet ze in een simpele planning met een datum erbij. Zo begin je nooit met een leeg scherm, en weet je dat je het een jaar kunt volhouden. Hoe je aan die onderwerpen komt, lees je hieronder.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Spreek je toon af</h3></div>
+        <p>Een blog mag persoonlijker klinken dan je diensten-pagina's, maar het blijft je bedrijf dat praat. Zeg je je of u? Mag er een grapje in? Leg het vast, zeker als er meer mensen gaan schrijven. Lees daarvoor de gids over <a href="/kennisbank/gidsen/tone-of-voice/">tone of voice</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="koffie" maat={48} /><h3>5. Reserveer vaste tijd</h3></div>
+        <p>Een goed artikel kost een halve tot een hele dag: onderzoek, schrijven, foto's, nalezen. Zet die tijd in je agenda, bijvoorbeeld elke eerste vrijdagochtend van de maand. Wie wacht tot er tijd over is, schrijft nooit.</p>
+
+        <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h3>6. Meet wat het oplevert</h3></div>
+        <p>Kijk elke maand in Google Search Console op welke zoekwoorden je artikelen gevonden worden, en in je statistieken hoeveel lezers doorklikken naar je dienst. Schrijf meer over wat werkt. Verbeter of schrap wat na een jaar niets doet.</p>
+
+        <h2 id="onderwerpen">Onderwerpen vinden waar klanten op zoeken</h2>
+        <p>De beste onderwerpen liggen voor het oprapen. Je hoort ze elke week.</p>
+        <ul class="vink">
+          <li><b>Vragen aan de telefoon en in de mail.</b> Elke vraag die je drie keer hebt gekregen, is een artikel. Houd een maand lang een lijstje bij.</li>
+          <li><b>Wat kost het?</b> Bijna elke klant wil het weten. Een eerlijk artikel over prijzen wordt veel gelezen, juist omdat weinig bedrijven het durven.</li>
+          <li><b>Vergelijkingen.</b> Warmtepomp of hybride? Huren of kopen? Mensen die twijfelen, zoeken naar uitleg.</li>
+          <li><b>Mensen vragen ook.</b> Zoek je vak op in Google en kijk naar het blok met vragen. Elke vraag is een mogelijk onderwerp.</li>
+          <li><b>Zoekwoordonderzoek.</b> Met tools zie je hoe vaak er ergens op wordt gezocht. Hoe dat werkt, lees je in de gids <a href="/kennisbank/gidsen/zoekwoordonderzoek/">zoekwoordonderzoek doen</a>.</li>
+        </ul>
+        <p>Een verzonnen voorbeeld. Een isolatiebedrijf in Drenthe kan schrijven over spouwmuurisolatie, de subsidie die er nu is, wat isoleren in een jaren-zeventigwoning oplevert en hoe je vocht na het isoleren voorkomt. Vier onderwerpen die mensen zoeken voordat ze een offerte aanvragen.</p>
+
+        <h2 id="artikel">Zo schrijf je een artikel dat gelezen wordt</h2>
+        <p>Begin met het antwoord. Wie zoekt "hoe vaak cv-ketel onderhoud", wil in de eerste zin lezen: eens per jaar of eens per twee jaar, afhankelijk van je ketel. Uitleg en details komen daarna. Dat is ook precies wat Google en AI-assistenten willen citeren.</p>
+        <p>Een paar vaste regels die werken:</p>
+        <ul>
+          <li>Een kop die de vraag stelt of belooft wat de lezer krijgt.</li>
+          <li>Tussenkoppen elke 200 tot 300 woorden, zodat een lezer kan scannen.</li>
+          <li>Korte alinea's. Op een telefoon is vier regels al een blok.</li>
+          <li>Eigen voorbeelden, eigen foto's en eigen ervaring. Dat kan niemand kopiëren.</li>
+          <li><a href="/kennisbank/wat-is/interne-links/">Interne links</a> naar je dienst en naar verwante artikelen.</li>
+          <li>Een afsluiting met één volgende stap.</li>
+        </ul>
+        <p>Een oude maar bruikbare vuistregel komt van communicatieman Steve Rubel. Hij noemde vier eigenschappen van een goede bedrijfsblogger: schrijf over iets waar je passie ligt, met een duidelijk doel, over wat nu speelt, en neem een standpunt in. Vooral dat laatste maakt een artikel interessant. Een mening is het enige wat AI niet van je kan overnemen.</p>
+        <p>Meer schrijftips voor Google lees je in de gids <a href="/kennisbank/gidsen/seo-teksten-schrijven/">SEO-teksten schrijven</a>.</p>
+
+        <h2 id="promoten">Na het publiceren: zo komt je artikel bij lezers</h2>
+        <ul class="vink">
+          <li>Deel het op de social media-kanalen waar je klanten zitten. Niet op alle kanalen, wel op de juiste.</li>
+          <li>Zet het in je nieuwsbrief. Zo houd je klanten op de hoogte en geef je ze een reden om je mail te openen. Hoe je die opzet, lees je in de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a>.</li>
+          <li>Link vanaf oudere artikelen en diensten-pagina's naar het nieuwe stuk.</li>
+          <li>Stuur het naar een klant die er laatst naar vroeg. Dat is de meest persoonlijke promotie die er is.</li>
+          <li>Werk je beste artikelen elk jaar bij, met een nieuwe datum. Bijwerken levert vaak meer op dan iets nieuws schrijven.</li>
+        </ul>
+
+        <h2 id="uitbesteden">Zelf schrijven of uitbesteden?</h2>
+        <p>Zelf schrijven heeft één groot voordeel: niemand kent je vak zo goed als jij. Het nadeel is tijd. Regelmatig een goed artikel schrijven naast je eigen werk, houden maar weinig ondernemers een jaar vol.</p>
+        <p>Een tussenweg die vaak goed werkt: jij levert de kennis in een gesprek van een half uur, een tekstschrijver maakt er een artikel van. Bij Drijfveer Media kost een losse tekst vanaf € 75 per pagina. Bij <a href="/tekstschrijver/contentmarketing/">contentmarketing</a> plannen en schrijven we elke maand nieuwe artikelen voor je, vanaf € 495 per maand. Lees meer over onze aanpak bij <a href="/tekstschrijver/">tekstschrijver</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je blog bijhouden?" intro="Wat je van ons mag verwachten als we elke maand voor je schrijven." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoe vaak moet ik bloggen?', a: 'Eén goed artikel per maand is voor de meeste mkb-bedrijven genoeg. Regelmaat is belangrijker dan aantal. Liever twaalf sterke artikelen per jaar dan vijftig dunne.' },
+      { v: 'Hoe lang moet een blogartikel zijn?', a: 'Zo lang als nodig om de vraag goed te beantwoorden. Voor een praktische vraag is dat vaak 600 tot 1.200 woorden, voor een uitgebreide uitleg meer. Opvullen helpt niet.' },
+      { v: 'Hoe lang duurt het voordat een bedrijfsblog bezoekers oplevert?', a: 'Reken op zes tot twaalf maanden voordat je duidelijk verschil ziet in Google. Bij weinig concurrentie gaat het soms sneller. Lees ook <a href="/kennisbank/gidsen/hoe-werkt-seo/">hoe SEO werkt</a>.' },
+      { v: 'Mag ik AI gebruiken om blogs te schrijven?', a: 'Als hulpmiddel wel, wij doen dat ook. Laat AI een opzet of eerste versie maken, en voeg daarna je eigen kennis, voorbeelden en mening toe. Een tekst die alleen door AI is geschreven, lijkt op duizend andere teksten.' },
+      { v: 'Moet een bedrijfsblog op mijn eigen website staan?', a: 'Ja. Een blog op een los platform levert je eigen website niets op. Zet het op je eigen domein, bijvoorbeeld onder /blog/ of /kennisbank/.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Contentmarketing', href: '/tekstschrijver/contentmarketing/', tekst: 'Elke maand nieuwe artikelen, vanaf € 495 per maand.' },
+      { label: 'Gids', titel: 'Zoekwoordonderzoek doen', href: '/kennisbank/gidsen/zoekwoordonderzoek/', tekst: 'Zo vind je onderwerpen waar klanten op zoeken.' },
+      { label: 'Gids', titel: 'Tone of voice bepalen', href: '/kennisbank/gidsen/tone-of-voice/', tekst: 'Zo klinkt je bedrijf overal hetzelfde.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waarover jij moet schrijven?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je concurrenten, en belt je met de onderwerpen waar jouw klanten op zoeken.`} />
+</Base>

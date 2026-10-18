@@ -1,0 +1,22 @@
+---
+// Wie schreef dit, en wanneer. Belangrijk voor E-E-A-T.
+import { persoon } from '../../data/site';
+interface Props { slug: string; datum: string; nagekeken?: string } // datum als JJJJ-MM-DD
+const { slug, datum, nagekeken } = Astro.props;
+const p = persoon(slug);
+const leesbaar = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<div class="auteur">
+  <img src={`/img/team/${p.slug}-klein.webp`} width="56" height="56" alt={p.naam} loading="lazy" decoding="async" />
+  <div>
+    <p class="naam">{p.naam} <span class="muted">· {p.rol}</span></p>
+    <p class="muted klein">Bijgewerkt op <time datetime={datum}>{leesbaar(datum)}</time>{nagekeken && <> · nagekeken door {persoon(nagekeken).naam}</>}</p>
+  </div>
+</div>
+<style>
+  .auteur { display: flex; gap: 14px; align-items: center; margin: 4px 0 28px; }
+  .auteur img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; background: #e8eef4; flex: none; }
+  .auteur p { margin: 0; }
+  .naam { font-weight: 800; }
+  .naam span { font-weight: 500; }
+</style>

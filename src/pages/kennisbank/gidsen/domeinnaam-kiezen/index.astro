@@ -1,0 +1,154 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--domeinnaam-kiezen.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/domeinnaam-kiezen/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'goede-naam', titel: 'Wat maakt een goede domeinnaam?' },
+  { id: 'merk-of-zoekwoord', titel: 'Bedrijfsnaam of zoekwoord?' },
+  { id: 'extensie', titel: '.nl, .com of iets anders?' },
+  { id: 'registreren', titel: 'Registreren in vier stappen' },
+  { id: 'bezet', titel: 'Je naam is bezet: wat nu?' },
+  { id: 'valkuilen', titel: 'Valkuilen' },
+  { id: 'daarna', titel: 'En daarna?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Domeinnaam kiezen en registreren: zo pak je het aan',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  about: { '@type': 'Thing', name: 'Domeinnaam' },
+  inLanguage: 'nl-NL',
+}];
+---
+<Base
+  title="Domeinnaam kiezen en registreren | Drijfveer Media"
+  description="Een domeinnaam kiezen die klanten onthouden: tips voor de naam en de extensie, en zo registreer je hem in vier stappen op je eigen naam."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Domeinnaam kiezen', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Website" titel="Domeinnaam kiezen en registreren: zo pak je het aan" knop={{ tekst: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Een domeinnaam kiezen doe je één keer, en daarna zit je er jaren aan vast. Neem er dus even de tijd voor. Hier lees je wat een goede naam is en hoe je hem registreert.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort (stand oktober 2026)</p>
+          <ul>
+            <li>Kies een korte naam die je zonder uitleg kunt spellen. Geen streepjes, geen cijfers.</li>
+            <li>Werk je in Nederland, kies dan .nl. Leg de .com erbij vast als je verder wilt.</li>
+            <li>Je registreert een .nl-domeinnaam via een registrar, voor zo'n € 10 tot € 20 per jaar.</li>
+            <li>Zet de naam altijd op jouw bedrijf, niet op die van je webbouwer.</li>
+          </ul>
+        </div>
+
+        <h2 id="goede-naam">Wat maakt een goede domeinnaam?</h2>
+        <p>Je domeinnaam staat op je bus, je offertes en je visitekaartje. Hij moet dus makkelijk te onthouden zijn en makkelijk over te nemen. Deze acht vragen helpen je bij het kiezen.</p>
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>1. Is hij kort?</h3></div>
+        <p>Hoe korter, hoe minder typefouten. SIDN geeft het voorbeeld sportschoolensaunadewilgenberg.nl: wie die naam hoort, is hem vergeten voordat hij achter de computer zit. Probeer onder de vijftien tekens te blijven.</p>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>2. Doorstaat hij de radiotest?</h3></div>
+        <p>Zeg de naam hardop tegen iemand die hem niet kent. Kan diegene hem zonder vragen intypen? Dan zit je goed. Moet je uitleggen "met een y" of "aan elkaar", kies dan een andere.</p>
+        <div class="stap-kop"><Tekening naam="merk" maat={48} /><h3>3. Past hij bij je bedrijfsnaam?</h3></div>
+        <p>Het makkelijkst is je bedrijfsnaam als domeinnaam. Dan hoeven klanten maar één naam te onthouden. Is je bedrijfsnaam lang of lastig, kijk dan of een kortere versie werkt.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>4. Zitten er geen streepjes of cijfers in?</h3></div>
+        <p>Mensen vergeten het streepje en komen bij een ander uit. Cijfers geven verwarring: is het 4 of vier? Is de naam zonder streepje bezet, zoek dan liever een andere naam dan dezelfde met een streepje.</p>
+        <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>5. Kies je de juiste extensie?</h3></div>
+        <p>Voor een Nederlands bedrijf met Nederlandse klanten is .nl de logische keuze. Meer daarover hieronder.</p>
+        <div class="stap-kop"><Tekening naam="ster" maat={48} /><h3>6. Lijkt hij niet op een bestaand merk?</h3></div>
+        <p>Een merknaam van een ander in je domeinnaam kan een flinke claim opleveren. Check vooraf het handelsregister van de KvK en het merkenregister.</p>
+        <div class="stap-kop"><Tekening naam="social" maat={48} /><h3>7. Is de naam ook vrij op social media?</h3></div>
+        <p>Overal dezelfde naam maakt je makkelijker te vinden. Kijk dus voordat je registreert of de naam op Instagram, Facebook en LinkedIn nog beschikbaar is.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>8. Leg je de varianten erbij vast?</h3></div>
+        <p>Registreer ook de meest voor de hand liggende tikfout of het meervoud, en stuur die door naar je hoofddomein. Zo voorkom je dat een ander ermee aan de haal gaat. Een paar tientjes per jaar, en je slaapt rustiger.</p>
+
+        <h2 id="merk-of-zoekwoord">Bedrijfsnaam of zoekwoord in je domeinnaam?</h2>
+        <p>Een veelgestelde vraag: helpt het voor Google als je zoekwoord in je domeinnaam staat? Een beetje, maar veel minder dan vroeger. Google kijkt vooral naar de inhoud van je site en naar wie ernaar linkt. Een naam als schilderinassen.nl geeft je hooguit een klein zetje in herkenning.</p>
+        <p>Daar staat iets tegenover. Een zoekwoordnaam is moeilijk om een merk van te maken en lastig als je uitbreidt. Wat doet schilderinassen.nl als de schilder ook in Beilen en Hoogeveen gaat werken? Een merknaam groeit mee. Kies daarom voor je hoofdsite bij voorkeur je bedrijfsnaam. Wil je per se een zoekwoord, combineer het dan met je naam, zoals devriesschilders.nl.</p>
+        <p>Het belangrijkste werk voor je vindbaarheid zit niet in de naam, maar in wat erop staat. Hoe dat werkt, lees je in <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen</a>.</p>
+
+        <h2 id="extensie">.nl, .com of iets anders?</h2>
+        <p>De extensie is het stukje achter de punt. Volgens SIDN, de stichting die het .nl-domein beheert, zijn er meer dan 6 miljoen .nl-domeinnamen geregistreerd. SIDN meldt ook dat 80 procent het liefst op een .nl-adres klikt.</p>
+        <ul>
+          <li><b>.nl</b> voor bedrijven die vooral in Nederland werken. Vertrouwd en herkenbaar voor Nederlandse klanten.</li>
+          <li><b>.com</b> voor internationale ambities, of als extra naast je .nl. Probeer hem in elk geval vast te leggen.</li>
+          <li><b>.eu</b> of een landextensie als je in meerdere Europese landen werkt.</li>
+          <li><b>Nieuwe extensies</b> zoals .shop, .online of .amsterdam. Leuk als aanvulling, maar klanten typen uit gewoonte toch .nl.</li>
+        </ul>
+        <p>Een .nl-naam bestaat uit 2 tot 63 tekens: letters, cijfers en het liggende streepje. Een paar namen zijn gereserveerd, zoals www.nl en mail.nl.</p>
+
+        <h2 id="registreren">Een domeinnaam registreren in vier stappen</h2>
+        <ol>
+          <li><b>Kijk of de naam vrij is.</b> Typ hem in de zoekbalk (de Whois) op sidn.nl. Daar zie je of hij beschikbaar is en, als hij bezet is, wie hem heeft.</li>
+          <li><b>Kies een registrar.</b> SIDN verkoopt zelf geen domeinnamen. Dat doen aangesloten partijen, vaak hostingbedrijven. Iedere registrar bepaalt zijn eigen prijs. Reken op € 10 tot € 20 per jaar voor een .nl.</li>
+          <li><b>Vul de juiste houder in.</b> Registreer je voor je bedrijf, vul dan je bedrijf in als houder, niet een medewerker. Gebruik een echt adres: een postbus is niet toegestaan. Kies een e-mailadres dat je echt leest.</li>
+          <li><b>Rond af en controleer.</b> SIDN kent namen toe op volgorde van binnenkomst. Binnen een uur na de aanvraag is je naam actief. Kijk daarna in de Whois of je gegevens kloppen.</li>
+        </ol>
+        <p>Let bij het afsluiten op de verlengprijs. Veel registrars geven korting in het eerste jaar en rekenen daarna meer. JouwWeb geeft bijvoorbeeld het eerste jaar een gratis domeinnaam en rekent daarna € 20 per jaar.</p>
+
+        <h2 id="bezet">Je gewenste naam is bezet: wat nu?</h2>
+        <ul>
+          <li><b>Probeer een logische toevoeging,</b> zoals je plaats of je vak: devriesbakkerij.nl in plaats van devries.nl.</li>
+          <li><b>Kijk of de naam echt gebruikt wordt.</b> Staat er niets op, dan kun je de houder via de Whois benaderen en een bod doen.</li>
+          <li><b>Houd een verlopen naam in de gaten.</b> Een opgeheven .nl-domeinnaam staat eerst 40 dagen in quarantaine. In die tijd kan alleen de oude houder hem terughalen. Daarna is hij weer vrij.</li>
+          <li><b>Kies geen variant met streepje</b> van een naam die al bestaat. Je klanten komen dan regelmatig bij de ander terecht.</li>
+        </ul>
+
+        <h2 id="valkuilen">Drie valkuilen bij het vastleggen</h2>
+        <p><b>De naam staat op je webbouwer.</b> Een bekend probleem: een ondernemer wil overstappen en ontdekt dat zijn domeinnaam op naam van zijn oude webbouwer staat. Alleen de geregistreerde houder kan een naam verhuizen of overdragen. Controleer het vandaag nog in de Whois.</p>
+        <p><b>Een telefoontje met haast.</b> SIDN waarschuwt voor bedrijven die bellen dat "iemand anders" jouw naam met een andere extensie wil registreren. Ze bieden aan om die naam voor jou vast te leggen, voor veel te veel geld. In een voorbeeld van SIDN betaalde een ondernemer € 360 voor tien jaar .com. Laat je niet opjagen. Een extra extensie leg je zelf vast bij je eigen registrar, voor een normale prijs.</p>
+        <p><b>Verlopen door een oud e-mailadres.</b> Herinneringen gaan naar het e-mailadres van de administratieve contactpersoon. Is dat adres van een oud-medewerker, dan mis je ze. Houd je gegevens actueel.</p>
+
+        <h2 id="daarna">En daarna: je domeinnaam aan het werk</h2>
+        <p>Met een domeinnaam alleen ben je er nog niet. Gebruik hem meteen voor een zakelijk e-mailadres, zoals jij@jouwbedrijf.nl. Dat oogt professioneler dan een Gmail-adres en je bent niet meer afhankelijk van je internetprovider. Daarna volgt de website.</p>
+        <p>Bij Drijfveer Media kun je een <a href="/website-laten-maken/website-met-ai/">website met AI</a> laten maken vanaf € 250, of een maatwerk site in WordPress vanaf € 2.000. Lees meer over <a href="/website-laten-maken/">een website laten maken</a>, of kijk wat er op een <a href="/kennisbank/gidsen/website-zzp/">website voor zzp'ers</a> hoort. Twijfel je over je naam? Leg je opties gerust aan ons voor. We denken eerlijk mee.</p>
+        <div class="kader">
+          <p class="kader-titel">Bronnen</p>
+          <p class="klein">SIDN: tips voor een zakelijke domeinnaam, domeinnaam registreren, regels voor .nl-domeinnamen, domeinnaam opheffen en de waarschuwing voor malafide bedrijven (sidn.nl). Providercheck, domeinnaam registreren. JouwWeb, prijzen. Geraadpleegd in oktober 2026.</p>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Van domeinnaam naar website die klanten oplevert" intro="Als je naam staat, bouwen we de site erbij. Met een vaste prijs en afspraken waar je ons op kunt afrekenen." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost een domeinnaam?', a: 'Een .nl-domeinnaam kost bij de meeste registrars € 10 tot € 20 per jaar. Let op de prijs na het eerste jaar, die is vaak hoger.' },
+      { v: 'Hoe snel is een domeinnaam actief?', a: 'Een .nl-domeinnaam is binnen een uur na de aanvraag actief, volgens SIDN.' },
+      { v: 'Kan ik een domeinnaam kopen die al bezet is?', a: 'Soms. Zoek de houder op via de Whois van SIDN en doe een bod. Sommige namen staan te koop op een marktplaats voor domeinnamen.' },
+      { v: 'Heb ik ook een .com nodig?', a: 'Niet altijd, maar het is slim. SIDN raadt ondernemers aan om zowel de .nl als de .com vast te leggen.' },
+      { v: 'Helpt een zoekwoord in mijn domeinnaam voor Google?', a: 'Een beetje, maar veel minder dan vroeger. De inhoud van je site en links van andere sites wegen veel zwaarder.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Website met AI laten maken', href: '/website-laten-maken/website-met-ai/', tekst: 'Je domeinnaam staat, nu de site. Vanaf € 250.' },
+      { label: 'Gids', titel: 'Website voor zzp\'ers', href: '/kennisbank/gidsen/website-zzp/', tekst: 'Welke pagina\'s je nodig hebt en wat verplicht is.' },
+      { label: 'Gids', titel: 'Zelf een website maken of laten maken?', href: '/kennisbank/gidsen/zelf-website-maken/', tekst: 'In 7 stappen online, en wat het echt kost.' },
+    ]}
+  />
+
+  <Actie titel="Domeinnaam geregeld? Dan de website" tekst={`Vertel ${site.contactpersoon} wat je site moet doen. Hij belt je binnen 15 minuten terug met een eerlijk voorstel.`} />
+</Base>

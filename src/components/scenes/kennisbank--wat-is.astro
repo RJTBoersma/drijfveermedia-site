@@ -1,0 +1,62 @@
+---
+// Scène voor /kennisbank/wat-is/: een kaartenbak met tabbladen per letter. Eén kaart is eruit getrokken en zweeft erboven.
+// In de volledige versie glijdt een vergrootglas langs de tabbladen en zweeft de losse kaart rustig op en neer.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+// van achter naar voor
+const kaarten = [
+  { l: 'Z', x: 272, y: 92 },
+  { l: 'S', x: 226, y: 100 },
+  { l: 'E', x: 180, y: 108 },
+  { l: 'B', x: 134, y: 116 },
+  { l: 'A', x: 88, y: 124 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kaartenbak met tabbladen van A tot Z. Eén kaart met de letter G is eruit getrokken en zweeft erboven, een vergrootglas zoekt langs de tabbladen.'}>
+  <!-- de kaarten in de bak -->
+  {kaarten.map((k) => (
+    <g>
+      <rect x="80" y={k.y + 14} width="300" height="110" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <path d={`M${k.x} ${k.y + 16}v-10a6 6 0 0 1 6-6h28a6 6 0 0 1 6 6v10z`} fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+      <text x={k.x + 20} y={k.y + 13} font-size="14" font-weight="900" text-anchor="middle" style="fill:#074663">{k.l}</text>
+    </g>
+  ))}
+  <!-- de voorkant van de bak -->
+  <path d="M64 158h332l-12 82a10 10 0 0 1-10 8H86a10 10 0 0 1-10-8z" fill="#074663" />
+  <rect x="198" y="186" width="64" height="20" rx="6" fill="#0b5a7e" />
+  <rect x="212" y="194" width="36" height="4" rx="2" fill="#8fc1dc" />
+
+  <!-- de losse kaart -->
+  <g class="los">
+    <rect x="318" y="26" width="140" height="92" rx="8" fill="#fff" stroke="#074663" stroke-width="2.5" />
+    <path d="M330 28v-8a6 6 0 0 1 6-6h28a6 6 0 0 1 6 6v8" fill="#fff" stroke="#074663" stroke-width="2.5" />
+    <text x="350" y="27" font-size="13" font-weight="900" text-anchor="middle" style="fill:#ff6600">G</text>
+    <rect class="o" x="332" y="44" width="70" height="9" rx="4.5" />
+    <rect x="332" y="62" width="110" height="6" rx="3" fill="#d9e1ea" />
+    <rect x="332" y="75" width="96" height="6" rx="3" fill="#d9e1ea" />
+    <rect x="332" y="88" width="104" height="6" rx="3" fill="#d9e1ea" />
+  </g>
+
+  {!mini && (
+    <g class="glas">
+      <circle cx="108" cy="98" r="15" fill="#fff" fill-opacity=".35" stroke="#10283f" stroke-width="3" />
+      <path d="M119 109l12 12" stroke="#10283f" stroke-width="4" stroke-linecap="round" />
+    </g>
+  )}
+</svg>
+<style>
+  .los { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .los { animation: kennisbank-wat-is-overzicht-zweef 5s ease-in-out infinite; }
+  .in-beeld .glas { animation: kennisbank-wat-is-overzicht-glas 7s ease-in-out 0.4s infinite; }
+  @keyframes kennisbank-wat-is-overzicht-zweef { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(-2deg); } }
+  @keyframes kennisbank-wat-is-overzicht-glas {
+    0%, 8% { transform: translate(0, 24px); }
+    22%, 30% { transform: translate(46px, 16px); }
+    44%, 52% { transform: translate(92px, 8px); }
+    66%, 74% { transform: translate(138px, 0); }
+    88%, 100% { transform: translate(0, 24px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .los, .in-beeld .glas { animation: none; }
+  }
+</style>

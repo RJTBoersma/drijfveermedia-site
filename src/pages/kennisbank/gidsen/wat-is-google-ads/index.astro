@@ -1,0 +1,275 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wat-is-google-ads.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/wat-is-google-ads/';
+const datum = '2026-10-18';
+const hoofdstukken = [
+  { id: 'wat-is', titel: 'Wat het precies is' },
+  { id: 'cijfers', titel: 'Google Ads in cijfers' },
+  { id: 'veiling', titel: 'Hoe de veiling werkt' },
+  { id: 'begrippen', titel: 'Begrippen die je tegenkomt' },
+  { id: 'campagnes', titel: 'Soorten campagnes' },
+  { id: 'zoektypen', titel: 'Zoektypen en locatie' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'voorbeeld', titel: 'Een voorbeeld van begin tot eind' },
+  { id: 'klikfraude', titel: 'Klikfraude en merknamen' },
+  { id: 'voor-wie', titel: 'Voor wie het werkt' },
+  { id: 'seo', titel: 'Adverteren of SEO?' },
+  { id: 'zelf-of-uitbesteden', titel: 'Zelf doen of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Wat is Google Ads? Uitleg, kosten en voorbeelden',
+  datePublished: '2026-10-17',
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Google Ads',
+  citation: [
+    'https://nl.wikipedia.org/wiki/Google_Ads',
+    'https://support.google.com/google-ads/answer/1752122?hl=nl',
+    'https://support.google.com/google-ads/answer/6297?hl=nl',
+    'https://support.google.com/google-ads/answer/6167118?hl=nl',
+    'https://support.google.com/google-ads/answer/1704424?hl=nl',
+    'https://support.google.com/google-ads/answer/42995?hl=nl',
+    'https://support.google.com/google-ads/answer/2549113?hl=nl',
+    'https://support.google.com/google-ads/answer/2375423?hl=nl',
+    'https://support.google.com/google-ads/answer/7478529?hl=nl',
+    'https://support.google.com/google-ads/answer/7684791?hl=nl',
+    'https://support.google.com/adspolicy/answer/6118?hl=nl',
+    'https://support.google.com/google-ads/answer/13020501?hl=nl',
+    'https://blog.google/technology/ads/new-advertising-brands/',
+  ],
+}];
+---
+<Base
+  title="Wat is Google Ads? Uitleg, kosten en voorbeelden"
+  description="Wat is Google Ads en hoe werkt het? Uitleg over de veiling, wat een klik kost, een rekenvoorbeeld voor het mkb en wanneer adverteren niet loont."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat is Google Ads?', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Online adverteren" titel="Wat is Google Ads? Uitleg, kosten en voorbeelden" knop={{ tekst: 'Laat je kansen gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>Google Ads is het advertentieprogramma van Google. Je betaalt om bovenaan te staan op het moment dat iemand zoekt naar wat jij doet. Bij zoekadvertenties betaal je pas als hij klikt. Hier lees je hoe het werkt, wat het kost en wanneer het loont.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} nagekeken="thorgall" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Google Ads heette tot juli 2018 Google AdWords. Je advertenties verschijnen in Google Zoeken, Maps, YouTube, Gmail en op websites van partners.</li>
+            <li>Bij elke zoekopdracht houdt Google een veiling. Het hoogste bod wint niet vanzelf, want kwaliteit telt mee.</li>
+            <li>Er is geen minimumbudget. Per maand betaal je nooit meer dan 30,4 keer je gemiddelde dagbudget.</li>
+            <li>Adverteren werkt meteen. Het stopt ook meteen, zodra je stopt met betalen.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is">Wat is Google Ads precies?</h2>
+        <p>Google Ads is het online advertentieprogramma van Google. Bedrijven tonen er advertenties mee bij zoekopdrachten, op YouTube, in Gmail en op websites die advertentieruimte aan Google verhuren. Tot 24 juli 2018 heette het Google AdWords. Die oude naam hoor je nog vaak, maar het is hetzelfde programma.</p>
+        <p>Voor Google is het de motor onder het bedrijf. Advertenties zijn al jaren de grootste inkomstenbron, en adverteerders van over de hele wereld doen mee. Van internationale ketens tot de schilder om de hoek: wereldwijd draaien ze op hetzelfde systeem.</p>
+        <p>Je herkent een advertentie aan het label Gesponsord. Ze staan boven en onder de gewone zoekresultaten en soms in het kaartje van Google Maps. Het verschil met de gewone resultaten is simpel. Voor een gewone plek kun je niet betalen, die verdien je met <a href="/zoekmachine-optimalisatie/">SEO</a>. Een advertentieplek koop je, per klik.</p>
+
+        <h2 id="cijfers">Google Ads in cijfers</h2>
+        <p>Hoe groot is het? Google begon er in 2000 mee, onder de naam AdWords. Toen Google in 2018 de nieuwe naam aankondigde, schreef het bedrijf dat het bijna achttien jaar eerder was gestart om mensen online makkelijker in contact te brengen met bedrijven. Inmiddels is het uitgegroeid tot een van de grootste advertentiesystemen ter wereld.</p>
+        <div class="getallen">
+          <div class="getal-kaart"><b>$ 82,3 mld</b><span>advertentie-omzet van Google in het laatste kwartaal van 2025</span></div>
+          <div class="getal-kaart"><b>72%</b><span>van alle omzet van moederbedrijf Alphabet in dat kwartaal</span></div>
+          <div class="getal-kaart"><b>$ 63,1 mld</b><span>daarvan uit Google Zoeken en verwante diensten</span></div>
+        </div>
+        <p class="klein muted">Bron: kwartaalcijfers van Alphabet over het vierde kwartaal van 2025. De advertentie-omzet omvat Zoeken, YouTube en het netwerk van partnersites.</p>
+        <p>Voor jou als adverteerder betekent dat vooral: het systeem is volwassen en goed gedocumenteerd, en je concurrenten zitten er ook. Het betekent ook dat Google er belang bij heeft dat je meer uitgeeft. Dat is geen reden om het niet te doen, wel een reden om de standaardinstellingen kritisch te bekijken.</p>
+
+        <h2 id="veiling">Hoe werkt de veiling achter elke zoekopdracht?</h2>
+        <p>Elke keer dat iemand zoekt, houdt Google in een fractie van een seconde een veiling. Alle adverteerders die bij die zoekopdracht willen verschijnen, doen mee. Het gaat zo:</p>
+        <ol>
+          <li><b>Je kiest zoekwoorden.</b> Bijvoorbeeld "loodgieter assen" of "lekkage dak". Je bepaalt ook waar je advertentie mag verschijnen, zoals een straal van 25 kilometer rond je bedrijf, en op welke tijden.</li>
+          <li><b>Je doet een bod.</b> Dat is het maximale bedrag dat je voor één klik wilt betalen. Je kunt Google ook zelf laten bieden, op basis van een doel dat jij opgeeft.</li>
+          <li><b>Google bepaalt je rangschikking.</b> Google combineert je bod met de kwaliteit van je advertentie en de pagina waar die naartoe leidt. Ook de context weegt mee: waar de zoeker is, welk apparaat hij gebruikt, hoe laat het is.</li>
+          <li><b>Je betaalt per klik.</b> Meestal minder dan je bod. Je betaalt net genoeg om de adverteerder direct onder je te verslaan.</li>
+        </ol>
+        <p>Daarom wint het hoogste bod niet altijd. Google zegt het zelf in de eigen hulppagina's: met heel relevante zoekwoorden en advertenties kun je hoger komen, tegen een lagere prijs, ook als een concurrent meer biedt. Een goede advertentie is dus letterlijk geld waard.</p>
+        <div class="kader">
+          <p class="kader-titel">Wat is de kwaliteitsscore?</p>
+          <p>Per zoekwoord geeft Google een kwaliteitsscore van 1 tot 10. Die kijkt naar drie dingen: de verwachte klikfrequentie, hoe goed je advertentie past bij de zoekopdracht, en de ervaring op je landingspagina. Volgens Google telt het cijfer zelf niet mee in de veiling. Het is een meter die laat zien waar je advertentie beter kan. Zie je veel zoekwoorden met een 3 of 4, dan betaal je vrijwel zeker te veel per klik.</p>
+        </div>
+
+        <h2 id="begrippen">Begrippen die je tegenkomt</h2>
+        <p>Google Ads zit vol afkortingen. Dit zijn de woorden die je het vaakst ziet, in gewone taal. Bij de meeste staat een link naar een korte uitleg in onze kennisbank.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Begrip</th><th>Wat het betekent</th><th>Waarom het telt</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/kennisbank/wat-is/sea/">SEA</a></td><td>Search engine advertising: adverteren in zoekmachines. Google Ads is daar het grootste voorbeeld van.</td><td>Het betaalde broertje van SEO</td></tr>
+              <tr><td><a href="/kennisbank/wat-is/cpc/">CPC</a></td><td>Kosten per klik: wat je gemiddeld betaalt als iemand op je advertentie klikt</td><td>Bepaalt hoeveel bezoekers je budget oplevert</td></tr>
+              <tr><td><a href="/kennisbank/wat-is/ctr/">CTR</a></td><td>Klikfrequentie: het percentage mensen dat klikt nadat ze je advertentie zagen</td><td>Een lage CTR betekent vaak dat je tekst niet past bij de zoekopdracht</td></tr>
+              <tr><td>Conversie</td><td>De actie die je wilt: een aanvraag, een telefoontje, een aankoop</td><td>Zonder conversiemeting weet je niet wat je advertenties opleveren</td></tr>
+              <tr><td>CPA</td><td>Kosten per conversie: je uitgaven gedeeld door het aantal aanvragen</td><td>Het getal waar een dienstverlener op stuurt</td></tr>
+              <tr><td><a href="/kennisbank/wat-is/roas/">ROAS</a></td><td>Opbrengst per uitgegeven euro aan advertenties</td><td>Het getal waar een webwinkel op stuurt</td></tr>
+              <tr><td>Kwaliteitsscore</td><td>Een cijfer van 1 tot 10 per zoekwoord dat laat zien hoe goed je advertentie en pagina passen</td><td>Een meter voor verbeterpunten, geen knop in de veiling</td></tr>
+              <tr><td>Uitsluitingszoekwoord</td><td>Een woord waarbij je advertentie juist niet mag verschijnen, zoals "vacature" of "gratis"</td><td>Voorkomt dat je betaalt voor klikken die nooit klant worden</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="campagnes">Welke soorten campagnes zijn er?</h2>
+        <p>Een campagne is een bundel advertenties met één budget en één doel. Er zijn zeven hoofdsoorten. Voor de meeste ondernemers zijn er twee of drie echt interessant.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Campagne</th><th>Waar je advertentie staat</th><th>Handig voor</th></tr></thead>
+            <tbody>
+              <tr><td>Zoeken</td><td>Een tekstadvertentie boven of onder de zoekresultaten</td><td>Mensen die nu zoeken naar wat jij doet</td></tr>
+              <tr><td>Performance Max</td><td>Alle kanalen van Google tegelijk, Google kiest zelf</td><td>Wie al genoeg aanvragen meet om Google te laten sturen</td></tr>
+              <tr><td><a href="/online-adverteren/google-shopping/">Shopping</a></td><td>Productfoto met prijs, bovenaan of in het tabblad Shopping</td><td>Webshops</td></tr>
+              <tr><td>Display</td><td>Banners op websites en in apps</td><td>Naamsbekendheid en eerdere bezoekers terughalen</td></tr>
+              <tr><td>Video</td><td>Voor en tijdens filmpjes op YouTube</td><td>Merkbekendheid; je betaalt vaak per view</td></tr>
+              <tr><td>Demand Gen</td><td>YouTube, Discover en Gmail, met beeld</td><td>Interesse wekken bij mensen die nog niet zoeken</td></tr>
+              <tr><td>App</td><td>Overal waar Google advertenties toont</td><td>Downloads van een app</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Voor een dienstverlener is een zoekcampagne bijna altijd de beste start. Wie "dakgoot lekt" intypt, heeft vandaag een probleem en zoekt iemand die het oplost. Daar betaal je met plezier voor. Wie tussen twee filmpjes door een banner ziet, zat daar niet op te wachten.</p>
+
+        <h2 id="zoektypen">Zoektypen en locatie: de twee instellingen die het meeste geld kosten</h2>
+        <p>Je kiest niet alleen zoekwoorden, maar ook hoe streng Google ze moet nemen. Dat heet het zoektype. Er zijn er drie.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoektype</th><th>Hoe je het invoert</th><th>Je advertentie verschijnt bij</th><th>Voorbeeld bij het zoekwoord dakgoot repareren</th></tr></thead>
+            <tbody>
+              <tr><td>Breed zoeken</td><td>dakgoot repareren</td><td>Zoekopdrachten die ermee te maken hebben, ook zonder jouw woorden erin</td><td>Ook bij "dakdekker in de buurt" of "regenpijp verstopt"</td></tr>
+              <tr><td>Zoeken op woordgroep</td><td>"dakgoot repareren"</td><td>Zoekopdrachten die de betekenis van je zoekwoord bevatten</td><td>"dakgoot laten repareren assen"</td></tr>
+              <tr><td>Exact zoeken</td><td>[dakgoot repareren]</td><td>Zoekopdrachten met dezelfde betekenis als je zoekwoord</td><td>"dakgoot reparatie"</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Volgens Google is breed zoeken het standaard zoektype voor elk nieuw zoekwoord. Google raadt ook aan het te combineren met Slim bieden, waarbij Google zelf je bod bepaalt. Met een groot budget en goede meting kan dat werken. Met een klein budget betaal je al snel voor zoekopdrachten die net naast je vak liggen. Begin daarom met woordgroep en exact, en kijk elke week in het rapport met zoektermen waar je echt bij verscheen.</p>
+        <p>Dan de locatie. Google kent twee opties: mensen die in je gebied zijn of er regelmatig komen (aanwezigheid), of ook mensen die interesse tonen in je gebied (aanwezigheid of interesse). Google raadt de brede optie aan en meldt dat adverteerders in reizen, vastgoed en onderwijs daar 5 procent meer conversies mee kregen. Voor een hotel klopt dat: wie in Amsterdam zoekt naar een hotel in Assen, wil hier slapen. Voor een loodgieter niet: wie in Spanje op vakantie "loodgieter Assen" intypt, wordt zelden klant. Lokale dienstverleners kiezen dus meestal voor aanwezigheid.</p>
+
+        <h2 id="kosten">Wat kost Google Ads?</h2>
+        <p>Google Ads kost precies zoveel als je zelf instelt. Er is geen minimumbudget en Google rekent geen opstartkosten. Bij zoekcampagnes betaal je alleen voor klikken. Je rekening bestaat uit drie delen.</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>Je budget</h3></div>
+        <p>Je stelt per campagne een gemiddeld dagbudget in. Op een drukke dag mag Google tot twee keer dat bedrag uitgeven, op een rustige dag minder. Over een maand betaal je nooit meer dan 30,4 keer je dagbudget. Bij € 10 per dag is dat dus maximaal € 304. Werk je liever met een maandbedrag, deel dat dan door 30,4.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>De prijs per klik</h3></div>
+        <p>Die verschilt enorm per branche. In de ene markt kost een klik een paar dubbeltjes, in de andere tientallen euro's. Hoe meer adverteerders op hetzelfde woord bieden, hoe duurder het wordt. Juridische en financiële diensten zitten vaak aan de dure kant. De Zoekwoordplanner van Google laat vooraf zien wat je ongeveer kwijt bent.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Beheer</h3></div>
+        <p>Doe je het niet zelf, dan betaal je ook een bureau of freelancer. Dat gaat per maand of als percentage van je advertentiebudget. Let op bij dat laatste: dan verdient je bureau meer naarmate jij meer uitgeeft, ook als het niets oplevert.</p>
+        <div class="kader kader-oranje">
+          <p class="kader-titel">Rekenvoorbeeld (verzonnen): een installateur in Emmen</p>
+          <ul>
+            <li>Hij wil € 600 per maand uitgeven.</li>
+            <li>Een klik kost gemiddeld € 2,50. Dat zijn 240 bezoekers.</li>
+            <li>Van die bezoekers vraagt 6% een offerte aan: 14 aanvragen.</li>
+            <li>Hij wint één op de drie offertes: 4 à 5 nieuwe klanten.</li>
+            <li>Kosten per nieuwe klant: € 120 tot € 150.</li>
+          </ul>
+          <p>Levert een klant gemiddeld € 1.500 op, dan is de som snel gemaakt. Is je marge per klus klein en de klikprijs hoog, dan wordt het lastig. Dan is SEO vaak de betere route.</p>
+        </div>
+        <p>Vul de som in met je eigen getallen. Weet je niet hoeveel van je bezoekers nu iets aanvragen? Begin dan daar. Zonder dat getal gok je, met of zonder advertenties.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Rekensom</th><th>Formule</th><th>In het voorbeeld</th></tr></thead>
+            <tbody>
+              <tr><td>Bezoekers</td><td>Budget gedeeld door de gemiddelde CPC</td><td>€ 600 / € 2,50 = 240</td></tr>
+              <tr><td>Aanvragen</td><td>Bezoekers keer het percentage dat iets aanvraagt</td><td>240 x 6% = 14</td></tr>
+              <tr><td>Kosten per aanvraag (CPA)</td><td>Budget gedeeld door het aantal aanvragen</td><td>€ 600 / 14 = ongeveer € 43</td></tr>
+              <tr><td>Kosten per klant</td><td>Budget gedeeld door het aantal nieuwe klanten</td><td>€ 600 / 4 à 5 = € 120 tot € 150</td></tr>
+              <tr><td>Maximaal per klik</td><td>Wat een klant mag kosten, keer conversie en winkans</td><td>€ 150 x 6% x 1/3 = € 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die laatste regel is de handigste. Hij zegt hoeveel een klik je maximaal mag kosten voordat je verlies draait. Kost een klik in jouw branche meer dan dat, dan moet je pagina beter converteren of moet je een ander kanaal kiezen.</p>
+
+        <h2 id="voorbeeld">Een voorbeeld van zoekopdracht tot aanvraag</h2>
+        <p>Hoe ziet dat er in het echt uit? Neem een hovenier in Zwolle die in het voorjaar meer tuinaanleg wil. Een verzonnen voorbeeld, maar zo ziet een nette opzet eruit.</p>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeldadvertentie (verzonnen)</p>
+          <p><b>Hovenier in Zwolle | Tuin klaar voor de zomer</b><br />Tuinbedrijf Groen (voorbeeld) · Tuinaanleg, bestrating en onderhoud. Vrijblijvend advies aan huis, binnen een week een prijs.<br /><span class="muted">Tuinaanleg · Onderhoud · Prijzen · Bel direct</span></p>
+        </div>
+        <ul class="vink">
+          <li><b>Zoekwoorden:</b> "hovenier zwolle", "tuin laten aanleggen zwolle", "tuinaanleg overijssel".</li>
+          <li><b>Uitsluitingen:</b> "vacature", "opleiding", "zelf", "gratis". Zo betaal je niet voor mensen die een baan of een doe-het-zelftip zoeken.</li>
+          <li><b>Locatie:</b> Zwolle plus 20 kilometer, alleen mensen die er echt zijn.</li>
+          <li><b>Landingspagina:</b> een pagina over tuinaanleg in Zwolle, met foto's van eigen werk en een kort formulier. Niet de homepage.</li>
+        </ul>
+        <p>De advertentie zelf is een responsieve zoekadvertentie. Je levert tot 15 koppen van 30 tekens en 4 beschrijvingen van 90 tekens aan. Google combineert die en leert welke combinatie het best werkt. De regels onder de advertentie zijn sitelinks. Google noemt die tegenwoordig componenten; vroeger heette het advertentie-extensies.</p>
+
+        <h2 id="klikfraude">Klikfraude: klikt je concurrent je budget leeg?</h2>
+        <p>Het kan, en Google weet dat. Niet elke vreemde klik is fraude, maar het komt voor. Klikken zonder echte interesse noemt Google ongeldige klikken. Denk aan herhaald klikken om iemands kosten op te drijven, klikken door robots en de tweede klik van een dubbelklik. Google filtert die automatisch uit je rapporten en rekent ze niet. In je account kun je de kolom Ongeldige klikken aanzetten om te zien hoeveel er zijn weggefilterd.</p>
+        <p>Vertrouw je het niet, dan heb je vier knoppen. Zet je locatie op mensen die echt in je gebied zijn. Sluit zoekwoorden uit die vreemde klikken trekken. Sluit een verdacht ip-adres uit. En vraag bij Google een onderzoek aan als je kosten plotseling stijgen zonder dat er meer aanvragen komen. Klikfraude helemaal uitbannen lukt niemand, maar met deze stappen houd je het klein.</p>
+
+        <h3>Wat Google wel en niet terugbetaalt</h3>
+        <p>Ontdekt Google ongeldige klikken voordat je factuur er is, dan worden ze uit je kosten gehaald. Ontdekt Google ze later, dan krijg je een tegoed, geen terugbetaling. Dat staat op je factuuroverzicht als aanpassing voor ongeldige activiteit. De automatische controle kijkt volgens Google naar verkeer van de afgelopen 60 dagen. Een plotselinge piek in klikken is volgens Google bovendien meestal geen fraude, maar het gevolg van een hoger budget, een hoger bod of nieuwe, brede zoekwoorden. Kijk dus eerst naar je eigen wijzigingen.</p>
+
+        <h3>Mag je adverteren op de naam van een concurrent?</h3>
+        <p>Het beleid van Google is duidelijk over zoekwoorden: Google beperkt het gebruik van een merknaam als zoekwoord niet. In de tekst van je advertentie ligt het anders. Dient de merkhouder een klacht in, dan kan Google het gebruik van die naam in advertenties van een directe concurrent beperken. Het Europese Hof van Justitie oordeelde in maart 2010 al dat Google zelf geen merkinbreuk pleegt door merknamen als zoekwoord te verkopen. Of jouw advertentie mag, hangt af van hoe je de naam gebruikt. Twijfel je, vraag het dan na voordat je begint.</p>
+
+        <h2 id="voor-wie">Voor wie werkt Google Ads, en voor wie niet?</h2>
+        <p>Google Ads is geen toverknop. Het werkt goed als mensen al zoeken naar wat jij doet. Het werkt slecht als niemand weet dat jouw product bestaat.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Werkt vaak goed</th><th>Werkt vaak lastig</th></tr></thead>
+            <tbody>
+              <tr><td>Spoedklussen: lekkage, ontstopping, slotenmaker, glasschade</td><td>Producten die niemand kent en waar dus niemand op zoekt</td></tr>
+              <tr><td>Diensten met een flinke opdrachtwaarde: warmtepomp, dakkapel, verbouwing</td><td>Lage marges bij hoge klikprijzen</td></tr>
+              <tr><td>Seizoenswerk: tuinaanleg in het voorjaar, cv-onderhoud in de herfst</td><td>Een website die bezoekers niet overtuigt</td></tr>
+              <tr><td>Nieuwe bedrijven die nog niet gevonden worden in Google</td><td>Een budget dat te klein is om iets van te leren</td></tr>
+              <tr><td>Testen welke zoekwoorden klanten opleveren, voordat je in SEO investeert</td><td>Bedrijven die geen tijd hebben om aanvragen snel op te volgen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Staat een bedrijf vooral aan de rechterkant, dan raden we Google Ads meestal af. Dat zeggen we liever vooraf dan na drie maanden en een paar duizend euro.</p>
+
+        <h2 id="seo">Google Ads of SEO: wat past bij jou?</h2>
+        <p>Het korte antwoord: Google Ads is huren, SEO is kopen. Met advertenties sta je morgen bovenaan, maar zodra je stopt met betalen ben je weg. Met <a href="/kennisbank/wat-is/seo-en-sea/">SEO</a> duurt het maanden voordat je bovenaan komt, maar daarna blijven de bezoekers komen zonder dat je per klik betaalt.</p>
+        <p>Advertenties zijn sterk als je snel aanvragen nodig hebt, een seizoen hebt of wilt testen welke zoekwoorden klanten opleveren. Die kennis gebruik je daarna voor je SEO. Het werkt vaak het best samen: eerst advertenties voor de aanvragen van nu, intussen bouwen aan posities voor later.</p>
+        <p>Een eerlijke kanttekening hoort erbij. Een campagne die al maanden draait zonder dat iemand kijkt wat hij oplevert, kost vaak meer dan je denkt. Soms is het beste advies om ermee te stoppen. Verspild budget schrappen levert soms meer op dan een nieuwe campagne starten.</p>
+
+        <h2 id="zelf-of-uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>Een account aanmaken kan iedereen in een kwartier. Het lastige zit in de standaardinstellingen. Nieuwe zoekwoorden staan op breed zoeken, waardoor je ook verschijnt bij zoekopdrachten die er maar half mee te maken hebben. De locatie staat op aanwezigheid of interesse, zodat ook mensen buiten je gebied je advertentie zien. En met één klik laat je Google zijn eigen aanbevelingen automatisch doorvoeren. Elk van die keuzes geeft Google meer ruimte om je budget uit te geven.</p>
+        <p>Wil je het zelf doen? Volg dan ons stappenplan <a href="/online-adverteren/google-ads-campagne-opzetten/">een Google Ads-campagne opzetten</a>. Heb je al een account? Loop de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check in tien punten</a> door, dan zie je snel waar geld weglekt. Liever dat iemand het overneemt? Bij <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a> spreken we vooraf af hoeveel aanvragen je mag verwachten. Die afspraak is waar je ons op afrekent. Een maandcontract is genoeg, want je blijft omdat het werkt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je campagnes bijhouden?" intro="Wat je van ons mag verwachten als we je advertenties beheren." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is het verschil tussen Google Ads en Google AdWords?', a: 'Er is geen verschil. Google AdWords is de oude naam. Op 24 juli 2018 ging het verder als Google Ads, omdat het programma inmiddels veel meer kon dan tekstadvertenties bij zoekwoorden.' },
+      { v: 'Wat is het minimale budget voor Google Ads?', a: 'Google kent geen minimum. Onze vuistregel: je budget moet genoeg klikken opleveren om er binnen een maand iets van te leren. Bij een klikprijs van € 2 en een budget van € 5 per dag krijg je zo weinig bezoekers dat je na een maand nog niets weet.' },
+      { v: 'Betaal je ook als niemand klikt?', a: 'Bij zoekcampagnes niet: je betaalt per klik. Bij sommige display- en videocampagnes betaal je per duizend vertoningen of per view. Kijk dus goed welke biedstrategie je kiest.' },
+      { v: 'Hoe snel werkt Google Ads?', a: 'Een goedgekeurde advertentie kan dezelfde dag al verschijnen. Laat je Google zelf bieden op aanvragen, dan volgt een leerperiode. Volgens Google kan die ongeveer 50 conversies of drie conversiecycli duren. Pas in die tijd zo weinig mogelijk aan.' },
+      { v: 'Wat kost een klik in Google Ads?', a: 'Dat verschilt per branche en per zoekwoord, van een paar dubbeltjes tot tientallen euro\'s. Hoe meer adverteerders op hetzelfde woord bieden, hoe duurder. De Zoekwoordplanner in Google Ads laat vooraf zien wat je ongeveer kwijt bent.' },
+      { v: 'Kan ik op de naam van mijn concurrent adverteren?', a: 'Google beperkt merknamen als zoekwoord niet. In je advertentietekst kan de merkhouder het gebruik van zijn naam laten beperken. Twijfel je, kijk dan in het advertentiebeleid van Google of vraag het ons in een <a href="/consult/">consult</a>.' },
+      { v: 'Kan ik altijd stoppen?', a: 'Ja. Je zet een campagne met één klik op pauze en betaalt vanaf dat moment niets meer. De bezoekers stoppen dan ook direct. Dat is het grote verschil met SEO.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Google Ads-check in 10 punten', href: '/kennisbank/gidsen/google-ads-check/', tekst: 'Wordt je geld goed besteed? Loop je account zelf na.' },
+      { label: 'Dienst', titel: 'Google Ads-campagne opzetten', href: '/online-adverteren/google-ads-campagne-opzetten/', tekst: 'Het complete stappenplan, of laat hem door ons opzetten.' },
+      { label: 'Pillar', titel: 'Online adverteren', href: '/online-adverteren/', tekst: 'Adverteren waar je klant zoekt: Google, Shopping en ChatGPT.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten of Google Ads voor jou loont?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt wat klikken in jouw branche en regio kosten, en belt je met een eerlijke inschatting. Ook als het antwoord is dat je beter iets anders kunt doen.`} />
+</Base>

@@ -1,0 +1,117 @@
+---
+// Scène voor /regio/friesland/: een Fries landschap (kerk op een terp, molen, boerderij, zeilboot op het meer)
+// met daarboven een zoekresultaat waarin "Jouw bedrijf" bovenaan staat. De molen draait, de boot deint,
+// een cursor klikt op het resultaat en er komt een aanvraag binnen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend Fries landschap met een kerk op een terp, een molen, een boerderij en een zeilboot op het meer. Erboven een zoekresultaat voor marketingbureau Friesland, met jouw bedrijf bovenaan.'}>
+  <defs>
+    <clipPath id="regio-friesland-venster"><rect x="12" y="52" width="456" height="206" rx="16" /></clipPath>
+  </defs>
+  <rect x="12" y="52" width="456" height="206" rx="16" fill="#fff" />
+  <g clip-path="url(#regio-friesland-venster)">
+    <!-- land en water -->
+    <path d="M12 150C120 145 240 153 468 147V178H12Z" fill="#d7e6d8" />
+    <rect x="12" y="176" width="456" height="90" fill="#dbe6ef" />
+    <g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+      <path d="M34 198q10-4 20 0t20 0" /><path d="M250 192q10-4 20 0t20 0" /><path d="M96 238q10-4 20 0t20 0" />
+      <path d="M300 236q10-4 20 0t20 0" /><path d="M214 222q8-3 16 0t16 0" /><path d="M402 204q8-3 16 0t16 0" />
+    </g>
+    <!-- vogels -->
+    <path class="l" d="M232 74q5-5 10 0q5-5 10 0M118 66q4-4 8 0q4-4 8 0" style="stroke-width:1.6" />
+    <!-- kerk op een terp -->
+    <path d="M22 154Q70 126 122 154Z" fill="#c7dbc9" />
+    <path d="M50 141V104h16v37z" fill="#fff" />
+    <path class="l" d="M50 141V104h16v37M47 104l11-18 11 18zM66 120h34v21M64 121l19-13 19 13" />
+    <path d="M47 104l11-18 11 18z" fill="#074663" />
+    <rect class="v" x="55" y="112" width="6" height="9" rx="3" />
+    <rect class="v" x="76" y="126" width="5" height="8" rx="2.5" /><rect class="v" x="87" y="126" width="5" height="8" rx="2.5" />
+    <!-- molen -->
+    <path d="M190 150l7-44h16l7 44z" fill="#fff" />
+    <path class="l" d="M190 150l7-44h16l7 44zM201 150v-11a4 4 0 0 1 8 0v11M203 122h4" />
+    <path d="M195 107q10-14 20 0z" fill="#074663" />
+    <g class="regio-friesland-wieken">
+      <g fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round">
+        <path d="M205 100V62M205 68h9v26h-9M205 77h9M205 86h9" />
+        <path d="M205 100V62M205 68h9v26h-9M205 77h9M205 86h9" transform="rotate(90 205 100)" />
+        <path d="M205 100V62M205 68h9v26h-9M205 77h9M205 86h9" transform="rotate(180 205 100)" />
+        <path d="M205 100V62M205 68h9v26h-9M205 77h9M205 86h9" transform="rotate(270 205 100)" />
+      </g>
+      <circle cx="205" cy="100" r="3.5" fill="#ff6600" />
+    </g>
+    <!-- boerderij met bomen -->
+    <path d="M322 150l18-20h34l18 20z" fill="#e8eef4" />
+    <path class="l" d="M322 150l18-20h34l18 20zM300 137l12-10 12 10" />
+    <rect x="302" y="137" width="20" height="13" fill="#fff" />
+    <path class="l" d="M302 150v-13h20v13" />
+    <rect class="v" x="308" y="141" width="8" height="6" rx="1" />
+    <circle cx="414" cy="138" r="11" fill="#9cc3a3" /><circle cx="431" cy="143" r="8" fill="#9cc3a3" />
+    <path d="M414 149v4M431 151v3" stroke="#6b8f72" stroke-width="2" />
+    <!-- zeilboot -->
+    <g class="regio-friesland-boot">
+      <path d="M130 214h66l-10 12h-46z" fill="#10283f" />
+      <path d="M166 210V160" stroke="#10283f" stroke-width="2.5" />
+      <path d="M168 164l28 46h-28z" fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+      <path d="M163 170l-24 40h24z" fill="#fff" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+      <path class="o" d="M166 158l11 3-11 4z" />
+      <path d="M140 232q12 3 24 0t24 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+    </g>
+    <path d="M436 196l12-22v22zM430 198h22l-4 5h-14z" fill="#8aa0b4" />
+  </g>
+  <rect x="12" y="52" width="456" height="206" rx="16" fill="none" stroke="#d9e1ea" stroke-width="2" />
+  <!-- zoekresultaat -->
+  <g>
+    <rect x="262" y="14" width="204" height="112" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+    <rect x="274" y="26" width="180" height="24" rx="12" fill="#f4f7fa" stroke="#d9e1ea" />
+    <circle cx="288" cy="37" r="5" fill="none" stroke="#074663" stroke-width="2" />
+    <path d="M292 41l4 4" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+    <text x="302" y="42" font-size="10.5" font-weight="600">marketingbureau friesland</text>
+    <rect x="274" y="57" width="180" height="29" rx="8" fill="#fff4ec" />
+    <path d="M281 69c0-4 3-7 6-7s6 3 6 7c0 5-6 10-6 10s-6-5-6-10z" fill="#ff6600" />
+    <circle cx="287" cy="69" r="2.2" fill="#fff" />
+    <text x="300" y="69" font-size="11" font-weight="800">Jouw bedrijf</text>
+    <text x="300" y="80" font-size="8.5" class="zacht">Open · bellen · route</text>
+    <circle cx="287" cy="98" r="4" fill="#c4d0dc" />
+    <rect x="300" y="93" width="110" height="5" rx="2.5" fill="#d9e1ea" /><rect x="300" y="101" width="70" height="4" rx="2" fill="#e8eef4" />
+    <circle cx="287" cy="114" r="4" fill="#c4d0dc" />
+    <rect x="300" y="109" width="96" height="5" rx="2.5" fill="#d9e1ea" /><rect x="300" y="117" width="58" height="4" rx="2" fill="#e8eef4" />
+  </g>
+  {!mini && (
+    <g>
+      <g transform="translate(424 70)">
+        <g class="regio-friesland-cursor">
+          <path d="M0 0v17l4.5-4 3 7 3.5-1.5-3-6.8H14z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+        </g>
+      </g>
+      <circle class="regio-friesland-klik" cx="424" cy="70" r="6" fill="none" stroke="#ff6600" stroke-width="2" />
+      <g transform="translate(334 214)">
+        <g class="regio-friesland-aanvraag">
+          <rect width="124" height="28" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+          <circle cx="15" cy="14" r="8" fill="#1f8a5b" />
+          <path d="M11 14l3 3 5-6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <text x="29" y="18" font-size="10.5" font-weight="800">Nieuwe aanvraag</text>
+        </g>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .regio-friesland-wieken { transform-box: view-box; transform-origin: 205px 100px; }
+  .in-beeld .regio-friesland-wieken { animation: regio-friesland-draai 8s linear 0.6s infinite; }
+  .regio-friesland-boot { transform-box: view-box; transform-origin: 163px 220px; }
+  .in-beeld .regio-friesland-boot { animation: regio-friesland-deinen 4s ease-in-out 0.4s infinite; }
+  :global(.teken-js) .regio-friesland-cursor, :global(.teken-js) .regio-friesland-klik, :global(.teken-js) .regio-friesland-aanvraag { opacity: 0; }
+  .regio-friesland-klik { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .regio-friesland-cursor { animation: regio-friesland-cursor 1.2s cubic-bezier(.4,0,.2,1) 0.8s forwards; }
+  .in-beeld .regio-friesland-klik { animation: regio-friesland-klik 0.8s ease-out 2s forwards; }
+  .in-beeld .regio-friesland-aanvraag { animation: regio-friesland-op 0.7s cubic-bezier(.3,1.6,.5,1) 2.5s forwards; }
+  @keyframes regio-friesland-draai { to { transform: rotate(360deg); } }
+  @keyframes regio-friesland-deinen { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(3px) rotate(-1.5deg); } }
+  @keyframes regio-friesland-cursor { from { opacity: 0; transform: translate(30px, 46px); } 30% { opacity: 1; } to { opacity: 1; transform: none; } }
+  @keyframes regio-friesland-klik { from { opacity: 1; transform: scale(0.6); } to { opacity: 0; transform: scale(2.6); } }
+  @keyframes regio-friesland-op { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .regio-friesland-wieken, .in-beeld .regio-friesland-boot, .in-beeld .regio-friesland-cursor, .in-beeld .regio-friesland-klik, .in-beeld .regio-friesland-aanvraag { animation: none; }
+  }
+</style>

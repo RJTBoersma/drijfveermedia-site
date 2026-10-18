@@ -1,0 +1,182 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--utm-codes.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/utm-codes/';
+const datum = '2026-10-17';
+const hoofdstukken = [
+  { id: 'wat-is-het', titel: 'Wat is een UTM-code?' },
+  { id: 'waarom', titel: 'Waarom je ze nodig hebt' },
+  { id: 'parameters', titel: 'De vijf parameters' },
+  { id: 'maken', titel: 'Maken in vier stappen' },
+  { id: 'naamgeving', titel: 'Een naamgeving die je volhoudt' },
+  { id: 'terugvinden', titel: 'Terugvinden in Google Analytics' },
+  { id: 'niet', titel: 'Waar je ze niet voor gebruikt' },
+  { id: 'ai', titel: 'Bezoekers uit ChatGPT' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'UTM-codes maken en gebruiken: zien welke link klanten oplevert',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'UTM-parameters',
+  citation: [
+    'https://support.google.com/analytics/answer/10917952?hl=nl',
+    'https://support.google.com/analytics/answer/9756891?hl=nl',
+  ],
+}];
+---
+<Base
+  title="UTM-codes maken en gebruiken | Drijfveer Media"
+  description="UTM-codes maken in twee minuten: de vijf parameters, een naamgeving die klopt en in Google Analytics zien welke mail of post aanvragen oplevert."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'UTM-codes', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Tracking en analytics" titel="UTM-codes maken en gebruiken: zien welke link klanten oplevert" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een paar woorden achter een link, met een groot effect. Je ziet in Google Analytics welke mail, post of flyer bezoekers en aanvragen oplevert. Zo maak je die codes, en zo houd je ze netjes.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een UTM-code is een toevoeging aan een link die vertelt waar een bezoeker vandaan kwam.</li>
+            <li>Je gebruikt er drie altijd: utm_source (de bron), utm_medium (het soort kanaal) en utm_campaign (de campagne).</li>
+            <li>Schrijf alles in kleine letters en leg je vaste namen vast in één lijst.</li>
+            <li>Gebruik ze nooit op links binnen je eigen site. Dan raak je de echte bron kwijt.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat-is-het">Wat is een UTM-code?</h2>
+        <p>UTM staat voor Urchin Tracking Module. Urchin was een meetprogramma dat Google in 2005 kocht en dat later Google Analytics werd. De naam is gebleven.</p>
+        <p>De code is niets meer dan een stukje tekst achter een gewone link. Neem deze link uit een nieuwsbrief:</p>
+        <p><code>jouwbedrijf.nl/dakkapel/?utm_source=nieuwsbrief&amp;utm_medium=email&amp;utm_campaign=voorjaar</code></p>
+        <p>Achter het vraagteken staan de parameters, gescheiden door een &amp;. Wie op deze link klikt, komt gewoon op de pagina over dakkapellen. Maar Google Analytics leest mee en noteert: deze bezoeker kwam uit de nieuwsbrief, via e-mail, voor de voorjaarscampagne. Op dezelfde manier lezen ook tools als Plausible en Matomo de code uit.</p>
+
+        <h2 id="waarom">Waarom je ze nodig hebt</h2>
+        <p>Zonder zo'n code raakt veel verkeer zijn herkomst kwijt. Een klik uit de mailapp op je telefoon, een link in een pdf-offerte of een QR-code op je bus: Google Analytics weet niet waar die bezoeker vandaan komt en zet hem bij direct verkeer. Dan zie je een hoop bezoekers uit het niets, en weet je niet welke inspanning werkte.</p>
+        <p>Met een code zie je per link wat er gebeurt. Je ziet welke campagnes leads opleveren en welke alleen geld kosten. Juist bij acquisitiecampagnes, waar je nieuwe klanten zoekt, wil je dat weten. Verspild budget schrappen levert vaak meer op dan een nieuwe campagne starten.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld</p>
+          <p>Stel: een installateur in Emmen deelt in het voorjaar 5.000 flyers uit en stuurt een nieuwsbrief over warmtepompen. Op de flyer staat een QR-code met een eigen campagnelink, in de mail een link met een andere code. Na zes weken: de flyer leverde 38 bezoekers en één aanvraag op, de nieuwsbrief 210 bezoekers en negen aanvragen. Volgend jaar weet hij waar zijn geld heen moet.</p>
+        </div>
+
+        <h2 id="parameters">De vijf parameters</h2>
+        <p>Er zijn vijf gangbare parameters. Google Analytics kent er nog een paar extra, zoals utm_id, maar die heb je als mkb'er zelden nodig.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Parameter</th><th>Voorbeeld</th><th>Wat het vertelt</th></tr></thead>
+            <tbody>
+              <tr><td>utm_source</td><td>google</td><td>De bron: welke site, nieuwsbrief of plek. Verplicht.</td></tr>
+              <tr><td>utm_medium</td><td>cpc</td><td>Het soort kanaal: email, social, cpc voor betaalde klikken.</td></tr>
+              <tr><td>utm_campaign</td><td>voorjaar</td><td>De naam van je actie of campagne.</td></tr>
+              <tr><td>utm_term</td><td>dakkapel</td><td>Het zoekwoord, vooral bij advertenties. Optioneel.</td></tr>
+              <tr><td>utm_content</td><td>knop-boven</td><td>Welke link het was, als er meer in één mail of post staan. Optioneel.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Source, medium en campaign gebruik je altijd. Met utm_content test je bijvoorbeeld of mensen vaker op de knop bovenaan je nieuwsbrief klikken of op de link onderaan. Google zelf <a href="https://support.google.com/analytics/answer/10917952?hl=nl" rel="noopener">raadt aan</a> per platform één vaste bronnaam te kiezen en per kanaal één vast medium.</p>
+
+        <h2 id="maken">UTM-codes maken in vier stappen</h2>
+
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} /><h3>1. Kies de pagina</h3></div>
+        <p>Stuur mensen naar de pagina die past bij je boodschap, niet standaard naar je homepage. Gaat de mail over dakkapellen, link dan naar de pagina over dakkapellen. Of naar een eigen <a href="/kennisbank/gidsen/landingspagina-maken/">landingspagina</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>2. Vul de parameters in</h3></div>
+        <p>Gebruik de gratis Campaign URL Builder van Google. Je vult de link, de bron, het medium en de campagne in en krijgt de complete link terug. Maak je er veel, zet dan een simpele spreadsheet op die de link voor je samenstelt. Dan typ je nooit meer een tikfout.</p>
+
+        <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>3. Maak hem kort of zet hem in een QR-code</h3></div>
+        <p>Een lange link ziet er rommelig uit in een post of op papier. Zet hem in een knop, maak er een QR-code van of gebruik een linkverkorter. De code blijft gewoon werken.</p>
+
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>4. Test hem</h3></div>
+        <p>Klik zelf op de link en kijk in het rapport Realtime of je bezoek binnenkomt met de juiste bron en campagne. Twee minuten werk dat je later uren puzzelen bespaart.</p>
+
+        <h2 id="naamgeving">Een naamgeving die je volhoudt</h2>
+        <p>De codes zijn hoofdlettergevoelig. Voor Google Analytics zijn Facebook, facebook en fb drie verschillende bronnen. Na een jaar heb je dan een lijst waar niemand meer wijs uit wordt. Spreek daarom vijf regels af:</p>
+        <ol>
+          <li>Alles in kleine letters.</li>
+          <li>Geen spaties. Gebruik een koppelteken: voorjaar-2027.</li>
+          <li>Eén vaste naam per bron en per medium, vastgelegd in een lijst.</li>
+          <li>Campagnenamen die je over een jaar nog snapt.</li>
+          <li>Eén persoon beheert de lijst.</li>
+        </ol>
+        <p>Kies voor het medium de woorden die Google Analytics kent. Dan komen je bezoekers vanzelf in het <a href="https://support.google.com/analytics/answer/9756891?hl=nl" rel="noopener">juiste kanaal</a> terecht. Dit lijstje kun je overnemen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Waar staat de link?</th><th>utm_source</th><th>utm_medium</th></tr></thead>
+            <tbody>
+              <tr><td>Je nieuwsbrief</td><td>nieuwsbrief</td><td>email</td></tr>
+              <tr><td>Je e-mailhandtekening</td><td>handtekening</td><td>email</td></tr>
+              <tr><td>Een LinkedIn-bericht</td><td>linkedin</td><td>social</td></tr>
+              <tr><td>Een Facebook-bericht</td><td>facebook</td><td>social</td></tr>
+              <tr><td>Je Google Bedrijfsprofiel</td><td>google</td><td>organic</td></tr>
+              <tr><td>Een QR-code op een flyer</td><td>flyer</td><td>print</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een medium dat Google niet kent, zoals print, komt onder Niet toegewezen terecht. Dat is niet erg, zolang je weet waar je moet kijken. De link in je <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a> verdient extra aandacht. Zonder code tellen die klikken vaak als gewoon zoekverkeer, en weet je niet wat je profiel oplevert.</p>
+
+        <h2 id="terugvinden">Je campagnes terugvinden in Google Analytics 4</h2>
+        <p>In <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a> ga je naar Rapporten, Acquisitie, Verkeersacquisitie. Kies bovenaan de tabel als dimensie Sessiecampagne, of Sessiebron/-medium. Je ziet nu per campagne hoeveel bezoekers er kwamen.</p>
+        <p>Het interessante deel zit in de kolommen rechts. Kies daar je belangrijke gebeurtenissen, zoals een verzonden formulier of een klik op je telefoonnummer. Dan zie je niet alleen welke link bezoekers trok, maar ook welke link klanten opleverde. Wil je utm_content of utm_term zien, voeg die dan toe als tweede dimensie.</p>
+
+        <h2 id="niet">Waar je ze niet voor gebruikt</h2>
+        <ul>
+          <li><b>Links binnen je eigen site.</b> Een UTM-code op een interne link start een nieuwe sessie. De bezoeker die via Google binnenkwam, staat dan ineens bij jouw eigen campagne. Je cijfers kloppen niet meer.</li>
+          <li><b>Google Ads.</b> Zet automatisch taggen aan in je Ads-account. Bij advertenties in Google UTM-tags toevoegen is dan meestal overbodig, want Google koppelt de klik zelf.</li>
+          <li><b>Persoonsgegevens.</b> Zet nooit een naam of e-mailadres in een UTM-code. Dan stuur je persoonsgegevens naar Google, en dat mag niet zomaar.</li>
+        </ul>
+
+        <h2 id="ai">Bezoekers uit ChatGPT herkennen</h2>
+        <p>Kijk je in je rapporten, dan zie je misschien al bron chatgpt.com staan. ChatGPT zet zelf een UTM-code achter de links die het in een antwoord geeft. Zo zie je zwart op wit hoeveel bezoekers een AI-assistent je stuurt, en of die bezoekers ook contact opnemen. Wil je dat ChatGPT jouw bedrijf vaker noemt, lees dan hoe je <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar wordt in ChatGPT</a>.</p>
+
+        <h2 id="hulp">Liever dat het in één keer goed staat?</h2>
+        <p>Campagnelinks zijn het kleine broertje van een goede meting. Ze werken alleen als Google Analytics je aanvragen ook meet. Wij richten <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a> in vanaf € 395 eenmalig, exclusief btw. Je krijgt er een naamlijst voor je campagnelinks bij, zodat je team vanaf dag één dezelfde namen gebruikt.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={8} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs titel="Liever dat wij je meting inrichten?" intro="Wat je bij ons krijgt, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Zijn UTM-codes slecht voor SEO?', a: 'Nee, zolang je ze alleen gebruikt op links van buitenaf, zoals in mails en posts. Een goede site vertelt Google met een canonical tag welke versie van de pagina de echte is.' },
+      { v: 'Maakt het uit of ik hoofdletters gebruik?', a: 'Ja. Nieuwsbrief en nieuwsbrief zijn voor Google Analytics twee verschillende bronnen. Gebruik daarom altijd kleine letters.' },
+      { v: 'Werken deze codes ook zonder Google Analytics?', a: 'Ja. Privacyvriendelijke tools zoals Plausible, Simple Analytics en Matomo lezen dezelfde parameters uit.' },
+      { v: 'Zie ik met een UTM-code wie er heeft geklikt?', a: 'Nee, en dat is maar goed ook. Je ziet hoeveel mensen via een link kwamen en wat ze deden, niet wie het waren.' },
+      { v: 'Hoe lang blijft zo\'n code werken?', a: 'Zolang de link bestaat. Een QR-code op een bus of een link in een oude pdf telt dus jaren later nog mee onder dezelfde campagne.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over meten"
+    links={[
+      { label: 'Gids', titel: 'Google Analytics 4', href: '/kennisbank/gidsen/google-analytics-4/', tekst: 'GA4, Tag Manager en Looker Studio instellen.' },
+      { label: 'Dienst', titel: 'Tracking en analytics', href: '/leadgeneratie/tracking-en-analytics/', tekst: 'Wij richten het in, vanaf € 395 eenmalig.' },
+      { label: 'Gids', titel: 'Nieuwsbrief maken', href: '/kennisbank/gidsen/nieuwsbrief-maken/', tekst: 'Een nieuwsbrief die mensen openen en lezen.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten welke campagne echt werkt?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt wat je nu meet en belt je met een eerlijk advies, ook over wat je kunt schrappen.`} />
+</Base>

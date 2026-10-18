@@ -1,0 +1,73 @@
+---
+// Scène voor /online-marketing-leeuwarden/: een mengpaneel met drie schuiven (SEO, Ads, Mail).
+// De grijze knoppen zijn de oude verdeling; in de volledige versie schuiven gekleurde knoppen naar een betere verdeling
+// en lopen de aanvragen ernaast op.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een mengpaneel met schuiven voor SEO, advertenties en e-mail. Het budget wordt anders verdeeld en het aantal aanvragen ernaast stijgt.'}>
+  <!-- mengpaneel -->
+  <rect x="30" y="36" width="270" height="206" rx="14" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="50" y="62" font-size="13" font-weight="800">Budget per maand</text>
+  <g stroke="#e8eef4" stroke-width="2">
+    <path d="M70 90h40M70 120h40M70 150h40M70 180h40" />
+    <path d="M145 90h40M145 120h40M145 150h40M145 180h40" />
+    <path d="M220 90h40M220 120h40M220 150h40M220 180h40" />
+  </g>
+  <rect x="85" y="80" width="10" height="120" rx="5" fill="#e8eef4" />
+  <rect x="160" y="80" width="10" height="120" rx="5" fill="#e8eef4" />
+  <rect x="235" y="80" width="10" height="120" rx="5" fill="#e8eef4" />
+  <!-- oude verdeling: drie gelijke knoppen -->
+  <rect x="74" y="132" width="32" height="14" rx="5" fill="#fff" stroke="#c9d3dd" stroke-width="2" />
+  <rect x="149" y="132" width="32" height="14" rx="5" fill="#fff" stroke="#c9d3dd" stroke-width="2" />
+  <rect x="224" y="132" width="32" height="14" rx="5" fill="#fff" stroke="#c9d3dd" stroke-width="2" />
+  <text x="90" y="226" text-anchor="middle" font-size="12" font-weight="700">SEO</text>
+  <text x="165" y="226" text-anchor="middle" font-size="12" font-weight="700">Ads</text>
+  <text x="240" y="226" text-anchor="middle" font-size="12" font-weight="700">Mail</text>
+  <!-- aanvragen -->
+  <rect x="318" y="66" width="138" height="150" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="334" y="90" font-size="12" font-weight="800">Aanvragen</text>
+  <path class="l" d="M334 196h108" />
+  <rect x="340" y="176" width="16" height="20" rx="3" fill="#e8eef4" />
+  {!mini && (
+    <g>
+      <g class="knop k1"><rect x="74" y="132" width="32" height="14" rx="5" fill="#074663" /></g>
+      <g class="knop k2"><rect x="149" y="132" width="32" height="14" rx="5" fill="#074663" /></g>
+      <g class="knop k3"><rect x="224" y="132" width="32" height="14" rx="5" fill="#ff6600" /></g>
+      <rect class="staaf s1" x="364" y="164" width="16" height="32" rx="3" fill="#9fc0d3" />
+      <rect class="staaf s2" x="388" y="146" width="16" height="50" rx="3" fill="#074663" />
+      <rect class="staaf s3" x="412" y="118" width="16" height="78" rx="3" fill="#ff6600" />
+      <g class="post">
+        <rect x="372" y="20" width="96" height="30" rx="9" fill="#fff" stroke="#d9e1ea" />
+        <rect x="382" y="28" width="18" height="13" rx="2" fill="none" stroke="#074663" stroke-width="2" />
+        <path d="M382 29l9 7 9-7" fill="none" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+        <text x="406" y="40" font-size="12" font-weight="800">+1 lead</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .knop, .staaf, .post { transform-box: fill-box; }
+  .staaf { transform-origin: 50% 100%; }
+  .post { transform-origin: center; }
+  .in-beeld .k1 { animation: online-marketing-leeuwarden-k1 1.4s cubic-bezier(.4,1.3,.5,1) 0.5s both; }
+  .in-beeld .k2 { animation: online-marketing-leeuwarden-k2 1.4s cubic-bezier(.4,1.3,.5,1) 0.7s both; }
+  .in-beeld .k3 { animation: online-marketing-leeuwarden-k3 1.4s cubic-bezier(.4,1.3,.5,1) 0.9s both; }
+  .k1 { transform: translateY(-42px); }
+  .k2 { transform: translateY(22px); }
+  .k3 { transform: translateY(-20px); }
+  :global(.teken-js) .knop { transform: none; }
+  :global(.teken-js) .staaf { transform: scaleY(0); }
+  :global(.teken-js) .post { opacity: 0; }
+  .in-beeld .staaf { animation: online-marketing-leeuwarden-groei 0.9s cubic-bezier(.3,1.4,.5,1) forwards; }
+  .in-beeld .s1 { animation-delay: 1.4s; }
+  .in-beeld .s2 { animation-delay: 1.6s; }
+  .in-beeld .s3 { animation-delay: 1.8s; }
+  .in-beeld .post { animation: online-marketing-leeuwarden-post 5s ease-in-out 2.4s infinite; }
+  @keyframes online-marketing-leeuwarden-k1 { from { transform: none; } to { transform: translateY(-42px); } }
+  @keyframes online-marketing-leeuwarden-k2 { from { transform: none; } to { transform: translateY(22px); } }
+  @keyframes online-marketing-leeuwarden-k3 { from { transform: none; } to { transform: translateY(-20px); } }
+  @keyframes online-marketing-leeuwarden-groei { to { transform: none; } }
+  @keyframes online-marketing-leeuwarden-post { 0% { opacity: 0; transform: translateY(10px) scale(0.9); } 12%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-6px); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .k1, .in-beeld .k2, .in-beeld .k3, .in-beeld .staaf, .in-beeld .post { animation: none; } }
+</style>

@@ -1,0 +1,65 @@
+---
+// Scène voor /online-marketing-emmen/: een mengpaneel met schuiven voor SEO, Ads, site en print, en daarnaast een kaart met aanvragen per maand die stijgen.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const schuiven = [
+  { x: 72, y: 94, naam: 'SEO', accent: true },
+  { x: 117, y: 128, naam: 'Ads' },
+  { x: 162, y: 108, naam: 'Site' },
+  { x: 207, y: 176, naam: 'Print' },
+];
+const balken = [[298, 30], [328, 44], [358, 58], [388, 78], [418, 102]];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: een mengpaneel waarop SEO hoog staat en print laag, en een grafiek waarin het aantal aanvragen per maand stijgt.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- mengpaneel -->
+  <rect x="30" y="38" width="222" height="196" rx="14" fill="#10283f" />
+  <text x="50" y="64" font-size="13" font-weight="800" style="fill:#fff">Jouw mix</text>
+  {schuiven.map((s) => (
+    <g>
+      <rect x={s.x - 3} y="84" width="6" height="112" rx="3" fill="#2d4b66" />
+      <rect x={s.x - 14} y={s.y} width="28" height="15" rx="4" fill={s.accent ? '#ff6600' : '#fff'} />
+      <path d={`M${s.x - 7} ${s.y + 7.5}h14`} stroke={s.accent ? '#fff' : '#8aa0b4'} stroke-width="2" stroke-linecap="round" />
+      <text x={s.x} y="218" text-anchor="middle" font-size="11" font-weight="700" style="fill:#d9e1ea">{s.naam}</text>
+    </g>
+  ))}
+  <!-- kaart met aanvragen -->
+  <rect x="278" y="48" width="174" height="176" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="294" y="74" font-size="13" font-weight="800">Aanvragen</text>
+  <text x="294" y="90" font-size="10.5" class="zacht">per maand</text>
+  <path d="M290 200h150" stroke="#d9e1ea" stroke-width="2" />
+  {balken.map(([x, h], i) => (
+    <rect x={x} y={200 - h} width="20" height={h} rx="4" fill={i > 2 ? '#074663' : '#e8eef4'} />
+  ))}
+
+  {!mini && (
+    <g>
+      <!-- lampjes boven de schuiven -->
+      {schuiven.map((s, i) => (
+        <circle class="lampje" cx={s.x} cy="76" r="3.5" fill={s.naam === 'Print' ? '#8aa0b4' : '#1f8a5b'} style={`animation-delay:${0.3 * i}s`} />
+      ))}
+      <!-- pijlen: SEO omhoog, print omlaag -->
+      <g class="pijlen" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M92 110V92m-5 5l5-5 5 5" />
+        <path d="M227 170v18m-5-5l5 5 5-5" />
+      </g>
+      <!-- trendlijn over de balken -->
+      <path class="trend" d="M308 166L338 152L368 138L398 118L428 94" fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="1" />
+      <circle class="punt" cx="428" cy="94" r="6" fill="#ff6600" stroke="#fff" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .trend { stroke-dasharray: 1; }
+  .punt, .pijlen { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .trend { stroke-dashoffset: 1; }
+  :global(.teken-js) .punt, :global(.teken-js) .pijlen { opacity: 0; }
+  .in-beeld .trend { animation: online-marketing-emmen-trend 1.6s cubic-bezier(.6,.1,.3,1) 0.6s forwards; }
+  .in-beeld .pijlen { animation: online-marketing-emmen-op 0.6s ease 0.3s forwards; }
+  .in-beeld .punt { animation: online-marketing-emmen-op 0.4s ease 2.1s forwards, online-marketing-emmen-hart 3s ease-in-out 2.5s infinite; }
+  .in-beeld .lampje { animation: online-marketing-emmen-lamp 2.4s ease-in-out infinite; }
+  @keyframes online-marketing-emmen-trend { to { stroke-dashoffset: 0; } }
+  @keyframes online-marketing-emmen-op { to { opacity: 1; } }
+  @keyframes online-marketing-emmen-hart { 50% { transform: scale(1.35); } }
+  @keyframes online-marketing-emmen-lamp { 50% { opacity: 0.35; } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .trend, .in-beeld .pijlen, .in-beeld .punt, .in-beeld .lampje { animation: none; opacity: 1; stroke-dashoffset: 0; } }
+</style>

@@ -1,0 +1,159 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--wat-is--anchortekst.astro';
+import { site } from '../../../../data/site';
+import { overgang } from '../../../../data/miniaturen';
+
+const url = '/kennisbank/wat-is/anchortekst/';
+const definitie = 'Anchortekst is de klikbare tekst van een link: de woorden die vaak blauw en onderstreept zijn en die bezoekers en zoekmachines vertellen waar de link naartoe gaat.';
+const schema = [{
+  '@type': 'DefinedTerm',
+  name: 'Anchortekst',
+  alternateName: ['Ankertekst', 'Linktekst', 'Anchor text'],
+  description: definitie,
+  inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Begrippen van Drijfveer Media', url: `${site.url}/kennisbank/wat-is/` },
+  url: `${site.url}${url}`,
+}];
+
+const codeLink = `<a href="/linkbuilding/">linkbuilding</a>`;
+
+const codeGoed = `Bekijk de <a href="/cv-ketel-vervangen/">prijzen voor een nieuwe cv-ketel</a>.`;
+const codeSlecht = `Voor de prijzen <a href="/cv-ketel-vervangen/">klik hier</a>.`;
+const codeBeeld = `<a href="/offerte/"><img src="offerte.png" alt="Offerte aanvragen"></a>`;
+
+const codeAnker = `<a href="#prijzen">Naar de prijzen</a>
+...
+<h2 id="prijzen">Wat kost een nieuwe cv-ketel?</h2>`;
+---
+<Base
+  title="Wat is anchortekst? Uitleg met voorbeelden | Drijfveer Media"
+  description="Wat is anchortekst? De klikbare tekst van een link. Met de zes soorten, wat Google erover zegt, codevoorbeelden en hoe je je eigen linkteksten controleert."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Begrippen', url: '/kennisbank/wat-is/' }, { naam: 'Anchortekst', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <section class="wrap begrip">
+    <div class="kop-rij">
+      <div>
+        <p class="kicker">Begrip · Linkbuilding</p>
+        <h1>Wat is anchortekst?</h1>
+        <div class="card definitie">
+          <p class="kader-titel">In één zin</p>
+          <p>{definitie}</p>
+        </div>
+      </div>
+      <div style={`view-transition-name:${overgang(url)}`}><Scene /></div>
+    </div>
+
+    <article class="tekst">
+      <Auteur slug="thorgall" datum="2026-10-18" />
+      <h2>Zo werkt het</h2>
+      <p>Een link bestaat uit twee delen: het adres waar hij naartoe gaat en de tekst waarop je klikt. Dat tweede deel heet de anchortekst. Je hoort ook ankertekst of linktekst, en soms wordt het gewoon anchor tekst genoemd. Het is allemaal hetzelfde. Het woord komt van het HTML-element a, van anchor.</p>
+      <p>In de code ziet het er zo uit:</p>
+      <pre><code>{codeLink}</code></pre>
+      <p>Het woord tussen de tags is wat je op het scherm ziet, vaak blauw en onderstreept. Voor een bezoeker is het een belofte: hier klik je naar meer over linkbuilding. Voor Google is het een hint over het onderwerp van de pagina erachter. Dat werkt twee kanten op. Je eigen links vertellen Google iets over je eigen pagina's. En de links die andere sites naar jou maken, vertellen Google hoe de rest van het web over jou praat.</p>
+
+      <div class="stap-kop"><Tekening naam="ketting" maat={52} /><h2>Zes soorten anchorteksten</h2></div>
+      <p>Neem een loodgieter uit Groningen als voorbeeld. Zo kan een link naar zijn site eruitzien:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Soort</th><th>Voorbeeld</th><th>Bij links van andere sites</th></tr></thead>
+          <tbody>
+            <tr><td>Exact</td><td>loodgieter Groningen</td><td>Spaarzaam. Veel hiervan valt op als onnatuurlijk.</td></tr>
+            <tr><td>Gedeeltelijk</td><td>een loodgieter in Groningen die ook 's avonds komt</td><td>Prima, zo schrijven mensen</td></tr>
+            <tr><td>Merknaam</td><td>Jansen Loodgieters</td><td>Het meest normaal</td></tr>
+            <tr><td>Naakte URL</td><td>jansenloodgieters.nl</td><td>Normaal, vooral in lijsten en op social media</td></tr>
+            <tr><td>Algemeen</td><td>klik hier, lees meer, deze site</td><td>Komt vanzelf voor, maar zegt Google weinig</td></tr>
+            <tr><td>Afbeelding</td><td>een logo met alt-tekst "Jansen Loodgieters"</td><td>Normaal. Google leest de alt als linktekst.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Jansen Loodgieters is een verzonnen bedrijf.</p>
+
+      <div class="stap-kop"><Tekening naam="vergrootglas" maat={52} /><h2>Wat Google zegt over linkteksten</h2></div>
+      <p>Google heeft een eigen pagina over links en anchorteksten. Goede linktekst is volgens Google beschrijvend, redelijk kort en relevant voor de pagina waar hij op staat en de pagina waar hij heen gaat. De belangrijkste punten op een rij:</p>
+      <ul class="vink">
+        <li><b>Lees de link los.</b> Google geeft zelf deze toets: lees alleen de linktekst, zonder de zin eromheen. Weet je dan waar hij heen gaat? Zo niet, maak hem beschrijvender.</li>
+        <li><b>Niet te lang.</b> Een hele zin als link is net zo onhandig als "klik hier".</li>
+        <li><b>Geen zoekwoorden proppen.</b> Vraag je af of de lezer die woorden nodig heeft om de volgende pagina te snappen.</li>
+        <li><b>Zet links niet vlak naast elkaar.</b> Vijf links op vijf losse woorden achter elkaar zijn voor lezers niet uit elkaar te houden.</li>
+        <li><b>Plaatjes tellen mee.</b> Is een afbeelding de link, dan gebruikt Google de <a href="/kennisbank/wat-is/alt-tekst/">alt-tekst</a> als anchortekst. Is een link helemaal leeg, dan valt Google terug op het title-attribuut.</li>
+      </ul>
+      <p>Zo ziet het verschil eruit in de code. Goed, want je weet waar je uitkomt:</p>
+      <pre><code>{codeGoed}</code></pre>
+      <p>Te algemeen, want zonder de zin eromheen zegt het niets:</p>
+      <pre><code>{codeSlecht}</code></pre>
+      <p>Een afbeelding als link. Hier is "Offerte aanvragen" de anchortekst:</p>
+      <pre><code>{codeBeeld}</code></pre>
+      <p>Bij links van andere sites trekt Google een harde grens. In de regels tegen spam staan links met geoptimaliseerde anchorteksten in gastblogs, persberichten en betaalde artikelen als voorbeeld van linkspam. Net als reacties op fora met een zoekwoordlink in de handtekening.</p>
+
+      <div class="stap-kop"><Tekening naam="pin" maat={52} /><h2>Een voorbeeld: de loodgieter uit Groningen</h2></div>
+      <p>Stel: een loodgieter uit Groningen heeft tien links van andere sites. Twee daarvan hebben de tekst "loodgieter Groningen". Dat ziet er gewoon uit. Mensen linken zoals het in hun zin past. <span class="muted">(Verzonnen voorbeeld.)</span></p>
+      <p>Nu heeft dezelfde loodgieter duizend links, en tweehonderd daarvan zeggen exact "loodgieter Groningen". Dat gebeurt nooit vanzelf. Vraag tien mensen een link naar je site te maken en je krijgt tien verschillende teksten. Google weet dat ook. Sinds de Penguin-update van 2012 pakt Google sites aan met een onnatuurlijk linkprofiel, en een stapel identieke zoekwoordlinks is daar het bekendste kenmerk van.</p>
+      <p>We praten hier niet over theorie. Met eigen sites in ons <a href="/proeflab/">proeflab</a> hebben we vroeger te veel risico genomen, en een daarvan kreeg een penalty. Daarom testen we zulke grenzen op eigen sites en blijven we bij klanten er ruim vandaan.</p>
+
+      <div class="stap-kop"><Tekening naam="huis" maat={52} /><h2>Anchortekst bij interne links</h2></div>
+      <p>Bij <a href="/kennisbank/wat-is/interne-links/">interne links</a>, van de ene pagina op je site naar de andere, heb je alles zelf in de hand. Daar mag de tekst gerust beschrijvend zijn en het zoekwoord bevatten. Google raadt aan dat elke pagina die je belangrijk vindt minstens één link krijgt vanaf een andere pagina op je site. Met een goede linktekst erbij.</p>
+      <p>Een paar gewoontes die het verschil maken:</p>
+      <ul>
+        <li>Link vanuit de lopende tekst, op de plek waar de lezer er iets aan heeft. Niet alleen vanuit het menu.</li>
+        <li>Gebruik voor twee verschillende pagina's niet dezelfde linktekst. Dan weet Google niet welke pagina waarover gaat.</li>
+        <li>Varieer gerust. "Dakkapel laten plaatsen", "prijzen voor een dakkapel" en "onze dakkapellen" kunnen allemaal naar dezelfde pagina.</li>
+      </ul>
+      <h3>Niet verwarren met een ankerlink</h3>
+      <p>Een ankerlink is iets anders. Dat is een link naar een plek op dezelfde pagina, zoals een inhoudsopgave die je naar een hoofdstuk laat springen. Het adres begint dan met een hekje. Ook zo'n link heeft natuurlijk een anchortekst.</p>
+      <pre><code>{codeAnker}</code></pre>
+
+      <div class="stap-kop"><Tekening naam="scan" maat={52} /><h2>Zo controleer je jouw anchorteksten</h2></div>
+      <ol>
+        <li><b>Links van andere sites.</b> Open Google Search Console en ga naar Links. Onder Externe links staat de lijst "Tekst met de meeste links naar jouw pagina". Staat daar één zoekwoord ver bovenaan, terwijl je merknaam pas veel lager komt? Dan is dat een signaal om op te letten.</li>
+        <li><b>Links binnen je site.</b> Een crawler als Screaming Frog toont per pagina welke linkteksten ernaar wijzen, gratis tot 500 URL's. Zoek naar "klik hier", "lees meer" en lege links.</li>
+        <li><b>Je eigen teksten.</b> Lees alleen de blauwe woorden op je belangrijkste pagina's. Vertellen ze samen waar je naartoe kunt?</li>
+      </ol>
+      <p>Algemene linkteksten komen veel voor. WebAIM vond in 2026 op 15,2 procent van een miljoen homepages links als "klik hier" of "meer". Voor wie met een screenreader van link naar link springt, zijn die onbruikbaar.</p>
+
+      <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2>Wat je ermee moet</h2></div>
+      <p>Bij links op je eigen site mag de tekst beschrijvend zijn. Bij links van anderen werkt het omgekeerd: hoe gewoner de mix, hoe beter. Het luistert nauw, maar de regels zijn makkelijk te onthouden:</p>
+      <ul class="vink">
+        <li>Schrijf in je eigen teksten nooit "klik hier". Elk woord dat je in een link zet, vertelt iets. Gebruik dat.</li>
+        <li>Houd de tekst kort: twee tot vijf woorden die zeggen wat er achter de link zit.</li>
+        <li>Laat de meeste externe links op je merknaam of je webadres staan. Exacte zoekwoorden zijn de uitzondering.</li>
+        <li>Vraag je bij elke link van een ander af: zou deze schrijver het zo ook zelf hebben opgeschreven?</li>
+      </ul>
+      <p>Een goede linktekst maakt een pagina ook gemakkelijker te lezen. Wie snel scrolt, leest vooral de blauwe woorden. Zeggen die iets, dan begrijpt de lezer je tekst in vijf seconden.</p>
+
+      <div class="kader">
+        <p class="kader-titel">Meer lezen</p>
+        <p>Hoe je aan goede links van andere sites komt, lees je in de gids <a href="/kennisbank/gidsen/backlinks/">Wat zijn backlinks?</a>. Hoe waarde door een link stroomt, staat bij <a href="/kennisbank/wat-is/link-juice/">link juice</a>. Wil je het laten doen, kijk dan bij <a href="/linkbuilding/">linkbuilding</a> of in het bredere verhaal over <a href="/zoekmachine-optimalisatie/">zoekmachine optimalisatie</a>.</p>
+      </div>
+    </article>
+  </section>
+
+  <Faq
+    titel="Veelgestelde vragen over anchorteksten"
+    vragen={[
+      { v: 'Wat is het verschil tussen anchortekst, ankertekst en linktekst?', a: 'Er is geen verschil. Het zijn drie namen voor dezelfde klikbare tekst van een link. Anchor text is de Engelse term.' },
+      { v: 'Is een exacte zoekwoordlink slecht?', a: 'Niet als het er een paar zijn die natuurlijk in de zin passen. Het wordt een risico als een groot deel van je externe links precies hetzelfde zoekwoord heeft. Dat gebeurt nooit vanzelf.' },
+      { v: 'Hoe lang mag een anchortekst zijn?', a: 'Er is geen vaste lengte. Google vraagt om beschrijvend en redelijk kort. In de praktijk zijn twee tot vijf woorden meestal genoeg.' },
+      { v: 'Telt de alt-tekst van een afbeelding als anchortekst?', a: 'Ja. Als een afbeelding een link is, gebruikt Google de alt-tekst als linktekst. Laat die dus nooit leeg bij een klikbaar plaatje.' },
+      { v: 'Kan ik de anchortekst van links naar mijn site laten aanpassen?', a: 'Je kunt het vriendelijk vragen, bijvoorbeeld als je naam verkeerd gespeld is. Vraag niet om een zoekwoord als linktekst. Google ziet geoptimaliseerde linkteksten op andere sites als linkspam.' },
+    ]}
+  />
+
+  <Actie titel="Hoe ziet jouw linkprofiel eruit?" tekst={`We kijken gratis welke anchorteksten naar jouw site wijzen en of daar risico in zit. ${site.contactpersoon} belt je met wat hij vond.`} />
+</Base>
+<style>
+  .begrip { padding-block: 24px 40px; }
+  .kop-rij { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 40px; align-items: center; margin-bottom: 48px; }
+  h1 { margin: 10px 0 20px; }
+  .definitie { padding: 22px 24px; font-size: var(--step-1); line-height: 1.45; border-left: 6px solid var(--orange); }
+  .definitie p:last-child { margin: 0; }
+  code { font-size: 0.9em; background: var(--chip); padding: 2px 6px; border-radius: 6px; word-break: break-word; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; background: var(--ink); color: #e8eef4; border-radius: 10px; padding: 16px 18px; font-size: 0.88rem; line-height: 1.6; margin: 0 0 1.4em; }
+  pre code { font-family: var(--mono); background: none; padding: 0; font-size: inherit; }
+  @media (max-width: 860px) { .kop-rij { grid-template-columns: minmax(0, 1fr); } }
+</style>

@@ -1,0 +1,84 @@
+---
+// Scène voor /trainingen/: een team van drie aan tafel kijkt naar hun eigen website op het scherm. Bij één gaat het lampje aan, op het lijstje komen vinkjes.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: drie collega\'s aan tafel volgen een training met hun eigen website op het scherm. Bij één van hen gaat een lampje aan en op het lijstje van vandaag komen vinkjes.'}>
+  <!-- scherm op standaard -->
+  <path class="l" d="M92 184l-14 56M218 184l14 56" />
+  <rect x="30" y="22" width="250" height="162" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M30 48h250" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="46" cy="35" r="4" fill="#d9e1ea" /><circle cx="58" cy="35" r="4" fill="#d9e1ea" /><circle cx="70" cy="35" r="4" fill="#d9e1ea" />
+  <text x="46" y="72" font-size="13" font-weight="800">Les: jullie eigen website</text>
+  <rect class="v" x="46" y="82" width="200" height="18" rx="9" />
+  <circle cx="58" cy="91" r="4" fill="none" stroke="#074663" stroke-width="2" />
+  <!-- drie zoekresultaten, de bovenste is van jullie -->
+  <rect x="46" y="112" width="4" height="24" rx="2" fill="#ff6600" />
+  <rect x="56" y="112" width="120" height="9" rx="4" fill="#074663" />
+  <rect x="56" y="127" width="170" height="7" rx="3" fill="#d9e1ea" />
+  <rect x="56" y="146" width="100" height="9" rx="4" fill="#8aa0b4" />
+  <rect x="56" y="161" width="150" height="7" rx="3" fill="#d9e1ea" />
+  <!-- lijstje van vandaag -->
+  <rect x="326" y="22" width="134" height="92" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <text x="342" y="44" font-size="12" font-weight="800">Vandaag</text>
+  <rect x="342" y="56" width="12" height="12" rx="3" fill="none" stroke="#074663" stroke-width="2" />
+  <rect x="362" y="59" width="80" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="342" y="76" width="12" height="12" rx="3" fill="none" stroke="#074663" stroke-width="2" />
+  <rect x="362" y="79" width="66" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="342" y="96" width="12" height="12" rx="3" fill="none" stroke="#074663" stroke-width="2" />
+  <rect x="362" y="99" width="74" height="6" rx="3" fill="#d9e1ea" />
+  <!-- lampje boven de middelste collega -->
+  <circle cx="388" cy="140" r="10" fill="#fff4ec" stroke="#ff6600" stroke-width="2.5" />
+  <path class="a" d="M384 152h8M385 157h6" />
+  <!-- drie collega's aan tafel -->
+  <circle class="v" cx="332" cy="182" r="13" />
+  <circle class="l" cx="332" cy="182" r="13" />
+  <path class="l" d="M310 222c0-14 10-22 22-22s22 8 22 22" />
+  <circle class="v" cx="388" cy="178" r="13" />
+  <circle class="l" cx="388" cy="178" r="13" />
+  <path class="l" d="M366 222c0-16 10-24 22-24s22 8 22 24" />
+  <circle class="v" cx="444" cy="182" r="13" />
+  <circle class="l" cx="444" cy="182" r="13" />
+  <path class="l" d="M422 222c0-14 10-22 22-22s22 8 22 22" />
+  <rect x="294" y="222" width="180" height="10" rx="5" fill="#d9e1ea" />
+  <path class="l" d="M306 232v20M462 232v20" />
+  <!-- laptops op tafel -->
+  <path d="M318 222l4-12h20l4 12z" fill="#10283f" />
+  <path d="M374 222l4-12h20l4 12z" fill="#10283f" />
+  <path d="M430 222l4-12h20l4 12z" fill="#10283f" />
+  {!mini && (
+    <g>
+      <g class="trainingen-gloed"><circle cx="388" cy="140" r="17" fill="none" stroke="#ff6600" stroke-width="2" /></g>
+      <path class="trainingen-straal" d="M388 118v-8M370 126l-6-5M406 126l6-5" fill="none" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" />
+      <path class="trainingen-vink trainingen-vink-1" d="M344 62l3 3 6-7" fill="none" stroke="#1f8a5b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path class="trainingen-vink trainingen-vink-2" d="M344 82l3 3 6-7" fill="none" stroke="#1f8a5b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path class="trainingen-vink trainingen-vink-3" d="M344 102l3 3 6-7" fill="none" stroke="#1f8a5b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <g class="trainingen-chip">
+        <rect x="186" y="104" width="78" height="26" rx="13" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+        <path d="M198 122v-10M194 116l4-4 4 4" fill="none" stroke="#1f8a5b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="208" y="122" font-size="12" font-weight="800">Plek 1</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .trainingen-gloed { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .trainingen-vink { opacity: 0; transform: scale(0.4); }
+  :global(.teken-js) .trainingen-chip { opacity: 0; }
+  :global(.teken-js) .trainingen-straal { opacity: 0; }
+  .trainingen-vink { transform-box: fill-box; transform-origin: center; }
+  .in-beeld .trainingen-vink { animation: trainingen-vink 0.45s cubic-bezier(.3,1.7,.5,1) forwards; }
+  .in-beeld .trainingen-vink-1 { animation-delay: 0.8s; }
+  .in-beeld .trainingen-vink-2 { animation-delay: 1.5s; }
+  .in-beeld .trainingen-vink-3 { animation-delay: 2.2s; }
+  .in-beeld .trainingen-chip { animation: trainingen-chip 6s ease-in-out 1.2s infinite both; }
+  .in-beeld .trainingen-gloed { animation: trainingen-gloed 4s ease-out 1s infinite both; }
+  .in-beeld .trainingen-straal { animation: trainingen-straal 4s ease-in-out 1s infinite both; }
+  @keyframes trainingen-vink { to { opacity: 1; transform: none; } }
+  @keyframes trainingen-chip { 0% { opacity: 0; transform: translateY(10px); } 12%, 82% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-4px); } }
+  @keyframes trainingen-gloed { 0% { transform: scale(0.7); opacity: 0.9; } 60%, 100% { transform: scale(1.6); opacity: 0; } }
+  @keyframes trainingen-straal { 0%, 100% { opacity: 0; } 20%, 60% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .trainingen-vink, .in-beeld .trainingen-chip, .in-beeld .trainingen-gloed, .in-beeld .trainingen-straal { animation: none; opacity: 1; transform: none; }
+  }
+</style>

@@ -1,0 +1,80 @@
+---
+// Scène voor /website-laten-maken/ux-ui-design/: een schets wordt een uitgewerkt ontwerp, en een bezoeker vindt meteen de knop.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-label={mini ? undefined : 'Getekend: links een schets van een webpagina met kaders en kruisen, rechts hetzelfde scherm uitgewerkt. Een cursor loopt naar de oranje knop en klikt.'} aria-hidden={mini ? 'true' : undefined}>
+  <!-- Schets -->
+  <text x="20" y="34" font-size="12" font-weight="800" class="zacht">Schets</text>
+  <rect x="16" y="44" width="176" height="186" rx="10" fill="#fff" stroke="#b9c8d6" stroke-width="2" stroke-dasharray="6 5" />
+  <path class="l" d="M32 64h60" />
+  <path class="l" d="M140 64h36" />
+  <path class="l" d="M32 90h68M32 106h52" />
+  <rect x="32" y="122" width="62" height="20" rx="4" fill="none" stroke="#074663" stroke-width="2" />
+  <rect x="112" y="84" width="66" height="58" rx="4" fill="none" stroke="#b9c8d6" stroke-width="2" />
+  <path d="M112 84l66 58M178 84l-66 58" stroke="#b9c8d6" stroke-width="1.5" />
+  <rect x="32" y="160" width="40" height="52" rx="4" fill="none" stroke="#b9c8d6" stroke-width="2" />
+  <rect x="84" y="160" width="40" height="52" rx="4" fill="none" stroke="#b9c8d6" stroke-width="2" />
+  <rect x="136" y="160" width="40" height="52" rx="4" fill="none" stroke="#b9c8d6" stroke-width="2" />
+  <!-- Pijl -->
+  <path class="a" d="M198 136c14-16 26-16 38 0" />
+  <path class="a" d="M230 128l7 9-10 3" />
+  <!-- Ontwerp -->
+  <text x="252" y="24" font-size="12" font-weight="800" class="zacht">Ontwerp</text>
+  <rect x="246" y="32" width="220" height="208" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="246" y="32" width="220" height="30" rx="12" fill="#074663" />
+  <rect x="246" y="50" width="220" height="12" fill="#074663" />
+  <rect x="260" y="43" width="54" height="8" rx="4" fill="#fff" />
+  <rect x="404" y="40" width="50" height="14" rx="5" fill="#ff6600" />
+  <rect x="260" y="78" width="112" height="12" rx="4" fill="#10283f" />
+  <rect x="260" y="96" width="88" height="12" rx="4" fill="#10283f" />
+  <rect x="260" y="116" width="96" height="7" rx="3.5" fill="#d9e1ea" />
+  <rect x="260" y="134" width="96" height="26" rx="8" fill="#ff6600" />
+  <text x="272" y="151" font-size="10.5" font-weight="800" style="fill:#fff">Vraag offerte</text>
+  <rect class="v" x="378" y="76" width="74" height="84" rx="10" />
+  <circle cx="415" cy="106" r="14" fill="#fff" />
+  <path class="l" d="M396 152c4-14 12-20 19-20s15 6 19 20" />
+  <rect x="260" y="176" width="58" height="48" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="327" y="176" width="58" height="48" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <rect x="394" y="176" width="58" height="48" rx="8" fill="#fff" stroke="#d9e1ea" stroke-width="1.5" />
+  <circle class="o" cx="276" cy="192" r="6" /><circle class="o" cx="343" cy="192" r="6" /><circle class="o" cx="410" cy="192" r="6" />
+  <rect class="v" x="268" y="206" width="40" height="6" rx="3" /><rect class="v" x="335" y="206" width="40" height="6" rx="3" /><rect class="v" x="402" y="206" width="40" height="6" rx="3" />
+  {!mini && (
+    <g>
+      <path class="website-laten-maken--ux-ui-design-pijl" d="M198 136c14-16 26-16 38 0" />
+      <g class="website-laten-maken--ux-ui-design-cursor">
+        <path d="M0 0l7 19 3-8 8-3z" fill="#10283f" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+      <circle class="website-laten-maken--ux-ui-design-ring" cx="308" cy="147" r="14" fill="none" stroke="#ff6600" stroke-width="3" />
+      <g class="website-laten-maken--ux-ui-design-duim">
+        <rect x="330" y="244" width="140" height="24" rx="10" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="346" cy="256" r="8" fill="#1f8a5b" />
+        <path d="M342 256l3 3 6-6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="360" y="260" font-size="11" font-weight="800">Knop gevonden</text>
+      </g>
+    </g>
+  )}
+</svg>
+<style>
+  .website-laten-maken--ux-ui-design-pijl { fill: none; stroke: #fff; stroke-width: 3; stroke-dasharray: 3 9; stroke-linecap: round; }
+  .website-laten-maken--ux-ui-design-cursor { transform: translate(440px, 120px); }
+  .website-laten-maken--ux-ui-design-ring { opacity: 0; transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .website-laten-maken--ux-ui-design-cursor, :global(.teken-js) .website-laten-maken--ux-ui-design-duim { opacity: 0; }
+  .in-beeld .website-laten-maken--ux-ui-design-pijl { animation: website-laten-maken--ux-ui-design-pijl 1.4s linear infinite; }
+  .in-beeld .website-laten-maken--ux-ui-design-cursor { animation: website-laten-maken--ux-ui-design-cursor 6.5s ease-in-out 0.6s infinite both; }
+  .in-beeld .website-laten-maken--ux-ui-design-ring { animation: website-laten-maken--ux-ui-design-ring 6.5s ease-out 0.6s infinite both; }
+  .in-beeld .website-laten-maken--ux-ui-design-duim { animation: website-laten-maken--ux-ui-design-duim 6.5s ease-in-out 0.6s infinite both; }
+  @keyframes website-laten-maken--ux-ui-design-pijl { to { stroke-dashoffset: -24; } }
+  @keyframes website-laten-maken--ux-ui-design-cursor {
+    0% { opacity: 0; transform: translate(440px, 120px); }
+    10% { opacity: 1; transform: translate(430px, 110px); }
+    40%, 56% { opacity: 1; transform: translate(305px, 144px); }
+    75% { opacity: 1; transform: translate(360px, 200px); }
+    90%, 100% { opacity: 0; transform: translate(440px, 120px); }
+  }
+  @keyframes website-laten-maken--ux-ui-design-ring { 0%, 40% { opacity: 0; transform: scale(0.3); } 44% { opacity: 1; } 58%, 100% { opacity: 0; transform: scale(1.8); } }
+  @keyframes website-laten-maken--ux-ui-design-duim { 0%, 46% { opacity: 0; transform: translateY(8px); } 54%, 88% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .website-laten-maken--ux-ui-design-pijl, .in-beeld .website-laten-maken--ux-ui-design-cursor, .in-beeld .website-laten-maken--ux-ui-design-ring, .in-beeld .website-laten-maken--ux-ui-design-duim { animation: none; }
+  }
+</style>
