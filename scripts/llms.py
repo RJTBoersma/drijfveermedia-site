@@ -28,6 +28,7 @@ tekst = f"""# Drijfveer Media
 - Prijzen: https://www.drijfveermedia.nl/prijzen/
 - Gratis website-analyse: https://www.drijfveermedia.nl/gratis-website-analyse/
 - Contact: https://www.drijfveermedia.nl/contact/
+- Veelgestelde vragen (adres, openingstijden, prijzen, afspraken): https://www.drijfveermedia.nl/veelgestelde-vragen/
 
 ## Diensten en prijzen
 {chr(10).join(diensten)}

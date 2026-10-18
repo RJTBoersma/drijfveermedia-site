@@ -49,7 +49,7 @@ const personen = team.map((p) => ({
 
 const basis = [
   {
-    '@type': ['Organization', 'ProfessionalService'],
+    '@type': ['Organization', 'LocalBusiness', 'ProfessionalService'],
     '@id': orgId,
     name: site.naam,
     url: `${site.url}/`,
@@ -72,6 +72,7 @@ const basis = [
     geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
     hasMap: site.kaart,
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', telephone: telefoon, email: site.email, areaServed: 'NL', availableLanguage: ['nl', 'en'] },
+    openingHours: site.openingHours,
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],

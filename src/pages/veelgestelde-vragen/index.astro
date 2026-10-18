@@ -1,0 +1,132 @@
+---
+import Base from '../../layouts/Base.astro';
+import Actie from '../../components/pagina/Actie.astro';
+import { site } from '../../data/site';
+
+// Alle vragen over Drijfveer Media zelf op één plek. Feiten komen uit site.ts en de prijzen uit de dienstpagina's.
+interface Vraag { v: string; a: string }
+const groepen: { id: string; titel: string; vragen: Vraag[] }[] = [
+  {
+    id: 'bereikbaar',
+    titel: 'Adres, openingstijden en contact',
+    vragen: [
+      { v: 'Waar zit Drijfveer Media?', a: `Aan de ${site.straat}, ${site.postcode} ${site.plaats}, in een bedrijfsverzamelpand. Het is ons enige kantoor. <a href="${site.kaart}" rel="noopener">Bekijk ons op Google Maps</a>.` },
+      { v: 'Wat zijn de openingstijden?', a: 'Maandag tot en met vrijdag van 8.00 tot 17.00 uur. In het weekend zijn we dicht.' },
+      { v: 'Wat is het telefoonnummer?', a: `${site.telefoon}. Op werkdagen tussen 8.00 en 17.00 uur bellen we je binnen 15 minuten terug als we niet meteen opnemen.` },
+      { v: 'Hoe snel bellen jullie terug?', a: 'Op werkdagen tussen 8.00 en 17.00 uur binnen 15 minuten. Laat je buiten kantoortijd een bericht of je nummer achter, dan bellen we de volgende werkdag vóór 8.15 uur.' },
+      { v: 'Kan ik zomaar langskomen?', a: `Je bent welkom aan de ${site.straat} in ${site.plaats}. Bel wel even van tevoren, dan zit er iemand voor je klaar en staat de koffie aan.` },
+      { v: 'Komen jullie ook bij mij langs?', a: 'Ja. In heel Noord-Nederland komen we graag naar je toe. Daarbuiten praten we meestal telefonisch of via een videogesprek.' },
+      { v: 'Wie is mijn aanspreekpunt?', a: `${site.contactpersoon} van Eeden. Hij belt je terug, houdt je project bij en schakelt de specialist in die je nodig hebt.` },
+      { v: 'Wat is het e-mailadres?', a: `<a href="mailto:${site.email}">${site.email}</a>.` },
+    ],
+  },
+  {
+    id: 'wie',
+    titel: 'Over Drijfveer Media',
+    vragen: [
+      { v: 'Wat doet Drijfveer Media?', a: 'We zorgen dat ondernemers gevonden worden in Google, genoemd worden door AI-assistenten zoals ChatGPT en gekozen worden met een website die aanvragen oplevert. Gevonden. Genoemd. Gekozen.' },
+      { v: 'Sinds wanneer bestaat Drijfveer Media?', a: 'Sinds 2011. Robert Boersma en Evelien Heerema richtten het bureau op. Lees <a href="/over-ons/">hoe het begon</a>.' },
+      { v: 'Hoe groot is het team?', a: 'We zijn met z\'n vieren: Robert, Thorgall, Evelien en Johan. Voor specialistisch werk werken we met een vaste groep freelancers die we al jaren kennen.' },
+      { v: 'Voor wie werken jullie?', a: 'Voor ondernemers in het mkb: van de installateur met drie busjes tot het advocatenkantoor met twaalf mensen. Veel klanten komen uit Drenthe, Friesland en Groningen, maar we werken voor bedrijven in heel Nederland.' },
+      { v: 'In welke regio werken jullie?', a: 'Vanuit Assen in heel Noord-Nederland en rond Zwolle, en op afstand in de rest van het land. Per plaats lees je meer bij ons <a href="/werkgebied/">werkgebied</a>.' },
+      { v: 'Wat is het KvK-nummer?', a: `${site.kvk}.` },
+      { v: 'Gebruiken jullie AI?', a: 'Ja, elke dag, voor onderzoek, eerste versies en rekenwerk. Een mens beslist en controleert altijd. Lees <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.' },
+    ],
+  },
+  {
+    id: 'diensten',
+    titel: 'Diensten: wat we wel en niet doen',
+    vragen: [
+      { v: 'Welke diensten bieden jullie?', a: 'SEO, lokale SEO en je Google Bedrijfsprofiel, linkbuilding, GEO (genoemd worden door AI), websites, teksten, branding, Google Ads en adverteren in ChatGPT, social media beheer, e-mailmarketing, leadgeneratie en tracking. Je kunt ook alles in één hand <a href="/online-marketing-uitbesteden/">uitbesteden</a>.' },
+      { v: 'Wat doen jullie niet?', a: 'Advertenties op Facebook, Instagram, LinkedIn of TikTok, influencers, video en webshops. Hosting voor nieuwe sites regelen we ook niet. Vraag je iets wat we niet goed kunnen, dan zeggen we dat meteen.' },
+      { v: 'Bouwen jullie websites?', a: 'Ja. Snel en betaalbaar met AI, of maatwerk in WordPress. De site, de teksten en het domein zijn van jou. Zie <a href="/website-laten-maken/">website laten maken</a>.' },
+      { v: 'Kunnen jullie zorgen dat ChatGPT mijn bedrijf noemt?', a: 'Daar werken we aan met <a href="/generative-engine-optimization/">GEO</a>. Niemand kan eerlijk garanderen dat AI je noemt, maar we spreken een meetbaar doel af en meten elke maand of je genoemd wordt.' },
+      { v: 'Kunnen jullie mijn Google Bedrijfsprofiel inrichten?', a: 'Ja, samen met Bing Places en Apple Business Connect, eenmalig vanaf € 249. Wil je hoger op de kaart blijven staan, dan is er <a href="/lokale-seo/">lokale SEO</a> vanaf € 295 per maand.' },
+      { v: 'Is er een gratis kennismaking?', a: 'Ja. Het terugbelgesprek, de <a href="/gratis-website-analyse/">gratis scan</a> en het voorstel kosten niets. Je betaalt pas als je zelf besluit verder te gaan.' },
+    ],
+  },
+  {
+    id: 'prijzen',
+    titel: 'Prijzen en afspraken',
+    vragen: [
+      { v: 'Wat kosten jullie diensten?', a: 'Een paar vanaf-prijzen, exclusief btw: lokale SEO € 295 per maand, SEO € 495 per maand, linkbuilding € 395 per maand, Google Ads-beheer € 249 per maand, een website met AI € 250 en maatwerk vanaf € 2.000, alles uitbesteden € 595 per maand en een consult € 85 per uur. Alles staat op de pagina <a href="/prijzen/">prijzen</a>.' },
+      { v: 'Zijn de prijzen inclusief btw?', a: 'Nee. Alle prijzen zijn exclusief btw.' },
+      { v: 'Zit ik vast aan een contract?', a: 'Nee. Maandelijkse diensten zijn maandelijks opzegbaar, tenzij we samen iets anders afspreken.' },
+      { v: 'Wat houdt de garantie in?', a: 'We spreken vooraf een meetbaar doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Lees alles over <a href="/garantie/">de garantie</a>.' },
+      { v: 'Betaal ik het advertentiebudget aan jullie?', a: 'Nee. Je advertentiebudget betaal je rechtstreeks aan Google (of OpenAI). Aan ons betaal je alleen het beheer, vanaf € 249 per maand.' },
+      { v: 'Van wie zijn mijn accounts en mijn website?', a: 'Van jou. Je Google Ads-account, je Bedrijfsprofiel, je website en je teksten staan op jouw naam. Stop je, dan neem je alles mee.' },
+    ],
+  },
+  {
+    id: 'samenwerken',
+    titel: 'Samenwerken',
+    vragen: [
+      { v: 'Hoe begint een samenwerking?', a: 'Je belt of laat je nummer achter. We bellen je terug, vragen wat je wilt bereiken en kijken naar je site en je concurrenten. Daarna krijg je een voorstel met een doel en een vaste prijs. Zie <a href="/werkwijze/">onze werkwijze</a>.' },
+      { v: 'Hoe snel zie ik resultaat?', a: 'Met Google Ads vaak binnen een week. Een goed ingericht Bedrijfsprofiel merk je meestal binnen een paar weken. SEO en GEO hebben een paar maanden nodig.' },
+      { v: 'Wat heb ik nodig om te beginnen?', a: 'Alleen je website en een telefoonnummer. Heb je nog geen website, dan kijken we eerst naar je concurrenten en je profiel in Google.' },
+      { v: 'Hoe houden jullie me op de hoogte?', a: 'Met een maandelijks overzicht in gewone taal: wat we deden en wat het opleverde, afgezet tegen het doel dat we samen afspraken.' },
+      { v: 'Moet ik zelf ook iets doen?', a: 'Een beetje. Jij kent je vak en je klanten. We vragen om foto\'s, feedback op teksten en dat je aanvragen snel opvolgt.' },
+    ],
+  },
+];
+const alle = groepen.flatMap((g) => g.vragen);
+const schoon = (h: string) => h.replace(/<[^>]+>/g, '');
+const url = `${site.url}/veelgestelde-vragen/`;
+const schema = [{
+  '@type': 'FAQPage',
+  '@id': `${url}#faq`,
+  name: 'Veelgestelde vragen over Drijfveer Media',
+  about: { '@id': `${site.url}/#organisatie` },
+  mainEntity: alle.map((q) => ({ '@type': 'Question', name: q.v, acceptedAnswer: { '@type': 'Answer', text: schoon(q.a) } })),
+}];
+---
+<Base
+  title="Veelgestelde vragen over Drijfveer Media in Assen"
+  description="Adres, openingstijden, telefoonnummer, diensten, prijzen en afspraken: alle vragen over Drijfveer Media in Assen met een kort en eerlijk antwoord."
+  kruimels={[{ naam: 'Veelgestelde vragen', url: '/veelgestelde-vragen/' }]}
+  schema={schema}
+>
+  <section class="wrap sectie kop">
+    <p class="kicker">Veelgestelde vragen</p>
+    <h1>Veelgestelde vragen over Drijfveer Media</h1>
+    <p class="lead">Drijfveer Media is een online marketingbureau aan de {site.straat} in {site.plaats}, open op werkdagen van 8.00 tot 17.00 uur en bereikbaar op {site.telefoon}. Hieronder staan de vragen die ondernemers ons het vaakst stellen, met een kort antwoord.</p>
+    <nav aria-label="Onderwerpen" class="onderwerpen">
+      <ul>{groepen.map((g) => <li><a class="chip" href={`#${g.id}`}>{g.titel}</a></li>)}</ul>
+    </nav>
+  </section>
+
+  <section class="wrap sectie lijst">
+    {groepen.map((g) => (
+      <div class="groep">
+        <h2 id={g.id}>{g.titel}</h2>
+        <div class="vragen">
+          {g.vragen.map((q) => (
+            <details>
+              <summary>{q.v}</summary>
+              <p set:html={q.a} />
+            </details>
+          ))}
+        </div>
+      </div>
+    ))}
+    <p class="muted">Staat je vraag er niet tussen? Bel {site.telefoon} of <a href="/contact/">stel hem via het contactformulier</a>. Vragen over SEO, GEO en online marketing in het algemeen beantwoorden we in de <a href="/kennisbank/">kennisbank</a>.</p>
+  </section>
+
+  <Actie titel="Liever even bellen?" tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en beantwoordt je vraag meteen. Je zit nergens aan vast.`} knop={{ tekst: 'Bel me terug', href: '/contact/#terugbellen' }} />
+</Base>
+<style>
+  .kop { padding-bottom: 8px; }
+  .kop h1 { margin: 8px 0 14px; }
+  .kop .lead { max-width: 760px; font-size: var(--step-1); line-height: 1.45; }
+  .onderwerpen ul { list-style: none; padding: 0; margin: 20px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .onderwerpen .chip { text-decoration: none; padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center; background: var(--panel); border: 1px solid var(--line); font-weight: 700; }
+  .onderwerpen .chip:hover { background: var(--navy); color: #fff; }
+  .groep { margin-bottom: 40px; max-width: 820px; }
+  .vragen { margin-top: 12px; border-top: 1px solid var(--line); }
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 800; font-size: 1.08rem; padding: 16px 40px 16px 0; list-style: none; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; position: absolute; right: 6px; top: 12px; font-size: 1.5rem; font-weight: 400; color: var(--muted); }
+  details[open] summary::after { content: '−'; }
+  details p { margin: 0 0 18px; color: var(--muted); max-width: 66ch; }
+</style>
