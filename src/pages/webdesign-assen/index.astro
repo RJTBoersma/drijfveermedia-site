@@ -7,6 +7,7 @@ import Actie from '../../components/pagina/Actie.astro';
 import Verder from '../../components/pagina/Verder.astro';
 import Schermen from '../../components/beeld/Schermen.astro';
 import Tekening from '../../components/teken/Tekening.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
@@ -21,6 +22,8 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: [{ '@type': 'City', name: 'Assen' }, { '@type': 'AdministrativeArea', name: 'Drenthe' }],
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
+  citation: ['https://madatech.nl/prijzen/', 'https://jakdesign.nl/webdesign-assen/', 'https://trustoo.nl/drenthe/assen/webdesign/'],
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
 }];
 
@@ -41,7 +44,7 @@ const wijken = [
   schema={schema}
 >
   <Hero kicker="Gekozen · Assen" titel="Webdesign in Assen: een website die klanten oplevert" prijs="vanaf € 250" eenmalig>
-    <p>Assen is onze thuisstad. Ons kantoor staat aan de {site.straat}, dus voor webdesign in Assen kun je even langskomen. We bouwen sites die er goed uitzien, snel laden en gevonden worden.</p>
+    <p>Assen is onze thuisstad. Ons kantoor staat aan de {site.straat}, dus voor webdesign in Assen kun je even langskomen. Je krijgt een site die snel laadt en gevonden wordt, met een vaste prijs vooraf. Site en domein staan op jouw naam.</p>
     <Schermen slot="beeld" bedrijf="Hovenier Bos" kop="Een tuin waar je elk seizoen van geniet" label="Verzonnen voorbeeld van een website op laptop en telefoon" />
   </Hero>
 
@@ -49,7 +52,7 @@ const wijken = [
     <div class="tekst">
       <Plaatsfeiten waar={`Ons kantoor staat aan de ${site.straat}, in een bedrijfsverzamelpand in Assen. Voor een gesprek over je website loop je zo bij ons binnen.`} />
       <h2>Webdesign uit Assen, voor ondernemers in Assen</h2>
-      <p>Sinds 2011 maken we websites voor ondernemers in heel Nederland. Ons kantoor staat in een bedrijfsverzamelpand aan de Lauwers in Assen, tussen andere ondernemers. Voor klanten uit de stad en de dorpen eromheen, zoals Rolde, Vries, Smilde en Beilen, is dat handig. Even aan tafel zitten is zo geregeld. Je loopt binnen, je ziet wie er aan je site werkt en je rijdt weer naar huis.</p>
+      <p>Sinds 2011 maken we websites voor ondernemers in heel Nederland. Nieuwe technieken testen we eerst op meer dan 100 eigen sites in ons <a href="/proeflab/">proeflab</a>. Ons kantoor staat in een bedrijfsverzamelpand aan de Lauwers in Assen, tussen andere ondernemers. Voor klanten uit de stad en de dorpen eromheen, zoals Rolde, Vries, Smilde en Beilen, is dat handig. Even aan tafel zitten is zo geregeld. Je loopt binnen, je ziet wie er aan je site werkt en je rijdt weer naar huis.</p>
       <p>Dat scheelt meer dan reistijd. Een website laten maken gaat over jouw bedrijf, je klanten en je wensen. Dat leg je makkelijker uit in een gesprek dan in een mail. En moet er later iets veranderen, dan weet je precies bij wie je moet zijn.</p>
 
       <h2>Assen in cijfers: voor wie bouw je je site?</h2>
@@ -120,13 +123,13 @@ const wijken = [
       </div>
     </div>
     <div class="tekst">
-      <p>Twijfel je welke route past? Deze vergelijking helpt bij de keuze. Bij webdesign in Assen kun je ook langskomen om voorbeelden van allebei te bekijken.</p>
+      <p>Twijfel je welke route past? Deze vergelijking helpt bij de keuze. Bij webdesign in Assen kun je ook even langskomen om het aan tafel door te nemen.</p>
       <div class="tabel-scroll">
         <table>
           <thead><tr><th></th><th>Website met AI</th><th>Maatwerk in WordPress</th></tr></thead>
           <tbody>
             <tr><td><b>Prijs</b></td><td>Vanaf € 250</td><td>Vanaf € 2.000</td></tr>
-            <tr><td><b>Doorlooptijd</b></td><td>Vaak binnen twee weken</td><td>Meestal zes tot tien weken</td></tr>
+            <tr><td><b>Doorlooptijd</b></td><td>Vaak binnen twee weken</td><td>Langer; hoe lang precies, staat in de offerte</td></tr>
             <tr><td><b>Ontwerp</b></td><td>Strak en zakelijk, op een vaste opbouw</td><td>Een eigen ontwerp, afgestemd op je doelgroep</td></tr>
             <tr><td><b>Pagina's</b></td><td>Een handvol: home, diensten, over ons, contact</td><td>Zoveel als nodig, ook met eigen functies</td></tr>
             <tr><td><b>Zelf aanpassen</b></td><td>Teksten en foto's, via een eenvoudig scherm</td><td>Alles, in het bekende WordPress</td></tr>
@@ -136,18 +139,18 @@ const wijken = [
       </div>
       <p>Heb je nog geen logo? Een <a href="/branding/logo-laten-maken/">logo laten maken</a> kan erbij, vanaf € 495. Teksten schrijven we vanaf € 75 per pagina. Wil je precies weten waar de kosten van een website in zitten, lees dan onze gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
 
-      <h2>Wat elke website van ons heeft</h2>
-    </div>
-    <div class="raster heeft">
-      <div class="card"><Tekening naam="scherm" /><h3>Werkt op elke telefoon</h3><p>De meeste bezoekers komen mobiel binnen. We ontwerpen eerst voor het kleine scherm.</p></div>
-      <div class="card"><Tekening naam="raket" vertraging={120} /><h3>Laadt snel</h3><p>Een trage site kost bezoekers en posities in Google.</p></div>
-      <div class="card"><Tekening naam="vergrootglas" vertraging={240} /><h3>Vindbaar vanaf dag één</h3><p>De technische basis voor SEO zit erin, net als je Google Bedrijfsprofiel als je dat wilt.</p></div>
-      <div class="card"><Tekening naam="pen" vertraging={360} /><h3>Teksten die verkopen</h3><p>Geschreven voor jouw doelgroep, met de woorden waarop klanten zoeken.</p></div>
-      <div class="card"><Tekening naam="telefoon" vertraging={480} /><h3>Contact zonder drempel</h3><p>Bellen, mailen of een offerte aanvragen kan vanaf elke pagina.</p></div>
-      <div class="card"><Tekening naam="schild" vertraging={600} /><h3>Van jou</h3><p>Je bent eigenaar van je site en je content. Wil je ooit weg, dan neem je alles mee.</p></div>
-    </div>
-    <div class="tekst" style="margin-top:40px">
-      <p>Over die snelheid: Google meet die met drie Core Web Vitals. Het grootste blok van een pagina moet binnen 2,5 seconden staan. Een tik of klik moet binnen 200 milliseconden reageren. En de pagina mag tijdens het laden nauwelijks verspringen, met een score onder 0,1. Wij testen elke site op die drie punten voordat hij live gaat.</p>
+      <h2>Wat je krijgt, en wat er niet in zit</h2>
+      <p>Bij beide routes krijg je:</p>
+      <ul class="vink">
+        <li>Je ziet het ontwerp voordat we bouwen, en zegt wat anders moet.</li>
+        <li>Eerst ontworpen voor de telefoon, want daar komen de meeste bezoekers binnen.</li>
+        <li>Snel en vindbaar: lichte beelden, paginatitels, koppen en een logische opbouw voor Google.</li>
+        <li>Bellen met één tik en een kort formulier, op elke pagina.</li>
+        <li>Getest op laptop, tablet en telefoon, met een controle of formulieren aankomen.</li>
+        <li>Een korte uitleg van het beheer, zodat je teksten en foto's zelf aanpast.</li>
+        <li>Alles op jouw naam: site, teksten en domein. Wil je ooit weg, dan neem je alles mee.</li>
+      </ul>
+      <p>Buiten de vanaf-prijs vallen hosting (die sluit je zelf af), teksten als je ze niet zelf schrijft, een logo, fotografie en koppelingen zoals een afsprakenplanner. Heb je die nodig, dan staan ze met een prijs in de offerte.</p>
 
       <h2>Rekenvoorbeeld: wanneer verdient je website zich terug?</h2>
       <p>Goed webdesign in Assen is een investering. Reken hem dus door, net als een nieuwe bus of machine. Een verzonnen voorbeeld met verzonnen cijfers:</p>
@@ -167,8 +170,24 @@ const wijken = [
           </tbody>
         </table>
       </div>
-      <p>Bij maatwerk heeft deze hovenier dus minder dan twee aanvragen per maand nodig om zijn site in het eerste jaar terug te verdienen. Alles daarboven is winst. Met een site die op "hovenier Assen" gevonden wordt, is dat haalbaar. Met een site die niemand vindt, niet. Daarom kijken we bij elke offerte eerst naar het doel en pas daarna naar het ontwerp. Alle bedragen zijn exclusief btw.</p>
-      <WebsitePrijs plaats="Assen" paginas={7} teksten={true} onderhoud={true} marge={540} intro="Reken het voor je eigen zaak in Assen uit, net als bij de hovenier hierboven. Kies wat je nodig hebt. Dan zie je welke route past, wat die minimaal kost en na hoeveel klussen je site terugverdiend is." noot="Vanaf-prijzen, exclusief btw. Een koppeling met je software of een afsprakenplanner zit er niet in; die prijs bespreken we aan tafel. Hosting sluit je zelf af, meestal voor een paar euro per maand." />
+      <p>Bij maatwerk heeft deze hovenier dus minder dan twee aanvragen per maand nodig om zijn site in het eerste jaar terug te verdienen. Dat lukt alleen met een site die op "hovenier Assen" gevonden wordt. Alle bedragen zijn exclusief btw.</p>
+      <WebsitePrijs plaats="Assen" paginas={7} teksten={true} onderhoud={true} marge={540} intro="Reken het voor je eigen zaak in Assen uit, net als bij de hovenier hierboven. Je ziet welke route past, wat die minimaal kost en na hoeveel klussen je site terugverdiend is." noot="Vanaf-prijzen, exclusief btw. Een koppeling met je software of een afsprakenplanner zit er niet in; die prijs bespreken we aan tafel. Hosting sluit je zelf af, meestal voor een paar euro per maand." />
+
+      <h2>Wat andere webbouwers in Assen vragen</h2>
+      <p>In Assen zelf is genoeg keus. Twee partijen die bovenaan staan op "webdesign assen" noemen hun prijs op hun eigen site, en een vergelijkingssite geeft een gemiddelde:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Aanbieder</th><th>Wat ze zelf noemen</th><th>Goed om te weten</th></tr></thead>
+          <tbody>
+            <tr><td>MADA Tech, Assen</td><td>Onepager vanaf € 499, professionele site vanaf € 699, maatwerk vanaf € 1.099. Of € 65 tot € 110 per maand</td><td>Bij het maandbedrag zitten hosting, updates en beheer. Ook een AI-site vanaf € 350, daarna € 25 per maand</td></tr>
+            <tr><td>Jak Design, Groningen</td><td>€ 3.497 tot € 10.000 voor maatwerk</td><td>Geen vaste prijzen; een voorstel na de kennismaking</td></tr>
+            <tr><td>Trustoo, vergelijkingssite</td><td>Webdesigner € 65 tot € 105 per uur, een nieuwe site gemiddeld € 800 tot € 4.000</td><td>Een gemiddelde over aanbieders, geen vaste prijs</td></tr>
+            <tr><td><b>Drijfveer Media</b></td><td><b>Met AI vanaf € 250, maatwerk vanaf € 2.000</b></td><td>Eenmalig, geen abonnement. Hosting op je eigen naam, onderhoud los vanaf € 39 per maand</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted klein">Bron: madatech.nl/prijzen, jakdesign.nl/webdesign-assen en trustoo.nl (webdesigners in Assen), zoals ze er in oktober 2026 stonden. Alle bedragen exclusief btw.</p>
+      <p>Voor maatwerk zijn we in Assen dus niet de goedkoopste. Met de AI-route wel een van de goedkoopste instappers. Wat je verder vergelijkt: wil je één bedrag en klaar, of een maandbedrag waar hosting en beheer in zitten? Vraag bij een abonnement wat er met je site gebeurt als je opzegt. Meer over alle kosten, ook over drie jaar gerekend, staat in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
 
       <h2>Zo verloopt het</h2>
     </div>
@@ -180,42 +199,29 @@ const wijken = [
       <li><strong>Live, en daarna</strong><p>Zelf bijhouden, of het onderhoud aan ons laten vanaf € 39 per maand.</p></li>
     </ol>
     <div class="tekst" style="margin-top:40px">
-      <h3>Wat je zelf klaarzet</h3>
-      <p>Hoe beter je dit voorbereidt, hoe sneller je site live staat. Dit vragen we bij de start:</p>
-      <ul class="vink">
-        <li>Je logo, het liefst als SVG of als groot PNG-bestand.</li>
-        <li>Een lijstje van je diensten, met wat ze ongeveer kosten.</li>
-        <li>Foto's van jezelf, je team, je werk of je zaak. Echte foto's doen het beter dan stockfoto's.</li>
-        <li>De inloggegevens van je domeinnaam, of de naam die je wilt registreren.</li>
-        <li>Een hostingpakket op je eigen naam. Hosting regelen we niet zelf, wel helpen we je kiezen.</li>
-        <li>Twee of drie sites die je mooi vindt, en waarom.</li>
+      <h2>Wanneer een nieuwe site geen zin heeft</h2>
+      <ul>
+        <li><b>Je site is prima, maar niemand vindt hem.</b> Dan heb je meer aan SEO of een goed Google Bedrijfsprofiel. Een <a href="/gratis-website-analyse/">gratis website-analyse</a> laat zien waar het zit.</li>
+        <li><b>Je wilt online verkopen.</b> Webshops bouwen of optimaliseren doen we niet. Google Shopping voor een bestaande webshop wel.</li>
+        <li><b>Je hebt geen tijd om teksten en foto's aan te leveren, en ook geen budget om ze te laten maken.</b> Dan blijft een nieuwe site een lege huls. Wacht liever een maand.</li>
       </ul>
 
-      <h2>Vijf veelgemaakte fouten bij webdesign in Assen en omgeving</h2>
-      <p>Bij een <a href="/gratis-website-analyse/">gratis website-analyse</a> kijken we met een frisse blik naar je site. Deze vijf punten komen we bij mkb'ers vaak tegen:</p>
-      <ol>
-        <li><b>Het telefoonnummer staat alleen op de contactpagina.</b> Op een telefoon moet je met één tik kunnen bellen, vanaf elke pagina.</li>
-        <li><b>Geen plaatsnaam in de tekst.</b> Google en je klant moeten kunnen lezen dat je in Assen werkt. Noem je stad, je wijk en de dorpen waar je komt.</li>
-        <li><b>Een template dat op tien andere sites staat.</b> Niets mis met een goede basis, maar met dezelfde stockfoto's als je concurrent val je niet op.</li>
-        <li><b>Te zware foto's.</b> Een foto van 5 MB maakt een pagina op mobiel traag. Wij zetten beelden om naar kleine, scherpe bestanden.</li>
-        <li><b>Niemand houdt hem bij.</b> Verouderde plug-ins zijn een open deur voor hackers. Plan het onderhoud, of laat het ons doen.</li>
-      </ol>
-
       <h2>Na de lancering: gevonden worden in Assen</h2>
-      <p>Een mooie website is pas het begin. Wie in Assen zoekt op jouw dienst, moet jou ook vinden. Google zegt zelf dat lokale resultaten vooral draaien om drie dingen: relevantie, afstand en bekendheid. Relevantie regel je met goede teksten en een compleet <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Afstand bepaalt de zoeker. Bekendheid bouw je op met reviews en met andere sites die naar je linken.</p>
-      <p>Daarom bieden we na de oplevering <a href="/seo-assen/">SEO in Assen</a> aan, en zetten we je bedrijf goed op de kaart van Google, Bing en Apple. Het inrichten van die drie kaarten kost eenmalig vanaf € 249. Lokale SEO, met reviews en elke maand verbeteringen, begint bij € 295 per maand. Dan staat er niet alleen een site, maar komen er ook bezoekers die bellen.</p>
+      <p>Een mooie website is pas het begin. Google zegt zelf dat lokale resultaten vooral draaien om relevantie, afstand en bekendheid. Daarom bieden we na de oplevering <a href="/seo-assen/">SEO in Assen</a> aan, en zetten we je bedrijf goed op de kaart van Google, Bing en Apple. Dat inrichten kost eenmalig vanaf € 249. Lokale SEO, met reviews en elke maand verbeteringen, begint bij € 295 per maand.</p>
     </div>
   </section>
 
   <Bewijs case="dakraamconcurrent" />
 
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, zet de vaste prijs op papier en houdt je project bij.' }, { slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }]} extra="Je vindt ze allebei aan de Lauwers in Assen. Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen." />
+
   <Faq
     vragen={[
       { v: 'Wat kost webdesign in Assen?', a: 'Een website die we met AI bouwen begint bij € 250. Een maatwerk website in WordPress begint bij € 2.000. Na een kort gesprek krijg je een offerte met een vaste prijs. Alle prijzen zijn exclusief btw.' },
-      { v: 'Hoe lang duurt het om een website te laten maken?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerk website duurt meestal zes tot tien weken, afhankelijk van het aantal pagina\'s en hoe snel de teksten en foto\'s klaar zijn.' },
+      { v: 'Hoe lang duurt het om een website te laten maken?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerksite in WordPress kost meer tijd. Hoe lang precies, hoor je vooraf in de offerte. Het hangt vooral af van hoe snel teksten en foto\'s klaar zijn.' },
+      { v: 'Waarom geen abonnement met hosting erbij, zoals sommige bureaus in Assen?', a: 'Dat kan handig zijn, en het is een prima keuze. Wij doen het anders: je betaalt de site één keer en regelt hosting zelf, meestal voor een paar euro per maand. Zo zit je aan niets vast. Onderhoud door ons kan los, vanaf € 39 per maand, en zeg je per maand op met één maand opzegtermijn, per e-mail.' },
+      { v: 'Wat zit er niet in de prijs?', a: 'Hosting, een logo (vanaf € 495), teksten als je die niet zelf schrijft (vanaf € 75 per pagina), fotografie en koppelingen zoals een afsprakenplanner. Wat je nodig hebt, staat met een prijs in de offerte.' },
       { v: 'Kan ik langskomen voor een gesprek?', a: `Ja, graag zelfs. Ons kantoor staat aan de ${site.straat} in Assen. Bel even van tevoren, dan zit de juiste persoon aan tafel.` },
-      { v: 'Kan ik de website zelf aanpassen?', a: 'Ja. Je krijgt een eenvoudig beheerscherm en een korte uitleg. Teksten en foto\'s aanpassen kun je zelf. Voor grotere wijzigingen kun je bij ons terecht.' },
-      { v: 'Regelen jullie ook de hosting?', a: 'Nee. Hosting sluit je zelf af, op je eigen naam. Wij helpen je kiezen en zetten de site er voor je op. Zo hang je nooit aan ons vast.' },
       { v: 'Ik heb al een site. Raak ik mijn plek in Google kwijt als ik vernieuw?', a: 'Niet als het goed gebeurt. We sturen elke oude pagina met een doorverwijzing naar de nieuwe. Zo neemt Google je opgebouwde posities mee. Dat plannen we voordat er iets live gaat.' },
       { v: 'Werken jullie ook buiten Assen?', a: 'Zeker. We werken voor ondernemers in heel Drenthe en de rest van Nederland. Kijk ook eens bij <a href="/webdesign-drenthe/">webdesign in Drenthe</a>.' },
     ]}

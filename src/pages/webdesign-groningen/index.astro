@@ -5,12 +5,14 @@ import Bewijs from '../../components/pagina/Bewijs.astro';
 import Faq from '../../components/pagina/Faq.astro';
 import Actie from '../../components/pagina/Actie.astro';
 import Verder from '../../components/pagina/Verder.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 import Tekening from '../../components/teken/Tekening.astro';
 import Scene from '../../components/scenes/webdesign-groningen.astro';
 
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
+import WebsitePrijs from '../../components/tool/WebsitePrijs.astro';
 
 const url = '/webdesign-groningen/';
 const schema = [{
@@ -20,6 +22,12 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: [{ '@type': 'City', name: 'Groningen' }, { '@type': 'AdministrativeArea', name: 'Groningen' }],
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
+  citation: [
+    'https://vrijdagonline.nl/webdesign-groningen',
+    'https://jakdesign.nl/webdesign-groningen/',
+    'https://designy.nl/starterspakket-ontwerp-logo-huisstijl-en-website/',
+  ],
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
 }];
 ---
@@ -30,7 +38,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gekozen · Groningen" titel="Webdesign in Groningen: een website die opvalt in een volle stad" prijs="vanaf € 250" eenmalig>
-    <p>Wij zijn een webdesignbureau uit Assen, een half uur over de A28. We bouwen websites voor ondernemers in Groningen die snel laden, gevonden worden en bezoekers laten bellen.</p>
+    <p>Voor ondernemers in de stad die meer telefoontjes willen, niet alleen een mooiere site. Je weet vooraf wat het kost, en site en domein staan op jouw naam. We komen uit Assen, een half uur over de A28.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -41,7 +49,7 @@ const schema = [{
       <p>Groningen is veruit de grootste markt van het Noorden. Het CBS telt in de gemeente 244.441 inwoners en 31.695 bedrijfsvestigingen (Kerncijfers wijken en buurten 2025). Voor jou betekent dat vooral één ding: je klant heeft keus.</p>
       <p>Zoekt iemand een fysiotherapeut, een installateur of een accountant, dan staan er binnen fietsafstand tien. Hij opent er drie. Na een paar seconden belt hij er één.</p>
       <p>Om die paar seconden draait goed webdesign in Groningen. Snapt een bezoeker meteen wat je doet? Gelooft hij dat je het goed doet? Ziet hij hoe hij je bereikt? Dat moet ook lukken op een telefoon, in de bus naar Zernike.</p>
-      <p>Ook bij webbouwers is het druk. Op "webdesign groningen" wordt zo'n 1.140 keer per maand gezocht (SE Ranking, oktober 2026). Bureaus die daar bovenaan staan en hun prijzen noemen, zitten voor een nieuwe site tussen de € 2.250 en € 10.000. Dat zagen we half oktober 2026 op hun eigen sites. Bij ons begint het bij € 250.</p>
+      <p>Ook bij webbouwers is het druk. Op "webdesign groningen" wordt zo'n 1.140 keer per maand gezocht (SE Ranking, oktober 2026). Wat de bureaus bovenaan zelf voor een site vragen, zie je verderop naast onze prijs.</p>
 
       <h2>Drie soorten Groningse klanten, drie soorten websites</h2>
       <p>Een kapper in de binnenstad heeft een andere site nodig dan een groothandel op Eemspoort. We beginnen daarom bij je klant, niet bij een mooi plaatje.</p>
@@ -79,7 +87,7 @@ const schema = [{
           <thead><tr><th></th><th>Website met AI</th><th>Maatwerk in WordPress</th></tr></thead>
           <tbody>
             <tr><td>Vanaf (excl. btw)</td><td>€ 250</td><td>€ 2.000</td></tr>
-            <tr><td>Doorlooptijd</td><td>Vaak binnen twee weken live</td><td>Meestal zes tot tien weken</td></tr>
+            <tr><td>Doorlooptijd</td><td>Vaak binnen twee weken live</td><td>Langer; hoe lang precies, staat in de offerte</td></tr>
             <tr><td>Ontwerp</td><td>Opbouw en ontwerp met AI, met de hand afgemaakt</td><td>Een eigen grafisch ontwerp, tot in detail</td></tr>
             <tr><td>Pagina's</td><td>Vooraf afgesproken</td><td>Onbeperkt uit te breiden</td></tr>
             <tr><td>Zelf aanpassen</td><td>Teksten en foto's</td><td>Teksten, foto's en nieuwe pagina's</td></tr>
@@ -87,41 +95,38 @@ const schema = [{
           </tbody>
         </table>
       </div>
-      <p>Wat de prijs nog meer bepaalt:</p>
-      <ul>
-        <li>Het aantal pagina's en wie de teksten schrijft.</li>
-        <li>Of je een logo en huisstijl hebt, of dat die er nog moeten komen.</li>
-        <li>Koppelingen, zoals online afspraken maken of een vacaturemodule.</li>
-        <li>Een Engelse versie naast de Nederlandse.</li>
-      </ul>
-      <p>Een verzonnen voorbeeld. Een fysiotherapiepraktijk in Helpman wil acht pagina's, online afspraken en een eigen uitstraling. Dat wordt maatwerk. Een schilder uit Hoogkerk met vier diensten en een duidelijk werkgebied is met de AI-route prima geholpen. In beide gevallen krijg je vooraf een vaste prijs, exclusief btw. Hosting regel je zelf, op je eigen naam. Dat kost bij de meeste partijen een paar euro per maand.</p>
-      <p>Meer rekenwerk vind je in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website laten maken</a>. Twijfel je over een offerte van een ander bureau? Leg hem naast de checklist in <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte beoordelen</a>.</p>
+      <p>Een verzonnen voorbeeld. Een fysiotherapiepraktijk in Helpman wil acht pagina's, online afspraken en een eigen uitstraling. Dat wordt maatwerk. Een schilder uit Hoogkerk met vier diensten en een duidelijk werkgebied is met de AI-route prima geholpen. In beide gevallen krijg je vooraf een vaste prijs, exclusief btw.</p>
+      <WebsitePrijs plaats="Groningen" paginas={8} ontwerp={true} teksten={true} marge={300} intro="Reken het na voor je eigen zaak in de stad, of het nu de praktijk in Helpman is of een bedrijf op Eemspoort. Kies wat de site moet hebben en vul in wat één nieuwe klant je oplevert. Je ziet welke route past, de vanaf-prijs en na hoeveel klanten je site betaald is." noot="Vanaf-prijzen, exclusief btw. Online afspraken of een koppeling met je software zitten niet in deze som; wat dat kost, hoor je in het gesprek. Hosting regel je zelf, op je eigen naam, voor een paar euro per maand." />
 
-      <Tussenactie />
-      <h2>Wat er in elke website van ons zit</h2>
-      <ul class="vink">
-        <li>Eerst ontworpen voor de telefoon. Google gebruikt de mobiele versie van je site om je te beoordelen.</li>
-        <li>Snel en veilig gebouwd, met de technische basis voor een betere vindbaarheid in Google.</li>
-        <li>Teksten zonder vakjargon, met de woorden waarop jouw klanten zoeken.</li>
-        <li>Vanaf elke pagina bellen, mailen of een offerte aanvragen.</li>
-        <li>Je adres en werkgebied in gewone tekst, gekoppeld aan je Google Bedrijfsprofiel.</li>
-        <li>De site is van jou. Wil je ooit weg, dan neem je alles mee.</li>
-      </ul>
-      <p>Na de lancering kun je de site zelf bijhouden. Wil je dat hij up-to-date blijft zonder dat je ernaar omkijkt? Dan doen wij het <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud</a>, vanaf € 39 per maand.</p>
-
-      <h2>Snel genoeg voor de bus naar Zernike?</h2>
-      <p>Google meet hoe snel en stabiel je pagina's zijn met drie cijfers, de Core Web Vitals. Dit zijn de grenzen die Google zelf als goed noemt. We testen elke site ertegen voordat hij live gaat.</p>
+      <h2 id="markt">Wij naast de bureaus uit de stad</h2>
+      <p>Bureaus die bovenaan staan op "webdesign groningen" noemen hun prijzen niet altijd. Drie doen het wel, op hun eigen site. Zo verhoudt onze prijs zich tot die van hen:</p>
       <div class="tabel-scroll">
         <table>
-          <thead><tr><th>Meting</th><th>Wat het zegt</th><th>Goed volgens Google</th></tr></thead>
+          <thead><tr><th>Aanbieder</th><th>Wat ze zelf noemen</th><th>Wat je ervoor krijgt</th></tr></thead>
           <tbody>
-            <tr><td>LCP</td><td>Hoe snel het grootste stuk van de pagina staat</td><td>Binnen 2,5 seconde</td></tr>
-            <tr><td>INP</td><td>Hoe snel de pagina reageert als je tikt</td><td>200 milliseconden of minder</td></tr>
-            <tr><td>CLS</td><td>Of de pagina verspringt tijdens het laden</td><td>0,1 of minder</td></tr>
+            <tr><td>VrijdagOnline</td><td>Start € 2.250, Basis € 4.900, Plus vanaf € 8.000</td><td>Een site in Umbraco met 3, 5 of 8 paginasjablonen. Oplevering in ongeveer 2, 5 of 9 weken.</td></tr>
+            <tr><td>Jak Design</td><td>€ 3.497 tot € 10.000 voor maatwerk</td><td>Een site met eigen functies of meer unieke pagina's. Geen vaste prijzen; je krijgt een voorstel na de kennismaking.</td></tr>
+            <tr><td>Designy</td><td>Starterspakket € 2.495</td><td>Logo, huisstijl en een WordPress-site van ongeveer vier à vijf pagina's.</td></tr>
+            <tr><td><b>Drijfveer Media</b></td><td><b>Vanaf € 250 met AI, vanaf € 2.000 maatwerk</b></td><td>Een vaste prijs vooraf. Logo vanaf € 495 en teksten vanaf € 75 per pagina komen erbij als je ze nodig hebt.</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Is je huidige site traag? In de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a> staat wat je zelf kunt doen.</p>
+      <p class="klein muted">Bron: de prijzen op vrijdagonline.nl/webdesign-groningen, jakdesign.nl/webdesign-groningen en de pagina Starterspakket van designy.nl, zoals ze er in oktober 2026 stonden. Alle bedragen exclusief btw.</p>
+      <p>Wie meer betaalt, krijgt vaak ook meer. Een pakket met logo en huisstijl, of een platform voor een organisatie met koppelingen naar andere systemen. Heb je dat nodig, dan is een groter bureau in de stad een prima keuze. Heb je vooral een site nodig die laat bellen, dan hoef je daar geen € 5.000 aan uit te geven. Hoe je offertes naast elkaar legt, staat in <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte beoordelen</a>. Alle prijzen in de markt, van zelf bouwen tot een groot bureau, vind je in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website laten maken</a>.</p>
+
+      <Tussenactie />
+      <h2>Wat je krijgt voor je geld</h2>
+      <p>Dit zit in elke site, ook bij de route van € 250:</p>
+      <ul class="vink">
+        <li>Je ziet het ontwerp voordat we bouwen, en past aan wat je wilt.</li>
+        <li>Eerst ontworpen voor de telefoon. Google beoordeelt je site op de mobiele versie.</li>
+        <li>Snel en veilig gebouwd, met paginatitels, koppen en een logische opbouw voor een betere vindbaarheid.</li>
+        <li>Vanaf elke pagina bellen met één tik, mailen of een offerte aanvragen.</li>
+        <li>Getest op laptop, tablet en telefoon. We controleren of formulieren aankomen voordat hij live gaat.</li>
+        <li>Een korte uitleg, zodat je teksten en foto's zelf aanpast.</li>
+        <li>Site, teksten en domein zijn van jou. Wil je ooit weg, dan neem je alles mee.</li>
+      </ul>
+      <p><b>Wat er niet in zit:</b> hosting (die regel je zelf, op je eigen naam), teksten als je die niet zelf schrijft, een logo, fotografie en koppelingen zoals een afsprakenplanner. Wat je daarvan nodig hebt, staat met een prijs in de offerte. Wil je dat de site daarna up-to-date blijft zonder dat je ernaar omkijkt? Dan doen wij het <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud</a>, vanaf € 39 per maand.</p>
 
       <h2>Een nieuwe site zonder je plek in Google te verliezen</h2>
       <p>Heb je al een site die gevonden wordt? Dan is een nieuwe site ook een verhuizing. Pagina-adressen veranderen, en een oud adres dat nergens meer heen wijst, laat bezoekers op een foutpagina belanden. Google ziet dat ook.</p>
@@ -130,7 +135,14 @@ const schema = [{
         <li>Elke oude pagina krijgt een vaste plek op de nieuwe site, of een <a href="/kennisbank/wat-is/redirect/">redirect</a> naar de beste vervanger.</li>
         <li>Na de lancering kijken we in Search Console of Google alles goed oppakt.</li>
       </ol>
-      <p>Zo neem je wat je in de stad al hebt opgebouwd mee naar je nieuwe site.</p>
+      <p>Zo neem je wat je in de stad al hebt opgebouwd mee naar je nieuwe site. Staat je domein nog op naam van je oude webbouwer, dan helpen we je dat eerst recht te zetten.</p>
+
+      <h2>Wanneer je beter iets anders kiest</h2>
+      <ul>
+        <li><b>Je wilt online verkopen.</b> Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.</li>
+        <li><b>Je hebt een portaal of koppelingen met je eigen systemen nodig.</b> Daar zijn bureaus als VrijdagOnline op ingericht. Wij bouwen sites die aanvragen opleveren.</li>
+        <li><b>Je site ziet er goed uit, maar levert weinig op.</b> Dan is een nieuwe site vaak niet nodig. Betere teksten of <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> zijn goedkoper.</li>
+      </ul>
 
       <h2>Zo verloopt het</h2>
       <p>In het eerste gesprek bespreken we deze onderwerpen. Daarna weet je precies wat je krijgt.</p>
@@ -152,20 +164,24 @@ const schema = [{
     <div class="tekst" style="margin-top:40px">
       <h2>Waarom een bureau uit Assen?</h2>
       <p>In de stad zelf zitten tientallen bureaus. Wij zitten aan de Lauwers in Assen, zo'n 30 kilometer van de Grote Markt. Voor een kennismaking rijden we naar je toe, of je komt bij ons langs. De rest gaat net zo makkelijk via telefoon en video.</p>
-      <p>Wat we wel anders doen? We bouwen websites sinds 2011 en testen nieuwe technieken eerst op onze eigen sites. Ontwerp, ontwikkeling en teksten doen we met ons team van vier en een vaste groep freelancers. Je hebt één aanspreekpunt, Thorgall. Dat maakt het een fijne samenwerking: je hoeft niet bij drie mensen na te vragen hoe het ervoor staat.</p>
+      <p>Wat we wel anders doen? We bouwen websites sinds 2011. Nieuwe technieken testen we eerst in ons <a href="/proeflab/">proeflab</a>: meer dan 100 eigen sites in verschillende beroepen. In twee van onze <a href="/cases/">cases</a> hoorde een nieuwe site bij het werk. Conflictbemiddeling Nederland kreeg 47% meer bezoekers uit Google, na een nieuwe site, SEO, linkbuilding en Google Ads. Dakraam Concurrent kreeg er 32% bij en staat op 1 voor "dakraam plaatsen", na eerst een nieuwe site en daarna linkbuilding en SEO.</p>
+      <p>Ontwerp, ontwikkeling en teksten doen we met ons team van vier en een vaste groep freelancers. Je hebt één aanspreekpunt, Thorgall. Dat maakt het een fijne samenwerking: je hoeft niet bij drie mensen na te vragen hoe het ervoor staat.</p>
       <p>Een nieuwe site is pas het begin. Wil je in de stad hoger in Google komen, lees dan over <a href="/seo-groningen/">SEO in Groningen</a>. Wil je alles in één hand, dan past <a href="/online-marketing-groningen/">online marketing in Groningen</a> beter. Alle plaatsen waar we werken, staan in ons <a href="/werkgebied/">werkgebied</a>.</p>
     </div>
   </section>
 
-  <Bewijs case="dakraamconcurrent" />
+  <Bewijs case="conflictbemiddeling" />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, zet de vaste prijs op papier en houdt je project bij.' }, { slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
   <Faq
     vragen={[
       { v: 'Wat kost webdesign in Groningen?', a: 'Een website via de AI-route begint bij € 250, maatwerk in WordPress bij € 2.000. Wat jouw site kost, hangt af van het aantal pagina\'s, het ontwerp en de koppelingen. Na een kort gesprek krijg je een vaste prijs. Alle bedragen zijn exclusief btw.' },
+      { v: 'Waarom kost een site bij jullie minder dan bij veel bureaus in de stad?', a: 'Bij de AI-route doet AI het eerste werk en maken wij de site met de hand af. Dat scheelt veel uren. Bij maatwerk is € 2.000 een startbedrag voor een compacte site. Met meer pagina\'s, een logo of koppelingen kom je hoger uit. Dat hoor je vooraf, niet achteraf.' },
+      { v: 'Wat zit er niet in de prijs?', a: 'Hosting regel je zelf, op je eigen naam, meestal voor een paar euro per maand. Teksten schrijven we als je wilt, vanaf € 75 per pagina. Een logo kost vanaf € 495. Fotografie doen we niet.' },
       { v: 'Komen jullie langs in Groningen?', a: 'Ja. Ons kantoor staat in Assen, een half uur rijden. Voor een kennismaking komen we graag naar je toe. Je bent ook welkom aan de Lauwers.' },
-      { v: 'Hoe snel staat mijn website live?', a: 'Via de AI-route vaak binnen twee weken. Maatwerk duurt meestal zes tot tien weken. Het tempo hangt vooral af van hoe snel teksten en foto\'s klaar zijn.' },
+      { v: 'Hoe snel staat mijn website live?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerksite in WordPress kost meer tijd; hoe lang precies, hoor je vooraf in de offerte. Het tempo hangt vooral af van hoe snel teksten en foto\'s klaar zijn.' },
       { v: 'Kunnen jullie ook een Engelse versie maken?', a: 'Ja. In Groningen is dat vaak slim, met veel studenten en internationale medewerkers. Een tweede taal maakt de site wel groter, dus het telt mee in de prijs.' },
-      { v: 'Bouwen jullie ook webshops in Groningen?', a: 'Nee. We richten ons op websites die aanvragen en telefoontjes opleveren. Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.' },
       { v: 'Kan ik mijn huidige site laten verbeteren in plaats van een nieuwe?', a: 'Soms is dat slimmer. De <a href="/gratis-website-analyse/">gratis website-analyse</a> laat zien wat er aan je huidige site schort. Daarna hoor je van ons wat slimmer is: verbouwen of opnieuw beginnen.' },
     ]}
   />
@@ -176,7 +192,7 @@ const schema = [{
       { label: 'Groningen', titel: 'SEO in Groningen', href: '/seo-groningen/', tekst: 'Hoger in Google in een stad vol concurrenten.', teken: 'vergrootglas' },
       { label: 'Groningen', titel: 'Online marketing in Groningen', href: '/online-marketing-groningen/', tekst: 'Minder kanalen, meer klanten.', teken: 'megafoon' },
       { label: 'In de buurt', titel: 'Webdesign in Veendam', href: '/webdesign-veendam/', tekst: 'Een site voor de Veenkoloniën.', teken: 'scherm' },
-      { label: 'Overzicht', titel: 'Ons werkgebied', href: '/werkgebied/', tekst: 'Alle plaatsen in het Noorden op een rij.' },
+      { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'Alle prijzen in de markt, van zelf bouwen tot een groot bureau.' },
     ]}
   />
 

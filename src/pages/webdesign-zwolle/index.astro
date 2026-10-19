@@ -6,6 +6,7 @@ import Faq from '../../components/pagina/Faq.astro';
 import Actie from '../../components/pagina/Actie.astro';
 import Verder from '../../components/pagina/Verder.astro';
 import Tekening from '../../components/teken/Tekening.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 import Scene from '../../components/scenes/webdesign-zwolle.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
@@ -20,6 +21,8 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: [{ '@type': 'City', name: 'Zwolle' }, { '@type': 'AdministrativeArea', name: 'Overijssel' }],
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
+  citation: ['https://dewebsmid.nl/tarieven/', 'https://sandragortemaker.nl/webdesign-advies/praktische-ondersteuning-en-tarieven/', 'https://jakdesign.nl/webdesign-zwolle/'],
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
 }];
 ---
@@ -30,7 +33,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gekozen · Zwolle" titel="Webdesign in Zwolle: een site die opvalt in een drukke markt" prijs="vanaf € 250" eenmalig>
-    <p>In Zwolle kies je uit tientallen webbouwers. Dan moet je site net wat scherper zijn dan die van de buren. Wij bouwen websites die snel laden, op elk scherm kloppen en bezoekers omzetten in aanvragen.</p>
+    <p>In Zwolle kies je uit tientallen webbouwers. Dan moet je site net wat scherper zijn dan die van de buren. Wij bouwen websites die snel laden, op elk scherm kloppen en bezoekers omzetten in aanvragen. Met een vaste prijs vooraf en de basis voor Google erin.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -104,7 +107,7 @@ const schema = [{
           <thead><tr><th></th><th>Zelf bouwen met een thema</th><th>Website met AI (ons)</th><th>Maatwerk in WordPress (ons)</th></tr></thead>
           <tbody>
             <tr><td>Kosten vooraf</td><td>Vooral je eigen tijd</td><td>Vanaf € 250</td><td>Vanaf € 2.000</td></tr>
-            <tr><td>Tijd tot live</td><td>Zo snel als jij bent</td><td>Vaak binnen twee weken</td><td>Meestal zes tot tien weken</td></tr>
+            <tr><td>Tijd tot live</td><td>Zo snel als jij bent</td><td>Vaak binnen twee weken</td><td>Langer; de planning staat in de offerte</td></tr>
             <tr><td>Ontwerp</td><td>Een thema dat anderen ook hebben</td><td>Met AI opgezet, met de hand afgemaakt</td><td>Helemaal eigen ontwerp</td></tr>
             <tr><td>Teksten en SEO</td><td>Doe je zelf</td><td>Basis zit erin</td><td>Basis zit erin, uitbreiden kan</td></tr>
             <tr><td>Risico</td><td>Veel tijd kwijt, weinig gevonden</td><td>Minder ruimte voor bijzondere wensen</td><td>Hogere investering vooraf</td></tr>
@@ -113,9 +116,16 @@ const schema = [{
       </div>
       <p>Twijfel je over zelf bouwen? De gids <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a> zet de afwegingen op een rij. Hoe beide routes van ons werken, lees je bij <a href="/website-laten-maken/">website laten maken</a> en <a href="/website-laten-maken/website-met-ai/">website met AI</a>.</p>
 
-      <h2>Wie er aan je website werkt</h2>
-      <p>We zijn een team van vier, met een vaste groep freelancers eromheen. Bij het website bouwen werken webdevelopers, tekstschrijvers en SEO-specialisten samen aan één site. Je praat daarbij met één persoon: {site.contactpersoon}. Hij houdt het overzicht en belt je als er iets te kiezen valt.</p>
-      <p>Na het eerste gesprek krijg je eerst een globale prijsindicatie en daarna een vaste prijs, exclusief btw. Hosting regel je zelf, op je eigen naam. Onderhoud kun je zelf doen of aan ons laten, vanaf € 39 per maand.</p>
+      <h2>Wat je krijgt voor je geld</h2>
+      <p>We zijn een team van vier, met een vaste groep freelancers eromheen. Webdevelopers, tekstschrijvers en SEO-specialisten werken samen aan één site, en jij praat met één persoon: {site.contactpersoon}. Dit krijg je altijd, ook bij de route van € 250:</p>
+      <ul class="vink">
+        <li>Het ontwerp om te bekijken en aan te passen, voordat we bouwen.</li>
+        <li>Een responsive opbouw, getest op telefoon, tablet en laptop.</li>
+        <li>De SEO-basis: paginatitels, beschrijvingen, koppen, een logische opbouw en de code die zoekmachines vertelt wat je doet en waar.</li>
+        <li>Op elke pagina een belknop en een kort formulier, en een controle of aanvragen echt aankomen.</li>
+        <li>Een korte uitleg van het beheer. Site, teksten en domein staan op jouw naam.</li>
+      </ul>
+      <p>Wat er niet in zit: hosting (die regel je zelf, op je eigen naam), teksten als je ze niet zelf schrijft (€ 75 per pagina), een logo (vanaf € 495) en koppelingen zoals een afsprakenplanner. Na het eerste gesprek krijg je eerst een globale prijsindicatie en daarna een vaste prijs, exclusief btw. Onderhoud kun je zelf doen of aan ons laten, vanaf € 39 per maand.</p>
 
       <h2>Zo verloopt het</h2>
     </div>
@@ -143,15 +153,28 @@ const schema = [{
       </div>
       <p>Krijg je offertes binnen die je lastig kunt vergelijken? De gids <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte beoordelen</a> helpt je op weg.</p>
 
-      <h2>Vijf fouten bij een nieuwe website</h2>
-      <p>Bij webdesign in Zwolle gaat het zelden mis op het ontwerp. Het gaat mis op de dingen eromheen. Dit zijn vijf valkuilen die je makkelijk voorkomt.</p>
-      <ol>
-        <li><strong>Oude pagina's verdwijnen zonder redirect.</strong> Wat je jarenlang in Google opbouwde, is in één nacht weg.</li>
-        <li><strong>Teksten komen als laatste.</strong> Dan wordt de site gebouwd rond lege blokken en past de tekst er later niet in.</li>
-        <li><strong>Alleen getest op de laptop van de ontwerper.</strong> Op een oudere telefoon verspringt alles of laadt het traag.</li>
-        <li><strong>Geen duidelijke volgende stap.</strong> Een mooie pagina zonder telefoonnummer in beeld levert niets op.</li>
-        <li><strong>Niemand meet iets.</strong> Zonder meting weet je na een jaar niet of de site iets heeft opgeleverd.</li>
-      </ol>
+      <h3>Wat webbouwers in Zwolle zelf noemen</h3>
+      <p>Een paar partijen die bovenaan staan op "webdesign zwolle" zetten hun prijzen op hun site. Zo verhoudt onze prijs zich daartoe:</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Aanbieder</th><th>Prijs volgens hun site</th><th>Wat erbij hoort</th></tr></thead>
+          <tbody>
+            <tr><td>De Websmid, Noordereiland</td><td>Professionele website vanaf € 2.500</td><td>Concept en design € 750, bouwen rond € 1.800. Basis-SEO € 420 extra, hosting vanaf € 19,50 per maand</td></tr>
+            <tr><td>Studio Sandra Gortemaker, freelancer</td><td>Eenvoudige basiswebsite vanaf € 900</td><td>Op een premium template met plug-ins; uurprijs € 90</td></tr>
+            <tr><td>Jak Design</td><td>€ 3.497 tot € 10.000 voor maatwerk</td><td>Een voorstel na de kennismaking</td></tr>
+            <tr><td><b>Drijfveer Media</b></td><td><b>Met AI vanaf € 250, maatwerk vanaf € 2.000</b></td><td>SEO-basis inbegrepen. Hosting op je eigen naam</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: dewebsmid.nl/tarieven, de tarievenpagina van sandragortemaker.nl en jakdesign.nl/webdesign-zwolle, zoals ze er in oktober 2026 stonden. Alle bedragen exclusief btw.</p>
+      <p>Een bureau op het Noordereiland waar je zo binnenloopt, of een freelancer die alles zelf doet: dat zijn goede keuzes, en soms passen ze beter dan wij. Wij zitten een uur verderop. Daar staat tegenover dat de SEO-basis bij ons in de prijs zit, en dat je vooraf één bedrag hoort. Alle prijzen in de markt op een rij staan in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
+
+      <h2>Wanneer je beter iets anders kiest</h2>
+      <ul>
+        <li><b>Je wilt een webshop.</b> Webshops bouwen of optimaliseren doen we niet. Google Shopping voor een bestaande webshop wel.</li>
+        <li><b>Je wilt elke week bij je webbouwer aan tafel.</b> Dan is een bureau in de stad handiger. Wij komen voor de kennismaking en het voorstel, de rest gaat per telefoon en mail.</li>
+        <li><b>Je huidige site is goed, maar wordt niet gevonden.</b> Dan heb je meer aan <a href="/seo-zwolle/">SEO in Zwolle</a> dan aan een nieuwe site.</li>
+      </ul>
 
       <Tussenactie />
       <h2>Na de lancering: lokaal gevonden in Zwolle</h2>
@@ -168,15 +191,18 @@ const schema = [{
       <p>Wat je bij ons krijgt en niet overal vindt:</p>
       <ul class="vink">
         <li><strong>Lage instap.</strong> Een professionele website kan al vanaf € 250. Groeit je bedrijf, dan groeit de site mee.</li>
-        <li><strong>Getest voordat jij het krijgt.</strong> Sinds 2011 bouwden we een proeflab op van meer dan 100 eigen websites. Wat werkt, zetten we in bij klanten. Wat niet werkt, laten we daar.</li>
+        <li><strong>Getest voordat jij het krijgt.</strong> In ons <a href="/proeflab/">proeflab</a> van meer dan 100 eigen websites testen we nieuwe technieken. Wat werkt, zetten we in bij klanten. Wat niet werkt, laten we daar.</li>
+        <li><strong>Resultaat met een nieuwe site.</strong> In twee van onze <a href="/cases/">cases</a> hoorde een nieuwe site bij het werk: Conflictbemiddeling Nederland kreeg 47% en Dakraam Concurrent 32% meer bezoekers uit Google.</li>
         <li><strong>Een doel voor je site.</strong> We bespreken vooraf wat de site moet opleveren, en meten dat vanaf de eerste dag.</li>
         <li><strong>Geen lock-in.</strong> De site is van jou, inclusief teksten en beelden.</li>
       </ul>
-      <p>Wil je na de lancering ook hoger in Google, dan kan dat met <a href="/zoekmachine-optimalisatie/">SEO</a> of <a href="/lokale-seo/">lokale SEO</a>. Meer over waar we werken, zie je op de pagina <a href="/werkgebied/">werkgebied</a>.</p>
+      <p>Wil je na de lancering ook hoger in Google, dan kan dat met <a href="/lokale-seo/">lokale SEO</a>. Meer over waar we werken, zie je op de pagina <a href="/werkgebied/">werkgebied</a>.</p>
     </div>
   </section>
 
   <Bewijs case="dakraamconcurrent" />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, maakt de afspraak in Zwolle en houdt je project bij.' }, { slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
   <Faq
     vragen={[
@@ -184,8 +210,9 @@ const schema = [{
       { v: 'Komen jullie ook naar Zwolle?', a: 'Ja. Voor de kennismaking en het voorstel komen we graag langs. Het bouwen zelf gebeurt achter een scherm, dus de rest gaat per telefoon en mail.' },
       { v: 'Werken jullie ook voor bedrijven in Kampen, Hattem of Dalfsen?', a: 'Ja. We werken in de hele regio Zwolle en ver daarbuiten. Op je site en in je Google Bedrijfsprofiel zorgen we dat duidelijk is welke plaatsen jij bedient.' },
       { v: 'Schrijven jullie ook de teksten?', a: 'Ja, als je dat wilt. Onze tekstschrijvers schrijven teksten die gevonden worden en overtuigen. Lever je ze liever zelf aan, dan lezen we ze na en geven we tips voor Google.' },
-      { v: 'Is mijn site ook goed te lezen op een tablet en telefoon?', a: 'Altijd. We ontwerpen eerst voor de telefoon en testen elke pagina op meerdere schermen voordat de site live gaat.' },
-      { v: 'Hoe lang duurt het voordat mijn site live staat?', a: 'Een site met AI staat er vaak binnen twee weken. Maatwerk duurt meestal zes tot tien weken, afhankelijk van hoe snel teksten en foto\'s klaar zijn.' },
+      { v: 'Hoe lang duurt het voordat mijn site live staat?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerksite in WordPress kost meer tijd. Hoe lang precies, hoor je vooraf in de offerte. Het hangt vooral af van hoe snel teksten en foto\'s klaar zijn.' },
+      { v: 'Zit SEO in de prijs?', a: 'De basis wel: paginatitels, beschrijvingen, koppen, een logische opbouw en snelheid. Daar betaal je niet apart voor. Hoger komen in Zwolle, waar veel concurrentie is, vraagt daarna om <a href="/seo-zwolle/">SEO</a>. Dat is een aparte maandelijkse dienst.' },
+      { v: 'Wat zit er niet in de prijs?', a: 'Hosting regel je zelf, op je eigen naam. Teksten schrijven we als je wilt, vanaf € 75 per pagina. Een logo kost vanaf € 495. Koppelingen, zoals een afsprakenplanner, staan met een prijs in de offerte.' },
       { v: 'Kan ik mijn bestaande site laten vernieuwen?', a: 'Dat kan. Soms is een opknapbeurt genoeg, soms is opnieuw bouwen goedkoper. We kijken eerst gratis naar je huidige site en zeggen wat we zouden doen. Vraag de <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.' },
     ]}
   />

@@ -8,6 +8,7 @@ import Verder from '../../components/pagina/Verder.astro';
 import Inhoud from '../../components/pagina/Inhoud.astro';
 import Prijskaart from '../../components/pagina/Prijskaart.astro';
 import Tekening from '../../components/teken/Tekening.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 import Scene from '../../components/scenes/webdesign-leeuwarden.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
@@ -15,13 +16,15 @@ import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
 import WebsitePrijs from '../../components/tool/WebsitePrijs.astro';
 
 const url = '/webdesign-leeuwarden/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'vertrouwen', titel: 'Webdesign begint bij vertrouwen' },
   { id: 'soorten', titel: 'Welke site past bij jouw bedrijf' },
   { id: 'vijf', titel: 'Vijf dingen die een bezoeker moet zien' },
   { id: 'routes', titel: 'Snel met AI of maatwerk' },
+  { id: 'krijgt', titel: 'Wat je krijgt' },
   { id: 'kosten', titel: 'Wat het kost: een rekenvoorbeeld' },
+  { id: 'markt', titel: 'Onze prijs naast de markt' },
   { id: 'werkwijze', titel: 'Zo verloopt een maatwerktraject' },
   { id: 'huidige', titel: 'Opknappen of opnieuw bouwen?' },
   { id: 'snel', titel: 'Snel en veilig' },
@@ -35,6 +38,7 @@ const schema = [{
   areaServed: [{ '@type': 'City', name: 'Leeuwarden' }, { '@type': 'AdministrativeArea', name: 'Friesland' }],
   url: `${site.url}${url}`,
   dateModified: datum,
+  citation: ['https://www.idsinternet.nl/', 'https://wadup.nl/webdesign-leeuwarden/', 'https://trustoo.nl/friesland/leeuwarden/webdesign/'],
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
 }];
 ---
@@ -45,7 +49,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gekozen · Leeuwarden" titel="Webdesign in Leeuwarden: een website die vertrouwen wekt" prijs="vanaf € 250" eenmalig>
-    <p>Leeuwarden is een stad van adviseurs, winkels en vakmensen. Wie daar een website laat maken, wil dat een bezoeker binnen tien tellen denkt: die weten waar ze het over hebben. Dat bouwen we, vanuit Assen.</p>
+    <p>Leeuwarden is een stad van adviseurs, winkels en vakmensen. Wie daar een website laat maken, wil dat een bezoeker binnen tien tellen denkt: die weten waar ze het over hebben. Dat bouwen we, vanuit Assen. Met een vaste prijs vooraf, en alles op jouw naam.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -118,6 +122,17 @@ const schema = [{
             </tbody>
           </table>
         </div>
+        <h2 id="krijgt">Wat je krijgt, en wat niet</h2>
+        <p>Bij beide routes krijg je dezelfde basis. Die zit in de prijs:</p>
+        <ul class="vink">
+          <li>Een ontwerp dat je eerst ziet en kunt laten aanpassen, voordat we bouwen.</li>
+          <li>Eerst gebouwd voor de telefoon, en getest op laptop, tablet en mobiel.</li>
+          <li>De basis voor Google: paginatitels, beschrijvingen, koppen en een logische opbouw.</li>
+          <li>Bellen met één tik, een kort formulier en een controle of aanvragen aankomen.</li>
+          <li>Doorverwijzingen van je oude pagina's, als je al een site hebt.</li>
+          <li>Een korte uitleg van het beheer, en alles op jouw naam.</li>
+        </ul>
+        <p>Niet in de vanaf-prijs: hosting, teksten als je die niet zelf schrijft, een logo, fotografie en koppelingen met je software. Wat je daarvan nodig hebt, staat met een prijs in de offerte.</p>
         <p>Welke route past, hoor je na een vrijblijvende kennismaking. Soms luidt ons advies dat je huidige website prima is en alleen betere teksten nodig heeft. Dan zeggen we dat ook.</p>
 
         <Tussenactie />
@@ -156,7 +171,23 @@ const schema = [{
         </div>
         <p class="muted klein">Bedrijven en de opbrengst per klant zijn verzonnen. De prijzen zijn onze vanaf-prijzen, exclusief btw.</p>
         <WebsitePrijs plaats="Leeuwarden" paginas={8} ontwerp={true} teksten={true} profiel={true} onderhoud={true} marge={1500} intro="Zit jouw bedrijf ergens tussen het adviesbureau en de fotograaf in? Zet je eigen keuzes erin en vul in wat een nieuwe klant je oplevert. De rekenhulp laat de passende route zien, met de vanaf-prijs en na hoeveel klanten de site betaald is." noot="Het gaat om vanaf-prijzen, exclusief btw. Een afsprakenplanner of een koppeling met je software rekent de hulp niet mee; wat die kost, hoor je in het gesprek. Hosting neem je zelf af, meestal voor een paar euro per maand." />
-        <p>Je krijgt altijd eerst een vaste prijs. Wat erin zit en wat niet, staat op papier voordat we beginnen. Meer over prijzen in het algemeen lees je in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website laten maken</a>.</p>
+        <p>Je krijgt altijd eerst een vaste prijs. Wat erin zit en wat niet, staat op papier voordat we beginnen.</p>
+
+        <h2 id="markt">Onze prijs naast die van webbouwers rond Leeuwarden</h2>
+        <p>Wat vragen anderen? Twee partijen uit de top van Google op "webdesign leeuwarden" noemen een prijs op hun eigen site. Een vergelijkingssite geeft een gemiddelde.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Prijs volgens hun site</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td>IDS Internet, Leeuwarden</td><td>Basiswebsite vanaf € 900, website op maat vanaf € 1.900</td><td>Bij de basis kies je een kant-en-klaar ontwerp. Hosting en domein kunnen erbij</td></tr>
+              <tr><td>Wad Up, Franeker</td><td>Offerte op maat, met een vaste prijs vooraf. Een webshop vanaf € 3.500</td><td>Offerte binnen een week, oplevering vier tot zes weken na het ontwerp</td></tr>
+              <tr><td>Trustoo, vergelijkingssite</td><td>Een nieuwe site gemiddeld € 800 tot € 4.000</td><td>Webdesigners rekenen € 65 tot € 105 per uur</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td><b>Met AI vanaf € 250, maatwerk vanaf € 2.000</b></td><td>Vaste prijs vooraf, hosting op je eigen naam</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Bron: idsinternet.nl, wadup.nl/webdesign-leeuwarden en trustoo.nl (webdesigners in Leeuwarden), zoals ze er in oktober 2026 stonden. Alle bedragen exclusief btw.</p>
+        <p>Voor maatwerk zitten we dus in hetzelfde gebied als de webbouwers in de stad. Het verschil zit aan de onderkant: wie snel een goede, compacte site wil, is bij ons met de AI-route vanaf € 250 klaar. En wie dichtbij wil afspreken, heeft aan een bureau in Leeuwarden of Franeker een korter ritje. Alle prijzen in de markt, ook over drie jaar gerekend, staan in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website laten maken</a>.</p>
 
         <h2 id="werkwijze">Zo verloopt een maatwerktraject</h2>
         <div class="stap-kop"><Tekening naam="koffie" maat={44} /><h3>1. Kennismaken</h3></div>
@@ -193,7 +224,7 @@ const schema = [{
         <h2 id="assen">Waarom een bureau uit Assen?</h2>
         <p>In Leeuwarden zelf werken genoeg webdesigners. Wij komen uit Assen. Ons kantoor staat aan de Lauwers, ruim 70 kilometer verderop. Met de auto ben je er in iets meer dan een uur.</p>
         <p>Voor webdesign in Leeuwarden maakt die afstand weinig uit. Het eerste gesprek voeren we graag aan jouw tafel, of bij ons in Assen. Daarna gaat bijna alles via een link en de telefoon. We werken voor ondernemers in heel Noord-Nederland en daarbuiten.</p>
-        <p>Wat wel uitmaakt, is wat er na de handtekening gebeurt. Bij ons bel je met {site.contactpersoon}, die je project kent. En vraag elke webdesigner, ook ons, wat hij niet doet. Wij bouwen bijvoorbeeld geen webshops en regelen geen hosting. Wel helpen we je een hostingpartij kiezen, en zetten we je site erop.</p>
+        <p>Wat wel uitmaakt, is wat er na de handtekening gebeurt. Bij ons bel je met {site.contactpersoon}, die je project kent. Nieuwe technieken testen we eerst in ons <a href="/proeflab/">proeflab</a> van meer dan 100 eigen sites. En in twee van onze <a href="/cases/">cases</a> hoorde een nieuwe site bij het werk: Conflictbemiddeling Nederland kreeg daarna 47% en Dakraam Concurrent 32% meer bezoekers uit Google. En vraag elke webdesigner, ook ons, wat hij niet doet. Wij bouwen bijvoorbeeld geen webshops en regelen geen hosting. Wel helpen we je een hostingpartij kiezen, en zetten we je site erop.</p>
 
         <h2 id="daarna">Na de oplevering: gevonden worden</h2>
         <p>Een nieuwe site is een aanzet, geen eindpunt. De technische basis voor Google zit erin, maar posities komen met goede teksten, links en een sterk bedrijfsprofiel. Wil je hoger komen bij mensen die in de stad zoeken, lees dan wat <a href="/seo-leeuwarden/">SEO in Leeuwarden</a> inhoudt. Wil je je hele marketing uit handen geven, dan past <a href="/online-marketing-leeuwarden/">online marketing in Leeuwarden</a> beter. Wat we in de rest van de provincie doen, staat op de pagina over <a href="/regio/friesland/">Friesland</a>.</p>
@@ -207,13 +238,16 @@ const schema = [{
 
   <Bewijs case="dakraamconcurrent" />
 
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, spreekt af in Leeuwarden of Assen en houdt je project bij.' }, { slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
   <Faq
     vragen={[
       { v: 'Wat kost webdesign in Leeuwarden?', a: 'Een website die we met AI bouwen kost vanaf € 250. Maatwerk in WordPress begint bij € 2.000. Teksten kosten € 75 per pagina. Na een kort gesprek krijg je een vaste prijs. Alle prijzen zijn exclusief btw.' },
       { v: 'Komen jullie naar Leeuwarden?', a: 'Ja. Voor de kennismaking of de oplevering rijden we graag naar je toe. Liever bij ons in Assen aan tafel kan ook. Tussendoor werken we op afstand, met korte lijnen via de telefoon.' },
       { v: 'Blijft mijn huidige website online tot de nieuwe klaar is?', a: 'Ja. We bouwen de nieuwe site in een aparte testomgeving. Pas als jij akkoord geeft, gaat hij live. Oude adressen sturen we door naar de nieuwe pagina\'s, zodat je je plek in Google houdt.' },
       { v: 'Kan ik mijn website bij jullie laten hosten?', a: 'Nee. Hosting bieden we niet aan. Je neemt die af bij een hostingbedrijf, op je eigen naam. Het onderhoud van WordPress kunnen we wel voor je doen, vanaf € 39 per maand.' },
-      { v: 'Kan ik de website zelf aanpassen?', a: 'Ja. Teksten, foto\'s en openingstijden pas je zelf aan. Bij een maatwerk site in WordPress kun je alles zelf beheren. Liever niet zelf? Dan doen wij het.' },
+      { v: 'Krijg ik bij maatwerk ook een vaste prijs?', a: 'Ja. Na de kennismaking krijg je één bedrag op papier, met daarin wat erin zit en wat niet. Kies je later zelf voor iets extra\'s, dan hoor je de prijs daarvan voordat we het doen.' },
+      { v: 'Wat zit er niet in de prijs?', a: 'Hosting regel je zelf, op je eigen naam. Teksten schrijven we als je wilt, vanaf € 75 per pagina. Een logo kost vanaf € 495. Fotografie doen we niet.' },
       { v: 'Hoe lang duurt webdesign in Leeuwarden, van eerste gesprek tot live?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerksite in WordPress kost meer tijd. Hoe lang precies, hoor je vooraf in de offerte. Het tempo hangt ook af van hoe snel teksten en foto\'s er zijn.' },
       { v: 'Moet mijn website ook in het Fries?', a: 'Dat hoeft niet. Wij schrijven in het Nederlands, want niemand van ons spreekt Fries. Een Friese versie laat je maken door een goede vertaler, en wij zetten die tekst er dan netjes in.' },
       { v: 'Bouwen jullie ook webshops in Leeuwarden?', a: 'Nee. We maken websites die aanvragen en telefoontjes opleveren. Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.' },

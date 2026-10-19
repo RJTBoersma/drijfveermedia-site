@@ -6,6 +6,7 @@ import Faq from '../../components/pagina/Faq.astro';
 import Actie from '../../components/pagina/Actie.astro';
 import Verder from '../../components/pagina/Verder.astro';
 import Tekening from '../../components/teken/Tekening.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 import Scene from '../../components/scenes/webdesign-stadskanaal.astro';
 
 import { site } from '../../data/site';
@@ -21,6 +22,8 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: [{ '@type': 'City', name: 'Stadskanaal' }, { '@type': 'AdministrativeArea', name: 'Groningen' }],
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
+  citation: ['https://nijm.nl/webdesign-stadskanaal/', 'https://jakdesign.nl/webdesign-stadskanaal/', 'https://trustoo.nl/groningen/stadskanaal/webdesign/'],
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
 }];
 ---
@@ -31,7 +34,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gekozen · Stadskanaal" titel="Webdesign in Stadskanaal: meer aanvragen voor bedrijven uit alle vijf kernen" prijs="vanaf € 250" eenmalig>
-    <p>Stadskanaal is meer dan één plaats. De gemeente loopt door tot Musselkanaal, Onstwedde en Alteveer, en klanten komen ook van over de grens met Drenthe. Wij bouwen websites die daar gevonden worden. Vanuit Assen zijn we er in ruim een half uur.</p>
+    <p>Stadskanaal is meer dan één plaats. De gemeente loopt door tot Musselkanaal, Onstwedde en Alteveer, en klanten komen ook van over de grens met Drenthe. Wij bouwen websites die daar gevonden worden, met een vaste prijs vooraf en alles op jouw naam. Vanuit Assen zijn we er in ruim een half uur.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -103,19 +106,34 @@ const schema = [{
           </tbody>
         </table>
       </div>
-      <p>Welke oplossing past, hoor je na een vrijblijvende kennismaking. Je krijgt vooraf een vaste prijs, exclusief btw. Hosting regel je zelf, op je eigen naam.</p>
+      <p>Welke oplossing past, hoor je na een vrijblijvende kennismaking. Je krijgt vooraf een vaste prijs, exclusief btw. Bij beide routes zie je het ontwerp voordat we bouwen. De site werkt op elke telefoon en is daarop getest, met de basis voor Google erin en een belknop en formulier waarvan we controleren of ze werken. Je krijgt een korte uitleg van het beheer. Buiten de prijs vallen hosting (regel je zelf, op je eigen naam), teksten als je ze niet zelf schrijft (€ 75 per pagina), een logo en fotografie.</p>
       <p>Een verzonnen voorbeeld. Een hovenier uit Musselkanaal werkt in de hele gemeente en in Nieuw-Buinen. Hij wil een site met vijf pagina's: één per dienst, een pagina over het bedrijf en een contactpagina met zijn werkgebied. Dat past prima in de AI-route. Krijgt hij daardoor één extra tuinklus van € 1.500 per jaar, dan heeft de site zich ruim terugverdiend.</p>
       <WebsitePrijs plaats="Stadskanaal" paginas={5} teksten={false} marge={1500} intro="Reken het voorbeeld van de hovenier na voor je eigen bedrijf in de Kanaalstreek. Kies wat de site moet kunnen en vul in wat één klus oplevert. Je ziet welke route past, de vanaf-prijs en na hoeveel klussen de site is betaald." noot="Alle bedragen zijn vanaf-prijzen, exclusief btw. Een afsprakenplanner of een koppeling met je software zit er niet in; wat dat kost, hoor je in het gesprek. Hosting regel je zelf, meestal een paar euro per maand." />
 
-      <h2>Kijk niet alleen naar een portfolio</h2>
-      <p>Elke webbouwer laat graag een portfolio vol mooie plaatjes zien. Vraag liever wat die sites opleveren. Een mooi design dat niemand vindt, is een dure brochure. Stel bij elke webbouwer deze vragen:</p>
+      <h2>Wat anderen in de Kanaalstreek vragen</h2>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Aanbieder</th><th>Volgens hun site</th></tr></thead>
+          <tbody>
+            <tr><td>NIJM Webdesign</td><td>Een portfolio van meer dan 1.000 websites. Prijslijst op aanvraag, met een site "in 1 dag" voor zzp'ers</td></tr>
+            <tr><td>Jak Design</td><td>€ 3.497 tot € 10.000 voor maatwerk</td></tr>
+            <tr><td>Trustoo, vergelijkingssite</td><td>Een nieuwe site gemiddeld € 800 tot € 4.000</td></tr>
+            <tr><td><b>Drijfveer Media</b></td><td><b>Met AI vanaf € 250, maatwerk vanaf € 2.000</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="klein muted">Bron: nijm.nl/webdesign-stadskanaal, jakdesign.nl/webdesign-stadskanaal en trustoo.nl (webdesigners in Stadskanaal), oktober 2026. Exclusief btw. Meer prijzen staan in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
+      <p>Wil je bladeren door honderden voorbeelden, dan heeft NIJM meer te laten zien dan wij. Wil je vooraf een prijs zien zonder eerst een lijst op te vragen, dan staat de onze hierboven.</p>
+
+      <h2>Kijk ook naar wat een site oplevert</h2>
+      <p>Een portfolio laat zien hoe sites eruitzien. Vraag er ook bij wat ze opleveren. Een mooi design dat niemand vindt, is een dure brochure. Stel bij elke webbouwer deze vragen:</p>
       <ul class="vink">
         <li>Staan de sites die je hebt gebouwd ook in Google, op de woorden waar het om gaat?</li>
         <li>Komen er aanvragen binnen via die sites?</li>
         <li>Van wie is de site straks, en kan ik weg als ik dat wil?</li>
         <li>Wat kost het per jaar, als je hosting en onderhoud meetelt?</li>
       </ul>
-      <p>Wij laten liever cijfers zien. In onze <a href="/cases/">cases</a> lees je wat een nieuwe site, SEO en linkbuilding opleverden. We zijn gespecialiseerd in websites voor het mkb die gevonden worden, voor klanten in heel Nederland.</p>
+      <p>Wij laten cijfers zien. In twee van onze <a href="/cases/">cases</a> hoorde een nieuwe site bij het werk: Conflictbemiddeling Nederland kreeg daarna 47% en Dakraam Concurrent 32% meer bezoekers uit Google. Nieuwe technieken testen we eerst in ons <a href="/proeflab/">proeflab</a> van meer dan 100 eigen sites. We zijn gespecialiseerd in websites voor het mkb die gevonden worden, voor klanten in heel Nederland.</p>
 
       <h2>Van Assen naar het kanaal</h2>
       <p>We zitten in Assen, niet in Stadskanaal. Het is zo'n 36 kilometer rijden. Ben je geïnteresseerd? Dan kun je contact opnemen met Thorgall. Hij belt op werkdagen binnen 15 minuten terug en komt daarna graag langs, of je komt naar ons aan de Lauwers. Daarmee hou je het overzichtelijk: één gesprek, één vaste prijs, één aanspreekpunt.</p>
@@ -125,12 +143,15 @@ const schema = [{
 
   <Bewijs case="dakraamconcurrent" />
 
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, zet de vaste prijs op papier en houdt je project bij.' }, { slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
   <Faq
     vragen={[
       { v: 'Wat kost webdesign in Stadskanaal?', a: 'Een site via de AI-route begint bij € 250. Maatwerk in WordPress begint bij € 2.000. Na een kort gesprek krijg je een vaste prijs, exclusief btw.' },
       { v: 'Werken jullie ook in Musselkanaal, Ter Apel en Nieuw-Buinen?', a: 'Ja. We werken voor ondernemers in de hele Kanaalstreek en ver daarbuiten. Een kennismaking kan bij jou, bij ons in Assen of via video.' },
       { v: 'Hoe laat ik zien dat ik ook in Drenthe werk?', a: 'Noem de plaatsen waar je echt komt op je site, en stel ze in als servicegebied in je Google Bedrijfsprofiel. Daar mag je tot 20 gebieden kiezen.' },
-      { v: 'Hebben jullie een portfolio?', a: 'We laten liever resultaten zien dan plaatjes. In de <a href="/cases/">cases</a> lees je wat een nieuwe site en SEO opleverden. Ontwerpen laten we graag zien in een gesprek.' },
+      { v: 'Hebben jullie een portfolio?', a: 'Een overzicht met screenshots staat nog niet op onze site. In de <a href="/cases/">cases</a> lees je wat een nieuwe site, SEO en linkbuilding opleverden, met cijfers.' },
+      { v: 'Hoe snel staat mijn site online?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerksite in WordPress kost meer tijd. Hoe lang precies, hoor je vooraf in de offerte.' },
       { v: 'Kan ik de website zelf bijhouden?', a: 'Ja. Teksten en foto\'s pas je eenvoudig zelf aan. Wil je dat niet, dan doen wij het onderhoud vanaf € 39 per maand.' },
     ]}
   />

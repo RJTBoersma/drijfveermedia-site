@@ -8,6 +8,7 @@ import Verder from '../../components/pagina/Verder.astro';
 import Inhoud from '../../components/pagina/Inhoud.astro';
 import Prijskaart from '../../components/pagina/Prijskaart.astro';
 import Tekening from '../../components/teken/Tekening.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 import Scene from '../../components/scenes/webdesign-friesland.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
@@ -15,13 +16,16 @@ import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
 import WebsitePrijs from '../../components/tool/WebsitePrijs.astro';
 
 const url = '/webdesign-friesland/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'voor-wie', titel: 'Voor elk soort bedrijf' },
   { id: 'sectoren', titel: 'Wat je site moet doen, per sector' },
   { id: 'extra', titel: 'Wat een Friese site extra moet kunnen' },
   { id: 'routes', titel: 'Twee routes' },
+  { id: 'krijgt', titel: 'Wat je krijgt' },
   { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld: B&B bij Bolsward' },
+  { id: 'markt', titel: 'Wat Friese webbouwers vragen' },
+  { id: 'assen', titel: 'Waarom een bureau uit Assen' },
   { id: 'checklist', titel: 'Checklist voor je huidige site' },
   { id: 'fouten', titel: 'Vier fouten bij een nieuwe site' },
   { id: 'aanleveren', titel: 'Wat je zelf klaarlegt' },
@@ -35,6 +39,7 @@ const schema = [{
   areaServed: { '@type': 'AdministrativeArea', name: 'Friesland' },
   url: `${site.url}${url}`,
   dateModified: datum,
+  citation: ['https://pixelsz.nl/webdesign-friesland/', 'https://www.idsinternet.nl/', 'https://eazyonline.nl/website-laten-maken-sneek', 'https://dianadesignstudio.nl/website-laten-maken-heerenveen/'],
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
 }];
 ---
@@ -45,7 +50,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gekozen · Friesland" titel="Webdesign in Friesland, van Lemmer tot Dokkum" prijs="vanaf € 250" eenmalig>
-    <p>Een website voor je Friese bedrijf die snel laadt, goed werkt op de telefoon en gevonden wordt. Gemaakt door een team uit Assen dat graag bij je langskomt.</p>
+    <p>Een website voor je Friese bedrijf die snel laadt, goed werkt op de telefoon en gevonden wordt. Met een vaste prijs vooraf, zonder abonnement, en alles op jouw naam. Gemaakt door een team uit Assen dat graag bij je langskomt.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -97,7 +102,16 @@ const schema = [{
             </tbody>
           </table>
         </div>
-        <p>Beide bouwroutes leveren professionele websites op die werken op elke telefoon, met de technische basis voor SEO erin. Je beheert je website volledig zelf, of je laat het <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud</a> aan ons vanaf € 39 per maand. De site en de teksten zijn van jou. Webshops bouwen doen we niet, en hosting ook niet. Bij hosting helpen we je wel kiezen, en we zetten je site erop.</p>
+        <h3 id="krijgt">Wat je krijgt bij beide routes</h3>
+        <ul class="vink">
+          <li>Een ontwerp dat je eerst ziet en laat aanpassen, voordat we bouwen.</li>
+          <li>Een professionele website die werkt op elke telefoon, getest op laptop, tablet en mobiel.</li>
+          <li>De technische basis voor SEO: paginatitels, beschrijvingen, koppen en een snelle laadtijd.</li>
+          <li>Bellen met één tik, een kort formulier en een controle of aanvragen aankomen.</li>
+          <li>Een korte uitleg, zodat je je website volledig zelf beheert.</li>
+          <li>Site, teksten en domein op jouw naam.</li>
+        </ul>
+        <p>Wat er niet in zit: hosting, teksten als je ze niet zelf schrijft (€ 75 per pagina), een logo, fotografie en koppelingen zoals een boekingssysteem. Die staan met een prijs in de offerte als je ze nodig hebt. Het <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud</a> kun je aan ons laten, vanaf € 39 per maand. Webshops bouwen doen we niet. Bij hosting helpen we je wel kiezen, en we zetten je site erop.</p>
 
         <h2 id="rekenvoorbeeld">Rekenvoorbeeld: een B&B bij Bolsward</h2>
         <div class="kader">
@@ -119,6 +133,23 @@ const schema = [{
         </div>
 
         <WebsitePrijs plaats="Friesland" paginas={5} teksten={true} profiel={true} marge={240} intro="Geen B&B maar een werf, winkel of praktijk? Vink aan wat jouw site nodig heeft en vul in wat één boeking of klus oplevert. Je ziet welke route past, de vanaf-prijs en hoe snel je hem terugverdient." noot="Dit zijn vanaf-prijzen, exclusief btw. Een afsprakenplanner of een koppeling met je eigen software zit niet in deze som; die prijs hoor je in het gesprek. Hosting regel je zelf, voor een paar euro per maand." />
+        <h2 id="markt">Wat webbouwers in Friesland vragen</h2>
+        <p>Een paar aanbieders uit de top van Google op "webdesign friesland" en in de Friese steden zetten hun prijs op hun site. Zo verhoudt de onze zich daartoe:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Prijs volgens hun site</th><th>Model</th></tr></thead>
+            <tbody>
+              <tr><td>Pixelsz</td><td>Website vanaf € 1.495</td><td>Plus € 395 per jaar voor hosting en onderhoud</td></tr>
+              <tr><td>IDS Internet, Leeuwarden</td><td>Basiswebsite vanaf € 900, op maat vanaf € 1.900</td><td>Hosting en domein kunnen erbij</td></tr>
+              <tr><td>Eazyonline</td><td>Opstart € 750 tot € 2.500</td><td>Plus € 39,95 tot € 99,95 per maand, met domein, hosting en updates</td></tr>
+              <tr><td>Diana Design Studio, Jubbega</td><td>Onepager vanaf € 450, website vanaf € 850</td><td>Domeinnaam en hosting staan in het pakket</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td><b>Met AI vanaf € 250, maatwerk vanaf € 2.000</b></td><td>Eenmalig. Hosting op je eigen naam, onderhoud los vanaf € 39 per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted klein">Bron: pixelsz.nl/webdesign-friesland, idsinternet.nl, eazyonline.nl/website-laten-maken-sneek en dianadesignstudio.nl/website-laten-maken-heerenveen, zoals ze er in oktober 2026 stonden. Alle bedragen exclusief btw.</p>
+        <p>Let bij het vergelijken op het model. Met een maandbedrag betaal je minder vooraf, maar over drie jaar telt het op: € 59,95 per maand is na drie jaar ruim € 2.150, bovenop de opstart. Bij ons betaal je de site één keer. Wie liever alles bij één partij heeft, inclusief hosting, zit bij een pakket met maandbedrag prima. Vraag dan wel wat er met je site gebeurt als je stopt. In de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a> staan alle kosten op een rij.</p>
+
         <h2 id="checklist">Checklist: is je huidige site klaar voor volgend jaar?</h2>
         <p>Loop deze punten na op je eigen telefoon. Elk nee is een punt om aan te werken.</p>
         <ul class="vink">
@@ -160,6 +191,9 @@ const schema = [{
           <li><strong>Ontwerp en bouw</strong><p>Je ziet het ontwerp eerst. Daarna bouwen en testen we.</p></li>
           <li><strong>Live en gevonden</strong><p>Na de lancering helpen we je hoger in Google, als je dat wilt.</p></li>
         </ol>
+        <h2 id="assen">Waarom een bureau uit Assen voor je Friese site?</h2>
+        <p>In Friesland zitten genoeg webbouwers, en sommige zijn dichterbij dan wij. Wat je bij ons krijgt: een vaste prijs vooraf, de AI-route voor wie snel en goedkoop online wil, en één aanspreekpunt dat op werkdagen binnen 15 minuten terugbelt. Nieuwe technieken testen we eerst in ons <a href="/proeflab/">proeflab</a> van meer dan 100 eigen sites. En in twee van onze <a href="/cases/">cases</a> hoorde een nieuwe site bij het werk, met daarna 47% en 32% meer bezoekers uit Google.</p>
+        <p>Wanneer je beter ergens anders kunt kijken? Als je een webshop wilt, want die bouwen we niet. Of als je een site in het Fries wilt die wij zelf schrijven: niemand van ons spreekt Fries.</p>
         <p>Afstand is bij webdesign in Friesland geen probleem. Heerenveen ligt op ongeveer een uur rijden van ons kantoor, Lemmer en Sneek op ruim een uur. Na het eerste gesprek gaat bijna alles via een link waarop je het ontwerp bekijkt, en via de telefoon. Een nieuwe website is daarna een begin. Wil je ook hoger in Google komen, lees dan wat <a href="/seo-friesland/">SEO in Friesland</a> inhoudt.</p>
       </article>
       <aside class="zijkolom">
@@ -171,11 +205,14 @@ const schema = [{
 
   <Bewijs case="dakraamconcurrent" />
 
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, plant het eerste gesprek bij jou of bij ons en houdt je project bij.' }, { slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
   <Faq
     vragen={[
       { v: 'Wat kost webdesign in Friesland?', a: 'Een website met AI begint bij € 250, een maatwerk website in WordPress bij € 2.000. Teksten kosten € 75 per pagina. Na een kort gesprek krijg je een vaste prijs. Alle bedragen zijn exclusief btw.' },
       { v: 'Komen jullie bij mij langs in Friesland?', a: `Ja. Ons kantoor staat in Assen, maar voor het eerste gesprek komen we graag naar je toe. Liever eerst mailen? Dat kan via ${site.email}.` },
       { v: 'Scoor ik met een nieuwe website meteen hoger in Google?', a: 'Niet vanzelf. Een nieuwe site heeft de technische basis op orde, maar posities komen pas met goede teksten, links en een sterk bedrijfsprofiel. Daar helpen we je mee met <a href="/seo-friesland/">SEO in Friesland</a>.' },
+      { v: 'Is een website met een maandbedrag niet makkelijker?', a: 'Soms wel: dan zit alles bij één partij. Reken het wel over een paar jaar uit, en vraag wat er met je site gebeurt als je opzegt. Bij ons betaal je de site één keer, regel je hosting zelf en zeg je het onderhoud per maand op.' },
       { v: 'Zijn jullie een webdesignbureau of een marketingbureau?', a: 'Allebei. We bouwen websites, maar kijken altijd verder dan het ontwerp: wordt de site gevonden en levert hij aanvragen op? Daarom werken webdesign en vindbaarheid bij ons samen.' },
       { v: 'Kan ik mijn site in het Nederlands, Fries en Duits laten maken?', a: 'De site bouwen we in elke taal die je wilt. De teksten schrijven wij in het Nederlands. Een Friese of Duitse versie laat je het best vertalen door iemand die de taal goed beheerst. Wij zetten die teksten er dan in.' },
       { v: 'Bouwen jullie ook webshops voor Friese bedrijven?', a: 'Nee. We maken websites voor dienstverleners, ambachtslieden, recreatiebedrijven en andere bedrijven die aanvragen of boekingen willen. Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.' },
