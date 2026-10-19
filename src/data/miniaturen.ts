@@ -9,7 +9,7 @@ export const miniaturen: Record<string, string> = {
   '/kennisbank/gidsen/wat-kost-seo/': 'reken',
   '/kennisbank/wat-is/e-e-a-t/': 'letters',
   '/kennisbank/': 'boeken',
-  '/cases/willemfikstt/': 'groei',
+  '/cases/#willemfikstt': 'groei',
   '/over-ons/': 'team',
   '/prijzen/': 'label',
   '/gratis-website-analyse/': 'formulier',

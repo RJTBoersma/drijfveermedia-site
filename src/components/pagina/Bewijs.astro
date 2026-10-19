@@ -9,7 +9,9 @@ import Plaatje from '../teken/Plaatje.astro';
 import { diensten } from '../../data/diensten';
 import { stapVoor } from '../../data/actie';
 type CaseNaam = 'willemfikstt' | 'conflictbemiddeling' | 'dakraamconcurrent';
-interface Props { titel?: string; intro?: string; case?: boolean | CaseNaam; eenmalig?: boolean; kort?: boolean }
+// Vorm: 'groot' (vier kaarten en een case, op home, prijzen, garantie en de hoofddiensten), 'strook' (één regel, op de andere
+// dienst- en plaatspagina's) of 'geen' (kennisbank: wie leest wat een sitemap is, zoekt nog geen garantie).
+interface Props { titel?: string; intro?: string; case?: boolean | CaseNaam; eenmalig?: boolean; kort?: boolean; vorm?: 'groot' | 'strook' | 'geen' }
 const pad = Astro.url.pathname;
 const groot = ['/', '/prijzen/', '/garantie/'].includes(pad) || diensten.some((d) => d.pillar && d.url === pad);
 const dienst = diensten.find((d) => d.url === pad);
@@ -21,16 +23,32 @@ const {
   intro,
   case: caseKeuze = true,
   eenmalig = eenmaligAuto,
-  kort = pad.startsWith('/kennisbank/'),
+  kort = false,
+  vorm = pad.startsWith('/kennisbank/') ? 'geen' : groot ? 'groot' : 'strook',
 } = Astro.props;
-const cases: Record<CaseNaam, { href: string; naam: string; getal: string; tekst: string; onderwerp: string }> = {
-  willemfikstt: { href: '/cases/willemfikstt/', naam: 'Willemfikstt.nl', getal: '+87%', tekst: 'kreeg 87% meer bezoekers uit Google', onderwerp: 'raket' },
-  conflictbemiddeling: { href: '/cases/conflictbemiddeling/', naam: 'Conflictbemiddeling.nl', getal: '+47%', tekst: 'kreeg 47% meer bezoekers uit Google, na een nieuwe site, SEO en Google Ads', onderwerp: 'raket' },
-  dakraamconcurrent: { href: '/cases/dakraamconcurrent/', naam: 'Dakraamconcurrent.nl', getal: '+32%', tekst: 'kreeg 32% meer bezoekers uit Google, na een nieuwe site en linkbuilding', onderwerp: 'raket' },
+const cases: Record<CaseNaam, { href: string; naam: string; getal: string; wat: string; tekst: string; onderwerp: string }> = {
+  willemfikstt: { href: '/cases/#willemfikstt', naam: 'Willemfikstt.nl', getal: '+87%', wat: 'bezoekers uit Google', tekst: 'kreeg 87% meer bezoekers uit Google', onderwerp: 'raket' },
+  conflictbemiddeling: { href: '/cases/#conflictbemiddeling', naam: 'Conflictbemiddeling.nl', getal: '+47%', wat: 'bezoekers uit Google', tekst: 'kreeg 47% meer bezoekers uit Google, na een nieuwe site, SEO en Google Ads', onderwerp: 'raket' },
+  dakraamconcurrent: { href: '/cases/#dakraamconcurrent', naam: 'Dakraamconcurrent.nl', getal: '+32%', wat: 'bezoekers uit Google', tekst: 'kreeg 32% meer bezoekers uit Google, na een nieuwe site en linkbuilding', onderwerp: 'raket' },
 };
 const caseAuto: CaseNaam = /^\/(website-laten-maken|webdesign-|online-adverteren|branding)/.test(pad) ? 'conflictbemiddeling' : /^\/linkbuilding/.test(pad) ? 'dakraamconcurrent' : 'willemfikstt';
 const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? caseAuto : caseKeuze];
 ---
+{vorm === 'strook' && (
+  <section class="wrap sectie bewijs-strook-sectie" data-aida="desire">
+    <h2 class="strook-kop">{titel}</h2>
+    <ul class="card bewijs-strook">
+      {eenmalig ? <li><b>Vaste prijs vooraf</b><span>Na één gesprek, in de offerte</span></li> : <>
+        <li><b><a href="/garantie/">Een doel op papier</a></b><span>Niet gehaald door ons? Een maand gratis</span></li>
+        <li><b>Per maand opzegbaar</b><span>Eén maand opzegtermijn</span></li>
+      </>}
+      <li><b><a href="/proeflab/">Getest in ons proeflab</a></b><span>Meer dan 100 eigen sites</span></li>
+      <li><b>Binnen 15 minuten gebeld</b><span>Op werkdagen, 8.00 tot 17.00 uur</span></li>
+      {gekozenCase && <li><b><a href={gekozenCase.href}>{gekozenCase.getal} bij {gekozenCase.naam}</a></b><span>{gekozenCase.wat}</span></li>}
+    </ul>
+  </section>
+)}
+{vorm === 'groot' && (
 <section class="wrap sectie band-donker" data-aida="desire">
   <Veer />
   <h2>{titel}</h2>
@@ -57,11 +75,18 @@ const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? case
       <div class="mini" aria-hidden="true"><Plaatje href={gekozenCase.href} onderwerp={gekozenCase.onderwerp} overgang={false} /></div>
       <span class="getal">{gekozenCase.getal}</span>
       <span class="wat"><a href={gekozenCase.href}><b>{gekozenCase.naam}</b> {gekozenCase.tekst}</a>{gekozenCase.naam === 'Willemfikstt.nl' && ', en 60% meer aanvragen via de site'}.</span>
-      <span class="meer" aria-hidden="true">Lees de case</span>
+      <span class="meer" aria-hidden="true">Bekijk de resultaten</span>
     </div>
   )}
 </section>
+)}
 <style>
+  .bewijs-strook-sectie { padding-block: 24px; }
+  .strook-kop { font-size: var(--step-1); margin-bottom: 12px; }
+  .bewijs-strook { list-style: none; margin: 0; padding: 16px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px 24px; }
+  .bewijs-strook li { display: grid; gap: 2px; margin: 0; }
+  .bewijs-strook b { color: var(--navy); }
+  .bewijs-strook span { color: var(--muted); font-size: 0.95rem; }
   .bewijs :global(.tekening) { margin-bottom: 4px; }
   @media (min-width: 900px) { .bewijs.drie { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .bewijs-kort { max-width: 68ch; }

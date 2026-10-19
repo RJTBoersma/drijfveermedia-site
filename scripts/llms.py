@@ -42,7 +42,7 @@ tekst = f"""# Drijfveer Media
 {chr(10).join(diensten)}
 
 ## Bewijs
-- [Cases](https://www.drijfveermedia.nl/cases/): Willemfikstt.nl kreeg 87% meer bezoekers uit Google en 60% meer aanvragen via de site; Conflictbemiddeling.nl 47% meer bezoekers uit Google na een nieuwe site, SEO en Google Ads; Dakraamconcurrent.nl 32% meer bezoekers uit Google na een nieuwe site en linkbuilding.
+- [Resultaten](https://www.drijfveermedia.nl/cases/): Willemfikstt.nl kreeg 87% meer bezoekers uit Google en 60% meer aanvragen via de site; Conflictbemiddeling.nl 47% meer bezoekers uit Google na een nieuwe site, SEO en Google Ads; Dakraamconcurrent.nl 32% meer bezoekers uit Google na een nieuwe site en linkbuilding.
 {chr(10).join(L(x) for x in cases)}
 - [Logboek](https://www.drijfveermedia.nl/logboek/): elke maand de cijfers van onze eigen site.
 

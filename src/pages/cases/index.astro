@@ -3,38 +3,43 @@ import Base from '../../layouts/Base.astro';
 import Hero from '../../components/pagina/Hero.astro';
 import Bewijs from '../../components/pagina/Bewijs.astro';
 import Actie from '../../components/pagina/Actie.astro';
-import Plaatje from '../../components/teken/Plaatje.astro';
 import Scene from '../../components/scenes/cases.astro';
 import { site } from '../../data/site';
 
 const url = '/cases/';
 const cases = [
   {
-    href: '/cases/willemfikstt/',
+    id: 'willemfikstt',
     naam: 'Willemfikstt.nl',
     soort: 'Klusplatform',
     getal: '+87%',
     wat: 'bezoekers uit Google',
-    tekst: 'Nieuwe pagina\'s per klus en plaats, linkbuilding en betere teksten. Op 1 voor "klusjesman Amsterdam" en 60% meer aanvragen via de site.',
-    diensten: ['SEO', 'Linkbuilding', 'Teksten'],
+    klant: 'Een platform dat mensen met een klus koppelt aan klusbedrijven uit hun regio.',
+    vraag: 'De site stond al op een paar goede posities. De vraag: die posities sterker maken en gevonden worden op woorden waar de site nog niet stond.',
+    deden: ['Nieuwe pagina\'s per klus en plaats', 'Linkbuilding', 'Betere teksten', 'Eén vaste marketeer als aanspreekpunt'],
+    resultaat: '87% meer bezoekers uit Google, de eerste plek op "klusjesman Amsterdam" en 60% meer aanvragen via de site.',
   },
   {
-    href: '/cases/conflictbemiddeling/',
+    id: 'conflictbemiddeling',
     naam: 'Conflictbemiddeling.nl',
     soort: 'Opleider voor mediators',
     getal: '+47%',
-    wat: 'organisch verkeer',
-    tekst: 'Een nieuwe responsive website, SEO, linkbuilding en Google Ads. Eerste posities op "mediation opleiding" en meer aanvragen.',
-    diensten: ['Webdesign', 'SEO', 'Google Ads'],
+    wat: 'bezoekers uit Google',
+    klant: 'Conflictbemiddeling Nederland leidt mediators op.',
+    vraag: 'De basis lag er, maar voor de groei die ze wilden, was meer nodig dan losse acties.',
+    deden: ['Een nieuwe, responsive website', 'SEO rond "mediation opleiding"', 'Linkbuilding', 'Google Ads, voor aanvragen terwijl de posities groeiden'],
+    resultaat: '47% meer bezoekers uit Google en de eerste posities op "mediation opleiding".',
   },
   {
-    href: '/cases/dakraamconcurrent/',
+    id: 'dakraamconcurrent',
     naam: 'Dakraamconcurrent.nl',
     soort: 'VELUX-installatiepartner',
     getal: '+32%',
-    wat: 'organisch verkeer',
-    tekst: 'Eerst een nieuwe website, dan linkbuilding, dan SEO. Nummer 1 op "dakraam plaatsen" en meer aanvragen.',
-    diensten: ['Webdesign', 'Linkbuilding', 'SEO'],
+    wat: 'bezoekers uit Google',
+    klant: 'Dakraam Concurrent plaatst en vervangt dakramen van VELUX.',
+    vraag: 'Het bedrijf wilde de eerste plek zijn als mensen online naar dakramen zoeken. Daar was eerst een stevig fundament voor nodig.',
+    deden: ['Eerst een nieuwe website', 'Daarna linkbuilding', 'Daarna SEO, met "dakraam plaatsen" voorop'],
+    resultaat: '32% meer bezoekers uit Google en nummer 1 op "dakraam plaatsen".',
   },
 ];
 const namen = ['Kärcher', 'bol.com', 'Nyenrode', 'Conflictbemiddeling Nederland', 'Glaspunt'];
@@ -44,16 +49,15 @@ const schema = [{
   url: `${site.url}${url}`,
   inLanguage: 'nl-NL',
   about: { '@id': `${site.url}/#organisatie` },
-  hasPart: cases.map((c) => ({ '@type': 'Article', headline: `Case ${c.naam}`, url: `${site.url}${c.href}` })),
 }];
 ---
 <Base
-  title="Cases: wat ons werk opleverde | Drijfveer Media"
-  description="Drie cases met echte cijfers: meer bezoekers uit Google, eerste posities en meer aanvragen. Plus de namen waarvoor Drijfveer Media verder werkte."
-  kruimels={[{ naam: 'Cases', url }]}
+  title="Resultaten: wat ons werk opleverde | Drijfveer Media"
+  description="Wat ons werk opleverde bij drie klanten: meer bezoekers uit Google, eerste posities en meer aanvragen. Plus de namen waarvoor Drijfveer Media werkte."
+  kruimels={[{ naam: 'Resultaten', url }]}
   schema={schema}
 >
-  <Hero kicker="Cases" titel="Wat ons werk opleverde, in echte cijfers">
+  <Hero kicker="Resultaten" titel="Wat ons werk opleverde, in echte cijfers">
     <p>Beloven kan iedereen. Hier zie je wat er gebeurde bij drie klanten: meer bezoekers uit Google, de eerste plek op de woorden die ertoe doen en meer aanvragen. Geen opgepoetste grafieken.</p>
     <Scene slot="beeld" />
   </Hero>
@@ -61,21 +65,21 @@ const schema = [{
   <section class="wrap sectie" data-aida="interest">
     <h2>Drie klanten, drie aanpakken</h2>
     <p class="sectie-intro">Een klusplatform dat al goed stond. Een opleider voor mediators die wilde groeien. Een dakramenspecialist die eerst een nieuwe site nodig had. Elke case begon ergens anders, maar steeds op de plek waar het snelst verschil te maken was.</p>
-    <ul class="case-lijst">
+    <div class="case-lijst">
       {cases.map((c) => (
-        <li>
-          <div class="card case-kaart kaart-link">
-            <div aria-hidden="true"><Plaatje href={c.href} onderwerp="raket" /></div>
-            <span class="kicker">{c.soort}</span>
-            <h3><a href={c.href}>{c.naam}</a></h3>
-            <p class="getal"><b>{c.getal}</b> <span>{c.wat}</span></p>
-            <p class="muted">{c.tekst}</p>
-            <ul class="chips">{c.diensten.map((d) => <li><span class="chip">{d}</span></li>)}</ul>
-            <span class="meer" aria-hidden="true">Lees de case</span>
-          </div>
-        </li>
+        <article class="card case-kaart" id={c.id}>
+          <span class="kicker">{c.soort}</span>
+          <h3>{c.naam}</h3>
+          <p class="getal"><b>{c.getal}</b> <span>{c.wat}</span></p>
+          <p>{c.klant} {c.vraag}</p>
+          <p class="kop-klein">Wat we deden</p>
+          <ol class="deden">{c.deden.map((d) => <li>{d}</li>)}</ol>
+          <p class="kop-klein">Wat het opleverde</p>
+          <p>{c.resultaat}</p>
+        </article>
       ))}
-    </ul>
+    </div>
+    <p class="muted volgt">Uitgebreide cases, met cijfers per maand en een grafiek uit Search Console, volgen.</p>
 
     <div class="tekst onder">
       <h2>Wat deze cases gemeen hebben</h2>
@@ -103,7 +107,7 @@ const schema = [{
 
   <Bewijs case={false} />
 
-  <Actie titel="Word jij onze volgende case?" />
+  <Actie titel="Wat zou dit voor jouw bedrijf opleveren?" />
 </Base>
 <style>
   .case-lijst { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
@@ -112,8 +116,10 @@ const schema = [{
   .case-kaart p { margin: 0; }
   .case-kaart .getal b { font-size: var(--step-2); font-weight: 900; color: var(--orange-tekst); letter-spacing: -0.03em; }
   .case-kaart .getal span { color: var(--muted); }
-  .case-kaart .chips { margin-top: 4px; }
-  .case-kaart .meer { margin-top: auto; padding-top: 6px; font-weight: 800; color: var(--navy); }
+  .case-kaart { scroll-margin-top: 100px; }
+  .kop-klein { font-weight: 800; color: var(--navy); margin-top: 6px !important; }
+  .deden { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+  .volgt { margin-top: 16px; }
   .onder { margin-top: 56px; }
   .namen { list-style: none; padding: 0; margin: 8px 0 24px; display: flex; flex-wrap: wrap; gap: 10px; }
   .namen li { margin: 0; padding: 12px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; font-weight: 800; font-size: 1.1rem; color: var(--navy); }

@@ -19,7 +19,7 @@ const vast = ['/', '/prijzen/', '/gratis-website-analyse/', '/consult/', '/garan
 const logboek = (await getCollection('logboek')).sort((a, b) => b.data.maand.localeCompare(a.data.maand));
 const groepen: { titel: string; id: string; items: P[] }[] = [
   { titel: 'Werkgebied', id: 'werkgebied', items: [...van('hub').filter((p) => p.url === '/werkgebied/'), ...van('provincie').sort(opNaam), ...van('plaats').sort(opNaam)] },
-  { titel: 'Cases', id: 'cases', items: [alle.find((p) => p.url === '/cases/')!, ...van('case').sort(opNaam)] },
+  { titel: 'Resultaten', id: 'cases', items: [alle.find((p) => p.url === '/cases/')!] },
   { titel: 'Gidsen', id: 'gidsen', items: [alle.find((p) => p.url === '/kennisbank/gidsen/')!, ...van('gids').filter((p) => p.url.startsWith('/kennisbank/')).sort(opNaam)] },
   { titel: 'Begrippen', id: 'begrippen', items: [alle.find((p) => p.url === '/kennisbank/wat-is/')!, ...van('begrip').sort(opNaam)] },
   { titel: 'Blogs', id: 'blogs', items: van('blog').sort(opNaam) },
@@ -39,7 +39,7 @@ const totaal = new Set([...alle.map((p) => p.url), ...logboek.map((l) => `/logbo
     <h1>Alle pagina's op een rij</h1>
     <p class="lead muted">{totaal} pagina's, van diensten tot begrippen. Zoek je iets en vind je het niet? Bel <a href={site.telefoonLink}>{site.telefoon}</a> of kijk in de <a href="/kennisbank/">kennisbank</a>.</p>
     <nav class="sprong" aria-label="Spring naar">
-      <a href="#vast">Algemeen</a><a href="#cases">Cases</a><a href="#logboek">Logboek</a><a href="#diensten">Diensten</a><a href="#werkgebied">Werkgebied</a><a href="#gidsen">Gidsen</a><a href="#begrippen">Begrippen</a><a href="#blogs">Blogs</a><a href="#juridisch">Juridisch</a>
+      <a href="#vast">Algemeen</a><a href="#cases">Resultaten</a><a href="#logboek">Logboek</a><a href="#diensten">Diensten</a><a href="#werkgebied">Werkgebied</a><a href="#gidsen">Gidsen</a><a href="#begrippen">Begrippen</a><a href="#blogs">Blogs</a><a href="#juridisch">Juridisch</a>
     </nav>
 
     <div class="blokken">

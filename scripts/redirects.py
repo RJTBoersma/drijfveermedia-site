@@ -86,7 +86,7 @@ vast = {
  '/blog/stagelopen-bij-drijfveer-media-leerzaam-en-gezellig/': '/werken-bij/',
  '/blog/werken-voor-niets-hoe-wenselijk-is-dat/': '/werken-bij/',
  '/vacatures/': '/werken-bij/', '/vacatures/online-marketing-stage/': '/werken-bij/',
- '/cases/dakraam-concurrent/': '/cases/dakraamconcurrent/',
+ '/cases/dakraam-concurrent/': '/cases/',
  '/cases/cijferbaas/': '/cases/', '/cases/dw-huisontruiming/': '/cases/', '/cases/industrialfreezing/': '/cases/',
  '/content-marketing-uitbesteden/': '/tekstschrijver/contentmarketing/',
  '/diensten/ai-vindbaarheidsanalyse/': '/generative-engine-optimization/ai-vindbaarheidsanalyse/',
@@ -122,6 +122,10 @@ kaart.update({
  '/regio/groningen/': '/online-marketing-groningen/',
  '/online-marketing-friesland/': '/regio/friesland/',
  '/kennisbank/wat-is/geo/': '/kennisbank/gidsen/wat-is-geo/',
+ # Losse casepagina's tijdelijk offline (19-10-2026): alles op één pagina Resultaten
+ '/cases/willemfikstt/': '/cases/',
+ '/cases/conflictbemiddeling/': '/cases/',
+ '/cases/dakraamconcurrent/': '/cases/',
 })
 # Ketens oplossen: wijst een doel zelf weer door (bijvoorbeeld naar een samengevoegde pagina), ga dan in één stap naar het eindpunt
 for u in list(kaart):

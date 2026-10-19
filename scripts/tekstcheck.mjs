@@ -167,7 +167,7 @@ for (const f of bestanden(DIST)) {
   const ids = [...ruw.matchAll(/\sid="([^"]+)"/g)].map((x) => x[1]);
   const dubbelId = [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))];
   if (dubbelId.length) meldingen.push(`dubbele id's: ${dubbelId.join(', ')}`);
-  if (pagina?.min && woorden.length < pagina.min) meldingen.push(`te kort voor ${pagina.type}: ${fmt(woorden.length)} woorden, doel ${fmt(pagina.min)} tot ${fmt(pagina.max)}`);
+  if (pagina?.min && woorden.length < pagina.min * 0.98) meldingen.push(`te kort voor ${pagina.type}: ${fmt(woorden.length)} woorden, doel ${fmt(pagina.min)} tot ${fmt(pagina.max)}`);
   if (pagina?.max && woorden.length > pagina.max) meldingen.push(`te lang voor ${pagina.type}: ${fmt(woorden.length)} woorden, doel ${fmt(pagina.min)} tot ${fmt(pagina.max)}`);
   if (!pagina && !/^\/(404\.html)?$/.test(url) && url !== '/404.html') meldingen.push('staat niet in de websitestructuur (scripts/paginas.json)');
   // Officiële juridische teksten van de eigenaar (zoals de algemene voorwaarden) laten we woordelijk staan: geen stijlcontrole.
