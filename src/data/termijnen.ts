@@ -6,8 +6,11 @@ export const termijnen = {
   lokaal: 'Kleine aanpassingen aan je Bedrijfsprofiel zie je vaak binnen een paar weken terug op de kaart. Hoger komen in je regio kost meestal een paar maanden.',
   geo: 'Reken op een paar maanden. Bij weinig concurrentie kan het sneller.',
   linkbuilding: 'Een nieuwe link telt meestal na een paar weken mee. Duidelijke stijgingen zie je vaak na drie tot zes maanden.',
-  websiteAi: 'Een site met AI staat er vaak binnen twee weken.',
+  websiteAi: 'Hoe snel je site met AI online staat, hoor je vooraf in de offerte. Het tempo hangt vooral af van wanneer teksten en foto\'s klaar zijn.',
   websiteMaatwerk: 'Een maatwerksite in WordPress kost meer tijd. Hoe lang precies, hoor je vooraf in de offerte.',
+  scan: 'De uitslag van een gratis scan of check hoor je uiterlijk de volgende werkdag.',
+  offerte: 'Na het eerste gesprek heb je binnen twee werkdagen een vaste prijs of een plan op één A4.',
+  spoed: 'Is je site gehackt of ligt hij plat terwijl je onderhoud bij ons hebt, dan beginnen we dezelfde werkdag.',
   terugbellen: 'Op werkdagen tussen 8.00 en 17.00 uur bellen we je binnen 15 minuten terug. Daarbuiten de volgende werkdag vóór 8.15 uur.',
   opzeggen: 'Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat.',
 } as const;

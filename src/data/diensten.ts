@@ -60,7 +60,7 @@ export const diensten: Dienst[] = [
   { naam: 'Online marketing uitbesteden', url: '/online-marketing-uitbesteden/', pijler: 'Advies', pillar: true, kort: 'Eén team, één maandbedrag, per maand opzegbaar', prijs: 'vanaf € 595 per maand', prijsWaarde: 595, prijsEenheid: 'maand' },
   { naam: 'Interim-marketeer', url: '/online-marketing-uitbesteden/interim-marketeer/', pijler: 'Advies', ouder: '/online-marketing-uitbesteden/', kort: 'Een marketeer op afroep', prijs: '€ 95 per uur', prijsWaarde: 95, prijsEenheid: 'uur' },
   { naam: 'Consult', url: '/consult/', pijler: 'Advies', pillar: true, kort: 'Een uur sparren over je marketing', prijs: '€ 85 per uur', prijsWaarde: 85, prijsEenheid: 'uur' },
-  { naam: 'Trainingen', url: '/trainingen/', pijler: 'Advies', pillar: true, kort: 'SEO, Google Ads en AI voor je team', prijs: 'in overleg' },
+  { naam: 'Trainingen', url: '/trainingen/', pijler: 'Advies', pillar: true, kort: 'SEO, Google Ads en AI voor je team', prijs: 'vanaf € 795', prijsWaarde: 795, prijsEenheid: 'eenmalig' },
 ];
 
 export const pillars = diensten.filter((d) => d.pillar);
