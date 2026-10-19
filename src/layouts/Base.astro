@@ -286,6 +286,19 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
         } catch (e) {}
       })();
     </script>
+    <script is:inline>
+      // Nette adresbalk: wat een gedeelde link of een knop meegeeft (?vraag=, ?w_p=, #tool&...), is na het laden gelezen en gaat eruit.
+      // De klikcodes van Google Ads (gclid, gbraid, wbraid) blijven staan, die zijn nodig voor de conversiemeting na toestemming.
+      addEventListener('load', function () {
+        try {
+          var q = new URLSearchParams(location.search), houd = new URLSearchParams();
+          ['gclid', 'gbraid', 'wbraid'].forEach(function (k) { if (q.has(k)) houd.set(k, q.get(k)); });
+          var s = houd.toString() ? '?' + houd.toString() : '';
+          var h = /[=&]/.test(location.hash) ? '' : location.hash;
+          if (s !== location.search || h !== location.hash) history.replaceState(history.state, '', location.pathname + s + h);
+        } catch (e) {}
+      });
+    </script>
   </body>
 </html>
 <style is:global>

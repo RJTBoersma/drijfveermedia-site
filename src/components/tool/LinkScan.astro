@@ -635,7 +635,6 @@ const { id = 'linkscan', vervolg = '#vergelijking', vervolgTekst = 'Laat Thorgal
         const web = doel.querySelector<HTMLInputElement>('input[name="website"]');
         if (web && !web.value && eigenDomein) web.value = eigenDomein;
       }
-      try { history.pushState(null, '', vervolg); } catch {}
       doel.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
       const eerste = doel.querySelector<HTMLElement>('input:not([type=hidden]):not([tabindex="-1"]), textarea');
       eerste?.focus({ preventScroll: true });
@@ -650,7 +649,6 @@ const { id = 'linkscan', vervolg = '#vergelijking', vervolgTekst = 'Laat Thorgal
     };
     $('[data-deel]').addEventListener('click', async () => {
       const link = deelLink();
-      try { history.replaceState(null, '', link.replace(location.origin, '')); } catch {}
       const st = $('[data-deel-status]');
       try { await navigator.clipboard.writeText(link); st.textContent = 'De link staat op je klembord. Er staan alleen je bedrijfsnaam en zoekwoorden in, niet je links. Wie hem opent, zet zijn eigen export erin.'; }
       catch { window.prompt('Kopieer deze link:', link); }

@@ -123,7 +123,6 @@ const vragen = [
       el.querySelector<HTMLElement>('[data-vlaggen-kop]')!.hidden = !fout.length;
       el.querySelector('[data-vlaggen]')!.innerHTML = gesorteerd.map((v) => `<li${v.w === 3 ? ' class="oc-zwaar"' : ''}><b>${esc(v.titel)}.</b> ${esc(v.vlag)}</li>`).join('');
       uitslag.hidden = false; status.textContent = '';
-      try { history.replaceState(null, '', `${location.pathname}${location.search}#${id}&a=${code()}`); } catch {}
       if (scroll) uitslag.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     };
 

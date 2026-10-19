@@ -78,6 +78,8 @@ const diensten = [
     const uit = el.querySelector<HTMLElement>('[data-uit]')!;
     const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
     const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    // De invoer gaat alleen in de gedeelde link, niet in de adresbalk.
+    let deelQs = '';
     const meld = el.querySelector<HTMLElement>('[data-meld]')!;
     let gebruikt = false;
     const zeg = (t: string) => { if (gebruikt) meld.textContent = t; };
@@ -134,10 +136,10 @@ const diensten = [
         </dl>
         <p class="klein muted">Besteed je meer dan ${uur(omslag)} uur per maand, dan is uitbesteden goedkoper. Wat je niet ziet in deze som: hoe lang je erover doet om het vak te leren.</p>`;
       cta.href = `/contact/?${new URLSearchParams({ vraag: `Ik twijfel tussen zelf doen en ${dienst.naam} (vanaf € ${dienst.prijs} per maand). Ik ben er nu zo'n ${uur(uren)} uur per maand mee bezig.` })}`;
-      const p = new URLSearchParams(location.search);
+      const p = new URLSearchParams();
       p.set('z_d', gekozen());
       ['t', 'u', 'g'].forEach((n) => p.set(`z_${n}`, tekst(n).value.trim()));
-      history.replaceState(null, '', `${location.pathname}?${p}${location.hash}`);
+      deelQs = p.toString();
       if (!geteld) { geteld = true; tel('uitkomst'); }
     };
 
@@ -147,7 +149,7 @@ const diensten = [
     form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
     deel.hidden = false;
     deel.addEventListener('click', async () => {
-      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      const link = `${location.origin}${location.pathname}${deelQs ? `?${deelQs}` : ''}#${el.id}`;
       try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; meld.textContent = 'De link naar deze uitkomst staat op je klembord.'; }
       catch { window.prompt('Kopieer deze link', link); }
       setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);

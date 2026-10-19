@@ -100,6 +100,8 @@ const euro = (n: number) => n.toLocaleString('nl-NL', { minimumFractionDigits: 2
     const uit = el.querySelector<HTMLElement>('[data-uit]')!;
     const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
     const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    // De invoer gaat alleen in de gedeelde link, niet in de adresbalk.
+    let deelQs = '';
     const meld = el.querySelector<HTMLElement>('[data-meld]')!;
     let gebruikt = false; // pas iets voorlezen als de bezoeker zelf iets veranderde
     const zeg = (t: string) => { if (gebruikt) meld.textContent = t; };
@@ -163,10 +165,9 @@ const euro = (n: number) => n.toLocaleString('nl-NL', { minimumFractionDigits: 2
       const b = veld('b').value;
       const cq = new URLSearchParams({ doel: 'ads' }); if (b !== 'eigen') cq.set('vak', b); cq.set('context', `Klikrekenhulp: ${oordeel}. Een klik mag tot ${eur(max)} kosten, je betaalt ${eur(cpc)}.`);
       cta.href = `/gratis-website-analyse/?${cq}`;
-      // Invoer in de URL, zodat de uitkomst te delen is. Andere parameters blijven staan.
-      const p = new URLSearchParams(location.search);
+      const p = new URLSearchParams();
       namen.forEach((nm) => p.set(`k_${nm}`, veld(nm).value.trim()));
-      history.replaceState(null, '', `${location.pathname}?${p}${location.hash}`);
+      deelQs = p.toString();
       if (!geteld) { geteld = true; tel('uitkomst'); }
     };
 
@@ -193,7 +194,7 @@ const euro = (n: number) => n.toLocaleString('nl-NL', { minimumFractionDigits: 2
     form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
     deel.hidden = false;
     deel.addEventListener('click', async () => {
-      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      const link = `${location.origin}${location.pathname}${deelQs ? `?${deelQs}` : ''}#${el.id}`;
       try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; meld.textContent = 'De link naar deze uitkomst staat op je klembord.'; }
       catch { window.prompt('Kopieer deze link', link); }
       setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);

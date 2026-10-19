@@ -151,7 +151,6 @@ const groepen = [
       const q = new URLSearchParams(); q.set('doel', 'kaart'); if (vak) q.set('vak', vak); if (plaats) q.set('plaats', plaats); q.set('context', `Kaartcheck: score ${score} van 100 (${oordeel})`);
       el.querySelector<HTMLAnchorElement>('[data-cta]')!.href = `/gratis-website-analyse/${q.toString() ? `?${q}` : ''}#scan`;
       uitslag.hidden = false; status.textContent = '';
-      try { history.replaceState(null, '', deelLink().replace(location.origin, '')); } catch {}
       if (scroll) uitslag.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     };
 

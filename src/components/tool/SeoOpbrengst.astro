@@ -104,6 +104,8 @@ const posities: [string, string][] = [
     const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement & HTMLSelectElement;
     const uit = el.querySelector<HTMLElement>('[data-uit]')!;
     const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    // De invoer gaat alleen in de gedeelde link, niet in de adresbalk.
+    let deelQs = '';
     const meld = el.querySelector<HTMLElement>('[data-meld]')!;
     let gebruikt = false;
     const zeg = (t: string) => { if (gebruikt) meld.textContent = t; };
@@ -179,10 +181,10 @@ const posities: [string, string][] = [
           <div><dt>Extra omzet per maand</dt><dd>${eur(omzet)}</dd></div>
         </dl>
         <p class="klein muted">Klikkans op ${naam(van)}: ${pct(kVan)}. Op ${naam(naar)}: ${pct(kNaar)}.${location.pathname === url ? '' : ` Wat <a href="${url}">${dienst}</a> inhoudt, lees je op de dienstpagina.`}</p>`;
-      const p = new URLSearchParams(location.search);
+      const p = new URLSearchParams();
       namen.forEach((nm) => p.set(`s_${nm}`, veld(nm).value.trim()));
       p.set('s_ai', a);
-      history.replaceState(null, '', `${location.pathname}?${p}${location.hash}`);
+      deelQs = p.toString();
       if (!geteld) { geteld = true; tel('uitkomst'); }
     };
 
@@ -192,7 +194,7 @@ const posities: [string, string][] = [
     form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
     deel.hidden = false;
     deel.addEventListener('click', async () => {
-      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      const link = `${location.origin}${location.pathname}${deelQs ? `?${deelQs}` : ''}#${el.id}`;
       try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; meld.textContent = 'De link naar deze uitkomst staat op je klembord.'; }
       catch { window.prompt('Kopieer deze link', link); }
       setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);

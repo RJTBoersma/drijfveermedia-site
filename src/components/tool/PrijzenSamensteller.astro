@@ -48,6 +48,8 @@ const keuzes = [
     const uit = el.querySelector<HTMLElement>('[data-uit]')!;
     const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
     const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    // De invoer gaat alleen in de gedeelde link, niet in de adresbalk.
+    let deelQs = '';
     const vakjes = [...form.querySelectorAll<HTMLInputElement>('input[name="d"]')];
     let geteld = false;
 
@@ -56,10 +58,7 @@ const keuzes = [
 
     const reken = () => {
       const gekozen = vakjes.filter((v) => v.checked).map((v) => v.value as K);
-      const p = new URLSearchParams(location.search);
-      if (gekozen.length) p.set('p_d', gekozen.join(',')); else p.delete('p_d');
-      const qs = p.toString();
-      history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
+      deelQs = gekozen.length ? new URLSearchParams({ p_d: gekozen.join(',') }).toString() : '';
       if (!gekozen.length) {
         uit.innerHTML = '<p class="leeg">Kies een of meer doelen, dan zie je welke diensten passen en wat ze kosten.</p>';
         cta.href = '/contact/';
@@ -88,7 +87,7 @@ const keuzes = [
     form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
     deel.hidden = false;
     deel.addEventListener('click', async () => {
-      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      const link = `${location.origin}${location.pathname}${deelQs ? `?${deelQs}` : ''}#${el.id}`;
       try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; el.querySelector<HTMLElement>('[data-meld]')!.textContent = 'De link naar deze prijs staat op je klembord.'; }
       catch { window.prompt('Kopieer deze link', link); }
       setTimeout(() => (deel.textContent = 'Kopieer link'), 2000);

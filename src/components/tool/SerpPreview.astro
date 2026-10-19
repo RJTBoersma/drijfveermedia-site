@@ -112,7 +112,6 @@ const Kop = kop;
     const form = el.querySelector<HTMLFormElement>('[data-form]')!;
     const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
     const status = el.querySelector<HTMLElement>('[data-status]')!;
-    let wacht = 0;
 
     const deelHash = () => {
       const p = new URLSearchParams();
@@ -178,8 +177,6 @@ const Kop = kop;
       });
       el.querySelector<HTMLElement>('[data-voorbeelden]')!.hidden = false;
       schaal();
-      clearTimeout(wacht);
-      wacht = window.setTimeout(() => { try { history.replaceState(null, '', `${location.pathname}${location.search}#${deelHash()}`); } catch {} }, 600);
     };
 
     // Het voorbeeld voor een computer is 600 px breed. Op een smal scherm verkleinen we het, zodat de regels gelijk blijven.
