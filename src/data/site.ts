@@ -22,7 +22,7 @@ export const site = {
 export interface Persoon { slug: string; naam: string; rol: string; kort: string }
 export const team: Persoon[] = [
   { slug: 'robert', naam: 'Robert Boersma', rol: 'Eigenaar en online marketeer', kort: 'Richtte Drijfveer Media in 2011 op en doet sindsdien SEO, content en strategie.' },
-  { slug: 'thorgall', naam: 'Thorgall van Eeden', rol: 'Online marketeer', kort: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je project bij.' },
+  { slug: 'thorgall', naam: 'Thorgall van Eeden', rol: 'Online marketeer', kort: 'Je eerste aanspreekpunt en onze linkbuilder. Hij belt je terug en houdt je project bij.' },
   { slug: 'evelien', naam: 'Evelien Heerema', rol: 'Medeoprichter', kort: 'Houdt de zaak draaiende en werkt mee aan marketing voor klanten.' },
   { slug: 'johan', naam: 'Johan Zwartenberg', rol: 'Marketeer', kort: 'Werkt mee aan de online marketing voor klanten.' },
 ];

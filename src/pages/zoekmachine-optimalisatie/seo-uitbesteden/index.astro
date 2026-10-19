@@ -6,19 +6,44 @@ import Faq from '../../../components/pagina/Faq.astro';
 import Actie from '../../../components/pagina/Actie.astro';
 import Prijskaart from '../../../components/pagina/Prijskaart.astro';
 import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
+import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/zoekmachine-optimalisatie--seo-uitbesteden.astro';
 import { site } from '../../../data/site';
+import { nietWebshop } from '../../../data/niet';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
 import ZelfOfUitbesteden from '../../../components/tool/ZelfOfUitbesteden.astro';
 
 const url = '/zoekmachine-optimalisatie/seo-uitbesteden/';
+const hoofdstukken = [
+  { id: 'wanneer', titel: 'Wanneer uitbesteden slim is' },
+  { id: 'wat-je-krijgt', titel: 'Wat je elke maand krijgt' },
+  { id: 'maand-a4', titel: 'Zo ziet je maand-A4 eruit' },
+  { id: 'vergelijken', titel: 'Zelf, freelancer of bureau' },
+  { id: 'samenwerking', titel: 'Zo loopt de samenwerking' },
+  { id: 'bureau-kiezen', titel: 'Een SEO-bureau kiezen' },
+  { id: 'overstappen', titel: 'Overstappen' },
+  { id: 'geen-zin', titel: 'Wanneer het geen zin heeft' },
+  { id: 'kosten', titel: 'Wat het kost en oplevert' },
+];
+const bronnen = [
+  'https://www.samonlinemarketing.nl/seo-pakket/',
+  'https://www.samonlinemarketing.nl/seo-uitbesteden/',
+  'https://sommetmedia.nl/diensten/zoekmachinemarketing/seo-uitbesteden/',
+  'https://searchlab.nl/seo-uitbesteden',
+  'https://roxtar.nl/seo-uitbesteden/',
+];
 const schema = [{
   '@type': 'Service',
   name: 'SEO uitbesteden',
   serviceType: 'Zoekmachineoptimalisatie',
+  description: 'SEO uitbesteden aan een vast team: techniek, teksten en links in één hand, elke maand één A4 en een doel met een datum, per maand opzegbaar.',
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
+  citation: bronnen,
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
 }];
 ---
@@ -29,70 +54,146 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gevonden · SEO" titel="SEO uitbesteden aan één vast team, met een doel waar je ons op afrekent" prijs="vanaf € 495 per maand">
-    <p>Jij runt je bedrijf, wij zorgen dat Google je vindt. Met één vast aanspreekpunt, een doel met een datum en een contract dat je per maand opzegt.</p>
+    <p>Voor mkb'ers die willen groeien in Google, maar er zelf geen tijd voor hebben. Techniek, teksten en links in één hand, elke maand één A4 en een doel met een datum. Je zegt per maand op.</p>
     <Scene slot="beeld" />
   </Hero>
 
   <section class="wrap sectie" data-aida="interest">
     <div class="met-zijkolom">
       <article class="tekst">
-        <h2>Wanneer is SEO uitbesteden slim?</h2>
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <p>Bij SEO uitbesteden doet een bureau elke maand het werk aan je vindbaarheid: techniek, teksten en links. Bij Drijfveer Media kost dat vanaf € 495 per maand, exclusief btw. {site.contactpersoon} is je vaste aanspreekpunt. Bij de start leggen we een doel met een datum vast. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Je zegt per maand op, met één maand opzegtermijn.</p>
+        </div>
+
+        <h2 id="wanneer">Wanneer is SEO uitbesteden slim?</h2>
         <p>Als je wel wilt groeien in Google, maar de tijd of de kennis mist om het zelf te doen. <a href="/zoekmachine-optimalisatie/">Zoekmachineoptimalisatie</a> is geen klus van één middag. SEO draait om elke maand een beetje beter worden dan je concurrenten: techniek bijhouden, teksten verbeteren, links verdienen. Wie dat er 's avonds bij doet, houdt het zelden een jaar vol.</p>
         <p>Maak de rekensom. Wat is een uur van jou waard? Als je acht uur per maand aan SEO besteedt en je uur is € 75 waard, kost het je € 600 aan tijd. En dan moet je het vak nog leren. Bij ons begint SEO laten doen bij € 495 per maand, met mensen die het elke dag doen.</p>
         <ZelfOfUitbesteden dienst="seo" tarief={75} uren={8} />
-        <p>Uitbesteden is niet altijd nodig. Heb je weinig concurrentie en lees je graag in? Begin dan zelf, met de tips op onze <a href="/zoekmachine-optimalisatie/">SEO-pagina</a>. Een <a href="/consult/">consult</a> van een uur, voor € 85, kan je dan op weg helpen.</p>
 
-        <h2>Wat we voor je doen</h2>
-        <p>Je krijgt geen standaardpakket, maar een SEO-aanpak die past bij jouw site. Elke maand kijken we waar de kansen liggen, en daar gaat de tijd naartoe. Dit zijn de werkzaamheden die er meestal in zitten:</p>
+        <h2 id="wat-je-krijgt">Wat je elke maand krijgt</h2>
+        <p>Je krijgt geen standaardpakket, maar een SEO-aanpak die past bij jouw site. Bij de start kijken we waar je grootste groeikansen liggen, en daarna elke maand opnieuw waar de kansen liggen. Daar gaat de tijd naartoe. Deze werkzaamheden zitten er altijd in:</p>
         <ul class="vink">
-          <li><b>Een plan op basis van cijfers.</b> Zoekwoordonderzoek, een nulmeting en een <a href="/kennisbank/gidsen/seo-strategie/">SEO-strategie</a> die past bij wat je wilt verkopen. Zo weet je waar je grootste groeikansen liggen.</li>
+          <li><b>Een vast aanspreekpunt.</b> {site.contactpersoon} kent je bedrijf en belt je op werkdagen binnen 15 minuten terug. Je hoeft je verhaal niet elke keer opnieuw te vertellen.</li>
+          <li><b>Een plan met een doel.</b> Zoekwoordonderzoek, een nulmeting en een <a href="/kennisbank/gidsen/seo-strategie/">SEO-strategie</a> die past bij wat je wilt verkopen, met een doel en een datum.</li>
           <li><b>Techniek bijhouden.</b> Snelheid, indexering, fouten en doorverwijzingen. Wat in de <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> zit, houden we elke maand in de gaten.</li>
-          <li><b>Pagina's en teksten.</b> Bestaande pagina's verbeteren en nieuwe schrijven. Dezelfde aanpak als bij <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten laten schrijven</a>.</li>
-          <li><b>Off-page werk.</b> Links en vermeldingen op andere sites. Thorgall, onze linkbuilder, zoekt links die bij je passen. Meer over <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>.</li>
-          <li><b>Lokale vindbaarheid.</b> Je Google Bedrijfsprofiel en reviews, als je klanten uit je eigen regio komen.</li>
-          <li><b>Een rapport dat je zonder uitleg begrijpt.</b> Elke maand één A4: wat we deden, wat het opleverde en wat we nu doen. Plus advies over wat niet werkt, en waar je beter mee stopt.</li>
+          <li><b>Pagina's en teksten.</b> Bestaande pagina's verbeteren en nieuwe schrijven, zoals bij <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten laten schrijven</a>. Je leest alles voordat het online gaat.</li>
+          <li><b>Off-page werk.</b> Links en vermeldingen op andere sites, met de hand gezocht door {site.contactpersoon}. Meer over <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>.</li>
+          <li><b>Lokale vindbaarheid,</b> als je klanten uit je eigen regio komen: je Google Bedrijfsprofiel en reviews.</li>
+          <li><b>Elke maand één A4.</b> Wat we deden, wat het opleverde, wat niet lukte en wat we nu doen. Plus advies over waar je beter mee stopt.</li>
         </ul>
+        <p>Wat er niet in zit: je advertentiebudget voor Google Ads, een nieuwe website en betaalde plaatsingen op andere sites. Zo'n plaatsing doen we alleen in overleg, en de kosten komen bovenop het maandbedrag. Hoeveel uur er per maand in zit, hangt af van je markt en je doel. Dat staat in het voorstel, met de reden erbij, voordat je tekent.</p>
+
+        <h2 id="maand-a4">Zo ziet je maand-A4 eruit</h2>
+        <p>Een rapportage waar je uitleg bij nodig hebt, schiet zijn doel voorbij. Daarom krijg je elke maand één pagina. Je leest hem in twee minuten.</p>
+        <div class="kader a4">
+          <p class="kader-titel">Hoveniersbedrijf Mulder, Meppel · maand 4</p>
+          <dl>
+            <dt>Wat we deden</dt><dd>De pagina "tuinaanleg Meppel" herschreven, met prijzen en foto's van echt werk. Twaalf oude adressen van je vorige site doorgestuurd. Twee links: de ledenlijst van de ondernemersvereniging en een artikel in een tuinvakblad.</dd>
+            <dt>Wat het opleverde</dt><dd>"tuinaanleg Meppel" van plek 14 naar plek 7. Bezoekers uit Google: 310, vorige maand 240. Vijf aanvragen via het formulier, vorige maand twee.</dd>
+            <dt>Wat niet lukte</dt><dd>De pagina over sierbestrating staat nog op pagina drie. Het vakblad wilde geen tweede artikel.</dd>
+            <dt>Wat we nu doen</dt><dd>De pagina over sierbestrating aanvullen. Jij stuurt foto's van drie klussen.</dd>
+            <dt>Stand van het doel</dt><dd>6 van de 10 zoekwoorden op pagina één. Afgesproken: 8 vóór de zesde maand.</dd>
+          </dl>
+          <p class="klein muted">Verzonnen voorbeeld. Hoveniersbedrijf Mulder bestaat niet.</p>
+        </div>
+        <p>Let op de regel "wat niet lukte". Een bureau dat alleen successen rapporteert, vertelt niet het hele verhaal.</p>
+
+        <h2 id="vergelijken">Zelf doen, een freelancer of een bureau?</h2>
+        <p>Elke keuze kan goed zijn. Het verschil zit in wat er gebeurt als het tegenzit. Zo verhouden ze zich:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf doen</th><th>Freelancer</th><th>Groter bureau</th><th>Drijfveer Media</th></tr></thead>
+            <tbody>
+              <tr><td><b>Kosten</b></td><td>Je eigen tijd, zie de rekenhulp</td><td>Meestal € 60 tot € 100 per uur</td><td>Zie de tabel hieronder</td><td>Vanaf € 495 per maand</td></tr>
+              <tr><td><b>Als iemand uitvalt</b></td><td>Stopt het</td><td>Stopt het</td><td>Neemt een collega het over</td><td>Neemt een collega het over</td></tr>
+              <tr><td><b>Als het niet werkt</b></td><td>Merk je het zelf, laat</td><td>Stop je de klus</td><td>Hangt af van je contract</td><td>Een maand gratis door als het aan ons ligt, en per maand opzegbaar</td></tr>
+              <tr><td><b>Onder één dak</b></td><td>Wat jij kunt</td><td>Vaak één onderdeel</td><td>Techniek, tekst en links</td><td>Techniek, tekst en links, plus websites en Google Ads</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wat vragen bureaus? Dit zijn de instapprijzen op hun eigen prijspagina's, naast die van ons:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bureau</th><th>Instap per maand</th><th>Hoe lang je vastzit</th></tr></thead>
+            <tbody>
+              <tr><td>SAM Online Marketing</td><td>€ 750 (pakket Starter)</td><td>Minimale looptijd drie maanden, contracten van 3, 6 of 12 maanden</td></tr>
+              <tr><td>Sommet Media</td><td>Vanaf € 1.600</td><td>Niet vermeld op de pagina</td></tr>
+              <tr><td>Searchlab</td><td>Vanaf € 3.000</td><td>Maandelijks opzegbaar</td></tr>
+              <tr><td>ROXTAR</td><td>Vanaf € 495</td><td>Eerste drie maanden maandelijks opzegbaar, daarna vier maanden opzegtermijn</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td><b>Vanaf € 495</b></td><td><b>Per maand, met één maand opzegtermijn</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Geraadpleegd in oktober 2026, bronnen onderaan deze pagina. Freelancertarieven uit de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO?</a></p>
 
         <Tussenactie />
-        <h2>Zo loopt de samenwerking</h2>
+        <h2 id="samenwerking">Zo loopt de samenwerking</h2>
         <ol class="stappen-rij">
-          <li><strong>Binnen 15 minuten gebeld</strong><p>Op werkdagen tussen 8.00 en 17.00 uur. Thorgall vraagt wat je wilt bereiken.</p></li>
+          <li><strong>Binnen 15 minuten gebeld</strong><p>Op werkdagen tussen 8.00 en 17.00 uur. {site.contactpersoon} vraagt wat je wilt bereiken.</p></li>
           <li><strong>Doorvragen</strong><p>Tot we weten wat je echt wilt, en wat een klant je oplevert.</p></li>
           <li><strong>Kansen voorleggen</strong><p>Aan de telefoon, bij ons in Assen of bij jou.</p></li>
           <li><strong>Een doel afspreken</strong><p>Met een lage investering en een target waar je ons op afrekent.</p></li>
           <li><strong>Snelle winst eerst</strong><p>Daarna perfectioneren we, maand na maand.</p></li>
         </ol>
-        <p>Thorgall blijft je vaste aanspreekpunt. Je hoeft je verhaal dus niet elke keer opnieuw te vertellen. Hij werkt in ons team van vier, met een vaste groep freelancers die we al jaren kennen. Nieuwe technieken testen we eerst op onze eigen sites in het <a href="/proeflab/">proeflab</a>.</p>
+        <p>Je werkt met een klein team voor SEO, teksten en techniek: vier mensen, met een vaste groep freelancers die we al jaren kennen. Nieuwe technieken testen we eerst op onze eigen sites in het <a href="/proeflab/">proeflab</a>, zodat jouw site geen proefkonijn is.</p>
 
-        <h2>Waar je op let bij een SEO-bureau</h2>
-        <p>Offertes van SEO-bureaus lijken vaak op elkaar. Het verschil zit in wat er na de start gebeurt. Stel daarom deze vragen voordat je tekent:</p>
+        <h2 id="bureau-kiezen">Waar je op let bij een SEO-bureau</h2>
+        <p>Offertes van SEO-bureaus lijken vaak op elkaar. Het verschil zit in wat er na de start gebeurt. Stel daarom deze vragen voordat je tekent, ook aan ons:</p>
         <ul>
-          <li><b>Wie doet het werk?</b> De persoon die je de offerte geeft, of een stagiair die je nooit spreekt?</li>
+          <li><b>Wie doet het werk?</b> De persoon die je de offerte geeft, of iemand die je nooit spreekt?</li>
           <li><b>Wat gebeurt er elke maand?</b> Een goed bureau kan je precies vertellen waar je budget heen gaat.</li>
           <li><b>Hoe lang zit je vast?</b> Een contract van een jaar is niet nodig als het werk goed is.</li>
           <li><b>Wordt plek één beloofd?</b> Wees dan voorzichtig. Niemand bepaalt wat Google doet.</li>
-          <li><b>Hoe worden links verkregen?</b> Pakketten met honderd links voor weinig geld zijn bijna altijd linknetwerken. Zo'n netwerk raakt je site vroeg of laat.</li>
+          <li><b>Hoe worden links verkregen?</b> Pakketten met honderd links voor weinig geld komen bijna altijd uit linknetwerken. Zo'n netwerk raakt je site vroeg of laat.</li>
+          <li><b>Van wie zijn de accounts?</b> Je Search Console, Analytics en Bedrijfsprofiel horen op jouw naam te staan.</li>
         </ul>
-        <p>Een goed bureau bel je over een jaar nog steeds, omdat het werkt. Twijfel je over een offerte die je al hebt? Lees dan hoe je <a href="/kennisbank/gidsen/offerte-beoordelen/">een SEO-offerte beoordeelt</a>.</p>
+        <p>Heb je al een offerte liggen? Leg hem naast de offertecheck in de gids <a href="/kennisbank/gidsen/offerte-beoordelen/">een SEO-offerte beoordelen</a>.</p>
 
-        <h2>Wat SEO uitbesteden kost en oplevert</h2>
+        <h2 id="overstappen">Overstappen van een ander bureau</h2>
+        <p>Werk je al met een bureau en twijfel je? Je hoeft niets op te zeggen voordat je met ons praat. Zo pakken we een overstap aan:</p>
+        <ol>
+          <li><b>We kijken eerst mee.</b> Met leestoegang tot Search Console zien we wat er de laatste maanden gebeurde, en wat er goed ging.</li>
+          <li><b>Je vraagt je oude bureau om een overzicht.</b> Welke pagina's zijn aangepast, welke links zijn geregeld?</li>
+          <li><b>We zetten de accounts op jouw naam.</b> Staat je Bedrijfsprofiel of Search Console op naam van het oude bureau, dan helpen we je dat om te zetten.</li>
+          <li><b>We gaan door waar het werkte.</b> Goed werk gooien we niet weg, en een nieuwe strategie voor SEO maken we alleen als de oude niet werkt. Met de nulmeting erbij weet je meteen waar je staat.</li>
+        </ol>
+
+        <h2 id="geen-zin">Wanneer uitbesteden (nog) geen zin heeft</h2>
+        <p>We zeggen het liever vooraf dan na drie maanden.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>Je hebt deze maand al klanten nodig</h3></div>
+        <p>SEO werkt op maanden. Met <a href="/online-adverteren/google-ads-bureau/">Google Ads</a> staan je advertenties online zodra Google ze heeft goedgekeurd, meestal binnen een werkdag.</p>
+        <div class="stap-kop"><Tekening naam="scherm" maat={48} vertraging={150} /><h3>Je site gaat binnenkort op de schop</h3></div>
+        <p>Dan steek je je geld beter in een <a href="/website-laten-maken/">nieuwe website</a> met de vindbaarheid er vanaf de start in.</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={48} vertraging={300} /><h3>Je hebt een webshop</h3></div>
+        <p>{nietWebshop}</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={48} vertraging={450} /><h3>Je wilt het zelf leren</h3></div>
+        <p>Heb je weinig concurrentie en lees je graag in? Begin dan zelf, met de tips op onze <a href="/zoekmachine-optimalisatie/">SEO-pagina</a>. Een <a href="/consult/">consult</a> van een uur, voor € 85, helpt je op weg.</p>
+
+        <h2 id="kosten">Wat SEO uitbesteden kost en oplevert</h2>
         <p>SEO uitbesteden kost bij Drijfveer Media vanaf € 495 per maand, exclusief btw. Hoeveel werk er nodig is, hangt af van je markt en je doelen. Na de gratis scan hoor je wat het voor jou kost en wat je ervoor mag verwachten. Ter vergelijking: bij de meeste bureaus kost SEO € 500 tot € 3.500 per maand (zie <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO?</a>).</p>
-        <p>Wat het oplevert, leggen we bij de start vast, met een datum. Meestal is dat een stijging in posities op afgesproken zoekwoorden, meer organisch verkeer en uiteindelijk meer aanvragen. Bij <a href="/cases/#conflictbemiddeling">Conflictbemiddeling Nederland</a> groeide het organisch verkeer met 47%. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Dat is onze <a href="/garantie/">stijggarantie</a>. Want uiteindelijk telt maar één ding: wat het werk aan winst oplevert voor jouw bedrijf.</p>
+        <p>Wat het oplevert, leggen we bij de start vast, met een datum. Meestal is dat een stijging in posities op afgesproken zoekwoorden, meer organisch verkeer en uiteindelijk meer aanvragen. Bij <a href="/cases/#willemfikstt">Willemfikstt.nl</a> werkten we met één vaste marketeer als aanspreekpunt aan nieuwe pagina's, betere teksten en linkbuilding. Het resultaat: 87% meer bezoekers uit Google en 60% meer aanvragen via de site. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Dat is onze <a href="/garantie/">stijggarantie</a>. Want uiteindelijk telt één ding: wat het werk aan winst oplevert voor jouw bedrijf.</p>
       </article>
       <aside class="zijkolom">
-        <Prijskaart naam="SEO uitbesteden" prijs="€ 495" eenheid="per maand" punten={['Vast aanspreekpunt', 'Techniek, teksten en links', 'Elke maand één A4 met de resultaten', 'Stijggarantie op een afgesproken doel']} />
+        <Inhoud items={hoofdstukken} leestijd={10} />
+        <Prijskaart naam="SEO uitbesteden" prijs="€ 495" eenheid="per maand" punten={['Vast aanspreekpunt: Thorgall', 'Plan met een doel en een datum', 'Techniek, teksten en links', 'Elke maand één A4 met de resultaten', 'Stijggarantie op het afgesproken doel']} />
       </aside>
     </div>
   </section>
 
   <Bewijs case="conflictbemiddeling" />
 
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, houdt je project bij en zoekt de links die bij je passen.' }, { slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }]} />
+
   <Faq
     vragen={[
+      { v: 'Wat kost SEO uitbesteden per maand?', a: 'Bij ons vanaf € 495 per maand, exclusief btw. Bij de meeste bureaus ligt het tussen € 500 en € 3.500 per maand. Na de gratis scan hoor je wat het voor jou kost, voordat je iets tekent.' },
+      { v: 'Waarom zijn jullie goedkoper dan veel andere bureaus?', a: 'We gebruiken AI voor onderzoek, rekenwerk en eerste versies, zodat onze mensen hun tijd steken in het werk zelf. Nieuwe technieken testen we eerst op onze eigen sites, dus we verspillen geen uren. En we zijn een klein team in een bedrijfsverzamelpand in Assen.' },
       { v: 'Hoe snel zie ik resultaat als ik SEO uitbesteed?', a: 'Reken op drie tot zes maanden voor duidelijke stijgingen. Technische verbeteringen zie je soms al binnen een paar weken terug. Daarna komen de bezoekers en aanvragen.' },
-      { v: 'Wat kost SEO uitbesteden per maand?', a: 'Bij ons vanaf € 495 per maand, exclusief btw. Bij de meeste bureaus ligt het tussen € 500 en € 3.500 per maand. Na de gratis scan hoor je wat het voor jou kost.' },
+      { v: 'Wat als het niet werkt?', a: 'Dan zie je dat in je maand-A4, want daar staat ook wat niet lukte. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. En je zegt per maand op, dus je zit nergens aan vast.' },
       { v: 'Kan ik SEO uitbesteden per maand opzeggen?', a: 'Ja. Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat.' },
       { v: 'Moet ik zelf nog iets doen als ik SEO uitbesteed?', a: 'Een beetje. We hebben toegang tot je website nodig, antwoorden op onze vragen over je diensten en af en toe je akkoord op een tekst. Dat is ook de voorwaarde voor onze garantie.' },
+      { v: 'Ik zit nog bij een ander bureau. Kan ik overstappen?', a: 'Ja. Je hoeft niets op te zeggen voordat je met ons praat. We kijken eerst mee in Search Console, en zetten je accounts op jouw naam als dat nog niet zo is. Goed werk van je oude bureau laten we staan.' },
       { v: 'Werken jullie ook voor bedrijven buiten het Noorden?', a: 'Ja. We zitten in Assen, maar onze klanten komen uit heel Nederland en soms uit het buitenland. SEO kan prima op afstand.' },
       { v: 'Wat is het verschil met online marketing uitbesteden?', a: 'Bij SEO uitbesteden gaat het alleen om gevonden worden in Google. Wil je ook advertenties, social media en e-mail in één hand, kijk dan bij <a href="/online-marketing-uitbesteden/">online marketing uitbesteden</a>.' },
     ]}
@@ -103,7 +204,7 @@ const schema = [{
     links={[
       { label: 'Prijzen', titel: 'Al onze prijzen', href: '/prijzen/', tekst: 'Alle diensten met een vanaf-prijs, zonder kleine lettertjes.' },
       { label: 'Pillar', titel: 'Zoekmachineoptimalisatie', href: '/zoekmachine-optimalisatie/', tekst: 'Hoe SEO werkt en wat het oplevert.' },
-      { label: 'Dienst', titel: 'Technische SEO en audit', href: '/zoekmachine-optimalisatie/technische-seo/', tekst: 'Eerst de fundering op orde, vanaf € 395.' },
+      { label: 'Gids', titel: 'Wat kost SEO?', href: '/kennisbank/gidsen/wat-kost-seo/', tekst: 'Prijzen van bureaus en freelancers, met bronnen.' },
       { label: 'Gids', titel: 'Wat doet een SEO-specialist?', href: '/kennisbank/gidsen/wat-doet-een-seo-specialist/', tekst: 'En wanneer heb je er een nodig?' },
     ]}
   />
@@ -112,4 +213,8 @@ const schema = [{
 </Base>
 <style>
   .tekst .stappen-rij { padding-left: 0; margin: 8px 0 20px; }
+  .a4 dl { margin: 6px 0 10px; display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr); gap: 8px 18px; }
+  .a4 dt { font-weight: 800; color: var(--navy); }
+  .a4 dd { margin: 0; }
+  @media (max-width: 640px) { .a4 dl { grid-template-columns: minmax(0, 1fr); gap: 2px; } .a4 dd { margin-bottom: 10px; } }
 </style>

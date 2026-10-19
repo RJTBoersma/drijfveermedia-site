@@ -10,13 +10,16 @@ import Inhoud from '../../../components/pagina/Inhoud.astro';
 import Auteur from '../../../components/pagina/Auteur.astro';
 import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/zoekmachine-optimalisatie--technische-seo.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 import { site } from '../../../data/site';
+import { nietWebshop } from '../../../data/niet';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
 
 const url = '/zoekmachine-optimalisatie/technische-seo/';
 const datum = '2026-10-18';
 const hoofdstukken = [
   { id: 'wat-is', titel: 'Wat is technische SEO?' },
+  { id: 'wat-je-krijgt', titel: 'Wat je krijgt voor € 395' },
   { id: 'belangrijker', titel: 'Waarom het belangrijker is geworden' },
   { id: 'signalen', titel: 'Signalen van een technisch probleem' },
   { id: 'audit', titel: 'Wat er in de audit zit' },
@@ -25,6 +28,7 @@ const hoofdstukken = [
   { id: 'checklist', titel: 'Checklist in 15 punten' },
   { id: 'fouten', titel: 'Fouten die vaak voorkomen' },
   { id: 'wanneer', titel: 'Wanneer een audit zinvol is' },
+  { id: 'vergelijken', titel: 'Gratis tool, webbouwer of audit' },
   { id: 'kosten', titel: 'Wat het kost' },
   { id: 'na-de-audit', titel: 'Na de audit' },
 ];
@@ -58,6 +62,8 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
+  citation: ['https://searchlab.nl/kosten/wat-kost-seo-uitbesteden'],
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 395, priceSpecification: { '@type': 'PriceSpecification', price: 395, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
 }];
 ---
@@ -67,8 +73,8 @@ const schema = [{
   kruimels={[{ naam: 'SEO', url: '/zoekmachine-optimalisatie/' }, { naam: 'Technische SEO', url }]}
   schema={schema}
 >
-  <Hero kicker="Gevonden · SEO" titel="Technische SEO: eerst de fundering op orde" prijs="vanaf € 395" eenmalig>
-    <p>Een mooie site waar Google niet goed bij kan, staat nergens. Met onze audit zie je zwart op wit wat je posities kost en wat je als eerste moet oplossen.</p>
+  <Hero kicker="Gevonden · SEO" titel="Technische SEO-audit: zwart op wit wat je posities kost" prijs="vanaf € 395" eenmalig>
+    <p>Voor ondernemers met een site die in Google achterblijft, of die net verhuisd is naar een nieuwe site. Je krijgt een lijst op volgorde van winst, met per punt wie het oplost. Vaste prijs vooraf, en het rapport is van jou.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -97,6 +103,17 @@ const schema = [{
           <div><Tekening naam="vergrootglas" maat={52} vertraging={400} /><b>3. Tonen</b><span>Zoekt iemand iets, dan kiest Google uit die index de pagina's die het beste antwoord geven.</span></div>
         </div>
         <p>Technische SEO gaat vooral over de eerste twee stappen. Gaat daar iets mis, dan doe je bij de derde stap niet eens mee. Een pagina die niet in de index staat, kan op geen enkel zoekwoord gevonden worden.</p>
+
+        <h2 id="wat-je-krijgt">Wat je krijgt voor € 395</h2>
+        <ul class="vink">
+          <li><b>Een crawl van je hele site.</b> Elke pagina gaat door de crawler, en we vergelijken wat er staat met wat Google kent.</li>
+          <li><b>Elf onderdelen nagelopen.</b> Van robots.txt en redirects tot Core Web Vitals, structured data en AI-crawlers. Hieronder staat elk onderdeel.</li>
+          <li><b>Cijfers van echte bezoekers.</b> Uit het Core Web Vitals-rapport in Search Console, plus losse metingen van je belangrijkste pagina's.</li>
+          <li><b>Een mens die beoordeelt.</b> Welke meldingen je geld kosten, en welke je kunt laten liggen.</li>
+          <li><b>Een rapport op volgorde van winst.</b> Per punt: waarom het telt, hoeveel werk het is en wie het kan oplossen.</li>
+          <li><b>Een bespreking.</b> Aan de telefoon, bij ons in Assen of bij jou op locatie. Je mag alles vragen.</li>
+        </ul>
+        <p>Wat er niet in zit: het oplossen zelf. Dat kan je eigen webbouwer doen, of wij, voor een vaste prijs die je vooraf hoort. Heeft je site duizenden pagina's, dan is er meer werk nodig. Ook dat hoor je vooraf. Bij andere bureaus kost een losse audit meestal € 500 tot € 2.500, volgens het prijsoverzicht van Searchlab. Meer prijzen staan in de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
 
         <h2 id="belangrijker">Waarom techniek belangrijker is geworden</h2>
         <p>Vroeger was technische SEO vooral een klus voor grote webshops. Dat is de afgelopen jaren veranderd. Drie dingen kwamen erbij.</p>
@@ -237,6 +254,28 @@ const schema = [{
           <li><b>Voordat je in teksten of links investeert.</b> Anders bouw je op een scheve fundering.</li>
           <li><b>Als er al jaren niemand naar heeft gekeken.</b> Plugins, oude pagina's en losse aanpassingen stapelen zich op.</li>
         </ul>
+        <h3>En wanneer niet</h3>
+        <ul>
+          <li><b>Je site gaat binnenkort eruit.</b> Een audit van een site die over twee maanden verdwijnt, is weggegooid geld. Vraag dan alleen een lijst van je oude adressen en waar ze naartoe moeten.</li>
+          <li><b>Je hebt een webshop.</b> {nietWebshop}</li>
+          <li><b>Je site is klein en nieuw, en Search Console is groen.</b> Dan zit de winst eerder in je teksten of in links. Begin dan met <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten</a>.</li>
+          <li><b>Je wilt alleen een score.</b> Een cijfer uit een tool krijg je gratis bij PageSpeed Insights. Een audit is pas zinvol als je wilt weten wat je moet doen.</li>
+        </ul>
+
+        <h2 id="vergelijken">Gratis tool, je webbouwer of een audit?</h2>
+        <p>Je kunt op meer manieren uitzoeken wat er technisch mis is. Zo verhouden ze zich:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Gratis tool</th><th>Je eigen webbouwer</th><th>Audit bij een groter bureau</th><th>Audit bij ons</th></tr></thead>
+            <tbody>
+              <tr><td><b>Kosten</b></td><td>Niets</td><td>Zijn uurtarief</td><td>Meestal € 500 tot € 2.500</td><td>Vanaf € 395, vaste prijs vooraf</td></tr>
+              <tr><td><b>Wat je krijgt</b></td><td>Een score en een lange lijst meldingen</td><td>Oplossingen voor wat hij zelf ziet</td><td>Een rapport, vaak uitgebreid</td><td>Een korte lijst op volgorde van winst, met wie het oplost</td></tr>
+              <tr><td><b>Wie beslist wat telt</b></td><td>Jij</td><td>De bouwer, vaak zonder SEO-blik</td><td>Een specialist</td><td>Een specialist, samen met jou</td></tr>
+              <tr><td><b>Past bij</b></td><td>Een eerste blik</td><td>Kleine fouten die je al kent</td><td>Grote sites en webshops</td><td>Mkb-sites die achterblijven of net verhuisd zijn</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een gratis tool is een goed begin, en de checklist hierboven ook. Het lastige zit in de keuze: welke drie meldingen kosten je echt bezoekers? Daar betaal je een audit voor.</p>
 
         <h2 id="kosten">Wat technische SEO kost</h2>
         <p>Een technische SEO-audit kost bij Drijfveer Media vanaf € 395, eenmalig en exclusief btw. Daarin zitten de crawl, de metingen, het rapport en de bespreking. Voor grote sites met duizenden pagina's is meer werk nodig. Dat hoor je vooraf, niet achteraf. Wat past bij jouw situatie?</p>
@@ -258,20 +297,24 @@ const schema = [{
         <h2 id="na-de-audit">Na de audit: zelf oplossen of door ons laten doen</h2>
         <p>Het rapport is van jou. Je kunt het zelf oppakken of aan je eigen webbouwer geven. Wil je dat wij het oplossen, dan hoor je vooraf wat het kost. Wie <a href="/zoekmachine-optimalisatie/seo-uitbesteden/">SEO uitbesteedt</a> bij ons, krijgt de technische controle er elke maand bij. Dan geldt ook onze stijggarantie: we leggen bij de start een doel met een datum vast, en halen we dat niet door ons, dan werken we een maand gratis door.</p>
         <p>Een audit is het begin van een <a href="/kennisbank/gidsen/seo-strategie/">SEO-strategie</a>, niet het einde. Een geoptimaliseerde website laadt sneller en werkt prettiger, en dat merk je ook in het aantal aanvragen. Daarom combineren we het vaak met <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a>: meer bezoekers is mooi, meer bezoekers die bellen is beter.</p>
-        <p>Waarom durven we te zeggen wat werkt en wat niet? Sinds 2011 bouwden we een <a href="/proeflab/">proeflab</a> op van meer dan 100 eigen websites. Daar proberen we technieken eerst zelf uit. Ook de technieken die misgaan, zodat dat bij jou niet gebeurt.</p>
+        <p>Waarom durven we te zeggen wat werkt en wat niet? Sinds 2011 bouwden we een <a href="/proeflab/">proeflab</a> op van meer dan 100 eigen websites. Daar proberen we technieken eerst zelf uit. Ook de technieken die misgaan: een van die sites kreeg ooit een penalty van Google. Zo weet je dat het bij jou niet gebeurt.</p>
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={16} />
-        <Prijskaart naam="Technische SEO-audit" prijs="€ 395" eenmalig punten={['Indexering, snelheid en Core Web Vitals', 'Structuur, redirects en duplicate content', 'Structured data en AI-crawlers', 'Rapport op volgorde van winst', 'Bespreking van de uitkomst']} />
+        <Prijskaart naam="Technische SEO-audit" prijs="€ 395" eenmalig punten={['Crawl van je hele site', 'Indexering, snelheid en Core Web Vitals', 'Structuur, redirects en duplicate content', 'Structured data en AI-crawlers', 'Rapport op volgorde van winst', 'Bespreking, en het rapport is van jou']} />
       </aside>
     </div>
   </section>
 
   <Bewijs case="conflictbemiddeling" />
 
+  <WieDoetHet wie={[{ slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }, { slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, regelt de toegang en plant de bespreking.' }]} />
+
   <Faq
     vragen={[
       { v: 'Wat kost een technische SEO-audit?', a: 'Bij Drijfveer Media vanaf € 395, eenmalig en exclusief btw. Voor grote sites met duizenden pagina\'s is meer werk nodig. Dat hoor je vooraf.' },
+      { v: 'Waarom is jullie audit goedkoper dan bij veel bureaus?', a: 'We gebruiken tools en AI voor het zware rekenwerk, zodat onze tijd naar het beoordelen gaat. En je krijgt een korte lijst op volgorde van winst in plaats van een dik rapport. Wat je niet nodig hebt, schrijven we ook niet op.' },
+      { v: 'Wat als de audit weinig problemen vindt?', a: 'Dan weet je dat techniek je niet tegenhoudt, en dat de winst in je teksten of links zit. Dat hoor je ook, met de pagina\'s waar je dan het beste kunt beginnen. Zo geef je je geld daarna uit aan wat werkt.' },
       { v: 'Wat is het verschil tussen technische SEO en een SEO-audit?', a: 'Technische SEO is het vakgebied: alles wat zorgt dat Google je site kan vinden en lezen. Een SEO-audit is de controle daarvan op één moment, met een lijst verbeterpunten. Na de audit begint het echte werk.' },
       { v: 'Kan ik zelf een technische SEO-audit doen?', a: 'Voor een deel wel. Google Search Console en PageSpeed Insights zijn gratis en laten veel zien. Gebruik de checklist op deze pagina als start. De kunst is bepalen welke meldingen ertoe doen en welke niet.' },
       { v: 'Hoe snel zie ik resultaat na een technische SEO-audit?', a: 'Technische verbeteringen zie je soms al binnen een paar weken terug, zodra Google de pagina\'s opnieuw bezoekt. Voor duidelijke stijgingen reken je op drie tot zes maanden. Een audit garandeert geen posities, wel dat techniek je niet meer tegenhoudt.' },
