@@ -1,0 +1,247 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+import LinkbudgetRekenhulp from '../../../../components/tool/LinkbudgetRekenhulp.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--wat-kost-linkbuilding.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/wat-kost-linkbuilding/';
+const datum = '2026-10-19';
+const hoofdstukken = [
+  { id: 'kort', titel: 'Het korte antwoord' },
+  { id: 'per-link', titel: 'Prijs per link per soort' },
+  { id: 'bureaus', titel: 'Maandbudgetten bij bureaus' },
+  { id: 'prijs', titel: 'Waar de prijs van afhangt' },
+  { id: 'verborgen', titel: 'Verborgen kosten' },
+  { id: 'per-uur', titel: 'Per uur of per link?' },
+  { id: 'rekenhulp', titel: 'Rekenhulp' },
+  { id: 'zelf', titel: 'Wat zelf doen kost' },
+  { id: 'bij-ons', titel: 'Wat je bij ons krijgt' },
+];
+// Alle marktprijzen zijn op 19 oktober 2026 met curl opgehaald van deze pagina's.
+const bronnen = [
+  'https://linkbuildingmasters.nl/',
+  'https://linkbuildingmasters.nl/linkbuilding-pakketten/',
+  'https://linkbuildingmasters.nl/product/linkbuilding-pakket-medium/',
+  'https://linkbuildingmasters.nl/linkbuilding-abonnementen/',
+  'https://linkbuildingmasters.nl/product/startpagina-backlink/',
+  'https://linkbuildinghulpje.nl/tarieven/',
+  'https://backlinks.nl/',
+  'https://www.backlinks.nl/kennisbank/kosten-linkbuilding/',
+  'https://backlinkswinkel.nl/linkbuilding-kosten/',
+  'https://backlinkswinkel.nl/prijzen/',
+  'https://www.flixmarketing.nl/linkbuilding-pakket-kopen/',
+  'https://goonline.nl/wat-kost-een-backlink/',
+  'https://www.heers.nl/linkbuilding-uitbesteden/',
+  'https://www.heers.nl/linkbuilding-bureau/',
+  'https://rankingmasters.nl/linkbuilding/',
+  'https://rankingmasters.nl/seo-kosten-waaruit-bestaan-de-kosten-voor-seo/',
+  'https://www.samonlinemarketing.nl/linkbuilding-prijzen/',
+  'https://zoominmarketing.nl/seo/linkbuilding-uitbesteden/',
+  'https://equote.nl/linkbuilding/linkbuilding-uitbesteden/',
+  'https://ahrefs.com/blog/link-rot-study/',
+  'https://developers.google.com/search/docs/essentials/spam-policies?hl=nl',
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Linkbuilding kosten: wat betaal je per link, per maand en per uur?',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/robert-boersma/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Linkbuilding',
+  citation: bronnen,
+}];
+---
+<Base
+  title="Linkbuilding kosten: wat kost een backlink in 2026?"
+  description="Linkbuilding kosten in 2026: wat een backlink kost bij linkshops, uitgevers en bureaus, welke kosten je pas later ziet, plus een rekenhulp voor je budget."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Wat kost linkbuilding?', url }]}
+  schema={schema}
+  ogType="article"
+  bronnenBlok={false}
+>
+  <Hero kicker="Gids · Linkbuilding" titel="Linkbuilding kosten: wat betaal je per link, per maand en per uur?" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Een backlink kost tussen een paar euro en ruim duizend euro. Een bureau vraagt meestal € 500 tot € 3.000 per maand. Hier zie je wat je voor die bedragen krijgt, welke kosten je pas later ziet en hoe je aanbiedingen naast elkaar legt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+
+        <h2 id="kort">Linkbuilding kosten: het korte antwoord</h2>
+        <p>Wat linkbuilding kost, hangt vooral af van wat je koopt. Een link op een startpagina is iets anders dan een artikel op een nieuwssite. En allebei zijn ze iets anders dan een linkbuilder die een maand lang voor je zoekt. Dit zijn de bedragen die we in oktober 2026 op openbare prijspagina's vonden.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat je koopt</th><th>Wat het kost</th><th>Wat je ervoor krijgt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Link op een startpagina of linkpagina</b></td><td>€ 2 tot € 15 per link</td><td>Een regel met je naam, tussen tientallen andere links</td></tr>
+              <tr><td><b>Pakket bij een linkshop</b></td><td>€ 99 tot € 1.299, dat is € 8 tot € 50 per link</td><td>Een vaste stapel links. De verkoper kiest de sites</td></tr>
+              <tr><td><b>Artikel bij een uitgever</b></td><td>€ 100 tot € 400 per link, op sterke sites € 1.000 of meer</td><td>Een artikel met jouw link op een blog of nieuwssite</td></tr>
+              <tr><td><b>Bureau met een maandpakket</b></td><td>€ 500 tot € 3.000 per maand</td><td>Een aantal links per maand, met rapportage</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td>€ 75 per uur, minimaal 5 uur (€ 375) per maand</td><td>Meestal 3 tot 5 links per uur, met de hand gezocht</td></tr>
+              <tr><td><b>Zelf doen</b></td><td>Alleen je eigen tijd</td><td>Een paar uur per link, als je net begint</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De bedragen staan zoals de aanbieders ze noemen, de meeste exclusief btw. Per bedrag vind je de bron <a href="#bronnen">onderaan deze gids</a>. Prijzen in linkshops veranderen vaak.</p>
+
+        <h2 id="per-link">Wat kost een backlink? De prijs per link per soort</h2>
+        <p>Een prijs per link vergelijken heeft pas zin als je weet wat er achter die link zit. We delen de markt daarom op in drie soorten links.</p>
+
+        <h3>Startpagina's en linkshops: een paar euro</h3>
+        <p>De goedkoopste links staan op startpagina's en linkpagina's: een lijst met tientallen links over één onderwerp. Linkbuilding Masters verkoopt een startpagina-backlink vanaf € 1,99 en een link op Startpagina.nl voor € 14,95. Linkbuildinghulpje rekent € 8 per link, en € 5 als je er meer dan vijfhonderd afneemt. Backlinks.nl noemt links vanaf 1 euro.</p>
+        <p>Voor die prijs kijkt niemand of de link bij jou past. Zo'n link staat tussen veel andere, zonder tekst eromheen. Een paar van zulke vermeldingen in je linkprofiel kan geen kwaad. Worden ze de hoofdmoot, dan valt je profiel op. In zijn spamregels noemt Google links uit bedrijvengidsen en bookmarksites van lage kwaliteit als voorbeeld van linkspam.</p>
+
+        <h3>Pakketten: € 8 tot € 50 per link</h3>
+        <p>Een pakket is een vaste stapel links voor één prijs. De verkoper kiest de sites. Zo zien de pakketten eruit die we bekeken:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Prijs</th><th>Aantal links</th><th>Per link</th></tr></thead>
+            <tbody>
+              <tr><td>Linkbuilding Masters, Small tot Extra Large</td><td>€ 179,95 tot € 999,95 eenmalig</td><td>7 tot 68</td><td>€ 9 tot € 26</td></tr>
+              <tr><td>Backlinkswinkel, Starter tot Enterprise</td><td>€ 249 tot € 1.299 eenmalig</td><td>5 tot 50</td><td>€ 26 tot € 50</td></tr>
+              <tr><td>Flix Marketing, Brons tot Goud</td><td>€ 99 tot € 299 eenmalig</td><td>13 tot 30</td><td>€ 8 tot € 10</td></tr>
+              <tr><td>Backlinkswinkel, Drip-diensten</td><td>€ 150 tot € 500 per maand</td><td>10 tot 40 per maand</td><td>€ 12,50 tot € 15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij Linkbuilding Masters kies je een pakket met of zonder startpagina's. Het Medium-pakket van € 249,95 bevat zonder startpagina's 12 links en met startpagina's 27. Meer links voor hetzelfde geld klinkt als een koopje. Het verschil zit alleen in de soort: er komen vijftien startpagina-links bij.</p>
+
+        <h3>Artikelen bij uitgevers: € 100 tot € 400, soms veel meer</h3>
+        <p>Bij een betaalde plaatsing komt jouw link in een artikel op de blog of nieuwssite van een ander. Go Online noemt € 200 tot € 350 per link als gangbaar, inclusief het artikel. Op sites met tienduizenden bezoekers betaal je volgens hen € 1.000 of meer. Heers noemt € 100 tot € 1.500 per link, Rankingmasters € 75 tot € 500. Een plaatsing op een nieuwswebsite kost bij Linkbuilding Masters € 135 tot € 2.100.</p>
+        <p>Backlinkswinkel zet zijn hele catalogus per score op een rij. Een site met een domain rating onder de 20 kost daar gemiddeld € 185. Een site boven de 40 kost gemiddeld € 421. Kijk wat daar gebeurt: de prijs volgt een score uit een tool. Of de site over jouw vak gaat en echte lezers heeft, zit niet in die prijs. Scores als <a href="/kennisbank/wat-is/domain-authority/">Domain Authority</a> en domain rating zijn schattingen van softwarebedrijven, geen cijfers van Google.</p>
+        <p>Een betaalde plaatsing hoort volgens Google het label <code>rel="sponsored"</code> te krijgen. Dan geeft de link geen waarde door aan je posities. Je betaalt in dat geval voor lezers en naamsbekendheid. Wat mag en wat werkt, lees je in de gids <a href="/kennisbank/gidsen/backlinks-kopen/">backlinks kopen</a>.</p>
+
+        <h2 id="bureaus">Wat bureaus per maand vragen</h2>
+        <p>Een linkbuildingbureau rekent meestal per maand. Daarin zitten het zoeken, het schrijven, de plaatsingen en een rapportage. Soms horen de kosten van uitgevers erbij, soms komen ze erbovenop. Dit vragen vijf bureaus die in Google bovenaan staan als je zoekt op linkbuilding kosten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bureau</th><th>Per maand</th><th>Wat erin zit</th></tr></thead>
+            <tbody>
+              <tr><td>SAM Online Marketing, Basis</td><td>€ 500 tot € 1.000</td><td>5 backlinks, blogartikelen, rapportage</td></tr>
+              <tr><td>SAM Online Marketing, Premium</td><td>€ 1.000 tot € 2.000</td><td>15 backlinks, plus een concurrentieanalyse</td></tr>
+              <tr><td>SAM Online Marketing, Geavanceerd</td><td>vanaf € 2.000</td><td>30 of meer backlinks</td></tr>
+              <tr><td>Heers</td><td>€ 500 tot € 3.000</td><td>Maatwerk, geen pakketten</td></tr>
+              <tr><td>Rankingmasters</td><td>gemiddeld € 1.000 tot € 3.000</td><td>Afhankelijk van markt, concurrentie en tempo</td></tr>
+              <tr><td>Zoom in Marketing</td><td>€ 350 tot € 750 of meer</td><td>Van lokale zoektermen tot algemene termen met veel concurrentie</td></tr>
+              <tr><td>Equote</td><td>€ 500</td><td>4 tot 5 publicaties, inclusief tekst</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Reken je het Basis-pakket van SAM om, dan kost een link € 100 tot € 200. Bij Equote is dat € 100 tot € 125. Volgens Backlinks.nl geven bedrijven gemiddeld € 250 tot € 1.500 per maand uit aan linkbuilding. De meeste bureaus in de top van Google zitten dus tussen € 500 en € 3.000 per maand. Daaronder vind je vooral pakketten en shops.</p>
+
+        <h2 id="prijs">Waar de prijs van afhangt</h2>
+        <p>Twee aanbiedingen met hetzelfde aantal links kunnen tien keer in prijs verschillen. Dat komt door deze zeven dingen.</p>
+        <ol>
+          <li><b>De score van de site.</b> Linkverkopers prijzen vooral op domain rating en geschat verkeer. Hoe hoger de score, hoe duurder de link.</li>
+          <li><b>De niche.</b> In markten waar veel geld omgaat, vragen sites meer. Go Online noemt automotive, zorg en wetenschap.</li>
+          <li><b>De soort plaatsing.</b> Een regel op een linkpagina kost een paar euro. Een artikel met een link in de tekst kost tientallen tot honderden euro's.</li>
+          <li><b>Wie de tekst schrijft.</b> Lever je zelf een artikel aan, of schrijft de site of het bureau het? En met de hand of met AI?</li>
+          <li><b>Het land.</b> Buiten Nederland is het vaak duurder. Het Medium-pakket van Linkbuilding Masters kost € 249,95 voor Nederland en € 399,95 voor Duitsland.</li>
+          <li><b>De concurrentie in jouw markt.</b> Hoeveel goede links hebben de bedrijven boven je? Dat bepaalt hoeveel je er nodig hebt, en dus je budget. Een kapper in Veendam heeft minder nodig dan een landelijke installateur.</li>
+          <li><b>Het werk eromheen.</b> Zoeken, beoordelen, mailen, opvolgen en rapporteren. Bij een shop doe je dat zelf. Bij een bureau zit het in de prijs.</li>
+        </ol>
+
+        <h2 id="verborgen">Verborgen kosten: waar je pas later aan denkt</h2>
+        <p>De prijs per link is zelden de hele rekening. Deze posten worden vaak vergeten.</p>
+        <h3>Teksten</h3>
+        <p>Een plaatsing zonder artikel bestaat bijna niet. Bij Equote kost een met de hand geschreven Nederlandse tekst € 30 en een buitenlandse € 45, bovenop de link. Een tekst met AI kost daar € 5. Bij andere aanbieders zit de tekst in de prijs. Vraag dan wie hem schrijft en of je hem eerst mag lezen.</p>
+        <h3>Plaatsingskosten bovenop het maandbedrag</h3>
+        <p>Bij sommige bureaus betaal je een maandbedrag voor het werk en komen de kosten van uitgevers erbovenop. Bij andere zitten ze erin. Vraag het vooraf, en vraag tot welk bedrag. Bij ons is het zo geregeld: betaalde plaatsingen alleen in overleg, en die kosten komen bovenop de uren.</p>
+        <h3>Huurlinks en jaarlijkse verlenging</h3>
+        <p>Niet elke link blijft staan. Sommige plaatsingen zijn tijdelijk: na een jaar verleng je, of de link verdwijnt. Backlinkswinkel geeft op zijn pakketten één jaar garantie. Linkbuilding Masters schrijft dat de meeste plaatsingen permanent zijn en raadt aan om per plaatsing de voorwaarden op te vragen. Stel die vraag dus altijd: staat de link er voorgoed, of zolang ik betaal?</p>
+        <h3>Een minimale looptijd</h3>
+        <p>Abonnementen hebben soms een vaste looptijd. De linkbuildingabonnementen van Linkbuilding Masters lopen minimaal zes maanden, daarna zeg je per maand op. Reken dus met zes keer het maandbedrag als je instapt.</p>
+        <h3>Links die verdwijnen</h3>
+        <p>Ook links die je niet huurt, verdwijnen. Ahrefs volgde de links naar ruim twee miljoen sites. Van alle links sinds 2013 was minstens 66,5 procent weer weg. Sites gaan offline, pagina's verhuizen, eigenaren ruimen op. Wie per link betaalt, betaalt ook voor dat verlies.</p>
+        <h3>Opruimen als het misgaat</h3>
+        <p>Krijg je in Search Console een melding over onnatuurlijke links, dan moet je links laten verwijderen of afwijzen. Dat kost uren, en je posities zijn intussen weg. Hoe dat gaat, lees je bij de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a>.</p>
+        <h3>Je eigen tijd</h3>
+        <p>Bij een shop kies en controleer je zelf. Backlinkswinkel rekent het voor: vier plaatsingen van € 75 plus twee uur eigen werk tegen € 50 per uur kost samen € 400, en geen € 300.</p>
+
+        <Tussenactie />
+        <h2 id="per-uur">Per uur of per link betalen: wat is het verschil?</h2>
+        <p>Linkbuilding reken je af per link of per uur. Allebei hebben ze een voordeel.</p>
+        <p><b>Per link</b> weet je vooraf wat je krijgt: vijf links, vijftien links, dertig links. Aanbiedingen leg je makkelijk naast elkaar. Daarom doen de meeste aanbieders het zo.</p>
+        <p><b>Per uur</b> betaal je voor de tijd die iemand aan je links besteedt. Hoeveel links dat oplevert, weet je vooraf niet precies. Dat is het nadeel.</p>
+        <p>Het grote verschil zit in de prikkel. Wie per link betaald krijgt, verdient meer aan meer links. En veel links regelen is niet moeilijk: startpagina's, linkpagina's en sites die voor iedereen openstaan, zijn er genoeg. Goede links vinden kost tijd. Een vakblad dat nee zegt, een bron die bij nader inzien tegenvalt: dat werk zie je in geen enkele telling terug. Bij een prijs per link wordt juist dat werk het eerst geschrapt.</p>
+        <p>Daar komt bij dat de prijs per link meestal op een score is gebaseerd. Een verkoper verdient het meest aan sites met een hoge score en een lage inkoopprijs. Of die site bij jouw vak past, maakt voor zijn marge geen verschil.</p>
+        <blockquote>Eén goede link is meer waard dan honderd slechte. En slechte links kosten meer dan alleen geld: ze kunnen je site schaden.</blockquote>
+        <p>Kies je een uurtarief, vraag dan een overzicht van elke link en hoeveel links er in een uur meestal uitkomen.</p>
+
+        <h2 id="rekenhulp">Rekenhulp: wat krijg je voor je budget?</h2>
+        <p>Vul je budget in en kies een soort aanbieding. De rekenhulp rekent met de bandbreedtes uit deze gids. Je ziet ook hoeveel uur het je kost om evenveel links zelf te regelen.</p>
+        <LinkbudgetRekenhulp bron="#bronnen" />
+
+        <h2 id="zelf">Wat kost zelf doen?</h2>
+        <p>Zelf doen kost geen geld, wel tijd. Wie net begint, is voor één goede link al snel een paar uur kwijt. Zoeken, beoordelen, mailen, opvolgen. Heers schat dat zelf linkbuilding doen 20 tot 40 uur per maand kost.</p>
+        <p>Reken het om naar geld. Stel: een uur van jou is € 50 waard en je wilt vijf goede links per maand. Bij vier uur per link ben je twintig uur kwijt. Dat is € 1.000 aan tijd, elke maand. <span class="muted">(Rekenvoorbeeld met ronde cijfers.)</span></p>
+        <p>Begin je zelf, start dan bij leveranciers, je brancheclub en verenigingen. Zie de gids over <a href="/kennisbank/gidsen/lokale-linkbuilding/">lokale linkbuilding</a>.</p>
+
+        <h2 id="bij-ons">Wat je bij Drijfveer Media krijgt</h2>
+        <p>Bij ons kost linkbuilding € 75 per uur, exclusief btw. Je spreekt vooraf af hoeveel uur Thorgall van Eeden per maand voor je werkt, met een minimum van vijf uur (€ 375). Een uur levert meestal drie tot vijf links op. Omgerekend is dat ongeveer € 15 tot € 25 per link aan werk.</p>
+        <p>In die uren zitten de nulmeting van jouw links en die van je concurrenten, het zoeken en beoordelen van bronnen, de teksten, het plaatsen en een maandoverzicht met elke link. Vraagt een site geld voor een plaatsing, dan doen we dat alleen in overleg met jou en met het label sponsored. Die kosten komen bovenop de uren. Onze eigen <a href="/proeflab/">proeflabsites</a> gebruiken we om te testen, nooit als linkbron voor klanten.</p>
+        <p>Zijn we daarmee de goedkoopste? Per link zeker niet. Bij een linkshop koop je links voor een paar euro. Bij ons betaal je voor tijd en oordeel, niet voor een stapel links. Een bron die niet goed genoeg is, valt af. Dat kost jou geen link die je niet wilde.</p>
+        <p>Je zegt per maand op, met één maand opzegtermijn, per e-mail. Er geldt een <a href="/garantie/">stijggarantie</a>: bij de start leggen we vast welke pagina's moeten stijgen en vóór welke datum. Lukt dat niet en ligt het aan ons, dan werken we een maand gratis door. Wat er precies in de uren zit, lees je bij <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>. Al onze tarieven staan op <a href="/prijzen/">de prijzenpagina</a>. Wil je weten wat zoekmachineoptimalisatie als geheel kost, lees dan <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+
+        <div class="kader klein" id="bronnen">
+          <p class="kader-titel">Bronnen (openbare prijzen, oktober 2026)</p>
+          <p>Elk bedrag in deze gids staat bij de naam van de aanbieder. Dit zijn de pagina's waar het staat.</p>
+          <ul>
+            <li>Linkbuilding Masters: <a href="https://linkbuildingmasters.nl/" rel="nofollow noopener">home</a>, <a href="https://linkbuildingmasters.nl/linkbuilding-pakketten/" rel="nofollow noopener">pakketten</a>, <a href="https://linkbuildingmasters.nl/product/linkbuilding-pakket-medium/" rel="nofollow noopener">pakket Medium</a>, <a href="https://linkbuildingmasters.nl/linkbuilding-abonnementen/" rel="nofollow noopener">abonnementen</a>, <a href="https://linkbuildingmasters.nl/product/startpagina-backlink/" rel="nofollow noopener">startpagina-backlink</a>. Of de bedragen in- of exclusief btw zijn, staat er niet bij.</li>
+            <li>Linkbuildinghulpje: <a href="https://linkbuildinghulpje.nl/tarieven/" rel="nofollow noopener">tarieven</a>.</li>
+            <li>Backlinks.nl: <a href="https://backlinks.nl/" rel="nofollow noopener">home</a>, <a href="https://www.backlinks.nl/kennisbank/kosten-linkbuilding/" rel="nofollow noopener">kosten linkbuilding</a>.</li>
+            <li>Backlinkswinkel: <a href="https://backlinkswinkel.nl/linkbuilding-kosten/" rel="nofollow noopener">linkbuilding-kosten</a>, <a href="https://backlinkswinkel.nl/prijzen/" rel="nofollow noopener">prijzen</a>.</li>
+            <li>Flix Marketing: <a href="https://www.flixmarketing.nl/linkbuilding-pakket-kopen/" rel="nofollow noopener">linkbuilding-pakket-kopen</a>.</li>
+            <li>Go Online: <a href="https://goonline.nl/wat-kost-een-backlink/" rel="nofollow noopener">wat-kost-een-backlink</a>.</li>
+            <li>Heers: <a href="https://www.heers.nl/linkbuilding-uitbesteden/" rel="nofollow noopener">linkbuilding-uitbesteden</a>, <a href="https://www.heers.nl/linkbuilding-bureau/" rel="nofollow noopener">linkbuilding-bureau</a>.</li>
+            <li>Rankingmasters: <a href="https://rankingmasters.nl/linkbuilding/" rel="nofollow noopener">linkbuilding</a>, <a href="https://rankingmasters.nl/seo-kosten-waaruit-bestaan-de-kosten-voor-seo/" rel="nofollow noopener">seo-kosten</a>.</li>
+            <li>SAM Online Marketing: <a href="https://www.samonlinemarketing.nl/linkbuilding-prijzen/" rel="nofollow noopener">linkbuilding-prijzen</a>.</li>
+            <li>Zoom in Marketing: <a href="https://zoominmarketing.nl/seo/linkbuilding-uitbesteden/" rel="nofollow noopener">linkbuilding-uitbesteden</a>.</li>
+            <li>Equote: <a href="https://equote.nl/linkbuilding/linkbuilding-uitbesteden/" rel="nofollow noopener">linkbuilding-uitbesteden</a>.</li>
+            <li>Ahrefs: <a href="https://ahrefs.com/blog/link-rot-study/" rel="noopener">onderzoek naar verdwenen links</a>.</li>
+            <li>Google Search Central: <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">spamregels voor Google Zoeken</a>.</li>
+          </ul>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={11} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Wat kost een backlink gemiddeld?', a: 'Een link op een startpagina kost € 2 tot € 15. In een pakket betaal je € 8 tot € 50 per link. Een artikel bij een uitgever kost meestal € 100 tot € 400, op sterke sites € 1.000 of meer. Dat blijkt uit openbare prijzen van linkshops en bureaus in oktober 2026.' },
+      { v: 'Wat kost linkbuilding per maand bij een bureau?', a: 'De meeste bureaus in de top van Google vragen € 500 tot € 3.000 per maand. Bij Drijfveer Media betaal je € 75 per uur, met een minimum van vijf uur per maand (€ 375). Een uur levert meestal drie tot vijf links op.' },
+      { v: 'Hoeveel links krijg ik voor € 500 per maand?', a: 'Bij een bureaupakket zijn dat er ongeveer vijf, bij een linkshop tientallen. Bij ons werkt Thorgall voor € 450 zes uur, en een uur levert meestal drie tot vijf links op. Hoeveel het er precies worden, hangt af van je markt. En het aantal vertelt je nog niet wat de links waard zijn. Gebruik de <a href="#rekenhulp">rekenhulp</a> voor je eigen budget.' },
+      { v: 'Zijn goedkope backlinks slecht?', a: 'Een paar startpagina-links kunnen geen kwaad. Als je profiel vooral bestaat uit links die voor iedereen te koop zijn, valt dat op. Links die alleen bestaan om verkocht te worden, negeert Google meestal. Bij grove gevallen volgt een handmatige maatregel.' },
+      { v: 'Is linkbuilding de kosten waard?', a: 'Reken het om naar klanten. Levert een nieuwe klant je gemiddeld € 1.000 op, dan verdien je vijf uur linkbuilding met één extra klant ruim terug. Een nieuwe link telt meestal na een paar weken mee. Duidelijke stijgingen zie je vaak na drie tot zes maanden.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Backlinks kopen', href: '/kennisbank/gidsen/backlinks-kopen/', tekst: 'Wat je koopt, wat Google ervan vindt en wat werkt.', teken: 'ketting' },
+      { label: 'Dienst', titel: 'Linkbuilding uitbesteden', href: '/linkbuilding/linkbuilding-uitbesteden/', tekst: '€ 75 per uur, meestal drie tot vijf links per uur.' },
+      { label: 'Gids', titel: 'Wat kost SEO?', href: '/kennisbank/gidsen/wat-kost-seo/', tekst: 'Uurtarieven, maandbedragen en audits op een rij.' },
+      { label: 'Gids', titel: 'Linkbuilding-strategie', href: '/kennisbank/gidsen/linkbuilding-strategie/', tekst: 'Zo maak je een plan dat past bij je markt.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten wat jouw budget oplevert?" tekst={`${site.contactpersoon} bekijkt je links en die van je concurrenten, en belt je met het aantal uren dat bij jouw markt past. Gratis, en je zit nergens aan vast.`} />
+</Base>

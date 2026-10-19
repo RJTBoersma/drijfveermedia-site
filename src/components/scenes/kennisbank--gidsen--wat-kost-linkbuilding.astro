@@ -1,0 +1,77 @@
+---
+// Scène voor /kennisbank/gidsen/wat-kost-linkbuilding/: een weegschaal. Links een hoop goedkope links met prijskaartjes van een paar euro,
+// rechts één stevige link. De schaal zakt naar de kant van die ene goede link. Rechtsboven een kaartje "€ 75 per uur" met een klokje.
+// Beweging: de prijskaartjes verschijnen een voor een, de weegschaal wiegt rustig na en de wijzer van het klokje draait.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const hoop = [
+  [76, 140], [100, 142], [124, 141], [148, 139],
+  [86, 129], [110, 130], [134, 128],
+  [98, 118], [122, 119],
+  [110, 108],
+];
+const kaartjes = [
+  { x: 58, y: 80, t: '€ 2' },
+  { x: 140, y: 76, t: '€ 5' },
+  { x: 98, y: 66, t: '€ 8' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een weegschaal. Links ligt een hoop goedkope links met prijskaartjes van een paar euro, rechts één stevige link. De weegschaal zakt naar de kant van de ene goede link. Rechtsboven een kaartje met € 75 per uur.'}>
+  <!-- voet en paal -->
+  <rect x="180" y="222" width="120" height="14" rx="7" fill="#10283f" />
+  <path d="M240 86V222" stroke="#074663" stroke-width="8" stroke-linecap="round" />
+  <path d="M214 222l26-22 26 22" fill="#e8eef4" stroke="#074663" stroke-width="2" stroke-linejoin="round" />
+
+  <!-- balk met schalen, iets gekanteld naar rechts -->
+  <g transform="rotate(5 240 80)">
+    <g class={mini ? undefined : 'balk'}>
+      <path d="M104 80H376" stroke="#10283f" stroke-width="6" stroke-linecap="round" />
+      <path d="M120 80L84 150M120 80L156 150" stroke="#8aa0b4" stroke-width="2" />
+      <path d="M360 80L324 150M360 80L396 150" stroke="#8aa0b4" stroke-width="2" />
+      <path d="M72 150Q120 186 168 150Z" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+      <path d="M312 150Q360 186 408 150Z" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" stroke-linejoin="round" />
+      <!-- links: een hoop kleine links -->
+      {hoop.map(([x, y]) => <rect x={x - 11} y={y - 5} width="22" height="10" rx="5" fill="#fff" stroke="#8aa0b4" stroke-width="2" />)}
+      <!-- rechts: één stevige link -->
+      <rect x="331" y="124" width="32" height="20" rx="10" fill="none" stroke="#074663" stroke-width="5" />
+      <rect x="355" y="124" width="32" height="20" rx="10" fill="none" stroke="#ff6600" stroke-width="5" />
+      {kaartjes.map((k, i) => (
+        <g class={mini ? undefined : `kaartje kaartje${i}`}>
+          <path d={`M${k.x} ${k.y + 9}l8-9h28v18h-28z`} fill="#fff" stroke="#d9e1ea" stroke-width="1.5" stroke-linejoin="round" />
+          <circle cx={k.x + 9} cy={k.y + 9} r="2" fill="#8aa0b4" />
+          <text x={k.x + 24} y={k.y + 13} font-size="10.5" font-weight="800" text-anchor="middle">{k.t}</text>
+        </g>
+      ))}
+    </g>
+  </g>
+  <circle cx="240" cy="80" r="8" fill="#ff6600" />
+
+  <!-- kaartje met uurtarief -->
+  <rect x="362" y="14" width="104" height="40" rx="10" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <circle cx="383" cy="34" r="11" fill="none" stroke="#074663" stroke-width="2.5" />
+  <path d="M383 34l6 3" stroke="#074663" stroke-width="2" stroke-linecap="round" />
+  <path class={mini ? undefined : 'wijzer'} d="M383 34V26" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" />
+  <text x="401" y="39" font-size="12" font-weight="900">€ 75/uur</text>
+
+  <!-- onderschriften -->
+  <text x="120" y="258" font-size="12" font-weight="800" text-anchor="middle">Veel goedkope links</text>
+  <text x="360" y="258" font-size="12" font-weight="800" text-anchor="middle">Eén goede link</text>
+</svg>
+<style>
+  .balk, .wijzer, .kaartje { transform-box: view-box; }
+  .balk { transform-origin: 240px 80px; }
+  .wijzer { transform-origin: 383px 34px; }
+  :global(.teken-js) .kaartje { opacity: 0; }
+  .in-beeld .kaartje0 { animation: kennisbank-gidsen-wat-kost-linkbuilding-kaartje 0.5s ease-out 0.3s forwards; }
+  .in-beeld .kaartje1 { animation: kennisbank-gidsen-wat-kost-linkbuilding-kaartje 0.5s ease-out 0.7s forwards; }
+  .in-beeld .kaartje2 { animation: kennisbank-gidsen-wat-kost-linkbuilding-kaartje 0.5s ease-out 1.1s forwards; }
+  .in-beeld .balk { animation: kennisbank-gidsen-wat-kost-linkbuilding-wieg 6s ease-in-out 1.4s infinite; }
+  .in-beeld .wijzer { animation: kennisbank-gidsen-wat-kost-linkbuilding-klok 8s linear infinite; }
+  @keyframes kennisbank-gidsen-wat-kost-linkbuilding-kaartje { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-wat-kost-linkbuilding-wieg { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(2.5deg); } 65% { transform: rotate(-1.5deg); } }
+  @keyframes kennisbank-gidsen-wat-kost-linkbuilding-klok { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .kaartje0, .in-beeld .kaartje1, .in-beeld .kaartje2 { animation: none; opacity: 1; transform: none; }
+    .in-beeld .balk, .in-beeld .wijzer { animation: none; }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+// Scène voor /linkbuilding/linkbuilding-scan/: een export uit Search Console gaat in de linkscan, die meteen laat zien
+// welke teksten en sites naar je linken en drie acties geeft. Het slotje zegt: de data blijft in je browser.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const balken = [
+  { y: 112, t: 'Bedrijfsnaam', w: 120 },
+  { y: 138, t: 'Webadres', w: 84 },
+  { y: 164, t: 'Zoekwoord', w: 34, accent: true },
+  { y: 190, t: 'Algemeen', w: 22 },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een bestand met links uit Search Console gaat in de linkscan. Die laat meteen zien met welke teksten sites naar je linken en geeft drie acties. Een slotje laat zien dat alles in je eigen browser blijft.'}>
+  <!-- Het bestand uit Search Console -->
+  <path d="M30 44h76l22 22v104a8 8 0 0 1-8 8H30a8 8 0 0 1-8-8V52a8 8 0 0 1 8-8z" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M106 44v16a6 6 0 0 0 6 6h16" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" />
+  <text x="34" y="64" font-size="12" font-weight="800">links.csv</text>
+  <rect class="v" x="34" y="80" width="80" height="7" rx="3.5" />
+  <rect x="34" y="96" width="62" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="34" y="110" width="74" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="34" y="124" width="54" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="34" y="138" width="70" height="6" rx="3" fill="#d9e1ea" />
+  <rect x="34" y="152" width="48" height="6" rx="3" fill="#d9e1ea" />
+
+  <path class="a" d="M136 110c18-6 30-2 44 8" stroke-dasharray="4 6" />
+  <path class="a" d="M174 110l8 9-11 3" />
+
+  <!-- Het slotje: blijft in je browser -->
+  <rect x="22" y="200" width="150" height="40" rx="20" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect x="38" y="216" width="16" height="13" rx="3" fill="#074663" />
+  <path d="M41 216v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#074663" stroke-width="2.5" />
+  <text x="62" y="225" font-size="11" font-weight="800">Blijft in je browser</text>
+
+  <!-- De linkscan -->
+  <rect x="192" y="26" width="266" height="222" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M204 27h242a11 11 0 0 1 11 11v10H193V38a11 11 0 0 1 11-11z" fill="#e8eef4" />
+  <circle cx="206" cy="38" r="3.5" fill="#d9e1ea" /><circle cx="218" cy="38" r="3.5" fill="#d9e1ea" /><circle cx="230" cy="38" r="3.5" fill="#d9e1ea" />
+  <text x="208" y="70" font-size="12" font-weight="800">Met welke tekst ze linken</text>
+  <rect x="208" y="80" width="62" height="18" rx="9" fill="#e8eef4" />
+  <text x="217" y="93" font-size="10" font-weight="700">48 sites</text>
+  {balken.map((b) => (
+    <g>
+      <text x="208" y={b.y} font-size="10" class="zacht">{b.t}</text>
+      <rect x="290" y={b.y - 9} width="150" height="9" rx="4.5" fill="#e8eef4" />
+    </g>
+  ))}
+  <path class="l" d="M208 206h232" stroke="#d9e1ea" />
+  <text x="208" y="226" font-size="11" font-weight="800">3 acties</text>
+  <rect x="262" y="218" width="54" height="8" rx="4" fill="#e8eef4" /><rect x="324" y="218" width="54" height="8" rx="4" fill="#e8eef4" /><rect x="386" y="218" width="54" height="8" rx="4" fill="#e8eef4" />
+
+  {!mini && (
+    <g>
+      <g class="vel">
+        <rect x="150" y="76" width="34" height="42" rx="5" fill="#fff" stroke="#074663" stroke-width="2" />
+        <rect x="156" y="88" width="20" height="4" rx="2" fill="#d9e1ea" /><rect x="156" y="96" width="16" height="4" rx="2" fill="#d9e1ea" /><rect x="156" y="104" width="20" height="4" rx="2" fill="#d9e1ea" />
+      </g>
+      {balken.map((b, i) => <rect class="vul" x="290" y={b.y - 9} width={b.w} height="9" rx="4.5" fill={b.accent ? '#ff6600' : '#074663'} style={`--i:${i}`} />)}
+      {[262, 324, 386].map((x, i) => (
+        <g class="vink" style={`--i:${i}`}>
+          <circle cx={x + 6} cy="222" r="7" fill="#1f8a5b" />
+          <path d={`M${x + 2.5} 222l2.5 2.5 4.5-5`} stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+      ))}
+      <circle class="puls" cx="46" cy="220" r="14" fill="none" stroke="#074663" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .vul { transform-box: fill-box; transform-origin: left center; }
+  .vel, .vink, .puls { transform-box: fill-box; transform-origin: center; }
+  :global(.teken-js) .vul { transform: scaleX(0); }
+  :global(.teken-js) .vink, :global(.teken-js) .vel, :global(.teken-js) .puls { opacity: 0; }
+  .in-beeld .vel { animation: linkbuilding--linkbuilding-scan-vel 6s ease-in-out 0.3s infinite; }
+  .in-beeld .vul { animation: linkbuilding--linkbuilding-scan-vul 0.9s cubic-bezier(.3,.7,.3,1) calc(1.2s + var(--i) * 0.25s) forwards; }
+  .in-beeld .vink { animation: linkbuilding--linkbuilding-scan-vink 0.4s ease-out calc(2.6s + var(--i) * 0.3s) forwards; }
+  .in-beeld .puls { animation: linkbuilding--linkbuilding-scan-puls 4s ease-out 1s infinite; }
+  @keyframes linkbuilding--linkbuilding-scan-vel { 0% { opacity: 0; transform: translate(-40px, -6px); } 12% { opacity: 1; } 30% { opacity: 1; transform: translate(18px, 14px) scale(0.9); } 40%, 100% { opacity: 0; transform: translate(34px, 20px) scale(0.6); } }
+  @keyframes linkbuilding--linkbuilding-scan-vul { to { transform: none; } }
+  @keyframes linkbuilding--linkbuilding-scan-vink { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: none; } }
+  @keyframes linkbuilding--linkbuilding-scan-puls { 0% { opacity: 0.7; transform: scale(0.8); } 60%, 100% { opacity: 0; transform: scale(1.6); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .vel, .in-beeld .vul, .in-beeld .vink, .in-beeld .puls { animation: none; } }
+</style>

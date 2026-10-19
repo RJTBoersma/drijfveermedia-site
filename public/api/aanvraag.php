@@ -39,7 +39,7 @@ function bewaar(string $bestand, array $gegevens): void {
 // Soort aanvraag naar een korte sleutel voor de bedankpagina
 function soort_sleutel(string $soort): string {
     $s = mb_strtolower($soort);
-    foreach (['kaart' => 'kaart', 'training' => 'training', 'consult' => 'consult', 'second' => 'second', 'ads' => 'ads', 'website' => 'website', 'scan' => 'scan', 'interim' => 'contact'] as $zoek => $sleutel) {
+    foreach (['kaart' => 'kaart', 'training' => 'training', 'consult' => 'consult', 'second' => 'second', 'ads' => 'ads', 'website' => 'website', 'scan' => 'scan', 'interim' => 'contact', 'link' => 'links'] as $zoek => $sleutel) {
         if (str_contains($s, $zoek)) return $sleutel;
     }
     if (preg_match('/\bai\b/u', $s)) return 'ai';

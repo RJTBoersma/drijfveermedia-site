@@ -1,0 +1,77 @@
+---
+// Scène voor /kennisbank/gidsen/lokale-linkbuilding/: een kaartje van Friesland, Groningen en Drenthe met drie pinnen
+// (ledenlijst, nieuwssite, netwerk). Stippellijnen lopen van de pinnen naar jouw website.
+// Als hij leeft: de lijnen worden oranje en tekenen zich naar jouw site, de pinnen vallen op hun plek
+// en bij jouw site verschijnt rustig, steeds opnieuw, een melding "+1 link uit de regio".
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const pinnen = [
+  { x: 96, y: 98, t: 'Ledenlijst' },
+  { x: 226, y: 82, t: 'Nieuwssite' },
+  { x: 204, y: 186, t: 'Netwerk' },
+];
+const lijnen = ['M110 76C200 150 290 140 338 124', 'M226 82C272 84 306 104 338 128', 'M204 186C262 204 304 172 338 140'];
+const pin = (x: number, y: number) => `M${x} ${y}c-7-9-13-15-13-23a13 13 0 0 1 26 0c0 8-6 14-13 23z`;
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een kaartje van Friesland, Groningen en Drenthe met drie pinnen, een ledenlijst, een nieuwssite en een netwerk. Vanaf elke pin loopt een link naar jouw website.'}>
+  <!-- provincies -->
+  <path d="M30 98c2-26 24-44 54-48l52-6c14 0 22 12 20 26l-6 44c-4 18-20 28-40 30l-46 4c-22 2-38-14-36-34z" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M162 58c16-14 42-20 68-16l40 8c16 6 22 22 16 38l-10 26c-6 14-22 20-38 18l-50-6c-18-2-30-18-28-36z" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" />
+  <path d="M150 154c10-10 28-14 46-12l50 6c18 4 28 20 24 38l-8 30c-4 16-20 26-38 24l-46-6c-20-4-34-22-30-42z" fill="#e8eef4" stroke="#d9e1ea" stroke-width="2" />
+  <text x="58" y="150" font-size="10" font-weight="700" fill="#6b7f92">Friesland</text>
+  <text x="236" y="116" font-size="10" font-weight="700" fill="#6b7f92">Groningen</text>
+  <text x="196" y="226" font-size="10" font-weight="700" fill="#6b7f92">Drenthe</text>
+
+  <!-- stippellijnen naar jouw site -->
+  {lijnen.map((d) => <path d={d} fill="none" stroke="#c9d3dd" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round" />)}
+
+  <!-- jouw site -->
+  <rect x="338" y="88" width="118" height="84" rx="10" fill="#fff" stroke="#074663" stroke-width="2.5" />
+  <path d="M338 98a10 10 0 0 1 10-10h98a10 10 0 0 1 10 10v6H338z" fill="#074663" />
+  <text x="397" y="128" font-size="12" font-weight="900" text-anchor="middle" fill="#10283f">Jouw site</text>
+  <rect x="356" y="138" width="82" height="7" rx="3.5" fill="#e8eef4" />
+  <rect x="356" y="151" width="56" height="7" rx="3.5" fill="#e8eef4" />
+
+  <!-- pinnen -->
+  {pinnen.map((p) => (
+    <g class="pin">
+      <path d={pin(p.x, p.y)} fill="#074663" />
+      <circle cx={p.x} cy={p.y - 23} r="5" fill="#fff" />
+      <rect x={p.x - 34} y={p.y + 4} width="68" height="18" rx="9" fill="#fff" stroke="#d9e1ea" />
+      <text x={p.x} y={p.y + 17} font-size="9.5" font-weight="800" text-anchor="middle" fill="#10283f">{p.t}</text>
+    </g>
+  ))}
+
+  {!mini && (
+    <g>
+      {lijnen.map((d, i) => <path class={`lijn lijn-${i}`} d={d} fill="none" stroke="#ff6600" stroke-width="3" stroke-linecap="round" pathLength="1" />)}
+      <g class="melding">
+        <rect x="344" y="190" width="108" height="30" rx="15" fill="#fff" stroke="#d9e1ea" />
+        <circle cx="362" cy="205" r="8" fill="#1f8a5b" />
+        <path d="M358 205l3 3 5-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="376" y="209" font-size="10.5" font-weight="800" fill="#10283f">+1 lokale link</text>
+      </g>
+      <circle class="puls" cx="397" cy="130" r="58" fill="none" stroke="#ff6600" stroke-width="2" />
+    </g>
+  )}
+</svg>
+<style>
+  .lijn { stroke-dasharray: 1; }
+  :global(.teken-js) .lijn { stroke-dashoffset: 1; }
+  .in-beeld .lijn-0 { animation: kennisbank-gidsen-lokale-linkbuilding-lijn 1.1s cubic-bezier(.6,.1,.3,1) 0.6s forwards; }
+  .in-beeld .lijn-1 { animation: kennisbank-gidsen-lokale-linkbuilding-lijn 1.1s cubic-bezier(.6,.1,.3,1) 1.1s forwards; }
+  .in-beeld .lijn-2 { animation: kennisbank-gidsen-lokale-linkbuilding-lijn 1.1s cubic-bezier(.6,.1,.3,1) 1.6s forwards; }
+  .pin { transform-box: fill-box; transform-origin: bottom center; }
+  .in-beeld .pin { animation: kennisbank-gidsen-lokale-linkbuilding-val 0.6s cubic-bezier(.4,1.6,.6,1) both; }
+  .in-beeld .pin:nth-of-type(2) { animation-delay: 0.15s; }
+  .in-beeld .pin:nth-of-type(3) { animation-delay: 0.3s; }
+  :global(.teken-js) .melding { opacity: 0; }
+  .in-beeld .melding { animation: kennisbank-gidsen-lokale-linkbuilding-melding 5s ease-in-out 2.8s infinite both; }
+  .puls { transform-box: fill-box; transform-origin: center; opacity: 0; }
+  .in-beeld .puls { animation: kennisbank-gidsen-lokale-linkbuilding-puls 5s ease-out 2.8s infinite; }
+  @keyframes kennisbank-gidsen-lokale-linkbuilding-lijn { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-gidsen-lokale-linkbuilding-val { from { transform: translateY(-14px); } to { transform: none; } }
+  @keyframes kennisbank-gidsen-lokale-linkbuilding-melding { 0% { opacity: 0; transform: translateY(8px); } 15%, 80% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+  @keyframes kennisbank-gidsen-lokale-linkbuilding-puls { 0% { opacity: 0.6; transform: scale(0.7); } 40%, 100% { opacity: 0; transform: scale(1.05); } }
+  @media (prefers-reduced-motion: reduce) { .in-beeld .lijn, .in-beeld .pin, .in-beeld .melding, .in-beeld .puls { animation: none; } }
+</style>

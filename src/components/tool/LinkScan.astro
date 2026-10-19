@@ -1,0 +1,782 @@
+---
+// Linkprofiel-check: leest exports uit het rapport Links van Google Search Console, helemaal in de browser.
+// De bezoeker sleept of kiest CSV-bestanden (of een ZIP-export) of plakt de inhoud. De tool herkent zelf welk rapport
+// het is (Sites met de meeste links, Meest gelinkte pagina's, Tekst met de meeste links, Nieuwste of Laatste links,
+// Meer voorbeeldlinks), op Nederlandse en Engelse kolomnamen en, als dat niet lukt, op de inhoud van de kolommen.
+// Uitkomst: linkende sites, totaal links, concentratie, ankerteksten, extensies en patronen om na te lopen,
+// homepage tegenover andere pagina's, tempo per maand en drie acties. Geen API, geen opslag van de data:
+// alleen de instellingen (merk, zoekwoorden, pagina's) blijven in localStorage. De deel-link bevat alleen merk en zoekwoorden.
+// ZIP: eigen kleine uitpakker met DecompressionStream('deflate-raw'). Ontbreekt die in de browser, dan volgt uitleg.
+interface Props {
+  id?: string;
+  vervolg?: string; // waar de vervolgknop heen gaat; een #anker op dezelfde pagina vult daar het formulier
+  vervolgTekst?: string;
+}
+const { id = 'linkscan', vervolg = '#vergelijking', vervolgTekst = 'Laat Thorgall je links naast die van je concurrenten leggen' } = Astro.props;
+---
+<section class="wrap sectie" id={id}>
+  <div class="linkscan card" data-linkscan data-vervolg={vervolg}>
+    <div class="kop">
+      <p class="kicker">Gratis check · in je eigen browser</p>
+      <h2>Check je links: sleep je export uit Search Console hierin</h2>
+      <p class="muted">Exporteer in Google Search Console de tabellen uit het rapport Links en zet de bestanden hieronder. Je ziet meteen hoeveel sites naar je linken, welke teksten ze gebruiken, welke pagina's links krijgen en welke links je beter even kunt bekijken.</p>
+      <p class="privacy"><span aria-hidden="true" class="slot">●</span> Je bestanden blijven op je eigen computer. De check rekent in je browser en stuurt niets naar ons of naar een andere server.</p>
+    </div>
+
+    <div class="invoer">
+      <div class="drop" data-drop>
+        <input class="sr-only" type="file" id={`${id}-bestand`} multiple accept=".csv,.tsv,.txt,.zip,text/csv,text/plain,application/zip" data-bestand aria-describedby={`${id}-bestand-uitleg`} />
+        <label class="btn btn-ghost kies" for={`${id}-bestand`}>Kies bestanden</label>
+        <p id={`${id}-bestand-uitleg`} class="klein muted">of sleep ze hierheen. CSV of ZIP uit Search Console, meerdere tegelijk mag.</p>
+      </div>
+      <ul class="bronnen" data-bronnen aria-label="Gelezen bestanden" hidden></ul>
+
+      <details class="uitklap plak">
+        <summary>Liever plakken, bijvoorbeeld uit Google Spreadsheets?</summary>
+        <div class="veld">
+          <label for={`${id}-plak`}>Plak de inhoud van één export, met de kopregel erbij</label>
+          <textarea id={`${id}-plak`} data-plak rows="5" spellcheck="false"></textarea>
+        </div>
+        <button class="btn btn-ghost" type="button" data-plak-knop>Lees de geplakte tekst</button>
+      </details>
+
+      <fieldset class="instellingen">
+        <legend>Maak de uitkomst preciezer <span class="muted">(niet verplicht)</span></legend>
+        <div class="veld-rij">
+          <div class="veld"><label for={`${id}-merk`}>Je bedrijfsnaam</label><input id={`${id}-merk`} data-instelling="merk" autocomplete="organization" placeholder="Bijvoorbeeld: Jansen Installatie" /></div>
+          <div class="veld"><label for={`${id}-zw1`}>Belangrijkste zoekwoord</label><input id={`${id}-zw1`} data-instelling="zw1" autocomplete="off" placeholder="Bijvoorbeeld: cv-ketel vervangen" /></div>
+          <div class="veld"><label for={`${id}-zw2`}>Tweede zoekwoord</label><input id={`${id}-zw2`} data-instelling="zw2" autocomplete="off" placeholder="Bijvoorbeeld: installateur Assen" /></div>
+        </div>
+        <div class="veld">
+          <label for={`${id}-paginas`}>Je belangrijkste pagina's, één per regel</label>
+          <textarea id={`${id}-paginas`} data-instelling="paginas" rows="3" spellcheck="false" placeholder="/cv-ketel-vervangen/&#10;/vloerverwarming/" aria-describedby={`${id}-paginas-uitleg`}></textarea>
+          <p class="klein muted" id={`${id}-paginas-uitleg`}>Dan zie je welke van deze pagina's geen links hebben in de export.</p>
+        </div>
+      </fieldset>
+
+      <p class="tekstacties">
+        <button class="btn-tekst" type="button" data-voorbeeld>Probeer met voorbeeldgegevens</button>
+        <span class="klein muted">(verzonnen bedrijf)</span>
+        <span aria-hidden="true" data-wis-punt hidden>·</span>
+        <button class="btn-tekst" type="button" data-wis hidden>Begin opnieuw</button>
+      </p>
+      <p class="klein muted gedeeld" data-gedeeld hidden></p>
+    </div>
+
+    <p class="sr-only" aria-live="polite" data-meld></p>
+    <p class="melding" data-fout hidden></p>
+
+    <div class="uitslag" data-uitslag hidden>
+      <p class="voorbeeld-label" data-voorbeeld-label hidden>Verzonnen voorbeeldgegevens van een verzonnen installateur. Zet je eigen export erin om je eigen links te zien.</p>
+      <h3 tabindex="-1" data-uitslag-kop>Zo staan je links ervoor</h3>
+      <div class="tegels" data-tegels></div>
+      <div data-blokken></div>
+      <h3 class="acties-kop">Drie dingen om nu te doen</h3>
+      <ol class="punten" data-acties></ol>
+      <div class="knoppen">
+        <a class="btn" href={vervolg} data-cta>{vervolgTekst}</a>
+      </div>
+      <p class="klein muted" data-cta-uitleg hidden>Met deze knop zetten we een korte samenvatting (alleen aantallen en percentages) in het formulier. Je ziet wat er staat en verstuurt het alleen als je dat zelf doet.</p>
+      <p class="tekstacties">
+        <button class="btn-tekst" type="button" data-deel>Deel je instellingen</button>
+      </p>
+      <p class="klein muted deel-status" data-deel-status role="status"></p>
+      <p class="klein muted">Search Console laat een steekproef van je links zien, maximaal 1000 rijen per tabel, en zegt niet welke links nofollow zijn. Zie de uitkomst daarom als een eerste blik, niet als het hele verhaal.</p>
+    </div>
+
+    <noscript><p class="klein">Deze check werkt met JavaScript. Zonder kun je het ook met de hand doen: open in Search Console het rapport Links en loop de drie tabellen na met de uitleg op deze pagina. Of laat Thorgall het doen via <a href="#vergelijking">het formulier</a>.</p></noscript>
+  </div>
+</section>
+
+<script>
+  type Soort = 'sites' | 'paginas' | 'teksten' | 'laatste';
+  interface SiteRij { site: string; links: number | null }
+  interface PaginaRij { url: string; links: number | null; sites: number | null }
+  interface TekstRij { tekst: string; links: number | null }
+  interface LinkRij { url: string; datum: Date | null }
+  interface Bron { naam: string; soort: Soort | null; rijen: number; reden?: string; sites?: SiteRij[]; paginas?: PaginaRij[]; teksten?: TekstRij[]; links?: LinkRij[] }
+
+  const OPSLAG = 'dm-linkscan';
+  const MAX_BYTES = 30 * 1024 * 1024;
+  const soortNaam: Record<Soort, string> = {
+    sites: 'Sites met de meeste links',
+    paginas: "Meest gelinkte pagina's",
+    teksten: 'Tekst met de meeste links',
+    laatste: 'Losse links (Nieuwste links of Meer voorbeeldlinks)',
+  };
+
+  // ---------- Hulpjes ----------
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  const nl = (n: number) => n.toLocaleString('nl-NL');
+  const pct = (deel: number, totaal: number) => (totaal ? Math.round((deel / totaal) * 100) : 0);
+  const plat = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '');
+  const kopNorm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/["'’]/g, '').trim();
+  const getal = (s: string) => { const d = s.replace(/[^\d]/g, ''); return d ? Number(d) : null; };
+  const isGetal = (s: string) => /^\s*[\d][\d.,\s]*\s*$/.test(s);
+  const isUrl = (s: string) => /^(https?:\/\/|www\.)\S+$/i.test(s.trim()) || /^\/\S*$/.test(s.trim()) || /^[a-z0-9-]+(\.[a-z0-9-]+)+\/\S*$/i.test(s.trim());
+  const isDomein = (s: string) => /^(?!https?:)[a-z0-9-]+(\.[a-z0-9-]+)+\.?$/i.test(s.trim());
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/linkscan/${stap}`, r: '' })); } catch {} };
+
+  const maanden: Record<string, number> = { jan: 0, feb: 1, mrt: 2, maa: 2, mar: 2, apr: 3, mei: 4, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, okt: 9, oct: 9, nov: 10, dec: 11 };
+  const leesDatum = (ruw: string): Date | null => {
+    const s = ruw.trim().toLowerCase();
+    if (!s) return null;
+    let d: Date | null = null;
+    let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) d = new Date(+m[1], +m[2] - 1, +m[3]);
+    else if ((m = s.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{2,4})$/))) {
+      let dag = +m[1], mnd = +m[2]; const jaar = +m[3] < 100 ? +m[3] + 2000 : +m[3];
+      if (mnd > 12 && dag <= 12) [dag, mnd] = [mnd, dag];
+      if (mnd >= 1 && mnd <= 12 && dag >= 1 && dag <= 31) d = new Date(jaar, mnd - 1, dag);
+    } else if ((m = s.match(/^(\d{1,2})\s+([a-z]{3})[a-z.]*\s+(\d{4})/)) && m[2] in maanden) d = new Date(+m[3], maanden[m[2]], +m[1]);
+    else if ((m = s.match(/^([a-z]{3})[a-z.]*\s+(\d{1,2}),?\s+(\d{4})/)) && m[1] in maanden) d = new Date(+m[3], maanden[m[1]], +m[2]);
+    if (!d || isNaN(d.getTime()) || d.getFullYear() < 1995 || d.getFullYear() > 2100) return null;
+    return d;
+  };
+
+  const tweeDelig = new Set(['co.uk', 'org.uk', 'ac.uk', 'gov.uk', 'com.au', 'net.au', 'org.au', 'co.nz', 'co.za', 'com.br', 'com.tr', 'co.jp', 'com.cn', 'com.mx', 'co.in', 'com.sg', 'com.hk', 'co.il', 'com.pl', 'com.es', 'com.ar', 'com.ua', 'co.kr']);
+  const hostVan = (s: string) => {
+    try { return new URL(/^https?:\/\//i.test(s) ? s : 'http://' + s.replace(/^\/+/, '')).hostname.toLowerCase().replace(/^www\d?\./, '').replace(/\.$/, ''); } catch { return ''; }
+  };
+  const rootVan = (host: string) => { const d = host.split('.'); if (d.length <= 2) return host; const l2 = d.slice(-2).join('.'); return tweeDelig.has(l2) ? d.slice(-3).join('.') : l2; };
+  const extensie = (host: string) => host.split('.').pop() || '';
+  const padVan = (s: string) => {
+    const t = s.trim();
+    if (!t) return '';
+    try { const u = new URL(/^https?:\/\//i.test(t) ? t : /^\//.test(t) ? 'http://x' + t : 'http://' + t); return (u.pathname.replace(/\/(index\.(html?|php))?$/i, '/') || '/').toLowerCase(); } catch { return t.toLowerCase(); }
+  };
+  const zonderSlash = (p: string) => p.replace(/\/+$/, '') || '/';
+  const toonPad = (p: string) => (p === '/' ? 'Homepage' : /\.[a-z0-9]{2,5}$/i.test(p) ? p : p + '/');
+
+  // ---------- Bestanden lezen: tekst, CSV en ZIP ----------
+  const decodeer = (b: Uint8Array) => {
+    if (b[0] === 0xff && b[1] === 0xfe) return new TextDecoder('utf-16le').decode(b);
+    if (b[0] === 0xfe && b[1] === 0xff) return new TextDecoder('utf-16be').decode(b);
+    const t = new TextDecoder('utf-8').decode(b);
+    if (t.includes('�')) { try { return new TextDecoder('windows-1252').decode(b); } catch {} }
+    return t;
+  };
+
+  const leesCsv = (ruw: string): string[][] => {
+    const tekst = ruw.replace(/^﻿/, '');
+    const eerste = tekst.split(/\r?\n/).find((r) => r.trim()) || '';
+    const telTeken = (c: string) => { let n = 0, q = false; for (const ch of eerste) { if (ch === '"') q = !q; else if (!q && ch === c) n++; } return n; };
+    const kandidaten = ['\t', ';', ','].map((c) => [c, telTeken(c)] as [string, number]).sort((a, b) => b[1] - a[1]);
+    const scheid = kandidaten[0][1] ? kandidaten[0][0] : ',';
+    const rijen: string[][] = [];
+    let rij: string[] = [], veld = '', q = false;
+    for (let i = 0; i < tekst.length; i++) {
+      const c = tekst[i];
+      if (q) {
+        if (c === '"') { if (tekst[i + 1] === '"') { veld += '"'; i++; } else q = false; } else veld += c;
+      } else if (c === '"' && veld === '') q = true;
+      else if (c === scheid) { rij.push(veld); veld = ''; }
+      else if (c === '\n' || c === '\r') { if (c === '\r' && tekst[i + 1] === '\n') i++; rij.push(veld); rijen.push(rij); rij = []; veld = ''; }
+      else veld += c;
+    }
+    if (veld !== '' || rij.length) { rij.push(veld); rijen.push(rij); }
+    return rijen.filter((r) => r.some((v) => v.trim() !== ''));
+  };
+
+  // Kleine ZIP-lezer: centrale map uitlezen, bestanden 'stored' (0) of 'deflate' (8) uitpakken.
+  const pakUit = async (buf: ArrayBuffer): Promise<{ naam: string; bytes: Uint8Array }[]> => {
+    const v = new DataView(buf), u8 = new Uint8Array(buf);
+    let eind = -1;
+    for (let i = u8.length - 22; i >= Math.max(0, u8.length - 65557); i--) { if (v.getUint32(i, true) === 0x06054b50) { eind = i; break; } }
+    if (eind < 0) throw new Error('kapot');
+    const aantal = v.getUint16(eind + 10, true);
+    let p = v.getUint32(eind + 16, true);
+    const uit: { naam: string; bytes: Uint8Array }[] = [];
+    for (let k = 0; k < aantal; k++) {
+      if (p + 46 > u8.length || v.getUint32(p, true) !== 0x02014b50) throw new Error('kapot');
+      const vlag = v.getUint16(p + 8, true), methode = v.getUint16(p + 10, true);
+      const gepakt = v.getUint32(p + 20, true), lengte = v.getUint32(p + 24, true);
+      const nLen = v.getUint16(p + 28, true), xLen = v.getUint16(p + 30, true), cLen = v.getUint16(p + 32, true);
+      const lokaal = v.getUint32(p + 42, true);
+      const naam = new TextDecoder().decode(u8.subarray(p + 46, p + 46 + nLen));
+      p += 46 + nLen + xLen + cLen;
+      if (naam.endsWith('/') || naam.startsWith('__MACOSX') || vlag & 1) continue;
+      if (lengte > MAX_BYTES) throw new Error('groot');
+      if (v.getUint32(lokaal, true) !== 0x04034b50) throw new Error('kapot');
+      const begin = lokaal + 30 + v.getUint16(lokaal + 26, true) + v.getUint16(lokaal + 28, true);
+      const data = u8.subarray(begin, begin + gepakt);
+      if (methode === 0) uit.push({ naam, bytes: data });
+      else if (methode === 8) {
+        if (typeof DecompressionStream === 'undefined') throw new Error('oud');
+        const stroom = new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+        uit.push({ naam, bytes: new Uint8Array(await new Response(stroom).arrayBuffer()) });
+      }
+    }
+    return uit;
+  };
+
+  // ---------- Herkennen welk rapport het is ----------
+  const herken = (naam: string, rijen: string[][]): Bron => {
+    const leeg: Bron = { naam, soort: null, rijen: 0 };
+    if (/metadata|filters?\.csv|chart|diagram/i.test(naam)) return { ...leeg, reden: 'overslaan' };
+    if (rijen.length < 1) return { ...leeg, reden: 'leeg' };
+    const breed = Math.max(...rijen.slice(0, 20).map((r) => r.length));
+    // Heeft het bestand een kopregel? Ja, als de eerste rij geen getallen, adressen of datums bevat.
+    const r0 = rijen[0];
+    const heeftKop = r0.every((c) => !isUrl(c) && !isDomein(c) && !isGetal(c) && !leesDatum(c)) && r0.some((c) => c.trim());
+    const koppen = heeftKop ? r0.map(kopNorm) : [];
+    const data = heeftKop ? rijen.slice(1) : rijen;
+    if (!data.length) return { ...leeg, reden: 'leeg' };
+    const steek = data.slice(0, 300);
+    const kol = Array.from({ length: breed }, (_, i) => {
+      const waarden = steek.map((r) => (r[i] ?? '').trim()).filter(Boolean);
+      const n = waarden.length || 1;
+      return {
+        i, kop: koppen[i] ?? '', gevuld: waarden.length / steek.length,
+        getal: waarden.filter(isGetal).length / n,
+        url: waarden.filter(isUrl).length / n,
+        domein: waarden.filter((w) => isDomein(w) && !isUrl(w)).length / n,
+        datum: waarden.filter((w) => !isGetal(w) && leesDatum(w)).length / n,
+      };
+    });
+    const kopIs = (re: RegExp) => kol.find((k) => re.test(k.kop));
+    const tekstKol = kopIs(/tekst|text|anchor|anker/);
+    const datumKol = kol.find((k) => k.datum > 0.6) ?? kol.find((k) => /datum|date|gecrawld|crawled|ontdekt|discovered/.test(k.kop) && k.datum > 0.3);
+    const urlKol = kol.find((k) => k.url > 0.6);
+    const domKol = kol.find((k) => k.domein > 0.6 && k.url < 0.3);
+    const getalKols = kol.filter((k) => k.getal > 0.8 && k !== tekstKol);
+    const cel = (r: string[], k?: { i: number }) => (k ? (r[k.i] ?? '').trim() : '');
+    const telKol = (voorkeur: RegExp, mijd?: RegExp) => getalKols.find((k) => voorkeur.test(k.kop) && !(mijd && mijd.test(k.kop))) ?? getalKols[0];
+
+    if (tekstKol) {
+      const t = telKol(/link|pagina|page|aantal|count/);
+      const teksten = data.map((r) => ({ tekst: cel(r, tekstKol), links: t ? getal(cel(r, t)) : null })).filter((x) => x.tekst || (x.links ?? 0) > 0);
+      return { naam, soort: 'teksten', rijen: teksten.length, teksten };
+    }
+    if (urlKol && datumKol) {
+      const links = data.map((r) => ({ url: cel(r, urlKol), datum: leesDatum(cel(r, datumKol)) })).filter((x) => x.url);
+      return { naam, soort: 'laatste', rijen: links.length, links };
+    }
+    if (domKol) {
+      const t = telKol(/link/, /doel|target/) ;
+      const sites = data.map((r) => ({ site: rootVan(hostVan(cel(r, domKol)) || cel(r, domKol).toLowerCase()), links: t ? getal(cel(r, t)) : null })).filter((x) => x.site);
+      return { naam, soort: 'sites', rijen: sites.length, sites };
+    }
+    if (urlKol && getalKols.length) {
+      const l = telKol(/inkomend|incoming|links/, /site/);
+      const s = getalKols.find((k) => /site/.test(k.kop) && k !== l) ?? getalKols.find((k) => k !== l);
+      const paginas = data.map((r) => ({ url: cel(r, urlKol), links: l ? getal(cel(r, l)) : null, sites: s ? getal(cel(r, s)) : null })).filter((x) => x.url);
+      return { naam, soort: 'paginas', rijen: paginas.length, paginas };
+    }
+    if (urlKol) {
+      const links = data.map((r) => ({ url: cel(r, urlKol), datum: null })).filter((x) => x.url);
+      return { naam, soort: 'laatste', rijen: links.length, links };
+    }
+    // Laatste kans: een kolom met gewone tekst onder een kopregel is een lijst met linkteksten.
+    const tekstig = heeftKop ? kol.find((k) => k.getal < 0.2 && k.url < 0.3 && k.datum < 0.2 && k.gevuld > 0.3) : undefined;
+    if (tekstig) {
+      const t = getalKols[0];
+      const teksten = data.map((r) => ({ tekst: cel(r, tekstig), links: t ? getal(cel(r, t)) : null })).filter((x) => x.tekst || (x.links ?? 0) > 0);
+      return { naam, soort: 'teksten', rijen: teksten.length, teksten };
+    }
+    return { ...leeg, reden: 'onbekend' };
+  };
+
+  // ---------- Ankerteksten en patronen ----------
+  const algemeen = new Set(['klik hier', 'hier', 'klik', 'lees meer', 'lees verder', 'meer', 'meer info', 'meer informatie', 'info', 'informatie', 'website', 'deze website', 'de website', 'hun website', 'zijn website', 'haar website', 'bekijk', 'bekijk website', 'bekijk de website', 'bezoek website', 'bezoek de website', 'naar de website', 'ga naar', 'ga naar de website', 'link', 'deze link', 'bron', 'via', 'homepage', 'home', 'site', 'deze site', 'webpagina', 'deze pagina', 'pagina', 'click here', 'here', 'read more', 'learn more', 'more', 'more info', 'visit', 'visit website', 'website bezoeken', 'this site', 'this website', 'source', 'details', 'contact', 'klik hier voor meer informatie'].map(plat));
+  const stopwoorden = new Set(['in', 'de', 'het', 'een', 'van', 'voor', 'bij', 'te', 'met', 'op', 'en', 'je', 'jouw', 'uit', 'aan']);
+  const algemeneMerkwoorden = new Set(['bedrijf', 'installatie', 'installatiebedrijf', 'holding', 'groep', 'group', 'nederland', 'media', 'service', 'services', 'diensten', 'advies', 'online', 'company', 'webshop']);
+  const verdachteExt = new Set(['xyz', 'top', 'club', 'icu', 'buzz', 'monster', 'cyou', 'cfd', 'sbs', 'bond', 'click', 'link', 'work', 'loan', 'win', 'bid', 'tk', 'ml', 'ga', 'cf', 'gq', 'pw', 'su', 'rest', 'quest', 'lol']);
+  const spamWoorden = ['casino', 'poker', 'gokken', 'betting', 'viagra', 'cialis', 'porn', 'xxx', 'escort', 'payday', 'forex', 'replica', 'pharma', 'pills', 'onlinecasino', 'slots', 'bonus'];
+  const linkWoorden = ['startpagina', 'beginthier', 'linkpagina', 'linkfarm', 'backlink', 'backlinks', 'pagerank', 'directory', 'webdir', 'seolinks', 'linkbuilding'];
+  const algemeneExt = new Set(['com', 'org', 'net', 'eu', 'info', 'io', 'biz']);
+
+  type Anker = 'merk' | 'url' | 'leeg' | 'zoekwoord' | 'algemeen' | 'overig';
+  const ankerNaam: Record<Anker, string> = {
+    merk: 'Je bedrijfsnaam', url: 'Je webadres', leeg: 'Zonder tekst (vaak een plaatje)', zoekwoord: 'Met je zoekwoord', algemeen: 'Algemeen ("klik hier", "website")', overig: 'Andere omschrijving',
+  };
+
+  const deelVan = (tekst: string) => tekst.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').split(/[^a-z0-9]+/).filter(Boolean);
+
+  // ---------- Staat ----------
+  document.querySelectorAll<HTMLElement>('[data-linkscan]').forEach((el) => {
+    const id = el.closest('section')?.id || 'linkscan';
+    const $ = <T extends HTMLElement = HTMLElement>(s: string) => el.querySelector<T>(s)!;
+    const invoerBestand = $<HTMLInputElement>('[data-bestand]');
+    const drop = $('[data-drop]');
+    const bronLijst = $<HTMLUListElement>('[data-bronnen]');
+    const fout = $('[data-fout]');
+    const meld = $('[data-meld]');
+    const uitslag = $('[data-uitslag]');
+    const instellingen = [...el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-instelling]')];
+    const vervolg = el.dataset.vervolg || '#vergelijking';
+    let bronnen: Bron[] = [];
+    let isVoorbeeld = false;
+    let voorVoorbeeld: Record<string, string> | null = null; // instellingen van de bezoeker van voor het voorbeeld
+    let samenvatting = '';
+    let eigenDomein = '';
+
+    const zeg = (t: string) => { meld.textContent = ''; setTimeout(() => (meld.textContent = t), 60); };
+    const toonFout = (t: string) => { fout.textContent = t; fout.hidden = !t; };
+    const instelling = (n: string) => (instellingen.find((i) => i.dataset.instelling === n)?.value || '').trim();
+    const zetInstelling = (n: string, w: string) => { const i = instellingen.find((x) => x.dataset.instelling === n); if (i) i.value = w; };
+    // Na het voorbeeld krijgt de bezoeker zijn eigen instellingen terug
+    const stopVoorbeeld = () => {
+      isVoorbeeld = false;
+      if (voorVoorbeeld) Object.entries(voorVoorbeeld).forEach(([k, w]) => zetInstelling(k, w));
+      voorVoorbeeld = null;
+    };
+    const bewaar = () => { try { localStorage.setItem(OPSLAG, JSON.stringify(Object.fromEntries(instellingen.map((i) => [i.dataset.instelling, i.value])))); } catch {} };
+
+    // ---------- Bestanden toevoegen ----------
+    const voegToe = async (lijst: { naam: string; bytes?: Uint8Array; tekst?: string }[]) => {
+      if (isVoorbeeld) { bronnen = []; stopVoorbeeld(); }
+      const nieuw: Bron[] = [];
+      for (const b of lijst) {
+        const tekst = b.tekst ?? decodeer(b.bytes!);
+        const bron = herken(b.naam, leesCsv(tekst));
+        if (bron.reden === 'overslaan') continue;
+        nieuw.push(bron);
+      }
+      bronnen.push(...nieuw);
+      return nieuw;
+    };
+
+    const leesBestanden = async (files: FileList | File[]) => {
+      toonFout('');
+      const lijst: { naam: string; bytes?: Uint8Array; tekst?: string }[] = [];
+      const meldingen: string[] = [];
+      for (const f of [...files]) {
+        if (f.size > MAX_BYTES) { meldingen.push(`${f.name} is te groot voor de check (meer dan 30 MB).`); continue; }
+        const buf = new Uint8Array(await f.arrayBuffer());
+        const isZip = buf[0] === 0x50 && buf[1] === 0x4b && buf[2] === 0x03 && buf[3] === 0x04;
+        if (/\.xlsx?$/i.test(f.name) || (isZip && /\.xlsx$/i.test(f.name))) { meldingen.push(`${f.name} is een Excel-bestand. Kies bij het exporteren CSV, of open het bestand en plak de inhoud hieronder.`); continue; }
+        if (isZip) {
+          try {
+            const delen = (await pakUit(buf.buffer)).filter((d) => /\.(csv|tsv|txt)$/i.test(d.naam));
+            if (!delen.length) meldingen.push(`In ${f.name} staan geen CSV-bestanden.`);
+            delen.forEach((d) => lijst.push({ naam: `${f.name} › ${d.naam.split('/').pop()}`, bytes: d.bytes }));
+          } catch (e) {
+            const w = (e as Error).message;
+            meldingen.push(w === 'oud'
+              ? `Je browser kan ${f.name} niet uitpakken. Pak de zip eerst zelf uit (dubbelklik erop) en kies dan de CSV-bestanden die erin zitten.`
+              : `${f.name} lukt niet om uit te pakken. Pak de zip eerst zelf uit (dubbelklik erop) en kies dan de CSV-bestanden.`);
+          }
+          continue;
+        }
+        lijst.push({ naam: f.name, bytes: buf });
+      }
+      const nieuw = await voegToe(lijst);
+      verwerk(meldingen, nieuw);
+    };
+
+    const verwerk = (meldingen: string[], nieuw: Bron[]) => {
+      const onbekend = nieuw.filter((b) => !b.soort);
+      onbekend.forEach((b) => meldingen.push(`${b.naam}: niet herkend. Gebruik een export uit het rapport Links van Search Console, met de kopregel erbij.`));
+      toonFout(meldingen.join(' '));
+      toonBronnen();
+      const goed = nieuw.filter((b) => b.soort);
+      if (goed.length) {
+        reken(true);
+        zeg(`${goed.length === 1 ? 'Eén bestand' : `${goed.length} bestanden`} gelezen: ${goed.map((b) => soortNaam[b.soort!]).join(', ')}. De uitkomst staat hieronder.`);
+      } else if (meldingen.length) zeg(meldingen[0]);
+    };
+
+    const toonBronnen = () => {
+      bronLijst.hidden = !bronnen.length;
+      bronLijst.innerHTML = bronnen.map((b, i) => `<li class="${b.soort ? '' : 'mis'}"><span><b>${esc(b.naam)}</b><br><span class="klein muted">${b.soort ? `${esc(soortNaam[b.soort])} · ${nl(b.rijen)} ${b.rijen === 1 ? 'rij' : 'rijen'}` : 'Niet herkend'}</span></span><button type="button" class="btn-tekst" data-weg="${i}" aria-label="Verwijder ${esc(b.naam)}">Verwijder</button></li>`).join('');
+      const iets = bronnen.length > 0;
+      $('[data-wis]').hidden = !iets; $('[data-wis-punt]').hidden = !iets;
+    };
+    bronLijst.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-weg]');
+      if (!b) return;
+      const weg = bronnen.splice(Number(b.dataset.weg), 1)[0];
+      toonBronnen(); reken(false);
+      zeg(`${weg?.naam ?? 'Bestand'} is verwijderd.`);
+      (bronLijst.querySelector('button') ?? invoerBestand).focus();
+    });
+
+    invoerBestand.addEventListener('change', () => { if (invoerBestand.files?.length) leesBestanden(invoerBestand.files).finally(() => (invoerBestand.value = '')); });
+    ['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('erboven'); }));
+    ['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('erboven'); }));
+    drop.addEventListener('drop', (e) => { const f = (e as DragEvent).dataTransfer?.files; if (f?.length) leesBestanden(f); });
+    // Elders op de tool laten vallen opent het bestand niet in een nieuw tabblad
+    el.addEventListener('dragover', (e) => e.preventDefault());
+    el.addEventListener('drop', (e) => { if (!drop.contains(e.target as Node)) { e.preventDefault(); const f = (e as DragEvent).dataTransfer?.files; if (f?.length) leesBestanden(f); } });
+
+    $('[data-plak-knop]').addEventListener('click', async () => {
+      const veld = $<HTMLTextAreaElement>('[data-plak]');
+      if (!veld.value.trim()) { toonFout('Er is nog niets geplakt. Kopieer in Search Console of Google Spreadsheets de hele tabel, met de kopregel, en plak hem in het vak.'); veld.focus(); return; }
+      toonFout('');
+      const nieuw = await voegToe([{ naam: `Geplakte tekst ${bronnen.length + 1}`, tekst: veld.value }]);
+      if (nieuw.some((b) => b.soort)) veld.value = '';
+      verwerk([], nieuw);
+    });
+
+    // ---------- Rekenen ----------
+    const reken = (focus: boolean) => {
+      const van = <K extends keyof Bron>(s: Soort, k: K) => bronnen.filter((b) => b.soort === s).flatMap((b) => (b[k] as unknown[]) ?? []);
+      const siteRijen = van('sites', 'sites') as SiteRij[];
+      const paginaRijen = van('paginas', 'paginas') as PaginaRij[];
+      const tekstRijen = van('teksten', 'teksten') as TekstRij[];
+      const linkRijen = van('laatste', 'links') as LinkRij[];
+      if (!siteRijen.length && !paginaRijen.length && !tekstRijen.length && !linkRijen.length) { uitslag.hidden = true; return; }
+
+      // Eigen domein: het meest voorkomende domein in de meest gelinkte pagina's
+      const telDom = new Map<string, number>();
+      paginaRijen.forEach((p) => { if (!/^(https?:\/\/|www\.)/i.test(p.url)) return; const h = rootVan(hostVan(p.url)); if (h) telDom.set(h, (telDom.get(h) ?? 0) + 1); });
+      eigenDomein = [...telDom].sort((a, b) => b[1] - a[1])[0]?.[0] ?? '';
+
+      // Sites: uit de tabel, en anders afgeleid uit de losse links
+      const perSite = new Map<string, number>();
+      let telBekend = true;
+      if (siteRijen.length) siteRijen.forEach((s) => { if (s.links === null) telBekend = false; perSite.set(s.site, (perSite.get(s.site) ?? 0) + (s.links ?? 1)); });
+      else linkRijen.forEach((l) => { const r = rootVan(hostVan(l.url)); if (r) perSite.set(r, (perSite.get(r) ?? 0) + 1); });
+      const sites = [...perSite].map(([site, links]) => ({ site, links })).sort((a, b) => b.links - a.links);
+      const totaalSiteLinks = sites.reduce((s, x) => s + x.links, 0);
+      const totaalPaginaLinks = paginaRijen.reduce((s, p) => s + (p.links ?? 0), 0);
+      const totaalLinks = siteRijen.length && telBekend ? totaalSiteLinks : totaalPaginaLinks || (linkRijen.length && !siteRijen.length ? linkRijen.length : totaalSiteLinks);
+      const afgekapt = bronnen.some((b) => b.soort === 'sites' && b.rijen >= 1000);
+
+      // Ankerteksten
+      const merk = instelling('merk');
+      const merkPlat = plat(merk) || plat(eigenDomein.split('.')[0] || '');
+      const zws = [instelling('zw1'), instelling('zw2')].filter(Boolean);
+      const zwWoorden = zws.map((z) => deelVan(z).filter((w) => !stopwoorden.has(w)));
+      const alleZwWoorden = new Set(zwWoorden.flat());
+      const merkWoorden = deelVan(merk).filter((w) => w.length >= 5 && !alleZwWoorden.has(w) && !algemeneMerkwoorden.has(w));
+      const soortVan = (t: string): Anker => {
+        const s = t.trim();
+        if (!s || /^\((leeg|empty)\)$/i.test(s)) return 'leeg';
+        if (/^(https?:\/\/|www\.)/i.test(s) || /^[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}(\/\S*)?$/i.test(s)) return 'url';
+        const p = plat(s);
+        if (merkPlat.length >= 3 && p.includes(merkPlat)) return 'merk';
+        const woorden = deelVan(s);
+        if (merkWoorden.some((w) => woorden.includes(w))) return 'merk';
+        if (zwWoorden.some((zw) => zw.length && zw.every((w) => woorden.includes(w) || p.includes(w)))) return 'zoekwoord';
+        if (algemeen.has(p)) return 'algemeen';
+        return 'overig';
+      };
+      const ankers: Record<Anker, { n: number; voorbeelden: string[] }> = { merk: { n: 0, voorbeelden: [] }, url: { n: 0, voorbeelden: [] }, leeg: { n: 0, voorbeelden: [] }, zoekwoord: { n: 0, voorbeelden: [] }, algemeen: { n: 0, voorbeelden: [] }, overig: { n: 0, voorbeelden: [] } };
+      let exact = 0;
+      const verdachteTeksten: string[] = [];
+      tekstRijen.forEach((r) => {
+        const s = soortVan(r.tekst), n = r.links ?? 1;
+        ankers[s].n += n;
+        if (r.tekst && ankers[s].voorbeelden.length < 3) ankers[s].voorbeelden.push(r.tekst);
+        if (s === 'zoekwoord' && zws.some((z) => plat(z) === plat(r.tekst))) exact += n;
+        const p = plat(r.tekst);
+        if (r.tekst && (spamWoorden.some((w) => p.includes(w)) || /[Ѐ-ӿ؀-ۿ぀-ヿ一-鿿]/.test(r.tekst)) && verdachteTeksten.length < 6) verdachteTeksten.push(r.tekst);
+      });
+      const ankerTotaal = Object.values(ankers).reduce((s, a) => s + a.n, 0);
+
+      // Extensies en patronen
+      const groep = { nl: 0, be: 0, int: 0, rest: 0 };
+      const bekijk: { site: string; reden: string; links: number }[] = [];
+      sites.forEach((s) => {
+        const ext = extensie(s.site);
+        if (ext === 'nl') groep.nl++; else if (ext === 'be') groep.be++; else if (algemeneExt.has(ext)) groep.int++; else groep.rest++;
+        const delen = s.site.split(/[.-]/);
+        const p = plat(s.site);
+        let reden = '';
+        if (verdachteExt.has(ext)) reden = `extensie .${ext}, die vaak bij spamsites voorkomt`;
+        else if (spamWoorden.some((w) => delen.includes(w) || (w.length >= 6 && p.includes(w)))) reden = 'het domein gaat over gokken, pillen of andere onderwerpen die vaak bij spam horen';
+        else if (linkWoorden.some((w) => p.includes(w)) || delen.includes('seo') || delen.includes('links')) reden = 'een linkpagina of startpagina, meestal weinig waard';
+        else if (s.site.startsWith('xn--') || s.site.includes('.xn--')) reden = 'een domein in een ander schrift';
+        else if ((s.site.split('.')[0].match(/-/g) ?? []).length >= 3 || /\d{4,}/.test(s.site)) reden = 'een domeinnaam met veel streepjes of cijfers';
+        if (reden) bekijk.push({ site: s.site, reden, links: s.links });
+      });
+      const buitenland = sites.length ? pct(groep.rest, sites.length) : 0;
+
+      // Pagina's
+      const isHome = (u: string) => { const p = zonderSlash(padVan(u)); return p === '/' || /^\/(nl|en)$/.test(p); };
+      const perPad = new Map<string, number>();
+      paginaRijen.forEach((p) => { const k = zonderSlash(padVan(p.url)); perPad.set(k, (perPad.get(k) ?? 0) + (p.links ?? 1)); });
+      const paginaTotaal = [...perPad.values()].reduce((a, b) => a + b, 0);
+      const homeLinks = paginaRijen.filter((p) => isHome(p.url)).reduce((s, p) => s + (p.links ?? 1), 0);
+      const homeAandeel = pct(homeLinks, paginaTotaal);
+      const weinig = [...perPad].filter(([p, n]) => p !== '/' && n <= 2).slice(0, 5);
+      const opgegeven = instelling('paginas').split(/\n+/).map((r) => r.trim()).filter(Boolean).slice(0, 20);
+      const opgegevenUit = opgegeven.map((r) => ({ invoer: r, n: perPad.get(zonderSlash(padVan(r))) ?? 0 }));
+      const zonderLinks = opgegevenUit.filter((x) => x.n === 0);
+
+      // Tempo per maand
+      const metDatum = linkRijen.filter((l) => l.datum);
+      const perMaand = new Map<string, { links: number; nieuw: number }>();
+      const eersteKeer = new Map<string, Date>();
+      metDatum.forEach((l) => { const r = rootVan(hostVan(l.url)); const d = l.datum!; if (!eersteKeer.has(r) || d < eersteKeer.get(r)!) eersteKeer.set(r, d); });
+      const sleutel = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      let maandRij: { k: string; links: number; nieuw: number }[] = [];
+      if (metDatum.length) {
+        const laatste = new Date(Math.max(...metDatum.map((l) => l.datum!.getTime())));
+        for (let i = 11; i >= 0; i--) { const d = new Date(laatste.getFullYear(), laatste.getMonth() - i, 1); perMaand.set(sleutel(d), { links: 0, nieuw: 0 }); }
+        metDatum.forEach((l) => { const m = perMaand.get(sleutel(l.datum!)); if (m) m.links++; });
+        eersteKeer.forEach((d) => { const m = perMaand.get(sleutel(d)); if (m) m.nieuw++; });
+        maandRij = [...perMaand].map(([k, v]) => ({ k, ...v }));
+      }
+      const maandNaam = (k: string) => { const [j, m] = k.split('-').map(Number); return new Date(j, m - 1, 1).toLocaleDateString('nl-NL', { month: 'short', year: 'numeric' }); };
+      const laatsteDrie = maandRij.slice(-3).reduce((s, m) => s + m.nieuw, 0);
+      const mediaan = (() => { const a = maandRij.map((m) => m.links).sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : 0; })();
+      const piek = maandRij.reduce((b, m) => (m.links > (b?.links ?? -1) ? m : b), maandRij[0]);
+
+      // ---------- Tegels ----------
+      const top = sites[0];
+      const topAandeel = top ? pct(top.links, totaalSiteLinks) : 0;
+      const tegel = (getal: string, wat: string, noot = '') => `<div class="tegel"><b>${getal}</b><span>${wat}</span>${noot ? `<small>${noot}</small>` : ''}</div>`;
+      $('[data-tegels]').innerHTML = [
+        tegel(sites.length ? nl(sites.length) + (afgekapt ? '+' : '') : '?', 'linkende sites', !sites.length ? 'voeg Sites met de meeste links toe' : afgekapt ? 'de export stopt bij 1000' : !siteRijen.length ? 'geteld uit de losse links' : ''),
+        tegel(totaalLinks ? nl(totaalLinks) : '?', 'links in totaal', !totaalLinks ? 'staat niet in deze export' : ''),
+        tegel(top && telBekend ? `${topAandeel}%` : '?', 'van je links komt van één site', top && telBekend ? esc(top.site) : 'nog onbekend'),
+        tegel(paginaTotaal ? `${homeAandeel}%` : '?', 'gaat naar je homepage', !paginaTotaal ? "voeg Meest gelinkte pagina's toe" : ''),
+      ].join('');
+
+      // ---------- Blokken ----------
+      const balk = (naam: string, n: number, totaal: number, noot = '', accent = false) => `<li class="${accent ? 'accent' : ''}"><span class="naam">${naam}${noot}</span><span class="getal">${nl(n)}${totaal ? ` <span class="muted">(${pct(n, totaal)}%)</span>` : ''}</span><span class="balk" aria-hidden="true"><span style="width:${Math.max(totaal ? (n / totaal) * 100 : 0, n ? 1.5 : 0).toFixed(1)}%"></span></span></li>`;
+      const blokken: string[] = [];
+
+      // 1. Sites en concentratie
+      if (sites.length) {
+        let tekst = `Je hebt links van ${nl(sites.length)} ${sites.length === 1 ? 'site' : 'verschillende sites'}${afgekapt ? ' (of meer: de export stopt bij 1000 rijen)' : ''}. Voor Google telt vooral hoeveel verschillende, passende sites naar je linken, niet het totaal aantal links.`;
+        if (telBekend && top && topAandeel >= 40 && top.links >= 50) tekst += ` Eén site, ${esc(top.site)}, levert ${topAandeel}% van al je links. Dat is bijna altijd een link die op elke pagina staat, bijvoorbeeld in de footer of een zijbalk. Vaak is dat een partner, leverancier of je webbouwer. Meestal is dat geen probleem, maar het telt als één site.`;
+        else if (telBekend && top && topAandeel >= 25) tekst += ` De grootste, ${esc(top.site)}, levert ${topAandeel}% van je links. Dat is veel voor één site, maar niet vreemd.`;
+        else if (telBekend) tekst += ' Je links zijn mooi verdeeld: geen enkele site levert het grootste deel.';
+        blokken.push(`<div class="blok"><h4>Wie naar je linkt</h4><p>${tekst}</p><ul class="balken">${sites.slice(0, 5).map((s, i) => balk(esc(s.site), s.links, telBekend ? totaalSiteLinks : 0, '', i === 0 && topAandeel >= 40)).join('')}</ul>${!telBekend ? '<p class="klein muted">In deze export staat geen aantal per site, dus de verdeling is niet bekend.</p>' : ''}</div>`);
+      }
+
+      // 2. Ankerteksten
+      if (ankerTotaal) {
+        const neutraal = ankers.merk.n + ankers.url.n + ankers.leeg.n;
+        const zwAandeel = pct(ankers.zoekwoord.n, ankerTotaal);
+        let oordeel = '';
+        if (!zws.length) oordeel = 'Vul hierboven je zoekwoorden in, dan zie je ook hoeveel links je zoekwoord als tekst hebben.';
+        else if (zwAandeel > 20) oordeel = `${zwAandeel}% van je links heeft je zoekwoord als tekst${exact ? `, waarvan ${pct(exact, ankerTotaal)}% precies het zoekwoord` : ''}. Dat is meer dan je in een vanzelf gegroeid profiel meestal ziet. Bekijk eens waar die links vandaan komen.`;
+        else oordeel = `${zwAandeel}% van je links heeft je zoekwoord als tekst. Dat ziet er rustig en natuurlijk uit.`;
+        if (!plat(merk) && merkPlat) oordeel += ` Als bedrijfsnaam zochten we op "${esc(eigenDomein.split('.')[0])}" uit je webadres. Vul je naam in voor een preciezere telling.`;
+        else if (!merkPlat) oordeel += ' Vul je bedrijfsnaam in, dan telt de check die apart.';
+        const volgorde: Anker[] = ['merk', 'url', 'zoekwoord', 'algemeen', 'overig', 'leeg'];
+        blokken.push(`<div class="blok"><h4>Met welke tekst ze linken</h4><p>${oordeel}</p><ul class="balken">${volgorde.filter((a) => ankers[a].n).map((a) => balk(esc(ankerNaam[a]), ankers[a].n, ankerTotaal, ankers[a].voorbeelden.length ? `<span class="vb">${ankers[a].voorbeelden.map((v) => `"${esc(v.slice(0, 40))}"`).join(', ')}</span>` : '', a === 'zoekwoord' && zwAandeel > 20)).join('')}</ul><p class="klein muted">Vuistregel, geen norm van Google: in een profiel dat vanzelf groeit, noemt het grootste deel van de links je naam of je webadres (nu ${pct(neutraal, ankerTotaal)}%), en is hooguit een klein deel, zeg een op de vijf, een zoekwoord.</p>${verdachteTeksten.length ? `<p>Deze teksten passen niet bij een gewoon bedrijf. Bekijk ze eens: ${verdachteTeksten.map((t) => `"${esc(t.slice(0, 50))}"`).join(', ')}.</p>` : ''}</div>`);
+      }
+
+      // 3. Extensies en patronen
+      if (sites.length) {
+        blokken.push(`<div class="blok"><h4>Waar de sites vandaan komen</h4><p>${buitenland >= 30 ? `${buitenland}% van de sites heeft een buitenlandse of ongewone extensie. Werk je vooral in Nederland, dan is dat veel. Het kan kloppen (internationale klanten, een buitenlandse leverancier), maar het is de moeite waard om te kijken wie dat zijn.` : 'De meeste sites die naar je linken, hebben een Nederlandse, Belgische of algemene extensie. Dat past bij een Nederlands bedrijf.'}</p><ul class="balken">${balk('.nl', groep.nl, sites.length)}${balk('.be', groep.be, sites.length)}${balk('.com, .org, .net, .eu en andere algemene', groep.int, sites.length)}${balk('Andere extensies', groep.rest, sites.length, '', buitenland >= 30)}</ul>${bekijk.length ? `<p><b>Bekijk deze eens.</b> Dit hoeft geen spam te zijn, maar het zijn wel de sites waar je als eerste naar kijkt:</p><ul class="bekijk">${bekijk.slice(0, 8).map((b) => `<li><b>${esc(b.site)}</b> <span class="muted">(${nl(b.links)} ${b.links === 1 ? 'link' : 'links'})</span>: ${b.reden}.</li>`).join('')}</ul>${bekijk.length > 8 ? `<p class="klein muted">En nog ${bekijk.length - 8} andere.</p>` : ''}<p class="klein muted">Google negeert de meeste van zulke links zelf. Afwijzen met de disavow tool is alleen nodig bij een handmatige actie in Search Console.</p>` : '<p>We zagen geen domeinen met opvallende extensies of woorden.</p>'}</div>`);
+      }
+
+      // 4. Pagina's
+      if (paginaTotaal || opgegeven.length) {
+        let p = '';
+        if (paginaTotaal) {
+          p = homeAandeel >= 60 ? `${homeAandeel}% van je links gaat naar je homepage. Dat is normaal voor de meeste bedrijven, maar je dienstpagina's moeten zelf ook links krijgen om op hun eigen zoekwoord te stijgen.` : `${homeAandeel}% van je links gaat naar je homepage, de rest naar andere pagina's. Mooi: ook je andere pagina's krijgen aandacht.`;
+        } else p = "Voeg de export Meest gelinkte pagina's toe om te zien welke pagina's links krijgen.";
+        const topPaginas = [...perPad].sort((a, b) => b[1] - a[1]).slice(0, 5);
+        blokken.push(`<div class="blok"><h4>Welke pagina's links krijgen</h4><p>${p}</p>${topPaginas.length ? `<ul class="balken">${topPaginas.map(([pad, n]) => balk(esc(toonPad(pad)), n, paginaTotaal)).join('')}</ul>` : ''}${weinig.length ? `<p>Pagina's met maar één of twee links: ${weinig.map(([pad]) => `<b>${esc(toonPad(pad))}</b>`).join(', ')}.</p>` : ''}${opgegeven.length && paginaTotaal ? (zonderLinks.length ? `<p>Van de pagina's die je invulde, hebben deze geen links in de export: ${zonderLinks.map((x) => `<b>${esc(x.invoer)}</b>`).join(', ')}.</p>` : '<p>Alle pagina\'s die je invulde, krijgen links.</p>') : ''}</div>`);
+      }
+
+      // 5. Tempo
+      if (maandRij.length) {
+        const max = Math.max(...maandRij.map((m) => m.links), 1);
+        blokken.push(`<div class="blok"><h4>Tempo per maand</h4><p>De datum in deze export is de laatste keer dat Google de pagina met de link bekeek. Een maand met veel links kan dus ook betekenen dat Google veel pagina's tegelijk opnieuw bezocht. De kolom "nieuwe sites" telt sites die in die maand voor het eerst in je export staan.</p><ul class="balken maanden">${maandRij.map((m) => `<li><span class="naam">${esc(maandNaam(m.k))}</span><span class="getal">${nl(m.links)} ${m.links === 1 ? 'link' : 'links'} <span class="muted">· ${nl(m.nieuw)} ${m.nieuw === 1 ? 'nieuwe site' : 'nieuwe sites'}</span></span><span class="balk" aria-hidden="true"><span style="width:${((m.links / max) * 100).toFixed(1)}%"></span></span></li>`).join('')}</ul></div>`);
+      } else if (linkRijen.length) blokken.push('<div class="blok"><h4>Tempo per maand</h4><p>In deze losse links staat geen datum. Exporteer Nieuwste links (soms Laatste links genoemd) om het tempo te zien.</p></div>');
+
+      const ontbreekt = (['sites', 'paginas', 'teksten', 'laatste'] as Soort[]).filter((s) => !bronnen.some((b) => b.soort === s));
+      if (ontbreekt.length && !isVoorbeeld) blokken.push(`<p class="klein muted">Nog niet toegevoegd: ${ontbreekt.map((s) => esc(soortNaam[s])).join(', ')}. Met die exports erbij wordt de uitkomst vollediger.</p>`);
+      $('[data-blokken]').innerHTML = blokken.join('');
+
+      // ---------- Drie acties ----------
+      const acties: { prio: number; tekst: string }[] = [];
+      if (bekijk.length) acties.push({ prio: 9 + Math.min(bekijk.length, 5) / 10, tekst: `<b>Loop ${bekijk.length === 1 ? 'die ene site' : `de ${nl(bekijk.length)} sites`} onder "Bekijk deze eens" na.</b> Open de pagina met de link en kijk of het een echte site is. Weet je niet hoe ze aan je link komen en zijn het er veel, lees dan eerst over de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a> voordat je iets afwijst.` });
+      if (ankerTotaal && zws.length && pct(ankers.zoekwoord.n, ankerTotaal) > 20) acties.push({ prio: 8.5, tekst: '<b>Laat nieuwe links vooral je bedrijfsnaam of webadres als tekst hebben.</b> Te veel links met precies je zoekwoord vallen op. Heb je ooit links gekocht of een pakket afgenomen, kijk dan of de tekst daar aangepast kan worden.' });
+      if (telBekend && top && topAandeel >= 40 && top.links >= 50) acties.push({ prio: 7, tekst: `<b>Check de link van ${esc(top.site)}.</b> Staat hij op elke pagina, vraag dan of één link op een vaste plek (bijvoorbeeld een pagina met partners) ook goed is. Dat oogt natuurlijker en kost niemand iets.` });
+      if (zonderLinks.length) acties.push({ prio: 8, tekst: `<b>Zoek de eerste links voor ${esc(zonderLinks[0].invoer)}.</b> Begin bij sites die al naar je linken: een leverancier, je branchevereniging of een klant met een eigen site. Vraag of ze naar die pagina willen linken in plaats van naar je homepage.` });
+      else if (paginaTotaal && homeAandeel >= 60) acties.push({ prio: 6, tekst: '<b>Geef je belangrijkste dienstpagina een eigen link.</b> Je homepage krijgt bijna alles. Zoek voor je beste dienst één of twee sites die over precies dat onderwerp gaan.' });
+      if (sites.length && sites.length < 30) acties.push({ prio: 6.5, tekst: `<b>Werk aan meer verschillende sites.</b> Je hebt er nu ${nl(sites.length)}. Voor een lokaal bedrijf gaat het meestal om tientallen goede sites. Begin met de tien ideeën voor lokale links op onze <a href="/linkbuilding/">pagina over linkbuilding</a>.` });
+      if (maandRij.length && laatsteDrie === 0) acties.push({ prio: 6, tekst: '<b>Breng weer wat beweging in je links.</b> De laatste drie maanden kwamen er geen nieuwe sites bij in de export. Twee tot vijf goede links per maand is voor de meeste mkb\'ers een prima tempo.' });
+      if (piek && mediaan && piek.links >= mediaan * 5 && piek.links >= 20) acties.push({ prio: 7.5, tekst: `<b>Zoek uit waar de piek in ${esc(maandNaam(piek.k))} vandaan komt.</b> Toen kwamen er ${nl(piek.links)} links in één maand bij, veel meer dan normaal. Een nieuwe vermelding is mooi, een stapel links van onbekende sites niet.` });
+      if (buitenland >= 30) acties.push({ prio: 5, tekst: '<b>Kijk wie de buitenlandse sites zijn.</b> Herken je ze niet en gaan ze niet over jouw vak, dan leveren ze je weinig op.' });
+      if (ontbreekt.length && !isVoorbeeld) acties.push({ prio: 3, tekst: `<b>Voeg ook ${esc(soortNaam[ontbreekt[0]])} toe.</b> Dan ziet de check meer van je profiel.` });
+      acties.push({ prio: 2, tekst: '<b>Leg je links naast die van je concurrenten.</b> De bedrijven die boven je staan, laten zien wat in jouw markt nodig is. Interessant zijn vooral sites die naar twee of drie van hen linken, maar niet naar jou.' });
+      acties.push({ prio: 1, tekst: '<b>Herhaal deze check elke maand.</b> Exporteer dezelfde tabellen en kijk of er nieuwe sites bij komen, en of je dienstpagina\'s links krijgen.' });
+      $('[data-acties]').innerHTML = acties.sort((a, b) => b.prio - a.prio).slice(0, 3).map((a) => `<li>${a.tekst}</li>`).join('');
+
+      // Samenvatting voor het formulier (alleen aantallen en percentages)
+      const delen = [
+        sites.length ? `${nl(sites.length)}${afgekapt ? '+' : ''} linkende sites` : '',
+        totaalLinks ? `${nl(totaalLinks)} links` : '',
+        top && telBekend ? `grootste site ${topAandeel}% van de links` : '',
+        ankerTotaal ? `ankerteksten ${pct(ankers.merk.n + ankers.url.n, ankerTotaal)}% naam of webadres${zws.length ? ` en ${pct(ankers.zoekwoord.n, ankerTotaal)}% zoekwoord` : ''}` : '',
+        paginaTotaal ? `${homeAandeel}% naar de homepage` : '',
+        bekijk.length ? `${bekijk.length} sites om na te lopen` : '',
+      ].filter(Boolean);
+      samenvatting = `Uitkomst linkbuilding scan: ${delen.join(', ')}.`;
+
+      $('[data-voorbeeld-label]').hidden = !isVoorbeeld;
+      $('[data-cta-uitleg]').hidden = !vervolg.startsWith('#') || isVoorbeeld;
+      uitslag.hidden = false;
+      $('[data-deel-status]').textContent = '';
+      if (focus) {
+        tel(isVoorbeeld ? 'voorbeeld' : 'uitslag');
+        const kop = $('[data-uitslag-kop]');
+        kop.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+        kop.focus({ preventScroll: true });
+      }
+    };
+
+    // Instellingen veranderen: opnieuw rekenen (zonder focus te verplaatsen) en onthouden
+    let wacht = 0;
+    instellingen.forEach((i) => i.addEventListener('input', () => { if (isVoorbeeld) voorVoorbeeld = null; else bewaar(); clearTimeout(wacht); wacht = window.setTimeout(() => { if (!uitslag.hidden) reken(false); }, 300); }));
+
+    // ---------- Vervolgknop: formulier op dezelfde pagina invullen ----------
+    $<HTMLAnchorElement>('[data-cta]').addEventListener('click', (e) => {
+      if (!vervolg.startsWith('#')) return;
+      const doel = document.querySelector<HTMLElement>(vervolg);
+      if (!doel) return;
+      e.preventDefault();
+      if (!isVoorbeeld) {
+        const vraag = doel.querySelector<HTMLTextAreaElement>('textarea[name="bericht"]');
+        if (vraag && !vraag.value.includes('Uitkomst linkbuilding scan')) vraag.value = (samenvatting + (vraag.value ? `\n${vraag.value}` : '')).slice(0, 400);
+        const web = doel.querySelector<HTMLInputElement>('input[name="website"]');
+        if (web && !web.value && eigenDomein) web.value = eigenDomein;
+      }
+      try { history.pushState(null, '', vervolg); } catch {}
+      doel.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      const eerste = doel.querySelector<HTMLElement>('input:not([type=hidden]):not([tabindex="-1"]), textarea');
+      eerste?.focus({ preventScroll: true });
+    });
+
+    // ---------- Delen: alleen merk en zoekwoorden ----------
+    const deelLink = () => {
+      const p = new URLSearchParams();
+      ['merk', 'zw1', 'zw2'].forEach((k) => { const w = instelling(k); if (w) p.set(k, w.slice(0, 60)); });
+      const q = p.toString();
+      return `${location.origin}${location.pathname}#${id}${q ? '&' + q : ''}`;
+    };
+    $('[data-deel]').addEventListener('click', async () => {
+      const link = deelLink();
+      try { history.replaceState(null, '', link.replace(location.origin, '')); } catch {}
+      const st = $('[data-deel-status]');
+      try { await navigator.clipboard.writeText(link); st.textContent = 'De link staat op je klembord. Er staan alleen je bedrijfsnaam en zoekwoorden in, niet je links. Wie hem opent, zet zijn eigen export erin.'; }
+      catch { window.prompt('Kopieer deze link:', link); }
+    });
+
+    // ---------- Voorbeeld en opnieuw beginnen ----------
+    $('[data-voorbeeld]').addEventListener('click', () => {
+      toonFout('');
+      bronnen = voorbeeld();
+      if (!isVoorbeeld) voorVoorbeeld = Object.fromEntries(instellingen.map((i) => [i.dataset.instelling!, i.value]));
+      isVoorbeeld = true;
+      zetInstelling('merk', 'Voorbeeld Installatie'); zetInstelling('zw1', 'cv-ketel vervangen'); zetInstelling('zw2', 'installateur Drenthe');
+      zetInstelling('paginas', '/cv-ketel-vervangen/\n/vloerverwarming/\n/warmtepomp/');
+      toonBronnen(); reken(true);
+      zeg('Verzonnen voorbeeldgegevens geladen. De uitkomst staat hieronder.');
+    });
+    $('[data-wis]').addEventListener('click', () => {
+      bronnen = []; if (isVoorbeeld) stopVoorbeeld(); toonBronnen(); toonFout('');
+      uitslag.hidden = true;
+      zeg('Alles is gewist. Je kunt opnieuw beginnen.');
+      $('label.kies').scrollIntoView({ block: 'center' });
+      invoerBestand.focus();
+    });
+
+    // ---------- Laden: gedeelde link of eerdere instellingen ----------
+    const h = new URLSearchParams(location.hash.slice(1));
+    if (h.has(id)) {
+      ['merk', 'zw1', 'zw2'].forEach((k) => zetInstelling(k, (h.get(k) || '').slice(0, 60)));
+      const g = $('[data-gedeeld]');
+      g.hidden = false;
+      g.textContent = 'Bedrijfsnaam en zoekwoorden komen uit een gedeelde link. De links zelf zitten er nooit in: zet je eigen export erin, of probeer het voorbeeld.';
+      el.scrollIntoView({ block: 'start' });
+    } else {
+      try { const oud = JSON.parse(localStorage.getItem(OPSLAG) || 'null'); if (oud) Object.entries(oud).forEach(([k, w]) => zetInstelling(k, String(w ?? ''))); } catch {}
+    }
+  });
+
+  // ---------- Verzonnen voorbeeldgegevens ----------
+  function voorbeeld(): Bron[] {
+    const sites: SiteRij[] = [
+      ['partner-voorbeeld.nl', 412], ['linkfarm-voorbeeld.xyz', 37], ['seo-links-voorbeeld.top', 22], ['leverancier-voorbeeld.nl', 18], ['casino-voorbeeld.club', 9],
+      ['drentsnieuws-voorbeeld.nl', 6], ['catalogus-voorbeeld.ru', 5], ['bouwvakblad-voorbeeld.nl', 4], ['ondernemers-voorbeeld.nl', 3], ['vergelijk-voorbeeld.nl', 3],
+      ['installatiegids-voorbeeld.nl', 2], ['buurtapp-voorbeeld.nl', 2], ['startpagina-voorbeeld.nl', 2], ['blog-voorbeeld.com', 2], ['webgids-voorbeeld.info', 2],
+      ['sportclub-voorbeeld.nl', 1], ['opleiding-voorbeeld.nl', 1], ['bedrijvengids-voorbeeld.be', 1], ['nieuws-voorbeeld.org', 1], ['forum-voorbeeld.de', 1],
+      ['dorpshuis-voorbeeld.nl', 1], ['klant-voorbeeld.nl', 1], ['makelaar-voorbeeld.nl', 1], ['aannemer-voorbeeld.nl', 1],
+    ].map(([site, links]) => ({ site: site as string, links: links as number }));
+    const basis = 'https://www.voorbeeld-installatie.nl';
+    const paginas: PaginaRij[] = [['/', 468, 20], ['/cv-ketel-vervangen/', 9, 5], ['/blog/ketel-ontluchten/', 6, 4], ['/contact/', 4, 3], ['/over-ons/', 3, 2], ['/vloerverwarming/', 1, 1]]
+      .map(([p, l, s]) => ({ url: basis + p, links: l as number, sites: s as number }));
+    const teksten: TekstRij[] = [['Voorbeeld Installatie', 182], ['voorbeeld-installatie.nl', 121], ['www.voorbeeld-installatie.nl', 58], ['cv-ketel vervangen', 38], ['installateur Drenthe', 22], ['', 14], ['cv ketel vervangen in Assen', 12], ['beste casino bonus', 9], ['klik hier', 8], ['website', 6], ['goedkope installateur', 5], ['lees meer', 4], ['onderhoud van je ketel', 3]]
+      .map(([t, l]) => ({ tekst: t as string, links: l as number }));
+    const nu = new Date();
+    const links: LinkRij[] = [];
+    const bronSites = ['drentsnieuws-voorbeeld.nl', 'bouwvakblad-voorbeeld.nl', 'leverancier-voorbeeld.nl', 'ondernemers-voorbeeld.nl', 'vergelijk-voorbeeld.nl', 'installatiegids-voorbeeld.nl', 'buurtapp-voorbeeld.nl', 'sportclub-voorbeeld.nl', 'opleiding-voorbeeld.nl', 'klant-voorbeeld.nl', 'makelaar-voorbeeld.nl', 'aannemer-voorbeeld.nl', 'dorpshuis-voorbeeld.nl'];
+    for (let m = 13; m >= 0; m--) {
+      const aantal = m === 5 ? 3 : 2 + ((m * 7) % 4);
+      for (let k = 0; k < aantal; k++) links.push({ url: `https://${bronSites[(m + k) % bronSites.length]}/artikel-${m}-${k}/`, datum: new Date(nu.getFullYear(), nu.getMonth() - m, 3 + k * 5) });
+      if (m === 5) for (let k = 0; k < 41; k++) links.push({ url: `https://${k % 2 ? 'linkfarm-voorbeeld.xyz' : 'seo-links-voorbeeld.top'}/p/${k}`, datum: new Date(nu.getFullYear(), nu.getMonth() - m, 1 + (k % 27)) });
+    }
+    return [
+      { naam: 'Voorbeeld: sites met de meeste links', soort: 'sites', rijen: sites.length, sites },
+      { naam: "Voorbeeld: meest gelinkte pagina's", soort: 'paginas', rijen: paginas.length, paginas },
+      { naam: 'Voorbeeld: tekst met de meeste links', soort: 'teksten', rijen: teksten.length, teksten },
+      { naam: 'Voorbeeld: nieuwste links', soort: 'laatste', rijen: links.length, links },
+    ];
+  }
+</script>
+
+<style>
+  .linkscan { padding: clamp(22px, 4vw, 40px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); }
+  .linkscan.card { border-color: var(--navy); }
+  .kop { max-width: 66ch; margin-bottom: 22px; }
+  .kop h2 { margin: 6px 0 10px; }
+  .kop p { margin: 0 0 10px; }
+  .privacy { display: flex; gap: 10px; align-items: baseline; font-weight: 600; }
+  .slot { color: #1f8a5b; font-size: 0.8em; }
+  .invoer { display: grid; gap: 18px; }
+  .drop { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding: 22px; border: 2px dashed var(--veldrand); border-radius: 14px; background: var(--bg); transition: border-color 0.15s, background-color 0.15s; }
+  .drop p { margin: 0; flex: 1 1 220px; }
+  .drop.erboven { border-color: var(--navy); background: var(--tint); }
+  .kies { min-height: 48px; }
+  .drop:has(input:focus-visible) .kies { outline: 3px solid var(--navy); outline-offset: 3px; }
+  .bronnen { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .bronnen :global(li) { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 14px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); min-width: 0; }
+  .bronnen :global(li > span) { min-width: 0; overflow-wrap: anywhere; }
+  .bronnen :global(li.mis) { border-color: #ffd6b8; background: var(--tint); }
+  .plak summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+  .plak[open] summary { margin-bottom: 10px; }
+  .plak .btn { margin-top: 10px; }
+  .plak textarea, .instellingen textarea { font-family: var(--mono, monospace); font-size: 0.92rem; min-height: 0; }
+  .instellingen { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 14px; }
+  .instellingen legend { font-weight: 800; padding: 0; margin-bottom: 10px; }
+  .instellingen p { margin: 0; }
+  .tekstacties { display: flex; flex-wrap: wrap; align-items: center; gap: 0 10px; margin: 0; color: var(--muted); }
+  .gedeeld { background: var(--tint); border: 1px solid #ffd6b8; border-radius: 10px; padding: 10px 14px; margin: 0; color: var(--ink); }
+  .melding { margin: 16px 0 0; padding: 10px 14px; border-radius: 10px; background: var(--tint); border: 1px solid #ffd6b8; color: var(--ink); font-weight: 600; }
+  .uitslag { margin-top: 30px; padding-top: 26px; border-top: 1px solid var(--line); }
+  .uitslag h3 { margin: 0 0 14px; }
+  [data-uitslag-kop]:focus { outline: none; }
+  [data-uitslag-kop]:focus-visible { outline: 3px solid var(--navy); outline-offset: 4px; }
+  .voorbeeld-label { display: inline-block; margin: 0 0 14px; padding: 6px 12px; border-radius: 999px; background: var(--tint); border: 1px solid #ffd6b8; font-weight: 700; font-size: 0.92rem; }
+  .tegels { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); margin-bottom: 8px; }
+  .tegels :global(.tegel) { background: var(--bg); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; min-width: 0; }
+  .tegels :global(.tegel b) { font-size: 1.9rem; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .tegels :global(.tegel span) { font-weight: 600; }
+  .tegels :global(.tegel small) { color: var(--muted); font-size: 0.85rem; overflow-wrap: anywhere; }
+  .uitslag :global(.blok) { margin-top: 26px; }
+  .uitslag :global(.blok h4) { font-size: 1.1rem; margin: 0 0 6px; }
+  .uitslag :global(.blok p) { margin: 0 0 10px; }
+  .uitslag :global(.balken) { list-style: none; padding: 0; margin: 0 0 10px; display: grid; gap: 10px; }
+  .uitslag :global(.balken li) { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; }
+  .uitslag :global(.balken .naam) { min-width: 0; overflow-wrap: anywhere; font-weight: 600; }
+  .uitslag :global(.balken .getal) { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .uitslag :global(.balken .vb) { display: block; font-weight: 400; font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
+  .uitslag :global(.balken .balk) { grid-column: 1 / -1; height: 8px; border-radius: 4px; background: var(--chip); overflow: hidden; }
+  .uitslag :global(.balken .balk > span) { display: block; height: 100%; border-radius: 4px; background: var(--navy); }
+  .uitslag :global(.balken li.accent .balk > span) { background: var(--orange); }
+  .uitslag :global(.bekijk) { padding-left: 1.2em; margin: 0 0 10px; display: grid; gap: 6px; overflow-wrap: anywhere; }
+  .acties-kop { margin-top: 30px !important; }
+  .punten { padding-left: 1.2em; margin: 0 0 18px; display: grid; gap: 10px; }
+  .punten :global(li::marker) { color: var(--orange-tekst); font-weight: 800; }
+  .knoppen { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 10px; }
+  .deel-status { min-height: 1.4em; margin: 0 0 8px; }
+  .uitslag > p.klein { margin: 0 0 8px; }
+  @media (max-width: 560px) {
+    .uitslag :global(.balken li) { grid-template-columns: minmax(0, 1fr); }
+    .uitslag :global(.balken .getal) { text-align: left; white-space: normal; }
+    .knoppen .btn { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .drop { transition: none; } }
+</style>

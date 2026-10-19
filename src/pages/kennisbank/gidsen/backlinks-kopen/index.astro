@@ -1,0 +1,209 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--backlinks-kopen.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/backlinks-kopen/';
+const datum = '2026-10-19';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat je koopt' },
+  { id: 'google', titel: 'Wat Google zegt' },
+  { id: 'misgaat', titel: 'Als het misgaat' },
+  { id: 'checklist', titel: 'Een aanbieding beoordelen' },
+  { id: 'prijzen', titel: 'Wat het kost' },
+  { id: 'alternatieven', titel: 'Alternatieven' },
+  { id: 'ons', titel: 'Hoe wij het doen' },
+];
+// Opgehaald met curl op 19 oktober 2026.
+const bronnen = [
+  'https://developers.google.com/search/docs/essentials/spam-policies?hl=nl',
+  'https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links?hl=nl',
+  'https://support.google.com/webmasters/answer/9044175?hl=nl',
+  'https://developers.google.com/search/blog/2022/12/december-22-link-spam-update',
+  'https://popi.nl/blog/backlinks-kopen-dit-moet-je-weten',
+  'https://www.backlink.nl/',
+  'https://linkbuildingmasters.nl/',
+  'https://linkbuildingmasters.nl/product/startpagina-backlink/',
+  'https://backlinkswinkel.nl/linkbuilding-kosten/',
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Backlinks kopen: wat je koopt, wat Google zegt en wat werkt',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/robert-boersma/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Linkbuilding',
+  citation: bronnen,
+}];
+---
+<Base
+  title="Backlinks kopen: wat mag en wat werkt | Drijfveer Media"
+  description="Backlinks kopen in 2026: wat je koopt bij linkshops en uitgevers, wat Google over betaalde links zegt en een checklist om elke aanbieding te beoordelen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Backlinks kopen', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Linkbuilding" titel="Backlinks kopen: wat je koopt, wat Google zegt en wat werkt" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Backlinks kopen kan in een paar klikken. Een linkshop toont honderden sites met een prijs en een score. Hier lees je wat je daar eigenlijk koopt, waar Google de grens legt en hoe je een aanbieding beoordeelt voordat je betaalt. Wij verkopen zelf geen links per stuk of per pakket.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Backlinks kopen mag, als de link het label sponsored of nofollow krijgt. Dan telt hij niet mee voor je posities.</li>
+            <li>Links kopen om hoger te komen, noemt Google linkspam. Meestal negeert Google zulke links. Bij grove gevallen volgt een handmatige maatregel.</li>
+            <li>Een betaalde plaatsing op een site die echt over jouw vak gaat, kan wel lezers en naamsbekendheid opleveren.</li>
+            <li>Beoordeel elke aanbieding op de belofte, de site, de pagina, de voorwaarden en de prijs. De checklist staat hieronder.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat je koopt als je backlinks koopt</h2>
+        <p>Achter "backlinks kopen" zitten vijf heel verschillende producten. Ze verschillen in prijs, in wie de site kiest en in wat ze opleveren.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Hoe het werkt</th><th>Prijs</th><th>Wie kiest de site</th></tr></thead>
+            <tbody>
+              <tr><td><b>Startpagina-link</b></td><td>Een regel met je naam op een pagina met tientallen links over één onderwerp</td><td>€ 2 tot € 15</td><td>Jij, uit een lijst</td></tr>
+              <tr><td><b>Gastartikel bij een uitgever</b></td><td>Een artikel met jouw link op de blog of nieuwssite van een ander, tegen betaling</td><td>€ 100 tot € 400, sterke sites € 1.000 of meer</td><td>Jij of de verkoper</td></tr>
+              <tr><td><b>Marktplaats</b></td><td>Een catalogus met duizenden sites, elk met een prijs en scores. Je bestelt een plaatsing per site</td><td>Per site, van een paar euro tot duizenden euro's</td><td>Jij, uit de catalogus</td></tr>
+              <tr><td><b>Linkbuilding pakket</b></td><td>Een vaste stapel links voor één prijs, eenmalig of per maand</td><td>€ 8 tot € 50 per link</td><td>De verkoper</td></tr>
+              <tr><td><b>Huurlink</b></td><td>Een link die blijft staan zolang je betaalt. Stop je, dan verdwijnt hij</td><td>Per maand of per jaar</td><td>Wisselt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Marktplaatsen: kiezen uit duizenden sites</h3>
+        <p>Een marktplaats is de grootste winkel. <a href="https://popi.nl/blog/backlinks-kopen-dit-moet-je-weten" rel="nofollow noopener">Popi</a> noemt toegang tot meer dan 62.000 websites, <a href="https://www.backlink.nl/" rel="nofollow noopener">Backlink.nl</a> meer dan 25.000 sites in meer dan 50 landen, <a href="https://linkbuildingmasters.nl/" rel="nofollow noopener">Linkbuilding Masters</a> meer dan 6.000. Per site zie je een prijs, een domain rating en geschat verkeer. Op de voorpagina van Backlink.nl kostte een plaatsing op een Nederlandse site met zo'n 7.000 bezoekers per maand in oktober 2026 rond de € 110 tot € 150. Een Nederlandse autosite met ruim 33.000 bezoekers per maand vroeg € 854,70.</p>
+        <p>Het voordeel: je ziet zelf waar je link komt. Het nadeel: de lijst is gesorteerd op metrics, niet op wat bij jouw bedrijf past. Het selecteren ligt dus bij jou.</p>
+        <h3>Huurlinks: let op wat er na een jaar gebeurt</h3>
+        <p>Bij een huurlink betaal je voor een plek, niet voor een link die blijft. Dat staat niet altijd in de aanbieding. <a href="https://backlinkswinkel.nl/linkbuilding-kosten/" rel="nofollow noopener">Backlinkswinkel</a> geeft op zijn pakketten één jaar garantie. <a href="https://linkbuildingmasters.nl/product/startpagina-backlink/" rel="nofollow noopener">Linkbuilding Masters</a> noemt de meeste plaatsingen permanent en raadt aan per plaatsing naar de voorwaarden te vragen. Vraag het dus zelf, voordat je betaalt.</p>
+
+        <h2 id="google">Wat Google zegt over betaalde backlinks</h2>
+        <p>Google is er duidelijk over. In de <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">spamregels voor Google Zoeken</a> staat linkspam omschreven als "links maken naar of vanaf een site, vooral om de posities in de zoekresultaten te manipuleren". Als voorbeelden noemt Google onder meer:</p>
+        <ul>
+          <li>links kopen of verkopen voor posities, ook in ruil voor een product of dienst;</li>
+          <li>advertorials waarvoor betaald is, met links die waarde doorgeven;</li>
+          <li>links met zoekwoorden als ankertekst in artikelen, gastblogs of persberichten op andere sites;</li>
+          <li>links uit bedrijvengidsen en bookmarksites van lage kwaliteit.</li>
+        </ul>
+        <p>Direct daarna volgt de zin waar het om draait. Google begrijpt dat links kopen en verkopen bij reclame en sponsoring hoort. Zulke links zijn in orde, "zolang ze het kenmerk <code>rel="nofollow"</code> of <code>rel="sponsored"</code> hebben". In de uitleg over het <a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links?hl=nl" rel="noopener">kwalificeren van uitgaande links</a> staat het nog korter: markeer links die advertenties of betaalde plaatsingen zijn met <code>sponsored</code>. Nofollow mag ook, sponsored heeft de voorkeur. <span class="muted">(Citaten vrij vertaald uit de documentatie van Google.)</span></p>
+        <p>Kopen is dus toegestaan. Het label weglaten is het probleem. Een betaalde link met het label telt niet mee voor je posities. Wie links koopt om hoger te komen, koopt dus juist de link zonder label, en gokt dat Google het niet merkt. Opvallend: van de acht Nederlandse pagina's uit de top voor "backlinks kopen" die we in oktober 2026 openden, noemde er maar één het label sponsored.</p>
+
+        <h2 id="misgaat">Wat er gebeurt als het misgaat</h2>
+        <p>Een gekochte link zonder label kan een tijd goed gaan. Gaat het mis, dan gebeurt een van deze twee dingen.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>Google negeert de links</h3></div>
+        <p>Dit is het meest voorkomende geval. Sinds de <a href="https://developers.google.com/search/blog/2022/12/december-22-link-spam-update" rel="noopener">linkspam-update van december 2022</a> gebruikt Google het AI-systeem SpamBrain om onnatuurlijke links te herkennen. Volgens Google ziet het zowel sites die links kopen als sites die bestaan om links door te geven. De waarde van zulke links valt weg. Je betaalde ervoor, en posities die op die links leunden, zakken weer.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>Een handmatige maatregel</h3></div>
+        <p>Bij grove gevallen kijkt een medewerker van Google mee. Je krijgt dan in Search Console, in het <a href="https://support.google.com/webmasters/answer/9044175?hl=nl" rel="noopener">rapport Handmatige acties</a>, de melding "Onnatuurlijke links naar je site". Google schrijft daarbij dat het "een patroon van onnatuurlijke, kunstmatige, misleidende of manipulatieve links" vond. Zo'n maatregel kan voor een deel van je site gelden of voor de hele site.</p>
+        <p>Herstellen gaat in stappen. Je downloadt je links uit Search Console, vraagt eigenaren om links te verwijderen of te labelen, en wijst de rest af. Daarna dien je een verzoek tot heroverweging in. Google waarschuwt dat zo'n beoordeling bij links langer kan duren dan bij andere problemen. Hoe het afwijzen werkt, lees je bij de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a>.</p>
+        <p>We weten hoe dat voelt: een van onze eigen sites kreeg ooit een penalty, toen we er te veel risico namen, en daarover lees je meer bij ons <a href="/proeflab/">proeflab</a>.</p>
+
+        <Tussenactie />
+        <h2 id="checklist">Een aanbieding voor betaalde backlinks beoordelen</h2>
+        <p>Krijg je een mail met "plaatsing op een DR 50-site voor € 149"? Of zie je een mooie site in een catalogus? Loop dan deze tien punten langs voordat je betaalt. Per aanbieding ben je er een kwartier mee bezig. Wil je een bureau beoordelen in plaats van één plaatsing, gebruik dan de vragen bij <a href="/linkbuilding/linkbuilding-uitbesteden/#bureau-kiezen">een linkbuilding bureau kiezen</a>.</p>
+        <h3>De belofte</h3>
+        <ul class="vink">
+          <li><b>Wordt een positie of een dofollow-link zonder label beloofd?</b> Dan draag jij het risico als Google het merkt, en de verkoper niet.</li>
+          <li><b>Gaat het aanbod alleen over metrics?</b> DR, DA en Trust Flow zijn scores van softwarebedrijven. Backlinkswinkel schrijft het zelf: domain rating is een Ahrefs-metric en geen Google-score. Vraag waar de bezoekers vandaan komen en waar de site over gaat.</li>
+        </ul>
+        <h3>De site</h3>
+        <ul class="vink">
+          <li><b>Lees de laatste tien artikelen.</b> Casino's, kredieten en tuinmeubelen door elkaar? Dan bestaat de site vooral om links te verkopen.</li>
+          <li><b>Zoek in Google op <code>site:domeinnaam.nl</code> met een onderwerp uit je vak.</b> Komt er niets, dan kent Google de site niet voor jouw onderwerp.</li>
+          <li><b>Kijk in het webarchief wat er vroeger op het domein stond.</b> Was het een kinderopvang en nu een blog over alles? Google noemt misbruik van verlopen domeinen apart in zijn spamregels.</li>
+        </ul>
+        <h3>De pagina</h3>
+        <ul class="vink">
+          <li><b>Tel de uitgaande links in een gemiddeld artikel.</b> Drie of meer links naar bedrijven in één stuk is een slecht teken.</li>
+          <li><b>Staat er "gesponsord" of "advertorial" boven betaalde stukken?</b> Zo niet, dan komt jouw stuk er straks ook zonder label te staan.</li>
+        </ul>
+        <h3>De voorwaarden</h3>
+        <ul class="vink">
+          <li><b>Blijft de link staan?</b> Vraag wat er na een jaar gebeurt, en als de site offline gaat.</li>
+          <li><b>Wie schrijft de tekst, en lees je hem vooraf?</b> Het artikel linkt naar jouw bedrijf.</li>
+        </ul>
+        <h3>De prijs</h3>
+        <ul class="vink">
+          <li><b>Leg de prijs naast vergelijkbare sites.</b> Een hoge score verklaart niet de hele prijs. Een kleine vakblog met echte lezers uit je branche kan meer opleveren dan een grote site waar niemand van je klanten komt.</li>
+        </ul>
+        <p>Valt een aanbieding op twee of meer punten door de mand, laat hem dan liggen. Wat een score wel en niet zegt over een site, lees je bij <a href="/kennisbank/wat-is/domain-authority/">Domain Authority</a>.</p>
+
+        <h2 id="prijzen">Wat het kost</h2>
+        <p>Een startpagina-link kost € 2 tot € 15. In een pakket betaal je € 8 tot € 50 per link. Een artikel bij een uitgever kost meestal € 100 tot € 400, en op sterke sites € 1.000 of meer. Een bureau vraagt doorgaans € 500 tot € 3.000 per maand. Alle bedragen, met de bron per bedrag, de verborgen kosten en een rekenhulp, staan in de gids <a href="/kennisbank/gidsen/wat-kost-linkbuilding/">wat kost linkbuilding</a>.</p>
+
+        <h2 id="alternatieven">Alternatieven: verdienen, laten bouwen of gelabeld kopen</h2>
+        <p>Links kopen is niet de enige weg naar een sterk linkprofiel. Dit zijn de vier routes naast elkaar.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Wat het kost</th><th>Telt mee voor je posities</th><th>Past bij</th></tr></thead>
+            <tbody>
+              <tr><td><b>Links verdienen</b></td><td>Je eigen tijd</td><td>Ja</td><td>Bedrijven met een netwerk en wat tijd</td></tr>
+              <tr><td><b>Links laten bouwen</b></td><td>De uren van een linkbuilder</td><td>Ja</td><td>Wie wil groeien zonder er zelf tijd in te steken</td></tr>
+              <tr><td><b>Gelabelde betaalde plaatsing</b></td><td>De prijs van de plaatsing</td><td>Nee, wel lezers en naamsbekendheid</td><td>Wie een publiek wil bereiken</td></tr>
+              <tr><td><b>Kopen zonder label</b></td><td>De prijs van de plaatsing</td><td>Tot Google het ziet</td><td>Niemand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Links verdienen</h3>
+        <p>De beste links liggen vaak dichtbij. Je leverancier met een dealerlijst, je brancheorganisatie, de ondernemersvereniging, een school die je als leerbedrijf noemt. Of iets op je eigen site waar anderen graag naar verwijzen, zoals een prijsoverzicht of een checklist. Een gastblog bij een vakblad hoort hier ook bij, zolang de redactie hem kiest omdat hij iets toevoegt en je er niet voor betaalt. Hoe je begint, staat in de gids over <a href="/kennisbank/gidsen/lokale-linkbuilding/">lokale linkbuilding</a>. Een plan voor zes maanden maak je met de gids <a href="/kennisbank/gidsen/linkbuilding-strategie/">linkbuilding-strategie</a>.</p>
+        <h3>Links laten bouwen</h3>
+        <p>Heb je er geen tijd voor, dan laat je een linkbuilder het werk doen. Die zoekt relevante websites, beoordeelt ze en benadert ze. Je betaalt voor het zoeken en het werk, en de links zelf zijn verdiend. Hoe dat bij ons gaat, lees je bij <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>.</p>
+        <h3>Een gelabelde betaalde plaatsing</h3>
+        <p>Soms is betalen de beste route. Een vakblad met precies jouw klanten als lezers vraagt geld voor een artikel. Dan koop je bereik. De link krijgt het label sponsored en telt niet mee voor je posities. Wel levert hij bezoekers op, en een vermelding van je bedrijf op een plek die ertoe doet. Dat soort vermeldingen nemen AI-assistenten steeds vaker mee.</p>
+
+        <h2 id="ons">Hoe wij met betaalde plaatsingen omgaan</h2>
+        <p>Wij verkopen geen links per stuk en geen pakketten. Linkbuilding kost bij ons € 75 per uur, exclusief btw, met een minimum van vijf uur per maand. Een uur levert meestal drie tot vijf links op. Thorgall van Eeden zoekt ze met de hand.</p>
+        <ul class="vink">
+          <li>Betaalde plaatsingen doen we alleen in overleg met jou, altijd met het label sponsored. De kosten komen bovenop de uren.</li>
+          <li>Onze eigen proeflabsites, meer dan 100 sinds 2011, gebruiken we om te testen. Ze zijn nooit linkbron voor klanten.</li>
+          <li>Je ziet elke link in je maandoverzicht, met de site, de pagina en of hij betaald is.</li>
+        </ul>
+        <p>Wat er verder in de uren zit en hoe de stijggarantie werkt, lees je op de pagina over <a href="/linkbuilding/">linkbuilding</a>.</p>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Is backlinks kopen verboden?', a: 'Het is niet tegen de wet. Het is wel tegen de regels van Google als de link waarde doorgeeft aan je posities. Met het label sponsored of nofollow mag een betaalde link gewoon.' },
+      { v: 'Werken gekochte backlinks nog?', a: 'Met het label sponsored tellen ze niet mee voor je posities. Ze leveren hooguit lezers op. Zonder label kunnen ze een tijd helpen, tot Google ze herkent. Sinds eind 2022 zet Google daar het AI-systeem SpamBrain voor in.' },
+      { v: 'Kan Google zien dat een link gekocht is?', a: 'Volgens Google herkent SpamBrain sites die links kopen en sites die bestaan om links door te geven. Lang niet elke gekochte link valt op. Je bouwt dan wel op iets wat elk moment kan wegvallen.' },
+      { v: 'Wat is het verschil tussen een gastblog en een betaalde plaatsing?', a: 'Bij een gastblog kiest de redactie je artikel omdat het iets toevoegt, en je betaalt niets. Bij een betaalde plaatsing koop je de ruimte. Dan hoort de link het label sponsored te krijgen.' },
+      { v: 'Ik heb vroeger links gekocht. Wat nu?', a: 'Meestal negeert Google ze al en hoef je niets te doen. Heb je een melding in Search Console, of zijn het er heel veel, ruim dan op: links laten verwijderen en de rest afwijzen. Lees hoe bij de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a>.' },
+      { v: 'Wat kost een backlink?', a: 'Een startpagina-link € 2 tot € 15, in een pakket € 8 tot € 50 per link, een artikel bij een uitgever € 100 tot € 400 en op sterke sites € 1.000 of meer. Alle prijzen met bronnen staan in de gids <a href="/kennisbank/gidsen/wat-kost-linkbuilding/">wat kost linkbuilding</a>.' },
+      { v: 'Zijn startpagina-links slecht?', a: 'Een paar kunnen geen kwaad. Ze geven weinig door en vallen op als ze het grootste deel van je links worden. Google noemt links uit bedrijvengidsen en bookmarksites van lage kwaliteit in zijn spamregels.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Wat kost linkbuilding?', href: '/kennisbank/gidsen/wat-kost-linkbuilding/', tekst: 'Prijzen per link en per maand, met bronnen en een rekenhulp.', teken: 'munten' },
+      { label: 'Dienst', titel: 'Google disavow tool', href: '/linkbuilding/google-disavow-tool/', tekst: 'Slechte links onschadelijk maken.' },
+      { label: 'Gids', titel: 'Lokale linkbuilding', href: '/kennisbank/gidsen/lokale-linkbuilding/', tekst: 'Linkkansen in Drenthe, Groningen en Friesland.' },
+      { label: 'Dienst', titel: 'Linkbuilding uitbesteden', href: '/linkbuilding/linkbuilding-uitbesteden/', tekst: '€ 75 per uur, meestal drie tot vijf links per uur.' },
+    ]}
+  />
+
+  <Actie titel="Twijfel je over een aanbieding?" tekst={`${site.contactpersoon} bekijkt je huidige links en die van je concurrenten, en belt je met welke links bij jouw markt passen. Gratis, en je zit nergens aan vast.`} />
+</Base>

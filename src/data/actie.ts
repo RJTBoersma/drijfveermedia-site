@@ -20,7 +20,14 @@ const regels: [RegExp, Stap][] = [
     knop: 'Doe de gratis AI-test', kort: 'Gratis AI-test', vraag: 'Noemt ChatGPT jou al?', href: '/generative-engine-optimization/#ai-test',
     zin: 'In vijf minuten weet je of ChatGPT en Gemini jouw bedrijf noemen als iemand naar jouw vak vraagt.',
     dienst: { naam: 'Genoemd worden door AI', prijs: 'vanaf € 495 per maand', url: '/generative-engine-optimization/' } }],
-  [/^\/linkbuilding|backlink|dofollow|linkbuilding/, { ...scan, vraag: 'Hoe sterk zijn jouw links, naast die van je concurrent?', dienst: { naam: 'Linkbuilding', prijs: '€ 75 per uur', url: '/linkbuilding/' } }],
+  [/^\/linkbuilding\/linkbuilding-scan\//, {
+    knop: 'Laat Thorgall je links vergelijken', kort: 'Links vergelijken', vraag: 'Wil je weten welke links je concurrent wel heeft?', href: '#vergelijking',
+    zin: 'Thorgall legt je links naast die van de bedrijven boven je in Google en belt je met de grootste gaten.',
+    dienst: { naam: 'Linkbuilding', prijs: '€ 75 per uur', url: '/linkbuilding/' } }],
+  [/^\/linkbuilding|backlink|dofollow|ankertekst|domain-authority|link-juice|linkbuilding|gastblog/, {
+    knop: 'Check gratis je links', kort: 'Gratis linkscan', vraag: 'Hoe sterk zijn jouw links, naast die van je concurrent?', href: '/linkbuilding/linkbuilding-scan/',
+    zin: 'Zet je export uit Search Console in de scan en zie meteen wie naar je linkt. Of laat Thorgall je links naast die van je concurrenten leggen.',
+    dienst: { naam: 'Linkbuilding', prijs: '€ 75 per uur', url: '/linkbuilding/' } }],
   [/^\/(tekstschrijver)|copywriting|teksten|contentmarketing|content-plan|blog/, { ...scan, vraag: 'Mag Thorgall een van je pagina\'s lezen?', dienst: { naam: 'Tekstschrijver', prijs: 'vanaf € 75 per pagina', url: '/tekstschrijver/' } }],
   [/^\/leadgeneratie|conversie|landingspagina|leads|nieuwsbrief|mail|funnel|heatmap/, { ...scan, dienst: { naam: 'Leadgeneratie', prijs: 'vanaf € 495 per maand', url: '/leadgeneratie/' } }],
   [/^\/social-media|instagram|linkedin|social|posten|reels|viraal/, { ...scan, dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],
@@ -32,6 +39,7 @@ export const stapVoor = (pad: string): Stap => regels.find(([r]) => r.test(pad))
 const algemeen = ['Laat je site gratis nakijken', 'Vraag een gratis scan aan', 'Vraag de gratis scan aan', 'Gratis scan aanvragen'];
 export const knopVoor = (pad: string, knop?: { tekst: string; href: string }) => {
   if (pad.startsWith('/gratis-website-analyse')) return knop ?? { tekst: scan.knop, href: '#scan' };
+  if (pad.startsWith('/linkbuilding/linkbuilding-scan')) return knop ?? { tekst: 'Laat Thorgall je links vergelijken', href: '#vergelijking' };
   if (!knop || (knop.href === '/gratis-website-analyse/' && algemeen.includes(knop.tekst))) { const s = stapVoor(pad); return { tekst: s.knop, href: s.href }; }
   return knop;
 };

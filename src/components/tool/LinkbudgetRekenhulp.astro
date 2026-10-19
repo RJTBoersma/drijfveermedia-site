@@ -1,0 +1,253 @@
+---
+// "Wat krijg je voor je linkbuildingbudget?" Budget per maand en soort aanbieding geven een bandbreedte aan links per maand,
+// plus de uren als je evenveel links zelf met de hand zou regelen.
+// Prijzen per link: openbare prijzen, opgehaald met curl op 19-10-2026 (zie de bronnen in /kennisbank/gidsen/wat-kost-linkbuilding/):
+//   startpagina/linkshop € 2 tot € 15: linkbuildingmasters.nl (startpagina-backlink € 1,99, Startpagina.nl-backlink € 14,95), linkbuildinghulpje.nl (€ 5 tot € 8)
+//   pakket € 8 tot € 50: linkbuildingmasters.nl (pakketten € 179,95 tot € 999,95 voor 7 tot 68 links), backlinkswinkel.nl (€ 25,98 tot € 49,80 per link; Drip € 150 tot € 500 voor 10 tot 40 links), flixmarketing.nl (€ 99 tot € 299 voor 13 tot 30 links)
+//   uitgever € 100 tot € 400: goonline.nl (€ 200 tot € 350), heers.nl (vanaf ongeveer € 100), backlinkswinkel.nl (gemiddeld € 185 tot € 421 per DR-band)
+//   bureau € 65 tot € 200: samonlinemarketing.nl (Basis € 500 tot € 1.000 voor 5 links, Premium € 1.000 tot € 2.000 voor 15, Geavanceerd € 2.000+ voor 30+)
+//   Drijfveer Media: € 75 per uur, minimaal 5 uur per maand, meestal 3 tot 5 links per uur (bevestigd door Robert, 19-10-2026).
+// Uren per link als je het zelf doet: voorbeeldwaarde 4, zoals het rekenvoorbeeld op /linkbuilding/linkbuilding-uitbesteden/.
+import { site } from '../../data/site';
+type Soort = 'shop' | 'pakket' | 'uitgever' | 'bureau' | 'drijfveer';
+interface Props {
+  id?: string;
+  budget?: number;
+  soort?: Soort;
+  uren?: number;
+  kop?: 'h2' | 'h3';
+  bron?: string; // waar de bronnen van de prijzen staan
+}
+const { id = 'linkbudget', budget = 500, soort = 'uitgever', uren = 4, kop = 'h3', bron = '/kennisbank/gidsen/wat-kost-linkbuilding/#bronnen' } = Astro.props;
+const Kop = kop;
+const soorten: { w: Soort; t: string }[] = [
+  { w: 'shop', t: 'Startpagina of linkshop' },
+  { w: 'pakket', t: 'Pakket bij een linkshop' },
+  { w: 'uitgever', t: 'Artikel bij een uitgever' },
+  { w: 'bureau', t: 'Bureau met maandpakket' },
+  { w: 'drijfveer', t: 'Drijfveer Media, per uur' },
+];
+---
+<div class="tool card" id={id} data-linkbudget>
+  <p class="kicker">Rekenhulp · Linkbuildingbudget</p>
+  <Kop class="titel">Wat krijg je voor je budget?</Kop>
+  <p class="intro muted">Vul in wat je per maand wilt uitgeven en kies een soort aanbieding. Je ziet hoeveel links dat ongeveer oplevert, en hoeveel uur het je kost om evenveel links zelf te regelen.</p>
+
+  <form class="velden" novalidate>
+    <fieldset class="breed keuzes keuze-pil">
+      <legend>Soort aanbieding</legend>
+      {soorten.map((s) => <label><input type="radio" name="s" value={s.w} checked={s.w === soort} /> {s.t}</label>)}
+    </fieldset>
+    <div class="veld">
+      <label for={`${id}-budget`}>Budget per maand<span class="sr-only"> in euro, exclusief btw</span></label>
+      <span class="invoer"><span class="voor" aria-hidden="true">€</span><input id={`${id}-budget`} name="b" inputmode="decimal" autocomplete="off" value={budget} /></span>
+    </div>
+    <div class="veld">
+      <label for={`${id}-uren`}>Jouw uren per link als je het zelf doet</label>
+      <input id={`${id}-uren`} name="u" inputmode="decimal" autocomplete="off" value={uren} />
+    </div>
+  </form>
+
+  <p class="sr-only" aria-live="polite" data-meld></p>
+  <div class="uitkomst" data-uit>
+    <p class="leeg">Zo reken je het zelf: deel je budget per maand door de prijs per link. Een link bij een linkshop kost € 2 tot € 15, in een pakket € 8 tot € 50, een artikel bij een uitgever € 100 tot € 400 en een link in een bureaupakket € 65 tot € 200. Bij ons betaal je € 75 per uur, minimaal vijf uur per maand, en een uur levert meestal drie tot vijf links op. Zet JavaScript aan om het hier uit te laten rekenen.</p>
+  </div>
+
+  <div class="acties">
+    <a class="btn" href="/contact/" data-cta>Vraag {site.contactpersoon} wat jouw budget oplevert</a>
+    <button class="btn btn-ghost deel" type="button" data-deel hidden>Kopieer link naar deze uitkomst</button>
+  </div>
+  <p class="bron klein muted">Bandbreedtes uit openbare prijzen van linkshops, uitgevers en bureaus, oktober 2026 (<a href={bron}>bronnen</a>). Alle bedragen exclusief btw. De uren per link zijn een voorbeeldwaarde: vul je eigen schatting in.</p>
+</div>
+
+<script>
+  type S = 'shop' | 'pakket' | 'uitgever' | 'bureau' | 'drijfveer';
+  const SOORT: Record<S, { naam: string; laag: number; hoog: number; min?: number; wat: string; let: string }> = {
+    shop: {
+      naam: 'een startpagina of linkshop', laag: 2, hoog: 15,
+      wat: 'Links op startpagina\'s en linkpagina\'s, meestal zonder tekst eromheen.',
+      let: 'Zulke links zijn voor iedereen te koop. Ze geven weinig door en vallen op als ze het grootste deel van je links worden.',
+    },
+    pakket: {
+      naam: 'een pakket bij een linkshop', laag: 8, hoog: 50,
+      wat: 'Een vast aantal links in één keer of per maand. De verkoper kiest de sites.',
+      let: 'Je weet vooraf hoeveel links je krijgt, maar niet waar. Vraag de lijst met sites voordat je betaalt.',
+    },
+    uitgever: {
+      naam: 'artikelen bij een uitgever', laag: 100, hoog: 400, min: 100,
+      wat: 'Een artikel met jouw link op een blog of nieuwssite. Sterke sites vragen € 1.000 of meer.',
+      let: 'Betaald, dus volgens Google met het label sponsored. Dan telt de link niet mee voor je posities, wel voor lezers en naamsbekendheid.',
+    },
+    bureau: {
+      naam: 'een bureau met een maandpakket', laag: 65, hoog: 200, min: 500,
+      wat: 'Een vast aantal links per maand met een rapportage. Hoe meer links in het pakket, hoe lager de prijs per link.',
+      let: 'Vraag of de plaatsingskosten in het maandbedrag zitten en of je elke link te zien krijgt.',
+    },
+    drijfveer: {
+      naam: 'Drijfveer Media', laag: 15, hoog: 25, min: 375,
+      wat: 'Thorgall zoekt de links met de hand, meestal drie tot vijf per uur. Je ziet elke link in je maandoverzicht.',
+      let: 'Je betaalt voor tijd en oordeel. Betaalde plaatsingen doen we alleen in overleg, met het label sponsored, en die kosten komen bovenop de uren.',
+    },
+  };
+  const VOLGORDE: S[] = ['shop', 'pakket', 'uitgever', 'bureau', 'drijfveer'];
+  const KORT: Record<S, string> = { shop: 'Startpagina of linkshop', pakket: 'Pakket bij een linkshop', uitgever: 'Artikel bij een uitgever', bureau: 'Bureau met maandpakket', drijfveer: 'Drijfveer Media' };
+  const eur = (n: number) => '€ ' + Math.round(n).toLocaleString('nl-NL');
+  const gt = (n: number) => Math.round(n).toLocaleString('nl-NL');
+  const getal = (s: string) => {
+    let t = s.trim().replace(/[€%\s]/g, '');
+    if (t === '') return NaN;
+    if (t.includes(',')) t = t.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, '');
+    const n = parseFloat(t);
+    return Number.isFinite(n) ? n : NaN;
+  };
+  // Links per maand voor een budget: [laag, hoog]. Bij ons: hele uren, minimaal vijf.
+  const links = (s: S, budget: number): [number, number, number] => {
+    if (s === 'drijfveer') {
+      const uren = Math.max(5, Math.floor(budget / 75));
+      return [uren * 3, uren * 5, uren];
+    }
+    const d = SOORT[s];
+    return [Math.floor(budget / d.hoog), Math.floor(budget / d.laag), 0];
+  };
+  const bereik = (a: number, b: number) => (a === b ? gt(a) : `${gt(a)} tot ${gt(b)}`);
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/linkbudget/${stap}`, r: '' })); } catch {} };
+
+  document.querySelectorAll<HTMLElement>('[data-linkbudget]').forEach((el) => {
+    const form = el.querySelector('form')!;
+    const uit = el.querySelector<HTMLElement>('[data-uit]')!;
+    const cta = el.querySelector<HTMLAnchorElement>('[data-cta]')!;
+    const deel = el.querySelector<HTMLButtonElement>('[data-deel]')!;
+    const meld = el.querySelector<HTMLElement>('[data-meld]')!;
+    const veld = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const gekozen = () => (form.querySelector<HTMLInputElement>('input[name="s"]:checked')?.value ?? 'uitgever') as S;
+    const foutId = `${el.id}-fout`;
+    let gebruikt = false;
+    let geteld = false;
+    const zeg = (t: string) => { if (gebruikt) meld.textContent = t; };
+    const markeer = (fout: string[]) => ['b', 'u'].forEach((n) => {
+      const v = veld(n);
+      if (fout.includes(n)) { v.setAttribute('aria-invalid', 'true'); v.setAttribute('aria-describedby', foutId); }
+      else { v.removeAttribute('aria-invalid'); v.removeAttribute('aria-describedby'); }
+    });
+
+    // Een gedeelde uitkomst: invoer uit de link overnemen.
+    const q = new URLSearchParams(location.search);
+    const qs = q.get('lk_s');
+    if (qs && qs in SOORT) form.querySelector<HTMLInputElement>(`input[name="s"][value="${qs}"]`)!.checked = true;
+    ['b', 'u'].forEach((n) => { const v = q.get(`lk_${n}`); if (v != null) veld(n).value = v.slice(0, 10); });
+
+    const reken = () => {
+      const budget = getal(veld('b').value), urenPerLink = getal(veld('u').value);
+      const fouten: [string, string][] = [];
+      if (!(budget > 0)) fouten.push(['b', 'Budget per maand: vul een bedrag groter dan nul in.']);
+      else if (budget > 100000) fouten.push(['b', 'Budget per maand: vul een bedrag tot € 100.000 in.']);
+      if (!(urenPerLink > 0) || urenPerLink > 40) fouten.push(['u', 'Uren per link: vul een getal tussen 0 en 40 in.']);
+      markeer(fouten.map(([f]) => f));
+      if (fouten.length) {
+        uit.innerHTML = `<p class="leeg fout" id="${foutId}">${fouten.map(([, t]) => t).join(' ')}</p>`;
+        zeg(fouten.map(([, t]) => t).join(' '));
+        return;
+      }
+      const s = gekozen();
+      const d = SOORT[s];
+      const [laag, hoog, uren] = links(s, budget);
+      const zelfLaag = laag * urenPerLink, zelfHoog = hoog * urenPerLink;
+      let kop: string;
+      let extra = '';
+      if (s === 'drijfveer') {
+        kop = `Meestal ${bereik(laag, hoog)} links per maand`;
+        extra = budget < 375
+          ? `<p class="let">Ons minimum is vijf uur per maand, dus € 375. Met ${eur(budget)} kom je daar niet aan. Hierboven staat wat vijf uur oplevert.</p>`
+          : `<p class="uitleg">Voor ${eur(budget)} werkt Thorgall ${gt(uren)} uur per maand voor je (${eur(uren * 75)}). We spreken hele uren af.</p>`;
+      } else if (laag === 0 && hoog === 0) {
+        kop = `Met ${eur(budget)} koop je hier nog geen link`;
+      } else {
+        kop = `Ongeveer ${bereik(laag, hoog)} links per maand`;
+        if (d.min && budget < d.min) extra = `<p class="let">${s === 'bureau' ? 'De bureaupakketten in onze bronnen beginnen bij € 500 per maand.' : 'Een artikel bij een uitgever kost zelden minder dan € 100.'} Met ${eur(budget)} zit je daaronder.</p>`;
+      }
+      const zelf = zelfHoog > 160
+        ? `Evenveel links zelf met de hand regelen kost je ${bereik(zelfLaag, zelfHoog)} uur per maand. Dat is meer dan een volle werkmaand: zulke aantallen haal je alleen met links die voor iedereen te koop zijn.`
+        : `Evenveel links zelf met de hand regelen kost je ongeveer ${bereik(zelfLaag, zelfHoog)} uur per maand, bij ${gt(urenPerLink)} uur per link.`;
+      const rijen = VOLGORDE.map((k) => {
+        const [a, b] = links(k, budget);
+        const p = SOORT[k];
+        const naam = KORT[k];
+        return `<tr${k === s ? ' class="gekozen"' : ''}><th scope="row">${naam}</th><td>${b === 0 ? 'geen' : bereik(a, b)}</td><td>${eur(p.laag)} tot ${eur(p.hoog)}</td></tr>`;
+      }).join('');
+      zeg(`${kop}. ${zelf}`);
+      uit.innerHTML = `
+        <p class="oordeel">${kop}</p>
+        <p class="uitleg">${d.wat}</p>
+        ${extra}
+        <p class="uitleg">${d.let}</p>
+        <dl class="getallen-rij">
+          <div><dt>Prijs per link</dt><dd>${eur(d.laag)} tot ${eur(d.hoog)}</dd></div>
+          <div><dt>Zelf doen</dt><dd>${bereik(zelfLaag, zelfHoog)} uur</dd></div>
+        </dl>
+        <p class="uitleg">${zelf}</p>
+        <div class="tabel-scroll"><table class="vergelijk">
+          <caption class="klein muted">Hetzelfde budget, ${eur(budget)} per maand, bij elke soort aanbieding</caption>
+          <thead><tr><th scope="col">Soort</th><th scope="col">Links per maand</th><th scope="col">Per link</th></tr></thead>
+          <tbody>${rijen}</tbody>
+        </table></div>
+        <p class="klein muted">Bij Drijfveer Media is de prijs per link de waarde van het werk: € 75 per uur gedeeld door drie tot vijf links. Het aantal links zegt niets over de kwaliteit. Eén goede link is meer waard dan honderd slechte.</p>`;
+      const vraag = `Ik heb ongeveer ${eur(budget)} per maand voor linkbuilding. Wat kan Thorgall daarmee doen?`;
+      const context = `Linkbudget-rekenhulp: ${eur(budget)} per maand, gekozen: ${d.naam}, ${gt(urenPerLink)} uur per link zelf.`;
+      cta.href = `/contact/?${new URLSearchParams({ soort: 'Uitslag tool', vraag, context })}`;
+      const p = new URLSearchParams(location.search);
+      p.set('lk_s', s);
+      p.set('lk_b', veld('b').value.trim());
+      p.set('lk_u', veld('u').value.trim());
+      history.replaceState(null, '', `${location.pathname}?${p}${location.hash}`);
+      if (!geteld && gebruikt) { geteld = true; tel('uitkomst'); }
+    };
+
+    let wacht: number | undefined;
+    form.addEventListener('input', () => { gebruikt = true; clearTimeout(wacht); wacht = window.setTimeout(reken, 250); });
+    form.addEventListener('change', () => { gebruikt = true; reken(); });
+    form.addEventListener('submit', (e) => { e.preventDefault(); reken(); });
+    deel.hidden = false;
+    deel.addEventListener('click', async () => {
+      const link = `${location.origin}${location.pathname}${location.search}#${el.id}`;
+      try { await navigator.clipboard.writeText(link); deel.textContent = 'Link gekopieerd'; meld.textContent = 'De link naar deze uitkomst staat op je klembord.'; }
+      catch { window.prompt('Kopieer deze link', link); }
+      setTimeout(() => (deel.textContent = 'Kopieer link naar deze uitkomst'), 2000);
+    });
+    reken();
+  });
+</script>
+
+<style>
+  .tool { margin: 28px 0; padding: clamp(20px, 4vw, 32px); border: 2px solid var(--navy); box-shadow: 0 30px 70px -40px rgb(7 70 99 / 0.5); max-width: 100%; min-width: 0; }
+  .titel { font-weight: 750; font-size: var(--step-1); line-height: 1.2; margin: 4px 0 8px; }
+  .intro { margin: 0 0 18px; max-width: 60ch; }
+  .velden { display: grid; align-items: end; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); margin-bottom: 18px; }
+  .velden .breed { grid-column: 1 / -1; }
+  .veld label { font-size: 0.95rem; }
+  .veld input { min-height: 48px; width: 100%; }
+  .invoer { position: relative; display: flex; align-items: center; }
+  .invoer input { width: 100%; }
+  .invoer .voor { position: absolute; left: 14px; color: var(--muted); font-weight: 700; pointer-events: none; }
+  .invoer .voor + input { padding-left: 32px; }
+  .uitkomst { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; min-width: 0; }
+  .uitkomst :global(p) { margin: 0 0 10px; }
+  .uitkomst :global(p:last-child) { margin-bottom: 0; }
+  .uitkomst :global(.leeg) { color: var(--muted); }
+  .uitkomst :global(.leeg.fout) { color: #b3261e; font-weight: 600; }
+  .uitkomst :global(.oordeel) { font-weight: 800; font-size: 1.25rem; line-height: 1.25; color: var(--navy); }
+  .uitkomst :global(.let) { border-left: 4px solid #f2b200; padding-left: 12px; }
+  .uitkomst :global(.getallen-rij) { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); margin: 14px 0; }
+  .uitkomst :global(.getallen-rij div) { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .uitkomst :global(dt) { font-size: 0.85rem; color: var(--muted); line-height: 1.3; }
+  .uitkomst :global(dd) { margin: 4px 0 0; font-size: 1.3rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+  .uitkomst :global(.vergelijk) { width: 100%; margin: 6px 0 10px; font-size: 0.92rem; }
+  .uitkomst :global(.vergelijk caption) { text-align: left; caption-side: top; padding-bottom: 6px; }
+  .uitkomst :global(.vergelijk th[scope="row"]) { font-weight: 600; text-align: left; }
+  .uitkomst :global(.vergelijk .gekozen) { background: #fff4ec; }
+  .uitkomst :global(.vergelijk .gekozen th) { font-weight: 800; }
+  .acties { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  .acties .btn { min-height: 48px; text-align: center; }
+  .deel { font-size: 1rem; }
+  .bron { margin: 0; }
+</style>

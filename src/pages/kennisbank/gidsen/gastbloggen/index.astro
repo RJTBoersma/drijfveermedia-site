@@ -1,0 +1,253 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--gastbloggen.astro';
+import { site, persoon } from '../../../../data/site';
+import { termijnen } from '../../../../data/termijnen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/gastbloggen/';
+const datum = '2026-10-19';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat is een gastblog?' },
+  { id: 'google', titel: 'Wat Google ervan vindt' },
+  { id: 'vinden', titel: '1. Een vaksite vinden' },
+  { id: 'beoordelen', titel: '2. De site beoordelen' },
+  { id: 'voorstel', titel: '3. Het voorstel' },
+  { id: 'schrijven', titel: '4. Het artikel' },
+  { id: 'betaald', titel: 'Betaald? Dan sponsored' },
+  { id: 'linkverkoper', titel: 'Een linkverkoper herkennen' },
+  { id: 'meten', titel: 'Wat je meet' },
+  { id: 'uitbesteden', titel: 'Laten schrijven' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Gastblog plaatsen: zo kom je met een gastartikel op een vaksite',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Gastbloggen',
+  citation: [
+    'https://developers.google.com/search/blog/2017/05/a-reminder-about-links-in-large-scale',
+    'https://developers.google.com/search/docs/essentials/spam-policies?hl=nl',
+    'https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links?hl=nl',
+    'https://backlinkswinkel.nl/kennisbank/guest-post-sites/',
+    'https://www.mijnzzp.nl/Weblogs/Van-de-redactie/Platforms-voor-gastbloggers',
+  ],
+}];
+---
+<Base
+  title="Gastblog plaatsen: zo kom je op een vakblad of vakblog"
+  description="Een gastblog plaatsen op een vakblad of vakblog: zo vind je de juiste site, schrijf je een voorstel dat een redacteur leest en herken je een linkverkoper."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Gastbloggen', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Linkbuilding" titel="Gastblog plaatsen: zo kom je met een gastartikel op een vaksite">
+    <p>Een gastblog plaatsen werkt nog steeds, als je schrijft voor de lezers van een vakblad of vakblog en niet voor de link. Deze werkinstructie loopt het hele traject door: een site vinden, een voorstel dat een redacteur leest, het artikel zelf, en hoe je een linkverkoper herkent die zich gastblogsite noemt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een gastblog is een artikel dat je schrijft voor de site van een ander. Je laat er je kennis zien aan lezers die je anders niet bereikt.</li>
+            <li>Google heeft er geen bezwaar tegen, zolang het artikel de lezer iets leert. Gastblogs op grote schaal, met zoekwoorden in de links, noemt Google linkspam.</li>
+            <li>Zoek vaksites die je klanten echt lezen. Met een paar zoekopdrachten in Google vind je ze sneller.</li>
+            <li>Eén link, met je bedrijfsnaam of een gewone omschrijving als linktekst. Geen verkooppraat.</li>
+            <li>Betaal je voor de plaatsing, op welke manier ook, dan hoort er rel="sponsored" bij de link.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat is een gastblog, en wanneer werkt het?</h2>
+        <p>Een gastblog, of gastartikel, is een artikel dat je schrijft voor de website van een ander. De site plaatst het onder jouw naam, met een korte bio en meestal een link naar je website. Jij krijgt bereik en een link. De site krijgt gratis inhoud van een vakman. Een gastblog schrijven is zo een manier om je expertise te laten zien aan een doelgroep die je anders niet bereikt, en om te bouwen aan autoriteit, bij lezers en bij Google.</p>
+        <p>Dat werkt alleen als beide kanten er iets aan hebben. Een installateur die voor een woonblog uitlegt wanneer een warmtepomp in een jaren dertig woning zin heeft, schrijft iets wat de lezers willen weten. Dezelfde installateur die een algemeen stuk over "duurzaam wonen" schrijft met drie links naar zijn eigen diensten, schrijft een advertentie.</p>
+        <p>Wie zoekt op gastblog plaatsen, vindt vooral platforms die plaatsingen verkopen en korte uitleg over wat een gastblog is. Hoe je het zelf aanpakt, van eerste zoekopdracht tot meting, lees je zelden. Dat doet deze gids. Hoe gastbloggen past naast andere manieren om links te krijgen, staat in de gids <a href="/kennisbank/gidsen/linkbuilding-strategie/">linkbuilding-strategie</a>.</p>
+
+        <h2 id="google">Wat Google van gastartikelen vindt</h2>
+        <p>Google schreef er in 2017 een apart blogbericht over, en dat is nog steeds de beste samenvatting. Google heeft geen bezwaar tegen gastartikelen die, vrij vertaald, "gebruikers informeren, het publiek van een andere site iets leren of aandacht vragen voor je zaak of bedrijf". Het gaat mis als het vooral om links te doen is, op grote schaal. Google noemt vier signalen:</p>
+        <ul>
+          <li>links vol zoekwoorden naar je eigen site in de artikelen;</li>
+          <li>artikelen die op heel veel verschillende sites verschijnen, of heel veel artikelen op een paar grote sites;</li>
+          <li>schrijvers die geen verstand hebben van het onderwerp;</li>
+          <li>dezelfde of bijna dezelfde tekst in al die artikelen.</li>
+        </ul>
+        <p>In de huidige <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">spamregels</a> staat het nog steeds. Links met geoptimaliseerde ankertekst in artikelen, gastposts of persberichten op andere sites vallen onder linkspam. En wie geld of een dienst geeft in ruil voor een artikel met een link, koopt een link.</p>
+        <p>Er is nog een regel die je moet kennen: de regel tegen misbruik van de reputatie van een site. Die gaat over sites die artikelen van anderen plaatsen vooral omdat de site zelf al goed scoort. Een onderwijssite met betaalde stukken over flitskredieten, bijvoorbeeld. Plaats je een gastartikel op een site waar het niet thuishoort, dan help je niemand. Zo'n artikel kan ook met de site mee wegzakken.</p>
+        <blockquote>Schrijf het artikel alsof er geen link in mag. Is het dan nog de moeite waard, dan zit je goed.</blockquote>
+
+        <h2 id="vinden">Stap 1: een vakblad of vakblog vinden dat gastartikelen plaatst</h2>
+        <p>Begin bij wat je al kent: je eigen vakgebied en de niche waarin je werkt. Welke vakbladen leest je branche? Welke blogs delen je klanten? Heeft je brancheorganisatie een blad of een nieuwsbrief met bijdragen van leden? Die drie vragen leveren vaak al vijf namen op. Daarna ga je zoeken in Google, met een paar handige zoekopdrachten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekopdracht</th><th>Wat je vindt</th></tr></thead>
+            <tbody>
+              <tr><td><code>warmtepomp "gastblog"</code></td><td>Pagina's over jouw onderwerp waar het woord gastblog op staat</td></tr>
+              <tr><td><code>installatietechniek "schrijf voor ons"</code></td><td>Sites die schrijvers zoeken</td></tr>
+              <tr><td><code>intitle:"gastauteur" verduurzamen</code></td><td>Pagina's met gastauteur in de titel</td></tr>
+              <tr><td><code>inurl:gastblog bouw</code></td><td>Sites met een aparte rubriek voor gastblogs</td></tr>
+              <tr><td><code>"artikel aanleveren" OR "bijdrage insturen" + je vak</code></td><td>Redacties die bijdragen aannemen</td></tr>
+              <tr><td><code>"geschreven door" "gastauteur" -site:jouwbedrijf.nl</code></td><td>Artikelen van gastschrijvers, zonder je eigen site</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Vervang de vakwoorden door die van jou. Meer over zulke zoekopdrachten lees je bij <a href="/kennisbank/geavanceerd-zoeken-met-google/">geavanceerd zoeken met Google</a>.</p>
+        <p>Een andere route: kijk waar je concurrenten gastartikelen schrijven. Zoek op hun naam tussen aanhalingstekens, of kijk in een tool als SE Ranking of Ahrefs welke sites naar hen linken. Een vakblog die al een gastartikel van een collega plaatste, staat er waarschijnlijk open voor. Mik dan op een ander onderwerp dan die collega.</p>
+        <p>Zet alles in een simpele lijst: de site, het onderwerp, of er gastartikelen staan, en de naam van de redacteur als die op de site staat. Tien goede kandidaten zijn genoeg om mee te beginnen.</p>
+
+        <h2 id="beoordelen">Stap 2: beoordeel de site voordat je mailt</h2>
+        <p>Een gastartikel kost je een dag werk. Kijk dus eerst of de site die dag waard is. Dit zijn de vragen die we zelf stellen:</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={44} /><h3>Schrijft de redactie zelf ook?</h3></div>
+        <p>Een goede vaksite heeft vaste auteurs en een eigen redactie, die bepaalt wat ze publiceren. Gastartikelen zijn een aanvulling. Bestaat de site alleen uit gastbijdragen, dan is er geen redactie, en waarschijnlijk ook geen publiek.</p>
+        <div class="stap-kop"><Tekening naam="doel" maat={44} /><h3>Heeft de site één duidelijk onderwerp?</h3></div>
+        <p>Een blog over bouwen en wonen is prima. Een blog met artikelen over bouwen, casino's, kredieten en reizen door elkaar is een linkverkoper. Kijk naar de laatste twintig artikelen, niet naar de homepage.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={44} /><h3>Zijn er echte lezers?</h3></div>
+        <p>Reacties onder artikelen, een nieuwsbrief, een actieve socialemediapagina. Tools als SE Ranking en Ahrefs schatten ook het verkeer uit Google. Dat is een schatting, maar een site met duizend artikelen en geen bezoekers valt meteen op.</p>
+        <div class="stap-kop"><Tekening naam="ketting" maat={44} /><h3>Hoe zien de links in andere gastartikelen eruit?</h3></div>
+        <p>Open drie gastartikelen. Staat er één link in, met een gewone tekst? Of vier links met precies het zoekwoord van de schrijver? Klik met de rechtermuisknop op een link en kies Inspecteren. Zo zie je of er rel="sponsored" of rel="nofollow" bij staat.</p>
+        <div class="stap-kop"><Tekening naam="boek" maat={44} /><h3>Zijn er richtlijnen voor schrijvers?</h3></div>
+        <p>Een redactie die zegt wat ze wel en niet plaatst, neemt haar site serieus. Lees die richtlijnen goed. Ze vertellen je ook wat de redacteur in je voorstel wil zien.</p>
+
+        <Tussenactie />
+        <h2 id="voorstel">Stap 3: een voorstel dat een redacteur leest</h2>
+        <p>Een redacteur krijgt veel mails van mensen die "een gastblog willen aanbieden". De meeste zijn standaardteksten met een vraag om een dofollow-link. Die gaan ongelezen weg. Een redacteur zoekt waardevolle content voor haar lezers. Jouw mail moet in tien seconden laten zien dat je de site kent, dat je iets te vertellen hebt en dat de lezer er iets aan heeft.</p>
+        <p>In de gids over linkbuilding-strategie staat een korte mail voor een kapotte link. Een voorstel voor een gastartikel vraagt meer. Dit is de opbouw die werkt:</p>
+        <ol>
+          <li><b>Een onderwerpregel met het idee.</b> Geen "Samenwerking?" maar het onderwerp zelf.</li>
+          <li><b>Eén zin waaruit blijkt dat je de site leest.</b> Noem een artikel dat je las, en waarom je daar iets aan wilt toevoegen.</li>
+          <li><b>Twee of drie onderwerpen, elk in één zin.</b> Concreet, voor hun lezers, en nog niet op hun site.</li>
+          <li><b>Waarom jij.</b> Wat je doet, hoe lang al, in één zin.</li>
+          <li><b>Wat de redacteur krijgt.</b> Een af artikel, eigen foto's, op de lengte die zij willen.</li>
+          <li><b>Geen vraag om een link.</b> Je bio met je bedrijfsnaam volgt vanzelf. Vraag daar pas naar als het artikel is goedgekeurd.</li>
+        </ol>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeldmail (verzonnen)</p>
+          <p><b>Onderwerp:</b> Idee voor een artikel: warmtepomp in een jaren dertig woning</p>
+          <p>Beste Marieke,</p>
+          <p>Uw artikel over isoleren van jaren dertig woningen las ik met plezier. U schrijft dat veel lezers daarna twijfelen over een warmtepomp. Daar zie ik bij ons in de praktijk elke week vragen over.</p>
+          <p>Misschien is een van deze onderwerpen iets voor uw lezers:</p>
+          <ul>
+            <li>Warmtepomp in een jaren dertig woning: wanneer het wel en niet kan, met drie voorbeelden.</li>
+            <li>De vijf vragen die een installateur bij de eerste afspraak moet stellen.</li>
+            <li>Hybride of volledig elektrisch: een rekenvoorbeeld voor een gemiddelde rijtjeswoning.</li>
+          </ul>
+          <p>Ik ben installateur in Hoogeveen en doe dit werk sinds 2009. U krijgt een afgerond artikel van ongeveer 900 woorden, met eigen foto's, en ik pas het graag aan uw richtlijnen aan.</p>
+          <p>Met vriendelijke groet,<br />Jan Bakker, Installatiebedrijf Bakker</p>
+        </div>
+        <p>Geen antwoord na tien werkdagen? Stuur één korte herinnering, met het onderwerp dat je zelf het sterkst vindt. Daarna laat je het los en ga je door naar de volgende site. Een nee is ook nuttig. Vraag dan of er een ander onderwerp is waar de redactie wel naar zoekt.</p>
+
+        <h2 id="schrijven">Stap 4: wat er in het artikel mag, en wat niet</h2>
+        <p>Een ja van de redacteur is pas het begin. Het artikel moet zo goed zijn dat ze je later weer willen. Dit zijn de regels die we zelf aanhouden.</p>
+        <ul class="vink">
+          <li><b>Eén link naar je eigen site.</b> In je bio, of in de tekst als hij de lezer echt verder helpt. Bijvoorbeeld naar een rekenhulp of een gids, niet naar je offerteformulier.</li>
+          <li><b>Een natuurlijke linktekst.</b> Je bedrijfsnaam, je webadres of een gewone omschrijving, zoals "deze uitleg over warmtepompen". Niet "warmtepomp installateur Hoogeveen".</li>
+          <li><b>Links naar anderen mogen ook.</b> Een bron, een onderzoek, een fabrikant. Dat maakt het artikel beter en laat zien dat het niet om jouw link draait.</li>
+          <li><b>Geen verkooppraat.</b> Geen prijzen, geen acties, geen "neem contact met ons op". Je vakkennis is de reclame.</li>
+          <li><b>Een nieuw artikel.</b> Geen kopie van een tekst op je eigen site. Google noemt dezelfde tekst op veel sites uitdrukkelijk als signaal.</li>
+          <li><b>Je eigen ervaring.</b> Een klus, een fout die je zag, een getal uit je eigen werk. Dat kan alleen jij schrijven.</li>
+        </ul>
+        <p>Een goede bio is twee zinnen. Wie je bent en wat je doet, met één link. "Jan Bakker is installateur bij Installatiebedrijf Bakker in Hoogeveen en adviseert huiseigenaren over warmtepompen." Met de bedrijfsnaam als link. Meer hoeft niet.</p>
+        <p>Laat het artikel ook leven nadat het online staat. Deel het, reageer op vragen eronder en link er vanaf je eigen site naar als het past. Zo bouw je een relatie met de redactie. Die is op termijn meer waard dan één link.</p>
+
+        <h2 id="betaald">Betaald of niet: wanneer hoort er sponsored bij?</h2>
+        <p>Steeds vaker vraagt een site geld voor een plaatsing. Mijnzzp.nl schrijft het in zijn eigen uitleg: "Steeds vaker vragen uitgevers en gastbloggers bovendien een vergoeding voor publicatie." Dat mag. De link hoort dan wel een label te krijgen. Google schrijft in de uitleg over <a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links?hl=nl" rel="noopener">het kwalificeren van uitgaande links</a> dat advertenties en betaalde plaatsingen rel="sponsored" krijgen. Ook nofollow is toegestaan, maar sponsored heeft de voorkeur.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Situatie</th><th>Betaald?</th><th>Label</th></tr></thead>
+            <tbody>
+              <tr><td>De redactie plaatst je artikel omdat het goed is, zonder vergoeding</td><td>Nee</td><td>Geen label nodig</td></tr>
+              <tr><td>Je betaalt een bedrag per plaatsing of per link</td><td>Ja</td><td>rel="sponsored"</td></tr>
+              <tr><td>De site plaatst alleen als je ook een advertentie afneemt</td><td>Ja</td><td>rel="sponsored"</td></tr>
+              <tr><td>Je stuurt een product of geeft korting in ruil voor het artikel</td><td>Ja</td><td>rel="sponsored"</td></tr>
+              <tr><td>Je ruilt: jij plaatst hun artikel, zij het jouwe</td><td>Ja, het is een ruil</td><td>rel="sponsored" of nofollow</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een betaalde plaatsing met label geeft geen rankingkracht door. Ze kan wel bezoekers, naamsbekendheid en vermeldingen opleveren. Op een goed gelezen vakblad kan dat het geld waard zijn. Op een site zonder lezers nooit.</p>
+
+        <h2 id="linkverkoper">Zo herken je een linkverkoper die zich gastblogsite noemt</h2>
+        <p>Veel sites die gastblogs plaatsen, verkopen eigenlijk links. Dat zie je aan de prijzen. Backlinkswinkel noemt bijvoorbeeld losse plaatsingen vanaf € 5 en een Starter-pakket van € 249 per jaar voor 5 links (openbare prijzen, oktober 2026). Wie zo'n plaatsing koopt, koopt een betaalde link. Volgens Google hoort er dan sponsored bij. Wat je dan precies koopt, staat in de gids <a href="/kennisbank/gidsen/backlinks-kopen/">backlinks kopen</a>. Deze signalen verraden een linkverkoper:</p>
+        <ul>
+          <li><b>Een prijslijst per link</b>, of beloftes als "dofollow gegarandeerd" en "blijvend online".</li>
+          <li><b>Alle onderwerpen door elkaar.</b> Wonen, gokken, kredieten, reizen en beauty op één site.</li>
+          <li><b>Geen vaste schrijvers.</b> Alles staat op naam van "redactie" of van steeds andere gastschrijvers.</li>
+          <li><b>Elk artikel heeft meerdere links</b> naar bedrijven, met dure zoekwoorden als linktekst.</li>
+          <li><b>Geen lezers.</b> Geen reacties, geen nieuwsbrief, en volgens de tools nauwelijks verkeer uit Google.</li>
+          <li><b>Een hoge score, maar een raar verleden.</b> Een site die vroeger over iets heel anders ging en is overgenomen. Kijk in de Wayback Machine (web.archive.org) hoe hij er een paar jaar geleden uitzag.</li>
+          <li><b>Je vindt de site alleen via een lijst</b> van een platform, niet doordat lezers hem delen.</li>
+        </ul>
+        <p>Een site die drie van deze signalen heeft, laat je liggen. Ook met een sponsored-label levert een plaatsing daar niets op, want er zijn geen lezers.</p>
+
+        <h2 id="meten">Wat je meet na een plaatsing</h2>
+        <p>Een gastartikel is pas geslaagd als het iets oplevert. Kijk na een maand, na drie maanden en na een jaar naar deze punten.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat</th><th>Waar je het ziet</th><th>Wat het zegt</th></tr></thead>
+            <tbody>
+              <tr><td>Staat de link er nog, zonder label?</td><td>Het artikel zelf, met Inspecteren</td><td>Of de afspraak is nagekomen</td></tr>
+              <tr><td>Bezoekers via het artikel</td><td>Google Analytics 4, bij verwijzingen</td><td>Of de lezers van de site jou ook vinden</td></tr>
+              <tr><td>Nieuwe verwijzende site</td><td>Search Console, rapport Links</td><td>Of Google de link heeft gevonden</td></tr>
+              <tr><td>Aanvragen of telefoontjes</td><td>Je formulier, je telefoon, de vraag "hoe kwam u bij ons?"</td><td>Of het je klanten oplevert</td></tr>
+              <tr><td>Posities van de pagina waar je naartoe linkt</td><td>Search Console, rapport Prestaties</td><td>Of de link helpt in Google</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>{termijnen.linkbuilding} Eén gastartikel verplaatst zelden een pagina. Een paar goede, verspreid over een jaar, op sites die je klanten lezen, doen dat wel. Hoe je de links van je site in Search Console bekijkt, staat in de gids over <a href="/kennisbank/gidsen/backlinks/">backlinks</a>.</p>
+
+        <h2 id="uitbesteden">Gastbloggen laten doen</h2>
+        <p>Gastbloggen kost tijd. Een site vinden, beoordelen, een voorstel schrijven, het artikel schrijven en opvolgen: reken op een dag per artikel als je het zelf doet. Wil je dat niet, dan kan het via ons.</p>
+        <p>Bij <a href="/linkbuilding/">linkbuilding van Drijfveer Media</a> schrijven wij de teksten. Is er een gastartikel nodig, dan schrijven wij het en krijg je het eerst te lezen. Thorgall van Eeden zoekt en beoordeelt de sites en houdt contact met de redactie. Je betaalt € 75 per uur, exclusief btw, met een minimum van vijf uur per maand. Betaalde plaatsingen doen we alleen in overleg met jou, met het label sponsored erbij. Die kosten komen bovenop de uren. Wat je precies krijgt, staat bij <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>.</p>
+        <p>Zoek je vooral lokale links, uit je eigen regio? Begin dan bij de gids <a href="/kennisbank/gidsen/lokale-linkbuilding/">lokale linkbuilding</a>. Daar staan verenigingen en nieuwssites in Drenthe, Groningen en Friesland die we zelf hebben nagelopen.</p>
+
+        <h3>Bronnen</h3>
+        <ul class="klein">
+          <li>Google Search Central Blog, <a href="https://developers.google.com/search/blog/2017/05/a-reminder-about-links-in-large-scale" rel="noopener">A reminder about links in large-scale article campaigns</a>, mei 2017.</li>
+          <li>Google Search Central, <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">spamregels voor Google Zoeken</a>, onderdelen linkspam en reputatie van een site.</li>
+          <li>Google Search Central, <a href="https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links?hl=nl" rel="noopener">uitgaande links kwalificeren</a>.</li>
+          <li>Backlinkswinkel, <a href="https://backlinkswinkel.nl/kennisbank/guest-post-sites/" rel="noopener">guest posting sites: lijst en wat het kost</a>.</li>
+          <li>Mijnzzp.nl, <a href="https://www.mijnzzp.nl/Weblogs/Van-de-redactie/Platforms-voor-gastbloggers" rel="noopener">platforms voor gastbloggers</a>.</li>
+        </ul>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={13} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs intro="Links met de hand gezocht, teksten die we zelf schrijven, en een doel waar je ons op mag aanspreken." />
+
+  <Faq
+    vragen={[
+      { v: 'Werkt gastbloggen nog voor SEO?', a: 'Ja, als je schrijft voor de lezers van een vaksite en de link natuurlijk is. Google heeft geen bezwaar tegen gastartikelen die lezers iets leren. Gastartikelen op grote schaal, met zoekwoorden in de links, noemt Google linkspam.' },
+      { v: 'Hoeveel links mag ik in een gastartikel zetten?', a: 'Eén link naar je eigen site is genoeg, in je bio of in de tekst als hij de lezer helpt. Links naar bronnen van anderen mogen ook. Meerdere links naar je eigen diensten maken van het artikel een advertentie.' },
+      { v: 'Moet een betaald gastartikel een sponsored-label krijgen?', a: 'Ja. Betaal je met geld, een product, korting of een ruil, dan is het een betaalde plaatsing. Google vraagt dan om rel="sponsored" bij de link, of rel="nofollow".' },
+      { v: 'Hoe vind ik sites die een gastblog willen plaatsen?', a: 'Begin bij de vakbladen en blogs die je branche al leest. Zoek daarna in Google op je vak met woorden als "gastblog", "schrijf voor ons" of "gastauteur", en kijk waar je concurrenten gastartikelen schreven.' },
+      { v: 'Hoe lang moet een gastartikel zijn?', a: 'Zo lang als de redactie wil, en zo lang als het onderwerp nodig heeft. Vraag het na of kijk naar andere artikelen op de site. Een artikel van 800 tot 1.200 woorden is voor veel vakblogs een goede lengte.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Linkbuilding', href: '/linkbuilding/', tekst: 'Wij zoeken de sites en schrijven de teksten.' },
+      { label: 'Gids', titel: 'Linkbuilding-strategie', href: '/kennisbank/gidsen/linkbuilding-strategie/', tekst: 'Waar gastbloggen past in je plan.' },
+      { label: 'Gids', titel: 'Lokale linkbuilding', href: '/kennisbank/gidsen/lokale-linkbuilding/', tekst: 'Linkkansen in Drenthe, Groningen en Friesland.' },
+      { label: 'Begrip', titel: 'Wat is een ankertekst?', href: '/kennisbank/wat-is/ankertekst/', tekst: 'De klikbare tekst van een link.', teken: 'ketting' },
+    ]}
+  />
+
+  <Actie titel="Wil je een gastartikel laten schrijven?" tekst={`${site.contactpersoon} kijkt welke vaksites bij jouw bedrijf passen en belt je met wat hij ziet. Gratis, en je zit nergens aan vast.`} />
+</Base>

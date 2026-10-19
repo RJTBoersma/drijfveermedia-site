@@ -1,0 +1,199 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Aanvraagformulier from '../../../components/pagina/Aanvraagformulier.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
+import LinkScan from '../../../components/tool/LinkScan.astro';
+import Scene from '../../../components/scenes/linkbuilding--linkbuilding-scan.astro';
+import { site } from '../../../data/site';
+
+const url = '/linkbuilding/linkbuilding-scan/';
+const hoofdstukken = [
+  { id: 'linkscan', titel: 'De scan' },
+  { id: 'exporteren', titel: 'Je links exporteren' },
+  { id: 'betekenis', titel: 'Wat de uitkomst betekent' },
+  { id: 'checkers', titel: 'Gratis checkers naast elkaar' },
+  { id: 'vergelijking', titel: 'Naast je concurrenten' },
+  { id: 'kosten', titel: 'Wat linkbuilding kost' },
+];
+const stappen = [
+  ['Open Search Console', 'Log in bij Google Search Console en kies je website. Heb je nog geen Search Console, zet dat dan eerst op.'],
+  ['Ga naar het rapport Links', 'Klik in het menu links op Links. Je ziet externe links (van andere sites) en interne links (binnen je eigen site).'],
+  ["Exporteer de meest gelinkte pagina's", "Klik onder Externe links bij Meest gelinkte pagina's op Meer. Klik op de pagina die opent rechtsboven op Exporteren en kies CSV."],
+  ['Exporteer sites en linkteksten', 'Doe hetzelfde bij Sites met de meeste links en bij Tekst met de meeste links.'],
+  ['Exporteer de nieuwste links', 'Wil je het tempo zien? Klik bovenaan het rapport op Externe links exporteren en kies Nieuwste links. In sommige versies heet dat Laatste links.'],
+  ['Zet de bestanden in de scan', 'Sleep alle bestanden in de scan bovenaan deze pagina. Een zip mag ook. Lukt die niet, pak hem dan eerst uit.'],
+];
+const bronnen = [
+  'https://support.google.com/webmasters/answer/9049606?hl=nl',
+  'https://developers.google.com/search/blog/2020/02/data-export',
+  'https://developers.google.com/search/docs/essentials/spam-policies?hl=nl',
+  'https://support.google.com/webmasters/answer/2648487?hl=nl',
+  'https://blogs.bing.com/webmaster/july-2020/Announcing-the-new-Bing-Webmaster-Tools-(migration-complete)',
+  'https://ahrefs.com/backlink-checker',
+  'https://ahrefs.com/webmaster-tools',
+  'https://seranking.com/backlink-checker.html',
+];
+const schema = [
+  {
+    '@type': 'HowTo',
+    name: 'Zo exporteer je je links uit Google Search Console',
+    url: `${site.url}${url}#exporteren`,
+    tool: [{ '@type': 'HowToTool', name: 'Google Search Console' }],
+    step: stappen.map(([naam, tekst], i) => ({ '@type': 'HowToStep', position: i + 1, name: naam, text: tekst, url: `${site.url}${url}#exporteren` })),
+    citation: bronnen,
+  },
+  {
+    '@type': 'WebApplication',
+    name: 'Linkbuilding scan',
+    url: `${site.url}${url}#linkscan`,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Elke moderne browser',
+    description: 'Leest een export uit het rapport Links van Google Search Console in je eigen browser en laat linkende sites, ankerteksten, verdachte patronen, gelinkte pagina\'s en het tempo per maand zien.',
+    offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
+    provider: { '@id': `${site.url}/#organisatie` },
+  },
+];
+---
+<Base
+  title="Linkbuilding scan: check gratis je links | Drijfveer Media"
+  description="Gratis linkbuilding scan: zet je export uit Search Console erin en zie meteen wie naar je linkt, met welke tekst en welke links je beter nakijkt."
+  kruimels={[{ naam: 'Linkbuilding', url: '/linkbuilding/' }, { naam: 'Linkbuilding scan', url }]}
+  schema={schema}
+  bronnenBlok={false}
+>
+  <Hero kicker="Gratis · Linkbuilding" titel="Gratis linkbuilding scan: zie meteen hoe sterk je links zijn" knop={{ tekst: 'Check je links', href: '#linkscan' }}>
+    <p>Zet de export uit Google Search Console in de linkbuilding scan. Je ziet direct wie naar je linkt, met welke tekst, naar welke pagina's, en welke links je beter even bekijkt. Zonder e-mailadres, en je bestanden blijven op je eigen computer.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <LinkScan />
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-19" />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <p>De linkbuilding scan leest de tabellen uit het rapport Links van Search Console en rekent in je browser uit hoe je linkprofiel eruitziet: hoeveel verschillende sites naar je linken, met welke ankerteksten, naar welke pagina's en hoe snel er links bijkomen. Daarna krijg je drie acties. Wil je weten hoe je ervoor staat naast de bedrijven boven je in Google? Dan legt Thorgall je links naast die van je concurrenten. Dat is gratis en je zit nergens aan vast.</p>
+        </div>
+
+        <h2 id="exporteren">Zo exporteer je je links uit Search Console</h2>
+        <p>Search Console is de gratis omgeving van Google voor website-eigenaren. Het rapport Links laat zien welke sites naar je linken. Zo haal je de gegevens eruit voor de scan:</p>
+        <ol class="stappen">
+          {stappen.map(([naam, tekst], i) => <li><b>{naam}.</b> {i === 0 ? <>Log in bij Google Search Console en kies je website. Heb je nog geen Search Console, lees dan eerst <a href="/kennisbank/gidsen/google-search-console/">hoe je je website aanmeldt bij Google</a>.</> : tekst}</li>)}
+        </ol>
+        <p>Werk je liever met Google Spreadsheets? Kies bij het exporteren voor een spreadsheet, selecteer daar de hele tabel met de kopregel en plak hem in het plakvak van de scan. Kies niet voor Excel: dat bestand kan de scan niet lezen.</p>
+        <h3>Wat er in de export zit, en wat niet</h3>
+        <p>Google is er <a href="https://support.google.com/webmasters/answer/9049606?hl=nl" rel="noopener">in de uitleg over het rapport Links</a> duidelijk over: het rapport is geen volledige lijst van al je links, maar een steekproef. Elke tabel stopt bij 1000 rijen. Bij Nieuwste links en Meer voorbeeldlinks gaat het om maximaal 100.000 rijen. Sites worden samengevoegd per domein, dus <code>www.voorbeeld.nl</code> en <code>m.voorbeeld.nl</code> tellen als één site. Links die inmiddels weg zijn, kunnen er nog in staan. En het rapport zegt niet of een link nofollow is.</p>
+        <p>Download je als CSV, dan krijg je soms een zip met meerdere bestanden. Dat <a href="https://developers.google.com/search/blog/2020/02/data-export" rel="noopener">schreef Google toen de exports werden uitgebreid</a>. De scan pakt zo'n zip zelf uit. Lukt dat in je browser niet, dan zie je dat meteen en pak je hem eerst met een dubbelklik uit.</p>
+
+        <h2 id="betekenis">Wat de uitkomst van de linkbuilding scan betekent</h2>
+        <p>Een getal zonder uitleg helpt niemand. Zo lees je de zes onderdelen.</p>
+
+        <h3>Linkende sites tegenover het aantal links</h3>
+        <p>Het belangrijkste getal is het aantal verschillende sites dat naar je linkt, de verwijzende domeinen. Tien links van één site wegen minder dan één link van tien sites. Het totaal aantal links zegt dus weinig zonder het aantal sites ernaast. Tools geven elk domein een eigen score voor autoriteit, zoals de <a href="/kennisbank/wat-is/domain-authority/">Domain Authority</a> van Moz. Zo'n score komt niet van Google. Gebruik hem om te vergelijken, niet als doel.</p>
+
+        <h3>Eén site met een groot deel van je links</h3>
+        <p>Levert één site de helft van al je links, dan staat jouw link daar bijna altijd op elke pagina: in de footer, in een zijbalk of in een lijst met partners. Vaak is dat een leverancier, een partner of je webbouwer. Dat is meestal geen probleem, maar het telt als één site. Let wel op als jouw link in de footer van veel verschillende sites staat. Google noemt dat in zijn <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">regels tegen linkspam</a> letterlijk als voorbeeld.</p>
+
+        <h3>Ankerteksten: naam, webadres of zoekwoord</h3>
+        <p>De <a href="/kennisbank/wat-is/ankertekst/">ankertekst</a> is de klikbare tekst van een link. De scan deelt ze in: je bedrijfsnaam, je webadres, je zoekwoord, algemene woorden als "klik hier" of "website", andere omschrijvingen, en links zonder tekst (meestal een plaatje). Vul je bedrijfsnaam en twee zoekwoorden in, dan wordt die indeling preciezer.</p>
+        <p>Een vuistregel, geen harde norm: in een profiel dat vanzelf groeit, noemt het grootste deel van de links je naam of je webadres. Hooguit een klein deel bevat precies je zoekwoord. Vraag tien mensen een link naar je site te maken en je krijgt tien verschillende teksten. Zie je veel meer zoekwoordteksten, dan zijn die links vaak ooit geregeld of gekocht. Google noemt links met geoptimaliseerde ankerteksten in artikelen en gastblogs als voorbeeld van linkspam.</p>
+
+        <h3>Buitenlandse sites en verdachte patronen</h3>
+        <p>De scan telt de extensies van de linkende sites: .nl, .be, de algemene zoals .com en .org, en de rest. Daarnaast zet hij sites apart die je beter even kunt bekijken. Denk aan een extensie die vaak bij spamsites voorkomt (.xyz, .top), woorden als casino in de domeinnaam, startpagina's en linkpagina's, of een naam vol cijfers en streepjes. De scan noemt ze bewust "bekijk deze eens" en geen spam. Een .xyz-site kan prima in orde zijn.</p>
+        <p>Vind je echt rare links, raak dan niet in paniek. Volgens Google kan het in de meeste gevallen zelf bepalen welke links te vertrouwen zijn, en hoeven de meeste sites de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a> niet te gebruiken. Dat schrijft Google in de <a href="https://support.google.com/webmasters/answer/2648487?hl=nl" rel="noopener">uitleg over links afwijzen</a>. Pas bij een handmatige actie in Search Console, of als die eraan komt, ga je opruimen.</p>
+
+        <h3>Homepage tegenover je andere pagina's</h3>
+        <p>De meeste links gaan naar de homepage. Logisch, want wie naar een bedrijf verwijst, linkt naar de voorkant. Maar een pagina die op "cv-ketel vervangen" moet stijgen, heeft zelf ook een paar goede links nodig. Vul in de scan je belangrijkste pagina's in. Dan zie je meteen welke nog geen enkele externe link hebben. Daar begin je.</p>
+
+        <h3>Het tempo per maand</h3>
+        <p>Met de export Nieuwste links ziet de scan per maand hoeveel links er in de lijst staan, en hoeveel sites voor het eerst opduiken. Let op: de datum is de laatste keer dat Google de pagina met de link bekeek. Een piek kan dus ook een grote ronde van Google zijn. Een gezond profiel groeit rustig. Twee tot vijf goede links per maand is voor de meeste mkb'ers een prima tempo. Honderd links in één week en daarna niets ziet er niet natuurlijk uit.</p>
+
+        <h3>Wat de scan niet ziet</h3>
+        <p>De scan weet niet of een link <a href="/kennisbank/wat-is/dofollow/">dofollow of nofollow</a> is, want Search Console zegt dat niet. Hij kijkt ook niet naar kwaliteit en relevantie: of een site over jouw vak of regio gaat, en of er echte bezoekers komen. Dat is mensenwerk. En hij ziet je concurrenten niet. Daarvoor is de vergelijking hieronder.</p>
+
+        <h2 id="checkers">Gratis backlinks checken: vier tools naast elkaar</h2>
+        <p>Naast deze scan zijn er meer gratis manieren om backlinks te checken. Dit is wat je bij elk gratis krijgt, volgens hun eigen pagina's (opgehaald in oktober 2026).</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Tool</th><th>Wat je gratis ziet</th><th>Concurrenten</th><th>Let op</th></tr></thead>
+            <tbody>
+              <tr><td><b>Google Search Console</b></td><td>Sites, pagina's en linkteksten van je eigen site. Tabellen tot 1000 rijen, exports tot 100.000 links.</td><td>Nee</td><td>Steekproef, geen nofollow. Alleen voor je eigen, geverifieerde site.</td></tr>
+              <tr><td><b>Bing Webmaster Tools</b></td><td>Backlinks van je site, met een gratis account.</td><td>Ja: volgens Bing toont het rapport Backlinks de links van elke site, ook van vergelijkbare sites</td><td>Je eigen site moet aangemeld zijn. Gebaseerd op de index van Bing.</td></tr>
+              <tr><td><b><a href="/kennisbank/wat-is/ahrefs/">Ahrefs</a></b></td><td>De gratis Backlink Checker geeft een eerste blik op elke site. Met Ahrefs Free (voorheen Webmaster Tools) zie je voor je eigen geverifieerde site wie naar je linkt, tot 1000 backlinks tegelijk, met het soort link (nofollow, ugc, sponsored).</td><td>Alleen de korte gratis check</td><td>Volledige rapporten van andere sites zijn betaald.</td></tr>
+              <tr><td><b>SE Ranking</b></td><td>Op de pagina van de Backlink Checker een momentopname van elke site, met een paar gratis checks per dag. De volledige tool 14 dagen gratis op proef.</td><td>Ja, binnen de proefperiode</td><td>Daarna een abonnement. Dit is de tool die wij zelf gebruiken.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bronnen: <a href="https://blogs.bing.com/webmaster/july-2020/Announcing-the-new-Bing-Webmaster-Tools-(migration-complete)" rel="noopener">Bing Webmaster Blog</a>, <a href="https://ahrefs.com/backlink-checker" rel="noopener">Ahrefs Backlink Checker</a>, <a href="https://ahrefs.com/webmaster-tools" rel="noopener">Ahrefs Webmaster Tools</a>, <a href="https://seranking.com/backlink-checker.html" rel="noopener">SE Ranking Backlink Checker</a>.</p>
+        <p>Elke tool heeft een eigen verzameling links. Daarom zie je bij Ahrefs andere aantallen dan in Search Console. Vergelijk dus altijd binnen één tool, en kijk vooral naar de verhoudingen: welke sites, welke teksten, welke pagina's. Die tools geven je ruwe data. De scan hierboven zet de data uit Search Console om in een paar heldere conclusies, maar alleen voor je eigen site.</p>
+
+        <div class="vergelijking" id="vergelijking">
+          <h2>Laat Thorgall je links naast die van je concurrenten leggen</h2>
+          <p>Je positie in Google is altijd relatief. Je hoeft niet het sterkste linkprofiel van Nederland te hebben, wel een sterker profiel dan de drie bedrijven boven je. Thorgall van Eeden doet bij ons de linkbuilding. Hij haalt jouw links op met SE Ranking en zet ze naast die van de drie bedrijven die op jouw belangrijkste zoekwoord boven je staan. Hij kijkt naar:</p>
+          <ul class="vink">
+            <li>hoeveel verschillende sites naar hen linken, en naar jou;</li>
+            <li>welke sites naar twee of drie van hen linken, maar niet naar jou;</li>
+            <li>welke van hun pagina's de links krijgen;</li>
+            <li>welke links bij jou misschien beter weg kunnen.</li>
+          </ul>
+          <p>Daarna belt hij je met de grootste gaten en waar je het beste kunt beginnen. Ook als je het daarna zelf doet. Vul je website en je nummer in. Op werkdagen belt Thorgall je binnen 15 minuten terug en vraagt eerst wat je wilt bereiken.</p>
+          <Aanvraagformulier soort="Linkvergelijking" knop="Vraag de vergelijking aan" website vak />
+        </div>
+
+        <h2 id="kosten">Wat linkbuilding bij ons kost</h2>
+        <p>Wil je het daarna niet zelf doen, dan bouwt Thorgall de links. Linkbuilding kost bij ons € 75 per uur, exclusief btw, met een minimum van vijf uur per maand (€ 375). Een uur levert meestal drie tot vijf links op. We werken per uur en niet per link, omdat veel links maken niet moeilijk is en goede links vinden wel. Eén goede link is meer waard dan honderd slechte.</p>
+        <p>Je spreekt de uren per maand af en zegt per maand op, met één maand opzegtermijn. De <a href="/garantie/">stijggarantie</a> geldt. Vraagt een site geld voor een plaatsing, dan doen we dat alleen in overleg met jou, met het label sponsored, en komen die kosten bovenop de uren. Onze eigen proeflabsites gebruiken we om te testen, nooit als linkbron voor klanten. Wat je elke maand krijgt, staat bij <a href="/linkbuilding/linkbuilding-uitbesteden/">linkbuilding uitbesteden</a>. Meer over hoe we links bouwen lees je op de pagina over <a href="/linkbuilding/">linkbuilding</a>.</p>
+      </article>
+
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={9} actie={false} />
+        <Prijskaart naam="Linkbuilding" prijs="€ 75" eenheid="per uur" vanaf={false} maandelijks punten={['Meestal drie tot vijf links per uur', 'Minimaal vijf uur per maand', 'Elke link zichtbaar in je maandoverzicht', 'Stijggarantie']} knop={{ tekst: 'Eerst je links vergelijken', href: '#vergelijking' }} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs />
+
+  <Faq
+    vragen={[
+      { v: 'Is de linkbuilding scan echt gratis?', a: 'Ja. De scan rekent in je browser en vraagt geen e-mailadres. Ook de vergelijking met je concurrenten door Thorgall is gratis. Je zit nergens aan vast.' },
+      { v: 'Komen mijn links bij jullie terecht?', a: 'Nee. Je bestanden worden alleen in je eigen browser gelezen en gaan niet naar ons of naar een andere server. Alleen je bedrijfsnaam, zoekwoorden en pagina\'s onthoudt je browser, zodat je ze de volgende keer niet opnieuw hoeft in te vullen. Pas als je zelf het formulier verstuurt, krijgen wij iets: wat er op dat moment in het formulier staat.' },
+      { v: 'Ik heb geen Search Console. Kan ik de scan toch gebruiken?', a: 'Niet zonder export. Search Console is gratis en snel ingesteld. Lees <a href="/kennisbank/gidsen/google-search-console/">hoe je je website aanmeldt</a>. Het rapport Links vult zich daarna vanzelf. Liever niet wachten? Vraag de vergelijking aan, dan haalt Thorgall je links op met SE Ranking.' },
+      { v: 'Waarom zie ik in Ahrefs andere aantallen dan in de scan?', a: 'Elke tool heeft een eigen verzameling links, en Search Console laat een steekproef zien. Vergelijk daarom altijd binnen één tool en let vooral op de verhoudingen.' },
+      { v: 'Hoeveel backlinks heb ik nodig?', a: 'Dat hangt af van je concurrenten. Kijk hoeveel verschillende sites naar de bedrijven boven je linken. Voor een lokaal bedrijf gaat het meestal om tientallen goede sites, niet om duizenden links.' },
+      { v: 'De scan zet sites onder "Bekijk deze eens". Moet ik ze afwijzen?', a: 'Meestal niet. Google negeert de meeste rare links zelf. Afwijzen met de disavow tool is bedoeld voor een handmatige actie, of als die eraan komt. Twijfel je, laat dan eerst iemand meekijken.' },
+      { v: 'Wat is een goede verdeling van ankerteksten?', a: 'Er is geen vaste formule. Als vuistregel noemt het grootste deel van je links je naam of webadres, en bevat hooguit een klein deel precies je zoekwoord. Kijk vooral naar wat normaal is in jouw branche.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over je links"
+    links={[
+      { label: 'Dienst', titel: 'Linkbuilding uitbesteden', href: '/linkbuilding/linkbuilding-uitbesteden/', tekst: 'Elke maand nieuwe links, elke link in je overzicht.' },
+      { label: 'Dienst', titel: 'Google disavow tool', href: '/linkbuilding/google-disavow-tool/', tekst: 'Wanneer je links afwijst, en wanneer niet.' },
+      { label: 'Gids', titel: 'Linkbuilding-strategie', href: '/kennisbank/gidsen/linkbuilding-strategie/', tekst: 'Van nulmeting tot plan voor zes maanden.' },
+      { label: 'Gids', titel: 'Lokale linkbuilding', href: '/kennisbank/gidsen/lokale-linkbuilding/', tekst: 'Linkkansen in Drenthe, Groningen en Friesland.' },
+    ]}
+  />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je linkbuilder én je eerste aanspreekpunt. Hij legt je links naast die van je concurrenten en belt je met wat hij ziet.' }]} />
+
+  <Actie titel="Liever dat iemand meekijkt?" tekst={`${site.contactpersoon} legt je links naast die van de drie bedrijven boven je in Google, en belt je op werkdagen binnen 15 minuten terug.`} knop={{ tekst: 'Vraag de vergelijking aan', href: '#vergelijking' }} />
+</Base>
+<style>
+  .stappen li { margin-bottom: 0.6em; }
+  .vergelijking { margin-top: 56px; padding: clamp(20px, 3vw, 32px); border-radius: var(--radius); background: var(--tint); scroll-margin-top: 90px; }
+  .vergelijking h2 { margin-top: 0; }
+  .vergelijking :global(.aanvraag) { margin-top: 18px; }
+  #exporteren, #betekenis, #checkers, #kosten { scroll-margin-top: 100px; }
+</style>

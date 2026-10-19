@@ -1,0 +1,282 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--lokale-linkbuilding.astro';
+import { site, persoon } from '../../../../data/site';
+import { termijnen } from '../../../../data/termijnen';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+
+const url = '/kennisbank/gidsen/lokale-linkbuilding/';
+const datum = '2026-10-19';
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat is lokale linkbuilding?' },
+  { id: 'waarom', titel: 'Waarom lokale links werken' },
+  { id: 'controle', titel: 'Zo controleerden we de lijst' },
+  { id: 'verenigingen', titel: 'Ondernemersverenigingen' },
+  { id: 'nieuws', titel: 'Regionale nieuwssites' },
+  { id: 'netwerken', titel: 'Thema- en branchenetwerken' },
+  { id: 'opleidingen', titel: 'Opleidingen en leerbedrijven' },
+  { id: 'sport', titel: 'Sponsorpagina\'s' },
+  { id: 'profiel', titel: 'Bedrijfsprofiel en vermeldingen' },
+  { id: 'vragen', titel: 'Zo vraag je om een link' },
+  { id: 'laten', titel: 'Wat je beter laat' },
+  { id: 'zelf', titel: 'Zelf doen of laten doen?' },
+];
+
+// Elke bron hieronder is in oktober 2026 opgehaald en nagelopen: de pagina bestaat en de leden staan erop met een gewone link.
+const verenigingen = [
+  { provincie: 'Drenthe', bronnen: [
+    { naam: 'Ondernemend Assen', href: 'https://ondernemend-assen.nl/leden/', waar: 'Assen', hoe: 'Profielpagina per lid, met link naar de website' },
+    { naam: 'Ondernemend Emmen', href: 'https://www.ondernemendemmen.nl/leden/', waar: 'Emmen', hoe: 'Profielpagina per lid, met link naar de website' },
+    { naam: 'Business Club Meppel', href: 'https://www.bcmeppel.nl/bedrijven/', waar: 'Meppel', hoe: 'Profielpagina per lid, met link naar de website' },
+    { naam: 'ICC Parkmanagement Meppel', href: 'https://www.iccpmm.nl/leden/', waar: 'Bedrijventerreinen in Meppel', hoe: 'Profielpagina per lid, met link naar de website' },
+  ] },
+  { provincie: 'Groningen', bronnen: [
+    { naam: 'Ondernemerskring Oost-Groningen', href: 'https://www.oognet.nl/ledenlijst/', waar: 'Oost-Groningen', hoe: 'Ledenlijst met een link bij elk lid' },
+    { naam: 'Veendammer Ondernemers Compagnie', href: 'https://www.vocveendam.nl/leden/', waar: 'Veendam', hoe: 'Ledenlijst met een link bij elk lid' },
+    { naam: 'Ondernemersvereniging Westerkwartier', href: 'https://www.ondernemersverenigingwesterkwartier.nl/leden/', waar: 'Westerkwartier', hoe: 'Profielpagina per lid, met link naar de website' },
+    { naam: 'Jonge Bedrijven Netwerk Groningen', href: 'https://jbngroningen.nl/onze-leden/', waar: 'Groningen', hoe: 'Profielpagina per lid, met link naar de website' },
+    { naam: 'Business Breakfast Club Groningen', href: 'https://www.bbcgroningen.nl/leden/', waar: 'Groningen', hoe: 'Ledenlijst met een link bij elk lid' },
+  ] },
+  { provincie: 'Friesland', bronnen: [
+    { naam: 'Ondernemersvereniging Drachten', href: 'https://www.ovdrachten.nl/onze-leden/', waar: 'Drachten', hoe: 'Ledenlijst met een link bij elk lid' },
+    { naam: 'Ondernemerskring Heerenveen', href: 'https://www.ondernemerskringheerenveen.nl/over-ons/ledenlijst/', waar: 'Heerenveen', hoe: 'Ledenlijst met een link bij elk lid' },
+    { naam: 'Zakenhart Leeuwarden', href: 'https://zakenhartleeuwarden.nl/leden', waar: 'Leeuwarden', hoe: 'Ledenlijst met een link bij elk lid' },
+    { naam: 'Vereniging Ondernemend Sneek', href: 'https://www.ondernemendsneek.nl/leden/overzicht', waar: 'Sneek', hoe: 'Profielpagina per lid, met link naar de website' },
+  ] },
+];
+const redacties = [
+  { naam: 'RTV Drenthe', href: 'https://www.rtvdrenthe.nl/contact', provincie: 'Drenthe', hoe: 'Tip via WhatsApp of het formulier' },
+  { naam: 'WijDrenthe', href: 'https://wbn.nl/redactie/', provincie: 'Drenthe', hoe: 'Persbericht mailen; de redactie schrijft er een eigen artikel van' },
+  { naam: 'Regionieuws Hoogeveen', href: 'https://regionieuwshoogeveen.nl/tipderedactie/', provincie: 'Drenthe', hoe: 'Formulier voor tips en persberichten, met een rubriek Zakelijk' },
+  { naam: 'RTV Noord', href: 'https://www.rtvnoord.nl/contact', provincie: 'Groningen', hoe: 'Tip via WhatsApp, mail of het formulier' },
+  { naam: 'Groninger Ondernemers Courant', href: 'https://www.groningerondernemerscourant.nl/nieuws-aandragen', provincie: 'Groningen', hoe: 'Economisch nieuws als persbericht mailen' },
+  { naam: 'Groningen.nieuws.nl', href: 'https://groningen.nieuws.nl/tip-de-redactie', provincie: 'Groningen', hoe: 'Tip per mail, met foto' },
+  { naam: 'Omrop Fryslân', href: 'https://www.omropfryslan.nl/nl/contact', provincie: 'Friesland', hoe: 'Tip via de app of het formulier' },
+  { naam: 'Ondernemend Friesland', href: 'https://www.of.nl/persbericht-melden/', provincie: 'Friesland', hoe: 'Formulier "Persbericht melden" voor zakelijk nieuws' },
+  { naam: 'Fries Nieuws', href: 'https://www.friesnieuws.nl/tip-de-redactie/', provincie: 'Friesland', hoe: 'Formulier "Tip de redactie", met foto\'s' },
+];
+
+const schema = [{
+  '@type': 'Article',
+  headline: 'Lokale linkbuilding: echte linkkansen in Drenthe, Groningen en Friesland',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Lokale linkbuilding',
+  citation: [
+    'https://support.google.com/business/answer/7091?hl=nl',
+    'https://whitespark.ca/local-search-ranking-factors/',
+    'https://developers.google.com/search/docs/essentials/spam-policies?hl=nl',
+    'https://ahrefs.com/blog/ai-overview-brand-correlation/',
+    'https://www.s-bb.nl/bedrijven/wat-is-een-leerbedrijf/',
+    ...verenigingen.flatMap((v) => v.bronnen.map((b) => b.href)),
+    'https://circulairgroningendrenthe.nl/onze-leden/',
+    'https://circulairfriesland.frl/over-ons/netwerk-van-vereniging-circulair-friesland/',
+    ...redacties.map((r) => r.href),
+  ],
+}];
+---
+<Base
+  title="Lokale linkbuilding in Drenthe, Groningen en Friesland"
+  description="Lokale linkbuilding voor het mkb, met een gecontroleerde lijst van ondernemersverenigingen, nieuwssites en netwerken in Drenthe, Groningen en Friesland."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Lokale linkbuilding', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Linkbuilding" titel="Lokale linkbuilding: echte linkkansen in Drenthe, Groningen en Friesland">
+    <p>Lokale linkbuilding gaat over links van sites uit je eigen regio: je ondernemersvereniging, een regionale nieuwssite, een netwerk in je branche. Hieronder staan bronnen in het Noorden die we zelf hebben nagelopen, met per bron hoe je aan die link komt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Lokale backlinks komen van sites uit de regio waar je klanten zitten. Ze vertellen Google waar je werkt en wie je kent.</li>
+            <li>Google schrijft zelf dat je plek in de lokale resultaten mede afhangt van hoeveel websites naar je bedrijf linken.</li>
+            <li>We liepen dertien ondernemersverenigingen, twee themanetwerken en negen nieuwsredacties in het Noorden na. Alleen wat de controle doorstond, staat in deze gids.</li>
+            <li>Word lid voor het netwerk. De link op de ledenpagina is een mooie bijvangst.</li>
+            <li>Laat pakketten met honderden "lokale" gidsvermeldingen liggen.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat is lokale linkbuilding?</h2>
+        <p>Lokale linkbuilding is het verzamelen van links op websites uit de regio waar je klanten zitten. Denk aan de ledenlijst van je ondernemersvereniging, een bericht op een regionale nieuwssite of de sponsorpagina van de voetbalclub. Bij gewone linkbuilding zoek je vooral sites die over je vak gaan. Hier telt ook de plek. Een site uit Emmen die naar een installateur in Emmen linkt, klopt. Dat geografische verband maakt een lokale link sterk.</p>
+        <p>Het werkt voor elk bedrijf met klanten in de buurt. Een kapper, een boekhouder, een aannemer, een fysiotherapeut. Ook een bedrijf dat landelijk levert, heeft er baat bij. De eerste links die je krijgt, komen bijna altijd uit je eigen omgeving: je leveranciers, je klanten, de lokale krant.</p>
+        <p>Wat een backlink precies is en hoe Google links weegt, lees je in de gids <a href="/kennisbank/gidsen/backlinks/">wat zijn backlinks</a>. Deze gids gaat over de lokale kant, met namen en adressen.</p>
+
+        <h2 id="waarom">Waarom lokale links werken</h2>
+        <p>Google is er zelf vrij open over. Op de hulppagina over lokale resultaten staan drie factoren: relevantie, afstand en prominentie. Over prominentie schrijft Google: "Deze factor is ook gebaseerd op informatie zoals hoeveel websites naar uw bedrijf linken en hoeveel reviews u heeft." Links uit je regio maken je dus bekender in de ogen van Google. Dat helpt je lokale vindbaarheid, ook voor het kaartje.</p>
+        <p>Specialisten in lokale SEO zien hetzelfde. Whitespark vraagt hen regelmatig welke factoren het zwaarst wegen. In de editie van 2026 staat bij de gewone zoekresultaten de kwaliteit en autoriteit van links naar je domein op plek 3. Het aantal links van sites uit je branche staat op plek 5. Voor het kaartje staan andere dingen bovenaan: de hoofdcategorie van je Bedrijfsprofiel, de afstand tot de zoeker en de zoekwoorden in je bedrijfsnaam.</p>
+        <p>Het is een enquête, geen meting. De richting is wel duidelijk. Links helpen vooral in de resultaten onder de kaart, en via je bekendheid ook een beetje op de kaart zelf. Daar komen nog drie voordelen bij.</p>
+        <div class="stap-kop"><Tekening naam="team" maat={44} /><h3>Echte bezoekers</h3></div>
+        <p>Een lid van de ondernemersvereniging dat een installateur zoekt, kijkt eerst op de ledenlijst. Die klik is soms meer waard dan de link zelf.</p>
+        <div class="stap-kop"><Tekening naam="schild" maat={44} /><h3>Moeilijk na te doen</h3></div>
+        <p>Een bureau uit Amsterdam kan een link kopen op een landelijke blog. Een plek op de ledenlijst in Veendam krijg je alleen als je in Veendam onderneemt. Zulke lokale bronnen zijn voor een concurrent van buiten de regio bijna niet te krijgen, hoe hoog zijn domeinautoriteit ook is.</p>
+        <div class="stap-kop"><Tekening naam="ai" maat={44} /><h3>Genoemd worden telt ook</h3></div>
+        <p>Onderzoek van Ahrefs onder 75.000 merken liet zien dat vermeldingen van een merk op het web sterker samenhangen met zichtbaarheid in de AI-overzichten van Google dan het aantal links. Een regionaal bericht over je bedrijf telt dus ook zonder link. Meer daarover staat op onze pagina over <a href="/linkbuilding/">linkbuilding</a>.</p>
+
+        <h2 id="controle">Zo controleerden we deze lijst</h2>
+        <p>Lijsten met "honderd lokale linkkansen" zijn vaak overgeschreven en verouderd. Daarom hebben we in oktober 2026 elke bron zelf geopend. We keken naar drie dingen:</p>
+        <ol>
+          <li>Bestaat de pagina, en staat hij openbaar online?</li>
+          <li>Staan de leden of bedrijven erop met een klikbare link naar hun eigen website? Een e-mailadres of alleen een naam telt niet.</li>
+          <li>Staat er rel="nofollow" of rel="sponsored" bij die links? Bij alle bronnen in de lijsten hieronder vonden we gewone links.</li>
+        </ol>
+        <p>Wat niet door de controle kwam, staat er niet in. Bij de Commerciële Club Assen en bij Ondernemend Hoogeveen staan de leden wel op de site. Op de profielen die we openden, stond alleen geen link naar de website van het lid. Ook de afdelingspagina's van Koninklijke Horeca Nederland in Assen, Groningen en Leeuwarden tonen geen leden met een link.</p>
+        <div class="kader">
+          <p class="kader-titel">Twee dingen vooraf</p>
+          <p>Dit is een openbare lijst die we zelf hebben nagelopen. Opname in de lijst is geen aanbeveling en geen samenwerking. En sites veranderen. Kijk dus zelf nog even of de link er staat, als die link voor jou een reden is om lid te worden. Contactpersonen zetten we er bewust niet bij. Die vind je op de sites zelf.</p>
+        </div>
+
+        <h2 id="verenigingen">Ondernemersverenigingen en bedrijvenkringen</h2>
+        <p>Dit is de makkelijkste lokale link die er bestaat. Je wordt lid, je profiel komt op de site en daar staat je website bij. Lid word je voor het netwerk: de borrels, de bedrijfsbezoeken, de mensen die je anders nooit spreekt. De link is bijvangst. Een lidmaatschap kost contributie. Wat dat is, hoor je bij de vereniging zelf.</p>
+        <p>We kwamen twee soorten ledenpagina's tegen. Een ledenlijst met bij elk lid direct een link. En een lijst met per lid een eigen profielpagina, waar de link op staat. Allebei prima. Een profielpagina heeft zelfs een voordeel: je naam, je plaats en je vak staan bij elkaar op één pagina. Dat is precies de context die Google zoekt.</p>
+        {verenigingen.map((v) => (
+          <>
+            <h3>{v.provincie}</h3>
+            <div class="tabel-scroll">
+              <table>
+                <thead><tr><th>Vereniging</th><th>Waar</th><th>Hoe de leden erop staan</th></tr></thead>
+                <tbody>
+                  {v.bronnen.map((b) => <tr><td><a href={b.href} rel="noopener">{b.naam}</a></td><td>{b.waar}</td><td>{b.hoe}</td></tr>)}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ))}
+        <h3>Staat jouw plaats er niet bij?</h3>
+        <p>Veel gemeenten hebben een pagina met alle ondernemersverenigingen. Zoek op de site van je gemeente naar "ondernemersverenigingen". Zo vonden we er zelf een paar. Voorbeelden zijn de overzichten van <a href="https://www.assen.nl/ondernemersverenigingen" rel="noopener">de gemeente Assen</a>, <a href="https://www.veendam.nl/Onderwerpen/Ondernemen/Ondernemersverenigingen" rel="noopener">de gemeente Veendam</a>, <a href="https://sudwestfryslan.nl/onderwerp/ondernemersverenigingen/" rel="noopener">de gemeente Súdwest-Fryslân</a> en <a href="https://leeuwarderondernemersfonds.nl/verenigingen/" rel="noopener">het Leeuwarder Ondernemersfonds</a>.</p>
+        <p>Kijk ook naar je bedrijventerrein. Steeds meer terreinen hebben parkmanagement met een eigen site en een ledenlijst, zoals in Meppel. En winkel je in een centrum, dan is er vaak een centrumvereniging.</p>
+        <p>Een tip die geld scheelt: open twee of drie profielen voordat je lid wordt. Staat er bij andere leden een link naar hun website? Dan weet je dat het voor jou ook zo gaat.</p>
+
+        <Tussenactie />
+        <h2 id="nieuws">Regionale nieuwssites en ondernemersbladen</h2>
+        <p>Regionale media schrijven over wat er in de regio gebeurt. Een nieuwe vestiging, een jubileum, een opvallende klus, een prijs, een overname. Daar hoef je geen persbureau voor in te huren. Een kort bericht met een goede foto naar de juiste redactie is genoeg.</p>
+        <p>Reken wel niet op een link. Bij de berichten die we bekeken, stond soms een link naar het bedrijf en soms niet. Het bericht zelf heeft ook waarde. Je naam staat op een sterke regionale site, mensen uit je regio lezen het, en AI-assistenten nemen het mee. Komt er een link bij, dan is dat een link die bijna niemand kan kopen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Redactie</th><th>Provincie</th><th>Zo stuur je nieuws in</th></tr></thead>
+            <tbody>
+              {redacties.map((r) => <tr><td><a href={r.href} rel="noopener">{r.naam}</a></td><td>{r.provincie}</td><td>{r.hoe}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p>WijDrenthe hoort bij Wij Business Nieuws, dat ook in andere provincies zakelijk nieuws brengt. Bij het insturen geef je op voor welke provincie je bericht bedoeld is.</p>
+        <h3>Zo krijgt je bericht een kans</h3>
+        <ul>
+          <li><b>Nieuws, geen reclame.</b> Dat je 25 jaar bestaat, is nieuws. Een nieuwe actie in de winkel is dat niet. Ondernemend Friesland zegt het zelf op het formulier: zorg voor nieuwswaarde.</li>
+          <li><b>De kern in de eerste zin.</b> Wie, wat, waar en wanneer. Een redacteur leest de eerste regel en beslist dan.</li>
+          <li><b>Een goede foto.</b> Liggend, scherp, met de namen van wie erop staan. Regionieuws Hoogeveen vraagt bijvoorbeeld om een liggende foto van minstens 800 bij 450 pixels.</li>
+          <li><b>Je website als bron.</b> Zet hem onderaan het bericht, bij je gegevens. Vraag niet om een link. Vindt de redacteur je site nuttig voor de lezer, dan zet hij hem er zelf bij.</li>
+          <li><b>Kort.</b> Een half A4 is genoeg. De redactie maakt er toch een eigen stuk van.</li>
+        </ul>
+
+        <h2 id="netwerken">Thema- en branchenetwerken</h2>
+        <p>Naast de algemene ondernemersclubs zijn er netwerken rond een thema of een branche. Die zijn extra waardevol, omdat ze twee dingen tegelijk vertellen: waar je zit en wat je doet. In het Noorden vonden we twee grote ledenlijsten met links.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Netwerk</th><th>Regio</th><th>Hoe de leden erop staan</th></tr></thead>
+            <tbody>
+              <tr><td><a href="https://circulairgroningendrenthe.nl/onze-leden/" rel="noopener">Circulair Groningen Drenthe</a></td><td>Groningen en Drenthe</td><td>Ledenlijst met een link bij elk lid, van bouw en afval tot advies</td></tr>
+              <tr><td><a href="https://circulairfriesland.frl/over-ons/netwerk-van-vereniging-circulair-friesland/" rel="noopener">Vereniging Circulair Friesland</a></td><td>Friesland</td><td>Ledenlijst met een link bij elk lid</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Werk je in de bouw, de techniek of de horeca, kijk dan ook naar de regionale afdeling van je brancheorganisatie. Reken er alleen niet blind op. Bij de drie afdelingen van KHN die we bekeken, stond geen ledenlijst. Vraag bij je eigen branche na of leden met een link op de site komen, en waar.</p>
+
+        <h2 id="opleidingen">Opleidingen en leerbedrijven</h2>
+        <p>Stagebedrijven hebben een streepje voor bij scholen. Toch vonden we bij de grote scholen in het Noorden geen openbare lijst van leerbedrijven met links. We keken bij DCTerra, Noorderpoort, Firda en de Hanze. Noorderpoort heeft wel een pagina "Onze leerbedrijven", maar daar gaat het om de eigen leerbedrijven van de school.</p>
+        <p>De ingang is landelijk. Alleen erkende leerbedrijven mogen mbo'ers opleiden, en die erkenning geeft <a href="https://www.s-bb.nl/bedrijven/wat-is-een-leerbedrijf/" rel="noopener">SBB</a>. Studenten zoeken daarna hun stageplek op Stagemarkt, de site van SBB. Dat levert stagiairs op, en soms een verhaal. Een bericht van de school over een geslaagd project. Een nominatie voor de verkiezing Beste leerbedrijf van SBB. Een stuk in de nieuwsbrief van de opleiding. Daar zitten de links.</p>
+        <p>Vraag de stagecoördinator dus of er een plek is om jullie samenwerking te laten zien. Bij hogescholen werkt het net zo. De Hanze heeft bijvoorbeeld een pagina waar je <a href="https://www.hanze.nl/nl/samenwerken/samenwerken-met-de-hanze/stageplekken-en-afstudeerplekken-aanbieden" rel="noopener">stage- en afstudeerplekken aanbiedt</a>. Begin bij de samenwerking. Een link volgt later, via een project of een bericht.</p>
+
+        <h2 id="sport">Sponsorpagina's van sportclubs</h2>
+        <p>Sponsor je de voetbalclub, de hockeyclub of de atletiekvereniging, dan sta je meestal op de sponsorpagina. Bij drie sponsorpagina's van clubs in het Noorden die we openden, stonden de sponsors met een gewone link naar hun site. Zo'n link telt dus mee, zolang de club er geen label bij zet.</p>
+        <p>Toch is dit de bron waar je het minst op moet sturen. Sponsoring is een betaalde relatie. In de <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">spamregels van Google</a> heet links kopen voor posities linkspam. Links voor reclame en sponsoring zijn wel in orde, als ze het label sponsored of nofollow krijgen. Een club die je logo toont omdat je de shirts betaalt, doet niets fout. Tien sponsorpakketten kopen om de links is een ander verhaal. Sponsor de club omdat je de club wilt steunen. Of er dan een label bij de link staat, doet er weinig toe.</p>
+
+        <h2 id="profiel">Bedrijfsprofiel en vermeldingen</h2>
+        <p>Lokale links staan nooit los van je Google Bedrijfsprofiel. Het profiel bepaalt grotendeels of je in het kaartje komt. Links en vermeldingen maken je bekender, het profiel laat zien waar je zit en wat je doet. Is dat nog niet op orde, begin dan daar. Hoe, staat in de gids <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel aanmaken</a>.</p>
+        <p>Daarnaast zijn er vermeldingen: plekken waar je naam, adres en telefoonnummer staan, met of zonder link. Denk aan je branchevereniging, een vergelijkingssite in je vak en de grotere bedrijvengidsen. Zorg dat die gegevens overal precies hetzelfde zijn als op je profiel. Een oud adres of een ander telefoonnummer maakt Google onzeker over welk bedrijf het is. Een handvol goede vermeldingen is genoeg.</p>
+        <p>Werk je in meerdere plaatsen, dan helpt een eigen landingspagina per plaats, met klussen en klanten uit die plaats. Een link van een vereniging of nieuwssite uit die plaats kan dan naar die pagina wijzen in plaats van naar je homepage.</p>
+        <p>Wil je dit laten regelen, samen met je profiel en je reviews? Dat doen we bij <a href="/lokale-seo/">lokale SEO</a>, vanaf € 295 per maand. Daar hoort het rechtzetten en aanvullen van je lokale vermeldingen bij. Linkbuilding komt erbij als je markt daarom vraagt.</p>
+
+        <h2 id="vragen">Zo vraag je om een link</h2>
+        <p>Bij een vereniging waar je lid van bent, vul je je profiel in en klaar. Staat je website er nog niet bij, of klopt er iets niet, stuur dan een kort bericht. Dat geldt ook voor een partner, een leverancier of een club die je al kent.</p>
+        <div class="kader">
+          <p class="kader-titel">Voorbeeldmail (verzonnen)</p>
+          <p><b>Onderwerp:</b> Website bij ons profiel op de ledenpagina</p>
+          <p>Hoi Jeroen,</p>
+          <p>Leuk om je vorige week op de borrel te spreken.</p>
+          <p>Ik zag dat ons profiel op de ledenpagina nog zonder website staat. Wil je www.schildersbedrijfbakker.nl erbij zetten? Ons adres is ook veranderd: we zitten nu aan de Industrieweg 12 in Hoogeveen.</p>
+          <p>Heb je nog een logo of een korte tekst nodig, dan stuur ik die meteen.</p>
+          <p>Groet,<br />Sanne, Schildersbedrijf Bakker</p>
+        </div>
+        <p>Dit werkt omdat het persoonlijk is, één ding vraagt en de ander geen werk geeft. Vraag niet om een bepaalde linktekst. Je bedrijfsnaam of je webadres als <a href="/kennisbank/wat-is/ankertekst/">ankertekst</a> is precies goed. Ken je de persoon, bel dan liever even. Voor een redactie of een vakblad werkt een ander soort mail. Die staat in de gids <a href="/kennisbank/gidsen/gastbloggen/">gastblog plaatsen</a>.</p>
+
+        <h2 id="laten">Wat je beter laat</h2>
+        <p>Wie zoekt op lokale backlinks, vindt ook aanbieders die je voor een vast bedrag in tientallen of honderden "lokale gidsen" zetten. Dat lijkt efficiënt. Google noemt links uit bedrijvengidsen en bookmarksites van lage kwaliteit letterlijk als voorbeeld van linkspam. Zulke gidsen hebben geen lezers uit jouw regio, staan vol met bedrijven uit het hele land en verdwijnen vaak weer. Honderd van die links in een paar weken zijn onnatuurlijke links in je backlinkprofiel. Ze passen niet bij een bedrijf van jouw grootte.</p>
+        <ul>
+          <li><b>Pakketten met honderden gidsvermeldingen.</b> Een paar goede vermeldingen helpen. Honderd onbekende helpen niet.</li>
+          <li><b>Nieuwssites die geen nieuws brengen.</b> Een plaatsnaam in de domeinnaam, maar vooral betaalde artikelen over van alles. Echte lokale berichten zie je er nauwelijks.</li>
+          <li><b>Linkruil met tientallen bedrijven uit je stad.</b> Een link naar je vaste partner is prima. Een kring die afspreekt om allemaal naar elkaar te linken, noemt Google overdreven linkruil.</li>
+          <li><b>Een link in ruil voor een product of korting.</b> Ook dat valt volgens Google onder linkspam, als er geen label bij staat.</li>
+          <li><b>Lid worden van tien clubs voor de link.</b> Je betaalt contributie, je komt nooit, en je profiel veroudert.</li>
+        </ul>
+        <p>Heb je ooit zo'n pakket gekocht? Meestal negeert Google die links en hoef je niets te doen. Kreeg je een melding over handmatige acties in Search Console, lees dan over de <a href="/linkbuilding/google-disavow-tool/">Google disavow tool</a>.</p>
+
+        <h2 id="zelf">Lokale backlinks zelf regelen of laten doen?</h2>
+        <p>De bronnen in deze gids kun je bijna allemaal zelf regelen. Lid worden, je profiel invullen, een bericht naar de regionale krant sturen: dat kost je een paar uur, verspreid over een paar maanden. Doe dat eerst. Het zijn je eigen relaties, en niemand kan ze beter vragen dan jij.</p>
+        <p>Lastiger wordt het als je meer wilt. Links van vakbladen, van sites in je branche buiten de regio, of een gastartikel. Dan heb je iemand nodig die bronnen zoekt, beoordeelt en benadert. Bij <a href="/linkbuilding/">linkbuilding van Drijfveer Media</a> doet Thorgall van Eeden dat, voor € 75 per uur, exclusief btw, met een minimum van vijf uur per maand. Een uur levert meestal drie tot vijf links op. Je ziet elke link terug in je maandoverzicht, er zit een stijggarantie op en je zegt per maand op. Hoe je zo'n plan zelf opbouwt, staat in de gids <a href="/kennisbank/gidsen/linkbuilding-strategie/">linkbuilding-strategie</a>.</p>
+
+        <h3>Bronnen</h3>
+        <ul class="klein">
+          <li>Google Bedrijfsprofiel Help, <a href="https://support.google.com/business/answer/7091?hl=nl" rel="noopener">tips om uw positie in lokale zoekresultaten te verbeteren</a>.</li>
+          <li>Whitespark, <a href="https://whitespark.ca/local-search-ranking-factors/" rel="noopener">Local Search Ranking Factors</a>, editie 2026.</li>
+          <li>Google Search Central, <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=nl" rel="noopener">spamregels voor Google Zoeken</a>, onderdeel linkspam.</li>
+          <li>Ahrefs, <a href="https://ahrefs.com/blog/ai-overview-brand-correlation/" rel="noopener">AI Overview brand visibility factors (75K brands studied)</a>, mei 2025.</li>
+          <li>SBB, <a href="https://www.s-bb.nl/bedrijven/wat-is-een-leerbedrijf/" rel="noopener">wat is een erkend leerbedrijf</a>.</li>
+        </ul>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={14} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs intro="Links uit je regio, binnen de regels van Google, en een doel waar je ons op mag aanspreken." />
+
+  <Faq
+    vragen={[
+      { v: 'Wat is lokale linkbuilding?', a: 'Het verzamelen van links op websites uit de regio waar je klanten zitten: je ondernemersvereniging, een regionale nieuwssite, een netwerk in je branche of de club die je sponsort. Zulke links laten Google zien waar je werkt.' },
+      { v: 'Helpen lokale backlinks ook voor het kaartje in Google?', a: 'Een beetje. Google noemt bij lokale resultaten relevantie, afstand en prominentie, en prominentie hangt onder meer af van hoeveel websites naar je bedrijf linken. Je Bedrijfsprofiel weegt voor het kaartje zwaarder. Links helpen vooral in de gewone resultaten eronder.' },
+      { v: 'Telt een link op een ledenlijst als gekochte link, omdat ik contributie betaal?', a: 'De contributie betaal je voor het lidmaatschap, en op de ledenlijst staat elk lid. Zo\'n lijst bestaat voor de leden en hun klanten. Word je lid van een club alleen om de link, dan zit je dichter bij wat Google links kopen noemt.' },
+      { v: 'Welke verenigingen in het Noorden zetten leden met een link op hun site?', a: 'In deze gids staan er dertien die we zelf hebben nagelopen, verdeeld over Drenthe, Groningen en Friesland. Staat jouw plaats er niet bij, kijk dan op de site van je gemeente onder "ondernemersverenigingen" en open een paar ledenprofielen.' },
+      { v: 'Hoe snel zie ik effect van lokale links?', a: `${termijnen.linkbuilding} Aanpassingen aan je Bedrijfsprofiel zie je vaak sneller terug op de kaart.` },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Dienst', titel: 'Linkbuilding', href: '/linkbuilding/', tekst: '€ 75 per uur, met stijggarantie.' },
+      { label: 'Dienst', titel: 'Lokale SEO', href: '/lokale-seo/', tekst: 'Je profiel, reviews en vermeldingen op orde.' },
+      { label: 'Gids', titel: 'Gastblog plaatsen', href: '/kennisbank/gidsen/gastbloggen/', tekst: 'Zo kom je met een artikel op een vaksite.' },
+      { label: 'Gids', titel: 'Wat zijn backlinks?', href: '/kennisbank/gidsen/backlinks/', tekst: 'De basis: wat een link waardevol maakt.' },
+    ]}
+  />
+
+  <Actie titel="Benieuwd welke lokale links jij nog mist?" tekst={`${site.contactpersoon} legt je links naast die van de concurrenten in je regio en belt je met de kansen die hij ziet. Gratis, en je zit nergens aan vast.`} />
+</Base>

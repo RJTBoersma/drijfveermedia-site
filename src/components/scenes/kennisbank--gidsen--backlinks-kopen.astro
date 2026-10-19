@@ -1,0 +1,68 @@
+---
+// Scène voor /kennisbank/gidsen/backlinks-kopen/: een productkaart uit een linkshop ("Backlink te koop", DR 50, € 249) wordt onder
+// een vergrootglas bekeken. Ernaast een checklist die een voor een wordt afgevinkt, en er komt een stempel "rel=sponsored" op de kaart.
+// Beweging: het vergrootglas schuift rustig heen en weer over de kaart, de vinkjes verschijnen en de stempel valt.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const regels = [
+  { y: 100, t: 'Over jouw vak?' },
+  { y: 136, t: 'Echte lezers?' },
+  { y: 172, t: 'Label erbij?' },
+];
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: een productkaart uit een linkshop met de tekst backlink te koop, DR 50, € 249, wordt onder een vergrootglas bekeken. Ernaast een checklist: over jouw vak, echte lezers, label erbij. De vragen worden een voor een afgevinkt en er komt een stempel rel=sponsored op de kaart.'}>
+  <!-- productkaart -->
+  <rect x="26" y="34" width="224" height="204" rx="12" fill="#fff" stroke="#d9e1ea" stroke-width="2" />
+  <rect class="v" x="42" y="50" width="192" height="72" rx="8" />
+  <rect x="104" y="66" width="68" height="40" rx="6" fill="#fff" stroke="#8aa0b4" stroke-width="2" />
+  <path d="M112 76h52M112 86h40M112 96h46" stroke="#d9e1ea" stroke-width="3" stroke-linecap="round" />
+  <text x="42" y="146" font-size="14" font-weight="900">Backlink te koop</text>
+  <text x="42" y="166" font-size="11" font-weight="700" class="zacht">DR 50 · dofollow</text>
+  <text x="42" y="196" font-size="18" font-weight="900">€ 249</text>
+  <rect x="124" y="180" width="110" height="26" rx="8" fill="#ff6600" />
+  <text x="179" y="197" font-size="11" font-weight="800" text-anchor="middle" style="fill:#fff">In winkelwagen</text>
+
+  <!-- checklist -->
+  <rect x="282" y="52" width="172" height="164" rx="10" fill="#fff" stroke="#074663" stroke-width="2" />
+  <text x="298" y="78" font-size="13" font-weight="900">Eerst checken</text>
+  {regels.map((r, i) => (
+    <g>
+      <rect x="298" y={r.y - 12} width="16" height="16" rx="4" fill="#fff" stroke="#8aa0b4" stroke-width="2" />
+      <text x="324" y={r.y + 1} font-size="11.5" font-weight="700">{r.t}</text>
+      {!mini && <path class={`vink vink${i}`} d={`M301 ${r.y - 4}l4 4 7-9`} fill="none" stroke={i === 1 ? '#ff6600' : '#1f8a5b'} stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />}
+    </g>
+  ))}
+
+  <!-- vergrootglas -->
+  <g class={mini ? undefined : 'loep'}>
+    <circle cx="196" cy="150" r="26" fill="#ffffff" fill-opacity="0.35" stroke="#074663" stroke-width="5" />
+    <path d="M215 169l20 20" stroke="#074663" stroke-width="8" stroke-linecap="round" />
+  </g>
+
+  {!mini && (
+    <g class="stempel">
+      <rect x="40" y="208" width="132" height="24" rx="4" fill="#fff" stroke="#ff6600" stroke-width="2.5" transform="rotate(-6 106 220)" />
+      <text x="106" y="225" font-size="12" font-weight="900" text-anchor="middle" transform="rotate(-6 106 220)" style="fill:#ff6600">rel="sponsored"</text>
+    </g>
+  )}
+</svg>
+<style>
+  .loep, .stempel, .vink { transform-box: fill-box; }
+  .stempel { transform-origin: 50% 50%; }
+  .vink { stroke-dasharray: 24; }
+  :global(.teken-js) .vink { stroke-dashoffset: 24; }
+  :global(.teken-js) .stempel { opacity: 0; }
+  .in-beeld .vink0 { animation: kennisbank-gidsen-backlinks-kopen-vink 0.4s ease-out 0.6s forwards; }
+  .in-beeld .vink1 { animation: kennisbank-gidsen-backlinks-kopen-vink 0.4s ease-out 1.2s forwards; }
+  .in-beeld .vink2 { animation: kennisbank-gidsen-backlinks-kopen-vink 0.4s ease-out 1.8s forwards; }
+  .in-beeld .stempel { animation: kennisbank-gidsen-backlinks-kopen-stempel 0.5s cubic-bezier(.3,1.5,.5,1) 2.3s forwards; }
+  .in-beeld .loep { animation: kennisbank-gidsen-backlinks-kopen-loep 7s ease-in-out 0.2s infinite; }
+  @keyframes kennisbank-gidsen-backlinks-kopen-vink { to { stroke-dashoffset: 0; } }
+  @keyframes kennisbank-gidsen-backlinks-kopen-stempel { from { opacity: 0; transform: scale(1.4); } to { opacity: 1; transform: none; } }
+  @keyframes kennisbank-gidsen-backlinks-kopen-loep { 0%, 100% { transform: translate(0, 0); } 30% { transform: translate(-120px, -60px); } 60% { transform: translate(-60px, -10px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .in-beeld .vink0, .in-beeld .vink1, .in-beeld .vink2 { animation: none; stroke-dashoffset: 0; }
+    .in-beeld .stempel { animation: none; opacity: 1; transform: none; }
+    .in-beeld .loep { animation: none; }
+  }
+</style>
