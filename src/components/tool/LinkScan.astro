@@ -153,7 +153,7 @@ const { id = 'linkscan', vervolg = '#vergelijking', vervolgTekst = 'Laat Thorgal
     if (b[0] === 0xff && b[1] === 0xfe) return new TextDecoder('utf-16le').decode(b);
     if (b[0] === 0xfe && b[1] === 0xff) return new TextDecoder('utf-16be').decode(b);
     const t = new TextDecoder('utf-8').decode(b);
-    if (t.includes('\uFFFD')) { try { return new TextDecoder('windows-1252').decode(b); } catch {} }
+    if (t.includes(String.fromCharCode(0xfffd))) { try { return new TextDecoder('windows-1252').decode(b); } catch {} }
     return t;
   };
 
