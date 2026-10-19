@@ -2,7 +2,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// Logboek: elke maand hoe drijfveermedia.nl zelf scoort. Cijfers uit SE Ranking (schattingen voor Google Nederland).
+// Logboek: elke maand hoe drijfveermedia.nl zelf scoort. Klikken uit Search Console, zoekwoorden uit SE Ranking (schattingen voor Google Nederland).
 const logboek = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/logboek' }),
   schema: z.object({
@@ -10,7 +10,7 @@ const logboek = defineCollection({
     beschrijving: z.string(),
     maand: z.string(), // JJJJ-MM, de maand van de meting
     datum: z.coerce.date(), // publicatiedatum
-    verkeer: z.number(), // geschatte klikken per maand uit Google NL
+    verkeer: z.number(), // klikken uit Google in de laatste volle maand (Search Console)
     zoekwoorden: z.number(), // zoekwoorden in de top 100
     top10: z.number(), // zoekwoorden in de top 10
     aanvragen: z.number().optional(), // aanvragen via de site in die maand

@@ -49,7 +49,7 @@ const andere = alle.filter((i) => i.id !== item.id).slice(-2).reverse();
       <p class="kicker">Logboek · {maandNaam}</p>
       <h1>{d.titel}</h1>
       <ul class="getallen">
-        <li class="card"><b>{fmt(d.verkeer)}</b><span>bezoekers uit Google per maand</span></li>
+        <li class="card"><b>{fmt(d.verkeer)}</b><span>klikken uit Google per maand</span></li>
         <li class="card"><b>{fmt(d.top10)}</b><span>zoekwoorden in de top 10</span></li>
         <li class="card"><b>{fmt(d.zoekwoorden)}</b><span>zoekwoorden in de top 100</span></li>
         {d.aanvragen !== undefined && <li class="card"><b>{fmt(d.aanvragen)}</b><span>aanvragen via de site</span></li>}
@@ -63,7 +63,7 @@ const andere = alle.filter((i) => i.id !== item.id).slice(-2).reverse();
     <article class="tekst">
       <Auteur slug="robert" datum={d.datum.toISOString().slice(0, 10)} />
       <Content />
-      <p class="klein muted">Cijfers: schattingen van SE Ranking voor Google Nederland, gemeten in {maandNaam}. Aanvragen: eigen telling.</p>
+      <p class="klein muted">Klikken uit Google: Google Search Console. Zoekwoorden en posities: schattingen van SE Ranking voor Google Nederland, gemeten in {maandNaam}. Aanvragen: eigen telling.</p>
     </article>
   </section>
   {andere.length > 0 && <Verder titel="Eerder in het logboek" links={andere.map((a) => ({ titel: a.data.titel, href: `/logboek/${a.id}/`, label: 'Logboek', teken: 'grafiek' }))} />}

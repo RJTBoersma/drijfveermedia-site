@@ -12,14 +12,14 @@ const maandNaam = (m: string) => new Date(m + '-15').toLocaleDateString('nl-NL',
 const schema = [{
   '@type': 'Blog',
   name: 'Logboek van Drijfveer Media',
-  description: 'Elke maand hoe de eigen website van Drijfveer Media scoort in Google.',
+  description: 'Elke maand hoe de eigen website van Drijfveer Media scoort in Google, met echte klikken uit Search Console.',
   url: `${site.url}/logboek/`,
   publisher: { '@id': `${site.url}/#organisatie` },
 }];
 ---
 <Base
   title="Logboek: zo scoren we zelf in Google | Drijfveer Media"
-  description="Elke maand de echte cijfers van onze eigen site: bezoekers uit Google, posities en aanvragen. Ook als het tegenvalt. Lees mee hoe we groeien."
+  description="Elke maand de echte cijfers van onze eigen site: klikken uit Google, posities en aanvragen. Ook als het tegenvalt. Lees mee hoe we groeien."
   kruimels={[{ naam: 'Logboek', url: '/logboek/' }]}
   schema={schema}
 >
@@ -32,9 +32,9 @@ const schema = [{
     <div class="tekst">
       <h2>Waarom we dit bijhouden</h2>
       <p>De meeste bureaus laten alleen hun beste resultaten zien. Logisch, maar je weet dan niet hoe ze werken als het tegenzit. Wij doen het andersom.</p>
-      <p>Elke maand zetten we hier drie getallen neer: hoeveel mensen ons via Google vinden, op hoeveel zoekwoorden we in de top 10 staan en hoeveel aanvragen er binnenkwamen. Daarbij schrijven we wat we die maand deden en wat het opleverde. Of niet.</p>
+      <p>Elke maand zetten we hier drie getallen neer: hoeveel mensen vanuit Google doorklikken, op hoeveel zoekwoorden we in de top 10 staan en hoeveel aanvragen er binnenkwamen. Daarbij schrijven we wat we die maand deden en wat het opleverde. Of niet.</p>
       <p>We begonnen in oktober 2026 met een nulmeting, vlak voor de lancering van de nieuwe site. Het startpunt is niet om trots op te zijn. Juist daarom is het interessant om te volgen.</p>
-      <p>De cijfers over bezoekers en posities komen uit SE Ranking. Dat zijn schattingen voor Google Nederland. De aanvragen tellen we zelf.</p>
+      <p>Het aantal klikken uit Google komt uit Google Search Console: dat zijn echte klikken. Posities en zoekwoorden komen uit SE Ranking, dat zijn schattingen voor Google Nederland. De aanvragen tellen we zelf.</p>
     </div>
   </section>
 
@@ -46,7 +46,7 @@ const schema = [{
           <Plaatje href={`/logboek/${i.id}/`} onderwerp="grafiek" />
           <span class="kicker">{maandNaam(i.data.maand)}</span>
           <h3>{i.data.titel}</h3>
-          <p>{i.data.verkeer.toLocaleString('nl-NL')} bezoekers uit Google, {i.data.top10.toLocaleString('nl-NL')} zoekwoorden in de top 10{i.data.aanvragen !== undefined ? `, ${i.data.aanvragen} aanvragen` : ''}.</p>
+          <p>{i.data.verkeer.toLocaleString('nl-NL')} klikken uit Google, {i.data.top10.toLocaleString('nl-NL')} zoekwoorden in de top 10{i.data.aanvragen !== undefined ? `, ${i.data.aanvragen} aanvragen` : ''}.</p>
           <span class="meer">Lees de meting</span>
         </a>
       ))}
