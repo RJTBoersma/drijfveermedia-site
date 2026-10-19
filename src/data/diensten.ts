@@ -13,6 +13,7 @@ export interface Dienst {
   prijs: string; // zoals op de site getoond
   prijsWaarde?: number; // voor structured data, in euro excl. btw
   prijsEenheid?: 'maand' | 'uur' | 'eenmalig' | 'pagina';
+  maandelijks?: boolean; // uurtarief, maar met vaste uren per maand: opzegbaar en met garantie (linkbuilding)
 }
 
 export const diensten: Dienst[] = [
@@ -23,8 +24,8 @@ export const diensten: Dienst[] = [
   { naam: 'SEO uitbesteden', url: '/zoekmachine-optimalisatie/seo-uitbesteden/', pijler: 'Gevonden', ouder: '/zoekmachine-optimalisatie/', kort: 'SEO helemaal uit handen', prijs: 'vanaf € 495 per maand', prijsWaarde: 495, prijsEenheid: 'maand' },
   { naam: 'Lokale SEO', url: '/lokale-seo/', pijler: 'Gevonden', pillar: true, kort: 'Gevonden in je regio en op Google Maps', prijs: 'vanaf € 295 per maand', prijsWaarde: 295, prijsEenheid: 'maand' },
   { naam: 'Google Bedrijfsprofiel', url: '/lokale-seo/google-bedrijfsprofiel/', pijler: 'Gevonden', ouder: '/lokale-seo/', kort: 'Google, Bing en Apple Maps goed ingericht', prijs: 'vanaf € 249', prijsWaarde: 249, prijsEenheid: 'eenmalig' },
-  { naam: 'Linkbuilding', url: '/linkbuilding/', pijler: 'Gevonden', pillar: true, kort: 'Sterke links, eerst getest in ons proeflab', prijs: 'vanaf € 395 per maand', prijsWaarde: 395, prijsEenheid: 'maand' },
-  { naam: 'Linkbuilding uitbesteden', url: '/linkbuilding/linkbuilding-uitbesteden/', pijler: 'Gevonden', ouder: '/linkbuilding/', kort: 'Elke maand nieuwe links, met verslag', prijs: 'vanaf € 395 per maand', prijsWaarde: 395, prijsEenheid: 'maand' },
+  { naam: 'Linkbuilding', url: '/linkbuilding/', pijler: 'Gevonden', pillar: true, kort: 'Sterke links, eerst getest in ons proeflab', prijs: '€ 75 per uur', prijsWaarde: 75, prijsEenheid: 'uur', maandelijks: true },
+  { naam: 'Linkbuilding uitbesteden', url: '/linkbuilding/linkbuilding-uitbesteden/', pijler: 'Gevonden', ouder: '/linkbuilding/', kort: 'Elke maand nieuwe links, met verslag', prijs: '€ 75 per uur', prijsWaarde: 75, prijsEenheid: 'uur', maandelijks: true },
   { naam: 'Google disavow tool', url: '/linkbuilding/google-disavow-tool/', pijler: 'Gevonden', ouder: '/linkbuilding/', kort: 'Slechte links onschadelijk maken', prijs: 'consult € 85 per uur', prijsWaarde: 85, prijsEenheid: 'uur' },
   { naam: 'Online adverteren', url: '/online-adverteren/', pijler: 'Gevonden', pillar: true, kort: 'Adverteren waar je klant zoekt', prijs: 'vanaf € 249 per maand', prijsWaarde: 249, prijsEenheid: 'maand' },
   { naam: 'Google Ads', url: '/online-adverteren/google-ads-bureau/', pijler: 'Gevonden', ouder: '/online-adverteren/', kort: 'Campagnes die aanvragen opleveren', prijs: 'vanaf € 249 per maand', prijsWaarde: 249, prijsEenheid: 'maand' },

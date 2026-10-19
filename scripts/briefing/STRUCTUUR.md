@@ -57,11 +57,11 @@ Ordening volgens Gevonden, Genoemd en Gekozen. Elke pillar heeft een eigen pagin
 | Lokale SEO (pillar) | /lokale-seo/ | Gevonden worden in je eigen regio en op Google Maps, inclusief reviews | € 295 p/m |
 | Google Bedrijfsprofiel, Bing Places en Apple | /lokale-seo/google-bedrijfsprofiel/ | Alle drie de kaarten goed ingericht | € 249 |
 | Reviews en reputatie | /lokale-seo/reviews/ | Reviewlink, QR-code, reageren op reviews | Onderdeel van lokale SEO |
-| Linkbuilding (pillar) | /linkbuilding/ | Hoe we links bouwen, getest in ons proeflab, stijggarantie | € 395 p/m |
-| Linkbuilding uitbesteden | /linkbuilding/linkbuilding-uitbesteden/ | Maandelijkse links zonder omkijken | € 395 p/m |
+| Linkbuilding (pillar) | /linkbuilding/ | Hoe we links bouwen, getest in ons proeflab, stijggarantie | € 75 p/u |
+| Linkbuilding uitbesteden | /linkbuilding/linkbuilding-uitbesteden/ | Maandelijkse links zonder omkijken | € 75 p/u |
 | Google disavow tool | /linkbuilding/google-disavow-tool/ | Slechte links onschadelijk maken | Consult € 85 p/u |
-| Link building Netherlands (Engels) | /linkbuilding/link-building-netherlands/ | Voor buitenlandse bedrijven die in Nederland willen scoren | € 395 p/m |
-| Linkbuilding Niederlande (Duits) | /linkbuilding/linkbuilding-niederlande/ | Idem, voor Duitse bedrijven | € 395 p/m |
+| Link building Netherlands (Engels) | /linkbuilding/link-building-netherlands/ | Voor buitenlandse bedrijven die in Nederland willen scoren | € 75 p/u |
+| Linkbuilding Niederlande (Duits) | /linkbuilding/linkbuilding-niederlande/ | Idem, voor Duitse bedrijven | € 75 p/u |
 
 ### Genoemd
 

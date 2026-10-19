@@ -16,7 +16,7 @@ const pad = Astro.url.pathname;
 const groot = ['/', '/prijzen/', '/garantie/'].includes(pad) || diensten.some((d) => d.pillar && d.url === pad);
 const dienst = diensten.find((d) => d.url === pad);
 const stapDienst = diensten.find((d) => d.url === stapVoor(pad).dienst?.url);
-const isEenmalig = (d?: typeof dienst) => !!d && ['eenmalig', 'pagina', 'uur'].includes(d.prijsEenheid ?? '');
+const isEenmalig = (d?: typeof dienst) => !!d && ['eenmalig', 'pagina', 'uur'].includes(d.prijsEenheid ?? '') && !d.maandelijks;
 const eenmaligAuto = pad.startsWith('/webdesign-') || isEenmalig(dienst) || (pad.startsWith('/kennisbank/') && isEenmalig(stapDienst));
 const {
   titel = groot ? 'Hoe weet je dat wij waarmaken wat we zeggen?' : 'Wat je bij ons zeker weet',
@@ -28,7 +28,7 @@ const {
 } = Astro.props;
 const cases: Record<CaseNaam, { href: string; naam: string; getal: string; wat: string; tekst: string; onderwerp: string }> = {
   willemfikstt: { href: '/cases/#willemfikstt', naam: 'Willemfikstt.nl', getal: '+87%', wat: 'bezoekers uit Google', tekst: 'kreeg 87% meer bezoekers uit Google', onderwerp: 'raket' },
-  conflictbemiddeling: { href: '/cases/#conflictbemiddeling', naam: 'Conflictbemiddeling.nl', getal: '+47%', wat: 'bezoekers uit Google', tekst: 'kreeg 47% meer bezoekers uit Google, na een nieuwe site, SEO en Google Ads', onderwerp: 'raket' },
+  conflictbemiddeling: { href: '/cases/#conflictbemiddeling', naam: 'Conflictbemiddeling.nl', getal: '+47%', wat: 'bezoekers uit Google', tekst: 'kreeg 47% meer bezoekers uit Google, na een nieuwe site, SEO, linkbuilding en Google Ads', onderwerp: 'raket' },
   dakraamconcurrent: { href: '/cases/#dakraamconcurrent', naam: 'Dakraamconcurrent.nl', getal: '+32%', wat: 'bezoekers uit Google', tekst: 'kreeg 32% meer bezoekers uit Google, na een nieuwe site en linkbuilding', onderwerp: 'raket' },
 };
 const caseAuto: CaseNaam = /^\/(website-laten-maken|webdesign-|online-adverteren|branding)/.test(pad) ? 'conflictbemiddeling' : /^\/linkbuilding/.test(pad) ? 'dakraamconcurrent' : 'willemfikstt';

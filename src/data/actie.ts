@@ -20,7 +20,7 @@ const regels: [RegExp, Stap][] = [
     knop: 'Doe de gratis AI-test', kort: 'Gratis AI-test', vraag: 'Noemt ChatGPT jou al?', href: '/generative-engine-optimization/#ai-test',
     zin: 'In vijf minuten weet je of ChatGPT en Gemini jouw bedrijf noemen als iemand naar jouw vak vraagt.',
     dienst: { naam: 'Genoemd worden door AI', prijs: 'vanaf € 495 per maand', url: '/generative-engine-optimization/' } }],
-  [/^\/linkbuilding|backlink|dofollow|linkbuilding/, { ...scan, vraag: 'Hoe sterk zijn jouw links, naast die van je concurrent?', dienst: { naam: 'Linkbuilding', prijs: 'vanaf € 395 per maand', url: '/linkbuilding/' } }],
+  [/^\/linkbuilding|backlink|dofollow|linkbuilding/, { ...scan, vraag: 'Hoe sterk zijn jouw links, naast die van je concurrent?', dienst: { naam: 'Linkbuilding', prijs: '€ 75 per uur', url: '/linkbuilding/' } }],
   [/^\/(tekstschrijver)|copywriting|teksten|contentmarketing|content-plan|blog/, { ...scan, vraag: 'Mag Thorgall een van je pagina\'s lezen?', dienst: { naam: 'Tekstschrijver', prijs: 'vanaf € 75 per pagina', url: '/tekstschrijver/' } }],
   [/^\/leadgeneratie|conversie|landingspagina|leads|nieuwsbrief|mail|funnel|heatmap/, { ...scan, dienst: { naam: 'Leadgeneratie', prijs: 'vanaf € 495 per maand', url: '/leadgeneratie/' } }],
   [/^\/social-media|instagram|linkedin|social|posten|reels|viraal/, { ...scan, dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],

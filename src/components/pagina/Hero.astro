@@ -12,8 +12,9 @@ interface Props {
   smal?: boolean; // zonder beeld
   eenmalig?: boolean; // eenmalige prijs in plaats van per maand
   knopAlleenMobiel?: boolean; // knop verbergen op brede schermen (als het formulier ernaast staat)
+  maandelijks?: boolean; // uurtarief met vaste uren per maand (linkbuilding): opzegbaar en met garantie
 }
-const { kicker, titel, prijs, knop: eigenKnop, bel = true, smal = false, eenmalig = false, knopAlleenMobiel = false } = Astro.props;
+const { kicker, titel, prijs, knop: eigenKnop, bel = true, smal = false, eenmalig = false, knopAlleenMobiel = false, maandelijks = false } = Astro.props;
 const knop = knopVoor(Astro.url.pathname, eigenKnop);
 const heeftBeeld = Astro.slots.has('beeld') && !smal;
 ---
@@ -29,8 +30,8 @@ const heeftBeeld = Astro.slots.has('beeld') && !smal;
     {prijs && (
       <ul class="hero-feiten">
         <li><b>{prijs}</b> excl. btw</li>
-        {/uur/.test(prijs) ? <li>Uurtarief, geen abonnement</li> : <li>{eenmalig ? 'Eenmalig, geen abonnement' : 'Per maand opzegbaar'}</li>}
-        {!eenmalig && /maand|p\/m/.test(prijs) && <li><a href="/garantie/">Met garantie</a></li>}
+        {maandelijks ? <li>Uren per maand, per maand opzegbaar</li> : /uur/.test(prijs) ? <li>Uurtarief, geen abonnement</li> : <li>{eenmalig ? 'Eenmalig, geen abonnement' : 'Per maand opzegbaar'}</li>}
+        {!eenmalig && (maandelijks || /maand|p\/m/.test(prijs)) && <li><a href="/garantie/">Met garantie</a></li>}
       </ul>
     )}
   </div>
