@@ -18,7 +18,6 @@ Vergeleken met TriplePro, Linkbuilding Masters, Traffic Today, Webton, SAM, Heer
 - **/kennisbank/gidsen/backlinks/** is nu een algemene gids "Wat zijn backlinks?". Het lokale deel staat in de nieuwe gids over lokale linkbuilding.
 
 ## Nalopen door Robert
-- Sleep één keer de vier links-exports van drijfveermedia.nl in de scan, om de herkenning met een echte export te testen.
 - In de gids wat kost linkbuilding: de prijzen van Backlinkswinkel en Backlink.nl veranderen vaak. Elk kwartaal nalopen.
 
 ## Besloten door Robert (19 oktober)
@@ -28,6 +27,7 @@ Vergeleken met TriplePro, Linkbuilding Masters, Traffic Today, Webton, SAM, Heer
 - Geen echte plaatsingen tonen.
 - Thorgall doet de linkbuilding. Johan is marketeer.
 - De concurrentenvergelijking door Thorgall (vanaf de linkbuildingscan) is gratis.
+- De scan is getest met de echte export Nieuwste links van drijfveermedia.nl (19-10): wordt goed gelezen.
 
 ## Nog open
 1. Toestemming voor linkdata van Dakraam Concurrent en Conflictbemiddeling (het verloop uit SE Ranking).
