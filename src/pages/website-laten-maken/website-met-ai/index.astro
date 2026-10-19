@@ -8,22 +8,33 @@ import Prijskaart from '../../../components/pagina/Prijskaart.astro';
 import Verder from '../../../components/pagina/Verder.astro';
 import Inhoud from '../../../components/pagina/Inhoud.astro';
 import Auteur from '../../../components/pagina/Auteur.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/website-laten-maken--website-met-ai.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import WebsitePrijs from '../../../components/tool/WebsitePrijs.astro';
 
 const url = '/website-laten-maken/website-met-ai/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'wat', titel: 'Wat het bij ons betekent' },
   { id: 'ai-mens', titel: 'Wat AI doet en wat wij doen' },
+  { id: 'voorbeeld', titel: 'Voor en na onze hand' },
+  { id: 'prijs', titel: 'Wat je krijgt voor € 250' },
+  { id: 'markt', titel: 'Wat het elders kost' },
   { id: 'zelf', titel: 'Waarom niet zelf?' },
   { id: 'google', titel: 'Wordt hij gevonden?' },
   { id: 'werkwijze', titel: 'Zo werkt het' },
-  { id: 'prijs', titel: 'Wat je krijgt voor € 250' },
   { id: 'voor-wie', titel: 'Voor wie het past' },
   { id: 'daarna', titel: 'Na de oplevering' },
+];
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
+const bronnen = [
+  'https://developers.google.com/search/docs/fundamentals/using-gen-ai-content',
+  'https://wjwebdesign.nl/website-laten-maken/kosten/',
+  'https://webstijn.nl/website-laten-maken/',
+  'https://siteactief.nl/tarieven/',
 ];
 const schema = [
   {
@@ -46,6 +57,7 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    citation: bronnen,
   },
 ];
 ---
@@ -56,7 +68,7 @@ const schema = [
   schema={schema}
 >
   <Hero kicker="Gekozen · Website" titel="Website met AI laten maken, door mensen afgemaakt" prijs="vanaf € 250" eenmalig>
-    <p>Snel online met een professionele website die klopt. AI doet het zware werk, wij maken hem af. Vaak staat hij er binnen twee weken, voor een vast bedrag.</p>
+    <p>Voor zzp'ers, starters en kleine bedrijven die snel online willen met een site die klopt. AI doet het zware werk. Wij herschrijven de teksten, controleren elk feit en richten hem in voor Google. Vaste prijs, geen abonnement, alles op jouw naam.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -77,8 +89,7 @@ const schema = [
 
         <h2 id="wat">Wat een website met AI laten maken bij ons betekent</h2>
         <p>Een website met AI laten maken klinkt als op een knop drukken en klaar. Zo werkt het bij ons niet. AI bouwt de eerste versie: de opbouw, de opmaak, een opzet voor de teksten. Daarna gaan wij er met de hand doorheen. We herschrijven wat te algemeen is, controleren elk feit en zetten de belknop op de plek waar je bezoeker hem zoekt.</p>
-        <p>Het resultaat is een complete site die mobielvriendelijk is, snel laadt en goed is ingericht voor Google. Voor een fractie van wat een bureau vraagt, omdat AI ons uren werk scheelt. Die besparing geven we door.</p>
-        <p>Het is de snelle route binnen <a href="/website-laten-maken/">website laten maken</a>. Wil je een volledig eigen ontwerp, dan is maatwerk in WordPress de andere route.</p>
+        <p>Het resultaat is een complete site die mobielvriendelijk is, snel laadt en goed is ingericht voor Google. Voor een fractie van wat maatwerk kost, omdat AI ons uren werk scheelt. Die besparing geven we door. Het is de snelle route binnen <a href="/website-laten-maken/">website laten maken</a>. Wil je een volledig eigen ontwerp, dan is maatwerk in WordPress de andere route.</p>
 
         <h2 id="ai-mens">Wat AI doet, en wat wij doen</h2>
         <p>AI is goed in snel en veel. Het is slecht in kloppen en in jou. Daarom verdelen we het werk zo:</p>
@@ -95,58 +106,23 @@ const schema = [
             </tbody>
           </table>
         </div>
-        <p>Dat AI soms iets verzint, is geen bijzaak. Google schrijft in zijn <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" rel="noopener">richtlijnen voor content met generatieve AI</a> dat zulke modellen geen feiten opzoeken, maar het meest waarschijnlijke volgende woord voorspellen. Google raadt daarom aan om alle AI-teksten op juistheid te controleren voordat je ze publiceert. Dat doen we dus. Welke tools we gebruiken, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
+        <p>Dat AI soms iets verzint, is geen bijzaak. Google schrijft in zijn <a href="https://developers.google.com/search/docs/fundamentals/using-gen-ai-content" rel="noopener">richtlijnen voor content met generatieve AI</a> dat zulke modellen geen feiten opzoeken, maar het meest waarschijnlijke volgende woord voorspellen. Google raadt daarom aan om AI-teksten op juistheid te controleren voordat je ze publiceert. Dat doen we dus. Welke tools we gebruiken, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
 
-        <h2 id="zelf">Waarom niet zelf met een AI-websitebouwer?</h2>
-        <p>Dat kan. Wix, Squarespace en een handvol nieuwe diensten zetten in tien minuten een site neer. Probeer het gerust. Je ziet dan meteen waar het schuurt.</p>
-        <ul>
-          <li><b>De teksten zijn van iedereen.</b> Een AI-bouwer kent je bedrijf niet. Hij schrijft "kwaliteit en service staan bij ons voorop", net als bij je concurrent.</li>
-          <li><b>De basis voor Google ontbreekt vaak.</b> Paginatitels, koppen, beschrijvingen en de code die zoekmachines vertelt wie je bent, staan er niet of half in.</li>
-          <li><b>Je betaalt elke maand.</b> De meeste bouwers werken met een verplicht abonnement. Stop je, dan stopt je site.</li>
-          <li><b>Het kost meer tijd dan je denkt.</b> De eerste versie staat er snel. De laatste twintig procent kost avonden.</li>
-        </ul>
+        <h2 id="voorbeeld">Voor en na onze hand</h2>
+        <p>Zo ziet dat er in de praktijk uit. Links wat AI in de eerste versie schrijft, rechts wat er na onze ronde staat.</p>
         <div class="tabel-scroll">
           <table>
-            <thead><tr><th></th><th>Zelf met een AI-bouwer</th><th>Website met AI bij ons</th><th>Maatwerk in WordPress</th></tr></thead>
+            <thead><tr><th></th><th>Eerste versie van AI</th><th>Na onze hand</th></tr></thead>
             <tbody>
-              <tr><td><b>Prijs</b></td><td>Een abonnement per maand</td><td>Vanaf € 250 eenmalig</td><td>Vanaf € 2.000</td></tr>
-              <tr><td><b>Doorlooptijd</b></td><td>Een avond tot een paar weken, naast je werk</td><td>Vaak binnen twee weken</td><td>Meer tijd, hoe lang hoor je in de offerte</td></tr>
-              <tr><td><b>Teksten</b></td><td>Algemene AI-tekst, tenzij je ze zelf herschrijft</td><td>Met de hand afgemaakt</td><td>Met de hand, of door onze tekstschrijver</td></tr>
-              <tr><td><b>SEO-basis</b></td><td>Zelf instellen</td><td>Ingericht</td><td>Ingericht</td></tr>
-              <tr><td><b>Van wie is de site?</b></td><td>Hij leeft bij de bouwer</td><td>Van jou</td><td>Van jou</td></tr>
-              <tr><td><b>Past bij</b></td><td>Wie het leuk vindt en tijd heeft</td><td>Starters, zzp'ers, kleine bedrijven</td><td>Mkb met meer diensten of eigen wensen</td></tr>
+              <tr><td><b>Kop bovenaan</b></td><td>Welkom bij Loodgieter Jansen, uw partner in kwaliteit en service</td><td>Lekkage of verstopping in Assen en omgeving? Jansen komt vandaag nog</td></tr>
+              <tr><td><b>Over het bedrijf</b></td><td>Wij zijn een dynamisch team met jarenlange ervaring</td><td>Piet Jansen is al twintig jaar loodgieter. Hij komt zelf, met een volle bus</td></tr>
+              <tr><td><b>Prijs</b></td><td>Scherpe tarieven</td><td>Voorrijden € 45, daarna € 65 per uur</td></tr>
+              <tr><td><b>Feiten</b></td><td>Erkend en gecertificeerd installateur</td><td>Geschrapt: Jansen heeft geen keurmerk, AI verzon het</td></tr>
+              <tr><td><b>Knop</b></td><td>"Neem contact op", onderaan de pagina</td><td>"Bel direct", bovenaan, met één tik op de telefoon</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Wie zelf wil bouwen, vindt in de gids <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a> een vergelijking van tijd en kosten. En ben je nieuwsgierig naar bouwen met alleen prompts, lees dan de gids over <a href="/kennisbank/gidsen/vibe-coding/">vibe coding</a>.</p>
-
-        <Tussenactie />
-        <h2 id="google">Wordt een AI-website gevonden in Google?</h2>
-        <p>Ja, als hij goed is. Google beoordeelt een pagina op wat erop staat, niet op hoe hij gemaakt is. Er zit wel een grens aan. Wie met AI in hoog tempo pagina's maakt waar niemand iets aan heeft, kan volgens Google het spambeleid tegen massaal geproduceerde content overtreden. Een site met tien pagina's die echt over jouw bedrijf gaan, heeft daar niets mee te maken.</p>
-        <p>Wat wel telt, is wat Google bij elke site wil zien: duidelijke titels en koppen, teksten die de vraag van de bezoeker beantwoorden, een site die snel is op een telefoon, en gegevens die kloppen. Daarom zit de SEO-basis bij elke site in de prijs. Wil je hoger komen bij zoekwoorden met veel concurrentie, dan is <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a> de volgende stap.</p>
-
-        <h2 id="werkwijze">Zo werkt het</h2>
-        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>1. Een kort gesprek</h3></div>
-        <p>{site.contactpersoon} belt je binnen 15 minuten terug, op werkdagen tussen 8.00 en 17.00 uur. Hij vraagt wat je doet, voor wie, in welke regio en wat de site moet opleveren. Bellen, een offerte, een afspraak? Daarna hoor je de vaste prijs.</p>
-
-        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>2. AI zet de eerste versie neer</h3></div>
-        <p>Met jouw antwoorden laten we AI de opbouw, het ontwerp en een eerste versie van de teksten maken. Daar gebruiken we tools als Claude, ChatGPT en Gemini voor. Dit deel gaat snel. Hoe AI ook zelf code schrijft, lees je in de gids over <a href="/kennisbank/gidsen/claude-code/">Claude Code</a>.</p>
-
-        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Wij maken hem af</h3></div>
-        <p>Nu begint het vakwerk. We herschrijven de teksten tot ze klinken als jouw bedrijf, kloppen je diensten en prijzen, en richten de SEO-basis in. We testen op telefoon en laptop en kijken of het formulier aankomt.</p>
-
-        <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3>4. Jij kijkt mee, daarna gaat hij live</h3></div>
-        <p>Je ziet de site voordat hij online gaat en geeft door wat anders moet. Pas als het klopt, zetten we hem live. Een snelle oplevering, maar geen gehaaste.</p>
-
-        <h3>Wat je zelf kunt voorbereiden</h3>
-        <p>De grootste vertraging zit bijna altijd in teksten en foto's. Met dit lijstje gaat het een stuk sneller:</p>
-        <ul class="vink">
-          <li>Je logo als bestand, het liefst als SVG of PNG met een doorzichtige achtergrond. Nog geen logo? Kijk bij <a href="/branding/logo-laten-maken/">logo laten maken</a>.</li>
-          <li>Tien tot twintig eigen foto's van je werk, je team of je bus. Liever een goede telefoonfoto dan een stockfoto.</li>
-          <li>Een lijstje van je diensten, met de vragen die klanten er altijd over stellen.</li>
-          <li>Je domeinnaam, of een paar ideeën. Twijfel je, lees dan de gids <a href="/kennisbank/gidsen/domeinnaam-kiezen/">domeinnaam kiezen</a>.</li>
-          <li>Twee sites die je mooi vindt, en één die je vreselijk vindt.</li>
-        </ul>
+        <p class="klein muted">Verzonnen voorbeeld. Loodgieter Jansen bestaat niet, de tarieven ook niet.</p>
 
         <h2 id="prijs">Wat je krijgt voor € 250</h2>
         <p>Een eenmalig, vast bedrag, exclusief btw. Geen verrassingen achteraf en geen verplicht abonnement. Wat erin zit:</p>
@@ -158,13 +134,65 @@ const schema = [
           <li>Een eenvoudig beheerscherm om zelf teksten en foto's te wijzigen</li>
           <li>De website volledig op jouw naam, net als je domein</li>
         </ul>
-        <p>Hoeveel pagina's erin passen en wie de teksten aanlevert, bespreken we vooraf. Heb je meer nodig, dan hoor je de meerprijs voordat we beginnen. Laat je alle teksten door ons schrijven, dan betaal je daarvoor vanaf € 75 per pagina via onze <a href="/tekstschrijver/">tekstschrijver</a>. Een vaste prijs betekent ook: niets bijrekenen wat je niet gevraagd hebt.</p>
-        <h3>Wat de prijs hoger maakt</h3>
-        <p>Drie dingen bepalen waar je uitkomt. Hoeveel pagina's je nodig hebt. Of wij de teksten schrijven of jij ze aanlevert. En of er bijzondere functies in moeten, zoals een afsprakenplanner of een koppeling met je software. Dat laatste past vaak beter bij maatwerk.</p>
-        <div class="kader">
-          <p class="kader-titel">Rekenvoorbeeld (verzonnen)</p>
-          <p>Een fysiotherapeut in Leek wil een site met een homepage, drie behandelpagina's en een contactpagina. Ze heeft een logo en goede foto's, maar geen teksten. De site begint bij € 250. Laat ze de teksten voor vijf pagina's door ons schrijven, dan komt daar vanaf € 75 per pagina bij. Na het eerste gesprek hoort ze de vaste prijs, voordat er iets gebeurt.</p>
+        <p>Wat er niet in zit, hoor je vooraf. Laat je de teksten door ons schrijven, dan betaal je vanaf € 75 per pagina via onze <a href="/tekstschrijver/">tekstschrijver</a>. Een logo kost vanaf € 495. Hosting regel je zelf, voor een paar euro per maand. Hoeveel pagina's erin passen, bespreken we in het eerste gesprek. Heb je meer nodig, dan hoor je de meerprijs voordat we beginnen. Een afsprakenplanner of een koppeling met je software past vaak beter bij maatwerk.</p>
+        <WebsitePrijs paginas={5} teksten={true} logo={false} marge={600} intro="Vul in wat je nodig hebt. Je ziet of de snelle route met AI past, wat hij kost en na hoeveel klussen hij terugverdiend is." />
+
+        <Tussenactie />
+        <h2 id="markt">Wat een AI-website elders kost</h2>
+        <p>Een website maken met AI kan op meer plekken. Dit vragen drie aanbieders op hun eigen site, in oktober 2026, zonder btw:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Wat je krijgt</th><th>Prijs</th></tr></thead>
+            <tbody>
+              <tr><td><b>wjwebdesign</b></td><td>Vijf pagina's op basis van een korte vragenlijst, online binnen 48 uur</td><td>€ 249 eenmalig, geen btw</td></tr>
+              <tr><td><b>Webstijn</b></td><td>Met AI gebouwd, met hosting, mail en onderhoud, online binnen één week</td><td>vanaf € 50 per maand</td></tr>
+              <tr><td><b>SiteActief</b></td><td>Gebouwd met AI en slimme tools, tot circa vijf pagina's, binnen een week</td><td>€ 1.250 eenmalig</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td>Met AI gebouwd, met de hand afgemaakt, vaak binnen twee weken</td><td>vanaf € 250 eenmalig</td></tr>
+            </tbody>
+          </table>
         </div>
+        <p>Op prijs zitten we dicht bij de goedkoopste. Sneller zijn we niet: een site in 48 uur beloven we niet. Wat je bij ons extra krijgt, is de ronde met de hand en wat er daarna komt. We zijn een online marketingbureau. Wil je later hoger in Google, beter op de kaart of genoemd worden door AI, dan doet hetzelfde team dat. En wat we bij jou doen, hebben we eerst getest op meer dan honderd eigen sites, in ons <a href="/proeflab/">proeflab</a>.</p>
+
+        <h2 id="zelf">Waarom niet zelf met een AI-websitebouwer?</h2>
+        <p>Dat kan. Wix, Squarespace en een handvol nieuwe diensten zetten in tien minuten een site neer. Probeer het gerust. Je ziet dan meteen waar het schuurt: de teksten zijn van iedereen, de basis voor Google staat er half in, je betaalt vaak elke maand en de laatste twintig procent kost avonden.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf met een AI-bouwer</th><th>Website met AI bij ons</th><th>Maatwerk in WordPress</th></tr></thead>
+            <tbody>
+              <tr><td><b>Prijs</b></td><td>Een abonnement per maand</td><td>Vanaf € 250 eenmalig</td><td>Vanaf € 2.000</td></tr>
+              <tr><td><b>Doorlooptijd</b></td><td>Een avond tot een paar weken, naast je werk</td><td>Vaak binnen twee weken</td><td>Meer tijd, hoe lang hoor je in de offerte</td></tr>
+              <tr><td><b>Teksten</b></td><td>Algemene AI-tekst, tenzij je ze zelf herschrijft</td><td>Met de hand afgemaakt</td><td>Met de hand, of door onze tekstschrijver</td></tr>
+              <tr><td><b>SEO-basis</b></td><td>Zelf instellen</td><td>Ingericht</td><td>Ingericht</td></tr>
+              <tr><td><b>Van wie is de site?</b></td><td>Hij leeft bij de bouwer</td><td>Van jou</td><td>Van jou</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wie zelf wil bouwen, vindt in de gids <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a> een vergelijking van tijd en kosten. Ben je nieuwsgierig naar bouwen met alleen prompts, lees dan de gids over <a href="/kennisbank/gidsen/vibe-coding/">vibe coding</a>.</p>
+
+        <h2 id="google">Wordt een AI-website gevonden in Google?</h2>
+        <p>Ja, als hij goed is. Google beoordeelt een pagina op wat erop staat, niet op hoe hij gemaakt is. Er zit wel een grens aan. Wie met AI in hoog tempo pagina's maakt waar niemand iets aan heeft, kan volgens Google het spambeleid tegen massaal geproduceerde content overtreden. Een site met tien pagina's die echt over jouw bedrijf gaan, heeft daar niets mee te maken.</p>
+        <p>Wat wel telt: duidelijke titels en koppen, teksten die de vraag van de bezoeker beantwoorden, een site die snel is op een telefoon, en gegevens die kloppen. Daarom zit de SEO-basis bij elke site in de prijs. Wil je hoger komen bij zoekwoorden met veel concurrentie, dan is <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a> de volgende stap.</p>
+
+        <h2 id="werkwijze">Zo werkt het</h2>
+        <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>1. Een kort gesprek</h3></div>
+        <p>{site.contactpersoon} belt je binnen 15 minuten terug, op werkdagen tussen 8.00 en 17.00 uur. Hij vraagt wat je doet, voor wie, in welke regio en wat de site moet opleveren. Daarna hoor je de vaste prijs.</p>
+
+        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>2. AI zet de eerste versie neer</h3></div>
+        <p>Met jouw antwoorden laten we AI de opbouw, het ontwerp en een eerste versie van de teksten maken. Daar gebruiken we tools als Claude, ChatGPT en Gemini voor. Hoe AI ook zelf code schrijft, lees je in de gids over <a href="/kennisbank/gidsen/claude-code/">Claude Code</a>.</p>
+
+        <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>3. Wij maken hem af</h3></div>
+        <p>Nu begint het vakwerk. We herschrijven de teksten tot ze klinken als jouw bedrijf, kloppen je diensten en prijzen, en richten de SEO-basis in. We testen op telefoon en laptop en kijken of het formulier aankomt.</p>
+
+        <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3>4. Jij kijkt mee, daarna gaat hij live</h3></div>
+        <p>Je ziet de site voordat hij online gaat en geeft door wat anders moet. Pas als het klopt, zetten we hem live. Een snelle oplevering, maar geen gehaaste.</p>
+
+        <h3>Wat je zelf kunt voorbereiden</h3>
+        <ul class="vink">
+          <li>Je logo als bestand, het liefst als SVG of PNG. Nog geen logo? Kijk bij <a href="/branding/logo-laten-maken/">logo laten maken</a>.</li>
+          <li>Tien tot twintig eigen foto's van je werk, je team of je bus.</li>
+          <li>Een lijstje van je diensten, met de vragen die klanten er altijd over stellen.</li>
+          <li>Je domeinnaam, of een paar ideeën. Lees anders de gids <a href="/kennisbank/gidsen/domeinnaam-kiezen/">domeinnaam kiezen</a>.</li>
+        </ul>
 
         <h2 id="voor-wie">Voor wie het past, en voor wie niet</h2>
         <p>De snelle route past bij een zzp'er die eindelijk een fatsoenlijke site wil. Bij een starter die over een maand opent. Bij een vakman die nu alleen een Facebookpagina heeft en merkt dat klanten daar niet op vertrouwen. Of bij een bedrijf met een site van tien jaar oud, waar je liever niemand naartoe stuurt.</p>
@@ -175,11 +203,10 @@ const schema = [
         </div>
 
         <h2 id="daarna">Na de oplevering kun je vooruit</h2>
-        <p>Een site van € 250 is geen eindpunt. Komen er bezoekers maar te weinig aanvragen, dan kijken we samen naar de opbouw. Wil je hoger in Google, dan is SEO de volgende stap. Werk je vooral in je eigen regio, begin dan met je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel laten inrichten</a>. En groeit je bedrijf, dan bouwen we verder of stap je over op maatwerk. Zonder gedoe, want alles staat al op jouw naam.</p>
-        <p>Hosting regel je zelf, zodat de site echt van jou is. We helpen je wel kiezen en zetten je site erop. Een domein en eenvoudige hosting kosten samen meestal een paar euro per maand. Wat hosting precies is, staat in het begrip <a href="/kennisbank/wat-is/hosting/">hosting</a>.</p>
+        <p>Een site van € 250 is geen eindpunt. Komen er bezoekers maar te weinig aanvragen, dan kijken we samen naar de opbouw. Werk je vooral in je eigen regio, begin dan met je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel laten inrichten</a>. En groeit je bedrijf, dan bouwen we verder of stap je over op maatwerk. Zonder gedoe, want alles staat al op jouw naam. Wat hosting precies is, staat in het begrip <a href="/kennisbank/wat-is/hosting/">hosting</a>.</p>
       </article>
       <aside class="zijkolom">
-        <Inhoud items={hoofdstukken} leestijd={9} />
+        <Inhoud items={hoofdstukken} leestijd={10} />
         <Prijskaart naam="Website met AI" prijs="€ 250" eenmalig punten={['Met de hand afgemaakt', 'Mobielvriendelijk en snel', 'SEO-basis ingericht', 'Geen verplicht abonnement', 'Helemaal van jou']} noot="Vaak binnen twee weken online." />
       </aside>
     </div>
@@ -189,12 +216,13 @@ const schema = [
 
   <Faq
     vragen={[
-      { v: 'Is een website met AI hetzelfde als een template?', a: 'Nee. AI zet een eerste versie neer op basis van jouw antwoorden. Daarna herschrijven en controleren wij alles met de hand, zodat de site over jouw bedrijf gaat en niet over een willekeurig bedrijf.' },
       { v: 'Wat kost een website met AI laten maken?', a: 'Bij ons vanaf € 250 eenmalig, exclusief btw. Teksten door onze tekstschrijver kosten vanaf € 75 per pagina. Je hoort de vaste prijs vooraf.' },
+      { v: 'Elders kost een AI-website € 249. Waarom bij jullie?', a: 'Op prijs scheelt het weinig. Vergelijk wat erin zit: bij ons herschrijft een mens de teksten, controleren we elk feit en richten we de SEO-basis in. En na de oplevering kun je bij hetzelfde bureau terecht voor SEO, lokale SEO en advertenties.' },
       { v: 'Hoe snel staat mijn website met AI online?', a: 'Vaak binnen twee weken. Het tempo hangt vooral af van hoe snel je je logo, foto\'s en antwoorden aanlevert.' },
+      { v: 'Wat als ik de eerste versie niet mooi vind?', a: 'Zeg het. Je ziet de site voordat hij online gaat en geeft door wat anders moet. Pas als het klopt, zetten we hem live.' },
       { v: 'Zit ik bij een website met AI vast aan een abonnement?', a: 'Nee. Je betaalt een eenmalig bedrag. Hosting regel je zelf, op je eigen naam.' },
+      { v: 'Is een website met AI hetzelfde als een template?', a: 'Nee. AI zet een eerste versie neer op basis van jouw antwoorden. Daarna herschrijven en controleren wij alles met de hand, zodat de site over jouw bedrijf gaat en niet over een willekeurig bedrijf.' },
       { v: 'Kan ik mijn website met AI later uitbreiden?', a: 'Ja. Je kunt pagina\'s toevoegen of later overstappen op een maatwerk website. Je teksten en domein neem je mee.' },
-      { v: 'Wordt een AI-website wel gevonden in Google?', a: 'De basis zit erin: titels, koppen, beschrijvingen en gegevens voor zoekmachines. Google beoordeelt een site op inhoud en kwaliteit, niet op hoe hij gemaakt is. Daarom maken we de teksten met de hand af.' },
       { v: 'Bouwen jullie ook een webshop met AI?', a: 'Nee. Webshops bouwen of optimaliseren doen we niet, ook niet met AI. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.' },
     ]}
   />
@@ -208,6 +236,8 @@ const schema = [
       { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'Wat een website in 2026 kost.' },
     ]}
   />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, noemt de vaste prijs en houdt je site bij tot hij live staat.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
   <Actie titel="Volgende maand online?" tekst={`Vertel ${site.contactpersoon} wat je doet en voor wie. Hij belt je op werkdagen binnen 15 minuten terug en zegt of de snelle route bij je past.`} />
 </Base>

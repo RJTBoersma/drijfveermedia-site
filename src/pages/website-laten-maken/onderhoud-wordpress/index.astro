@@ -8,22 +8,30 @@ import Prijskaart from '../../../components/pagina/Prijskaart.astro';
 import Verder from '../../../components/pagina/Verder.astro';
 import Inhoud from '../../../components/pagina/Inhoud.astro';
 import Auteur from '../../../components/pagina/Auteur.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/website-laten-maken--onderhoud-wordpress.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
 
 const url = '/website-laten-maken/onderhoud-wordpress/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
+// De knop past bij deze dienst: eerst kijken hoe je site ervoor staat (actie.ts geeft hier nog de websiteprijs).
+const knop = { tekst: 'Laat je WordPress-site gratis nakijken', href: '/contact/?vraag=Gratis%20check%20van%20mijn%20WordPress-site' };
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
+const markt = ['https://wjonderhoud.nl/pakketten/', 'https://keurigonline.nl/wordpress-onderhoud', 'https://juist.nl/diensten/techniek/wordpress-onderhoud/'];
 const hoofdstukken = [
   { id: 'waarom', titel: 'Waarom onderhoud nodig is' },
   { id: 'pakket', titel: 'Wat we doen voor € 39' },
+  { id: 'maandoverzicht', titel: 'Je maandoverzicht' },
   { id: 'laten-liggen', titel: 'Als je het laat liggen' },
   { id: 'php', titel: 'De PHP-versie' },
   { id: 'automatisch', titel: 'Automatische updates' },
   { id: 'niet', titel: 'Wat er niet in zit' },
   { id: 'zelf', titel: 'Zelf doen: de checklist' },
   { id: 'vergelijking', titel: 'Zelf, host of uitbesteden' },
+  { id: 'markt', titel: 'Wat anderen vragen' },
+  { id: 'geen-zin', titel: 'Wanneer het geen zin heeft' },
   { id: 'overstappen', titel: 'Overstappen naar ons' },
 ];
 const schema = [
@@ -47,6 +55,7 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    citation: markt,
   },
 ];
 ---
@@ -56,8 +65,8 @@ const schema = [
   kruimels={[{ naam: 'Website laten maken', url: '/website-laten-maken/' }, { naam: 'Onderhoud WordPress', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Website" titel="Onderhoud van WordPress voor € 39 per maand: na elke update kijken we of je site nog werkt" prijs="vanaf € 39 per maand">
-    <p>Je site werkt vandaag. Over een half jaar ook? Wij installeren de updates, maken back-ups, houden de beveiliging in de gaten en zorgen dat alles snel blijft. Jij hebt je handen vrij.</p>
+  <Hero kicker="Gekozen · Website" titel="Onderhoud van WordPress voor € 39 per maand: na elke update kijken we of je site nog werkt" prijs="vanaf € 39 per maand" knop={knop}>
+    <p>Voor ondernemers met een WordPress-site, ook als iemand anders hem bouwde. Wij installeren de updates, kijken daarna of alles nog werkt, maken back-ups buiten je server en houden beveiliging en snelheid in de gaten. Per maand opzegbaar, en je hosting blijft van jou.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -117,7 +126,7 @@ const schema = [
 
         <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3>Snelheid en techniek</h3></div>
         <p>Een site wordt langzaam trager. Afbeeldingen worden te groot geüpload, de database vult zich met oude revisies en plugins stapelen zich op. We houden de caching goed ingesteld, verkleinen zware afbeeldingen en zoeken broken links op, zodat bezoekers en Google niet op een foutpagina belanden.</p>
-        <p>Elke maand krijg je één A4: wat we deden, wat ons opviel en of er iets is waar je over moet beslissen.</p>
+        <p>Elke maand krijg je één A4: wat we deden, wat ons opviel en of er iets is waar je over moet beslissen. Hoe dat eruitziet, zie je hieronder.</p>
         <div class="tabel-scroll">
           <table>
             <thead><tr><th>Onderdeel</th><th>Wat je merkt als het ontbreekt</th></tr></thead>
@@ -139,6 +148,23 @@ const schema = [
           <li><b>Ver genoeg terug.</b> Een hack merk je soms pas na weken. Heb je alleen de back-up van gisteren, dan is die ook besmet.</li>
           <li><b>Getest.</b> Een back-up die nooit is teruggezet, is een belofte. Zet hem af en toe terug op een testomgeving.</li>
         </ol>
+
+        <h2 id="maandoverzicht">Zo ziet je maandoverzicht eruit</h2>
+        <p>Een rapport waar je uitleg bij nodig hebt, schiet zijn doel voorbij. Daarom past alles op één A4. Een voorbeeld voor een schildersbedrijf in Emmen:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Wat we deden</th><th>Wat jij moet doen</th></tr></thead>
+            <tbody>
+              <tr><td><b>Updates</b></td><td>WordPress bijgewerkt naar 7.1.3, vier plugins bijgewerkt. Eén update botste met het formulier en is teruggezet tot de maker het oplost</td><td>Niets</td></tr>
+              <tr><td><b>Controle</b></td><td>Formulier, menu en de vijf belangrijkste pagina's getest op telefoon en laptop</td><td>Niets</td></tr>
+              <tr><td><b>Back-ups</b></td><td>Bestanden en database buiten je server bewaard</td><td>Niets</td></tr>
+              <tr><td><b>Beveiliging</b></td><td>Een oud beheerdersaccount van je vorige bouwer verwijderd. Een ongebruikte sliderplugin weggehaald</td><td>Niets</td></tr>
+              <tr><td><b>Snelheid en links</b></td><td>Drie zware foto's verkleind, twee broken links hersteld</td><td>Niets</td></tr>
+              <tr><td><b>Om te beslissen</b></td><td>Je host draait PHP 8.2. Die krijgt na 31 december 2026 geen beveiligingsupdates meer</td><td>Akkoord geven voor de overstap naar 8.3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld. Het schildersbedrijf bestaat niet.</p>
 
         <h2 id="laten-liggen">Wat er gebeurt als je onderhoud van WordPress laat liggen</h2>
         <p>Een site zonder onderhoud gaat niet in één keer kapot. Het gaat sluipend. Zo verloopt het vaak, in een verzonnen maar herkenbaar voorbeeld van een loodgieter in Groningen:</p>
@@ -185,7 +211,7 @@ const schema = [
         </div>
         <p>WordPress zelf raadt op de pagina met <a href="https://wordpress.org/about/requirements/" rel="noopener">systeemeisen</a> PHP 8.3 of hoger aan, plus MySQL 8.0 of MariaDB 10.11 en HTTPS. De PHP-versie stel je meestal in via het controlepaneel van je host. Wij kijken bij elke onderhoudsbeurt welke versie je site gebruikt. Is er een nieuwere nodig, dan testen we eerst of je thema en plugins ermee werken en vertellen we je wat je bij je host moet aanzetten. Kan je host het niet, dan helpen we je verhuizen naar een andere partij. De hosting zelf blijft van jou.</p>
 
-        <Tussenactie />
+        <Tussenactie knop={knop} />
         <h2 id="automatisch">Automatische updates: handig, maar niet genoeg</h2>
         <p>Sinds WordPress 5.5 kun je per plugin en per thema automatische updates aanzetten. Volgens de <a href="https://wordpress.org/documentation/article/plugins-themes-auto-updates/" rel="noopener">documentatie van WordPress.org</a> controleert WordPress dan twee keer per dag of er iets nieuws is. Dat is beter dan niets. Toch vertrouwen we er niet blind op.</p>
         <ul>
@@ -223,7 +249,7 @@ const schema = [
         </div>
         <p>Werk onderdelen één voor één bij, niet alles tegelijk. Dan weet je welke update een probleem geeft. Reken op een uur tot twee per maand, en meer als er iets misgaat. Voor een ondernemer met een volle agenda is € 39 per maand dan vaak goedkoper dan zelf doen. Wil je weten hoe snel je site nu is, lees dan de gids <a href="/kennisbank/gidsen/website-sneller-maken/">website sneller maken</a>.</p>
 
-        <Tussenactie />
+        <Tussenactie knop={knop} />
         <h2 id="vergelijking">Zelf doen, je host of uitbesteden?</h2>
         <p>Veel hostingpartijen bieden automatische updates of een beheerpakket aan. Dat kan prima werken. Vergelijk wel wat je krijgt.</p>
         <div class="tabel-scroll">
@@ -241,6 +267,29 @@ const schema = [
         </div>
         <p>Vertrouw ook niet alleen op de beveiliging van je host. Patchstack liet een groot aantal hostingbedrijven testen met aanvallen op bekende WordPress-lekken. Volgens het rapport werd maar 26% van die aanvallen tegengehouden. De firewall van een host ziet een lek in een plugin vaak niet als aanval.</p>
 
+        <h2 id="markt">Wat anderen vragen voor WordPress-onderhoud</h2>
+        <p>Onderhoud van WordPress kun je bij veel partijen kwijt. Dit vragen er drie op hun eigen site, in oktober 2026, exclusief btw:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Prijs per maand</th><th>Looptijd</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td><b>WJ Onderhoud</b></td><td>€ 15, € 30 of € 50</td><td>Per maand, of per jaar met korting</td><td>Eerste maand gratis. Een hack verwijderen zit pas in het Premium-pakket</td></tr>
+              <tr><td><b>KeurigOnline</b></td><td>€ 20, € 45 of € 75</td><td>Minimaal zes maanden</td><td>Soms € 99 eenmalige instapkosten</td></tr>
+              <tr><td><b>Juist</b></td><td>€ 104 bij maandelijks onderhoud, € 42 bij één beurt per half jaar</td><td>Per half jaar</td><td>Je stelt het pakket samen uit modules</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td>€ 39</td><td>Per maand, één maand opzegtermijn</td><td>Controle na elke update, één A4 per maand, hosting blijft van jou</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Goedkoper kan dus. Kijk bij elk aanbod naar drie dingen: wordt er na een update gecontroleerd of je site nog werkt, staan de back-ups buiten je server, en hoe lang zit je vast. Wat wij doen, testen we eerst op meer dan honderd eigen sites in ons <a href="/proeflab/">proeflab</a>.</p>
+
+        <h2 id="geen-zin">Wanneer onderhoud bij ons geen zin heeft</h2>
+        <ul>
+          <li><b>Je host doet het al goed.</b> Werkt hij updates bij, controleert hij daarna en staan de back-ups ergens anders? Dan heb je ons niet nodig.</li>
+          <li><b>Je site is niet in WordPress gebouwd.</b> Dit onderhoud is voor WordPress. Bij Wix of Squarespace regelt het platform de updates.</li>
+          <li><b>Je site is oud en je wilt toch iets nieuws.</b> Dan is onderhoud op een site die over een paar maanden verdwijnt zonde. Kijk bij <a href="/website-laten-maken/">website laten maken</a>.</li>
+          <li><b>Je site is nu gehackt.</b> Eerst opruimen, dan onderhouden. Bel ons en lees wat je nu doet bij <a href="/website-laten-maken/wordpress-hack/">WordPress gehackt</a>.</li>
+        </ul>
+
         <h2 id="contract">Geen jarenlang WordPress onderhoudscontract</h2>
         <p>Een WordPress onderhoudscontract klinkt als iets waar je een jaar aan vastzit. Bij ons niet. Je zegt per maand op, met één maand opzegtermijn, per e-mail. Een bureau hoort te verdienen aan klanten die blijven omdat het werkt, niet aan klanten die vastzitten.</p>
 
@@ -257,7 +306,7 @@ const schema = [
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={14} />
-        <Prijskaart naam="Onderhoud WordPress" prijs="€ 39" eenheid="per maand" punten={['Updates van WordPress, thema en plugins', 'Back-ups buiten je server', 'Beveiliging in de gaten', 'Snelheid en broken links', 'Elke maand één A4 met wat we deden']} />
+        <Prijskaart naam="Onderhoud WordPress" prijs="€ 39" eenheid="per maand" knop={knop} punten={['Updates van WordPress, thema en plugins', 'Back-ups buiten je server', 'Beveiliging in de gaten', 'Snelheid en broken links', 'Elke maand één A4 met wat we deden']} />
       </aside>
     </div>
   </section>
@@ -268,7 +317,8 @@ const schema = [
     vragen={[
       { v: 'Wat valt er onder onderhoud van WordPress?', a: 'Updates van WordPress, je thema en plugins, back-ups van je bestanden en database, controle op beveiliging en het snel houden van je site. Hosting, nieuwe teksten en het opruimen van een hack vallen er niet onder.' },
       { v: 'Wat kost WordPress-onderhoud?', a: 'Bij ons € 39 per maand, exclusief btw. Je zegt per maand op. Is er achterstallig onderhoud, dan hoor je vooraf wat het kost om je site eerst op orde te brengen.' },
-      { v: 'Valt hosting ook onder het onderhoud?', a: 'Nee. Je site blijft bij je eigen hostingpartij staan, op jouw naam. Wij hebben alleen toegang nodig om het onderhoud te doen.' },
+      { v: 'Waarom € 39 als het elders vanaf € 15 kan?', a: 'Goedkoper kan, zie de vergelijking hierboven. Kijk dan wat erin zit. Bij ons controleren we na elke update of je formulier en belangrijkste pagina\'s nog werken, bewaren we back-ups buiten je server en krijg je elke maand één A4. En je zegt per maand op.' },
+      { v: 'Wat moet ik zelf doen?', a: 'Ons toegang geven tot WordPress en je hosting, met een eigen account voor ons. En beslissen als er iets te kiezen valt, zoals een plugin uitzetten waar nog geen update voor is of een nieuwere PHP-versie bij je host. Dat staat op je A4.' },
       { v: 'Kunnen jullie een site onderhouden die iemand anders heeft gebouwd?', a: 'Ja. We kijken eerst hoe hij ervoor staat. Is er achterstallig onderhoud, dan hoor je vooraf wat het kost om hem bij te werken.' },
       { v: 'Is automatische updates aanzetten niet genoeg?', a: 'Het helpt, maar niemand controleert daarna of je site nog werkt. Betaalde plugins doen vaak niet mee, en voor bijna de helft van de lekken was er volgens Patchstack nog geen update toen ze bekend werden.' },
       { v: 'Hoe vaak moet je WordPress updaten?', a: 'Beveiligingsupdates zo snel mogelijk, want zware lekken worden vaak binnen een dag misbruikt. Gewone updates van plugins en thema\'s kun je bundelen, bijvoorbeeld wekelijks. Maak altijd eerst een back-up en test daarna je formulier.' },
@@ -287,5 +337,7 @@ const schema = [
     ]}
   />
 
-  <Actie titel="Hoe staat jouw WordPress-site ervoor?" tekst={`Laat ${site.contactpersoon} je site gratis nakijken. Hij belt je op werkdagen binnen 15 minuten terug en vertelt of er achterstallig onderhoud is.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, bespreekt hoe je site ervoor staat en is er als je een vraag over je A4 hebt.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
+  <Actie titel="Hoe staat jouw WordPress-site ervoor?" tekst={`Laat ${site.contactpersoon} je site gratis nakijken. Hij belt je op werkdagen binnen 15 minuten terug en vertelt of er achterstallig onderhoud is.`} knop={knop} />
 </Base>

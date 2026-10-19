@@ -4,7 +4,25 @@ export interface Stap { knop: string; kort?: string; href: string; zin: string; 
 
 const scan: Stap = { knop: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/', vraag: 'Welke drie dingen leveren bij jou het meeste op?', zin: 'Thorgall belt je terug, bekijkt je site en die van je concurrenten, en vertelt je de drie grootste kansen.' };
 const regels: [RegExp, Stap][] = [
-  [/^\/branding|wat-is-branding|logo|huisstijl|tone-of-voice|kleuren-in-marketing/, { ...scan, vraag: 'Past je logo en huisstijl nog bij wat je nu doet?', dienst: { naam: 'Branding', prijs: 'vanaf € 495', url: '/branding/' } }],
+  [/^\/branding|wat-is-branding|logo|huisstijl|tone-of-voice|kleuren-in-marketing/, {
+    knop: 'Vraag een vaste prijs voor je logo of huisstijl', kort: 'Vaste prijs', vraag: 'Past je logo en huisstijl nog bij wat je nu doet?',
+    href: '/contact/?vraag=Vaste%20prijs%20voor%20logo%20of%20huisstijl',
+    zin: 'Vertel wat je doet en voor wie. Thorgall belt je terug met een vaste prijs voor je logo of huisstijl.',
+    dienst: { naam: 'Branding', prijs: 'vanaf € 495', url: '/branding/' } }],
+  [/^\/website-laten-maken\/wordpress-hack\/|wordpress-gehackt/, {
+    knop: 'Bel 088 11 55 666', kort: 'Bel direct', vraag: 'Is je site nu gehackt?', href: 'tel:+31881155666',
+    zin: 'Bel ons direct. Thorgall zegt wat er nodig is en hoeveel uur we verwachten, voordat we beginnen.',
+    dienst: { naam: 'WordPress gehackt', prijs: 'consult € 85 per uur', url: '/website-laten-maken/wordpress-hack/' } }],
+  [/^\/website-laten-maken\/onderhoud-wordpress\//, {
+    knop: 'Laat je WordPress-site gratis nakijken', kort: 'Gratis check', vraag: 'Loopt jouw WordPress-site achter?',
+    href: '/contact/?vraag=Gratis%20check%20van%20mijn%20WordPress-site',
+    zin: 'Thorgall kijkt hoe je site ervoor staat en belt je met wat er achterloopt.',
+    dienst: { naam: 'Onderhoud WordPress', prijs: 'vanaf € 39 per maand', url: '/website-laten-maken/onderhoud-wordpress/' } }],
+  [/^\/website-laten-maken\/ux-ui-design\//, {
+    knop: 'Vraag een vaste prijs voor je ontwerp', kort: 'Vaste prijs', vraag: 'Waar haken jouw bezoekers af?',
+    href: '/contact/?vraag=Vaste%20prijs%20voor%20UX-%20en%20UI-design',
+    zin: 'Vertel welke pagina\'s je aanvragen moeten opleveren. Thorgall belt je terug met een vaste prijs voor het ontwerp.',
+    dienst: { naam: 'UX- en UI-design', prijs: 'vanaf € 750', url: '/website-laten-maken/ux-ui-design/' } }],
   [/^\/(website-laten-maken|webdesign-)|\/(domeinnaam-kiezen|website-|wix|zzp|cms|hosting|ux|wordpress)|wat-kost-een-website|zelf-website|offerte-beoordelen/, {
     knop: 'Vraag een vaste prijs voor je website', kort: 'Vaste prijs', vraag: 'Liever een vaste prijs dan zelf rekenen?', href: '/gratis-website-analyse/?doel=website',
     zin: 'Vertel wat je site moet opleveren. Thorgall belt je terug met een vaste prijs, ook als de goedkoopste route het beste past.',

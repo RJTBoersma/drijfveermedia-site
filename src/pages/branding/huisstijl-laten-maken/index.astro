@@ -6,21 +6,29 @@ import Faq from '../../../components/pagina/Faq.astro';
 import Actie from '../../../components/pagina/Actie.astro';
 import Prijskaart from '../../../components/pagina/Prijskaart.astro';
 import Verder from '../../../components/pagina/Verder.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/branding--huisstijl-laten-maken.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
 
 const url = '/branding/huisstijl-laten-maken/';
-const schema = [{
-  '@type': 'Service',
-  name: 'Huisstijl laten ontwerpen',
-  serviceType: 'Huisstijlontwerp',
-  provider: { '@id': `${site.url}/#organisatie` },
-  areaServed: { '@type': 'Country', name: 'Nederland' },
-  url: `${site.url}${url}`,
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 995, priceSpecification: { '@type': 'PriceSpecification', price: 995, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
-}];
+// De knop past bij deze dienst: een vaste prijs voor je huisstijl (actie.ts geeft hier nog de algemene SEO-scan).
+const knop = { tekst: 'Vraag een vaste prijs voor je huisstijl', href: '/contact/?vraag=Vaste%20prijs%20voor%20een%20huisstijl' };
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
+const bronnen = ['https://www.logolove.nl/prijzen/', 'https://logohuis.com/onze-tarieven/', 'https://wjwebdesign.nl/website-laten-maken/kosten/', 'https://vandeburen.nl/huisstijl-laten-ontwerpen/'];
+const schema = [
+  { '@type': 'WebPage', name: 'Huisstijl laten ontwerpen: één stijl, van briefpapier tot website', dateModified: '2026-10-19', citation: bronnen },
+  {
+    '@type': 'Service',
+    name: 'Huisstijl laten ontwerpen',
+    serviceType: 'Huisstijlontwerp',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: { '@type': 'Country', name: 'Nederland' },
+    url: `${site.url}${url}`,
+    offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 995, priceSpecification: { '@type': 'PriceSpecification', price: 995, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+  },
+];
 ---
 <Base
   title="Huisstijl laten ontwerpen vanaf € 995 | Drijfveer Media"
@@ -28,8 +36,8 @@ const schema = [{
   kruimels={[{ naam: 'Branding', url: '/branding/' }, { naam: 'Huisstijl laten maken', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Branding" titel="Huisstijl laten ontwerpen: één stijl, van briefpapier tot website" prijs="vanaf € 995" eenmalig>
-    <p>Klanten vertrouwen wat ze herkennen. Wij ontwerpen een huisstijl die op je offerte, je bus en je website hetzelfde verhaal vertelt.</p>
+  <Hero kicker="Gekozen · Branding" titel="Huisstijl laten ontwerpen: één stijl, van briefpapier tot website" prijs="vanaf € 995" eenmalig knop={knop}>
+    <p>Voor ondernemers die er op hun offerte, bus en website hetzelfde uit willen zien. Logo, kleuren, letters, visitekaartje, briefpapier en een kort huisstijlboekje, met de rechten op jouw naam. Vaste prijs vooraf.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -37,60 +45,72 @@ const schema = [{
     <div class="met-zijkolom">
       <article class="tekst">
         <h2>Wat zit er in een huisstijl?</h2>
-        <p>Een huisstijl is de vaste manier waarop je bedrijf eruitziet, overal waar klanten je tegenkomen. Wie een huisstijl laat ontwerpen, krijgt meer dan een logo. Het gaat om een set afspraken die je identiteit zichtbaar maakt:</p>
+        <p>Een huisstijl is de vaste manier waarop je bedrijf eruitziet, overal waar klanten je tegenkomen. Wie een huisstijl laat ontwerpen, krijgt meer dan een logo: een set afspraken die je identiteit zichtbaar maakt.</p>
         <ul class="vink">
           <li><b>Logo.</b> Het hart van je huisstijl, in alle varianten.</li>
-          <li><b>Kleur.</b> Twee of drie hoofdkleuren en een paar steunkleuren, met vaste codes voor scherm en drukwerk.</li>
-          <li><b>Typografie.</b> Eén of twee lettertypes, voor koppen en voor lopende tekst.</li>
-          <li><b>Beeldelementen.</b> Vormen, lijnen of iconen die je herkent, ook zonder logo.</li>
-          <li><b>Toepassingen.</b> Hoe het er allemaal uitziet op briefpapier, een visitekaartje, je e-mail en je website.</li>
+          <li><b>Kleur.</b> Twee of drie hoofdkleuren, met vaste codes voor scherm en drukwerk.</li>
+          <li><b>Typografie.</b> Eén of twee lettertypes, voor koppen en lopende tekst.</li>
+          <li><b>Beeldelementen.</b> Vormen of iconen die je herkent, ook zonder logo.</li>
+          <li><b>Toepassingen.</b> Briefpapier, visitekaartje, e-mail en website.</li>
         </ul>
-        <p>Die afspraken leg je vast in een huisstijlhandboek. Dan weet iedereen die iets voor je maakt, van drukker tot websitebouwer, hoe het hoort.</p>
 
         <h2>Waarom een huisstijl klanten oplevert</h2>
-        <p>Mensen kopen bij bedrijven die ze vertrouwen. Vertrouwen groeit door herhaling: je ziet de bus in de straat, de advertentie in het huis-aan-huisblad, de website. Als alles er hetzelfde uitziet, telt elke keer mee. Als alles anders is, begint de klant steeds opnieuw.</p>
-        <p>Een verzonnen voorbeeld. Een hovenier in Meppel heeft een groene bus, een blauwe website en offertes in een standaard Word-sjabloon. Drie keer contact, drie verschillende bedrijven in het hoofd van de klant. Met één huisstijl wordt de bus een reclamebord voor de website, en versterkt de offerte de indruk die de site al gaf. Het bedrijf wordt herkenbaar, en dat voelt vertrouwd.</p>
-        <p>Een huisstijl hoeft dus niet alleen mooi te zijn. Hij moet je verhaal vertalen naar iets wat mensen in één oogopslag snappen: degelijk, vriendelijk, snel, betaalbaar of juist exclusief.</p>
+        <p>Mensen kopen bij bedrijven die ze vertrouwen, en vertrouwen groeit door herhaling. Je ziet de bus in de straat, de advertentie in het huis-aan-huisblad, de website. Als alles hetzelfde oogt, telt elke keer mee. Als alles anders is, begint de klant steeds opnieuw.</p>
+        <p>Een hovenier in Meppel heeft een groene bus, een blauwe website en offertes in een standaard Word-sjabloon. Drie keer contact, drie bedrijven in het hoofd van de klant. Met één huisstijl wordt de bus een reclamebord voor de website, en versterkt de offerte de indruk die de site al gaf. Zo wordt het bedrijf herkenbaar, en dat voelt vertrouwd. <span class="muted">(Verzonnen voorbeeld.)</span> Een goede huisstijl is dus meer dan mooi: hij moet je verhaal vertalen naar iets wat mensen in één oogopslag snappen.</p>
 
-        <Tussenactie />
-        <h2>Wat je krijgt als je een huisstijl laat maken</h2>
+        <h2 id="wat-je-krijgt">Wat je krijgt als je een huisstijl laat maken</h2>
         <p>Voor een huisstijl bij Drijfveer Media betaal je vanaf € 995, exclusief btw. Daarvoor krijg je:</p>
         <ul>
-          <li>Een logo, nieuw of opgefrist, met alle bestanden en varianten. Hoe we het logo ontwerpen, lees je bij <a href="/branding/logo-laten-maken/">logo laten maken</a>.</li>
-          <li>Een kleurenpalet met codes voor scherm (HEX en RGB) en voor drukwerk (CMYK).</li>
-          <li>De keuze voor lettertypes, zo mogelijk gratis te gebruiken en geschikt voor je website.</li>
+          <li>Een logo, nieuw of opgefrist, met alle bestanden en varianten. Hoe we dat doen, lees je bij <a href="/branding/logo-laten-maken/">logo laten maken</a>.</li>
+          <li>Een kleurenpalet met codes voor scherm (HEX en RGB) en drukwerk (CMYK).</li>
+          <li>Lettertypes, zo mogelijk gratis te gebruiken en geschikt voor je website.</li>
           <li>Een ontwerp voor je visitekaartje en briefpapier, klaar voor de drukker.</li>
           <li>Een e-mailhandtekening en beelden voor je profielen op social media.</li>
-          <li>Een kort huisstijlboekje waarin alles staat.</li>
+          <li>Een kort huisstijlboekje waarin alles staat, en de rechten schriftelijk op jouw naam.</li>
         </ul>
-        <p>Met die vaste regels kan elke drukker of ontwerper later ook flyers, borden of advertenties maken die kloppen. Je hoeft niet elke keer bij ons terug te komen. De rechten zetten we schriftelijk op jouw naam.</p>
+        <p>Met die vaste regels kan elke drukker of ontwerper later ook flyers, borden of advertenties maken die kloppen. Het boekje houden we kort: geen handboek van zestig pagina's dat niemand leest, maar een paar pagina's die je echt openslaat. Zo ziet één pagina eruit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kleur</th><th>Codes</th><th>Gebruik</th></tr></thead>
+            <tbody>
+              <tr><td><b>Donkergroen</b></td><td>HEX #1F4D3A · RGB 31 77 58 · CMYK 60 0 25 70</td><td>Koppen, logo, de bus</td></tr>
+              <tr><td><b>Warm oranje</b></td><td>HEX #E07A2E · RGB 224 122 46 · CMYK 0 46 79 12</td><td>Alleen voor de belknop en één accent per pagina</td></tr>
+              <tr><td><b>Bijna zwart</b></td><td>HEX #1A1A1A</td><td>Lopende tekst. Nooit lichtgrijs op wit: onleesbaar in de zon</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld.</p>
 
+        <Tussenactie knop={knop} titel="Weet je al genoeg?" tekst="Vertel Thorgall wat je doet en wat je al hebt. Hij belt je terug met een vaste prijs voor je huisstijl." />
         <h2>Zo ontwerpen we je huisstijl</h2>
         <div class="stap-kop"><Tekening naam="telefoon" maat={48} /><h3>1. We leren je bedrijf kennen</h3></div>
-        <p>In een gesprek vragen we wat je doet, voor wie, en welke indruk je wilt maken. Ook kijken we naar wat je al hebt: een bestaand logo, kleuren die klanten kennen, een bus die net is beletterd. Wat werkt, gooien we niet weg.</p>
-
+        <p>Wat doe je, voor wie, en welke indruk wil je maken? We kijken ook naar wat je al hebt: een logo of kleuren die klanten kennen, een bus die net is beletterd. Wat werkt, gooien we niet weg.</p>
         <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>2. Ontwerp in een paar richtingen</h3></div>
-        <p>Je krijgt een paar richtingen te zien, telkens als geheel: logo, kleur en typografie samen op een visitekaartje, briefpapier en een websitepagina. Zo beoordeel je niet een los plaatje, maar hoe je bedrijf eruit gaat zien.</p>
-
+        <p>Telkens als geheel: logo, kleur en typografie samen op een visitekaartje, briefpapier en een websitepagina. Zo beoordeel je niet een los plaatje, maar hoe je bedrijf eruit gaat zien.</p>
         <div class="stap-kop"><Tekening naam="scan" maat={48} /><h3>3. Uitwerken en testen</h3></div>
-        <p>De gekozen richting werken we uit. We testen of kleuren goed leesbaar zijn op een telefoon, of de letters werken in een e-mail en of het logo overeind blijft in het klein. Mooi op een groot scherm is niet genoeg.</p>
-
+        <p>Zijn de kleuren leesbaar op een telefoon? Werken de letters in een e-mail? Blijft het logo overeind in het klein? Lichtgrijze tekst ziet er strak uit, maar is buiten onleesbaar. En een zwaar lettertype maakt je site trager, wat Google niet waardeert.</p>
         <div class="stap-kop"><Tekening naam="boek" maat={48} /><h3>4. Oplevering met huisstijlboekje</h3></div>
-        <p>Je krijgt alle bestanden, de ontwerpen voor je drukwerk en het huisstijlboekje. We lopen het samen even door, zodat je weet waar alles staat.</p>
+        <p>Je krijgt alle bestanden, de ontwerpen voor je drukwerk en het boekje. We lopen het samen even door, zodat je weet waar alles staat. Wil je je site meteen in de nieuwe stijl? Kijk dan bij <a href="/website-laten-maken/">website laten maken</a>.</p>
 
-        <h2>Een huisstijlboekje dat je echt gebruikt</h2>
-        <p>Veel huisstijlen gaan mis na de oplevering. Er komt een handboek van zestig pagina's, niemand leest het, en na een jaar staan er weer vijf soorten blauw op de site. Wij houden het kort. Een paar pagina's met je logo en wat je er niet mee mag doen, je kleuren met codes, je lettertypes en voorbeelden van goed gebruik. Genoeg om het goed te doen, kort genoeg om het te lezen.</p>
-
-        <h2>Je huisstijl op je website</h2>
-        <p>Je website is vaak de plek waar klanten je huisstijl het eerst zien. Daar gelden eigen regels. Lichtgrijze tekst op een witte achtergrond ziet er strak uit, maar is op een telefoon in de zon onleesbaar. En een lettertype dat zwaar laadt, maakt je site trager, wat Google niet waardeert. Omdat we een online marketingbureau zijn, letten we daar vanaf het eerste ontwerp op. Wil je je site meteen in de nieuwe stijl? Kijk dan bij <a href="/website-laten-maken/">website laten maken</a>.</p>
-
-        <h2>Wat kost een huisstijl laten ontwerpen?</h2>
-        <p>Een huisstijl begint bij € 995, exclusief btw, met het logo erbij. Heb je alleen een logo nodig, dan kost dat vanaf € 495. Wil je extra toepassingen, zoals een folder, een offertesjabloon of belettering voor je bus? Dan hoor je vooraf wat dat kost. Meer over hoe logo, huisstijl en vindbaarheid samenhangen, lees je op de pagina over <a href="/branding/">branding</a>.</p>
+        <h2 id="markt">Wat kost een huisstijl laten ontwerpen?</h2>
+        <p>Bij ons begint een huisstijl bij € 995, exclusief btw, met het logo erbij. Alleen een logo kost vanaf € 495. Extra toepassingen, zoals een folder, offertesjabloon of belettering voor je bus, hoor je vooraf. Elders kan het goedkoper. Dit staat in oktober 2026 op de sites van een paar aanbieders:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Prijs</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td><b>LogoLove</b></td><td>Logo en huisstijl € 319</td><td>Oplevering in 48 uur, met visitekaartje en briefpapier</td></tr>
+              <tr><td><b>Logo Huis</b></td><td>Huisstijl € 89 tot € 159, plus een logo van € 99 tot € 199</td><td>Eerste voorbeelden meestal binnen één of twee werkdagen</td></tr>
+              <tr><td><b>wjwebdesign</b></td><td>Logo en uitgebreide huisstijl € 325, geen btw</td><td>Prijsvoorstel op maat bij meer middelen</td></tr>
+              <tr><td><b>Van de Buren</b></td><td>Geen prijs op de site</td><td>Twee tot vier weken werk, inclusief presenteren en finetunen</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wij zijn duurder dan de snelle aanbieders. Daarvoor krijg je een gesprek over je klanten, richtingen die je als geheel ziet, tests op telefoon en in het klein, en een team dat ook je website en vindbaarheid kent. Alle prijzen op een rij, van zelf doen tot een groot bureau, staan in de gids <a href="/kennisbank/gidsen/logo-en-huisstijl/">logo en huisstijl</a>. Hoe dat samenhangt met je vindbaarheid, lees je bij <a href="/branding/">branding</a>.</p>
         <h3>Opfrissen of opnieuw beginnen?</h3>
-        <p>Kennen klanten je logo en kleuren al jaren? Dan is opfrissen vaak slimmer. Je houdt de herkenning en wint aan kwaliteit. Begin je net, of past je uitstraling echt niet meer bij je bedrijf? Dan is een nieuwe huisstijl beter. We geven je daar eerlijk advies over, ook als het goedkopere antwoord het juiste is.</p>
+        <p>Kennen klanten je logo en kleuren al jaren? Dan is opfrissen vaak slimmer: je houdt de herkenning. Begin je net en heb je nog geen klanten, dan is een logo vaak genoeg en komt de huisstijl later. Past je uitstraling echt niet meer, dan is een nieuwe huisstijl beter. We zeggen het ook als het goedkopere antwoord het juiste is.</p>
       </article>
       <aside class="zijkolom">
-        <Prijskaart naam="Huisstijl" prijs="€ 995" eenmalig punten={['Logo in alle varianten', 'Kleurenpalet en lettertypes', 'Visitekaartje en briefpapier', 'E-mailhandtekening en social beelden', 'Kort huisstijlboekje', 'Rechten schriftelijk op jouw naam']} />
+        <Prijskaart naam="Huisstijl" prijs="€ 995" eenmalig knop={knop} punten={['Logo in alle varianten', 'Kleurenpalet en lettertypes', 'Visitekaartje en briefpapier', 'E-mailhandtekening en social beelden', 'Kort huisstijlboekje', 'Rechten schriftelijk op jouw naam']} />
       </aside>
     </div>
   </section>
@@ -99,7 +119,8 @@ const schema = [{
 
   <Faq
     vragen={[
-      { v: 'Wat is het verschil tussen een logo en een huisstijl?', a: 'Een logo is het teken van je bedrijf. Een huisstijl is het hele systeem eromheen: kleuren, lettertypes, beeldelementen en hoe je dat toepast op briefpapier, je website en je bus. Het logo is een onderdeel van de huisstijl.' },
+      { v: 'Wat is het verschil tussen een logo en een huisstijl?', a: 'Een logo is het teken van je bedrijf. Een huisstijl is het hele systeem eromheen: kleuren, lettertypes, beeldelementen en hoe je dat toepast op briefpapier, je website en je bus.' },
+      { v: 'Waarom € 995 als het online voor € 319 kan?', a: 'Daar krijg je snel een logo met drukwerk. Bij ons betaal je voor het gesprek over je klanten, richtingen die je als geheel ziet, tests op telefoon en in het klein, en een huisstijlboekje waarmee elke drukker of bouwer verder kan. Weet je al precies wat je wilt, dan is een snelle aanbieder prima.' },
       { v: 'Zit het drukken van visitekaartjes en briefpapier bij de prijs?', a: 'Nee. We leveren drukklare bestanden, zodat je bij elke drukker terechtkunt. Het drukken zelf betaal je aan de drukker.' },
       { v: 'Kan ik mijn huidige logo houden?', a: 'Ja. Dan bouwen we de huisstijl om je bestaande logo heen, of frissen we het een beetje op. Dat bespreken we in het eerste gesprek.' },
       { v: 'Hoe lang duurt het om een huisstijl te laten maken?', a: 'Dat hangt af van het aantal toepassingen en hoe snel je keuzes maakt. Na het eerste gesprek krijg je een planning, zodat je weet wanneer je wat ziet.' },
@@ -116,5 +137,7 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Ziet je bedrijf er overal hetzelfde uit?" tekst={`${site.contactpersoon} legt je website, je bedrijfsprofiel en je social media naast elkaar, en belt je met wat opvalt. Gratis, en je zit nergens aan vast.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, noemt de vaste prijs en houdt je project bij tot de oplevering.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen." />
+
+  <Actie titel="Ziet je bedrijf er overal hetzelfde uit?" tekst={`${site.contactpersoon} legt je website, je bedrijfsprofiel en je social media naast elkaar, en belt je met wat opvalt en wat een huisstijl kost. Gratis, en je zit nergens aan vast.`} knop={knop} />
 </Base>

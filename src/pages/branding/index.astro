@@ -15,17 +15,24 @@ import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 
 const url = '/branding/';
+// De knop past bij deze dienst: een vaste prijs voor logo of huisstijl (actie.ts geeft hier nog de algemene SEO-scan).
+const knop = { tekst: 'Vraag een vaste prijs voor je logo of huisstijl', href: '/contact/?vraag=Vaste%20prijs%20voor%20logo%20of%20huisstijl' };
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
+const bronnen = ['https://15eurologos.nl/prijzen-pakketten/', 'https://www.logolove.nl/prijzen/', 'https://logohuis.com/onze-tarieven/', 'https://studiobureau.nl/diensten/corporate-identity-branding', 'https://pienter.nl/creatie-en-content/huisstijl-en-grafisch-ontwerp/'];
 const hoofdstukken = [
   { id: 'wat-is', titel: 'Wat is branding?' },
   { id: 'signalen', titel: 'Wanneer je eraan toe bent' },
   { id: 'wat-doen', titel: 'Wat een brandingbureau doet' },
   { id: 'aanpak', titel: 'Zo werken we' },
+  { id: 'merk-a4', titel: 'Je merk op één A4' },
   { id: 'online', titel: 'Branding die online werkt' },
-  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'kosten', titel: 'Wat je krijgt en wat het kost' },
+  { id: 'markt', titel: 'Wat anderen vragen' },
   { id: 'kiezen', titel: 'Een bureau kiezen' },
+  { id: 'wachten', titel: 'Wanneer je beter wacht' },
   { id: 'zelf', titel: 'Wat je zelf kunt doen' },
 ];
-const schema = [{
+const schema = [{ '@type': 'WebPage', name: 'Brandingbureau voor het mkb: logo en huisstijl die ook online werken', dateModified: '2026-10-19', citation: bronnen }, {
   '@type': 'Service',
   name: 'Branding: logo en huisstijl',
   serviceType: 'Branding',
@@ -44,15 +51,15 @@ const schema = [{
   kruimels={[{ naam: 'Branding', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Branding" titel="Brandingbureau voor het mkb: een logo en huisstijl die ook online werken" prijs="vanaf € 495" eenmalig>
-    <p>Logo vanaf € 495, huisstijl vanaf € 995, met een vaste prijs vooraf. Scherp op een gevel, en ook als klein icoontje in Google. Een merk is wat klanten over je zeggen als jij er niet bij bent, en wij zorgen dat je logo, huisstijl en teksten daarbij helpen.</p>
+  <Hero kicker="Gekozen · Branding" titel="Brandingbureau voor het mkb: een logo en huisstijl die ook online werken" prijs="vanaf € 495" eenmalig knop={knop}>
+    <p>Voor mkb'ers die er overal hetzelfde en professioneel uit willen zien. Logo vanaf € 495, huisstijl vanaf € 995, met een vaste prijs vooraf en de rechten op jouw naam. Scherp op een gevel, en ook als klein icoontje in Google.</p>
     <Scene slot="beeld" />
   </Hero>
 
   <section class="wrap sectie" data-aida="interest">
     <div class="met-zijkolom">
       <article class="tekst">
-        <Auteur slug="robert" datum="2026-10-17" />
+        <Auteur slug="robert" datum="2026-10-19" />
         <div class="kader kader-oranje in-het-kort">
           <p class="kader-titel">In het kort</p>
           <p>Branding is alles wat je doet om je bedrijf herkenbaar te maken en te laten onthouden: je naam, logo, kleuren, letters, toon en gedrag. Drijfveer Media is een online marketingbureau uit Assen dat ook logo's en huisstijlen maakt voor het mkb. Een logo kost vanaf € 495, een complete huisstijl vanaf € 995, exclusief btw. We ontwerpen alles zo dat het meteen werkt op je website, in Google en op je bedrijfsbus.</p>
@@ -82,7 +89,7 @@ const schema = [{
         <h3>Wat we niet doen</h3>
         <p>We maken geen foto's, video's of animaties. We werken wel met de foto's en filmpjes die jij maakt. Een losse merkstrategie op papier bieden we ook niet aan. Wel nemen we de belangrijkste keuzes mee in je logo en huisstijl. Heb je iets nodig wat wij niet doen? Dan zeggen we dat meteen.</p>
 
-        <Tussenactie />
+        <Tussenactie knop={knop} titel="Weet je al genoeg?" tekst="Vertel Thorgall wat je doet en voor wie. Hij belt je terug met een vaste prijs voor je logo of huisstijl." />
         <h2 id="aanpak">Zo werken we</h2>
         <p>Of het nu om een logo gaat of een complete huisstijl, de stappen zijn dezelfde.</p>
 
@@ -101,23 +108,54 @@ const schema = [{
         <div class="stap-kop"><Tekening naam="schild" maat={48} /><h3>5. Oplevering met alle bestanden en rechten</h3></div>
         <p>Je krijgt alle bestanden die je nodig hebt, voor scherm en drukwerk. En de rechten zetten we zwart op wit op jouw naam. Hoe dat zit, lees je bij <a href="/branding/logo-laten-maken/">logo laten maken</a>.</p>
 
+        <h2 id="merk-a4">Zo ziet je merk op één A4 eruit</h2>
+        <p>Dat A4 uit stap 2 is de meetlat voor elk ontwerp. Een voorbeeld voor een hovenier:</p>
+        <div class="tabel-scroll">
+          <table>
+            <tbody>
+              <tr><td><b>Voor wie</b></td><td>Huiseigenaren in en rond Hoogeveen met een tuin die te veel werk is</td></tr>
+              <tr><td><b>Wat we beloven</b></td><td>Een tuin die er het hele jaar netjes bij ligt, met vaste afspraken</td></tr>
+              <tr><td><b>Waarom klanten kiezen</b></td><td>Een vaste ploeg die op de afgesproken dag komt en alles opruimt</td></tr>
+              <tr><td><b>Drie kernwaarden</b></td><td>Betrouwbaar, netjes, nuchter</td></tr>
+              <tr><td><b>Toon</b></td><td>Je-vorm, korte zinnen, geen vakjargon</td></tr>
+              <tr><td><b>Uitstraling</b></td><td>Degelijk en vriendelijk: donkergroen met één warme accentkleur, een schreefloze letter</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld.</p>
+
         <h2 id="online">Branding die ook online werkt</h2>
         <p>Een merk dat iedereen herkent, helpt ook je vindbaarheid. Google en AI-assistenten zoals ChatGPT moeten zeker weten wie je bent. Dat lukt alleen als je naam, logo en gegevens overal hetzelfde zijn. Staat er op je site "Bakkerij De Vries", op Facebook "De Vries Brood" en in je bedrijfsprofiel "Bakker de Vries Assen"? Dan zijn het voor een machine misschien drie bedrijven. Dat kost je vermeldingen.</p>
         <p>Daarom leveren we bij elk ontwerp ook de online kant mee: een vierkante versie voor profielfoto's, een icoontje voor je browser en zoekresultaten, en vaste kleurcodes voor je website. Met die kleuren maak je zelf ook een herkenbare <a href="/kennisbank/gidsen/infographic-maken/">infographic</a> of social post. Je merk communiceert dan overal dezelfde boodschap. Dat is de basis voor <a href="/generative-engine-optimization/">generative engine optimization</a>, het genoemd worden door AI.</p>
 
-        <h2 id="kosten">Wat kost branding?</h2>
+        <h2 id="kosten">Wat je krijgt, en wat branding kost</h2>
         <p>Bij Drijfveer Media zijn de prijzen vast en vooraf bekend, exclusief btw:</p>
         <div class="tabel-scroll">
           <table>
             <thead><tr><th>Wat</th><th>Vanaf</th><th>Wat je krijgt</th></tr></thead>
             <tbody>
-              <tr><td><a href="/branding/logo-laten-maken/">Logo</a></td><td>€ 495</td><td>Logo in alle varianten, bronbestanden en rechten</td></tr>
-              <tr><td><a href="/branding/huisstijl-laten-maken/">Huisstijl</a></td><td>€ 995</td><td>Logo plus kleuren, letters en toepassingen</td></tr>
+              <tr><td><a href="/branding/logo-laten-maken/">Logo</a></td><td>€ 495</td><td>Gesprek en één A4 met je merk, ontwerp in een paar richtingen, getest in echte toepassingen, alle varianten en bronbestanden, rechten schriftelijk op jouw naam</td></tr>
+              <tr><td><a href="/branding/huisstijl-laten-maken/">Huisstijl</a></td><td>€ 995</td><td>Alles van het logo, plus vaste kleuren en lettertypes, visitekaartje, briefpapier, e-mailhandtekening en een kort huisstijlboekje</td></tr>
               <tr><td><a href="/tekstschrijver/">Teksten</a></td><td>€ 75 per pagina</td><td>Webteksten in de toon van je merk</td></tr>
             </tbody>
           </table>
         </div>
         <p>Wil je je merk ook laten vastleggen als Benelux-merk? Dat regel je bij het Benelux-Bureau voor de Intellectuele Eigendom in Den Haag. Een inschrijving geldt tien jaar en kun je daarna steeds verlengen (<a href="https://nl.wikipedia.org/wiki/Merkenrecht_in_de_Benelux" rel="noopener">Wikipedia</a>). De kosten daarvan betaal je aan dat bureau, niet aan ons. Wil je ook een nieuwe site in je nieuwe stijl? Kijk dan bij <a href="/website-laten-maken/">website laten maken</a>.</p>
+
+        <h2 id="markt">Wat anderen vragen</h2>
+        <p>Een logo of huisstijl kun je op veel plekken laten maken. Dit staat in oktober 2026 op de sites van een paar aanbieders, exclusief btw:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Soort aanbieder</th><th>Voorbeeld</th><th>Prijs</th><th>Hoe het werkt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Online logowinkel</b></td><td>15 Euro Logo's, Logo Huis</td><td>Logo € 15 tot € 249</td><td>Bestellen via een formulier, eerste ontwerpen binnen 48 uur tot 7 werkdagen</td></tr>
+              <tr><td><b>Online ontwerpstudio</b></td><td>LogoLove</td><td>Logo € 259, logo en huisstijl € 319</td><td>Oplevering in 48 uur, onbeperkte correcties</td></tr>
+              <tr><td><b>Brandingbureau</b></td><td>Studio Bureau, Pienter</td><td>Geen prijs op de site</td><td>Eerst analyse, strategie of een positioneringssessie, daarna ontwerp</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td></td><td>Logo € 495, huisstijl € 995</td><td>Gesprek en één A4, richtingen, tests in de praktijk, ook online</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wij zijn duurder dan een logowinkel. Daarvoor krijg je een gesprek over je klanten, een logo dat getest is op een gevel, een factuur en als icoontje in Google, en mensen die ook je website en vindbaarheid kennen. Een groot brandingbureau gaat dieper in op strategie, met workshops en een merkplatform. Voor een corporate is dat logisch. Voor de meeste mkb'ers is één A4 genoeg.</p>
 
         <h2 id="kiezen">Waar je op let bij het kiezen van een brandingbureau</h2>
         <p>Een mooi portfolio laat zien welke smaak een bureau heeft. Hoe de samenwerking loopt en wat je na de start krijgt, zie je er niet aan. Stel daarom deze vragen:</p>
@@ -129,6 +167,14 @@ const schema = [{
           <li>Denkt het bureau mee over je website en je vindbaarheid?</li>
         </ul>
         <p>Drijfveer Media bestaat sinds 2011. Die jarenlange ervaring zit vooral in online marketing: zorgen dat bedrijven gevonden, genoemd en gekozen worden. Daar komt onze kijk op branding vandaan. Een merk moet er goed uitzien, en het moet werken.</p>
+
+        <h2 id="wachten">Wanneer je beter nog even wacht</h2>
+        <ul>
+          <li><b>Je naam staat nog niet vast.</b> Een logo bouw je rond je naam. Kies eerst je naam en check het merkregister.</li>
+          <li><b>Je bent net gestart en hebt nog geen klanten.</b> Een nette naam in je huisletter is dan vaak genoeg. Investeer eerst in gevonden worden.</li>
+          <li><b>Klanten kennen je logo al jaren.</b> Laat het dan opfrissen in plaats van vervangen. Dat is minder werk en je houdt de herkenning.</li>
+          <li><b>Je probleem is dat niemand je vindt.</b> Een nieuw logo verandert daar weinig aan. Begin dan met <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>.</li>
+        </ul>
 
         <h2 id="zelf">Wat je vandaag zelf kunt doen</h2>
         <p>Nog niet klaar voor een nieuw ontwerp? Met deze vier stappen maak je je merk vandaag al sterker.</p>
@@ -143,8 +189,8 @@ const schema = [{
 
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={9} />
-        <Prijskaart naam="Logo" prijs="€ 495" eenmalig punten={['Gesprek en één A4 met je merk', 'Ontwerp in een paar richtingen', 'Alle varianten en bronbestanden', 'Rechten schriftelijk op jouw naam']} />
-        <Prijskaart naam="Huisstijl" prijs="€ 995" eenmalig punten={['Logo inbegrepen', 'Vaste kleuren en lettertypes', 'Visitekaartje, briefpapier en e-mail', 'Kort en bruikbaar huisstijlboekje']} />
+        <Prijskaart naam="Logo" prijs="€ 495" eenmalig knop={knop} punten={['Gesprek en één A4 met je merk', 'Ontwerp in een paar richtingen', 'Alle varianten en bronbestanden', 'Rechten schriftelijk op jouw naam']} />
+        <Prijskaart naam="Huisstijl" prijs="€ 995" eenmalig knop={knop} punten={['Logo inbegrepen', 'Vaste kleuren en lettertypes', 'Visitekaartje, briefpapier en e-mail', 'Kort en bruikbaar huisstijlboekje']} />
       </aside>
     </div>
   </section>
@@ -164,6 +210,7 @@ const schema = [{
   <Faq
     vragen={[
       { v: 'Wat is het verschil tussen branding en een huisstijl?', a: 'Branding is het hele beeld dat klanten van je bedrijf hebben, inclusief hoe je werkt en communiceert. De huisstijl is het zichtbare deel: logo, kleuren, letters en hoe je die toepast.' },
+      { v: 'Waarom € 495 als een logo online vanaf € 15 kan?', a: 'Voor dat geld krijg je een ontwerp op basis van een formulier. Bij ons begint het met een gesprek over je klanten, zie je een paar richtingen, testen we het logo in het klein, in zwart-wit en als icoontje in Google, en krijg je alle bestanden en de rechten schriftelijk mee. Is een logowinkel genoeg voor jou, dan zeggen we dat.' },
       { v: 'Heb ik als klein bedrijf echt branding nodig?', a: 'Je hebt altijd een merk, of je er nu aan werkt of niet. De vraag is of het je helpt. Een herkenbaar logo en vaste kleuren kosten weinig en maken je professioneler dan veel concurrenten.' },
       { v: 'Hoe lang duurt het om een logo of huisstijl te laten maken?', a: 'Dat hangt vooral af van hoe snel je keuzes maakt. Na het eerste gesprek krijg je een planning. Een logo is sneller klaar dan een complete huisstijl met toepassingen.' },
       { v: 'Kunnen jullie mijn bestaande logo opfrissen?', a: 'Ja. Vaak is dat slimmer dan helemaal opnieuw beginnen, zeker als klanten je logo al kennen. We maken het strakker, beter leesbaar en bruikbaar in alle formaten.' },
@@ -174,5 +221,5 @@ const schema = [{
 
   <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je project bij.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
-  <Actie titel="Past je uitstraling nog bij je bedrijf?" tekst={`${site.contactpersoon} kijkt naar je logo, je website en je bedrijfsprofiel, en belt je met wat opvalt. Gratis, en je zit nergens aan vast.`} />
+  <Actie titel="Past je uitstraling nog bij je bedrijf?" tekst={`${site.contactpersoon} kijkt naar je logo, je website en je bedrijfsprofiel, en belt je met wat opvalt en wat een nieuw logo of een huisstijl kost. Gratis, en je zit nergens aan vast.`} knop={knop} />
 </Base>

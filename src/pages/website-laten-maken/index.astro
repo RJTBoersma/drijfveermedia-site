@@ -20,25 +20,42 @@ const hoofdstukken = [
   { id: 'opleveren', titel: 'Wat je website moet opleveren' },
   { id: 'twee-routes', titel: 'Twee routes' },
   { id: 'welke-route', titel: 'Welke route past bij jou?' },
+  { id: 'wat-je-krijgt', titel: 'Wat je krijgt' },
   { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'markt', titel: 'Wat anderen vragen' },
   { id: 'werkwijze', titel: 'Zo verloopt het' },
-  { id: 'altijd', titel: 'Wat er altijd in zit' },
   { id: 'voorbereiden', titel: 'Wat je zelf kunt voorbereiden' },
+  { id: 'geen-zin', titel: 'Wanneer het geen zin heeft' },
   { id: 'daarna', titel: 'Na de livegang' },
-  { id: 'niet', titel: 'Wat we niet doen' },
 ];
-const schema = [{
-  '@type': 'Service',
-  name: 'Website laten maken',
-  serviceType: 'Webdesign',
-  provider: { '@id': `${site.url}/#organisatie` },
-  areaServed: { '@type': 'Country', name: 'Nederland' },
-  url: `${site.url}${url}`,
-  offers: [
-    { '@type': 'Offer', name: 'Website met AI', url: `${site.url}/website-laten-maken/website-met-ai/`, priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
-    { '@type': 'Offer', name: 'Maatwerk website in WordPress', priceCurrency: 'EUR', price: 2000, priceSpecification: { '@type': 'PriceSpecification', minPrice: 2000, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
-  ],
-}];
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
+const bronnen = [
+  'https://friebie.nl/',
+  'https://webstijn.nl/website-laten-maken/',
+  'https://wjwebdesign.nl/website-laten-maken/kosten/',
+  'https://siteactief.nl/tarieven/',
+  'https://www.samdesign.nl/website-laten-maken/',
+];
+const schema = [
+  {
+    '@type': 'WebPage',
+    name: 'Website laten maken vanaf € 250, met een vaste prijs vooraf',
+    dateModified: '2026-10-19',
+    citation: bronnen,
+  },
+  {
+    '@type': 'Service',
+    name: 'Website laten maken',
+    serviceType: 'Webdesign',
+    provider: { '@id': `${site.url}/#organisatie` },
+    areaServed: { '@type': 'Country', name: 'Nederland' },
+    url: `${site.url}${url}`,
+    offers: [
+      { '@type': 'Offer', name: 'Website met AI', url: `${site.url}/website-laten-maken/website-met-ai/`, priceCurrency: 'EUR', price: 250, priceSpecification: { '@type': 'PriceSpecification', minPrice: 250, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+      { '@type': 'Offer', name: 'Maatwerk website in WordPress', priceCurrency: 'EUR', price: 2000, priceSpecification: { '@type': 'PriceSpecification', minPrice: 2000, priceCurrency: 'EUR', valueAddedTaxIncluded: false } },
+    ],
+  },
+];
 ---
 <Base
   title="Website laten maken vanaf € 250 | Drijfveer Media"
@@ -47,7 +64,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gekozen · Website" titel="Website laten maken vanaf € 250, met een vaste prijs vooraf" prijs="vanaf € 250" eenmalig>
-    <p>Snel met AI en met de hand afgemaakt, of maatwerk in WordPress vanaf € 2.000. Allebei gebouwd om aanvragen op te leveren. Een website laten maken hoeft geen half jaar en geen tienduizend euro te kosten.</p>
+    <p>Voor ondernemers en zzp'ers die een site willen die aanvragen oplevert. Snel met AI vanaf € 250, of maatwerk in WordPress vanaf € 2.000. Je hoort de prijs voordat we beginnen, de basis voor Google zit erin en alles staat op jouw naam.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -56,17 +73,17 @@ const schema = [{
       <article class="tekst">
         <div class="kader kader-oranje in-het-kort">
           <p class="kader-titel">In het kort</p>
-          <p>Bij Drijfveer Media kun je op twee manieren een website laten maken. De snelle route bouwen we met hulp van AI en maken we met de hand af, vanaf € 250. Maatwerk in WordPress begint bij € 2.000 en loopt op met wat je nodig hebt. Je krijgt vooraf een vaste prijs. Hosting regel je zelf, op je eigen naam. Webshops bouwen we niet.</p>
+          <p>Bij Drijfveer Media kun je op twee manieren een website laten maken. De snelle route bouwen we met hulp van AI en maken we met de hand af, vanaf € 250. Maatwerk in WordPress begint bij € 2.000 en loopt op met wat je nodig hebt. Je krijgt vooraf een vaste prijs. Hosting regel je zelf, op je eigen naam. Webshops bouwen we niet. Hieronder lees je wat je krijgt, wat anderen vragen en wanneer een nieuwe site geen zin heeft.</p>
         </div>
 
         <h2 id="opleveren">Wat je website moet opleveren</h2>
         <p>Wie een website wil laten maken, denkt vaak eerst aan het uiterlijk. De kleuren, een strak ontwerp, een mooie foto bovenaan. Logisch. Maar de vraag die er echt toe doet, is een andere: wat moet die site voor je doen?</p>
-        <p>Voor een loodgieter in Emmen is dat bellen. Voor een accountant in Zwolle een afspraak voor een kennismaking. Voor een zzp'er in de zorg misschien vooral vertrouwen, zodat een opdrachtgever na het eerste gesprek nog even kijkt en denkt: die zit goed. Elk doel vraagt een andere opbouw, andere teksten en een andere knop op een andere plek.</p>
-        <p>Daarom beginnen we niet met een ontwerp, maar met vragen. Wie zijn je klanten? Waar zoeken ze op? Wat willen ze weten voordat ze contact opnemen? Pas als dat helder is, weten we welke site je nodig hebt. Soms is dat een complete website met twintig pagina's. Vaak is het veel minder.</p>
+        <p>Voor een loodgieter in Emmen is dat bellen. Voor een accountant in Zwolle een afspraak voor een kennismaking. Voor een zzp'er in de zorg vooral vertrouwen, zodat een opdrachtgever na het eerste gesprek nog even kijkt en denkt: die zit goed. Elk doel vraagt een andere opbouw, andere teksten en een andere knop op een andere plek.</p>
+        <p>Daarom beginnen we met vragen. Wie zijn je klanten? Waar zoeken ze op? Wat willen ze weten voordat ze contact opnemen? Pas als dat helder is, weten we welke site je nodig hebt. Soms is dat een complete website met twintig pagina's. Vaak is het veel minder.</p>
         <blockquote>Een mooie website die niemand vindt, is een folder in een la.</blockquote>
 
         <h2 id="twee-routes">Twee routes: snel met AI of maatwerk in WordPress</h2>
-        <p>Niet elk bedrijf heeft hetzelfde nodig. Een starter wil snel online met een professionele website die klopt. Een bedrijf met tien medewerkers en vijf diensten wil een site die meegroeit. Daarom werken we met twee routes in plaats van drie pakketten met brons, zilver en goud.</p>
+        <p>Een starter wil snel online met een professionele website die klopt. Een bedrijf met tien medewerkers en vijf diensten wil een site die meegroeit. Daarom werken we met twee routes in plaats van drie pakketten met brons, zilver en goud.</p>
         <div class="raster raster-2 routes">
           <div class="card">
             <Tekening naam="raket" />
@@ -83,8 +100,7 @@ const schema = [{
             <a class="meer" href="#kosten">Wat maatwerk kost</a>
           </div>
         </div>
-        <p>Waarom is de snelle route zo veel goedkoper? Omdat AI het meeste rekenwerk en de eerste versies voor zijn rekening neemt. Een eerste opzet staat er veel sneller dan vroeger. De tijd die we overhouden, steken we in wat AI niet goed kan: je verhaal scherp krijgen, controleren of alles klopt en zorgen dat bezoekers de juiste kant op klikken. Hoe we AI inzetten en waar we het juist niet voor gebruiken, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
-        <p>Maatwerk is iets anders. Daar ontwerpen we elke pagina vanaf nul rond jouw bedrijf. Dat kost meer uren, en die zie je terug in de prijs. Je krijgt er wel iets voor terug: een site die precies doet wat jij wilt, met ruimte voor extra functies en een opbouw die past bij hoe jouw klanten kiezen.</p>
+        <p>Waarom is de snelle route zo veel goedkoper? Omdat AI de eerste versies voor zijn rekening neemt. De tijd die we overhouden, steken we in wat AI niet goed kan: je verhaal scherp krijgen, controleren of alles klopt en zorgen dat bezoekers de juiste kant op klikken. Hoe we AI inzetten, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>. Bij maatwerk ontwerpen we elke pagina vanaf nul rond jouw bedrijf. Dat kost meer uren, met ruimte voor extra functies.</p>
 
         <h2 id="welke-route">Welke route past bij jou?</h2>
         <p>Twijfel je? Deze vergelijking helpt. Het is geen wet, wel hoe het in de praktijk meestal uitpakt.</p>
@@ -101,13 +117,25 @@ const schema = [{
             </tbody>
           </table>
         </div>
-        <p>Kies de snelle route als je vooral online wilt staan met een site die vertrouwen geeft en gevonden wordt. Kies maatwerk als je website je belangrijkste verkoper is, als je veel verschillende diensten hebt of als je weet dat je over een jaar flink wilt uitbreiden.</p>
-        <p>Er is ook een tussenweg. Begin met de snelle route, kijk wat er binnenkomt en bouw daarna verder. Dat past bij hoe we het liefst werken: eerst daar beginnen waar het snelst verschil te maken is, daarna perfectioneren. Wie in een paar maanden ziet welke pagina's bezoekers lezen en waar ze bellen, maakt betere keuzes voor de volgende stap.</p>
-        <p>Voor zzp'ers hebben we een aparte gids met wat er echt op je site moet: <a href="/kennisbank/gidsen/website-zzp/">website voor zzp'ers</a>. En overweeg je om het helemaal zelf te doen met Wix of Squarespace? Lees dan eerst <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a>. Daar zetten we de tijd en de kosten naast elkaar.</p>
+        <p>Kies de snelle route als je vooral online wilt staan met een site die vertrouwen geeft en gevonden wordt. Kies maatwerk als je website je belangrijkste verkoper is, als je veel diensten hebt of als je over een jaar flink wilt uitbreiden. Er is ook een tussenweg: begin snel, kijk wat er binnenkomt en bouw daarna verder. Zo werken we het liefst. Eerst daar beginnen waar het snelst verschil te maken is, daarna perfectioneren.</p>
+        <p>Voor zzp'ers hebben we een aparte gids met wat er echt op je site moet: <a href="/kennisbank/gidsen/website-zzp/">website voor zzp'ers</a>. Overweeg je om het helemaal zelf te doen met Wix of Squarespace? Lees dan eerst <a href="/kennisbank/gidsen/zelf-website-maken/">zelf een website maken of laten maken</a>.</p>
 
         <Tussenactie />
+        <h2 id="wat-je-krijgt">Wat je krijgt, bij elke route</h2>
+        <p>Een goedkope site is geen kale site. Ga je bij ons een website laten maken, dan zit dit er altijd in, ook bij de route van € 250:</p>
+        <ul class="vink">
+          <li><b>Een vaste prijs vooraf.</b> Het bedrag staat in de offerte voordat we beginnen, en verandert niet halverwege.</li>
+          <li><b>Het ontwerp eerst te zien.</b> Je kijkt mee en past aan wat je wilt, voordat de site live gaat.</li>
+          <li><b>Werkt op elke telefoon.</b> We ontwerpen eerst voor het kleine scherm en testen op laptop, tablet en telefoon.</li>
+          <li><b>Beter vindbaar vanaf dag één.</b> Paginatitels, beschrijvingen, koppen en de code die zoekmachines en AI vertelt wat je doet en waar.</li>
+          <li><b>Contact zonder drempel.</b> Bellen met één tik en een formulier waarvan we testen of het aankomt.</li>
+          <li><b>Zelf aan te passen.</b> Teksten en foto's wijzig je in een eenvoudig beheerscherm, met een korte uitleg erbij.</li>
+          <li><b>Van jou.</b> Site, teksten, foto's en domein staan op jouw naam. Wil je ooit weg, dan neem je alles mee.</li>
+        </ul>
+        <p>Wat er niet standaard in zit, hoor je ook vooraf. Teksten door onze <a href="/tekstschrijver/">tekstschrijver</a> kosten vanaf € 75 per pagina. Een logo kost vanaf € 495. Hosting regel je zelf, meestal voor een paar euro per maand, zodat alles op jouw naam staat. We helpen je kiezen en zetten je site erop. Fotografie en video hebben we niet in huis: we werken met de foto's die jij maakt, en een goede telefoonfoto werkt vaak prima.</p>
+
         <h2 id="kosten">Wat kost een website laten maken?</h2>
-        <p>Tussen de € 250 en een paar duizend euro, afhankelijk van wat je nodig hebt. Hieronder zie je de prijsindicatie. Het zijn vanaf-prijzen, exclusief btw. Na een kort gesprek krijg je een vaste prijs, en die verandert niet halverwege.</p>
+        <p>Tussen de € 250 en een paar duizend euro, afhankelijk van wat je nodig hebt. Het zijn vanaf-prijzen, exclusief btw. Na een kort gesprek krijg je een vaste prijs.</p>
         <div class="tabel-scroll">
           <table class="prijstabel">
             <thead><tr><th>Onderdeel</th><th>Wat je krijgt</th><th>Vanaf</th></tr></thead>
@@ -122,13 +150,43 @@ const schema = [{
           </table>
         </div>
         <h3>Waar de prijs van afhangt</h3>
-        <p>Drie dingen bepalen waar je uitkomt. Hoeveel pagina's je nodig hebt. Of wij de teksten schrijven of jij ze aanlevert. En of er bijzondere functies in moeten, zoals een afsprakenplanner of een koppeling met je boekhoudsoftware. Een meerprijs zit dus nooit in kleine lettertjes. Die zit in werk dat je zelf kiest, en je weet het vooraf.</p>
-        <p>Een rekenvoorbeeld. Stel: een hovenier in Hoogeveen wil een site met een homepage, vier dienstpagina's, een pagina over het bedrijf en een contactpagina. Hij heeft een logo, maar geen teksten. Dan is de snelle route met teksten door ons een paar honderd euro duurder dan de kale prijs. Wil hij een eigen ontwerp met een planner voor tuinonderhoud, dan komt hij boven de € 2.000 uit. Hij hoort beide bedragen voordat hij kiest.</p>
+        <p>Drie dingen bepalen waar je uitkomt. Hoeveel pagina's je nodig hebt. Of wij de teksten schrijven of jij ze aanlevert. En of er bijzondere functies in moeten, zoals een afsprakenplanner of een koppeling met je boekhoudsoftware. Een meerprijs zit dus nooit in kleine lettertjes, maar in werk dat je zelf kiest.</p>
+        <h3>Zo ziet een offerte eruit</h3>
+        <p>Een hovenier in Hoogeveen wil een homepage, vier dienstpagina's, een pagina over het bedrijf en een contactpagina. Hij heeft een logo, maar geen teksten.</p>
+        <div class="tabel-scroll">
+          <table class="prijstabel">
+            <thead><tr><th>Onderdeel</th><th>Toelichting</th><th>Bedrag</th></tr></thead>
+            <tbody>
+              <tr><td><b>Website met AI</b></td><td>Zeven pagina's, met de hand afgemaakt</td><td>€ 250</td></tr>
+              <tr><td><b>Teksten</b></td><td>Zeven pagina's door onze tekstschrijver</td><td>€ 525</td></tr>
+              <tr><td><b>Logo</b></td><td>Heeft hij al</td><td>€ 0</td></tr>
+              <tr><td><b>Hosting</b></td><td>Regelt hij zelf, op eigen naam</td><td>bij zijn host</td></tr>
+              <tr><td><b>Totaal</b></td><td>Vaste prijs, exclusief btw</td><td>€ 775</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wil hij een eigen ontwerp met een planner voor tuinonderhoud, dan komt hij boven de € 2.000 uit. Hij hoort beide bedragen voordat hij kiest. <span class="muted">(Verzonnen voorbeeld met onze vanaf-prijzen. Jouw prijs hoor je na het gesprek.)</span> Reken het hieronder na voor je eigen bedrijf.</p>
         <WebsitePrijs paginas={7} teksten={true} logo={false} marge={600} />
         <p>Meer achtergrond, met de prijzen van freelancers en grote bureaus ernaast, vind je in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
-        <h3>Inclusief hosting? Lees dan even mee</h3>
-        <p>Veel aanbieders werken met pakketten waar hosting inbegrepen is, soms met een laag bedrag vooraf en een maandbedrag dat nooit stopt. Dat lijkt goedkoper, maar reken het eens uit over drie jaar. En vraag wat er gebeurt als je opzegt. Bij sommige partijen ben je dan je site kwijt.</p>
-        <p>Voor nieuwe sites regelen we geen hosting. Je regelt die zelf, bij een partij naar keuze en op je eigen naam. Dat kost bij de meeste hostingpartijen een paar euro per maand voor een gewone bedrijfssite. Het voordeel: de site is van jou, het domein is van jou en je zit nergens aan vast. Een website inclusief hosting bij één partij is makkelijk, tot je weg wilt.</p>
+
+        <h2 id="markt">Wat anderen vragen, en waar je op let</h2>
+        <p>Je kunt ook elders een website laten maken. Dit vragen een paar aanbieders op hun eigen site, in oktober 2026. Bedragen zonder btw; wjwebdesign rekent geen btw.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Wat je krijgt</th><th>Prijs</th></tr></thead>
+            <tbody>
+              <tr><td><b>Friebie</b></td><td>Ontwerp, bouw, hosting en onderhoud in één maandbedrag</td><td>€ 14,95 per maand</td></tr>
+              <tr><td><b>Webstijn, AI-pakket</b></td><td>Met AI gebouwd, met hosting, mail en onderhoud</td><td>vanaf € 50 per maand</td></tr>
+              <tr><td><b>wjwebdesign, AI-website</b></td><td>Vijf pagina's, online binnen 48 uur</td><td>€ 249 eenmalig</td></tr>
+              <tr><td><b>SiteActief</b></td><td>Maatwerk tot circa vijf pagina's, binnen een week</td><td>€ 1.250 eenmalig</td></tr>
+              <tr><td><b>Webstijn, Start</b></td><td>Maatwerk design in WordPress of Framer</td><td>vanaf € 2.000</td></tr>
+              <tr><td><b>SAM Design</b></td><td>Zakelijke maatwerksite, traject van zes tot acht weken</td><td>vanaf € 2.999</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td>Website met AI, of maatwerk in WordPress</td><td>vanaf € 250 of € 2.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een maandbedrag voelt goedkoop. Reken het uit over drie jaar: bij € 14,95 per maand betaal je € 538, bij € 50 per maand € 1.800. Vraag ook wat er met je site gebeurt als je opzegt. Een AI-site van € 249 kost ongeveer hetzelfde als die van ons. Vergelijk dan wat erin zit: hoeveel pagina's, wie de teksten nakijkt en wie je belt als er iets moet veranderen.</p>
+        <p>Het verschil met ons zit vooral in wat er na de bouw komt. We zijn een online marketingbureau. Wil je hoger in Google, genoemd worden door AI of meer aanvragen uit dezelfde bezoekers, dan doet hetzelfde team dat. Ideeën en technieken testen we eerst op meer dan honderd eigen sites, ons <a href="/proeflab/">proeflab</a>. We werkten onder meer voor Kärcher, bol.com, Nyenrode, Conflictbemiddeling Nederland en Glaspunt.</p>
 
         <h2 id="werkwijze">Zo verloopt het, van eerste telefoontje tot livegang</h2>
         <p>De snelle route en maatwerk volgen dezelfde stappen. Alleen het tempo verschilt.</p>
@@ -140,25 +198,13 @@ const schema = [{
         <p>Wie zijn je beste klanten? Wat vragen ze altijd aan de telefoon? Welke concurrent zie je steeds terug in Google? We vragen door tot we weten wat je echt wilt. Dat kan telefonisch, bij ons aan de Lauwers in Assen of bij jou op locatie.</p>
 
         <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>3. Een voorstel met een vaste prijs vooraf</h3></div>
-        <p>Je krijgt een voorstel met de route die past, de pagina's die erin komen en een vaste prijs. Dat bedrag staat in de offerte, voordat we beginnen. We bespreken ook wat de site moet opleveren, bijvoorbeeld meer aanvragen, zodat de opbouw daarop is afgestemd.</p>
+        <p>Je krijgt een voorstel met de route die past, de pagina's die erin komen en een vaste prijs. We bespreken ook wat de site moet opleveren, bijvoorbeeld meer aanvragen, zodat de opbouw daarop is afgestemd.</p>
 
         <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>4. Ontwerp, teksten en bouw</h3></div>
         <p>Je ziet het ontwerp voordat we bouwen en past aan wat je wilt. Daarna komt de site er echt te staan. We testen op laptop, tablet en telefoon, en kijken of formulieren aankomen en de belknop werkt.</p>
 
         <div class="stap-kop"><Tekening naam="raket" maat={48} /><h3>5. Live, en dan verbeteren</h3></div>
-        <p>Pas als alles werkt, gaat hij live. Daarna kijken we waar bezoekers afhaken en wat er binnenkomt. Eerst de pagina's die het meeste opleveren, dan de rest. Zo groeit je site in de richting die werkt, in plaats van in de richting die we vooraf bedachten.</p>
-
-        <h2 id="altijd">Wat er altijd in zit</h2>
-        <p>Een goedkope site is geen kale site. Deze dingen zitten in elke website die we opleveren, ook bij de route van € 250.</p>
-        <ul class="vink">
-          <li><b>Werkt op elke telefoon.</b> De meeste bezoekers komen mobiel binnen. We ontwerpen eerst voor het kleine scherm.</li>
-          <li><b>Snel.</b> Een trage site kost bezoekers en posities in Google. We houden afbeeldingen licht en de code schoon.</li>
-          <li><b>Beter vindbaar vanaf dag één.</b> Paginatitels, beschrijvingen, koppen en een logische structuur. Ook de code die zoekmachines en AI vertelt wat je bedrijf doet en waar.</li>
-          <li><b>Contact zonder drempel.</b> Bellen met één tik, een kort formulier en je adres in beeld.</li>
-          <li><b>Van jou.</b> Je bent eigenaar van je site en je content. Wil je ooit weg, dan neem je alles mee.</li>
-        </ul>
-        <p>Dat laatste lijkt vanzelfsprekend, maar is het niet. Toch komt het vaak voor dat een ondernemer zijn eigen site niet kan aanpassen of verhuizen, omdat de bouwer de sleutels houdt. Dat gebeurt bij ons niet.</p>
-        <p>Vindbaar zijn is overigens iets anders dan bovenaan staan. De basis zit erin. Wil je hoger komen bij zoekopdrachten met veel concurrentie, dan is <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a> de volgende stap. Werk je vooral in je eigen regio? Begin dan met je <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel laten inrichten</a>.</p>
+        <p>Pas als alles werkt, gaat hij live. Daarna kijken we waar bezoekers afhaken en wat er binnenkomt. Eerst de pagina's die het meeste opleveren, dan de rest.</p>
 
         <h2 id="voorbereiden">Wat je zelf kunt voorbereiden</h2>
         <p>Hoe beter je voorbereid bent, hoe sneller je site er staat en hoe minder hij kost. Je hoeft niet alles te hebben. Maar met dit lijstje scheelt het al snel een week.</p>
@@ -167,7 +213,7 @@ const schema = [{
           <li>Je logo als bestand, het liefst als SVG of PNG met een doorzichtige achtergrond.</li>
           <li>Tien tot twintig eigen foto's: van je bedrijf, je team en je werk. Liever een goede telefoonfoto dan een stockfoto.</li>
           <li>Een lijstje van je diensten, met de vragen die klanten er altijd over stellen.</li>
-          <li>Twee of drie sites die je mooi vindt, en één die je vreselijk vindt. Dat zegt vaak meer dan een lange briefing.</li>
+          <li>Twee of drie sites die je mooi vindt, en één die je vreselijk vindt.</li>
           <li>Je huidige site, als je die hebt. Dan nemen we mee wat goed scoort in Google, zodat je die posities niet kwijtraakt.</li>
         </ul>
         <h3>Vijf veelgemaakte fouten</h3>
@@ -179,24 +225,24 @@ const schema = [{
           <li>Na de lancering niets meer doen. Een site die je nooit bijwerkt, zakt langzaam weg.</li>
         </ol>
 
-        <h2 id="daarna">Na de livegang: onderhoud, ontwerp en spoedhulp</h2>
-        <p>Is je website gebouwd, dan begint het pas. Een site in WordPress moet je updaten, net als de software op je telefoon. Plugins krijgen nieuwe versies, beveiligingslekken worden gedicht en soms botsen twee onderdelen na een update. Wie dat laat liggen, loopt risico.</p>
-        <p>Je kunt het zelf doen. Of je laat het aan ons over met <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud voor WordPress</a>, vanaf € 39 per maand. Dan installeren wij de updates, maken we back-ups, houden we de beveiliging in de gaten en zorgen we dat je site snel blijft.</p>
-        <p>Komen er wel bezoekers maar te weinig aanvragen? Dan zit het probleem vaak in de opbouw van je pagina's. Met <a href="/website-laten-maken/ux-ui-design/">UX- en UI-design</a> kijken we waar bezoekers afhaken en ontwerpen we een route die wel naar de knop leidt.</p>
-        <p>En gaat het toch mis, omdat je site gehackt is? Bel dan meteen. Via <a href="/website-laten-maken/wordpress-hack/">WordPress hack verwijderen</a> lees je wat je direct kunt doen en hoe wij je site weer schoon krijgen. Ook als wij hem niet gebouwd hebben.</p>
+        <h2 id="geen-zin">Wanneer een nieuwe site geen zin heeft</h2>
+        <p>Een nieuwe website laten maken is niet altijd het antwoord. We zeggen het liever vooraf dan na de oplevering. In deze gevallen raden we iets anders aan.</p>
+        <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>Je site is jong en werkt, maar niemand vindt hem</h3></div>
+        <p>Dan is een nieuwe site weggegooid geld. Begin met <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>. Werk je vooral in je eigen regio, kijk dan eerst naar <a href="/lokale-seo/">lokale SEO</a>.</p>
+        <div class="stap-kop"><Tekening naam="klik" maat={48} vertraging={150} /><h3>Er komen bezoekers, maar ze bellen niet</h3></div>
+        <p>Vaak zit het in een paar pagina's. Een nieuwe opbouw met <a href="/website-laten-maken/ux-ui-design/">UX- en UI-design</a> of <a href="/leadgeneratie/conversie-optimalisatie/">conversie-optimalisatie</a> levert dan meer op dan alles opnieuw bouwen.</p>
+        <div class="stap-kop"><Tekening naam="munten" maat={48} vertraging={300} /><h3>Je wilt online verkopen</h3></div>
+        <p>Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je <a href="/online-adverteren/google-shopping/">Google Shopping</a>-campagnes doen.</p>
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} vertraging={450} /><h3>Je hebt deze maand al klanten nodig</h3></div>
+        <p>Een nieuwe site heeft tijd nodig voordat Google hem goed vindt. Voor snelle aanvragen past <a href="/online-adverteren/">online adverteren</a> beter. Ondertussen bouwen we rustig aan je site.</p>
 
-        <h2 id="niet">Wat we niet doen</h2>
-        <p>Een paar dingen laten we bewust liggen. Dat zeggen we liever vooraf.</p>
-        <ul>
-          <li><b>Webshops.</b> Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je <a href="/online-adverteren/google-shopping/">Google Shopping</a>-campagnes doen.</li>
-          <li><b>Hosting.</b> Die regel je zelf, zodat alles op jouw naam staat. We helpen je wel kiezen en zetten je site erop.</li>
-          <li><b>Fotografie en video.</b> Daar hebben we geen fotograaf of filmploeg voor in huis. We werken wel met de foto's en filmpjes die jij maakt, en een goede telefoonfoto werkt vaak prima.</li>
-        </ul>
-        <p>Werk je in Drenthe en wil je liever even langskomen? Op de pagina <a href="/webdesign-assen/">webdesign in Assen</a> lees je hoe dat gaat bij ons op kantoor.</p>
+        <h2 id="daarna">Na de livegang: onderhoud, ontwerp en spoedhulp</h2>
+        <p>Is je website gebouwd, dan begint het pas. Een site in WordPress moet je updaten, net als de software op je telefoon. Plugins krijgen nieuwe versies, lekken worden gedicht en soms botsen twee onderdelen na een update. Je kunt het zelf doen, of je laat het aan ons over met <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud voor WordPress</a>, vanaf € 39 per maand.</p>
+        <p>En gaat het toch mis, omdat je site gehackt is? Bel dan meteen. Via <a href="/website-laten-maken/wordpress-hack/">WordPress hack verwijderen</a> lees je wat je direct kunt doen en hoe wij je site weer schoon krijgen, ook als wij hem niet gebouwd hebben. Werk je in Drenthe en kom je liever even langs? Op de pagina <a href="/webdesign-assen/">webdesign in Assen</a> lees je hoe dat gaat bij ons op kantoor.</p>
       </article>
 
       <aside class="zijkolom">
-        <Inhoud items={hoofdstukken} leestijd={12} />
+        <Inhoud items={hoofdstukken} leestijd={13} />
         <Prijskaart naam="Website met AI" prijs="€ 250" eenmalig punten={['Met de hand afgemaakt', 'Werkt op elke telefoon', 'Klaar voor Google', 'Helemaal van jou']} />
         <Prijskaart naam="Maatwerk in WordPress" prijs="€ 2.000" eenmalig punten={['Eigen ontwerp, geen template', 'Zelf te beheren', 'Ruimte voor extra functies']} noot="Je hoort de vaste prijs na een kort gesprek." />
       </aside>
@@ -211,10 +257,11 @@ const schema = [{
     vragen={[
       { v: 'Wat kost een website laten maken?', a: 'Een website die we met AI bouwen begint bij € 250. Maatwerk in WordPress begint bij € 2.000. Teksten door ons kosten vanaf € 75 per pagina. Je krijgt altijd vooraf een vaste prijs, exclusief btw.' },
       { v: 'Hoe lang duurt het voordat mijn website online staat?', a: 'Een site met AI staat er vaak binnen twee weken. Een maatwerksite in WordPress kost meer tijd. Hoe lang precies, hoor je vooraf in de offerte. De grootste vertraging zit bijna altijd in teksten en foto\'s, dus hoe eerder die klaar zijn, hoe sneller je live bent.' },
-      { v: 'Zit hosting bij de prijs?', a: 'Nee. Voor nieuwe sites regelen we geen hosting. Je regelt die zelf, op je eigen naam, bij een partij naar keuze. Voor een gewone bedrijfssite kost dat meestal een paar euro per maand.' },
+      { v: 'Waarom geen website voor een vast bedrag per maand?', a: 'Dat kan elders, en het voelt goedkoop. Reken het uit over drie jaar: bij € 14,95 per maand betaal je € 538, bij € 50 per maand € 1.800. Vraag ook wat er met je site gebeurt als je opzegt. Bij ons betaal je één keer, en staan site en domein op jouw naam.' },
+      { v: 'Wat als ik het ontwerp niet mooi vind?', a: 'Je ziet het ontwerp voordat we bouwen en past aan wat je wilt. Pas als het klopt, gaat de site live. Twee of drie sites die je mooi vindt, helpen ons om in één keer dichter bij jouw smaak te komen.' },
+      { v: 'Wat moet ik zelf doen?', a: 'Je logo, eigen foto\'s, een lijstje van je diensten en je domeinnaam aanleveren, en meekijken met het ontwerp. Teksten mag je zelf schrijven of door onze tekstschrijver laten doen, vanaf € 75 per pagina.' },
+      { v: 'Zit hosting bij de prijs?', a: 'Nee. Voor nieuwe sites regelen we geen hosting. Je regelt die zelf, op je eigen naam, bij een partij naar keuze. Voor een bedrijfssite kost dat meestal een paar euro per maand. We helpen je kiezen en zetten je site erop.' },
       { v: 'Bouwen jullie ook webshops?', a: 'Nee. We bouwen websites voor bedrijven die aanvragen, telefoontjes en afspraken willen. Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.' },
-      { v: 'Kan ik mijn nieuwe website zelf aanpassen?', a: 'Ja. Teksten en foto\'s pas je zelf aan in een eenvoudig beheerscherm, en je krijgt een korte uitleg. Voor grotere wijzigingen kun je bij ons terecht.' },
-      { v: 'Is de website echt van mij?', a: 'Ja. De site, de teksten, de foto\'s en het domein zijn van jou. Wil je ooit naar een andere partij, dan neem je alles mee.' },
       { v: 'Sta ik met een nieuwe website meteen bovenaan in Google?', a: 'Nee, en wie dat belooft, vertelt je iets wat niet kan. De technische basis zit erin, zodat Google je site goed kan lezen. Hoger komen bij veel concurrentie vraagt daarna om <a href="/zoekmachine-optimalisatie/">SEO</a>.' },
     ]}
   />
@@ -230,7 +277,7 @@ const schema = [{
     ]}
   />
 
-  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je project bij.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, noemt de vaste prijs en houdt je project bij tot de site live staat.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
   <Actie titel="Welke website past bij jou?" tekst={`Vertel ${site.contactpersoon} wat je site moet opleveren. Hij belt je op werkdagen binnen 15 minuten terug en zegt welke route past, ook als dat de goedkoopste is.`} />
 </Base>

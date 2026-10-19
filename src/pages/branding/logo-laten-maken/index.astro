@@ -8,13 +8,18 @@ import Prijskaart from '../../../components/pagina/Prijskaart.astro';
 import Verder from '../../../components/pagina/Verder.astro';
 import Inhoud from '../../../components/pagina/Inhoud.astro';
 import Auteur from '../../../components/pagina/Auteur.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/branding--logo-laten-maken.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
 
 const url = '/branding/logo-laten-maken/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
+// De knop past bij deze dienst: een vaste prijs voor je logo (actie.ts geeft hier nog de websiteprijs).
+const knop = { tekst: 'Vraag een vaste prijs voor je logo', href: '/contact/?vraag=Vaste%20prijs%20voor%20een%20logo' };
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
+const markt = ['https://15eurologos.nl/prijzen-pakketten/', 'https://www.logolove.nl/prijzen/', 'https://logohuis.com/onze-tarieven/', 'https://developers.google.com/search/docs/appearance/favicon-in-search', 'https://wetten.overheid.nl/BWBR0001886/'];
 const hoofdstukken = [
   { id: 'goed-logo', titel: 'Wat een goed logo moet kunnen' },
   { id: 'werkwijze', titel: 'Zo werken we' },
@@ -46,6 +51,7 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    citation: markt,
   },
 ];
 ---
@@ -55,8 +61,8 @@ const schema = [
   kruimels={[{ naam: 'Branding', url: '/branding/' }, { naam: 'Logo laten maken', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Branding" titel="Logo laten maken dat overal werkt, van gevel tot icoontje" prijs="vanaf € 495" eenmalig>
-    <p>Een goed logo herken je op tien meter afstand en op een telefoonscherm. Wij ontwerpen het, testen het in de praktijk en geven je alle bestanden en rechten mee.</p>
+  <Hero kicker="Gekozen · Branding" titel="Logo laten maken dat overal werkt, van gevel tot icoontje" prijs="vanaf € 495" eenmalig knop={knop}>
+    <p>Voor ondernemers die een logo willen dat werkt op een gevel, een factuur en als icoontje in Google. Wij ontwerpen het, testen het in de praktijk en geven je alle bestanden en de rechten schriftelijk mee. Vaste prijs vooraf.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -140,7 +146,7 @@ const schema = [
         <h3>Vorm</h3>
         <p>Ronde vormen voelen vriendelijk, hoekige vormen stevig. Een beeldmerk mag iets vertellen over je vak, maar hoeft dat niet letterlijk te doen. Een goed beeldmerk is een teken dat je gaat herkennen, geen tekening van wat je verkoopt.</p>
 
-        <Tussenactie />
+        <Tussenactie knop={knop} titel="Weet je al genoeg?" tekst="Vertel Thorgall wat je doet en voor wie. Hij belt je terug met een vaste prijs voor je logo." />
         <h2 id="oplevering">Wat je krijgt bij de oplevering</h2>
         <p>Een logo dat je niet goed kunt gebruiken, is half werk. Daarom krijg je:</p>
         <ul>
@@ -174,6 +180,20 @@ const schema = [
           <li><b>De buurproef.</b> Zet het naast de logo's van drie concurrenten uit je regio. Valt het op, of verdwijnt het?</li>
         </ol>
         <p>Zakt je logo voor twee of meer proeven, dan is opfrissen of opnieuw beginnen het overwegen waard. Bij de pagina over <a href="/branding/">branding</a> staan meer signalen dat het tijd is.</p>
+        <p>Dezelfde proeven doen wij met elk ontwerp. Zo kan zo'n testronde uitpakken:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Proef</th><th>Uitslag</th><th>Wat we aanpasten</th></tr></thead>
+            <tbody>
+              <tr><td>Icoontje, 32 pixels</td><td>De naam is onleesbaar</td><td>Als icoontje alleen de korenaar, zonder tekst</td></tr>
+              <tr><td>Zwart-wit</td><td>Blijft herkenbaar</td><td>Niets</td></tr>
+              <tr><td>Donkere achtergrond</td><td>De korenaar valt weg</td><td>Een witte variant erbij</td></tr>
+              <tr><td>Gevel, tien meter</td><td>Goed leesbaar</td><td>Niets</td></tr>
+              <tr><td>Naast drie bakkers uit de regio</td><td>Twee gebruiken ook bruin</td><td>Accentkleur naar donkerblauw</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld voor een bakkerij.</p>
 
         <h2 id="rechten">Van wie is je logo? Over de rechten</h2>
         <p>Een logo is een werk waar auteursrecht op rust. Dat recht ligt in eerste instantie bij de maker, dus bij de ontwerper. Wil je het logo echt bezitten, dan moet dat recht naar jou overgaan. Volgens de <a href="https://wetten.overheid.nl/BWBR0001886/" rel="noopener">Auteurswet</a> (artikel 2) moet zo'n overdracht schriftelijk gebeuren. Een mondelinge afspraak of "het is toch betaald" is niet genoeg.</p>
@@ -185,19 +205,22 @@ const schema = [
 
         <h2 id="kosten">Wat kost een logo laten maken?</h2>
         <p>Een logo laten maken bij Drijfveer Media kost vanaf € 495, exclusief btw. Daarvoor krijg je het gesprek, het ontwerp in een paar richtingen, de tests in de praktijk, alle bestanden en de overdracht van de rechten. Moet je bestaande logo alleen worden opgefrist of opnieuw opgebouwd, dan is het vaak minder werk. Dat hoor je vooraf.</p>
-        <p>Online zie je ook aanbieders met logo's voor een paar tientjes. Wat is het verschil? Vooral wat er na het plaatje komt.</p>
+        <p>Online kan het goedkoper en sneller. Dit staat in oktober 2026 op de sites van twee bekende aanbieders, exclusief btw:</p>
         <div class="tabel-scroll">
           <table>
-            <thead><tr><th></th><th>Logo voor een paar tientjes</th><th>Logo bij ons, vanaf € 495</th></tr></thead>
+            <thead><tr><th></th><th>15 Euro Logo's</th><th>LogoLove</th><th>Drijfveer Media</th></tr></thead>
             <tbody>
-              <tr><td><b>Gesprek over je bedrijf</b></td><td>Meestal een formulier</td><td>Ja, en een A4 met je identiteit</td></tr>
-              <tr><td><b>Getest in echte toepassingen</b></td><td>Zelden</td><td>Visitekaartje, website, profielfoto, gevel</td></tr>
-              <tr><td><b>Bestanden</b></td><td>Vaak alleen een PNG, soms tegen meerprijs meer</td><td>SVG, PDF en PNG in alle varianten</td></tr>
-              <tr><td><b>Rechten</b></td><td>Lees de kleine letters</td><td>Schriftelijk op jouw naam</td></tr>
-              <tr><td><b>Werkt ook online</b></td><td>Afhankelijk van de ontwerper</td><td>Getest als icoontje in Google en op je telefoon</td></tr>
+              <tr><td><b>Prijs</b></td><td>€ 99 tot € 249, een tekstlogo € 15</td><td>€ 259</td><td>vanaf € 495</td></tr>
+              <tr><td><b>Eerste ontwerp</b></td><td>48 uur tot 7 werkdagen</td><td>Oplevering in 48 uur</td><td>Planning na het eerste gesprek</td></tr>
+              <tr><td><b>Je wensen doorgeven</b></td><td>Een bestelformulier</td><td>Online aanvragen</td><td>Een gesprek, en een A4 met je merk</td></tr>
+              <tr><td><b>Correcties</b></td><td>Onbeperkt, vanaf € 99</td><td>Onbeperkt</td><td>Vooraf afgesproken</td></tr>
+              <tr><td><b>Bestanden</b></td><td>JPG, PNG, AI, EPS en PDF, vanaf € 99</td><td>AI, EPS, PDF, PNG en JPG</td><td>SVG, PDF en PNG in alle varianten, plus icoontje en kleurcodes</td></tr>
+              <tr><td><b>Rechten</b></td><td>Volledige gebruiksrechten</td><td>100% eigendomsrechten</td><td>Schriftelijk op jouw naam</td></tr>
+              <tr><td><b>Getest in de praktijk</b></td><td>Staat er niet bij</td><td>Staat er niet bij</td><td>Op visitekaartje, website, profielfoto, gevel en als icoontje in Google</td></tr>
             </tbody>
           </table>
         </div>
+        <p>Snel en goedkoop kan dus, met goede bestanden en rechten. Weet je precies wat je wilt, dan ben je bij zo'n winkel prima af. Wat je bij ons extra krijgt, is het denkwerk vooraf en de proeven achteraf: een gesprek over je klanten, een logo dat getest is op de plekken waar het moet werken, en mensen die ook je website en vindbaarheid kennen. Daar betaal je meer voor, en dat moet het je waard zijn. Prijzen van zelf doen tot een groot bureau staan in de gids <a href="/kennisbank/gidsen/logo-en-huisstijl/">logo en huisstijl</a>.</p>
         <p>Wil je meer dan een logo, zoals vaste kleuren, briefpapier en een visitekaartje? Kies dan een logo met huisstijl. Een complete <a href="/branding/huisstijl-laten-maken/">huisstijl laten maken</a> kost vanaf € 995, met het logo erbij. Meer over hoe logo, huisstijl en vindbaarheid samenhangen, lees je op de pagina over branding.</p>
         <p>Niet alle ontwerpers vertalen een bedrijf in een teken op dezelfde manier. Kijk daarom bij elke keuze niet alleen naar het portfolio, maar ook naar wat je krijgt: bestanden, rechten en een logo dat werkt op je website. Dat laatste is waar wij als online marketingbureau scherp op letten.</p>
 
@@ -215,7 +238,7 @@ const schema = [
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={10} />
-        <Prijskaart naam="Logo" prijs="€ 495" eenmalig punten={['Gesprek en één A4 met je merk', 'Ontwerp in een paar richtingen', 'Getest in echte toepassingen', 'SVG, PDF en PNG in alle varianten', 'Rechten schriftelijk op jouw naam']} />
+        <Prijskaart naam="Logo" prijs="€ 495" eenmalig knop={knop} punten={['Gesprek en één A4 met je merk', 'Ontwerp in een paar richtingen', 'Getest in echte toepassingen', 'SVG, PDF en PNG in alle varianten', 'Rechten schriftelijk op jouw naam']} />
       </aside>
     </div>
   </section>
@@ -225,6 +248,7 @@ const schema = [
   <Faq
     vragen={[
       { v: 'Wat kost een logo laten maken?', a: 'Bij ons vanaf € 495, exclusief btw. Daarin zitten het gesprek, een paar ontwerprichtingen, de tests, alle bestanden en de schriftelijke overdracht van de rechten.' },
+      { v: 'Waarom € 495 als het online voor € 99 kan?', a: 'Daar krijg je vaak goede bestanden en rechten voor, snel. Bij ons betaal je voor het gesprek over je klanten, een paar richtingen met uitleg en de proeven in de praktijk: in het klein, in zwart-wit, op een gevel en als icoontje in Google. Weet je al precies wat je wilt, dan is een logowinkel prima.' },
       { v: 'Hoe lang duurt het om een logo te laten maken?', a: 'Dat hangt vooral af van hoe snel je keuzes maakt. Na het eerste gesprek krijg je een planning met de momenten waarop je ontwerpen ziet.' },
       { v: 'Hoeveel ontwerpen krijg ik te zien?', a: 'Je krijgt een paar verschillende richtingen. Daarna werken we de gekozen richting uit en schaven we bij. Hoeveel correctierondes erbij zitten, spreken we vooraf af.' },
       { v: 'Kunnen jullie mijn bestaande logo opfrissen?', a: 'Ja. Als klanten je logo al kennen, is opfrissen vaak slimmer dan iets nieuws. We maken het strakker en bruikbaar in alle formaten, en leveren nieuwe bronbestanden.' },
@@ -244,5 +268,7 @@ const schema = [
     ]}
   />
 
-  <Actie titel="Werkt je huidige logo nog overal?" tekst={`${site.contactpersoon} bekijkt je logo op je website, in Google en op je telefoon, en belt je met wat hem opvalt. Gratis, en je zit nergens aan vast.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, noemt de vaste prijs en houdt je project bij tot de oplevering.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
+  <Actie titel="Werkt je huidige logo nog overal?" tekst={`${site.contactpersoon} bekijkt je logo op je website, in Google en op je telefoon, en belt je met wat hem opvalt en wat een nieuw logo kost. Gratis, en je zit nergens aan vast.`} knop={knop} />
 </Base>

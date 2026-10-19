@@ -7,24 +7,35 @@ import Actie from '../../../components/pagina/Actie.astro';
 import Verder from '../../../components/pagina/Verder.astro';
 import Inhoud from '../../../components/pagina/Inhoud.astro';
 import Auteur from '../../../components/pagina/Auteur.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/website-laten-maken--wordpress-hack.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
 
 const url = '/website-laten-maken/wordpress-hack/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
+// Bij een hack is bellen de vervolgstap, niet een prijsaanvraag (actie.ts geeft hier nog de websiteprijs).
+const bel = { tekst: `Bel ${site.telefoon}`, href: site.telefoonLink };
 const hoofdstukken = [
   { id: 'herkennen', titel: 'Zo herken je een hack' },
   { id: 'nu', titel: 'Dit doe je nu' },
+  { id: 'wat-je-krijgt', titel: 'Wat je van ons krijgt' },
   { id: 'verwijderen', titel: 'Zo verwijderen we de hack' },
   { id: 'verstopplekken', titel: 'Waar een hack zich verstopt' },
   { id: 'binnenkomen', titel: 'Hoe een hacker binnenkomt' },
   { id: 'datalek', titel: 'Is er een datalek?' },
   { id: 'backup', titel: 'Back-up of opschonen?' },
   { id: 'kosten', titel: 'Wat het kost en hoe lang' },
+  { id: 'markt', titel: 'Wat anderen vragen' },
+  { id: 'geen-zin', titel: 'Wanneer je ons niet nodig hebt' },
   { id: 'daarna', titel: 'Zorgen dat het niet terugkomt' },
-  { id: 'zelf', titel: 'Liever zelf?' },
+];
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
+const markt = [
+  'https://wjonderhoud.nl/wordpress-website-gehackt/',
+  'https://slik.nl/service/wordpress-hackvrij/',
+  'https://kwaaijongens.nl/wordpress/hack-en-malware-verwijderen/',
 ];
 const schema = [
   {
@@ -47,6 +58,7 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    citation: markt,
   },
 ];
 ---
@@ -61,8 +73,8 @@ const schema = [
     <p><b>Site gehackt?</b> Bel direct <a href={site.telefoonLink}>{site.telefoon}</a> <span class="muted">· werkdagen 8.00 tot 17.00 uur</span></p>
   </div>
 
-  <Hero kicker="Gekozen · Spoedhulp" titel="WordPress hack verwijderen: snel weer een schone site" prijs="consult € 85 per uur" eenmalig bel={false} knop={{ tekst: `Bel ${site.telefoon}`, href: site.telefoonLink }}>
-    <p>Rare doorverwijzingen, spam in Google of een waarschuwing van je host? Bel ons meteen. We ruimen de hack op en dichten het lek, ook als wij je site niet gebouwd hebben.</p>
+  <Hero kicker="Gekozen · Spoedhulp" titel="WordPress hack verwijderen: snel weer een schone site" prijs="consult € 85 per uur" eenmalig bel={false} knop={bel}>
+    <p>Rare doorverwijzingen, spam in Google of een waarschuwing van je host? Bel meteen, ook als wij je site niet bouwden. We ruimen de hack op, dichten het lek en praten Google bij. Vooraf hoor je hoeveel uur we verwachten.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -73,11 +85,11 @@ const schema = [
         <div class="kader kader-oranje in-het-kort">
           <p class="kader-titel">In het kort</p>
           <ul>
-            <li>Een WordPress hack verwijderen is meer dan een virusscanner draaien. Je moet ook de achterdeur vinden en het lek dichten.</li>
-            <li>Verwijder niet zelf bestanden en zet niet blind een back-up terug. Wijzig wel meteen je wachtwoorden.</li>
+            <li>Een WordPress hack verwijderen is meer dan een virusscanner draaien. Je moet ook de tweede ingang vinden en het lek dichten.</li>
+            <li>Wijzig meteen je wachtwoorden. Laat de bestanden staan en wacht met een back-up tot duidelijk is wanneer de hack begon.</li>
             <li>Bijna elke hack begint bij een verouderde plugin of thema, of een zwak wachtwoord.</li>
             <li>Konden hackers bij persoonsgegevens, zoals ingevulde formulieren? Dan moet je dat mogelijk binnen 72 uur melden bij de Autoriteit Persoonsgegevens.</li>
-            <li>Wij werken op basis van een consult van € 85 per uur. Na een eerste blik hoor je hoeveel uur we verwachten.</li>
+            <li>Wij werken op basis van een consult van € 85 per uur. Je site blijft bij je eigen host.</li>
           </ul>
         </div>
 
@@ -90,7 +102,6 @@ const schema = [
           <li>Zoek je in Google op <code>site:jouwdomein.nl</code>, dan zie je pagina's die je nooit gemaakt hebt, soms in het Japans.</li>
           <li>Je host heeft je site offline gehaald, of je mail komt ineens niet meer aan.</li>
           <li>In WordPress staat een beheerder die je niet kent, of je kunt niet meer inloggen.</li>
-          <li>Klanten bellen dat hun virusscanner alarm slaat op jouw site.</li>
         </ul>
         <p>Herken je er één? Dan is je WordPress gehackt, of er is iets dat er sterk op lijkt. Hoe zo'n zoekopdracht met <code>site:</code> werkt, lees je in <a href="/kennisbank/geavanceerd-zoeken-met-google/">geavanceerd zoeken met Google</a>.</p>
         <h3>Wat er achter een symptoom zit</h3>
@@ -108,23 +119,21 @@ const schema = [
           </table>
         </div>
         <h3>Bekijk je eigen site veilig</h3>
-        <p>Klik niet zomaar op verdachte pagina's van je eigen site. Volgens <a href="https://support.google.com/webmasters/answer/9044101?hl=nl" rel="noopener">Google</a> kun je je computer besmetten door een pagina met malware in je browser te openen. Hackers verbergen hun werk bovendien vaak voor de eigenaar: ze tonen het alleen aan Google of aan bezoekers uit de zoekresultaten. Google raadt daarom aan om de URL-inspectietool in Search Console te gebruiken. Daarmee zie je de pagina zoals Google hem ziet.</p>
+        <p>Klik niet zomaar op verdachte pagina's van je eigen site. Volgens <a href="https://support.google.com/webmasters/answer/9044101?hl=nl" rel="noopener">Google</a> kun je je computer besmetten door een pagina met malware in je browser te openen. Hackers verbergen hun werk bovendien vaak voor de eigenaar: ze tonen het alleen aan Google of aan bezoekers uit de zoekresultaten. Google raadt daarom de URL-inspectietool in Search Console aan. Daarmee zie je de pagina zoals Google hem ziet.</p>
 
         <h2 id="nu">Dit doe je nu, voordat je iets anders doet</h2>
         <p>De eerste uren tellen. Met deze stappen beperk je de schade, zonder het herstel lastiger te maken.</p>
         <ol>
-          <li><b>Verwijder niet zelf bestanden.</b> Je wist sporen die nodig zijn om het lek te vinden, en soms ook schone bestanden.</li>
-          <li><b>Wijzig je wachtwoorden.</b> Van alle WordPress-beheerders, je hostingaccount, FTP en de database. Doe dat vanaf een computer die je vertrouwt.</li>
+          <li><b>Kies nieuwe wachtwoorden.</b> Voor elke beheerder in WordPress, je hostingaccount, FTP en de database. Gebruik een computer waarvan je zeker weet dat hij schoon is.</li>
           <li><b>Scan je eigen computer.</b> WordPress.org wijst erop dat een hack soms begint bij een besmette laptop die inloggegevens doorgeeft. Dan helpt een nieuw wachtwoord maar kort.</li>
-          <li><b>Schrijf op wat je ziet.</b> Wanneer merkte je het, wat zag je precies, wat veranderde er de laatste tijd? Bewaar de mail van je host, de melding in Search Console en screenshots.</li>
-          <li><b>Zet niet blind een back-up terug.</b> Weet je niet wanneer de hack begon, dan is de kans groot dat de back-up ook besmet is.</li>
+          <li><b>Laat de bestanden met rust.</b> Wie zelf verdachte bestanden weggooit, wist ook de sporen waarmee je ontdekt hoe de hacker binnenkwam. En soms gaat er een goed bestand mee.</li>
+          <li><b>Bewaar wat je ziet.</b> Noteer wanneer je het merkte en wat er de laatste tijd veranderde. Sla de mail van je host op, de melding uit Search Console en een paar schermafbeeldingen.</li>
+          <li><b>Wacht met een back-up terugzetten.</b> Zolang niemand weet sinds wanneer de hacker binnen is, kan de back-up dezelfde besmetting bevatten.</li>
           <li><b>Bel ons.</b> We kijken mee en vertellen wat er nodig is.</li>
         </ol>
-
         <h3>Kun je niet meer inloggen?</h3>
         <p>Probeer eerst de link "Wachtwoord vergeten" op je inlogpagina. Komt er geen mail, of bestaat je account niet meer, dan heeft de hacker je waarschijnlijk buitengesloten. Maak dan niet in paniek een nieuw account aan via je host. Zolang de achterdeur open staat, kan de hacker dat account net zo goed overnemen. Laat de site liever eerst afschermen, en herstel de toegang tijdens het opruimen.</p>
         <h3>Wat je je host kunt vragen</h3>
-        <p>Je hostingpartij weet vaak meer dan je denkt. Bel of mail ze met deze vragen:</p>
         <ul>
           <li>Zijn er logbestanden van de afgelopen weken, en kunnen we die krijgen?</li>
           <li>Welke back-ups hebben jullie, van welke dagen, en zit de database erin?</li>
@@ -132,10 +141,34 @@ const schema = [
           <li>Staat ons IP-adres of ons domein op een zwarte lijst voor mail?</li>
           <li>Wat moet er gebeuren voordat jullie de site weer online zetten?</li>
         </ul>
-        <p>Dat laatste punt is belangrijk. WordPress.org wijst erop dat een gehackte site op gedeelde hosting ook spam kan versturen, waardoor je mail niet meer aankomt. Dan wil je weten wat je host nodig heeft om dat op te heffen.</p>
+        <p>Dat laatste punt is belangrijk. Een gehackte site op gedeelde hosting kan ook spam versturen, waardoor je mail niet meer aankomt. Dan wil je weten wat je host nodig heeft om dat op te heffen.</p>
+
+        <h2 id="wat-je-krijgt">Wat je van ons krijgt</h2>
+        <ul class="vink">
+          <li><b>Vooraf een inschatting.</b> Na een eerste blik hoor je hoeveel uur we verwachten. Pas als je akkoord bent, beginnen we.</li>
+          <li><b>Een schone site.</b> Bestanden en database nagelopen, WordPress, thema en plugins vervangen door schone exemplaren.</li>
+          <li><b>Het lek dicht.</b> Het onderdeel waardoor de hacker binnenkwam, bijgewerkt of vervangen. Nieuwe wachtwoorden en geheime sleutels.</li>
+          <li><b>Google en je host bijgepraat.</b> Een nieuwe beoordeling aangevraagd in Search Console en je host laten weten dat de site schoon is.</li>
+          <li><b>Een kort verslag.</b> Wat we vonden, sinds wanneer en welke gegevens erbij konden. Dat heb je nodig om te beslissen of je een datalek meldt.</li>
+        </ul>
+        <p>Zo kan dat verslag eruitzien:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Vraag</th><th>Wat we vonden</th></tr></thead>
+            <tbody>
+              <tr><td><b>Hoe kwam de hacker binnen?</b></td><td>Via een sliderplugin die twee jaar geen update had gehad</td></tr>
+              <tr><td><b>Sinds wanneer?</b></td><td>Volgens de logbestanden van de host ongeveer drie weken</td></tr>
+              <tr><td><b>Wat deed hij?</b></td><td>Doorverwijzing voor bezoekers uit Google, 340 spampagina's, één extra beheerder</td></tr>
+              <tr><td><b>Persoonsgegevens?</b></td><td>Ingevulde contactformulieren stonden in de database. Afweging datalek ligt bij jou</td></tr>
+              <tr><td><b>Wat we deden</b></td><td>Alles opgeschoond, plugin vervangen, wachtwoorden en sleutels vernieuwd, herbeoordeling aangevraagd</td></tr>
+              <tr><td><b>Uren</b></td><td>4,5 uur, € 382,50 exclusief btw</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld. Hoeveel uur jouw site kost, hangt af van hoe diep de hack zit.</p>
 
         <h2 id="verwijderen">Zo verwijderen we een WordPress-hack</h2>
-        <p>Een virusscanner draaien en hopen dat het goed is, doen we niet. Een hacker laat bijna altijd een achterdeur achter. Die vind je alleen als je de hele installatie doorloopt.</p>
+        <p>Met alleen een scan ben je er niet. Hackers laten vrijwel altijd een tweede ingang achter, en die zit zelden in het bestand dat de scanner aanwijst. Daarom lopen we alles na: bestanden, database en instellingen.</p>
 
         <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>1. Alles veiligstellen</h3></div>
         <p>Eerst maken we een kopie van alle bestanden en de database, besmet en wel. Zo kunnen we terugkijken wat er veranderd is, en raak je niets kwijt wat nog schoon was. Waar je host ze bewaart, kijken we ook in de logbestanden. Daarin staat vaak hoe en wanneer de hacker binnenkwam.</p>
@@ -151,9 +184,9 @@ const schema = [
         <p>Een site schoon maken zonder te weten hoe de hacker binnenkwam, is dweilen met de kraan open. Meestal is het een verouderde plugin of een zwak wachtwoord. Dat onderdeel updaten of vervangen we. Daarna vernieuwen we alle wachtwoorden en de geheime sleutels in wp-config.php. WordPress.org heeft daar een eigen sleutelgenerator voor. Wie nog met een oude sessie was ingelogd, staat daarna buiten.</p>
 
         <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>5. Google en je host bijpraten</h3></div>
-        <p>Staat er een waarschuwing bij je site in Google, dan vragen we via het rapport Beveiligingsproblemen in Search Console een nieuwe beoordeling aan. Daarin beschrijven we wat er mis was en wat we deden, zoals Google vraagt. Heeft je host de site offline gehaald, dan laten we weten dat hij weer schoon is. Dan staat je website weer online en verdwijnt de waarschuwing.</p>
+        <p>Toont Google een waarschuwing bij je site, dan vragen we via het rapport Beveiligingsproblemen in Search Console een nieuwe beoordeling aan. Daarin beschrijven we wat er mis was en wat we deden, zoals Google vraagt. Heeft je host de site offline gehaald, dan laten we weten dat hij weer schoon is. Dan staat je website weer online en verdwijnt de waarschuwing.</p>
 
-        <Tussenactie />
+        <Tussenactie knop={bel} titel="Nu gehackt?" tekst="Bel ons direct. We kijken mee en zeggen hoeveel uur we verwachten, voordat we beginnen." />
         <h2 id="verstopplekken">Waar een WordPress hack zich verstopt</h2>
         <p>Een gehackte WordPress heeft zelden maar één besmet bestand. Wie een WordPress hack wil verwijderen, moet dus breder kijken dan de bestanden die de scanner aanwijst. Dit zijn de plekken die we bij elke klus nalopen:</p>
         <div class="tabel-scroll">
@@ -170,11 +203,11 @@ const schema = [
             </tbody>
           </table>
         </div>
-        <p>Die laatste is de reden dat een WordPress hack na een week vaak terug lijkt te komen. Ze ruimden de zichtbare bestanden op, maar niet wat ze terugzette.</p>
+        <p>Die laatste is de reden dat een WordPress hack na een week vaak terug lijkt te komen. De zichtbare bestanden waren weg, maar het stukje dat ze terugzette niet.</p>
 
         <h2 id="binnenkomen">Hoe komt een hacker binnen?</h2>
-        <p>Bijna altijd via iets wat al lang bijgewerkt had moeten worden. Beveiligingsbedrijf Patchstack telde in zijn <a href="https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/" rel="noopener">rapport over 2025</a> 11.334 nieuwe lekken in WordPress-software. Daarvan zat 91% in plugins en 9% in thema's. In WordPress zelf vonden ze er zes, en die waren niet ernstig.</p>
-        <p>Zodra zo'n lek bekend wordt, zoeken geautomatiseerde scripts het hele internet af naar sites die de update nog niet hebben. Ongeveer de helft van de zware lekken werd volgens Patchstack binnen 24 uur misbruikt. Een hacker kiest jouw site dus meestal niet uit. Hij vindt hem, omdat hij achterloopt. Andere bekende ingangen zijn een hergebruikt wachtwoord, te veel mensen met beheerdersrechten en betaalde plugins of thema's die buiten de officiële bibliotheek om zijn gedownload.</p>
+        <p>Meestal via software die al maanden een update mist. Beveiligingsbedrijf Patchstack telde in zijn <a href="https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/" rel="noopener">rapport over 2025</a> 11.334 nieuwe lekken in WordPress-software. Daarvan zat 91% in plugins en 9% in thema's. In WordPress zelf vonden ze er zes, en die waren niet ernstig.</p>
+        <p>Wordt een lek openbaar, dan gaan er programma's aan het werk die automatisch sites afgaan op zoek naar die ene verouderde versie. Ongeveer de helft van de zware lekken werd volgens Patchstack binnen 24 uur misbruikt. Het is dus zelden persoonlijk: je site komt in beeld omdat hij achterloopt. Andere bekende ingangen zijn een hergebruikt wachtwoord, te veel mensen met beheerdersrechten en betaalde plugins of thema's die buiten de officiële bibliotheek om zijn gedownload.</p>
         <p>Ook WordPress zelf is niet altijd veilig. Op 27 augustus 2026 waarschuwde de Autoriteit Persoonsgegevens dat kwetsbaarheden in de WordPress-software actief werden misbruikt, met datalekken tot gevolg. Er was een update, maar veel gebruikers hadden die nog niet geïnstalleerd.</p>
 
         <h2 id="datalek">Is er een datalek? Denk aan de meldplicht</h2>
@@ -184,7 +217,7 @@ const schema = [
           <li><b>Slachtoffers informeren.</b> Loopt iemand een hoog risico, bijvoorbeeld omdat er veel mailadressen en telefoonnummers zijn buitgemaakt, dan moet je die mensen zo snel mogelijk inlichten. Criminelen gebruiken zulke gegevens voor phishing.</li>
           <li><b>Datalekregister.</b> Elk datalek zet je in je eigen register, ook als je het niet meldt.</li>
         </ul>
-        <p>Of je moet melden, beslis je zelf. De AP legt op de pagina <a href="https://www.autoriteitpersoonsgegevens.nl/themas/beveiliging/datalekken/datalek-dit-moet-u-doen" rel="noopener">datalek, dit moet u doen</a> uit hoe je dat afweegt. Bij het opruimen zien wij de technische kant: welke gegevens op de site stonden, sinds wanneer de hacker binnen was en welke sporen hij achterliet. Die informatie geven we je mee, want die heb je nodig voor een goede afweging.</p>
+        <p>Of je moet melden, beslis je zelf. De AP legt op de pagina <a href="https://www.autoriteitpersoonsgegevens.nl/themas/beveiliging/datalekken/datalek-dit-moet-u-doen" rel="noopener">datalek, dit moet u doen</a> uit hoe je dat afweegt. Bij het opruimen zien wij de technische kant: welke gegevens op de site stonden, sinds wanneer de hacker binnen was en welke sporen hij achterliet. Die informatie staat in je verslag.</p>
 
         <h2 id="backup">Back-up terugzetten of opschonen?</h2>
         <p>Een back-up terugzetten lijkt de snelste weg. Soms is hij dat ook. Maar alleen onder voorwaarden.</p>
@@ -192,7 +225,7 @@ const schema = [
           <table>
             <thead><tr><th></th><th>Back-up terugzetten</th><th>Opschonen</th></tr></thead>
             <tbody>
-              <tr><td><b>Wanneer het kan</b></td><td>Je weet zeker dat de back-up van vóór de hack is</td><td>Altijd</td></tr>
+              <tr><td><b>Wanneer het kan</b></td><td>De back-up is aantoonbaar ouder dan de hack</td><td>Altijd</td></tr>
               <tr><td><b>Wat je kwijtraakt</b></td><td>Alles wat na de back-up is veranderd, zoals nieuwe berichten en aanvragen</td><td>Niets wat schoon was</td></tr>
               <tr><td><b>Het lek</b></td><td>Zit er nog in. Je moet het daarna alsnog dichten</td><td>Wordt gevonden en gedicht</td></tr>
               <tr><td><b>Risico</b></td><td>Een back-up die ook al besmet was</td><td>Een gemiste achterdeur, als je niet grondig werkt</td></tr>
@@ -205,7 +238,6 @@ const schema = [
         <p>We werken op basis van een consult van € 85 per uur, exclusief btw. Hoe lang het duurt, hangt af van hoe diep de hack zit. Een paar besmette bestanden zijn sneller opgeruimd dan een hack die zich ook in de database en in geplande taken heeft genesteld. Na een eerste blik hoor je hoeveel uur we verwachten. Pas als je akkoord bent, gaan we verder.</p>
         <p>Reken daarna nog op wachttijd aan de kant van Google. Een beoordeling via Search Console duurt volgens Google een paar dagen tot een paar weken. Je krijgt per mail bericht als hij klaar is. Stuur intussen geen nieuw verzoek, want dat kan de beoordeling volgens Google juist vertragen.</p>
         <h3>Wat we van je nodig hebben</h3>
-        <p>Hoe sneller we toegang hebben, hoe sneller je site weer schoon is. Zet dit alvast klaar:</p>
         <ul class="vink">
           <li>De inlog van je hostingpartij, of iemand daar die ons toegang kan geven.</li>
           <li>Toegang tot de bestanden, via FTP, SFTP of het bestandsbeheer van je host.</li>
@@ -223,8 +255,30 @@ const schema = [
           <li>Of de hack alleen in bestanden zit, of ook in de database.</li>
         </ul>
 
+        <h2 id="markt">Wat anderen vragen om een hack te verwijderen</h2>
+        <p>Je kunt ook elders terecht. Dit zeggen drie partijen op hun eigen site, in oktober 2026, exclusief btw:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Aanbieder</th><th>Prijs</th><th>Goed om te weten</th></tr></thead>
+            <tbody>
+              <tr><td><b>WJ Onderhoud</b></td><td>€ 195 eenmalig</td><td>In de meeste gevallen binnen 24 uur hackvrij</td></tr>
+              <tr><td><b>Slik</b></td><td>€ 750 eenmalig, of € 38 per maand met hosting</td><td>Opnieuw gehackt binnen een maand? Dan lossen ze het kosteloos op</td></tr>
+              <tr><td><b>Kwaaijongens</b></td><td>Voorstel na een technische check</td><td>Na het opschonen verhuist je site naar hun hosting, met een maandbedrag</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td>€ 85 per uur, vooraf ingeschat</td><td>Je site blijft bij je eigen host, het lek wordt gedicht</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een vaste prijs geeft rust, en als je hack klein is, ben je met € 195 goedkoper uit. Vergelijk bij elk aanbod drie dingen: wordt het lek gevonden en gedicht, wat gebeurt er als de hack terugkomt, en moet je verhuizen. Bij ons hoor je na de eerste blik wat het ongeveer kost, en beslis jij.</p>
+
+        <h2 id="geen-zin">Wanneer je ons niet nodig hebt</h2>
+        <ul>
+          <li><b>Je host ruimt het op.</b> Sommige hostingpartijen doen dat binnen je pakket. Vraag het eerst, en vraag ook of ze het lek dichten.</li>
+          <li><b>Je wilde toch al een nieuwe site.</b> Is je site oud en zwaar besmet, dan is opruimen soms duurder dan opnieuw beginnen. Dat zeggen we je na de eerste blik. Kijk dan bij <a href="/website-laten-maken/">website laten maken</a>.</li>
+          <li><b>Je bent handig met FTP en de database.</b> Dan kom je met het stappenplan in de gids <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt? Zo herstel je je site zelf</a> een heel eind.</li>
+        </ul>
+
         <h2 id="daarna">Daarna: zorgen dat het niet opnieuw gebeurt</h2>
-        <p>Een WordPress hack verwijderen is één ding. Een opgeruimde site is pas veilig als iemand hem daarna veilig houdt. Bij veel hacks ging het mis tussen partijen: de bouwer deed geen updates, de host keek niet naar WordPress en de eigenaar dacht dat het geregeld was.</p>
+        <p>Wie na het opruimen niets verandert, staat over een paar maanden weer op dezelfde plek. Vaak wist niemand wie de updates deed: de bouwer was uit beeld, de host keek naar de server en de eigenaar dacht dat het liep.</p>
         <ul class="vink">
           <li>Werk WordPress, je thema en je plugins bij zodra er een update is.</li>
           <li>Gebruik een backup-plugin of de back-ups van je host, en bewaar ze buiten de server.</li>
@@ -235,8 +289,6 @@ const schema = [
           <li>Gebruik een PHP-versie die nog beveiligingsupdates krijgt.</li>
         </ul>
         <p>Met <a href="/website-laten-maken/onderhoud-wordpress/">onderhoud voor WordPress</a> nemen wij dat over, vanaf € 39 per maand. We houden updates bij, maken back-ups buiten je server en letten op vreemde beheerders en bestanden.</p>
-        <h2 id="zelf">Liever zelf? Volg het stappenplan</h2>
-        <p>Ben je handig met FTP, de database en WordPress, dan kun je het ook zelf proberen. Het uitgebreide stappenplan staat in de gids <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt? Zo herstel je je site zelf</a>. En wil je meteen een nieuwe, veilige site, kijk dan bij <a href="/website-laten-maken/">website laten maken</a>.</p>
       </article>
       <aside class="zijkolom">
         <div class="card spoedkaart">
@@ -245,15 +297,16 @@ const schema = [
           <p class="muted klein">Werkdagen 8.00 tot 17.00 uur. Buiten die tijden? Mail <a href={`mailto:${site.email}`}>{site.email}</a> en doe alvast de eerste stappen op deze pagina.</p>
           <p class="tarief"><b>€ 85</b> per uur, excl. btw</p>
           <ul class="vink">
+            <li>Vooraf een inschatting in uren</li>
             <li>Zoeken waar de hack zit</li>
-            <li>Opschonen en vervangen</li>
-            <li>Het lek dichten</li>
+            <li>Opschonen en het lek dichten</li>
             <li>Google en je host bijpraten</li>
+            <li>Kort verslag voor je afweging over een datalek</li>
           </ul>
           <a class="btn" href={site.telefoonLink}>Bel direct</a>
           <p class="muted klein">Ook als wij je site niet gebouwd hebben.</p>
         </div>
-        <Inhoud items={hoofdstukken} leestijd={14} />
+        <Inhoud items={hoofdstukken} leestijd={15} />
       </aside>
     </div>
   </section>
@@ -262,13 +315,14 @@ const schema = [
 
   <Faq
     vragen={[
-      { v: 'Kan ik een WordPress-hack zelf verwijderen?', a: 'Soms wel, als je handig bent met FTP, de database en WordPress. Het risico is dat je de zichtbare besmetting weghaalt maar de achterdeur laat zitten. Dan ben je binnen een paar weken weer gehackt. Het stappenplan staat in de gids <a href="/kennisbank/gidsen/wordpress-gehackt/">WordPress gehackt</a>.' },
-      { v: 'Is een back-up terugzetten genoeg na een WordPress-hack?', a: 'Alleen als je zeker weet dat die back-up van voor de hack is. En ook dan moet het lek dicht, anders komt de hacker via dezelfde weg terug.' },
+      { v: 'Wat kost het als jullie mijn gehackte site opschonen?', a: 'We rekenen € 85 per uur, exclusief btw. Na een eerste blik hoor je hoeveel uur we verwachten. Pas als je akkoord bent, beginnen we.' },
+      { v: 'Waarom geen vaste prijs?', a: 'Omdat de ene hack in een uur is opgeruimd en de andere zich in de database en geplande taken heeft genesteld. Met een uurtarief betaal je alleen voor wat er nodig is. Je hoort vooraf hoeveel uur we verwachten.' },
+      { v: 'Moet ik naar jullie hosting verhuizen?', a: 'Nee. Hosting doen we niet. Je site blijft bij je eigen host. We helpen je wel kiezen als je toch wilt overstappen.' },
+      { v: 'Kan de hack terugkomen?', a: 'Ja, als het lek open blijft of de site daarna niet wordt bijgehouden. Daarom zoeken we altijd de ingang en dichten we die. Met vast onderhoud wordt de kans op een nieuwe hack veel kleiner, maar nooit nul.' },
+      { v: 'Is een back-up terugzetten genoeg?', a: 'Dat werkt alleen met een back-up die aantoonbaar ouder is dan de hack, en dat weet je vaak niet zeker. Ook dan blijft het lek open, en komt de hacker via dezelfde weg terug.' },
       { v: 'Verwijderen jullie ook een hack als iemand anders mijn site heeft gebouwd?', a: 'Ja. Voor het verwijderen van een hack maakt het niet uit wie de site gebouwd heeft. We hebben alleen toegang nodig tot je hosting en WordPress.' },
-      { v: 'Wat kost het om een hack te laten verwijderen?', a: 'We rekenen € 85 per uur, exclusief btw. Na een eerste blik hoor je hoeveel uur we verwachten, en pas daarna gaan we verder.' },
       { v: 'Moet ik een gehackte site melden bij de Autoriteit Persoonsgegevens?', a: 'Als de hacker mogelijk bij persoonsgegevens kon, zoals ingevulde formulieren of klantgegevens, kan het een datalek zijn. Dat moet je mogelijk binnen 72 uur melden. Een voorlopige melding mag. Je beslist zelf, op basis van het risico voor de mensen van wie de gegevens zijn.' },
-      { v: 'Hoe lang duurt het voordat de waarschuwing van Google weg is?', a: 'Na het opschonen vraag je een beoordeling aan in Search Console. Volgens Google duurt die een paar dagen tot een paar weken.' },
-      { v: 'Raak ik mijn posities in Google kwijt?', a: 'Hoe korter een hack actief is, hoe kleiner die kans. Na het opschonen vragen we Google om een nieuwe beoordeling. Meestal herstellen je posities zich daarna, maar snel handelen helpt.' },
+      { v: 'Raak ik mijn posities in Google kwijt?', a: 'Hoe korter een hack actief is, hoe kleiner die kans. Na het opschonen vragen we Google om een nieuwe beoordeling. Volgens Google duurt die een paar dagen tot een paar weken. Meestal herstellen je posities zich daarna.' },
     ]}
   />
 
@@ -281,7 +335,9 @@ const schema = [
     ]}
   />
 
-  <Actie titel="Is je site gehackt?" tekst={`Bel ons direct. ${site.contactpersoon} kijkt mee, vertelt eerlijk wat er nodig is en hoeveel uur we verwachten.`} knop={{ tekst: 'Stuur ons een bericht', href: '/contact/' }} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en zorgt dat je weet hoeveel uur we verwachten, voordat er iets gebeurt.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
+  <Actie titel="Is je site gehackt?" tekst={`Bel ons direct. ${site.contactpersoon} kijkt mee, zegt wat er nodig is en hoeveel uur we verwachten.`} knop={{ tekst: 'Stuur ons een bericht', href: '/contact/' }} />
 </Base>
 <style>
   .spoed { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 18px; background: var(--tint); border: 1px solid #ffd6b8; border-radius: var(--radius); }
