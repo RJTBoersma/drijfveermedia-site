@@ -13,6 +13,9 @@ import Tekening from '../../components/teken/Tekening.astro';
 import Scene from '../../components/scenes/tekstschrijver.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
+import SerpPreview from '../../components/tool/SerpPreview.astro';
+
+const leesKnop = { tekst: 'Laat een pagina gratis nalezen', href: '/gratis-website-analyse/' };
 
 const url = '/tekstschrijver/';
 const hoofdstukken = [
@@ -41,15 +44,15 @@ const schema = [{
   kruimels={[{ naam: 'Tekstschrijver', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Teksten" titel="Tekstschrijver voor je website: we schrijven op wat jij doet, zodat klanten bellen" prijs="vanaf € 75 per pagina" eenmalig>
-    <p>Vanaf € 75 per pagina, met een vaste prijs vooraf. Leesbaar voor je klant, vindbaar voor Google. Je weet precies wat je doet. Alleen staat het nog niet zo op je website. Wij schrijven het op zoals jouw klant het wil lezen, en zoals Google het kan vinden.</p>
+  <Hero kicker="Gekozen · Teksten" titel="Tekstschrijver voor je website: we schrijven op wat jij doet, zodat klanten bellen" prijs="vanaf € 75 per pagina" eenmalig knop={leesKnop}>
+    <p>Je weet precies wat je doet. Alleen staat het nog niet zo op je website. Wij schrijven het op zoals jouw klant het wil lezen en Google het kan vinden. Gesprek, zoekwoorden en een correctieronde zitten erbij, en de tekst is van jou.</p>
     <Scene slot="beeld" />
   </Hero>
 
   <section class="wrap sectie" data-aida="interest">
     <div class="met-zijkolom">
       <article class="tekst">
-        <Auteur slug="robert" datum="2026-10-17" />
+        <Auteur slug="robert" datum="2026-10-19" />
         <div class="kader kader-oranje in-het-kort">
           <p class="kader-titel">In het kort</p>
           <p>Een tekstschrijver zet jouw kennis om in tekst die mensen lezen en waar ze iets mee doen: bellen, mailen of een offerte aanvragen. Drijfveer Media schrijft webteksten, dienstpagina's, mailings en artikelen voor mkb-bedrijven. Elke tekst begint met vragen aan jou en is geschreven voor je klant, voor Google en voor AI-assistenten zoals ChatGPT. Een pagina kost vanaf € 75, exclusief btw. Je weet vooraf wat je betaalt.</p>
@@ -70,7 +73,7 @@ const schema = [{
           <li><b>Veelgestelde vragen.</b> Korte, directe antwoorden. Klanten lezen ze graag en AI-assistenten gebruiken ze vaak als bron.</li>
           <li><b>Je Google Bedrijfsprofiel.</b> De beschrijving en de diensten, zodat ook je vermelding op de kaart overtuigt.</li>
         </ul>
-        <p>We werken voor ondernemers in allerlei sectoren: installateurs, opleiders, adviseurs en zakelijke dienstverleners. Een tekst over mediation vraagt een andere toon dan een tekst over dakramen. Daarom begint elke opdracht bij jou en niet bij een sjabloon.</p>
+        <p>We werken voor ondernemers in allerlei sectoren: installateurs, opleiders, adviseurs en zakelijke dienstverleners. We werkten onder meer voor Kärcher, bol.com, Nyenrode, Conflictbemiddeling Nederland en Glaspunt. Een tekst over mediation vraagt een andere toon dan een tekst over dakramen. Daarom begint elke opdracht bij jou en niet bij een sjabloon.</p>
 
         <h2 id="waarom">Waarom goede tekst geld oplevert</h2>
         <p>Bezoekers lezen weinig. Onderzoek van de Nielsen Norman Group laat zien dat mensen op een gemiddelde webpagina hooguit 28 procent van de woorden lezen, en meestal eerder 20 procent (<a href="https://www.nngroup.com/articles/how-little-do-users-read/" rel="noopener">Nielsen, 2008</a>). Die twintig procent moet dus raak zijn. Staat daar "Wij zijn een klantgerichte specialist met passie voor kwaliteit", dan is je kans voorbij. Dat zegt elke concurrent.</p>
@@ -99,7 +102,8 @@ const schema = [{
         <p>Je krijgt de tekst om te lezen en aan te vullen. Klopt een feit niet, of zou je iets nooit zo zeggen? Dan passen we het aan. Pas als jij zegt dat het klopt, is de tekst af. Wil je dat we hem ook op je website zetten, dan doen we dat.</p>
 
         <h2 id="google-ai">Schrijven voor Google en AI tegelijk</h2>
-        <p>Een tekst die niemand vindt, verkoopt niets. Daarom schrijven we elke webtekst ook voor zoekmachines. Dat betekent niet dat we een zoekwoord twintig keer herhalen. Het betekent dat de tekst de vraag van de zoeker helder beantwoordt, met de woorden die hij zelf gebruikt. Daarbij horen een goede titel, een meta description die uitnodigt tot klikken en logische tussenkoppen. Over die kant lees je meer bij <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten laten schrijven</a>.</p>
+        <p>Een tekst die niemand vindt, verkoopt niets. Daarom schrijven we elke webtekst ook voor zoekmachines. Dat betekent niet dat we een zoekwoord twintig keer herhalen. Het betekent dat de tekst de vraag van de zoeker helder beantwoordt, met de woorden die hij zelf gebruikt. Daarbij horen een goede titel, een meta description die uitnodigt tot klikken en logische tussenkoppen. Over die kant lees je meer bij <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten laten schrijven</a>. Hoe jouw pagina nu in Google oogt, zie je meteen hieronder.</p>
+        <SerpPreview kop="h3" />
         <p>Steeds meer mensen stellen hun vraag aan ChatGPT, Gemini of Copilot. Die assistenten halen hun antwoord uit teksten die duidelijke feiten geven. Wat doe je, waar, voor wie, wat kost het. Een vage tekst slaan ze over. Een tekst die we schrijven, is dus meteen bruikbaar voor <a href="/generative-engine-optimization/">generative engine optimization</a>. Zo werkt één goede tekst voor drie lezers: je klant, Google en AI.</p>
 
         <h2 id="kiezen">Freelance tekstschrijver, bureau of zelf doen?</h2>
@@ -119,6 +123,20 @@ const schema = [{
         <h2 id="kosten">Wat kost een tekstschrijver?</h2>
         <p>Bij Drijfveer Media kost een tekst vanaf € 75 per pagina, exclusief btw. Dat geldt voor een gewone webpagina, zoals een dienstpagina of je over-ons. Daarbij horen het gesprek vooraf, het zoekwoordonderzoek, de tekst zelf, een title en meta description, en een correctieronde. Vraagt een pagina veel onderzoek, of wordt het een lange gids? Dan hoor je vooraf wat het kost. Nooit achteraf.</p>
         <p>Een rekenvoorbeeld. Een kleine dienstverlener heeft meestal een homepage, drie of vier dienstpagina's, een over-ons en een contactpagina. Dat zijn zes tot zeven pagina's. Vanaf € 75 per stuk kom je dan uit rond de € 450 tot € 525 voor een complete set nieuwe webteksten. Wil je elke maand nieuwe artikelen? Dan is <a href="/tekstschrijver/contentmarketing/">contentmarketing</a> vanaf € 495 per maand voordeliger dan losse opdrachten.</p>
+        <h3>Zo verhoudt de prijs zich tot de markt</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wie</th><th>Prijs</th></tr></thead>
+            <tbody>
+              <tr><td>Webtekst per pagina, gangbaar in de markt</td><td>€ 350 tot € 550</td></tr>
+              <tr><td>Complete website van vijf tot acht pagina's</td><td>€ 2.000 tot € 3.500</td></tr>
+              <tr><td>Freelance tekstschrijver <a href="https://vanleeuwencommuniceert.nl/tekstschrijver" rel="noopener">Van Leeuwen Communiceert</a></td><td>€ 90 per uur, vaak een vaste projectprijs</td></tr>
+              <tr><td><b>Drijfveer Media</b>, gewone webpagina</td><td><b>vanaf € 75 per pagina</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Prijzen exclusief btw, zoals ze in oktober 2026 online stonden. De eerste twee regels zijn de gangbare bedragen uit de kostengids van <a href="https://searchlab.nl/kosten/wat-kost-een-copywriter" rel="noopener">Searchlab</a>.</p>
+        <p>Een lange gids of een pagina met veel onderzoek kost bij ons meer dan € 75. Dat hoor je vooraf. En als een nieuwe tekst weinig oplevert omdat je site technisch niet goed in Google staat, zeggen we dat ook. Dan begin je beter bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>.</p>
 
         <h2 id="eerlijk">Over AI, en wat we niet doen</h2>
         <p>We zijn een online marketingbureau dat AI gebruikt, ook bij tekstschrijven. Bijvoorbeeld om research te ordenen, een gesprek uit te werken of tien varianten van een kop naast elkaar te zetten. Claude en ChatGPT zijn daar goed in. Het denkwerk, de keuzes en de eindredactie doen we zelf. Een tekst die naar niets klinkt, gaat de deur niet uit. Wil je liever helemaal geen AI bij je project? Vraag het gerust. Bij sommige diensten kan dat, en we zeggen je vooraf of het bij jouw opdracht lukt. Lees meer op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.</p>
@@ -127,7 +145,7 @@ const schema = [{
 
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={9} />
-        <Prijskaart naam="Webteksten" prijs="€ 75" eenheid="per pagina" eenmalig punten={['Gesprek en zoekwoordonderzoek', 'Tekst in jouw toon', 'Title en meta description', 'Een correctieronde', 'De tekst is van jou']} />
+        <Prijskaart naam="Webteksten" prijs="€ 75" eenheid="per pagina" eenmalig knop={leesKnop} punten={['Gesprek en zoekwoordonderzoek', 'Tekst in jouw toon', 'Title en meta description', 'Een correctieronde', 'De tekst is van jou']} />
         <Prijskaart naam="Contentmarketing" prijs="€ 495" eenheid="per maand" punten={['Elke maand nieuwe artikelen', 'Onderwerpen op basis van zoekvragen', 'Geschreven voor Google en AI', 'Per maand opzegbaar']} />
       </aside>
     </div>
@@ -149,10 +167,11 @@ const schema = [{
     vragen={[
       { v: 'Wat is het verschil tussen een tekstschrijver en een copywriter?', a: 'Weinig. Een copywriter schrijft vooral wervende tekst, zoals koppen, slogans en advertenties. Een tekstschrijver doet dat ook, maar schrijft daarnaast uitleg, artikelen en informatieve pagina\'s. Wij doen allebei.' },
       { v: 'Wat kost een tekstschrijver per pagina?', a: 'Bij ons vanaf € 75 per pagina, exclusief btw. Daar zitten het gesprek, het zoekwoordonderzoek, de tekst, een title en meta description en een correctieronde in. Je hoort de vaste prijs vooraf.' },
+      { v: 'Waarom kost een pagina bij jullie € 75, en elders vaak € 350 of meer?', a: 'Voor € 75 krijg je een gewone webpagina, met het gesprek, het zoekwoordonderzoek, de title en meta description en een correctieronde. Vraagt een pagina veel onderzoek of wordt het een lange gids, dan kost het meer. Dat hoor je vooraf, nooit achteraf.' },
+      { v: 'Wat als de tekst me niet bevalt?', a: 'Je ziet eerst de opzet: koppen, volgorde en boodschap. Klopt de richting niet, dan merken we dat voordat we schrijven. Daarna zit er een correctieronde bij. Een feit dat niet klopt, passen we altijd aan.' },
       { v: 'Hoe lang duurt het voordat mijn webteksten klaar zijn?', a: 'Dat hangt af van het aantal pagina\'s en van hoe snel we elkaar spreken. Na het eerste gesprek krijg je een planning met een datum per tekst. Zo weet je waar je aan toe bent.' },
       { v: 'Wat moet ik aanleveren voor mijn webteksten?', a: 'Weinig. Een halfuur aan de telefoon is meestal genoeg. Heb je al teksten, folders of offertes, stuur die dan mee. Daar staat vaak meer bruikbaars in dan je denkt.' },
       { v: 'Kunnen jullie mijn bestaande teksten verbeteren in plaats van nieuwe schrijven?', a: 'Ja. Soms is herschrijven genoeg. We kijken eerst wat er staat en zeggen je of herschrijven of opnieuw beginnen slimmer is. Herschrijven valt onder dezelfde prijs per pagina.' },
-      { v: 'Van wie zijn de teksten?', a: 'Van jou. Als de tekst af en betaald is, mag je hem overal gebruiken: op je site, in een folder of in een mail.' },
       { v: 'Schrijven jullie ook in het Engels?', a: 'We werken ook voor bedrijven in het buitenland. Vraag het gerust. We zeggen je eerlijk of we jouw Engelse tekst zelf goed genoeg kunnen schrijven.' },
     ]}
   />

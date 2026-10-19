@@ -10,6 +10,10 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/generative-engine-optimization--structured-data.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
+
+const prijsKnop = { tekst: 'Vraag een vaste prijs aan', href: '/contact/?vraag=Graag%20een%20vaste%20prijs%20voor%20structured%20data%20op%20mijn%20site.' };
 
 const url = '/generative-engine-optimization/structured-data/';
 const schema = [{
@@ -50,14 +54,15 @@ const types = [
   kruimels={[{ naam: 'GEO', url: '/generative-engine-optimization/' }, { naam: 'Structured data', url }]}
   schema={schema}
 >
-  <Hero kicker="Genoemd · Schema" titel="Structured data: je website leesbaar voor Google en AI" prijs="vanaf € 295" eenmalig>
-    <p>Een stukje code dat zoekmachines precies vertelt wie je bent, wat je doet en waar. Geen wondermiddel, wel een stevig fundament. Hieronder lees je wat het wel en niet oplevert.</p>
+  <Hero kicker="Genoemd · Schema" titel="Structured data: je website leesbaar voor Google en AI" prijs="vanaf € 295" eenmalig knop={prijsKnop}>
+    <p>Code die zoekmachines precies vertelt wie je bent, wat je doet en waar. Wij zetten hem neer voor je bedrijf, diensten en artikelen, getest en wel. Geen wondermiddel, wel een stevig fundament.</p>
     <Scene slot="beeld" />
   </Hero>
 
   <section class="wrap sectie" data-aida="interest">
     <div class="met-zijkolom">
       <article class="tekst">
+        <Auteur slug="robert" datum="2026-10-19" />
         <h2>Wat is structured data?</h2>
         <p>Structured data, in het Nederlands gestructureerde gegevens, is code in de HTML van je pagina die in een vaste taal beschrijft wat er op die pagina staat. Een bezoeker leest "open van maandag tot vrijdag, 8 tot 5" en snapt het. Een zoekmachine ziet een rij woorden. Met structured data geef je die woorden een betekenis: dit is een openingstijd, dit een adres, dit een prijs. Zo vertelt je website Google precies wat wat is.</p>
         <p>De taal heet schema, naar de woordenlijst op schema.org. Google, Bing en Yahoo begonnen die in 2011, toevallig hetzelfde jaar als Drijfveer Media. Je schrijft het meestal in JSON-LD: een los blokje HTML-code dat bezoekers niet zien. Een verzonnen voorbeeld:</p>
@@ -101,11 +106,19 @@ const types = [
         <p>Veelvoorkomende fouten: twee plugins die allebei een eigen bedrijfsblok maken, openingstijden die al jaren niet kloppen, en review-sterren op de eigen homepage.</p>
 
         <h2>Wat je krijgt voor € 295</h2>
-        <p>Eenmalig, exclusief btw. We kijken eerst wat er al staat, bijvoorbeeld uit Yoast of Rank Math in WordPress. Daarna zetten we het netwerk neer: je bedrijf, je belangrijkste dienstpagina's met prijs, het kruimelpad en je artikelen. Alles komt overeen met je zichtbare tekst en je Bedrijfsprofiel, en we testen het in de Rich Results Test en de validator. Heb je een grote site, dan hoor je vooraf wat het kost.</p>
-        <p>Deze code hoort bij <a href="/generative-engine-optimization/">generative engine optimization</a> en bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>. Neem je GEO bij ons af, dan zit het er al in.</p>
+        <p>Eenmalig, exclusief btw, met een vaste prijs vooraf:</p>
+        <ul class="vink">
+          <li>Een check van wat er al staat, bijvoorbeeld uit Yoast of Rank Math, zodat er geen dubbele blokken ontstaan.</li>
+          <li>Je bedrijf, je belangrijkste dienstpagina's met prijs, het kruimelpad en je artikelen, als één netwerk.</li>
+          <li>Dezelfde gegevens als je zichtbare tekst en je Bedrijfsprofiel.</li>
+          <li>Getest in de Rich Results Test en de validator, met een korte uitleg van wat er staat.</li>
+        </ul>
+        <p><b>Wat er niet in zit:</b> productschema voor een webshop, want webshops optimaliseren doen we niet. En reviewsterren op je eigen site, want die toont Google niet. Heb je een grote site, dan hoor je vooraf wat het kost.</p>
+        <p><b>Wanneer het geen zin heeft:</b> neem je <a href="/generative-engine-optimization/">generative engine optimization</a> bij ons af, dan zit het er al in. Heb je een kleine WordPress-site met een goed ingestelde plugin, dan is zelf controleren met de stappen hierboven vaak genoeg.</p>
+        <p><b>De markt:</b> bij andere bureaus zit schema vaak in een groter pakket, zoals de Fix van <a href="https://www.citeerbaar.nl/pakketten/" rel="noopener">Citeerbaar</a> voor € 695, met nog meer verbeteringen erbij. Het hoort ook bij <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO</a>.</p>
       </article>
       <aside class="zijkolom">
-        <Prijskaart naam="Structured data" prijs="€ 295" eenmalig punten={['Bedrijf, diensten, kruimelpad en artikelen', 'Gelijk aan je Bedrijfsprofiel', 'Getest in de Rich Results Test', 'Korte uitleg van wat er staat']} />
+        <Prijskaart naam="Structured data" prijs="€ 295" eenmalig knop={prijsKnop} punten={['Bedrijf, diensten, kruimelpad en artikelen', 'Gelijk aan je Bedrijfsprofiel', 'Getest in de Rich Results Test', 'Korte uitleg van wat er staat', 'Bij GEO inbegrepen']} />
       </aside>
     </div>
   </section>
@@ -118,6 +131,7 @@ const types = [
       { v: 'Wat kost structured data laten toevoegen?', a: 'Bij ons eenmalig vanaf € 295, exclusief btw. Daarin zitten je bedrijf, je belangrijkste dienstpagina\'s, het kruimelpad en je artikelen, getest en wel. Heb je een grote site, dan hoor je vooraf een vaste prijs.' },
       { v: 'Kan ik structured data zelf toevoegen?', a: 'Ja. In WordPress doen plugins zoals Yoast en Rank Math de basis. Controleer daarna wel of de gegevens kloppen en of er geen dubbele blokken ontstaan.' },
       { v: 'Komen er sterren bij mijn zoekresultaat?', a: 'Niet met reviews over je eigen bedrijf op je eigen site. Google toont die sinds 2019 niet meer. Sterren krijg je via je Google Bedrijfsprofiel, in het kaartje.' },
+      { v: 'Wat als Google daarna geen rich result toont?', a: 'Dat beslist Google zelf, dus beloven kan niemand het. Wat we wel beloven: code zonder fouten in de Rich Results Test, die klopt met je pagina en je Bedrijfsprofiel. De prijs staat vooraf vast.' },
       { v: 'Helpt schema om in ChatGPT te komen?', a: 'Dat is niet bewezen. Het maakt je feiten wel duidelijk voor elke machine die je site leest. Meer werk dat wel aantoonbaar helpt, lees je bij <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar in ChatGPT</a>.' },
     ]}
   />
@@ -131,7 +145,9 @@ const types = [
     ]}
   />
 
-  <Actie titel="Benieuwd wat Google nu van je site leest?" />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en noemt de vaste prijs.' }]} />
+
+  <Actie titel="Benieuwd wat Google nu van je site leest?" knop={prijsKnop} />
 </Base>
 <style>
   pre { background: var(--ink); color: #e8eef4; border-radius: var(--radius); padding: 16px 20px; overflow-x: auto; font-size: 0.86rem; line-height: 1.5; margin: 16px 0 20px; }

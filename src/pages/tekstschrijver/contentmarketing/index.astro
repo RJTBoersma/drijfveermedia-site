@@ -12,9 +12,13 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/tekstschrijver--contentmarketing.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
+import SeoOpbrengst from '../../../components/tool/SeoOpbrengst.astro';
+
+const onderwerpKnop = { tekst: 'Vraag vijf gratis onderwerpen aan', href: '/contact/?vraag=Graag%20vijf%20onderwerpen%20waar%20mijn%20klanten%20op%20zoeken.' };
 
 const url = '/tekstschrijver/contentmarketing/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'wat', titel: 'Wat contentmarketing is' },
   { id: 'stilvallen', titel: 'Waarom het stilvalt' },
@@ -23,7 +27,7 @@ const hoofdstukken = [
   { id: 'werkwijze', titel: 'Zo werkt het, maand na maand' },
   { id: 'google', titel: 'Wat Google van content vraagt' },
   { id: 'wie', titel: 'Zelf, freelancer of bureau' },
-  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'kosten', titel: 'Wat het kost, naast de markt' },
   { id: 'fouten', titel: 'Vijf veelgemaakte fouten' },
 ];
 const schema = [
@@ -56,8 +60,8 @@ const schema = [
   kruimels={[{ naam: 'Tekstschrijver', url: '/tekstschrijver/' }, { naam: 'Contentmarketing', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Teksten" titel="Contentmarketing uitbesteden: elke maand artikelen die klanten trekken" prijs="vanaf € 495 per maand">
-    <p>Je weet dat je iets moet publiceren. Alleen komt het er niet van. Wij schrijven elke maand de artikelen die jouw klanten zoeken, en zorgen dat Google ze vindt. Een contentmarketingbureau dat zelf ook SEO doet, dus niets valt tussen wal en schip.</p>
+  <Hero kicker="Gekozen · Teksten" titel="Contentmarketing uitbesteden: elke maand artikelen die klanten trekken" prijs="vanaf € 495 per maand" knop={onderwerpKnop}>
+    <p>Je weet dat je iets moet publiceren. Alleen komt het er niet van. Wij kiezen de onderwerpen waar je klanten op zoeken, schrijven en plaatsen de artikelen, en meten per artikel wat het oplevert. Een contentmarketingbureau dat zelf ook SEO doet.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -168,6 +172,18 @@ const schema = [
             </tbody>
           </table>
         </div>
+        <p>Zo ziet dat er in je maandoverzicht uit, op één A4:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Artikel</th><th>Bezoekers</th><th>Positie</th><th>Naar dienstpagina</th><th>Aanvragen</th></tr></thead>
+            <tbody>
+              <tr><td>Wat kost een warmtepomp in een jaren-70-woning?</td><td>212</td><td>4</td><td>31</td><td>3</td></tr>
+              <tr><td>Hybride of volledig elektrisch?</td><td>88</td><td>11</td><td>9</td><td>1</td></tr>
+              <tr><td>Zo herken je dat je cv-ketel aan vervanging toe is</td><td>14</td><td>27</td><td>2</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Daaronder wat we deden, wat we nu doen en wat niet werkte. Het derde artikel scoort nog niet: dat herschrijven we, of we stoppen ermee. <span class="muted">(Verzonnen voorbeeld met verzonnen cijfers.)</span></p>
         <p>Die aanvragen kun je alleen koppelen aan een artikel als je meting goed staat. Hoe dat werkt, lees je bij <a href="/leadgeneratie/tracking-en-analytics/">tracking en analytics</a>.</p>
 
         <h2 id="google">Wat Google van content vraagt</h2>
@@ -200,6 +216,20 @@ const schema = [
 
         <h2 id="kosten">Wat kost contentmarketing uitbesteden?</h2>
         <p>Contentmarketing bij Drijfveer Media begint bij € 495 per maand, exclusief btw. Daarvoor krijg je de onderwerpkeuze, het schrijven, het plaatsen en de maandelijkse meting. Hoeveel artikelen dat per maand zijn, hangt af van de lengte en hoeveel onderzoek een onderwerp vraagt. Dat spreken we vooraf af, zodat je weet wat je krijgt.</p>
+        <p><b>Wat er niet in zit:</b> video, fotografie en advertenties. Social media en nieuwsbrieven kunnen erbij, als aparte dienst. <b>Wanneer je iets merkt:</b> reken op drie tot zes maanden voor duidelijke stijgingen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wie</th><th>Wat je krijgt</th><th>Prijs</th></tr></thead>
+            <tbody>
+              <tr><td>Freelance copywriter</td><td>Teksten, de regie doe je zelf</td><td>€ 500 tot € 2.500 per maand</td></tr>
+              <tr><td>Contentbureau voor het mkb</td><td>Strategie, teksten, vaak beeld</td><td>€ 1.500 tot € 3.500 per maand</td></tr>
+              <tr><td><a href="https://endeavourheroes.nl/content-marketing-uitbesteden/" rel="noopener">Endeavour Heroes</a></td><td>Een contentmarketeer inhuren</td><td>€ 60 tot € 80 per uur</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td>Onderwerpen, schrijven, plaatsen, meten per artikel</td><td><b>vanaf € 495 per maand</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Prijzen exclusief btw, zoals ze in oktober 2026 online stonden. De eerste twee regels komen uit de kostengids van <a href="https://searchlab.nl/kosten/wat-kost-content-marketing" rel="noopener">Searchlab</a>. Hoe contentmarketing past naast de rest van je vindbaarheid, lees je in de gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+        <SeoOpbrengst kop="h3" intro="Wat levert één artikel op een betere plek op? Vul het zoekvolume van je onderwerp in en reken het uit." />
         <p>Je zegt per maand op, met één maand opzegtermijn. Bij de start leggen we wel een doel vast, met een datum, bijvoorbeeld een aantal bezoekers of aanvragen uit de artikelen. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>. Heb je maar een paar losse teksten nodig? Dan is onze <a href="/tekstschrijver/">tekstschrijver</a> per pagina goedkoper.</p>
         <h3>Wanneer we het je afraden</h3>
         <p>Staat je website technisch niet goed, of laadt hij traag? Dan helpt een stapel nieuwe artikelen weinig. Begin dan eerst bij de basis. En zoekt bijna niemand naar wat je doet, dan zeggen we dat ook. Dan zijn andere kanalen slimmer.</p>
@@ -216,7 +246,7 @@ const schema = [
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={12} />
-        <Prijskaart naam="Contentmarketing" prijs="€ 495" eenheid="per maand" punten={['Onderwerpen op basis van zoekvragen', 'Artikelen geschreven en geplaatst', 'Interne links en aanmelding bij Google', 'Elke maand een helder overzicht']} />
+        <Prijskaart naam="Contentmarketing" prijs="€ 495" eenheid="per maand" knop={onderwerpKnop} punten={['Onderwerpen op basis van zoekvragen', 'Artikelen geschreven en geplaatst', 'Interne links en aanmelding bij Google', 'Meting per artikel, op één A4', 'Je leest elk artikel mee']} />
       </aside>
     </div>
   </section>
@@ -228,6 +258,8 @@ const schema = [
       { v: 'Wat kost contentmarketing uitbesteden?', a: 'Bij ons vanaf € 495 per maand, exclusief btw. Je zegt per maand op, met één maand opzegtermijn. Daarvoor krijg je de onderwerpkeuze, het schrijven, het plaatsen en de maandelijkse meting.' },
       { v: 'Hoeveel artikelen krijg ik per maand?', a: 'Dat hangt af van de lengte en het onderzoek per artikel. Een korte uitleg kost minder tijd dan een uitgebreide gids. We spreken het aantal vooraf af en houden ons eraan.' },
       { v: 'Hoe snel levert contentmarketing bezoekers op?', a: 'Een nieuw artikel heeft meestal een paar maanden nodig om zijn plek in Google te vinden. Reken op drie tot zes maanden voor duidelijke stijgingen. Daarom leggen we een doel vast dat past bij die termijn, en laten we elke maand zien hoe het ervoor staat.' },
+      { v: 'Een freelancer schrijft een artikel voor € 300. Waarom zou ik meer betalen?', a: 'Voor een los artikel is een freelancer prima. Bij ons betaal je ook voor wat eromheen zit: de onderwerpkeuze op zoekvragen, het plaatsen, de interne links en de meting per artikel. Die regie voer je anders zelf.' },
+      { v: 'Wat als de artikelen na een half jaar weinig opleveren?', a: 'Dan zie je dat per artikel in het maandoverzicht. Wat niet werkt, herschrijven we of we stoppen ermee. Halen we het doel dat we bij de start vastlegden niet en ligt het aan ons, dan werken we een maand gratis door.' },
       { v: 'Moet ik zelf veel tijd vrijmaken voor contentmarketing?', a: 'Weinig. Een kort gesprek of een paar vragen per mail is meestal genoeg om jouw kennis in een artikel te krijgen. En je leest mee voordat het online gaat.' },
       { v: 'Plaatsen jullie de artikelen ook op mijn website?', a: 'Ja. We zetten ze in WordPress of een ander systeem, met afbeeldingen, links en de juiste instellingen. Heb je liever dat je het zelf doet, dan leveren we de tekst kant-en-klaar aan.' },
       { v: 'Wat is het verschil met SEO-teksten?', a: 'SEO-teksten zijn de vaste pagina\'s van je site, zoals je dienstpagina\'s. Bij contentmarketing komen er elke maand nieuwe artikelen bij die vragen van klanten beantwoorden en naar die dienstpagina\'s linken. Voor losse pagina\'s is er <a href="/zoekmachine-optimalisatie/seo-teksten/">SEO-teksten laten schrijven</a>.' },
@@ -246,5 +278,7 @@ const schema = [
     ]}
   />
 
-  <Actie titel="Waar zoeken jouw klanten op?" tekst={`${site.contactpersoon} zoekt uit welke vragen jouw klanten in Google stellen, en belt je met de eerste vijf onderwerpen. Gratis, en je zit nergens aan vast.`} />
+  <WieDoetHet wie={[{ slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }, { slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je planning bij.' }]} />
+
+  <Actie titel="Waar zoeken jouw klanten op?" tekst={`${site.contactpersoon} zoekt uit welke vragen jouw klanten in Google stellen, en belt je met de eerste vijf onderwerpen. Gratis, en je zit nergens aan vast.`} knop={onderwerpKnop} />
 </Base>

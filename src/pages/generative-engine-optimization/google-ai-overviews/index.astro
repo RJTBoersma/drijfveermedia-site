@@ -12,9 +12,11 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/generative-engine-optimization--google-ai-overviews.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
+import AiTest from '../../../components/tool/AiTest.astro';
 
 const url = '/generative-engine-optimization/google-ai-overviews/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'wat-is-het', titel: 'Wat het is' },
   { id: 'wanneer', titel: 'Wanneer Google het toont' },
@@ -26,7 +28,7 @@ const hoofdstukken = [
   { id: 'meten', titel: 'Meten in Search Console' },
   { id: 'impact', titel: 'De impact op je bezoekers' },
   { id: 'advertenties', titel: 'Advertenties' },
-  { id: 'wat-we-doen', titel: 'Wat we voor je doen' },
+  { id: 'wat-we-doen', titel: 'Wat je bij ons krijgt' },
 ];
 const schema = [{
   '@type': 'Service',
@@ -45,8 +47,8 @@ const schema = [{
   kruimels={[{ naam: 'GEO', url: '/generative-engine-optimization/' }, { naam: 'Google AI Overviews', url }]}
   schema={schema}
 >
-  <Hero kicker="Genoemd · Google AI" titel="Google AI Overviews: kom in het AI-overzicht bovenaan Google" prijs="vanaf € 495 per maand">
-    <p>Bij steeds meer vragen schrijft Google zelf het antwoord, met een paar bronnen ernaast. Wie daar staat, wordt gezien voordat iemand ook maar één link aanklikt.</p>
+  <Hero kicker="Genoemd · Google AI" titel="Google AI Overviews: kom in het AI-overzicht bovenaan Google" prijs="vanaf € 495 per maand" knop={{ tekst: 'Doe de gratis AI-test', href: '#ai-test' }}>
+    <p>Bij steeds meer vragen schrijft Google zelf het antwoord, met een paar bronnen ernaast. Wij maken jouw pagina's de bron: met eigen cijfers, goede techniek en elke maand een meting uit Search Console.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -181,15 +183,33 @@ const schema = [{
           <li>We houden je Bedrijfsprofiel op orde.</li>
           <li>Je krijgt elke maand één A4 met de data uit Search Console: wat we deden, wat het opleverde en wat we nu doen.</li>
         </ul>
+        <p>Zo ziet het bovenste deel van dat A4 eruit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Zoekvraag</th><th>AI-overzicht?</th><th>Jij als bron, vorige maand</th><th>Jij als bron, nu</th></tr></thead>
+            <tbody>
+              <tr><td>wat kost een warmtepomp in een oud huis</td><td>Ja</td><td>Nee</td><td>Ja</td></tr>
+              <tr><td>hybride of volledig elektrische warmtepomp</td><td>Ja</td><td>Nee</td><td>Nee</td></tr>
+              <tr><td>warmtepomp subsidie aanvragen</td><td>Ja</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td>warmtepomp Emmen</td><td>Nee, kaartje</td><td>n.v.t.</td><td>n.v.t.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Daaronder de vertoningen uit het rapport over generatieve AI, per pagina, en wat we nu doen. <span class="muted">(Verzonnen voorbeeld voor een installateur.)</span></p>
+        <p><b>Wat er niet in zit:</b> het beheer van Google Ads en je advertentiebudget, gekochte vermeldingen en digitale PR. <b>Wanneer je iets merkt:</b> reken op een paar maanden. Staat een pagina al in de top 10 en is er weinig concurrentie, dan kan het sneller. <b>Wanneer het geen zin heeft:</b> zoeken je klanten vooral op dienst plus plaats, dan staat er meestal een kaartje bovenaan en geen AI-overzicht. Dan werkt <a href="/lokale-seo/">lokale SEO</a> beter.</p>
+        <p><b>Hoe de prijs zich verhoudt.</b> Bureaus die hun prijs online zetten, vragen voor alleen meten € 149 per maand en voor doorlopend werk tussen € 695 en € 2.295 per maand. Het overzicht met bronnen staat bij <a href="/generative-engine-optimization/#markt">generative engine optimization</a>. Heb je al SEO bij ons, dan stemmen we de twee af, zodat je niet dubbel betaalt.</p>
+        <p><b>Waarom bij ons.</b> SEO en GEO zitten in één hand, we meten zelf, zoals de steekproef hierboven, en je praat met de mensen die het werk doen. Nieuwe technieken proberen we eerst op onze eigen sites in het <a href="/proeflab/">proeflab</a>.</p>
         <p>Een plek in het overzicht beloven we niet. Niemand kan dat. Wel leggen we bij de start samen een doel vast dat we kunnen meten, met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Je zegt per maand op, met één maand opzegtermijn. Wil je ook in ChatGPT, Gemini en Perplexity genoemd worden, kijk dan bij <a href="/generative-engine-optimization/">generative engine optimization</a>. Daar zit dit werk ook in.</p>
         <p class="klein muted">Bronnen, geraadpleegd oktober 2026: Google Search Central (AI-functies en je website; gids voor generatieve AI in Google Zoeken, mei 2026; blog over het prestatierapport, juni 2026), Search Console Help, Google Zoeken Help en Google Ads Help (advertenties en AI-overzichten).</p>
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={12} />
-        <Prijskaart naam="Google AI Overviews" prijs="€ 495" eenheid="per maand" punten={['Zoektermen met AI-antwoord in kaart', 'Pagina\'s met het antwoord vooraan', 'Nieuwe pagina\'s met eigen cijfers', 'Maandverslag uit Search Console']} />
+        <Prijskaart naam="Google AI Overviews" prijs="€ 495" eenheid="per maand" punten={['Zoektermen met AI-overzicht in kaart', 'Techniek en instelling in Search Console', 'Pagina\'s met het antwoord vooraan', 'Nieuwe pagina\'s met eigen cijfers', 'Elke maand één A4 uit Search Console']} />
       </aside>
     </div>
   </section>
+
+  <AiTest />
 
   <Bewijs />
 
@@ -201,6 +221,8 @@ const schema = [{
       { v: 'Kan ik mijn site uit het AI-overzicht houden?', a: 'Ja, met de instelling Generatieve AI in Zoeken in Search Console, of per pagina met nosnippet of data-nosnippet. Die laatste twee beperken ook je fragment in de gewone zoekresultaten. Dat raden we bijna nooit aan.' },
       { v: 'Wat is het verschil met een featured snippet?', a: 'Een <a href="/kennisbank/wat-is/featured-snippet/">featured snippet</a> citeert één pagina letterlijk. Het overzicht van Google schrijft een eigen antwoord uit meerdere bronnen en zet daar links bij.' },
       { v: 'Hoe zie ik of ik in het AI-overzicht sta?', a: 'In Search Console, in het prestatierapport over generatieve AI. Je ziet hoe vaak en met welke pagina\'s je in de AI-functies van Zoeken verscheen.' },
+      { v: 'Ik heb al SEO bij jullie. Betaal ik dan dubbel?', a: 'Nee. Veel van dit werk hoort bij goede SEO. We stemmen de twee op elkaar af, zodat je niet twee keer betaalt voor hetzelfde werk. Je hoort vooraf wat erbij komt.' },
+      { v: 'Wat moet ik zelf doen?', a: 'Weinig. Leestoegang tot Search Console, toegang tot je site als we pagina\'s aanpassen, en de kennis uit je vak: wat klanten vragen, wat iets echt kost. Die eigen cijfers maken je pagina anders dan de rest.' },
       { v: 'Hoe snel kom ik in het AI-overzicht?', a: 'Reken op een paar maanden. Staat een pagina al in de top 10 en is er weinig concurrentie, dan kan het sneller. Begin je lager, dan gaat er eerst SEO-werk aan vooraf.' },
     ]}
   />
@@ -215,5 +237,7 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Sta je al in het AI-overzicht?" tekst={`${site.contactpersoon} zoekt de vragen van jouw klanten op in Google en kijkt wie er in het overzicht staat. Gratis, en je zit nergens aan vast.`} />
+  <WieDoetHet wie={[{ slug: 'robert', taak: 'Doet SEO, content en strategie, sinds hij Drijfveer Media in 2011 oprichtte.' }, { slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug en houdt je project bij.' }]} />
+
+  <Actie titel="Sta je al in het AI-overzicht?" tekst={`${site.contactpersoon} zoekt de vragen van jouw klanten op in Google en kijkt wie er in het overzicht staat. Gratis, en je zit nergens aan vast.`} knop={{ tekst: 'Vraag de gratis AI-analyse aan', href: '/generative-engine-optimization/ai-vindbaarheidsanalyse/#aanvragen' }} />
 </Base>

@@ -17,6 +17,11 @@ const regels: [RegExp, Stap][] = [
     knop: 'Check gratis je plek op de kaart', kort: 'Gratis kaart-check', vraag: 'Sta jij al in het kaartje?', href: '/gratis-website-analyse/?doel=kaart',
     zin: 'Thorgall zoekt op jouw diensten in jouw plaats en belt je met wat hij ziet op de kaart en in Google.',
     dienst: { naam: 'Lokale SEO', prijs: 'vanaf € 295 per maand', url: '/lokale-seo/' } }],
+  [/^\/generative-engine-optimization\/structured-data\//, {
+    knop: 'Vraag een vaste prijs aan', kort: 'Vaste prijs', vraag: 'Wil je weten wat Google nu van je site leest?',
+    href: '/contact/?vraag=Graag%20een%20vaste%20prijs%20voor%20structured%20data%20op%20mijn%20site.',
+    zin: 'Vertel wat voor site je hebt. Thorgall belt je terug met een vaste prijs.',
+    dienst: { naam: 'Structured data', prijs: 'vanaf € 295', url: '/generative-engine-optimization/structured-data/' } }],
   [/^\/generative-engine-optimization|chatgpt|claude|gemini|perplexity|copilot|ai-modus|wat-is-geo|\/wat-is\/(geo|llm|aeo)\//, {
     knop: 'Doe de gratis AI-test', kort: 'Gratis AI-test', vraag: 'Noemt ChatGPT jou al?', href: '/generative-engine-optimization/#ai-test',
     zin: 'In vijf minuten weet je of ChatGPT en Gemini jouw bedrijf noemen als iemand naar jouw vak vraagt.',
@@ -29,9 +34,18 @@ const regels: [RegExp, Stap][] = [
     knop: 'Check gratis je links', kort: 'Gratis linkscan', vraag: 'Hoe sterk zijn jouw links, naast die van je concurrent?', href: '/linkbuilding/linkbuilding-scan/',
     zin: 'Zet je export uit Search Console in de scan en zie meteen wie naar je linkt. Of laat Thorgall je links naast die van je concurrenten leggen.',
     dienst: { naam: 'Linkbuilding', prijs: '€ 75 per uur', url: '/linkbuilding/' } }],
-  [/^\/(tekstschrijver)|copywriting|teksten|contentmarketing|content-plan|blog/, { ...scan, vraag: 'Mag Thorgall een van je pagina\'s lezen?', dienst: { naam: 'Tekstschrijver', prijs: 'vanaf € 75 per pagina', url: '/tekstschrijver/' } }],
+  [/^\/tekstschrijver\/contentmarketing\/|contentmarketing|content-plan/, { ...scan, knop: 'Vraag vijf gratis onderwerpen aan', kort: 'Gratis onderwerpen',
+    href: '/contact/?vraag=Graag%20vijf%20onderwerpen%20waar%20mijn%20klanten%20op%20zoeken.', vraag: 'Waar zoeken jouw klanten op?',
+    zin: 'Thorgall zoekt uit welke vragen jouw klanten in Google stellen, en belt je met de eerste vijf onderwerpen.',
+    dienst: { naam: 'Contentmarketing', prijs: 'vanaf € 495 per maand', url: '/tekstschrijver/contentmarketing/' } }],
+  [/^\/(tekstschrijver)|copywriting|teksten|blog/, { ...scan, knop: 'Laat een pagina gratis nalezen', vraag: 'Mag Thorgall een van je pagina\'s lezen?',
+    dienst: { naam: 'Tekstschrijver', prijs: 'vanaf € 75 per pagina', url: '/tekstschrijver/' } }],
   [/^\/leadgeneratie|conversie|landingspagina|leads|nieuwsbrief|mail|funnel|heatmap|werkspot/, { ...scan, dienst: { naam: 'Leadgeneratie', prijs: 'vanaf € 495 per maand', url: '/leadgeneratie/' } }],
-  [/^\/social-media|instagram|linkedin|social|posten|reels|viraal|inhaak/, { ...scan, dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],
+  [/^\/social-media|instagram|linkedin|social|posten|reels|viraal|inhaak/, {
+    knop: 'Laat je kanalen gratis bekijken', kort: 'Gratis kanaalcheck', vraag: 'Zullen we je kanalen samen bekijken?',
+    href: '/contact/?vraag=Willen%20jullie%20naar%20mijn%20social%20media%20kijken%3F',
+    zin: 'Thorgall kijkt naar je huidige kanalen en belt je met zijn advies: waar je moet beginnen, en waar je beter niet aan begint.',
+    dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],
   [/^\/leadgeneratie\/tracking|analytics|utm|\/wat-is\/(kpi|crm|bounce-rate)\//, { ...scan, dienst: { naam: 'Tracking en analytics', prijs: 'vanaf € 395', url: '/leadgeneratie/tracking-en-analytics/' } }],
   [/^\/zoekmachine-optimalisatie|seo|google|zoekwoord|hoger|meta|title|search-console|websiteverkeer|wat-is\//, { ...scan, dienst: { naam: 'SEO', prijs: 'vanaf € 495 per maand', url: '/zoekmachine-optimalisatie/' } }],
 ];
