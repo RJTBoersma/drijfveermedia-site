@@ -18,6 +18,11 @@ const dienst = diensten.find((d) => d.url === pad);
 const stapDienst = diensten.find((d) => d.url === stapVoor(pad).dienst?.url);
 const isEenmalig = (d?: typeof dienst) => !!d && ['eenmalig', 'pagina', 'uur'].includes(d.prijsEenheid ?? '') && !d.maandelijks;
 const eenmaligAuto = pad.startsWith('/webdesign-') || isEenmalig(dienst) || (pad.startsWith('/kennisbank/') && isEenmalig(stapDienst));
+// Bouw- en ontwerpwerk (website, UX, logo, huisstijl, landingspagina): na de oplevering lossen we kleine fouten gratis op (besluit Robert, 19-10-2026).
+const oplevering = /^\/(webdesign-|website-laten-maken\/($|website-met-ai\/|ux-ui-design\/)|branding\/|leadgeneratie\/landingspagina-laten-maken\/)/.test(pad);
+// Werk per uur (hack, disavow, interim): een vast uurtarief met een inschatting vooraf, geen 'vaste prijs'. Het consult krijgt eigen tekst.
+const perUur = !!dienst && dienst.prijsEenheid === 'uur' && !dienst.maandelijks && dienst.url !== '/consult/';
+const consult = pad === '/consult/';
 const {
   titel = groot ? 'Hoe weet je dat wij waarmaken wat we zeggen?' : 'Wat je bij ons zeker weet',
   intro,
@@ -39,7 +44,10 @@ const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? case
   <section class="wrap sectie bewijs-strook-sectie" data-aida="desire">
     <h2 class="strook-kop">{titel}</h2>
     <ul class="card bewijs-strook">
-      {eenmalig ? <li><b>Vaste prijs vooraf</b><span>Na één gesprek, in de offerte</span></li> : <>
+      {perUur ? <li><b>Vast uurtarief</b><span>{dienst?.prijs.replace(/^consult /, '')}, met vooraf een inschatting</span></li> : eenmalig ? <>
+        <li><b>Vaste prijs vooraf</b><span>Binnen twee werkdagen na het eerste gesprek</span></li>
+        {oplevering && <li><b>Kleine fouten gratis opgelost</b><span>Ook na de oplevering</span></li>}
+      </> : <>
         <li><b><a href="/garantie/">Een doel op papier</a></b><span>Niet gehaald door ons? Een maand gratis</span></li>
         <li><b>Per maand opzegbaar</b><span>Eén maand opzegtermijn</span></li>
       </>}
@@ -55,16 +63,17 @@ const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? case
   <h2>{titel}</h2>
   {intro && <p class="sectie-intro">{intro}</p>}
   {kort ? (
-    eenmalig ? <p class="bewijs-kort">Laat je het ons doen, dan hoor je na één gesprek een vaste prijs, die in de offerte staat voordat we beginnen. Wat we bij jou doen, hebben we eerst op onze eigen sites getest (<a href="/proeflab/">het proeflab</a>), en op werkdagen bellen we je binnen 15 minuten terug.</p> :
+    eenmalig ? <p class="bewijs-kort">Laat je het ons doen, dan heb je binnen twee werkdagen na het eerste gesprek een vaste prijs in de offerte, voordat we beginnen.{oplevering && ' Na de oplevering lossen we kleine fouten gratis op.'} Wat we bij jou doen, hebben we eerst op onze eigen sites getest (<a href="/proeflab/">het proeflab</a>), en op werkdagen bellen we je binnen 15 minuten terug.</p> :
     <p class="bewijs-kort">Bij maandelijkse diensten leggen we vooraf een doel vast. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door (<a href="/garantie/">zo werkt de garantie</a>). Je zegt per maand op, en wat we bij jou doen, hebben we eerst op onze eigen sites getest (<a href="/proeflab/">het proeflab</a>).</p>
   ) : (
     <div class:list={['raster', 'bewijs', { drie: eenmalig }]}>
       {eenmalig ? (
-        <div class="card"><Tekening naam="kalender" /><h3>Vaste prijs vooraf</h3><p>Na één gesprek weet je wat het kost. Dat bedrag staat in de offerte, voordat we beginnen.</p><a class="meer" href="/prijzen/">Alle prijzen</a></div>
+        consult ? <div class="card"><Tekening naam="kalender" /><h3>Vaste prijs vooraf</h3><p>Een uur kost € 85, exclusief btw, en dat weet je vooraf. Word je daarna klant, dan verrekenen we dat uur.</p><a class="meer" href="/prijzen/">Alle prijzen</a></div> :
+        <div class="card"><Tekening naam="kalender" /><h3>Vaste prijs vooraf</h3><p>Binnen twee werkdagen na het eerste gesprek weet je wat het kost. Dat bedrag staat in de offerte, voordat we beginnen.{oplevering && ' Na de oplevering lossen we kleine fouten gratis op.'}</p><a class="meer" href="/prijzen/">Alle prijzen</a></div>
       ) : (
         <>
           <div class="card"><Tekening naam="schild" /><h3>Een doel op papier</h3><p>We leggen bij de start een meetbaar doel vast, met een datum. Halen we het niet en ligt het aan ons, dan werk je de maand erna zonder factuur met ons door.</p><a class="meer" href="/garantie/">Zo werkt de garantie</a></div>
-          <div class="card"><Tekening naam="kalender" vertraging={150} /><h3>Per maand opzegbaar</h3><p>Eén maand opzegtermijn, per e-mail. Je blijft alleen zolang het iets oplevert.</p></div>
+          <div class="card"><Tekening naam="kalender" vertraging={150} /><h3>Per maand opzegbaar</h3><p>Eén maand opzegtermijn, per e-mail. Je blijft alleen zolang het iets oplevert. Onze langstlopende klant zit al meer dan vijf jaar bij ons.</p></div>
         </>
       )}
       <div class="card"><Tekening naam="kolf" vertraging={300} /><h3>Getest in ons proeflab</h3><p>Sinds 2011 bouwden we een proeflab op van meer dan 100 eigen websites. Een nieuwe techniek proberen we daar eerst, zodat jouw site geen proefkonijn is.</p><a class="meer" href="/proeflab/">Over het proeflab</a></div>

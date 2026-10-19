@@ -31,3 +31,4 @@
 18. WordPress-onderhoud: updates en back-ups wekelijks. 18b. Hack: per uur (€ 85), geen vaste prijs; inschatting vooraf.
 19. GEO kan LOS, ook naast een ander SEO-bureau ('nooit los van SEO' weghalen). 19b. Reviewbeheer: geen voorkeur → laten zoals nu (onderdeel van lokale SEO).
 20. Proeflab-leadsite in vak klant: niet noemen. 20b. Penalty jaar/techniek: niet noemen.
+21. Glaszettersservice en Kwastkoning: eigen platforms (proeflab); mogen zo als platform op de portfoliopagina staan.
