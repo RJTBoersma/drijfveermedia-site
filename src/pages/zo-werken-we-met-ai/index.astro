@@ -8,71 +8,50 @@ import Scene from '../../components/scenes/zo-werken-we-met-ai.astro';
 import { site } from '../../data/site';
 
 const url = '/zo-werken-we-met-ai/';
-const tools = [
-  ['ChatGPT, Claude en Gemini', 'Meedenken, eerste versies van teksten en code, data ordenen. We gebruiken ze naast elkaar, omdat elk model iets anders goed kan.'],
-  ['Copilot, Perplexity en Grok', 'Snel onderzoek met bronnen erbij. En kijken hoe deze assistenten over bedrijven praten, ook over het jouwe.'],
-  ['Google AI Studio', 'Proberen wat de nieuwste modellen van Google kunnen, voordat ze in gewone producten zitten.'],
-  ['NotebookLM', 'Lange stukken doorgronden, zoals een onderzoeksrapport of al je bestaande teksten. Hij antwoordt alleen uit de bronnen die je hem geeft.'],
-  ['Whisk en Suno', 'Beeld en muziek. Vooral om ideeën snel zichtbaar of hoorbaar te maken.'],
-  ['SE Ranking', 'Zoekwoorden, posities en de AI-overzichten van Google meten. Hier staan onze metingen in.'],
+const voordelen = [
+  ['kalender', 'Sneller klaar', 'Onderzoek, een eerste opzet en lange lijsten ordenen gaan met AI veel sneller. Zo staat je site of je tekst eerder online, en zie je eerder resultaat.'],
+  ['ai', 'Een lagere prijs', 'Minder uren betekent een lagere rekening. Daarom begint een website bij ons bij € 250. Bij een bureau betaal je daar vaak € 3.500 of meer voor.'],
+  ['team', 'Meer tijd voor jouw vraag', 'De tijd die we besparen, gaat naar wat telt: nadenken over jouw bedrijf, controleren of alles klopt en met je praten.'],
+  ['kolf', 'Kennis van binnenuit', 'We helpen bedrijven om genoemd te worden door ChatGPT, Gemini en Google AI. Dat kan alleen als je zelf weet hoe die systemen werken.'],
 ];
 const schema = [{ '@type': 'WebPage', name: 'Zo werken we met AI', url: `${site.url}${url}`, about: { '@id': `${site.url}/#organisatie` } }];
 ---
 <Base
   title="Zo werken we met AI | Drijfveer Media"
-  description="Welke AI-tools Drijfveer Media gebruikt en waarvoor, wat AI doet en wat mensen doen, en hoe we met jouw gegevens omgaan. Zonder vakjargon."
+  description="Drijfveer Media gebruikt AI waar het ons werk beter maakt. Dat merk je: je bent sneller klaar en je betaalt minder. Een mens beslist en controleert altijd."
   kruimels={[{ naam: 'Over ons', url: '/over-ons/' }, { naam: 'Zo werken we met AI', url }]}
   schema={schema}
 >
   <Hero kicker="Over ons" titel="Zo werken we met AI" knop={{ tekst: 'Stel je vraag', href: '/contact/' }}>
-    <p>We gebruiken AI elke dag. Het maakt ons sneller en scherper, en dat merk je aan de prijs. Maar een mens beslist, controleert en is verantwoordelijk.</p>
+    <p>We gebruiken AI waar het ons werk beter maakt. Daar heb jij voordeel van: je bent sneller klaar en je betaalt minder. Een mens beslist, controleert en is verantwoordelijk.</p>
     <Scene slot="beeld" />
   </Hero>
 
   <section class="wrap sectie" data-aida="interest">
     <div class="tekst">
-      <h2>Waarom we AI gebruiken</h2>
-      <p>We zijn met z'n vieren, met een vaste groep freelancers eromheen. AI neemt ons uren werk uit handen: onderzoek voorbereiden, een eerste opzet maken, lange lijsten ordenen. Die tijd gaat naar wat telt. Nadenken over jouw bedrijf, controleren of iets klopt en met je praten.</p>
-      <p>Er is nog een reden. We helpen klanten om genoemd te worden door ChatGPT, Gemini en Google AI. Dat lukt alleen als je die systemen van binnenuit kent. Wie er zelf niet elke dag mee werkt, kan er ook geen goed advies over geven.</p>
-
-      <h2>De tools die we echt gebruiken</h2>
-      <div class="tabel-scroll tools">
-        <table>
-          <thead><tr><th>Tool</th><th>Waarvoor</th></tr></thead>
-          <tbody>{tools.map(([t, w]) => <tr><td><b>{t}</b></td><td>{w}</td></tr>)}</tbody>
-        </table>
-      </div>
-      <p>Deze lijst verandert. Er komt bijna elke maand iets nieuws bij, zoals assistenten die zelf code schrijven en testen. Wat dat inhoudt, lees je in de gids over <a href="/kennisbank/gidsen/claude-code/">Claude Code</a>. Nieuwe tools en technieken proberen we eerst uit op onze eigen sites, in <a href="/proeflab/">ons proeflab</a>, voordat ze bij een klant in de buurt komen.</p>
-
-      <h2>Wat AI doet, en wat mensen doen</h2>
+      <h2>Wat jij eraan hebt</h2>
+      <p>We zijn met z'n vieren, met een vaste groep freelancers eromheen. Een klein team dat slim werkt, kan veel. AI helpt ons daarbij. Wat dat voor jou betekent:</p>
     </div>
-    <div class="raster raster-2 wie">
-      <div class="card">
-        <div class="stap-kop"><Tekening naam="ai" maat={48} /><h3>Dit laten we AI doen</h3></div>
-        <ul class="vink">
-          <li>Onderzoek voorbereiden en samenvatten</li>
-          <li>Eerste versies van teksten en code</li>
-          <li>Data ordenen en patronen zoeken</li>
-          <li>Varianten en ideeën bedenken</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="stap-kop"><Tekening naam="team" maat={48} /><h3>Dit doen wij zelf</h3></div>
-        <ul class="vink">
-          <li>Uitzoeken wat jij echt wilt bereiken</li>
-          <li>Keuzes maken en prioriteiten stellen</li>
-          <li>Feiten, cijfers en bronnen controleren</li>
-          <li>Eindredactie, zonder vakjargon</li>
-          <li>Het contact met jou</li>
-        </ul>
-      </div>
+    <div class="raster raster-2 voordelen">
+      {voordelen.map(([teken, kop, tekst]) => (
+        <div class="card">
+          <div class="stap-kop"><Tekening naam={teken} maat={48} /><h3>{kop}</h3></div>
+          <p>{tekst}</p>
+        </div>
+      ))}
     </div>
     <div class="tekst">
-      <p>AI maakt fouten. Een taalmodel kan iets verzinnen dat heel overtuigend klinkt. Daarom gaat er niets live zonder dat een van ons het heeft nagekeken. Google vindt AI-hulp bij het schrijven prima, zolang de inhoud bezoekers echt helpt. Honderden pagina's laten maken om hoger te komen, noemt Google spam. Dat doen we dus niet.</p>
+      <h2>Snel, maar niet slordig</h2>
+      <p>Sneller werken is alleen goed als het resultaat ook klopt. Daarom beslissen wij wat er gebeurt, en niet een computer. We zoeken uit wat jij wilt bereiken, maken de keuzes en controleren feiten, cijfers en bronnen. De laatste hand aan een tekst of een site leggen we zelf.</p>
+      <p>AI maakt soms fouten. Een taalmodel kan iets verzinnen dat heel overtuigend klinkt. Daarom gaat er niets live zonder dat een van ons het heeft nagekeken. Google vindt AI-hulp bij het schrijven prima, zolang de inhoud bezoekers echt helpt. Honderden pagina's laten maken om hoger te komen, noemt Google spam. Dat doen we dus niet.</p>
+      <p>Nieuwe technieken proberen we eerst uit op onze eigen sites, in <a href="/proeflab/">ons proeflab</a>. Pas als iets daar werkt, gebruiken we het voor klanten. Jouw site is geen proefkonijn.</p>
 
-      <div class="stap-kop"><Tekening naam="schild" maat={48} /><h2>Jouw gegevens en AI</h2></div>
-      <p>We zijn een online marketingbureau dat elke dag met AI werkt. Dat hoort bij hoe we werken, net als Search Console en een spreadsheet. Heb je liever niet dat er AI aan jouw project te pas komt? Zeg het gerust. Bij sommige diensten kunnen we dan zonder werken. Bij andere niet, omdat AI daar een vast onderdeel van het werk is. Dan zeggen we dat vooraf. Liever dat, dan dat we je iets beloven wat we niet waarmaken.</p>
-      <p>Werk je met gevoelige gegevens, zoals klantbestanden of medische informatie? Noem het bij de start. Dan bespreken we samen wat wel en niet in een AI-tool hoort. Lees ook onze <a href="/privacyverklaring/">privacyverklaring</a>.</p>
+      <h2>Waar je het merkt</h2>
+      <p>Het duidelijkst zie je het bij een <a href="/website-laten-maken/website-met-ai/">website met AI</a>, vanaf € 250. AI doet het eerste werk, wij maken de site met de hand af. Je krijgt een goede site voor een prijs die bij een klein bedrijf past. Wil je meer maatwerk, dan bouwen we in WordPress. Wat dat kost, staat op de pagina <a href="/website-laten-maken/">website laten maken</a>. Hoe dat zich verhoudt tot de markt, lees je in <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>.</p>
+      <p>Ook bij <a href="/tekstschrijver/">teksten</a>, <a href="/zoekmachine-optimalisatie/">SEO</a> en <a href="/generative-engine-optimization/">vindbaarheid in AI</a> scheelt het tijd. Het voorbereidende werk gaat sneller, zodat er meer uren overblijven voor het werk dat echt verschil maakt.</p>
+
+      <div class="stap-kop"><Tekening naam="schild" maat={48} /><h2>Jouw gegevens</h2></div>
+      <p>Werk je met gevoelige gegevens, zoals klantbestanden of medische informatie? Noem het bij de start. Dan spreken we samen af wat wel en niet in een AI-tool hoort. Heb je liever niet dat er AI aan jouw project te pas komt, zeg het dan ook. Dan bespreken we vooraf wat dat betekent. Lees ook onze <a href="/privacyverklaring/">privacyverklaring</a>.</p>
 
       <h2>Zelf aan de slag met AI?</h2>
       <p>Veel ondernemers gebruiken ChatGPT al, maar halen er maar een fractie uit. In de gids <a href="/kennisbank/gidsen/chatgpt-voor-bedrijven/">ChatGPT gebruiken in je bedrijf</a> lees je hoe je het slimmer inzet. Wil je dat je team er echt mee leert werken, dan geven we ook <a href="/trainingen/">trainingen</a>. En wil je weten of AI jouw bedrijf al kent, kijk dan bij <a href="/generative-engine-optimization/">generative engine optimization</a>.</p>
@@ -81,12 +60,10 @@ const schema = [{ '@type': 'WebPage', name: 'Zo werken we met AI', url: `${site.
 
   <Bewijs />
 
-  <Actie titel="Een vraag over AI en jouw bedrijf?" tekst={`Bel of mail ${site.contactpersoon}. Hij belt je binnen 15 minuten terug en vertelt eerlijk wat AI voor jou kan doen, en wat niet.`} knop={{ tekst: 'Neem contact op', href: '/contact/' }} />
+  <Actie titel="Benieuwd wat het jou oplevert?" tekst={`Bel of mail ${site.contactpersoon}. Hij belt je binnen 15 minuten terug en vertelt eerlijk wat we voor je kunnen doen, wat het kost en hoe snel het klaar is.`} knop={{ tekst: 'Neem contact op', href: '/contact/' }} />
 </Base>
 <style>
-  .tools td:first-child { white-space: nowrap; }
-  @media (max-width: 640px) { .tools td:first-child { white-space: normal; } }
-  .wie { max-width: 820px; margin: 8px 0 28px; }
-  .wie .stap-kop { margin-bottom: 8px; }
-  .wie .vink { margin: 0; }
+  .voordelen { max-width: 920px; margin: 8px 0 28px; }
+  .voordelen .stap-kop { margin-bottom: 8px; }
+  .voordelen p { margin: 0; }
 </style>
