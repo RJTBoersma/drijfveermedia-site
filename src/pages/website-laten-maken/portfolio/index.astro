@@ -1,0 +1,205 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Hero from '../../../components/pagina/Hero.astro';
+import Bewijs from '../../../components/pagina/Bewijs.astro';
+import Faq from '../../../components/pagina/Faq.astro';
+import Actie from '../../../components/pagina/Actie.astro';
+import Prijskaart from '../../../components/pagina/Prijskaart.astro';
+import Verder from '../../../components/pagina/Verder.astro';
+import Inhoud from '../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../components/pagina/Auteur.astro';
+import Scene from '../../../components/scenes/website-laten-maken--portfolio.astro';
+import { site, persoon } from '../../../data/site';
+
+const url = '/website-laten-maken/portfolio/';
+const datum = '2026-10-19';
+const hoofdstukken = [
+  { id: 'voorbeelden', titel: 'Vijf voorbeelden' },
+  { id: 'waar-op-letten', titel: 'Waar je op let' },
+  { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'zeker', titel: 'Wat je zeker weet' },
+];
+// Branche en wat de site doet: alleen van de sites zelf (gelezen met curl op 19-10-2026). Geen resultaten, jaartallen of bouwtijd.
+// Schermafbeeldingen: eerste scherm, gemaakt met Playwright op 19-10-2026 (1280×800 en 390×844).
+const sites = [
+  {
+    slug: 'lingen-beton',
+    naam: 'Lingen Beton',
+    url: 'https://www.lingen-beton.nl/',
+    domein: 'lingen-beton.nl',
+    branche: 'Betonbedrijf',
+    doet: 'Een betonspecialist voor grote projecten en kleine klussen thuis, zoals een garagevloer of de fundering van een tuinhuis. Beton maken, storten, verven, prefab, betonvloeren en boren in beton hebben elk een eigen pagina. Bovenaan staat één gele knop: vraag een prijsopgave aan.',
+    altDesktop: 'Eerste scherm van lingen-beton.nl op een laptop: een donkerblauw vlak met de kop "Dé betonspecialist van Nederland", een gele knop "Vraag een prijsopgave aan" en rechts een foto van vers gestort beton.',
+    altMobiel: 'Lingen Beton op een telefoon: logo, een menuknop, de kop en de gele knop voor een prijsopgave.',
+  },
+  {
+    slug: 'glaszettersservice',
+    naam: 'Glaszettersservice',
+    url: 'https://glaszettersservice.nl/',
+    domein: 'glaszettersservice.nl',
+    branche: 'Glaszetters, offertes vergelijken',
+    doet: 'Wie glas nodig heeft, beschrijft de klus in vier korte stappen en krijgt offertes van glaszetters uit de buurt. Voor spoed, zoals een kapotte ruit na een inbraak, is er een aparte route en een nummer dat dag en nacht opneemt. Zo komen de aanvragen terecht bij glaszetters uit de regio van de klant.',
+    altDesktop: 'Eerste scherm van glaszettersservice.nl: links een aanvraagformulier in vier stappen met keuzes als HR++ glas en kapotte ruit vervangen, rechts de kop "Glaszetter nodig? Wij regelen het, dag en nacht".',
+    altMobiel: 'Glaszettersservice op een telefoon: de kop, het formulier en onderin twee vaste knoppen, "Bel direct" en "Offerte aanvragen".',
+  },
+  {
+    slug: 'dw-huisontruiming',
+    naam: 'DW Huisontruiming',
+    url: 'https://www.dwhuisontruiming.nl/',
+    domein: 'dwhuisontruiming.nl',
+    branche: 'Woningontruiming',
+    doet: 'Ontruimt en ruimt woningen op in Drenthe, Groningen en Friesland, binnen ongeveer 50 kilometer rond Assen. Dat staat meteen in beeld, boven een foto van hun eigen bus. De eigenaren stellen zich voor, het telefoonnummer staat in het menu en bezoekers vragen een gratis intakegesprek aan. Rustig en persoonlijk, voor een dienst die vaak na een overlijden nodig is.',
+    altDesktop: 'Eerste scherm van dwhuisontruiming.nl: een bus met aanhanger voor een woning, met de kop "Ontruimen en opruimen van woningen in Drenthe, Groningen en Friesland" en een oranje knop om contact op te nemen.',
+    altMobiel: 'DW Huisontruiming op een telefoon: het logo, een menuknop en daaronder de introductie van de eigenaren.',
+    caseHref: '/cases/#dw-huisontruiming',
+  },
+  {
+    slug: 'kwastkoning',
+    naam: 'Kwastkoning',
+    url: 'https://kwastkoning.nl/',
+    domein: 'kwastkoning.nl',
+    branche: 'Schilders, offertes vergelijken',
+    doet: 'Wie een schilder zoekt, beschrijft de klus en vinkt aan wat het zwaarst weegt: een lage prijs, kwaliteit of snelheid. Op basis daarvan kiest Kwastkoning schilders uit de regio, en de klant vergelijkt hun offertes. Per klus, van kozijnen tot binnenschilderwerk, lees je wat het kost en hoe een schilder het aanpakt.',
+    altDesktop: 'Eerste scherm van kwastkoning.nl: een groene kop "Vind de schilder die bij jouw klus past" met rechts een formulier in vier stappen, met keuzes als buitenschilderwerk en houtrot herstellen.',
+    altMobiel: 'Kwastkoning op een telefoon: de kop, het formulier en een gele knop "Offertes aanvragen" die onderin blijft staan.',
+  },
+  {
+    slug: 'dakraamconcurrent',
+    naam: 'Dakraam Concurrent',
+    url: 'https://www.dakraamconcurrent.nl/',
+    domein: 'dakraamconcurrent.nl',
+    branche: 'Dakramen, montagepartner van VELUX',
+    doet: 'Plaatst en vervangt dakramen van VELUX. Het eerste wat je ziet, is een prijscalculator: bezoekers rekenen zelf uit wat een dakraam kost, inclusief plaatsen. Daarna kiezen ze een onderwerp, zoals plaatsen, vervangen, elektrisch of maten. Het telefoonnummer voor advies staat bovenaan.',
+    altDesktop: 'Eerste scherm van dakraamconcurrent.nl: een roze vlak met "Bereken zelf uw prijs" en een knop naar de gratis calculator, op een foto van drie dakramen in een schuin dak.',
+    altMobiel: 'Dakraam Concurrent op een telefoon: logo, het telefoonnummer voor advies, een menuknop en het roze vlak van de prijscalculator.',
+    caseHref: '/cases/#dakraamconcurrent',
+  },
+];
+const schema = [
+  {
+    '@type': 'CollectionPage',
+    '@id': `${site.url}${url}#pagina`,
+    url: `${site.url}${url}`,
+    name: 'Website laten maken voorbeelden: deze sites maakten we',
+    inLanguage: 'nl-NL',
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}/#organisatie` },
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: sites.map((s, i) => ({ '@type': 'ListItem', position: i + 1, item: { '@type': 'WebSite', name: s.naam, url: s.url, image: `${site.url}/img/portfolio/${s.slug}-desktop.webp` } })),
+    },
+  },
+];
+---
+<Base
+  title="Website laten maken voorbeelden | Drijfveer Media"
+  description="Voorbeelden van websites die we maakten: een betonbedrijf, glaszetters, woningontruiming, schilders en dakramen. Met wat elke site doet en wat het kost."
+  kruimels={[{ naam: 'Website laten maken', url: '/website-laten-maken/' }, { naam: 'Portfolio', url }]}
+  schema={schema}
+>
+  <Hero kicker="Gekozen · Website" titel="Website laten maken voorbeelden: deze sites maakten we" prijs="vanaf € 250" eenmalig>
+    <p>Voordat je een website laat maken, wil je zien wat je krijgt. Hier staan vijf sites die nu live zijn, op laptop en telefoon. Per site lees je in welke branche het bedrijf zit en wat de site voor die ondernemer doet.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <p>Een betonbedrijf, twee sites waar je offertes van vakmensen vergelijkt, een woningontruimer uit Drenthe en een specialist in dakramen. Toch moet elke site hetzelfde doen: in een paar seconden laten zien wat het bedrijf doet en de bezoeker naar één knop leiden. Twee van deze bedrijven staan ook bij onze <a href="/cases/">resultaten</a>, met cijfers.</p>
+
+        <h2 id="voorbeelden">Vijf voorbeelden van websites die we maakten</h2>
+        <div class="portfolio-lijst">
+          {sites.map((s) => (
+            <article class="card portfolio-kaart" id={s.slug}>
+              <div class="schermen">
+                <img class="desktop" src={`/img/portfolio/${s.slug}-desktop.webp`} width="1280" height="800" alt={s.altDesktop} loading="lazy" decoding="async" />
+                <img class="mobiel" src={`/img/portfolio/${s.slug}-mobiel.webp`} width="390" height="844" alt={s.altMobiel} loading="lazy" decoding="async" />
+              </div>
+              <div class="portfolio-tekst">
+                <span class="kicker">{s.branche}</span>
+                <h3>{s.naam}</h3>
+                <p>{s.doet}</p>
+                <p class="portfolio-links">
+                  <a href={s.url} rel="noopener" target="_blank">Bekijk de website<span class="sr-only"> van {s.naam} (opent in een nieuw tabblad)</span></a>
+                  {s.caseHref && <a href={s.caseHref}>Lees de case</a>}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <h2 id="waar-op-letten">Waar je op let bij voorbeelden van websites</h2>
+        <p>Een greep uit een webdesign portfolio laat vooral zien wat een bureau mooi vindt. Kijk daarom verder dan het plaatje. Open de sites op je eigen telefoon en loop dit lijstje af:</p>
+        <ul class="vink">
+          <li><b>Zie je binnen vijf seconden wat het bedrijf doet en waar?</b> Bij DW Huisontruiming staan de drie provincies in de kop. Meer hoeft een bezoeker in het begin niet te weten.</li>
+          <li><b>Staat de belangrijkste knop in het eerste scherm?</b> Bij alle vijf wel: een prijsopgave, een offerte, contact of een calculator.</li>
+          <li><b>Werkt het op mobiel?</b> Veel bezoekers komen met een telefoon. Bij Glaszettersservice en Kwastkoning staat de knop voor een offerte op de telefoon direct onderin beeld.</li>
+          <li><b>Heeft elke dienst een eigen pagina?</b> Dan word je per dienst goed vindbaar in Google. Lingen Beton heeft er zes.</li>
+          <li><b>Klopt de inhoud?</b> Prijzen, werkgebied en telefoonnummer: een bezoeker merkt het meteen als iets niet klopt.</li>
+          <li><b>Van wie is de site?</b> Vraag het bureau. Bij ons staat de site op naam van de klant, net als de accounts.</li>
+        </ul>
+        <p>Een mooi design is de helft. De andere helft is een site die praktisch is ingericht, zelf te beheren is en goed vindbaar is. Wat er bij een nieuwe site allemaal bij komt kijken, lees je op <a href="/website-laten-maken/">website laten maken</a>.</p>
+
+        <h2 id="kosten">Wat een website zoals deze kost</h2>
+        <p>Bij ons kies je uit twee routes. De <a href="/website-laten-maken/website-met-ai/">website met AI</a> begint bij € 250: AI bouwt de eerste versie, wij maken hem met de hand af. Maatwerk in WordPress begint bij € 2.000, met een eigen ontwerp en ruimte voor extra functies. Welke route bij jou past, hangt af van het aantal diensten en wat de site moet kunnen. Je hoort de vaste prijs na één gesprek, in de offerte. Daarin staat ook de planning.</p>
+        <p>Wat vragen andere bureaus voor een site? Dat lees je in de gids <a href="/kennisbank/gidsen/wat-kost-een-website/">wat kost een website</a>, op basis van hun openbare prijspagina's.</p>
+
+        <h2 id="zeker">Wat je zeker weet bij ons webdesign</h2>
+        <ul class="vink">
+          <li><b>Vaste prijs, vooraf betaald.</b> Eenmalig werk, zoals een website, betaal je voordat we beginnen.</li>
+          <li><b>Kleine fouten na de oplevering lossen we gratis op.</b> Werkt een knop niet of staat er een typfout in, dan maken we het in orde.</li>
+          <li><b>Alles op jouw naam.</b> De site, het domein en accounts zoals Search Console en Analytics. Wil je ooit weg, dan neem je de site gratis mee: je krijgt een kopie en de inlog.</li>
+        </ul>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={5} />
+        <Prijskaart naam="Website laten maken" prijs="€ 250" eenmalig punten={['Met AI vanaf € 250', 'Maatwerk vanaf € 2.000', 'Vaste prijs in de offerte', 'Site en accounts op jouw naam']} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs eenmalig />
+
+  <Faq
+    vragen={[
+      { v: 'Kan ik een website laten maken die lijkt op een van deze voorbeelden?', a: 'Ja, als richting. Wijs aan wat je aanspreekt: de opbouw, het formulier in stappen, de calculator. Je eigen site krijgt je eigen teksten, foto\'s en kleuren.' },
+      { v: 'Wat kost een website zoals in dit portfolio?', a: 'Een website met AI begint bij € 250, maatwerk in WordPress bij € 2.000, exclusief btw. Extra functies tellen mee in de prijs. Je hoort de vaste prijs na één gesprek en betaalt vooraf.' },
+      { v: 'Hoe snel staat mijn nieuwe site online?', a: 'Dat hangt af van het aantal pagina\'s, wat de site moet kunnen en hoe snel je teksten en foto\'s aanlevert. De planning hoor je in de offerte, samen met de prijs.' },
+      { v: 'Waarom staan er geen cijfers bij deze voorbeelden?', a: 'Op deze pagina laten we de sites zelf zien. Bij DW Huisontruiming en Dakraam Concurrent staan de cijfers in hun case. Bij de andere noemen we geen getallen die we hier niet kunnen laten zien.' },
+      { v: 'Van wie is de website als hij klaar is?', a: 'Van jou. Site, domein en accounts staan op jouw naam. Stap je over, dan neem je de site gratis mee: je krijgt een kopie en de inlog, zonder afkoopsom.' },
+    ]}
+  />
+
+  <Verder
+    titel="Meer over je website"
+    links={[
+      { label: 'Pillar', titel: 'Website laten maken', href: '/website-laten-maken/', tekst: 'Snel met AI of maatwerk in WordPress.' },
+      { label: 'Dienst', titel: 'Website met AI', href: '/website-laten-maken/website-met-ai/', tekst: 'De snelle route, vanaf € 250.' },
+      { label: 'Gids', titel: 'Wat kost een website?', href: '/kennisbank/gidsen/wat-kost-een-website/', tekst: 'Prijzen en waar je op let.' },
+      { label: 'Case', titel: 'Resultaten', href: '/cases/', tekst: 'Wat ons werk opleverde, in cijfers.' },
+    ]}
+  />
+
+  <Actie titel="Zo'n site voor jouw bedrijf?" tekst={`Vertel ${site.contactpersoon} welk voorbeeld je aanspreekt en wat je doet. Hij belt je op werkdagen binnen 15 minuten terug en zegt welke route past.`} />
+</Base>
+<style>
+  .portfolio-lijst { display: grid; gap: 24px; margin: 8px 0 8px; }
+  .portfolio-kaart { padding: 0; overflow: hidden; scroll-margin-top: 100px; }
+  .schermen { position: relative; background: var(--panel, #e8eef4); padding: 18px 18px 0; border-bottom: 1px solid var(--line); }
+  .schermen img { display: block; height: auto; }
+  .schermen .desktop { width: 82%; border-radius: 8px 8px 0 0; box-shadow: 0 6px 20px rgba(16, 40, 63, 0.14); }
+  .schermen .mobiel { position: absolute; right: 18px; bottom: 0; width: 22%; border: 4px solid #10283f; border-bottom: 0; border-radius: 14px 14px 0 0; box-shadow: 0 6px 20px rgba(16, 40, 63, 0.22); max-height: calc(100% - 30px); object-fit: cover; object-position: top; }
+  .portfolio-tekst { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; }
+  .portfolio-tekst h3 { margin: 0; font-size: 1.3rem; }
+  .portfolio-tekst p { margin: 0; }
+  .portfolio-links { display: flex; flex-wrap: wrap; gap: 8px 20px; font-weight: 700; margin-top: 4px !important; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  @media (max-width: 520px) {
+    .schermen { padding: 12px 12px 0; }
+    .schermen .desktop { width: 78%; }
+    .schermen .mobiel { right: 10px; width: 26%; border-width: 3px; }
+  }
+</style>
