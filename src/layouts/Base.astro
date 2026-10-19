@@ -62,6 +62,7 @@ const basis = [
     foundingDate: String(site.opgericht),
     identifier: { '@type': 'PropertyValue', propertyID: 'KvK', value: site.kvk },
     ...(site.btwId ? { vatID: site.btwId } : {}),
+    ...(site.rechtsvorm ? { legalName: `${site.naam} ${site.rechtsvorm}` } : {}),
     address: {
       '@type': 'PostalAddress',
       streetAddress: site.straat,

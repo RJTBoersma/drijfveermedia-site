@@ -30,6 +30,7 @@ tekst = f"""# Drijfveer Media
 - Telefoon: {b['telefoon']}
 - E-mail: {b['email']}
 - KvK: {b['kvk']}
+- Rechtsvorm: {b.get('rechtsvorm','')}, btw-id {b.get('btwId','')}
 - Bereikbaar: {b['kantoortijden']}. {b['belofte']} (op werkdagen).
 - Team: Robert Boersma (eigenaar), Thorgall van Eeden (online marketeer, eerste aanspreekpunt), Evelien Heerema (medeoprichter), Johan Zwartenberg (linkbuilder), plus vaste freelancers.
 - Prijzen: https://www.drijfveermedia.nl/prijzen/

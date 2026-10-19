@@ -1,28 +1,27 @@
 # Nieuwe drijfveermedia.nl: stand van zaken en lanceerlijst (bijgewerkt 19 oktober 2026)
 
 ## Status in één zin
-Na de ronde met het expertpanel (zie claude/panel-18okt-2026.md) zijn inhoud, ontwerp, toegankelijkheid en techniek bijgewerkt en zijn alle controles groen: tekstcheck, linkcheck en axe (WCAG 2.2 AA) op alle 238 pagina's. Voor de livegang zijn nodig: GitHub en Vimexx-toegang, het btw-id en de rechtsvorm, en het SPF-record.
+Na de ronde met het expertpanel (zie claude/panel-18okt-2026.md) zijn inhoud, ontwerp, toegankelijkheid en techniek bijgewerkt en zijn alle controles groen: tekstcheck, linkcheck en axe (WCAG 2.2 AA) op alle 238 pagina's. Voor de livegang zijn nodig: GitHub en Vimexx-toegang, het SPF-record en het deponeren van de voorwaarden.
 
 ## Nodig van Robert voor de livegang
 1. Een privé GitHub-repository met de geheimen FTP_SERVER, FTP_USERNAME en FTP_PASSWORD (optioneel FTP_MAP), en de naam van die repository, voor admin/config.yml.
-2. Het btw-id en de rechtsvorm, in te vullen in /admin/ onder Bedrijfsgegevens (wettelijk verplicht).
-3. Een gerepareerd SPF-record (zie punt 2 hieronder).
-4. De algemene voorwaarden van oktober 2026 gedeponeerd bij KVK (zie punt 3 hieronder).
+2. Een gerepareerd SPF-record (zie punt 2 hieronder).
+3. De algemene voorwaarden van oktober 2026 gedeponeerd bij KVK (zie punt 3 hieronder).
 
 ## Beslispunten en aanlevering na het expertpanel (19 oktober)
 
 ### Moet vóór de livegang (wettelijk of risico)
-1. **Btw-id en rechtsvorm.** Wettelijk verplicht op de site (art. 3:15d en 6:230b BW). Het veld staat klaar in /admin/ (Bedrijfsgegevens); vul je het in, dan staat het in de footer, de privacyverklaring, de disclaimer en het schema. Let op: het btw-id (NL…B..), niet het omzetbelastingnummer. In de oude voorwaarden staat "Drijfveer Media Beheer b.v." uit Drachten: klopt de naam in het Handelsregister nog met KvK 62104500?
+1. ~~**Btw-id en rechtsvorm.**~~ Verwerkt op 19 oktober: Drijfveer Media v.o.f., btw-id NL854652863B01. Staat in de footer, de privacyverklaring, de disclaimer, de voorwaarden (ook de pdf) en het schema.
 2. **SPF-record repareren.** Nu: `v=spf1include:spf.protection.outlook.com-all` (spaties ontbreken, dus ongeldig). Aanvraagmails van de website kunnen daardoor in de spam belanden. Laat Vimexx of je DNS-beheerder er `v=spf1 include:spf.protection.outlook.com include:<spf van Vimexx> -all` van maken en test met een echte aanvraag.
 3. **Algemene voorwaarden versie oktober 2026 deponeren bij KVK** (algemene.voorwaarden@kvk.nl, met de vermelding "vervanging"). Volgens artikel 19.7 gaat anders de oude gedeponeerde versie voor, zonder maandelijkse opzegbaarheid en zonder garantie. Overweeg die voorrangszin te schrappen. De pdf staat nu op de site; stuur hem mee met elke offerte.
 4. **Jurist laten kijken naar de voorwaarden:** de stapelende boetes tot € 25.000 (art. 14), exclusiviteit (3.9), 7.8, 8.2, 10.5 en de AI-artikelen 4.16 tot 4.18 (die schuiven alle controle naar de klant, terwijl de site zegt dat wij alles controleren). Het nietige "niet voor rechterlijke matiging vatbaar" en de opmaakfouten heb ik al rechtgezet.
-5. **Klantnamen:** Kärcher, bol.com, Nyenrode en Glaspunt staan er nu als "we werkten onder meer voor". Heb je per naam een directe opdracht en geen publiciteitsverbod? Liefst een mailtje met toestemming. Klopt "VELUX-installatiepartner" bij Dakraam Concurrent nog?
+5. **Klantnamen:** door Robert bevestigd (19 oktober). Bewaar per naam een opdracht of factuur; een mailtje met toestemming is extra zekerheid.
 6. **Casecijfers:** +87%, +47% en +32% staan zonder meetperiode. Kun je de periode uit Search Console of Analytics halen, dan zet ik hem erbij. En: schriftelijke toestemming van de drie caseklanten.
 
 ### Bevestigen of schrappen (claims die ik niet kon controleren)
-7. "Geen wanbetalers" en het citaat over "cowboys" (over ons), "general manager bij de grootste leadgenerator van de Benelux" (Robert), stagiairs van NHL Stenden (werken bij).
+7. ~~Claims~~ door Robert bevestigd (19 oktober). "Geen wanbetalers" is op zijn verzoek weggehaald.
 8. "Klanten blijven jaren, bijna niemand vertrekt": een getal maakt het sterk (langstlopende klant of gemiddelde duur).
-9. "Een kwartier per week van jou" bij social media, en "na elke update kijken we of je site nog werkt" bij WordPress-onderhoud.
+9. ~~Kwartier per week, controle na elke update~~: bevestigd.
 10. Prijsvergelijkingen met concurrenten zonder bron: /webdesign-groningen/ (€ 2.250 tot € 10.000) en de gids wat kost Google Ads (€ 500 tot ruim € 2.000 beheer). Bewaar schermafbeeldingen of laat de zin weghalen. Bij SEO is het nu onderbouwd met vijf openbare prijspagina's.
 11. Doen we infographics en een losse concurrentieanalyse echt niet? Dan zet ik ze in de vaste lijst "wat we niet doen".
 
