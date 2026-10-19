@@ -535,7 +535,9 @@ const { id = 'linkscan', vervolg = '#vergelijking', vervolgTekst = 'Laat Thorgal
         let tekst = `Je hebt links van ${nl(sites.length)} ${sites.length === 1 ? 'site' : 'verschillende sites'}${afgekapt ? ' (of meer: de export stopt bij 1000 rijen)' : ''}. Voor Google telt vooral hoeveel verschillende, passende sites naar je linken, niet het totaal aantal links.`;
         if (telBekend && top && topAandeel >= 40 && top.links >= 50) tekst += ` Eén site, ${esc(top.site)}, levert ${topAandeel}% van al je links. Dat is bijna altijd een link die op elke pagina staat, bijvoorbeeld in de footer of een zijbalk. Vaak is dat een partner, leverancier of je webbouwer. Meestal is dat geen probleem, maar het telt als één site.`;
         else if (telBekend && top && topAandeel >= 25) tekst += ` De grootste, ${esc(top.site)}, levert ${topAandeel}% van je links. Dat is veel voor één site, maar niet vreemd.`;
-        else if (telBekend) tekst += ' Je links zijn mooi verdeeld: geen enkele site levert het grootste deel.';
+        else if (telBekend) tekst += ' Geen enkele site levert het grootste deel van je links.';
+        const veel = telBekend ? sites.filter((s) => s.links >= 50) : [];
+        if (veel.length && !(top && topAandeel >= 40 && top.links >= 50)) tekst += ` Wel ${veel.length === 1 ? 'linkt één site' : `linken ${nl(veel.length)} sites`} meer dan 50 keer naar je (${veel.slice(0, 3).map((s) => esc(s.site)).join(', ')}${veel.length > 3 ? ' en meer' : ''}). Dat zijn meestal links in een footer, een zijbalk of onder elk bericht op een forum. Zo'n site telt als één site, hoe vaak de link er ook staat. Kijk of je die links nog wilt houden.`;
         blokken.push(`<div class="blok"><h4>Wie naar je linkt</h4><p>${tekst}</p><ul class="balken">${sites.slice(0, 5).map((s, i) => balk(esc(s.site), s.links, telBekend ? totaalSiteLinks : 0, '', i === 0 && topAandeel >= 40)).join('')}</ul>${!telBekend ? '<p class="klein muted">In deze export staat geen aantal per site, dus de verdeling is niet bekend.</p>' : ''}</div>`);
       }
 
