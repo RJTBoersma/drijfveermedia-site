@@ -1,7 +1,7 @@
 # Linkbuilding: waar we staan en wat nog nodig is (19 oktober 2026)
 
 ## Oordeel na de concurrentieanalyse
-Vergeleken met TriplePro, Linkbuilding Masters, Traffic Today, Webton, SAM, Heers en Rankingmasters is onze linkbuildingpagina inhoudelijk de sterkste van Nederland. Commercieel is hij hooguit gelijkwaardig. We verliezen op bewijs: er staan geen echte plaatsingen op, de cases hebben geen linkdata en Johan heeft geen gezicht of verhaal. Op "linkbuilding" en "linkbuilding uitbesteden" zijn we voorlopig kansloos. Wel haalbaar zijn backlinks kopen, linkbuilding kosten, linkbuilding scan, linkbuilding specialist en lokale linkbuilding.
+Vergeleken met TriplePro, Linkbuilding Masters, Traffic Today, Webton, SAM, Heers en Rankingmasters is onze linkbuildingpagina inhoudelijk de sterkste van Nederland. Commercieel is hij hooguit gelijkwaardig. We verliezen op bewijs: er staan geen echte plaatsingen op, de cases hebben geen linkdata en de linkbuilder heeft geen gezicht of verhaal. Op "linkbuilding" en "linkbuilding uitbesteden" zijn we voorlopig kansloos. Wel haalbaar zijn backlinks kopen, linkbuilding kosten, linkbuilding scan, linkbuilding specialist en lokale linkbuilding.
 
 ## Verwerkt op 19 oktober
 - **Prijs.** Linkbuilding kost € 75 per uur, exclusief btw, en een uur levert meestal 3 tot 5 links op. De klant spreekt uren per maand af, zegt per maand op en houdt de stijggarantie. Dit staat overal op de site: de pillar, uitbesteden, de Engelse en Duitse pagina, prijzen, de plaatspagina's, de gidsen, de FAQ en het schema. Het oude "vanaf € 395 per maand" is weg.
@@ -11,16 +11,19 @@ Vergeleken met TriplePro, Linkbuilding Masters, Traffic Today, Webton, SAM, Heer
 
 ## Nog te bouwen (geen info nodig, op verzoek)
 - Een linkbuildingscan met een tool die een links-export uit Search Console in de browser analyseert.
-- Gidsen: wat kost linkbuilding, backlinks kopen, lokale linkbuilding (met bronnen per provincie in het Noorden) en gastbloggen.
+- Gidsen: wat kost linkbuilding, backlinks kopen, lokale linkbuilding (met bronnen per provincie in het Noorden) en gastb## Besloten door Robert (19 oktober)
+- € 75 per uur, minimaal 5 uur per maand (€ 375), meestal 3 tot 5 links per uur.
+- Betaalde plaatsingen alleen in overleg; de kosten komen bovenop de uren.
+- Proeflabsites zijn nooit linkbron voor klanten. Dat staat nu op de linkbuildingpagina's, de uitbestedenpagina en /proeflab/.
+- Geen echte plaatsingen tonen.
+- Thorgall doet de linkbuilding. Johan is marketeer.
 
-## Nodig van Robert en Johan
-1. Komen betaalde plaatsingen (publisherkosten) bovenop de uren, en tot welk bedrag? Is er een minimum aantal uren per maand?
-2. Klopt "onze proeflabsites zijn nooit linkbron voor klanten"? De uitbestedenpagina noemt links op een eigen netwerk een waarschuwingssignaal.
-3. Kopen we ooit plaatsingen voor klanten (met het label sponsored)? Eén zin als standpunt.
-4. Vijf tot tien echte plaatsingen die we mogen tonen, en toestemming voor linkdata van Dakraam Concurrent en Conflictbemiddeling (het verloop uit SE Ranking).
-5. Johans achtergrond, zijn drempels voor een bron en zijn LinkedIn. Daarmee komt er een pagina /over-ons/johan-zwartenberg/ op "linkbuilding specialist".
-6. Het penaltyverhaal: jaar, techniek, herstelduur en eventueel een screenshot.
-7. Mogen de posities en links van onze eigen linkbuilding maandelijks openbaar in het logboek?
-8. Whitelabel voor bureaus: ja of nee?
+## Nog open
+1. Toestemming voor linkdata van Dakraam Concurrent en Conflictbemiddeling (het verloop uit SE Ranking).
+2. Het penaltyverhaal: jaar, techniek, herstelduur.
+3. Mogen de posities en links van onze eigen linkbuilding maandelijks openbaar in het logboek?
+4. Whitelabel voor bureaus: ja of nee?
+
+of nee?
 
 Niet doen: een aparte pagina "linkbuilding bureau", een pagina over AI-linkbuilding (die concurreert met GEO) en digitale PR (staat op de lijst van wat we niet doen).

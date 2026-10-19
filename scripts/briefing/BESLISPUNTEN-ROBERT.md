@@ -34,12 +34,5 @@
 
 ### Linkbuilding (kerndienst, 19-10-2026)
 Bron: concurrentieanalyse linkbuilding. De inhoud is de beste van Nederland, het bewijs is het zwakst. Deze antwoorden maken het verschil.
-25. **Prijs (opgelost 19-10):** € 75 per uur, meestal 3 tot 5 links per uur, uren per maand, opzegbaar, met stijggarantie. Staat nu overal op de site. Nog open: komen betaalde plaatsingen (publisherkosten) bovenop de uren, en tot welk bedrag? En is er een minimum aantal uren per maand?
-26. **Proeflab en klanten:** klopt "onze eigen sites gebruiken we om te testen, nooit als linkbron voor klanten"? De uitbestedenpagina noemt "links op het eigen netwerk van het bureau" een waarschuwingssignaal; dat moet kloppen.
-27. **Betaalde plaatsingen:** kopen we ooit plaatsingen voor klanten (met het label sponsored)? Eén zin als standpunt.
-28. **Echt bewijs:** vijf tot tien plaatsingen die we mogen tonen (klant- of proeflabsites), een geanonimiseerd echt maandoverzicht, en toestemming van Dakraam Concurrent en Conflictbemiddeling voor linkdata. Johan kan het verloop van hun verwijzende domeinen uit SE Ranking halen; dat lost ook de ontbrekende meetperiode op.
-29. **Johan:** achtergrond, sinds wanneer linkbuilder, zijn drempels voor een bron (verkeer, uitgaande links, uitsluitingen), LinkedIn, en een paar zinnen in zijn eigen woorden. Dan krijgt hij /over-ons/johan-zwartenberg/ ("linkbuilding specialist") en wordt hij inhoudelijk controleur van de linkbuildingpagina's.
-30. **Penalty:** welk jaar, welke techniek, hoe lang het herstel duurde, en is er een screenshot (domein onleesbaar)?
-31. **Eigen linkbuilding openbaar:** mogen de maandelijkse posities en nieuwe links van onze eigen linkbuildingpagina's in het logboek? Geen concurrent doet dat.
-32. **Linkbuildingscan:** wat doet Johan bij de concurrentenvergelijking en binnen hoeveel werkdagen? Wie belt erover (Thorgall of Johan)?
-33. **Whitelabel voor bureaus:** ja of nee, en met welke capaciteit? Tot dan bouwen we het niet.
+25. **Linkbuilding, besloten 19-10:** € 75 per uur, minimaal 5 uur per maand, meestal 3 tot 5 links per uur, opzegbaar per maand, met stijggarantie. Betaalde plaatsingen alleen in overleg, bovenop de uren. Proeflabsites zijn nooit linkbron voor klanten (staat nu op de site). Geen echte plaatsingen tonen. Thorgall doet de linkbuilding; Johan is marketeer.
+26. Nog open: toestemming voor linkdata van Dakraam Concurrent en Conflictbemiddeling (verloop uit SE Ranking), het penaltyverhaal (jaar, techniek, herstel), eigen linkbuilding openbaar in het logboek, en whitelabel ja of nee.
