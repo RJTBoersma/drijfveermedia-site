@@ -1,0 +1,35 @@
+---
+// "Link naar deze tool": kant-en-klare HTML-code, zodat bloggers, docenten en vakgenoten makkelijk naar een tool linken.
+// Staat in <dm-extra>: telt niet mee in de woordentelling van de tekstcheck.
+// De link wijst altijd naar de vaste pagina van de tool, ook als de tool op een andere pagina staat.
+import { site } from '../../data/site';
+interface Props { naam: string; href: string }
+const { naam, href } = Astro.props;
+const anker = naam.charAt(0).toUpperCase() + naam.slice(1);
+const code = `<a href="${site.url}${href}">${anker}</a> van Drijfveer Media`;
+---
+<dm-extra><details class="link-naar-tool" data-link-naar-tool>
+  <summary>Link naar deze tool</summary>
+  <p class="klein muted">Gebruik je de {naam} in een blog, les of nieuwsbrief? Link er gerust naar met deze code:</p>
+  <textarea readonly rows="2" aria-label={`HTML-code voor een link naar de ${naam}`}>{code}</textarea>
+  <button type="button" class="btn btn-ghost" data-kopieer-link>Kopieer de code</button>
+  <span class="klein muted" role="status" aria-live="polite" data-kopieer-status></span>
+</details></dm-extra>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-link-naar-tool]').forEach((el) => {
+    const veld = el.querySelector('textarea')!;
+    const status = el.querySelector<HTMLElement>('[data-kopieer-status]')!;
+    el.querySelector('[data-kopieer-link]')?.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(veld.value); status.textContent = 'Gekopieerd.'; }
+      catch { veld.select(); status.textContent = 'Selecteer de code en kopieer hem.'; }
+      setTimeout(() => (status.textContent = ''), 2500);
+    });
+  });
+</script>
+<style>
+  .link-naar-tool { margin-top: 16px; font-size: 0.95rem; }
+  .link-naar-tool summary { cursor: pointer; font-weight: 700; color: var(--navy); min-height: 44px; display: flex; align-items: center; }
+  .link-naar-tool textarea { width: 100%; font-family: var(--mono, ui-monospace, monospace); font-size: 0.85rem; padding: 10px 12px; border: 1px solid var(--line, #d9e1ea); border-radius: 10px; resize: vertical; margin: 6px 0 8px; background: var(--panel, #fff); color: var(--ink); }
+  .link-naar-tool .btn { min-height: 44px; }
+  .link-naar-tool [data-kopieer-status] { margin-left: 10px; }
+</style>
