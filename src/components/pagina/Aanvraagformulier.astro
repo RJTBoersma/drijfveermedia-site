@@ -10,6 +10,8 @@ const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
   <input type="hidden" name="pagina" value={Astro.url.pathname} />
   <input type="hidden" name="van" value="" data-van />
   <input type="hidden" name="campagne" value="" data-campagne />
+  <input type="hidden" name="binnenkomst" value="" data-binnenkomst />
+  <input type="hidden" name="verwijzer" value="" data-verwijzer />
   <input type="hidden" name="context" value="" data-context />
   <input type="hidden" name="t" value="" data-t />
   <div class="honing" aria-hidden="true"><label for={`${id}-extra`}>Laat dit veld leeg</label><input id={`${id}-extra`} name="hp_veld_x" type="text" tabindex="-1" autocomplete="new-password" /></div>
@@ -92,6 +94,7 @@ const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
     // Van welke pagina kwam de bezoeker, en via welke campagne (zonder cookies: alleen voor deze tab)
     try { const r = document.referrer && new URL(document.referrer); if (r && r.host === location.host) (f.querySelector('[data-van]') as HTMLInputElement).value = r.pathname; } catch {}
     try { (f.querySelector('[data-campagne]') as HTMLInputElement).value = (sessionStorage.getItem('dm-campagne') || '').slice(0, 120); } catch {}
+    try { (f.querySelector('[data-binnenkomst]') as HTMLInputElement).value = (sessionStorage.getItem('dm-binnen') || '').slice(0, 150); (f.querySelector('[data-verwijzer]') as HTMLInputElement).value = (sessionStorage.getItem('dm-verwijzer') || '').slice(0, 80); } catch {}
 
     // Belmomenten die kloppen met vandaag
     const sel = f.querySelector<HTMLSelectElement>('[data-moment]');

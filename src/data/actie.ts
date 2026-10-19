@@ -4,7 +4,8 @@ export interface Stap { knop: string; kort?: string; href: string; zin: string; 
 
 const scan: Stap = { knop: 'Laat je site gratis nakijken', href: '/gratis-website-analyse/', vraag: 'Welke drie dingen leveren bij jou het meeste op?', zin: 'Thorgall belt je terug, bekijkt je site en die van je concurrenten, en vertelt je de drie grootste kansen.' };
 const regels: [RegExp, Stap][] = [
-  [/^\/(website-laten-maken|webdesign-)|\/(domeinnaam-kiezen|website-|wix|zzp|logo|cms|hosting|ux|wordpress)/, {
+  [/^\/branding|wat-is-branding|logo|huisstijl|tone-of-voice|kleuren-in-marketing/, { ...scan, vraag: 'Past je logo en huisstijl nog bij wat je nu doet?', dienst: { naam: 'Branding', prijs: 'vanaf € 495', url: '/branding/' } }],
+  [/^\/(website-laten-maken|webdesign-)|\/(domeinnaam-kiezen|website-|wix|zzp|cms|hosting|ux|wordpress)|wat-kost-een-website|zelf-website|offerte-beoordelen/, {
     knop: 'Vraag een vaste prijs voor je website', kort: 'Vaste prijs', vraag: 'Liever een vaste prijs dan zelf rekenen?', href: '/gratis-website-analyse/?doel=website',
     zin: 'Vertel wat je site moet opleveren. Thorgall belt je terug met een vaste prijs, ook als de goedkoopste route het beste past.',
     dienst: { naam: 'Website laten maken', prijs: 'vanaf € 250', url: '/website-laten-maken/' } }],
@@ -29,10 +30,10 @@ const regels: [RegExp, Stap][] = [
     zin: 'Zet je export uit Search Console in de scan en zie meteen wie naar je linkt. Of laat Thorgall je links naast die van je concurrenten leggen.',
     dienst: { naam: 'Linkbuilding', prijs: '€ 75 per uur', url: '/linkbuilding/' } }],
   [/^\/(tekstschrijver)|copywriting|teksten|contentmarketing|content-plan|blog/, { ...scan, vraag: 'Mag Thorgall een van je pagina\'s lezen?', dienst: { naam: 'Tekstschrijver', prijs: 'vanaf € 75 per pagina', url: '/tekstschrijver/' } }],
-  [/^\/leadgeneratie|conversie|landingspagina|leads|nieuwsbrief|mail|funnel|heatmap/, { ...scan, dienst: { naam: 'Leadgeneratie', prijs: 'vanaf € 495 per maand', url: '/leadgeneratie/' } }],
-  [/^\/social-media|instagram|linkedin|social|posten|reels|viraal/, { ...scan, dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],
+  [/^\/leadgeneratie|conversie|landingspagina|leads|nieuwsbrief|mail|funnel|heatmap|werkspot/, { ...scan, dienst: { naam: 'Leadgeneratie', prijs: 'vanaf € 495 per maand', url: '/leadgeneratie/' } }],
+  [/^\/social-media|instagram|linkedin|social|posten|reels|viraal|inhaak/, { ...scan, dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],
   [/^\/leadgeneratie\/tracking|analytics|utm|\/wat-is\/(kpi|crm|bounce-rate)\//, { ...scan, dienst: { naam: 'Tracking en analytics', prijs: 'vanaf € 395', url: '/leadgeneratie/tracking-en-analytics/' } }],
-  [/^\/zoekmachine-optimalisatie|seo|google|zoekwoord|hoger|meta|title|search-console|wat-is\//, { ...scan, dienst: { naam: 'SEO', prijs: 'vanaf € 495 per maand', url: '/zoekmachine-optimalisatie/' } }],
+  [/^\/zoekmachine-optimalisatie|seo|google|zoekwoord|hoger|meta|title|search-console|websiteverkeer|wat-is\//, { ...scan, dienst: { naam: 'SEO', prijs: 'vanaf € 495 per maand', url: '/zoekmachine-optimalisatie/' } }],
 ];
 export const stapVoor = (pad: string): Stap => regels.find(([r]) => r.test(pad))?.[1] ?? { ...scan, dienst: { naam: 'Online marketing uitbesteden', prijs: 'vanaf € 595 per maand', url: '/online-marketing-uitbesteden/' } };
 // Knoppen die nog de algemene scan-tekst hebben, krijgen de stap van de pagina.

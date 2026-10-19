@@ -178,6 +178,7 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="google-site-verification" content="tfgiH6nFzX4HgNUo-RNhPuas24L-m2KRHVE0heZlUXI" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
@@ -257,6 +258,12 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
           var u = new URLSearchParams(location.search);
           var c = ['utm_source', 'utm_medium', 'utm_campaign'].map(function (k) { return u.get(k); }).filter(Boolean).join(' / ') || (u.has('gclid') ? 'google ads' : '');
           if (c && !sessionStorage.getItem('dm-campagne')) sessionStorage.setItem('dm-campagne', c.slice(0, 120));
+          // Eerste pagina in deze tab en de site waar je vandaan kwam (alleen de domeinnaam), zodat we zien welke pagina's tot een aanvraag leiden.
+          if (!sessionStorage.getItem('dm-binnen')) {
+            sessionStorage.setItem('dm-binnen', location.pathname.slice(0, 150));
+            var vh = ''; try { vh = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : ''; } catch (e) {}
+            if (vh && vh !== location.hostname.replace(/^www\./, '')) sessionStorage.setItem('dm-verwijzer', vh.slice(0, 80));
+          }
         } catch (e) {}
         try {
           if (location.hostname !== 'www.drijfveermedia.nl' || navigator.doNotTrack === '1' || navigator.globalPrivacyControl) return;

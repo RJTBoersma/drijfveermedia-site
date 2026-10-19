@@ -36,14 +36,23 @@ function tel_bezoek(string $pad, string $bron, bool $binnen = false, string $utm
         teller_plus($d['dagen'][$dag], 'bezoeken');
         teller_plus($d['paginas'], $pad);
         if ($bron !== '') teller_plus($d['bronnen'], $bron);
+        // Bezoek uit AI-assistenten apart, per bron en per pagina waarop ze binnenkomen.
+        if ($bron !== '' && $binnen && is_ai_bron($bron)) { teller_plus($d['ai_bronnen'], $bron); teller_plus($d['ai_paginas'], $pad); }
         if ($binnen) { teller_plus($d['dagen'][$dag], 'binnenkomsten'); teller_plus($d['binnenkomsten'], $pad); }
         if ($utm !== '') teller_plus($d['campagnes'], $utm);
     });
 }
 
-// Een aanvraag via het formulier.
-function tel_aanvraag(string $pad, string $soort = '', string $campagne = ''): void {
-    teller_ophogen(function (array &$d, string $dag) use ($pad, $soort, $campagne) {
+// Domeinen van AI-assistenten (ChatGPT, Perplexity, Gemini, Copilot, Claude en andere).
+function is_ai_bron(string $bron): bool {
+    return (bool)preg_match('/(^|\.)(chatgpt\.com|openai\.com|perplexity\.ai|gemini\.google\.com|bard\.google\.com|copilot\.microsoft\.com|claude\.ai|you\.com|phind\.com|mistral\.ai|deepseek\.com|meta\.ai|grok\.com)$/', $bron);
+}
+
+// Een aanvraag via het formulier. $eerste is de eerste pagina in die tab, $via de site waar de bezoeker vandaan kwam.
+function tel_aanvraag(string $pad, string $soort = '', string $campagne = '', string $eerste = '', string $via = ''): void {
+    teller_ophogen(function (array &$d, string $dag) use ($pad, $soort, $campagne, $eerste, $via) {
+        if (preg_match('#^/[a-z0-9/_.-]{0,150}$#i', $eerste)) teller_plus($d['aanvraag_eerste'], $eerste);
+        if (preg_match('/^[a-z0-9.-]{3,80}$/', $via)) teller_plus($d['aanvraag_via'], $via);
         teller_plus($d['dagen'][$dag], 'aanvragen');
         teller_plus($d['aanvraagpaginas'], $pad ?: '(onbekend)');
         if ($soort !== '') teller_plus($d['aanvraagsoorten'], $soort);

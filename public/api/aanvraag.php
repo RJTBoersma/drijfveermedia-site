@@ -79,6 +79,8 @@ $gegevens = [
     'Hoe ken je ons' => veld('bron', 80),
     'Klikte vanaf'   => veld('van', 200),
     'Campagne'       => veld('campagne', 120),
+    'Eerste pagina'  => veld('binnenkomst', 150),
+    'Kwam via site'  => veld('verwijzer', 80),
     'Formulier op'   => veld('pagina', 200),
 ];
 
@@ -124,7 +126,7 @@ $verstuurd = @mail(ONTVANGER, $onderwerp, implode("\n", $regels), implode("\r\n"
 
 // Tellen voor de statistiek (alleen het aantal en de pagina, geen gegevens van de aanvrager)
 require __DIR__ . '/teller-lib.php';
-tel_aanvraag(parse_url($gegevens['Klikte vanaf'] ?: $gegevens['Formulier op'], PHP_URL_PATH) ?: '', $gegevens['Soort aanvraag'], $gegevens['Campagne']);
+tel_aanvraag(parse_url($gegevens['Klikte vanaf'] ?: $gegevens['Formulier op'], PHP_URL_PATH) ?: '', $gegevens['Soort aanvraag'], $gegevens['Campagne'], $gegevens['Eerste pagina'], $gegevens['Kwam via site']);
 
 if (!$verstuurd) {
     // De aanvraag staat wel in het logbestand, maar de mail kwam niet weg. Laat de bezoeker niet in de waan.
