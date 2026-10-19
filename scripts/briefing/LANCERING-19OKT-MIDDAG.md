@@ -1,11 +1,11 @@
 # Nieuwe drijfveermedia.nl: lanceerlijst (stand 19 oktober 2026, middag)
 
 ## Status
-Inhoud, verkooppagina's, linkbuildingcluster, cases, portfolio, toestemmingsbalk en statistiek zijn klaar. Alle controles zijn groen op 241 pagina's: tekstcheck, linkcheck, WCAG 2.2 AA (axe, 482 scans), controle op overgenomen tekst en geen concurrentnamen. De site wacht alleen nog op toegang om online te zetten en op het SPF-record.
+Inhoud, verkooppagina's, linkbuildingcluster, cases, portfolio, toestemmingsbalk en statistiek zijn klaar. Alle controles zijn groen op 241 pagina's: tekstcheck, linkcheck, WCAG 2.2 AA (axe, 482 scans), controle op overgenomen tekst en geen concurrentnamen. De site wacht alleen nog op toegang om online te zetten.
 
 ## Nodig van Robert vóór de livegang
-1. **GitHub en Vimexx:** een privé GitHub-repository met de geheimen FTP_SERVER, FTP_USERNAME en FTP_PASSWORD (optioneel FTP_MAP), en de naam van de repository (voor admin/config.yml). Wachtwoorden vult Robert zelf in.
-2. **SPF-record repareren** (blokkerend). Nu: `v=spf1include:spf.protection.outlook.com-all` (ongeldig). Wordt: `v=spf1 include:spf.protection.outlook.com include:<spf van Vimexx> -all`. Daarna testen met een echte aanvraag.
+1. **GitHub en Antagonist (hosting):** een privé GitHub-repository met de geheimen FTP_SERVER, FTP_USERNAME en FTP_PASSWORD (optioneel FTP_MAP), en de naam van de repository (voor admin/config.yml). Wachtwoorden vult Robert zelf in.
+2. ~~SPF-record~~ gerepareerd op 19-10: `v=spf1 include:spf.protection.outlook.com include:_spf.webhostingserver.nl -all` (dekt Microsoft 365 en de server van Antagonist, 141.138.169.250). DMARC staat op p=none; na een paar weken zonder problemen kan dat naar quarantine.
 3. **Algemene voorwaarden oktober 2026 deponeren bij KVK** (algemene.voorwaarden@kvk.nl, "vervanging"). Mag kort na de livegang, maar snel: anders geldt de oude versie zonder maandelijkse opzegbaarheid en garantie.
 
 ## Direct na de livegang
@@ -26,7 +26,7 @@ Inhoud, verkooppagina's, linkbuildingcluster, cases, portfolio, toestemmingsbalk
 
 ## Openstaand van Robert (niet blokkerend)
 - Jurist naar de voorwaarden (boetes art. 14, exclusiviteit 3.9, AI-artikelen 4.16-4.18).
-- Verwerkersovereenkomsten Vimexx en Microsoft, verwerkingsregister, A4 over AI-gebruik (AI Act art. 4).
+- Verwerkersovereenkomsten Antagonist en Microsoft, verwerkingsregister, A4 over AI-gebruik (AI Act art. 4).
 - Reviews: Thorgall vraagt vanaf nu klanten na oplevering om een Google-review (besluit 19-10). Vijf echte reviews dichten het grootste gat op alle verkooppagina's.
 - Zie verder claude/commercieel-19okt-2026.md en claude/antwoorden-robert-19okt.md.
 

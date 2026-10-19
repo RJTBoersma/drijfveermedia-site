@@ -1,6 +1,6 @@
 <?php
 // Ontvangt aanvragen van de site en mailt ze naar Drijfveer Media.
-// Draait op de PHP van Vimexx. Geen database, geen cookies.
+// Draait op de PHP van Antagonist. Geen database, geen cookies.
 
 declare(strict_types=1);
 

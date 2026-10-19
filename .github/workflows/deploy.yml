@@ -1,4 +1,4 @@
-# Bouwt de site bij elke wijziging (ook vanuit /admin/) en zet hem via FTP op Vimexx.
+# Bouwt de site bij elke wijziging (ook vanuit /admin/) en zet hem via FTP op Antagonist.
 # De build keurt zichzelf af als de tekstcontrole iets vindt; dan blijft de oude versie online.
 name: Bouwen en publiceren
 on:
@@ -19,7 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lanceercheck
-      - name: Naar Vimexx (FTP)
+      - name: Naar Antagonist (FTP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}

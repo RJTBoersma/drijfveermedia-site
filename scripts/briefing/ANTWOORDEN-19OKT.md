@@ -32,3 +32,4 @@
 19. GEO kan LOS, ook naast een ander SEO-bureau ('nooit los van SEO' weghalen). 19b. Reviewbeheer: geen voorkeur → laten zoals nu (onderdeel van lokale SEO).
 20. Proeflab-leadsite in vak klant: niet noemen. 20b. Penalty jaar/techniek: niet noemen.
 21. Glaszettersservice en Kwastkoning: eigen platforms (proeflab); mogen zo als platform op de portfoliopagina staan.
+- Hosting is Antagonist (niet Vimexx), besluit/feit 19-10. SPF gerepareerd.
