@@ -42,6 +42,9 @@ Na de ronde met het expertpanel (zie claude/panel-18okt-2026.md) zijn inhoud, on
 23. Vóór de livegang: verwerkersovereenkomsten met Vimexx en Microsoft vastleggen, een verwerkingsregister, en één A4 over AI-gebruik voor het team (AI Act art. 4). Daar zijn geen wijzigingen op de site voor nodig.
 24. Bedrijfsgrootte bevestigen (minder dan 10 mensen en onder € 2 miljoen omzet): dan geldt de toegankelijkheidswet (EAA) niet. Een toegankelijkheidsverklaring kan erbij zodra je een contactpersoon en reactietermijn kiest; doe vooraf één hertest met een schermlezer.
 
+## Cases (19 oktober)
+De drie losse casepagina's zijn tijdelijk offline. Er staat één pagina "Resultaten" (/cases/), en de oude adressen sturen daar met een 301 naartoe. Zodra er uitgebreide cases zijn (periode, grafiek uit Search Console, aantal aanvragen, citaat), komen de losse pagina's terug. De oude versies staan in git (commit vóór "Losse cases offline").
+
 ## Direct na de livegang
 - Search Console: de XML-sitemap indienen en een paar oude URL's testen, ook via http en zonder www. Controleren dat /regio/groningen/, /online-marketing-friesland/ en /kennisbank/wat-is/geo/ met een 301 doorsturen.
 - Bing Webmaster Tools: importeren vanuit Search Console.
