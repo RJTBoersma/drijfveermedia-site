@@ -1,0 +1,202 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--onderzoek-websites-noorden.astro';
+import { site, persoon } from '../../../../data/site';
+// Alle cijfers komen uit deze file. Die is gemaakt met de meetscripts van 19 oktober 2026 (zie "Hoe we het onderzochten").
+import d from '../../../../data/onderzoek-noorden-2026.json';
+
+const url = '/kennisbank/gidsen/onderzoek-websites-noorden/';
+const datum = '2026-10-19';
+const nl = (n: number) => n.toLocaleString('nl-NL');
+const p = (n: number) => `${Math.round(n)}%`;
+const p1 = (n: number) => `${n.toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+const a = d.alle;
+const zonder = (n: number) => 100 - n;
+const opDeTien = (n: number) => Math.round(n / 10);
+const soorten: Record<string, string> = { shop: 'Winkels', amenity: 'Horeca en praktijken', tourism: 'Hotels, B&B\'s en campings', office: 'Kantoren en zakelijke dienstverleners', craft: 'Ambachtsbedrijven', healthcare: 'Zorgverleners' };
+const hoofdstukken = [
+  { id: 'kort', titel: 'De uitkomsten in het kort' },
+  { id: 'bedrijfsgegevens', titel: 'Geen bedrijfsgegevens voor Google en AI' },
+  { id: 'beschrijving', titel: 'Geen beschrijving' },
+  { id: 'bellen', titel: 'Niet met één tik bellen' },
+  { id: 'onderhoud', titel: 'Sites die stil zijn blijven staan' },
+  { id: 'ai', titel: 'AI-crawlers en llms.txt' },
+  { id: 'provincies', titel: 'Drenthe en Groningen naast elkaar' },
+  { id: 'branches', titel: 'Per branche' },
+  { id: 'zelf', titel: 'Zo kijk je je eigen site na' },
+  { id: 'methode', titel: 'Hoe we het onderzochten' },
+];
+const bronnen = [
+  'https://www.openstreetmap.org/copyright',
+  'https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=nl',
+  'https://developers.google.com/search/docs/appearance/snippet?hl=nl',
+  'https://llmstxt.org/',
+];
+const schema = [
+  {
+    '@type': 'Article',
+    headline: `Onderzoek: hoe vindbaar zijn ${nl(d.gemeten)} bedrijfssites in Drenthe en Groningen?`,
+    datePublished: datum,
+    dateModified: datum,
+    author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/robert-boersma/` },
+    publisher: { '@id': `${site.url}/#organisatie` },
+    mainEntityOfPage: `${site.url}${url}`,
+    inLanguage: 'nl-NL',
+    about: 'Vindbaarheid van mkb-websites in Drenthe en Groningen',
+    citation: bronnen,
+  },
+  {
+    '@type': 'Dataset',
+    name: 'Vindbaarheid van bedrijfswebsites in Drenthe en Groningen, oktober 2026',
+    description: `Meting van ${nl(d.gemeten)} websites van bedrijven in Drenthe en Groningen uit OpenStreetMap: mobiele weergave, titel, meta description, H1, structured data, bel-link, robots.txt, llms.txt en copyrightjaar.`,
+    creator: { '@id': `${site.url}/#organisatie` },
+    temporalCoverage: '2026-10',
+    spatialCoverage: 'Drenthe en Groningen, Nederland',
+    isBasedOn: 'https://www.openstreetmap.org/',
+    url: `${site.url}${url}`,
+  },
+];
+---
+<Base
+  title="Onderzoek: hoe vindbaar zijn bedrijfssites in het Noorden?"
+  description={`We maten ${nl(d.gemeten)} bedrijfswebsites in Drenthe en Groningen. ${opDeTien(zonder(a.localbusiness))} op de 10 geven Google en AI geen bedrijfsgegevens, ruim een derde mist een beschrijving.`}
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Onderzoek websites in het Noorden', url }]}
+  schema={schema}
+  ogType="article"
+  bronnenBlok={false}
+>
+  <Hero kicker="Onderzoek · Oktober 2026" titel={`Onderzoek: hoe vindbaar zijn ${nl(d.gemeten)} bedrijfssites in Drenthe en Groningen?`} knop={{ tekst: 'Laat je eigen site gratis nakijken', href: '/gratis-website-analyse/' }}>
+    <p>We bekeken de websites van winkels, horeca, ambachtsbedrijven, kantoren, zorgverleners en verblijven in Drenthe en Groningen. Bij {opDeTien(zonder(a.localbusiness))} op de 10 ontbreken de bedrijfsgegevens die Google en AI-assistenten gebruiken. Ruim een derde heeft geen beschrijving voor Google.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+
+        <h2 id="kort">De uitkomsten in het kort</h2>
+        <p>In oktober 2026 hebben we {nl(d.gemeten)} websites van bedrijven in Drenthe en Groningen gemeten. We keken naar de dingen die bepalen of Google en AI-assistenten als ChatGPT je goed kunnen vinden en begrijpen. En naar een paar dingen die een bezoeker direct merkt. Dit kwam eruit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wat we maten</th><th>Op orde</th><th>Ontbreekt</th></tr></thead>
+            <tbody>
+              <tr><td><b>Bedrijfsgegevens voor zoekmachines</b> (structured data)</td><td>{p(a.localbusiness)}</td><td>{p(zonder(a.localbusiness))}</td></tr>
+              <tr><td><b>Beschrijving voor Google</b> (meta description)</td><td>{p(a.description)}</td><td>{p(zonder(a.description))}</td></tr>
+              <tr><td><b>Bellen met één tik</b> (telefoonlink)</td><td>{p(a.tel_link)}</td><td>{p(zonder(a.tel_link))}</td></tr>
+              <tr><td><b>Duidelijke hoofdkop</b> (H1)</td><td>{p(a.h1)}</td><td>{p(zonder(a.h1))}</td></tr>
+              <tr><td><b>Geschikt voor mobiel</b> (viewport)</td><td>{p(a.viewport)}</td><td>{p(zonder(a.viewport))}</td></tr>
+              <tr><td><b>Paginatitel</b></td><td>{p(a.titel)}</td><td>{p(zonder(a.titel))}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>De basis voor mobiel en Google, met een titel en een beschrijving, heeft {p(d.basis)} op orde. Komen de bedrijfsgegevens er ook bij, dan blijft {p(d.basis_plus_ld)} over. Nog geen derde van de ondernemers in het Noorden heeft de technische basis dus helemaal op orde.</p>
+
+        <h2 id="bedrijfsgegevens">{opDeTien(zonder(a.localbusiness))} op de 10 geven Google en AI geen bedrijfsgegevens</h2>
+        <p>Structured data is een stukje code dat een zoekmachine vertelt wat voor bedrijf je bent. Denk aan je naam, je adres, je telefoonnummer, je openingstijden en wat je doet. Een bezoeker ziet het niet, maar <a href="https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=nl" rel="noopener">Google gebruikt het</a> om je bedrijf goed te tonen. AI-assistenten lezen het ook.</p>
+        <p>Van de gemeten sites heeft {p(zonder(a.localbusiness))} geen bedrijfsgegevens in die vorm. Ruim de helft ({p(a.jsonld)}) heeft wel een vorm van structured data, maar vaak alleen wat een websitebouwer of plug-in standaard toevoegt. Dat zegt dan iets over de website, niet over het bedrijf. Wat structured data precies is, lees je bij <a href="/kennisbank/wat-is/schema-markup/">schema markup</a>.</p>
+
+        <h2 id="beschrijving">Ruim een derde heeft geen beschrijving</h2>
+        <p>De meta description is het stukje tekst onder je titel in Google. Bij {p(zonder(a.description))} van de sites ontbreekt hij. Google kiest dan zelf een stuk tekst van je pagina. Soms gaat dat goed, vaak staat er iets onhandigs, zoals een cookiemelding of een menu. Het is een gemiste kans om in één zin te vertellen waarom iemand bij jou moet klikken. Hoe je een goede schrijft, lees je in de gids <a href="/kennisbank/gidsen/meta-description/">meta description schrijven</a>.</p>
+
+        <h2 id="bellen">Ruim de helft is op mobiel niet met één tik te bellen</h2>
+        <p>Op {p(zonder(a.tel_link))} van de sites staat het telefoonnummer niet als link. Op een telefoon moet een bezoeker het nummer dan overtypen of kopiëren. Voor een kapper, een installateur of een restaurant is bellen vaak de belangrijkste actie op de site. Elke extra handeling kost klanten.</p>
+
+        <h2 id="onderhoud">Sites die stil zijn blijven staan</h2>
+        <p>Onderaan veel sites staat een copyrightjaar. Op {nl(a.copyright_n)} sites vonden we er een. Bij {p(a.copyright_oud_2023)} daarvan staat 2023 of eerder, bij {p(a.copyright_oud_2020)} zelfs 2020 of eerder. Een oud jaartal is op zich geen ramp. Wel is het vaak een teken dat er al lang niemand naar de site heeft gekeken. Bezoekers merken dat.</p>
+        <p>Ongeveer de helft van de sites ({nl(d.wordpress)}) draait op WordPress. Dat werkt prima, zolang iemand de updates bijhoudt. Een verouderde WordPress-site is een van de makkelijkste doelwitten voor hackers. Lees ook <a href="/kennisbank/gidsen/wordpress-gehackt/">wat je doet als je WordPress-site gehackt is</a>.</p>
+
+        <h2 id="ai">Bijna niemand houdt AI-crawlers tegen, weinigen helpen ze</h2>
+        <p>Via een bestand dat robots.txt heet, kun je bepaalde bezoekers op je site tegenhouden, ook de crawlers van ChatGPT, Claude en Gemini. Dat doet bijna niemand: {p1(a.ai_geblokkeerd)} van de sites ({nl(a.ai_geblokkeerd_n)} in totaal) houdt een of meer AI-crawlers tegen. Dat is goed nieuws. Wie AI-crawlers tegenhoudt, kan ook niet door AI-assistenten worden aangeraden.</p>
+        <p>Een stap verder is een llms.txt: een kort tekstbestand dat AI-assistenten vertelt wat er op je site staat en waar het belangrijkste te vinden is. Het is een <a href="https://llmstxt.org/" rel="noopener">voorstel</a> en nog geen vaste standaard. {p1(a.llms)} van de sites heeft er al een. Hoe je zorgt dat ChatGPT en andere assistenten jou noemen, lees je bij <a href="/generative-engine-optimization/vindbaar-in-chatgpt/">vindbaar in ChatGPT</a>.</p>
+
+        <h2 id="provincies">Drenthe en Groningen naast elkaar</h2>
+        <p>De verschillen tussen de provincies zijn klein. Drentse sites zijn iets vaker met één tik te bellen, Groningse sites hebben iets vaker een beschrijving.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Op orde</th><th>Drenthe ({nl(d.drenthe.n)} sites)</th><th>Groningen ({nl(d.groningen.n)} sites)</th></tr></thead>
+            <tbody>
+              <tr><td>Bedrijfsgegevens (structured data)</td><td>{p1(d.drenthe.localbusiness)}</td><td>{p1(d.groningen.localbusiness)}</td></tr>
+              <tr><td>Beschrijving voor Google</td><td>{p1(d.drenthe.description)}</td><td>{p1(d.groningen.description)}</td></tr>
+              <tr><td>Bellen met één tik</td><td>{p1(d.drenthe.tel_link)}</td><td>{p1(d.groningen.tel_link)}</td></tr>
+              <tr><td>Hoofdkop (H1)</td><td>{p1(d.drenthe.h1)}</td><td>{p1(d.groningen.h1)}</td></tr>
+              <tr><td>Geschikt voor mobiel</td><td>{p1(d.drenthe.viewport)}</td><td>{p1(d.groningen.viewport)}</td></tr>
+              <tr><td>Copyrightjaar 2023 of eerder</td><td>{p1(d.drenthe.copyright_oud_2023)}</td><td>{p1(d.groningen.copyright_oud_2023)}</td></tr>
+              <tr><td>Heeft een llms.txt</td><td>{p1(d.drenthe.llms)}</td><td>{p1(d.groningen.llms)}</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="branches">Per branche</h2>
+        <p>Kantoren en zakelijke dienstverleners, zoals accountants, advocaten en makelaars, scoren het best. Hotels, B&B's en campings hebben het minst vaak de basis op orde. Dat is opvallend, want juist gasten zoeken vaak via Google en steeds vaker via AI.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Branche</th><th>Sites</th><th>Basis op orde</th><th>Beschrijving</th><th>Bedrijfsgegevens</th></tr></thead>
+            <tbody>
+              {Object.entries(d.per_soort).map(([k, v]: [string, any]) => (
+                <tr><td>{soorten[k] ?? k}</td><td>{nl(v.n)}</td><td>{p(v.basis)}</td><td>{p(v.description)}</td><td>{p(v.localbusiness)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">"Basis op orde" betekent: geschikt voor mobiel, met een paginatitel en een beschrijving.</p>
+
+        <h2 id="zelf">Zo kijk je je eigen site na</h2>
+        <p>De meeste punten uit dit onderzoek kun je in een kwartier zelf nakijken:</p>
+        <ul>
+          <li><b>Beschrijving.</b> Zoek in Google op je bedrijfsnaam. Staat er onder je titel een zin die je zelf zou kiezen? Zo niet, vul dan de meta description in. In WordPress gaat dat met een SEO-plug-in.</li>
+          <li><b>Bellen.</b> Open je site op je telefoon en tik op je telefoonnummer. Gaat je telefoon niet bellen, laat het nummer dan als link zetten.</li>
+          <li><b>Bedrijfsgegevens.</b> Plak het adres van je site in de <a href="https://search.google.com/test/rich-results?hl=nl" rel="noopener">test voor rich results van Google</a>. Ziet die geen bedrijf, dan ontbreken de gegevens. Lees bij <a href="/generative-engine-optimization/structured-data/">structured data</a> hoe je dat oplost.</li>
+          <li><b>Jaartal en updates.</b> Kijk onderaan je site. Staat er een oud jaar, kijk dan ook of je WordPress en plug-ins bijgewerkt zijn.</li>
+          <li><b>AI.</b> Vraag ChatGPT of Gemini naar een bedrijf zoals het jouwe in je eigen plaats. Word je genoemd? Doe de <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-test</a> om te zien waar je staat.</li>
+        </ul>
+        <p>Liever dat iemand meekijkt? We bekijken je site <a href="/gratis-website-analyse/">gratis</a> en vertellen je welke drie punten het meeste opleveren.</p>
+
+        <h2 id="methode">Hoe we het onderzochten</h2>
+        <p>We namen alle bedrijven in de provincies Drenthe en Groningen die in <a href="https://www.openstreetmap.org/" rel="noopener">OpenStreetMap</a> staan met een website. Dat zijn winkels, horeca, ambachtsbedrijven, kantoren, zorgverleners en verblijven. Ketens en filialen lieten we weg: sites zonder merkaanduiding, en geen domein dat op meer dan drie plekken voorkomt. Zo hielden we {nl(d.gevonden)} websites over. Daarvan konden we er {nl(d.gemeten)} openen en meten. De rest gaf een foutmelding, was niet bereikbaar of hield onze meting tegen.</p>
+        <p>Op 19 oktober 2026 haalden we van elke site de homepage op, plus robots.txt en llms.txt. We keken alleen naar wat in de code van de homepage staat: de viewport-instelling voor mobiel, de paginatitel, de meta description, een H1-kop, structured data van het type bedrijf of organisatie, een telefoonlink en het copyrightjaar in de zichtbare tekst. Bij robots.txt telden we sites die de hele site afsluiten voor een of meer bekende AI-crawlers.</p>
+        <p>Een paar kanttekeningen. OpenStreetMap is gemaakt door vrijwilligers en niet volledig, dus dit is een grote steekproef en geen telling van alle bedrijven. Er staan ook een paar grotere organisaties tussen. Sites die hun inhoud pas na het laden met JavaScript opbouwen, kunnen gegevens hebben die wij niet zagen. En we meten de homepage, niet de hele site.</p>
+
+        <div class="kader klein" id="bronnen">
+          <p class="kader-titel">Bronnen en gebruik van de cijfers</p>
+          <p>Bedrijfsgegevens: © <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap-bijdragers</a>, beschikbaar onder de Open Database License. Metingen: Drijfveer Media, 19 oktober 2026. Je mag de cijfers overnemen met een vermelding van de bron en een link naar deze pagina. We noemen geen individuele bedrijven.</p>
+          <ul>
+            <li>Google Search Central: <a href="https://developers.google.com/search/docs/appearance/structured-data/local-business?hl=nl" rel="noopener">structured data voor lokale bedrijven</a>.</li>
+            <li>Google Search Central: <a href="https://developers.google.com/search/docs/appearance/snippet?hl=nl" rel="noopener">hoe Google de beschrijving kiest</a>.</li>
+            <li>Voorstel voor llms.txt: <a href="https://llmstxt.org/" rel="noopener">llmstxt.org</a>.</li>
+          </ul>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={7} />
+      </aside>
+    </div>
+  </section>
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel websites zijn er onderzocht?', a: `We vonden ${nl(d.gevonden)} websites van bedrijven in Drenthe en Groningen in OpenStreetMap. Daarvan konden we er ${nl(d.gemeten)} openen en meten: ${nl(d.drenthe.n)} in Drenthe en ${nl(d.groningen.n)} in Groningen.` },
+      { v: 'Wat is de grootste fout op websites van ondernemers in het Noorden?', a: `Het ontbreken van bedrijfsgegevens voor zoekmachines. ${p(zonder(a.localbusiness))} van de sites vertelt Google en AI-assistenten niet in code wie het bedrijf is, waar het zit en wat het doet. Daarna volgt de beschrijving voor Google, die bij ${p(zonder(a.description))} ontbreekt.` },
+      { v: 'Mag ik deze cijfers gebruiken?', a: 'Ja. Vermeld Drijfveer Media als bron en link naar deze pagina. De bedrijfsgegevens komen uit OpenStreetMap, © OpenStreetMap-bijdragers.' },
+      { v: 'Staat mijn bedrijf in het onderzoek?', a: 'Dat kan, als je bedrijf met een website in OpenStreetMap staat. We publiceren alleen totalen en noemen geen bedrijven. Wil je weten hoe jouw site scoort, vraag dan een gratis analyse aan.' },
+      { v: 'Herhalen jullie het onderzoek?', a: 'Dat is het plan. Dan zie je of ondernemers in het Noorden hun site beter op orde krijgen, nu steeds meer mensen via AI-assistenten zoeken.' },
+    ]}
+  />
+
+  <Verder
+    links={[
+      { label: 'Gids', titel: 'Meta description schrijven', href: '/kennisbank/gidsen/meta-description/', tekst: 'Een zin die mensen laat klikken.', teken: 'pen' },
+      { label: 'Dienst', titel: 'Structured data laten toevoegen', href: '/generative-engine-optimization/structured-data/', tekst: 'Je bedrijfsgegevens leesbaar voor Google en AI.' },
+      { label: 'Tool', titel: 'AI-test', href: '/generative-engine-optimization/ai-vindbaarheidsanalyse/', tekst: 'Zie of AI-assistenten jou kennen.' },
+      { label: 'Gids', titel: 'Hoger in Google', href: '/kennisbank/gidsen/hoger-in-google/', tekst: 'Wat echt helpt, op volgorde.' },
+    ]}
+  />
+
+  <Actie titel="Hoe scoort jouw site?" tekst={`We kijken je site gratis na op deze punten en meer. ${site.contactpersoon} belt je met de drie dingen die het meeste opleveren.`} />
+</Base>

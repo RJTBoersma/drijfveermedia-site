@@ -1,0 +1,40 @@
+---
+// Scène voor /kennisbank/gidsen/onderzoek-websites-noorden/: een raster van kleine websites (vensters), elk met een vinkje of een kruisje.
+// Links een vergrootglas dat over het raster beweegt. Rechtsboven een staafje met een percentage.
+// Beweging: de vinkjes en kruisjes verschijnen een voor een, het vergrootglas schuift rustig heen en weer.
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const vensters: [number, number, boolean][] = [];
+const goed = [1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1];
+for (let r = 0; r < 3; r++) for (let k = 0; k < 6; k++) vensters.push([70 + k * 58, 70 + r * 58, goed[r * 6 + k] === 1]);
+---
+<svg class="scene" viewBox="0 0 480 270" data-leeft={mini ? undefined : ''} role={mini ? undefined : 'img'} aria-hidden={mini ? 'true' : undefined} aria-label={mini ? undefined : 'Getekend: achttien kleine websites in een raster, sommige met een groen vinkje en sommige met een oranje kruisje. Een vergrootglas schuift eroverheen.'}>
+  <rect x="40" y="40" width="400" height="200" rx="18" fill="#f4f7fa" stroke="#d9e1ea" stroke-width="2" />
+  {vensters.map(([x, y, ok], i) => (
+    <g>
+      <rect x={x} y={y} width="46" height="44" rx="6" fill="#fff" stroke="#c9d5e1" stroke-width="2" />
+      <path d={`M${x} ${y + 10}H${x + 46}`} stroke="#c9d5e1" stroke-width="2" />
+      <circle cx={x + 6} cy={y + 5} r="1.8" fill="#c9d5e1" />
+      <path d={`M${x + 8} ${y + 18}H${x + 32}M${x + 8} ${y + 25}H${x + 26}`} stroke="#e1e8ef" stroke-width="3" stroke-linecap="round" />
+      <g class={mini ? undefined : `teken teken${i % 6}`}>
+        {ok
+          ? <path d={`M${x + 26} ${y + 34}l5 5 9-10`} fill="none" stroke="#1a7a50" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          : <path d={`M${x + 28} ${y + 30}l9 9m0-9l-9 9`} fill="none" stroke="#ff6600" stroke-width="3.5" stroke-linecap="round" />}
+      </g>
+    </g>
+  ))}
+  <g class={mini ? undefined : 'loep'}>
+    <circle cx="150" cy="150" r="30" fill="rgba(255,255,255,0.35)" stroke="#10283f" stroke-width="6" />
+    <path d="M172 172l26 26" stroke="#10283f" stroke-width="10" stroke-linecap="round" />
+  </g>
+</svg>
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    [data-leeft] .teken { opacity: 0; animation: verschijn 0.4s ease-out forwards; }
+    [data-leeft] .teken0 { animation-delay: 0.2s; } [data-leeft] .teken1 { animation-delay: 0.4s; } [data-leeft] .teken2 { animation-delay: 0.6s; }
+    [data-leeft] .teken3 { animation-delay: 0.8s; } [data-leeft] .teken4 { animation-delay: 1s; } [data-leeft] .teken5 { animation-delay: 1.2s; }
+    [data-leeft] .loep { animation: schuif 9s ease-in-out infinite alternate; }
+  }
+  @keyframes verschijn { to { opacity: 1; } }
+  @keyframes schuif { from { transform: translate(0, 0); } to { transform: translate(190px, -50px); } }
+</style>
