@@ -10,9 +10,11 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/regio--friesland.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import ZelfOfUitbesteden from '../../../components/tool/ZelfOfUitbesteden.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 
 const url = '/regio/friesland/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'kantoor', titel: 'Kantoor in Drenthe, klanten in Friesland' },
   { id: 'plaatsen', titel: 'Plaatsen met een eigen pagina' },
@@ -47,6 +49,8 @@ const schema = [{
   citation: [
     'https://www.cbs.nl/nl-nl/cijfers/detail/85984NED',
     'https://www.cbs.nl/nl-nl/cijfers/detail/82061NED',
+    'https://travyk.nl/diensten/seo/',
+    'https://www.samonlinemarketing.nl/online-marketing-uitbesteden/',
   ],
 }];
 ---
@@ -56,8 +60,8 @@ const schema = [{
   kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Friesland', url }]}
   schema={schema}
 >
-  <Hero kicker="Werkgebied · Friesland" titel="Marketingbureau voor Friesland, vanuit Assen">
-    <p>Friese ondernemers willen weten waar ze aan toe zijn. We zorgen dat klanten je vinden in Google, dat AI je noemt en dat je website aanvragen oplevert. Met prijzen die je vooraf kent.</p>
+  <Hero kicker="Werkgebied · Friesland" titel="Marketingbureau voor Friesland, vanuit Assen" prijs="alles in één hand vanaf € 595 per maand">
+    <p>Voor Friese ondernemers die willen weten waar ze aan toe zijn. We zorgen dat klanten je vinden in Google, dat AI je noemt en dat je website aanvragen oplevert. De prijs staat op de site, het doel op papier. Losse diensten kan ook, vanaf € 295 per maand.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -215,7 +219,9 @@ const schema = [{
         <p>Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is om het doel te halen. Je zegt per maand op, met één maand opzegtermijn. Lees hoe dat werkt op de pagina over onze <a href="/garantie/">garantie</a>.</p>
 
         <h2 id="kiezen">Een online marketingbureau in Friesland kiezen</h2>
-        <p>Let op deze signalen, bij elk bureau.</p>
+        <p>Eerst de prijs. De Friese bureaus bovenaan voor "marketingbureau friesland" noemen op die pagina's geen bedrag. Travyk, dat in Heerenveen, Drachten en Sneek hoog staat, noemt € 800 per maand voor basis Google Ads-beheer en € 1.500 voor een basis SEO-abonnement. SAM Online Marketing noemt uitbesteden minder geschikt bij een budget onder € 1.000 per maand. Bij ons begint alles in één hand bij € 595. Zelf doen kan ook, maar dat kost uren. Reken het na:</p>
+        <ZelfOfUitbesteden dienst="alles" tarief={60} uren={12} />
+        <p>Let daarna op deze signalen, bij elk bureau.</p>
         <div class="tabel-scroll">
           <table>
             <thead><tr><th>Waar je op let</th><th>Goed teken</th><th>Reden tot twijfel</th></tr></thead>
@@ -252,10 +258,11 @@ const schema = [{
   <Faq
     vragen={[
       { v: 'Hebben jullie een kantoor in Friesland?', a: 'Nee. Assen is onze enige vestiging. We komen graag naar je toe in Friesland, of je komt langs aan de Lauwers 9 in Assen. Veel werk doen we op afstand, zonder dat je daar iets van merkt.' },
-      { v: 'Schrijven jullie ook teksten in het Fries?', a: 'Nee. Niemand van ons spreekt Fries. We schrijven in helder Nederlands. Een Friese tekst die een Fries direct als nep herkent, kost je meer vertrouwen dan hij oplevert.' },
       { v: 'Wat kost een marketingbureau in Friesland?', a: 'Bij ons begint lokale SEO bij € 295 per maand, SEO bij € 495 en een website bij € 250. Alles in één hand kost vanaf € 595 per maand. Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alle bedragen staan op de pagina <a href="/prijzen/">prijzen</a>.' },
       { v: 'Is lokaal gevonden worden in een Fries dorp de moeite waard?', a: 'Ja. In kleine plaatsen zijn er weinig sterke concurrenten in Google. Met een goed bedrijfsprofiel en een paar sterke pagina\'s sta je vaak snel bovenaan. En elke nieuwe klant telt.' },
       { v: 'Werken jullie ook voor bedrijven op de Waddeneilanden?', a: 'Ja. Dat gaat vooral op afstand, met telefoon en videogesprekken. Juist op een eiland telt vindbaarheid: gasten kiezen hun verblijf en hun restaurant vaak al voordat ze de boot nemen.' },
+      { v: 'Wat als het niets oplevert?', a: 'Bij maandelijkse diensten leggen we vooraf een doel vast, met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is.' },
+      { v: 'Waarom kost het bij jullie minder dan bij veel bureaus?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, testen technieken eerst op meer dan 100 eigen sites in ons <a href="/proeflab/">proeflab</a> en huren een plek in een bedrijfsverzamelpand in Assen.' },
       { v: 'Kunnen we eerst kennismaken zonder dat het iets kost?', a: 'Ja. Vraag de gratis website-analyse aan, of bel ons. We bellen binnen 15 minuten terug op werkdagen. Een kennismaking bij jou of bij ons in Assen kost je niets.' },
     ]}
   />
@@ -269,6 +276,8 @@ const schema = [{
       { label: 'Overzicht', titel: 'Ons werkgebied', href: '/werkgebied/', tekst: 'Alle plaatsen in het Noorden op een rij.' },
     ]}
   />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug en komt naar je toe, van Leeuwarden tot Lemmer.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij maakt met je het plan voor jouw deel van de provincie.' }, { slug: 'johan', taak: 'Werkt mee aan de online marketing voor klanten.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen." />
 
   <Actie titel="Ondernemer in Friesland?" tekst={`Bel of mail ${site.contactpersoon}. Hij belt je op werkdagen binnen 15 minuten terug en komt daarna graag bij je langs, van Leeuwarden tot Lemmer.`} />
 </Base>

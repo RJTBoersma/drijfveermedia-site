@@ -10,6 +10,8 @@ import Scene from '../../components/scenes/online-marketing-groningen.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
+import ZelfOfUitbesteden from '../../components/tool/ZelfOfUitbesteden.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-marketing-groningen/';
 const schema = [{
@@ -20,9 +22,10 @@ const schema = [{
   areaServed: [{ '@type': 'City', name: 'Groningen' }, { '@type': 'AdministrativeArea', name: 'Groningen' }],
   url: `${site.url}${url}`,
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', price: 595, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  dateModified: '2026-10-19',
 }, {
   '@type': 'WebPage',
-  citation: ['https://www.cbs.nl/nl-nl/cijfers/detail/86165NED'],
+  citation: ['https://www.cbs.nl/nl-nl/cijfers/detail/86165NED', 'https://convident.nl/online-marketing-bureau-groningen/', 'https://www.samonlinemarketing.nl/online-marketing-uitbesteden/'],
 }];
 ---
 <Base
@@ -32,7 +35,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Advies · Groningen" titel="Online marketing in Groningen: minder kanalen, meer klanten" prijs="vanaf € 595 per maand">
-    <p>Je hoeft niet overal te zijn. We zoeken uit welke twee of drie kanalen jouw bedrijf in Groningen klanten opleveren, en die doen we goed. Met één vast aanspreekpunt en zonder jaarcontract.</p>
+    <p>Voor mkb'ers in de stad en de Ommelanden die meer aanvragen willen, geen extra kanalen. We kiezen de twee of drie die jou in Groningen klanten opleveren, en doen die goed: SEO, Google Ads, je site en de opvolging. Met één vast aanspreekpunt en een doel op papier.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -121,49 +124,48 @@ const schema = [{
       <p>Wat er precies bij zit, lees je bij <a href="/online-marketing-uitbesteden/">online marketing uitbesteden</a>. Wil je liever iemand die een paar dagen per maand in je team meedraait? Dan is een <a href="/online-marketing-uitbesteden/interim-marketeer/">interim-marketeer</a> een optie. Heb je alleen een vraag of een second opinion nodig? Een <a href="/consult/">consult</a> van een uur kan ook.</p>
 
       <h2>Een meedenkend bureau zegt ook: stop hiermee</h2>
-      <p>Bureaus adviseren zelden om ergens mee te stoppen. Toch levert verspild budget schrappen soms meer op dan een nieuwe campagne. Daar steken we graag energie in.</p>
+      <p>Verspild budget schrappen levert soms meer op dan een nieuwe campagne.</p>
       <p>Een verzonnen voorbeeld. Een installatiebedrijf op Eemspoort betaalt al een jaar voor drie posts per week. De cijfers laten zien dat bijna alle aanvragen via Google binnenkomen. Ons advies is dan niet: meer posts. Het is: steek dat geld in je Google Bedrijfsprofiel en in twee sterke pagina's over je belangrijkste diensten. Dat geeft een betere vindbaarheid voor hetzelfde bedrag.</p>
 
-      <h2>Wat je elke maand van ons ziet</h2>
-      <p>Een rapportage die je zonder uitleg snapt. Geen veertig grafieken, maar de antwoorden op vier vragen.</p>
+      <h2>Wat je krijgt voor € 595 per maand</h2>
+      <ul class="vink">
+        <li><b>Eén plan op één A4.</b> Drie keuzes, een budget en een doel per maand.</li>
+        <li><b>Elke maand werk waar de grootste kans zit.</b> SEO, Google Ads, je site, teksten of e-mail: wat op dat moment het meeste oplevert.</li>
+        <li><b>Eén vast aanspreekpunt.</b> {site.contactpersoon} belt je terug en houdt alles bij. Je hoeft niemand twee keer iets uit te leggen.</li>
+        <li><b>Elke maand één A4.</b> Wat we deden, wat het opleverde en wat we nu doen.</li>
+        <li><b>Een doel met een datum.</b> Halen we het niet en ligt het aan ons, dan werken we een maand gratis door (<a href="/garantie/">de voorwaarden</a>).</li>
+      </ul>
+      <p>Advertentiebudget betaal je apart, rechtstreeks aan Google. Advertenties op Facebook, Instagram of LinkedIn, video en webshops doen we niet. De eerste aanvragen uit Google Ads komen vaak in de eerste weken, bij SEO reken je op drie tot zes maanden.</p>
+      <h3>Zo ziet zo'n A4 eruit</h3>
       <div class="tabel-scroll">
         <table>
-          <thead><tr><th>Vraag</th><th>Waar we naar kijken</th></tr></thead>
+          <thead><tr><th>Vraag</th><th>Antwoord in september (verzonnen)</th></tr></thead>
           <tbody>
-            <tr><td>Wat leverde het op?</td><td>Aanvragen, telefoontjes en offertes, per kanaal</td></tr>
-            <tr><td>Wat kostte het?</td><td>Ons werk en je advertentiebudget, per aanvraag</td></tr>
-            <tr><td>Wat werkte niet?</td><td>Kanalen of pagina's die achterblijven, met de reden</td></tr>
-            <tr><td>Wat doen we nu anders?</td><td>De twee of drie acties voor volgende maand</td></tr>
+            <tr><td>Wat leverde het op?</td><td>11 aanvragen: 7 via Google Ads, 3 via de kaart, 1 via de nieuwsbrief</td></tr>
+            <tr><td>Wat kostte het?</td><td>Advertentiebudget € 395, dus € 56 per aanvraag uit Ads</td></tr>
+            <tr><td>Wat werkte niet?</td><td>De advertenties op "advies" zonder plaatsnaam: veel klikken, geen aanvragen. Gestopt</td></tr>
+            <tr><td>Wat doen we nu?</td><td>Een pagina voor inkopers op Zernike, en de reviewlink in de bevestigingsmail</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Werkt iets niet, dan zeggen we dat. Je betaalt ook voor eerlijk advies over wat niet loopt.</p>
+      <p class="klein muted">(Verzonnen voorbeeld van het adviesbureau op Martini Trade Park hierboven. Het bureau en de cijfers bestaan niet.)</p>
 
-      <Tussenactie />
-      <h2>Zes vragen voordat je een marketingbureau kiest</h2>
-      <p>Zoek je hulp bij online marketing in Groningen? Ga je met ons in zee of met een bureau in de stad zelf, stel dan eerst deze vragen.</p>
+      <h2>Bureau in de stad, groot bureau of zelf doen?</h2>
+      <p>Ga je met ons in zee of met een bureau in de stad zelf, leg de routes naast elkaar. De prijzen komen van de bureaus zelf.</p>
       <div class="tabel-scroll">
         <table>
-          <thead><tr><th>Vraag</th><th>Waarom je hem stelt</th></tr></thead>
+          <thead><tr><th>Route</th><th>Wat het kost</th><th>Waar je op let</th></tr></thead>
           <tbody>
-            <tr><td>Wie is mijn vaste aanspreekpunt?</td><td>Bij een groot team weet je anders nooit wie je moet bellen</td></tr>
-            <tr><td>Waar rekenen we je op af?</td><td>Aanvragen en omzet zeggen meer dan bereik of likes</td></tr>
-            <tr><td>Hoe lang zit ik vast?</td><td>Een bureau dat zeker is van zijn werk, heeft geen jaarcontract nodig</td></tr>
-            <tr><td>Wat raad je me af?</td><td>Wie nooit nee zegt, verkoopt vooral uren</td></tr>
-            <tr><td>Mag ik een echte rapportage zien?</td><td>Snap je hem niet zonder uitleg, dan schiet hij zijn doel voorbij</td></tr>
-            <tr><td>Van wie zijn de accounts?</td><td>Je advertentieaccount, je profiel en je site horen op jouw naam te staan</td></tr>
+            <tr><td><b>Drijfveer Media</b>, vanuit Assen</td><td>Alles in één hand vanaf € 595 per maand, losse diensten vanaf € 295</td><td>Een halfuur rijden. Voor een gesprek komen we naar je toe</td></tr>
+            <tr><td>Bureau in de stad</td><td>Convident noemt op zijn pagina geen prijs en werkt met een maatwerkofferte</td><td>Vraag wie je vaste aanspreekpunt is en hoe lang je vastzit</td></tr>
+            <tr><td>Groter landelijk bureau</td><td>SAM Online Marketing noemt uitbesteden minder geschikt bij een budget onder € 1.000 per maand</td><td>Past als je groter wilt, met een eigen team per kanaal</td></tr>
+            <tr><td>Freelancer per kanaal</td><td>Per uur, per kanaal</td><td>Jij houdt de losse eindjes bij elkaar</td></tr>
+            <tr><td>Zelf doen</td><td>Je eigen avonden</td><td>Prima voor reviews en een nieuwsbrief. Ads en techniek kosten veel leergeld</td></tr>
           </tbody>
         </table>
       </div>
-
-      <h2>Een uur per week zelf aan de slag</h2>
-      <p>Wil je eerst zelf beginnen? Met een uur per week kom je verder dan je denkt.</p>
-      <ol>
-        <li>Reageer op elke nieuwe review in je Google Bedrijfsprofiel. Kort en persoonlijk.</li>
-        <li>Schrijf de vraag op die klanten deze week het vaakst stelden. Dat is je volgende pagina of mail.</li>
-        <li>Kijk in Search Console op welke zoekwoorden je net buiten de eerste pagina staat.</li>
-        <li>Stuur één keer per maand een korte mail aan je vaste klanten, met één tip en één aanbod.</li>
-      </ol>
+      <p>Welke route je ook kiest, vraag waar ze je op afrekenen, wat ze je afraden en van wie de accounts zijn. Je advertentieaccount, je profiel en je site horen op jouw naam te staan. Wie in Groningen werkt, moet ook de stad snappen: dat een klant in Hoogkerk niet zomaar naar de andere kant van de ring rijdt, en dat een inkoper op Zernike anders zoekt dan een gezin in Meerstad. Wat ons onderscheidt: elke techniek testen we eerst op meer dan 100 eigen sites in ons <a href="/proeflab/">proeflab</a>, en het doel waarop je ons afrekent staat op papier.</p>
+      <ZelfOfUitbesteden dienst="alles" tarief={65} uren={16} />
 
       <h2>Een marketingbureau voor Groningen en de Ommelanden</h2>
       <p>De provincie heet niet voor niets Stad en Ommelanden. Buiten de stad is het een andere markt. In de dorpen en kleine steden zijn er minder sterke websites. Een goed ingericht Google Bedrijfsprofiel, een pagina per werkgebied en een handvol reviews brengen je daar vaak sneller bovenaan dan in de stad. In het buitengebied belt een klant meestal de eerste die hij vindt.</p>
@@ -187,9 +189,8 @@ const schema = [{
         <li><b>Winkels bij de grens.</b> Winschoten en de rest van Oost-Groningen liggen tegen Duitsland aan. Wil je Duitse klanten, zorg dan dat je openingstijden, adres en aanbod ook voor een Duitser duidelijk zijn.</li>
       </ul>
 
-      <h2>Hoeft je bureau in de stad te zitten?</h2>
-      <p>Niet per se. Wij zitten in Assen, een half uur over de A28. Wat telt, is dat je marketingbureau de Groningse markt snapt. Dat een klant in Hoogkerk niet zomaar naar de andere kant van de ring rijdt. Dat het CBS in de gemeente ruim 36.000 hbo- en wo-studenten telt, met een eigen ritme. En dat een inkoper op Zernike anders zoekt dan een gezin in Meerstad.</p>
-      <p>Wie dat weet, kan prima van een afstand voor je werken. Kies je toch voor een bureau in Groningen, kijk dan vooral naar wat er na de handtekening gebeurt. Vraag naar een voorbeeld van een rapportage, en naar een klant die al jaren blijft.</p>
+      <h2>Wanneer we online marketing in Groningen afraden</h2>
+      <p>Heb je eigenlijk één ding nodig, zoals alleen een Bedrijfsprofiel dat klopt of alleen een nieuwe site, neem dan die losse dienst. Dat is goedkoper dan alles uitbesteden. Verkoop je vooral via een webshop, dan zijn we niet de juiste partij: webshops bouwen of optimaliseren doen we niet. En zit je marge in advertenties op Instagram of TikTok, dan heb je een socialemediabureau nodig.</p>
       <p>Lees ook over <a href="/seo-groningen/">SEO in Groningen</a> en <a href="/webdesign-groningen/">webdesign in Groningen</a>. Alle plaatsen waar we werken, staan in ons <a href="/werkgebied/">werkgebied</a>.</p>
     </div>
   </section>
@@ -201,10 +202,11 @@ const schema = [{
       { v: 'Wat kost online marketing in Groningen?', a: 'Online marketing uitbesteden begint bij € 595 per maand. Losse diensten kan ook: lokale SEO vanaf € 295 en SEO vanaf € 495 per maand. Google Ads-beheer kost vanaf € 249 per maand, plus het advertentiebudget. Alle prijzen zijn exclusief btw.' },
       { v: 'Zitten jullie in Groningen?', a: 'Nee, ons kantoor staat in Assen, een half uur rijden. Voor een kennismaking komen we naar je toe, daarna werken we vooral via telefoon en video.' },
       { v: 'Kan ik ook één losse dienst afnemen?', a: 'Ja. Alleen SEO, alleen lokale SEO of alleen e-mailmarketing kan prima. Soms is dat zelfs slimmer dan alles tegelijk.' },
+      { v: 'Waarom zijn jullie goedkoper dan veel bureaus?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, zodat onze mensen hun tijd steken in het werk zelf. Technieken testen we eerst op onze eigen sites. En we huren een plek in een bedrijfsverzamelpand in Assen. Voor dat bedrag krijg je wel een plan met keuzes: we doen niet alles tegelijk.' },
+      { v: 'Wat als het niets oplevert?', a: 'Bij de start leggen we een doel vast, met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals snel reageren op aanvragen.' },
       { v: 'Werken jullie ook voor B2B-bedrijven?', a: 'Ja. In Groningen zit ruim een kwart van de bedrijven in de zakelijke dienstverlening. Voor hen werken SEO en content die de vragen van inkopers beantwoordt vaak het best.' },
       { v: 'Welke kanalen doen jullie niet?', a: 'Advertenties op Facebook, Instagram, LinkedIn, TikTok of Microsoft doen we niet, en ook geen influencers. Webshops bouwen of optimaliseren evenmin; Google Shopping voor een bestaande webshop wel. Liever een paar dingen goed dan alles half.' },
       { v: 'Hoe snel levert online marketing in Groningen aanvragen op?', a: 'Je advertenties in Google staan online zodra Google ze heeft goedgekeurd, meestal binnen een werkdag. De eerste aanvragen komen vaak in de eerste weken. Bij SEO reken je op drie tot zes maanden, bij lokale SEO op een paar maanden om hoger te komen. We spreken vooraf af wat je wanneer mag verwachten.' },
-      { v: 'Schrijven jullie in het Gronings?', a: 'Nee, niemand van ons spreekt Gronings. We schrijven in helder Nederlands, en dat leest in Delfzijl net zo goed als in de stad.' },
       { v: 'Zit ik in Groningen vast aan een contract?', a: 'Nee. Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat.' },
     ]}
   />
@@ -218,6 +220,8 @@ const schema = [{
       { label: 'Overzicht', titel: 'Ons werkgebied', href: '/werkgebied/', tekst: 'Alle plaatsen in het Noorden op een rij.' },
     ]}
   />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, komt naar de stad voor het eerste gesprek en houdt je plan bij.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij kiest met je welke kanalen in Groningen het eerst aan de beurt zijn.' }, { slug: 'johan', taak: 'Werkt mee aan de online marketing voor klanten.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
   <Actie titel="Waar gaat jouw budget nu naartoe?" tekst={`Vertel ${site.contactpersoon} waar je nu geld aan uitgeeft. Hij belt je op werkdagen binnen 15 minuten terug en zegt wat hij zou houden en wat niet.`} />
 </Base>

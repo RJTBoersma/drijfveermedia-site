@@ -9,6 +9,8 @@ import Regiokaart from '../../../components/beeld/Regiokaart.astro';
 import Tekening from '../../../components/teken/Tekening.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import ZelfOfUitbesteden from '../../../components/tool/ZelfOfUitbesteden.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 
 const url = '/regio/drenthe/';
 const omtrek: [number, number][] = [[6.11, 52.7], [6.25, 52.66], [6.45, 52.665], [6.62, 52.63], [6.75, 52.65], [6.9, 52.64], [7.07, 52.64], [7.09, 52.75], [7.05, 52.85], [6.98, 52.95], [6.88, 53.05], [6.75, 53.12], [6.62, 53.2], [6.5, 53.2], [6.4, 53.18], [6.33, 53.1], [6.3, 53.02], [6.22, 52.92], [6.12, 52.85], [6.1, 52.78]];
@@ -50,6 +52,9 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: { '@type': 'AdministrativeArea', name: 'Drenthe' },
   url: `${site.url}${url}`,
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', price: 595, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  dateModified: '2026-10-19',
+  citation: ['https://thesuccessagency.nl/online-marketing-bureau-drenthe/', 'https://ralfvanveen.com/seo-specialist-assen/'],
 }];
 ---
 <Base
@@ -58,8 +63,8 @@ const schema = [{
   kruimels={[{ naam: 'Werkgebied', url: '/werkgebied/' }, { naam: 'Drenthe', url }]}
   schema={schema}
 >
-  <Hero kicker="Werkgebied · Drenthe" titel="Marketingbureau in Drenthe, met kantoor in Assen">
-    <p>Al sinds 2011 helpen we ondernemers in Drenthe om online gevonden, genoemd en gekozen te worden. Een marketingbureau uit Drenthe zelf, voor de hovenier in Roden en de installateur in Emmen.</p>
+  <Hero kicker="Werkgebied · Drenthe" titel="Marketingbureau in Drenthe, met kantoor in Assen" prijs="alles in één hand vanaf € 595 per maand">
+    <p>Voor de hovenier in Roden en de installateur in Emmen: sinds 2011 zorgen we dat Drentse ondernemers online gevonden, genoemd en gekozen worden. Losse diensten kan ook, vanaf € 295 per maand. Met een doel op papier. Langskomen aan de Lauwers kan op werkdagen.</p>
     <Regiokaart slot="beeld" naam="Drenthe" omtrek={omtrek} plaatsen={plaatsen} punten={[{ soort: 'tt', lat: 52.955, lng: 6.5, label: 'TT-circuit' }, { soort: 'hunebed', lat: 52.93, lng: 6.8, label: 'Hunebedden' }, { soort: 'boom', lat: 52.82, lng: 6.3 }, { soort: 'boom', lat: 53.06, lng: 6.72 }, { soort: 'boom', lat: 52.76, lng: 6.62 }, { soort: 'boom', lat: 52.97, lng: 6.97 }, { soort: 'boom', lat: 53.1, lng: 6.55 }]} />
   </Hero>
 
@@ -174,7 +179,12 @@ const schema = [{
       </div>
       <p>De advertentie in het blad is in dit voorbeeld vier keer te duur. Die schrappen levert meer op dan een nieuwe campagne. Dat soort keuzes maken we samen, op basis van echte cijfers uit je eigen bedrijf. Bureaus adviseren te weinig om ergens mee te stoppen. Wij doen dat wel.</p>
 
+      <h3>Zo ziet de A4 van het kozijnenbedrijf er na drie maanden uit</h3>
+      <p class="klein muted">Verzonnen voorbeeld. Gedaan: advertentie in het blad gestopt, Zuidwolde en Ruinen in het servicegebied, pagina over kunststof kozijnen met prijzen. Opgeleverd: 13 aanvragen, € 46 per aanvraag. Volgende maand: reviewlink na elke montage.</p>
+
       <h2>Zo kies je een marketingbureau in Drenthe</h2>
+      <p>Bij ons krijg je voor € 595 per maand alles in één hand: een plan op één A4, elke maand werk aan de kanalen die nu het meeste opleveren, {site.contactpersoon} als vast aanspreekpunt, elke maand één A4 met de resultaten en een doel met een datum. Halen we dat doel niet en ligt het aan ons, dan werken we een maand gratis door. Wat vragen anderen? The Success Agency, in de top 3 voor "marketingbureau drenthe", schrijft dat een basis SEO-pakket in Drenthe vaak € 500 tot € 800 per maand kost en uitgebreide online marketing € 2.000 tot € 5.000. Ralf van Veen noemt € 400 tot € 800 per maand gangbaar bij Drentse bureaus voor SEO. Doe je het liever zelf, reken dan eerst uit wat je eigen uren kosten:</p>
+      <ZelfOfUitbesteden dienst="alles" tarief={60} uren={12} />
       <p>Stel deze vragen, aan ons en aan elk ander bureau:</p>
       <ul class="vink">
         <li>Waarop mag ik jullie afrekenen? Vraag om een doel in aanvragen of telefoontjes, niet in "bereik".</li>
@@ -195,6 +205,7 @@ const schema = [{
       { v: 'Komen jullie ook langs?', a: 'Ja. In Drenthe komen we graag bij je langs. Je kunt ook bij ons in Assen langskomen, of alles telefonisch en online regelen.' },
       { v: 'Wat kost online marketing in Drenthe?', a: 'Dat hangt af van wat je nodig hebt. Lokale SEO begint bij € 295 per maand, een website bij € 250 en alles uitbesteden bij € 595 per maand. Alle prijzen staan op de pagina <a href="/prijzen/">prijzen</a>.' },
       { v: 'Hoe begint een samenwerking?', a: 'Met een telefoontje. We vragen wat je wilt bereiken en kijken daarna gratis naar je website en je vindbaarheid. Je hoort welke stappen het meeste opleveren en wat dat kost. Daarna beslis jij.' },
+      { v: 'Waarom kost het bij jullie minder dan bij veel bureaus?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, testen technieken eerst op meer dan 100 eigen sites in ons <a href="/proeflab/">proeflab</a> en huren een plek in een bedrijfsverzamelpand in Assen. Zo gaat je geld naar het werk zelf.' },
       { v: 'Is het in Drenthe makkelijker om bovenaan te komen?', a: 'Vaak wel. In veel branches is de concurrentie hier lager dan in grote steden. Dat betekent niet dat het vanzelf gaat, maar wel dat je sneller resultaat ziet.' },
       { v: 'Wat als het niet werkt?', a: 'Bij maandelijkse diensten spreken we vooraf een doel af, met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is om het doel te halen. Lees de details bij onze <a href="/garantie/">garantie</a>.' },
       { v: 'Adverteren jullie voor Drentse bedrijven ook op Facebook en Instagram?', a: 'Nee. We beheren wel social media kanalen, maar adverteren op social media doen we niet. Onze kracht ligt bij Google, AI-zoekmachines en je website.' },
@@ -211,7 +222,9 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Ondernemer in Drenthe?" tekst={`Bel of mail ${site.contactpersoon}. Op werkdagen heb je hem binnen 15 minuten aan de lijn, en langskomen in Assen kan altijd.`} />
+  <WieDoetHet titel="Wie je aan de Lauwers in Assen tegenkomt" wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug en rijdt naar Emmen, Meppel of Coevorden voor het eerste gesprek.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie voor Drentse ondernemers en ver daarbuiten.' }, { slug: 'evelien', taak: 'Richtte Drijfveer Media in 2011 met Robert op en houdt de zaak draaiende.' }, { slug: 'johan', taak: 'Werkt mee aan de online marketing voor klanten.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen." />
+
+  <Actie titel="Ondernemer in Drenthe?" tekst={`Bel of mail ${site.contactpersoon}. Op werkdagen heb je hem binnen 15 minuten aan de lijn, en langskomen in Assen kan op werkdagen tussen 8.00 en 17.00 uur.`} />
 </Base>
 <style>
   .plaatsen .card { gap: 12px; }

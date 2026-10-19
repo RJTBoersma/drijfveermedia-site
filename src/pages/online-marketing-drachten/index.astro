@@ -11,6 +11,8 @@ import Scene from '../../components/scenes/online-marketing-drachten.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
+import ZelfOfUitbesteden from '../../components/tool/ZelfOfUitbesteden.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-marketing-drachten/';
 const schema = [{
@@ -20,7 +22,9 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: [{ '@type': 'City', name: 'Drachten' }, { '@type': 'AdministrativeArea', name: 'Smallingerland' }, { '@type': 'AdministrativeArea', name: 'Friesland' }],
   url: `${site.url}${url}`,
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 595, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 595, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  dateModified: '2026-10-19',
+  citation: ['https://brandmerck.nl/online-marketing-drachten/', 'https://travyk.nl/diensten/seo/', 'https://www.samonlinemarketing.nl/online-marketing-uitbesteden/'],
 }];
 ---
 <Base
@@ -30,7 +34,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Advies · Drachten" titel="Online marketing in Drachten: één plan en één budget voor meer aanvragen" prijs="vanaf € 595 per maand">
-    <p>SEO bij de een, advertenties bij de ander en social media doe je 's avonds zelf. Niemand ziet het geheel. Bij online marketing in Drachten nemen wij het geheel over, met één plan, één budget en één aanspreekpunt.</p>
+    <p>Voor ondernemers op De Haven, in het centrum en de dorpen bij wie SEO bij de een ligt, advertenties bij de ander en social media 's avonds zelf gebeurt. Wij nemen het geheel over: één plan, één budget, één aanspreekpunt en een doel waar je ons op afrekent.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -182,8 +186,16 @@ const schema = [{
         <li>Structurele verbeteringen aan je website, zodat meer bezoekers bellen of mailen.</li>
         <li>Elke maand één A4: wat we deden, wat het opleverde en wat we nu doen. Zonder marketeer ernaast te begrijpen.</li>
         <li>Iemand die de ontwikkelingen bijhoudt, zoals AI-antwoorden in Google en adverteren in ChatGPT.</li>
+        <li>Een doel met een datum. Halen we het niet en ligt het aan ons, dan werken we een maand gratis door. Lees de <a href="/garantie/">garantie</a>.</li>
       </ul>
-      <p>Heb je zelf een marketeer en zoek je vooral een tweede paar handen, dan is een <a href="/online-marketing-uitbesteden/interim-marketeer/">interim-marketeer</a> vanaf € 95 per uur misschien handiger. Eerst een uur sparren kan ook, met een <a href="/consult/">consult</a> vanaf € 85 per uur.</p>
+      <div class="kader">
+        <p class="kader-titel">Verzonnen voorbeeld: de A4 van de warmtepompinstallateur, maand drie</p>
+        <p>Opgeleverd: 12 aanvragen, € 58 per aanvraag uit Ads, 3 opdrachten. Gestopt: de advertenties op "warmtepomp subsidie", veel klikken van mensen die alleen informatie zochten. Gedaan: de offertepagina ingekort, waardoor meer bezoekers belden. Volgende maand: een uitlegpagina over hybride of volledig elektrisch.</p>
+      </div>
+      <h3>Wat bureaus in de regio vragen</h3>
+      <p>Brandmerck en The Success Agency, bovenaan voor "online marketing drachten", noemen op die pagina's geen prijs. Travyk noemt € 800 per maand voor basis Google Ads-beheer en € 1.500 voor een basis SEO-abonnement. SAM Online Marketing noemt uitbesteden minder geschikt bij een budget onder € 1.000 per maand. Zelf doen kost je vooral avonden. Reken het na:</p>
+      <ZelfOfUitbesteden dienst="alles" tarief={65} uren={14} />
+      <p>Heb je zelf een marketeer en zoek je vooral een tweede paar handen, dan is een <a href="/online-marketing-uitbesteden/interim-marketeer/">interim-marketeer</a> vanaf € 95 per uur misschien handiger. Eerst een uur sparren kan ook, met een <a href="/consult/">consult</a> vanaf € 85 per uur. Heb je maar één ding nodig, zoals alleen een Bedrijfsprofiel, neem dan die losse dienst. En verkoop je vooral via een webshop, dan zijn we niet de juiste partij.</p>
 
       <h2>De eerste negentig dagen</h2>
       <p>We beginnen waar de grootste kans op snel verschil zit. Daarna perfectioneren we. Zo ziet dat er bij de meeste klanten uit:</p>
@@ -206,9 +218,11 @@ const schema = [{
   <Faq
     vragen={[
       { v: 'Wat kost online marketing in Drachten?', a: 'Online marketing uitbesteden begint bij € 595 per maand, exclusief btw. Je advertentiebudget komt daar los bij. Na een eerste gesprek krijg je een voorstel met een vaste prijs en concrete doelen.' },
-      { v: 'Hoeveel advertentiebudget heb ik nodig?', a: 'Dat hangt af van je klikkosten en wat een klant je oplevert. Reken eerst uit wat een aanvraag maximaal mag kosten, zoals in het rekenvoorbeeld op deze pagina. Veel lokale bedrijven beginnen met een paar honderd euro per maand en schalen op als de kosten per aanvraag goed zijn.' },
+      { v: 'Hoeveel advertentiebudget heb ik nodig?', a: 'Dat hangt af van je klikkosten en wat een klant je oplevert. Reken eerst uit wat een aanvraag maximaal mag kosten, zoals in het rekenvoorbeeld op deze pagina. Begin met een bedrag dat je kunt missen en schaal op als de kosten per aanvraag goed zijn.' },
       { v: 'Moet ik alle kanalen tegelijk inzetten?', a: 'Nee. We beginnen met de kanalen waar de grootste kans op snel resultaat zit. Pas als die goed lopen, breiden we uit.' },
       { v: 'Ik zit op De Haven en verkoop aan bedrijven. Werkt dit ook voor mij?', a: 'Ja, maar de aanpak is anders. Zakelijke kopers zoeken vaak zonder plaatsnaam en vergelijken lang. Dan werken vakpagina\'s, gerichte advertenties en een goede opvolging van offertes beter dan een kaartje in Google.' },
+      { v: 'Wat als het niets oplevert?', a: 'Bij de start leggen we een doel vast, met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals snel reageren op aanvragen.' },
+      { v: 'Waarom kost het bij jullie minder dan bij veel bureaus?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, testen technieken eerst op onze eigen sites en huren een plek in een bedrijfsverzamelpand in Assen. Zo gaat je geld naar het werk zelf.' },
       { v: 'Kan ik mijn bestaande Google Ads-account houden?', a: 'Ja. We nemen het beheer over en kijken eerst wat er nu gebeurt voordat we iets veranderen. Het account blijft van jou.' },
       { v: 'Adverteren jullie voor mijn zaak in Drachten ook op Facebook en Instagram?', a: 'Nee. Advertenties op social media doen we niet. We beheren wel je sociale kanalen, met berichten en reacties, via <a href="/social-media-beheer/">social media beheer</a>.' },
       { v: 'Zit ik in Drachten vast aan een jaarcontract?', a: 'Nee. Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat.' },
@@ -225,6 +239,8 @@ const schema = [{
       { label: 'Buren', titel: 'Online marketing in Leeuwarden', href: '/online-marketing-leeuwarden/', tekst: 'Marketing voor ondernemers in de Friese hoofdstad.', teken: 'kompas' },
     ]}
   />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, rijdt naar Drachten voor het eerste gesprek en stemt de kanalen op elkaar af.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij maakt met je de twee sporen: zakelijk en particulier.' }, { slug: 'johan', taak: 'Werkt mee aan de online marketing voor klanten.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen." />
 
   <Actie titel="Wie draait er nu aan jouw knoppen?" tekst={`Vertel ${site.contactpersoon} wat je nu doet aan marketing en wat het oplevert. Hij belt je op werkdagen binnen 15 minuten terug en zegt wat hij zou laten vallen.`} />
 </Base>

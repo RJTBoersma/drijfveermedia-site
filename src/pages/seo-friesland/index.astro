@@ -12,9 +12,11 @@ import Scene from '../../components/scenes/seo-friesland.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
+import KaartCheck from '../../components/tool/KaartCheck.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const url = '/seo-friesland/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'provincie', titel: 'Friesland in cijfers' },
   { id: 'plaatsnamen', titel: 'Zoeken op plaats, niet op gemeente' },
@@ -24,7 +26,7 @@ const hoofdstukken = [
   { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld: hovenier in het zuiden' },
   { id: 'planning', titel: 'Het eerste half jaar' },
   { id: 'taal', titel: 'Fries of Nederlands?' },
-  { id: 'kiezen', titel: 'Vijf vragen voor elk bureau' },
+  { id: 'kiezen', titel: 'Bureau, specialist of zelf' },
   { id: 'voor-wie', titel: 'Voor wie het loont' },
   { id: 'kosten', titel: 'Kosten en afspraken' },
 ];
@@ -59,7 +61,8 @@ const schema = [{
   areaServed: { '@type': 'AdministrativeArea', name: 'Friesland' },
   url: `${site.url}${url}`,
   dateModified: datum,
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  citation: ['https://travyk.nl/diensten/seo/', 'https://web-wings.nl/seo-friesland/', 'https://heibrink.nl/wat-kost-seo/'],
 }];
 ---
 <Base
@@ -69,8 +72,8 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gevonden · Friesland" titel="SEO in Friesland: gevonden van Leeuwarden tot de eilanden" prijs="vanaf € 495 per maand">
-    <p>Je klanten zitten in Leeuwarden, in een dorp als Stiens of op Terschelling. SEO in Friesland zorgt dat ze jou vinden, waar ze ook zoeken. Wij doen dat vanuit Assen, en komen graag naar je toe.</p>
-    <p>Alleen gevonden worden in je eigen regio? Lokale SEO kan vanaf € 295 per maand.</p>
+    <p>Voor ondernemers met klanten in Leeuwarden, in een dorp als Stiens of op Terschelling. Wij zorgen dat ze jou vinden, waar ze ook zoeken, met één site die in je hele werkgebied scoort. Met een doel op papier en elke maand één A4.</p>
+    <p>Alleen op de kaart staan? Lokale SEO kan vanaf € 295 per maand.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -110,13 +113,8 @@ const schema = [{
 
         <h2 id="lokaal">Lokale vindbaarheid in een provincie vol dorpen</h2>
         <p>Bij een zoekopdracht als "hovenier" of "kapper" toont Google eerst bedrijven op de kaart. Volgens Google bepalen drie dingen wie daar staat: relevantie, afstand en prominentie. In een provincie met zoveel kleine kernen is de afstand tot je klant al snel groter dan de afstand tot je concurrent. Wat helpt:</p>
-        <ul class="vink">
-          <li>Een volledig Google Bedrijfsprofiel, met de juiste hoofdcategorie en echte foto's.</li>
-          <li>Een servicegebied als je bij klanten thuis komt. Google staat er maximaal 20 toe, op plaats of postcode, binnen ongeveer twee uur rijden van je bedrijf. Kies de plaatsen waar je echt werk wilt.</li>
-          <li>Dezelfde gegevens achter je bedrijfsnaam op elke plek: naam, adres en telefoonnummer, overal gelijk. Wat Google vindt op andere sites, telt mee.</li>
-          <li>Reviews van klanten uit de dorpen waar je werkt. Volgens Google helpen meer reviews en positieve beoordelingen je positie op de kaart.</li>
-          <li>Een pagina per dienst die laat zien in welke plaatsen je actief bent, met echte voorbeelden.</li>
-        </ul>
+        <p>Een volledig profiel, een servicegebied met de plaatsen waar je echt werkt (maximaal 20, binnen ongeveer twee uur rijden), overal dezelfde gegevens en reviews van klanten uit die dorpen. Hoe sta jij ervoor? Zoek op je vak plus je eigen plaats en loop de punten na.</p>
+        <KaartCheck plaats="Sneek" vak="hovenier" />
         <p>Meer over dit deel van het werk lees je bij <a href="/lokale-seo/">lokale SEO</a>, vanaf € 295 per maand.</p>
 
         <h2 id="opbouw">Een SEO-strategie voor heel Friesland: één site, slimme opbouw</h2>
@@ -195,16 +193,21 @@ const schema = [{
         <p>Wij spreken zelf geen Fries. Je teksten schrijven we in het Nederlands. Wil je een Friese pagina, bijvoorbeeld omdat je klanten dat waarderen, laat die dan schrijven door iemand die de taal echt beheerst. Een stroeve vertaling kost meer vertrouwen dan hij oplevert.</p>
 
         <Tussenactie />
-        <h2 id="kiezen">SEO in Friesland uitbesteden: vijf vragen voor elk bureau</h2>
-        <p>Er zijn genoeg bureaus die SEO in Friesland aanbieden, in de provincie zelf en daarbuiten. Stel deze vragen, ook aan ons, voordat je tekent.</p>
-        <ol>
-          <li><strong>Wat doen jullie de eerste drie maanden, concreet?</strong> Een goed antwoord noemt pagina's, techniek en links. Met een vaag antwoord over "optimaliseren" kom je niet verder.</li>
-          <li><strong>Op welk doel mag ik jullie afrekenen?</strong> Posities op afgesproken zoekwoorden, of het aantal aanvragen. Niet alleen "meer verkeer".</li>
-          <li><strong>Hoe lang zit ik vast?</strong> Een bureau hoort te verdienen aan klanten die blijven omdat het werkt, niet aan een contract van een jaar.</li>
-          <li><strong>Waar komen de links vandaan?</strong> Vraag om voorbeelden. Gekochte links van sites zonder bezoekers kunnen je juist schade doen.</li>
-          <li><strong>Wat raden jullie af?</strong> Een bureau dat nooit zegt dat iets geen zin heeft, vertelt je niet het hele verhaal. Soms is stoppen met een kanaal het beste advies.</li>
-        </ol>
-        <p>Een rapport waar je een marketeer naast nodig hebt, schiet zijn doel voorbij. Vraag dus ook om een voorbeeld van een maandrapport. Begrijp je het zonder uitleg, dan zit je goed.</p>
+        <h2 id="kiezen">SEO in Friesland uitbesteden: bureau, specialist of zelf?</h2>
+        <p>Er zijn genoeg bureaus die SEO in Friesland aanbieden, in de provincie zelf en daarbuiten. Zo verhouden de routes zich, met de prijzen die aanbieders zelf noemen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Wat het kost</th><th>Waar je op let</th></tr></thead>
+            <tbody>
+              <tr><td><b>Drijfveer Media</b>, vanuit Assen</td><td>SEO vanaf € 495, lokale SEO vanaf € 295 per maand</td><td>Een uur rijden naar Leeuwarden of Heerenveen. Voor een gesprek komen we langs</td></tr>
+              <tr><td>Fries bureau met pakketten</td><td>Travyk noemt € 800 per maand voor lokale SEO en € 1.500 voor een basis SEO-abonnement</td><td>Vraag wat er per maand in zit en hoe lang je vastzit</td></tr>
+              <tr><td>Bureau met een gratis scan</td><td>Web Wings, bovenaan voor "seo friesland", noemt op die pagina geen prijs</td><td>Vraag na de scan om een vaste prijs en een doel</td></tr>
+              <tr><td>Zelfstandige specialist</td><td>Volgens Heibrink meestal € 300 tot € 1.500 per maand</td><td>Eén persoon doet alles. Vraag wat er bij ziekte gebeurt</td></tr>
+              <tr><td>Zelf doen</td><td>Je eigen tijd</td><td>Profiel en reviews lukken prima. Techniek en links kosten veel uren</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Stel elk bureau, ook ons, deze vragen voordat je tekent: wat doen jullie de eerste drie maanden concreet, op welk doel mag ik jullie afrekenen, hoe lang zit ik vast, waar komen de links vandaan, en wat raden jullie af? Vraag ook om een voorbeeld van een maandrapport. Begrijp je het zonder uitleg, dan zit je goed. Meer bedragen staan in <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
 
         <h2 id="voor-wie">Voor wie SEO wel en niet loont</h2>
         <p>SEO is geen middel voor elk bedrijf. Dit is ons lijstje.</p>
@@ -222,7 +225,11 @@ const schema = [{
         <p>Twijfel je? In de gratis scan rekenen we het samen na. Valt de rekensom niet goed uit, dan hoor je dat ook.</p>
 
         <h2 id="kosten">Wat het kost, en hoe we elkaar zien</h2>
-        <p>SEO begint bij € 495 per maand, lokale SEO bij € 295 per maand. Beide exclusief btw en maandelijks opzegbaar. Bij SEO krijg je stijggarantie: halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Wel moet jij doen wat nodig is, zoals reviews vragen en teksten op tijd nakijken.</p>
+        <p>SEO begint bij € 495 per maand, lokale SEO bij € 295 per maand. Beide exclusief btw en per maand opzegbaar, met één maand opzegtermijn. Voor SEO krijg je het werk uit de planning hierboven, elke maand één A4 en een doel met een datum. Halen we dat doel niet en ligt het aan ons, dan werken we een maand gratis door (<a href="/garantie/">stijggarantie</a>). Wel moet jij doen wat nodig is, zoals reviews vragen en teksten op tijd nakijken. Advertentiebudget zit er niet in, en webshops optimaliseren doen we niet.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: de A4 van Hoveniersbedrijf De Haan, maand vier</p>
+          <p>Gedaan: pagina's voor Heerenveen en Joure met zes projecten, Gorredijk en Wolvega op de werkgebiedpagina, link van de kwekerij. Opgeleverd: "hovenier joure" van plek 14 naar plek 6, drie aanvragen via de site. Niet gelukt: de pagina over schuttingen staat nog op pagina 2. Volgende maand: die pagina uitbreiden met prijzen.</p>
+        </div>
         <p>Ons enige kantoor staat in Assen. Drachten ligt op zo'n 50 minuten rijden, Heerenveen en Leeuwarden op ongeveer een uur. Een afspraak bij jou op de zaak plannen we graag, of je komt naar de Lauwers. Je praat dan met een SEO-specialist. En je hoeft niet lang te wachten: op werkdagen bellen we binnen 15 minuten terug.</p>
         <p>Voor de grootste plaatsen hebben we een eigen pagina met wat daar speelt:</p>
         <ul class="chips fries-plaatsen">
@@ -244,10 +251,11 @@ const schema = [{
       { v: 'Wat kost SEO in Friesland?', a: 'SEO begint bij € 495 per maand, lokale SEO bij € 295 per maand. Alles exclusief btw en maandelijks opzegbaar. Na de gratis scan hoor je wat er voor jouw bedrijf nodig is.' },
       { v: 'Moet een SEO-bureau voor Friesland ook in Friesland zitten?', a: 'Nee. Ons enige kantoor staat aan de Lauwers 9 in Assen. Naar Drachten is het zo\'n 50 minuten rijden, naar Leeuwarden en Heerenveen ongeveer een uur. We komen langs, of regelen het telefonisch en online.' },
       { v: 'Moet ik voor elke Friese plaats een pagina maken?', a: 'Nee. Maak een eigen pagina alleen voor plaatsen waar je veel werkt en iets eigens kunt laten zien. De rest zet je op een goede werkgebiedpagina, met projecten als bewijs.' },
-      { v: 'Schrijven jullie ook teksten in het Fries?', a: 'Nee, niemand van ons spreekt Fries. We schrijven in het Nederlands. Wil je een Friese versie, dan werk je het best met een Friese vertaler.' },
       { v: 'Werkt SEO ook voor een bedrijf op de Waddeneilanden?', a: 'Ja. Gasten zoeken ruim van tevoren naar een plek om te slapen, te eten of te huren. Wie dan bovenaan staat, maakt de meeste kans. Begin wel op tijd, liefst in het najaar.' },
       { v: 'Hoe snel sta ik op de kaart in mijn Friese plaats?', a: 'Kleine aanpassingen aan je Bedrijfsprofiel zie je vaak binnen een paar weken terug op de kaart, zeker als je profiel eerst onvolledig was. Hoger komen in je regio kost meestal een paar maanden.' },
       { v: 'Hoe snel stijg ik met SEO in Friesland in de gewone zoekresultaten?', a: 'Reken op drie tot zes maanden voor duidelijke stijgingen. Technische verbeteringen zie je soms al binnen een paar weken terug. Je eerste maandoverzicht krijg je na een maand, met wat er gedaan is en wat er bewoog.' },
+      { v: 'Wat als SEO in Friesland niets oplevert?', a: 'Dan staat het doel op papier. Halen we het niet vóór de afgesproken datum en ligt het aan ons, dan werken we een maand gratis door. Je zegt per maand op, met één maand opzegtermijn, per e-mail.' },
+      { v: 'Waarom kost het bij jullie minder dan bij veel Friese bureaus?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, testen technieken eerst op onze eigen sites en huren een plek in een bedrijfsverzamelpand in Assen. De tijd gaat naar het werk zelf.' },
       { v: 'Wordt mijn bedrijf ook in ChatGPT en Google AI genoemd?', a: 'Goede SEO helpt daarbij, maar het is niet hetzelfde. Wil je weten wat AI nu over je zegt, vraag dan een <a href="/generative-engine-optimization/ai-vindbaarheidsanalyse/">AI-vindbaarheidsanalyse</a> aan.' },
     ]}
   />
@@ -262,7 +270,9 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Benieuwd waar je staat in Friesland?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en vertelt waar je grootste kans zit.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, zoekt op jouw vak in je Friese plaatsen en zoekt links uit de regio.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij maakt met je de planning voor het eerste half jaar.' }]} />
+
+  <Actie titel="Waar sta jij op de kaart in Friesland?" tekst={`${site.contactpersoon} zoekt op jouw vak in de plaatsen waar je werkt, en belt je met wat hij ziet op de kaart en in Google. Op werkdagen binnen 15 minuten.`} />
 </Base>
 <style>
   .fries-plaatsen { margin: 4px 0 20px; padding-left: 0; }

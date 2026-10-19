@@ -12,6 +12,8 @@ import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
 import SeoOpbrengst from '../../components/tool/SeoOpbrengst.astro';
+import KaartCheck from '../../components/tool/KaartCheck.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const url = '/seo-groningen/';
 const schema = [{
@@ -22,6 +24,8 @@ const schema = [{
   areaServed: [{ '@type': 'City', name: 'Groningen' }, { '@type': 'AdministrativeArea', name: 'Groningen' }],
   url: `${site.url}${url}`,
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', price: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  dateModified: '2026-10-19',
+  citation: ['https://ralfvanveen.com/seo-specialist-groningen/'],
 }];
 ---
 <Base
@@ -31,8 +35,8 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gevonden · Groningen" titel="SEO in Groningen: bovenaan bij klanten uit de stad" prijs="vanaf € 495 per maand">
-    <p>SEO in Groningen is werken in de drukste markt van het Noorden. Per vak vechten tientallen bedrijven om dezelfde plekken in Google. Wij zoeken uit waar jouw kans zit en bouwen die uit. Met stijggarantie.</p>
-    <p>Alleen gevonden worden in je eigen regio? Lokale SEO kan vanaf € 295 per maand.</p>
+    <p>Voor ondernemers die klanten willen uit de stad, Haren en de dorpen. In de drukste markt van het Noorden zoeken we uit waar jouw kans zit, en zetten we je pagina's, je Bedrijfsprofiel en je links daarop in. Halen we het afgesproken doel niet door ons, dan werken we een maand gratis door.</p>
+    <p>Alleen op de kaart staan? Lokale SEO kan vanaf € 295 per maand.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -87,27 +91,19 @@ const schema = [{
       </div>
       <p>Die Engelse regel is in Groningen geen detail. Het CBS telt in de gemeente ruim 22.000 wo-studenten en ruim 14.000 hbo-studenten (voorlopige cijfers, 2025). Een deel van hen zoekt in het Engels. Verkoop je aan studenten of internationale medewerkers, dan laat je met alleen Nederlandse pagina's klanten liggen.</p>
 
-      <h2>Drie dingen waar Google lokaal op let</h2>
-      <p>Google noemt in zijn eigen helpcentrum drie factoren voor lokale resultaten: relevantie, afstand en prominentie. Je kunt ze niet alle drie even makkelijk beïnvloeden.</p>
-    </div>
-    <div class="raster drie">
-      <div class="card"><Tekening naam="doel" /><h3>Relevantie</h3><p>Past je bedrijf bij de zoekvraag? Google leest dat uit je website en je profiel. Een pagina per dienst werkt beter dan één pagina met alles.</p></div>
-      <div class="card"><Tekening naam="pin" vertraging={150} /><h3>Afstand</h3><p>Hoe ver zit je van de zoeker? Daar verander je weinig aan. Wel kun je laten zien welke wijken en dorpen je bedient, van Hoogkerk tot Haren.</p></div>
-      <div class="card"><Tekening naam="ster" vertraging={300} /><h3>Prominentie</h3><p>Hoe bekend ben je? Google noemt zelf hoeveel websites naar je linken en hoeveel reviews je hebt. Backlinks van sites uit de stad Groningen tellen dus mee.</p></div>
-    </div>
-    <div class="tekst" style="margin-top:48px">
-      <Tussenactie />
+      <h2>Sta jij in het kaartje van de stad?</h2>
+      <p>Google noemt in zijn eigen helpcentrum drie factoren voor lokale resultaten: relevantie, afstand en prominentie. Afstand verander je niet. Wel kun je laten zien welke wijken en dorpen je bedient, van Hoogkerk tot Haren. En backlinks van sites uit de stad tellen mee voor je bekendheid. Doe de check en zie in vijf minuten waar je staat.</p>
+      <KaartCheck plaats="Groningen" vak="installateur" />
+
       <h2>Je Google Bedrijfsprofiel in de stad</h2>
-      <p>Voor de kaart in Google is je Google Bedrijfsprofiel het belangrijkste stuk. Volgens Google maken bedrijven met complete en juiste gegevens meer kans om getoond te worden. Vier punten waar het in Groningen vaak misgaat:</p>
+      <p>Voor de kaart is je Google Bedrijfsprofiel het belangrijkste stuk. Twee punten waar het bij SEO in Groningen vaak misgaat:</p>
       <ol>
-        <li><strong>Winkel, servicegebied of allebei.</strong> Komen klanten bij jou? Dan toon je je adres. Ga je naar de klant toe, zoals een schilder of een glazenwasser? Dan stel je een servicegebied in. Doe je allebei, dan mag dat ook. Google noemt dat een hybride bedrijf.</li>
-        <li><strong>Een servicegebied dat klopt.</strong> Je mag maximaal 20 gebieden kiezen, op plaats of postcode. Google vraagt het totale gebied binnen ongeveer twee uur rijden te houden. Kies dus Groningen, Haren, Hoogkerk en de dorpen waar je echt komt. Niet heel Nederland.</li>
-        <li><strong>De juiste hoofdcategorie.</strong> "Installateur" en "loodgieter" zijn voor Google twee verschillende dingen. Kies de categorie die past bij waar je het meest mee verdient.</li>
-        <li><strong>Reviews, en reageren.</strong> Google zegt letterlijk dat reageren op reviews laat zien dat je feedback waardeert. Vraag elke tevreden klant om een review via een vaste link.</li>
+        <li><strong>Winkel, servicegebied of allebei.</strong> Komen klanten bij jou, dan toon je je adres. Ga je naar de klant, zoals een schilder of glazenwasser, dan stel je een servicegebied in. Allebei mag ook: Google noemt dat een hybride bedrijf.</li>
+        <li><strong>Een servicegebied dat klopt.</strong> Je kiest maximaal 20 gebieden, op plaats of postcode, binnen ongeveer twee uur rijden. Kies dus Groningen, Haren, Hoogkerk en de dorpen waar je echt komt. Niet heel Nederland.</li>
       </ol>
       <p>Hoe je het profiel stap voor stap inricht, lees je in de gids over het <a href="/kennisbank/gidsen/google-bedrijfsprofiel/">Google Bedrijfsprofiel</a>. Wil je dat wij het doen, samen met Bing en Apple? Dat kan eenmalig, bij <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel laten inrichten</a>.</p>
 
-      <h2>Zo werken we aan hogere posities</h2>
+      <h2>Zo werken we aan SEO in Groningen</h2>
       <p>Hogere posities zijn geen doel op zich. Het gaat om meer klanten. Daarom beginnen we bij de zoekwoorden die geld opleveren, en pas daarna bij de rest.</p>
 
       <div class="stap-kop"><Tekening naam="vergrootglas" maat={48} /><h3>1. Zoekwoordonderzoek</h3></div>
@@ -120,11 +116,10 @@ const schema = [{
       <p>Pagina's die echt uitleggen wat je doet, wat het kost en hoe het werkt. Geen twintig kopieën met alleen een andere wijknaam erin. Google noemt pagina's per stad of regio die bezoekers alleen doorsturen zelfs met zoveel woorden als voorbeeld van spam. Goede content beantwoordt de vraag die een Groninger stelt voordat hij belt.</p>
 
       <div class="stap-kop"><Tekening naam="pin" maat={48} /><h3>4. Lokale vindbaarheid</h3></div>
-      <p>Je profiel met de juiste categorieën, diensten, foto's en reviews. Je naam, adres en telefoonnummer overal hetzelfde: op je site, bij de KvK en in elke vermelding. Daar win je de kaart. Lees meer over <a href="/lokale-seo/">lokale SEO</a>.</p>
+      <p>Je naam, adres en telefoonnummer overal hetzelfde: op je site, bij de KvK en in elke vermelding. Daarna categorieën, foto's en reviews. Daar win je de kaart. Lees meer over <a href="/lokale-seo/">lokale SEO</a>.</p>
 
       <div class="stap-kop"><Tekening naam="ketting" maat={48} /><h3>5. Linkbuilding</h3></div>
-      <p>Thorgall zoekt backlinks die echt iets betekenen, liefst van sites uit de regio. Denk aan je bedrijvenvereniging, een club die je al sponsort of een leverancier die je noemt. Geen linkfarms, geen trucs. Meer over onze <a href="/linkbuilding/">linkbuilding</a>.</p>
-      <p>Elke maand zie je je posities, je organisch verkeer en het aantal aanvragen, op één A4. Zonder grafiek waar je uitleg bij nodig hebt.</p>
+      <p>Thorgall zoekt backlinks die echt iets betekenen, liefst van sites uit de regio. Denk aan je bedrijvenvereniging, een club die je al sponsort of een leverancier die je noemt. Linkfarms laten we liggen. Meer over onze <a href="/linkbuilding/">linkbuilding</a>.</p>
 
       <h2>Rekenvoorbeeld: wat levert een plek hoger op?</h2>
       <p>Een verzonnen voorbeeld, met verzonnen cijfers en ruwe aannames. Het gaat om de manier van rekenen, niet om de precieze getallen.</p>
@@ -153,29 +148,50 @@ const schema = [{
         <li><strong>Links kopen in bulk.</strong> Goedkoop, maar het risico ligt bij jou. Ziet Google het, dan zak jij.</li>
       </ul>
 
-      <h2>Waar je op let bij een SEO-specialist in Groningen</h2>
-      <p>Wie je ook kiest voor SEO in Groningen, stel deze vragen in het eerste gesprek. Aan de antwoorden merk je snel met wie je te maken hebt.</p>
+      <h2>Wat je krijgt voor € 495 per maand</h2>
+      <ul class="vink">
+        <li><b>Een nulmeting.</b> Waar sta je nu op de zoekwoorden die geld opleveren, en wie staat er in de stad boven je?</li>
+        <li><b>Zoekwoordonderzoek.</b> Per zoekwoord het volume, je positie en de pagina die erop moet scoren. Ook de wijken en de Engelse varianten, als ze voor jou tellen.</li>
+        <li><b>Techniek op orde.</b> Snelheid, mobiel, indexering en structuur.</li>
+        <li><b>Nieuwe en betere teksten.</b> We beginnen bij de dienst die het meeste oplevert.</li>
+        <li><b>Werk aan je autoriteit.</b> Je profiel, vermeldingen en verwijzingen vanaf andere sites.</li>
+        <li><b>Elke maand één A4.</b> Wat we deden, wat het opleverde en wat we nu doen.</li>
+        <li><b>Een doel met een datum.</b> Dat leggen we bij de start vast. Het is de basis van de <a href="/garantie/">stijggarantie</a>.</li>
+      </ul>
+      <p>Duidelijke stijgingen zie je meestal na drie tot zes maanden. Technische verbeteringen soms al binnen een paar weken. Advertentiebudget voor Google Ads zit er niet in, en webshops optimaliseren doen we niet. Hoeveel werk jouw markt vraagt, hoor je na de gratis scan, voordat je iets tekent.</p>
+
+      <h3>Zo ziet zo'n A4 eruit</h3>
       <div class="tabel-scroll">
         <table>
-          <thead><tr><th>Vraag</th><th>Goed teken</th><th>Rode vlag</th></tr></thead>
+          <thead><tr><th>Wat we deden</th><th>Wat het opleverde</th><th>Wat we nu doen</th></tr></thead>
           <tbody>
-            <tr><td>Op welke zoekwoorden gaan we stijgen?</td><td>Een concrete lijst, met volumes</td><td>"Dat zien we later wel"</td></tr>
-            <tr><td>Hoe meten we of het werkt?</td><td>Posities, verkeer en aanvragen</td><td>Alleen een score van een tool</td></tr>
-            <tr><td>Waar komen de links vandaan?</td><td>Echte sites, liefst uit de regio</td><td>Pakketten van honderd links</td></tr>
-            <tr><td>Wat als het niet werkt?</td><td>Een afspraak over doelen</td><td>Een jaarcontract zonder uitweg</td></tr>
-            <tr><td>Kun je uitleggen wat je doet?</td><td>Ja, in gewone woorden</td><td>Veel vakjargon en weinig inhoud</td></tr>
+            <tr><td>Pagina "cv-ketel vervangen" herschreven, met prijzen en de dorpen waar het bedrijf komt</td><td>"cv-ketel vervangen groningen" van plek 11 naar plek 6</td><td>Dezelfde aanpak voor de pagina over warmtepompen</td></tr>
+            <tr><td>Haren en Ten Boer toegevoegd aan het servicegebied, hoofdcategorie aangepast</td><td>14 keer gebeld via het profiel, de maand ervoor 9 keer</td><td>Reviewlink naar de klanten van deze maand</td></tr>
+            <tr><td>Foto's verkleind op de vijf drukste pagina's</td><td>Laadtijd op een telefoon van 4,1 naar 1,9 seconde</td><td>Search Console nalopen op pagina's die niet in Google staan</td></tr>
           </tbody>
         </table>
       </div>
-      <p>We zitten zelf niet in Groningen. Ons kantoor staat aan de Lauwers in Assen, zo'n 30 kilometer en een half uur rijden over de A28. Voor een kennismaking komen we naar je toe, of je komt bij ons langs. Het werk zelf gebeurt achter een scherm. Google kijkt niet naar het adres van je bureau, wel naar wat er op jouw site en in jouw profiel staat.</p>
+      <p class="klein muted">(Verzonnen voorbeeld van het installatiebedrijf uit Hoogkerk hierboven. Het bedrijf en de cijfers bestaan niet.)</p>
+
+      <h2>Bureau in de stad, specialist op afstand of zelf doen?</h2>
+      <p>In Groningen is genoeg te kiezen. Dit zijn de vijf routes die we het vaakst naast elkaar zien liggen, met de prijzen die aanbieders zelf noemen.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Route</th><th>Wat het kost</th><th>Wie doet het werk</th><th>Waar je op let</th></tr></thead>
+          <tbody>
+            <tr><td><b>Drijfveer Media</b>, vanuit Assen</td><td>SEO vanaf € 495, lokale SEO vanaf € 295 per maand</td><td>Thorgall en Robert, met een vaste groep freelancers die we al jaren kennen</td><td>Geen kantoor in de stad. Voor een gesprek rijden we het halfuur</td></tr>
+            <tr><td>SEO-bureau in de stad</td><td>Meestal € 500 tot € 3.500 per maand (<a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>)</td><td>Een team, vaak met een accountmanager ertussen</td><td>Vraag wie het werk doet en hoe lang je vastzit</td></tr>
+            <tr><td>Landelijke specialist op afstand</td><td>Ralf van Veen, in de top 3 op "seo groningen", noemt vanaf € 1.000 per maand, maandelijks opzegbaar</td><td>Eén senior specialist</td><td>Werkt standaard op afstand, langskomen kan</td></tr>
+            <tr><td>Goedkoop pakket</td><td>Een paar tientjes per maand</td><td>Vaak onduidelijk</td><td>Vraag waar de links vandaan komen. Gekochte links in bulk kunnen je laten zakken</td></tr>
+            <tr><td>Zelf doen</td><td>Je eigen tijd</td><td>Jij</td><td>Je Bedrijfsprofiel en reviews lukken prima. Techniek en teksten kosten veel uren</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Wie je ook kiest, vraag in het eerste gesprek op welke zoekwoorden je gaat stijgen, hoe je meet of het werkt en wat er gebeurt als het niet lukt. Een goede SEO-specialist legt dat uit zonder vakjargon. Bij ons staat het antwoord op die laatste vraag op papier: halen we het doel niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals teksten aanleveren of op tijd reageren. Nieuwe technieken testen we eerst op meer dan 100 eigen sites in ons <a href="/proeflab/">proeflab</a>, sinds 2011. Bij klanten blijven we ruim binnen de regels.</p>
 
       <Tussenactie />
-      <h2>Getest in ons proeflab, met stijggarantie</h2>
-      <p>Sinds 2011 bouwden we een proeflab op van meer dan 100 eigen websites. Nieuwe technieken testen we daar eerst. We kennen de grens van Google, omdat we hem op die eigen sites hebben opgezocht (het verhaal staat bij het <a href="/proeflab/">proeflab</a>). Bij klanten blijven we ruim binnen de regels.</p>
-      <p>Daarom durven we bij SEO in Groningen een <a href="/garantie/">stijggarantie</a> te geven. We spreken samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals teksten aanleveren of op tijd reageren.</p>
-
       <h2>Wat kost SEO in Groningen?</h2>
-      <p>Bij de meeste bureaus kost SEO € 500 tot € 3.500 per maand, zie onze gids <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>. Bij ons begint SEO in Groningen bij € 495. Dit zijn onze vanaf-prijzen, exclusief btw.</p>
+      <p>Bij ons begint SEO in Groningen bij € 495 per maand. Dit zijn onze vanaf-prijzen, exclusief btw. Je zegt per maand op, met één maand opzegtermijn, per e-mail.</p>
       <div class="tabel-scroll">
         <table>
           <thead><tr><th>Dienst</th><th>Vanaf</th><th>Past bij</th></tr></thead>
@@ -189,16 +205,15 @@ const schema = [{
           </tbody>
         </table>
       </div>
-      <p>Hoe die bedragen zijn opgebouwd, lees je in dezelfde gids. Een tip, wie je ook kiest: een goede SEO-specialist legt in gewone woorden uit wat hij doet. Snap je na het eerste gesprek niet wat je krijgt? Zoek dan een ander.</p>
 
-      <h2>Wat je deze week zelf kunt doen</h2>
-      <ol>
-        <li>Zoek je eigen dienst plus "groningen" op je telefoon, in een privévenster. Noteer wie er boven je staat.</li>
-        <li>Open je Google Bedrijfsprofiel en controleer je hoofdcategorie, je openingstijden en je servicegebied.</li>
-        <li>Leg je adres en telefoonnummer naast je KvK-gegevens en je site. Klopt alles letter voor letter?</li>
-        <li>Stuur vijf tevreden klanten je reviewlink. Reageer op elke review die binnenkomt.</li>
-        <li>Kijk of elke dienst een eigen pagina heeft. Zo niet, begin met de dienst die het meest oplevert.</li>
-      </ol>
+      <h2>Wanneer SEO in Groningen geen zin heeft</h2>
+      <p>Dat zeggen we liever in het eerste gesprek dan na drie maanden.</p>
+      <ul>
+        <li><b>Je hebt deze maand al klussen nodig.</b> SEO werkt op maanden. Met <a href="/online-adverteren/google-ads-bureau/">Google Ads</a> sta je er meestal binnen een werkdag.</li>
+        <li><b>Er wordt in de stad amper op jouw dienst gezocht.</b> Dan zie je dat in de nulmeting, en raden we een ander kanaal aan.</li>
+        <li><b>Je site moet toch vervangen worden.</b> Dan eerst een nieuwe site, met de vindbaarheid er vanaf de start in.</li>
+        <li><b>Je hebt een webshop.</b> Webshops bouwen of optimaliseren doen we niet. Heb je al een webshop, dan kunnen we wel je Google Shopping-campagnes doen.</li>
+      </ul>
       <p>Meer over onze aanpak lees je bij <a href="/zoekmachine-optimalisatie/">zoekmachine-optimalisatie</a>. Een nieuwe site nodig? Kijk bij <a href="/webdesign-groningen/">webdesign in Groningen</a>. Alle plaatsen waar we werken, staan in ons <a href="/werkgebied/">werkgebied</a>.</p>
     </div>
   </section>
@@ -211,9 +226,11 @@ const schema = [{
       { v: 'Hoe snel sta ik hoger in Groningen?', a: 'Reken op drie tot zes maanden voor duidelijke stijgingen. Technische verbeteringen zie je soms al binnen een paar weken terug. Kleine aanpassingen aan je Bedrijfsprofiel zie je vaak binnen een paar weken terug op de kaart.' },
       { v: 'Is lokale SEO genoeg voor mijn bedrijf?', a: 'Als bijna al je klanten uit de stad en de dorpen eromheen komen: vaak wel. Wil je ook gevonden worden op algemene vragen of in de rest van het land, dan heb je volledige SEO nodig.' },
       { v: 'Moet ik een pagina per wijk maken?', a: 'Alleen als je in die wijk echt iets anders te vertellen hebt. Twintig pagina\'s met dezelfde tekst en een andere wijknaam noemt Google spam. Liever één sterke pagina per dienst en je werkgebied goed in je profiel.' },
-      { v: 'Komen jullie langs in Groningen?', a: 'Ja. Voor een kennismaking rijden we graag het half uur vanuit Assen. Het werk zelf doen we vanaf ons kantoor aan de Lauwers.' },
-      { v: 'Wat houdt de stijggarantie in?', a: 'We spreken vooraf af welke zoekwoorden moeten stijgen. Gebeurt dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals teksten aanleveren of op tijd feedback geven.' },
-      { v: 'Kan ik eerst een scan laten doen?', a: 'Ja. De <a href="/gratis-website-analyse/">gratis website-analyse</a> laat zien hoe je site er nu voor staat en waar de snelste winst zit.' },
+      { v: 'Komen jullie langs in Groningen?', a: 'Ja. Voor een kennismaking rijden we graag het halfuur vanuit Assen, naar Zernike, Eemspoort of de binnenstad. Het werk zelf doen we vanaf ons kantoor aan de Lauwers.' },
+      { v: 'Wat als SEO in Groningen niets oplevert?', a: 'We spreken vooraf af welke zoekwoorden moeten stijgen, en vóór welke datum. Gebeurt dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals teksten aanleveren of op tijd feedback geven. Lees de voorwaarden bij de <a href="/garantie/">garantie</a>.' },
+      { v: 'Waarom kost SEO bij jullie minder dan bij veel bureaus in de stad?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, zodat onze mensen hun tijd steken in het werk zelf. Technieken testen we eerst op onze eigen sites, dus we betalen geen leergeld met jouw budget. En we huren een plek in een bedrijfsverzamelpand in Assen.' },
+      { v: 'Wat moet ik zelf doen?', a: 'Weinig, maar wel iets. Leestoegang geven tot Search Console en je Bedrijfsprofiel, teksten nalezen voordat ze online gaan, en tevreden klanten om een review vragen.' },
+      { v: 'Ik zit nu bij een ander bureau. Hoe stap ik over?', a: 'Zeg daar op volgens je contract en vraag of Search Console, je Bedrijfsprofiel en je site op jouw naam staan. Wij beginnen met een nulmeting, zodat je ziet wat er al is opgebouwd. Wat goed werkt, laten we staan.' },
     ]}
   />
 
@@ -227,10 +244,11 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Waar sta jij in Google?" tekst={`Laat je site gratis nakijken of bel ${site.contactpersoon}. Op werkdagen hoor je binnen 15 minuten waar in de stad jouw grootste kans zit.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, doet de kaart-check voor jouw vak in de stad en bouwt je links.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij bepaalt met je welke zoekwoorden in Groningen het eerst aan de beurt zijn.' }]} />
+
+  <Actie titel="Waar sta jij op de kaart van Groningen?" tekst={`${site.contactpersoon} zoekt op jouw vak in de stad en belt je met wat hij ziet: op de kaart, in Google en bij je concurrenten. Op werkdagen binnen 15 minuten.`} />
 </Base>
 <style>
-  .drie { margin-top: 8px; }
   .cijfers { margin: 8px 0 12px; }
   .cijfers .getal-kaart b { font-size: var(--step-2); }
 </style>

@@ -13,17 +13,19 @@ import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
 import SeoOpbrengst from '../../components/tool/SeoOpbrengst.astro';
+import KaartCheck from '../../components/tool/KaartCheck.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const url = '/seo-leeuwarden/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'zoeken', titel: 'Hoe klanten in Leeuwarden zoeken' },
   { id: 'concurrentie', titel: 'Je concurrentie peilen in een kwartier' },
   { id: 'kaart', titel: 'De kaart en je Google Bedrijfsprofiel' },
   { id: 'lagen', titel: 'Drie lagen: techniek, content, autoriteit' },
   { id: 'rekenvoorbeeld', titel: 'Rekenvoorbeeld: installateur op de Hemrik' },
-  { id: 'fouten', titel: 'Vijf fouten die je plek kosten' },
-  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden' },
+  { id: 'fouten', titel: 'Vier fouten die je plek kosten' },
+  { id: 'uitbesteden', titel: 'Bureau, specialist of zelf doen' },
   { id: 'kosten', titel: 'Kosten en werkwijze' },
   { id: 'afstand', titel: 'Een bureau uit Assen?' },
 ];
@@ -35,7 +37,8 @@ const schema = [{
   areaServed: [{ '@type': 'City', name: 'Leeuwarden' }, { '@type': 'AdministrativeArea', name: 'Friesland' }],
   url: `${site.url}${url}`,
   dateModified: datum,
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 495, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  citation: ['https://wpmasters.nl/seo-specialist-leeuwarden/', 'https://travyk.nl/diensten/seo/'],
 }];
 ---
 <Base
@@ -45,8 +48,8 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gevonden · Leeuwarden" titel="SEO in Leeuwarden: bovenaan bij klanten uit stad en dorpen" prijs="vanaf € 495 per maand">
-    <p>In de grootste gemeente van Friesland is het druk in Google. Voor bijna elk vak strijden tientallen bedrijven om dezelfde paar plekken. Wij zorgen dat jij er een van pakt, met werk dat je zelf kunt volgen.</p>
-    <p>Alleen gevonden worden in je eigen regio? Lokale SEO kan vanaf € 295 per maand.</p>
+    <p>Voor ondernemers met klanten in de stad, Stiens, Grou en de dorpen. In de grootste gemeente van Friesland strijden per vak tientallen bedrijven om dezelfde plekken. Wij zorgen dat jij er een van pakt, met elke maand één A4 en een doel op papier.</p>
+    <p>Alleen op de kaart staan? Lokale SEO kan vanaf € 295 per maand.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -81,25 +84,22 @@ const schema = [{
         <p>Daarom begint SEO in Leeuwarden bij ons met een zoekwoordonderzoek. We zoeken uit op welke relevante zoekwoorden je doelgroep zoekt, en waar je met weinig moeite kunt winnen. Voor een installateur op de Hemrik kan "cv-ketel vervangen Leeuwarden" meer opleveren dan het algemene "installateur". Wie dat typt, heeft een klus en een budget.</p>
 
         <h2 id="concurrentie">Hoe sterk is je concurrentie? Peil het in een kwartier</h2>
-        <p>Voor je aan SEO in Leeuwarden begint, wil je weten waar je staat. Daar heb je geen dure tool voor nodig. Doe dit op je laptop, in een privévenster, zodat Google je eigen zoekgeschiedenis niet meeneemt.</p>
+        <p>Voor je aan SEO in Leeuwarden begint, wil je weten waar je staat. Doe dit in een privévenster:</p>
         <ol>
-          <li><strong>Zoek op je vak plus Leeuwarden.</strong> Schrijf op wie er op de kaart staan en wie in de eerste vijf gewone resultaten.</li>
-          <li><strong>Tel de reviews van de drie op de kaart.</strong> Hebben ze er 15 of 150? Dat zegt veel over hoeveel werk je hebt om erbij te komen.</li>
-          <li><strong>Open de pagina's die bovenaan staan.</strong> Is het een pagina speciaal over die dienst, of een algemene homepage? Een homepage op plek 1 betekent vaak dat er nog ruimte is.</li>
-          <li><strong>Kijk of er overzichtssites tussen staan.</strong> Staan er vooral vergelijkingssites boven de vakmensen, dan wint vaak wie de beste eigen pagina heeft.</li>
-          <li><strong>Herhaal het met een dorp.</strong> Zoek ook op je vak plus Stiens, Goutum of Grou. Staat daar niemand met een eigen pagina, dan ligt daar je snelste winst.</li>
+          <li><strong>Zoek op je vak plus Leeuwarden.</strong> Wie staan op de kaart, en wie in de eerste vijf gewone resultaten?</li>
+          <li><strong>Tel de reviews van de drie op de kaart.</strong> Hebben ze er 15 of 150?</li>
+          <li><strong>Open de pagina's die bovenaan staan.</strong> Een algemene homepage op plek 1 betekent vaak dat er nog ruimte is.</li>
+          <li><strong>Herhaal het met een dorp.</strong> Staat er op je vak plus Stiens, Goutum of Grou niemand met een eigen pagina, dan ligt daar je snelste winst.</li>
         </ol>
-        <p>Na een kwartier weet je of je te maken hebt met een paar sterke spelers of met een veld vol halve websites. Wij doen hetzelfde, maar dan met SE Ranking en Search Console erbij. Zo zien we ook op welke zoekwoorden je al op plek 8 tot 15 staat. Die zijn het makkelijkst omhoog te duwen.</p>
+        <p>Wij doen hetzelfde met SE Ranking en Search Console erbij.</p>
 
         <h2 id="kaart">Lokale SEO: de kaart boven de gewone resultaten</h2>
         <p>Wie in Leeuwarden lokale klanten zoekt, moet op de kaart staan. Bij veel zoekopdrachten met een plaatsnaam toont Google eerst een kaartje met drie bedrijven. Die zie je als eerste, nog voor je hebt gescrold.</p>
         <p>Volgens Google zelf hangt je plek op de kaart af van drie dingen: relevantie (past je profiel bij de zoekopdracht), afstand (hoe ver zit je van de zoeker) en prominentie (hoe bekend ben je, onder meer door links naar je site en het aantal reviews). Aan je adres kun je weinig doen. Aan de andere twee wel.</p>
         <div class="stap-kop"><Tekening naam="pin" maat={44} /><h3>Zit je op een bedrijventerrein?</h3></div>
         <p>Een bedrijf op de Hemrik of De Zwette zit ver van de meeste woonwijken. Voor iemand in Camminghaburen staat een concurrent in de wijk dan dichterbij. Ga je bij klanten langs, stel dan een servicegebied in. Google staat er maximaal 20 toe, op plaats of postcode, en het hele gebied mag niet verder reiken dan ongeveer twee uur rijden. Kies de wijken en dorpen waar je echt werkt, en noem ze ook op je website.</p>
-        <div class="stap-kop"><Tekening naam="ster" maat={44} vertraging={150} /><h3>Reviews zijn je snelste hefboom</h3></div>
-        <p>Reviews tellen mee voor prominentie, en ze overtuigen de zoeker. Vraag ze vlak na een klus, met een directe link of een QR-code op je factuur. Reageer op elke review, ook op de kritische. De volgende klant leest dat ook.</p>
-        <div class="stap-kop"><Tekening naam="tandwiel" maat={44} vertraging={300} /><h3>Profiel volledig maken</h3></div>
-        <p>Kies de juiste hoofdcategorie, vul je diensten in, zet echte foto's van je werk erop en houd je openingstijden bij, ook rond de feestdagen. Doe hetzelfde bij Bing en Apple. Dat is een uur werk, en dan klopt je bedrijf overal.</p>
+        <p>Reviews en een volledig profiel doen de rest. Hoe sta jij ervoor?</p>
+        <KaartCheck plaats="Leeuwarden" vak="installateur" />
         <p>Met <a href="/lokale-seo/">lokale SEO</a> vanaf € 295 per maand richten we dit voor je in en houden we het bij. Alleen het profiel goed zetten kan ook: <a href="/lokale-seo/google-bedrijfsprofiel/">Google Bedrijfsprofiel, Bing en Apple inrichten</a> kost vanaf € 249.</p>
 
         <Tussenactie />
@@ -135,31 +135,28 @@ const schema = [{
         <p>Vul je eigen getallen in, dan weet je wat SEO in Leeuwarden voor jou kan opleveren. Wat is één klus gemiddeld waard? Hoeveel aanvragen kun je aan? Leveren drie extra opdrachten per maand je meer op dan € 495, dan groeit je bedrijf van SEO. Zo niet, dan zeggen we dat liever vooraf.</p>
         <SeoOpbrengst plaats="Leeuwarden" volume={1200} van="p2" naar="o3" conversie={5} klant={33} waarde={600} intro="Geen installateur op de Hemrik? Zet dan je eigen cijfers erin: hoe vaak er in Leeuwarden op jouw dienst wordt gezocht, waar je nu staat en welke plek je wilt. Je ziet wat dat verschil per maand oplevert." />
 
-        <h2 id="fouten">Vijf fouten die je een plek in Google kosten</h2>
+        <h2 id="fouten">Vier fouten die je een plek in Google kosten</h2>
         <ol>
           <li><strong>Alleen "Friesland" in je teksten.</strong> Klanten typen zelden de provincie. Ze typen hun stad of dorp. Noem Leeuwarden en de dorpen waar je werkt.</li>
           <li><strong>Eén pagina "Diensten" voor alles.</strong> Een pagina met acht diensten scoort op geen van de acht goed. Geef elke belangrijke dienst een eigen pagina.</li>
           <li><strong>Verschillende gegevens op verschillende plekken.</strong> Een oud adres in een bedrijvengids, een ander nummer op Facebook. Zorg dat naam, adres en telefoonnummer overal gelijk zijn.</li>
-          <li><strong>Geen reviews vragen.</strong> Tevreden klanten laten zelden uit zichzelf iets achter. Vraag het, elke keer.</li>
           <li><strong>Een trage site op de telefoon.</strong> Google raadt aan dat het grootste beeld van een pagina binnen 2,5 seconden staat. Zware foto's en een stapel plug-ins zitten dat vaak in de weg.</li>
         </ol>
 
-        <h2 id="uitbesteden">SEO uitbesteden of zelf doen?</h2>
-        <p>Een deel van het werk kun je prima zelf. Een ander deel kost je veel tijd, of gaat snel mis. Zo verdelen we het meestal:</p>
+        <h2 id="uitbesteden">Bureau in Leeuwarden, specialist of zelf doen?</h2>
+        <p>Wie in Leeuwarden SEO zoekt, vindt bureaus uit de stad, zelfstandige specialisten en bureaus uit de rest van Friesland. Zo verhouden ze zich, met de prijzen die ze zelf noemen.</p>
         <div class="tabel-scroll">
           <table>
-            <thead><tr><th>Taak</th><th>Zelf doen?</th><th>Waarom</th></tr></thead>
+            <thead><tr><th>Route</th><th>Wat het kost</th><th>Waar je op let</th></tr></thead>
             <tbody>
-              <tr><td>Reviews vragen en beantwoorden</td><td>Ja</td><td>Niemand kent je klanten beter dan jij.</td></tr>
-              <tr><td>Foto's en openingstijden in je bedrijfsprofiel</td><td>Ja</td><td>Een paar minuten per maand.</td></tr>
-              <tr><td>Zoekwoordonderzoek</td><td>Liever niet</td><td>Zonder tools zie je zoekvolumes en concurrentie niet goed.</td></tr>
-              <tr><td>Techniek, snelheid en indexering</td><td>Liever niet</td><td>Eén verkeerde instelling kan pagina's uit Google halen.</td></tr>
-              <tr><td>Pagina's per dienst schrijven</td><td>Samen</td><td>Jij levert de vakkennis, wij de opbouw en de zoekwoorden.</td></tr>
-              <tr><td>Links van andere sites</td><td>Liever niet</td><td>Slechte links kunnen je meer kosten dan ze opleveren.</td></tr>
+              <tr><td><b>Drijfveer Media</b>, vanuit Assen</td><td>SEO vanaf € 495, lokale SEO vanaf € 295 per maand, op de site</td><td>Ruim een uur rijden. Voor een gesprek komen we naar je toe</td></tr>
+              <tr><td>SEO-specialist in Leeuwarden</td><td>WPMasters noemt geen vast bedrag: de ene specialist vraagt 50 euro per uur, de ander 100</td><td>Vraag of software en links apart worden doorberekend</td></tr>
+              <tr><td>Bureau elders in Friesland</td><td>Travyk noemt € 800 per maand voor lokale SEO en € 1.500 voor een basis SEO-abonnement</td><td>Vraag wat je per maand precies krijgt, en hoe lang je vastzit</td></tr>
+              <tr><td>Zelf doen</td><td>Je eigen tijd</td><td>Reviews, foto's en openingstijden lukken prima. Zoekwoorden, techniek en links liever niet</td></tr>
             </tbody>
           </table>
         </div>
-        <p>Wil je het helemaal uit handen geven, lees dan hoe <a href="/zoekmachine-optimalisatie/seo-uitbesteden/">SEO uitbesteden</a> bij ons werkt. Wil je het eerst zelf proberen, dan helpt de gids <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen als klein bedrijf</a>.</p>
+        <p>Zelf proberen? De gids <a href="/kennisbank/gidsen/hoger-in-google/">hoger in Google komen als klein bedrijf</a> helpt. Wat bureaus elders vragen, staat in <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
 
         <h2 id="kosten">Wat het kost en hoe we werken</h2>
         <p>Onze <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a> begint bij € 495 per maand, exclusief btw en maandelijks opzegbaar. Daarvoor krijg je zoekwoordonderzoek en een nulmeting, techniek op orde, nieuwe en betere teksten, werk aan je autoriteit en elke maand één A4: wat we deden, wat het opleverde en wat we nu doen. Hoeveel werk er nodig is, hangt af van je vak. Een pedicure in Grou heeft minder concurrentie dan een advocaat in de binnenstad.</p>
@@ -171,11 +168,16 @@ const schema = [{
           <li><strong>Lage investering, concrete targets.</strong> Een doel waar je ons op kunt afrekenen.</li>
           <li><strong>Beginnen waar het snelst verschil zit.</strong> Vaak een handvol pagina's die al op plek 8 tot 15 staan. Daarna perfectioneren.</li>
         </ol>
-        <p>Reken op drie tot zes maanden voor duidelijke stijgingen in de gewone resultaten. Bovenaan staan op "loodgieter Leeuwarden" is voor veel vakmensen een droom. Het kan, maar niet in een maand. Wel krijg je stijggarantie: we spreken af op welke zoekwoorden je stijgt. Gebeurt dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals reviews vragen en teksten op tijd nakijken.</p>
+        <p>Reken op drie tot zes maanden voor duidelijke stijgingen. Bovenaan staan op "loodgieter Leeuwarden" is voor veel vakmensen een droom. Het kan, maar niet in een maand. Wel krijg je stijggarantie: we spreken af op welke zoekwoorden je stijgt. Gebeurt dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals reviews vragen en teksten op tijd nakijken.</p>
+        <div class="kader">
+          <p class="kader-titel">Verzonnen voorbeeld: de A4 van de installateur op de Hemrik, maand vier</p>
+          <p>Gedaan: de pagina "cv-ketel onderhoud" herschreven, Stiens en Goutum in het servicegebied, twee trage pagina's sneller. Opgeleverd: van pagina 2 naar plek 7 op "cv onderhoud leeuwarden", 5 aanvragen via de site (was 2). Niet gelukt: de link van de ondernemersvereniging staat er nog niet. Volgende maand: de pagina over warmtepompen.</p>
+        </div>
+        <p>SEO in Leeuwarden heeft geen zin als je deze maand al klanten nodig hebt (dan eerst <a href="/online-adverteren/google-ads-bureau/">Google Ads</a>), als er op jouw dienst amper wordt gezocht, of als je een webshop hebt. Webshops optimaliseren doen we niet. Dat hoor je in het eerste gesprek.</p>
 
         <h2 id="afstand">Moet je SEO-bureau in Leeuwarden zitten?</h2>
         <p>Nee. Google kijkt naar jouw website en jouw profiel, niet naar het adres van je bureau. Wij komen uit Assen. Naar de Hemrik is het ruim 70 kilometer, iets meer dan een uur rijden. Voor de kennismaking komen we graag naar je toe. Langskomen aan de Lauwers kan ook. Daarna werken we op afstand, met korte lijnen via de telefoon.</p>
-        <p>Sinds 2011 werken we voor klanten in heel Nederland. We werkten onder meer voor Kärcher en bol.com, en voor veel mkb'ers uit de buurt. Kies een SEO-bureau op wat het waarmaakt. Kijk naar de <a href="/cases/">cases</a> en vraag elk bureau hoe het werkt en wat het niet doet. Wat we in de rest van de provincie doen, staat op de pagina over <a href="/regio/friesland/">Friesland</a>.</p>
+        <p>Sinds 2011 werken we voor klanten in heel Nederland. We werkten onder meer voor Kärcher en bol.com. Kijk naar de <a href="/cases/">cases</a>. Wat we in de rest van de provincie doen, staat op de pagina over <a href="/regio/friesland/">Friesland</a>.</p>
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={11} />
@@ -194,7 +196,9 @@ const schema = [{
       { v: 'Ik zit op een bedrijventerrein. Kom ik dan wel op de kaart?', a: 'Ja, maar afstand telt mee. Zoekt iemand vanuit een wijk aan de andere kant van de stad, dan staat een bedrijf in die wijk dichterbij. Stel een servicegebied in als je bij klanten komt, en maak je profiel en reviews sterker dan die van je buren.' },
       { v: 'Zoeken mensen ook op Ljouwert?', a: 'De gemeente heeft ook een Friese versie van haar website, met de naam Ljouwert. Of jouw klanten die naam gebruiken, zie je in Search Console bij de zoekopdrachten. Wij schrijven zelf geen Fries, je teksten worden Nederlands.' },
       { v: 'Wat als mijn concurrent al jaren bovenaan staat?', a: 'Dan zoeken we eerst de zoekwoorden waar hij zwak is. Bijna altijd zijn er vragen of dorpen waar niemand een goede pagina voor heeft. Daar begin je, en van daaruit bouw je op.' },
-      { v: 'Hoe weet ik of het werkt?', a: 'Elke maand zie je hoe je staat op de afgesproken zoekwoorden, hoeveel bezoekers uit Google komen en hoeveel er belden of mailden. Zonder grafieken die je moet laten uitleggen.' },
+      { v: 'Hoe weet ik of het werkt?', a: 'Elke maand krijg je één A4: hoe je staat op de afgesproken zoekwoorden, hoeveel bezoekers uit Google komen en hoeveel er belden of mailden.' },
+      { v: 'Wat als SEO in Leeuwarden niets oplevert?', a: 'Dan staat het doel op papier. Halen we het niet vóór de afgesproken datum en ligt het aan ons, dan werken we een maand gratis door. Je zegt per maand op, met één maand opzegtermijn, per e-mail.' },
+      { v: 'Waarom kost het bij jullie minder dan bij veel bureaus?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, testen technieken eerst op onze eigen sites en huren een plek in een bedrijfsverzamelpand in Assen. De tijd gaat naar het werk zelf.' },
     ]}
   />
 
@@ -208,5 +212,7 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Waar sta jij nu in Leeuwarden?" tekst={`Laat je site gratis nakijken. ${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en vertelt op welke zoekwoorden je de snelste winst pakt.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, komt naar Leeuwarden voor de kennismaking en zoekt links uit de regio.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij zoekt met je de zoekwoorden en dorpen waar je concurrent zwak is.' }]} />
+
+  <Actie titel="Waar sta jij op de kaart in Leeuwarden?" tekst={`${site.contactpersoon} zoekt op jouw vak in Leeuwarden en de dorpen, en belt je met wat hij ziet: op de kaart, in Google en bij je concurrenten. Op werkdagen binnen 15 minuten.`} />
 </Base>

@@ -10,6 +10,8 @@ import Scene from '../../components/scenes/online-marketing-heerenveen.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
+import ZelfOfUitbesteden from '../../components/tool/ZelfOfUitbesteden.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-marketing-heerenveen/';
 const schema = [{
@@ -19,7 +21,9 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: [{ '@type': 'City', name: 'Heerenveen' }, { '@type': 'AdministrativeArea', name: 'Friesland' }],
   url: `${site.url}${url}`,
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 595, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 595, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 595, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  dateModified: '2026-10-19',
+  citation: ['https://travyk.nl/diensten/seo/', 'https://www.samonlinemarketing.nl/online-marketing-uitbesteden/'],
 }];
 ---
 <Base
@@ -29,7 +33,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Advies · Heerenveen" titel="Online marketing in Heerenveen, met elke maand een scorebord" prijs="vanaf € 595 per maand">
-    <p>In Heerenveen weet iedereen wat een scorebord is. Bij online marketing in Heerenveen spreken we vooraf af wat erop komt: aanvragen en telefoontjes, geen likes. Daar mag je ons op afrekenen.</p>
+    <p>Voor mkb'ers in Heerenveen en de dorpen die het werk echt uit handen willen. SEO, Google Ads, e-mail en je site in één plan, met één aanspreekpunt. Vooraf spreken we af wat er op het scorebord komt: aanvragen en telefoontjes, geen likes. Daar mag je ons op afrekenen.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -55,7 +59,10 @@ const schema = [{
           </tbody>
         </table>
       </div>
-      <p>Heb je al een collega die marketing doet, maar te weinig handen? Dan is een <a href="/online-marketing-uitbesteden/interim-marketeer/">interim-marketeer</a> vanaf € 95 per uur vaak slimmer dan alles uitbesteden.</p>
+      <p>Heb je al een collega die marketing doet, maar te weinig handen? Dan is een <a href="/online-marketing-uitbesteden/interim-marketeer/">interim-marketeer</a> vanaf € 95 per uur vaak slimmer dan alles uitbesteden. Wat zelf doen je echt kost, reken je hier uit:</p>
+      <ZelfOfUitbesteden dienst="alles" tarief={65} uren={14} />
+      <h3>Wat bureaus in de regio vragen</h3>
+      <p>Travyk, een bureau dat hoog staat op "online marketing heerenveen", noemt op zijn site € 800 per maand voor basis Google Ads-beheer, € 800 voor een lokaal SEO-abonnement en € 1.500 voor een basis SEO-abonnement. SAM Online Marketing noemt uitbesteden minder geschikt bij een budget onder € 1.000 per maand. Bij ons begint alles in één hand bij € 595 per maand. Waarom dat kan: we gebruiken AI voor het rekenwerk en de eerste versies, testen technieken eerst op meer dan 100 eigen sites in ons <a href="/proeflab/">proeflab</a> en huren een plek in een bedrijfsverzamelpand in Assen.</p>
 
       <h2>Vijf vragen voor je een bureau kiest</h2>
       <p>Kies je voor ons of voor een marketingbureau uit de buurt? Stel deze vragen voordat je tekent:</p>
@@ -126,7 +133,15 @@ const schema = [{
     </ol>
     <div class="tekst" style="margin-top:40px">
       <h2>Wat online marketing in Heerenveen kost</h2>
-      <p>Online marketing uitbesteden begint bij € 595 per maand, exclusief btw en maandelijks opzegbaar. Daarvoor krijg je een doordachte aanpak voor alle kanalen samen, met {site.contactpersoon} als vast aanspreekpunt. Wil je met één kanaal beginnen? Dat kan ook. SEO begint bij € 495 per maand, lokale SEO bij € 295 en social media beheer bij € 395. Alle prijzen staan op onze pagina met <a href="/prijzen/">prijzen</a>. Social advertising op Facebook of Instagram doen we niet.</p>
+      <p>Online marketing uitbesteden begint bij € 595 per maand, exclusief btw, en je zegt per maand op met één maand opzegtermijn. Daarvoor krijg je:</p>
+      <ul class="vink">
+        <li>Een doordachte aanpak voor alle kanalen samen, op één A4.</li>
+        <li>Elke maand werk aan de kanalen die nu het meeste opleveren.</li>
+        <li>{site.contactpersoon} als vast aanspreekpunt.</li>
+        <li>Het scorebord en één A4 per maand.</li>
+        <li>Een doel met een datum, met <a href="/garantie/">garantie</a>: halen we het niet door ons, dan werken we een maand gratis door.</li>
+      </ul>
+      <p>Advertentiebudget betaal je apart aan Google. Wil je met één kanaal beginnen? Dat kan ook. SEO begint bij € 495 per maand, lokale SEO bij € 295 en social media beheer bij € 395. Alle prijzen staan op onze pagina met <a href="/prijzen/">prijzen</a>. Social advertising op Facebook of Instagram doen we niet, net als video en webshops. Heb je eigenlijk maar één ding nodig, zoals alleen een Bedrijfsprofiel of alleen een nieuwe site, neem dan die losse dienst: dat is goedkoper, en dat zeggen we je ook.</p>
 
       <h2>Vanuit Assen naar Heerenveen</h2>
       <p>We zitten in Assen, ongeveer 60 kilometer van Heerenveen. Reken op een uur rijden. Sta je liever met iemand aan tafel, dan komen we langs om je plannen te bespreken. Je bent ook welkom op ons kantoor aan de Lauwers. Daarna werken we vooral op afstand, met een vast belmoment per maand.</p>
@@ -141,6 +156,7 @@ const schema = [{
       { v: 'Wat kost online marketing in Heerenveen?', a: 'Online marketing uitbesteden begint bij € 595 per maand, exclusief btw. Je advertentiebudget komt daar los bij. Na een eerste gesprek krijg je een voorstel met een vaste prijs en concrete doelen.' },
       { v: 'Waarom een bureau uit Assen?', a: 'Omdat het werk niet afhangt van de afstand, maar van wie het doet. We komen langs als dat nodig is en bellen je op werkdagen binnen 15 minuten terug. Wil je liever iemand om de hoek, dan helpen de vragen op deze pagina je ook bij een ander bureau.' },
       { v: 'Kan ik ook een deel van mijn marketing uitbesteden?', a: 'Ja. Je kunt ook met één kanaal beginnen, zoals SEO of Google Ads. Heb je zelf een marketeer en zoek je extra handen, dan is een interim-marketeer vanaf € 95 per uur een optie.' },
+      { v: 'Wat als het scorebord leeg blijft?', a: 'Dan staat het doel op papier. Halen we het niet vóór de afgesproken datum en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals snel reageren op aanvragen.' },
       { v: 'Van wie zijn de accounts?', a: 'Van jou. Je Google Ads-account, je Bedrijfsprofiel en je statistieken staan op jouw naam. Wij krijgen toegang. Stop je, dan neem je alles mee.' },
       { v: 'Hoe vaak hebben we contact?', a: `Elke maand bespreken we het scorebord. Daartussen bel of mail je ${site.contactpersoon} wanneer je wilt. Op werkdagen bellen we binnen 15 minuten terug.` },
       { v: 'Wat als ik met online marketing in Heerenveen wil stoppen?', a: 'Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat. We verdienen liever aan klanten die blijven omdat het werkt.' },
@@ -157,6 +173,8 @@ const schema = [{
       { label: 'Buren', titel: 'Online marketing in Leeuwarden', href: '/online-marketing-leeuwarden/', tekst: 'Marketing voor ondernemers in de Friese hoofdstad.', teken: 'kompas' },
     ]}
   />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, bespreekt elke maand het scorebord en komt naar Heerenveen als je aan tafel wilt.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij zet met je de doelen op het scorebord.' }, { slug: 'johan', taak: 'Werkt mee aan de online marketing voor klanten.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
   <Actie titel="Wat moet er op jouw scorebord?" tekst={`Vertel ${site.contactpersoon} hoeveel aanvragen je nu krijgt en hoeveel je er wilt. Hij belt je op werkdagen binnen 15 minuten terug en zegt of dat haalbaar is.`} />
 </Base>

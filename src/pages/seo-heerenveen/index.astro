@@ -11,6 +11,8 @@ import Scene from '../../components/scenes/seo-heerenveen.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
 import Plaatsfeiten from '../../components/pagina/Plaatsfeiten.astro';
+import KaartCheck from '../../components/tool/KaartCheck.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const url = '/seo-heerenveen/';
 const schema = [{
@@ -20,7 +22,9 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: [{ '@type': 'City', name: 'Heerenveen' }, { '@type': 'AdministrativeArea', name: 'Friesland' }],
   url: `${site.url}${url}`,
-  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 495, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false } },
+  offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 495, priceSpecification: { '@type': 'UnitPriceSpecification', minPrice: 495, priceCurrency: 'EUR', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+  dateModified: '2026-10-19',
+  citation: ['https://travyk.nl/diensten/seo/', 'https://heibrink.nl/wat-kost-seo/'],
 }];
 ---
 <Base
@@ -30,8 +34,8 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Gevonden · Heerenveen" titel="SEO in Heerenveen: vaste aanvragen uit Google, zonder te betalen per klik" prijs="vanaf € 495 per maand">
-    <p>In de Sportstad weten ze dat een paar honderdste van een seconde het verschil maakt. Op het web wint snelheid ook, maar alleen als de rest klopt. Bij SEO in Heerenveen kijken we eerst waar je geld het meeste oplevert.</p>
-    <p>Alleen gevonden worden in je eigen regio? Lokale SEO kan vanaf € 295 per maand.</p>
+    <p>Voor ondernemers in Heerenveen en de dorpen van Jubbega tot Akkrum die minder willen betalen per klik. Wij kijken eerst waar je geld het meeste oplevert: Ads, SEO of allebei. Daarna bouwen we aan posities die blijven, met een doel op papier.</p>
+    <p>Alleen op de kaart staan? Lokale SEO kan vanaf € 295 per maand.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -130,23 +134,28 @@ const schema = [{
       </ol>
       <p style="margin-top:20px">Elke maand krijg je één A4: wat we deden, wat het opleverde en wat we nu doen. Wat niets oplevert, schrappen we. Dat geld steken we in wat wel werkt.</p>
 
-      <h2>Wat je vandaag zelf kunt doen</h2>
-      <p>Veel kun je zelf. Met deze vijf punten kom je met SEO in Heerenveen al een flink eind, en ze kosten je alleen tijd:</p>
-      <ul class="vink">
-        <li>Controleer of de hoofdcategorie van je Google Bedrijfsprofiel klopt met wat klanten zoeken.</li>
-        <li>Vraag je laatste vijf tevreden klanten om een review, met een directe link.</li>
-        <li>Zet op je homepage in gewone tekst in welke plaatsen je werkt.</li>
-        <li>Meet je belangrijkste pagina in PageSpeed Insights en noteer de Largest Contentful Paint.</li>
-        <li>Vraag je vereniging, sportclub of leverancier om een link naar je site.</li>
-      </ul>
-      <p>Kom je er niet uit of wil je weten wat het meest oplevert, vraag dan een <a href="/gratis-website-analyse/">gratis website-analyse</a> aan.</p>
+      <h2>SEO in Heerenveen begint op de kaart</h2>
+      <p>Veel kun je zelf. Zoek in een privévenster op je vak plus "heerenveen" en loop de twaalf punten na. Zo zie je waar SEO in Heerenveen voor jou het eerst iets oplevert. Je ziet meteen welke drie dingen het meeste opleveren.</p>
+      <KaartCheck plaats="Heerenveen" vak="fysiotherapeut" />
 
       <h2>Wat we niet doen</h2>
       <p>Nieuwe technieken testen we eerst op ons <a href="/proeflab/">proeflab</a> van meer dan 100 eigen websites. We kennen de grens van Google, omdat we hem daar zelf hebben opgezocht. Bij klanten blijven we ruim binnen de regels. Dus geen gekochte links in bulk, geen pagina's vol zoekwoorden en geen nepreviews.</p>
 
-      <h2>Wat SEO in Heerenveen kost</h2>
-      <p>SEO begint bij € 495 per maand, exclusief btw, en is maandelijks opzegbaar. Wil je vooral in de kaart staan, dan kan <a href="/lokale-seo/">lokale SEO</a> vanaf € 295 per maand genoeg zijn. We spreken samen een doel af. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Dat is onze stijggarantie. Zo helpen we sinds 2011 ondernemers in heel Nederland, en veel klanten werken al jaren met ons.</p>
-      <p>We zitten in Assen, ongeveer 60 kilometer van Heerenveen. Voor een gesprek komen we langs, of je komt naar ons. Lees meer over onze aanpak bij <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>, of kijk bij de buren: <a href="/seo-drachten/">SEO in Drachten</a>. Al onze diensten in de provincie staan bij <a href="/regio/friesland/">Friesland</a>.</p>
+      <h2>Wat SEO in Heerenveen kost, en wat je krijgt</h2>
+      <p>SEO begint bij € 495 per maand, exclusief btw, en je zegt per maand op met één maand opzegtermijn. Wil je vooral in de kaart staan, dan kan <a href="/lokale-seo/">lokale SEO</a> vanaf € 295 per maand genoeg zijn. Voor SEO in Heerenveen krijg je:</p>
+      <ul class="vink">
+        <li>Zoekwoordonderzoek en een nulmeting, voor Heerenveen en de dorpen waar je werkt.</li>
+        <li>De drie fasen hierboven: techniek en snelheid, nieuwe en betere pagina's, werk aan je autoriteit.</li>
+        <li>Elke maand één A4: wat we deden, wat het opleverde en wat we nu doen.</li>
+        <li>Een doel met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Dat is onze <a href="/garantie/">stijggarantie</a>.</li>
+      </ul>
+      <div class="kader">
+        <p class="kader-titel">Verzonnen voorbeeld: de A4 van de fysiotherapeut, maand vijf</p>
+        <p>Gedaan: Largest Contentful Paint van 4,8 naar 2,1 seconde, pagina's over rugklachten en sportblessures, link van de ijsclub. Opgeleverd: "fysiotherapie heerenveen" van plek 12 naar plek 5, 9 aanvragen via de site. Daardoor ging het klikbudget in Ads van € 400 naar € 200 per maand. Volgende maand: Akkrum en Oranjewoud in het servicegebied.</p>
+      </div>
+      <h3>Wat kost SEO in Heerenveen bij anderen?</h3>
+      <p>Travyk, een bureau in de top 5 voor "seo heerenveen", noemt € 800 per maand voor een lokaal SEO-abonnement, € 1.500 voor een basis SEO-abonnement en € 800 voor basis Google Ads-beheer. Een zelfstandige specialist rekent volgens Heibrink meestal € 300 tot € 1.500 per maand. Zelf doen kan ook: je profiel en reviews lukken prima, laadsnelheid en links kosten meer uren. Meer bedragen staan in <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO</a>.</p>
+      <p>Wanneer we SEO afraden: als je volgende week al klanten nodig hebt (dan eerst Ads), als er op je dienst amper wordt gezocht, of als je een webshop hebt. Webshops optimaliseren doen we niet. We zitten in Assen, ongeveer 60 kilometer van Heerenveen. Voor een gesprek komen we langs, of je komt naar ons. Lees meer over onze aanpak bij <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>, of kijk bij de buren: <a href="/seo-drachten/">SEO in Drachten</a>. Al onze diensten in de provincie staan bij <a href="/regio/friesland/">Friesland</a>.</p>
     </div>
   </section>
 
@@ -159,6 +168,8 @@ const schema = [{
       { v: 'Hoe snel sta ik hoger in Heerenveen?', a: 'Reken op drie tot zes maanden voor duidelijke stijgingen. Technische verbeteringen, zoals een snellere site, zie je soms al binnen een paar weken terug. Kleine aanpassingen aan je Bedrijfsprofiel zie je vaak binnen een paar weken op de kaart.' },
       { v: 'Wat is een goede laadsnelheid?', a: 'Google noemt een Largest Contentful Paint van 2,5 seconden of minder goed. Je meet het gratis met PageSpeed Insights van Google.' },
       { v: 'Ik woon in Jubbega maar werk in heel de gemeente. Welk adres gebruik ik?', a: 'Komen klanten niet bij je langs, dan verberg je je adres en stel je een servicegebied in. Zo kun je Heerenveen en de dorpen waar je werkt allemaal opgeven, tot maximaal 20 gebieden.' },
+      { v: 'Wat als het niets oplevert?', a: 'Dan staat het doel op papier. Halen we het niet vóór de afgesproken datum en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is dat jij doet wat nodig is, zoals reviews vragen en teksten nalezen.' },
+      { v: 'Waarom kost SEO bij jullie minder dan bij veel bureaus?', a: 'We gebruiken AI voor het rekenwerk en de eerste versies, testen technieken eerst op onze eigen sites en huren een plek in een bedrijfsverzamelpand in Assen. De tijd gaat naar het werk zelf.' },
       { v: 'Moet ik mijn website eerst vernieuwen?', a: 'Meestal niet. We beginnen met de site die je hebt. Alleen als de techniek zo verouderd is dat elke verbetering vastloopt, raden we een nieuwe site aan.' },
     ]}
   />
@@ -173,6 +184,8 @@ const schema = [{
       { label: 'Buren', titel: 'SEO in Leeuwarden', href: '/seo-leeuwarden/', tekst: 'Gevonden worden in de Friese hoofdstad.', teken: 'vergrootglas' },
     ]}
   />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug, bekijkt je plek op de kaart en je Ads, en zoekt links uit de buurt.' }, { slug: 'robert', taak: 'Doet sinds 2011 SEO, content en strategie. Hij rekent met je uit wanneer SEO het van Ads overneemt.' }]} />
 
   <Actie titel="Ads, SEO of allebei?" tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en kijkt mee waar jouw geld het meeste oplevert. Ook als het antwoord is dat je minder moet uitgeven.`} />
 </Base>
