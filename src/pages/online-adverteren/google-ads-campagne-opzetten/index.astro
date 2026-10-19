@@ -11,10 +11,12 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/online-adverteren--google-ads-campagne-opzetten.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import Klikrekenhulp from '../../../components/tool/Klikrekenhulp.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-adverteren/google-ads-campagne-opzetten/';
 const gepubliceerd = '2026-10-17';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'voor-je-begint', titel: 'Voor je begint: drie vragen' },
   { id: 'account', titel: '1. Account in expertmodus' },
@@ -176,6 +178,8 @@ const schema = [{
         </div>
         <p class="klein muted">Bron: SE Ranking, zoekwoorddatabase Nederland, oktober 2026. Een gemiddelde over het hele land. Wat jij betaalt, hangt af van je regio, de concurrentie op dat moment en je kwaliteitsscore.</p>
         <p>Twee dingen vallen op. De bedragen lopen ver uiteen: een klik op hypotheekadviseur kost bijna vijftien keer zoveel als een klik op glazenwasser. En een duur zoekwoord is niet per se slecht. Een hypotheek levert ook veel meer op dan een keer de ramen wassen. Het gaat er alleen om of de klikprijs past bij wat een aanvraag mag kosten.</p>
+        <p>Reken dat meteen na voor je eigen vak. Kies je branche en vul je eigen marge in:</p>
+        <Klikrekenhulp branche="dakdekker" marge={1200} conversie={5} klus={25} klussen={4} />
         <h3>Zoekwoordtypes</h3>
         <p>Met het zoekwoordtype bepaal je hoe ruim Google je zoekwoord mag opvatten.</p>
         <div class="tabel-scroll">
@@ -303,7 +307,19 @@ const schema = [{
 
         <h2 id="laten-doen">Of laat je Google Ads-campagne opzetten door ons</h2>
         <p>Geen tijd of zin om dit zelf uit te zoeken? Dan zetten wij de campagne voor je op, met precies dit stappenplan. We beginnen bij de drie vragen bovenaan, regelen de meting en bouwen de campagne. Daarna sturen we elke week bij, tot het afgesproken doel gehaald wordt.</p>
-        <p>Beheer kost bij ons vanaf € 249 per maand, exclusief btw; je advertentiebudget betaal je rechtstreeks aan Google. Na een kort gesprek hoor je welk budget past bij je doel. Maandelijks opzegbaar, met <a href="/garantie/">garantie</a>. Het account staat op jouw naam, dus je zit nergens aan vast. Meer over onze aanpak lees je bij <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a> en op de pagina over <a href="/online-adverteren/">online adverteren</a>.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th></th><th>Zelf opzetten</th><th>Wij zetten op en beheren</th></tr></thead>
+            <tbody>
+              <tr><td><b>Kosten</b></td><td>Je eigen uren, plus leergeld uit je budget</td><td>Vanaf € 249 per maand, plus je budget</td></tr>
+              <tr><td><b>Meting</b></td><td>Stap 2, zelf testen</td><td>Ingericht en getest met een echte aanvraag</td></tr>
+              <tr><td><b>Bijsturen</b></td><td>Als je eraan toekomt</td><td>Elke week, met één A4 per maand</td></tr>
+              <tr><td><b>Doel</b></td><td>Je eigen rekensom</td><td>Op papier, met een datum en een maand gratis als we het door onze fout niet halen</td></tr>
+              <tr><td><b>Account</b></td><td>Op jouw naam</td><td>Ook op jouw naam</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Beheer kost bij ons vanaf € 249 per maand, exclusief btw; je advertentiebudget betaal je rechtstreeks aan Google. Na een kort gesprek hoor je welk budget past bij je doel. Maandelijks opzegbaar, met <a href="/garantie/">garantie</a>. Wil je het na de start zelf doen? Dan loopt een <a href="/consult/">consult</a> van € 85 per uur je campagne met je na voordat hij live gaat. Hoe onze prijs zich verhoudt tot pakketten, bureaus en freelancers, en hoe je maandoverzicht eruitziet, lees je bij <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a>. Klikprijzen en beheermodellen staan in de gids <a href="/kennisbank/gidsen/wat-kost-google-ads/">wat kost Google Ads</a>.</p>
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={20} />
@@ -311,7 +327,7 @@ const schema = [{
           <p class="kicker">Wij zetten hem op</p>
           <p class="prijs-kop">Beheer vanaf € 249 per maand</p>
           <p class="muted klein">Exclusief btw. Je advertentiebudget betaal je rechtstreeks aan Google. Maandelijks opzegbaar.</p>
-          <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+          <a class="btn" href="/gratis-website-analyse/?doel=ads">Laat je Google Ads-account gratis checken</a>
         </div>
       </aside>
     </div>
@@ -326,6 +342,7 @@ const schema = [{
       { v: 'Zoekcampagne of Performance Max?', a: 'Voor dienstverleners meestal eerst een zoekcampagne: je ziet precies waar je geld heen gaat. Performance Max werkt beter als je al veel conversies hebt, zoals bij een webshop.' },
       { v: 'Ik krijg klikken maar geen aanvragen. Hoe kan dat?', a: 'Kijk eerst in het zoektermenrapport of de klikken wel van de juiste mensen komen. Is dat zo, dan ligt het vaak aan de landingspagina. Ook een kapotte conversiemeting komt vaak voor.' },
       { v: 'Moet ik adverteren op mijn eigen bedrijfsnaam?', a: 'Vaak wel, in een aparte campagne. Het kost weinig per klik en voorkomt dat een concurrent bovenaan staat als iemand jou zoekt.' },
+      { v: 'Wat kost het als jullie mijn campagne opzetten?', a: 'Beheer begint bij € 249 per maand, exclusief btw. Wat opzetten en beheer samen voor jou kosten, hoor je na een kort gesprek, voordat we beginnen. Je advertentiebudget betaal je rechtstreeks aan Google. Je zegt per maand op, met één maand opzegtermijn.' },
       { v: 'Wanneer weet ik of Google Ads voor mij werkt?', a: 'Je advertenties staan online zodra Google ze heeft goedgekeurd, meestal binnen een werkdag. De eerste aanvragen komen vaak in de eerste weken. Dan zie je ook wat een aanvraag kost. Vergelijk die kosten met wat een aanvraag volgens je eigen rekensom mag kosten.' },
     ]}
   />
@@ -339,7 +356,11 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Zullen wij je eerste campagne opzetten?" tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en rekent met je uit wat een aanvraag mag kosten. Daarna weet je of Google Ads voor jou loont.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug en rekent met je uit wat een aanvraag mag kosten.' }
+, { slug: 'robert', taak: 'Schreef dit stappenplan. Doet SEO, content en strategie sinds 2011.' }]} />
+
+  <Actie titel="Zullen wij je eerste campagne opzetten?"
+ tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en rekent met je uit wat een aanvraag mag kosten. Daarna weet je of Google Ads voor jou loont.`} />
 </Base>
 <style>
   .prijs-eigen { padding: 22px; }

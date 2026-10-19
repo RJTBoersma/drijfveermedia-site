@@ -11,6 +11,8 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/online-adverteren--adverteren-in-chatgpt.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import Klikrekenhulp from '../../../components/tool/Klikrekenhulp.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-adverteren/adverteren-in-chatgpt/';
 const datum = '2026-10-18';
@@ -24,6 +26,8 @@ const hoofdstukken = [
   { id: 'vergelijking', titel: 'ChatGPT Ads of Google Ads?' },
   { id: 'organisch', titel: 'Adverteren of genoemd worden?' },
   { id: 'aanpak', titel: 'Zo pakken wij het aan' },
+  { id: 'geen-zin', titel: 'Wanneer het geen zin heeft' },
+
 ];
 const tijdlijn = [
   ['16 januari 2026', 'OpenAI kondigt aan advertenties te gaan testen bij volwassen gebruikers van de gratis versie en ChatGPT Go in de Verenigde Staten.'],
@@ -42,6 +46,13 @@ const schema = [{
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
   offers: { '@type': 'Offer', price: 249, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: 249, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false }, description: 'Beheer vanaf € 249 per maand, exclusief btw. Het advertentiebudget betaal je rechtstreeks aan OpenAI. Per maand opzegbaar.' },
+}, {
+  '@type': 'WebPage',
+  url: `${site.url}${url}`,
+  name: 'Adverteren in ChatGPT: zo werkt het',
+  inLanguage: 'nl-NL',
+  dateModified: '2026-10-19',
+  citation: ['https://leadlogic.nl/chatgpt-ads', 'https://adsimpact.nl/ai-advertising/', 'https://seobureau.nl/blog/adverteren-in-chatgpt'],
 }];
 ---
 <Base
@@ -50,8 +61,8 @@ const schema = [{
   kruimels={[{ naam: 'Online adverteren', url: '/online-adverteren/' }, { naam: 'Adverteren in ChatGPT', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Online adverteren" titel="Adverteren in ChatGPT: de nieuwe advertentieplek, nuchter bekeken" prijs="vanaf € 249 per maand">
-    <p>Sinds eind augustus 2026 kunnen bedrijven ook in Nederland adverteren in ChatGPT. Een nieuw kanaal, met nog weinig adverteerders. Dit is wat er echt bekend is, en hoe je bepaalt of het iets voor jou is.</p>
+  <Hero kicker="Gevonden · Online adverteren" titel="Adverteren in ChatGPT: de nieuwe advertentieplek, nuchter bekeken" prijs="vanaf € 249 per maand">
+    <p>Sinds eind augustus 2026 kun je ook in Nederland adverteren in ChatGPT. Voor webshops en dienstverleners die vroeg willen testen, met een klein budget en een doel op papier. Past jouw vak er niet in, dan zeggen we dat vooraf.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -130,6 +141,8 @@ const schema = [{
           <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
           <p>Een webshop verkoopt een tuinset van € 600 met € 180 marge. Hij wil per verkoop hooguit € 60 aan advertenties uitgeven. Koopt één op de vijftig bezoekers, dan mag een klik maximaal € 1,20 kosten. Met dat getal start je met een vast bod, en je ziet na een paar weken of het klopt.</p>
         </div>
+        <p>Reken het meteen uit voor je eigen bedrijf. De rekenhulp hieronder is gemaakt voor Google, met klikprijzen uit Google Ads. De bovenste uitkomst, de hoogste klikprijs die nog loont, geldt net zo goed voor ChatGPT. Dat getal is je startbod.</p>
+        <Klikrekenhulp branche="schilder" marge={900} conversie={4} klus={30} klussen={3} />
         <p>Ter vergelijking: in Google Ads kost een klik op "dakdekker" gemiddeld € 4,81 en op "hovenier" € 0,88 (SE Ranking, Nederland, oktober 2026). Meer klikprijzen staan in ons <a href="/online-adverteren/google-ads-campagne-opzetten/">stappenplan voor een Google Ads-campagne</a>. Wie vroeg instapt in ChatGPT, concurreert met minder adverteerders. In een veiling betekent minder concurrentie meestal een lagere prijs. Hoe langer je wacht, hoe voller het wordt.</p>
 
         <div class="stap-kop"><Tekening naam="grafiek" maat={48} /><h2 id="meten">Meten wat het oplevert</h2></div>
@@ -184,6 +197,41 @@ const schema = [{
         <div class="stap-kop"><Tekening naam="doel" maat={44} /><h3>4. Opschalen of stoppen</h3></div>
         <p>Werkt het, dan gaat er meer budget naartoe. Werkt het niet, dan stoppen we ermee. We leggen het doel en de datum bij de start vast. Halen we dat doel niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
 
+        <h3 id="wat-je-krijgt">Wat je krijgt voor € 249 per maand</h3>
+        <ul class="vink">
+          <li>De check of jouw vak en jouw klanten in ChatGPT passen, vóór de start.</li>
+          <li>De meting op je site, getest met een echte aanvraag.</li>
+          <li>Account, campagne, hints en advertentieteksten.</li>
+          <li>Elke week bijsturen op wat een klik en een aanvraag kosten.</li>
+          <li>Elke maand één A4: wat het kostte, wat het opleverde en wat we nu doen.</li>
+        </ul>
+        <p>Je advertentiebudget zit er niet in: dat betaal je rechtstreeks aan OpenAI. Draaien er ook <a href="/online-adverteren/google-ads-bureau/">Google Ads</a>, dan hoor je vooraf wat beheer van allebei samen kost.</p>
+        <p>Zo ziet het verslag na een proefmaand eruit, voor een opleider die cursussen verkoopt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Proefmaand</th><th>Uitkomst</th></tr></thead>
+            <tbody>
+              <tr><td>Budget en klikken</td><td>€ 300 voor 410 klikken, € 0,73 per klik</td></tr>
+              <tr><td>Aanmeldingen</td><td>6, dus € 50 per aanmelding</td></tr>
+              <tr><td>Afgesproken doel</td><td>Hooguit € 60 per aanmelding: gehaald</td></tr>
+              <tr><td>Wat we nu doen</td><td>Twee hints die niets opleverden eruit, budget naar € 450</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld. Echte klikprijzen voor Nederland zijn er nog niet.</p>
+
+        <h3>Hoe anderen het aanbieden</h3>
+        <p>Een paar bureaus bieden ChatGPT Ads al aan. Leadlogic richt de campagnes in, geeft de eerste € 250 aan advertentietegoed cadeau en noemt een minimum van € 15 per dag. Ads & Impact biedt een gratis adviesgesprek, Seobureau.nl een scan van je zichtbaarheid in AI. Op die pagina's vonden we bij geen van drieën een vaste beheerprijs. Bij ons staat die er wel: vanaf € 249 per maand, per maand opzegbaar.</p>
+        <p class="klein muted">Bronnen, opgehaald op 19 oktober 2026: <a href="https://leadlogic.nl/chatgpt-ads" rel="noopener">leadlogic.nl</a>, <a href="https://adsimpact.nl/ai-advertising/" rel="noopener">adsimpact.nl</a> en <a href="https://seobureau.nl/blog/adverteren-in-chatgpt" rel="noopener">seobureau.nl</a>.</p>
+
+        <h2 id="geen-zin">Wanneer adverteren in ChatGPT geen zin heeft</h2>
+        <ul>
+          <li><b>Je werkt in de zorg</b> of een ander gevoelig onderwerp. Daar toont OpenAI geen advertenties.</li>
+          <li><b>Je Google Ads lopen nog niet goed.</b> Los dat eerst op. Daar zoeken mensen al naar wat jij doet.</li>
+          <li><b>Je kunt geen paar honderd euro missen voor een test.</b> Met te weinig klikken leer je niets.</li>
+          <li><b>Je wilt genoemd worden in het antwoord zelf.</b> Dat koop je niet. Daarvoor is <a href="/generative-engine-optimization/">generative engine optimization</a>.</li>
+        </ul>
+
         <h2>Wat nog niemand weet</h2>
         <p>Hoe vaak mensen in Nederland op zo'n advertentie klikken, is nog onduidelijk. En of een klik uit een gesprek vaker een klant oplevert dan een klik uit Google. OpenAI kondigde meer advertentievormen en meetmogelijkheden aan. Verandert er iets wezenlijks, dan passen we deze pagina aan. Hoe dit kanaal past naast Google Ads en Shopping, lees je bij <a href="/online-adverteren/">online adverteren</a>.</p>
         <p class="klein muted">Bronnen, geraadpleegd oktober 2026: berichten van OpenAI over advertenties (16 januari, 5 mei, 18 en 31 augustus, 23 september en 5 oktober 2026), de advertentiedocumentatie voor ontwikkelaars van OpenAI en de documentatie van OpenAI over zijn robots. Klikprijzen Google Ads: SE Ranking, oktober 2026.</p>
@@ -198,9 +246,10 @@ const schema = [{
             <li>Check of jouw vak erin past</li>
             <li>Meting op je eigen site</li>
             <li>Proefcampagne met één doel</li>
-            <li>Elke maand een helder verslag</li>
+            <li>Elke maand één A4 met de cijfers</li>
+            <li>Een doel op papier</li>
           </ul>
-          <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+          <a class="btn" href="/gratis-website-analyse/?doel=ads">Laat gratis meekijken</a>
         </div>
       </aside>
     </div>
@@ -215,6 +264,10 @@ const schema = [{
       { v: 'Kan ik kiezen bij welke vragen mijn advertentie verschijnt?', a: 'Alleen ongeveer. Je geeft hints mee over wanneer je product nuttig is, maar dat zijn geen zoekwoorden. ChatGPT bepaalt op basis van het gesprek of je advertentie past.' },
       { v: 'Ziet iedereen de advertenties?', a: 'Nee. Alleen gebruikers van de gratis versie en ChatGPT Go. Plus, Pro en Enterprise zijn reclamevrij. Minderjarigen krijgen geen advertenties, en bij gevoelige onderwerpen zoals gezondheid verschijnen ze niet.' },
       { v: 'Krijgt de adverteerder mijn gesprekken te zien?', a: 'Nee. Volgens OpenAI blijven gesprekken privé en krijgen adverteerders alleen samengevoegde cijfers, zoals klikken en conversies.' },
+      { v: 'Is het niet te vroeg om in ChatGPT te adverteren?', a: 'Voor de meeste mkb\'ers wel, zolang Google Ads nog niet goed loopt. Loopt dat wel en heb je ruimte voor een test, dan is vroeg erbij zijn juist het voordeel: minder concurrenten in de veiling. We beginnen klein, met een doel en een datum, en stoppen als het niet loont.' },
+      { v: 'Waarom niet zelf in de Ads Manager van OpenAI?', a: 'Dat kan. De meeste tijd zit in de meting, scherpe hints en elke week bijsturen. Wil je het zelf doen, dan helpt een <a href="/consult/">consult</a> van € 85 per uur om goed te starten.' },
+      { v: 'Wat als het niets oplevert?', a: 'Dan zie je dat na de proefmaand op je A4, en stoppen we. Je zegt per maand op, met één maand opzegtermijn. Halen we het doel niet en ligt dat aan ons, dan werken we een maand gratis door.' },
+
       { v: 'Is dit hetzelfde als vindbaar worden in ChatGPT?', a: 'Nee. Adverteren is betaalde ruimte onder het antwoord. Genoemd worden in het antwoord zelf is organisch werk. Lees meer bij <a href="/generative-engine-optimization/">generative engine optimization</a>.' },
     ]}
   />
@@ -228,7 +281,10 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Past adverteren in ChatGPT bij jouw bedrijf?" tekst={`${site.contactpersoon} kijkt of jouw klanten hun vragen in ChatGPT stellen en belt je met zijn antwoord, ook als dat nee is.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij kijkt of jouw klanten hun vragen in ChatGPT stellen en belt je met zijn antwoord.' }, { slug: 'robert', taak: 'Schreef deze pagina, op basis van wat OpenAI zelf publiceert.' }]} />
+
+  <Actie titel="Past adverteren in ChatGPT bij jouw bedrijf?"
+ tekst={`${site.contactpersoon} kijkt of jouw klanten hun vragen in ChatGPT stellen en belt je met zijn antwoord, ook als dat nee is.`} />
 </Base>
 <style>
   .prijs-eigen { padding: 24px; }

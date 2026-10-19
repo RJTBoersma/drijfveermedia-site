@@ -12,9 +12,11 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/leadgeneratie--tracking-en-analytics.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
+import UtmBuilder from '../../../components/tool/UtmBuilder.astro';
 
 const url = '/leadgeneratie/tracking-en-analytics/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'niet-genoeg', titel: 'Bezoekers tellen is niet genoeg' },
   { id: 'wat-doet', titel: 'Wat een specialist doet' },
@@ -24,6 +26,7 @@ const hoofdstukken = [
   { id: 'aanpak', titel: 'Zo richten we het in' },
   { id: 'overzicht', titel: 'Het overzicht op één scherm' },
   { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'geen-zin', titel: 'Wanneer het geen zin heeft' },
 ];
 const schema = [
   {
@@ -46,6 +49,7 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    citation: ['https://daarom.com/google-analytics-specialist/', 'https://leonkorteweg.nl/google-analytics-specialist/', 'https://pienter.nl/online-marketing/data-web-analytics/google-analytics/', 'https://trustoo.nl/kosten/online-marketing-kosten/'],
   },
 ];
 ---
@@ -56,7 +60,8 @@ const schema = [
   schema={schema}
 >
   <Hero kicker="Gekozen · Leadgeneratie" titel="Google Analytics-specialist: weet waar je aanvragen vandaan komen" prijs="vanaf € 395" eenmalig>
-    <p>Hoeveel aanvragen kwamen er vorige maand uit Google? En hoeveel uit je advertenties? Wie dat niet weet, stuurt op gevoel. Wij richten je meting zo in dat je het wel weet. Liefst zonder cookiemelding.</p>
+    <p>Welk kanaal levert aanvragen op, en welk kost alleen geld? Wij richten je meting in, testen hem met een echte aanvraag en geven je één overzicht dat je zelf snapt. Liefst zonder cookiemelding.</p>
+
     <Scene slot="beeld" />
   </Hero>
 
@@ -132,7 +137,7 @@ const schema = [
         <Tussenactie />
         <h2 id="cookies">Meten zonder cookiemelding: kan dat?</h2>
         <p>Ja, in veel gevallen wel. De regels zijn helder. Volgens de <a href="https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/online-beinvloeden/cookies-plaatsen" rel="noopener">ACM</a> mag je analytische cookies met weinig gevolgen voor de privacy van bezoekers zonder toestemming plaatsen. Je moet wel vertellen dat je ze gebruikt, bijvoorbeeld in je <a href="/privacyverklaring/">privacyverklaring</a>. Voor privacygevoelige analytische cookies en tracking cookies is altijd toestemming nodig. Vooraf aangevinkte keuzes zijn verboden.</p>
-        <p>Er zijn tools die zonder cookies meten en geen persoonsgegevens bewaren. Daarmee hoeft er geen banner op je site. Op onze eigen site kiezen we ook voor meten zonder cookiemelding.</p>
+        <p>Er zijn tools die zonder cookies meten en geen persoonsgegevens bewaren. Daarmee hoeft er geen banner op je site. Zo doen we het zelf ook: bezoek meten we met een eigen teller zonder cookies. Alleen voor het meten van onze Google-advertenties vragen we toestemming, want daar plaatst Google een cookie.</p>
         <div class="tabel-scroll">
           <table>
             <thead><tr><th>Tool</th><th>Cookiemelding nodig?</th><th>Past bij</th></tr></thead>
@@ -187,11 +192,23 @@ const schema = [
           </table>
         </div>
         <p>In tien seconden zie je wat werkt. In dit voorbeeld leveren Maps en de gewone zoekresultaten het meeste op, voor niets. De advertenties op social media kosten geld en leveren deze maand niets op. Een reden om meteen te stoppen is dat nog niet. Wel om de vraag te stellen. Zo wordt je marketing data-gedreven, in plaats van een gok.</p>
-        <p>Komen er via advertenties aanvragen binnen? Zet dan in elke link een UTM-code. Daarmee ziet je tool precies welke campagne of mail de bezoeker stuurde. Hoe dat werkt, staat in de gids over <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a>.</p>
+        <p>Komen er via advertenties aanvragen binnen? Zet dan in elke link een UTM-code. Daarmee ziet je tool precies welke campagne of mail de bezoeker stuurde. Maak er hieronder meteen een. Meer uitleg staat in de gids over <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a>.</p>
+        <UtmBuilder />
 
         <h2 id="kosten">Wat het kost</h2>
         <p>Tracking inrichten kost eenmalig vanaf € 395, exclusief btw. Daarvoor krijg je het meetplan, de installatie, het testen, het overzicht en de training. Een tool zoals Plausible kost een klein maandbedrag, dat je zelf betaalt. Google Analytics is gratis. Heb je al een installatie die alleen nagekeken en rechtgezet moet worden, dan is dat vaak minder werk. Dat hoor je vooraf.</p>
+        <p>Wat er niet in zit: het abonnement op een betaalde tool, en elke maand meekijken. Dat laatste kan los of binnen leadgeneratie.</p>
+        <h3>Zo verhoudt dat zich tot de markt</h3>
+        <p>Op de pagina's over Google Analytics van Daarom, Leon Korteweg en Pienter vonden we geen prijs. Daarom biedt een vrijblijvende eerste scan aan, de anderen een afspraak of een contactformulier.
+ Trustoo noemt voor online marketing gemiddeld € 80 tot € 160 per uur. Bij ons weet je het vooraf: vanaf € 395 eenmalig, met het testen en de training erbij. <span class="klein muted">(Bronnen opgehaald op 19 oktober 2026.)</span></p>
         <p>Wil je dat we elke maand met je meekijken? Data-analyse hoort bij <a href="/leadgeneratie/">leadgeneratie</a>, waar we op basis van de cijfers bijsturen en een doel afspreken waar je ons op afrekent. Wie liever zelf leert meten, kan ook een <a href="/trainingen/">training</a> volgen voor zichzelf of het team.</p>
+
+        <h2 id="geen-zin">Wanneer een Google Analytics-specialist (nog) geen zin heeft</h2>
+        <ul>
+          <li><b>Er komen nog bijna geen bezoekers.</b> Met tien bezoekers per week valt er weinig te meten. Werk eerst aan <a href="/zoekmachine-optimalisatie/">gevonden worden</a>.</li>
+          <li><b>Je kijkt er nooit naar.</b> Een meting die niemand leest, levert niets op. Spreek af wie het overzicht elke maand opent.</li>
+          <li><b>Je meting werkt al goed.</b> Test het zelf met een aanvraag en de realtime weergave. Komt alles binnen, dan heb je ons niet nodig.</li>
+        </ul>
       </article>
       <aside class="zijkolom">
         <Inhoud items={hoofdstukken} leestijd={10} />
@@ -209,6 +226,9 @@ const schema = [
       { v: 'Ik heb Google Analytics al. Kunnen jullie het nakijken?', a: 'Ja. Vaak staat het er wel, maar telt het geen aanvragen of dubbel. We kijken het na en zetten het recht. Dat is meestal minder werk dan een nieuwe inrichting.' },
       { v: 'Wat is Google Tag Manager?', a: 'Een gratis hulpmiddel van Google waarmee je metingen op je site beheert vanuit één plek. Zo hoef je niet bij elke wijziging in de code van je website te duiken.' },
       { v: 'Werkt mijn oude Google Analytics nog?', a: 'Begint je code met UA-, dan niet. Universal Analytics verwerkt sinds 1 juli 2023 geen gegevens meer. Je hebt een Google Analytics 4-property nodig, of een andere tool.' },
+      { v: 'Is de standaardinstallatie van Google Analytics niet genoeg?',
+ a: 'Die telt bezoekers, geen aanvragen. Zonder meetplan, belangrijke gebeurtenissen en een test weet je nog steeds niet welk kanaal klanten oplevert. Dat is het werk dat wij doen.' },
+      { v: 'Wat moet ik zelf doen?', a: 'Ons toegang geven tot je site en je accounts, en na de inrichting een halfuur vrijmaken voor de training. De rest regelen wij.' },
       { v: 'Van wie zijn de gegevens?', a: 'Van jou. De accounts staan op jouw naam. Wij krijgen toegang zolang we voor je werken.' },
       { v: 'Hoe snel zie ik resultaat van de nieuwe meting?', a: 'De meting werkt meteen na de inrichting. Na een maand of twee heb je genoeg gegevens om echte conclusies te trekken.' },
     ]}
@@ -224,5 +244,8 @@ const schema = [
     ]}
   />
 
-  <Actie titel="Weet jij waar je aanvragen vandaan komen?" tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en kijkt wat je nu al meet. Daarna hoor je wat er beter kan, en de vaste prijs.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij kijkt wat je nu al meet en belt je met wat er beter kan.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
+  <Actie titel="Weet jij waar je aanvragen vandaan komen?"
+ tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en kijkt wat je nu al meet. Daarna hoor je wat er beter kan, en de vaste prijs.`} />
 </Base>

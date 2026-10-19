@@ -10,6 +10,7 @@ import Scene from '../../../components/scenes/online-adverteren--google-ads-bure
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
 import Klikrekenhulp from '../../../components/tool/Klikrekenhulp.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-adverteren/google-ads-bureau/';
 // Gemiddelde klikprijzen in Nederland, opgevraagd in SE Ranking op 18 oktober 2026 (zelfde bron als het stappenplan voor een campagne).
@@ -22,6 +23,13 @@ const klikprijzen = [
   ['schilder', '€ 1,73'],
   ['hovenier', '€ 0,88'],
 ];
+// Marktprijzen voor beheer, opgehaald met curl op 19 oktober 2026 (zie de bronnen onder de tabel en in citation).
+const markt = [
+  ['Pakket bij GoogleSpecialist.nl', '€ 99,99 tot € 249,99 per maand', 'Vast aantal campagnes en zoekwoorden, met een maximaal advertentiebudget per pakket'],
+  ['Bureau ViVortis', 'vanaf € 385 per maand', 'Geen opstartkosten, maandelijks opzegbaar, budgetadvies € 500 tot € 1.000 per maand'],
+  ['Freelancer via Freelancer.nl', '€ 40 tot € 125 per uur', 'Gemiddelde uurtarieven, van junior tot senior'],
+  ['Drijfveer Media', 'vanaf € 249 per maand', 'Meting, campagnes, bijsturen en één A4 per maand, met een doel op papier'],
+];
 const schema = [{
   '@type': 'Service',
   name: 'Google Ads uitbesteden: campagnes opzetten en beheren',
@@ -30,6 +38,17 @@ const schema = [{
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
   offers: { '@type': 'Offer', price: 249, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: 249, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false }, description: 'Beheer vanaf € 249 per maand, exclusief btw. Het advertentiebudget betaal je rechtstreeks aan Google. Per maand opzegbaar.' },
+}, {
+  '@type': 'WebPage',
+  url: `${site.url}${url}`,
+  name: 'Google Ads-specialist: campagnes opzetten en beheren',
+  inLanguage: 'nl-NL',
+  dateModified: '2026-10-19',
+  citation: [
+    'https://googlespecialist.nl/',
+    'https://vivortis.nl/google-ads-uitbesteden',
+    'https://www.freelancer.nl/freelancers/google-adwords',
+  ],
 }];
 ---
 <Base
@@ -38,17 +57,17 @@ const schema = [{
   kruimels={[{ naam: 'Online adverteren', url: '/online-adverteren/' }, { naam: 'Google Ads', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Online adverteren" titel="Een Google Ads-specialist die ook zegt waar je moet stoppen" prijs="vanaf € 249 per maand">
-    <p>Meer aanvragen uit hetzelfde budget. Dat begint vaak niet met een nieuwe campagne, maar met schrappen wat geld kost en niets oplevert. Daarna bouwen we uit wat werkt.</p>
+  <Hero kicker="Gevonden · Online adverteren" titel="Een Google Ads-specialist die ook zegt waar je moet stoppen" prijs="vanaf € 249 per maand">
+    <p>Voor mkb'ers die meer aanvragen uit Google willen, zonder budget te verbranden. Eerst schrappen wat niets oplevert, dan uitbouwen wat werkt. Je account blijft van jou, het doel staat op papier.</p>
+
     <Scene slot="beeld" />
   </Hero>
 
   <section class="wrap sectie" data-aida="interest">
     <div class="met-zijkolom">
       <article class="tekst">
-        <h2>Wat een Google Ads-specialist voor je doet</h2>
-        <p>Google Ads, vroeger AdWords, lijkt simpel. Je kiest zoekwoorden, schrijft een advertentie en zet een budget in. Je advertenties staan online zodra Google ze heeft goedgekeurd, meestal binnen een werkdag. Het lastige deel komt daarna: zorgen dat die klikken klanten worden, tegen een prijs die je kunt betalen.</p>
-        <p>Dat is het werk van een Google Ads-specialist. Bij ons hoort dit erbij:</p>
+        <h2 id="wat-je-krijgt">Wat je krijgt van je Google Ads-specialist, vanaf € 249 per maand</h2>
+        <p>Google Ads, vroeger AdWords, lijkt simpel. Je kiest zoekwoorden, schrijft een advertentie en zet een budget in. Je advertenties staan online zodra Google ze heeft goedgekeurd, meestal binnen een werkdag. Het lastige deel komt daarna: zorgen dat die klikken klanten worden, tegen een prijs die je kunt betalen. Dit zit in het beheer:</p>
         <ul class="vink">
           <li><b>Meting.</b> Conversies instellen voor formulieren, telefoontjes en bestellingen, en koppelen met Google Analytics. Zonder meting stuur je blind.</li>
           <li><b>Zoekwoorden en uitsluitingen.</b> De zoektermen van mensen die willen kopen, en een lange lijst met woorden waarop je níet wilt verschijnen.</li>
@@ -56,7 +75,17 @@ const schema = [{
           <li><b>Biedstrategie.</b> Eerst grip op de klikprijs, daarna slim bieden zodra er genoeg conversies zijn.</li>
           <li><b>Continue bijsturing.</b> Elke week het zoektermenrapport, het budget en de resultaten per campagne.</li>
           <li><b>Rapportage.</b> Eén keer per maand, op één A4. Wat het kostte, wat het opleverde en wat we gaan doen.</li>
+          <li><b>Een doel op papier.</b> Bij de start leggen we vast wat het moet opleveren, en vóór welke datum.</li>
         </ul>
+        <div class="kader">
+          <p class="kader-titel">Wat er niet in zit</p>
+          <ul>
+            <li>Je advertentiebudget. Dat betaal je rechtstreeks aan Google, dus je ziet zelf elke euro.</li>
+            <li>Advertenties op Facebook, Instagram, LinkedIn, TikTok of Microsoft. Die doen we niet.</li>
+            <li>Een webshop bouwen. Heb je er al een, dan kan <a href="/online-adverteren/google-shopping/">Google Shopping</a> er wel bij.</li>
+          </ul>
+          <p>Heb je een groot budget of veel campagnes, dan is er meer werk. Wat dat kost, hoor je vooraf, voordat je iets tekent.</p>
+        </div>
         <p>We werken vooral met zoekcampagnes, voor mensen die actief zoeken. Voor webshops komt daar <a href="/online-adverteren/google-shopping/">Google Shopping</a> bij, soms in de vorm van Performance Max. Banners op het Display-netwerk zetten we standaard uit. Die leveren voor de meeste mkb'ers vooral goedkope klikken op die niets kopen.</p>
         <p>Google duwt adverteerders steeds meer naar automatische vormen, zoals Performance Max en AI Max voor zoekcampagnes. Die kunnen goed werken, als het systeem genoeg conversies ziet om van te leren. Met een paar aanvragen per maand is dat zelden zo. Een goede specialist weet wanneer automatisering je helpt en wanneer je de touwtjes beter zelf vasthoudt.</p>
 
@@ -72,6 +101,20 @@ const schema = [{
             </tbody>
           </table>
         </div>
+        <h3 id="maandoverzicht">Zo ziet je maandoverzicht eruit</h3>
+        <p>Eén A4, in deze volgorde. Een voorbeeld voor een installateur die cv-ketels vervangt:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Deze maand</th><th>Vorige maand</th></tr></thead>
+            <tbody>
+              <tr><td>Uitgegeven aan Google</td><td>€ 640</td><td>€ 610</td></tr>
+              <tr><td>Aanvragen (formulier en telefoon)</td><td>17</td><td>11</td></tr>
+              <tr><td>Kosten per aanvraag</td><td>€ 38</td><td>€ 55</td></tr>
+              <tr><td>Doel: aanvragen voor hooguit € 45</td><td>Gehaald</td><td>Niet gehaald</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Daaronder drie korte blokken. <b>Wat we deden:</b> 42 zoektermen uitgesloten, zoals "cv-ketel zelf ontluchten", en de advertenties 's avonds uitgezet. <b>Wat niet werkte:</b> de campagne voor warmtepompen, één aanvraag voor € 210, staat stil. <b>Wat we nu doen:</b> het budget van warmtepompen naar ketels verschuiven. <span class="muted">(Verzonnen voorbeeld.)</span></p>
 
         <h2>Waar het budget meestal weglekt</h2>
         <p>Wie een bestaand account openslaat, vindt bijna altijd dezelfde lekken. Ze kosten samen vaak een flink deel van het budget.</p>
@@ -153,9 +196,30 @@ const schema = [{
         </ol>
         <p>Let ook op een paar rode vlaggen. Een rapport vol vertoningen en doorklikratio's, maar zonder aanvragen. Een bureau dat geen toegang tot je eigen account wil geven. En beloftes over een vaste positie bovenaan: die bepaalt Google per veiling opnieuw.</p>
 
-        <h2>Wat Google Ads uitbesteden kost</h2>
+        <h2 id="kosten">Wat Google Ads uitbesteden kost</h2>
         <p>Je hebt twee soorten kosten. Het advertentiebudget gaat naar Google. Daarnaast betaal je voor opzet en beheer. Beheer kost bij ons vanaf € 249 per maand, exclusief btw. Bij een groot budget of veel campagnes is er meer werk; na een kort gesprek hoor je welk budget past bij je doel en wat het beheer voor jou kost. Je zegt per maand op, met één maand opzegtermijn. Ben je een goed doel? Dan kan je advertentiebudget gratis zijn, met <a href="/kennisbank/gidsen/google-ad-grants/">Google Ad Grants</a>.</p>
+        <h3>Zo verhoudt dat zich tot de markt</h3>
+        <p>We zochten op wat anderen voor Google Ads-beheer vragen. Dit staat op hun eigen sites:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Wie</th><th>Prijs</th><th>Wat erbij staat</th></tr></thead>
+            <tbody>
+              {markt.map(([wie, prijs, wat]) => <tr><td><b>{wie}</b></td><td>{prijs}</td><td>{wat}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bronnen, opgehaald op 19 oktober 2026: <a href="https://googlespecialist.nl/" rel="noopener">googlespecialist.nl</a>, <a href="https://vivortis.nl/google-ads-uitbesteden" rel="noopener">vivortis.nl</a> en <a href="https://www.freelancer.nl/freelancers/google-adwords" rel="noopener">freelancer.nl</a>. Alle prijzen exclusief btw en exclusief advertentiebudget.</p>
+        <p>Er zijn dus goedkopere pakketten. Daar zit een grens aan het aantal campagnes en aan je budget, en dat kan prima passen als je klein begint. Bij ons betaal je niet per pakket. Je betaalt voor het werk dat jouw doel vraagt, en dat doel staat op papier. Meer over klikprijzen en beheermodellen lees je in de gids <a href="/kennisbank/gidsen/wat-kost-google-ads/">wat kost Google Ads</a>.</p>
         <p>Vergelijk je offertes? Kijk dan niet alleen naar het bedrag. Kijk naar wat erin zit: wordt de meting ingericht, hoe vaak wordt er bijgestuurd, en krijg je een doel waarop je kunt afrekenen? In de gids over <a href="/kennisbank/gidsen/offerte-beoordelen/">een offerte beoordelen</a> staan de vragen die je kunt stellen.</p>
+
+        <h2 id="geen-zin">Wanneer Google Ads (nog) geen zin heeft</h2>
+        <p>Dat zeggen we liever vooraf dan na drie maanden.</p>
+        <ul>
+          <li><b>Je klikprijs past niet bij je marge.</b> Reken het na met de rekenhulp hierboven. Is de hoogste klikprijs die loont lager dan wat Google vraagt, dan verlies je op elke aanvraag.</li>
+          <li><b>Er is geen pagina voor de dienst.</b> Een advertentie naar een homepage met tien diensten kost klikken zonder aanvragen. Eerst een <a href="/leadgeneratie/landingspagina-laten-maken/">landingspagina</a>.</li>
+          <li><b>Je agenda zit al vol.</b> Een campagne die je na twee weken stilzet, is leergeld.</li>
+          <li><b>Je wilt vooral bekend worden.</b> Google Ads werkt het best bij mensen die al zoeken. Voor naamsbekendheid zijn er andere kanalen, en die doen wij niet.</li>
+        </ul>
 
         <h2>Wat je zelf blijft doen</h2>
         <p>Ook als je het uitbesteedt, hangt het resultaat deels van jou af. Drie dingen kan geen specialist voor je doen:</p>
@@ -192,6 +256,9 @@ const schema = [{
       { v: 'Hoeveel Google Ads-budget heb ik nodig?', a: 'Genoeg om binnen een maand of twee betrouwbare cijfers te hebben. Hoeveel dat is, hangt af van de klikprijzen in jouw branche: in Nederland van gemiddeld minder dan een euro tot ruim acht euro per klik. We rekenen het vooraf voor je uit.' },
       { v: 'Hoe snel levert Google Ads de eerste aanvragen op?', a: 'Je advertenties staan online zodra Google ze heeft goedgekeurd, meestal binnen een werkdag. De eerste aanvragen komen vaak in de eerste weken. Daarna sturen we bij op wat een aanvraag kost.' },
       { v: 'Kan ik Google Ads-beheer per maand opzeggen?', a: 'Ja. Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat.' },
+      { v: 'Er zijn pakketten van € 100 per maand. Waarom zou ik meer betalen?', a: 'Zo\'n pakket kan prima passen als je klein begint. Kijk wel naar de grenzen: vaak een vast aantal campagnes en een maximaal budget. Wij rekenen vooraf uit wat een aanvraag mag kosten, leggen een doel vast en werken een maand gratis door als we dat door onze fout niet halen.' },
+      { v: 'Wat als het niet werkt?', a: 'Dan zie je dat op je maandoverzicht, met de reden erbij. Ligt het aan ons, dan werken we een maand gratis door. Blijkt Google Ads voor jouw vak niet te lonen, dan zeggen we dat en raden we je aan te stoppen. Je account en alle gegevens blijven van jou.' },
+      { v: 'Wat moet ik zelf doen?', a: 'Aanvragen snel opvolgen, de telefoon opnemen als de advertenties draaien, en ons laten weten welke aanvragen klant werden. De rest doen wij.' },
       { v: 'Kunnen jullie mijn bestaande account overnemen?', a: 'Ja. We lopen het eerst helemaal na en vertellen je wat er goed gaat, wat geld lekt en wat we als eerste aanpakken. Je account blijft van jou.' },
       { v: 'Wat gebeurt er met mijn account als ik stop?', a: 'Niets. Het account staat op jouw naam en jij blijft beheerder. Je verbreekt de koppeling met ons manageraccount en alles loopt door, met alle gegevens.' },
       { v: 'Doen jullie ook advertenties op Facebook of LinkedIn?', a: 'Nee. Wij richten ons op Google: zoekcampagnes en Shopping. Ook kijken we naar <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>. Social advertising doen we niet.' },
@@ -206,6 +273,9 @@ const schema = [{
       { label: 'Case', titel: 'Conflictbemiddeling Nederland', href: '/cases/#conflictbemiddeling', tekst: 'Nieuwe site, SEO, linkbuilding en Google Ads.' },
     ]}
   />
+
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij belt je terug en vertelt je wat we in je account zien.' }
+]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
 
   <Actie titel="Lekt jouw Google Ads-budget?" tekst={`${site.contactpersoon} kijkt in je account of naar je plannen en belt je met wat hij ziet. Gratis, en je zit nergens aan vast.`} />
 </Base>

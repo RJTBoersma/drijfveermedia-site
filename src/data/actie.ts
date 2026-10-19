@@ -9,6 +9,7 @@ const regels: [RegExp, Stap][] = [
     knop: 'Vraag een vaste prijs voor je website', kort: 'Vaste prijs', vraag: 'Liever een vaste prijs dan zelf rekenen?', href: '/gratis-website-analyse/?doel=website',
     zin: 'Vertel wat je site moet opleveren. Thorgall belt je terug met een vaste prijs, ook als de goedkoopste route het beste past.',
     dienst: { naam: 'Website laten maken', prijs: 'vanaf € 250', url: '/website-laten-maken/' } }],
+  [/^\/online-adverteren\/adverteren-in-chatgpt\//, { knop: 'Check of ChatGPT Ads bij je past', kort: 'Gratis ChatGPT-check', vraag: 'Stellen jouw klanten hun vragen in ChatGPT?', href: '/gratis-website-analyse/?doel=chatgpt', zin: 'Thorgall kijkt of jouw klanten hun vragen in ChatGPT stellen en belt je met zijn antwoord, ook als dat nee is.', dienst: { naam: 'Adverteren in ChatGPT', prijs: 'beheer vanaf € 249 per maand', url: '/online-adverteren/adverteren-in-chatgpt/' } }],
   [/^\/online-adverteren|google-ads|\/wat-is\/(sea|cpc|ctr|roas|cpa|zoekmachinemarketing)\/|google-ad-grants|adverteren/, {
     knop: 'Laat je Google Ads-account gratis checken', kort: 'Gratis Ads-check', vraag: 'Benieuwd waar jouw budget weglekt?', href: '/gratis-website-analyse/?doel=ads',
     zin: 'We kijken waar je budget weglekt en bellen je met wat we zien. Je account blijft van jou.',
@@ -40,13 +41,13 @@ const regels: [RegExp, Stap][] = [
     dienst: { naam: 'Contentmarketing', prijs: 'vanaf € 495 per maand', url: '/tekstschrijver/contentmarketing/' } }],
   [/^\/(tekstschrijver)|copywriting|teksten|blog/, { ...scan, knop: 'Laat een pagina gratis nalezen', vraag: 'Mag Thorgall een van je pagina\'s lezen?',
     dienst: { naam: 'Tekstschrijver', prijs: 'vanaf € 75 per pagina', url: '/tekstschrijver/' } }],
-  [/^\/leadgeneratie|conversie|landingspagina|leads|nieuwsbrief|mail|funnel|heatmap|werkspot/, { ...scan, dienst: { naam: 'Leadgeneratie', prijs: 'vanaf € 495 per maand', url: '/leadgeneratie/' } }],
+  [/^\/leadgeneratie\/tracking|analytics|utm|\/wat-is\/(kpi|crm|bounce-rate)\//, { ...scan, dienst: { naam: 'Tracking en analytics', prijs: 'vanaf € 395', url: '/leadgeneratie/tracking-en-analytics/' } }],
+  [/^\/leadgeneratie|conversie|landingspagina|leads|nieuwsbrief|mail|funnel|heatmap|werkspot/, { ...scan, knop: 'Laat gratis zien waar je aanvragen lekken', kort: 'Gratis aanvragen-check', href: '/gratis-website-analyse/?doel=leads', vraag: 'Hoeveel aanvragen laat jouw site liggen?', zin: 'Thorgall loopt je site door als een klant en belt je met de drie plekken waar je aanvragen lekken.', dienst: { naam: 'Leadgeneratie', prijs: 'vanaf € 495 per maand', url: '/leadgeneratie/' } }],
   [/^\/social-media|instagram|linkedin|social|posten|reels|viraal|inhaak/, {
     knop: 'Laat je kanalen gratis bekijken', kort: 'Gratis kanaalcheck', vraag: 'Zullen we je kanalen samen bekijken?',
     href: '/contact/?vraag=Willen%20jullie%20naar%20mijn%20social%20media%20kijken%3F',
     zin: 'Thorgall kijkt naar je huidige kanalen en belt je met zijn advies: waar je moet beginnen, en waar je beter niet aan begint.',
     dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],
-  [/^\/leadgeneratie\/tracking|analytics|utm|\/wat-is\/(kpi|crm|bounce-rate)\//, { ...scan, dienst: { naam: 'Tracking en analytics', prijs: 'vanaf € 395', url: '/leadgeneratie/tracking-en-analytics/' } }],
   [/^\/zoekmachine-optimalisatie|seo|google|zoekwoord|hoger|meta|title|search-console|websiteverkeer|wat-is\//, { ...scan, dienst: { naam: 'SEO', prijs: 'vanaf € 495 per maand', url: '/zoekmachine-optimalisatie/' } }],
 ];
 export const stapVoor = (pad: string): Stap => regels.find(([r]) => r.test(pad))?.[1] ?? { ...scan, dienst: { naam: 'Online marketing uitbesteden', prijs: 'vanaf € 595 per maand', url: '/online-marketing-uitbesteden/' } };

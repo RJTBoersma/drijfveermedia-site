@@ -11,6 +11,7 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/online-adverteren--google-shopping.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-adverteren/google-shopping/';
 const datum = '2026-10-18';
@@ -27,8 +28,9 @@ const hoofdstukken = [
   { id: 'kosten', titel: 'Wat het kost' },
   { id: 'fouten', titel: 'Veelgemaakte fouten' },
   { id: 'eerste-maanden', titel: 'De eerste 90 dagen' },
+  { id: 'geen-zin', titel: 'Wanneer het geen zin heeft' },
   { id: 'ai', titel: 'Je feed en AI' },
-  { id: 'werkwijze', titel: 'Zo werken we' },
+  { id: 'werkwijze', titel: 'Wat je van ons krijgt' },
 ];
 const kenmerken = [
   ['ID [id]', 'Altijd', 'Een vaste, unieke code per product. Verander hem niet, anders begint Google opnieuw met leren.'],
@@ -52,6 +54,13 @@ const schema = [{
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
   offers: { '@type': 'Offer', price: 249, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: 249, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false }, description: 'Beheer vanaf € 249 per maand, exclusief btw. Het advertentiebudget betaal je rechtstreeks aan Google. Per maand opzegbaar.' },
+}, {
+  '@type': 'WebPage',
+  url: `${site.url}${url}`,
+  name: 'Google Shopping adverteren voor je webshop',
+  inLanguage: 'nl-NL',
+  dateModified: '2026-10-19',
+  citation: ['https://www.webton.nl/zoekmachine-adverteren/google-shopping/', 'https://www.samonlinemarketing.nl/google-shopping/', 'https://pienter.nl/online-marketing/e-commerce-marketing/shopping-advertenties/', 'https://googlespecialist.nl/', 'https://vivortis.nl/google-ads-uitbesteden'],
 }];
 ---
 <Base
@@ -60,8 +69,9 @@ const schema = [{
   kruimels={[{ naam: 'Online adverteren', url: '/online-adverteren/' }, { naam: 'Google Shopping', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Online adverteren" titel="Google Shopping adverteren: je producten bovenaan Google, met foto en prijs" prijs="vanaf € 249 per maand">
-    <p>Iemand zoekt "wandelschoenen heren" en ziet bovenaan een rij producten met foto, prijs en winkelnaam. Daar wil je met je webshop tussen staan. Wij zetten de campagnes op en houden ze winstgevend.</p>
+  <Hero kicker="Gevonden · Online adverteren" titel="Google Shopping adverteren: je producten bovenaan Google, met foto en prijs" prijs="vanaf € 249 per maand">
+    <p>Voor webshops die al draaien. Wij zetten je feed en campagnes op en sturen op marge per product, zodat je niet betaalt voor klikken die niets verkopen.</p>
+
     <Scene slot="beeld" />
   </Hero>
 
@@ -218,6 +228,9 @@ const schema = [{
         </div>
         <p>Daarom sturen we op rendement en niet op zoveel mogelijk klikken. Producten met weinig marge krijgen een lager bod of gaan eruit. Stoppen met wat niet werkt, levert vaak meer op dan een nieuwe campagne.</p>
         <p>Het beheer kost bij ons vanaf € 249 per maand, exclusief btw. Na een kort gesprek hoor je welk budget past bij je doel en wat het beheer voor jou kost. Je zegt per maand op, met één maand opzegtermijn. Er zit <a href="/garantie/">garantie</a> op: we leggen bij de start een doel en een datum vast, en halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p>
+        <h3>Zo verhoudt dat zich tot de markt</h3>
+        <p>Webton, SAM Online Marketing en Pienter noemen op hun pagina over Google Shopping geen prijs voor hun werk. Ze bieden een gratis scan of een gesprek aan. GoogleSpecialist.nl heeft Google Ads-pakketten van € 99,99 tot € 249,99 per maand, met een maximaal advertentiebudget per pakket. ViVortis begint Google Ads-beheer bij € 385 per maand. Wij zitten met € 249 per maand dus in het midden, met de prijs vooraf op de pagina. Meer over beheerprijzen en klikkosten staat in de gids <a href="/kennisbank/gidsen/wat-kost-google-ads/">wat kost Google Ads</a>.</p>
+        <p class="klein muted">Bronnen, opgehaald op 19 oktober 2026: de Shopping-pagina's van <a href="https://www.webton.nl/zoekmachine-adverteren/google-shopping/" rel="noopener">Webton</a>, <a href="https://www.samonlinemarketing.nl/google-shopping/" rel="noopener">SAM Online Marketing</a> en <a href="https://pienter.nl/online-marketing/e-commerce-marketing/shopping-advertenties/" rel="noopener">Pienter</a>, en <a href="https://googlespecialist.nl/" rel="noopener">googlespecialist.nl</a> en <a href="https://vivortis.nl/google-ads-uitbesteden" rel="noopener">vivortis.nl</a>.</p>
 
         <Tussenactie />
         <h2 id="fouten">Veelgemaakte fouten</h2>
@@ -243,17 +256,39 @@ const schema = [{
         </div>
         <p>Daarna is het doorlopend werk: feed schoon houden, nieuwe producten toevoegen, seizoenen voorbereiden. Shopping is geen knop die je één keer aanzet.</p>
 
+        <h2 id="geen-zin">Wanneer Google Shopping (nog) geen zin heeft</h2>
+        <ul>
+          <li><b>Je marges zijn te dun.</b> Bij 10 procent marge moet elke advertentie-euro € 10 omzet opleveren. Dat lukt zelden.</li>
+
+          <li><b>Je productpagina's zijn zwak.</b> Geen duidelijke levertijd, trage pagina's, onduidelijke retour. Dan betaal je voor bezoekers die niet kopen.</li>
+          <li><b>Je hebt nog geen webshop.</b> Bouwen doen we niet. Kom terug als hij draait.</li>
+          <li><b>Je kunt de verkopen niet meten.</b> Zonder omzet per product sturen we blind. Dat regelen we dus eerst.</li>
+        </ul>
+
         <div class="stap-kop"><Tekening naam="ai" maat={48} /><h2 id="ai">Je feed werkt ook voor AI</h2></div>
         <p>Een goede feed doet meer dan advertenties vullen. Google schrijft in zijn gids voor generatieve AI dat antwoorden in Google ook productinformatie kunnen tonen, en dat Merchant Center helpt om daar zichtbaar te zijn. Ook OpenAI werkt met productfeeds: voor advertenties in ChatGPT kun je een catalogus aanleveren. Wie zijn productgegevens één keer goed op orde heeft, kan ze op meer plekken gebruiken. Meer daarover bij <a href="/online-adverteren/adverteren-in-chatgpt/">adverteren in ChatGPT</a>.</p>
 
-        <h2 id="werkwijze">Zo werken we</h2>
+        <h2 id="werkwijze">Wat je krijgt bij Google Shopping adverteren via ons</h2>
         <ul class="vink">
           <li>We lopen je Merchant Center en feed na en lossen afkeuringen op.</li>
           <li>We regelen de conversiemeting met omzetwaarde, zodat je per product ziet wat het oplevert.</li>
           <li>We bouwen de campagne en verdelen je producten in groepen op marge en prestaties.</li>
           <li>Elke week kijken we naar zoektermen, budget en producten die geld kosten zonder te verkopen.</li>
           <li>Elke maand krijg je één A4: wat we deden, wat het opleverde en wat we nu doen.</li>
+          <li>Bij de start een doel op papier, bijvoorbeeld een ROAS van minstens 400 procent op je best verkopende groep.</li>
         </ul>
+        <p>Niet inbegrepen: je advertentiebudget, dat rechtstreeks naar Google gaat, en werk aan de webshop zelf. Foto's maken we niet. We werken wel met de foto's die jij aanlevert. Zo ziet de kern van je maandoverzicht eruit:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Productgroep</th><th>Kosten</th><th>Omzet</th><th>ROAS</th><th>Wat we doen</th></tr></thead>
+            <tbody>
+              <tr><td>marge-hoog</td><td>€ 420</td><td>€ 2.310</td><td>550%</td><td>Meer budget</td></tr>
+              <tr><td>bestseller</td><td>€ 380</td><td>€ 1.520</td><td>400%</td><td>Zo laten</td></tr>
+              <tr><td>marge-laag</td><td>€ 160</td><td>€ 290</td><td>181%</td><td>Bod omlaag, onder break-even</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Verzonnen voorbeeld van een webshop in wandelartikelen.</p>
         <p>Shopping is een van de kanalen binnen <a href="/online-adverteren/">online adverteren</a>. Voor tekstadvertenties op zoekwoorden zie je de pagina over <a href="/online-adverteren/google-ads-bureau/">Google Ads uitbesteden</a>. Wil je eerst laten nakijken hoe je account ervoor staat? Gebruik dan de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check</a>.</p>
         <p class="klein muted">Bronnen, geraadpleegd oktober 2026: Google Merchant Center Help (productgegevensspecificatie, titel, beschrijving, afbeelding, GTIN, MPN, gratis vermeldingen, services voor prijsvergelijking, aan de slag), Google Ads Help (Shopping-advertenties, Performance Max), Google Search Central (gids voor generatieve AI) en de advertentiedocumentatie van OpenAI.</p>
       </article>
@@ -267,9 +302,11 @@ const schema = [{
             <li>Merchant Center en feed op orde</li>
             <li>Meting met omzet per product</li>
             <li>Sturen op marge, niet op klikken</li>
-            <li>Elke maand een helder verslag</li>
+            <li>Elke maand één A4, met cijfers per productgroep</li>
+
+            <li>Account op jouw naam</li>
           </ul>
-          <a class="btn" href="/gratis-website-analyse/">Gratis scan aanvragen</a>
+          <a class="btn" href="/gratis-website-analyse/?doel=ads">Laat je account gratis checken</a>
         </div>
       </aside>
     </div>
@@ -279,7 +316,9 @@ const schema = [{
 
   <Faq
     vragen={[
-      { v: 'Wat kost adverteren in Google Shopping?', a: 'Je betaalt per klik en bepaalt zelf je dagbudget. Wat een klik kost, verschilt per product en per markt. Reken terug vanaf je marge: bij 40 procent marge moet elke advertentie-euro minstens € 2,50 omzet opleveren. Wat ons beheer kost, hangt af van je advertentiebudget.' },
+      { v: 'Wat kost adverteren in Google Shopping?', a: 'Je betaalt per klik en bepaalt zelf je dagbudget. Wat een klik kost, verschilt per product en per markt. Reken terug vanaf je marge: bij 40 procent marge moet elke advertentie-euro minstens € 2,50 omzet opleveren. Ons beheer begint bij € 249 per maand, exclusief btw.' },
+      { v: 'Is € 249 per maand niet veel voor een kleine webshop?', a: 'Dat hangt af van je marge en je omzet uit Google. Levert beheer je per maand minder extra marge op dan het kost, dan raden we het af. Dat rekenen we vooraf met je uit, met de break-even ROAS van je eigen producten.' },
+      { v: 'Wat als mijn Shopping-campagne niets oplevert?', a: 'Dan zie je dat per productgroep op je maandoverzicht. Producten die verlies maken, gaan eruit. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Je zegt per maand op, en je account en feed blijven van jou.' },
       { v: 'Kan ik gratis in Google Shopping staan?', a: 'Ja. Met een Merchant Center-account kunnen je producten gratis verschijnen, onder meer op het tabblad Shopping, in Afbeeldingen en in Maps. Bij een nieuw account staat dat standaard aan. Bovenaan de zoekresultaten staan is wel betaald.' },
       { v: 'Waarom keurt Google mijn producten af?', a: 'Meestal door een ontbrekende GTIN, een prijs of voorraad die niet gelijk is aan je site, of een foto met tekst erop. In Merchant Center zie je onder Producten, op het tabblad Vereist aandacht, per product wat er mis is.' },
       { v: 'Wat is een CSS, en heb ik er een nodig?', a: 'Een prijsvergelijkingsdienst. In Nederland lopen Shopping-advertenties altijd via een CSS. Google Shopping is er zelf een. Je kunt die gebruiken of een andere kiezen, ook meerdere tegelijk.' },
@@ -300,7 +339,10 @@ const schema = [{
     ]}
   />
 
-  <Actie titel="Benieuwd wat Shopping jouw webshop oplevert?" tekst={`${site.contactpersoon} kijkt naar je feed en je marges, en belt je met zijn inschatting, ook als het advies is om het nog niet te doen.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij kijkt naar je feed en je marges en belt je met wat hij ziet.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
+  <Actie titel="Benieuwd wat Shopping jouw webshop oplevert?"
+ tekst={`${site.contactpersoon} kijkt naar je feed en je marges, en belt je met zijn inschatting, ook als het advies is om het nog niet te doen.`} />
 </Base>
 <style>
   .prijs-eigen { padding: 24px; }

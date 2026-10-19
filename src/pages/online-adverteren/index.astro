@@ -12,6 +12,7 @@ import Tekening from '../../components/teken/Tekening.astro';
 import Scene from '../../components/scenes/online-adverteren.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
+import Klikrekenhulp from '../../components/tool/Klikrekenhulp.astro';
 
 const url = '/online-adverteren/';
 const hoofdstukken = [
@@ -23,6 +24,7 @@ const hoofdstukken = [
   { id: 'fouten', titel: 'Vijf fouten die geld kosten' },
   { id: 'zelf-doen', titel: 'Wat je zelf kunt doen' },
   { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'kiezen', titel: 'Waarom via ons' },
   { id: 'eerlijk', titel: 'Wat we niet beloven' },
 ];
 const schema = [{
@@ -33,6 +35,12 @@ const schema = [{
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
   offers: { '@type': 'Offer', price: 249, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: 249, priceCurrency: 'EUR', unitText: 'maand', valueAddedTaxIncluded: false }, description: 'Beheer vanaf € 249 per maand, exclusief btw. Het advertentiebudget betaal je rechtstreeks aan Google. Per maand opzegbaar.' },
+}, {
+  '@type': 'WebPage',
+  url: `${site.url}${url}`,
+  name: 'Online adverteren in Google en ChatGPT',
+  inLanguage: 'nl-NL',
+  dateModified: '2026-10-19',
 }];
 ---
 <Base
@@ -41,8 +49,9 @@ const schema = [{
   kruimels={[{ naam: 'Online adverteren', url }]}
   schema={schema}
 >
-  <Hero kicker="Gekozen · Online adverteren" titel="Online adverteren in Google en ChatGPT, met vooraf berekend wat een aanvraag mag kosten" prijs="vanaf € 249 per maand">
-    <p>Je advertenties staan online zodra Google ze heeft goedgekeurd, meestal binnen een werkdag. Beheer vanaf € 249 per maand, en je budget betaal je rechtstreeks aan het platform. Iemand typt "dakkapel laten plaatsen" in Google of vraagt ChatGPT om een goede boekhouder. Op dat moment wil je in beeld zijn.</p>
+  <Hero kicker="Gevonden · Online adverteren" titel="Online adverteren in Google en ChatGPT, met vooraf berekend wat een aanvraag mag kosten" prijs="vanaf € 249 per maand">
+    <p>Voor mkb'ers en webshops die in beeld willen zijn als iemand zoekt. Je budget gaat rechtstreeks naar het platform, je account blijft van jou en we leggen vooraf een doel vast.</p>
+
     <Scene slot="beeld" />
   </Hero>
 
@@ -103,6 +112,8 @@ const schema = [{
           <p class="kader-titel">Rekenvoorbeeld (verzonnen cijfers)</p>
           <p>Een hovenier in Hoogeveen betaalt € 1,80 per klik. Van elke honderd bezoekers vragen er zes een offerte aan. Een aanvraag kost dan € 30. Eén op de drie aanvragen wordt een klus, dus een klant kost € 90. Een gemiddelde tuinklus levert € 800 marge op. Elke euro aan advertenties brengt dan bijna negen euro marge terug.</p>
         </div>
+        <p>Maak dezelfde som met je eigen cijfers. Kies je branche, vul je marge in en je ziet meteen welke klikprijs nog loont en welk budget past.</p>
+        <Klikrekenhulp branche="hovenier" marge={800} conversie={6} klus={33} klussen={4} />
         <h3>Waar het meestal goed werkt</h3>
         <p>Bij diensten waar mensen snel iemand nodig hebben: een loodgieter, een slotenmaker, een glaszetter. Bij grote keuzes waarbij mensen actief vergelijken, zoals een dakkapel, een advocaat of een opleiding. En bij webshops met producten waar mensen gericht naar zoeken.</p>
         <p>Voor Conflictbemiddeling Nederland, dat mediationopleidingen geeft, zetten we Google Ads in naast een nieuwe website, SEO en linkbuilding. Zo vullen advertenties en organische groei elkaar aan. Lees de <a href="/cases/#conflictbemiddeling">case van Conflictbemiddeling Nederland</a>.</p>
@@ -177,9 +188,28 @@ const schema = [{
           <li><b>Het advertentiebudget.</b> Dat gaat rechtstreeks naar Google of OpenAI. Je bepaalt het zelf, en over een hele maand gaat Google er niet overheen.</li>
           <li><b>Opzet en beheer.</b> Het werk: meting, campagnes bouwen, teksten schrijven, bijsturen en rapporteren.</li>
         </ul>
-        <p>Het beheer kost bij ons vanaf € 249 per maand. Wie € 300 per maand aan Google besteedt, heeft ander werk nodig dan wie er € 5.000 in steekt. Na een kort gesprek hoor je welk budget past bij je doel en wat ons beheer voor jou kost. Zonder kleine letters, en per maand opzegbaar, met één maand opzegtermijn.</p>
+        <p>Het beheer kost bij ons vanaf € 249 per maand, exclusief btw. Daarvoor krijg je:</p>
+        <ul class="vink">
+          <li>de meting van aanvragen, telefoontjes of verkopen, voordat er een euro naar het platform gaat;</li>
+          <li>campagnes, zoekwoorden, uitsluitingen en advertentieteksten;</li>
+          <li>elke week bijsturen op wat een aanvraag kost;</li>
+          <li>elke maand één A4: wat we deden, wat het opleverde en wat we nu doen (<a href="/online-adverteren/google-ads-bureau/#maandoverzicht">zo ziet dat eruit</a>);</li>
+          <li>een doel met een datum, waar je ons op afrekent.</li>
+        </ul>
+        <p>Wie € 300 per maand aan Google besteedt, heeft ander werk nodig dan wie er € 5.000 in steekt. Na een kort gesprek hoor je welk budget past bij je doel en wat ons beheer voor jou kost. Per maand opzegbaar, met één maand opzegtermijn. Hoe € 249 zich verhoudt tot pakketten, andere bureaus en freelancers, zie je op <a href="/online-adverteren/google-ads-bureau/#kosten">Google Ads uitbesteden</a>. Klikprijzen per branche staan in de gids <a href="/kennisbank/gidsen/wat-kost-google-ads/">wat kost Google Ads</a>.</p>
         <p>Hoeveel advertentiebudget je nodig hebt, reken je terug vanuit je doel. Wil je tien aanvragen per maand en kost een aanvraag naar schatting € 40, dan begin je rond € 400 per maand. Daar zit ook ruimte in om te testen, waaronder zoekwoorden waarvan je nog niet weet of ze aanvragen opleveren.</p>
         <p>Laat je account in elk geval op je eigen naam staan, bij welk bureau je ook zit. Dan blijven je gegevens en je historie van jou, ook als je ooit overstapt.</p>
+
+        <h2 id="kiezen">Waarom ondernemers adverteren via ons</h2>
+        <p>Je kunt het zelf doen, een pakket nemen, een freelancer inhuren of naar een groot bureau gaan. Dit is wat je bij ons anders krijgt:</p>
+        <ul class="vink">
+          <li><b>Je account staat op jouw naam.</b> Stop je, dan houd je alles: campagnes, historie en gegevens.</li>
+          <li><b>Een doel op papier.</b> Geen belofte over klikken, wel over aanvragen of kosten per aanvraag, met een datum.</li>
+          <li><b>Eén aanspreekpunt.</b> Thorgall belt je op werkdagen binnen 15 minuten terug en weet wat er in je account gebeurt.</li>
+          <li><b>Advies om te stoppen.</b> Kost een campagne geld zonder aanvragen, dan zetten we hem stil en zeggen we je waarom.</li>
+
+        </ul>
+        <p>En wanneer zit je beter ergens anders? Wil je adverteren op Facebook, Instagram, LinkedIn of TikTok, dan zijn wij niet je bureau. Besteed je tienduizenden euro's per maand over veel kanalen tegelijk, dan past een groot bureau met een eigen team per kanaal beter.</p>
 
         <h2 id="eerlijk">Wat we niet beloven</h2>
         <p>Niemand kan garanderen dat je altijd op plek 1 staat. De veiling verandert bij elke zoekopdracht, en concurrenten bieden mee. Wat we wel doen: bij de start samen een doel vastleggen dat we kunnen meten, met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Voorwaarde is wel dat jij doet wat nodig is, zoals aanvragen snel opvolgen. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
@@ -197,6 +227,7 @@ const schema = [{
             <li>Google Ads, Shopping en ChatGPT</li>
             <li>Elke week bijsturen</li>
             <li>Een doel waar je ons op afrekent</li>
+            <li>Account op jouw naam</li>
           </ul>
           <a class="btn" href="/gratis-website-analyse/?doel=ads">Laat je Google Ads-account gratis checken</a>
         </div>
@@ -214,6 +245,8 @@ const schema = [{
       { v: 'Wat heb ik nodig om te beginnen met online adverteren?', a: 'Een website met een duidelijke pagina per dienst of product, een manier om aanvragen te meten en een budget dat past bij je doel. De meting regelen wij.' },
       { v: 'Kan ik online adverteren bij jullie per maand opzeggen?', a: 'Ja. Je zegt per maand op, met één maand opzegtermijn, per e-mail. Alleen als we samen schriftelijk iets anders afspreken, geldt dat. Je advertentieaccount blijft van jou.' },
       { v: 'Kan ik ook zelf adverteren?', a: 'Zeker. In de gids <a href="/online-adverteren/google-ads-campagne-opzetten/">Google Ads-campagne opzetten</a> staat stap voor stap hoe je begint, met een check van tien punten.' },
+      { v: 'Waarom betaal ik voor beheer als Google al geld kost?', a: 'Omdat het budget het meest weglekt in instellingen die niemand nakijkt: zoektermen zonder uitsluitingen, advertenties buiten je werkgebied of buiten kantoortijd, een meting die niets telt. Beheer betaalt zich terug als je aanvragen goedkoper worden. Lukt dat niet, dan zie je dat op je maandoverzicht en kun je per maand stoppen.' },
+      { v: 'Wat als online adverteren voor mij niet werkt?', a: 'Dan zeggen we dat, met de cijfers erbij. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Blijkt het kanaal niet te lonen, dan raden we je aan te stoppen en kijken we samen naar een andere route, zoals lokale SEO.' },
     ]}
   />
 

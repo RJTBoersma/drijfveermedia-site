@@ -12,9 +12,11 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/leadgeneratie--e-mailmarketing.astro';
 import { site, persoon } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
+import UtmBuilder from '../../../components/tool/UtmBuilder.astro';
 
 const url = '/leadgeneratie/e-mailmarketing/';
-const datum = '2026-10-18';
+const datum = '2026-10-19';
 const hoofdstukken = [
   { id: 'wat-is-het', titel: 'Wat e-mailmarketing is' },
   { id: 'waarom', titel: 'Waarom e-mail nog werkt' },
@@ -29,6 +31,7 @@ const hoofdstukken = [
   { id: 'fouten', titel: 'Acht veelgemaakte fouten' },
   { id: 'aanpak', titel: 'Zo pakken we het aan' },
   { id: 'kosten', titel: 'Wat het kost' },
+  { id: 'geen-zin', titel: 'Wanneer het geen zin heeft' },
 ];
 const schema = [
   {
@@ -51,6 +54,7 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+    citation: ['https://searchlab.nl/kosten/wat-kost-email-marketing', 'https://trustoo.nl/kosten/online-marketing-kosten/'],
   },
 ];
 ---
@@ -61,7 +65,8 @@ const schema = [
   schema={schema}
 >
   <Hero kicker="Gekozen · Leadgeneratie" titel="E-mailmarketing: nieuwsbrieven en vaste opvolgmails voor je offertes" prijs="vanaf € 295 per maand">
-    <p>Een offerte versturen en dan niets meer horen. Herkenbaar? Met vaste opvolgmails die we één keer instellen, krijgt elke klant op het juiste moment de juiste mail. Jij hoeft alleen nog te bellen als de klant ja zegt. Wij zijn het e-mailmarketingbureau dat het hele traject regelt, van eerste mail tot opvolging.</p>
+    <p>Voor dienstverleners die offertes versturen en daarna niets meer horen. Wij stellen vaste opvolgmails één keer in en schrijven je nieuwsbrief. Jij belt als de klant ja zegt.</p>
+
     <Scene slot="beeld" />
   </Hero>
 
@@ -263,7 +268,8 @@ const schema = [
           </table>
         </div>
         <p>Waarom zijn open rates minder betrouwbaar? Een mail telt als geopend als er een onzichtbaar plaatje wordt geladen. Apple downloadt met <a href="https://www.apple.com/legal/privacy/data/nl/mail-privacy-protection/" rel="noopener">Privacybescherming in Mail</a> dat soort extern materiaal standaard op de achtergrond, zodra een mail binnenkomt. Of de ontvanger hem nu leest of niet. Een mail aan iemand met een iPhone kan dus als geopend tellen, terwijl niemand hem zag. Wij kijken daarom naar kliks, antwoorden en vooral naar aanvragen. Dat zijn de cijfers die in je agenda terechtkomen.</p>
-        <p>Zet achter elke link in je mails een UTM-code. Dan zie je in je statistieken welke mail welke aanvraag opleverde. Hoe je die maakt, staat in de gids over <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a>.</p>
+        <p>Zet achter elke link in je mails een UTM-code. Dan zie je in je statistieken welke mail welke aanvraag opleverde. Maak hem hieronder meteen voor je volgende nieuwsbrief. Meer uitleg staat in de gids over <a href="/kennisbank/gidsen/utm-codes/">UTM-codes</a>.</p>
+        <UtmBuilder />
 
         <Tussenactie />
         <h2 id="tools">Een tool voor e-mailmarketing kiezen</h2>
@@ -312,7 +318,19 @@ const schema = [
         <p>Elke maand kijken we wat de mails opleverden. Een mail die niets doet, gaat eruit of wordt herschreven. Je krijgt elke maand één A4 met wat we deden en wat het opleverde, zonder grafieken waar je een marketeer bij nodig hebt. Zo werken we bij alles: eerst daar beginnen waar het snelst verschil te maken is, daarna perfectioneren. Lees er meer over op <a href="/werkwijze/">onze werkwijze</a>.</p>
 
         <h2 id="kosten">Wat e-mailmarketing kost</h2>
-        <p>E-mailmarketing bij ons begint bij € 295 per maand, exclusief btw. Je zegt per maand op, met één maand opzegtermijn. Daarvoor schrijven en versturen we je nieuwsbrieven, houden we je vaste reeksen bij en krijg je het maandoverzicht. Hoeveel mails er precies in je maand zitten, leggen we vooraf vast. De verzendtool betaal je zelf. Voor een kleine lijst is die vaak gratis, zie de tabel hierboven.</p>
+        <p>E-mailmarketing bij ons begint bij € 295 per maand, exclusief btw. Je zegt per maand op, met één maand opzegtermijn. Daarvoor schrijven en versturen we je nieuwsbrieven, houden we je vaste reeksen bij en krijg je het maandoverzicht. Hoeveel mails er precies in je maand zitten, leggen we vooraf vast. De verzendtool betaal je zelf. Voor een kleine lijst is die vaak gratis, zie de tabel hierboven. Adressen kopen of lijsten zonder toestemming mailen doen we niet.</p>
+        <h3>Zo verhoudt dat zich tot de markt</h3>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Bron</th><th>Wat een e-mailmarketingbureau kost</th></tr></thead>
+            <tbody>
+              <tr><td>Searchlab, kostengids e-mailmarketing</td><td>€ 500 tot € 2.500 per maand voor uitvoering door een bureau. Voor een mkb'er met 2.500 contacten noemen ze € 500 tot € 1.500 per maand.</td></tr>
+              <tr><td>Trustoo, kosten online marketing</td><td>Gemiddeld € 80 tot € 120 per uur</td></tr>
+              <tr><td>Drijfveer Media</td><td>Vanaf € 295 per maand, met vaste opvolgmails, nieuwsbrieven en één A4 per maand</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="klein muted">Bronnen, opgehaald op 19 oktober 2026: <a href="https://searchlab.nl/kosten/wat-kost-email-marketing" rel="noopener">searchlab.nl</a> en <a href="https://trustoo.nl/kosten/online-marketing-kosten/" rel="noopener">trustoo.nl</a>. Prijzen exclusief btw en exclusief de verzendtool.</p>
         <p>Bij de start leggen we samen een doel vast, met een datum, bijvoorbeeld een aantal extra opdrachten uit je offertes. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
         <h3>Zelf doen of uitbesteden?</h3>
         <div class="tabel-scroll">
@@ -326,6 +344,12 @@ const schema = [
             </tbody>
           </table>
         </div>
+        <h2 id="geen-zin">Wanneer e-mailmarketing (nog) geen zin heeft</h2>
+        <ul>
+          <li><b>Je verstuurt bijna geen offertes en hebt geen klantenlijst.</b> Dan valt er weinig op te volgen. Begin met meer aanvragen, bijvoorbeeld via <a href="/lokale-seo/">lokale SEO</a>.</li>
+          <li><b>Je wilt een gekochte lijst mailen.</b> Dat mag niet zonder toestemming, en het beschadigt je domein.</li>
+          <li><b>Je klanten kopen één keer in hun leven.</b> Dan levert alleen de offerte-opvolging iets op. Een maandelijkse nieuwsbrief niet.</li>
+        </ul>
         <p>Liever zelf aan de slag? In de gids <a href="/kennisbank/gidsen/nieuwsbrief-maken/">nieuwsbrief maken</a> lees je hoe je begint. Wil je weten waar mail past in de weg van eerste klik naar klant, lees dan het begrip <a href="/kennisbank/wat-is/funnel/">funnel</a>.</p>
       </article>
       <aside class="zijkolom">
@@ -347,6 +371,8 @@ const schema = [
       { v: 'Welk programma gebruiken jullie?', a: 'Dat hangt af van wat je nodig hebt. Vaak Laposta, MailerLite of Brevo. Werk je al met een tool of CRM, dan kijken we eerst of we daarmee verder kunnen.' },
       { v: 'Wat als mijn mails in de spam belanden?', a: 'Dan ligt het vaak aan de instellingen van je domein (SPF, DKIM en DMARC) of aan een vervuilde lijst. Allebei lossen we op bij de start.' },
       { v: 'Wat kost e-mailmarketing?', a: 'Bij ons vanaf € 295 per maand, exclusief btw. Je zegt per maand op, met één maand opzegtermijn. De verzendtool betaal je zelf. Voor een kleine lijst is die vaak gratis.' },
+      { v: 'Waarom € 295 per maand als de verzendtool gratis is?', a: 'De tool verstuurt alleen. Het werk zit in de reeksen bedenken en schrijven, de nieuwsbrief, de techniek van je domein en elke maand kijken wat het oplevert. Dat doen wij, zodat het blijft lopen.' },
+      { v: 'Wat als niemand op mijn mails reageert?', a: 'Dan zie je dat op je maandoverzicht, en herschrijven of schrappen we de mail. Bij de start leggen we een doel vast. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Je zegt per maand op.' },
       { v: 'Hoe snel levert het iets op?', a: 'Een reeks die offertes opvolgt, werkt vanaf de eerste offerte die je na de start verstuurt. Een nieuwsbrief heeft meer tijd nodig: reken op een paar edities voordat lezers hem herkennen en erop reageren.' },
       { v: 'Wat is het verschil tussen e-mailmarketing en marketing automation?', a: 'Marketing automation is het deel van e-mailmarketing met vaste opvolgmails: mails die we één keer instellen en die vertrekken na een gebeurtenis, zoals een aanvraag of een afgeronde klus. Een nieuwsbrief verstuur je zelf, op een moment dat jij kiest.' },
     ]}
@@ -362,5 +388,8 @@ const schema = [
     ]}
   />
 
-  <Actie titel="Hoeveel offertes blijven bij jou liggen?" tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en kijkt met je mee waar opvolging het meeste oplevert. Daarna hoor je wat het kost.`} />
+  <WieDoetHet wie={[{ slug: 'thorgall', taak: 'Je vaste aanspreekpunt. Hij vraagt hoe je nu offertes opvolgt en belt je met waar de eerste winst zit.' }]} extra="Voor specialistisch werk schakelen we een vaste groep freelancers in die we al jaren kennen. Jij houdt één aanspreekpunt." />
+
+  <Actie titel="Hoeveel offertes blijven bij jou liggen?"
+ tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en kijkt met je mee waar opvolging het meeste oplevert. Daarna hoor je wat het kost.`} />
 </Base>
