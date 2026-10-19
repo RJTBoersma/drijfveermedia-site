@@ -115,7 +115,7 @@ const { id = 'linkscan', vervolg = '#vergelijking', vervolgTekst = 'Laat Thorgal
   const isGetal = (s: string) => /^\s*[\d][\d.,\s]*\s*$/.test(s);
   const isUrl = (s: string) => /^(https?:\/\/|www\.)\S+$/i.test(s.trim()) || /^\/\S*$/.test(s.trim()) || /^[a-z0-9-]+(\.[a-z0-9-]+)+\/\S*$/i.test(s.trim());
   const isDomein = (s: string) => /^(?!https?:)[a-z0-9-]+(\.[a-z0-9-]+)+\.?$/i.test(s.trim());
-  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/linkscan/${stap}`, r: '' })); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/linkscan/${stap}`, r: '' })); (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('tool_gebruikt', { tool: 'linkscan', stap }); } catch {} };
 
   const maanden: Record<string, number> = { jan: 0, feb: 1, mrt: 2, maa: 2, mar: 2, apr: 3, mei: 4, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, okt: 9, oct: 9, nov: 10, dec: 11 };
   const leesDatum = (ruw: string): Date | null => {

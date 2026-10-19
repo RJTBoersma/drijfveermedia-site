@@ -71,7 +71,7 @@ const diensten = [
     const n = parseFloat(t);
     return Number.isFinite(n) ? n : NaN;
   };
-  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/zelf-of-uitbesteden/${stap}`, r: '' })); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/zelf-of-uitbesteden/${stap}`, r: '' })); (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('tool_gebruikt', { tool: 'zelf-of-uitbesteden', stap }); } catch {} };
 
   document.querySelectorAll<HTMLElement>('[data-zelf-of-uit]').forEach((el) => {
     const form = el.querySelector('form')!;

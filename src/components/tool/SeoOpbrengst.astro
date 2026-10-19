@@ -97,7 +97,7 @@ const posities: [string, string][] = [
     const n = parseFloat(t);
     return Number.isFinite(n) ? n : NaN;
   };
-  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/seo-opbrengst/${stap}`, r: '' })); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/seo-opbrengst/${stap}`, r: '' })); (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('tool_gebruikt', { tool: 'seo-opbrengst', stap }); } catch {} };
 
   document.querySelectorAll<HTMLElement>('[data-seo-opbrengst]').forEach((el) => {
     const form = el.querySelector('form')!;

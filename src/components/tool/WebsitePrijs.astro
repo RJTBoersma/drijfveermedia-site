@@ -82,7 +82,7 @@ const Kop = kop;
     const n = parseFloat(t);
     return Number.isFinite(n) ? n : NaN;
   };
-  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/website-prijs/${stap}`, r: '' })); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/website-prijs/${stap}`, r: '' })); (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('tool_gebruikt', { tool: 'website-prijs', stap }); } catch {} };
 
   document.querySelectorAll<HTMLElement>('[data-website-prijs]').forEach((el) => {
     const form = el.querySelector('form')!;

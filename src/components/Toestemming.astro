@@ -1,5 +1,5 @@
 ---
-// Toestemming voor de Google Ads-tag (conversiemeting). Zonder "Toestaan" laden we niets van Google.
+// Toestemming voor Google Analytics 4 (G-C8JGHV3H2J) en de Google Ads-tag (conversiemeting). Zonder "Toestaan" laden we niets van Google.
 // Keuze staat in localStorage (dm-toestemming) en wordt na 12 maanden opnieuw gevraagd. Intrekken kan via "Cookie-instellingen" in de footer.
 // De tag laadt alleen op www.drijfveermedia.nl, dus niet in previews.
 ---
@@ -10,14 +10,21 @@
   window.dmAdsLaden = function () {
     if (window.__dmAds || location.hostname !== 'www.drijfveermedia.nl') return;
     window.__dmAds = true;
-    gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted' });
+    gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', analytics_storage: 'granted' });
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-362377547';
     document.head.appendChild(s);
     gtag('js', new Date());
     gtag('config', 'AW-362377547');
+    gtag('config', 'G-C8JGHV3H2J', { allow_google_signals: false, allow_ad_personalization_signals: false });
   };
+  // Meetpunten voor Analytics en Ads. Alleen na toestemming: anders blijft er niets in de wachtrij staan dat later alsnog verstuurd wordt.
+  window.dmMeet = function (naam, params) { if (window.__dmAds) gtag('event', naam, params || {}); };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"],a[href^="mailto:"]');
+    if (a) window.dmMeet(a.protocol === 'tel:' ? 'contact_bellen' : 'contact_mailen', { pagina: location.pathname });
+  });
   try {
     var k = JSON.parse(localStorage.getItem('dm-toestemming') || 'null');
     if (k && k.k === 'ja' && Date.now() - k.t < 365 * 864e5) window.dmAdsLaden();
@@ -26,8 +33,8 @@
 <section class="toestemming" data-toestemming hidden aria-labelledby="toestemming-kop">
   <div class="toestemming-binnen">
     <div>
-      <p class="toestemming-kop" id="toestemming-kop">Mogen we meten of onze advertenties werken?</p>
-      <p class="toestemming-tekst">Kwam je via een advertentie in Google? Met een cookie van Google zien we of die advertentie tot een aanvraag leidde. Weiger je, dan werkt de site precies hetzelfde. Meer in de <a href="/privacyverklaring/#cookies">privacyverklaring</a>.</p>
+      <p class="toestemming-kop" id="toestemming-kop">Mogen we meten hoe onze site werkt?</p>
+      <p class="toestemming-tekst">Met cookies van Google zien we welke pagina's goed werken en of een advertentie tot een aanvraag leidde. Persoonlijke advertenties staan uit. Weiger je, dan werkt de site precies hetzelfde. Meer in de <a href="/privacyverklaring/#cookies">privacyverklaring</a>.</p>
     </div>
     <div class="toestemming-knoppen">
       <button type="button" class="btn" data-keuze="ja">Toestaan</button>
@@ -53,9 +60,10 @@
     const w = window as unknown as { dmAdsLaden?: () => void; gtag?: (...a: unknown[]) => void };
     if (k === 'ja') w.dmAdsLaden?.();
     else {
-      w.gtag?.('consent', 'update', { ad_storage: 'denied', ad_user_data: 'denied' });
-      // Eerder geplaatste cookies van Google Ads op ons domein weghalen
-      document.cookie.split(';').map((c) => c.trim().split('=')[0]).filter((n) => /^_gcl|^_gac/.test(n)).forEach((n) => {
+      w.gtag?.('consent', 'update', { ad_storage: 'denied', ad_user_data: 'denied', analytics_storage: 'denied' });
+      (window as unknown as { __dmAds?: boolean }).__dmAds = false;
+      // Eerder geplaatste cookies van Google Analytics en Google Ads op ons domein weghalen
+      document.cookie.split(';').map((c) => c.trim().split('=')[0]).filter((n) => /^_gcl|^_gac|^_ga|^_gid/.test(n)).forEach((n) => {
         for (const d of ['', '; domain=.drijfveermedia.nl', '; domain=www.drijfveermedia.nl']) document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
       });
     }

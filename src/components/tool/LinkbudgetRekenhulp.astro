@@ -111,7 +111,7 @@ const soorten: { w: Soort; t: string }[] = [
     return [Math.floor(budget / d.hoog), Math.floor(budget / d.laag), 0];
   };
   const bereik = (a: number, b: number) => (a === b ? gt(a) : `${gt(a)} tot ${gt(b)}`);
-  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/linkbudget/${stap}`, r: '' })); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/linkbudget/${stap}`, r: '' })); (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('tool_gebruikt', { tool: 'linkbudget', stap }); } catch {} };
 
   document.querySelectorAll<HTMLElement>('[data-linkbudget]').forEach((el) => {
     const form = el.querySelector('form')!;

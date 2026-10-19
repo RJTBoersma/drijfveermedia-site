@@ -92,7 +92,7 @@ const euro = (n: number) => n.toLocaleString('nl-NL', { minimumFractionDigits: 2
     const n = parseFloat(t);
     return Number.isFinite(n) ? n : NaN;
   };
-  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/klikprijs/${stap}`, r: '' })); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/klikprijs/${stap}`, r: '' })); (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('tool_gebruikt', { tool: 'klikprijs', stap }); } catch {} };
 
   document.querySelectorAll<HTMLElement>('[data-klik]').forEach((el) => {
     const form = el.querySelector('form')!;

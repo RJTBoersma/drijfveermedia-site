@@ -99,7 +99,7 @@ const { id = 'ai-test' } = Astro.props;
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
   const lees = () => { try { return JSON.parse(localStorage.getItem(OPSLAG) || 'null'); } catch { return null; } };
   const bewaar = (d: unknown) => { try { localStorage.setItem(OPSLAG, JSON.stringify(d)); } catch {} };
-  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/ai-test/${stap}`, r: '' })); } catch {} };
+  const tel = (stap: string) => { try { if (location.hostname === 'www.drijfveermedia.nl') navigator.sendBeacon('/api/teller.php', JSON.stringify({ p: `/_tool/ai-test/${stap}`, r: '' })); (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('tool_gebruikt', { tool: 'ai-test', stap }); } catch {} };
 
   document.querySelectorAll<HTMLElement>('[data-ai-test]').forEach((el) => {
     const stappen = [...el.querySelectorAll<HTMLElement>('[data-stap]')];

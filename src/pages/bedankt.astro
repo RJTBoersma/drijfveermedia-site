@@ -38,6 +38,14 @@ const vcardHref = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
   // Kop, verwachting en vervolg afstemmen op het moment (werkdagen en feestdagen) en het soort aanvraag (?s=).
   import { bereikbaarheid } from '../data/kantoortijd';
   const q = new URLSearchParams(location.search);
+  // Conversie voor Analytics en Google Ads (alleen na toestemming, één keer per aanvraag in deze tab)
+  try {
+    const sleutel = `dm-lead-${q.get('s') || ''}-${q.get('b') || ''}`;
+    if (!sessionStorage.getItem(sleutel)) {
+      (window as unknown as { dmMeet?: (n: string, p: object) => void }).dmMeet?.('generate_lead', { soort: (q.get('s') || 'algemeen').slice(0, 40) });
+      sessionStorage.setItem(sleutel, '1');
+    }
+  } catch {}
   const zet = (id: string, tekst: string) => { const el = document.getElementById(id); if (el) el.textContent = tekst; };
   const b = bereikbaarheid();
   const alleenMail = q.get('m') === '1';
