@@ -9,9 +9,20 @@ Vergeleken met TriplePro, Linkbuilding Masters, Traffic Today, Webton, SAM, Heer
 - **Overlap opgeruimd.** De pillar en de uitbestedenpagina beconcurreerden elkaar. "Een bureau kiezen" staat nu kort op de pillar, en uitgebreid op uitbesteden onder de H2 "Een linkbuilding bureau kiezen: zo vergelijk je". De variant "linkbuilding bureau" hoort nu bij uitbesteden.
 - **Case.** De Conflictbemiddeling-case noemt nu ook linkbuilding.
 
-## Nog te bouwen (geen info nodig, op verzoek)
-- Een linkbuildingscan met een tool die een links-export uit Search Console in de browser analyseert.
-- Gidsen: wat kost linkbuilding, backlinks kopen, lokale linkbuilding (met bronnen per provincie in het Noorden) en gastb## Besloten door Robert (19 oktober)
+## Gebouwd op 19 oktober
+- **/linkbuilding/linkbuilding-scan/**: gratis tool die de links-export uit Search Console in de browser analyseert (ankerteksten, concentratie, verdachte bronnen, pagina's zonder links, tempo), met daaronder een aanvraag voor een concurrentenvergelijking door Thorgall. Alle knoppen op de linkbuildingpagina's gaan nu hierheen.
+- **/kennisbank/gidsen/wat-kost-linkbuilding/**: marktprijzen met bronnen, en een rekenhulp.
+- **/kennisbank/gidsen/backlinks-kopen/**: een kritische, onafhankelijke gids.
+- **/kennisbank/gidsen/lokale-linkbuilding/**: een gecontroleerde lijst met verenigingen en nieuwssites in Drenthe, Groningen en Friesland.
+- **/kennisbank/gidsen/gastbloggen/**: een werkinstructie met een voorbeeldmail.
+- **/kennisbank/gidsen/backlinks/** is nu een algemene gids "Wat zijn backlinks?". Het lokale deel staat in de nieuwe gids over lokale linkbuilding.
+
+## Nalopen door Robert
+- Is de concurrentenvergelijking door Thorgall gratis? De scanpagina zegt nu ja.
+- Sleep één keer de vier links-exports van drijfveermedia.nl in de scan, om de herkenning met een echte export te testen.
+- In de gids wat kost linkbuilding: de prijzen van Backlinkswinkel en Backlink.nl veranderen vaak. Elk kwartaal nalopen.
+
+## Besloten door Robert (19 oktober)
 - € 75 per uur, minimaal 5 uur per maand (€ 375), meestal 3 tot 5 links per uur.
 - Betaalde plaatsingen alleen in overleg; de kosten komen bovenop de uren.
 - Proeflabsites zijn nooit linkbron voor klanten. Dat staat nu op de linkbuildingpagina's, de uitbestedenpagina en /proeflab/.
