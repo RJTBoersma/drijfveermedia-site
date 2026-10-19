@@ -18,8 +18,7 @@ const url = '/website-laten-maken/onderhoud-wordpress/';
 const datum = '2026-10-19';
 // De knop past bij deze dienst: eerst kijken hoe je site ervoor staat (actie.ts geeft hier nog de websiteprijs).
 const knop = { tekst: 'Laat je WordPress-site gratis nakijken', href: '/contact/?vraag=Gratis%20check%20van%20mijn%20WordPress-site' };
-// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
-const markt = ['https://wjonderhoud.nl/pakketten/', 'https://keurigonline.nl/wordpress-onderhoud', 'https://juist.nl/diensten/techniek/wordpress-onderhoud/'];
+// Marktprijzen van drie onderhoudsdiensten, opgehaald op 19-10-2026 (niet bij naam, besluit 19-10-2026).
 const hoofdstukken = [
   { id: 'waarom', titel: 'Waarom onderhoud nodig is' },
   { id: 'pakket', titel: 'Wat we doen voor € 39' },
@@ -55,7 +54,6 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
-    citation: markt,
   },
 ];
 ---
@@ -64,6 +62,7 @@ const schema = [
   description="Onderhoud van WordPress uitbesteden: updates, back-ups, beveiliging en snelheid voor € 39 per maand. Per maand opzegbaar, en jij hebt je handen vrij."
   kruimels={[{ naam: 'Website laten maken', url: '/website-laten-maken/' }, { naam: 'Onderhoud WordPress', url }]}
   schema={schema}
+  marktbron
 >
   <Hero kicker="Gekozen · Website" titel="Onderhoud van WordPress voor € 39 per maand: na elke update kijken we of je site nog werkt" prijs="vanaf € 39 per maand" knop={knop}>
     <p>Voor ondernemers met een WordPress-site, ook als iemand anders hem bouwde. Wij installeren de updates, kijken daarna of alles nog werkt, maken back-ups buiten je server en houden beveiliging en snelheid in de gaten. Per maand opzegbaar, en je hosting blijft van jou.</p>
@@ -273,9 +272,9 @@ const schema = [
           <table>
             <thead><tr><th>Aanbieder</th><th>Prijs per maand</th><th>Looptijd</th><th>Goed om te weten</th></tr></thead>
             <tbody>
-              <tr><td><b>WJ Onderhoud</b></td><td>€ 15, € 30 of € 50</td><td>Per maand, of per jaar met korting</td><td>Eerste maand gratis. Een hack verwijderen zit pas in het Premium-pakket</td></tr>
-              <tr><td><b>KeurigOnline</b></td><td>€ 20, € 45 of € 75</td><td>Minimaal zes maanden</td><td>Soms € 99 eenmalige instapkosten</td></tr>
-              <tr><td><b>Juist</b></td><td>€ 104 bij maandelijks onderhoud, € 42 bij één beurt per half jaar</td><td>Per half jaar</td><td>Je stelt het pakket samen uit modules</td></tr>
+              <tr><td><b>Onderhoudsdienst voor WordPress</b></td><td>€ 15, € 30 of € 50</td><td>Per maand, of per jaar met korting</td><td>Eerste maand gratis. Een hack verwijderen zit pas in het Premium-pakket</td></tr>
+              <tr><td><b>Webbureau met onderhoudspakketten</b></td><td>€ 20, € 45 of € 75</td><td>Minimaal zes maanden</td><td>Soms € 99 eenmalige instapkosten</td></tr>
+              <tr><td><b>Bureau met losse modules</b></td><td>€ 104 bij maandelijks onderhoud, € 42 bij één beurt per half jaar</td><td>Per half jaar</td><td>Je stelt het pakket samen uit modules</td></tr>
               <tr><td><b>Drijfveer Media</b></td><td>€ 39</td><td>Per maand, één maand opzegtermijn</td><td>Controle na elke update, één A4 per maand, hosting blijft van jou</td></tr>
             </tbody>
           </table>

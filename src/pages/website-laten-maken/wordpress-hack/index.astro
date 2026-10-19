@@ -31,12 +31,7 @@ const hoofdstukken = [
   { id: 'geen-zin', titel: 'Wanneer je ons niet nodig hebt' },
   { id: 'daarna', titel: 'Zorgen dat het niet terugkomt' },
 ];
-// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf.
-const markt = [
-  'https://wjonderhoud.nl/wordpress-website-gehackt/',
-  'https://slik.nl/service/wordpress-hackvrij/',
-  'https://kwaaijongens.nl/wordpress/hack-en-malware-verwijderen/',
-];
+// Marktprijzen: opgehaald met curl op 19-10-2026 van de sites van de aanbieders zelf (niet bij naam, besluit 19-10-2026).
 const schema = [
   {
     '@type': 'Service',
@@ -58,7 +53,6 @@ const schema = [
     about: { '@id': `${site.url}${url}#dienst` },
     dateModified: datum,
     author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
-    citation: markt,
   },
 ];
 ---
@@ -67,6 +61,7 @@ const schema = [
   description="WordPress hack verwijderen? Bel direct 088 11 55 666. We maken je gehackte site weer schoon en dichten het lek. Consult € 85 per uur, excl. btw."
   kruimels={[{ naam: 'Website laten maken', url: '/website-laten-maken/' }, { naam: 'WordPress gehackt', url }]}
   schema={schema}
+  marktbron
 >
   <div class="wrap spoed">
     <Tekening naam="telefoon" maat={36} />
@@ -261,9 +256,9 @@ const schema = [
           <table>
             <thead><tr><th>Aanbieder</th><th>Prijs</th><th>Goed om te weten</th></tr></thead>
             <tbody>
-              <tr><td><b>WJ Onderhoud</b></td><td>€ 195 eenmalig</td><td>In de meeste gevallen binnen 24 uur hackvrij</td></tr>
-              <tr><td><b>Slik</b></td><td>€ 750 eenmalig, of € 38 per maand met hosting</td><td>Opnieuw gehackt binnen een maand? Dan lossen ze het kosteloos op</td></tr>
-              <tr><td><b>Kwaaijongens</b></td><td>Voorstel na een technische check</td><td>Na het opschonen verhuist je site naar hun hosting, met een maandbedrag</td></tr>
+              <tr><td><b>Onderhoudsdienst voor WordPress</b></td><td>€ 195 eenmalig</td><td>In de meeste gevallen binnen 24 uur hackvrij</td></tr>
+              <tr><td><b>Webbureau met hosting</b></td><td>€ 750 eenmalig, of € 38 per maand met hosting</td><td>Opnieuw gehackt binnen een maand? Dan lossen ze het kosteloos op</td></tr>
+              <tr><td><b>Groot WordPress-bureau</b></td><td>Voorstel na een technische check</td><td>Na het opschonen verhuist je site naar hun hosting, met een maandbedrag</td></tr>
               <tr><td><b>Drijfveer Media</b></td><td>€ 85 per uur, vooraf ingeschat</td><td>Je site blijft bij je eigen host, het lek wordt gedicht</td></tr>
             </tbody>
           </table>

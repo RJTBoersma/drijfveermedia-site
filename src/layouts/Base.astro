@@ -22,9 +22,10 @@ interface Props {
   alternatief?: { lang: string; url: string }[]; // hreflang-verwijzingen naar dezelfde pagina in andere talen
   ogImage?: string; // pad naar een eigen deelafbeelding van 1200 x 630
   bronnenBlok?: boolean; // false als de pagina zelf al een zichtbare bronnenlijst heeft
+  marktbron?: boolean; // true als er marktprijzen van andere aanbieders op de pagina staan (die noemen we niet bij naam, besluit 19-10-2026)
 }
 
-const { title, description, kruimels = [], noindex = false, schema = [], ogType = 'website', ogImage: eigenOg, lang = 'nl', alternatief = [], bronnenBlok = true } = Astro.props;
+const { title, description, kruimels = [], noindex = false, schema = [], ogType = 'website', ogImage: eigenOg, lang = 'nl', alternatief = [], bronnenBlok = true, marktbron = false } = Astro.props;
 // Eigen deelafbeelding per pagina (gemaakt met scripts/og.py), anders de algemene
 const ogSlug = Astro.url.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '--') || 'home';
 const ogImage = eigenOg ?? (existsSync(`public/og/${ogSlug}.jpg`) ? `/og/${ogSlug}.jpg` : '/og-drijfveer-media.jpg');
@@ -219,12 +220,13 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
     </div>
     <main id="inhoud">
       <slot />
-      {bronnen.length > 0 && (
+      {(bronnen.length > 0 || (marktbron && bronnenBlok)) && (
         <dm-extra><section class="wrap sectie bronnen" aria-labelledby="bronnen-kop" lang={lang !== 'nl' ? 'nl' : undefined}>
           <h2 id="bronnen-kop" class="bronnen-kop">Bronnen</h2>
-          <ol>
+          {bronnen.length > 0 && <ol>
             {bronnen.map((u) => { const b = bronNaam(u); return <li><a href={u} rel="noopener" target="_blank">{b.host}</a>{b.stuk && <span lang={/\.nl$/.test(b.host) ? undefined : 'en'}>: {b.stuk}</span>}</li>; })}
-          </ol>
+          </ol>}
+          {marktbron && <p class="klein muted">De marktprijzen komen van openbare prijspagina's van Nederlandse bureaus en aanbieders, bekeken in oktober 2026.</p>}
         </section></dm-extra>
       )}
     </main>
