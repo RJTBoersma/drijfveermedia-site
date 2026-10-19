@@ -1,0 +1,79 @@
+---
+// Toestemming voor de Google Ads-tag (conversiemeting). Zonder "Toestaan" laden we niets van Google.
+// Keuze staat in localStorage (dm-toestemming) en wordt na 12 maanden opnieuw gevraagd. Intrekken kan via "Cookie-instellingen" in de footer.
+// De tag laadt alleen op www.drijfveermedia.nl, dus niet in previews.
+---
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+  window.dmAdsLaden = function () {
+    if (window.__dmAds || location.hostname !== 'www.drijfveermedia.nl') return;
+    window.__dmAds = true;
+    gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted' });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-362377547';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'AW-362377547');
+  };
+  try {
+    var k = JSON.parse(localStorage.getItem('dm-toestemming') || 'null');
+    if (k && k.k === 'ja' && Date.now() - k.t < 365 * 864e5) window.dmAdsLaden();
+  } catch (e) {}
+</script>
+<section class="toestemming" data-toestemming hidden aria-labelledby="toestemming-kop">
+  <div class="toestemming-binnen">
+    <div>
+      <p class="toestemming-kop" id="toestemming-kop">Mogen we meten of onze advertenties werken?</p>
+      <p class="toestemming-tekst">Kwam je via een advertentie in Google? Met een cookie van Google zien we of die advertentie tot een aanvraag leidde. Weiger je, dan werkt de site precies hetzelfde. Meer in de <a href="/privacyverklaring/#cookies">privacyverklaring</a>.</p>
+    </div>
+    <div class="toestemming-knoppen">
+      <button type="button" class="btn" data-keuze="ja">Toestaan</button>
+      <button type="button" class="btn" data-keuze="nee">Weigeren</button>
+    </div>
+  </div>
+</section>
+<script>
+  const balk = document.querySelector<HTMLElement>('[data-toestemming]');
+  const lees = () => { try { return JSON.parse(localStorage.getItem('dm-toestemming') || 'null'); } catch { return null; } };
+  const bewaar = (k: string) => { try { localStorage.setItem('dm-toestemming', JSON.stringify({ k, t: Date.now() })); } catch {} };
+  const toon = (open: boolean) => {
+    if (!balk) return;
+    balk.hidden = !open;
+    document.documentElement.classList.toggle('toestemming-open', open);
+  };
+  const keuze = lees();
+  if (!keuze || Date.now() - keuze.t > 365 * 864e5) toon(true);
+  balk?.querySelectorAll<HTMLButtonElement>('[data-keuze]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.keuze ?? 'nee';
+    bewaar(k);
+    toon(false);
+    const w = window as unknown as { dmAdsLaden?: () => void; gtag?: (...a: unknown[]) => void };
+    if (k === 'ja') w.dmAdsLaden?.();
+    else {
+      w.gtag?.('consent', 'update', { ad_storage: 'denied', ad_user_data: 'denied' });
+      // Eerder geplaatste cookies van Google Ads op ons domein weghalen
+      document.cookie.split(';').map((c) => c.trim().split('=')[0]).filter((n) => /^_gcl|^_gac/.test(n)).forEach((n) => {
+        for (const d of ['', '; domain=.drijfveermedia.nl', '; domain=www.drijfveermedia.nl']) document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
+      });
+    }
+  }));
+  document.querySelectorAll('[data-cookie-instellingen]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); toon(true); balk?.querySelector<HTMLButtonElement>('[data-keuze]')?.focus(); }));
+</script>
+<style>
+  .toestemming { position: fixed; z-index: 60; left: 12px; right: 12px; bottom: 12px; display: flex; justify-content: center; pointer-events: none; }
+  .toestemming[hidden] { display: none; }
+  .toestemming-binnen { pointer-events: auto; max-width: 760px; width: 100%; background: var(--panel, #fff); color: var(--ink); border: 1px solid var(--line, #d9e1ea); border-radius: 16px; box-shadow: var(--schaduw-hover, 0 10px 30px rgba(16, 40, 63, 0.18)); padding: 16px 20px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 20px; align-items: center; }
+  .toestemming-kop { font-weight: 800; color: var(--navy); margin: 0 0 4px; }
+  .toestemming-tekst { margin: 0; font-size: 0.95rem; color: var(--muted); }
+  .toestemming-knoppen { display: flex; gap: 10px; }
+  .toestemming-knoppen .btn { min-height: 44px; min-width: 112px; justify-content: center; }
+  @media (max-width: 640px) {
+    .toestemming { left: 8px; right: 8px; bottom: 8px; }
+    .toestemming-binnen { grid-template-columns: minmax(0, 1fr); padding: 14px 16px; }
+    .toestemming-knoppen .btn { flex: 1; }
+  }
+  :global(html.toestemming-open .mbar) { display: none; }
+</style>
