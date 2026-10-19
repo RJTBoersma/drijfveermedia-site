@@ -10,6 +10,7 @@ import Tekening from '../../../components/teken/Tekening.astro';
 import Scene from '../../../components/scenes/online-marketing-uitbesteden--interim-marketeer.astro';
 import { site } from '../../../data/site';
 import Tussenactie from '../../../components/pagina/Tussenactie.astro';
+import WieDoetHet from '../../../components/pagina/WieDoetHet.astro';
 
 const url = '/online-marketing-uitbesteden/interim-marketeer/';
 const schema = [{
@@ -19,7 +20,14 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
   offers: { '@type': 'Offer', priceCurrency: 'EUR', price: 95, priceSpecification: { '@type': 'UnitPriceSpecification', price: 95, priceCurrency: 'EUR', unitText: 'HOUR', valueAddedTaxIncluded: false } },
+  // Marktprijzen en werkwijzen in "Wat het kost" en "Bureau, bemiddelaar of freelancer", opgehaald met curl op 19-10-2026
+  citation: [
+    'https://marketingguys.com/nl/interim-online-marketeer/',
+    'https://schaalx.nl/interimbemiddeling/',
+    'https://roxtar.nl/wat-kost-een-online-marketing-bureau/',
+  ],
 }];
 ---
 <Base
@@ -28,8 +36,8 @@ const schema = [{
   kruimels={[{ naam: 'Online marketing uitbesteden', url: '/online-marketing-uitbesteden/' }, { naam: 'Interim-marketeer', url }]}
   schema={schema}
 >
-  <Hero kicker="Advies · Uitbesteden" titel="Interim marketeer op afroep, die meedraait in jouw systemen" knop={{ tekst: 'Vraag een interim aan', href: '/contact/' }}>
-    <p>Voor € 95 per uur, exclusief btw, en je betaalt alleen de uren die we maken. Je marketeer gaat met verlof, de vacature staat al maanden open of er ligt een project dat niemand oppakt. Een interim marketeer van Drijfveer Media springt bij. Voor een paar uur per week of een paar dagen, zolang het nodig is.</p>
+  <Hero kicker="Advies · Uitbesteden" titel="Interim marketeer op afroep, die meedraait in jouw systemen" prijs="€ 95 per uur" knop={{ tekst: 'Vraag een interim aan', href: '/contact/' }}>
+    <p>Je marketeer gaat met verlof, de vacature staat al maanden open of er ligt een project dat niemand oppakt. Een interim marketeer van Drijfveer Media springt bij, voor een paar uur per week of een paar dagen. Je betaalt alleen de uren die we maken, en je ziet elke week waar ze in zaten.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -58,7 +66,18 @@ const schema = [{
         </ul>
         <p>Het zijn senior mensen met inhoudelijke expertise in <a href="/kennisbank/wat-is/digital-marketing/">digital marketing</a>: iemand uit ons team of uit de vaste groep freelancers met wie we al jaren werken. Ze kennen de technieken die we eerst in ons <a href="/proeflab/">proeflab</a> hebben getest. En omdat ze een heel team achter zich hebben, hoeven ze niet alles alleen te weten.</p>
 
-        <Tussenactie />
+        <h2>Wat je krijgt</h2>
+        <ul class="vink">
+          <li><b>Eerst kennismaken.</b> Je spreekt de interim voordat er iets begint.</li>
+          <li><b>Uren en doelen vooraf.</b> Hoeveel uur per week, welke taken en wat er na een maand af moet zijn.</li>
+          <li><b>Werk in jouw accounts en systemen.</b> Alles blijft van jou.</li>
+          <li><b>Elke week een kort overzicht.</b> Wat er gedaan is en hoeveel uur het kostte.</li>
+          <li><b>Een team erachter.</b> Loopt de interim ergens tegenaan, dan kijkt een collega mee.</li>
+          <li><b>Een nette overdracht.</b> Wachtwoorden, instellingen, lopende campagnes en wat we geleerd hebben.</li>
+        </ul>
+        <p>Wat er niet in zit: leidinggeven aan je afdeling (zie hieronder) en advertenties op social media.</p>
+
+        <Tussenactie titel="Ligt er nu al werk stil?" tekst="Thorgall belt je terug, vraagt wat er moet gebeuren en zegt wie we kunnen inzetten." knop={{ tekst: 'Vraag een interim aan', href: '/contact/' }} />
         <h2>Interim marketeer of interim marketing manager?</h2>
         <p>Dat is een wezenlijk verschil. Een interim marketing manager leidt een afdeling, stuurt mensen aan en praat mee in de directie. Daarvoor bestaan bureaus die interim professionals op managementniveau bemiddelen. Wij zijn dat niet.</p>
         <p>Wij leveren de marketeer die het werk doet. Wel met genoeg ervaring om je team mee te nemen en te zeggen wat beter kan. Zoek je iemand die een team van tien mensen gaat leiden, dan zeggen we je meteen dat wij daarvoor niet de juiste partij zijn. Zoek je iemand die morgen je campagnes overneemt en zorgt dat er aanvragen binnenkomen, dan zit je hier goed.</p>
@@ -74,14 +93,39 @@ const schema = [{
         <p>Komt je eigen marketeer terug of is de vacature vervuld? Dan dragen we alles over: wachtwoorden, instellingen, lopende campagnes en wat we geleerd hebben. Je blijft niet afhankelijk van ons achter.</p>
 
         <h2>Wat het kost</h2>
-        <p>Een interim-marketeer kost € 95 per uur, exclusief btw. Je betaalt alleen de uren die we maken. Een rekenvoorbeeld: acht uur per week komt neer op € 760 per week. Hoeveel uur per week en hoe lang, bepaal je zelf. Je kunt per week bijsturen.</p>
+        <p>Een interim-marketeer kost € 95 per uur, exclusief btw. Je betaalt alleen de uren die we maken. Hoeveel uur per week en hoe lang, bepaal je zelf. Je kunt per week bijsturen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Uren per week</th><th>Per week</th><th>Per maand (ruim 4 weken)</th></tr></thead>
+            <tbody>
+              <tr><td>4 uur</td><td>€ 380</td><td>ongeveer € 1.650</td></tr>
+              <tr><td>8 uur</td><td>€ 760</td><td>ongeveer € 3.290</td></tr>
+              <tr><td>16 uur</td><td>€ 1.520</td><td>ongeveer € 6.590</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Bureau, bemiddelaar of freelancer</h3>
+        <p>De bronnen staan onderaan de pagina.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Route</th><th>Prijs</th><th>Hoe het werkt</th></tr></thead>
+            <tbody>
+              <tr><td>Zelfstandige marketeer</td><td>Gemiddeld € 82 per uur</td><td>Eén persoon, zonder team erachter</td></tr>
+              <tr><td>Marketing Guys</td><td>€ 75 per uur</td><td>Minimaal drie dagen per week</td></tr>
+              <tr><td>Bemiddelaar zoals SchaalX</td><td>Per opdracht</td><td>Binnen drie werkdagen een selectie kandidaten; jij kiest en stuurt</td></tr>
+              <tr><td>Marketingbureau, medior</td><td>€ 110 tot € 135 per uur</td><td>Volgens de prijsgids van ROXTAR</td></tr>
+              <tr><td><b>Drijfveer Media</b></td><td><b>€ 95 per uur</b></td><td>Ook voor een paar uur per week, met een team erachter</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Heb je drie volle dagen per week nodig, dan is € 75 per uur goedkoper. Zoek je minder uren, of hulp bij SEO, Google Ads en je website vanuit één team, dan past ons model beter.</p>
         <p>Heb je geen tijdelijk gat, maar wil je je marketing structureel uitbesteden? Dan is <a href="/online-marketing-uitbesteden/">online marketing uitbesteden</a> vaak voordeliger, vanaf € 595 per maand. Wil je alleen een keer sparren over een vraagstuk? Dan past een <a href="/consult/">consult</a> van € 85 per uur beter.</p>
 
         <h3>Waar je op let bij het inhuren</h3>
         <p>Vraag bij elk bureau of elke freelancer naar ervaring met precies jouw kanalen. Vraag of ze zelf uitvoeren of alleen adviseren. En let op de klik: iemand die prettig samenwerkt met je collega's, levert in twee maanden meer op dan een expert die niemand durft te bellen.</p>
       </article>
       <aside class="zijkolom">
-        <Prijskaart naam="Interim-marketeer" prijs="€ 95" eenheid="per uur" punten={['Senior marketeer uit ons team of netwerk', 'Werkt in jouw systemen', 'Weekoverzicht van uren en werk', 'Nette overdracht aan het eind']} />
+        <Prijskaart naam="Interim-marketeer" prijs="€ 95" eenheid="per uur" punten={['Senior marketeer uit ons team of netwerk', 'Ook voor een paar uur per week', 'Werkt in jouw systemen', 'Weekoverzicht van uren en werk', 'Nette overdracht aan het eind']} />
       </aside>
     </div>
   </section>
@@ -95,6 +139,8 @@ const schema = [{
       { v: 'Werkt de interim op afstand of op locatie?', a: 'Meestal op afstand, met vaste overlegmomenten. Een dag per week bij je op kantoor kan ook, in overleg. Klanten in de buurt van Assen kunnen ook bij ons langskomen.' },
       { v: 'Wat is het verschil met online marketing uitbesteden?', a: 'Bij een interim betaal je per uur en werkt iemand mee in jouw team. Bij uitbesteden nemen wij het werk helemaal over, voor een vast maandbedrag. Uitbesteden is beter voor de lange termijn, een interim voor een tijdelijk gat.' },
       { v: 'Wie is er eigenaar van de accounts en campagnes?', a: 'Jij. We werken in jouw accounts. Bij het afscheid dragen we alles over.' },
+      { v: 'Waarom € 95 per uur, als het elders € 75 kost?', a: 'Bij een tarief van € 75 hoort vaak een minimum van drie dagen per week. Bij ons kan het ook voor een paar uur per week, en heeft de interim een team achter zich voor SEO, Google Ads en techniek. Heb je echt drie volle dagen nodig, vergelijk dan ook een bureau met een lager uurtarief.' },
+      { v: 'Wat als het niet klikt met de interim?', a: 'Zeg het meteen. Je maakt vooraf kennis, je betaalt alleen de gemaakte uren en je stuurt per week bij. Dan kijken we samen wat er beter moet.' },
     ]}
   />
 
@@ -106,6 +152,8 @@ const schema = [{
       { label: 'Pillar', titel: 'Trainingen', href: '/trainingen/', tekst: 'SEO, Google Ads en AI voor je eigen team.', teken: 'team' },
     ]}
   />
+
+  <WieDoetHet titel="Je aanspreekpunt bij ons" wie={[{ slug: 'thorgall', taak: 'Belt je terug, vraagt wat er moet gebeuren en houdt je project bij, ook als de interim al draait.' }]} extra="De interim zelf komt uit ons team of uit de vaste groep freelancers die we al jaren kennen. Je maakt kennis voordat er iets begint." />
 
   <Actie titel="Ligt er marketingwerk dat niemand oppakt?" tekst={`${site.contactpersoon} belt je op werkdagen binnen 15 minuten terug en vraagt wat er moet gebeuren. Daarna hoor je wie we kunnen inzetten en wat het kost.`} knop={{ tekst: 'Neem contact op', href: '/contact/' }} />
 </Base>

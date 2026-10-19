@@ -66,6 +66,9 @@ const regels: [RegExp, Stap][] = [
     href: '/contact/?vraag=Willen%20jullie%20naar%20mijn%20social%20media%20kijken%3F',
     zin: 'Thorgall kijkt naar je huidige kanalen en belt je met zijn advies: waar je moet beginnen, en waar je beter niet aan begint.',
     dienst: { naam: 'Social media beheer', prijs: 'vanaf € 395 per maand', url: '/social-media-beheer/' } }],
+  [/^\/trainingen\//, { knop: 'Bespreek een training', kort: 'Training', href: '/contact/', vraag: 'Wat moet jullie team straks kunnen?', zin: 'Thorgall belt je terug en vraagt wat jullie willen leren. Daarna krijg je een voorstel met onderwerpen, vorm en een vaste prijs.', dienst: { naam: 'Trainingen', prijs: 'prijs vooraf vast', url: '/trainingen/' } }],
+  [/^\/consult\//, { knop: 'Plan een consult', kort: 'Consult', href: '/contact/?soort=Consult#terugbellen', vraag: 'Zit je met een marketingvraag?', zin: 'Thorgall belt je terug en plant een uur sparren op een moment dat jou past.', dienst: { naam: 'Consult', prijs: '€ 85 per uur', url: '/consult/' } }],
+  [/^\/online-marketing-uitbesteden\/interim-marketeer\//, { knop: 'Vraag een interim aan', kort: 'Interim', href: '/contact/', vraag: 'Ligt er marketingwerk stil?', zin: 'Thorgall belt je terug, vraagt wat er moet gebeuren en zegt wie we kunnen inzetten.', dienst: { naam: 'Interim-marketeer', prijs: '€ 95 per uur', url: '/online-marketing-uitbesteden/interim-marketeer/' } }],
   [/^\/zoekmachine-optimalisatie|seo|google|zoekwoord|hoger|meta|title|search-console|websiteverkeer|wat-is\//, { ...scan, dienst: { naam: 'SEO', prijs: 'vanaf € 495 per maand', url: '/zoekmachine-optimalisatie/' } }],
 ];
 export const stapVoor = (pad: string): Stap => regels.find(([r]) => r.test(pad))?.[1] ?? { ...scan, dienst: { naam: 'Online marketing uitbesteden', prijs: 'vanaf € 595 per maand', url: '/online-marketing-uitbesteden/' } };

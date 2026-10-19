@@ -6,6 +6,8 @@ import Faq from '../../components/pagina/Faq.astro';
 import Actie from '../../components/pagina/Actie.astro';
 import Tekening from '../../components/teken/Tekening.astro';
 import Scene from '../../components/scenes/werkwijze.astro';
+import PrijzenSamensteller from '../../components/tool/PrijzenSamensteller.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 import { site } from '../../data/site';
 
 const stapTekst = [
@@ -15,7 +17,7 @@ const stapTekst = [
   "Je hoort welke investering nodig is, en wat je daar concreet van mag verwachten. Liever klein beginnen en laten zien dat het werkt, dan een groot budget vragen op basis van beloftes.",
   "We beginnen altijd bij de grootste kansen om op korte termijn verschil te maken. Daarna komt het perfectioneren.",
 ];
-const schema = [{
+const schema = [{ '@type': 'WebPage', dateModified: '2026-10-19' }, {
   '@type': 'HowTo',
   name: 'Zo werkt Drijfveer Media: van eerste telefoontje tot resultaat',
   url: `${site.url}/werkwijze/`,
@@ -35,7 +37,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Werkwijze" titel="Van eerste telefoontje tot resultaat in vijf stappen">
-    <p>Geen verkooppraatje en geen dik rapport vooraf. We bellen snel terug, vragen door en beginnen waar je het snelst verschil merkt. Zo gaat dat, stap voor stap.</p>
+    <p>We bellen op werkdagen binnen 15 minuten terug, vragen door en beginnen waar je het snelst verschil merkt. Het eerste gesprek en het voorstel kosten je niets. Zo gaat dat, stap voor stap.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -57,10 +59,29 @@ const schema = [{
       <div class="stap-kop"><Tekening naam="doel" maat={52} /><h2>4. Een lage investering en targets waar je ons op afrekent</h2></div>
       <p>Je hoort welke investering nodig is, en wat je daar concreet van mag verwachten. Liever klein beginnen en laten zien dat het werkt, dan een groot budget vragen op basis van beloftes. Wat onze diensten kosten, staat op de pagina <a href="/prijzen/">prijzen</a>.</p>
       <p>Daarbij spreken we targets af waar we op afgerekend kunnen worden. Een aantal aanvragen per maand, bijvoorbeeld, of posities op zoekwoorden die geld opleveren. Halen we die niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
+      <p>Wil je alvast weten waar je ongeveer op uitkomt? Kies hieronder wat je wilt bereiken. Je ziet meteen welke diensten passen en wat ze kosten.</p>
+      <PrijzenSamensteller />
 
       <div class="stap-kop"><Tekening naam="raket" maat={52} /><h2>5. Beginnen waar het snelst verschil zit</h2></div>
       <p>We beginnen altijd bij de grootste kansen om op korte termijn verschil te maken. Daarna komt het perfectioneren. Dat is het Pareto-principe: ongeveer twintig procent van het werk levert tachtig procent van het resultaat op. Die twintig procent doen we eerst.</p>
       <p>Een verzonnen voorbeeld. Een hovenier in Roden heeft een prima website. Alleen is zijn Google Bedrijfsprofiel half ingevuld, en noemen zijn pagina's nergens de dorpen waar hij werkt. Dat rechtzetten kost een paar dagen. Dat kan binnen weken meer telefoontjes opleveren. Een nieuw logo of een blog per week kan later nog.</p>
+
+      <h2>Wat je per stap krijgt</h2>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th>Stap</th><th>Wat je krijgt</th><th>Wat het kost</th></tr></thead>
+          <tbody>
+            <tr><td>1. Terugbellen</td><td>Een gesprek met {site.contactpersoon}, op werkdagen binnen 15 minuten</td><td>Niets</td></tr>
+            <tr><td>2. Vragen</td><td>Een helder beeld van wat je echt wilt bereiken</td><td>Niets</td></tr>
+            <tr><td>3. Uitzoeken</td><td>De kansen op een rij, met per kans wat het oplevert en kost</td><td>Niets</td></tr>
+            <tr><td>4. Voorstel</td><td>Een vaste prijs en een doel op papier, met een datum</td><td>Niets</td></tr>
+            <tr><td>5. Aan de slag</td><td>Het werk, en elke maand één A4 met wat het opleverde</td><td>De <a href="/prijzen/">vanaf-prijs</a> van de dienst</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Wanneer we nee zeggen</h2>
+      <p>Soms is het eerlijke antwoord dat we niet de goede partij zijn. Dat hoor je dan in stap 2 of 3, niet na drie maanden. Bijvoorbeeld als je een webshop wilt laten bouwen, advertenties op Facebook of Instagram zoekt, of een doel hebt dat we zelf niet haalbaar vinden. Dan zeggen we dat meteen.</p>
 
       <h2>En daarna?</h2>
       <p>Elke maand hoor je wat we deden en wat het opleverde, op één A4, want een rapport waar je een marketeer naast nodig hebt, schiet zijn doel voorbij. Werkt iets niet, dan zeggen we dat en stoppen we ermee. Verspild budget schrappen is soms meer waard dan een nieuwe campagne.</p>
@@ -74,9 +95,16 @@ const schema = [{
     vragen={[
       { v: 'Kost het eerste gesprek iets?', a: 'Nee. Het terugbelgesprek en het voorstel zijn gratis. Je betaalt pas als je zelf besluit met ons verder te gaan.' },
       { v: 'Moet ik naar Assen komen?', a: 'Hoeft niet. We praten telefonisch, online of bij jou op locatie. Wil je langskomen aan de Lauwers in Assen, dan is dat ook goed.' },
-      { v: 'Wat als ik buiten kantoortijd bel?', a: 'Dan bellen we de volgende werkdag terug. We zijn bereikbaar op werkdagen van 8.00 tot 17.00 uur.' },
+      { v: 'Wat als ik buiten kantoortijd bel?', a: 'Dan bellen we de volgende werkdag vóór 8.15 uur terug. We zijn bereikbaar op werkdagen van 8.00 tot 17.00 uur.' },
+      { v: 'Moet ik meteen alles afnemen?', a: 'Nee. We beginnen meestal met één kanaal, op de plek waar het snelst verschil zit. Pas als dat werkt, breiden we uit.' },
+      { v: 'Wat als ik na het voorstel nee zeg?', a: 'Dan is dat het. Je hebt niets betaald en zit nergens aan vast. De kansen die we je lieten zien, kun je zelf of met een ander oppakken.' },
     ]}
   />
+
+  <WieDoetHet titel="Met wie je de stappen zet" wie={[
+    { slug: 'thorgall', taak: 'Belt je terug in stap 1 en blijft daarna je vaste aanspreekpunt.' },
+    { slug: 'robert', taak: 'Richtte Drijfveer Media in 2011 op. Doet SEO, content en strategie.' },
+  ]} extra="Daarachter werken Evelien Heerema, Johan Zwartenberg en een vaste groep freelancers die we al jaren kennen." />
 
   <Actie titel="Zullen we bij stap 1 beginnen?" tekst={`Laat je nummer achter of bel zelf. ${site.contactpersoon} belt je binnen 15 minuten terug en stelt eerst vragen. Pas daarna praten we over geld.`} />
 </Base>

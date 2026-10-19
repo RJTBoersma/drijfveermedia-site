@@ -10,6 +10,7 @@ import Tekening from '../../components/teken/Tekening.astro';
 import Scene from '../../components/scenes/trainingen.astro';
 import { site } from '../../data/site';
 import Tussenactie from '../../components/pagina/Tussenactie.astro';
+import SerpPreview from '../../components/tool/SerpPreview.astro';
 
 const url = '/trainingen/';
 const hoofdstukken = [
@@ -30,7 +31,10 @@ const schema = [{
   provider: { '@id': `${site.url}/#organisatie` },
   areaServed: { '@type': 'Country', name: 'Nederland' },
   url: `${site.url}${url}`,
+  dateModified: '2026-10-19',
   description: 'Trainingen in SEO, Google Ads en AI voor ondernemers en teams, met de eigen website of het eigen account als lesstof. Prijs in overleg.',
+  // Prijs van een online videotraining bij "Wat een training kost", opgehaald met curl op 19-10-2026
+  citation: ['https://onder.nl/trainingen/online-seo-training-gevorderden/'],
 }];
 ---
 <Base
@@ -40,7 +44,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Advies · Trainingen" titel="SEO training voor je team, met je eigen website als lesstof" knop={{ tekst: 'Bespreek een training', href: '/contact/' }}>
-    <p>Je wilt het zelf kunnen. Of je wilt in elk geval snappen wat je bureau doet. In een SEO training van ons werken we aan jullie eigen site, jullie Google Ads-account en de AI-tools die je al gebruikt.</p>
+    <p>Je wilt het zelf kunnen. Of je wilt in elk geval snappen wat je bureau doet. In een SEO training van ons werken we aan jullie eigen site, jullie Google Ads-account en de AI-tools die je al gebruikt. De prijs hoor je vooraf, en die staat vast.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -83,6 +87,8 @@ const schema = [{
 
         <div class="stap-kop"><Tekening naam="pen" maat={48} /><h3>Teksten die gevonden worden en overtuigen</h3></div>
         <p>Title, meta description, koppen en de eerste alinea. Waar zet je het zoekwoord, en waar juist niet? We herschrijven samen een paar echte pagina's van je site. We kijken ook naar wat Google nu bovenaan laat zien voor jullie zoekwoord. Daar leer je meer van dan van welke vuistregel ook.</p>
+        <p>Probeer het alvast. Zet de title en omschrijving van je eigen dienstpagina in het voorbeeld hieronder. Je ziet meteen hoe Google ze ongeveer toont, en waar hij afkapt. Precies deze oefening doen we in de training, met jouw pagina's.</p>
+        <SerpPreview />
 
         <div class="stap-kop"><Tekening naam="tandwiel" maat={48} /><h3>Techniek zonder developer</h3></div>
         <p>Wat moet je weten over indexeren, laadsnelheid, redirects en weergave op een telefoon? We lopen samen door Google Search Console. Je leert de rapporten lezen die ertoe doen, en welke meldingen je rustig kunt laten liggen. Structured data en rich snippets komen ook aan bod: de sterren, prijzen of vragen die soms onder een zoekresultaat staan.</p>
@@ -109,7 +115,7 @@ const schema = [{
         </ul>
         <p>Eén ding leren we je ook: stoppen. Een campagne die al maanden niets oplevert uitzetten, is soms meer waard dan een nieuwe beginnen. Bureaus adviseren dat te weinig. Wil je eerst zelf zien hoe je account ervoor staat? Gebruik dan de <a href="/kennisbank/gidsen/google-ads-check/">Google Ads-check in 10 punten</a>.</p>
 
-        <Tussenactie />
+        <Tussenactie titel="Liever op jullie eigen site oefenen?" tekst="Thorgall belt je terug en vraagt wat jullie team straks moet kunnen. Daarna krijg je een voorstel met onderwerpen, vorm en een vaste prijs." knop={{ tekst: 'Bespreek een training', href: '/contact/' }} />
         <h2 id="ai">AI training: slimmer werken met ChatGPT, Claude en Gemini</h2>
         <p>Bijna iedereen heeft ChatGPT wel eens geprobeerd. Weinig teams gebruiken het goed. In een AI training leer je AI inzetten voor werk dat je toch al doet: teksten, onderzoek, mails en ideeën. En je leert waar je het beter niet voor gebruikt.</p>
         <p>We werken zelf elke dag met AI, met onder meer Claude, ChatGPT, Gemini, Copilot, Perplexity en NotebookLM. Wat we laten zien, komt dus uit de praktijk:</p>
@@ -137,7 +143,7 @@ const schema = [{
         <p>In het eerste gesprek kwam naar boven wat ze echt wilden. Meer aanvragen voor warmtepompen, en minder telefoontjes over kleine reparaties. Dan ligt de training voor de hand. Eén sessie over zoekwoorden en teksten voor de warmtepomppagina's. Eén sessie in het Ads-account, met de zoektermen van de afgelopen drie maanden op het scherm. En een uur over AI, om sneller offerteteksten en blogs te schrijven.</p>
         <p>Na afloop heeft het team een lijst met tien taken, op volgorde van belang. Wat ze zelf doen, staat erop. Wat ze liever uitbesteden, ook.</p>
 
-        <Tussenactie />
+        <Tussenactie titel="Zo'n training ook voor jullie?" tekst="Vertel wie er meedoen en wat ze al weten. Je hoort vooraf wat het kost, en dat bedrag staat vast." knop={{ tekst: 'Bespreek een training', href: '/contact/' }} />
         <h2 id="na-afloop">Wat je na afloop kunt</h2>
         <p>Dat hangt af van wat we samen kiezen. Na een training met de belangrijkste onderdelen van SEO, Ads en AI:</p>
         <ul class="vink">
@@ -152,6 +158,14 @@ const schema = [{
         <h2 id="kosten">Wat een training kost</h2>
         <p>De prijs is in overleg. Dat klinkt vaag, maar het hangt echt van een paar dingen af. Een ochtend met één ondernemer is iets anders dan drie sessies met een team van acht. Wat meetelt: hoeveel mensen meedoen, hoe lang het duurt, hoeveel voorbereiding we doen op jullie site en waar we de training geven.</p>
         <p>Je hoort de prijs vooraf, in het voorstel, en dan staat hij vast. Alles exclusief btw. Wil je liever eerst één-op-één sparren over een concrete vraag? Dan is een <a href="/consult/">consult</a> van € 85 per uur misschien al genoeg.</p>
+        <p>Ter vergelijking: een online videotraining SEO voor gevorderden kost bij Onder € 49 exclusief btw. Voor de theorie is dat een prima keus. Het verschil met een training van ons: wij werken in jullie eigen site en account, en je kunt vragen stellen over je eigen pagina's.</p>
+        <h3>Wat je altijd krijgt</h3>
+        <ul class="vink">
+          <li>Een gesprek vooraf over wat jullie na de training moeten kunnen.</li>
+          <li>Voorbereiding op jullie eigen site of account.</li>
+          <li>Een voorstel met onderwerpen, duur, vorm en een vaste prijs.</li>
+          <li>Aan het eind een lijst: wat eerst, wat daarna en wat nooit.</li>
+        </ul>
 
         <h2 id="leren-of-uitbesteden">Zelf leren of uitbesteden?</h2>
         <p>Wij verdienen ook aan klanten die het werk aan ons overlaten. Toch raden we een training soms aan. Een team dat snapt hoe zoeken werkt, schrijft betere teksten, neemt betere beslissingen en verspilt minder budget. Ook als er een bureau naast staat.</p>
@@ -159,7 +173,7 @@ const schema = [{
       </article>
 
       <aside class="zijkolom">
-        <Inhoud items={hoofdstukken} leestijd={9} />
+        <Inhoud items={hoofdstukken} leestijd={11} actie={false} />
         <div class="card prijs-overleg">
           <p class="kicker">Trainingen</p>
           <p class="bedrag">In overleg</p>
@@ -198,6 +212,8 @@ const schema = [{
       { v: 'Moeten we iets voorbereiden voor de training?', a: 'Weinig. We vragen vooraf om mee te mogen kijken, bijvoorbeeld in Search Console of je Google Ads-account. Alleen lezen is genoeg. En we vragen wat je met de training wilt bereiken.' },
       { v: 'Kan het ook over genoemd worden door AI gaan?', a: 'Ja, als onderdeel van een AI training of een SEO training. Je leert dan hoe ChatGPT, Gemini en Google AI bedrijven aanraden, en wat je doet om zelf genoemd te worden.' },
       { v: 'Wat kost een SEO training?', a: 'De prijs is in overleg en hangt af van het aantal deelnemers, de duur en de voorbereiding. Je hoort hem vooraf en dan staat hij vast.' },
+      { v: 'Wat als mijn team er na de training niet aan toekomt?', a: 'Daarom vragen we vooraf wie er daarna mee aan de slag gaat, en hoeveel tijd die heeft. Is dat niemand, dan zeggen we dat, en raden we je eerder <a href="/zoekmachine-optimalisatie/seo-uitbesteden/">SEO uitbesteden</a> aan. Na de training heb je een lijst met taken op volgorde, zodat je ook later nog weet waar je was.' },
+      { v: 'Is een online cursus niet goedkoper?', a: 'Ja. Een videotraining kost vaak een paar tientjes, en voor de theorie is dat prima. Wat zo\'n cursus niet doet: naar jullie site kijken en zeggen wat daar het eerst moet. Dat is waar een training van ons over gaat.' },
     ]}
   />
 

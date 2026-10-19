@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Hero from '../../components/pagina/Hero.astro';
 import Bewijs from '../../components/pagina/Bewijs.astro';
 import Actie from '../../components/pagina/Actie.astro';
+import Faq from '../../components/pagina/Faq.astro';
 import { site, team } from '../../data/site';
 import RitTerug from '../../components/teken/RitTerug.astro';
 import Tekening from '../../components/teken/Tekening.astro';
@@ -15,7 +16,7 @@ const meningen = [
   'Soms is stoppen met verspild budget meer waard dan een nieuwe campagne.',
   'Een rapport waar je een marketeer bij nodig hebt om het te snappen, schiet zijn doel voorbij.',
 ];
-const schema = [{ '@type': 'AboutPage', name: 'Over Drijfveer Media', url: `${site.url}/over-ons/`, about: { '@id': `${site.url}/#organisatie` } }];
+const schema = [{ '@type': 'AboutPage', name: 'Over Drijfveer Media', url: `${site.url}/over-ons/`, about: { '@id': `${site.url}/#organisatie` }, dateModified: '2026-10-19' }];
 ---
 <Base
   title="Over ons: online marketingbureau uit Assen | Drijfveer Media"
@@ -47,9 +48,7 @@ const schema = [{ '@type': 'AboutPage', name: 'Over Drijfveer Media', url: `${si
       <p>Voordat hij Drijfveer Media begon, was Robert general manager bij wat toen de grootste leadgenerator van de Benelux was. Waarom hij daar wegging? "Ik vond het niet meer leuk. De uitdaging was weg."</p>
       <h3>Waar hij trots op is</h3>
       <p>"Er gaat niets boven een persoonlijk compliment van een klant. Maar waar ik het meest trots op ben, is dat klanten heel lang bij ons blijven."</p>
-      <h3>Wat hem dwarszit</h3>
-      <p>"Het irriteert me dat er veel cowboys zijn die doen alsof ze verstand hebben van online marketing, maar alleen een handboek voor beginners hebben doorgebladerd. Ze zijn goed in sales, maar de uitvoering schiet tekort. Dat schaadt het vertrouwen in de hele branche. Hoe vaak wij wel niet de puinhopen van andere 'marketeers' hebben moeten opruimen."</p>
-      <p>Daarom werkt Drijfveer Media zoals het werkt: eerst een doel op papier, dan pas aan de slag, en elke maand laten zien of het lukt.</p>
+      <p>Dat zie je terug in hoe Drijfveer Media werkt: eerst een doel op papier, dan pas aan de slag, en elke maand laten zien of het lukt. Meer over Robert lees je op <a href="/over-ons/robert-boersma/">zijn eigen pagina</a>.</p>
 
       <h2>Waarom Drijfveer</h2>
       <p>Talent zonder inzet blijft een belofte. Kennis die je niet deelt, verdampt. Alles begint bij de juiste drijfveer: weten waar je naartoe wilt, en waarom.</p>
@@ -89,9 +88,27 @@ const schema = [{ '@type': 'AboutPage', name: 'Over Drijfveer Media', url: `${si
       ))}
     </div>
     <p class="muted" style="margin-top:20px">Daarnaast werken we met een vaste groep freelancers: ontwerpers, tekstschrijvers en developers die we al jaren kennen.</p>
+
+    <div class="tekst" style="margin-top:40px">
+      <h2>Wat je merkt van een klein team</h2>
+      <p>Met vier mensen is er geen accountmanager tussen jou en het werk. Je belt met {site.contactpersoon}, en hij weet wat er bij jou speelt. Is hij er een keer niet, dan belt een collega je terug. Voor specialistisch werk halen we een freelancer erbij die we al jaren kennen, en jij houdt hetzelfde aanspreekpunt.</p>
+      <p>Het scheelt ook in de prijs. SEO begint bij ons bij € 495 per maand, waar de meeste bureaus € 500 tot € 3.500 vragen (zie <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO?</a>). Alle tarieven staan op <a href="/prijzen/">prijzen</a>.</p>
+      <p>Is een klein bureau altijd de beste keus? Nee. Wil je advertenties op social media, een webshop of video, of een team van tien dat dagelijks met je meedraait, dan ben je bij een groter bureau beter af. Dat zeggen we je ook.</p>
+
+      <h2>Voor wie we werkten</h2>
+      <p>We werkten onder meer voor Kärcher, bol.com, Nyenrode, Conflictbemiddeling Nederland en Glaspunt. En voor veel mkb'ers in het Noorden en de rest van het land. Wat dat opleverde, lees je bij de <a href="/cases/">resultaten</a>: van 32% tot 87% meer bezoekers uit Google bij drie klanten.</p>
+    </div>
   </section>
 
   <Bewijs titel="Waarom ondernemers bij ons blijven" />
+
+  <Faq
+    vragen={[
+      { v: 'Zijn jullie met vier mensen niet te klein?', a: 'Voor de meeste mkb\'ers niet. Je hebt één aanspreekpunt dat je dossier kent, en voor specialistisch werk schakelen we vaste freelancers in. Is Thorgall er een keer niet, dan belt een collega je terug.' },
+      { v: 'Werken jullie ook buiten het Noorden?', a: 'Ja. We zitten in Assen, maar onze klanten komen uit heel Nederland en ook uit het buitenland. Bijna alles kan op afstand.' },
+      { v: 'Waarom heten jullie Drijfveer Media?', a: 'Talent zonder inzet levert niets op, en kennis die je niet deelt ook niet. Alles begint bij de juiste drijfveer. Daarom delen we in de <a href="/kennisbank/">kennisbank</a> hoe we werken.' },
+    ]}
+  />
 
   <Actie titel="Kom gerust langs aan de Lauwers" tekst={`Je vindt ons op ${site.straat} in ${site.plaats}. Je bent welkom. Liever eerst bellen? ${site.contactpersoon} belt je binnen 15 minuten terug.`} knop={{ tekst: 'Plan een kennismaking', href: '/contact/' }} />
 </Base>

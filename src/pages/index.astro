@@ -10,6 +10,8 @@ import { perOnderwerp } from '../data/tekeningen';
 import InDeRegio from '../components/pagina/InDeRegio.astro';
 import { termijnen } from '../data/termijnen';
 import { nietKort } from '../data/niet';
+import WieDoetHet from '../components/pagina/WieDoetHet.astro';
+import AiTest from '../components/tool/AiTest.astro';
 
 const kolommen = [
   { titel: 'Gevonden', zin: 'Klanten vinden je in Google: in de zoekresultaten, op de kaart en in de advertenties.', items: perPijler('Gevonden').filter((d) => d.pillar) },
@@ -28,12 +30,20 @@ const vragen = [
   { v: 'Werken jullie alleen in het Noorden?', a: 'Nee. We zitten in Assen en kennen het Noorden goed, maar we werken voor ondernemers in heel Nederland en hebben ook klanten in het buitenland. Bijna alles kan op afstand. Wil je liever aan tafel zitten, dan komen we langs of kom jij naar ons. Kijk ook bij ons <a href="/werkgebied/">werkgebied</a>.' },
   { v: 'Zit ik ergens aan vast?', a: `Nee. ${termijnen.opzeggen}` },
   { v: 'Doen jullie ook advertenties op Facebook en Instagram?', a: `Nee. ${nietKort} We beheren wel je social media kanalen, zonder advertenties, en we adverteren in Google, waar mensen actief zoeken. Vraag je iets wat we niet goed kunnen, dan zeggen we dat meteen.` },
-  { v: 'Ik heb al een bureau. Kunnen jullie meekijken?', a: 'Ja. Met de <a href="/consult/#offerte-check">offertecheck</a> zie je zelf in een paar minuten of de offerte of het maandoverzicht van je bureau klopt. Wil je dat we meekijken, dan kan dat in een <a href="/consult/">consult</a> van € 85 per uur.' },
+  { v: 'Ik heb al een bureau. Kunnen jullie meekijken?', a: 'Ja. Met de <a href="/consult/#offerte-check">offertecheck</a> zie je zelf in een paar minuten of de offerte of het maandoverzicht van je bureau klopt. Wil je dat we meekijken, dan kan dat in een <a href="/consult/">consult</a> van € 85 per uur. Je hoeft niets op te zeggen voordat je met ons praat.' },
+  { v: 'Waarom zijn jullie goedkoper dan veel andere bureaus?', a: 'We zijn met z\'n vieren, zonder accountmanagers, in een bedrijfsverzamelpand in Assen. AI doet bij ons het rekenwerk en de eerste versies, een mens controleert alles. En wat we bij jou doen, hebben we eerst op onze eigen sites getest, dus je betaalt geen leergeld. Hoe onze prijzen zich tot de markt verhouden, lees je bij <a href="/prijzen/">prijzen</a>.' },
+  { v: 'Wat als het niet werkt?', a: 'Dan hoor je dat van ons, en niet pas na een jaar. Elke maand zie je op één A4 wat het opleverde. Halen we het afgesproken doel niet en ligt het aan ons, dan werken we een maand gratis door. Wil je daarna stoppen, dan zeg je per maand op. Je accounts en je website blijven van jou.' },
   { v: 'Gebruiken jullie AI?', a: 'Ja, elke dag. Voor onderzoek, eerste versies en het rekenwerk. Een mens beslist, controleert en past aan. Dat maakt ons sneller en scherper, en dat zie je terug in de prijs. Hoe dat precies gaat, lees je op <a href="/zo-werken-we-met-ai/">zo werken we met AI</a>.' },
   { v: 'Waarom heet het bedrijf Drijfveer Media?', a: 'Talent zonder inzet levert niets op. Kennis die je niet deelt ook niet. Alles begint bij de juiste drijfveer. Daarom delen we in onze <a href="/kennisbank/">kennisbank</a> hoe we werken, zodat je veel zelf kunt doen.' },
-  { v: 'Kan ik bij jullie langskomen?', a: 'Graag. We zitten aan de Lauwers 9 in Assen, in een bedrijfsverzamelpand vol ondernemers. Bel even van tevoren, dan weten we dat je komt.' },
+  { v: 'Kan ik bij jullie langskomen?', a: 'Graag. We zitten aan de Lauwers 9 in Assen, in een bedrijfsverzamelpand vol ondernemers. Bel even van tevoren, dan weten we dat je komt. Wat we voor ondernemers in de stad doen, lees je bij <a href="/online-marketing-assen/">online marketing in Assen</a>.' },
 ];
 const schema = [{
+  '@type': 'WebPage',
+  dateModified: '2026-10-19',
+  // Marktprijzen in "Waar begin je?" en de vergelijking met de alternatieven (opgehaald met curl op 19-10-2026)
+  // SEO-prijzen in de markt: zie de bronnen van /kennisbank/gidsen/wat-kost-seo/ (link in de tekst).
+  citation: ['https://roxtar.nl/wat-kost-een-online-marketing-bureau/'],
+}, {
   '@type': 'FAQPage',
   mainEntity: vragen.map((q) => ({ '@type': 'Question', name: q.v, acceptedAnswer: { '@type': 'Answer', text: q.a.replace(/<[^>]+>/g, '') } })),
 }];
@@ -49,7 +59,7 @@ const schema = [{
       <p class="claim" aria-hidden="true"><span>Gevonden.</span><span>Genoemd.</span><span>Gekozen<b>.</b></span></p>
       <h1>Online marketingbureau voor het mkb: meer klanten, met het doel op papier</h1>
       <p class="lead">We zorgen dat klanten je vinden in Google, dat ChatGPT je noemt en dat je site ze laat bellen. Bij de start leggen we een meetbaar doel vast. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door.</p>
-      <p class="usp">SEO vanaf € 495 per maand (excl. btw) · alle prijzen online · elke techniek eerst getest op meer dan 100 eigen sites</p>
+      <p class="usp">SEO vanaf € 495 per maand (excl. btw) · per maand opzegbaar · alle prijzen online · elke techniek eerst getest op meer dan 100 eigen sites</p>
     </div>
     <form class="card vraag" id="ask" action="/gratis-website-analyse/" method="get">
       <p class="zin">
@@ -90,7 +100,7 @@ const schema = [{
         <span class="kicker">2 · Genoemd</span>
         <h2>Steeds vaker vraagt die klant het aan AI.</h2>
         <p>ChatGPT en Google AI noemen een paar namen. Wij zorgen dat de jouwe erbij staat, met een link naar je site.</p>
-        <p class="diensten-links"><a href="/generative-engine-optimization/">Genoemd worden door AI (GEO)</a> · <a href="/generative-engine-optimization/#ai-test">Doe de AI-test (5 minuten)</a> · <a href="/lokale-seo/reviews/">Reviews</a></p>
+        <p class="diensten-links"><a href="/generative-engine-optimization/">Genoemd worden door AI (GEO)</a> · <a href="#ai-test">Doe de AI-test (5 minuten)</a> · <a href="/lokale-seo/reviews/">Reviews</a></p>
       </article>
       <article class="hoofdstuk">
         <span class="kicker">3 · Gekozen</span>
@@ -153,9 +163,32 @@ const schema = [{
         </table>
       </div>
       <p class="muted klein">Vanaf-prijzen, exclusief btw. Onze diensten zijn voor ondernemers en organisaties.</p>
+      <p>Ter vergelijking: bij een online marketingbureau betaalt een mkb-bedrijf vaak € 1.000 tot € 2.500 per maand, en SEO kost bij de meeste bureaus € 500 tot € 3.500 per maand (zie <a href="/kennisbank/gidsen/wat-kost-seo/">wat kost SEO?</a>). Bij ons begin je met één kanaal, voor een paar honderd euro per maand.</p>
       <p>Twijfel je? Daar is de <a href="/gratis-website-analyse/">gratis scan</a> voor. We kijken naar je site, je concurrenten en wat AI over je zegt. Daarna hoor je welke stap bij jou het meeste oplevert, ook als dat iets is wat je zelf kunt doen.</p>
     </div>
   </section>
+
+  <section class="wrap blok" aria-labelledby="keuze-kop">
+    <div class="tekst breed">
+      <h2 id="keuze-kop">Groot bureau, freelancer, zelf doen of wij?</h2>
+      <p>Er is geen route die voor iedereen de beste is. Zet ze naast elkaar voordat je kiest. Dit is hoe wij het zien, inclusief waar wij niet de beste keus zijn.</p>
+      <div class="tabel-scroll">
+        <table>
+          <thead><tr><th></th><th>Wat je betaalt</th><th>Wie doet het werk</th><th>Sterk in</th><th>Let op</th></tr></thead>
+          <tbody>
+            <tr><td><b>Groot bureau</b></td><td>Vaak € 1.000 tot € 2.500 per maand voor een mkb'er</td><td>Een team, met een accountmanager als tussenpersoon</td><td>Veel kanalen tegelijk, grote budgetten</td><td>Bij een klein budget ben je een kleine klant</td></tr>
+            <tr><td><b>Freelancer</b></td><td>Per uur, bij SEO meestal € 60 tot € 100</td><td>Eén persoon</td><td>Persoonlijk, vaak sterk in één vak</td><td>Ziek of op vakantie: dan ligt je marketing stil</td></tr>
+            <tr><td><b>Goedkoop pakket</b></td><td>Een laag vast bedrag</td><td>Vaak niet duidelijk</td><td>Snel geregeld</td><td>Je weet zelden wat er precies gebeurt</td></tr>
+            <tr><td><b>Zelf doen</b></td><td>Je eigen uren</td><td>Jij</td><td>Niemand kent je vak beter</td><td>Het schiet erbij in als het druk is</td></tr>
+            <tr><td><b>Drijfveer Media</b></td><td>SEO vanaf € 495, alles uitbesteden vanaf € 595 per maand</td><td>{site.contactpersoon} als vast aanspreekpunt, met een team van vier erachter</td><td>Gevonden worden, genoemd door AI, een site die aanvragen oplevert</td><td>Webshops, advertenties op social media en video doen we niet</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Werk je liever zelf, met af en toe hulp? Dan is een <a href="/consult/">consult</a> of een <a href="/trainingen/">training</a> voor je team vaak genoeg. Dat zeggen we ook als je ons belt voor iets groters.</p>
+    </div>
+  </section>
+
+  <AiTest />
 
 
   <section class="wrap blok twee" aria-label="Voor wie en wie we zijn">
@@ -168,10 +201,16 @@ const schema = [{
     <div>
       <h2>Wie we zijn</h2>
       <p>In 2011 gingen Robert Boersma en Evelien Heerema twee weken op vakantie naar België. Na twee dagen hadden ze het wel gezien. Op dag drie stonden ze weer thuis en schreven ze Drijfveer Media in.</p>
-      <p>Inmiddels zijn we met z'n vieren, met een vaste groep freelancers om ons heen. Thorgall van Eeden is online marketeer, je eerste aanspreekpunt en onze linkbuilder. Robert is eigenaar en online marketeer, Evelien is medeoprichter en Johan Zwartenberg is marketeer. Voor specialistisch werk schakelen we freelancers in die bovenop de nieuwste ontwikkelingen zitten.</p>
-      <p>Je vindt ons aan de Lauwers 9 in Assen. Kom gerust langs. <a href="/over-ons/">Meer over ons</a></p>
+      <p>Inmiddels zijn we met z'n vieren, met een vaste groep freelancers die we al jaren kennen. Hieronder zie je wie wat doet. Je vindt ons aan de Lauwers 9 in Assen. Kom gerust langs. <a href="/over-ons/">Meer over ons</a></p>
     </div>
   </section>
+
+  <WieDoetHet titel="Met wie je te maken krijgt" wie={[
+    { slug: 'thorgall', taak: 'Je eerste aanspreekpunt. Hij belt je terug, kent je dossier en is ook onze linkbuilder.' },
+    { slug: 'robert', taak: 'Richtte Drijfveer Media in 2011 op. Doet SEO, content en strategie.' },
+    { slug: 'evelien', taak: 'Houdt de zaak draaiende en werkt mee aan marketing voor klanten.' },
+    { slug: 'johan', taak: 'Werkt mee aan de online marketing voor klanten.' },
+  ]} extra="Voor specialistisch werk schakelen we freelancers in die bovenop de nieuwste ontwikkelingen zitten. Jij houdt één aanspreekpunt." />
 
   <section class="wrap blok" aria-labelledby="kort-kop">
     <h2 id="kort-kop">Drijfveer Media in het kort</h2>

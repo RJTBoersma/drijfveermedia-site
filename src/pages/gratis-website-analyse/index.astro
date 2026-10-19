@@ -9,6 +9,8 @@ import { site } from '../../data/site';
 import Scanner from '../../components/teken/Scanner.astro';
 import Tekening from '../../components/teken/Tekening.astro';
 import Inhoud from '../../components/pagina/Inhoud.astro';
+import AiTest from '../../components/tool/AiTest.astro';
+import WieDoetHet from '../../components/pagina/WieDoetHet.astro';
 
 const iconen = ['vergrootglas', 'tandwiel', 'pen', 'ketting', 'pin', 'ai'];
 const onderdelen = [
@@ -30,11 +32,19 @@ const hoofdstukken = [
   { id: 'voor-wie', titel: 'Voor wie de scan is' },
   { id: 'gegevens', titel: 'Wat er met je gegevens gebeurt' },
 ];
+const schema = [{ '@type': 'WebPage', dateModified: '2026-10-19' }, {
+  '@type': 'Service',
+  name: 'Gratis SEO-scan',
+  serviceType: 'SEO-scan',
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
+}];
 ---
 <Base
   title="Gratis SEO-scan van je website | Drijfveer Media"
   description="Vraag een gratis SEO-scan aan. We bekijken je zoekwoorden, techniek, content, backlinks en AI-vindbaarheid en bellen je binnen 15 minuten terug."
   kruimels={[{ naam: 'Gratis scan', url: '/gratis-website-analyse/' }]}
+  schema={schema}
 >
   <Hero kicker="Gratis" titel="Gratis SEO-scan: de 3 kansen die jou de meeste klanten opleveren" knop={{ tekst: 'Naar het formulier', href: '#scan' }} knopAlleenMobiel>
     <p>Thorgall kijkt naar je website, je drie grootste concurrenten, je plek op de kaart en wat ChatGPT over je zegt. Daarna hoor je de drie verbeterpunten die het meeste opleveren, ook als je nooit klant wordt. Op werkdagen bellen we je binnen 15 minuten terug.</p>
@@ -50,6 +60,8 @@ const hoofdstukken = [
     const doelen: Record<string, { titel: string; lead: string; knop: string; soort: string }> = {
       kaart: { titel: `Gratis kaart-check: sta jij in het kaartje als iemand${plaats ? ` in ${plaats}` : ''} zoekt?`, lead: 'Thorgall zoekt op jouw vak in jouw plaats en kijkt wie er in het kaartje van Google staat, en waarom. Daarna belt hij je met de drie dingen die jou daar het snelst brengen.', knop: 'Check mijn plek op de kaart', soort: 'Kaart-check' },
       ads: { titel: 'Gratis Google Ads-check: waar lekt je budget weg?', lead: 'We lopen je campagnes na: zoektermen, biedingen, advertenties en de meting. Daarna hoor je waar geld weglekt en wat je als eerste aanpakt. Je account blijft van jou.', knop: 'Laat mijn account checken', soort: 'Ads-check' },
+      leads: { titel: 'Gratis aanvragen-check: waar lekken je aanvragen weg?', lead: 'Thorgall loopt je site door zoals een klant dat doet: je belangrijkste dienstpagina, je formulier en wat er na het versturen gebeurt. Daarna belt hij je met de drie plekken waar de snelste winst zit.', knop: 'Laat mijn site nakijken', soort: 'Aanvragen-check' },
+      chatgpt: { titel: 'Gratis check: past adverteren in ChatGPT bij jou?', lead: 'Thorgall stelt de vragen van jouw klanten aan ChatGPT en kijkt of jouw vak onder de onderwerpen valt waar OpenAI geen advertenties toont. Daarna belt hij je met zijn antwoord, ook als dat nee is.', knop: 'Check of het bij mij past', soort: 'ChatGPT-check' },
       website: { titel: 'Vraag een vaste prijs voor je nieuwe website', lead: 'Vertel wat je site moet opleveren. Thorgall belt je terug en noemt een vaste prijs, ook als de goedkoopste route het beste bij je past.', knop: 'Vraag mijn vaste prijs aan', soort: 'Website-prijs' },
     };
     const d = doelen[q.get('doel') || ''];
@@ -121,7 +133,8 @@ const hoofdstukken = [
           <li>hoeveel werk het is om op te lossen;</li>
           <li>wie het kan doen: jij zelf, je webbouwer of wij.</li>
         </ul>
-        <p>Je hoort ook hoe je ervoor staat ten opzichte van je concurrenten. Niet om je bang te maken, maar omdat je positie in Google altijd relatief is. Je hoeft niet perfect te zijn. Je moet beter zijn dan de drie bedrijven boven je.</p>
+        <p>Je hoort ook hoe je ervoor staat ten opzichte van je concurrenten. Je positie in Google is altijd relatief. Je hoeft niet perfect te zijn. Je moet beter zijn dan de drie bedrijven boven je.</p>
+        <p>Hoe je de uitkomst krijgt, kies je zelf in het formulier: Thorgall belt je, of je krijgt alles per mail. Bellen heeft een voordeel. Dan kun je meteen vragen wat je niet snapt, en hoor je wat je zelf kunt doen en wat niet.</p>
         <div class="kader">
           <p class="kader-titel">Zo kan een uitkomst eruitzien (verzonnen voorbeeld)</p>
           <p>Een schildersbedrijf in Meppel vraagt de scan aan. Wat we zien:</p>
@@ -158,7 +171,7 @@ const hoofdstukken = [
           <li><b>Meet je laadsnelheid.</b> Vul je adres in bij <a href="/kennisbank/wat-is/pagespeed-insights/">PageSpeed Insights</a> van Google. Je krijgt een score per categorie: 90 of hoger is goed, 50 tot 89 kan beter en onder de 50 is slecht. Belangrijker zijn de cijfers van echte bezoekers bovenaan, als Google daar genoeg gegevens voor heeft.</li>
           <li><b>Open Search Console.</b> Kijk bij Prestaties op het tabblad Zoekopdrachten. Staan daar zoekwoorden met veel vertoningen maar een gemiddelde positie tussen 8 en 20? Die staan net buiten beeld en zijn het snelst te verbeteren.</li>
           <li><b>Bekijk je links.</b> In Search Console staat het rapport Links. Daar zie je welke sites het vaakst naar je linken. Google noemt het zelf een steekproef, geen volledige lijst. Zet de export in onze <a href="/linkbuilding/linkbuilding-scan/">linkbuilding scan</a>, dan zie je meteen wat het betekent.</li>
-          <li><b>Vraag het aan AI.</b> Stel ChatGPT en Gemini de vraag die je klant zou stellen. Noteer wie genoemd wordt en welke bronnen erbij staan.</li>
+          <li><b>Vraag het aan AI.</b> Stel ChatGPT en Gemini de vraag die je klant zou stellen. Noteer wie genoemd wordt en welke bronnen erbij staan. Of doe de <a href="#ai-test">AI-test onderaan deze pagina</a>: die maakt de vragen voor je en geeft een score.</li>
         </ol>
         <p>Heb je nog geen Search Console? In de gids <a href="/kennisbank/gidsen/google-search-console/">website aanmelden bij Google en Search Console gebruiken</a> staat hoe je dat regelt.</p>
 
@@ -199,6 +212,10 @@ const hoofdstukken = [
     </div>
   </section>
 
+  <AiTest />
+
+  <WieDoetHet titel="Wie je scan doet" wie={[{ slug: 'thorgall', taak: 'Bekijkt je site en die van je drie grootste concurrenten, vraagt ChatGPT naar jouw vak en belt je met de drie kansen die het meeste opleveren.' }]} extra="Word je daarna klant, dan blijft hij je vaste aanspreekpunt. Hoeft niet: de uitkomst is van jou." />
+
   <Bewijs />
 
   <Faq
@@ -209,6 +226,8 @@ const hoofdstukken = [
       { v: 'Wat is het verschil tussen een SEO-scan en een SEO-audit?', a: 'De scan is een snelle blik op je hele zichtbaarheid: zoekwoorden, techniek, content, links, de kaart en AI. Je krijgt de drie belangrijkste verbeterpunten. Een <a href="/zoekmachine-optimalisatie/technische-seo/">technische SEO-audit</a> gaat diep op de techniek in, pagina voor pagina, en kost vanaf € 395.' },
       { v: 'Kan ik zelf een gratis SEO-scan doen?', a: 'Ja. Met Google Search Console, PageSpeed Insights en een paar zoekopdrachten kom je een heel eind. Hierboven staat een stappenplan van een halfuur. Wat een tool niet doet, is kiezen welke punten voor jouw bedrijf het meeste opleveren.' },
       { v: 'Wat is een goede laadsnelheid?', a: 'Google noemt een pagina goed als het grootste element binnen 2,5 seconden in beeld staat, de pagina binnen 200 milliseconden reageert en er weinig verspringt. Meet het met PageSpeed Insights, vooral op een telefoon.' },
+      { v: 'Krijg ik de uitkomst ook op papier?', a: 'Ja, als je dat wilt. Kies in het formulier "Mail me alleen", dan krijg je de drie verbeterpunten per mail. Kies je "Bel me", dan bespreekt Thorgall ze met je aan de telefoon.' },
+      { v: 'Waarom geen automatisch rapport, zoals bij online tools?', a: 'Een tool ziet de techniek van één pagina. Hij weet niet wie je concurrenten zijn, wat je klanten zoeken of wat ChatGPT over je zegt. En hij kiest niet. Wij geven je de drie punten die voor jouw bedrijf het meeste opleveren, ook als je die zelf kunt oppakken.' },
       { v: 'Moet ik na de scan klant worden?', a: 'Nee. Je krijgt de uitkomst en mag er zelf mee aan de slag. Veel punten kun je zelf of met je webbouwer oppakken. Wil je dat wij het doen, dan hoor je eerst wat het kost.' },
       { v: 'Ik heb nog geen website. Kan ik toch een scan aanvragen?', a: 'Dan kijken we naar je Google Bedrijfsprofiel en je concurrenten, en vertellen we wat een nieuwe site minimaal moet hebben. Zie ook <a href="/website-laten-maken/">website laten maken</a>.' },
     ]}

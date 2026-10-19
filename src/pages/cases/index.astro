@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Hero from '../../components/pagina/Hero.astro';
 import Bewijs from '../../components/pagina/Bewijs.astro';
 import Actie from '../../components/pagina/Actie.astro';
+import Faq from '../../components/pagina/Faq.astro';
+import SeoOpbrengst from '../../components/tool/SeoOpbrengst.astro';
 import Scene from '../../components/scenes/cases.astro';
 import { site } from '../../data/site';
 
@@ -49,6 +51,7 @@ const schema = [{
   url: `${site.url}${url}`,
   inLanguage: 'nl-NL',
   about: { '@id': `${site.url}/#organisatie` },
+  dateModified: '2026-10-19',
 }];
 ---
 <Base
@@ -58,7 +61,7 @@ const schema = [{
   schema={schema}
 >
   <Hero kicker="Resultaten" titel="Wat ons werk opleverde, in echte cijfers">
-    <p>Beloven kan iedereen. Hier zie je wat er gebeurde bij drie klanten: meer bezoekers uit Google, de eerste plek op de woorden die ertoe doen en meer aanvragen. Geen opgepoetste grafieken.</p>
+    <p>Beloven kan iedereen. Hier zie je wat er gebeurde bij drie klanten: meer bezoekers uit Google, de eerste plek op de woorden die ertoe doen en meer aanvragen. Per klant lees je wat we deden, in welke volgorde.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -85,15 +88,16 @@ const schema = [{
       <h2>Wat deze cases gemeen hebben</h2>
       <p>Drie verschillende bedrijven, toch zie je hetzelfde patroon terug: eerst de basis, dan groei. Zo werken we bij elke klant.</p>
       <ul class="vink">
-        <li><b>Eerst het doel, dan het werk.</b> We vragen wat de site moet opleveren. Meestal is dat geen bezoekers, maar aanvragen. Daar sturen we op.</li>
+        <li><b>Eerst het doel, dan het werk.</b> Meestal is dat doel geen bezoekers, maar aanvragen.</li>
         <li><b>Woorden van mensen die iets willen.</b> "Klusjesman Amsterdam", "mediation opleiding", "dakraam plaatsen". Wie zo zoekt, staat op het punt om te kiezen.</li>
-        <li><b>Links die autoriteit geven.</b> In alle drie de cases hoorde <a href="/linkbuilding/">linkbuilding</a> erbij. Goede pagina's alleen zijn vaak niet genoeg om bovenaan te komen.</li>
-        <li><b>De grootste kans eerst.</b> We beginnen waar je het snelst verschil merkt. Daarna schaven we bij. Lees hoe dat gaat in <a href="/werkwijze/">onze werkwijze</a>.</li>
+        <li><b>Links die autoriteit geven.</b> In alle drie de cases hoorde <a href="/linkbuilding/">linkbuilding</a> erbij.</li>
+        <li><b>De grootste kans eerst.</b> Daarna schaven we bij. Lees hoe dat gaat in <a href="/werkwijze/">onze werkwijze</a>.</li>
       </ul>
 
-      <h2>Wat we wel en niet kunnen laten zien</h2>
-      <p>De percentages komen uit de analytics van deze klanten. De precieze meetperiode hebben we niet meer, dus die noemen we niet. Wat we wel weten: in alle drie de gevallen kwamen er meer aanvragen binnen. Bij nieuwe klanten leggen we de nulmeting en het doel vanaf dag één vast, zodat je later precies kunt nagaan wat het opleverde.</p>
-      <p>We spreken vooraf een doel af dat je kunt meten, en je ziet zelf of we het halen. Lukt dat niet en ligt het aan ons? Dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.</p>
+      <h2>Wat zou dit voor jou betekenen?</h2>
+    </div>
+    <SeoOpbrengst volume={400} van="o10" naar="o3" conversie={5} klant={33} waarde={1000} intro="Procenten zeggen pas iets als je ze omrekent naar je eigen zaak. Vul in hoe vaak er op je dienst wordt gezocht, waar je nu staat en waar je wilt staan." />
+    <div class="tekst">
 
       <h2>Voor wie we nog meer werkten</h2>
       <p>Naast deze drie werkten we voor bedrijven en organisaties van heel verschillende grootte. Een paar namen:</p>
@@ -106,6 +110,14 @@ const schema = [{
   </section>
 
   <Bewijs case={false} />
+
+  <Faq
+    vragen={[
+      { v: 'Waarom staat er geen meetperiode bij de cijfers?', a: 'De percentages komen uit de analytics van deze klanten, maar de precieze meetperiode hebben we niet meer. Dan noemen we hem liever niet dan dat we hem gokken. Bij nieuwe klanten leggen we de nulmeting en het doel vanaf dag één vast, zodat je later precies ziet wat het opleverde.' },
+      { v: 'Hoe weet ik dat jullie dit bij mij ook halen?', a: 'Zeker weten doe je het vooraf nooit. Daarom spreken we bij maandelijkse diensten een meetbaar doel af, met een datum. Halen we dat niet en ligt het aan ons, dan werken we een maand gratis door. Zo werkt <a href="/garantie/">onze garantie</a>.' },
+      { v: 'Wat deden jullie voor Kärcher en bol.com?', a: 'Voor de namen op deze pagina deden we werk in online marketing, tekstschrijven, leadgeneratie en linkbuilding. Wat precies voor wie, zetten we niet online.' },
+    ]}
+  />
 
   <Actie titel="Wat zou dit voor jouw bedrijf opleveren?" />
 </Base>
