@@ -12,15 +12,15 @@ import Scene from '../../../components/scenes/website-laten-maken--portfolio.ast
 import { site, persoon } from '../../../data/site';
 
 const url = '/website-laten-maken/portfolio/';
-const datum = '2026-10-19';
+const datum = '2026-10-21';
 const hoofdstukken = [
-  { id: 'voorbeelden', titel: 'Vijf voorbeelden' },
+  { id: 'voorbeelden', titel: 'Zeven voorbeelden' },
   { id: 'waar-op-letten', titel: 'Waar je op let' },
   { id: 'kosten', titel: 'Wat het kost' },
   { id: 'zeker', titel: 'Wat je zeker weet' },
 ];
-// Branche en wat de site doet: alleen van de sites zelf (gelezen met curl op 19-10-2026). Geen resultaten, jaartallen of bouwtijd.
-// Schermafbeeldingen: eerste scherm, gemaakt met Playwright op 19-10-2026 (1280×800 en 390×844).
+// Branche en wat de site doet: van de sites zelf (gelezen met curl op 19-10-2026) en, voor Meander Support en Nana's Zorg, uit de case van Robert (21-10-2026). Geen resultaten, jaartallen of bouwtijd.
+// Schermafbeeldingen: eerste scherm, gemaakt met Playwright op 19-10-2026 en 21-10-2026 (1280×800 en 390×844).
 const sites = [
   {
     slug: 'lingen-beton',
@@ -74,6 +74,26 @@ const sites = [
     altMobiel: 'Dakraam Concurrent op een telefoon: logo, het telefoonnummer voor advies, een menuknop en het roze vlak van de prijscalculator.',
     caseHref: '/cases/#dakraamconcurrent',
   },
+  {
+    slug: 'meander-support',
+    naam: 'Meander Support',
+    url: 'https://www.meandersupport.nl/',
+    domein: 'meandersupport.nl',
+    branche: 'Bewindvoering en budgetcoaching',
+    doet: 'Meander Support uit Annen helpt mensen met hun geldzaken: bewindvoering, inkomensbeheer, hulp bij schulden en budgetcoaching. Geldzorgen zijn een gevoelig onderwerp, dus de site is rustig en overzichtelijk, zonder ingewikkeld menu. Elke dienst heeft een eigen pagina, en bovenaan staan het telefoonnummer en een knop voor een terugbelverzoek.',
+    altDesktop: 'Eerste scherm van meandersupport.nl: het logo met een groene M, een blauwgroen menu met de diensten en een foto van een doolhof van heggen met vier knoppen: bewindvoering, inkomensbeheer, hulp bij schulden en budgetcoaching.',
+    altMobiel: 'Meander Support op een telefoon: het mailadres, het telefoonnummer en een knop voor een terugbelverzoek boven het logo.',
+  },
+  {
+    slug: 'nanas-zorg',
+    naam: "Nana's Zorg",
+    url: 'https://www.nanaszorg.nl/',
+    domein: 'nanaszorg.nl',
+    branche: 'Thuiszorg',
+    doet: 'Thuiszorg in Amsterdam-Oost en Weesp: verpleging, wondzorg, persoonlijke verzorging en palliatieve zorg. De site is warm en persoonlijk, met de missie en de visie op een vaste plek in het menu. Wie zorg zoekt voor zichzelf of voor een dierbare, ziet snel wat er kan en bij wie hij terechtkan.',
+    altDesktop: "Eerste scherm van nanaszorg.nl: het logo met een bloem van hartjes, een oudroze menu en een foto van een oudere man met twee zorgverleners, daaronder de introductie van Nana's Zorg.",
+    altMobiel: "Nana's Zorg op een telefoon: het logo, een menuknop, de foto en de eerste alinea over de thuiszorg.",
+  },
 ];
 const schema = [
   {
@@ -95,12 +115,12 @@ const schema = [
 ---
 <Base
   title="Website laten maken voorbeelden | Drijfveer Media"
-  description="Voorbeelden van websites die we maakten: een betonbedrijf, glaszetters, woningontruiming, schilders en dakramen. Met wat elke site doet en wat het kost."
+  description="Voorbeelden van websites die we maakten: een betonbedrijf, glaszetters, thuiszorg, bewindvoering, schilders en dakramen. Met wat elke site doet en wat het kost."
   kruimels={[{ naam: 'Website laten maken', url: '/website-laten-maken/' }, { naam: 'Portfolio', url }]}
   schema={schema}
 >
   <Hero kicker="Gekozen · Website" titel="Website laten maken voorbeelden: deze sites maakten we" prijs="vanaf € 250" eenmalig>
-    <p>Voordat je een website laat maken, wil je zien wat je krijgt. Hier staan vijf sites die nu live zijn, op laptop en telefoon. Per site lees je in welke branche het bedrijf zit en wat de site voor die ondernemer doet.</p>
+    <p>Voordat je een website laat maken, wil je zien wat je krijgt. Hier staan zeven sites die nu live zijn, op laptop en telefoon. Per site lees je in welke branche het bedrijf zit en wat de site voor die ondernemer doet.</p>
     <Scene slot="beeld" />
   </Hero>
 
@@ -108,9 +128,9 @@ const schema = [
     <div class="met-zijkolom">
       <article class="tekst">
         <Auteur slug="robert" datum={datum} />
-        <p>Een betonbedrijf, twee sites waar je offertes van vakmensen vergelijkt, een woningontruimer uit Drenthe en een specialist in dakramen. Toch moet elke site hetzelfde doen: in een paar seconden laten zien wat het bedrijf doet en de bezoeker naar één knop leiden. Twee van deze bedrijven staan ook bij onze <a href="/cases/">resultaten</a>, met cijfers.</p>
+        <p>Een betonbedrijf, twee sites waar je offertes van vakmensen vergelijkt, een woningontruimer uit Drenthe, een specialist in dakramen, een bewindvoerder en een thuiszorgorganisatie. Toch moet elke site hetzelfde doen: in een paar seconden laten zien wat het bedrijf doet en de bezoeker naar één knop leiden. Twee van deze bedrijven staan ook bij onze <a href="/cases/">resultaten</a>, met cijfers.</p>
 
-        <h2 id="voorbeelden">Vijf voorbeelden van websites die we maakten</h2>
+        <h2 id="voorbeelden">Zeven voorbeelden van websites die we maakten</h2>
         <div class="portfolio-lijst">
           {sites.map((s) => (
             <article class="card portfolio-kaart" id={s.slug}>
@@ -135,7 +155,8 @@ const schema = [
         <p>Een greep uit een webdesign portfolio laat vooral zien wat een bureau mooi vindt. Kijk daarom verder dan het plaatje. Open de sites op je eigen telefoon en loop dit lijstje af:</p>
         <ul class="vink">
           <li><b>Zie je binnen vijf seconden wat het bedrijf doet en waar?</b> Bij DW Huisontruiming staan de drie provincies in de kop. Meer hoeft een bezoeker in het begin niet te weten.</li>
-          <li><b>Staat de belangrijkste knop in het eerste scherm?</b> Bij alle vijf wel: een prijsopgave, een offerte, contact of een calculator.</li>
+          <li><b>Past de toon bij het onderwerp?</b> Bij geldzorgen of zorg voor een dierbare wil je rust en vertrouwen, geen schreeuwende knoppen. Kijk hoe Meander Support en Nana's Zorg dat oplossen.</li>
+          <li><b>Staat de belangrijkste knop in het eerste scherm?</b> Bij de meeste wel: een prijsopgave, een offerte, een terugbelverzoek of een calculator.</li>
           <li><b>Werkt het op mobiel?</b> Veel bezoekers komen met een telefoon. Bij Glaszettersservice en Kwastkoning staat de knop voor een offerte op de telefoon direct onderin beeld.</li>
           <li><b>Heeft elke dienst een eigen pagina?</b> Dan word je per dienst goed vindbaar in Google. Lingen Beton heeft er zes.</li>
           <li><b>Klopt de inhoud?</b> Prijzen, werkgebied en telefoonnummer: een bezoeker merkt het meteen als iets niet klopt.</li>

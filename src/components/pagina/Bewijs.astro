@@ -8,7 +8,7 @@ import Veer from '../teken/Veer.astro';
 import Plaatje from '../teken/Plaatje.astro';
 import { diensten } from '../../data/diensten';
 import { stapVoor } from '../../data/actie';
-type CaseNaam = 'willemfikstt' | 'willemfikstt-aanvragen' | 'conflictbemiddeling' | 'dakraamconcurrent';
+type CaseNaam = 'willemfikstt' | 'willemfikstt-aanvragen' | 'conflictbemiddeling' | 'dakraamconcurrent' | 'dakraamplaza' | 'zoekeenvakantiepark';
 // Vorm: 'groot' (vier kaarten en een case, op home, prijzen, garantie en de hoofddiensten), 'strook' (één regel, op de andere
 // dienst- en plaatspagina's) of 'geen' (kennisbank: wie leest wat een sitemap is, zoekt nog geen garantie).
 interface Props { titel?: string; intro?: string; case?: boolean | CaseNaam; eenmalig?: boolean; kort?: boolean; vorm?: 'groot' | 'strook' | 'geen' }
@@ -36,8 +36,10 @@ const cases: Record<CaseNaam, { href: string; naam: string; getal: string; wat: 
   conflictbemiddeling: { href: '/cases/#conflictbemiddeling', naam: 'Conflictbemiddeling.nl', getal: '+47%', wat: 'bezoekers uit Google', tekst: 'kreeg 47% meer bezoekers uit Google, na een nieuwe site, SEO, linkbuilding en Google Ads', onderwerp: 'raket' },
   'willemfikstt-aanvragen': { href: '/cases/#willemfikstt', naam: 'Willemfikstt.nl', getal: '+60%', wat: 'aanvragen via de site', tekst: 'kreeg 60% meer aanvragen via de site', onderwerp: 'raket' },
   dakraamconcurrent: { href: '/cases/#dakraamconcurrent', naam: 'Dakraamconcurrent.nl', getal: '+32%', wat: 'bezoekers uit Google', tekst: 'kreeg 32% meer bezoekers uit Google, na een nieuwe site en linkbuilding', onderwerp: 'raket' },
+  dakraamplaza: { href: '/cases/#dakraamplaza', naam: 'Dakraamplaza.nl', getal: '#1', wat: 'op "VELUX dakraam"', tekst: 'begon bij nul en staat nu op 1 voor "VELUX dakraam", met 11.602 zoekwoorden in de top 10 van Google', onderwerp: 'raket' },
+  zoekeenvakantiepark: { href: '/cases/#zoekeenvakantiepark', naam: 'ZoekEenVakantiepark.nl', getal: '+575%', wat: 'zoekwoorden in de top 10', tekst: 'kreeg na een nieuwe naam 575% meer zoekwoorden in de top 10, met linkbuilding', onderwerp: 'raket' },
 };
-const caseAuto: CaseNaam = /^\/leadgeneratie/.test(pad) ? 'willemfikstt-aanvragen' : /^\/(website-laten-maken|webdesign-|online-adverteren|branding)/.test(pad) ? 'conflictbemiddeling' : /^\/linkbuilding/.test(pad) ? 'dakraamconcurrent' : 'willemfikstt';
+const caseAuto: CaseNaam = /^\/leadgeneratie/.test(pad) ? 'willemfikstt-aanvragen' : /^\/(website-laten-maken|webdesign-|online-adverteren|branding)/.test(pad) ? 'conflictbemiddeling' : /^\/linkbuilding/.test(pad) ? 'zoekeenvakantiepark' : /^\/(zoekmachine-optimalisatie|seo-)/.test(pad) ? 'dakraamplaza' : 'willemfikstt';
 const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? caseAuto : caseKeuze];
 ---
 {vorm === 'strook' && (
@@ -84,7 +86,7 @@ const gekozenCase = caseKeuze === false ? null : cases[caseKeuze === true ? case
     <div class="card case-strook kaart-link">
       <div class="mini" aria-hidden="true"><Plaatje href={gekozenCase.href} onderwerp={gekozenCase.onderwerp} overgang={false} /></div>
       <span class="getal">{gekozenCase.getal}</span>
-      <span class="wat"><a href={gekozenCase.href}><b>{gekozenCase.naam}</b> {gekozenCase.tekst}</a>{gekozenCase.getal === '+87%' && ', en 60% meer aanvragen via de site'}.</span>
+      <span class="wat"><a href={gekozenCase.href}><b>{gekozenCase.naam}</b>{' '}{gekozenCase.tekst}</a>{gekozenCase.getal === '+87%' && ', en 60% meer aanvragen via de site'}.</span>
       <span class="meer" aria-hidden="true">Bekijk de resultaten</span>
     </div>
   )}
