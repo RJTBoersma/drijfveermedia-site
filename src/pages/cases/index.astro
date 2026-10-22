@@ -9,9 +9,10 @@ import Scene from '../../components/scenes/cases.astro';
 import { site } from '../../data/site';
 
 const url = '/cases/';
-const cases: { id: string; naam: string; soort: string; getal: string; wat: string; klant: string; vraag: string; deden: string[]; resultaat: string; reeks?: [string, number][]; bron?: string }[] = [
+const cases: { id: string; diensten: string[]; naam: string; soort: string; getal: string; wat: string; klant: string; vraag: string; deden: string[]; resultaat: string; reeks?: [string, number][]; bron?: string }[] = [
   {
     id: 'dakraamplaza',
+    diensten: ['SEO', 'Linkbuilding'],
     naam: 'Dakraamplaza.nl',
     soort: 'Webshop in VELUX-dakramen',
     getal: '11.602',
@@ -25,6 +26,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'willemfikstt',
+    diensten: ['SEO', 'Linkbuilding', 'Teksten'],
     naam: 'Willemfikstt.nl',
     soort: 'Klusplatform',
     getal: '+87%',
@@ -36,6 +38,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'conflictbemiddeling',
+    diensten: ['Website', 'SEO', 'Linkbuilding', 'Google Ads'],
     naam: 'Conflictbemiddeling.nl',
     soort: 'Opleider voor mediators',
     getal: '+47%',
@@ -47,6 +50,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'dakraamconcurrent',
+    diensten: ['Website', 'Linkbuilding', 'SEO'],
     naam: 'Dakraamconcurrent.nl',
     soort: 'VELUX-installatiepartner',
     getal: '+32%',
@@ -58,6 +62,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'cijferbaas',
+    diensten: ['Website', 'SEO', 'Linkbuilding'],
     naam: 'Cijferbaas.nl',
     soort: 'Administratie- en boekhoudkantoor',
     getal: '+63%',
@@ -69,6 +74,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'dw-huisontruiming',
+    diensten: ['Website', 'SEO', 'Linkbuilding', 'Google Ads'],
     naam: 'DWhuisontruiming.nl',
     soort: 'Woningontruiming in Noord-Nederland',
     getal: '+40%',
@@ -80,6 +86,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'industrialfreezing',
+    diensten: ['Internationale SEO', 'Linkbuilding'],
     naam: 'IndustrialFreezing.com',
     soort: 'Leverancier van gebruikte vriesapparatuur',
     getal: '+32%',
@@ -91,6 +98,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'van-leeuwen-bemiddeling',
+    diensten: ['SEO', 'Linkbuilding'],
     naam: 'Van Leeuwen Bemiddeling',
     soort: 'Mediator',
     getal: '+650%',
@@ -104,6 +112,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'zoekeenvakantiepark',
+    diensten: ['Domeinverhuizing', 'Linkbuilding'],
     naam: 'ZoekEenVakantiepark.nl',
     soort: 'Vergelijker van vakantieparken',
     getal: '+575%',
@@ -117,6 +126,7 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
   },
   {
     id: 'kantoorverhuur-zuidlaren',
+    diensten: ['Website', 'Lokale SEO'],
     naam: 'Kantoorverhuur Zuidlaren',
     soort: 'Verhuur van kantoor- en praktijkruimtes',
     getal: '3 → 37',
@@ -128,6 +138,21 @@ const cases: { id: string; naam: string; soort: string; getal: string; wat: stri
     bron: 'Historische gegevens van SE Ranking.',
   },
 ];
+// Volgorde op de pagina: Dakraamplaza uitgelicht, daarna de rest.
+const volgorde = ['willemfikstt', 'van-leeuwen-bemiddeling', 'zoekeenvakantiepark', 'conflictbemiddeling', 'cijferbaas', 'dw-huisontruiming', 'dakraamconcurrent', 'industrialfreezing', 'kantoorverhuur-zuidlaren'];
+const uitgelicht = cases.find((c) => c.id === 'dakraamplaza')!;
+const overige = volgorde.map((id) => cases.find((c) => c.id === id)!);
+const maanden: Record<string, string> = { januari: 'jan', februari: 'feb', maart: 'mrt', april: 'apr', mei: 'mei', juni: 'jun', juli: 'jul', augustus: 'aug', september: 'sep', oktober: 'okt', november: 'nov', december: 'dec' };
+const kortMaand = (m: string) => { const [maand, jaar] = m.split(' '); return `${maanden[maand] ?? maand} '${jaar.slice(2)}`; };
+// Staafjes voor de meetmomenten: hoogte naar verhouding, de laatste staaf oranje.
+const staven = (reeks: [string, number][], b = 320, h = 150) => {
+  const max = Math.max(...reeks.map(([, n]) => n));
+  const w = b / reeks.length;
+  return reeks.map(([m, n], i) => {
+    const hoog = Math.max(3, Math.round((n / max) * (h - 44)));
+    return { x: i * w + w * 0.18, w: w * 0.64, y: h - 22 - hoog, hoog, label: kortMaand(m), waarde: n.toLocaleString('nl-NL'), laatste: i === reeks.length - 1, midden: i * w + w / 2 };
+  });
+};
 const namen = ['Kärcher', 'bol.com', 'Nyenrode', 'Conflictbemiddeling Nederland', 'Glaspunt'];
 const schema = [{
   '@type': 'CollectionPage',
@@ -152,24 +177,60 @@ const schema = [{
   <section class="wrap sectie" data-aida="interest">
     <h2>Tien klanten, tien aanpakken</h2>
     <p class="sectie-intro">Een webshop die bij nul begon. Een klusplatform dat al goed stond. Een mediator die van een ander bureau kwam en een platform dat een nieuwe naam kreeg. Een dakramenspecialist, een woningontruimer en een verhuurder van kantoren die eerst een nieuwe site nodig hadden. Elke case begon ergens anders, maar steeds op de plek waar het snelst verschil te maken was.</p>
-    <div class="case-lijst">
-      {cases.map((c) => (
-        <article class="card case-kaart" id={c.id}>
-          <span class="kicker">{c.soort}</span>
-          <h3>{c.naam}</h3>
-          <p class="getal"><b>{c.getal}</b> <span>{c.wat}</span></p>
-          <p>{c.klant} {c.vraag}</p>
-          <p class="kop-klein">Wat we deden</p>
-          <ol class="deden">{c.deden.map((d) => <li>{d}</li>)}</ol>
-          <p class="kop-klein">Wat het opleverde</p>
-          <p>{c.resultaat}</p>
-          {c.reeks && (
-            <table class="reeks">
-              <thead><tr><th>Meetmoment</th><th>In de top 10</th></tr></thead>
-              <tbody>{c.reeks.map(([m, n]) => <tr><td>{m}</td><td>{n.toLocaleString('nl-NL')}</td></tr>)}</tbody>
-            </table>
-          )}
-          {c.bron && <p class="klein muted bron">{c.bron}</p>}
+    <article class="card case-uitgelicht" id={uitgelicht.id}>
+      <div class="cu-tekst">
+        <span class="kicker">Uitgelicht · {uitgelicht.soort}</span>
+        <h3>{uitgelicht.naam}</h3>
+        <p class="cu-getal"><b>{uitgelicht.getal}</b> <span>{uitgelicht.wat}</span></p>
+        <p>{uitgelicht.klant} {uitgelicht.vraag}</p>
+        <ul class="tags" aria-label="Diensten">{uitgelicht.diensten.map((d) => <li>{d}</li>)}</ul>
+        <p class="kop-klein">Wat het opleverde</p>
+        <p>{uitgelicht.resultaat}</p>
+      </div>
+      <figure class="cu-grafiek">
+        <svg viewBox="0 0 320 150" role="img" aria-label={`Zoekwoorden in de top 10 van ${uitgelicht.naam}: ${uitgelicht.reeks!.map(([m, n]) => `${m} ${n.toLocaleString('nl-NL')}`).join(', ')}`}>
+          {staven(uitgelicht.reeks!).map((st) => (
+            <g>
+              <rect x={st.x} y={st.y} width={st.w} height={st.hoog} rx="4" class:list={['staaf', { laatste: st.laatste }]} />
+              <text x={st.midden} y={st.y - 6} text-anchor="middle" class="waarde">{st.waarde}</text>
+              <text x={st.midden} y="144" text-anchor="middle" class="label">{st.label}</text>
+            </g>
+          ))}
+        </svg>
+        <figcaption class="klein muted">{uitgelicht.bron}</figcaption>
+      </figure>
+    </article>
+
+    <div class="case-rijen">
+      {overige.map((c) => (
+        <article class="card case-rij" id={c.id}>
+          <header class="cr-kop">
+            <span class="kicker">{c.soort}</span>
+            <h3>{c.naam}</h3>
+            <p class="cr-getal"><b>{c.getal}</b><span>{c.wat}</span></p>
+          </header>
+          <div class="cr-verhaal">
+            <p>{c.klant} {c.vraag}</p>
+            <p class="kop-klein">Wat we deden</p>
+            <ul class="deden">{c.deden.map((d) => <li>{d}</li>)}</ul>
+          </div>
+          <div class="cr-resultaat">
+            <p class="kop-klein">Wat het opleverde</p>
+            <p>{c.resultaat}</p>
+            {c.reeks && (
+              <svg class="mini" viewBox="0 0 320 150" role="img" aria-label={`Zoekwoorden in de top 10: ${c.reeks.map(([m, n]) => `${m} ${n.toLocaleString('nl-NL')}`).join(', ')}`}>
+                {staven(c.reeks).map((st) => (
+                  <g>
+                    <rect x={st.x} y={st.y} width={st.w} height={st.hoog} rx="4" class:list={['staaf', { laatste: st.laatste }]} />
+                    <text x={st.midden} y={st.y - 6} text-anchor="middle" class="waarde">{st.waarde}</text>
+                    <text x={st.midden} y="144" text-anchor="middle" class="label">{st.label}</text>
+                  </g>
+                ))}
+              </svg>
+            )}
+            <ul class="tags" aria-label="Diensten">{c.diensten.map((d) => <li>{d}</li>)}</ul>
+            {c.bron && <p class="klein muted bron">{c.bron}</p>}
+          </div>
         </article>
       ))}
     </div>
@@ -215,20 +276,46 @@ const schema = [{
   <Actie titel="Wat zou dit voor jouw bedrijf opleveren?" />
 </Base>
 <style>
-  .case-lijst { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
-  .case-kaart { height: 100%; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
-  .case-kaart h3 { font-size: 1.25rem; margin: 0; }
-  .case-kaart p { margin: 0; }
-  .case-kaart .getal b { font-size: var(--step-2); font-weight: 900; color: var(--orange-tekst); letter-spacing: -0.03em; }
-  .case-kaart .getal span { color: var(--muted); }
-  .case-kaart { scroll-margin-top: 100px; }
+  /* Uitgelichte case: tekst links, grafiek rechts */
+  .case-uitgelicht { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; padding: 32px; margin-bottom: 20px; scroll-margin-top: 100px; }
+  .case-uitgelicht h3 { font-size: var(--step-2); margin: 4px 0 0; }
+  .cu-tekst { display: flex; flex-direction: column; gap: 10px; }
+  .cu-tekst p { margin: 0; }
+  .cu-getal b { font-size: var(--step-4); font-weight: 900; color: var(--orange-tekst); letter-spacing: -0.04em; line-height: 1; }
+  .cu-getal span { display: block; color: var(--muted); font-weight: 700; margin-top: 4px; }
+  .cu-grafiek { margin: 0; background: color-mix(in srgb, var(--navy) 5%, transparent); border-radius: var(--radius); padding: 20px 18px 12px; }
+  .cu-grafiek svg { width: 100%; height: auto; display: block; }
+  .cu-grafiek figcaption { margin-top: 8px; }
+  /* Overige cases: volle breedte, drie kolommen */
+  .case-rijen { display: grid; gap: 16px; }
+  .case-rij { display: grid; grid-template-columns: 240px minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; padding: 26px 28px; scroll-margin-top: 100px; }
+  .case-rij p { margin: 0; }
+  .cr-kop h3 { font-size: 1.3rem; margin: 4px 0 12px; }
+  .cr-getal b { display: block; font-size: var(--step-3); font-weight: 900; color: var(--orange-tekst); letter-spacing: -0.04em; line-height: 1; }
+  .cr-getal span { display: block; color: var(--muted); font-weight: 700; margin-top: 6px; line-height: 1.35; }
+  .cr-verhaal, .cr-resultaat { display: flex; flex-direction: column; gap: 8px; }
+  .cr-resultaat { border-left: 1px solid var(--line); padding-left: 28px; }
+  .deden { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
   .kop-klein { font-weight: 800; color: var(--navy); margin-top: 6px !important; }
-  .deden { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+  .tags { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags li { margin: 0; font-size: 0.85rem; font-weight: 700; color: var(--navy); background: color-mix(in srgb, var(--navy) 8%, transparent); border-radius: 999px; padding: 4px 10px; }
+  .mini { width: 100%; max-width: 300px; height: auto; margin-top: 4px; }
+  .staaf { fill: color-mix(in srgb, var(--navy) 22%, transparent); }
+  .staaf.laatste { fill: var(--orange); }
+  .waarde { font-size: 13px; font-weight: 800; fill: var(--navy); }
+  .label { font-size: 12px; fill: var(--muted); }
+  .bron { margin-top: 4px !important; }
+  @media (max-width: 1000px) {
+    .case-rij { grid-template-columns: 200px minmax(0, 1fr); }
+    .cr-resultaat { grid-column: 2; border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 14px; }
+  }
+  @media (max-width: 720px) {
+    .case-uitgelicht { grid-template-columns: minmax(0, 1fr); padding: 22px; }
+    .case-rij { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 22px; }
+    .cr-resultaat { grid-column: auto; }
+    .cr-kop h3 { margin-bottom: 8px; }
+  }
   .volgt { margin-top: 16px; }
-  .reeks { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 4px; }
-  .reeks th, .reeks td { text-align: left; padding: 4px 0; border-bottom: 1px solid var(--line); }
-  .reeks td:last-child, .reeks th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
-  .bron { margin-top: auto !important; padding-top: 6px; }
   .onder { margin-top: 56px; }
   .namen { list-style: none; padding: 0; margin: 8px 0 24px; display: flex; flex-wrap: wrap; gap: 10px; }
   .namen li { margin: 0; padding: 12px 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; font-weight: 800; font-size: 1.1rem; color: var(--navy); }
