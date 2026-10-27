@@ -4,7 +4,7 @@ beschrijving: "Tot en met 26 oktober 202 klikken uit Google, tegen 54 in heel se
 maand: "2026-10"
 datum: 2026-10-27
 verkeer: 202
-zoekwoorden: 2830
+zoekwoorden: 2832
 top10: 607
 ---
 
@@ -18,7 +18,7 @@ Het verschil zit vooral in de laatste week. Tot en met 19 oktober kwamen er 39 k
 
 Rond die dagen ging de nieuwe site online. Ook het aantal keer dat we in Google in beeld kwamen, schoot omhoog. Half oktober was dat zo'n 3.000 keer per dag. Vanaf 21 oktober lag het elke dag rond de 16.000. Google heeft de nieuwe pagina's dus snel opgepikt.
 
-Voor de zoekwoorden staan hier nog de getallen van de nulmeting: 2.830 in de top 100 en 607 in de top 10. Die meten we opnieuw voor de volledige cijfers van oktober.
+In SE Ranking is nog weinig veranderd. De site staat op 2.832 zoekwoorden in de top 100, waarvan 607 in de top 10. Dat is bijna gelijk aan de nulmeting. SE Ranking schat posities op basis van zijn eigen metingen, en die lopen vaak achter op wat Google echt laat zien. Search Console laat de verandering nu al zien. In SE Ranking verwachten we die later pas terug te zien.
 
 ## Waar de klikken vandaan komen
 
@@ -48,4 +48,4 @@ Aanvragen tellen we zelf. Dat getal zetten we hier neer zodra oktober voorbij is
 
 ## Volgende keer
 
-Begin november zetten we hier de volledige cijfers van oktober neer, met nieuwe metingen uit SE Ranking. Benieuwd hoe jouw site ervoor staat? Laat hem dan [gratis nakijken](/gratis-website-analyse/).
+Begin november zetten we hier de volledige cijfers van oktober neer, met een nieuwe meting uit SE Ranking. Benieuwd hoe jouw site ervoor staat? Laat hem dan [gratis nakijken](/gratis-website-analyse/).
