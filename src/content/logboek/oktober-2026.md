@@ -19,7 +19,9 @@ Het verschil zit vooral in de laatste week. Tot en met 19 oktober kwamen er 39 k
 
 Rond die dagen ging de nieuwe site online. Ook het aantal keer dat we in Google in beeld kwamen, schoot omhoog. Half oktober was dat zo'n 3.000 keer per dag. Vanaf 21 oktober lag het elke dag rond de 16.000. Google heeft de nieuwe pagina's dus snel opgepikt.
 
-In SE Ranking is nog weinig veranderd. De site staat op 2.832 zoekwoorden in de top 100, waarvan 607 in de top 10. Dat is bijna gelijk aan de nulmeting. SE Ranking schat posities op basis van zijn eigen metingen, en die lopen vaak achter op wat Google echt laat zien. Search Console laat de verandering nu al zien. In SE Ranking verwachten we die later pas terug te zien.
+In onze eigen rankingtracker zie je de verandering wel. Daar volgen we elke dag 197 zoekwoorden die bij onze diensten en gidsen horen. Op 18 oktober stonden er daarvan 16 in de top 10. Op 27 oktober waren dat er 44. Bijna drie keer zoveel. In de top 30 ging het van 27 naar 81 zoekwoorden. Het aantal zoekwoorden waarop we nog niet in de top 100 stonden, daalde van 159 naar 73. Vooral de pagina's voor Noord-Nederland stegen snel: gemiddeld van plek 97 naar plek 36.
+
+De grote database van SE Ranking loopt achter. Die schat de posities van een hele site maar af en toe opnieuw. Daar staat de site nog op 2.832 zoekwoorden in de top 100, waarvan 607 in de top 10, bijna gelijk aan de nulmeting. Die getallen houden we aan om maanden te vergelijken, maar de stijging zie je daar pas later.
 
 ## Waar de klikken vandaan komen
 
