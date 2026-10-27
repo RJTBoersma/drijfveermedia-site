@@ -1,0 +1,11 @@
+---
+// Scène voor /logboek/oktober-2026/: klikken uit Google (Search Console) per maand, met oktober tot nu toe.
+import { getEntry } from 'astro:content';
+import Groeilijn from '../beeld/Groeilijn.astro';
+interface Props { mini?: boolean }
+const { mini = false } = Astro.props;
+const nul = await getEntry('logboek', 'nulmeting-oktober-2026');
+const e = await getEntry('logboek', 'oktober-2026');
+const punten = [...((nul?.data.historie ?? []) as [string, number][]), ['2026-10', e?.data.verkeer ?? 0]].slice(-16) as [string, number][];
+---
+<Groeilijn punten={punten} mini={mini} id={mini ? 'oktober-2026-mini' : 'oktober-2026'} label="Klikken uit Google per maand volgens Search Console, juli 2025 tot en met 26 oktober 2026" />
