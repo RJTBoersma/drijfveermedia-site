@@ -1,11 +1,12 @@
 ---
 titel: "Oktober 2026: nieuwe site online, klikken stijgen"
-beschrijving: "Tot en met 26 oktober 202 klikken uit Google, tegen 54 in heel september. De inhaakkalender doet het meeste werk. Aanvragen blijven nog uit."
+beschrijving: "Tot en met 26 oktober 202 klikken uit Google, tegen 54 in heel september. De inhaakkalender doet het meeste werk. Aanvragen: nog nul."
 maand: "2026-10"
 datum: 2026-10-27
 verkeer: 202
 zoekwoorden: 2832
 top10: 607
+aanvragen: 0
 ---
 
 Dit is de eerste maand na de nulmeting. De maand is nog niet voorbij, dus dit is de stand tot nu toe: de cijfers tot en met 26 oktober.
@@ -38,7 +39,7 @@ Analytics telt alleen bezoekers die toestemming gaven voor cookies. Die getallen
 
 ## Aanvragen
 
-Aanvragen tellen we zelf. Dat getal zetten we hier neer zodra oktober voorbij is. Wel is duidelijk waar de klikken nu vandaan komen. De klikken van nu komen vooral van mensen die een kalender zoeken. Dat zijn waarschijnlijk marketeers en ondernemers die zelf hun posts plannen. Ze zoeken een lijst, geen bureau. Toch zijn het mensen die later best hulp kunnen zoeken, dus het is goed dat ze ons nu leren kennen.
+Via de site kwamen er in oktober tot nu toe nul aanvragen binnen. Meer bezoekers betekent dus nog geen nieuwe klanten. Dat komt waarschijnlijk doordat de klikken vooral komen van mensen die een kalender zoeken. Vaak zijn dat marketeers en ondernemers die zelf hun posts plannen. Ze zoeken een lijst, geen bureau. Toch zijn het mensen die later best hulp kunnen zoeken, dus het is goed dat ze ons nu leren kennen.
 
 ## Waar we op letten
 
