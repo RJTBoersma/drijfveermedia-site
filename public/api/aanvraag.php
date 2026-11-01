@@ -18,6 +18,31 @@ function veld(string $naam, int $max = 500): string {
     return mb_substr($waarde, 0, $max);
 }
 
+// Telefoonnummer controleren. Dezelfde regels staan in src/data/telefoon.ts (nummerOk), die het formulier in de browser gebruikt.
+function nummer_ok(string $invoer): bool {
+    $ruw = trim($invoer);
+    if (!preg_match('~^\+?[0-9\s\-.()/]+$~', $ruw)) return false;
+    $cijfers = preg_replace('~\D~', '', $ruw);
+    $buitenland = false;
+    if (str_starts_with($ruw, '+')) { $buitenland = true; }
+    elseif (str_starts_with($cijfers, '00')) { $buitenland = true; $cijfers = substr($cijfers, 2); }
+    if ($buitenland && str_starts_with($cijfers, '31')) {
+        $nummer = '0' . preg_replace('~^0~', '', substr($cijfers, 2));
+    } elseif ($buitenland) {
+        if (!preg_match('~^[1-9][0-9]{7,14}$~', $cijfers)) return false;
+        return !lijkt_nep(substr($cijfers, -8));
+    } else {
+        $nummer = $cijfers;
+    }
+    if (!preg_match('~^0[1-9][0-9]{8}$~', $nummer)) return false;
+    return !lijkt_nep(str_starts_with($nummer, '06') ? substr($nummer, 2) : substr($nummer, -7));
+}
+
+function lijkt_nep(string $deel): bool {
+    if (preg_match('~(\d)\1{6,}~', $deel)) return true;
+    return str_contains('01234567890123456789', $deel) || str_contains('98765432109876543210', $deel);
+}
+
 // Elke inzending ook bewaren (api/data is afgeschermd), zodat er nooit een aanvraag stil verdwijnt.
 function bewaar(string $bestand, array $gegevens): void {
     $map = __DIR__ . '/data';
@@ -52,8 +77,10 @@ function soort_sleutel(string $soort): string {
 $honing = veld('hp_veld_x') . veld('website_extra');
 $duur   = (int)($_POST['t'] ?? -1);
 $teSnel = $duur >= 0 && $duur < 1500;
-if ($honing !== '' || $teSnel) {
-    $verdacht = ['reden' => $honing !== '' ? 'lokveld' : 'te snel (' . $duur . ' ms)', 'naam' => veld('naam', 120), 'telefoon' => veld('telefoon', 40), 'email' => veld('email', 160), 'pagina' => veld('pagina', 200)];
+// Een ingevuld telefoonnummer moet kloppen. Het formulier controleert dat al in de browser; wat hier toch fout binnenkomt, is bijna altijd spam.
+$nepNummer = veld('telefoon', 40) !== '' && !nummer_ok(veld('telefoon', 40));
+if ($honing !== '' || $teSnel || $nepNummer) {
+    $verdacht = ['reden' => $honing !== '' ? 'lokveld' : ($teSnel ? 'te snel (' . $duur . ' ms)' : 'telefoonnummer klopt niet'), 'naam' => veld('naam', 120), 'telefoon' => veld('telefoon', 40), 'email' => veld('email', 160), 'pagina' => veld('pagina', 200)];
     bewaar('afgewezen', $verdacht);
     // Toch even laten weten, met een herkenbaar onderwerp: zo zie je het als er een echte klant tussen zit.
     $tekst = [];

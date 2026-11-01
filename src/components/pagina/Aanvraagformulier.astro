@@ -31,8 +31,8 @@ const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
     </div>
     <div class="veld">
       <label for={`${id}-tel`}>Je telefoonnummer <span class="muted" data-tel-optioneel hidden>(niet verplicht)</span></label>
-      <input id={`${id}-tel`} name="telefoon" type="tel" autocomplete="tel" inputmode="tel" required pattern="^\s*(\+|00)?[0-9][0-9\s\-()]{8,16}\s*$" aria-describedby={`${id}-tel-fout`} data-tel />
-      <p class="fout-tekst" id={`${id}-tel-fout`} hidden>Controleer je nummer, bijvoorbeeld 06 12 34 56 78 of 0592 123 456. We bellen je hierop terug.</p>
+      <input id={`${id}-tel`} name="telefoon" type="tel" autocomplete="tel" inputmode="tel" required pattern="\s*\+?[0-9\s\-.\(\)\/]{9,22}\s*" aria-describedby={`${id}-tel-fout`} data-tel />
+      <p class="fout-tekst" id={`${id}-tel-fout`} hidden>Controleer je nummer. Een Nederlands nummer heeft 10 cijfers, zoals 06 en dan 8 cijfers. We bellen je hierop terug.</p>
     </div>
   </div>
   {mailKeuze && (
@@ -82,6 +82,7 @@ const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
 </form>
 <script>
   import { bereikbaarheid } from '../../data/kantoortijd';
+  import { nummerOk } from '../../data/telefoon';
   const start = performance.now();
   const q = new URLSearchParams(location.search);
   const soorten = ['Consult', 'Training', 'Second opinion', 'Website-prijs', 'Ads-check', 'Kaart-check', 'Interim-marketeer', 'Uitslag tool'];
@@ -121,6 +122,8 @@ const id = soort.toLowerCase().replace(/[^a-z]+/g, '-');
 
     // Eigen, Nederlandse foutmeldingen onder het veld
     const controleer = (i: HTMLInputElement) => {
+      // Telefoonnummer: ook nepnummers als 0612345678 tegenhouden (zelfde regels als op de server)
+      if (i === tel) tel.setCustomValidity(tel.value.trim() && !nummerOk(tel.value) ? 'Controleer je nummer' : '');
       const fout = document.getElementById(i.getAttribute('aria-describedby') || '');
       const goed = i.disabled || i.checkValidity();
       i.setAttribute('aria-invalid', String(!goed));
