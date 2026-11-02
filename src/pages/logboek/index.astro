@@ -44,7 +44,7 @@ const schema = [{
       {items.map((i) => (
         <a class="card" href={`/logboek/${i.id}/`}>
           <Plaatje href={`/logboek/${i.id}/`} onderwerp="grafiek" />
-          <span class="kicker">{maandNaam(i.data.maand)}</span>
+          <span class="kicker">{i.data.periode ?? maandNaam(i.data.maand)}</span>
           <h3>{i.data.titel}</h3>
           <p>{i.data.verkeer.toLocaleString('nl-NL')} klikken uit Google, {i.data.top10.toLocaleString('nl-NL')} zoekwoorden in de top 10{i.data.aanvragen !== undefined ? `, ${i.data.aanvragen} aanvragen` : ''}.</p>
           <span class="meer">Lees de meting</span>

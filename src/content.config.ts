@@ -14,6 +14,7 @@ const logboek = defineCollection({
     zoekwoorden: z.number(), // zoekwoorden in de top 100
     top10: z.number(), // zoekwoorden in de top 10
     aanvragen: z.number().optional(), // aanvragen via de site in die maand
+    periode: z.string().optional(), // over welke periode de cijfers gaan, bijv. "1 tot en met 31 oktober 2026"
     domainTrust: z.number().optional(),
     // Eerdere maanden, alleen nodig in de nulmeting: [maand, verkeer]
     historie: z.array(z.tuple([z.string(), z.number()])).optional(),

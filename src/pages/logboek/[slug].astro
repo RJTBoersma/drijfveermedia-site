@@ -49,11 +49,12 @@ const andere = alle.filter((i) => i.id !== item.id).slice(-2).reverse();
       <p class="kicker">Logboek · {maandNaam}</p>
       <h1>{d.titel}</h1>
       <ul class="getallen">
-        <li class="card"><b>{fmt(d.verkeer)}</b><span>klikken uit Google per maand</span></li>
+        <li class="card"><b>{fmt(d.verkeer)}</b><span>klikken uit Google</span></li>
         <li class="card"><b>{fmt(d.top10)}</b><span>zoekwoorden in de top 10</span></li>
         <li class="card"><b>{fmt(d.zoekwoorden)}</b><span>zoekwoorden in de top 100</span></li>
         {d.aanvragen !== undefined && <li class="card"><b>{fmt(d.aanvragen)}</b><span>aanvragen via de site</span></li>}
       </ul>
+      {d.periode && <p class="periode">Periode: {d.periode}</p>}
     </div>
     <div style={`view-transition-name:${overgang(url)}`}>
       {Scene ? <Scene /> : <Groeilijn punten={punten} id={`logboek-${item.id}`} />}
@@ -75,6 +76,7 @@ const andere = alle.filter((i) => i.id !== item.id).slice(-2).reverse();
   .getallen { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .getallen li { padding: 14px 16px; }
   .getallen b { display: block; font-size: var(--step-2); line-height: 1.1; color: var(--ink); }
+  .periode { margin: 14px 0 0; color: var(--muted); font-size: 0.95rem; }
   .getallen span { font-size: 0.92rem; color: var(--muted); }
   @media (max-width: 900px) { .logboek-kop { grid-template-columns: minmax(0, 1fr); } }
 </style>

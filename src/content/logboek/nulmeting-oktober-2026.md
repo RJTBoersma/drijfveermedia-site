@@ -8,6 +8,7 @@ zoekwoorden: 2830
 top10: 607
 aanvragen: 0
 domainTrust: 49
+periode: "1 tot en met 30 september 2026"
 historie:
   - ["2025-07", 97]
   - ["2025-08", 84]

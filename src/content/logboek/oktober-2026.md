@@ -6,6 +6,8 @@ datum: 2026-11-02
 verkeer: 366
 zoekwoorden: 2852
 top10: 617
+aanvragen: 0
+periode: "1 tot en met 31 oktober 2026"
 ---
 
 Dit is de eerste volle maand na de nulmeting, en op 19 oktober ging halverwege die maand de nieuwe site online. Hieronder staan de cijfers van heel oktober.
@@ -44,7 +46,7 @@ Van de bezoekers die toestemming gaven, klikten er twee op ons telefoonnummer en
 
 ## Aanvragen
 
-Tot en met 27 oktober kwamen er via de site nul aanvragen binnen. Meer bezoekers betekent dus nog geen nieuwe klanten. Dat valt tegen. Het komt waarschijnlijk doordat de klikken vooral komen van mensen die een kalender zoeken. Vaak zijn dat marketeers en ondernemers die zelf hun posts plannen. Ze zoeken een lijst, geen bureau. Het zijn wel mensen die later hulp kunnen zoeken, dus het is goed dat ze ons nu leren kennen.
+In oktober kwamen er via de site nul aanvragen binnen. Meer bezoekers betekent dus nog geen nieuwe klanten. Dat valt tegen. Het komt waarschijnlijk doordat de klikken vooral komen van mensen die een kalender zoeken. Vaak zijn dat marketeers en ondernemers die zelf hun posts plannen. Ze zoeken een lijst, geen bureau. Het zijn wel mensen die later hulp kunnen zoeken, dus het is goed dat ze ons nu leren kennen.
 
 ## Waar we op letten
 
