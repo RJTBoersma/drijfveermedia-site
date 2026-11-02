@@ -1,54 +1,58 @@
 ---
-titel: "Oktober 2026: nieuwe site online, klikken stijgen"
-beschrijving: "Tot en met 26 oktober 202 klikken uit Google, tegen 54 in heel september. De inhaakkalender doet het meeste werk. Aanvragen: nog nul."
+titel: "Oktober 2026: bijna zeven keer zoveel klikken uit Google"
+beschrijving: "In oktober 366 klikken uit Google, tegen 54 in september. De inhaakkalender deed het meeste werk. Op de zoektermen voor klanten staan we nog te laag."
 maand: "2026-10"
-datum: 2026-10-27
-verkeer: 202
-zoekwoorden: 2832
-top10: 607
-aanvragen: 0
+datum: 2026-11-02
+verkeer: 366
+zoekwoorden: 2852
+top10: 617
 ---
 
-Dit is de eerste maand na de nulmeting. De maand is nog niet voorbij, dus dit is de stand tot nu toe: de cijfers tot en met 26 oktober.
+Dit is de eerste volle maand na de nulmeting, en op 19 oktober ging halverwege die maand de nieuwe site online. Hieronder staan de cijfers van heel oktober.
 
 ## De cijfers
 
-In de eerste 26 dagen van oktober klikten 202 mensen vanuit Google door naar drijfveermedia.nl. In heel september waren het er 54. We zitten dus nu al op bijna vier keer zoveel, met nog vijf dagen te gaan.
+In oktober klikten 366 mensen vanuit Google door naar drijfveermedia.nl. In september waren het er 54. Bijna zeven keer zoveel. Het grootste deel van die klikken kwam na de lancering. Op de drukste dag, 27 oktober, waren het er 48.
 
-Het verschil zit vooral in de laatste week. Tot en met 19 oktober kwamen er 39 klikken binnen. Van 20 tot en met 26 oktober waren het er 163, met uitschieters van 31 en 36 op één dag.
+Ook het aantal keer dat we in Google in beeld kwamen, schoot omhoog. In september was dat 67.000 keer, in oktober 255.000 keer. Half oktober kwamen we zo'n 3.000 keer per dag in beeld. In de laatste tien dagen van oktober was dat elke dag tussen de 15.000 en 24.000 keer. Google pikte de nieuwe pagina's dus snel op.
 
-Rond die dagen ging de nieuwe site online. Ook het aantal keer dat we in Google in beeld kwamen, schoot omhoog. Half oktober was dat zo'n 3.000 keer per dag. Vanaf 21 oktober lag het elke dag rond de 16.000. Google heeft de nieuwe pagina's dus snel opgepikt.
+Op werkdagen kwamen er duidelijk meer klikken binnen dan in het weekend. Op zaterdag 24 en zondag 25 oktober waren het er 11 en 10. Van maandag tot en met donderdag in de week daarna steeds tussen de 38 en 48.
 
-In onze eigen rankingtracker zie je de verandering wel. Daar volgen we elke dag 197 zoekwoorden die bij onze diensten en gidsen horen. Op 18 oktober stonden er daarvan 16 in de top 10. Op 27 oktober waren dat er 44. Bijna drie keer zoveel. In de top 30 ging het van 27 naar 81 zoekwoorden. Het aantal zoekwoorden waarop we nog niet in de top 100 stonden, daalde van 159 naar 73. Vooral de pagina's voor Noord-Nederland stegen snel: gemiddeld van plek 97 naar plek 36.
-
-De grote database van SE Ranking loopt achter. Die schat de posities van een hele site maar af en toe opnieuw. Daar staat de site nog op 2.832 zoekwoorden in de top 100, waarvan 607 in de top 10, bijna gelijk aan de nulmeting. Die getallen houden we aan om maanden te vergelijken, maar de stijging zie je daar pas later.
+Volgens SE Ranking staat de site nu op 2.852 zoekwoorden in de top 100, waarvan 617 in de top 10. Bij de nulmeting waren dat er 2.830 en 607. Die database loopt achter: hij schat de posities van een hele site maar af en toe opnieuw. In onze eigen rankingtracker zagen we de stijging eerder. Daar volgen we 197 zoekwoorden die bij onze diensten en gidsen horen. Op 18 oktober stonden er 16 in de top 10, op 27 oktober 44.
 
 ## Waar de klikken vandaan komen
 
-Eén pagina doet het meeste werk: de inhaakkalender. Die kreeg 118 van de 202 klikken. Mensen zoeken nu al naar "inhaakkalender 2027" om volgend jaar te plannen. Op die zoekterm staan we gemiddeld op plek 2, en ruim vier op de tien mensen die ons daar zien, klikken door. Ook "inhaak kalender 2027", "inhakers 2027" en "themadagen 2027" leveren klikken op.
+Eén pagina doet het meeste werk: de inhaakkalender. Die kreeg 230 van de 366 klikken. Mensen zoeken nu al naar "inhaakkalender 2027" om volgend jaar te plannen, en alleen die zoekterm leverde al 140 klikken op. Dat is veel. We staan daar gemiddeld op plek 2, en ruim vier op de tien mensen die ons zien, klikken door. Ook "inhaak kalender 2027", "inhakers 2027" en "inhaakdagen 2027" brengen bezoekers.
 
-Daarna volgt het lang niets. De gids over de AI-modus van Google kwam bijna 13.000 keer in beeld, maar kreeg 9 klikken. Het oude stuk over semantisch zoeken kreeg er ook 9. De homepage kwam ruim 12.000 keer in beeld en kreeg 7 klikken. Hij staat gemiddeld op plek 62, dus vooral op pagina's waar bijna niemand komt.
+De gids over de AI-modus van Google kwam bijna 23.000 keer in beeld, vaker dan elke andere pagina. Hij staat gemiddeld op plek 7, maar kreeg maar 14 klikken. Wie "ai modus" zoekt, wil waarschijnlijk vooral weten wat het is, en daar geeft Google zelf al antwoord op. De gids over Claude Code kreeg 8 klikken, ook vanaf plek 8.
+
+De gids over wat een website kost, kwam ruim 17.000 keer in beeld en kreeg 6 klikken. Hij staat gemiddeld op plek 16, dus op de tweede pagina van Google. Dat is een van de pagina's waar we op letten: wie zoekt wat een website kost, is vaak al bijna klant.
+
+De homepage kwam ook zo'n 17.000 keer in beeld, met 9 klikken. Hij staat gemiddeld op plek 62. Op de zoekterm "drijfveer media" staan we bovenaan.
 
 ## Gezien, maar nog niet gekozen
 
-Op de zoektermen waar we klanten mee willen vinden, komen we wel in beeld. Op "seo" bijna 2.800 keer, op "online marketing uitbesteden" ruim 2.600 keer. Klikken leverde dat nog niet op. We staan daar rond plek 29, op de derde pagina van Google.
+Op de zoektermen waar we klanten mee willen vinden, komen we wel in beeld. Zoektermen met "uitbesteden" erin, zoals "online marketing uitbesteden" en "seo uitbesteden", kwamen samen zo'n 8.800 keer in beeld. Klikken? Nul. Gemiddeld staan we daar op plek 40. Op "online marketing uitbesteden" staan we rond plek 33, op de vierde pagina van Google.
 
-Dat is normaal voor een site die net vernieuwd is. Google moet de nieuwe dienstpagina's eerst leren kennen. Het eerste teken is er wel: iemand vond ons via "website laten maken drachten".
+Dat is normaal. Een nieuwe pagina heeft vaak een paar weken nodig voordat Google hem een vaste plek geeft. Google laat ook nog oude adressen van de vorige site zien. Die sturen bezoekers door naar de nieuwe pagina's, maar het duurt even voordat Google alles heeft omgezet.
 
 ## Wat Google Analytics liet zien
 
-Analytics telt alleen bezoekers die toestemming gaven voor cookies. Die getallen zijn dus lager dan het echte aantal. In oktober kwamen er tot nu toe 304 bezoeken binnen. Daarvan kwamen er 118 via zoekmachines. Wie via Google kwam, bleef gemiddeld 50 seconden. Een bezoek dat direct binnenkwam, duurde gemiddeld 10 seconden. Er kwam één bezoek via een AI-assistent.
+Analytics telt alleen bezoekers die toestemming gaven voor cookies, dus de getallen hieronder zijn lager dan het echte aantal bezoekers dat langskwam. In oktober kwamen er 385 bezoeken binnen. Daarvan kwamen er 191 via zoekmachines. Wie via een zoekmachine kwam, bleef gemiddeld 46 seconden actief. Een bezoek dat direct binnenkwam, duurde gemiddeld 11 seconden. Er kwam één bezoek via een AI-assistent. Die bleef twee minuten.
+
+Van de bezoekers die toestemming gaven, klikten er twee op ons telefoonnummer en één op ons mailadres. Drie bezoekers gebruikten samen twintig keer een van onze online tools. Via het formulier kwam er bij deze groep geen aanvraag binnen.
 
 ## Aanvragen
 
-Via de site kwamen er in oktober tot nu toe nul aanvragen binnen. Meer bezoekers betekent dus nog geen nieuwe klanten. Dat komt waarschijnlijk doordat de klikken vooral komen van mensen die een kalender zoeken. Vaak zijn dat marketeers en ondernemers die zelf hun posts plannen. Ze zoeken een lijst, geen bureau. Toch zijn het mensen die later best hulp kunnen zoeken, dus het is goed dat ze ons nu leren kennen.
+Tot en met 27 oktober kwamen er via de site nul aanvragen binnen. Meer bezoekers betekent dus nog geen nieuwe klanten. Dat valt tegen. Het komt waarschijnlijk doordat de klikken vooral komen van mensen die een kalender zoeken. Vaak zijn dat marketeers en ondernemers die zelf hun posts plannen. Ze zoeken een lijst, geen bureau. Het zijn wel mensen die later hulp kunnen zoeken, dus het is goed dat ze ons nu leren kennen.
 
 ## Waar we op letten
 
-- Stijgen de dienstpagina's? Een nieuwe pagina heeft vaak een paar weken nodig voordat Google hem een vaste plek geeft.
-- Komen we op zoektermen als "seo" en "online marketing uitbesteden" van de derde pagina naar de eerste?
+- Stijgen de dienstpagina's? Op "online marketing uitbesteden" willen we van de vierde pagina naar de eerste.
+- Komt de gids over wat een website kost van plek 16 op de eerste pagina?
 - Blijft de inhaakkalender trekken, nu het einde van het jaar dichterbij komt?
+- Leveren de extra bezoekers ook telefoontjes en aanvragen op?
 
 ## Volgende keer
 
-Begin november zetten we hier de volledige cijfers van oktober neer, met een nieuwe meting uit SE Ranking. Benieuwd hoe jouw site ervoor staat? Laat hem dan [gratis nakijken](/gratis-website-analyse/).
+In november houden we hier elke week bij hoe het gaat. Benieuwd hoe jouw site ervoor staat? Laat hem dan [gratis nakijken](/gratis-website-analyse/).
