@@ -1,0 +1,242 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Hero from '../../../../components/pagina/Hero.astro';
+import Bewijs from '../../../../components/pagina/Bewijs.astro';
+import Faq from '../../../../components/pagina/Faq.astro';
+import Actie from '../../../../components/pagina/Actie.astro';
+import Inhoud from '../../../../components/pagina/Inhoud.astro';
+import Auteur from '../../../../components/pagina/Auteur.astro';
+import Verder from '../../../../components/pagina/Verder.astro';
+import Tekening from '../../../../components/teken/Tekening.astro';
+import Tussenactie from '../../../../components/pagina/Tussenactie.astro';
+import MarketingbudgetRekenhulp from '../../../../components/tool/MarketingbudgetRekenhulp.astro';
+import Scene from '../../../../components/scenes/kennisbank--gidsen--marketingbudget.astro';
+import { site, persoon } from '../../../../data/site';
+
+const url = '/kennisbank/gidsen/marketingbudget/';
+const datum = '2026-11-02';
+const bronnen = [
+  'https://www.gartner.com/en/newsroom/press-releases/2026-05-11-gartner-2026-cmo-spend-survey-finds-cmos-allocate-15-point-3-percent-of-marketing-budgets-to-ai-but-only-30-percent-are-ready-to-scale-ai-capabilities',
+  'https://support.google.com/google-ads/answer/2375423?hl=nl',
+  'https://www.kvk.nl/marketing/klanten-werven-dankzij-je-marketingplan/',
+];
+const hoofdstukken = [
+  { id: 'wat', titel: 'Wat valt eronder?' },
+  { id: 'procent', titel: 'Een percentage van je omzet' },
+  { id: 'terugrekenen', titel: 'Terugrekenen vanaf je klant' },
+  { id: 'rekenhulp', titel: 'Rekenhulp' },
+  { id: 'fase', titel: 'Per fase van je bedrijf' },
+  { id: 'verdelen', titel: 'Zo verdeel je het' },
+  { id: 'kosten', titel: 'Wat kost wat?' },
+  { id: 'begroting', titel: 'Je begroting voor 2027' },
+  { id: 'fouten', titel: 'Veelgemaakte fouten' },
+  { id: 'uitbesteden', titel: 'Zelf doen of uitbesteden?' },
+];
+const schema = [{
+  '@type': 'Article',
+  headline: 'Marketingbudget bepalen: hoeveel geef je uit aan marketing?',
+  datePublished: datum,
+  dateModified: datum,
+  author: { '@type': 'Person', name: persoon('robert').naam, jobTitle: persoon('robert').rol, url: `${site.url}/over-ons/` },
+  publisher: { '@id': `${site.url}/#organisatie` },
+  mainEntityOfPage: `${site.url}${url}`,
+  inLanguage: 'nl-NL',
+  about: 'Marketingbudget',
+  citation: bronnen,
+}];
+---
+<Base
+  title="Marketingbudget bepalen: rekenhulp en vuistregels"
+  description="Hoeveel marketingbudget heb je nodig? Reken het uit vanaf wat een klant oplevert, zie de vuistregels en verdeel je begroting voor 2027 over de kwartalen."
+  kruimels={[{ naam: 'Kennisbank', url: '/kennisbank/' }, { naam: 'Gidsen', url: '/kennisbank/gidsen/' }, { naam: 'Marketingbudget', url }]}
+  schema={schema}
+  ogType="article"
+>
+  <Hero kicker="Gids · Online marketing uitbesteden" titel="Marketingbudget bepalen: hoeveel geef je uit aan marketing?" knop={{ tekst: 'Vraag een gratis scan aan', href: '/gratis-website-analyse/' }}>
+    <p>Je marketingbudget bepaal je het best door terug te rekenen vanaf wat een klant je oplevert. Een percentage van je omzet is een handige controle, maar geen plan. Hieronder lees je hoe je het uitrekent, hoe je het verdeelt en hoe je in een middag je begroting voor 2027 maakt.</p>
+    <Scene slot="beeld" />
+  </Hero>
+
+  <section class="wrap sectie" data-aida="interest">
+    <div class="met-zijkolom">
+      <article class="tekst">
+        <Auteur slug="robert" datum={datum} />
+        <div class="kader kader-oranje in-het-kort">
+          <p class="kader-titel">In het kort</p>
+          <ul>
+            <li>Een veelgebruikte vuistregel is 5 tot 10 procent van je omzet. Grote bedrijven zaten in 2026 gemiddeld op 7,8 procent.</li>
+            <li>Beter: bepaal wat een nieuwe klant mag kosten en reken van daaruit je budget per maand uit.</li>
+            <li>Tel alles mee: advertenties, bureau of freelancer, tools en je eigen uren.</li>
+            <li>Houd een deel apart om te testen, en stop met wat na drie maanden niets oplevert.</li>
+          </ul>
+        </div>
+
+        <h2 id="wat">Wat valt onder je marketingbudget?</h2>
+        <p>Je marketingbudget is het geld dat je in een jaar uitgeeft om klanten te vinden en te houden. Veel ondernemers tellen alleen de advertenties. Dan lijkt marketing goedkoper dan het is, en kun je nooit zien wat een klant je echt kost.</p>
+        <p>Deze posten horen erin:</p>
+        <ul>
+          <li><b>Advertentiebudget.</b> Wat je aan Google, sociale media of een vakblad betaalt voor plaatsing.</li>
+          <li><b>Werk van anderen.</b> Een bureau, een freelancer of een tekstschrijver.</li>
+          <li><b>Vaste kosten.</b> Onderhoud van je website, tools voor je nieuwsbrief of planning, je domeinnaam.</li>
+          <li><b>Eenmalige uitgaven.</b> Een nieuwe website, een logo, drukwerk of een beursstand. Spreid ze over de jaren dat je ze gebruikt.</li>
+          <li><b>Eigen uren.</b> De tijd die jij of een collega aan marketing besteedt. Reken die tegen een eerlijk uurtarief.</li>
+        </ul>
+        <p>Die laatste post vergeten de meeste mensen. Toch kost een middag per week aan je eigen website schrijven ook geld. KVK noemt in een artikel over het marketingplan minstens vier uur per week als richtlijn voor wie zelf zijn marketing doet. Vier uur per week is ruim tweehonderd uur per jaar. Tegen € 60 per uur is dat al ruim € 12.000.</p>
+
+        <h2 id="procent">Marketingbudget als percentage van je omzet</h2>
+        <p>De bekendste vuistregel: besteed 5 tot 10 procent van je omzet aan marketing. Je leest hem op veel plekken, met steeds iets andere getallen. Een officiële norm voor Nederland bestaat er niet.</p>
+        <p>Wat wel gemeten wordt, is wat grote bedrijven uitgeven. Gartner vraagt elk jaar honderden marketingdirecteuren naar hun budget. In het onderzoek van 2026 deden 401 marketingleiders uit Noord-Amerika en Europa mee. Hun marketingbudget kwam gemiddeld uit op 7,8 procent van de omzet, tegen 7,7 procent in 2025. Let op: de meeste van die bedrijven hebben meer dan een miljard dollar omzet. Voor een installateur met acht man personeel is dat een ander verhaal.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Jaaromzet</th><th>5 procent</th><th>7,8 procent</th><th>10 procent</th></tr></thead>
+            <tbody>
+              <tr><td>€ 150.000</td><td>€ 7.500 (€ 625 per maand)</td><td>€ 11.700 (€ 975 per maand)</td><td>€ 15.000 (€ 1.250 per maand)</td></tr>
+              <tr><td>€ 400.000</td><td>€ 20.000 (€ 1.667 per maand)</td><td>€ 31.200 (€ 2.600 per maand)</td><td>€ 40.000 (€ 3.333 per maand)</td></tr>
+              <tr><td>€ 1.000.000</td><td>€ 50.000 (€ 4.167 per maand)</td><td>€ 78.000 (€ 6.500 per maand)</td><td>€ 100.000 (€ 8.333 per maand)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een percentage is handig als controle achteraf. Zit je ver onder de 3 procent, dan groei je vooral via via. Prima, zolang dat werkt. Zit je boven de 15 procent, dan moet je zeker weten dat het geld terugkomt.</p>
+        <p>Als startpunt deugt het percentage minder. Het gaat uit van je omzet van vorig jaar, en niet van wat je wilt bereiken. Een bedrijf met dikke marges kan veel meer per klant betalen dan een bedrijf dat op elke euro let. En een starter heeft nog geen omzet om een percentage van te nemen.</p>
+
+        <h2 id="terugrekenen">Terugrekenen vanaf je klant</h2>
+        <p>Daarom rekenen wij liever andersom. Begin bij de klant: wat levert hij op, en hoeveel mag het kosten om hem binnen te halen? Dat zijn vier vragen.</p>
+
+        <div class="stap-kop"><Tekening naam="munten" maat={48} /><h3>1. Wat levert een nieuwe klant op?</h3></div>
+        <p>Neem de brutowinst: de omzet van een gemiddelde opdracht min de inkoop en de directe kosten. Komt een klant vaker terug, tel dan de winst over de eerste één of twee jaar mee. Een kapper verdient zijn klant pas terug na een paar bezoeken, een dakdekker vaak in één klus.</p>
+
+        <div class="stap-kop"><Tekening naam="doel" maat={48} /><h3>2. Welk deel mag naar marketing?</h3></div>
+        <p>Spreek met jezelf af welk deel van die winst een nieuwe klant mag kosten. Veel ondernemers kiezen een kwart tot een derde. Is je capaciteit vol, dan houd je het lager. Wil je snel groeien in een nieuwe regio, dan mag het tijdelijk hoger. Dit getal heet ook wel je maximale kosten per klant.</p>
+
+        <div class="stap-kop"><Tekening naam="klik" maat={48} /><h3>3. Hoeveel aanvragen worden klant?</h3></div>
+        <p>Een deel van je aanvragen wordt nooit een opdracht. Kijk in je offertelijst: van de laatste twintig aanvragen, hoeveel werden klant? Is dat er één op de vier, dan mag een aanvraag een kwart kosten van wat een klant mag kosten. Dat getal, je kosten per aanvraag, kun je per kanaal meten.</p>
+
+        <div class="stap-kop"><Tekening naam="kalender" maat={48} /><h3>4. Hoeveel klanten wil je erbij?</h3></div>
+        <p>Vermenigvuldig wat een klant mag kosten met het aantal klanten dat je per maand erbij wilt. Dan heb je je budget per maand. Maal twaalf is je jaarbudget.</p>
+        <p>Een verzonnen voorbeeld. Een installatiebedrijf in Assen verdient gemiddeld € 750 brutowinst per opdracht. Een derde daarvan, € 250, mag naar marketing. Eén op de vier aanvragen wordt klant, dus een aanvraag mag € 62,50 kosten. De eigenaar wil zes klanten per maand erbij. Dan is zijn marketingbudget € 1.500 per maand, of € 18.000 per jaar. Bij een omzet van € 400.000 is dat 4,5 procent. Zo weet hij niet alleen hoeveel hij uitgeeft, maar ook waarom.</p>
+
+        <h2 id="rekenhulp">Rekenhulp: hoeveel marketingbudget heb je nodig?</h2>
+        <p>Vul je eigen getallen in. De rekenhulp rekent uit wat een klant en een aanvraag mogen kosten, en welk budget per maand daarbij hoort. Vul je je jaaromzet in, dan zie je ook welk percentage dat is.</p>
+        <MarketingbudgetRekenhulp />
+
+        <h2 id="fase">Je budget per fase van je bedrijf</h2>
+        <p>Een starter, een groeier en een bedrijf dat vol zit, hebben elk een ander budget nodig. Gebruik deze indeling als richting, niet als regel.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Fase</th><th>Waar het geld heen gaat</th><th>Waar je op let</th></tr></thead>
+            <tbody>
+              <tr><td><b>Starter</b></td><td>Een goede website, je Google Bedrijfsprofiel, de eerste reviews en een meting die klopt</td><td>Liever een paar honderd euro per maand goed besteed dan duizenden aan advertenties zonder meting</td></tr>
+              <tr><td><b>Groeier</b></td><td>Vindbaarheid in Google en Google Maps, advertenties waar het snel moet, content die vragen van klanten beantwoordt</td><td>Kosten per aanvraag per kanaal, en of je de aanvragen wel aankunt</td></tr>
+              <tr><td><b>Vol</b></td><td>Onderhoud van wat werkt, klanten houden, een nieuwsbrief, betere marges</td><td>Minder volume, meer de klanten en klussen die je het liefst hebt</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Een starter heeft vaak geen cijfers om mee te rekenen. Schat dan wat een klant oplevert, en zet een vast bedrag opzij voor de eerste zes maanden. Spreek vooraf af wanneer je kijkt of het werkt.</p>
+
+        <Tussenactie />
+        <h2 id="verdelen">Zo verdeel je je marketingbudget</h2>
+        <p>Heb je een bedrag, dan is de volgende vraag waar het heen gaat. Wij delen het meestal in drie potjes.</p>
+        <ul>
+          <li><b>Fundament, ongeveer 70 procent.</b> Wat elke maand doorloopt en zich bewezen heeft. Denk aan <a href="/zoekmachine-optimalisatie/">zoekmachineoptimalisatie</a>, je Bedrijfsprofiel, je website en de advertenties die aanvragen opleveren.</li>
+          <li><b>Uitbouwen, ongeveer 20 procent.</b> Meer van wat werkt: een extra plaats in je lokale SEO, een nieuwe dienstpagina, een tweede campagne.</li>
+          <li><b>Testen, ongeveer 10 procent.</b> Iets nieuws proberen, met een vaste einddatum. Werkt het, dan schuift het door naar uitbouwen.</li>
+        </ul>
+        <p>Die 70, 20 en 10 is een vuistregel die je in de marketing veel tegenkomt. De precieze getallen zijn minder belangrijk dan het idee: het grootste deel gaat naar wat zich al bewezen heeft, een klein deel naar proberen.</p>
+        <p>Let ook op het verschil tussen kanalen die snel werken en kanalen die langzaam opbouwen. Advertenties leveren aanvragen zolang je betaalt. Zet je ze uit, dan stopt het. SEO en content kosten eerst geld en tijd, en blijven daarna jaren werken. Een gezond budget heeft van allebei iets. Lees in de gids over <a href="/kennisbank/gidsen/wat-kost-seo/">wat SEO kost</a> hoe je dat afweegt.</p>
+
+        <h2 id="kosten">Wat kost wat?</h2>
+        <p>Om je budget te vullen, moet je weten wat de onderdelen kosten. Hieronder onze eigen vanaf-prijzen, exclusief btw. Andere bureaus rekenen andere bedragen, maar het geeft je een idee van de verhoudingen.</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Onderdeel</th><th>Vanaf</th><th>Soort kosten</th></tr></thead>
+            <tbody>
+              <tr><td><a href="/website-laten-maken/">Website laten maken</a></td><td>€ 250</td><td>Eenmalig, spreid over de jaren</td></tr>
+              <tr><td>Onderhoud WordPress</td><td>€ 39 per maand</td><td>Vaste kosten</td></tr>
+              <tr><td><a href="/lokale-seo/">Lokale SEO</a></td><td>€ 295 per maand</td><td>Fundament</td></tr>
+              <tr><td>SEO</td><td>€ 495 per maand</td><td>Fundament</td></tr>
+              <tr><td><a href="/online-adverteren/google-ads-bureau/">Beheer Google Ads</a></td><td>€ 249 per maand</td><td>Werk, het advertentiebudget komt erbij</td></tr>
+              <tr><td>Social media beheer</td><td>€ 395 per maand</td><td>Werk</td></tr>
+              <tr><td>Linkbuilding</td><td>€ 75 per uur</td><td>Uitbouwen</td></tr>
+              <tr><td>Online marketing in één hand</td><td>€ 595 per maand</td><td>Alles samen, maandelijks opzegbaar</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Bij Google Ads betaal je het advertentiebudget rechtstreeks aan Google. Je stelt een gemiddeld dagbudget in. Op een drukke dag kan Google tot twee keer dat bedrag uitgeven, maar over een maand betaal je nooit meer dan 30,4 keer je dagbudget. Een dagbudget van € 20 betekent dus hooguit zo'n € 608 per maand. Wat je per klik betaalt, lees je in de gids over <a href="/kennisbank/gidsen/wat-kost-google-ads/">wat Google Ads kost</a>.</p>
+
+        <h2 id="begroting">Je marketingbegroting voor 2027 in vijf stappen</h2>
+        <p>November en december zijn de maanden om je begroting voor volgend jaar te maken. Je weet hoe dit jaar liep, en januari is nog rustig genoeg om te beginnen. Zo pak je het aan.</p>
+        <ol>
+          <li><b>Kijk terug.</b> Zet op een rij wat je dit jaar uitgaf, per kanaal, en hoeveel aanvragen en klanten elk kanaal opleverde. Weet je dat niet, dan is meten je eerste klus voor 2027.</li>
+          <li><b>Kies je doel.</b> Hoeveel klanten wil je erbij, en welke? Eén getal is genoeg. In de gids over een <a href="/kennisbank/gidsen/marketingplan-maken/">marketingplan maken</a> lees je hoe je dat doel stelt.</li>
+          <li><b>Reken je budget uit.</b> Gebruik de rekenhulp hierboven. Leg de uitkomst naast je omzet als controle.</li>
+          <li><b>Verdeel over de kwartalen.</b> De ene maand is drukker dan de andere. Een installateur verkoopt in het najaar meer cv-onderhoud, een tuinbedrijf in het voorjaar. Zet je advertentiebudget in de maanden waarin je klant zoekt. Ook de momenten waarop je wilt inhaken, zoals feestdagen of een vakdag, zet je erin. De <a href="/kennisbank/gidsen/inhaakkalender/">inhaakkalender voor 2027</a> helpt je die dagen te vinden.</li>
+          <li><b>Plan je evaluatie.</b> Zet aan het eind van elk kwartaal een uur in je agenda. Kijk naar je kosten per aanvraag per kanaal, en schuif geld van wat niet werkt naar wat wel werkt.</li>
+        </ol>
+        <p>Een verzonnen voorbeeld van de verdeling, voor het installatiebedrijf van hierboven met € 18.000 per jaar:</p>
+        <div class="tabel-scroll">
+          <table>
+            <thead><tr><th>Kwartaal</th><th>Budget</th><th>Waar het heen gaat</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>€ 4.500</td><td>Meting op orde, nieuwe pagina's voor warmtepompen, start lokale SEO</td></tr>
+              <tr><td>2</td><td>€ 4.000</td><td>Lokale SEO, reviews vragen, kleine test met advertenties</td></tr>
+              <tr><td>3</td><td>€ 4.000</td><td>Lokale SEO, advertenties voor cv-onderhoud vanaf september</td></tr>
+              <tr><td>4</td><td>€ 5.500</td><td>Advertenties in het drukke seizoen, nieuwsbrief aan vaste klanten, begroting voor 2028</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="fouten">Veelgemaakte fouten</h2>
+        <ul>
+          <li><b>Alleen naar advertenties kijken.</b> Wie zijn eigen uren en vaste kosten niet meetelt, weet niet wat een klant kost.</li>
+          <li><b>Budget zonder doel.</b> "We doen € 1.000 per maand" zonder te weten wat het moet opleveren. Dan kun je ook niet zien of het werkt.</li>
+          <li><b>Te veel kanalen tegelijk.</b> Overal een beetje is nergens genoeg. Begin met twee kanalen en doe die goed.</li>
+          <li><b>Te snel stoppen met SEO.</b> Reken op drie tot zes maanden voor duidelijke stijgingen. Wie na zes weken stopt, betaalt de opbouw en mist de opbrengst.</li>
+          <li><b>Nooit iets schrappen.</b> Een advertentie die al een halfjaar niets oplevert, kost elke maand opnieuw geld. Bureaus adviseren te weinig om ergens mee te stoppen. Doe het zelf.</li>
+          <li><b>Zonder meting werken.</b> Zonder meting stuur je op gevoel. In de gids over <a href="/kennisbank/gidsen/google-analytics-4/">Google Analytics 4</a> lees je hoe je bijhoudt waar aanvragen vandaan komen.</li>
+        </ul>
+
+        <Tussenactie />
+        <h2 id="uitbesteden">Zelf doen of uitbesteden?</h2>
+        <p>Doe je het zelf, dan bestaat je budget vooral uit tijd. Dat kan prima, als je die tijd hebt en het leuk vindt. Merk je dat het werk blijft liggen, dan betaal je ook dat: in klanten die naar een concurrent gaan.</p>
+        <p>Als je je <a href="/online-marketing-uitbesteden/">online marketing uitbesteedt</a> bij ons, begint dat bij € 595 per maand en is het maandelijks opzegbaar. In het eerste gesprek vragen we door tot we weten wat je wilt bereiken, en rekenen we samen uit wat een klant mag kosten. Daarna spreken we doelen af waar je ons op kunt afrekenen. Elke maand krijg je één A4: wat we deden, wat het opleverde en wat we nu doen. Een losse begroting of een marketingplan op papier maken we niet. Wil je wel dat iemand kritisch naar je eigen begroting kijkt, boek dan een <a href="/consult/">consult</a> van € 85 per uur.</p>
+
+        <div class="kader klein" id="bronnen">
+          <p class="kader-titel">Bronnen</p>
+          <ul>
+            <li>Gartner: <a href={bronnen[0]} rel="noopener">CMO Spend Survey 2026</a>, gehouden van januari tot en met maart 2026 onder 401 marketingleiders.</li>
+            <li>Google Ads Help: <a href={bronnen[1]} rel="noopener">over overweergave en je gemiddelde dagbudget</a>.</li>
+            <li>KVK: <a href={bronnen[2]} rel="noopener">klanten werven dankzij je marketingplan</a>.</li>
+          </ul>
+        </div>
+      </article>
+      <aside class="zijkolom">
+        <Inhoud items={hoofdstukken} leestijd={10} />
+      </aside>
+    </div>
+  </section>
+
+  <Bewijs intro="Wat je bij ons krijgt als je je marketing uitbesteedt, en waarom je dat kunt vertrouwen." />
+
+  <Faq
+    vragen={[
+      { v: 'Hoeveel procent van de omzet gaat naar marketing?', a: 'Een veelgebruikte vuistregel is 5 tot 10 procent. Grote bedrijven besteedden in 2026 gemiddeld 7,8 procent, volgens onderzoek van Gartner. Voor een mkb-bedrijf is het beter om terug te rekenen vanaf wat een klant oplevert, en het percentage als controle te gebruiken.' },
+      { v: 'Hoe bereken ik mijn marketingbudget?', a: 'Neem de brutowinst van een nieuwe klant, bepaal welk deel daarvan naar marketing mag, en vermenigvuldig dat met het aantal klanten dat je per maand erbij wilt. Dan heb je je budget per maand. De rekenhulp op deze pagina doet het voor je.' },
+      { v: 'Wat is een goed marketingbudget voor een klein bedrijf?', a: 'Dat hangt af van je marges en je doel. Een starter kan met een paar honderd euro per maand een goede basis leggen: website, Google Bedrijfsprofiel en reviews. Wie snel wil groeien, heeft meer nodig.' },
+      { v: 'Tellen mijn eigen uren mee in het marketingbudget?', a: 'Ja. Tijd die je aan marketing besteedt, kun je niet aan klanten besteden. Reken je eigen uren tegen een uurtarief, dan zie je wat een klant je echt kost.' },
+      { v: 'Is het advertentiebudget voor Google Ads inclusief beheer?', a: 'Nee. Het advertentiebudget betaal je rechtstreeks aan Google. Bij ons komt het beheer daar los bij, vanaf € 249 per maand.' },
+      { v: 'Wanneer maak ik mijn marketingbegroting voor 2027?', a: 'In november of december. Dan weet je hoe dit jaar liep en kun je in januari beginnen. Kijk daarna elk kwartaal of je moet bijsturen.' },
+      { v: 'Hoe snel verdien ik mijn marketingbudget terug?', a: 'Advertenties leveren vaak in de eerste weken aanvragen op. Bij SEO reken je op drie tot zes maanden voor duidelijke stijgingen, daarna blijft het werken zonder dat je per klik betaalt.' },
+    ]}
+  />
+
+  <Verder
+    titel="Verder met je planning"
+    links={[
+      { label: 'Dienst', titel: 'Online marketing uitbesteden', href: '/online-marketing-uitbesteden/', tekst: 'Alles in één hand, vanaf € 595 per maand.' },
+      { label: 'Gids', titel: 'Marketingplan maken', href: '/kennisbank/gidsen/marketingplan-maken/', tekst: 'Je plan op één A4, met voorbeeld.' },
+      { label: 'Gids', titel: 'Inhaakkalender 2027', href: '/kennisbank/gidsen/inhaakkalender/', tekst: 'Alle dagen om op in te haken, per maand.' },
+    ]}
+  />
+
+  <Actie titel="Wil je weten waar jouw budget het meeste oplevert?" tekst={`Vraag de gratis scan aan. ${site.contactpersoon} kijkt naar je site en je concurrenten, en belt je met de eerste drie dingen die we zouden doen.`} />
+</Base>
