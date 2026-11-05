@@ -1,5 +1,5 @@
 ---
-// Toestemming voor Google Analytics 4 (G-C8JGHV3H2J) en de Google Ads-tag (conversiemeting). Zonder "Toestaan" laden we niets van Google.
+// Toestemming voor Google Analytics 4 (G-C8JGHV3H2J), de Google Ads-tag (conversiemeting) en Leadinfo (welke bedrijven de site bezoeken). Zonder "Toestaan" laden we niets van Google of Leadinfo.
 // Keuze staat in localStorage (dm-toestemming) en wordt na 12 maanden opnieuw gevraagd. Intrekken kan via "Cookie-instellingen" in de footer.
 // De tag laadt alleen op www.drijfveermedia.nl, dus niet in previews.
 ---
@@ -10,6 +10,7 @@
   window.dmAdsLaden = function () {
     if (window.__dmAds || location.hostname !== 'www.drijfveermedia.nl') return;
     window.__dmAds = true;
+    if (window.dmLeadinfoLaden) window.dmLeadinfoLaden();
     gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted', analytics_storage: 'granted' });
     var s = document.createElement('script');
     s.async = true;
@@ -34,7 +35,7 @@
   <div class="toestemming-binnen">
     <div>
       <p class="toestemming-kop" id="toestemming-kop">Mogen we meten hoe onze site werkt?</p>
-      <p class="toestemming-tekst">Met cookies van Google zien we welke pagina's goed werken en of een advertentie tot een aanvraag leidde. Persoonlijke advertenties staan uit. Weiger je, dan werkt de site precies hetzelfde. Meer in de <a href="/privacyverklaring/#cookies">privacyverklaring</a>.</p>
+      <p class="toestemming-tekst">Met cookies van Google en Leadinfo zien we welke pagina's goed werken, of een advertentie tot een aanvraag leidde en welke bedrijven onze site bezoeken. Persoonlijke advertenties staan uit. Weiger je, dan werkt de site precies hetzelfde. Meer in de <a href="/privacyverklaring/#cookies">privacyverklaring</a>.</p>
     </div>
     <div class="toestemming-knoppen">
       <button type="button" class="btn" data-keuze="ja">Toestaan</button>
@@ -62,8 +63,8 @@
     else {
       w.gtag?.('consent', 'update', { ad_storage: 'denied', ad_user_data: 'denied', analytics_storage: 'denied' });
       (window as unknown as { __dmAds?: boolean }).__dmAds = false;
-      // Eerder geplaatste cookies van Google Analytics en Google Ads op ons domein weghalen
-      document.cookie.split(';').map((c) => c.trim().split('=')[0]).filter((n) => /^_gcl|^_gac|^_ga|^_gid/.test(n)).forEach((n) => {
+      // Eerder geplaatste cookies van Google Analytics, Google Ads en Leadinfo op ons domein weghalen
+      document.cookie.split(';').map((c) => c.trim().split('=')[0]).filter((n) => /^_gcl|^_gac|^_ga|^_gid|^_li_/.test(n)).forEach((n) => {
         for (const d of ['', '; domain=.drijfveermedia.nl', '; domain=www.drijfveermedia.nl']) document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
       });
     }

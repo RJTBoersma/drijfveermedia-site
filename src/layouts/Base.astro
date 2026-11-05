@@ -211,6 +211,17 @@ const jsonld = { '@context': 'https://schema.org', '@graph': [...basis, ...kruim
       // Tekeningen pas verbergen als we ze ook weer kunnen laten verschijnen.
       if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('teken-js');
     </script>
+    <!-- Leadinfo tracking code. Laadt pas na "Toestaan" in de toestemmingsbalk (Toestemming.astro roept dmLeadinfoLaden aan), alleen op www.drijfveermedia.nl. -->
+    <script is:inline>
+      window.dmLeadinfoLaden = function () {
+        if (window.__dmLeadinfo || location.hostname !== 'www.drijfveermedia.nl') return;
+        window.__dmLeadinfo = true;
+        (function(l,e,a,d,i,n,f,o){if(!l[i]){l.GlobalLeadinfoNamespace=l.GlobalLeadinfoNamespace||[];
+        l.GlobalLeadinfoNamespace.push(i);l[i]=function(){(l[i].q=l[i].q||[]).push(arguments)};l[i].t=l[i].t||n;
+        l[i].q=l[i].q||[];o=e.createElement(a);f=e.getElementsByTagName(a)[0];o.async=1;o.src=d;f.parentNode.insertBefore(o,f);}
+        }(window,document,'script','https://cdn.leadinfo.net/ping.js','leadinfo','LI-61F00DCF8895B'));
+      };
+    </script>
   </head>
   <body>
     <a class="skiplink" href="#inhoud">{lang === 'en' ? 'Skip to content' : lang === 'de' ? 'Zum Inhalt springen' : 'Direct naar de inhoud'}</a>
